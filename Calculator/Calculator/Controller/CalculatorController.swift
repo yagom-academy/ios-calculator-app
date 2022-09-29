@@ -7,6 +7,7 @@ class CalculatorController {
     var Expression: String = ""
     var viewDisplayNumber: String = ""
     var displaySign: Operator.RawValue = Operator.add.rawValue
+    var isFirstClick: Bool = true
     
     init() {
         self.view = MainViewController()
@@ -41,11 +42,16 @@ class CalculatorController {
             viewDisplayNumber += input ?? ""
         }
         
+        isFirstClick = false
         return viewDisplayNumber
     }
     
-    func tappedOperatorButton(input: String?) {
-        determineOperator(stringOperator: input)
+    func tappedOperatorButton(input: String?) -> String {
+        if isFirstClick == false {
+            determineOperator(stringOperator: input)
+            return String(displaySign)
+        }
+        return ""
     }
     
     func determineOperator(stringOperator: String?) {
@@ -64,6 +70,6 @@ class CalculatorController {
     }
     
     func tappedCEButton() {
-        viewDisplayNumber.text = ""
+        viewDisplayNumber = ""
     }
 }

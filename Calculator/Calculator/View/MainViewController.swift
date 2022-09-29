@@ -38,8 +38,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        displaySignLabel.text = sender.titleLabel?.text
-        calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
+        displaySignLabel.text = calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
