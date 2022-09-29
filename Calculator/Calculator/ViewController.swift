@@ -14,22 +14,31 @@ class ViewController: UIViewController {
     @IBOutlet weak private var historyInputStackView: UIStackView!
     @IBOutlet weak private var historyInputScrollView: UIScrollView!
     
+    let numberFormatter = NumberFormatter()
+    
     private var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     private func autoSlideScrollView() {
-        let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - self.historyInputScrollView.bounds.size.height + self.historyInputScrollView.contentInset.bottom)
-        historyInputScrollView.setContentOffset(bottomOffset, animated: true)
+        let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - self.historyInputScrollView.bounds.height)
+        historyInputScrollView.layoutIfNeeded()
+        historyInputScrollView.setContentOffset(bottomOffset, animated: false)
     }
     
     private func addZero(inputText: String, zero: String) {
         if inputText == Literal.numberZero.value {
             return
         } else {
-            inputNumberLabel.text = inputText + "\(zero)"
+            let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+            if let number: Double = Double(numberWithOutComma + zero) {
+                inputNumberLabel.text = numberFormatter.string(for: number)
+            }
         }
     }
     
@@ -45,7 +54,10 @@ class ViewController: UIViewController {
         if inputText == Literal.numberZero.value {
             inputNumberLabel.text = "\(number)"
         } else {
-            inputNumberLabel.text = inputText + "\(number)"
+            let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+            if let number: Double = Double(numberWithOutComma + number) {
+                inputNumberLabel.text = numberFormatter.string(for: number)
+            }
         }
     }
     
@@ -129,9 +141,11 @@ class ViewController: UIViewController {
     }
     
     private func addOperator(inputText: String, operatorValue: String) {
-        if inputText == Literal.numberZero.value && inputOperatorLabel.text == "" {
+        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+        
+        if numberWithOutComma == Literal.numberZero.value && inputOperatorLabel.text == "" {
             return
-        } else if inputText == Literal.numberZero.value && operatorValue != "" {
+        } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
             
             guard let operatorText = inputOperatorLabel.text,
@@ -148,7 +162,7 @@ class ViewController: UIViewController {
             }
             
             addStackView(operatorText: operatorText, inputText: inputText)
-            insertIntoQueue(operatorValue: operatorValue, inputText: inputText)
+            insertIntoQueue(operatorValue: operatorValue, inputText: numberWithOutComma)
             
             inputNumberLabel.text = Literal.numberZero.value
             inputOperatorLabel.text = operatorValue
@@ -160,15 +174,14 @@ class ViewController: UIViewController {
             return
         }
         
-        if let operandValue = Double(inputText),
+        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+        
+        if let operandValue = Double(numberWithOutComma),
            let operatorText = inputOperatorLabel.text {
             formula.operands?.enqueue(operandValue)
             addStackView(operatorText: operatorText, inputText: inputText)
         }
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
         if let result = numberFormatter.string(for: formula.result()) {
             inputNumberLabel.text = String(result)
             inputOperatorLabel.text = ""
