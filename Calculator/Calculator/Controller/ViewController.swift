@@ -58,6 +58,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func resetVauleToZero() {
+        expressionLabel.text = "0"
+    }
+    
     func addLabelAndSign(vaule: String, sender: UIButton) {
         addNewLableToStackView(message: vaule, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
