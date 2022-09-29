@@ -61,6 +61,7 @@ class ViewController: UIViewController {
             operandLabel.text = String(result)
         }
         operatorLabel.text = ""
+        currentOperand = "0"
         expression = ""
     }
     
@@ -79,6 +80,8 @@ class ViewController: UIViewController {
 // handling Operands
 extension ViewController {
     private func handleSignButton() {
+        guard currentOperand != "0" else { return }
+        
         if currentOperand.first == "-" {
             currentOperand.removeFirst()
         } else {
@@ -99,8 +102,6 @@ extension ViewController {
     private func appendOperands(from operand: String) {
         if currentOperand == "0" {
             currentOperand = operand
-        } else if currentOperand == "-0" {
-            currentOperand = "-" + operand
         } else {
             currentOperand.append(operand)
         }
