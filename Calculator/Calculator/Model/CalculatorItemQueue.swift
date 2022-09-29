@@ -16,12 +16,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
         
         if isEmpty == true {
             head = newNode
-            tail = newNode
-            return
         } else {
             tail?.next = newNode
-            tail = newNode
         }
+        tail = newNode
     }
     
     mutating func dequeue() -> T? {
