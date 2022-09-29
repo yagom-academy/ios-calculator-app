@@ -59,6 +59,10 @@ class ViewController: UIViewController {
         }
     }
     
+    func resetExpressionString() {
+        expressionString = ""
+    }
+    
     func resetVauleToZero() {
         expressionLabel.text = "0"
     }
