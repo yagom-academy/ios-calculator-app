@@ -18,6 +18,13 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        stringNumbers = zero
+        operandsLabel.text = stringNumbers
+        operatorLabel.text = stringOperators
+        recentNumbersStackView.arrangedSubviews.forEach {
+            $0.isHidden = true
+        }
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
