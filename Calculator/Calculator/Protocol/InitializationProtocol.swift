@@ -1,0 +1,3 @@
+protocol InitializationProtocol {
+    func Initialization()
+}

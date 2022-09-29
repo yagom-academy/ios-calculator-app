@@ -9,12 +9,14 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var numberLabel: NumberLabel!
     @IBOutlet weak var operatorLabel: OperatorLabel!
+    @IBOutlet weak var formulaStackView: FormulaStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        numberLabel.clearAll()
-        operatorLabel.clearAll()
+        numberLabel.Initialization()
+        operatorLabel.Initialization()
+        formulaStackView.Initialization()
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
@@ -26,7 +28,9 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
         if numberLabel.isReceiving == true {
-            return
+            operatorLabel.text = sender.operatorSign
+            formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
+            numberLabel.Initialization()
         } else {
             operatorLabel.text = sender.operatorSign
         }
@@ -40,7 +44,7 @@ class ViewController: UIViewController {
         case .AllClear:
             return
         case .ClearElement:
-            numberLabel.clearAll()
+            numberLabel.Initialization()
         case .SwapNumberSign:
             numberLabel.swapNumberSign()
         case .EnterDecimalPoints:

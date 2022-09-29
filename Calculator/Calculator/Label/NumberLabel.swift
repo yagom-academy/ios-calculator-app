@@ -49,8 +49,8 @@ class NumberLabel: UILabel {
 }
 
 //MARK: - extension Clearable
-extension NumberLabel: Clearable {
-    func clearAll() {
+extension NumberLabel: InitializationProtocol {
+    func Initialization() {
         self.text = initialValue
         self.isPositiveNumber = true
         self.hasDecimalPoints = false

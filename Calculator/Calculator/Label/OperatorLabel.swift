@@ -1,7 +1,7 @@
 import UIKit
 
-class OperatorLabel: UILabel, Clearable {
-    func clearAll() {
+class OperatorLabel: UILabel, InitializationProtocol {
+    func Initialization() {
         self.text = nil
     }
 }
