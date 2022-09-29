@@ -110,6 +110,7 @@ class CalculatorViewController: UIViewController {
             resetExpression()
             resetMathExpression()
             removeAllChildStackView()
+            convertDidCalculate()
             
             return
         }
@@ -127,15 +128,11 @@ class CalculatorViewController: UIViewController {
         
         changeNumbers("")
         changeNumberLabel("0")
-        
     }
     
     @IBAction func didTappedConvertSign(_ sender: UIButton) {
-        guard selectedNumbers.isNotEmpty else {
-            return
-        }
-        
-        guard let firstElement = selectedNumbers.first else {
+        guard selectedNumbers.isNotEmpty,
+              let firstElement = selectedNumbers.first else {
             return
         }
         
@@ -158,9 +155,12 @@ class CalculatorViewController: UIViewController {
             let calculatedValue = try formula.result()
             changeLabels(calculatedValue.description, "")
             resetExpression()
+        } catch FormulaError.dividedByZero {
+            let errorValue = Double.signalingNaN.description
+            
+            changeNumberLabel(errorValue)
         } catch {
-            // TODO: -에러처리하기
-            print(error)
+            
         }
     }
     
