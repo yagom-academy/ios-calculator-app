@@ -27,7 +27,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCommandButton(_ sender: CommandButton) {
-        
+        guard let command: Command = sender.command else {
+            return
+        }
+        switch command {
+        case .AllClear:
+            return
+        case .ClearElement:
+            return
+        case .SwapNumberSign:
+            numberLabel.swapNumberSign()
+        case .EnterDecimalPoints:
+            return
+        case .calculation:
+            return
+        }
     }
 }
 
