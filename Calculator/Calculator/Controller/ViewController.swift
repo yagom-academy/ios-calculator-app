@@ -101,6 +101,11 @@ class ViewController: UIViewController {
     
     func addNewLableToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.text = "\(message)"
+        label.textAlignment = .right
+        label.numberOfLines = 0
         stackView.addArrangedSubview(label)
     }
     
