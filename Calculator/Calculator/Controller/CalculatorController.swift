@@ -31,6 +31,13 @@ class CalculatorController {
         return false
     }
     
+    func canMakeHorizontalStackView() -> Bool {
+        if displaySign != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
+            return true
+        }
+        return false
+    }
+    
     func tappedNumberButton(input: String?) -> String {
         if isOverCount20(stringNumber: viewDisplayNumber, input: input) {
             return viewDisplayNumber
