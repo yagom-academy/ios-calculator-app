@@ -9,8 +9,20 @@ import Foundation
 import UIKit
 
 class LineStackView: UIStackView {
-    var operatorLabel = UILabel()
-    var operandLabel = UILabel()
+    let operatorLabelToPush: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        
+        return label
+    }()
+    
+    let operandLabelToPush: UILabel = {
+        let label = UILabel()
+
+        label.textColor = .white
+        
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,9 +33,10 @@ class LineStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addSubviews() {
-        addArrangedSubview(operatorLabel)
-        addArrangedSubview(operandLabel)
+    init(operatorStr: String, operandStr: String) {
+        self.operatorLabelToPush.text = operatorStr
+        self.operandLabelToPush.text = operandStr
+        super.init(arrangedSubviews: [operatorLabelToPush, operandLabelToPush])
     }
     
     func fetchOperatorLabelText() {
