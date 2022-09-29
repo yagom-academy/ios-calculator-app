@@ -38,6 +38,10 @@ class CalculatorController {
         return false
     }
     
+    func canChangedOperator() -> Bool {
+        return isStartZero(stringNumber: viewDisplayNumber) ? true : false
+    }
+    
     func tappedNumberButton(input: String?) -> String {
         if isOverCount20(stringNumber: viewDisplayNumber, input: input) {
             return viewDisplayNumber
