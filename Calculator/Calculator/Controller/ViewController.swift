@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     private var initializationList: [InitializationProtocol] = []
+    private var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
+        if isCalculated == true {
+            Initialization()
+            isCalculated = false
+        }
         guard let number = sender.number else {
             return
         }
@@ -29,6 +34,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
+        if isCalculated == true {
+            Initialization()
+            isCalculated = false
+        }
         operatorLabel.text = sender.operatorSign
         if numberLabel.isReceiving == true {
             formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
@@ -51,7 +60,8 @@ class ViewController: UIViewController {
         case .EnterDecimalPoints:
             numberLabel.appendDecimalPoints()
         case .calculation:
-            return
+            formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
+            calculateFormula()
         }
     }
     
@@ -59,6 +69,18 @@ class ViewController: UIViewController {
         initializationList.forEach {
             $0.Initialization()
         }
+    }
+    
+    private func calculateFormula() {
+        var formula: Formula = ExpressionParser.parse(from: formulaStackView.formula)
+        let result: Double = formula.result()
+        if result.isInfinite || result.isNaN {
+            numberLabel.text = "NaN"
+        } else {
+            numberLabel.text = "\(result)"
+        }
+        operatorLabel.Initialization()
+        isCalculated = true
     }
 }
 
