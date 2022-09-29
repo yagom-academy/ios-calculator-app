@@ -4,13 +4,13 @@
 class CalculatorController {
     let view: MainViewController
     let formula: Formula?
-    var input: String = ""
+    var Expression: String = ""
     var viewDisplayNumber: String = ""
     var displaySign: Operator.RawValue = Operator.add.rawValue
     
     init() {
         self.view = MainViewController()
-        self.formula = ExpressionParser.parse(from: input)
+        self.formula = ExpressionParser.parse(from: Expression)
     }
     
     func isStartZero(stringNumber: String) -> Bool {
