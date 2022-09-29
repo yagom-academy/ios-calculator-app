@@ -6,6 +6,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    private var expression: String = ""
     private var currentOperand: String = "0"
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -36,26 +37,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard Double(currentOperand) != .zero else {
+        guard let tappedOperator = sender.currentTitle, Double(currentOperand) != .zero else {
             operatorLabel.text = sender.currentTitle
             return
         }
         
-        let stackView: UIStackView = makeExpressionStackView()
-        let operand: UILabel = makeExpressionLabel(currentOperand)
-        if !expressionQueue.arrangedSubviews.isEmpty {
-            let `operator`: UILabel = makeExpressionLabel(operatorLabel.text)
-            stackView.addArrangedSubview(`operator`)
-        }
-        
-        stackView.addArrangedSubview(operand)
-        expressionQueue.addArrangedSubview(stackView)
+        appendExpressionQueue(operator: tappedOperator, operand: currentOperand)
         
         clearOperand()
-        operatorLabel.text = sender.currentTitle
+        operatorLabel.text = tappedOperator
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
+        guard let currentOperator = operatorLabel.text, !expression.isEmpty else { return }
+        appendExpressionQueue(operator: currentOperator, operand: currentOperand)
+        
+        var components = ExpressionParser.parse(from: expression)
+        let result = components.result()
+        
+        if result.isNaN {
+            operandLabel.text = "NaN"
+        } else {
+            operandLabel.text = String(result)
+        }
+        operatorLabel.text = ""
+        expression = ""
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -106,7 +112,7 @@ extension ViewController {
     }
 }
 
-// making stackView
+// handling stackView
 extension ViewController {
     private func makeExpressionLabel(_ expr: String?) -> UILabel {
         let label: UILabel = UILabel()
@@ -129,5 +135,20 @@ extension ViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
+    }
+    
+    private func appendExpressionQueue(operator: String, operand: String) {
+        let stackView: UIStackView = makeExpressionStackView()
+        
+        if !expressionQueue.arrangedSubviews.isEmpty {
+            let operatorLabel: UILabel = makeExpressionLabel(`operator`)
+            stackView.addArrangedSubview(operatorLabel)
+            expression.append(" \(`operator`)")
+        }
+        let operandLabel: UILabel = makeExpressionLabel(operand)
+        stackView.addArrangedSubview(operandLabel)
+        expression.append(" \(operand)")
+        
+        expressionQueue.addArrangedSubview(stackView)
     }
 }
