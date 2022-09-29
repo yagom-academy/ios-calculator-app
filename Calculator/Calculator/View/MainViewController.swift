@@ -22,7 +22,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var formulaStackView: UIStackView!
     
     var calculatorController: CalculatorController!
-    var displaySign: Operator.RawValue = Operator.add.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,24 +37,9 @@ class MainViewController: UIViewController {
         }
     }
     
-    func determineOperator(stringOperator: String?) {
-        switch stringOperator {
-        case "+":
-            displaySign = Operator.add.rawValue
-        case "−":
-            displaySign = Operator.subtract.rawValue
-        case "×":
-            displaySign = Operator.multiply.rawValue
-        case "÷":
-            displaySign = Operator.divide.rawValue
-        default:
-            displaySign = Operator.add.rawValue
-        }
-    }
-    
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = sender.titleLabel?.text
-        determineOperator(stringOperator: sender.titleLabel?.text)
+        calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {

@@ -6,6 +6,7 @@ class CalculatorController {
     let formula: Formula?
     var input: String = ""
     var viewDisplayNumber: String = ""
+    var displaySign: Operator.RawValue = Operator.add.rawValue
     
     init() {
         self.view = MainViewController()
@@ -41,5 +42,24 @@ class CalculatorController {
         }
         
         return viewDisplayNumber
+    }
+    
+    func tappedOperatorButton(input: String?) {
+        determineOperator(stringOperator: input)
+    }
+    
+    func determineOperator(stringOperator: String?) {
+        switch stringOperator {
+        case "+":
+            displaySign = Operator.add.rawValue
+        case "−":
+            displaySign = Operator.subtract.rawValue
+        case "×":
+            displaySign = Operator.multiply.rawValue
+        case "÷":
+            displaySign = Operator.divide.rawValue
+        default:
+            displaySign = Operator.add.rawValue
+        }
     }
 }
