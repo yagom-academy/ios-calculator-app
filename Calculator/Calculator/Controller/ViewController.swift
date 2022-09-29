@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         case .AllClear:
             return
         case .ClearElement:
-            return
+            numberLabel.clearAll()
         case .SwapNumberSign:
             numberLabel.swapNumberSign()
         case .EnterDecimalPoints:
