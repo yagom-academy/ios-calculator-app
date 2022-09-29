@@ -73,6 +73,16 @@ class ViewController: UIViewController {
         default:
             return
         }
+        expressionLabel.text = expressionString
+    }
+    
+    @IBAction func tappedOperatorButton(_ sender: UIButton) {
+        guard expressionString.count != 0 && expressionLabel.text != "" else {
+            return
+        }
+        
+        guard let vaule = expressionLabel.text else { return }
+        
     }
     
 }
