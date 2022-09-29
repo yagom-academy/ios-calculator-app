@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var inputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputNumberLabel: UILabel!
-    @IBOutlet weak private var historyInputScrollView: UIScrollView!
+    @IBOutlet weak private var historyInputStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,7 @@ class ViewController: UIViewController {
             let inputLabel = UILabel()
             
             inputLabel.text = inputText
+            inputLabel.textColor = UIColor.white
             inputLabel.translatesAutoresizingMaskIntoConstraints = false
             return inputLabel
         }
@@ -61,16 +62,16 @@ class ViewController: UIViewController {
     
     private func makeHistoryStactView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
         var stackView: UIStackView {
-            let stactView = UIStackView()
+            let stackView = UIStackView()
             
-            stactView.translatesAutoresizingMaskIntoConstraints = false
-            stactView.axis = .horizontal
-            stactView.alignment = .fill
-            stactView.distribution = .equalSpacing
-            stactView.spacing = 8
-            stactView.addArrangedSubview(operatorLabel)
-            stactView.addArrangedSubview(operandLabel)
-            return stactView
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.axis = .horizontal
+            stackView.alignment = .fill
+            stackView.distribution = .fill
+            stackView.spacing = 8
+            stackView.addArrangedSubview(operatorLabel)
+            stackView.addArrangedSubview(operandLabel)
+            return stackView
         }
         
         return stackView
@@ -96,7 +97,7 @@ class ViewController: UIViewController {
         let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
         let operandLabel = makeHistoryInputLabel(inputText: inputText)
         let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-        historyInputScrollView.addSubview(stackView)
+        historyInputStackView.addArrangedSubview(stackView)
         
         inputNumberLabel.text = Literal.numberZero.value
         inputOperatorLabel.text = operatorValue
@@ -170,4 +171,3 @@ class ViewController: UIViewController {
         }
     }
 }
-

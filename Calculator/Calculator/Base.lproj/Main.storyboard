@@ -20,7 +20,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
                                 <rect key="frame" x="16" y="252" width="382" height="20.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" restorationIdentifier="showHistoryInputScrollView" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="20.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-iL-eIa">
@@ -349,7 +349,7 @@
                     <connections>
                         <outlet property="historyInputNumberLabel" destination="Hcb-r0-27f" id="hWN-yb-h6E"/>
                         <outlet property="historyInputOperatorLabel" destination="alw-Zd-2pT" id="Raq-MT-buX"/>
-                        <outlet property="historyInputScrollView" destination="BOT-7g-vxv" id="KZe-WD-ZsF"/>
+                        <outlet property="historyInputStackView" destination="XRe-QE-UJf" id="Tdw-6j-We5"/>
                         <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="cUT-a2-agD"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="L6e-J2-OZ3"/>
                     </connections>
