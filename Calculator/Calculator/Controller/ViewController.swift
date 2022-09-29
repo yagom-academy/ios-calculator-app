@@ -148,6 +148,26 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func tappedEqualButton(_ sender: UIButton) {
+        if totalString.isEmpty {
+            return
+        } else {
+            guard let sign = signLabel.text else { return }
+            guard let value = expressionLabel.text else { return }
+            expressionString = "\(sign)\(value)"
+            addNewLableToStackView(message: expressionString, stackView: stackView)
+            totalString += sign
+            if value.contains("-") {
+                totalString += "\(value.dropFirst())"
+            } else {
+                totalString += value
+            }
+            resetExpressionString()
+            resetStackView()
+            resetVauleToZero()
+        }
+    }
+    
     func addNewLableToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)

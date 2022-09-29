@@ -308,6 +308,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedEqualButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rrM-Xe-0Yw"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
