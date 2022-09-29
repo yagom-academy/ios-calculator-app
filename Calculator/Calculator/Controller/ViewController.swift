@@ -23,33 +23,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
-        if isCalculated == true {
-            Initialization()
-            isCalculated = false
-        }
+        checkCalculated()
+        
         guard let number = sender.number else {
             return
         }
+        
         numberLabel.append(number)
     }
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
-        if isCalculated == true {
-            Initialization()
-            isCalculated = false
-        }
-        operatorLabel.text = sender.operatorSign
+        checkCalculated()
+        
         if numberLabel.isReceiving == true {
-            formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
+            appendFormulaIntoStackView()
             numberLabel.Initialization()
-            scrollView.moveToBottom()
         }
+        
+        operatorLabel.text = sender.operatorSign
     }
     
     @IBAction func touchUpCommandButton(_ sender: CommandButton) {
         guard let command: Command = sender.command else {
             return
         }
+        
         switch command {
         case .AllClear:
             Initialization()
@@ -60,8 +58,10 @@ class ViewController: UIViewController {
         case .EnterDecimalPoints:
             numberLabel.appendDecimalPoints()
         case .calculation:
-            formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
-            calculateFormula()
+            if isCalculated == false {
+                appendFormulaIntoStackView()
+                calculateFormula()
+            }
         }
     }
     
@@ -71,16 +71,30 @@ class ViewController: UIViewController {
         }
     }
     
+    private func appendFormulaIntoStackView() {
+        formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
+        scrollView.moveToBottom()
+    }
+    
     private func calculateFormula() {
         var formula: Formula = ExpressionParser.parse(from: formulaStackView.formula)
         let result: Double = formula.result()
+        
         if result.isInfinite || result.isNaN {
             numberLabel.text = "NaN"
         } else {
             numberLabel.text = "\(result)"
         }
+        
         operatorLabel.Initialization()
         isCalculated = true
+    }
+    
+    private func checkCalculated() {
+        if isCalculated == true {
+            Initialization()
+            isCalculated = false
+        }
     }
 }
 
