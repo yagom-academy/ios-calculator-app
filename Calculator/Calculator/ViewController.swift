@@ -163,10 +163,14 @@ class ViewController: UIViewController {
         case Literal.CE.buttonID:
             inputNumberLabel.text = Literal.numberZero.value
         case Literal.numberInvertion.buttonID:
-//            if inputText == Literal.numberZero.value { return }
-//            if inputText.prefix(1) != Literal.subtraction.value {
-//                inputNumberLabel.text = "(" + Literal.subtraction.value + inputText + ")"
-//            }
+            if inputText == Literal.numberZero.value { return }
+            
+            if inputText.prefix(1) != Literal.subtraction.value {
+                inputNumberLabel.text = Literal.subtraction.value + inputText
+            } else {
+                inputNumberLabel.text = inputText.replacingOccurrences(of: "-", with: "")
+            }
+            
             return
         case Literal.division.buttonID:
             addOperator(inputText: inputText, operatorValue: Literal.division.value)
