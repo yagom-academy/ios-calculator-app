@@ -65,7 +65,7 @@ class CalculatorViewController: UIViewController {
     private func addChildStackView() {
         let operatorValue = selectedOperator.isEmpty ? "" : selectedOperator
         
-        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers)
+        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers.calNumber)
         
         recordedCalculatedStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom()
@@ -198,7 +198,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeNumberLabel(_ input: String) {
-        currentNumbersLabel.text = input
+        currentNumbersLabel.text = input.calNumber
     }
     
     private func changeOperatorLabel(_ input: String) {

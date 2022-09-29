@@ -8,7 +8,6 @@
 import UIKit
 
 class CalculatedRecordStackView: UIStackView {
-    
     let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -32,9 +31,17 @@ class CalculatedRecordStackView: UIStackView {
         operandLabel.text = inputedOperand
         
         super.init(arrangedSubviews: [operatorLabel, operandLabel])
+        setUpStackView()
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setUpStackView() {
+        spacing = 8
+        distribution = .fill
+        axis = .horizontal
+        alignment = .fill
     }
 }
