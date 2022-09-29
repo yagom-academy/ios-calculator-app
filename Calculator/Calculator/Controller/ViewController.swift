@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         case .SwapNumberSign:
             numberLabel.swapNumberSign()
         case .EnterDecimalPoints:
-            return
+            numberLabel.appendDecimalPoints()
         case .calculation:
             return
         }

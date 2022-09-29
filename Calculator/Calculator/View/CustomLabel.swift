@@ -6,8 +6,10 @@ class NumberLabel: UILabel {
     private let zero: String = "0"
     private let doublyZero: String = "00"
     private let negativeNumberSign: String = "-"
+    private let decimalPoints: Character = "."
 //MARK: - NumberLabel Properties
     private var isPositiveNumber: Bool = true
+    private var hasDecimalPoints: Bool = false
     
 //MARK: - NumberLabel Func
     func append(_ number: String) {
@@ -18,6 +20,13 @@ class NumberLabel: UILabel {
             self.text = number
         } else {
             self.text?.append(number)
+        }
+    }
+    
+    func appendDecimalPoints() {
+        if !hasDecimalPoints {
+            self.text?.append(decimalPoints)
+            hasDecimalPoints = true
         }
     }
     
@@ -37,5 +46,7 @@ class NumberLabel: UILabel {
     
     func clearAll() {
         self.text = initialValue
+        self.isPositiveNumber = true
+        self.hasDecimalPoints = false
     }
 }
