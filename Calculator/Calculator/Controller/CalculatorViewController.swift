@@ -50,13 +50,16 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        addChildStackView()
+        if selectedNumbers.isNotEmpty {
+            addChildStackView()
+        }
         
         appendExpressionFromNumbers()
         changeNumbers("")
         
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
+        changeNumberLabel("0")
     }
     
     private func addChildStackView() {
@@ -65,6 +68,10 @@ class CalculatorViewController: UIViewController {
         
         recordedCalculatedStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom()
+    }
+    
+    private func removeAllChildStackView() {
+        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
@@ -93,6 +100,8 @@ class CalculatorViewController: UIViewController {
         if !didNotCalculate {
             convertDidCalculate()
         }
+        
+        removeAllChildStackView()
     }
     
     @IBAction func didTappedCEButton(_ sender: UIButton) {
@@ -100,14 +109,17 @@ class CalculatorViewController: UIViewController {
             resetLabels()
             resetExpression()
             resetMathExpression()
+            removeAllChildStackView()
             
             return
         }
-
+        
         guard let lastElement = mathExpression.last else {
+            changeNumbers("")
+            changeNumberLabel("0")
             return
         }
-
+        
         guard lastElement.shouldConvertOperator else {
             return
         }
@@ -115,6 +127,7 @@ class CalculatorViewController: UIViewController {
         changeNumbers("")
         changeNumberLabel("0")
         changeOperator("")
+        
     }
     
     @IBAction func didTappedConvertSign(_ sender: UIButton) {
@@ -123,7 +136,8 @@ class CalculatorViewController: UIViewController {
         }
         
         let minus = Operator.subtract.rawValue
-        let isContainMinus = (selectedNumbers.filter { $0 == minus }.count == 0)
+        let isContainMinus = (selectedNumbers.filter { $0 == minus }.count != 0)
+        
         let startIndex = selectedNumbers.startIndex
         
         if isContainMinus {
