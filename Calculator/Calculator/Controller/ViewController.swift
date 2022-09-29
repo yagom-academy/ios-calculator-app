@@ -40,10 +40,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setAccessibilityIndentifier()
+        setAccessibilityIdentifier()
     }
     
-    func setAccessibilityIndentifier() {
+    func setAccessibilityIdentifier() {
         calculatorDisplayLabel.isAccessibilityElement = true
         calculatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.calculatorDisplayLabel
         
