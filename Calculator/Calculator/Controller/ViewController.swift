@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var expressionString: String = ""
     
     @IBOutlet weak var stackView: UIStackView!
     
@@ -43,5 +44,36 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func tappedOperandButton(_ sender: UIButton) {
+        switch sender {
+        case oneButton:
+            expressionString += "1"
+        case twoButton:
+            expressionString += "2"
+        case threeButton:
+            expressionString += "3"
+        case fourButton:
+            expressionString += "4"
+        case fiveButton:
+            expressionString += "5"
+        case sixButton:
+            expressionString += "6"
+        case sevenButton:
+            expressionString += "7"
+        case eightButton:
+            expressionString += "8"
+        case nineButton:
+            expressionString += "9"
+        case zeroButton:
+            expressionString += "0"
+        case doubleZeroButton:
+            expressionString += "00"
+        case dotButton:
+            expressionString += "."
+        default:
+            return
+        }
+    }
+    
 }
 
