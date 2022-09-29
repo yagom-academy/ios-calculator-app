@@ -114,34 +114,9 @@ class ViewController: UIViewController {
     }
     
     func pushInArchive(operand: String, `operator`: String) {
-        let stackView = {
-            let stackView = UIStackView()
-            stackView.axis = .horizontal
-            stackView.spacing = 8
-            
-            return stackView
-        }()
+        let generator = StackViewCell(operand: operand, operator: `operator`)
+        let stackView = generator.genarateStackView()
         
-        let operatorLabel = {
-            let label = UILabel()
-            label.text = `operator`
-            label.textColor = .white
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            return label
-        }()
-        
-        let operandLabel = {
-            let label = UILabel()
-            label.text = operand
-            label.textColor = .white
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            return label
-        }()
-        
-        stackView.addArrangedSubview(operatorLabel)
-        stackView.addArrangedSubview(operandLabel)
         calculatorArchive.addArrangedSubview(stackView)
         
         self.scrollView.layoutIfNeeded()
