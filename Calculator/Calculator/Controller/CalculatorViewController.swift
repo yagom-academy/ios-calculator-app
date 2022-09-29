@@ -21,8 +21,6 @@ class CalculatorViewController: UIViewController {
         
         resetExpression()
         resetLabels()
-        
-        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
@@ -52,6 +50,8 @@ class CalculatorViewController: UIViewController {
             return
         }
         
+        addChildStackView()
+        
         appendExpressionFromNumbers()
         changeNumbers("")
         
@@ -63,12 +63,8 @@ class CalculatorViewController: UIViewController {
         let operatorValue = selectedOperator.isEmpty ? "" : selectedOperator
         let childView = CalculatedRecordStackView(operatorValue, selectedNumbers)
         
-        recordedCalculatedStackView.addArrangedSubview(view)
-        scrollView.layoutIfNeeded()
-        
-        let bottomOffset = CGPointMake(0,scrollView.contentSize.height - scrollView.frame.height)
-        scrollView.setContentOffset(bottomOffset, animated: true)
-        
+        recordedCalculatedStackView.addArrangedSubview(childView)
+        scrollView.scrollToBottom()
     }
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
@@ -100,7 +96,6 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedCEButton(_ sender: UIButton) {
-        print(mathExpression, selectedOperator)
         guard didNotCalculate else {
             resetLabels()
             resetExpression()
@@ -127,18 +122,20 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        let isContainMinus = (selectedNumbers.filter { $0 == "-" }.count == 0)
+        let minus = Operator.subtract.rawValue
+        let isContainMinus = (selectedNumbers.filter { $0 == minus }.count == 0)
         let startIndex = selectedNumbers.startIndex
         
         if isContainMinus {
             selectedNumbers.remove(at: startIndex)
         } else {
-            selectedNumbers.insert("-", at: startIndex)
+            selectedNumbers.insert(minus, at: startIndex)
         }
         
         changeNumbers(selectedNumbers)
         changeNumberLabel(selectedNumbers)
     }
+    
     private func calculateExpression() {
         let formula = ExpressionParser.parse(from: mathExpression)
         
