@@ -78,7 +78,7 @@ class CalculatorViewController: UIViewController {
         guard didNotCalculate else {
             return
         }
-        
+        addChildStackView()
         guard let lastElement = mathExpression.last else {
             return
         }
@@ -117,6 +117,7 @@ class CalculatorViewController: UIViewController {
         guard let lastElement = mathExpression.last else {
             changeNumbers("")
             changeNumberLabel("0")
+            print(selectedOperator)
             return
         }
         
@@ -126,7 +127,6 @@ class CalculatorViewController: UIViewController {
         
         changeNumbers("")
         changeNumberLabel("0")
-        changeOperator("")
         
     }
     
@@ -135,15 +135,16 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        let minus = Operator.subtract.rawValue
-        let isContainMinus = (selectedNumbers.filter { $0 == minus }.count != 0)
+        guard let firstElement = selectedNumbers.first else {
+            return
+        }
         
-        let startIndex = selectedNumbers.startIndex
+        let minusCharactor = Operator.subtract.rawValue
         
-        if isContainMinus {
-            selectedNumbers.remove(at: startIndex)
+        if firstElement == minusCharactor {
+            selectedNumbers.removeFirst()
         } else {
-            selectedNumbers.insert(minus, at: startIndex)
+            selectedNumbers.insert(minusCharactor, at: selectedNumbers.startIndex)
         }
         
         changeNumbers(selectedNumbers)
