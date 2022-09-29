@@ -19,7 +19,8 @@ class MainViewController: UIViewController {
     @IBOutlet weak var displayNumberLabel: UILabel!
     
     @IBOutlet weak var formulaScrollView: UIScrollView!
-    @IBOutlet weak var formulaStackView: UIStackView!
+    @IBOutlet weak var formulaHorizontalStackView: UIStackView!
+    @IBOutlet weak var formulaVerticalStackView: UIStackView!
     
     var calculatorController: CalculatorController!
     
@@ -32,7 +33,7 @@ class MainViewController: UIViewController {
     func configureDisplayLabels() {
         displaySignLabel.text = ""
         displayNumberLabel.text = "0"
-        formulaStackView.subviews.forEach {
+        formulaHorizontalStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
     }

@@ -341,8 +341,9 @@
                         <outlet property="displaySignLabel" destination="HPC-iy-qdm" id="zWO-Ta-y6g"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="oMF-px-7ni"/>
                         <outlet property="equalButton" destination="Daw-iX-Owl" id="K9Q-08-gOz"/>
+                        <outlet property="formulaHorizontalStackView" destination="2Pu-Ld-ZGi" id="sfd-Fj-GUs"/>
                         <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="EtH-gC-eeK"/>
-                        <outlet property="formulaStackView" destination="2Pu-Ld-ZGi" id="sfd-Fj-GUs"/>
+                        <outlet property="formulaVerticalStackView" destination="XRe-QE-UJf" id="91E-vw-ytN"/>
                         <outlet property="reverseSignButton" destination="ows-U7-mNc" id="jFF-zW-8la"/>
                         <outletCollection property="numberButton" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="tKq-xZ-0Bj"/>
                         <outletCollection property="numberButton" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="rS3-F9-htX"/>
