@@ -17,7 +17,7 @@ struct Formula {
         
         var formulaResult: Double? = operands.dequeue()
         
-        while !operands.isEmpty || !operators.isEmpty {
+        while operands.isEmpty == false || operators.isEmpty == false {
             guard let lhs = formulaResult else { return .nan }
             guard let rhs = operands.dequeue() else { return .nan }
             formulaResult = operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
