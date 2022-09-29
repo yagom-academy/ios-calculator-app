@@ -8,11 +8,29 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var historyStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        resetOperatorLabel()
+        resetOperandLabel()
+        removeAllsubviewsInHistoryStackView()
+    }
+    
+    func resetOperatorLabel() {
+        operatorLabel.text = ""
+    }
+    
+    func resetOperandLabel() {
+        operandLabel.text = "0"
     }
 
-
+    func removeAllsubviewsInHistoryStackView() {
+        historyStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
 }
 
