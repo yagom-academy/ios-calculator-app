@@ -18,19 +18,19 @@ final class OperatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_queue에Operator타입의add가enqueque되었을때_head의데이터가add인지() {
+    func test_queue에Operator타입의add가enqueque하고dequeue했을때_dequeue값이add인지() {
         //given
         let data: Operator = .add
         
         //when
         sut.enqueue(data)
-        let result = sut.head?.data
+        let result = sut.dequeue()
 
         //then
         XCTAssertEqual(result, Operator.add)
     }
     
-    func test_queue에Operator타입의divide와multiply가enqueque되었을때_head의데이터가divide_tail의데이터가multiply인지() {
+    func test_queue에Operator타입의divide와multiply가enqueque하고dequeue했을때_dequeue값이divide인지() {
         //given
         let dataArray: [Operator] = [.divide, .multiply]
         
@@ -39,12 +39,10 @@ final class OperatorTests: XCTestCase {
             sut.enqueue(data)
         }
         
-        let headDataResult = sut.head?.data
-        let tailDataResult = sut.tail?.data
+        let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(headDataResult, Operator.divide)
-        XCTAssertEqual(tailDataResult, Operator.multiply)
+        XCTAssertEqual(result, Operator.divide)
     }
     
     func test_1더하기1을calculate했을때_2인지() {
