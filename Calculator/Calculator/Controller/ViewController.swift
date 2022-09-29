@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         Initialization()
     }
     //MARK: - IBAction
-    @IBAction func touchUpOperandButton(_ sender: OprandButton) {
+    @IBAction func touchUpOperandButton(_ sender: OperandButton) {
         checkCalculated()
         
         guard let number = sender.number else {

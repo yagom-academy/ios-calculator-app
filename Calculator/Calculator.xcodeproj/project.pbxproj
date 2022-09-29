@@ -38,7 +38,7 @@
 		D3D44E6B28E5EA170001B9CA /* CommandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E6A28E5EA170001B9CA /* CommandButton.swift */; };
 		D3D44E7428E60B0E0001B9CA /* NumberLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7328E60B0E0001B9CA /* NumberLabel.swift */; };
 		D3D44E7728E615820001B9CA /* InitializationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7628E615820001B9CA /* InitializationProtocol.swift */; };
-		D3D44E7B28E616AF0001B9CA /* OprandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7A28E616AF0001B9CA /* OprandButton.swift */; };
+		D3D44E7B28E616AF0001B9CA /* OperandButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7A28E616AF0001B9CA /* OperandButton.swift */; };
 		D3D44E7D28E616B80001B9CA /* OperatorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7C28E616B80001B9CA /* OperatorButton.swift */; };
 		D3D44E7F28E617330001B9CA /* OperatorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E7E28E617330001B9CA /* OperatorLabel.swift */; };
 		D3D44E8228E61CB90001B9CA /* FormulaStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D44E8128E61CB90001B9CA /* FormulaStackView.swift */; };
@@ -83,7 +83,7 @@
 		D3D44E6A28E5EA170001B9CA /* CommandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandButton.swift; sourceTree = "<group>"; };
 		D3D44E7328E60B0E0001B9CA /* NumberLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberLabel.swift; sourceTree = "<group>"; };
 		D3D44E7628E615820001B9CA /* InitializationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitializationProtocol.swift; sourceTree = "<group>"; };
-		D3D44E7A28E616AF0001B9CA /* OprandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OprandButton.swift; sourceTree = "<group>"; };
+		D3D44E7A28E616AF0001B9CA /* OperandButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperandButton.swift; sourceTree = "<group>"; };
 		D3D44E7C28E616B80001B9CA /* OperatorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorButton.swift; sourceTree = "<group>"; };
 		D3D44E7E28E617330001B9CA /* OperatorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorLabel.swift; sourceTree = "<group>"; };
 		D3D44E8128E61CB90001B9CA /* FormulaStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaStackView.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				D3D44E6A28E5EA170001B9CA /* CommandButton.swift */,
-				D3D44E7A28E616AF0001B9CA /* OprandButton.swift */,
+				D3D44E7A28E616AF0001B9CA /* OperandButton.swift */,
 				D3D44E7C28E616B80001B9CA /* OperatorButton.swift */,
 			);
 			path = Button;
@@ -575,7 +575,7 @@
 				D3D44E8828E63E680001B9CA /* CalculatorNumberFormatter.swift in Sources */,
 				D3D44E8528E6314B0001B9CA /* UIScrollView.swift in Sources */,
 				D359BBCA28DD69EA00D015C2 /* Formula.swift in Sources */,
-				D3D44E7B28E616AF0001B9CA /* OprandButton.swift in Sources */,
+				D3D44E7B28E616AF0001B9CA /* OperandButton.swift in Sources */,
 				D3D44E7D28E616B80001B9CA /* OperatorButton.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				D3D44E7F28E617330001B9CA /* OperatorLabel.swift in Sources */,
