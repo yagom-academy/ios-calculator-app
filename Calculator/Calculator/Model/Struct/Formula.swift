@@ -22,7 +22,7 @@ struct Formula {
                 throw CalculatorError.emptyOperators
             }
             
-            result = operators.calculate(lhs: result, rhs: number)
+            result = try operators.calculate(lhs: result, rhs: number)
         }
             
         return result

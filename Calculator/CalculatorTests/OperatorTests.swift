@@ -21,7 +21,7 @@ final class OperatorTests: XCTestCase {
         sut = Operator(rawValue: "+")
         
         // When
-        let result = sut.calculate(lhs: 20, rhs: 2)
+        let result = try sut.calculate(lhs: 20, rhs: 2)
         
         // Then
         XCTAssertEqual(result, 22)
@@ -32,7 +32,7 @@ final class OperatorTests: XCTestCase {
         sut = Operator(rawValue: "-")
         
         // When
-        let result = sut.calculate(lhs: 2.5, rhs: 20)
+        let result = try sut.calculate(lhs: 2.5, rhs: 20)
         
         // Then
         XCTAssertEqual(result, -17.5)
@@ -43,7 +43,7 @@ final class OperatorTests: XCTestCase {
         sut = Operator(rawValue: "*")
         
         // When
-        let result = sut.calculate(lhs: 10.5, rhs: 10.5)
+        let result = try sut.calculate(lhs: 10.5, rhs: 10.5)
         
         // Then
         XCTAssertEqual(result, 110.25)
@@ -54,7 +54,7 @@ final class OperatorTests: XCTestCase {
         sut = Operator(rawValue: "/")
         
         // When
-        let result = sut.calculate(lhs: 20, rhs: 50)
+        let result = try sut.calculate(lhs: 20, rhs: 50)
         
         // Then
         XCTAssertEqual(result, 0.4)

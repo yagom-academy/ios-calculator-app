@@ -9,4 +9,5 @@ enum CalculatorError: Error {
     case emptyOperators
     case emptyOperands
     case noMoreOperands
+    case notaNumber
 }
