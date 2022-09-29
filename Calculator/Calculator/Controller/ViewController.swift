@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorArchive: UIStackView!
 
     @IBOutlet weak var scrollView: UIScrollView!
+    
     private var displayLabelText: String = nameSpace.zero {
         didSet {
             if displayLabelText.count >= 20 {
@@ -120,7 +121,7 @@ class ViewController: UIViewController {
         calculatorArchive.addArrangedSubview(stackView)
         
         self.scrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom)
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         self.scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
