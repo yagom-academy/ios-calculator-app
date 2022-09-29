@@ -28,7 +28,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(queue.isEmpty)
     }
     
-    func test_queue에_3을enqueue했을때_isEmpty가False인지() {
+    func test_queue에_값을enqueue했을때_isEmpty가False인지() {
         //given
         let element: Double = 3
         

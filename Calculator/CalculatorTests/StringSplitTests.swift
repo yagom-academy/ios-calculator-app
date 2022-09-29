@@ -14,7 +14,7 @@ final class StringSplitTests: XCTestCase {
         let result = str.split(with: Operator.add.rawValue)
         
         //then
-        XCTAssertEqual(result, ["1","1"])
+        XCTAssertEqual(result, ["1", "1"])
     }
     
     func test_1더하기2더하기3을split했을때_결과가1_2_3_인지() {
@@ -25,7 +25,7 @@ final class StringSplitTests: XCTestCase {
         let result = str.split(with: Operator.add.rawValue)
         
         //then
-        XCTAssertEqual(result, ["1","2","3"])
+        XCTAssertEqual(result, ["1", "2", "3"])
     }
     
     func test_4곱하기5를split했을때_결과가4_5인지() {
@@ -36,6 +36,6 @@ final class StringSplitTests: XCTestCase {
         let result = str.split(with: Operator.multiply.rawValue)
         
         //then
-        XCTAssertEqual(result, ["4","5"])
+        XCTAssertEqual(result, ["4", "5"])
     }
 }
