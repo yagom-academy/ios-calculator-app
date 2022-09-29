@@ -7,11 +7,27 @@ class OprandButton: UIButton {
         return convertNumber(about: self.restorationIdentifier)
     }
     
-    private func convertNumber(about restorationIdentifier: String? ) -> String? {
+    private func convertNumber(about restorationIdentifier: String?) -> String? {
         guard let identifier = restorationIdentifier,
               let number = identifierList[identifier] else {
             return nil
         }
         return number
+    }
+}
+
+class OperatorButton: UIButton {
+    private let identifierList: [String: String] = ["add": "+", "subtract": "−", "divide": "÷", "multiply": "×"]
+
+    var operatorSign: String? {
+        return convertOperatorSign(about: self.restorationIdentifier)
+    }
+    
+    private func convertOperatorSign(about restorationIdentifier: String?) -> String? {
+        guard let identifier = restorationIdentifier,
+              let operatorSign = identifierList[identifier] else {
+            return nil
+        }
+        return operatorSign
     }
 }
