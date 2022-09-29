@@ -6,7 +6,7 @@ class CalculatorController {
     let formula: Formula?
     var Expression: String = ""
     var viewDisplayNumber: String = ""
-    var displaySign: Operator.RawValue = Operator.add.rawValue
+    var displaySign: Operator.RawValue = Operator.unknown.rawValue
     var isFirstClick: Bool = true
     
     init() {
