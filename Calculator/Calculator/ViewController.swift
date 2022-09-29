@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var inputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputNumberLabel: UILabel!
+    @IBOutlet weak private var historyInputScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +41,63 @@ class ViewController: UIViewController {
         }
     }
     
+    private func invertNumber(inputText: String) {
+        if inputText.prefix(1) != Literal.subtraction.value {
+            
+        }
+    }
+    
+    private func makeHistoryInputLabel(inputText: String) -> UILabel {
+        var inputLabel: UILabel {
+            let inputLabel = UILabel()
+            
+            inputLabel.text = inputText
+            inputLabel.translatesAutoresizingMaskIntoConstraints = false
+            return inputLabel
+        }
+        
+        return inputLabel
+    }
+    
+    private func makeHistoryStactView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        var stackView: UIStackView {
+            let stactView = UIStackView()
+            
+            stactView.translatesAutoresizingMaskIntoConstraints = false
+            stactView.axis = .horizontal
+            stactView.alignment = .fill
+            stactView.distribution = .equalSpacing
+            stactView.spacing = 8
+            stactView.addArrangedSubview(operatorLabel)
+            stactView.addArrangedSubview(operandLabel)
+            return stactView
+        }
+        
+        return stackView
+    }
+    
+    private func showResult() {
+        
+    }
+    
     private func addOperator(inputText: String, operatorValue: String) {
-        historyInputOperatorLabel.text = inputOperatorLabel.text
-        historyInputNumberLabel.text = inputText
+        if inputText == Literal.numberZero.value {
+            return
+        }
+        //old
+//        historyInputOperatorLabel.text = inputOperatorLabel.text
+//        historyInputNumberLabel.text = inputText
+        
+        //new
+        guard let operatorText = inputOperatorLabel.text else {
+            return
+        }
+        
+        let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
+        let operandLabel = makeHistoryInputLabel(inputText: inputText)
+        let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        historyInputScrollView.addSubview(stackView)
+        
         inputNumberLabel.text = Literal.numberZero.value
         inputOperatorLabel.text = operatorValue
     }
@@ -59,6 +114,10 @@ class ViewController: UIViewController {
         case Literal.CE.buttonID:
             inputNumberLabel.text = Literal.numberZero.value
         case Literal.numberInvertion.buttonID:
+//            if inputText == Literal.numberZero.value { return }
+//            if inputText.prefix(1) != Literal.subtraction.value {
+//                inputNumberLabel.text = "(" + Literal.subtraction.value + inputText + ")"
+//            }
             return
         case Literal.division.buttonID:
             addOperator(inputText: inputText, operatorValue: Literal.division.value)
