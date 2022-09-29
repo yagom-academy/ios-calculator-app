@@ -27,7 +27,7 @@ class CalculatorViewController: UIViewController {
         }
         
         if selectedNumbers.isEmpty {
-            appendExpressionFromNumbers()
+            appendExpressionFromOperator()
         }
         
         guard let inputNumber = sender.titleLabel?.text else {
@@ -84,7 +84,24 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func didTappedConvertSign(_ sender: UIButton) {
+        guard selectedNumbers.isNotEmpty else {
+            return
+        }
+        
+        if selectedNumbers.contains("-") {
+            selectedNumbers.remove(at: selectedNumbers.startIndex)
+        } else {
+            selectedNumbers.insert("-", at: selectedNumbers.startIndex)
+        }
+        
+        changeNumbers(selectedNumbers)
+        changeNumberLabel(selectedNumbers)
+    }
     private func calculateExpression() {
+        
+        print(mathExpression)
+        
         let formula = ExpressionParser.parse(from: mathExpression)
         
         do {
@@ -128,7 +145,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeNumbers(_ input: String) {
-        selectedNumbers = ""
+        selectedNumbers = input
     }
     
     private func appendNumbers(_ input: String) {
@@ -141,6 +158,10 @@ class CalculatorViewController: UIViewController {
     
     private func appendExpressionFromNumbers() {
         mathExpression.append(selectedNumbers)
+    }
+    
+    private func appendExpressionFromOperator() {
+        mathExpression.append(selectedOperator)
     }
     
     private func resetMathExpression() {
