@@ -331,6 +331,7 @@
                         <outlet property="calculatorArchive" destination="XRe-QE-UJf" id="7cG-UJ-L0o"/>
                         <outlet property="calculatorDisplayLabel" destination="Lwz-OF-XHD" id="AyZ-az-ZVx"/>
                         <outlet property="operatorDisplayLabel" destination="HPC-iy-qdm" id="KSm-8l-hVl"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="MHn-ie-UXw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

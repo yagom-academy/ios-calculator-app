@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorDisplayLabel: UILabel!
     @IBOutlet weak var calculatorArchive: UIStackView!
 
+    @IBOutlet weak var scrollView: UIScrollView!
     private var displayLabelText: String = nameSpace.zero {
         didSet {
             if displayLabelText.count >= 20 {
@@ -142,6 +143,10 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         calculatorArchive.addArrangedSubview(stackView)
+        
+        self.scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height + self.scrollView.contentInset.bottom)
+        self.scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
