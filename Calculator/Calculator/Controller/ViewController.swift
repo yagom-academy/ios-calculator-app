@@ -53,7 +53,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func numberButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle else {
+        guard let title = sender.currentTitle,
+              displayLabelText != nameSpace.nan else {
             return
         }
         
@@ -65,7 +66,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle else {
+        guard let title = sender.currentTitle,
+              displayLabelText != nameSpace.nan else {
             return
         }
         
@@ -75,7 +77,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle else {
+        guard let title = sender.currentTitle,
+              displayLabelText != nameSpace.nan else {
             return
         }
         
