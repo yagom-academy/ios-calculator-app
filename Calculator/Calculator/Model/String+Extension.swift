@@ -7,15 +7,6 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        var result = self.components(separatedBy: String(target))
-        
-        if result.first == "" {
-            result.removeFirst()
-        }
-        if result.last == "" {
-            result.removeLast()
-        }
-        
-        return result
+        self.trimmingCharacters(in: [" "]).components(separatedBy: String(target))
     }
 }
