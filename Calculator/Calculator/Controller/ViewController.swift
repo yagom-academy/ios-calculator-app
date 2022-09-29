@@ -22,11 +22,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
-        guard let tappedOperand = sender.currentTitle, !isCalculated else { return }
+        guard let tappedOperand = sender.currentTitle else { return }
+        if isCalculated { clearOperand() }
         
         switch tappedOperand {
-        case "⁺⁄₋":
-            handleSignButton()
         case ".":
             handleDotButton()
         case "0", "00":
@@ -66,6 +65,12 @@ class ViewController: UIViewController {
         isCalculated = true
         currentOperand = "\(result)"
         expression = ""
+    }
+    
+    @IBAction func tapSignButton(_ sender: UIButton) {
+        handleSignButton()
+        isCalculated = false
+        operandLabel.text = currentOperand
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {

@@ -91,7 +91,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapOperandButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eyv-IO-Ki3"/>
+                                                    <action selector="tapSignButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="403-A5-dVt"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
