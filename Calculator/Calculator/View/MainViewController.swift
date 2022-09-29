@@ -38,8 +38,36 @@ class MainViewController: UIViewController {
         }
     }
     
+    func makeStakView() {
+        let operandLabel = UILabel()
+        operandLabel.text = displayNumberLabel.text
+        operandLabel.textColor = .white
+    
+        let operatorLabel = UILabel()
+        operatorLabel.text = displaySignLabel.text
+        operatorLabel.textColor = .white
+        
+        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        formulaVerticalStackView.addArrangedSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        autoScroll()
+    }
+    
+    func autoScroll() {
+        let contentOffsetPoint: CGPoint = CGPoint(x: .zero, y: formulaScrollView.contentSize.height)
+        formulaScrollView.setContentOffset(contentOffsetPoint, animated: false)
+    }
+    
+    func resetDisplayNumberLabel() {
+        displayNumberLabel.text = "0"
+        calculatorController.viewDisplayNumber = ""
+    }
+    
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
+        makeStakView()
+        resetDisplayNumberLabel()
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
