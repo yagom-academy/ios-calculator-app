@@ -73,8 +73,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
-        displayNumberLabel.text = "0"
-        displaySignLabel.text = ""
+        calculatorController.tappedCEButton()
     }
 }
 

@@ -90,5 +90,6 @@ class CalculatorController {
     
     func tappedCEButton() {
         viewDisplayNumber = "0"
+        view.displayNumberLabel.text = "0"
     }
 }
