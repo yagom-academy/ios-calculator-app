@@ -12,7 +12,7 @@ extension String {
         var isNegative: Bool = true
         
         self.forEach { character in
-            if character == target && !isNegative{
+            if character == target && !isNegative {
                 isNegative = true
                 result.append(nonTargets.joined(separator: ""))
                 result.append(String(character))

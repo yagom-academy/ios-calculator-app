@@ -44,7 +44,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 6.0)
     }
     
-    func testFormula_operators종류4가지가하나씩입력되고operands값5개가입력되었을때_적잘한연산결과가반환되어야한다() {
+    func testFormula_operators4가지가하나씩입력되고operands5개가입력되었을때_연산결과가_연산순서대로연산된값이나와야한다() {
         // given
         let inputValue = (5.0 + 12.0 - 10.0) / 5.0 * 7.0
         sut.operands.enqueue(5.0)
