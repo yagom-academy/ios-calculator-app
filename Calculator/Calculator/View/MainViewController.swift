@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var formulaStackView: UIStackView!
     
-    var displayNumber: String = ""
+    var displayNumber: String = "0"
     var displaySign: Operator.RawValue = Operator.add.rawValue
     
     override func viewDidLoad() {
@@ -50,6 +50,15 @@ class MainViewController: UIViewController {
             displaySign = Operator.divide.rawValue
         default:
             displaySign = Operator.add.rawValue
+        }
+    }
+    
+    func isStartZero(stringNumber: String) -> Bool {
+        if stringNumber.first == "0" {
+            print("Is Start Zero!")
+            return true
+        } else {
+            return false
         }
     }
     
