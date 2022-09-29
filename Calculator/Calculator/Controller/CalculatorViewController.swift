@@ -17,9 +17,8 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentNumbersLabel.text = "0"
-        currentOperatorLabel.text = ""
-        
+        resetExpression()
+        resetLabels()
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
@@ -28,16 +27,16 @@ class CalculatorViewController: UIViewController {
         }
         
         if selectedNumbers.isEmpty {
-            mathExpression.append(selectedOperator)
+            appendExpressionFromNumbers()
         }
         
         guard let inputNumber = sender.titleLabel?.text else {
             return
         }
         
-        selectedNumbers.append(inputNumber)
-        currentNumbersLabel.text = selectedNumbers
         
+        appendNumbers(inputNumber)
+        changeNumberLabel(selectedNumbers)
     }
     
     @IBAction func didTappedOperatorButton(_ sender: UIButton) {
@@ -53,8 +52,8 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        selectedOperator = inputedOperator
-        currentOperatorLabel.text = inputedOperator
+        changeOperator(inputedOperator)
+        changeOperatorLabel(selectedOperator)
     }
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
         guard didNotCalculate else {
@@ -66,7 +65,7 @@ class CalculatorViewController: UIViewController {
         }
         
         if lastElement.shouldConvertOperator {
-            mathExpression.append(selectedNumbers)
+            appendExpressionFromNumbers()
         }
         
         calculateExpression()
@@ -74,20 +73,57 @@ class CalculatorViewController: UIViewController {
         didNotCalculate = false
     }
     
+    @IBAction func didTappedACButton(_ sender: UIButton) {
+    }
     
     private func calculateExpression() {
         let formula = ExpressionParser.parse(from: mathExpression)
         
         do {
             let calculatedValue = try formula.result()
-            currentNumbersLabel.text = calculatedValue.description
-            currentOperatorLabel.text = ""
-            
-            selectedNumbers = "0"
-            selectedOperator = ""
+            changeLabels(calculatedValue.description, "")
+            resetExpression()
         } catch {
             // TODO: -에러처리하기
             print(error)
         }
+    }
+    
+    private func resetLabels() {
+        changeLabels("0", "")
+    }
+    
+    private func resetExpression() {
+        changeExpression("0", "")
+    }
+    
+    private func changeLabels(_ numbers: String, _ operators: String) {
+        changeNumberLabel(numbers)
+        changeOperatorLabel(operators)
+    }
+    
+    private func changeExpression(_ numbers: String, _ operators: String) {
+        appendNumbers(numbers)
+        changeOperator(operators)
+    }
+    
+    private func changeNumberLabel(_ input: String) {
+        currentNumbersLabel.text = input
+    }
+    
+    private func changeOperatorLabel(_ input: String) {
+        currentOperatorLabel.text = input
+    }
+    
+    private func appendNumbers(_ input: String) {
+        selectedNumbers.append(input)
+    }
+    
+    private func changeOperator(_ input: String) {
+        selectedOperator = input
+    }
+    
+    private func appendExpressionFromNumbers() {
+        self.mathExpression.append(selectedNumbers)
     }
 }
