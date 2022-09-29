@@ -127,13 +127,24 @@ class ViewController: UIViewController {
         inputOperatorLabel.text = operatorValue
     }
     
-    private func showResult() {
-        if let inputNumber = inputNumberLabel.text,
-           let operandValue = Double(inputNumber) {
+    private func showResult(inputText: String) {
+        if ((formula.operators?.isEmpty()) == true) {
+            return
+        }
+        
+        if let operandValue = Double(inputText),
+           let operatorText = inputOperatorLabel.text {
             formula.operands?.enqueue(operandValue)
+            
+            let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
+            let operandLabel = makeHistoryInputLabel(inputText: inputText)
+            let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+            historyInputStackView.addArrangedSubview(stackView)
+            autoSlideScrollView()
         }
         
         inputNumberLabel.text = String(formula.result())
+        inputOperatorLabel.text = ""
     }
     
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
@@ -162,7 +173,7 @@ class ViewController: UIViewController {
         case Literal.addition.buttonID:
             addOperator(inputText: inputText, operatorValue: Literal.addition.value)
         case Literal.result.buttonID:
-            showResult()
+            showResult(inputText: inputText)
         default:
             return
         }
