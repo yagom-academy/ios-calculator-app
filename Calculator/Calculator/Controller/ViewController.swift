@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     var expressionString: String = ""
+    var totalString: String = ""
     
     @IBOutlet weak var stackView: UIStackView!
     
@@ -113,9 +114,19 @@ class ViewController: UIViewController {
             return
         }
         
-        guard let vaule = expressionLabel.text else { return }
-        addLabelAndSign(vaule: vaule, sender: sender)
-        initializeExpression()
+        if totalString.isEmpty {
+            guard let vaule = expressionLabel.text else { return }
+            addLabelAndSign(vaule: vaule, sender: sender)
+            initializeExpression()
+        } else {
+            if expressionLabel.text == "0" {
+                signLabel.text = signOfOperator(sender: sender)
+            } else {
+                guard let sign = signLabel.text else { return }
+                guard let value = expressionLabel.text else { return }
+            }
+        }
+        
         
     }
     
