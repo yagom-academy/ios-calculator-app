@@ -20,5 +20,9 @@ class ViewController: UIViewController {
     @IBAction func tuchUpOperatorButton(_ sender: OperatorButton) {
         
     }
+    
+    @IBAction func touchUpCommandButton(_ sender: CommandButton) {
+        
+    }
 }
 
