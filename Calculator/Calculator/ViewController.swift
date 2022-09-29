@@ -107,6 +107,14 @@ class ViewController: UIViewController {
         }
     }
     
+    private func addStackView(operatorText: String, inputText: String) {
+        let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
+        let operandLabel = makeHistoryInputLabel(inputText: inputText)
+        let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        historyInputStackView.addArrangedSubview(stackView)
+        autoSlideScrollView()
+    }
+    
     private func addOperator(inputText: String, operatorValue: String) {
         if inputText == Literal.numberZero.value {
             return
@@ -116,11 +124,7 @@ class ViewController: UIViewController {
             return
         }
         
-        let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
-        let operandLabel = makeHistoryInputLabel(inputText: inputText)
-        let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-        historyInputStackView.addArrangedSubview(stackView)
-        autoSlideScrollView()
+        addStackView(operatorText: operatorText, inputText: inputText)
         insertIntoQueue(operatorValue: operatorValue, inputText: inputText)
         
         inputNumberLabel.text = Literal.numberZero.value
@@ -135,16 +139,16 @@ class ViewController: UIViewController {
         if let operandValue = Double(inputText),
            let operatorText = inputOperatorLabel.text {
             formula.operands?.enqueue(operandValue)
-            
-            let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
-            let operandLabel = makeHistoryInputLabel(inputText: inputText)
-            let stackView = makeHistoryStactView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-            historyInputStackView.addArrangedSubview(stackView)
-            autoSlideScrollView()
+            addStackView(operatorText: operatorText, inputText: inputText)
         }
         
-        inputNumberLabel.text = String(formula.result())
-        inputOperatorLabel.text = ""
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        if let result = numberFormatter.string(for: formula.result()) {
+            inputNumberLabel.text = String(result)
+            inputOperatorLabel.text = ""
+        }
     }
     
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
