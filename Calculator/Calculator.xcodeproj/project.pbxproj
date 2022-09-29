@@ -85,6 +85,81 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1839CDE228E5CB6200885ADD /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1839CDE328E5CB6800885ADD /* App */,
+				1839CDE528E5CB7800885ADD /* Calculator */,
+				1839CDE928E5CB9B00885ADD /* Common */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		1839CDE328E5CB6800885ADD /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		1839CDE528E5CB7800885ADD /* Calculator */ = {
+			isa = PBXGroup;
+			children = (
+				1839CDE828E5CB8C00885ADD /* Controller */,
+				1839CDE728E5CB8900885ADD /* View */,
+				1839CDE628E5CB8000885ADD /* Model */,
+			);
+			path = Calculator;
+			sourceTree = "<group>";
+		};
+		1839CDE628E5CB8000885ADD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				18DDB22228D857DF006568AD /* CalculatorItemQueue.swift */,
+				18CFA3C528DC43A8004747CE /* Operator.swift */,
+				18CFA3E928DC5F98004747CE /* Formula.swift */,
+				1830C26B28DFD1C1009AFA5F /* ExpressionParser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1839CDE728E5CB8900885ADD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				18EB9AE128E5418500FFF5D8 /* CalculatedRecordStackView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1839CDE828E5CB8C00885ADD /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1839CDE928E5CB9B00885ADD /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1839CDED28E5CC2200885ADD /* Errors */,
+				18558A1A28DB3C6E00D11803 /* Extensions */,
+				1839CDDF28E5C92C00885ADD /* Constants.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1839CDED28E5CC2200885ADD /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				18CFA3E528DC5999004747CE /* FormulaError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
 		18558A1A28DB3C6E00D11803 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,46 +182,14 @@
 			path = CalculatorItemQueueTests;
 			sourceTree = "<group>";
 		};
-		18DDB21E28D856B5006568AD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				18DDB22228D857DF006568AD /* CalculatorItemQueue.swift */,
-				18CFA3C528DC43A8004747CE /* Operator.swift */,
-				18CFA3E528DC5999004747CE /* FormulaError.swift */,
-				18CFA3E928DC5F98004747CE /* Formula.swift */,
-				1830C26B28DFD1C1009AFA5F /* ExpressionParser.swift */,
-				1839CDDF28E5C92C00885ADD /* Constants.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		18DDB21F28D856BA006568AD /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		18DDB22028D856D2006568AD /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		18DDB22128D856D9006568AD /* View */ = {
-			isa = PBXGroup;
-			children = (
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				18EB9AE128E5418500FFF5D8 /* CalculatedRecordStackView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		C713D9352570E5EB001C3AFC = {
@@ -170,11 +213,8 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				18558A1A28DB3C6E00D11803 /* Extensions */,
+				1839CDE228E5CB6200885ADD /* Sources */,
 				18DDB21F28D856BA006568AD /* Resources */,
-				18DDB21E28D856B5006568AD /* Model */,
-				18DDB22128D856D9006568AD /* View */,
-				18DDB22028D856D2006568AD /* Controller */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";

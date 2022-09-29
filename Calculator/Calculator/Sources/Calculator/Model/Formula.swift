@@ -3,8 +3,6 @@
 //  Created by 미니.
 //
 
-import Foundation
-
 struct Formula {
     private let operands: CalculatorItemQueue<Double>
     private let operators: CalculatorItemQueue<Operator>

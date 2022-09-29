@@ -28,7 +28,8 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
-        guard didNotCalculate else {
+        guard didNotCalculate,
+              let inputNumber = sender.titleLabel?.text else {
             return
         }
         
@@ -36,21 +37,13 @@ class CalculatorViewController: UIViewController {
             appendExpressionFromOperator()
         }
         
-        guard let inputNumber = sender.titleLabel?.text else {
-            return
-        }
-        
         appendNumbers(inputNumber)
         changeNumberLabel(selectedNumbers)
     }
     
     @IBAction func didTappedOperatorButton(_ sender: UIButton) {
-        
-        guard didNotCalculate else {
-            return
-        }
-        
-        guard let inputedOperator = sender.titleLabel?.text else {
+        guard didNotCalculate,
+              let inputedOperator = sender.titleLabel?.text else {
             return
         }
         
@@ -66,18 +59,7 @@ class CalculatorViewController: UIViewController {
         changeNumberLabel()
     }
     
-    private func addChildStackView() {
-        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
-        
-        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers.calNumber)
-        
-        recordedCalculatedStackView.addArrangedSubview(childView)
-        scrollView.scrollToBottom()
-    }
-    
-    private func removeAllChildStackView() {
-        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
+
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
         guard didNotCalculate else {
@@ -164,6 +146,22 @@ class CalculatorViewController: UIViewController {
         } catch {
             
         }
+    }
+}
+
+// MARK: - StackView UI변경 관련 메서드
+private extension CalculatorViewController {
+    func addChildStackView() {
+        let operatorValue = selectedOperator.isEmpty ? defaultInputValue : selectedOperator
+        
+        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers.calNumber)
+        
+        recordedCalculatedStackView.addArrangedSubview(childView)
+        scrollView.scrollToBottom()
+    }
+    
+    func removeAllChildStackView() {
+        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
