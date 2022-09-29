@@ -28,7 +28,7 @@ class Calculator {
     }
     
     func addFormula(_ formula: String) {
-        self.formula += formula
+        self.formula += formula.replacingOccurrences(of: ",", with: "")
     }
     
     func calculate() throws -> Double {

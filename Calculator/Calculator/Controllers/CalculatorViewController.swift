@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
         
         return numberFormatter
     }()
@@ -74,9 +75,12 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addHistoryStackView(operatorText: String?, operandText: String?) {
+        guard let operand = operandText,
+              let convertedOperand = Double(operand) else { return }
+        
         let historyLabels: [UIView] = [
             makeHistoryLabel(text: operatorText),
-            makeHistoryLabel(text: operandText)
+            makeHistoryLabel(text: numberFormatter.string(from: convertedOperand as NSNumber))
         ]
         
         let stackView = UIStackView()
@@ -146,7 +150,7 @@ class CalculatorViewController: UIViewController {
     private func showCalculationResult() {
         do {
             let result = try calculator.calculate()
-            setOperandLabel(to: String(result))
+            setOperandLabel(to: numberFormatter.string(from: result as NSNumber))
         } catch CalculatorError.divisionByZero {
             setOperandLabel(to: numberFormatter.notANumberSymbol)
         } catch {
