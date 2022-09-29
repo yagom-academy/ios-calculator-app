@@ -7,7 +7,7 @@ enum ExpressionParser {
         var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
         var operators: CalculatorItemQueue = CalculatorItemQueue<Operator>()
         
-        let operandsComponentArray = componentsByOperators(from: input).compactMap { str in Double(str) }
+        let operandsComponentArray = componentsByOperators(from: input).compactMap { string in Double(string) }
         operandsComponentArray.forEach {
             operands.enqueue($0)
         }
