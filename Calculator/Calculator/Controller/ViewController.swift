@@ -173,26 +173,12 @@ class ViewController: UIViewController {
             let result = try parsedFormula.result()
             displayLabelText = String(result)
             
-            if result.isNaN == false {
-                trimmingDoubleToInt(string: displayLabelText)
-            }
-            
             formula = nameSpace.empty
             operatorDisplayLabel.text = nameSpace.empty
         } catch CalculatorError.divideZero {
             displayLabelText = nameSpace.nan
         } catch {
             print(error.localizedDescription)
-        }
-    }
-    
-    func trimmingDoubleToInt(string: String) {
-        guard let textToDouble = Double(displayLabelText) else {
-            return
-        }
-        
-        if Double(Int(textToDouble)) == textToDouble {
-            displayLabelText = String(Int(textToDouble))
         }
     }
 }
