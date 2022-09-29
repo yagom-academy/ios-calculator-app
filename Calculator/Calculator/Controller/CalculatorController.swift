@@ -3,10 +3,10 @@
 
 class CalculatorController {
     let view: MainViewController
-    let model: Formula
+    let formula: Formula
     
     init(view: MainViewController, model: Formula) {
         self.view = view
-        self.model = model
+        self.formula = model
     }
 }
