@@ -114,6 +114,8 @@ class ViewController: UIViewController {
         }
         
         guard let vaule = expressionLabel.text else { return }
+        addLabelAndSign(vaule: vaule, sender: sender)
+        initializeExpression()
         
     }
     
