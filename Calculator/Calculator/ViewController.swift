@@ -32,5 +32,15 @@ class ViewController: UIViewController {
             $0.removeFromSuperview()
         }
     }
+    
+    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+        resetOperandLabel()
+    }
+    
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        resetOperatorLabel()
+        resetOperandLabel()
+        removeAllsubviewsInHistoryStackView()
+    }
 }
 
