@@ -14,6 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         numberLabel.clearAll()
+        operatorLabel.clearAll()
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
@@ -24,7 +25,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
-        
+        if numberLabel.isReceiving == true {
+            return
+        } else {
+            operatorLabel.text = sender.operatorSign
+        }
     }
     
     @IBAction func touchUpCommandButton(_ sender: CommandButton) {

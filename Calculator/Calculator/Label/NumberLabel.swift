@@ -10,7 +10,9 @@ class NumberLabel: UILabel {
 //MARK: - NumberLabel Properties
     private var isPositiveNumber: Bool = true
     private var hasDecimalPoints: Bool = false
-    
+    var isReceiving: Bool {
+        return self.text != initialValue ? true : false
+    }
 //MARK: - NumberLabel Func
     func append(_ number: String) {
         if self.text == initialValue {
@@ -24,7 +26,7 @@ class NumberLabel: UILabel {
     }
     
     func appendDecimalPoints() {
-        if !hasDecimalPoints {
+        if hasDecimalPoints == false {
             self.text?.append(decimalPoints)
             hasDecimalPoints = true
         }
@@ -32,10 +34,11 @@ class NumberLabel: UILabel {
     
     func swapNumberSign() {
         guard let number = self.text,
-              number != initialValue else {
+              number != initialValue,
+              isReceiving == true else {
             return
         }
-        if isPositiveNumber {
+        if isPositiveNumber == true {
             self.text = negativeNumberSign + number
             isPositiveNumber = false
         } else {
