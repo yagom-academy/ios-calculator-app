@@ -127,9 +127,10 @@ class ViewController: UIViewController {
         }
         
         if totalString.isEmpty {
-            guard let vaule = expressionLabel.text else { return }
-            addLabelAndSign(vaule: vaule, sender: sender)
-//            initializeExpression()
+            guard let value = expressionLabel.text else { return }
+            assignTotalString(value: value)
+            addLabelAndSign(vaule: value, sender: sender)
+            initializeExpression()
         } else {
             if expressionLabel.text == "0" {
                 signLabel.text = signOfOperator(sender: sender)
@@ -138,6 +139,7 @@ class ViewController: UIViewController {
                 guard let value = expressionLabel.text else { return }
                 resetExpressionString()
                 totalString += sign
+                assignTotalString(value: value)
                 addLabelAndSign(vaule: sign + value, sender: sender)
                 initializeExpression()
             }
