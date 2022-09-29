@@ -17,7 +17,6 @@ enum ExpressionParser {
         doubleOperands.forEach { value in
             formula.operands.enqueue(value)
         }
-
         
         let operators = input.compactMap { str in Operator(rawValue: str) }
         
