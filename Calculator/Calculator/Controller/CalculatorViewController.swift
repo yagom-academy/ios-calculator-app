@@ -99,9 +99,6 @@ class CalculatorViewController: UIViewController {
         changeNumberLabel(selectedNumbers)
     }
     private func calculateExpression() {
-        
-        print(mathExpression)
-        
         let formula = ExpressionParser.parse(from: mathExpression)
         
         do {
