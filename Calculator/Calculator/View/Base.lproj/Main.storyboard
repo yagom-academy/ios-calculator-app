@@ -346,6 +346,7 @@
                     <connections>
                         <outlet property="currentNumbersLabel" destination="Lwz-OF-XHD" id="4rz-mG-79t"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Wsh-g0-pWE"/>
+                        <outlet property="recordedCalculatedStackView" destination="XRe-QE-UJf" id="hOq-F1-fQi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -6,6 +6,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    @IBOutlet weak var recordedCalculatedStackView: UIStackView!
     @IBOutlet weak var currentNumbersLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     
@@ -44,12 +45,14 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        appendExpressionFromNumbers()
-        changeNumbers("")
-
         guard let inputedOperator = sender.titleLabel?.text else {
             return
         }
+        let view = CalculatedRecordStackView(selectedOperator.isEmpty ? "" : selectedOperator, selectedNumbers)
+        recordedCalculatedStackView.addArrangedSubview(view)
+        
+        appendExpressionFromNumbers()
+        changeNumbers("")
         
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
