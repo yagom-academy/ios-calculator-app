@@ -8,6 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var numberLabel: NumberLabel!
+    @IBOutlet weak var operatorLabel: OperatorLabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
