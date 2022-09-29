@@ -11,6 +11,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentNumbersLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     
+    private let defaultNumberLabelValue: String = Constant.Calculator.defaultNumberLabelValue
+    private let defaultOperatorLabelValue: String = Constant.Calculator.defaultOperatorLabelValue
+    private let defaultInputValue: String = Constant.Calculator.defaultInput
+    
     private var mathExpression: String = ""
     private var selectedNumbers: String = ""
     private var selectedOperator: String = ""
@@ -55,15 +59,15 @@ class CalculatorViewController: UIViewController {
         }
         
         appendExpressionFromNumbers()
-        changeNumbers("")
+        changeNumbers()
         
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
-        changeNumberLabel("0")
+        changeNumberLabel()
     }
     
     private func addChildStackView() {
-        let operatorValue = selectedOperator.isEmpty ? "" : selectedOperator
+        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
         
         let childView = CalculatedRecordStackView(operatorValue, selectedNumbers.calNumber)
         
@@ -81,15 +85,13 @@ class CalculatorViewController: UIViewController {
         }
         
         if selectedNumbers.isEmpty {
-            changeNumbers("0")
+            changeNumbers()
             appendExpressionFromOperator()
             appendExpressionFromNumbers()
-            
-            print(mathExpression)
         }
         
         addChildStackView()
-
+        
         guard let lastElement = mathExpression.last else {
             return
         }
@@ -126,19 +128,8 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let lastElement = mathExpression.last else {
-            changeNumbers("")
-            changeNumberLabel("0")
-            print(selectedOperator)
-            return
-        }
-        
-        guard lastElement.shouldConvertOperator else {
-            return
-        }
-        
-        changeNumbers("")
-        changeNumberLabel("0")
+        changeNumbers()
+        changeNumberLabel()
     }
     
     @IBAction func didTappedConvertSign(_ sender: UIButton) {
@@ -174,58 +165,64 @@ class CalculatorViewController: UIViewController {
             
         }
     }
-    
-    private func convertDidCalculate() {
+}
+
+// MARK: - 계산기 사용자 입력 상태 관리 메서드
+private extension CalculatorViewController {
+    func convertDidCalculate() {
         didNotCalculate = !didNotCalculate
     }
     
-    private func resetLabels() {
-        changeLabels("0", "")
+    func resetExpression() {
+        changeExpression(defaultInputValue, defaultInputValue)
     }
     
-    private func resetExpression() {
-        changeExpression("", "")
-    }
-    
-    private func changeLabels(_ numbers: String, _ operators: String) {
-        changeNumberLabel(numbers)
-        changeOperatorLabel(operators)
-    }
-    
-    private func changeExpression(_ numbers: String, _ operators: String) {
+    func changeExpression(_ numbers: String, _ operators: String) {
         changeNumbers(numbers)
         changeOperator(operators)
     }
     
-    private func changeNumberLabel(_ input: String) {
-        currentNumbersLabel.text = input.calNumber
-    }
-    
-    private func changeOperatorLabel(_ input: String) {
-        currentOperatorLabel.text = input
-    }
-    
-    private func changeNumbers(_ input: String) {
+    func changeNumbers(_ input: String = Constant.Calculator.defaultInput) {
         selectedNumbers = input
     }
     
-    private func appendNumbers(_ input: String) {
+    func appendNumbers(_ input: String) {
         selectedNumbers.append(input)
     }
     
-    private func changeOperator(_ input: String) {
+    func changeOperator(_ input: String = Constant.Calculator.defaultInput) {
         selectedOperator = input
     }
     
-    private func appendExpressionFromNumbers() {
+    func appendExpressionFromNumbers() {
         mathExpression.append(selectedNumbers)
     }
     
-    private func appendExpressionFromOperator() {
+    func appendExpressionFromOperator() {
         mathExpression.append(selectedOperator)
     }
     
-    private func resetMathExpression() {
-        mathExpression = ""
+    func resetMathExpression() {
+        mathExpression = defaultInputValue
+    }
+}
+
+// MARK: - 뷰 관련 메서드
+private extension CalculatorViewController {
+    func resetLabels() {
+        changeLabels(defaultNumberLabelValue,defaultOperatorLabelValue)
+    }
+    
+    func changeLabels(_ numbers: String, _ operators: String) {
+        changeNumberLabel(numbers)
+        changeOperatorLabel(operators)
+    }
+    
+    func changeNumberLabel(_ input: String = Constant.Calculator.defaultInput) {
+        currentNumbersLabel.text = input.calNumber
+    }
+    
+    func changeOperatorLabel(_ input: String = Constant.Calculator.defaultInput) {
+        currentOperatorLabel.text = input
     }
 }

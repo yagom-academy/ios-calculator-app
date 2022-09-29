@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1830C26C28DFD1C1009AFA5F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830C26B28DFD1C1009AFA5F /* ExpressionParser.swift */; };
 		1830C26E28DFD26A009AFA5F /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1830C26D28DFD26A009AFA5F /* ExpressionParserTests.swift */; };
+		1839CDE028E5C92C00885ADD /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1839CDDF28E5C92C00885ADD /* Constants.swift */; };
 		189B8E8828E02F4D00B8D848 /* Double+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18558A1D28DB3C8500D11803 /* Double+CalculateItem.swift */; };
 		189B8E8928E030DA00B8D848 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		18CC548F28DDB248005F8B4F /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18CC548E28DDB248005F8B4F /* FormulaTests.swift */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		1830C26B28DFD1C1009AFA5F /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		1830C26D28DFD26A009AFA5F /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		1839CDDF28E5C92C00885ADD /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		18558A1D28DB3C8500D11803 /* Double+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CalculateItem.swift"; sourceTree = "<group>"; };
 		18CC548E28DDB248005F8B4F /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		18CFA3C528DC43A8004747CE /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				18CFA3E528DC5999004747CE /* FormulaError.swift */,
 				18CFA3E928DC5F98004747CE /* Formula.swift */,
 				1830C26B28DFD1C1009AFA5F /* ExpressionParser.swift */,
+				1839CDDF28E5C92C00885ADD /* Constants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				18DDB22328D857DF006568AD /* CalculatorItemQueue.swift in Sources */,
 				18CFA3C628DC43A8004747CE /* Operator.swift in Sources */,
 				18CFA3E628DC5999004747CE /* FormulaError.swift in Sources */,
+				1839CDE028E5C92C00885ADD /* Constants.swift in Sources */,
 				18CFA3EA28DC5F98004747CE /* Formula.swift in Sources */,
 				1830C26C28DFD1C1009AFA5F /* ExpressionParser.swift in Sources */,
 			);

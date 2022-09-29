@@ -45,7 +45,6 @@ enum ExpressionParser {
         operators.forEach { sign in
             input = input.replacingOccurrences(of: "\(sign)−", with: "\(sign)")
         }
-        print(input.filter { !$0.isNumber })
         return input.filter { !$0.isNumber }
     }
 }
