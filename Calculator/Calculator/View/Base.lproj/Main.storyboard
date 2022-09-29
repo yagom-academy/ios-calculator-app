@@ -367,6 +367,7 @@
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="KPy-9M-FH9"/>
                         <outlet property="numberLabel" destination="Lwz-OF-XHD" id="luR-ZU-tuS"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="wSC-28-ube"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="6so-oT-QZ6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

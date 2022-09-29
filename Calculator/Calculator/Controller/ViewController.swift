@@ -10,13 +10,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberLabel: NumberLabel!
     @IBOutlet weak var operatorLabel: OperatorLabel!
     @IBOutlet weak var formulaStackView: FormulaStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
+    private var initializationList: [InitializationProtocol] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        numberLabel.Initialization()
-        operatorLabel.Initialization()
-        formulaStackView.Initialization()
+        
+        initializationList = [numberLabel, operatorLabel, formulaStackView]
+        Initialization()
     }
     
     @IBAction func touchUpOperandButton(_ sender: OprandButton) {
@@ -27,12 +29,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
+        operatorLabel.text = sender.operatorSign
         if numberLabel.isReceiving == true {
-            operatorLabel.text = sender.operatorSign
             formulaStackView.appendFormula(combining: operatorLabel, to: numberLabel)
             numberLabel.Initialization()
-        } else {
-            operatorLabel.text = sender.operatorSign
+            scrollView.moveToBottom()
         }
     }
     
@@ -42,7 +43,7 @@ class ViewController: UIViewController {
         }
         switch command {
         case .AllClear:
-            return
+            Initialization()
         case .ClearElement:
             numberLabel.Initialization()
         case .SwapNumberSign:
@@ -51,6 +52,12 @@ class ViewController: UIViewController {
             numberLabel.appendDecimalPoints()
         case .calculation:
             return
+        }
+    }
+    
+    private func Initialization() {
+        initializationList.forEach {
+            $0.Initialization()
         }
     }
 }
