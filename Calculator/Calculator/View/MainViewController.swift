@@ -45,5 +45,10 @@ class MainViewController: UIViewController {
     @IBAction func tapNumberButton(_ sender: UIButton) {
         displayNumberLabel.text = calculatorController.tappedNumberButton(input: sender.titleLabel?.text)
     }
+    
+    @IBAction func tapCEButton(_ sender: UIButton) {
+        displayNumberLabel.text = "0"
+        displaySignLabel.text = ""
+    }
 }
 

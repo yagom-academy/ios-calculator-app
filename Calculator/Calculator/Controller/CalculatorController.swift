@@ -62,4 +62,8 @@ class CalculatorController {
             displaySign = Operator.add.rawValue
         }
     }
+    
+    func tappedCEButton() {
+        viewDisplayNumber.text = ""
+    }
 }
