@@ -35,7 +35,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 3.0)
     }
     
-    func test_피연산자3개_같은연산자2개로이루어진Formula에서_result함수호출시_연산결과가반환되어야한다() {
+    func test_3개이상의피연산자와_모두같은연산자로만이루어진Formula에서_result함수호출시_연산결과가반환되어야한다() {
         // given
         operands.enqueue(1)
         operands.enqueue(2)
@@ -58,7 +58,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 6.0)
     }
     
-    func test_5개의피연산자와4개의각각다른연산자를통해_순서대로연산완료후결과를반환해야한다() {
+    func test_3개이상의피연산자를_각각다른연산자를통해서도_연산이가능해야한다() {
         // given
         operands.enqueue(1)
         operands.enqueue(2)
