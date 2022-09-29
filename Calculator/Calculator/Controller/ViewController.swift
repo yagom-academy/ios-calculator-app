@@ -13,8 +13,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculatorArchive: UIStackView!
 
     private var displayLabelText: String = nameSpace.zero {
-        didSet{
+        didSet {
+            if displayLabelText.count >= 20 {
+                let index = displayLabelText.index(displayLabelText.startIndex, offsetBy: 19)
+                displayLabelText = String(displayLabelText[...index])
+                if displayLabelText.last == "." {
+                    displayLabelText.removeLast()
+                }
+            }
+            
             calculatorDisplayLabel.text = displayLabelText
+            
+            guard let textToDouble = Double(displayLabelText) else {
+                return
+            }
+            
+            let numberFormatter = NumberFormatter()
+            numberFormatter.numberStyle = .decimal
+            calculatorDisplayLabel.text = numberFormatter.string(from: textToDouble as NSNumber)
         }
     }
     
@@ -68,13 +84,14 @@ class ViewController: UIViewController {
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let title = sender.currentTitle,
+              let displayText = calculatorDisplayLabel.text,
               let operatorText = operatorDisplayLabel.text else {
             return
         }
         
         if displayLabelText != nameSpace.zero {
             pushInFormula(operand: displayLabelText, operator: operatorText)
-            pushInArchive(operand: displayLabelText, operator: operatorText)
+            pushInArchive(operand: displayText, operator: operatorText)
         }
         
         if formula.isEmpty == false {
@@ -158,7 +175,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        guard let operatorText = operatorDisplayLabel.text else {
+        guard let operatorText = operatorDisplayLabel.text,
+              formula != nameSpace.empty else {
             return
         }
         
@@ -170,16 +188,18 @@ class ViewController: UIViewController {
         do {
             let result = try parsedFormula.result()
             displayLabelText = String(result)
+            
+            if result.isNaN == false {
+                trimmingDoubleToInt(string: displayLabelText)
+            }
+            
+            formula = nameSpace.empty
+            operatorDisplayLabel.text = nameSpace.empty
         } catch CalculatorError.divideZero {
             displayLabelText = nameSpace.nan
         } catch {
             print(error.localizedDescription)
         }
-        
-        formula = nameSpace.empty
-        operatorDisplayLabel.text = nameSpace.empty
-        
-        trimmingDoubleToInt(string: displayLabelText)
     }
     
     func trimmingDoubleToInt(string: String) {
