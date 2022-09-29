@@ -42,15 +42,15 @@ class ViewController: UIViewController {
             return
         }
         
-        appendExpressionQueue(operator: tappedOperator, operand: currentOperand)
+        appendExpressionQueue()
         
         clearOperand()
         operatorLabel.text = tappedOperator
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
-        guard let currentOperator = operatorLabel.text, !expression.isEmpty else { return }
-        appendExpressionQueue(operator: currentOperator, operand: currentOperand)
+        guard !expression.isEmpty else { return }
+        appendExpressionQueue()
         
         var components = ExpressionParser.parse(from: expression)
         let result = components.result()
@@ -137,17 +137,18 @@ extension ViewController {
         return stackView
     }
     
-    private func appendExpressionQueue(operator: String, operand: String) {
+    private func appendExpressionQueue() {
         let stackView: UIStackView = makeExpressionStackView()
         
+        guard let currentOperator = operatorLabel.text else { return }
         if !expressionQueue.arrangedSubviews.isEmpty {
-            let operatorLabel: UILabel = makeExpressionLabel(`operator`)
+            let operatorLabel: UILabel = makeExpressionLabel(currentOperator)
             stackView.addArrangedSubview(operatorLabel)
-            expression.append(" \(`operator`)")
+            expression.append(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(operand)
+        let operandLabel: UILabel = makeExpressionLabel(currentOperand)
         stackView.addArrangedSubview(operandLabel)
-        expression.append(" \(operand)")
+        expression.append(" \(currentOperand)")
         
         expressionQueue.addArrangedSubview(stackView)
     }
