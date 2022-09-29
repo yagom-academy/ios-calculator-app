@@ -20,9 +20,9 @@ struct Formula {
         
         while operators.isEmpty != true {
             guard let operators = operators.dequeue() else { return 0.0 }
-            guard let operand = operands.dequeue() else { return 0.0 }
+            guard let operands = operands.dequeue() else { return 0.0 }
             
-            result = operators.calculate(lhs: result, rhs: operand)
+            result = operators.calculate(lhs: result, rhs: operands)
         }
         return result
     }

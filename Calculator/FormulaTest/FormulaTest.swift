@@ -64,5 +64,34 @@ class FormulaTest: XCTestCase {
         // then
         XCTAssertEqual(result, 10.0)
     }
+    
+    func test_result_호출시_연산자큐요소가_한개남을때() {
+        //given
+        sut.operands.enqueue(10)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(5)
+        sut.operators.enqueue(.subtract)
+        sut.operators.enqueue(.subtract)
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, 15.0)
+    }
 
+    func test_result_호출시_숫자큐요소가_한개남을때() {
+        // given
+        sut.operands.enqueue(10)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(5)
+        sut.operands.enqueue(100)
+        sut.operands.enqueue(100)
+
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 15.0)
+    }
+    
+    
 }
