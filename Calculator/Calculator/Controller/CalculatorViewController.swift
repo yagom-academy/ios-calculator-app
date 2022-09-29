@@ -6,6 +6,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var recordedCalculatedStackView: UIStackView!
     @IBOutlet weak var currentNumbersLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
@@ -20,6 +21,8 @@ class CalculatorViewController: UIViewController {
         
         resetExpression()
         resetLabels()
+        
+        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
@@ -48,14 +51,24 @@ class CalculatorViewController: UIViewController {
         guard let inputedOperator = sender.titleLabel?.text else {
             return
         }
-        let view = CalculatedRecordStackView(selectedOperator.isEmpty ? "" : selectedOperator, selectedNumbers)
-        recordedCalculatedStackView.addArrangedSubview(view)
         
         appendExpressionFromNumbers()
         changeNumbers("")
         
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
+    }
+    
+    private func addChildStackView() {
+        let operatorValue = selectedOperator.isEmpty ? "" : selectedOperator
+        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers)
+        
+        recordedCalculatedStackView.addArrangedSubview(view)
+        scrollView.layoutIfNeeded()
+        
+        let bottomOffset = CGPointMake(0,scrollView.contentSize.height - scrollView.frame.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
+        
     }
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
@@ -114,10 +127,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if selectedNumbers.contains("-") {
-            selectedNumbers.remove(at: selectedNumbers.startIndex)
+        let isContainMinus = (selectedNumbers.filter { $0 == "-" }.count == 0)
+        let startIndex = selectedNumbers.startIndex
+        
+        if isContainMinus {
+            selectedNumbers.remove(at: startIndex)
         } else {
-            selectedNumbers.insert("-", at: selectedNumbers.startIndex)
+            selectedNumbers.insert("-", at: startIndex)
         }
         
         changeNumbers(selectedNumbers)
