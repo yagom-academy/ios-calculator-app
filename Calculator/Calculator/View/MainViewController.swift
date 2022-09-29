@@ -21,18 +21,18 @@ class MainViewController: UIViewController {
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var formulaStackView: UIStackView!
     
-    var displayNumber: String = "0"
+    var calculatorController: CalculatorController!
     var displaySign: Operator.RawValue = Operator.add.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        calculatorController = CalculatorController()
         configureDisplayLabels()
     }
     
     func configureDisplayLabels() {
         displaySignLabel.text = ""
-        displayNumberLabel.text = displayNumber
+        displayNumberLabel.text = "0"
         formulaStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
@@ -53,44 +53,13 @@ class MainViewController: UIViewController {
         }
     }
     
-    func isStartZero(stringNumber: String) -> Bool {
-        if stringNumber.first == "0" {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    func isOverCount20(stringNumber: String, input: String?) -> Bool {
-        if input != "00" && stringNumber.count >= 20 {
-            return true
-        } else if input == "00" && stringNumber.count >= 19 {
-            return true
-        }
-        return false
-    }
-    
-    func updateDisplayNumberLabel() {
-        displayNumberLabel.text = displayNumber
-    }
-    
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = sender.titleLabel?.text
         determineOperator(stringOperator: sender.titleLabel?.text)
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
-        if isOverCount20(stringNumber: displayNumber, input: sender.titleLabel?.text) {
-            return
-        }
-        
-        if isStartZero(stringNumber: displayNumber) == true {
-            displayNumber = sender.titleLabel?.text ?? ""
-        } else {
-            displayNumber += sender.titleLabel?.text ?? ""
-        }
-        
-        updateDisplayNumberLabel()
+        displayNumberLabel.text = calculatorController.tappedNumberButton(input: sender.titleLabel?.text)
     }
 }
 
