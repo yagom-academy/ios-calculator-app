@@ -14,8 +14,8 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         var formula = Formula(operands: operands, operators: operators)
         
-        for num in numberArray {
-            formula.operands?.enqueue(num)
+        for number in numberArray {
+            formula.operands?.enqueue(number)
         }
         
         let allOperators = Operator.allCases.map { $0.rawValue }

@@ -101,6 +101,25 @@ class ViewController: UIViewController {
         }
     }
     
+    private func insertIntoOperatorQueue(operatorValue: String) -> Operator? {
+        let someOperator: Operator?
+        
+        switch operatorValue {
+        case "+":
+            someOperator = .add
+        case "-":
+            someOperator = .subtract
+        case "ⅹ":
+            someOperator = .multiply
+        case "÷":
+            someOperator = .divide
+        default:
+            return nil
+        }
+        
+        return someOperator
+    }
+    
     private func addStackView(operatorText: String, inputText: String) {
         let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
         let operandLabel = makeHistoryInputLabel(inputText: inputText)
@@ -110,25 +129,30 @@ class ViewController: UIViewController {
     }
     
     private func addOperator(inputText: String, operatorValue: String) {
-        if inputText == Literal.numberZero.value {
+        if inputText == Literal.numberZero.value && inputOperatorLabel.text == "" {
             return
-        }
-//        if inputText == Literal.numberZero.value && inputOperatorLabel.text == "" {
-//            return
-//        } else if inputText == Literal.numberZero.value && inputOperatorLabel.text != "" {
-//            inputOperatorLabel.text = operatorValue
-//            return
-//        }
-        
-        guard let operatorText = inputOperatorLabel.text else {
+        } else if inputText == Literal.numberZero.value && operatorValue != "" {
+            inputOperatorLabel.text = operatorValue
+            
+            guard let operatorText = inputOperatorLabel.text,
+                  let getOperator = insertIntoOperatorQueue(operatorValue: operatorText) else {
+                return
+            }
+            
+            _ = formula.operators?.dequeue()
+            formula.operators?.enqueue(getOperator)
             return
+        } else {
+            guard let operatorText = inputOperatorLabel.text else {
+                return
+            }
+            
+            addStackView(operatorText: operatorText, inputText: inputText)
+            insertIntoQueue(operatorValue: operatorValue, inputText: inputText)
+            
+            inputNumberLabel.text = Literal.numberZero.value
+            inputOperatorLabel.text = operatorValue
         }
-        
-        addStackView(operatorText: operatorText, inputText: inputText)
-        insertIntoQueue(operatorValue: operatorValue, inputText: inputText)
-        
-        inputNumberLabel.text = Literal.numberZero.value
-        inputOperatorLabel.text = operatorValue
     }
     
     private func showResult(inputText: String) {
@@ -164,6 +188,7 @@ class ViewController: UIViewController {
     private func deleteAllHistory() {
         formula.operands?.allDelete()
         formula.operators?.allDelete()
+        inputOperatorLabel.text = ""
         inputNumberLabel.text = Literal.numberZero.value
         
         for view in historyInputStackView.subviews {
