@@ -7,8 +7,10 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
     private var formula = ""
+    private var isCalculateSucceeded = false
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
+        numberFormatter.usesSignificantDigits = true
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter
@@ -47,11 +49,19 @@ class CalculatorViewController: UIViewController {
         guard var operand = operandLabel.text else { return }
         let keyNumber = key.rawValue
         
-        if (operand.last == "." || operand.contains(".") || formula == "") && (keyNumber == ".") ||
-            isOperandLabelZero() && (keyNumber == "0" || keyNumber == "00") { return }
+        if keyNumber == ".", operand.contains(".") {
+            return
+        }
         
-        if (isOperandLabelZero() && keyNumber != ".") || formula == "" {
+        if keyNumber == "0" || keyNumber == "00",
+           isOperandLabelZero() {
+            return
+        }
+        
+        if (isOperandLabelZero() && keyNumber != ".") ||
+            isCalculateSucceeded == true {
             operand = keyNumber
+            isCalculateSucceeded = false
         } else {
             operand += keyNumber
         }
@@ -165,6 +175,7 @@ class CalculatorViewController: UIViewController {
         
         setOperatorLabel(to: nil)
         initFormula()
+        isCalculateSucceeded = true
     }
     
     @IBAction private func touchUpCalculatorButton(_ sender: UIButton) {
