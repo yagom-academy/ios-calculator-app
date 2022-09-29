@@ -99,5 +99,10 @@ class ViewController: UIViewController {
         
     }
     
+    func addNewLableToStackView(message: String, stackView: UIStackView) {
+        let label = UILabel()
+        stackView.addArrangedSubview(label)
+    }
+    
 }
 
