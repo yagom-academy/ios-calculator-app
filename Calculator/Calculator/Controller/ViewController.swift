@@ -7,6 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var numberLabel: NumberLabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
