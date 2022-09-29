@@ -49,12 +49,6 @@ class ViewController: UIViewController {
         }
     }
     
-    private func invertNumber(inputText: String) {
-        if inputText.prefix(1) != Literal.subtraction.value {
-            
-        }
-    }
-    
     private func makeHistoryInputLabel(inputText: String) -> UILabel {
         var inputLabel: UILabel {
             let inputLabel = UILabel()
@@ -151,6 +145,16 @@ class ViewController: UIViewController {
         }
     }
     
+    private func invertNumber(inputText: String) {
+        if inputText == Literal.numberZero.value { return }
+        
+        if inputText.prefix(1) != Literal.subtraction.value {
+            inputNumberLabel.text = Literal.subtraction.value + inputText
+        } else {
+            inputNumberLabel.text = inputText.replacingOccurrences(of: "-", with: "")
+        }
+    }
+    
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
         guard let id = sender.restorationIdentifier,
               let inputText = inputNumberLabel.text else {
@@ -163,15 +167,7 @@ class ViewController: UIViewController {
         case Literal.CE.buttonID:
             inputNumberLabel.text = Literal.numberZero.value
         case Literal.numberInvertion.buttonID:
-            if inputText == Literal.numberZero.value { return }
-            
-            if inputText.prefix(1) != Literal.subtraction.value {
-                inputNumberLabel.text = Literal.subtraction.value + inputText
-            } else {
-                inputNumberLabel.text = inputText.replacingOccurrences(of: "-", with: "")
-            }
-            
-            return
+            invertNumber(inputText: inputText)
         case Literal.division.buttonID:
             addOperator(inputText: inputText, operatorValue: Literal.division.value)
         case Literal.multiplication.buttonID:
