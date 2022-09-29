@@ -11,6 +11,9 @@ extension String {
     var calNumber: String {
         let numberValue = NSDecimalNumber(string: self)
         Self.formatter.numberStyle = .decimal
+        Self.formatter.maximumFractionDigits = 10
+        Self.formatter.maximumIntegerDigits = 20
+        Self.formatter.maximumSignificantDigits = 20
         return Self.formatter.string(from: numberValue) ?? "0"
     }
     
@@ -21,6 +24,4 @@ extension String {
     var isNotEmpty: Bool {
         return !self.isEmpty
     }
-    
-
 }

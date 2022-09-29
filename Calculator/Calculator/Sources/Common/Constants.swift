@@ -10,5 +10,6 @@ enum Constant {
         static let defaultNumberLabelValue: String = "0"
         static let defaultOperatorLabelValue: String = ""
         static let defaultInput: String = ""
+        static let defaultPoint: String = "."
     }
 }
