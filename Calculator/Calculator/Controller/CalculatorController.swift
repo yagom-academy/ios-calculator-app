@@ -5,12 +5,12 @@ class CalculatorController {
     let view: MainViewController
     let formula: Formula?
     var Expression: String = ""
-    var viewDisplayNumber: String = ""
+    var viewDisplayNumber: String = "0"
     var displaySign: Operator.RawValue = Operator.unknown.rawValue
     var isFirstClick: Bool = true
     
-    init() {
-        self.view = MainViewController()
+    init(view: MainViewController) {
+        self.view = view
         self.formula = ExpressionParser.parse(from: Expression)
     }
     
@@ -48,9 +48,9 @@ class CalculatorController {
         }
         
         if isStartZero(stringNumber: viewDisplayNumber) == true {
-            viewDisplayNumber = input ?? ""
+            viewDisplayNumber = input ?? "0"
         } else {
-            viewDisplayNumber += input ?? ""
+            viewDisplayNumber += input ?? "0"
         }
         
         isFirstClick = false
@@ -58,11 +58,18 @@ class CalculatorController {
     }
     
     func tappedOperatorButton(input: String?) -> String {
-        if isFirstClick == false {
+        if isFirstClick == true {
+            return ""
+        } else if canChangedOperator() == true {
+            determineOperator(stringOperator: input)
+            return String(displaySign)
+        } else {
+            viewDisplayNumber = "0"
+            view.makeStakView()
+            view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
             return String(displaySign)
         }
-        return ""
     }
     
     func determineOperator(stringOperator: String?) {
@@ -81,6 +88,6 @@ class CalculatorController {
     }
     
     func tappedCEButton() {
-        viewDisplayNumber = ""
+        viewDisplayNumber = "0"
     }
 }

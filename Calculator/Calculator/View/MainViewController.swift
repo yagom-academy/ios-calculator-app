@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculatorController = CalculatorController()
+        calculatorController = CalculatorController(view: self)
         configureDisplayLabels()
     }
     
@@ -61,13 +61,11 @@ class MainViewController: UIViewController {
     
     func resetDisplayNumberLabel() {
         displayNumberLabel.text = "0"
-        calculatorController.viewDisplayNumber = ""
+        calculatorController.viewDisplayNumber = "0"
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
-        makeStakView()
-        resetDisplayNumberLabel()
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
