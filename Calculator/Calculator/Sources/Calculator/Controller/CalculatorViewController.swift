@@ -80,7 +80,7 @@ final class CalculatorViewController: UIViewController {
         
         calculateExpression()
         
-        convertDidCalculate()
+        didNotCalculate.toggle()
     }
     
     @IBAction func didTappedACButton(_ sender: UIButton) {
@@ -89,7 +89,7 @@ final class CalculatorViewController: UIViewController {
         resetMathExpression()
         
         if !didNotCalculate {
-            convertDidCalculate()
+            didNotCalculate.toggle()
         }
         
         removeAllChildStackView()
@@ -101,7 +101,7 @@ final class CalculatorViewController: UIViewController {
             resetExpression()
             resetMathExpression()
             removeAllChildStackView()
-            convertDidCalculate()
+            didNotCalculate.toggle()
             
             return
         }
@@ -166,10 +166,6 @@ private extension CalculatorViewController {
 
 // MARK: - 계산기 사용자 입력 상태 관리 메서드
 private extension CalculatorViewController {
-    func convertDidCalculate() {
-        didNotCalculate = !didNotCalculate
-    }
-    
     func resetExpression() {
         resetSelectedNumbers()
         resetSelectedOperator()
@@ -230,4 +226,16 @@ private extension CalculatorViewController {
         currentOperatorLabel.text = selectedOperator
     }
     
+}
+
+private extension Character {
+    var shouldConvertOperator: Bool {
+        return Operator(rawValue: self) != nil
+    }
+}
+
+private extension Bool {
+    mutating func toggle() {
+        self = !self
+    }
 }
