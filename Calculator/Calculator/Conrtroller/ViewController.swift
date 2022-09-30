@@ -6,6 +6,14 @@
 
 import UIKit
 
+struct Text {
+    fileprivate static let zero: String = "0"
+    fileprivate static let noValue: String = ""
+    fileprivate static let blank: String = " "
+    fileprivate static let negativeSymbol: String = "-"
+    fileprivate static let dot: Character = "."
+}
+
 class ViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
@@ -13,15 +21,13 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
-    private let zero = "0"
-    private let noValue = ""
-    private let blank = " "
     private var formula: String = ""
     private var result: Double = 0.0
     private var inputNumber: String = "" {
         willSet {
-            guard newValue != noValue, newValue != "-" else {
-                operandLabel.text = zero
+            guard newValue != Text.noValue,
+                  newValue != Text.negativeSymbol else {
+                operandLabel.text = Text.zero
                 return
             }
             
@@ -34,9 +40,9 @@ class ViewController: UIViewController {
         
         switch number {
         case "0", "00":
-            guard inputNumber != zero else { return }
+            guard inputNumber != Text.zero else { return }
         default:
-            if inputNumber == zero {
+            if inputNumber == Text.zero {
                 inputNumber.removeFirst()
             }
         }
@@ -45,44 +51,44 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard inputNumber != noValue else {
+        guard inputNumber != Text.noValue else {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
         
-        guard inputNumber.split(with: ".").count <= 2,
-              inputNumber != "." else {
-            inputNumber = noValue
-            operandLabel.text = numberFormatter.notANumberSymbol
-            return
-        }
+        guard inputNumber.split(with: Text.dot).count <= 2,
+              inputNumber != String(Text.dot) else {
+                  inputNumber = Text.noValue
+                  operandLabel.text = numberFormatter.notANumberSymbol
+                  return
+              }
         
         addFormula()
         MakeOperationStackView()
         scrollTobottom()
-        inputNumber = noValue
+        inputNumber = Text.noValue
         operatorLabel.text = sender.titleLabel?.text
     }
     
     @IBAction private func touchUpConvertingPositiveNegativeButton() {
-        guard inputNumber != zero else { return }
+        guard inputNumber != Text.zero else { return }
     
-        if inputNumber.prefix(1) == "-" {
+        if inputNumber.prefix(1) == Text.negativeSymbol {
             inputNumber.removeFirst()
         } else {
-            inputNumber.insert("-", at: inputNumber.startIndex)
+            inputNumber.insert(contentsOf: Text.negativeSymbol, at: inputNumber.startIndex)
         }
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        inputNumber = noValue
+        inputNumber = Text.noValue
     }
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
         showingOperationsStackView.subviews.forEach { $0.removeFromSuperview() }
-        formula = noValue
-        inputNumber = noValue
-        operatorLabel.text = blank
+        formula = Text.noValue
+        inputNumber = Text.noValue
+        operatorLabel.text = Text.blank
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
@@ -91,8 +97,8 @@ class ViewController: UIViewController {
         addFormula()
         MakeOperationStackView()
         scrollTobottom()
-        inputNumber = noValue
-        operatorLabel.text = blank
+        inputNumber = Text.noValue
+        operatorLabel.text = Text.blank
        
         do {
             var formulaQueue = ExpressionParser.parse(from: formula)
@@ -111,8 +117,8 @@ class ViewController: UIViewController {
             return
         }
         
-        if `operator` == blank {
-            formula += ("+" + operand)
+        if `operator` == Text.blank {
+            formula += (String(Operator.add.rawValue) + operand)
         } else {
             formula += (`operator` + operand)
         }
@@ -166,7 +172,7 @@ class ViewController: UIViewController {
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .up
         
-        let result = numberFormatter.string(from: operationResult as NSNumber) ?? zero
+        let result = numberFormatter.string(from: operationResult as NSNumber) ?? Text.zero
         
         return result
     }
