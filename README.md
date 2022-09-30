@@ -37,7 +37,7 @@
 > **현재 사용중인 방법 - 단방향 Linked List**
 <img src="https://i.imgur.com/FCUrHu7.jpg"/>  
 
-> **Formula 계산방식 - 2개의 Linked List**
+> **Formula 계산방식**
 <img src="https://i.imgur.com/wkpvxYC.gif"/>
 
 # 3.🗿**고민한 점**🗿
