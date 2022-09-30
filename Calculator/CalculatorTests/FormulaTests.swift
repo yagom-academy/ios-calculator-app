@@ -61,7 +61,7 @@ final class FormulaTests: XCTestCase {
     
     func test_나눗셈이_연산되었을때_input된_수들의_나누기와_동일해야한다() throws {
         // Given
-        let testOperands: [Double] = [100.0, 0.0, 5.0, 4.0]
+        let testOperands: [Double] = [100.0, 2.0, 5.0, 4.0]
         let testOperators: [Operator] = [.divide, .divide, .divide]
         
         // When
