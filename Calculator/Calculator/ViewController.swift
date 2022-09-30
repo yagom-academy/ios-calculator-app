@@ -8,11 +8,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var calculateInput: String = ""
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
-    private var calculateInput: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,21 +21,21 @@ class ViewController: UIViewController {
         removeAllsubviewsInHistoryStackView()
     }
     
-    func resetOperatorLabel() {
+    private func resetOperatorLabel() {
         operatorLabel.text = ""
     }
     
-    func resetOperandLabel() {
+    private func resetOperandLabel() {
         operandLabel.text = "0"
     }
     
-    func removeAllsubviewsInHistoryStackView() {
+    private func removeAllsubviewsInHistoryStackView() {
         historyStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
     }
     
-    func addOperandToOperandLabel(_ operand: String) {
+    private func addOperandToOperandLabel(_ operand: String) {
         let currentLabelText: String = operandLabel.text ?? ""
         let isPointDuplication: Bool = operand == "." && currentLabelText.contains(".")
         let isZeroDuplication: Bool = currentLabelText == "0" && ["0", "00"].contains(operand)
@@ -54,11 +54,11 @@ class ViewController: UIViewController {
         }
     }
     
-    func changeOperandLabelText(to operand: String) {
+    private func changeOperandLabelText(to operand: String) {
         operandLabel.text = operand
     }
     
-    func switchPositiveNegativeOfOperandLabelText() {
+    private func switchPositiveNegativeOfOperandLabelText() {
         var labelText: String = operandLabel.text ?? ""
         if labelText == "0" {
             return
@@ -72,12 +72,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func changeOperatorLabelText(to newOperator: String) {
+    private func changeOperatorLabelText(to newOperator: String) {
         operatorLabel.text = newOperator
     }
     
     
-    func addSubViewInHistoryStackView(newOperator: String, newOperand: String) {
+    private func addSubViewInHistoryStackView(newOperator: String, newOperand: String) {
         let stackView: UIStackView = UIStackView()
         stackView.spacing = 8
         let operatorLabel: UILabel = createLabel(labelText: newOperator)
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         historyStackView.addArrangedSubview(stackView)
     }
     
-    func createLabel(labelText: String) -> UILabel {
+    private func createLabel(labelText: String) -> UILabel {
         let label: UILabel = UILabel()
         label.text = labelText
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         return label
     }
     
-    func formatNumber(_ number: String) -> String {
+    private func formatNumber(_ number: String) -> String {
         let intNumber: Int = Int(floor(Double(number) ?? 0))
         let decimalRange = number.index(number.startIndex, offsetBy: String(intNumber).count)..<number.endIndex
         let decimalNumber: String = String(number[decimalRange])
@@ -109,7 +109,7 @@ class ViewController: UIViewController {
         return result
     }
     
-    func removeComma(in text: String) -> String {
+    private func removeComma(in text: String) -> String {
         return text.replacingOccurrences(of: ",", with: "")
     }
     
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
         return result
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
         if(bottomOffset.y > 0) {
             scrollView.setContentOffset(bottomOffset, animated: true)
