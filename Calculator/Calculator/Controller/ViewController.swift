@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         resetSignLabel()
         resetStackView()
     }
-
+    
     func signOfOperator(sender: UIButton) -> String {
         switch sender {
         case plusButton:
@@ -119,7 +119,7 @@ class ViewController: UIViewController {
         signLabel.text = sign
         expressionLabel.text = expression
     }
-
+    
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
         case oneButton:
@@ -169,7 +169,7 @@ class ViewController: UIViewController {
                 guard let sign = signLabel.text else { return }
                 guard let value = expressionLabel.text else { return }
                 resetExpressionString()
-                totalString += sign
+                totalString += " \(sign) "
                 assignTotalString(value: value)
                 addLabelAndSign(vaule: sign + value, sender: sender)
                 initializeExpression()
@@ -187,12 +187,8 @@ class ViewController: UIViewController {
             guard let value = expressionLabel.text else { return }
             expressionString = "\(sign) \(value)"
             addNewLableToStackView(message: expressionString, stackView: stackView)
-            totalString += sign
-            if value.contains("-") {
-                totalString += "&\(value.dropFirst())"
-            } else {
-                totalString += value
-            }
+            totalString += " \(sign) "
+            totalString += value
             executeExpression()
             resetExpressionString()
             resetSignLabel()
@@ -243,6 +239,5 @@ class ViewController: UIViewController {
             label.isHidden = false
         }
     }
-    
 }
 
