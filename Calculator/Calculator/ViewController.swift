@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     private var calculateInput: String = ""
     
     override func viewDidLoad() {
@@ -104,6 +105,13 @@ class ViewController: UIViewController {
         return text.replacingOccurrences(of: ",", with: "")
     }
     
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+        if(bottomOffset.y > 0) {
+            scrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
+    
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         resetOperandLabel()
     }
@@ -144,6 +152,7 @@ class ViewController: UIViewController {
             addSubViewInHistoryStackView(newOperator: newOperatorLabelText, newOperand: currentOperandLabelText)
             calculateInput += "\(newOperatorLabelText)\(currentOperandLabelText)"
             resetOperandLabel()
+            scrollToBottom()
         }
     }
     
@@ -162,6 +171,7 @@ class ViewController: UIViewController {
             changeOperatorLabelText(to: "")
             calculateInput = ""
         }
+        scrollToBottom()
     }
 }
 

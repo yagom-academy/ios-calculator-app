@@ -367,6 +367,7 @@
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="N8n-Ay-vZr"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="mX5-zn-juU"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="E9T-GJ-YT3"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="M54-Gh-WDR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
