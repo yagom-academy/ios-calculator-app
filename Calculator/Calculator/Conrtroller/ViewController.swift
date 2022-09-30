@@ -7,10 +7,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var showingOperationsStackView: UIStackView!    
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var showingOperationsStackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
     private let zero = "0"
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
         
         switch number {
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         inputNumber += number
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard inputNumber != noValue else {
             operatorLabel.text = sender.titleLabel?.text
             return
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         operatorLabel.text = sender.titleLabel?.text
     }
     
-    @IBAction func touchUpConvertingPositiveNegativeButton() {
+    @IBAction private func touchUpConvertingPositiveNegativeButton() {
         guard inputNumber != zero else { return }
     
         if inputNumber.prefix(1) == "-" {
@@ -74,18 +74,18 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpCEButton(_ sender: UIButton) {
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
         inputNumber = noValue
     }
     
-    @IBAction func touchUpACButton(_ sender: UIButton) {
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
         showingOperationsStackView.subviews.forEach { $0.removeFromSuperview() }
         formula = noValue
         inputNumber = noValue
         operatorLabel.text = blank
     }
     
-    @IBAction func touchUpResultButton(_ sender: UIButton) {
+    @IBAction private func touchUpResultButton(_ sender: UIButton) {
         guard operandLabel.text != changeStyle(result) else { return }
 
         addFormula()
