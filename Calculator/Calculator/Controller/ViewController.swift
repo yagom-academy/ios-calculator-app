@@ -212,7 +212,12 @@ class ViewController: UIViewController {
         label.text = "\(message)"
         label.textAlignment = .right
         label.numberOfLines = 0
+        label.isHidden = true
+        label.adjustsFontForContentSizeCategory = true
         stackView.addArrangedSubview(label)
+        UIView.animate(withDuration: 0.3) {
+            label.isHidden = false
+        }
     }
     
 }
