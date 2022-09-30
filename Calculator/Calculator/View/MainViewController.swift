@@ -8,12 +8,12 @@ class MainViewController: UIViewController {
     @IBOutlet weak var displaySignLabel: UILabel!
     @IBOutlet weak var displayNumberLabel: UILabel!
     
-    @IBOutlet weak var formulaScrollView: UIScrollView!
-    @IBOutlet weak var formulaHorizontalStackView: UIStackView!
-    @IBOutlet weak var formulaVerticalStackView: UIStackView!
+    @IBOutlet weak private var formulaScrollView: UIScrollView!
+    @IBOutlet weak private var formulaHorizontalStackView: UIStackView!
+    @IBOutlet weak private var formulaVerticalStackView: UIStackView!
     
     var calculatorController: CalculatorController!
-    let numberFormatter: NumberFormatter = NumberFormatter()
+    private let numberFormatter: NumberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         configureNumberFormatter()
     }
     
-    func configureDisplayLabels() {
+    private func configureDisplayLabels() {
         displaySignLabel.text = ""
         displayNumberLabel.text = "0"
         formulaVerticalStackView.subviews.forEach {
@@ -30,12 +30,12 @@ class MainViewController: UIViewController {
         }
     }
     
-    func configureNumberFormatter() {
+    private func configureNumberFormatter() {
         self.numberFormatter.maximumFractionDigits = 16
         self.numberFormatter.numberStyle = .decimal
     }
     
-    func changeCalculateResultFormat(result: String?) -> String? {
+    private func changeCalculateResultFormat(result: String?) -> String? {
         guard let text = result,
               let number = Double(text),
               let changedFormatResult: String = numberFormatter.string(from: NSNumber(value: number)) else {
@@ -62,7 +62,7 @@ class MainViewController: UIViewController {
         autoScroll()
     }
     
-    func autoScroll() {
+    private func autoScroll() {
         let contentOffsetPoint: CGPoint = CGPoint(x: .zero, y: formulaScrollView.contentSize.height)
         formulaScrollView.setContentOffset(contentOffsetPoint, animated: false)
     }
@@ -72,23 +72,23 @@ class MainViewController: UIViewController {
         calculatorController.viewDisplayNumber = "0"
     }
     
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         displaySignLabel.text = calculatorController.tappedOperatorButton(
             input: sender.titleLabel?.text
         )
     }
     
-    @IBAction func tapNumberButton(_ sender: UIButton) {
+    @IBAction private func tapNumberButton(_ sender: UIButton) {
         displayNumberLabel.text = changeCalculateResultFormat(
             result: calculatorController.tappedNumberButton(input: sender.titleLabel?.text)
         )
     }
     
-    @IBAction func tapCEButton(_ sender: UIButton) {
+    @IBAction private func tapCEButton(_ sender: UIButton) {
         calculatorController.tappedCEButton()
     }
     
-    @IBAction func tapCalculateButton(_ sender: UIButton) {
+    @IBAction private func tapCalculateButton(_ sender: UIButton) {
         displayNumberLabel.text = changeCalculateResultFormat(
             result: calculatorController.tappedCalculateButton()
         )
@@ -99,18 +99,18 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func tapDotButton(_ sender: UIButton) {
+    @IBAction private func tapDotButton(_ sender: UIButton) {
         displayNumberLabel.text = changeCalculateResultFormat(
             result: calculatorController.tappedDotButton()
         )
     }
     
-    @IBAction func tapACButton(_ sender: UIButton) {
+    @IBAction private func tapACButton(_ sender: UIButton) {
         configureDisplayLabels()
         calculatorController.tappedACButton()
     }
     
-    @IBAction func tapReverseSignButton(_ sender: UIButton) {
+    @IBAction private func tapReverseSignButton(_ sender: UIButton) {
         displayNumberLabel.text = changeCalculateResultFormat(
             result: calculatorController.tappedReverseSignButton()
         )
