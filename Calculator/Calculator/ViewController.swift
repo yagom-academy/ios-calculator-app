@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     let empty = ""
     var stringNumbers: String = ""
     var stringOperators: String = ""
+    var fullFormula: String = ""
     let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var recentNumbersStackView: UIStackView!
@@ -28,6 +29,19 @@ class ViewController: UIViewController {
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.isHidden = true
         }
+    }
+    
+    private func makeLabel(labelText :String) -> UILabel {
+        let label = UILabel()
+        label.text = labelText
+        label.textColor = .white
+        return label
+    }
+    
+    private func makeStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
+        formulaStackView.spacing = 8
+        return formulaStackView
     }
     
     private func applyNumberFormatter() {
@@ -48,6 +62,8 @@ class ViewController: UIViewController {
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
+        operandsLabel.text = empty
+        fullFormula = empty
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
@@ -67,22 +83,35 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
-        let recentOperatorLabel = UILabel()
-        recentOperatorLabel.text = stringOperators
-        recentOperatorLabel.textColor = .white
-        stringOperators = sender.titleLabel?.text ?? ""
-        operatorLabel.text = stringOperators
-        let recentOperandsLabel = UILabel()
-        recentOperandsLabel.text = stringNumbers
-        recentOperandsLabel.textColor = .white
-        stringNumbers = zero
-        operandsLabel.text = stringNumbers
+        var formulaStackView = UIStackView()
         
-        let stackView: UIStackView = .init(arrangedSubviews: [recentOperatorLabel, recentOperandsLabel])
+        if fullFormula == empty {
+            stringOperators = sender.titleLabel?.text ?? ""
+            let operatorUILabel = makeLabel(labelText: empty)
+            operatorLabel.text = stringOperators
+            
+            let operandsUILabel = makeLabel(labelText: stringNumbers)
+            fullFormula += stringNumbers + stringOperators
+            stringNumbers = zero
+            operandsLabel.text = stringNumbers
+            
+            formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
+            
+        } else {
+            let operatorUILabel = makeLabel(labelText: stringOperators)
+            stringOperators = sender.titleLabel?.text ?? ""
+            operatorLabel.text = stringOperators
+            
+            let operandsUILabel = makeLabel(labelText: stringNumbers)
+            fullFormula += stringNumbers + stringOperators
+            stringNumbers = zero
+            operandsLabel.text = stringNumbers
+            
+            formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
+        }
         
-        recentNumbersStackView.addArrangedSubview(stackView)
-        recentNumbersScrollView.layoutIfNeeded()
-        recentNumbersScrollView.setContentOffset(CGPoint(x: 0, y: recentNumbersScrollView.contentSize.height - recentNumbersScrollView.bounds.height), animated: false)
+        recentNumbersStackView.addArrangedSubview(formulaStackView)
+        placeScroll()
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
@@ -121,9 +150,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        //        guard operandsLabel.text != zero else { return }
+        // 마지막 숫자가 레이블에 있어도 =을 누르면 계산이 되어야 한다.
+        // 레이블에 = 연산 결과값이 띄워져 있다면 = 계산이 되지 않아야 한다.
         
-        // 숫자 개수가 3개씩 될때마다 . 찍어줘
+        // ===연속 처리
+        // 0나누기 했을 때 nan
+        // = 누르면 연산결과가 숫자 레이블에 보여지기
+        // 스택뷰 만드는 함수 생성 후 호출!
         
+        fullFormula += operandsLabel.text ?? ""
+        operandsLabel.text = fullFormula
+        
+        //만약 stringOperators 가 0이라면 위에 쌓인 레이블 초기화 시키고 현재 숫자 레이블에는 오류 문구로 바뀌
+        var parsedFullFormula = ExpressionParser.parse(from: fullFormula)
+        let calcultedFormula = parsedFullFormula.result()
+        operandsLabel.text = String(calcultedFormula)
     }
 }
 
