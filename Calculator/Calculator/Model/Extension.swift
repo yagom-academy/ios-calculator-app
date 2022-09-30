@@ -5,6 +5,8 @@
 //  Created by leewonseok on 2022/09/20.
 //
 
+import UIKit
+
 extension Double: CalculateItem {
     
 }
@@ -22,5 +24,11 @@ extension String {
 extension Array {
     public subscript (safe index: Int) -> Element? {
         return indices ~= index ? self[index] : nil
+    }
+}
+
+extension UIStackView {
+    func removeSubViewAll() {
+        self.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
