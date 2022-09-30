@@ -11,7 +11,7 @@ enum MathSymbol {
     static let division = "÷"
     static let multiplication = "×"
     static let decimalPoint = "."
-    static let nagative = "−"
+    static let negative = "−"
 }
 
 
