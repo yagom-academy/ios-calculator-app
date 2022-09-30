@@ -8,8 +8,8 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    @IBOutlet weak var mainOperatorLabel: UILabel!
-    @IBOutlet weak var mainResultLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var resultLabel: UILabel!
     
     @IBOutlet weak var historyScrollView: UIScrollView!
     @IBOutlet weak var historyStackView: UIStackView!
@@ -25,12 +25,12 @@ final class ViewController: UIViewController {
     }
     
     private func setUILabel() {
-        mainOperatorLabel.text = Constant.empty
-        mainResultLabel.text = Constant.zero
+        operatorLabel.text = Constant.empty
+        resultLabel.text = Constant.zero
     }
     
     private func setDefaultOperand() {
-        mainResultLabel.text = Constant.zero
+        resultLabel.text = Constant.zero
         currentOperand = Constant.defaultZero
     }
 
@@ -38,8 +38,8 @@ final class ViewController: UIViewController {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
-    private func updateMainResultLabel() {
-        mainResultLabel.text = currentOperand
+    private func updateResultLabel() {
+        resultLabel.text = currentOperand
     }
     
     private func applyNumberFormatter(number: Double) -> String {
@@ -106,7 +106,7 @@ final class ViewController: UIViewController {
             currentOperand += number
         }
         
-        updateMainResultLabel()
+        updateResultLabel()
     }
     
     @IBAction func tappedOperatorPads(_ sender: UIButton) {
@@ -117,12 +117,12 @@ final class ViewController: UIViewController {
         let tappedOperator = sender.currentTitle
         guard let operators = tappedOperator else { return }
         
-        mainOperatorLabel.text = operators
+        operatorLabel.text = operators
         
         if currentOperator == Constant.calculate {
             currentOperand = Constant.defaultZero
             currentOperator = operators
-            mainResultLabel.text = Constant.zero
+            resultLabel.text = Constant.zero
             return
         }
         
@@ -153,16 +153,16 @@ final class ViewController: UIViewController {
         removeFirstHistory.removeFirst()
         
         currentOperator = Constant.calculate
-        mainOperatorLabel.text = Constant.empty
+        operatorLabel.text = Constant.empty
         
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
         do {
             let result = try formula.result()
             if result.isNaN {
-                mainResultLabel.text = "NaN"
+                resultLabel.text = "NaN"
             } else {
-                mainResultLabel.text = applyNumberFormatter(number: result)
+                resultLabel.text = applyNumberFormatter(number: result)
             }
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
@@ -179,7 +179,7 @@ final class ViewController: UIViewController {
             return
         } else {
             currentOperand += Constant.dot
-            updateMainResultLabel()
+            updateResultLabel()
         }
     }
     
@@ -194,7 +194,7 @@ final class ViewController: UIViewController {
             currentOperand = Constant.negative + currentOperand
         }
         
-        updateMainResultLabel()
+        updateResultLabel()
     }
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
@@ -207,6 +207,6 @@ final class ViewController: UIViewController {
     
     @IBAction func tappedClearEntry(_ sender: UIButton) {
         currentOperand = Constant.defaultZero
-        mainResultLabel.text = Constant.zero
+        resultLabel.text = Constant.zero
     }
 }

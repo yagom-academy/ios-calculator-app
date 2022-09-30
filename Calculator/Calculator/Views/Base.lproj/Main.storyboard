@@ -366,8 +366,8 @@
                     <connections>
                         <outlet property="historyScrollView" destination="BOT-7g-vxv" id="2Wr-GT-dX7"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="YDg-kX-HkP"/>
-                        <outlet property="mainOperatorLabel" destination="HPC-iy-qdm" id="fKh-Xb-U01"/>
-                        <outlet property="mainResultLabel" destination="Lwz-OF-XHD" id="UVX-Jg-CXF"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="9Ba-Lx-6XN"/>
+                        <outlet property="resultLabel" destination="Lwz-OF-XHD" id="f1m-HY-Gaa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
