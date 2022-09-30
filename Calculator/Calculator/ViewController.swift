@@ -101,8 +101,13 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         guard !stringNumbers.contains(".") else { return }
-        stringNumbers += "."
-        operandsLabel.text = stringNumbers
+        if operandsLabel.text == zero {
+            stringNumbers = zero + "."
+            operandsLabel.text = stringNumbers
+        } else {
+            stringNumbers += "."
+            operandsLabel.text = stringNumbers
+        }
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
