@@ -103,21 +103,7 @@ class ViewController: UIViewController {
     }
     
     func creatStackView() {
-        let operandLabel: UILabel = {
-            let label = UILabel()
-            label.text = operand
-            label.textColor = .white
-            return label
-        }()
-        
-        let operatorLabel: UILabel = {
-            let label = UILabel()
-            label.text = arithmeticOperator
-            label.textColor = .white
-            return label
-        }()
-        
-        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        let stackView = LogStackView(operand: operand, arithmeticOperator: arithmeticOperator)
         formulaStackView.addArrangedSubview(stackView)
     }
     
