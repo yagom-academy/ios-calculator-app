@@ -206,6 +206,15 @@ class ViewController: UIViewController {
         resetStackView()
     }
     
+    @IBAction func tappedCEButton(_ sender: UIButton) {
+        if expressionString.isEmpty && totalString.isEmpty {
+            resetVauleToZero()
+        } else {
+            expressionLabel.text = ""
+        }
+        resetExpressionString()
+    }
+    
     func addNewLableToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
