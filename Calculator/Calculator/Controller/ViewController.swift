@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = "\(addComma(number: String(result)))"
+            operandLabel.text = addComma(number: String(result))
         }
         
         operatorLabel.text = ""
