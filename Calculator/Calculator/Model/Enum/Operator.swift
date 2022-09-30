@@ -36,7 +36,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         if rhs != 0 {
             return (lhs / rhs)
         } else {
-            throw CalculatorError.notaNumber
+            throw CalculatorError.invalidNumber
         }
     }
     
