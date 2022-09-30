@@ -12,5 +12,6 @@ enum Constant {
         static let defaultInput: String = ""
         static let defaultPoint: String = "."
         static let minusOperator: Character = "-"
+        static let errorNumber: String = "Nan"
     }
 }

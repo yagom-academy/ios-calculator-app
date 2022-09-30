@@ -176,22 +176,20 @@ private extension CalculatorViewController {
     }
     
     func calculateExpression() {
-        print(mathExpression)
         let formula = ExpressionParser.parse(from: mathExpression)
-        
         do {
             let calculatedValue = try formula.result()
             let calNumber = calculatedValue.description.calNumber
-            
+
             updateNumberLabelTo(numbers: calNumber)
             resetOperatorLabel()
-            
+
             resetSelected()
         } catch FormulaError.dividedByZero {
-            let errorValue = Double.signalingNaN.description
+            let errorValue = Constant.Calculator.errorNumber
             updateNumberLabelTo(numbers: errorValue)
         } catch {
-            
+            // no op
         }
     }
 }
