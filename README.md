@@ -5,10 +5,11 @@
 1. [팀 소개](#-팀-소개)
 2. [Diagram](#-Diagram)
 3. [폴더 구조](#-폴더-구조)
-4. [타임라인](#-타임라인)
-5. [트러블 슈팅](#-트러블-슈팅)
-6. [기술적 도전](#-기술적-도전)
-7. [참고 링크](#-참고-링크)
+4. [실행 화면](#-실행-화면)
+5. [타임라인](#-타임라인)
+6. [트러블 슈팅](#-트러블-슈팅)
+7. [기술적 도전](#-기술적-도전)
+8. [참고 링크](#-참고-링크)
 
 ## 🌱 팀 소개
  |[Wonbi](https://github.com/wonbi92)|
@@ -18,10 +19,8 @@
 - `Wonbi`가 만든 계산기입니다!
 
 ## 👀 Diagram
-
 ### 🧬 Class Diagram
-
-![](https://i.imgur.com/AcKleDQ.png)
+![](https://i.imgur.com/zZQoppo.jpg)
 
 ## 🗂 폴더 구조
 ```
@@ -30,7 +29,12 @@ Calculator
 ├── Model
 │   ├── CalculatorItemQueue
 │   ├── CalculateItem
-│   └── Operator
+│   ├── Operator
+│   ├── Formula
+│   ├── ExpressionParser
+│   └── Extension
+│       ├── Double
+│       └── String
 ├── View
 │   ├── Main
 │   ├── Assets
@@ -40,8 +44,20 @@ Calculator
 │   ├── SceneDelegate
 │   └── ViewController
 └── CalculatorTests
-    └── CalculatorTests
+    ├── ExpressionParserTests
+    ├── FormulaTests
+    ├── CalculatorItemQueueTests
+    └── OperatorTests
 ```
+
+## ⚒️ 실행 화면
+ |**기본 연산**|**연산 후 =비활성화**|**0일때 연산자 변경**|
+ |:---:|:---:|:---:|
+ |![](https://i.imgur.com/fXs4Eqj.gif)|![](https://i.imgur.com/faxfI4T.gif)|![](https://i.imgur.com/HBbmhCU.gif)|
+ |**AC버튼**|**CE버튼**|**등호 바꾸기**|
+ |![](https://i.imgur.com/3lxfsFQ.gif)|![](https://i.imgur.com/CF26olN.gif)|![](https://i.imgur.com/lv26Pge.gif)|
+ |**0일때 0, 00입력**|**소수점 입력**|**0으로 나눌 시 NaN**|
+ |![](https://i.imgur.com/ogjl4Wl.gif)|![](https://i.imgur.com/PqQs4EX.gif)|![](https://i.imgur.com/ZnEMGr0.gif)|
 
 ## ⏰ 타임라인
 
@@ -50,6 +66,20 @@ Calculator
 - 계산 가능한 아이템만 채택하여 활용하도록 `CalculateItem`프로토콜 생성
 - 연산자를 구분해주는 `Operator`열거형 타입 구현
 - 테스트를 위한 `CalculatorTests`클래스 구현
+
+### 👟 Step 2
+- 테스트를 위한 `ExpressionParserTests`, `FormulaTests`, `OperatorTests`구현
+- `String` 값을 연산자와 피연산자로 나눠주는 `ExpressionParser`타입 구현
+- `CalculatorItemQueue`을 가지고 연산을 처리하는 `Formula`타입 구현
+- `String`타입에 `extension`을 이용해 추가한 `split`메서드 로직 구현
+- 연산자를 처리하고 그에 맞는 계산을 하는 `Operator`타입 구현
+
+### 👟 Step 3
+- 스토리보드에 있는 라벨 및 버튼의 아울렛과 액션 추가
+- 각 버튼을 터치했을 때 그에 맞게 연산 큐가 누적되는 로직 구현
+- 스크롤 뷰 구현
+- 숫자를 처리하는 `NumberFormatter` 구현
+- 예외 처리
 
 
 ## 🚀 트러블 슈팅
@@ -126,6 +156,71 @@ mutating func dequeue() -> CalculateItem? {
 #### 결론
 - 결론적으로, 저는 더블 스택 큐를 구현하기로 결정했습니다. 이 방법은 공간복잡도가 높은 단점이 있지만, 구현 난이도가 쉬워 빠르게 구현할 수 있는 장점이 있어서 채택하였습니다. 또 `output`배열이 비어있을 때 `removeAll()`메서드를 호출하기에 시간복잡도가 완벽히 O(1)은 아니지만, "*`output`배열이 비어있을 때*" 라는 조건이 있어 어느정도 수용 가능하다는 판단을 하였습니다.
 
+### split구현
+```swift
+    func split(wiht target: Character) -> [String] {
+        let splitComponents = self.split(separator: target, omittingEmptySubsequences: true)
+        var result = [String]()
+        
+        splitComponents.forEach { result.append(String($0)) }
+        
+        return result
+    }
+```
+- 기존에는 `components`메서드를 사용해서 만들었는데, `split`메서드를 사용하게 바꿨습니다. 그 이유는 비어있는 값을 지워주는 기능이 `split`메서드에 있기 때문이었습니다.
+
+- 하지만 `split`메서드는 `SubString`을 담은 배열을 반환하는 문제가 있어, 이를 해결하는 로직을 추가적으로 작성하게 되었습니다.
+
+### 나누기0 NaN 처리
+- 나누기 0의 오류를 어떻게 처리해야 할까 고민하다가 스위프트의 `Double`이 "IEEE 754 부동소수점 표준"을 준수해서 내부에 `inf`, `nan`, `zero`등의 프로퍼티가 있다는 것을 알게되었습니다. 
+```swift
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        return rhs == .zero ? .nan : lhs / rhs
+    }
+```
+- 이를 활용해서 나누기 0의 오류를 처리하도록 하였습니다. 또한, NaN일 경우 더이상 계산이 되지 않고 바로 NaN을 반환하도록 `Formula`의 `result`메서드의 로직에 이를 추가하였습니다.
+```swift
+    mutating func result() -> Double {
+        guard let firstOperand = operands.dequeue() else { return .zero }
+        var result = firstOperand
+
+        while !operators.isEmpty || !operands.isEmpty {
+            let firstOperand = result
+            let secondOperand = operands.dequeue()
+            let currentOperator = operators.dequeue()
+            
+            if let secondOperand = secondOperand,
+               let currentOperator = currentOperator {
+                result = currentOperator.calculate(lhs: firstOperand, rhs: secondOperand)
+            }
+            
+            if result.isNaN {
+                return .nan
+            }
+        }
+
+        return result
+    }
+```
+
+### 예외 처리하기
+- 이번 프로젝트에서 가장 힘든 부분이었습니다. 사용자가 버튼을 터치했을 때 상황에 따라 모두 다른 처리를 해줘야 했기 때문에 더욱 어려웠던 것 같습니다.
+
+- 프로젝트에서 제시했던 대로, 두번 이상 들여쓰기를 하지않고, 최대한 고차함수를 활용해보며 코드를 작성해보았습니다.
+
+- 또한 가독성을 확보하기 위해 액션 메서드와 내부 컴포넌트를 컨트롤 하는 메서드를 extension을 이용해 분리해보았습니다.
+
+- 프로젝트에서 제시하지 않았던 예외들은 최대한 기본 계산기와 비슷하게 구현하였고, 가장 자연스럽다 판단되도록 구현하였습니다.
+    - 예를 들어, =버튼을 눌러 계산을 완료한 후 등호버튼, 연산자, 혹은 피연산자 버튼을 눌렀을 때 등호버튼의 경우, 계산결과에 등호를 바꾸면서 새로운 연산이 시작되도록, 피연산자의 경우 새로운 피연산자를 입력하도록, 연산자의 경우, 계산결과에 이어서 계산을 진행하도록 구현하였습니다.
+
+- 이와 같이, 각 예외조건과 프로젝트의 요구사항에 맞게 구현되도록 하였습니다.
+
+
+### 넘버 포맷터 사용하기
+- 넘버 포맷터를 사용 자체는 어렵지 않았습니다. 하지만 피연산자를 입력할 때 입력값에 바로 넘버 포맷터를 적용하면 소수점 밑으로 0을 연속으로 입력할 시 생략해버리는 문제가 있었고, 이를 적용하지 않으면 입력값에 콤마(,)가 찍히지 않는 문제가 있었습니다. 
+
+- 이 문제를 해결하기 위해, 소숫점 뒷부분은 넘버 포맷터를 적용하지 않고 앞부분만 적용한 후 합치는 로직을 구현하여 해결해보았습니다.
+
 ## 🏃🏻 기술적 도전
 
 ### TDD
@@ -137,8 +232,22 @@ mutating func dequeue() -> CalculateItem? {
 
 - 이는 이 방식을 처음 접하면서 겪는 시행착오라 생각했고 이를 해결하는 방법은 많은 경험을 통해 익숙해지는 것이라 생각하였습니다.
 
+### 제네릭 사용
+- 테스트 케이스를 작성할 때 마다 타입 캐스팅을 반복해서 진행하는 것 보다 새로운 것을 사용해보고 싶기도 하고, 리스트를 구현할 때 제네릭을 사용하는 경우가 많아, 제네릭을 사용해보았습니다. 
+
+- 또한 `CalculateItem`프로토콜이 `Equatable`프로토콜을 채택하게 하고 싶어서 제네릭을 사용하게 되었었습니다. `Equatable`프로토콜을 채택의 목적은, 테스트 케이스를 작성할 때 큐에 들어가는 타입이 `CalculateItem`이 되도록 해서 이를 비교해 테스트를 쓰고 싶어서 였습니다.
+
+- 하지만 결국 값을 테스트를 위한 값을 넣어주고 비교하려면 다운 캐스팅이 필요하고, 의미가 없는거 같아 `Equatable`프로토콜 채택은 제외하게 되었습니다.
+
+### 스크롤 뷰 구현
+- 새로운 수식이 스크롤 뷰에 추가되었을 때, 스크롤 뷰의 스크롤이 맨 밑으로 세팅되도록 구현하는 부분에서 고민이 많았습니다.
+
+- 스크롤 뷰를 공부하던 중 `setContentOffset`메서드를 알게 되었고, 이 메서드를 원하는 타이밍에 호출해 원하는 스크롤 위치를 세팅하는게 가능해졌습니다.
+
 ## 🔗 참고 링크
 
-[Swift Language Guide - Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)
-
-[Swift Language Guide - Extentions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)
+[Swift Language Guide - Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)<br>
+[Swift Language Guide - Extentions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)<br>
+[Receive messages from a UI object](https://help.apple.com/xcode/mac/11.4/#/dev9662c7670)<br>
+[NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)<br>
+[오토레이아웃 정복하기 - 야곰닷넷](https://yagom.net/courses/autolayout/)
