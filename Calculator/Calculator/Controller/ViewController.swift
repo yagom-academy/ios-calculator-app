@@ -49,6 +49,8 @@ class ViewController: UIViewController {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 2
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
         numberFormatter.usesSignificantDigits = true
     }
     
