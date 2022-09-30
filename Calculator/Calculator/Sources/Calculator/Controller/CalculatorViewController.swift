@@ -33,7 +33,12 @@ final class CalculatorViewController: UIViewController {
         }
 
         selectedNumbers.append(inputNumber)
-        updateNumberLabelTo(numbers: selectedNumbers.calNumber)
+        
+        if selectedNumbers.contains(Constant.Calculator.defaultPoint) {
+            updateNumberLabelTo(numbers: selectedNumbers)
+        } else {
+            updateNumberLabelTo(numbers: selectedNumbers.calNumber)
+        }
     }
     
     @IBAction func didTappedOperatorButton(_ sender: UIButton) {
@@ -64,8 +69,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         guard let lastElement = mathExpression.last else {
-            resetSelectedNumbers()
-            resetSelectedOperator()
+            resetSelected()
             return
         }
         
@@ -82,13 +86,11 @@ final class CalculatorViewController: UIViewController {
         didNotCalculate.toggle()
     }
     
-    @IBAction func didTappedACButton(_ sender: UIButton) {
-        setUpInitState()
-    }
+    @IBAction func didTappedACButton(_ sender: UIButton) { resetInitState() }
     
     @IBAction func didTappedCEButton(_ sender: UIButton) {
         guard didNotCalculate else {
-            setUpInitState()
+            resetInitState()
             return
         }
         
@@ -116,7 +118,10 @@ final class CalculatorViewController: UIViewController {
         if firstElement == Constant.Calculator.minusOperator {
             selectedNumbers.removeFirst()
         } else {
-            selectedNumbers.insert(Constant.Calculator.minusOperator, at: selectedNumbers.startIndex)
+            selectedNumbers.insert(
+                Constant.Calculator.minusOperator,
+                at: selectedNumbers.startIndex
+            )
         }
         
         updateNumberLabelTo(numbers: selectedNumbers.calNumber)
@@ -151,6 +156,11 @@ private extension CalculatorViewController {
 // MARK: - 계산기 사용자 입력 상태 관리 메서드
 private extension CalculatorViewController {
     func setUpInitState() {
+        currentNumbersLabel.text = Constant.Calculator.defaultNumber
+        currentOperatorLabel.text = Constant.Calculator.defaultOperator
+    }
+    
+    func resetInitState() {
         resetLabels()
         resetSelected()
         resetMathExpression()

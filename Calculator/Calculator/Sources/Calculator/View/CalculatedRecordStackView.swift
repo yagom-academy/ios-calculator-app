@@ -41,9 +41,9 @@ final class CalculatedRecordStackView: UIStackView {
     }
     
     private func setUpLabels() {
-        let labelTexts = delegate?.sendLabelTexts()
+        let receivedLabelTexts = delegate?.sendLabelTexts()
         
-        operandLabel.text = labelTexts?.operand
-        operatorLabel.text = labelTexts?.operatorValue
+        operandLabel.text = receivedLabelTexts?.operand
+        operatorLabel.text = receivedLabelTexts?.operatorValue
     }
 }
