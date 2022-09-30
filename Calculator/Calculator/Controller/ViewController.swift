@@ -95,13 +95,13 @@ class ViewController: UIViewController {
             let result = try expression.result()
             expressionLabel.text = String(result)
         } catch ValueError.emptyOperandsQueue {
-            
+            displaySignAndLabel(sign: "!", expression: "Operand is Empty")
         } catch ValueError.emptyOperatorsQueue {
-            
+            displaySignAndLabel(sign: "!", expression: "Operator is Empty")
         } catch ValueError.divideByZero {
-            
+            displaySignAndLabel(sign: "", expression: "NaN")
         } catch {
-            
+            displaySignAndLabel(sign: "?", expression: "Error")
         }
     }
     
