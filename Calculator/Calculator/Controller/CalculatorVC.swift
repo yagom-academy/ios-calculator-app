@@ -36,7 +36,16 @@ final class CalculatorVC: UIViewController {
         }
         currentNumber.append(sender.titleLabel?.text ?? "")
         operandLabel.text = currentNumber
-        operandLabel.text = decimalNumberFormatter(number: currentNumber)
+        
+        if currentNumber.contains(".") {
+            guard let integerPart = currentNumber.split(with: ".").first,
+                  let fractionPart = currentNumber.split(with: ".").last else {
+                return
+            }
+            operandLabel.text = decimalNumberFormatter(number: integerPart) + "." + fractionPart
+        } else {
+            operandLabel.text = decimalNumberFormatter(number: currentNumber)
+        }
     }
     
     @IBAction private func touchUpDotButton(_ sender: UIButton) {
