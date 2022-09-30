@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
-        guard let tappedOperand = sender.currentTitle else { return }
+        guard let tappedOperand = sender.currentTitle, operandLabel.text?.count ?? 0 <= 18 else { return }
         if isCalculated { clearOperand() }
         
         switch tappedOperand {
