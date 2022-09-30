@@ -123,13 +123,11 @@ final class ViewController: UIViewController {
             currentOperand = Constant.defaultZero
             currentOperator = operators
             mainResultLabel.text = Constant.zero
-            
             return
         }
         
         if currentOperand == Constant.defaultZero {
             currentOperator = operators
-            
             return
         }
         
