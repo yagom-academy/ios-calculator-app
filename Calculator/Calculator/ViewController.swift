@@ -132,5 +132,21 @@ class ViewController: UIViewController {
             resetOperandLabel()
         }
     }
+    
+    @IBAction func touchUpEqualButton(_ sender: Any) {
+        guard calculateInput != "" else {
+            return
+        }
+        let currentOperatorLabelText: String = operatorLabel.text ?? ""
+        let currentOperandLabelText: String = operandLabel.text ?? ""
+        addSubViewInHistoryStackView(newOperator: currentOperatorLabelText, newOperand: currentOperandLabelText)
+        calculateInput += "\(currentOperatorLabelText)\(currentOperandLabelText)"
+        var formula: Formula = ExpressionParser.parse(from: calculateInput)
+        if let result: Double = formula.result() {
+            changeOperandLabelText(to: "\(result)")
+            changeOperatorLabelText(to: "")
+            calculateInput = ""
+        }
+    }
 }
 
