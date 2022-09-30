@@ -15,7 +15,7 @@ final class CalculatorViewController: UIViewController {
     
     private var isCalculated: Bool = false
     private var calculationRecord: [String?] = []
-    let numberFormatter = NumberFormatter()
+    private let numberFormatter = NumberFormatter()
     
     private var formulaStackView: UIStackView {
         let stackView = UIStackView()
@@ -104,13 +104,10 @@ final class CalculatorViewController: UIViewController {
                 inputNumberLabel.text = numberLabel
                 return
             }
-            numberLabel.append(value)
-            inputNumberLabel.text = numberLabel
+            fallthrough
         case CalculatorNameSpace.doubleZero:
             if numberLabel == CalculatorNameSpace.zero { return }
-            
-            numberLabel.append(value)
-            inputNumberLabel.text = numberLabel
+            fallthrough
         default:
             numberLabel.append(value)
             inputNumberLabel.text = numberFomatter(numberLabel.components(separatedBy: ",").joined())
