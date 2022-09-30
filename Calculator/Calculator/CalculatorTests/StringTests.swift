@@ -2,8 +2,6 @@
 //  StringTests.swift
 //  CalculatorTests
 //
-//  Created by 서수영 on 2022/09/30.
-//
 
 import XCTest
 @testable import Calculator
@@ -30,7 +28,7 @@ class StringTests: XCTestCase {
         
         guard let sutArr = sut?.split(with: Character(Operator.add.description)) else {
             XCTAssert(false)
-            return 
+            return
         }
         
         if sutArr[0] == "11sa4", sutArr[1] == "a1243" {
@@ -40,4 +38,20 @@ class StringTests: XCTestCase {
         }
     }
 
+    func test_Split함수실행시_나누기로자르면_true리턴() {
+        sut = testCase3
+        
+        guard let sutArr = sut?.split(with: Character(Operator.divide.description)) else {
+            XCTAssert(false)
+            return
+        }
+        
+        if sutArr[0] == "1sw10sd", sutArr[1] == "1asf" {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
+
+    ㄹ
 }
