@@ -37,3 +37,9 @@ enum Operator: Character, CaseIterable {
 }
 
 extension Operator: CalculateItem {}
+extension Operator: CustomStringConvertible {
+    var description: String {
+        return "\(self.rawValue)"
+    }
+}
+

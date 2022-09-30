@@ -25,7 +25,7 @@ enum ExpressionParser {
         result = input.split(with: " ")
         Operator.allCases.forEach { operators in
             result = result.flatMap {
-                $0.split(with: operators.rawValue)}
+                $0.split(with: Character(operators.description))}
         }
         return result
     }
