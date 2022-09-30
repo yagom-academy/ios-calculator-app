@@ -6,8 +6,11 @@
 //
 
 class Calculator {
+    private(set) var `operator` = ""
+    private(set) var operand = ""
     private(set) var formula = ""
     private var calculationState = false
+    
     var isCalculateCompleted: Bool {
         get {
             return calculationState
@@ -18,24 +21,36 @@ class Calculator {
         }
     }
     
-    init(formula: String = "", calculationState: Bool = false) {
+    init(`operator`: String = "", operand: String = "", formula: String = "", calculationState: Bool = false) {
+        self.operator = `operator`
+        self.operand = operand
         self.formula = formula
         self.calculationState = calculationState
     }
     
-    func initFormula() {
-        formula = ""
+    func initCalculation() {
+        self.operator = ""
+        self.operand = ""
+        self.formula = ""
     }
     
-    func addFormula(_ formula: String) {
-        self.formula += formula.replacingOccurrences(of: ",", with: "")
+    func changeOperator(_ `operator`: String) {
+        self.operator = `operator`
+    }
+    
+    func changeOperand(_ operand: String) {
+        self.operand = operand
+    }
+    
+    func addFormula() {
+        self.formula += self.operator + self.operand
     }
     
     func calculate() throws -> Double {
         var convertedFormula = ExpressionParser.parser(from: formula)
         let result = try convertedFormula.result()
         
-        initFormula()
+        initCalculation()
         isCalculateCompleted = true
         
         return result
