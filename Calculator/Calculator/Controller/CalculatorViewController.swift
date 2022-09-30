@@ -15,7 +15,7 @@ final class CalculatorViewController: UIViewController {
     
     private var isCalculated: Bool = false
     private var calculationRecord: [String?] = []
-    let numberFormatter = NumberFormatter()
+    private let numberFormatter = NumberFormatter()
     
     private var formulaStackView: UIStackView {
         let stackView = UIStackView()
