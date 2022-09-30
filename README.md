@@ -76,14 +76,18 @@ split메서드 구현, ExpressionParser파일 연산자분리 CaseIterable 활�
 
 - ### 제네릭 사용
 `CalculatorItemQueue`에서 `CalculateItem프로토콜`을 채택하였습니다.
+
 ▶️ 문제점 1
 그 후 테스트파일에서 제네릭 매개변수로 받은 T를 추론할 수 없다는 에러메세지가 떴습니다.
-    > Generic parameter 'T' could not be inferred
 
-    ▶️ 문제점 2
-    > Type 'Double' does not conform to protocol 'CalculateItem’ 
+> Generic parameter 'T' could not be inferred
+
+▶️ 문제점 2
+
+> Type 'Double' does not conform to protocol 'CalculateItem’ 
     
-    `Double` 타입이 `CalculateItem프로토콜`을 채택하지 않았다는 에러메세지가 떴습니다.
+`Double` 타입이 `CalculateItem프로토콜`을 채택하지 않았다는 에러메세지가 떴습니다.
+    
 ▶️ 해결방법
  `CalculateItem프로토콜`에서 `extension`기능을 이용하여 `Double`타입도 이 프로토콜을 채택하도록 해주어 해결하였습니다.
 ```swift
@@ -106,25 +110,31 @@ queue(선형,원형), List(노드,단방향,양방향), TDD, enum, UML, extensio
 #### 고민한점
 - ### TDD 기반으로 수행할 때 실패테스트 작성
 반환값이 있는 메서드의 경우에는 반환값을 실패하도록 주어 수월했으나 반환값이 없는 메서드의 경우에는 실패하게 할 반환값이 없었습니다. 
+
 ▶️ 해결방법 : 조건이 필요한 메서드의 경우 조건문 없이 특정 상황을 그대로 마주하여 실패하도록 테스트한 후 리팩토링 하였습니다.
 
 - ### 열거형 연산프로퍼티 초기화를 해야하는지
 열거형타입이면서 저장프로퍼티를 갖지 않고, 메서드인 연산프로퍼티만 갖는 경우, 테스트파일에서 초기화를 하지 않았다는 오류가 생겼습니다.
 ![](https://i.imgur.com/xJbAgeW.png)
+
 ▶️ 해결방법 : static 키워드를 enum에 있는 메서드에 붙여주어 해결하였습니다. static 키워드를 붙이면 연산프로퍼티가 연산 타입 프로퍼티가 되어 초기화할 필요 없이 테스트파일에서도 접근할 수 있기 때문에 해결할 수 있었습니다.
 
 - ### 0으로 나누기 결과값 처리
 구현목표 : 0으로 나누기를 시도할 경우 "NaN" 을 화면에 보여준다.
 
 우선 0으로 나누기를 시도하는 경우의 상황을 예상해보았습니다.
+
 ➡️ 고민방법 1 : 나누기연산의 피연산자 중 rhs가 0일 때
+
 ➡️ 고민방법 2 : 0을 받고나서 결과값.isInfinite == ture 일 때
+
 rhs가 0 인경우는 0을 곱할 수도 있는 다른 경우의 수가 있기 때문에 나누기 연산 후 결과값으로 처리하는 방법으로 결정 하였습니다.
 
 ▶️  결과값 처리방법 1 : do-catch문 사용하여 에러 처리
 do-catch문으로 구현할 경우 rethrow를 두번하여 반환값이 없는곳까지 던져야했습니다. 그 이유는 반환값을 갖는 메서드는 에러를 던지는 상황에서 어떤값을 반환해야할지 오류가 났기 때문입니다.
 rethrow를 위해 0으로 나누기 연산을 호출한 코드, 0으로 나누기 연산의 결과값을 담는 코드에 do-catch구문을 작성해주었습니다.
 테스트 파일에서는 에러를 XCTAssertThrowsError메서드를 이용하여 받은 후 예상한 에러와 일치하는지 XCAssertEqual 메서드를 이용하여 테스트 성공여부를 판단하였습니다.
+
 ▶️  결과값 처리방법 2 : infinity 값을 조건문으로 확인하여 처리 
 0으로 나누기 연산의 결과값인 inf 에 대해 알아보았습니다.
 Double 타입에서 지원하는 값이었습니다. 나누기연산을 계산하는 역할을 맡은 Operator파일의 calculate메서드의 반환타입도 Double이었으므로 Double.infinity값을 테스트파일로 받아올 수 있었습니다.
@@ -134,6 +144,7 @@ Double 타입에서 지원하는 값이었습니다. 나누기연산을 계산�
 
 - ### LLDB 활용
 활용목표 : print문을 사용하지 않고, 콘솔창에서 lldb 명령어를 이용하여 디버깅한다.
+
 ➡️ 주로 사용한 명령어
 ```swift
 // 생성, 확인
