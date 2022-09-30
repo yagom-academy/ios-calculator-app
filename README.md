@@ -18,7 +18,7 @@
 |:---:|
 |인호|
 
-## 타임라인
+## 🗒 타임라인
 시간 순으로 프로젝트의 주요 진행 척도를 표시
 | 날짜 | 중요 진행 상황 | 코드 관련 사항
 |---|---|---|
@@ -26,10 +26,16 @@
 |9/21| 추가 기능 및 코드 수정| `CalculatorItemQueue`에 `last`,`isEmpty`프로퍼티 추가, `removeAll`메서드 리팩토링
 |9/22| `STEP2` 시작, UML을 바탕으로 타입 구성 | `Formula`, `ExpressionParser`,`Operator`타입 생성 및 내부 메서드 생성, `Extension` 구현
 |9/23| 각 타입의 메서드 기능 수정 | `split`메서드 구현, `componentsByOperators`메서드 수정, 부호랑 연산자 구분하도록 수정
+|9/27|`STEP2` 수정 및 테스트 케이스 추가 | 0으로 나눈 경우에 대한 에러 처리, `Formula`,`ExpressionParser`의 유닛 테스트 작성
+|9/28|`STEP3` 시작 | 버튼과 레이블의 아웃렛 추가, 피연산자 누를때의 `CurrentEntry` 입력 구현, `CE`버튼 기능 구현, `부호변환`버튼 기능 구현
 
-## 앱 실행 화면
-추가 예정
 
+## 📱 앱 실행 화면
+
+ 추가 예정 
+<!-- |:---:|
+|입력이 0일때 |
+ -->
 ## 트러블 슈팅
 <!-- <details>
 <summary id="Step1"><h4>Step1</h4></summary>
@@ -39,12 +45,12 @@
 </div>
 </details>
  -->
-### Step1
+### 1️⃣ Step1
 #### `CalculatorItemQueue` 구현 방법
 계산기의 연산과정을 고민했을때, 단계적으로 계산을 할때마다 `dequeue`를 하게 될텐데, 해당 부분을 배열로 구현하면 매번 인덱스이 이동이 일어나야해서 리스트가 더 효율적일 것이라고 생각하여 단방향 연결 리스트를 이용했다.
 (리스트를 공부하기 위함도 있었다.)
 
-### Step2
+### 2️⃣ Step2
 #### 계산기에서 전달받을 `input`
 - 처음에는 입력이 `1+3-6*3%9-1`과 같이 전달될 것이라고 생각하고 프로젝트를 진행했는데, 다른 캠퍼들과 얘기하다 보니 부호 변환 부분이 문제였다. 기존의 코드대로면 부호를 변환기호도 음수 연산자로 분류되는 상황이었다.
 - 어떻게 문제를 해결할까 고민하면서 계산기 앱의 구동 화면을 보고 입력이 `1 + 3 + -6 * 3 % -9 - 1`과 같이 연산자와 피연산자 사이에 공백이 있는 상태로 들어올 수 있겠다는 생각을 했고, 이를 기준으로 다시 작성했다.
@@ -85,14 +91,21 @@ private static func componentsByOperators(from input: String) -> [String] {
 let components = separatedInput.filter({ $0.filter({ $0.isNumber }).count != 0 })
 let operandsInInput = componentsByOperators(from: input).compactMap { Double($0) }
 ```
-<!-- <details>
-<summary id="Step2"><h4>Step2</h4></summary>
-<div markdown="1">
+
+### 3️⃣ Step3
+#### `updateEntry()`메서드에서 두가지 조건을 확인하는 방법
+- 함수를 종료하고 싶은 조건은 현재 입력이 `.(소수점)` 이면서 이전 입력이 소수점을 이미 포함하고 있는 상황이다. 
+- 조건문을 이용한다면 `if input == "." && currentEntry.contains(".") { return }`과 같이 작성할 수 있는데, 빠른 탈출을 위해서 `guard`문을 이용하고자 했다.
+```swift
+func updateEntry(using input: String) {
+    ...
+    guard input != "." || !currentEntry.contains(input) else { return }
+    ...
+}
+```
+- `guard`문의 조건을 해석해 보면 `input`이 소수점이 아니거나, 현재 입력이 `input`을 포함하고 있지 않아야 하고, `else`로 걸리는 조건은 두가지 모두 `true`인 경우가 된다. (처음에는 `&&`연산자가 와야된다고 생각해서 헷갈렸다.)
 
 
-</div>
-</details>
- -->
 
 ## 참고 링크
 추가 예정
