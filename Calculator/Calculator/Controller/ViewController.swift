@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     @IBAction func ACButton(_ sender: UIButton) {
+        initCalculator()
     }
     
     @IBAction func CEButton(_ sender: UIButton) {
@@ -42,43 +43,56 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pointButton(_ sender: UIButton) {
+        pushInput(".")
     }
     
     @IBAction func zeroButton(_ sender: UIButton) {
+        pushInput("0")
     }
     
     @IBAction func doubleZeroButton(_ sender: UIButton) {
+        pushInput("00")
     }
     
     @IBAction func oneButton(_ sender: UIButton) {
+        pushInput("1")
     }
     
     @IBAction func twoButton(_ sender: UIButton) {
+        pushInput("2")
     }
     
     @IBAction func threeCButton(_ sender: UIButton) {
+        pushInput("3")
     }
     
     @IBAction func fourButton(_ sender: UIButton) {
+        pushInput("4")
     }
     
     @IBAction func fiveButton(_ sender: UIButton) {
+        pushInput("5")
     }
     
     @IBAction func sixButton(_ sender: UIButton) {
+        pushInput("6")
     }
     
     @IBAction func sevenButton(_ sender: UIButton) {
+        pushInput("7")
     }
     
     @IBAction func eightButton(_ sender: UIButton) {
+        pushInput("8")
     }
     
     @IBAction func nineButton(_ sender: UIButton) {
+        pushInput("9")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initCalculator()
         // Do any additional setup after loading the view.
     }
     
