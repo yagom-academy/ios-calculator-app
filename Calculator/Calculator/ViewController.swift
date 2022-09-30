@@ -7,7 +7,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
@@ -28,7 +28,7 @@ class ViewController: UIViewController {
     func resetOperandLabel() {
         operandLabel.text = "0"
     }
-
+    
     func removeAllsubviewsInHistoryStackView() {
         historyStackView.subviews.forEach {
             $0.removeFromSuperview()
@@ -148,9 +148,16 @@ class ViewController: UIViewController {
         } else {
             newOperatorLabelText = currentOperatorLabelText
         }
+        let isNanError: Bool = currentOperandLabelText == CalculateError.dividedByZero.localizedDescription
+        let newOperandLabelText: String
+        if isNanError {
+            newOperandLabelText = "0"
+        } else {
+            newOperandLabelText = currentOperandLabelText
+        }
         if isEditing {
             addSubViewInHistoryStackView(newOperator: newOperatorLabelText, newOperand: currentOperandLabelText)
-            calculateInput += "\(newOperatorLabelText)\(currentOperandLabelText)"
+            calculateInput += "\(newOperatorLabelText)\(newOperandLabelText)"
             resetOperandLabel()
             scrollToBottom()
         }
@@ -166,10 +173,18 @@ class ViewController: UIViewController {
         calculateInput += "\(currentOperatorLabelText)\(currentOperandLabelText)"
         let calculateInputRemovedComma: String = removeComma(in: calculateInput)
         var formula: Formula = ExpressionParser.parse(from: calculateInputRemovedComma)
-        if let result: Double = formula.result() {
-            changeOperandLabelText(to: formatNumber(result))
+        let result = formula.result()
+        switch result {
+        case .failure(let calculateError):
+            changeOperandLabelText(to: calculateError.localizedDescription)
             changeOperatorLabelText(to: "")
             calculateInput = ""
+        case .success(let result):
+            if let result {
+                changeOperandLabelText(to: formatNumber(result))
+                changeOperatorLabelText(to: "")
+                calculateInput = ""
+            }
         }
         scrollToBottom()
     }
