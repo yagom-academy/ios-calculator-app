@@ -9,7 +9,7 @@ import XCTest
 class StringTests: XCTestCase {
     var sut: String?
     
-    let testCase1 = "adsfa14qsaf"
+    let testCase1 = "ad-fa-4qs-ㄹ"
     let testCase2 = "11sa4+a1243"
     let testCase3 = "1sw10sd/1asf"
     let testCase4 = "123as-12jsl"
@@ -77,6 +77,21 @@ class StringTests: XCTestCase {
         }
         
         if sutArr[0] == "192asod", sutArr[1] == "12jn" {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
+    
+    func test_split함수실행시_연산자가여러개있어도_각각모두분리_true리턴() {
+        sut = testCase1
+        
+        guard let sutArr = sut?.split(with: Character(Operator.substract.description)) else {
+            XCTAssert(false)
+            return
+        }
+        
+        if sutArr[0] == "ad", sutArr[1] == "fa", sutArr[2] == "4qs", sutArr[3] == "ㄹ"{
             XCTAssert(true)
         } else {
             XCTAssert(false)
