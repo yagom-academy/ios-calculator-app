@@ -215,6 +215,18 @@ class ViewController: UIViewController {
         resetExpressionString()
     }
     
+    @IBAction func tappedPlusMinusButton(_ sender: UIButton) {
+        guard let value = expressionLabel.text else { return }
+        if value.contains("-") {
+            expressionLabel.text = String(value.dropFirst())
+        } else {
+            if value == "0" {
+                return
+            }
+            expressionLabel.text = "-\(value)"
+        }
+    }
+    
     func addNewLableToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
