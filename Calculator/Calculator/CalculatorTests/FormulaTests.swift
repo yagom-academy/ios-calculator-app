@@ -10,6 +10,9 @@ import XCTest
 class FormulaTests: XCTestCase {
 
     var sut: Formula!
+    let operandTestCases1 = CalculatorItemQueue([1, 3])
+    let operandTestCases1 = CalculatorItemQueue([12, 9])
+    
 
     override func setUpWithError() throws {
         sut = Formula(operrands: CalculatorItemQueue([1, 3]),
@@ -33,5 +36,11 @@ class FormulaTests: XCTestCase {
         } catch {
             XCTAssert(false)
         }
+    }
+    
+    func testFormula연산시_사칙연산이_모두있을경우_true리턴() {
+        
+        
+        
     }
 }

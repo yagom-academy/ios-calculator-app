@@ -15,7 +15,11 @@ enum Operator: Character, CaseIterable {
     private func substract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
-    private func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
+        if rhs == 0 {
+            throw CalculateError.divideByZero
+        }
+        
         return lhs / rhs
     }
     private func muliply(lhs: Double, rhs: Double) -> Double {
@@ -29,7 +33,13 @@ enum Operator: Character, CaseIterable {
         case .substract:
             return substract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            do {
+                return try divide(lhs: lhs, rhs: rhs)
+            } catch CalculateError.divideByZero {
+                return lhs
+            } catch {
+                return lhs
+            }
         case .multiply:
             return muliply(lhs: lhs, rhs: rhs)
         }

@@ -54,7 +54,6 @@ private class CalculatorItemQueueTests: XCTestCase {
     
     func test_CalculatorItemQueue에서_deque에만_아이템이있을때_popLast시_마지막아이템추출() {
         sut.dequeue = [testCase1, testCase2, testCase3]
-        
         let result = sut.popLast()
         
         guard let result = result as? Double else{
