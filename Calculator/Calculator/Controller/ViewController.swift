@@ -36,7 +36,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpOperatorButton(_ sender: OperatorButton) {
         checkCalculated()
         
-        if numberLabel.isReceiving == true {
+        if numberLabel.isReceiving == true && numberLabel.isZero == false {
             appendFormulaIntoStackView()
             numberLabel.Initialization()
         }

@@ -7,50 +7,77 @@ class NumberLabel: UILabel {
     private let doublyZero: String = "00"
     private let negativeNumberSign: String = "-"
     private let decimalPoints: Character = "."
+    
     //MARK: - NumberLabel Properties
-    private var numberOfString: String = ""
-    private var isPositiveNumber: Bool = true
-    private var hasDecimalPoints: Bool = false
+    private var decimal: String = "" {
+        didSet {
+            self.text = interger + decimal
+        }
+    }
+    private var interger: String = "0" {
+        didSet {
+            self.text = decimal + interger
+        }
+    }
+    
     var isReceiving: Bool {
         return self.text != initialValue ? true : false
     }
+    var isZero: Bool {
+        guard let text = self.text,
+              let number = Double(text.filter({$0 != ","})) else {
+            return true
+        }
+        return number.isZero
+    }
+    private var isPositiveNumber: Bool {
+        return interger.contains(negativeNumberSign) == false
+    }
+    private var hasDecimalPoints: Bool {
+        return decimal.contains(decimalPoints)
+    }
+    
     //MARK: - NumberLabel Method
     func append(_ number: String) {
         guard var text = self.text,
               text.count <= 20 else {
             return
         }
-        if text == initialValue {
+        if isZero == true {
             if number == zero || number == doublyZero {
                 return
             }
-            self.text = number
+            self.interger = number
+        } else if hasDecimalPoints == true {
+            self.decimal += number
         } else {
             text.append(number)
-            let number = CalculatorNumberFormatter.shared.number(from: text)
-            self.text = CalculatorNumberFormatter.shared.string(for: number)
+            appendInterger(for: text)
         }
+    }
+    
+    private func appendInterger(for numberOfString: String) {
+        guard let number = CalculatorNumberFormatter.shared.number(from: numberOfString) else {
+            return
+        }
+        self.interger = CalculatorNumberFormatter.shared.string(for: number)!
     }
     
     func appendDecimalPoints() {
         if hasDecimalPoints == false {
-            self.text?.append(decimalPoints)
-            hasDecimalPoints = true
+            self.decimal.append(decimalPoints)
         }
     }
     
     func swapNumberSign() {
-        guard let number = self.text,
-              number != initialValue,
+        guard isZero == false,
               isReceiving == true else {
             return
         }
         if isPositiveNumber == true {
-            self.text = negativeNumberSign + number
-            isPositiveNumber = false
+            self.interger = negativeNumberSign + self.interger
         } else {
-            self.text?.removeFirst()
-            isPositiveNumber = true
+            self.interger.removeFirst()
         }
     }
 }
@@ -58,8 +85,7 @@ class NumberLabel: UILabel {
 //MARK: - extension
 extension NumberLabel: InitializationProtocol {
     func Initialization() {
-        self.text = initialValue
-        self.isPositiveNumber = true
-        self.hasDecimalPoints = false
+        self.interger = initialValue
+        self.decimal = ""
     }
 }
