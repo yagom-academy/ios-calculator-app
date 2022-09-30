@@ -8,8 +8,8 @@ struct Formula {
     var operands: CalculatorItemQueue
     var operators: CalculatorItemQueue
     
-    init(operrands: CalculatorItemQueue, operators: CalculatorItemQueue) {
-        self.operands = operrands
+    init(operands: CalculatorItemQueue, operators: CalculatorItemQueue) {
+        self.operands = operands
         self.operators = operators
     }
     
