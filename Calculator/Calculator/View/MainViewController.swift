@@ -64,6 +64,7 @@ class MainViewController: UIViewController {
         operatorLabel.textColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        stackView.spacing = 8
         formulaVerticalStackView.addArrangedSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
