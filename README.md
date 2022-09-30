@@ -12,7 +12,7 @@
 
 
 ## 👋 소개
-[하모](https://github.com/lxodud)가 구현한 Calculator Step-1 입니다.
+[하모](https://github.com/lxodud)가 구현한 Calculator Step-2 입니다.
 
 ## 💻 개발환경 및 라이브러리
 [![swift](https://img.shields.io/badge/swift-5.6-orange)]()
