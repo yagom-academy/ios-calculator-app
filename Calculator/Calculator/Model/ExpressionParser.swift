@@ -11,7 +11,7 @@ enum ExpressionParser {
             !"0123456789".contains($0) }.compactMap {
                 Operator(rawValue: $0) }
         
-        let operrands = componentsByOperators(from: input).compactMap {
+        let operands = componentsByOperators(from: input).compactMap {
             Double($0)
         }
         
