@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     }
     
     func resetValueToZero() {
-        expressionLabel.text = "0"
+        expressionLabel.text = CalculatorNameSpace.zero.rawValue
     }
     
     func resetTotalString() {
@@ -97,11 +97,7 @@ class ViewController: UIViewController {
     }
     
     func assignTotalString(value: String) {
-        if value.contains("-") {
-            totalString += "&\(value.dropFirst())"
-        } else {
-            totalString += value
-        }
+        totalString += value
     }
     
     func executeExpression() {
@@ -112,13 +108,16 @@ class ViewController: UIViewController {
             let number = numberFormatter.string(from: converted)
             expressionLabel.text = number
         } catch ValueError.emptyOperandsQueue {
-            displaySignAndLabel(sign: "!", expression: "Operand is Empty")
+            displaySignAndLabel(sign: CalculatorNameSpace.exclamationMark.rawValue,
+                                expression: CalculatorNameSpace.emptyOperand.rawValue)
         } catch ValueError.emptyOperatorsQueue {
-            displaySignAndLabel(sign: "!", expression: "Operator is Empty")
+            displaySignAndLabel(sign: CalculatorNameSpace.exclamationMark.rawValue,
+                                expression: CalculatorNameSpace.emptyOperator.rawValue)
         } catch ValueError.divideByZero {
-            displaySignAndLabel(sign: "", expression: "NaN")
+            displaySignAndLabel(sign: "", expression: CalculatorNameSpace.nan.rawValue)
         } catch {
-            displaySignAndLabel(sign: "?", expression: "Error")
+            displaySignAndLabel(sign: CalculatorNameSpace.questionMark.rawValue,
+                                expression: CalculatorNameSpace.error.rawValue)
         }
     }
     
@@ -130,29 +129,29 @@ class ViewController: UIViewController {
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
         case oneButton:
-            expressionString += "1"
+            expressionString += CalculatorNameSpace.one.rawValue
         case twoButton:
-            expressionString += "2"
+            expressionString += CalculatorNameSpace.two.rawValue
         case threeButton:
-            expressionString += "3"
+            expressionString += CalculatorNameSpace.three.rawValue
         case fourButton:
-            expressionString += "4"
+            expressionString += CalculatorNameSpace.four.rawValue
         case fiveButton:
-            expressionString += "5"
+            expressionString += CalculatorNameSpace.five.rawValue
         case sixButton:
-            expressionString += "6"
+            expressionString += CalculatorNameSpace.six.rawValue
         case sevenButton:
-            expressionString += "7"
+            expressionString += CalculatorNameSpace.seven.rawValue
         case eightButton:
-            expressionString += "8"
+            expressionString += CalculatorNameSpace.eight.rawValue
         case nineButton:
-            expressionString += "9"
+            expressionString += CalculatorNameSpace.nine.rawValue
         case zeroButton:
-            expressionString += "0"
+            expressionString += CalculatorNameSpace.zero.rawValue
         case doubleZeroButton:
-            expressionString += "00"
+            expressionString += CalculatorNameSpace.doubleZero.rawValue
         case dotButton:
-            expressionString += "."
+            expressionString += CalculatorNameSpace.dot.rawValue
         default:
             return
         }
@@ -172,7 +171,7 @@ class ViewController: UIViewController {
             addLabelAndSign(value: value, sender: sender)
             initializeExpression()
         } else {
-            if expressionLabel.text == "0" {
+            if expressionLabel.text == CalculatorNameSpace.zero.rawValue {
                 signLabel.text = signOfOperator(sender: sender)
             } else {
                 guard let sign = signLabel.text else { return }
@@ -224,10 +223,10 @@ class ViewController: UIViewController {
     
     @IBAction func tappedPlusMinusButton(_ sender: UIButton) {
         guard let value = expressionLabel.text else { return }
-        if value.contains("-") {
+        if value.contains(CalculatorNameSpace.minusSign.rawValue) {
             expressionLabel.text = String(value.dropFirst())
         } else {
-            if value == "0" {
+            if value == CalculatorNameSpace.zero.rawValue {
                 return
             }
             expressionLabel.text = "-\(value)"

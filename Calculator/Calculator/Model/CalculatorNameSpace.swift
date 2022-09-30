@@ -25,4 +25,9 @@ enum CalculatorNameSpace: String {
     
     case exclamationMark = "!"
     case questionMark = "?"
+    
+    case emptyOperand = "Operand is Empty"
+    case emptyOperator = "Operator is Empty"
+    case nan = "NaN"
+    case error = "Error"
 }
