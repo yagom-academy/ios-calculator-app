@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -35,16 +35,15 @@ final class CalculatorVC: UIViewController {
             operandLabel.text?.removeFirst()
         }
         currentNumber.append(sender.titleLabel?.text ?? "")
-        operandLabel.text = currentNumber
         
         if currentNumber.contains(".") {
-            guard let integerPart = currentNumber.split(with: ".").first,
-                  let fractionPart = currentNumber.split(with: ".").last else {
+            guard let integerPart = currentNumber.components(separatedBy: ".").first,
+                  let fractionPart = currentNumber.components(separatedBy: ".").last else {
                 return
             }
-            operandLabel.text = decimalNumberFormatter(number: integerPart) + "." + fractionPart
+            operandLabel.text = numberFormatter(number: integerPart) + "." + fractionPart
         } else {
-            operandLabel.text = decimalNumberFormatter(number: currentNumber)
+            operandLabel.text = numberFormatter(number: currentNumber)
         }
     }
     
@@ -58,9 +57,9 @@ final class CalculatorVC: UIViewController {
         }
         
         if currentNumber.last == "." {
-            operandLabel.text = "\(decimalNumberFormatter(number: currentNumber))."
+            operandLabel.text = "\(numberFormatter(number: currentNumber))."
         } else {
-            operandLabel.text = decimalNumberFormatter(number: currentNumber)
+            operandLabel.text = numberFormatter(number: currentNumber)
         }
     }
     
@@ -142,7 +141,7 @@ final class CalculatorVC: UIViewController {
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
         if !totalFormulaString.isEmpty {
             totalFormulaString += operatorLabel.text ?? ""
-            totalFormulaString += operandLabel.text ?? ""
+            totalFormulaString += currentNumber
             makeFormulaStackView()
             scrollToBottom()
             var formula = ExpressionParser.parse(from: totalFormulaString)
@@ -150,26 +149,15 @@ final class CalculatorVC: UIViewController {
             if result == Double.infinity {
                 operandLabel.text = "NaN"
             } else {
-                operandLabel.text = String(result)
+                operandLabel.text = numberFormatter(number: String(result))
             }
             totalFormulaString = ""
         }
     }
     
-    private func decimalNumberFormatter(number: String) -> String {
+    private func numberFormatter(number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 10
-        guard let decimalNumber = Double(number) else {
-            return number
-        }
-        return numberFormatter.string(from: NSNumber(value: decimalNumber))!
-    }
-    
-    private func noneNumberFormatter(number: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .none
-        numberFormatter.maximumFractionDigits = 10
         guard let decimalNumber = Double(number) else {
             return number
         }
