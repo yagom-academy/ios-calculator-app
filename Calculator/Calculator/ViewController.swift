@@ -96,21 +96,23 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    private func insertIntoQueue(operatorValue: String, inputText: String) {
-        let someOperator: Operator
-        
+    private func convertOperator(operatorValue: String) -> Operator? {
         switch operatorValue {
         case "+":
-            someOperator = .add
+            return .add
         case "-":
-            someOperator = .subtract
+            return .subtract
         case "ⅹ":
-            someOperator = .multiply
+            return .multiply
         case "÷":
-            someOperator = .divide
+            return .divide
         default:
-            return
+            return nil
         }
+    }
+    
+    private func insertIntoQueue(operatorValue: String, inputText: String) {
+        guard let someOperator = convertOperator(operatorValue: operatorValue) else { return }
         
         if let doubleValue = Double(inputText) {
             formula.operands?.enqueue(doubleValue)
@@ -119,20 +121,7 @@ class ViewController: UIViewController {
     }
     
     private func insertIntoOperatorQueue(operatorValue: String) -> Operator? {
-        let someOperator: Operator?
-        
-        switch operatorValue {
-        case "+":
-            someOperator = .add
-        case "-":
-            someOperator = .subtract
-        case "ⅹ":
-            someOperator = .multiply
-        case "÷":
-            someOperator = .divide
-        default:
-            return nil
-        }
+        let someOperator = convertOperator(operatorValue: operatorValue)
         
         return someOperator
     }
@@ -149,7 +138,6 @@ class ViewController: UIViewController {
         let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
         
         if numberWithOutComma == Literal.numberZero.value && inputOperatorLabel.text == "" {
-            return
         } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
             
@@ -160,7 +148,6 @@ class ViewController: UIViewController {
             
             _ = formula.operators?.dequeue()
             formula.operators?.enqueue(getOperator)
-            return
         } else {
             guard let operatorText = inputOperatorLabel.text else { return }
             
