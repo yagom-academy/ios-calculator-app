@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
     private var isNegativeSign: Bool = false
+    private var isCalculate: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,25 +47,32 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func doubleZeroButtonTapped(_ sender: Any) {
+        if !operand.isEmpty {
+            updateOperandLabel(with: "00")
+        }
+    }
+    
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let selectedOperator = sender.currentTitle else {
             return
         }
         
-        if isFirstInput {
+        guard !isFirstInput else {
             return
         }
         
-        if !operand.isEmpty {
-            removeLastDot()
-            creatStackView()
-            setOperandLabelToZero()
-            creatFinalFormula()
-            operand.removeAll()
-            isDotButtonTapped = false
+        updateOperatorLabel(with: selectedOperator)
+        guard !operand.isEmpty else {
+            return
         }
         
-        updateOperatorLabel(with: selectedOperator)
+        removeLastDot()
+        creatStackView()
+        setOperandLabelToZero()
+        creatFinalFormula()
+        operand.removeAll()
+        isDotButtonTapped = false
     }
     
     @IBAction func allClearButtonTapped(_ sender: Any) {
@@ -78,6 +86,7 @@ class ViewController: UIViewController {
         isDotButtonTapped = false
         operand.removeAll()
         arithmeticOperator.removeAll()
+        finalFormula.removeAll()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: Any) {
@@ -122,8 +131,10 @@ class ViewController: UIViewController {
     }
     
     func updateOperatorLabel(with input: String) {
-        arithmeticOperator = input
-        operatorLabel.text = arithmeticOperator
+        if !isCalculate {
+            arithmeticOperator = input
+            operatorLabel.text = arithmeticOperator
+        }
     }
 
     func setOperandLabelToZero() {
