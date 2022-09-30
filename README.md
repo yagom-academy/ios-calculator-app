@@ -81,7 +81,7 @@
 
 ### 레이블에 담긴 글자의 색 변경
 - 스택뷰에 원하는 레이블에 입력값을 담았으나 보이지 않는 문제가 발생하였고, `view hierarchy` 라는 것을 처음으로 사용해 육안으로 입력값을 확인하고 색상을 변경하여 문제를 해결 할 수 있었습니다.  
-![](https://i.imgur.com/zBOnIab.png)
+<img src=https://i.imgur.com/zBOnIab.png width=250>
 
 <br>
 
