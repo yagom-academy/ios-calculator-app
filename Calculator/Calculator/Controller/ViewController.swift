@@ -8,13 +8,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let numberFormatter = NumberFormatter()
     @IBOutlet weak var mainOperandLabel: UILabel!
     var operandLabelText: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainOperandLabel.text = applyNumberFormatter(to: mainOperandLabel.text ?? "")
+        mainOperandLabel.text = mainOperandLabel.text ?? "".applyNumberFormatter()
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
@@ -29,7 +28,8 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + sender.tag.description)
+        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatter()
+        // 20자리가 넘어가는 경우, alert 띄우기
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "0")
+            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatter()
             return
         }
     }
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "00")
+            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatter()
             return
         }
     }
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = applyNumberFormatter(to: operandLabelText) + "."
+        mainOperandLabel.text = operandLabelText.applyNumberFormatter() + "."
     }
     
     func removeComma(_ string: String?) -> String {
@@ -68,28 +68,6 @@ class ViewController: UIViewController {
             return ""
         }
         return returnValue
-    }
-    
-    func applyNumberFormatter(to string: String) -> String {
-        numberFormatter.numberStyle = .decimal // 3자리마다 , 를 찍어주는 역할
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20 // 유효자리수를 설정해주는 역할
-        
-        guard string.contains(".") else {
-            guard let number: NSNumber = numberFormatter.number(from: string),
-                  let returnValue = numberFormatter.string(from: number) else {
-                return ""
-            }
-            return returnValue
-        }
-        
-        let stringsSplitedByDot: [String] = string.split(with: ".")
-        
-        guard let numberBeforeDot: NSNumber = numberFormatter.number(from: stringsSplitedByDot[0]),
-              let returnValue = numberFormatter.string(from: numberBeforeDot) else {
-            return ""
-        }
-        return returnValue + "." + stringsSplitedByDot[1]
     }
 }
 
