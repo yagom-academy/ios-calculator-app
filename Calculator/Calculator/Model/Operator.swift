@@ -17,14 +17,14 @@ enum Operator: Character, CaseIterable {
         case divideByZero
     }
     
-    func calculate(lhs: Double, rhs: Double) -> Double? {
+    func calculate(lhs: Double, rhs: Double) throws -> Double? {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            guard rhs != 0.0 else { return nil }
+            guard rhs != 0.0 else { throw OperatorError.divideByZero }
             return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
