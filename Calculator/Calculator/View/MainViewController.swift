@@ -5,16 +5,6 @@ import UIKit
 
 class MainViewController: UIViewController {
     
-    @IBOutlet var numberButton: [UIButton]!
-    @IBOutlet var operatorButton: [UIButton]!
-    
-    @IBOutlet weak var dotButton: UIButton!
-    @IBOutlet weak var calculateButton: UIButton!
-
-    @IBOutlet weak var ceButton: UIButton!
-    @IBOutlet weak var acButton: UIButton!
-    @IBOutlet weak var reverseSignButton: UIButton!
-    
     @IBOutlet weak var displaySignLabel: UILabel!
     @IBOutlet weak var displayNumberLabel: UILabel!
     
