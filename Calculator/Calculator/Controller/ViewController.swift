@@ -28,6 +28,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        operandLabelText = removeComma(mainOperandLabel.text)
+        guard operandLabelText.count == 1,
+              operandLabelText.last == "0" else {
+            mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "0")
+            return
+        }
     }
     
     @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
