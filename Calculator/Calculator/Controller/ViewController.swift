@@ -22,24 +22,87 @@ class ViewController: UIViewController {
     }
     
     @IBAction func CEButton(_ sender: UIButton) {
+        stackCalculation = ""
+        operandLabel.text = ""
     }
     
     @IBAction func changeSignButton(_ sender: UIButton) {
+        guard let operandLabelText = operandLabel.text else { return }
+        
+        if operandLabelText.contains("-") {
+            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
+            checkSign = operandLabel.text ?? ""
+        } else {
+            operandLabel.text = "-" + operandLabelText
+            checkSign = operandLabel.text ?? ""
+        }
     }
     
     @IBAction func divideButton(_ sender: UIButton) {
+        if operandLabel.text != "" {
+            updateCalculatorStackView()
+        }
+        
+        finalCalculation = finalCalculation + "/"
+        stackCalculation = ""
+        operatorLabel.text = "÷"
+        operandLabel.text = ""
     }
     
     @IBAction func multiplyButton(_ sender: UIButton) {
+        if operandLabel.text != "" {
+            updateCalculatorStackView()
+        }
+        
+        finalCalculation = finalCalculation + "*"
+        stackCalculation = ""
+        operatorLabel.text = "x"
+        operandLabel.text = ""
     }
     
     @IBAction func subtractButton(_ sender: UIButton) {
+        if operandLabel.text != "" {
+            updateCalculatorStackView()
+        }
+        
+        if checkSign.contains("-") {
+            finalCalculation = finalCalculation + "+"
+            stackCalculation = ""
+            operatorLabel.text = "-"
+            operandLabel.text = ""
+        } else {
+            finalCalculation = finalCalculation + "-"
+            stackCalculation = ""
+            operatorLabel.text = "-"
+            operandLabel.text = ""
+        }
     }
     
     @IBAction func addButton(_ sender: UIButton) {
+        if operandLabel.text != "" {
+            updateCalculatorStackView()
+        }
+        
+        if checkSign.contains("-") {
+            finalCalculation = finalCalculation + "-"
+            stackCalculation = ""
+            operatorLabel.text = "+"
+            operandLabel.text = ""
+        } else {
+            finalCalculation = finalCalculation + "+"
+            stackCalculation = ""
+            operatorLabel.text = "+"
+            operandLabel.text = ""
+        }
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
+        updateCalculatorStackView()
+        operatorLabel.text = ""
+        operandLabel.text = ""
+        stackCalculation = ""
+        
+        try? showResult()
     }
     
     @IBAction func pointButton(_ sender: UIButton) {
@@ -110,6 +173,36 @@ class ViewController: UIViewController {
         stackCalculation = stackCalculation + userInput
         finalCalculation = finalCalculation + userInput
         operandLabel.text = stackCalculation
+    }
+    
+    private func updateCalculatorStackView() {
+        let calculatorLabel = UILabel()
+        calculatorLabel.text = (operatorLabel.text ?? "") + " " + (operandLabel.text ?? "")
+        calculatorLabel.textColor = .white
+        calculatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        calculatorStackView.addArrangedSubview(calculatorLabel)
+    }
+    
+    private func showResult() throws {
+        let calculation = ExpressionParser.parse(from: finalCalculation)
+        formula = Formula(operands: calculation.operands, operators: calculation.operators)
+        print(calculation.operands, calculation.operators)
+        
+        do {
+            let result = try formula?.result()
+            guard let calculatorResult = result else { return }
+            
+            operandLabel.text = String(calculatorResult)
+            stackCalculation = String(calculatorResult)
+        } catch CalculatorError.invalidNumber {
+            operandLabel.text = "invalid Number"
+            stackCalculation = ""
+            finalCalculation = ""
+            calculatorStackView.subviews.forEach { (view) in
+                view.removeFromSuperview()
+            }
+        }
     }
 }
 
