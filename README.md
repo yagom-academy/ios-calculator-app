@@ -33,8 +33,12 @@ Step - 2:
 
 ## 🗺 UML
 
+- STEP - 1
 
 ![제목 없는 다이어그램 (1)](https://user-images.githubusercontent.com/85005933/191208106-a6c61fca-9184-4db0-8525-20ee4a382677.jpg)
+- STEP - 2
+
+![제목 없는 다이어그램 drawio](https://user-images.githubusercontent.com/85005933/193236539-96b802c0-3909-427a-abd1-952efd9f562f.png)
 
 
 
