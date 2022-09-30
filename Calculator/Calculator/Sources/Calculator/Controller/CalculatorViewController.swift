@@ -18,9 +18,7 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        resetExpression()
-        resetLabels()
+        setUpInitState()
     }
     
     @IBAction func didTappedNumberButton(_ sender: UIButton) {
@@ -56,21 +54,18 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
-        guard didNotCalculate else {
+        guard didNotCalculate,
+              selectedNumbers.isNotEmpty else {
             return
         }
         
-        if selectedNumbers.isEmpty {
+        guard let lastElement = mathExpression.last else {
             resetSelectedNumbers()
-            mathExpression.append(selectedOperator)
-            mathExpression.append(selectedNumbers)
+            resetSelectedOperator()
+            return
         }
         
         addLogStackView()
-        
-        guard let lastElement = mathExpression.last else {
-            return
-        }
         
         if !lastElement.shouldConvertOperator {
             mathExpression.append(selectedOperator)
@@ -84,25 +79,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedACButton(_ sender: UIButton) {
-        resetLabels()
-        resetExpression()
-        resetMathExpression()
-        
-        if !didNotCalculate {
-            didNotCalculate.toggle()
-        }
-        
-        removeAllChildStackView()
+        setUpInitState()
     }
     
     @IBAction func didTappedCEButton(_ sender: UIButton) {
         guard didNotCalculate else {
-            resetLabels()
-            resetExpression()
-            resetMathExpression()
-            removeAllChildStackView()
-            didNotCalculate.toggle()
-            
+            setUpInitState()
             return
         }
         
@@ -159,14 +141,22 @@ private extension CalculatorViewController {
         scrollView.scrollToBottom()
     }
     
-    func removeAllChildStackView() {
+    func removeAllLogStackView() {
         recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
 // MARK: - 계산기 사용자 입력 상태 관리 메서드
 private extension CalculatorViewController {
-    func resetExpression() {
+    func setUpInitState() {
+        resetLabels()
+        resetSelected()
+        resetMathExpression()
+        removeAllLogStackView()
+        didNotCalculate = true
+    }
+
+    func resetSelected() {
         resetSelectedNumbers()
         resetSelectedOperator()
     }
@@ -193,7 +183,7 @@ private extension CalculatorViewController {
             updateNumberLabelTo(numbers: calNumber)
             resetOperatorLabel()
             
-            resetExpression()
+            resetSelected()
         } catch FormulaError.dividedByZero {
             let errorValue = Double.signalingNaN.description
             updateNumberLabelTo(numbers: errorValue)
@@ -207,7 +197,7 @@ private extension CalculatorViewController {
 private extension CalculatorViewController {
     func resetLabels() {
         resetNumberLabel()
-        resetSelectedNumbers()
+        resetOperatorLabel()
     }
 
     func resetNumberLabel() {
