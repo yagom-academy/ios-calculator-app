@@ -12,7 +12,7 @@ enum ExpresionParser {
         let componenets = componentsByOperators(from: input)
         var formula = Formula()
 
-        let operators = componenets.filter { $0.count == 1 }
+        let operators = componenets.filter { Character($0).isMathSymbol }
         operators.forEach{
             guard let operatorItem = Operator(rawValue: Character($0)) else { return }
             formula.operators.enqueue(data: operatorItem)
