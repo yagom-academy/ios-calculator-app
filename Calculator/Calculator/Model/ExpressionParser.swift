@@ -15,7 +15,7 @@ enum ExpressionParser {
             Double($0)
         }
         
-        return Formula(operrands: CalculatorItemQueue(operrands),
+        return Formula(operrands: CalculatorItemQueue(operands),
                        operators: CalculatorItemQueue(operators))
     }
     
