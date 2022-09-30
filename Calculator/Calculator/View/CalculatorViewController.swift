@@ -8,7 +8,6 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    // TODO: - 스크롤뷰 맨밑으로 자동으로 내려가게 하기
     @IBOutlet weak var historyScrollView: UIScrollView!
     @IBOutlet weak var historyStackView: UIStackView!
     @IBOutlet weak var lastOperatorLabel: UILabel!
