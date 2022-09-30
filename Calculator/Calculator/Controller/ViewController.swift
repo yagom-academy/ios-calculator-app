@@ -91,5 +91,11 @@ class ViewController: UIViewController {
             view.removeFromSuperview()
         }
     }
+    
+    private func pushInput(_ userInput: String) {
+        stackCalculation = stackCalculation + userInput
+        finalCalculation = finalCalculation + userInput
+        operandLabel.text = stackCalculation
+    }
 }
 
