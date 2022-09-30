@@ -54,13 +54,11 @@ class ViewController: UIViewController {
         
         clearOperand()
         operatorLabel.text = tappedOperator
-        updateScroll()
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
         guard !expression.isEmpty else { return }
         appendExpressionQueue()
-        updateScroll()
         
         var components = ExpressionParser.parse(from: expression)
         let result = components.result()
@@ -192,6 +190,7 @@ extension ViewController {
         expression.append(" \(currentOperand)")
         
         expressionQueue.addArrangedSubview(stackView)
+        updateScroll()
     }
 }
 
