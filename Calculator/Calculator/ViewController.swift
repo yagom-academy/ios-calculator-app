@@ -6,7 +6,7 @@
 
 import UIKit
 
-private class ViewController: UIViewController {
+class ViewController: UIViewController {
     @IBOutlet weak private var inputNumberLabel: UILabel!
     @IBOutlet weak private var inputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputOperatorLabel: UILabel!
