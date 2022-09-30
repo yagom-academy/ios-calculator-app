@@ -37,6 +37,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
+        operandLabelText = removeComma(mainOperandLabel.text)
+        guard operandLabelText.count == 1,
+              operandLabelText.last == "0" else {
+            mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "00")
+            return
+        }
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
