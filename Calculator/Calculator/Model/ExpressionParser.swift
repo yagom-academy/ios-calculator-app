@@ -8,7 +8,7 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operators = input.filter {
-            !"0123456789".contains($0) }.compactMap {
+            "0123456789".contains($0) == false }.compactMap {
                 Operator(rawValue: $0) }
         
         let operands = componentsByOperators(from: input).compactMap {
