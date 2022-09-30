@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUILabel()
-        setClearCalculateHistory()
+        clearCalculateHistory()
     }
     
     private func setUILabel() {
@@ -34,7 +34,7 @@ final class ViewController: UIViewController {
         currentOperand = Constant.defaultZero
     }
 
-    private func setClearCalculateHistory() {
+    private func clearCalculateHistory() {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
@@ -199,7 +199,7 @@ final class ViewController: UIViewController {
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
         setUILabel()
-        setClearCalculateHistory()
+        clearCalculateHistory()
         currentOperand = Constant.defaultZero
         currentOperator = Constant.empty
         calculateHistory.removeAll()
