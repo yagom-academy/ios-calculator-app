@@ -67,4 +67,19 @@ class StringTests: XCTestCase {
             XCTAssert(false)
         }
     }
+    
+    func test_Split함수실행시_곱하기로자르면_true리턴() {
+        sut = testCase5
+        
+        guard let sutArr = sut?.split(with: Character(Operator.multiply.description)) else {
+            XCTAssert(false)
+            return
+        }
+        
+        if sutArr[0] == "192asod", sutArr[1] == "12jn" {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
 }
