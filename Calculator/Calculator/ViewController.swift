@@ -55,6 +55,7 @@ class ViewController: UIViewController {
         }
         
         if !operand.isEmpty {
+            removeLastDot()
             creatStackView()
             setOperandLabelToZero()
             creatFinalFormula()
@@ -106,6 +107,10 @@ class ViewController: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.addArrangedSubview(stackView)
+    }
+    
+    func removeLastDot() {
+        operand = operand.trimmingCharacters(in: ["."])
     }
     
     func creatFinalFormula() {
