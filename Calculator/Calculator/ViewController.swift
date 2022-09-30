@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             if operand == "." {
                 changeOperandLabelText(to: "\(currentLabelText)\(operand)")
             } else {
-                changeOperandLabelText(to: formatNumber(Double("\(removeComma(in: currentLabelText))\(operand)") ?? 0))
+                changeOperandLabelText(to: formatNumber("\(removeComma(in: currentLabelText))\(operand)"))
             }
         }
     }
@@ -95,14 +95,32 @@ class ViewController: UIViewController {
         return label
     }
     
-    func formatNumber(_ number: Double) -> String {
+    func formatNumber(_ number: String) -> String {
+        let intNumber: Int = Int(floor(Double(number) ?? 0))
+        let decimalRange = number.index(number.startIndex, offsetBy: String(intNumber).count)..<number.endIndex
+        let decimalNumber: String = String(number[decimalRange])
+        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        return numberFormatter.string(from: NSNumber(value: number)) ?? ""
+        var result: String = "\(numberFormatter.string(from: NSNumber(value: intNumber)) ?? "")\(decimalNumber)"
+        while result.count > 20 {
+            result.popLast()
+        }
+        return result
     }
     
     func removeComma(in text: String) -> String {
         return text.replacingOccurrences(of: ",", with: "")
+    }
+    
+    func removeLastCommaZero(in text: String) -> String {
+        var result: String = text
+        if text.hasSuffix(".0") {
+            result.popLast()
+            result.popLast()
+            return result
+        }
+        return result
     }
     
     func scrollToBottom() {
@@ -181,7 +199,8 @@ class ViewController: UIViewController {
             calculateInput = ""
         case .success(let result):
             if let result {
-                changeOperandLabelText(to: formatNumber(result))
+                let resultToDisplay: String = removeLastCommaZero(in: formatNumber(String(result)))
+                changeOperandLabelText(to: resultToDisplay)
                 changeOperatorLabelText(to: "")
                 calculateInput = ""
             }
