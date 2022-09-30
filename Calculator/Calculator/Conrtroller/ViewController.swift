@@ -50,6 +50,13 @@ class ViewController: UIViewController {
             return
         }
         
+        guard inputNumber.split(with: ".").count <= 2,
+              inputNumber != "." else {
+            inputNumber = noValue
+            operandLabel.text = numberFormatter.notANumberSymbol
+            return
+        }
+        
         addFormula()
         MakeOperationStackView()
         scrollTobottom()
@@ -80,12 +87,13 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
         guard operandLabel.text != changeStyle(result) else { return }
-        
+
         addFormula()
         MakeOperationStackView()
+        scrollTobottom()
         inputNumber = noValue
         operatorLabel.text = blank
-        
+       
         do {
             var formulaQueue = ExpressionParser.parse(from: formula)
             result = try formulaQueue.result()
