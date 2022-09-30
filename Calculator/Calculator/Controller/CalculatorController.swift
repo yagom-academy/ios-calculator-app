@@ -1,21 +1,21 @@
 //  CalculatorController.swift
 //  Created by zhilly on 2022/09/29.
 
-class CalculatorController {
+final class CalculatorController {
     let view: MainViewController
     var formula: Formula?
-    var Expression: String = ""
+    private var Expression: String = ""
     var viewDisplayNumber: String = "0"
-    var displaySign: Operator.RawValue = Operator.unknown.rawValue
-    var isFirstClick: Bool = true
-    var canCalculate: Bool = false
+    private var displaySign: Operator.RawValue = Operator.unknown.rawValue
+    private var isFirstClick: Bool = true
+    private var canCalculate: Bool = false
     
     init(view: MainViewController) {
         self.view = view
         self.formula = ExpressionParser.parse(from: Expression)
     }
     
-    func isStartZero(stringNumber: String) -> Bool {
+    private func isStartZero(stringNumber: String) -> Bool {
         if stringNumber.first == "0" {
             return true
         } else {
@@ -23,7 +23,7 @@ class CalculatorController {
         }
     }
     
-    func isOverCount20(stringNumber: String, input: String?) -> Bool {
+    private func isOverCount20(stringNumber: String, input: String?) -> Bool {
         var inputLimit: Int = 20
         
         if stringNumber.contains(".") == true {
@@ -43,7 +43,7 @@ class CalculatorController {
         return false
     }
     
-    func canMakeHorizontalStackView() -> Bool {
+    private func canMakeHorizontalStackView() -> Bool {
         if displaySign != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
             return true
         }
@@ -51,7 +51,7 @@ class CalculatorController {
         return false
     }
     
-    func canChangedOperator() -> Bool {
+    private func canChangedOperator() -> Bool {
         return isStartZero(stringNumber: viewDisplayNumber) ? true : false
     }
     
@@ -92,7 +92,7 @@ class CalculatorController {
         }
     }
     
-    func determineOperator(stringOperator: String?) {
+    private func determineOperator(stringOperator: String?) {
         switch stringOperator {
         case "+":
             displaySign = Operator.add.rawValue
@@ -118,7 +118,7 @@ class CalculatorController {
         }
     }
     
-    func callbackCalculateResult() -> String {
+    private func callbackCalculateResult() -> String {
         Expression += String(displaySign) + viewDisplayNumber
         Expression = Expression.trimmingCharacters(in: .whitespaces)
         canCalculate = false
