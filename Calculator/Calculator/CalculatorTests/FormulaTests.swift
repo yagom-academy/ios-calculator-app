@@ -11,12 +11,13 @@ class FormulaTests: XCTestCase {
 
     var sut: Formula!
     let operandTestCases1 = CalculatorItemQueue([1, 3])
-    let operandTestCases1 = CalculatorItemQueue([12, 9])
+    let operandTestCases2 = CalculatorItemQueue([12, 0])
     
+    let operatorTestCases1 = CalculatorItemQueue([Operator.add, Operator.substract])
+    let operatorTestCases2 = CalculatorItemQueue([Operator.multiply, Operator.divide])
 
     override func setUpWithError() throws {
-        sut = Formula(operrands: CalculatorItemQueue([1, 3]),
-                      operators: CalculatorItemQueue([Operator.substract, Operator.multiply, Operator.add]))
+        sut = Formula(operands: operandTestCases1, operators: operatorTestCases1)
     }
     
     override func tearDownWithError() throws {
@@ -26,7 +27,7 @@ class FormulaTests: XCTestCase {
     func testFormula연산시_Double과Operator가아닌_다른타입이면_false리턴() {
         do {
             let result = try sut.result()
-            XCTAssertEqual(result, 1)
+            XCTAssertEqual(result, -2)
         } catch CalculateError.invalidOperator {
             print(CalculateError.invalidOperator)
             XCTAssert(false)
@@ -39,8 +40,16 @@ class FormulaTests: XCTestCase {
     }
     
     func testFormula연산시_사칙연산이_모두있을경우_true리턴() {
+        do {
+            let result = try sut.result()
+            XCTAssertEqual(result, -2)
+        } catch {
+            XCTAssert(false)
+        }
         
-        
+    }
+    
+    func testFormula에서_divide연산시_0으로나눌때_false리턴() {
         
     }
 }
