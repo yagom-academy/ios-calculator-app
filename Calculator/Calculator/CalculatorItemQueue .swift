@@ -16,8 +16,8 @@ final class Node<Element: CalculateItem> {
 }
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     init(head: Node<Element>? = nil) {
         self.head = head

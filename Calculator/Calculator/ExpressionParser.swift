@@ -29,7 +29,6 @@ enum ExpresionParser {
         return formula
     }
         
-        
     private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: "/")
     }
