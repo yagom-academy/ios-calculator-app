@@ -17,6 +17,10 @@ class ViewController: UIViewController {
         mainOperandLabel.text = applyNumberFormatter(to: mainOperandLabel.text ?? "")
     }
     
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        mainOperandLabel.text = "0"
+    }
+    
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         operandLabelText = removeComma(mainOperandLabel.text)
         
