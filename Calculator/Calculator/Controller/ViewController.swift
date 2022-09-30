@@ -71,7 +71,20 @@ class ViewController: UIViewController {
             }
         }
         
-        currentEntryLabel.text = currentEntry
+        guard let convertedEntry = formatNumber(input: currentEntry) else { return }
+        currentEntryLabel.text = convertedEntry
+    }
+    
+    func formatNumber(input: String) -> String? {
+        let inputWithoutComma = input.replacingOccurrences(of: ",", with: "")
+        guard let convertedInput = Double(inputWithoutComma) else { return nil }
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.roundingMode = .ceiling
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(for: convertedInput)
     }
 }
 
