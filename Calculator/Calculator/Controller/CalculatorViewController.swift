@@ -6,15 +6,16 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
-    @IBOutlet weak var inputNumberLabel: UILabel!
-    @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet weak var formulaScrollView: UIScrollView!
-    @IBOutlet weak var enterdFormulaStackView: UIStackView!
+    @IBOutlet weak private var inputNumberLabel: UILabel!
+    @IBOutlet weak private var inputOperatorLabel: UILabel!
+    @IBOutlet weak private var formulaScrollView: UIScrollView!
+    @IBOutlet weak private var enterdFormulaStackView: UIStackView!
     
     private var isCalculated: Bool = false
     private var calculationRecord: [String?] = []
+    let numberFormatter = NumberFormatter()
     
     private var formulaStackView: UIStackView {
         let stackView = UIStackView()
@@ -45,10 +46,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        calculatorSetup()
     }
     
-    @IBAction func signChangeButtonTapped(_ sender: UIButton) {
+    @IBAction private func signChangeButtonTapped(_ sender: UIButton) {
         guard inputNumberLabel.text != CalculatorNameSpace.nan else { return }
         
         if inputNumberLabel.text?.contains(CalculatorNameSpace.negative) == true {
@@ -62,25 +63,24 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        setup()
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
+        calculatorSetup()
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         if inputNumberLabel.text == CalculatorNameSpace.nan { return }
         
         if isCalculated {
-            setup()
+            calculatorSetup()
         } else {
             resetInputNumber()
             resetInputOperator()
         }
     }
     
-    @IBAction func operandsInputButtonTapped(_ sender: UIButton) {
+    @IBAction private func operandsInputButtonTapped(_ sender: UIButton) {
         guard let value = sender.currentTitle,
               var numberLabel = inputNumberLabel.text, numberLabel != CalculatorNameSpace.nan  else { return }
-        
         if calculationRecord == [] {
             inputOperatorLabel.text = ""
         }
@@ -117,7 +117,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func operatorsInputButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorsInputButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle, inputNumberLabel.text != CalculatorNameSpace.nan else { return }
         
         isCalculated = false
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         inputOperatorLabel.text = `operator`
     }
     
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonTapped(_ sender: UIButton) {
         guard !isCalculated else { return }
         
         addCalculationRecord([inputOperatorLabel.text, inputNumberLabel.text])
@@ -153,31 +153,27 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
-    func setup() {
+extension CalculatorViewController {
+    private func calculatorSetup() {
         resetInputNumber()
         resetInputOperator()
-        resetStackViewAll()
         resetCalculationRecord()
+        enterdFormulaStackView.removeSubViewAll()
     }
     
-    func resetStackViewAll() {
-        enterdFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    func resetInputNumber() {
+    private func resetInputNumber() {
         inputNumberLabel.text = CalculatorNameSpace.zero
     }
     
-    func resetInputOperator() {
+    private func resetInputOperator() {
         inputOperatorLabel.text = ""
     }
     
-    func resetCalculationRecord() {
+    private func resetCalculationRecord() {
         calculationRecord = []
     }
     
-    func addSubStackView(){
+    private func addSubStackView(){
         let stackView = formulaStackView
         let operandLabel = operandLabel
         let operatorLabel = operatorLabel
@@ -188,20 +184,19 @@ extension ViewController {
         scrollViewScrollToBottom()
     }
     
-    func scrollViewScrollToBottom() {
+    private func scrollViewScrollToBottom() {
         formulaScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.size.height)
         formulaScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    func addCalculationRecord(_ operatorAndOperands: [String?]) {
+    private func addCalculationRecord(_ operatorAndOperands: [String?]) {
         operatorAndOperands.forEach {
             calculationRecord.append($0?.components(separatedBy: [","]).joined())
         }
     }
     
-    func numberFomatter(_ numberString: String) -> String? {
-        let numberFormatter = NumberFormatter()
+    private func numberFomatter(_ numberString: String) -> String? {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         guard let number = numberFormatter.number(from: numberString) else { return nil }
