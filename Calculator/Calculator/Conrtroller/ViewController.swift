@@ -92,7 +92,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
-        guard operandLabel.text != changeStyle(result) else { return }
+        guard operandLabel.text != result.changeToDemical else { return }
 
         addFormula()
         MakeOperationStackView()
@@ -103,7 +103,7 @@ class ViewController: UIViewController {
         do {
             var formulaQueue = ExpressionParser.parse(from: formula)
             result = try formulaQueue.result()
-            operandLabel.text = String(changeStyle(result))
+            operandLabel.text = String(result.changeToDemical)
         } catch CalculatorError.divideByZeroError {
             operandLabel.text = numberFormatter.notANumberSymbol
         } catch {
@@ -165,15 +165,5 @@ class ViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
                                     animated: false)
-    }
-    
-    private func changeStyle(_ operationResult: Double) -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .up
-        
-        let result = numberFormatter.string(from: operationResult as NSNumber) ?? Text.zero
-        
-        return result
     }
 }
