@@ -23,7 +23,7 @@ class StringTests: XCTestCase {
         sut = nil
     }
     
-    func test_Split함수실행시_더하기로자르면_true리턴() {
+    func test_split함수실행시_더하기로자르면_true리턴() {
         sut = testCase2
         
         guard let sutArr = sut?.split(with: Character(Operator.add.description)) else {
@@ -38,7 +38,7 @@ class StringTests: XCTestCase {
         }
     }
 
-    func test_Split함수실행시_나누기로자르면_true리턴() {
+    func test_split함수실행시_나누기로자르면_true리턴() {
         sut = testCase3
         
         guard let sutArr = sut?.split(with: Character(Operator.divide.description)) else {
@@ -53,7 +53,7 @@ class StringTests: XCTestCase {
         }
     }
 
-    func test_Split함수실행시_빼기로자르면_true리턴() {
+    func test_split함수실행시_빼기로자르면_true리턴() {
         sut = testCase4
         
         guard let sutArr = sut?.split(with: Character(Operator.substract.description)) else {
@@ -68,7 +68,7 @@ class StringTests: XCTestCase {
         }
     }
     
-    func test_Split함수실행시_곱하기로자르면_true리턴() {
+    func test_split함수실행시_곱하기로자르면_true리턴() {
         sut = testCase5
         
         guard let sutArr = sut?.split(with: Character(Operator.multiply.description)) else {
