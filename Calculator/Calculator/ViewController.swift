@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var finalFormula: String = ""
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
+    private var isNegativeSign: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,17 @@ class ViewController: UIViewController {
         if finalFormula.isEmpty {
             isFirstInput = true
         }
+    }
+    
+    @IBAction func toggleSignButtonTapped(_ sender: Any) {
+        if !isNegativeSign {
+            operand = "-" + operand
+        } else {
+            operand = operand.trimmingCharacters(in: ["-"])
+        }
+        
+        operandLabel.text = operand
+        isNegativeSign.toggle()
     }
     
     func creatStackView() {
