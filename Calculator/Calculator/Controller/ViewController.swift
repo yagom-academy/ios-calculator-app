@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     @IBAction func tapSignButton(_ sender: UIButton) {
         handleSignButton()
         isCalculated = false
-        operandLabel.text = currentOperand
+        operandLabel.text = addComma(number: currentOperand)
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
