@@ -23,6 +23,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        let noCommaString = input.components(separatedBy: ",").joined()
+        return noCommaString.split(with: " ")
     }
 }
