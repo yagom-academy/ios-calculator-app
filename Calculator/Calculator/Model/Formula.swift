@@ -19,6 +19,7 @@ struct Formula {
             result = operatorSign.calculate(lhs: result, rhs: rhs)
         }
         
+        print(result)
         return result
     }
 }
