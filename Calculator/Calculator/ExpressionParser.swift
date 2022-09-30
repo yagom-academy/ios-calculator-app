@@ -21,9 +21,9 @@ enum ExpressionParser {
         let allOperators = Operator.allCases.map { $0.rawValue }
         let operatorArray = input.filter { allOperators.contains($0) }.map { Operator.init(rawValue: $0) }
         
-        for op in operatorArray {
-            if let op = op {
-                formula.operators?.enqueue(op)
+        for someOperator in operatorArray {
+            if let someOperator = someOperator {
+                formula.operators?.enqueue(someOperator)
             }
         }
 

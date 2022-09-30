@@ -18,7 +18,6 @@ struct Formula {
         
         while let someOperator: Operator = operators?.dequeue(),
               let someOperand: Double = operands?.dequeue() {
-            
             result = someOperator.calculate(lhs: result, rhs: someOperand)
         }
         
