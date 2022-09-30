@@ -25,9 +25,8 @@ class ViewController: UIViewController {
     }
     
     private func autoSlideScrollView() {
-        let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - self.historyInputScrollView.bounds.height)
-        historyInputScrollView.layoutIfNeeded()
-        historyInputScrollView.setContentOffset(bottomOffset, animated: false)
+        let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - historyInputScrollView.bounds.size.height + historyInputScrollView.contentInset.bottom)
+            historyInputScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func addZero(inputText: String, zero: String) {

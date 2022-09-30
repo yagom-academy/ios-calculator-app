@@ -26,7 +26,6 @@ enum ExpressionParser {
                 formula.operators?.enqueue(someOperator)
             }
         }
-
         return formula
     }
     
