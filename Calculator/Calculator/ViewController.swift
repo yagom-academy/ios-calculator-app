@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     private var operand: String = ""
     private var arithmeticOperator: String = ""
+    private var finalFormula: String = ""
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
     
@@ -56,6 +57,7 @@ class ViewController: UIViewController {
         if !operand.isEmpty {
             creatStackView()
             setOperandLabelToZero()
+            creatFinalFormula()
             operand.removeAll()
             isDotButtonTapped = false
         }
@@ -76,6 +78,17 @@ class ViewController: UIViewController {
         arithmeticOperator.removeAll()
     }
     
+    @IBAction func clearEntryButtonTapped(_ sender: Any) {
+        if !operand.isEmpty {
+            operand.removeAll()
+            setOperandLabelToZero()
+        }
+        
+        if finalFormula.isEmpty {
+            isFirstInput = true
+        }
+    }
+    
     func creatStackView() {
         let operandLabel: UILabel = {
             let label = UILabel()
@@ -93,6 +106,11 @@ class ViewController: UIViewController {
         
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.addArrangedSubview(stackView)
+    }
+    
+    func creatFinalFormula() {
+        finalFormula += arithmeticOperator
+        finalFormula += operand
     }
     
     func updateOperandLabel(with input: String) {
