@@ -25,6 +25,7 @@ class CalculatorController {
     
     func isOverCount20(stringNumber: String, input: String?) -> Bool {
         var inputLimit: Int = 20
+        
         if stringNumber.contains(".") == true {
             inputLimit += 1
         }
@@ -38,6 +39,7 @@ class CalculatorController {
         } else if input == "00" && stringNumber.count >= inputLimit - 1 {
             return true
         }
+        
         return false
     }
     
@@ -45,6 +47,7 @@ class CalculatorController {
         if displaySign != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
             return true
         }
+        
         return false
     }
     
@@ -57,7 +60,9 @@ class CalculatorController {
             return viewDisplayNumber
         }
         
-        if isStartZero(stringNumber: viewDisplayNumber) == true && viewDisplayNumber.contains(".") == false {
+        if isStartZero(stringNumber: viewDisplayNumber) == true &&
+            viewDisplayNumber.contains(".") == false
+        {
             input == "00" ? (viewDisplayNumber = "0") : (viewDisplayNumber = input ?? "0")
         } else {
             viewDisplayNumber += input ?? "0"
@@ -65,6 +70,7 @@ class CalculatorController {
         
         canCalculate = true
         isFirstClick = false
+        
         return viewDisplayNumber
     }
     
@@ -73,6 +79,7 @@ class CalculatorController {
             return ""
         } else if canChangedOperator() == true {
             determineOperator(stringOperator: input)
+            
             return String(displaySign)
         } else {
             Expression += String(displaySign) + viewDisplayNumber
@@ -80,6 +87,7 @@ class CalculatorController {
             view.makeStakView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
+            
             return String(displaySign)
         }
     }
@@ -113,11 +121,13 @@ class CalculatorController {
     func callbackCalculateResult() -> String {
         Expression += String(displaySign) + viewDisplayNumber
         Expression = Expression.trimmingCharacters(in: .whitespaces)
+        canCalculate = false
         view.makeStakView()
         view.resetDisplayNumberLabel()
-        self.formula = ExpressionParser.parse(from: Expression)
-        let result = self.formula?.result() ?? .nan
-        canCalculate = false
+        formula = ExpressionParser.parse(from: Expression)
+        
+        let result = formula?.result() ?? .nan
+        
         return String(result)
     }
     
@@ -126,6 +136,7 @@ class CalculatorController {
             return callbackCalculateResult()
         } else {
             guard let calculatedResult = view.displayNumberLabel.text else { return "" }
+            
             return calculatedResult
         }
     }
@@ -135,6 +146,7 @@ class CalculatorController {
             return viewDisplayNumber
         } else {
             viewDisplayNumber += "."
+            
             return viewDisplayNumber
         }
     }
@@ -156,6 +168,7 @@ class CalculatorController {
         } else {
             viewDisplayNumber = "-" + viewDisplayNumber
         }
+        
         return viewDisplayNumber
     }
 }
