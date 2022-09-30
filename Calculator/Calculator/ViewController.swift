@@ -18,5 +18,9 @@ class ViewController: UIViewController {
     func setOperandLabelToZero() {
         operandLabel.text = "0"
     }
+    
+    func setInitialOperatorLabel() {
+        operatorLabel.text = ""
+    }
 }
 
