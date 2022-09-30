@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet private weak var stackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     @IBOutlet private weak var zeroButton: UIButton!
     @IBOutlet private weak var doubleZeroButton: UIButton!
@@ -94,6 +95,7 @@ class ViewController: UIViewController {
     private func addLabelAndSign(value: String, sender: UIButton) {
         addNewLabelToStackView(message: value, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
+        autoSlideScrollView()
     }
     
     private func assignTotalString(value: String) {
@@ -246,6 +248,12 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             label.isHidden = false
         }
+    }
+    
+    private func autoSlideScrollView() {
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - self.scrollView.bounds.height)
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
 
