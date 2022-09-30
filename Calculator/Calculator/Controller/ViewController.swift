@@ -88,6 +88,11 @@ class ViewController: UIViewController {
             totalString += value
         }
     }
+    
+    func executeExpression() {
+        var expression = ExpressionParser.parse(from: totalString)
+        
+    }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
