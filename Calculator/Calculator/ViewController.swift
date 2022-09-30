@@ -35,6 +35,11 @@ class ViewController: UIViewController {
         numberFormatter.maximumSignificantDigits = 20
     }
     
+    private func placeScroll() {
+        recentNumbersScrollView.layoutIfNeeded()
+        recentNumbersScrollView.setContentOffset(CGPoint(x: 0, y: recentNumbersScrollView.contentSize.height - recentNumbersScrollView.bounds.height), animated: false)
+    }
+    
     @IBAction func touchUpACButton(_ sender: UIButton) {
         stringOperators = empty
         operatorLabel.text = stringOperators
