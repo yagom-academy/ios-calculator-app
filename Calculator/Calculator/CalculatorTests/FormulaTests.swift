@@ -10,7 +10,7 @@ import XCTest
 class FormulaTests: XCTestCase {
 
     var sut: Formula!
-    let operandTestCases1 = CalculatorItemQueue([1, 3])
+    let operandTestCases1 = CalculatorItemQueue([10, 3])
     let operandTestCases2 = CalculatorItemQueue([12, 0])
     
     let operatorTestCases1 = CalculatorItemQueue([Operator.add, Operator.substract])
@@ -42,7 +42,7 @@ class FormulaTests: XCTestCase {
     func testFormula연산시_사칙연산이_모두있을경우_true리턴() {
         do {
             let result = try sut.result()
-            XCTAssertEqual(result, -2)
+            XCTAssertEqual(result, 7)
         } catch {
             XCTAssert(false)
         }
@@ -50,6 +50,13 @@ class FormulaTests: XCTestCase {
     }
     
     func testFormula에서_divide연산시_0으로나눌때_false리턴() {
-        
+        sut = Formula(operands: operandTestCases2, operators: operatorTestCases2)
+        do {
+            _ = try sut.result()
+        } catch CalculateError.divideByZero {
+            XCTAssertFalse(false)
+        } catch {
+            XCTAssertFalse(true)
+        }
     }
 }

@@ -22,7 +22,7 @@ struct Formula {
                 throw CalculateError.invalidOperand
             }
             
-            return nowOperator.calculate(lhs: accumlatingResult, rhs: operands)
+            return try nowOperator.calculate(lhs: accumlatingResult, rhs: operands)
         }
         return result
     }

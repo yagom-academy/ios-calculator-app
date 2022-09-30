@@ -26,7 +26,7 @@ enum Operator: Character, CaseIterable {
         return lhs * rhs
     }
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
@@ -35,10 +35,8 @@ enum Operator: Character, CaseIterable {
         case .divide:
             do {
                 return try divide(lhs: lhs, rhs: rhs)
-            } catch CalculateError.divideByZero {
-                return lhs
-            } catch {
-                return lhs
+            } catch  {
+                throw CalculateError.divideByZero
             }
         case .multiply:
             return muliply(lhs: lhs, rhs: rhs)
