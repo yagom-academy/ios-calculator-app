@@ -1,5 +1,3 @@
-# README(4) 계산기
-
 # 계산기
 
 ## 1. ✏️ 프로젝트 소개
@@ -449,19 +447,20 @@ input.components(separatedBy: operators)
 <details>
  <summary> [해결과정 details] </summary>
         
-- 5-1 오토레이아웃의 문제인가?
+- 5-1 오토레이아웃의 문제인가? </br>
     처음엔 **오토레이아웃의 문제**인가 싶어 오토레이아웃도 뜯어살펴보았지만 문제를 찾지 못했습니다.
 
-- 5-2. 내려가지 않는 한 줄만큼 setContentOffsetd의 y축 값으로 추가
+- 5-2. 내려가지 않는 한 줄만큼 setContentOffsetd의 y축 값으로 추가 </br>
     setContentOffsetd의 y축 값을 더 내려가도록 해주면 될까 싶어서 **offSet변화량을 콘솔로 확인해서 변화량인 24큼 더 내리도록 해보았습니다** ( y = contentSize의 높이 - bounds의 높이 + **24** ) 
 
-    이렇게 할 때는 `컨텐츠높이`가 `bounds높이`보다 커질 때를 기준으로 첫번째 입력(아래GIF에서 +7때)에서 마지막줄이 안 보이고, 두번째 입력시(+8떄) 이전에 찍은 +7값과 같이 두개값이 동시에 나온 후에 세번째부터는 정상작동하는 문제가 있습니다.
-   <img width = 200, src ="https://i.imgur.com/PNj4xWk.gif">
+    이렇게 할 때는 `컨텐츠높이`가 `bounds높이`보다 커질 때를 기준으로 첫번째 입력(아래GIF에서 +7때)에서 마지막줄이 안 보이고, 두번째 입력시(+8떄) 이전에 찍은 +7값과 같이 두개값이 동시에 나온 후에 세번째부터는 정상작동하는 문제가 있습니다. </br>
+   
+    <img width = 200, src ="https://i.imgur.com/PNj4xWk.gif">
     
-- 5-3. 시간적인 duration 관련 문제인가?
+- 5-3. 시간적인 duration 관련 문제인가? </br>
     업데이트 후 스클롤링 함수를 호출하는 시간 사이에 delay가 생길까 싶어 **notification Center**사용으로 한박자 늦게 scroll을 내리는 함수를 호출해보기도 했지만 무용지물이었습니다..
     
-- 5-4. ✅ 드로잉 사이클 (drawing cycle)을 공부
+- 5-4. ✅ 드로잉 사이클 (drawing cycle)을 공부 </br>
     컨텐츠가 변하여도 다음 드로잉사이클까지 **대기 후**에 다시 view가 업데이트 되는것을 알았습니다.
     
     setNeedsDisplay 메서드를 사용하면 시스템에게 draw 메서드를 호출하도록 요청해서 다시 View를 그려주게되는데 이 과정이 바로 즉각 되는것이 아니라 다음 drawing cycle까지 기다렸다가 진행됩니다. 제 화면에서 생각해보면 내부에서 스크롤하는 함수가 호출되어 스크롤을 제일 아래로 내렸지만, 하단에 스택뷰가 추가된 완성된 레이아웃 재배치는 그 후에 이뤄지는 사이클이었기 때문에 마지막 줄이 안보이는 문제가 생겼던 것입니다.
@@ -472,8 +471,8 @@ input.components(separatedBy: operators)
     아래의 표는 스크롤뷰에 추가된 스택뷰의 갯수에 따른 컨텐츠높이, bound높이, content offset의 y축값 을 정리한 것입니다.
     표에서 확인이 가능한 것은 layoutIfNeeded를 호출하지 않고 계산기를 찍을때와 호출했을 때의 값이 한스텝씩 차이가 난다는 것입니다. 
 
-    <img width = 800, src ="https://i.imgur.com/oDgorTU.png">
-    (위 표에서 offSet을 빨간글씨는 스크롤 제일 아랫줄이 보이지 않을때를 표시한 것입니다..)
+    <img width = 800, src ="https://i.imgur.com/oDgorTU.png"> </br>
+    (위 표에서 offSet을 빨간글씨는 스크롤 제일 아랫줄이 보이지 않을때를 표시한 것입니다.)
 
     이 스텝의 차이는 위에서 설명했듯이 순서의 차이입니다. `스크롤내리기 -> 뷰 업데이트` 와 `뷰 업데이트 -> 스크롤내리기` 의 차이입니다.
 
