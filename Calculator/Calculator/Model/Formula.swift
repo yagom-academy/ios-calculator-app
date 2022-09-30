@@ -14,15 +14,15 @@ struct Formula {
     }
     
     mutating func result() throws -> Double {
-        let result = try operands.mergedQueue.reduce(0.0) {
+        let result = try operands.mergedQueue.reduce(0.0) { accumlatingResult, nextOperand in
             guard let nowOperator = operators.popFirst() as? Operator else {
                 throw CalculateError.invalidOperator
             }
-            guard let operands = $1 as? Double else {
+            guard let operands = nextOperand as? Double else {
                 throw CalculateError.invalidOperand
             }
             
-            return nowOperator.calculate(lhs: $0, rhs: operands)
+            return nowOperator.calculate(lhs: accumlatingResult, rhs: operands)
         }
         return result
     }
