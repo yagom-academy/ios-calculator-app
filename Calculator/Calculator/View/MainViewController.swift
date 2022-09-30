@@ -78,8 +78,10 @@ class MainViewController: UIViewController {
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
         displayNumberLabel.text = calculatorController.tappedCalculateButton()
-        displaySignLabel.text = ""
-        makeStakView()
+        if displaySignLabel.text != "" {
+            displaySignLabel.text = ""
+            makeStakView()
+        }
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {

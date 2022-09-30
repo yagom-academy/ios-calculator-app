@@ -8,6 +8,7 @@ class CalculatorController {
     var viewDisplayNumber: String = "0"
     var displaySign: Operator.RawValue = Operator.unknown.rawValue
     var isFirstClick: Bool = true
+    var canCalculate: Bool = false
     
     init(view: MainViewController) {
         self.view = view
@@ -62,6 +63,7 @@ class CalculatorController {
             viewDisplayNumber += input ?? "0"
         }
         
+        canCalculate = true
         isFirstClick = false
         return viewDisplayNumber
     }
@@ -108,15 +110,24 @@ class CalculatorController {
         }
     }
     
-    func tappedCalculateButton() -> String {
+    func callbackCalculateResult() -> String {
         Expression += String(displaySign) + viewDisplayNumber
         Expression = Expression.trimmingCharacters(in: .whitespaces)
         view.makeStakView()
         view.resetDisplayNumberLabel()
         self.formula = ExpressionParser.parse(from: Expression)
         let result = self.formula?.result() ?? .nan
-        
+        canCalculate = false
         return String(result)
+    }
+    
+    func tappedCalculateButton() -> String {
+        if canCalculate == true {
+            return callbackCalculateResult()
+        } else {
+            guard let calculatedResult = view.displayNumberLabel.text else { return "" }
+            return calculatedResult
+        }
     }
     
     func tappedDotButton() -> String {
