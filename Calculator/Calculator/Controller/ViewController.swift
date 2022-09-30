@@ -41,7 +41,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        resetVauleToZero()
+        resetSignLabel()
+        resetStackView()
     }
 
     func signOfOperator(sender: UIButton) -> String {
