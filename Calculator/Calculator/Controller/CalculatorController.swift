@@ -23,9 +23,14 @@ class CalculatorController {
     }
     
     func isOverCount20(stringNumber: String, input: String?) -> Bool {
-        if input != "00" && stringNumber.count >= 20 {
+        var inputLimit: Int = 20
+        if stringNumber.contains(".") == true {
+            inputLimit += 1
+        }
+        
+        if input != "00" && stringNumber.count >= inputLimit {
             return true
-        } else if input == "00" && stringNumber.count >= 19 {
+        } else if input == "00" && stringNumber.count >= inputLimit - 1 {
             return true
         }
         return false
@@ -47,8 +52,8 @@ class CalculatorController {
             return viewDisplayNumber
         }
         
-        if isStartZero(stringNumber: viewDisplayNumber) == true {
-            viewDisplayNumber = input ?? "0"
+        if isStartZero(stringNumber: viewDisplayNumber) == true && viewDisplayNumber.contains(".") == false {
+            input == "00" ? (viewDisplayNumber = "0") : (viewDisplayNumber = input ?? "0")
         } else {
             viewDisplayNumber += input ?? "0"
         }
@@ -102,5 +107,14 @@ class CalculatorController {
         let result = self.formula?.result() ?? .nan
         
         return String(result)
+    }
+    
+    func tappedDotButton() -> String {
+        if viewDisplayNumber.contains(".") == true {
+            return viewDisplayNumber
+        } else {
+            viewDisplayNumber += "."
+            return viewDisplayNumber
+        }
     }
 }
