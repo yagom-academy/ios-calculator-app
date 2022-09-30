@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
+    private var calculateInput: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +43,14 @@ class ViewController: UIViewController {
         }
         let isInitialState: Bool = currentLabelText == "0" && operand != "."
         if isInitialState {
-            operandLabel.text = operand
+            changeOperandLabelText(to: operand)
         } else {
-            operandLabel.text = "\(currentLabelText)\(operand)"
+            changeOperandLabelText(to: "\(currentLabelText)\(operand)")
         }
+    }
+    
+    func changeOperandLabelText(to operand: String) {
+        operandLabel.text = operand
     }
     
     func switchPositiveNegativeOfOperandLabelText() {
@@ -62,6 +67,29 @@ class ViewController: UIViewController {
         }
     }
     
+    func changeOperatorLabelText(to newOperator: String) {
+        operatorLabel.text = newOperator
+    }
+    
+    
+    func addSubViewInHistoryStackView(newOperator: String, newOperand: String) {
+        let stackView: UIStackView = UIStackView()
+        stackView.spacing = 8
+        let operatorLabel: UILabel = createLabel(labelText: newOperator)
+        let operandLabel: UILabel = createLabel(labelText: newOperand)
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        historyStackView.addArrangedSubview(stackView)
+    }
+    
+    func createLabel(labelText: String) -> UILabel {
+        let label: UILabel = UILabel()
+        label.text = labelText
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        return label
+    }
+    
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         resetOperandLabel()
     }
@@ -70,6 +98,7 @@ class ViewController: UIViewController {
         resetOperatorLabel()
         resetOperandLabel()
         removeAllsubviewsInHistoryStackView()
+        calculateInput = ""
     }
     
     @IBAction func touchUpNumberPadButton(_ sender: UIButton) {
@@ -77,8 +106,31 @@ class ViewController: UIViewController {
             addOperandToOperandLabel(labelText)
         }
     }
+    
     @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
         switchPositiveNegativeOfOperandLabelText()
+    }
+    
+    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard let newOperator = sender.titleLabel?.text else {
+            return
+        }
+        let currentOperatorLabelText: String = operatorLabel.text ?? ""
+        let currentOperandLabelText: String = operandLabel.text ?? ""
+        changeOperatorLabelText(to: newOperator)
+        let isEditing: Bool = currentOperandLabelText != "0"
+        let isInitialState: Bool = calculateInput == ""
+        let newOperatorLabelText: String
+        if isInitialState {
+            newOperatorLabelText = ""
+        } else {
+            newOperatorLabelText = currentOperatorLabelText
+        }
+        if isEditing {
+            addSubViewInHistoryStackView(newOperator: newOperatorLabelText, newOperand: currentOperandLabelText)
+            calculateInput += "\(newOperatorLabelText)\(currentOperandLabelText)"
+            resetOperandLabel()
+        }
     }
 }
 
