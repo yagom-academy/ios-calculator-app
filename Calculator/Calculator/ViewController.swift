@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var formulaStackView: UIStackView!
     
     private var operand: String = ""
     private var arithmeticOperator: String = ""
@@ -52,7 +53,30 @@ class ViewController: UIViewController {
             return
         }
         
+        creatStackView()
         updateOperatorLabel(with: selectedOperator)
+        setOperandLabelToZero()
+        operand.removeAll()
+        isDotButtonTapped = false
+    }
+    
+    func creatStackView() {
+        let operandLabel: UILabel = {
+            let label = UILabel()
+            label.text = operand
+            label.textColor = .white
+            return label
+        }()
+        
+        let operatorLabel: UILabel = {
+            let label = UILabel()
+            label.text = arithmeticOperator
+            label.textColor = .white
+            return label
+        }()
+        
+        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        formulaStackView.addArrangedSubview(stackView)
     }
     
     func updateOperandLabel(with input: String) {
