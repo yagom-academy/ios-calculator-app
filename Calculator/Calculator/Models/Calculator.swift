@@ -11,6 +11,10 @@ class Calculator {
     private(set) var formula = ""
     private var calculationState = false
     
+    var isFormulaEmpty: Bool {
+        return formula.count == 0
+    }
+    
     var isCalculateCompleted: Bool {
         get {
             return calculationState
@@ -51,7 +55,7 @@ class Calculator {
         let result = try convertedFormula.result()
         
         initCalculation()
-        isCalculateCompleted = true
+        calculationState = true
         
         return result
     }
