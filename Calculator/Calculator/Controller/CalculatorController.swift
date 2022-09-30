@@ -100,9 +100,12 @@ class CalculatorController {
     func tappedCEButton() {
         viewDisplayNumber = "0"
         view.displayNumberLabel.text = "0"
-        displaySign = Operator.unknown.rawValue
-        view.displaySignLabel.text = ""
-        Expression = ""
+        
+        if view.displaySignLabel.text == "" {
+            displaySign = Operator.unknown.rawValue
+            view.displaySignLabel.text = ""
+            Expression = ""
+        }
     }
     
     func tappedCalculateButton() -> String {
@@ -133,10 +136,13 @@ class CalculatorController {
     }
     
     func tappedReverseSignButton() -> String {
+        if viewDisplayNumber == "0" {
+            return viewDisplayNumber
+        }
+        
         if viewDisplayNumber.first == "-" {
             viewDisplayNumber = viewDisplayNumber.trimmingCharacters(in: ["-"])
         } else {
-            viewDisplayNumber = viewDisplayNumber.trimmingCharacters(in: ["-","0"])
             viewDisplayNumber = "-" + viewDisplayNumber
         }
         return viewDisplayNumber
