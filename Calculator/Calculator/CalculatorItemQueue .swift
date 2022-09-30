@@ -5,7 +5,7 @@
 //  Created by Jeremy on 2022/09/20.
 //
 
-class Node<Element: CalculateItem> {
+final class Node<Element: CalculateItem> {
     var value: Element
     var next: Node?
     
@@ -15,7 +15,7 @@ class Node<Element: CalculateItem> {
     }
 }
 
-struct  CalculatorItemQueue<Element: CalculateItem> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     var head: Node<Element>?
     var tail: Node<Element>?
     

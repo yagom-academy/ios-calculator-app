@@ -10,6 +10,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let operators = Operator.allCases.map{ $0.rawValue }
+        print(operators)
     }
 }
 
