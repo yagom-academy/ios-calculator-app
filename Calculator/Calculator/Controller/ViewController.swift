@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         operandLabelText = removeComma(mainOperandLabel.text)
+        
         guard operandLabelText != "0" else {
             mainOperandLabel.text = sender.tag.description
             return
@@ -29,6 +30,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
         operandLabelText = removeComma(mainOperandLabel.text)
+        
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
             mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "0")
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
         operandLabelText = removeComma(mainOperandLabel.text)
+        
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
             mainOperandLabel.text = applyNumberFormatter(to: operandLabelText + "00")
@@ -46,6 +49,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
+        operandLabelText = removeComma(mainOperandLabel.text)
+        
+        guard operandLabelText != ".",
+              operandLabelText.contains(".") == false else {
+            return
+        }
+        
+        mainOperandLabel.text = applyNumberFormatter(to: operandLabelText) + "."
     }
     
     func removeComma(_ string: String?) -> String {
@@ -69,6 +80,7 @@ class ViewController: UIViewController {
         }
         
         let stringsSplitedByDot: [String] = string.split(with: ".")
+        
         guard let numberBeforeDot: NSNumber = numberFormatter.number(from: stringsSplitedByDot[0]),
               let returnValue = numberFormatter.string(from: numberBeforeDot) else {
             return ""
