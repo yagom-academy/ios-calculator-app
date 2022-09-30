@@ -53,5 +53,18 @@ class StringTests: XCTestCase {
         }
     }
 
-    ㄹ
+    func test_Split함수실행시_빼기로자르면_true리턴() {
+        sut = testCase4
+        
+        guard let sutArr = sut?.split(with: Character(Operator.substract.description)) else {
+            XCTAssert(false)
+            return
+        }
+        
+        if sutArr[0] == "123as", sutArr[1] == "12jsl" {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
 }
