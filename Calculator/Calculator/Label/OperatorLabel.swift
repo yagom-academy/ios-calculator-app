@@ -1,7 +1,7 @@
 import UIKit
 
 class OperatorLabel: UILabel, InitializationProtocol {
-    func Initialization() {
+    func initialization() {
         self.text = nil
     }
 }

@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         initializationList = [numberLabel, operatorLabel, formulaStackView]
-        Initialization()
+        initialization()
     }
     //MARK: - IBAction
     @IBAction func touchUpOperandButton(_ sender: OperandButton) {
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         if numberLabel.isReceiving == true && numberLabel.isZero == false {
             appendFormulaIntoStackView()
-            numberLabel.Initialization()
+            numberLabel.initialization()
         }
         
         operatorLabel.text = sender.operatorSign
@@ -51,9 +51,9 @@ class ViewController: UIViewController {
         
         switch command {
         case .AllClear:
-            Initialization()
+            initialization()
         case .ClearElement:
-            numberLabel.Initialization()
+            numberLabel.initialization()
         case .SwapNumberSign:
             if isCalculated == false{
                 numberLabel.swapNumberSign()
@@ -68,9 +68,9 @@ class ViewController: UIViewController {
         }
     }
     //MARK: - Method
-    private func Initialization() {
+    private func initialization() {
         initializationList.forEach {
-            $0.Initialization()
+            $0.initialization()
         }
     }
     
@@ -89,13 +89,13 @@ class ViewController: UIViewController {
             numberLabel.text = CalculatorNumberFormatter.shared.string(for: result)
         }
         
-        operatorLabel.Initialization()
+        operatorLabel.initialization()
         isCalculated = true
     }
     
     private func checkCalculated() {
         if isCalculated == true {
-            Initialization()
+            initialization()
             isCalculated = false
         }
     }

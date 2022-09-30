@@ -84,7 +84,7 @@ class NumberLabel: UILabel {
 
 //MARK: - extension
 extension NumberLabel: InitializationProtocol {
-    func Initialization() {
+    func initialization() {
         self.interger = initialValue
         self.decimal = ""
     }

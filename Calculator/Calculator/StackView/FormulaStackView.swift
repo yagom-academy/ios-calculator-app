@@ -50,7 +50,7 @@ class FormulaStackView: UIStackView {
 }
 //MARK: - Extension
 extension FormulaStackView: InitializationProtocol {
-    func Initialization() {
+    func initialization() {
         formula = ""
         self.arrangedSubviews.forEach {
             $0.removeFromSuperview()

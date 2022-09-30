@@ -1,3 +1,3 @@
 protocol InitializationProtocol {
-    func Initialization()
+    func initialization()
 }
