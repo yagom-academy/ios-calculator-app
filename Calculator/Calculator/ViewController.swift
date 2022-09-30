@@ -32,13 +32,18 @@ class ViewController: UIViewController {
     }
     
     private func addZero(inputText: String, zero: String) {
-        if inputText == Literal.numberZero.value {
+        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+        let pointCount = numberWithOutComma.filter { $0 == "." }.count
+        
+        if numberWithOutComma == Literal.numberZero.value && pointCount != 1 {
             return
-        } else {
+        } else if numberWithOutComma != Literal.numberZero.value && pointCount != 1 {
             let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
             if let number: Double = Double(numberWithOutComma + zero) {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
+        } else if numberWithOutComma != Literal.numberZero.value && pointCount == 1 {
+            inputNumberLabel.text = numberWithOutComma + zero
         }
     }
     
