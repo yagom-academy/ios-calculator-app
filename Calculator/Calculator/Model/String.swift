@@ -5,7 +5,8 @@
 import Foundation
 
 extension String {
-    static func split(with target: Character) -> [String] {
-        return [""]
+    func split(with target: Character) -> [String] {
+        let result: [String] = self.components(separatedBy: String(target))
+        return result
     }
 }
