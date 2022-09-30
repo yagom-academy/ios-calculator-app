@@ -28,6 +28,10 @@ class CalculatorController {
             inputLimit += 1
         }
         
+        if stringNumber.contains("-") == true {
+            inputLimit += 1
+        }
+        
         if input != "00" && stringNumber.count >= inputLimit {
             return true
         } else if input == "00" && stringNumber.count >= inputLimit - 1 {
@@ -123,5 +127,14 @@ class CalculatorController {
         viewDisplayNumber = "0"
         displaySign = Operator.unknown.rawValue
         isFirstClick = true
+    }
+    
+    func tappedReverseSignButton() -> String {
+        if viewDisplayNumber.first == "-" {
+            viewDisplayNumber = viewDisplayNumber.trimmingCharacters(in: ["-"])
+        } else {
+            viewDisplayNumber = "-" + viewDisplayNumber
+        }
+        return viewDisplayNumber
     }
 }

@@ -90,5 +90,9 @@ class MainViewController: UIViewController {
         configureDisplayLabels()
         calculatorController.tappedACButton()
     }
+    
+    @IBAction func tapReverseSignButton(_ sender: UIButton) {
+        displayNumberLabel.text = calculatorController.tappedReverseSignButton()
+    }
 }
 
