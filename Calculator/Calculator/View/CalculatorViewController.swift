@@ -135,6 +135,7 @@ final class CalculatorViewController: UIViewController {
         let stack = LineStackView(operatorStr: lastOperatorLabelText, operandStr: formattedNumber)
         
         historyStackView.addArrangedSubview(stack)
+        historyScrollView.scrollToBottom(animated: false)
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
