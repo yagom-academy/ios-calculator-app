@@ -45,7 +45,11 @@ class ViewController: UIViewController {
         if isInitialState {
             changeOperandLabelText(to: operand)
         } else {
-            changeOperandLabelText(to: "\(currentLabelText)\(operand)")
+            if operand == "." {
+                changeOperandLabelText(to: "\(currentLabelText)\(operand)")
+            } else {
+                changeOperandLabelText(to: formatNumber(Double("\(removeComma(in: currentLabelText))\(operand)") ?? 0))
+            }
         }
     }
     
@@ -88,6 +92,16 @@ class ViewController: UIViewController {
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         return label
+    }
+    
+    func formatNumber(_ number: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: number)) ?? ""
+    }
+    
+    func removeComma(in text: String) -> String {
+        return text.replacingOccurrences(of: ",", with: "")
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
@@ -141,9 +155,10 @@ class ViewController: UIViewController {
         let currentOperandLabelText: String = operandLabel.text ?? ""
         addSubViewInHistoryStackView(newOperator: currentOperatorLabelText, newOperand: currentOperandLabelText)
         calculateInput += "\(currentOperatorLabelText)\(currentOperandLabelText)"
-        var formula: Formula = ExpressionParser.parse(from: calculateInput)
+        let calculateInputRemovedComma: String = removeComma(in: calculateInput)
+        var formula: Formula = ExpressionParser.parse(from: calculateInputRemovedComma)
         if let result: Double = formula.result() {
-            changeOperandLabelText(to: "\(result)")
+            changeOperandLabelText(to: formatNumber(result))
             changeOperatorLabelText(to: "")
             calculateInput = ""
         }
