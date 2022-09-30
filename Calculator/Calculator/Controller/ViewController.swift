@@ -7,37 +7,37 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var expressionString: String = ""
-    var totalString: String = ""
-    let numberFormatter: NumberFormatter = NumberFormatter()
+    private var expressionString: String = ""
+    private var totalString: String = ""
+    private let numberFormatter: NumberFormatter = NumberFormatter()
     
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet private weak var stackView: UIStackView!
     
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var doubleZeroButton: UIButton!
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var fourButton: UIButton!
-    @IBOutlet weak var fiveButton: UIButton!
-    @IBOutlet weak var sixButton: UIButton!
-    @IBOutlet weak var sevenButton: UIButton!
-    @IBOutlet weak var eightButton: UIButton!
-    @IBOutlet weak var nineButton: UIButton!
+    @IBOutlet private weak var zeroButton: UIButton!
+    @IBOutlet private weak var doubleZeroButton: UIButton!
+    @IBOutlet private weak var oneButton: UIButton!
+    @IBOutlet private weak var twoButton: UIButton!
+    @IBOutlet private weak var threeButton: UIButton!
+    @IBOutlet private weak var fourButton: UIButton!
+    @IBOutlet private weak var fiveButton: UIButton!
+    @IBOutlet private weak var sixButton: UIButton!
+    @IBOutlet private weak var sevenButton: UIButton!
+    @IBOutlet private weak var eightButton: UIButton!
+    @IBOutlet private weak var nineButton: UIButton!
     
-    @IBOutlet weak var dotButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
-    @IBOutlet weak var plusButton: UIButton!
-    @IBOutlet weak var minusButton: UIButton!
-    @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var divideButton: UIButton!
+    @IBOutlet private weak var dotButton: UIButton!
+    @IBOutlet private weak var equalButton: UIButton!
+    @IBOutlet private weak var plusButton: UIButton!
+    @IBOutlet private weak var minusButton: UIButton!
+    @IBOutlet private weak var multiplyButton: UIButton!
+    @IBOutlet private weak var divideButton: UIButton!
     
-    @IBOutlet weak var plusMinusButton: UIButton!
-    @IBOutlet weak var ceButton: UIButton!
-    @IBOutlet weak var acButton: UIButton!
+    @IBOutlet private weak var plusMinusButton: UIButton!
+    @IBOutlet private weak var ceButton: UIButton!
+    @IBOutlet private weak var acButton: UIButton!
     
-    @IBOutlet weak var signLabel: UILabel!
-    @IBOutlet weak var expressionLabel: UILabel!
+    @IBOutlet private weak var signLabel: UILabel!
+    @IBOutlet private weak var expressionLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         numberFormatter.usesSignificantDigits = true
     }
     
-    func signOfOperator(sender: UIButton) -> String {
+    private func signOfOperator(sender: UIButton) -> String {
         switch sender {
         case plusButton:
             return String(Operator.add.rawValue)
@@ -66,41 +66,41 @@ class ViewController: UIViewController {
         }
     }
     
-    func resetExpressionString() {
+    private func resetExpressionString() {
         expressionString = ""
     }
     
-    func resetValueToZero() {
+    private func resetValueToZero() {
         expressionLabel.text = CalculatorNameSpace.zero.rawValue
     }
     
-    func resetTotalString() {
+    private func resetTotalString() {
         totalString = ""
     }
     
-    func resetSignLabel() {
+    private func resetSignLabel() {
         signLabel.text = ""
     }
     
-    func resetStackView() {
+    private func resetStackView() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    func initializeExpression() {
+    private func initializeExpression() {
         resetValueToZero()
         resetExpressionString()
     }
     
-    func addLabelAndSign(value: String, sender: UIButton) {
+    private func addLabelAndSign(value: String, sender: UIButton) {
         addNewLabelToStackView(message: value, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
     }
     
-    func assignTotalString(value: String) {
+    private func assignTotalString(value: String) {
         totalString += value
     }
     
-    func executeExpression() {
+    private func executeExpression() {
         var expression = ExpressionParser.parse(from: totalString)
         do {
             let result = try expression.result()
@@ -121,12 +121,12 @@ class ViewController: UIViewController {
         }
     }
     
-    func displaySignAndLabel(sign: String, expression: String) {
+    private func displaySignAndLabel(sign: String, expression: String) {
         signLabel.text = sign
         expressionLabel.text = expression
     }
     
-    @IBAction func tappedOperandButton(_ sender: UIButton) {
+    @IBAction private func tappedOperandButton(_ sender: UIButton) {
         switch sender {
         case oneButton:
             expressionString += CalculatorNameSpace.one.rawValue
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
         expressionLabel.text = result
     }
     
-    @IBAction func tappedOperatorButton(_ sender: UIButton) {
+    @IBAction private func tappedOperatorButton(_ sender: UIButton) {
         guard expressionString.count != 0 && expressionLabel.text != "" else {
             return
         }
@@ -187,7 +187,7 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func tappedEqualButton(_ sender: UIButton) {
+    @IBAction private func tappedEqualButton(_ sender: UIButton) {
         if totalString.isEmpty {
             return
         } else {
@@ -204,7 +204,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func tappedACButton(_ sender: UIButton) {
+    @IBAction private func tappedACButton(_ sender: UIButton) {
         resetValueToZero()
         resetExpressionString()
         resetTotalString()
@@ -212,7 +212,7 @@ class ViewController: UIViewController {
         resetStackView()
     }
     
-    @IBAction func tappedCEButton(_ sender: UIButton) {
+    @IBAction private func tappedCEButton(_ sender: UIButton) {
         if expressionString.isEmpty && totalString.isEmpty {
             resetValueToZero()
         } else {
@@ -221,7 +221,7 @@ class ViewController: UIViewController {
         resetExpressionString()
     }
     
-    @IBAction func tappedPlusMinusButton(_ sender: UIButton) {
+    @IBAction private func tappedPlusMinusButton(_ sender: UIButton) {
         guard let value = expressionLabel.text else { return }
         if value.contains(CalculatorNameSpace.minusSign.rawValue) {
             expressionLabel.text = String(value.dropFirst())
@@ -233,7 +233,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addNewLabelToStackView(message: String, stackView: UIStackView) {
+    private func addNewLabelToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
