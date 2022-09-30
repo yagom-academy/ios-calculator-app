@@ -81,7 +81,7 @@ class ViewController: UIViewController {
     
     func initializeExpression() {
         resetVauleToZero()
-        resetStackView()
+        resetExpressionString()
     }
     
     func addLabelAndSign(vaule: String, sender: UIButton) {
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     
     func assignTotalString(value: String) {
         if value.contains("-") {
-            totalString += "\(value.dropFirst())"
+            totalString += "&\(value.dropFirst())"
         } else {
             totalString += value
         }
@@ -187,13 +187,14 @@ class ViewController: UIViewController {
             addNewLableToStackView(message: expressionString, stackView: stackView)
             totalString += sign
             if value.contains("-") {
-                totalString += "\(value.dropFirst())"
+                totalString += "&\(value.dropFirst())"
             } else {
                 totalString += value
             }
+            executeExpression()
             resetExpressionString()
-            resetStackView()
-            resetVauleToZero()
+            resetSignLabel()
+            resetTotalString()
         }
     }
     
