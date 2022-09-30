@@ -104,6 +104,11 @@ class ViewController: UIViewController {
             
         }
     }
+    
+    func displaySignAndLabel(sign: String, expression: String) {
+        signLabel.text = sign
+        expressionLabel.text = expression
+    }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
         switch sender {
