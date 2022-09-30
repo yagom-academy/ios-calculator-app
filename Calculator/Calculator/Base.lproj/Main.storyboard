@@ -317,6 +317,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpEqualButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qt3-mn-qpu"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -363,6 +366,7 @@
                     <connections>
                         <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="n5b-2q-EGh"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="2VC-cY-qBM"/>
+                        <outlet property="recentNumbersScrollView" destination="BOT-7g-vxv" id="heU-ma-fzd"/>
                         <outlet property="recentNumbersStackView" destination="XRe-QE-UJf" id="TVA-jj-qGQ"/>
                     </connections>
                 </viewController>
