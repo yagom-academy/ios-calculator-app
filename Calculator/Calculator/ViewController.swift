@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func zeroButtonTapped(_ sender: Any) {
+        if !operand.isEmpty {
+            updateOperandLabel(with: "0")
+        }
+    }
+    
     func updateOperandLabel(with input: String) {
         operand += input
         operandLabel.text = operand
