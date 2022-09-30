@@ -41,7 +41,7 @@ class ViewController: UIViewController {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
         } else if numberWithOutComma != Literal.numberZero.value && pointCount == 1 {
-            inputNumberLabel.text = numberWithOutComma + zero
+            inputNumberLabel.text = inputText + zero
         }
     }
     
@@ -144,9 +144,10 @@ class ViewController: UIViewController {
             _ = formula.operators?.dequeue()
             formula.operators?.enqueue(getOperator)
         } else {
-            guard let operatorText = inputOperatorLabel.text else { return }
+            guard let operatorText = inputOperatorLabel.text,
+                  let doubleValue = numberFormatter.string(for: Double(numberWithOutComma)) else { return }
             
-            addStackView(operatorText: operatorText, inputText: inputText)
+            addStackView(operatorText: operatorText, inputText: doubleValue)
             insertIntoQueue(operatorValue: operatorValue, inputText: numberWithOutComma)
             
             inputNumberLabel.text = Literal.numberZero.value
@@ -160,9 +161,10 @@ class ViewController: UIViewController {
         let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
         
         if let operandValue = Double(numberWithOutComma),
-           let operatorText = inputOperatorLabel.text {
+           let operatorText = inputOperatorLabel.text,
+           let doubleValue = numberFormatter.string(for: operandValue) {
             formula.operands?.enqueue(operandValue)
-            addStackView(operatorText: operatorText, inputText: inputText)
+            addStackView(operatorText: operatorText, inputText: doubleValue)
         }
         
         if let result = numberFormatter.string(for: formula.result()),
