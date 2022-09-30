@@ -84,6 +84,7 @@ class ViewController: UIViewController {
         addFormula()
         MakeOperationStackView()
         inputNumber = noValue
+        operatorLabel.text = blank
         
         do {
             var formulaQueue = ExpressionParser.parse(from: formula)
