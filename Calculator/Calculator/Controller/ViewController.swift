@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetVauleToZero()
+        resetValueToZero()
         resetSignLabel()
         resetStackView()
         
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         expressionString = ""
     }
     
-    func resetVauleToZero() {
+    func resetValueToZero() {
         expressionLabel.text = "0"
     }
     
@@ -87,12 +87,12 @@ class ViewController: UIViewController {
     }
     
     func initializeExpression() {
-        resetVauleToZero()
+        resetValueToZero()
         resetExpressionString()
     }
     
-    func addLabelAndSign(vaule: String, sender: UIButton) {
-        addNewLableToStackView(message: vaule, stackView: stackView)
+    func addLabelAndSign(value: String, sender: UIButton) {
+        addNewLabelToStackView(message: value, stackView: stackView)
         signLabel.text = signOfOperator(sender: sender)
     }
     
@@ -165,7 +165,7 @@ class ViewController: UIViewController {
         if totalString.isEmpty {
             guard let value = expressionLabel.text else { return }
             assignTotalString(value: value)
-            addLabelAndSign(vaule: value, sender: sender)
+            addLabelAndSign(value: value, sender: sender)
             initializeExpression()
         } else {
             if expressionLabel.text == "0" {
@@ -176,7 +176,7 @@ class ViewController: UIViewController {
                 resetExpressionString()
                 totalString += " \(sign) "
                 assignTotalString(value: value)
-                addLabelAndSign(vaule: sign + value, sender: sender)
+                addLabelAndSign(value: sign + value, sender: sender)
                 initializeExpression()
             }
         }
@@ -191,7 +191,7 @@ class ViewController: UIViewController {
             guard let sign = signLabel.text else { return }
             guard let value = expressionLabel.text else { return }
             expressionString = "\(sign) \(value)"
-            addNewLableToStackView(message: expressionString, stackView: stackView)
+            addNewLabelToStackView(message: expressionString, stackView: stackView)
             totalString += " \(sign) "
             totalString += value
             executeExpression()
@@ -202,7 +202,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedACButton(_ sender: UIButton) {
-        resetVauleToZero()
+        resetValueToZero()
         resetExpressionString()
         resetTotalString()
         resetSignLabel()
@@ -211,7 +211,7 @@ class ViewController: UIViewController {
     
     @IBAction func tappedCEButton(_ sender: UIButton) {
         if expressionString.isEmpty && totalString.isEmpty {
-            resetVauleToZero()
+            resetValueToZero()
         } else {
             expressionLabel.text = ""
         }
@@ -230,7 +230,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addNewLableToStackView(message: String, stackView: UIStackView) {
+    func addNewLabelToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
