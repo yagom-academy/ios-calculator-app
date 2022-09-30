@@ -43,7 +43,7 @@ class NumberLabel: UILabel {
               text.count <= 20 else {
             return
         }
-        if isZero == true {
+        if isZero == true && hasDecimalPoints == false {
             if number == zero || number == doublyZero {
                 return
             }
