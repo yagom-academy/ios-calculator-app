@@ -197,6 +197,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tappedACButton(_ sender: UIButton) {
+        resetVauleToZero()
+        resetExpressionString()
+        resetTotalString()
+        resetSignLabel()
+        resetStackView()
+    }
+    
     func addNewLableToStackView(message: String, stackView: UIStackView) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
