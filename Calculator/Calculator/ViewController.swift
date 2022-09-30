@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.isHidden = true
         }
+        applyNumberFormatter()
     }
     
     private func makeLabel(labelText :String) -> UILabel {
@@ -62,7 +63,7 @@ class ViewController: UIViewController {
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
-        operandsLabel.text = empty
+        operandsLabel.text = zero
         fullFormula = empty
     }
     
@@ -117,16 +118,12 @@ class ViewController: UIViewController {
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
         guard stringNumbers.count < 20 else { return }
         
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        
         if operandsLabel.text == zero {
             stringNumbers = sender.titleLabel?.text ?? ""
             operandsLabel.text = stringNumbers
         } else {
             stringNumbers += sender.titleLabel?.text ?? ""
-            guard let stringNumber = Double(stringNumbers),
-                  let number = numberFormatter.string(from: NSNumber(value: stringNumber)) else { return }
+            let number = numberFormatter.string(for: Double(stringNumbers))
             operandsLabel.text = number
         }
     }
@@ -150,22 +147,26 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        //        guard operandsLabel.text != zero else { return }
-        // 마지막 숫자가 레이블에 있어도 =을 누르면 계산이 되어야 한다.
-        // 레이블에 = 연산 결과값이 띄워져 있다면 = 계산이 되지 않아야 한다.
-        
-        // ===연속 처리
-        // 0나누기 했을 때 nan
-        // = 누르면 연산결과가 숫자 레이블에 보여지기
-        // 스택뷰 만드는 함수 생성 후 호출!
+        guard operatorLabel.text != empty else { return }
+        stringOperators = empty
+        operatorLabel.text = stringOperators
+        stringNumbers = empty
+        recentNumbersStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
         
         fullFormula += operandsLabel.text ?? ""
         operandsLabel.text = fullFormula
         
-        //만약 stringOperators 가 0이라면 위에 쌓인 레이블 초기화 시키고 현재 숫자 레이블에는 오류 문구로 바뀌
         var parsedFullFormula = ExpressionParser.parse(from: fullFormula)
-        let calcultedFormula = parsedFullFormula.result()
-        operandsLabel.text = String(calcultedFormula)
+        let calculatedFormula = parsedFullFormula.result()
+        
+        if calculatedFormula.isNaN || calculatedFormula.isInfinite {
+            operandsLabel.text = "NaN"
+        } else {
+            operandsLabel.text = numberFormatter.string(for: calculatedFormula)
+            stringNumbers = String(calculatedFormula)
+        }
     }
 }
 
