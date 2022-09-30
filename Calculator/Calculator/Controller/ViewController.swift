@@ -185,8 +185,6 @@ class ViewController: UIViewController {
                 initializeExpression()
             }
         }
-        
-        
     }
     
     @IBAction private func tappedEqualButton(_ sender: UIButton) {
