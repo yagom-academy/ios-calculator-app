@@ -71,6 +71,10 @@ class ViewController: UIViewController {
         totalString = ""
     }
     
+    func resetSignLabel() {
+        signLabel.text = ""
+    }
+    
     func resetStackView() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
