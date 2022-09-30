@@ -132,7 +132,7 @@ final class CalculatorViewController: UIViewController {
 private extension CalculatorViewController {
     func addLogStackView() {
         let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
-        let childView = CalculatedRecordStackView(
+        let childView = CalculatedLogStackView(
             operatorValue: operatorValue,
             operandValue: selectedNumbers.calNumber
         )

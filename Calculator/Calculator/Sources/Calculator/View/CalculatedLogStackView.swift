@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CalculatedRecordStackView: UIStackView {
+final class CalculatedLogStackView: UIStackView {
     private let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
