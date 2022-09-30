@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+private class ViewController: UIViewController {
     @IBOutlet weak private var inputNumberLabel: UILabel!
     @IBOutlet weak private var inputOperatorLabel: UILabel!
     @IBOutlet weak private var historyInputOperatorLabel: UILabel!
@@ -14,8 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak private var historyInputStackView: UIStackView!
     @IBOutlet weak private var historyInputScrollView: UIScrollView!
     
-    let numberFormatter = NumberFormatter()
-    
+    private let numberFormatter = NumberFormatter()
     private var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     
     override func viewDidLoad() {
@@ -75,7 +74,6 @@ class ViewController: UIViewController {
             inputLabel.translatesAutoresizingMaskIntoConstraints = false
             return inputLabel
         }
-        
         return inputLabel
     }
     
@@ -92,7 +90,6 @@ class ViewController: UIViewController {
             stackView.addArrangedSubview(operandLabel)
             return stackView
         }
-        
         return stackView
     }
     
@@ -122,7 +119,6 @@ class ViewController: UIViewController {
     
     private func insertIntoOperatorQueue(operatorValue: String) -> Operator? {
         let someOperator = convertOperator(operatorValue: operatorValue)
-        
         return someOperator
     }
     
