@@ -27,9 +27,11 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if selectedNumbers.isEmpty {
+        if let lastElement = mathExpression.last,
+           lastElement.shouldConvertOperator {
             mathExpression.append(selectedOperator)
         }
+
         selectedNumbers.append(inputNumber)
         updateNumberLabelTo(numbers: selectedNumbers.calNumber)
     }
@@ -39,6 +41,8 @@ final class CalculatorViewController: UIViewController {
               let inputedOperator = sender.titleLabel?.text else {
             return
         }
+        
+        print(selectedOperator)
         
         if selectedNumbers.isNotEmpty {
             addLogStackView()
@@ -109,15 +113,12 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        let minusCharactor = Operator.subtract.rawValue
-        
-        if firstElement == minusCharactor {
+        if firstElement == Constant.Calculator.minusOperator {
             selectedNumbers.removeFirst()
         } else {
-            selectedNumbers.insert(minusCharactor, at: selectedNumbers.startIndex)
+            selectedNumbers.insert(Constant.Calculator.minusOperator, at: selectedNumbers.startIndex)
         }
         
-        mathExpression.append(selectedNumbers)
         updateNumberLabelTo(numbers: selectedNumbers.calNumber)
     }
 }
@@ -175,6 +176,7 @@ private extension CalculatorViewController {
     }
     
     func calculateExpression() {
+        print(mathExpression)
         let formula = ExpressionParser.parse(from: mathExpression)
         
         do {

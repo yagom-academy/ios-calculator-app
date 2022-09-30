@@ -10,6 +10,7 @@ extension String {
     
     var calNumber: String {
         let numberValue = NSDecimalNumber(string: self)
+        
         Self.formatter.numberStyle = .decimal
         Self.formatter.maximumFractionDigits = 10
         Self.formatter.maximumIntegerDigits = 20
