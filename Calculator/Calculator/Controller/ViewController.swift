@@ -108,7 +108,9 @@ class ViewController: UIViewController {
         var expression = ExpressionParser.parse(from: totalString)
         do {
             let result = try expression.result()
-            expressionLabel.text = String(result)
+            let converted = NSDecimalNumber(string: String(result))
+            let number = numberFormatter.string(from: converted)
+            expressionLabel.text = number
         } catch ValueError.emptyOperandsQueue {
             displaySignAndLabel(sign: "!", expression: "Operand is Empty")
         } catch ValueError.emptyOperatorsQueue {
@@ -154,7 +156,9 @@ class ViewController: UIViewController {
         default:
             return
         }
-        expressionLabel.text = expressionString
+        let converted = NSDecimalNumber(string: expressionString)
+        let result = numberFormatter.string(from: converted)
+        expressionLabel.text = result
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
