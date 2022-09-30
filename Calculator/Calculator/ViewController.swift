@@ -30,6 +30,11 @@ class ViewController: UIViewController {
         }
     }
     
+    private func applyNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+    }
+    
     @IBAction func touchUpACButton(_ sender: UIButton) {
         stringOperators = empty
         operatorLabel.text = stringOperators
