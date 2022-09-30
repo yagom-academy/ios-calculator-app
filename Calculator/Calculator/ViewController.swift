@@ -53,11 +53,27 @@ class ViewController: UIViewController {
             return
         }
         
-        creatStackView()
+        if !operand.isEmpty {
+            creatStackView()
+            setOperandLabelToZero()
+            operand.removeAll()
+            isDotButtonTapped = false
+        }
+        
         updateOperatorLabel(with: selectedOperator)
+    }
+    
+    @IBAction func allClearButtonTapped(_ sender: Any) {
         setOperandLabelToZero()
-        operand.removeAll()
+        setOperatorLabelEmpty()
+        formulaStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        
+        isFirstInput = true
         isDotButtonTapped = false
+        operand.removeAll()
+        arithmeticOperator.removeAll()
     }
     
     func creatStackView() {
