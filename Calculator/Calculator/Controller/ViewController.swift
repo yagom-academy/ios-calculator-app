@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     var expressionString: String = ""
     var totalString: String = ""
+    let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet weak var stackView: UIStackView!
     
@@ -44,6 +45,10 @@ class ViewController: UIViewController {
         resetVauleToZero()
         resetSignLabel()
         resetStackView()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.usesSignificantDigits = true
     }
     
     func signOfOperator(sender: UIButton) -> String {
