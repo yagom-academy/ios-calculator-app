@@ -8,6 +8,7 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula()
         let separatedInputOperands: [String] = componentsByOperators(from: input)
+        
         let convertedToDoubleOperands: [Double] = separatedInputOperands.map {
             (operand: String) -> Double in
             return Double(operand) ?? 99.999
@@ -21,9 +22,9 @@ enum ExpressionParser {
             return (input == "+") || (input == "-") || (input == "*") || (input == "/")
         }
         separatedOperators.forEach { separatedCharactorOperator in
-            Operator.allCases.forEach { equalOperator in
-                if equalOperator.rawValue == separatedCharactorOperator {
-                    let convertedToCaseOperators: Operator = equalOperator
+            Operator.allCases.forEach { symbolOperator in
+                if symbolOperator.rawValue == separatedCharactorOperator {
+                    let convertedToCaseOperators: Operator = symbolOperator
                     formula.operators.enqueue(element: convertedToCaseOperators)
                 }
             }
@@ -32,7 +33,11 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        let result: [String] =  input.components(separatedBy: ["+","-","*","/"])
+        var operatorSet: CharacterSet = CharacterSet()
+        Operator.allCases.forEach{
+            operatorSet.insert(charactersIn: String($0.rawValue))
+        }
+        let result: [String] = input.components(separatedBy: operatorSet)
         return result
     }
 }
