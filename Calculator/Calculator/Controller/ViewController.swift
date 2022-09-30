@@ -91,7 +91,18 @@ class ViewController: UIViewController {
     
     func executeExpression() {
         var expression = ExpressionParser.parse(from: totalString)
-        
+        do {
+            let result = try expression.result()
+            expressionLabel.text = String(result)
+        } catch ValueError.emptyOperandsQueue {
+            
+        } catch ValueError.emptyOperatorsQueue {
+            
+        } catch ValueError.divideByZero {
+            
+        } catch {
+            
+        }
     }
 
     @IBAction func tappedOperandButton(_ sender: UIButton) {
