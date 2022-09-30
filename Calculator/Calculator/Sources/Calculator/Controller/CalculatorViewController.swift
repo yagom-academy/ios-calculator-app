@@ -93,7 +93,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedPointButton(_ sender: UIButton) {
-        guard selectedNumbers.isNotEmpty else {
+        guard selectedNumbers.isNotEmpty,
+              !selectedNumbers.contains(Constant.Calculator.defaultPoint) else {
             return
         }
         
