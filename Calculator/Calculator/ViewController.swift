@@ -11,11 +11,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     private var operand: String = ""
+    private var arithmeticOperator: String = ""
     private var isDotButtonTapped: Bool = false
+    private var isFirstInput: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setOperandLabelToZero()
+        setOperatorLabelEmpty()
     }
     
     @IBAction func oneToNineOperandButtonTapped(_ sender: UIButton) {
@@ -24,6 +27,7 @@ class ViewController: UIViewController {
         }
         
         updateOperandLabel(with: selectedOperand.bringOperandSymbol)
+        isFirstInput = false
     }
     
     @IBAction func dotButtonTapped(_ sender: Any) {
@@ -39,16 +43,33 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let selectedOperator = sender.currentTitle else {
+            return
+        }
+        
+        if isFirstInput {
+            return
+        }
+        
+        updateOperatorLabel(with: selectedOperator)
+    }
+    
     func updateOperandLabel(with input: String) {
         operand += input
         operandLabel.text = operand
+    }
+    
+    func updateOperatorLabel(with input: String) {
+        arithmeticOperator = input
+        operatorLabel.text = arithmeticOperator
     }
 
     func setOperandLabelToZero() {
         operandLabel.text = "0"
     }
     
-    func setInitialOperatorLabel() {
+    func setOperatorLabelEmpty() {
         operatorLabel.text = ""
     }
 }
