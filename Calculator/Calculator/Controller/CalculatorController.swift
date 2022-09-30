@@ -117,4 +117,11 @@ class CalculatorController {
             return viewDisplayNumber
         }
     }
+    
+    func tappedACButton() {
+        Expression = ""
+        viewDisplayNumber = "0"
+        displaySign = Operator.unknown.rawValue
+        isFirstClick = true
+    }
 }

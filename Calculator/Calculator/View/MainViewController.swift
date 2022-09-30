@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     func configureDisplayLabels() {
         displaySignLabel.text = ""
         displayNumberLabel.text = "0"
-        formulaHorizontalStackView.subviews.forEach {
+        formulaVerticalStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
     }
@@ -84,6 +84,11 @@ class MainViewController: UIViewController {
     
     @IBAction func tapDotButton(_ sender: UIButton) {
         displayNumberLabel.text = calculatorController.tappedDotButton()
+    }
+    
+    @IBAction func tapACButton(_ sender: UIButton) {
+        configureDisplayLabels()
+        calculatorController.tappedACButton()
     }
 }
 
