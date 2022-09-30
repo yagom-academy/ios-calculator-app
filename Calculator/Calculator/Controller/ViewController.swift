@@ -43,37 +43,37 @@ class ViewController: UIViewController {
     
     @IBAction func pointButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func zeroButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func doubleZeroButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func oneButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func twoButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func threeCButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func fourButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func fiveButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func sixButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func sevenButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func eightButton(_ sender: UIButton) {
     }
-
+    
     @IBAction func nineButton(_ sender: UIButton) {
     }
     
@@ -82,6 +82,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    
+    private func initCalculator() {
+        operandLabel.text = ""
+        operatorLabel.text = ""
+        stackCalculation = ""
+        finalCalculation = ""
+        calculatorStackView.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
 }
 
