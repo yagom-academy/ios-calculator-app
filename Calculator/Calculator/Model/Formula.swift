@@ -11,26 +11,21 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    enum FormulaError: Error {
-        case emptyOperandsQueue
-        case emptyOperatorsQueue
-    }
-    
     mutating func result() throws -> Double {
         guard var result: Double = operands.deQueue() else {
-            throw FormulaError.emptyOperandsQueue
+            throw ValueError.emptyOperandsQueue
         }
         
         while !operands.isEmpty {
             guard let inputOperator = operators.deQueue() else {
-                throw FormulaError.emptyOperatorsQueue
+                throw ValueError.emptyOperatorsQueue
             }
             
             guard let inputOperands = operands.deQueue() else {
-                throw FormulaError.emptyOperandsQueue
+                throw ValueError.emptyOperandsQueue
             }
             
-            result = inputOperator.calculate(lhs: result, rhs: inputOperands) ?? 0
+            result = try inputOperator.calculate(lhs: result, rhs: inputOperands) ?? 0
         }
         
         return result
