@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     private var operand: String = ""
+    private var isDotButtonTapped: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,13 @@ class ViewController: UIViewController {
         }
         
         updateOperandLabel(with: selectedOperand.bringOperandSymbol)
+    }
+    
+    @IBAction func dotButtonTapped(_ sender: Any) {
+        if !operand.isEmpty && !isDotButtonTapped {
+            updateOperandLabel(with: ".")
+            isDotButtonTapped = true
+        }
     }
     
     func updateOperandLabel(with input: String) {
