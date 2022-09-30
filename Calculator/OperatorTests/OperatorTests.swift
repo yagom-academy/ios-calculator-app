@@ -33,7 +33,7 @@ class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
-    func testCalculate_Double타입의값2개와devide오퍼레이터가입력될때_calculator메서드의_인자로들어갔을때_lhs나누기rhs한값이반환되어야한다() {
+    func testCalculate_Double타입의값2개와devide오퍼레이터가입력될때_calculator메서드의_인자로들어갔을때_두인자를나눈값이반환되어야한다() {
         // given
         sut = Operator.divide
         let lhs = 2.0
