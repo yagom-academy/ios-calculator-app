@@ -6,15 +6,10 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var recordedCalculatedStackView: UIStackView!
-    @IBOutlet weak var currentNumbersLabel: UILabel!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    
-    private let defaultNumberLabelValue: String = Constant.Calculator.defaultNumberLabelValue
-    private let defaultOperatorLabelValue: String = Constant.Calculator.defaultOperatorLabelValue
-    private let defaultInputValue: String = Constant.Calculator.defaultInput
-    private let defaultPointValue: String = Constant.Calculator.defaultPoint
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var recordedCalculatedStackView: UIStackView!
+    @IBOutlet private weak var currentNumbersLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
     
     private var mathExpression: String = ""
     private var selectedNumbers: String = ""
@@ -53,7 +48,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         appendExpressionFromNumbers()
-        changeNumbers(defaultNumberLabelValue)
+        changeNumbers(Constant.Calculator.defaultNumber)
         
         changeOperator(inputedOperator)
         changeOperatorLabel(selectedOperator)
@@ -121,7 +116,7 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        appendNumbers(defaultPointValue)
+        appendNumbers(Constant.Calculator.defaultPoint)
         changeNumberLabel(selectedNumbers)
     }
     
@@ -146,12 +141,21 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
+// MARK: - RecordStackViewDelegate 관련 메서드
+extension CalculatorViewController: RecordStackViewDelegate {
+    func sendLabelTexts() -> (operatorValue: String, operand: String) {
+        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
+        
+        return (operatorValue, selectedNumbers.calNumber)
+    }
+}
+
 // MARK: - StackView UI변경 관련 메서드
 private extension CalculatorViewController {
     func addChildStackView() {
-        let operatorValue = selectedOperator.isEmpty ? defaultInputValue : selectedOperator
-        
-        let childView = CalculatedRecordStackView(operatorValue, selectedNumbers.calNumber)
+        let childView = CalculatedRecordStackView()
+        childView.delegate = self
+        childView.setUpStackView()
         
         recordedCalculatedStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom()
@@ -169,7 +173,7 @@ private extension CalculatorViewController {
     }
     
     func resetExpression() {
-        changeExpression(defaultInputValue, defaultInputValue)
+        changeExpression(Constant.Calculator.defaultInput, Constant.Calculator.defaultInput)
     }
     
     func changeExpression(_ numbers: String, _ operators: String) {
@@ -198,7 +202,7 @@ private extension CalculatorViewController {
     }
     
     func resetMathExpression() {
-        mathExpression = defaultInputValue
+        mathExpression = Constant.Calculator.defaultInput
     }
     
     func calculateExpression() {
@@ -223,7 +227,7 @@ private extension CalculatorViewController {
 // MARK: - 뷰 관련 메서드
 private extension CalculatorViewController {
     func resetLabels() {
-        changeLabels(defaultNumberLabelValue, defaultOperatorLabelValue)
+        changeLabels(Constant.Calculator.defaultNumber, Constant.Calculator.defaultOperator)
     }
     
     func changeLabels(_ numbers: String, _ operators: String) {
@@ -231,11 +235,11 @@ private extension CalculatorViewController {
         changeOperatorLabel(operators)
     }
     
-    func changeNumberLabel(_ input: String = Constant.Calculator.defaultNumberLabelValue) {
+    func changeNumberLabel(_ input: String = Constant.Calculator.defaultNumber) {
         currentNumbersLabel.text = input
     }
     
-    func changeOperatorLabel(_ input: String = Constant.Calculator.defaultOperatorLabelValue) {
+    func changeOperatorLabel(_ input: String = Constant.Calculator.defaultOperator) {
         currentOperatorLabel.text = input
     }
 }

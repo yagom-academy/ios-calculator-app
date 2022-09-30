@@ -7,8 +7,8 @@
 
 enum Constant {
     enum Calculator {
-        static let defaultNumberLabelValue: String = "0"
-        static let defaultOperatorLabelValue: String = ""
+        static let defaultNumber: String = "0"
+        static let defaultOperator: String = ""
         static let defaultInput: String = ""
         static let defaultPoint: String = "."
     }

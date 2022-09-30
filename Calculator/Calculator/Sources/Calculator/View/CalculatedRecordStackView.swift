@@ -7,41 +7,43 @@
 
 import UIKit
 
+protocol RecordStackViewDelegate: AnyObject {
+    func sendLabelTexts() -> (operatorValue: String, operand: String)
+}
+
 final class CalculatedRecordStackView: UIStackView {
+    weak var delegate: RecordStackViewDelegate?
+    
     private let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
     
     private let operandLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title3)
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    init(_ inputedOperator: String, _ inputedOperand: String) {
-        operatorLabel.text = inputedOperator
-        operandLabel.text = inputedOperand
+    func setUpStackView() {
+        configureStackView()
+        setUpLabels()
         
-        super.init(arrangedSubviews: [operatorLabel, operandLabel])
-        setUpStackView()
+        [operatorLabel, operandLabel].forEach { addArrangedSubview($0) }
     }
     
-    required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setUpStackView() {
+    private func configureStackView() {
         spacing = 8
         distribution = .fill
         axis = .horizontal
         alignment = .fill
+    }
+    
+    private func setUpLabels() {
+        let labelTexts = delegate?.sendLabelTexts()
+        
+        operandLabel.text = labelTexts?.operand
+        operatorLabel.text = labelTexts?.operatorValue
     }
 }
