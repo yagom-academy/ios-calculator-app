@@ -147,7 +147,8 @@ extension ViewController {
     }
     
     func resetStackViewAll() {
-        enterdFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        enterdFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview()
+        }
     }
     
     func resetInputNumber() {
