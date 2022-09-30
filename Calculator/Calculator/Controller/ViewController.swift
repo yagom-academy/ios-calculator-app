@@ -67,6 +67,10 @@ class ViewController: UIViewController {
         expressionLabel.text = "0"
     }
     
+    func resetTotalString() {
+        totalString = ""
+    }
+    
     func resetStackView() {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
