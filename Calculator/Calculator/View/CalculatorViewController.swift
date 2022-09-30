@@ -15,20 +15,23 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentNumberLabel: UILabel!
     
     private var isInputZero: Bool = false
-    private var formula: String = ""
+    private var formula: String = Constants.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     private func resetlastOperatorLabel() {
-        lastOperatorLabel.text = ""
+        lastOperatorLabel.text = Constants.empty
     }
     
     private func resetCurrentNumberLabel() {
-        currentNumberLabel.text = "0"
+        currentNumberLabel.text = Constants.zero
         isInputZero = false
+    }
+    
+    private func resetFormula() {
+        formula = Constants.empty
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
@@ -37,15 +40,40 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        guard !isInputZero else  { return }
-        updateCurrentNumberLabel(with: "00")
+        guard isInputZero else  { return }
+        updateCurrentNumberLabel(with: Constants.doubleZero)
+    }
+
+    private func formatToNumber(_ number: String) -> String {
+        guard let formattedNumber = Formatter.toFormattedString(from: number) else {
+            return Constants.empty
+        }
+        
+        return formattedNumber
     }
     
-    // TODO: -.이 두 번 이상 나올 수 없는 것 처리해야함
+    func updateCurrentNumberLabel(with input: String) {
+        guard var curNumStr = currentNumberLabel.text else { return }
+        
+        if curNumStr == Constants.zero, input != Constants.doubleZero {
+            curNumStr = input
+        } else if curNumStr != Constants.zero {
+            curNumStr += input
+        }
+        
+        if curNumStr.contains(Constants.dot) {
+            currentNumberLabel.text = curNumStr
+        } else {
+            currentNumberLabel.text = Formatter.toFormattedString(from: curNumStr)
+        }
+    }
+
     @IBAction func touchUpDecimalButton(_ sender: UIButton) {
         guard let currentNumber = currentNumberLabel.text,
-              !currentNumber.contains(".") else { return }
-        updateCurrentNumberLabel(with: ".")
+              !currentNumber.contains(Constants.dot),
+              isInputZero else { return }
+        
+        currentNumberLabel.text = currentNumber + Constants.dot
     }
     
     @IBAction func touchUpSymbolChangeButton(_ sender: UIButton) {
@@ -57,58 +85,32 @@ final class CalculatorViewController: UIViewController {
         
         guard var currentNumber = currentNumberLabel.text else { return }
         
-        if currentNumber.first == "-" {
+        if currentNumber.first == Character(Constants.minusSymbol) {
             currentNumber.removeFirst()
             currentNumberLabel.text = currentNumber
         } else {
-            currentNumber = "-" + currentNumber
+            currentNumber = Constants.minusSymbol + currentNumber
             currentNumberLabel.text = currentNumber
         }
     }
     
-    private func formatToNumber(_ number: String) -> String {
-        guard let formattedNumber =
-                Formatter.formattedNumber.string(
-                    for: Formatter.formattedNumber.number(from: number)
-                ) else {
-            return ""
-        }
-        
-        return formattedNumber
-    }
-    
-    func updateCurrentNumberLabel(with input: String) {
-        guard var curNumStr = currentNumberLabel.text else { return }
-        
-        if curNumStr == "0", input == "00" {
-            curNumStr = input
-        } else if curNumStr == "0", input != "00" {
-            curNumStr = input
-        } else {
-            curNumStr += input
-        }
-        
-        currentNumberLabel.text = formatToNumber(curNumStr)
-    }
-    
     @IBAction func touchUpPlusButton(_ sender: UIButton) {
-        updateOperatorLabel("+")
+        updateOperatorLabel(Constants.plusSymbol)
     }
     
     @IBAction func touchUpMinusButton(_ sender: UIButton) {
-        updateOperatorLabel("-")
+        updateOperatorLabel(Constants.minusSymbol)
     }
     
     @IBAction func touchUpMultiplyButton(_ sender: UIButton) {
-        updateOperatorLabel("×")
+        updateOperatorLabel(Constants.multiplySymbol)
     }
     
     @IBAction func touchUpDivideButton(_ sender: UIButton) {
-        updateOperatorLabel("÷")
+        updateOperatorLabel(Constants.divideSymbol)
     }
     
     private func updateOperatorLabel(_ operatorSign: String) {
-        // 입력한 숫자가 아직 없을 경우 부호만 바꿔주고 종료한다.
         guard isInputZero else {
             lastOperatorLabel.text = operatorSign
             return
@@ -119,7 +121,7 @@ final class CalculatorViewController: UIViewController {
         guard let operatorToAdd = lastOperatorLabel.text,
               let numberToAdd = currentNumberLabel.text else { return }
         formula += operatorToAdd
-        formula += numberToAdd
+        formula += numberToAdd.replacingOccurrences(of: Constants.comma, with: Constants.empty)
         
         lastOperatorLabel.text = operatorSign
         resetCurrentNumberLabel()
@@ -127,9 +129,10 @@ final class CalculatorViewController: UIViewController {
     
     private func addToStackView() {
         guard let lastOperatorLabelText = lastOperatorLabel.text,
-              let currentNumberLabelText = currentNumberLabel.text else { return }
-        
-        let stack = LineStackView(operatorStr: lastOperatorLabelText, operandStr: currentNumberLabelText)
+              let currentNumber = currentNumberLabel.text,
+              let formattedNumber = Formatter.toFormattedString(from: currentNumber) else { return }
+
+        let stack = LineStackView(operatorStr: lastOperatorLabelText, operandStr: formattedNumber)
         
         historyStackView.addArrangedSubview(stack)
     }
@@ -138,25 +141,15 @@ final class CalculatorViewController: UIViewController {
         clearAll()
     }
     
-    // AC버튼을 눌렀을 때 동작할 녀석
     private func clearAll() {
-        // 입력되어있던 기호창 비우기
         resetlastOperatorLabel()
-        
-        // 입력하던 숫자창 비우기
         resetCurrentNumberLabel()
-
-        // stackView 안의 전체 stack item 날리는 것
         historyStackView.removeAllSubviews(of: historyStackView)
     }
-
-    // = 을 눌렀을 때 해야할 것
-    // 1. 스택의 모든 숫자, 연산자를 순서대로 가져와서 formula에 집어넣기
-    // 2. formula -> expressionParser
-    // 3. 결과값 가져오기 (+ 예외처리)
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        // TODO: -operator에 기호가 없으면 작동하지 않게 걸어주기
+        guard let lastOperator = lastOperatorLabel.text,
+              lastOperator != Constants.empty else { return }
         
         completeFormula()
         let calculatedResult: Double = fetchResult()
@@ -168,7 +161,7 @@ final class CalculatorViewController: UIViewController {
               let numberToAdd = currentNumberLabel.text else { return }
         
         formula += operatorToAdd
-        formula += numberToAdd
+        formula += numberToAdd.replacingOccurrences(of: Constants.comma, with: Constants.empty)
         
         addToStackView()
     }
@@ -181,8 +174,18 @@ final class CalculatorViewController: UIViewController {
     
     private func showResult(_ result: Double) {
         resetlastOperatorLabel()
+        
+        guard !result.isNaN else {
+            currentNumberLabel.text = Constants.nan
+            return
+        }
+        
         currentNumberLabel.text = formatToNumber(String(result))
+        resetFormula()
     }
 
+    @IBAction func touchUpCEButton(_ sender: UIButton) {
+        resetCurrentNumberLabel()
+    }
 }
 
