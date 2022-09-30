@@ -7,13 +7,7 @@
 
 import UIKit
 
-protocol RecordStackViewDelegate: AnyObject {
-    func sendLabelTexts() -> (operatorValue: String, operand: String)
-}
-
 final class CalculatedRecordStackView: UIStackView {
-    weak var delegate: RecordStackViewDelegate?
-    
     private let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -26,11 +20,20 @@ final class CalculatedRecordStackView: UIStackView {
         return label
     }()
     
-    func setUpStackView() {
-        configureStackView()
-        setUpLabels()
+    init(operatorValue: String, operandValue: String) {
+        operatorLabel.text = operatorValue
+        operandLabel.text = operandValue
         
-        [operatorLabel, operandLabel].forEach { addArrangedSubview($0) }
+        super.init(arrangedSubviews: [operatorLabel, operandLabel])
+        self.configureStackView()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     private func configureStackView() {
@@ -38,12 +41,5 @@ final class CalculatedRecordStackView: UIStackView {
         distribution = .fill
         axis = .horizontal
         alignment = .fill
-    }
-    
-    private func setUpLabels() {
-        let receivedLabelTexts = delegate?.sendLabelTexts()
-        
-        operandLabel.text = receivedLabelTexts?.operand
-        operatorLabel.text = receivedLabelTexts?.operatorValue
     }
 }

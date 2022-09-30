@@ -128,21 +128,14 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
-// MARK: - RecordStackViewDelegate 관련 메서드
-extension CalculatorViewController: RecordStackViewDelegate {
-    func sendLabelTexts() -> (operatorValue: String, operand: String) {
-        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
-        
-        return (operatorValue, selectedNumbers.calNumber)
-    }
-}
-
 // MARK: - StackView UI변경 관련 메서드
 private extension CalculatorViewController {
     func addLogStackView() {
-        let childView = CalculatedRecordStackView()
-        childView.delegate = self
-        childView.setUpStackView()
+        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
+        let childView = CalculatedRecordStackView(
+            operatorValue: operatorValue,
+            operandValue: selectedNumbers.calNumber
+        )
         
         recordedCalculatedStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom()
