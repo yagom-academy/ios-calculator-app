@@ -13,9 +13,9 @@ struct Formula {
         guard let firstOperand = operands.dequeue() else { return nil }
         var calculateResult: Double = firstOperand
         
-        while operators.head?.next != nil {
+        while let _ = operators.head?.next  {
             guard let operation = operators.dequeue(), let rhs = operands.dequeue() else { return nil }
-            calculateResult = try operation.calculate(lhs: firstOperand, rhs: rhs)
+            calculateResult = try operation.calculate(lhs: calculateResult, rhs: rhs)
         }
         
         return calculateResult
