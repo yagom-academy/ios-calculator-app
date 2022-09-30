@@ -41,6 +41,7 @@ class MainViewController: UIViewController {
               let changedFormatResult: String = numberFormatter.string(from: NSNumber(value: number)) else {
             return nil
         }
+        
         return changedFormatResult
     }
     
@@ -48,15 +49,15 @@ class MainViewController: UIViewController {
         let operandLabel = UILabel()
         operandLabel.text = displayNumberLabel.text
         operandLabel.textColor = .white
-    
+        
         let operatorLabel = UILabel()
         operatorLabel.text = displaySignLabel.text
         operatorLabel.textColor = .white
         
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         stackView.spacing = 8
-        formulaVerticalStackView.addArrangedSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
+        formulaVerticalStackView.addArrangedSubview(stackView)
         
         autoScroll()
     }
@@ -72,11 +73,15 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        displaySignLabel.text = calculatorController.tappedOperatorButton(input: sender.titleLabel?.text)
+        displaySignLabel.text = calculatorController.tappedOperatorButton(
+            input: sender.titleLabel?.text
+        )
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(result: calculatorController.tappedNumberButton(input: sender.titleLabel?.text))
+        displayNumberLabel.text = changeCalculateResultFormat(
+            result: calculatorController.tappedNumberButton(input: sender.titleLabel?.text)
+        )
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -84,7 +89,10 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(result: calculatorController.tappedCalculateButton())
+        displayNumberLabel.text = changeCalculateResultFormat(
+            result: calculatorController.tappedCalculateButton()
+        )
+        
         if displaySignLabel.text != "" {
             displaySignLabel.text = ""
             makeStakView()
@@ -92,7 +100,9 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(result: calculatorController.tappedDotButton())
+        displayNumberLabel.text = changeCalculateResultFormat(
+            result: calculatorController.tappedDotButton()
+        )
     }
     
     @IBAction func tapACButton(_ sender: UIButton) {
@@ -101,7 +111,9 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func tapReverseSignButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(result: calculatorController.tappedReverseSignButton())
+        displayNumberLabel.text = changeCalculateResultFormat(
+            result: calculatorController.tappedReverseSignButton()
+        )
     }
 }
 
