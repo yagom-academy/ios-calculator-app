@@ -155,7 +155,7 @@ JuiceMaker
 https://user-images.githubusercontent.com/102534252/193212902-f6d260c0-7c87-432e-bf25-59b8d11b094d.mov
 
 
-## ❓ 트러블 슈팅 & 고민한 것
+## ❓ 트러블 슈팅 & 어려웠던 점
 
 ### Step1
 
@@ -196,4 +196,4 @@ https://user-images.githubusercontent.com/102534252/193212902-f6d260c0-7c87-432e
 - [Swift Language Guide - Inheritance(선택사항)](https://docs.swift.org/swift-book/LanguageGuide/Inheritance.html)
 - [Swift Language Guide - Subscripts(선택사항)](https://docs.swift.org/swift-book/LanguageGuide/Subscripts.html)
 
-[🔝 맨 위로 이동하기]
+[🔝 맨 위로 이동하기](# ➕➖✖️➗🟰 계산기)
