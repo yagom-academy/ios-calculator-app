@@ -7,6 +7,10 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var stackCalculation = ""
+    var finalCalculation = ""
+    var checkSign = ""
+    var formula: Formula?
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
