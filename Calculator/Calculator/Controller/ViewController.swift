@@ -183,7 +183,7 @@ class ViewController: UIViewController {
         } else {
             guard let sign = signLabel.text else { return }
             guard let value = expressionLabel.text else { return }
-            expressionString = "\(sign)\(value)"
+            expressionString = "\(sign) \(value)"
             addNewLableToStackView(message: expressionString, stackView: stackView)
             totalString += sign
             if value.contains("-") {

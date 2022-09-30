@@ -9,7 +9,10 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.components(separatedBy: String(target))
+        let converted = String(target)
+        let replaced = self.replacingOccurrences(of: converted, with: " \(converted) ")
+        let splited = replaced.split(separator: " ").map { String($0) }
+        return splited
     }
 }
 
