@@ -15,6 +15,7 @@
 		866117F228DC218500DB385C /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866117F128DC218500DB385C /* Operator.swift */; };
 		866117F428DC230800DB385C /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866117F328DC230800DB385C /* Formula.swift */; };
 		866117F628DC270200DB385C /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866117F528DC270200DB385C /* ExpressionParser.swift */; };
+		866A4B0A28E4A44C0041F4A4 /*  CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866A4B0928E4A44C0041F4A4 /*  CircleButton.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* CalculatorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorVC.swift */; };
@@ -43,6 +44,7 @@
 		866117F128DC218500DB385C /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		866117F328DC230800DB385C /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		866117F528DC270200DB385C /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		866A4B0928E4A44C0041F4A4 /*  CircleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " CircleButton.swift"; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				866A4B0928E4A44C0041F4A4 /*  CircleButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				866117F428DC230800DB385C /* Formula.swift in Sources */,
 				866117F228DC218500DB385C /* Operator.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorVC.swift in Sources */,
+				866A4B0A28E4A44C0041F4A4 /*  CircleButton.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				866117E128D890FE00DB385C /* CalculatorItemQueue.swift in Sources */,
 				866117F628DC270200DB385C /* ExpressionParser.swift in Sources */,
