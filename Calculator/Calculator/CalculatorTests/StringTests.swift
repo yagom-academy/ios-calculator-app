@@ -1,0 +1,43 @@
+//
+//  StringTests.swift
+//  CalculatorTests
+//
+//  Created by 서수영 on 2022/09/30.
+//
+
+import XCTest
+@testable import Calculator
+
+class StringTests: XCTestCase {
+    var sut: String?
+    
+    let testCase1 = "adsfa14qsaf"
+    let testCase2 = "11sa4+a1243"
+    let testCase3 = "1sw10sd/1asf"
+    let testCase4 = "123as-12jsl"
+    let testCase5 = "192asod*12jn"
+    
+    override func setUpWithError() throws {
+        sut = ""
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func test_Split함수실행시_더하기로자르면_true리턴() {
+        sut = testCase2
+        
+        guard let sutArr = sut?.split(with: Character(Operator.add.description)) else {
+            XCTAssert(false)
+            return 
+        }
+        
+        if sutArr[0] == "11sa4", sutArr[1] == "a1243" {
+            XCTAssert(true)
+        } else {
+            XCTAssert(false)
+        }
+    }
+
+}
