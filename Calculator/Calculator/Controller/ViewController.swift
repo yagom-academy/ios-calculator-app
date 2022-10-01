@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var componentsStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -63,10 +63,13 @@ class ViewController: UIViewController {
     }
 
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
-        guard let operand = currentEntryLabel.text, operand != CalculatorItems.zero ||
+        guard var operand = currentEntryLabel.text, operand != CalculatorItems.zero ||
               !componentsStackView.subviews.isEmpty else { return }
         
-        if operand != CalculatorItems.zero {
+        if let last = operand.last, operand != CalculatorItems.zero {
+            if last == Character(CalculatorItems.dot) {
+                operand.removeLast()
+            }
             addFormula(operand: operand)
         }
         
@@ -98,11 +101,9 @@ class ViewController: UIViewController {
             let result = try calculate(input: formulaInput)
             currentEntryLabel.text = result.description.formatNumberToDecimal()
             resetOperatorLabel()
-            resetScrollView()
         } catch CalculatorError.dividedByZero {
             currentEntryLabel.text = CalculatorItems.nan
             resetOperatorLabel()
-            resetScrollView()
         } catch {
             print(error)
         }
