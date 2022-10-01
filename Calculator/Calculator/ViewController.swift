@@ -8,12 +8,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var expression: String = ""
+    private var expression: String = ""
     
-    @IBOutlet weak var operandAndOperatorScrollView: UIScrollView!
-    @IBOutlet weak var operandAndOperatorStackView: UIStackView!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandAndOperatorScrollView: UIScrollView!
+    @IBOutlet private weak var operandAndOperatorStackView: UIStackView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
     override func viewDidLoad() {
         
