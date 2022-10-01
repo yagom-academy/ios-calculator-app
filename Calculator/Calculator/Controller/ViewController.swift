@@ -17,11 +17,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var signChangeButton: UIButton!
     @IBOutlet weak var currentEntryLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var componentsStackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         resetCurrentEntry()
+        componentsStackView.arrangedSubviews.forEach({
+            $0.isHidden = true
+        })
     }
     
     @IBAction func clearEntryButtonPressed(_ sender: UIButton) {
@@ -85,6 +90,21 @@ class ViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter.string(for: convertedInput)
+    }
+    
+    func addLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        
+        return label
+    }
+    
+    func addStackView(operandLabel: UILabel, operatorLabel: UILabel) -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [operandLabel, operatorLabel])
+        stackView.spacing = 10
+        
+        return stackView
     }
 }
 
