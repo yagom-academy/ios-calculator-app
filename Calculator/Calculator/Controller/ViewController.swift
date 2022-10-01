@@ -116,7 +116,7 @@ class ViewController: UIViewController {
     
     func pushInArchive(operand: String, `operator`: String) {
         let generator = StackViewCell(operand: operand, operator: `operator`)
-        let stackView = generator.genarateStackView()
+        let stackView = generator.generateStackView()
         
         calculatorArchive.addArrangedSubview(stackView)
         

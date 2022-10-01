@@ -37,7 +37,7 @@ struct StackViewCell {
         operandLabel.text = operand
     }
     
-    func genarateStackView() -> UIStackView {
+    func generateStackView() -> UIStackView {
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         
