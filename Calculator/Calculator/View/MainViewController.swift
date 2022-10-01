@@ -65,7 +65,7 @@ final class MainViewController: UIViewController {
         formulaScrollView.setContentOffset(contentOffsetPoint, animated: false)
     }
     
-    private func resetDisplayNumberLabel() {
+    func resetDisplayNumberLabel() {
         displayNumberLabel.text = "0"
         calculatorController.viewDisplayNumber = "0"
     }
