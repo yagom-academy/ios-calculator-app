@@ -6,6 +6,18 @@
 
 import UIKit
 
+struct CalculatorItems {
+    private init() { }
+    
+    static let zero = "0"
+    static let doubleZero = "00"
+    static let negativeSign = "-"
+    static let dot = "."
+    static let comma = ","
+    static let nan = "NaN"
+    static let empty = ""
+}
+
 class ViewController: UIViewController {
     @IBOutlet weak var currentEntryLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
@@ -28,12 +40,12 @@ class ViewController: UIViewController {
     
     @IBAction func signChangeButtonPressed(_ sender: UIButton) {
         guard var currentEntry = currentEntryLabel.text,
-                  currentEntry != "0" else { return }
+              currentEntry != CalculatorItems.zero else { return }
         
-        if currentEntry.starts(with: "-") {
+        if currentEntry.starts(with: CalculatorItems.negativeSign) {
             currentEntry.removeFirst()
         } else {
-            currentEntry.insert("-", at: currentEntry.startIndex)
+            currentEntry.insert(Character(CalculatorItems.negativeSign), at: currentEntry.startIndex)
         }
         
         currentEntryLabel.text = currentEntry
@@ -44,19 +56,19 @@ class ViewController: UIViewController {
         case 0...9:
             updateEntry(using: sender.tag.description)
         case 10:
-            updateEntry(using: "00")
+            updateEntry(using: CalculatorItems.doubleZero)
         case 11:
-            updateEntry(using: ".")
+            updateEntry(using: CalculatorItems.dot)
         default:
             return
         }
     }
 
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        guard let operand = currentEntryLabel.text, operand != "0" ||
+        guard let operand = currentEntryLabel.text, operand != CalculatorItems.zero ||
               !componentsStackView.subviews.isEmpty else { return }
         
-        if operand != "0" {
+        if operand != CalculatorItems.zero {
             addFormula(operand: operand)
         }
         
@@ -74,7 +86,7 @@ class ViewController: UIViewController {
         guard !componentsStackView.subviews.isEmpty else { return }
         guard let operand = currentEntryLabel.text else { return }
         
-        var formulaInput: String = ""
+        var formulaInput: String = CalculatorItems.empty
         
         addFormula(operand: operand)
         
@@ -90,7 +102,7 @@ class ViewController: UIViewController {
             resetOperatorLabel()
             componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         } catch CalculatorError.dividedByZero {
-            currentEntryLabel.text = "NaN"
+            currentEntryLabel.text = CalculatorItems.nan
             resetOperatorLabel()
             componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         } catch {
@@ -99,44 +111,32 @@ class ViewController: UIViewController {
     }
     
     func resetOperatorLabel() {
-        currentOperatorLabel.text = ""
+        currentOperatorLabel.text = CalculatorItems.empty
     }
     
     func resetCurrentEntry() {
-        currentEntryLabel.text = "0"
+        currentEntryLabel.text = CalculatorItems.zero
     }
     
     func updateEntry(using input: String) {
         guard var currentEntry = currentEntryLabel.text,
-                  currentEntry != "0" || input != "00" else { return }
-        guard input != "." || !currentEntry.contains(input) else { return }
+                  currentEntry != CalculatorItems.zero || input != CalculatorItems.doubleZero else { return }
+        guard input != CalculatorItems.dot || !currentEntry.contains(input) else { return }
         
         currentEntry += input
         
-        if currentEntry.starts(with: "0") {
-            if !currentEntry.starts(with: "0.") {
+        if currentEntry.starts(with: CalculatorItems.zero) {
+            if !currentEntry.starts(with: CalculatorItems.zero + CalculatorItems.dot) {
                 currentEntry.removeFirst()
             }
         }
         
-        if input != "." {
+        if input != CalculatorItems.dot {
             guard let convertedEntry = currentEntry.formatNumberToDecimal() else { return }
             currentEntryLabel.text = convertedEntry
         } else {
             currentEntryLabel.text = currentEntry
         }
-    }
-    
-    func formatNumber(input: String) -> String? {
-        let inputWithoutComma = input.replacingOccurrences(of: ",", with: "")
-        guard let convertedInput = Double(inputWithoutComma) else { return nil }
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.roundingMode = .ceiling
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.numberStyle = .decimal
-        
-        return numberFormatter.string(for: convertedInput)
     }
     
     func addLabel(text: String) -> UILabel {
@@ -155,7 +155,7 @@ class ViewController: UIViewController {
     }
     
     func addFormula(operand: String) {
-        let operatorLabel = addLabel(text: currentOperatorLabel.text ?? "")
+        let operatorLabel = addLabel(text: currentOperatorLabel.text ?? CalculatorItems.empty)
         let operandLabel = addLabel(text: operand)
         componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
     }
