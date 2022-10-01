@@ -133,7 +133,7 @@ final class CalculatorViewController: UIViewController {
               let currentNumber = currentNumberLabel.text,
               let formattedNumber = Formatter.toFormattedString(from: currentNumber) else { return }
 
-        let formulaLine = LineStackView(operatorStr: lastOperatorLabelText, operandStr: formattedNumber)
+        let formulaLine = LineStackView(operatorLabelText: lastOperatorLabelText, operandLabelText: formattedNumber)
         
         historyStackView.addArrangedSubview(formulaLine)
         historyScrollView.scrollToBottom(animated: false)
