@@ -26,6 +26,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func oneToNineOperandButtonTapped(_ sender: UIButton) {
+        guard !isCalculate else {
+            return
+        }
+        
         guard let selectedOperand = Operand.matchOperandButtonTag(location: sender.tag) else {
             return
         }
@@ -35,6 +39,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
+            return
+        }
+        
         if !operand.isEmpty && !isDotButtonTapped {
             operandLabel.text = setNumberFormat(with: operand) + "."
             operand += "."
@@ -43,6 +51,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func zeroButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
+            return
+        }
+        
         var input: String = ""
         if operand.last == "." {
             input = ".0"
@@ -55,6 +67,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func doubleZeroButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
+            return
+        }
+        
         var input: String = ""
         if operand.last == "." {
             input = ".00"
@@ -71,21 +87,31 @@ class ViewController: UIViewController {
             return
         }
         
+        guard !isCalculate else {
+            return
+        }
+        
         guard !isFirstInput else {
             return
         }
         
+        if !operand.isEmpty {
+            creatFormulaLog()
+        }
+        
         updateOperatorLabel(with: selectedOperator)
-        guard !operand.isEmpty else {
+    }
+    
+    @IBAction func calculateButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
             return
         }
         
-        removeLastDot()
-        creatStackView()
-        setOperandLabelToZero()
-        creatFinalFormula()
-        operand.removeAll()
-        isDotButtonTapped = false
+        creatFormulaLog()
+        calculate()
+        setOperatorLabelEmpty()
+        arithmeticOperator.removeAll()
+        isCalculate = true
     }
     
     @IBAction func allClearButtonTapped(_ sender: Any) {
@@ -97,6 +123,7 @@ class ViewController: UIViewController {
         
         isFirstInput = true
         isDotButtonTapped = false
+        isCalculate = false
         operand.removeAll()
         arithmeticOperator.removeAll()
         finalFormula.removeAll()
@@ -150,7 +177,7 @@ class ViewController: UIViewController {
     func updateOperatorLabel(with input: String) {
         if !isCalculate {
             arithmeticOperator = input
-            operatorLabel.text = setNumberFormat(with: arithmeticOperator)
+            operatorLabel.text = arithmeticOperator
         }
     }
 
@@ -172,6 +199,27 @@ class ViewController: UIViewController {
         }
         
         return result
+    }
+    
+    func creatFormulaLog() {
+        removeLastDot()
+        creatStackView()
+        setOperandLabelToZero()
+        creatFinalFormula()
+        operand.removeAll()
+        isDotButtonTapped = false
+    }
+    
+    func calculate() {
+        isCalculate = true
+        var formula = ExpressionParser.parse(from: finalFormula)
+        guard let result = try? formula.result() else {
+            operandLabel.text = "NaN"
+            return
+        }
+        
+        updateOperandLabel(with: String(result))
+        return
     }
 }
 
