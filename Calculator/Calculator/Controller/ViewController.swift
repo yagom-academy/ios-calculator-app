@@ -120,6 +120,10 @@ class ViewController: UIViewController {
         
         calculatorArchive.addArrangedSubview(stackView)
         
+        scrollToBottom()
+    }
+    
+    func scrollToBottom() {
         self.scrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         self.scrollView.setContentOffset(bottomOffset, animated: true)
