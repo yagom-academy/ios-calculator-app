@@ -153,10 +153,10 @@ class ViewController: UIViewController {
         operatorDisplayLabel.text = nameSpace.empty
         self.formula = nameSpace.empty
         
-        allClearArchive()
+        resetArchive()
     }
     
-    func allClearArchive() {
+    func resetArchive() {
         calculatorArchive.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
