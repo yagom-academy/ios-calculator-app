@@ -76,6 +76,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6yL-uW-xy3"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -122,6 +125,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rjq-Px-Sxo"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -168,6 +174,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="touchUpAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kt7-68-IKT"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -310,7 +319,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="iyg-J1-mCC"/>
                         <outlet property="formulaHistoryView" destination="XRe-QE-UJf" id="8Dy-Af-wde"/>
                         <outlet property="mainOperandLabel" destination="Lwz-OF-XHD" id="5pQ-pd-tgn"/>
                         <outlet property="mainOperatorLabel" destination="HPC-iy-qdm" id="GSN-ox-kF4"/>

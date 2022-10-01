@@ -4,8 +4,11 @@
 //
 
 import Foundation
+import UIKit
 
 let numberFormatter = NumberFormatter()
+
+extension Double: CalculateItem {}
 
 extension String {
     func split(with target: Character) -> [String] {
@@ -39,4 +42,19 @@ extension String {
     }
 }
 
-extension Double: CalculateItem {}
+extension UIButton {
+    var operatorRawValue: String {
+        switch self.currentTitle {
+        case "+":
+            return String(Operator.add.rawValue)
+        case "-":
+            return String(Operator.subtract.rawValue)
+        case "×":
+            return String(Operator.multiply.rawValue)
+        case "÷":
+            return String(Operator.divide.rawValue)
+        default:
+            return ""
+        }
+    }
+}

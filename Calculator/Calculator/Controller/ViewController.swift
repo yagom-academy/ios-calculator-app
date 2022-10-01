@@ -11,7 +11,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainOperandLabel: UILabel!
     @IBOutlet weak var mainOperatorLabel: UILabel!
     @IBOutlet weak var formulaHistoryView: UIStackView!
-    @IBOutlet weak var addButton: UIButton!
     var operandLabelText: String = ""
     var partialFormula: String = ""
     var formula: Formula = ExpressionParser.parse(from: "")
@@ -21,19 +20,23 @@ class ViewController: UIViewController {
         mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatter()
     }
     
-    @IBAction func touchUpAddButton(_ sender: UIButton) {
+    @IBAction func touchUpFormulaButton(_ sender: UIButton) {
+        updateFormulaView(sender)
+    }
+    
+    func updateFormulaView(_ sender: UIButton) {
         guard let operandText = mainOperandLabel.text,
               operandText != "0" else {
+            mainOperatorLabel.text = sender.currentTitle ?? ""
             return
         }
         
-        sender.accessibilityLabel = "+"
-        let operatorText = sender.accessibilityLabel ?? ""
+        let operatorText = sender.operatorRawValue
         partialFormula += removeComma(operandText) + operatorText
         formula = ExpressionParser.parse(from: partialFormula)
         addStackViewInScrollView()
         mainOperandLabel.text = "0"
-        mainOperatorLabel.text = operatorText
+        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     func addStackViewInScrollView() {
