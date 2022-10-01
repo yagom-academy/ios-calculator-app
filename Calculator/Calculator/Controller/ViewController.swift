@@ -145,13 +145,14 @@ class ViewController: UIViewController {
         let label = UILabel()
         label.text = text
         label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
         
         return label
     }
     
     private func addStackView(operandLabel: UILabel, operatorLabel: UILabel) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-        stackView.spacing = 10
+        stackView.spacing = 8
         
         return stackView
     }
