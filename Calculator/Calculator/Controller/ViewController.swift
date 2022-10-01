@@ -138,6 +138,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
+            return
+        }
+        
         if !operand.isEmpty {
             operand.removeAll()
             setOperandLabelToZero()
@@ -149,6 +153,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonTapped(_ sender: Any) {
+        guard !isCalculate else {
+            return
+        }
+        
         if operand.isEmpty {
             return
         }
