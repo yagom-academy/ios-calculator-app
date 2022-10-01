@@ -364,18 +364,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="XpA-hS-dwE"/>
-                        <outlet property="allClearButton" destination="ped-N8-JbY" id="ZmO-Xr-p5d"/>
-                        <outlet property="clearEntryButton" destination="RLD-dY-LOA" id="cM2-Pb-73n"/>
                         <outlet property="componentsStackView" destination="XRe-QE-UJf" id="ndt-iU-UlC"/>
                         <outlet property="currentEntryLabel" destination="Lwz-OF-XHD" id="SN9-MP-IQK"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="eiG-kI-HkD"/>
-                        <outlet property="divideButton" destination="Tfz-eM-jll" id="ngG-Cr-LBv"/>
-                        <outlet property="multiplyButton" destination="811-Pz-An6" id="Ra2-rA-ewC"/>
-                        <outlet property="resultButton" destination="Daw-iX-Owl" id="39T-bU-53l"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="qlA-Vp-jiP"/>
-                        <outlet property="signChangeButton" destination="ows-U7-mNc" id="PeK-yY-BQw"/>
-                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="AjN-kV-KVO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
