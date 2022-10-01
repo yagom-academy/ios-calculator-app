@@ -65,9 +65,7 @@ class ViewController: UIViewController {
               !componentsStackView.subviews.isEmpty else { return }
         
         if operand != "0" {
-            let operatorLabel = addLabel(text: currentOperatorLabel.text ?? "")
-            let operandLabel = addLabel(text: operand)
-            componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
+            addFormula(operand: operand)
         }
         
         currentOperatorLabel.text = sender.currentTitle
@@ -77,6 +75,20 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonPressed(_ sender: UIButton) {
         componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         resetOperatorLabel()
+    }
+    
+    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+        guard !componentsStackView.subviews.isEmpty else { return }
+        guard let operand = currentEntryLabel.text, operand != "0" else { return }
+        
+        addFormula(operand: operand)
+        var formulaInput: String = ""
+        
+        componentsStackView.subviews.forEach { $0.subviews.forEach({
+            if let label = $0 as? UILabel, let text = label.text, !text.isEmpty {
+                formulaInput += " \(text) "
+            }
+        }) }
     }
     
     func resetOperatorLabel() {
@@ -133,6 +145,12 @@ class ViewController: UIViewController {
         stackView.spacing = 10
         
         return stackView
+    }
+    
+    func addFormula(operand: String) {
+        let operatorLabel = addLabel(text: currentOperatorLabel.text ?? "")
+        let operandLabel = addLabel(text: operand)
+        componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
     }
 }
 
