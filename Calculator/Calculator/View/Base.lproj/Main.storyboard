@@ -318,7 +318,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="P5E-oe-acv"/>
+                                                    <action selector="calculateButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Ow-57-cOL"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -369,7 +369,7 @@
                         <outlet property="clearEntryButton" destination="RLD-dY-LOA" id="cM2-Pb-73n"/>
                         <outlet property="componentsStackView" destination="XRe-QE-UJf" id="ndt-iU-UlC"/>
                         <outlet property="currentEntryLabel" destination="Lwz-OF-XHD" id="SN9-MP-IQK"/>
-                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="ywr-3G-qhv"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="eiG-kI-HkD"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="ngG-Cr-LBv"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="Ra2-rA-ewC"/>
                         <outlet property="resultButton" destination="Daw-iX-Owl" id="39T-bU-53l"/>

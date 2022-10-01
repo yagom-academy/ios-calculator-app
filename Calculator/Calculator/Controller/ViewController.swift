@@ -79,16 +79,30 @@ class ViewController: UIViewController {
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
         guard !componentsStackView.subviews.isEmpty else { return }
-        guard let operand = currentEntryLabel.text, operand != "0" else { return }
+        guard let operand = currentEntryLabel.text else { return }
+        
+        var formulaInput: String = ""
         
         addFormula(operand: operand)
-        var formulaInput: String = ""
         
         componentsStackView.subviews.forEach { $0.subviews.forEach({
             if let label = $0 as? UILabel, let text = label.text, !text.isEmpty {
-                formulaInput += " \(text) "
+                formulaInput += "\(text) "
             }
         }) }
+        
+        do {
+            let result = try calculate(input: formulaInput)
+            currentEntryLabel.text = result.description
+            resetOperatorLabel()
+            componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+        } catch CalculatorError.dividedByZero {
+            currentEntryLabel.text = "NaN"
+            resetOperatorLabel()
+            componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+        } catch {
+            print(error)
+        }
     }
     
     func resetOperatorLabel() {
@@ -151,6 +165,12 @@ class ViewController: UIViewController {
         let operatorLabel = addLabel(text: currentOperatorLabel.text ?? "")
         let operandLabel = addLabel(text: operand)
         componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
+    }
+    
+    func calculate(input: String) throws -> Double {
+        let formula = ExpressionParser.parse(from: input)
+        
+        return try formula.result()
     }
 }
 

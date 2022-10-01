@@ -15,7 +15,9 @@ enum ExpressionParser {
         let operatorsInInput = input.split(with: " ")
                                     .filter { $0.count == 1 }
                                     .compactMap { Operator(rawValue: Character($0)) }
-        
+        print("input: \(input)")
+        print("operandsInInput: \(operandsInInput)")
+        print("operatorsInInput: \(operatorsInInput)")
         operandsInInput.forEach { operands.enqueue(element: $0) }
         
         operatorsInInput.forEach { operators.enqueue(element: $0) }
