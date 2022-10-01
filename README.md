@@ -65,28 +65,35 @@
 
 ```bash
 .
-├── View
-│   └── MainViewController.swift
-├── Controller
-│   └── CalculatorController.swift
-├── Model
-│   ├── CalculatorItemQueue.swift
-│   ├── ExpressionsParser.swift
-│   ├── Formula.swift
-│   ├── Node.swift
-│   └── Operator.swift
-├── Protocol
-│   └── CalculateItemProtocol.swift
-├── Extension
-│   ├── Double+Extensions.swift
-│   └── String+Extensions.swift
-├── Delegate
-│   ├── AppDelegate.swift
-│   └── SceneDelegate.swift
-├── Base.lproj
-│   ├── LaunchScreen.storyboard
-│   └── Main.storyboard
-└── Info.plist
+├── Calculator
+│   ├── View
+│   │   └── MainViewController.swift
+│   ├── Controller
+│   │   └── CalculatorController.swift
+│   ├── Model
+│   │   ├── CalculatorItemQueue.swift
+│   │   ├── ExpressionsParser.swift
+│   │   ├── Formula.swift
+│   │   ├── Node.swift
+│   │   └── Operator.swift
+│   ├── Protocol
+│   │   └── CalculateItemProtocol.swift
+│   ├── Extension
+│   │   ├── Double+Extensions.swift
+│   │   └── String+Extensions.swift
+│   ├── Delegate
+│   │   ├── AppDelegate.swift
+│   │   └── SceneDelegate.swift
+│   ├── Base.lproj
+│   │   ├── LaunchScreen.storyboard
+│   │   └── Main.storyboard
+│   └── Info.plist
+└── CalculatorTests
+    ├── CalculatorItemQueueTests.swift
+    ├── ExpressionParserTests.swift
+    ├── FormulaTests.swift
+    ├── OperatorTests.swift
+    └── StringSplitTests.swift
 
 ```
 
