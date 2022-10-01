@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
 
     private var expression: String = ""
+    let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet private weak var operandAndOperatorScrollView: UIScrollView!
     @IBOutlet private weak var operandAndOperatorStackView: UIStackView!
@@ -19,6 +20,8 @@ class ViewController: UIViewController {
         
         super.viewDidLoad()
         removeAlloperandAndOperatorStackViewSubviews()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
     }
     
     @IBAction private func numberZeroButtonPressed(_ sender: UIButton) {
@@ -168,10 +171,6 @@ class ViewController: UIViewController {
     }
     
     private func fetchformattedNumbers(number: Double) -> String {
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
         guard let result = numberFormatter.string(for: number) else { return "" }
         return result
     }
