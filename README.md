@@ -39,29 +39,29 @@
 
 ```
 ├── Calculator
-│   ├── Base.lproj
-│   ├── Controller
-│   │   ├── AppDelegate.swift
-│   │   ├── SceneDelegate.swift
-│   │   └── CalculatorVC.swift
-│   ├── Info.plist
-│   ├── Model
-│   │   ├── CalculateItem.swift
-│   │   ├── CalculatorItemQueue.swift
-│   │   ├── ExpressionParser.swift
-│   │   ├── Formula.swift
-│   │   └── Operator.swift
-│   └── View
-│       ├── Assets.xcassets
-│       ├── CircleButton.swift
-│       │   ├── AccentColor.colorset
-│       │   │   └── Contents.json
-│       │   ├── AppIcon.appiconset
-│       │   │   └── Contents.json
-│       │   └── Contents.json
-│       └── Base.lproj
-│           ├── LaunchScreen.storyboard
-│           └── Main.storyboard          
+│   ├── Base.lproj
+│   ├── Controller
+│   │   ├── AppDelegate.swift
+│   │   ├── SceneDelegate.swift
+│   │   └── CalculatorVC.swift
+│   ├── Info.plist
+│   ├── Model
+│   │   ├── CalculateItem.swift
+│   │   ├── CalculatorItemQueue.swift
+│   │   ├── ExpressionParser.swift
+│   │   ├── Formula.swift
+│   │   └── Operator.swift
+│   └── View
+│       ├── Assets.xcassets
+│       ├── CircleButton.swift
+│       │   ├── AccentColor.colorset
+│       │   │   └── Contents.json
+│       │   ├── AppIcon.appiconset
+│       │   │   └── Contents.json
+│       │   └── Contents.json
+│       └── Base.lproj
+│           ├── LaunchScreen.storyboard
+│           └── Main.storyboard          
 └── CalculatorTests
     ├── CalculatorItemQueueTests.swift
     ├── ExpressionParserTests.swift
@@ -342,6 +342,7 @@
 [Apple Developer Doc - NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)  
 [오토레이아웃 정복하기 - 야곰닷넷](https://yagom.net/courses/autolayout/)  
 
+
 ---
 
-[🔝 맨 위로 이동하기](#-계산기) 
+[🔝 맨 위로 이동하기](#계산기)
