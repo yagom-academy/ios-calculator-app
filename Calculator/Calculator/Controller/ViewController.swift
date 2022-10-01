@@ -55,40 +55,40 @@ class ViewController: UIViewController {
     }
 
     @IBAction func numberButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
+        guard let titleText = sender.currentTitle,
               displayLabelText != nameSpace.nan else {
             return
         }
         
         if displayLabelText == nameSpace.zero {
-            displayLabelText = title
+            displayLabelText = titleText
         } else {
-            displayLabelText = displayLabelText + title
+            displayLabelText = displayLabelText + titleText
         }
     }
     
     @IBAction func zeroButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
+        guard let titleText = sender.currentTitle,
               displayLabelText != nameSpace.nan else {
             return
         }
         
         if displayLabelText != nameSpace.zero {
-            displayLabelText = displayLabelText + title
+            displayLabelText = displayLabelText + titleText
         }
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
+        guard let titleText = sender.currentTitle,
               displayLabelText != nameSpace.nan else {
             return
         }
         
-        displayLabelText = displayLabelText + title
+        displayLabelText = displayLabelText + titleText
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard let title = sender.currentTitle,
+        guard let titleText = sender.currentTitle,
               let displayText = calculatorDisplayLabel.text,
               let operatorText = operatorDisplayLabel.text else {
             return
@@ -100,7 +100,7 @@ class ViewController: UIViewController {
         }
         
         if formula.isEmpty == false {
-            operatorDisplayLabel.text = title
+            operatorDisplayLabel.text = titleText
         }
         
         displayLabelText = nameSpace.zero
