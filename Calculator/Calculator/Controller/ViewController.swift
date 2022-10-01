@@ -51,14 +51,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func zeroButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculate && !operand.isEmpty else {
             return
         }
         
         var input: String = ""
         if operand.last == "." {
             input = ".0"
-        } else if !operand.isEmpty {
+        } else {
             input = "0"
         }
         
@@ -105,6 +105,10 @@ class ViewController: UIViewController {
     @IBAction func calculateButtonTapped(_ sender: Any) {
         guard !isCalculate else {
             return
+        }
+        
+        if operand.isEmpty {
+            operand += "0"
         }
         
         creatFormulaLog()
