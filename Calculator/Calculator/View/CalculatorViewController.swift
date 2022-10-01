@@ -146,7 +146,7 @@ final class CalculatorViewController: UIViewController {
     private func clearAll() {
         resetlastOperatorLabel()
         resetCurrentNumberLabel()
-        historyStackView.removeAllSubviews(of: historyStackView)
+        historyStackView.removeAllSubviews()
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
