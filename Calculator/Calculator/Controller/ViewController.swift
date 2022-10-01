@@ -8,11 +8,11 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    @IBOutlet weak var calculatorDisplayLabel: UILabel!
-    @IBOutlet weak var operatorDisplayLabel: UILabel!
-    @IBOutlet weak var calculatorArchive: UIStackView!
+    @IBOutlet private weak var calculatorDisplayLabel: UILabel!
+    @IBOutlet private weak var operatorDisplayLabel: UILabel!
+    @IBOutlet private weak var calculatorArchive: UIStackView!
 
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private var displayLabelText: String = namespace.Zero {
         didSet {
@@ -43,7 +43,7 @@ final class ViewController: UIViewController {
         setAccessibilityIdentifier()
     }
     
-    func setAccessibilityIdentifier() {
+    private func setAccessibilityIdentifier() {
         calculatorDisplayLabel.isAccessibilityElement = true
         calculatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.CalculatorDisplayLabel
         
@@ -54,7 +54,7 @@ final class ViewController: UIViewController {
         calculatorArchive.accessibilityIdentifier = accessibilityIdentifier.CalculatorArchive
     }
 
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
+    @IBAction private func numberButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
               displayLabelText != namespace.NaN else {
             return
@@ -67,7 +67,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func zeroButtonTapped(_ sender: UIButton) {
+    @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
               displayLabelText != namespace.NaN else {
             return
@@ -78,7 +78,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
               displayLabelText != namespace.NaN else {
             return
@@ -87,7 +87,7 @@ final class ViewController: UIViewController {
         displayLabelText = displayLabelText + titleText
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
               let displayText = calculatorDisplayLabel.text,
               let operatorText = operatorDisplayLabel.text else {
@@ -106,7 +106,7 @@ final class ViewController: UIViewController {
         displayLabelText = namespace.Zero
     }
     
-    func pushInFormula(operand: String, `operator`: String) {
+    private func pushInFormula(operand: String, `operator`: String) {
         if self.formula.isEmpty {
             self.formula += operand
         } else {
@@ -114,7 +114,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    func pushInArchive(operand: String, `operator`: String) {
+    private func pushInArchive(operand: String, `operator`: String) {
         let generator = StackViewCell(operand: operand, operator: `operator`)
         let stackView = generator.generateStackView()
         
@@ -123,19 +123,19 @@ final class ViewController: UIViewController {
         scrollToBottom()
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         self.scrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         self.scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+    @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
         if displayLabelText != namespace.Zero {
             displayLabelText = changeSign(displayLabelText)
         }
     }
     
-    func changeSign(_ text: String) -> String {
+    private func changeSign(_ text: String) -> String {
         if text.first == Character(namespace.Negative) {
             let secondIndex = text.index(after: text.startIndex)
             return String(text[secondIndex...])
@@ -144,11 +144,11 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         displayLabelText = namespace.Zero
     }
     
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         displayLabelText = namespace.Zero
         operatorDisplayLabel.text = namespace.Empty
         self.formula = namespace.Empty
@@ -156,13 +156,13 @@ final class ViewController: UIViewController {
         resetArchive()
     }
     
-    func resetArchive() {
+    private func resetArchive() {
         calculatorArchive.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
     }
     
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard let operatorText = operatorDisplayLabel.text,
               self.formula != namespace.Empty else {
             return
