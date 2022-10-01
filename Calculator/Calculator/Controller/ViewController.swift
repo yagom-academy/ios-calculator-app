@@ -7,8 +7,7 @@ import UIKit
 
 class ViewController: UIViewController {
     private var isCalculated: Bool = false
-    private var expression: String = ""
-    private var currentOperand: String = "0"
+    private var operandHandler: OperandHandler = OperandHandler()
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -18,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearOperand()
+        clearOperandLabel()
         operatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
@@ -30,37 +29,37 @@ class ViewController: UIViewController {
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
         guard let tappedOperand = sender.currentTitle, operandLabel.text?.count ?? 0 <= 18 else { return }
-        if isCalculated { clearOperand() }
+        if isCalculated { clearOperandLabel() }
         
         switch tappedOperand {
         case ".":
-            handleDotButton()
+            operandHandler.handleDotButton()
         case "0", "00":
-            handleZeroButtons(from: tappedOperand)
+            operandHandler.handleZeroButtons(from: tappedOperand)
         default:
-            appendOperands(from: tappedOperand)
+            operandHandler.appendOperands(from: tappedOperand)
         }
         
-        displayOperand()
+        operandHandler.displayOperand(to: operandLabel)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let tappedOperator = sender.currentTitle, Double(currentOperand) != .zero else {
+        guard let tappedOperator = sender.currentTitle, Double(operandHandler.currentOperand) != .zero else {
             operatorLabel.text = sender.currentTitle
             return
         }
         
         appendExpressionQueue()
         
-        clearOperand()
+        clearOperandLabel()
         operatorLabel.text = tappedOperator
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
-        guard !expression.isEmpty else { return }
+        guard !operandHandler.expression.isEmpty else { return }
         appendExpressionQueue()
         
-        var components = ExpressionParser.parse(from: expression)
+        var components = ExpressionParser.parse(from: operandHandler.expression)
         let result = components.result()
         
         if result.isNaN {
@@ -71,75 +70,35 @@ class ViewController: UIViewController {
         
         operatorLabel.text = ""
         isCalculated = true
-        currentOperand = "\(result)"
-        expression = ""
+        operandHandler.setCurrentOperand("\(result)")
+        operandHandler.clearExpression()
     }
     
     @IBAction func tapSignButton(_ sender: UIButton) {
-        handleSignButton()
+        operandHandler.handleSignButton()
         isCalculated = false
-        operandLabel.text = currentOperand.addComma()
+        operandLabel.text = operandHandler.currentOperand.addComma()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
-        clearOperand()
+        clearOperandLabel()
     }
 
     @IBAction func tapACButton(_ sender: UIButton) {
         expressionQueue.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        clearOperand()
+        clearOperandLabel()
+        operandHandler.clearExpression()
         operatorLabel.text = ""
     }
 }
 
-// handling Operands
+// handling OperandsLabel
 extension ViewController {
-    private func handleSignButton() {
-        guard currentOperand != "0" else { return }
-        
-        if currentOperand.first == "-" {
-            currentOperand.removeFirst()
-        } else {
-            currentOperand = "-" + currentOperand
-        }
-    }
-    
-    private func handleDotButton() {
-        guard !currentOperand.contains(".") else { return }
-        currentOperand.append(".")
-    }
-    
-    private func handleZeroButtons(from operand: String) {
-        guard currentOperand != "0" else { return }
-        currentOperand.append(operand)
-    }
-    
-    private func appendOperands(from operand: String) {
-        if currentOperand == "0" {
-            currentOperand = operand
-        } else {
-            currentOperand.append(operand)
-        }
-    }
-    
-    private func clearOperand() {
+    private func clearOperandLabel() {
         isCalculated = false
-        currentOperand = "0"
+        operandHandler.setCurrentOperand("0")
         operandLabel.text = "0"
-    }
-    
-    private func displayOperand() {
-        let integerPart: String = currentOperand.components(separatedBy: ".")[0]
-        
-        if currentOperand.last == "." {
-            operandLabel.text = integerPart.addComma() + "."
-        } else if currentOperand.contains("."), currentOperand.last != "." {
-            let decimalPart: String = currentOperand.components(separatedBy: ".")[1]
-            operandLabel.text = integerPart.addComma() + "." + decimalPart
-        } else {
-            operandLabel.text = currentOperand.addComma()
-        }
     }
 }
 
@@ -175,11 +134,11 @@ extension ViewController {
         if !expressionQueue.arrangedSubviews.isEmpty {
             let operatorLabel: UILabel = makeExpressionLabel(currentOperator)
             stackView.addArrangedSubview(operatorLabel)
-            expression.append(" \(currentOperator)")
+            operandHandler.appendToExpression(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(currentOperand.addComma())
+        let operandLabel: UILabel = makeExpressionLabel(operandHandler.currentOperand.addComma())
         stackView.addArrangedSubview(operandLabel)
-        expression.append(" \(currentOperand)")
+        operandHandler.appendToExpression(" \(operandHandler.currentOperand)")
         
         expressionQueue.addArrangedSubview(stackView)
         updateScroll()
