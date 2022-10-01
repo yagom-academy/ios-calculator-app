@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         removeAlloperandAndOperatorStackViewSubviews()
     }
     
-    @IBAction func numberZeroButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberZeroButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             return
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
         updateOperandLabel(with: "0")
     }
     
-    @IBAction func numberDoubleZeroButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberDoubleZeroButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             return
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         updateOperandLabel(with: "00")
     }
     
-    @IBAction func decimalPointButtonPressed(_ sender: UIButton) {
+    @IBAction private func decimalPointButtonPressed(_ sender: UIButton) {
         
         guard let isContainingPoint = operandLabel.text?.contains(".") else { return }
         if isContainingPoint {
@@ -49,43 +49,43 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func numberOnePressed(_ sender: UIButton) {
+    @IBAction private func numberOnePressed(_ sender: UIButton) {
         updateOperandLabel(with: "1")
     }
     
-    @IBAction func numberTwoButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberTwoButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "2")
     }
     
-    @IBAction func numberThreeButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberThreeButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "3")
     }
     
-    @IBAction func numberFourButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberFourButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "4")
     }
     
-    @IBAction func numberFiveButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberFiveButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "5")
     }
     
-    @IBAction func numberSixButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberSixButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "6")
     }
     
-    @IBAction func numberSevenButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberSevenButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "7")
     }
     
-    @IBAction func numberEightButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberEightButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "8")
     }
     
-    @IBAction func numberNineButtonPressed(_ sender: UIButton) {
+    @IBAction private func numberNineButtonPressed(_ sender: UIButton) {
         updateOperandLabel(with: "9")
     }
     
-    @IBAction func divideButtonPressed(_ sender: UIButton) {
+    @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             updateExpression(nextOperator: "÷")
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
         updateExpression(nextOperator: "÷")
     }
     
-    @IBAction func multiplyButtonPressed(_ sender: UIButton) {
+    @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             updateExpression(nextOperator: "×")
@@ -105,7 +105,7 @@ class ViewController: UIViewController {
         updateExpression(nextOperator: "×")
     }
     
-    @IBAction func subtractButtonPressed(_ sender: UIButton) {
+    @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             updateExpression(nextOperator: "−")
@@ -115,7 +115,7 @@ class ViewController: UIViewController {
         updateExpression(nextOperator: "−")
     }
     
-    @IBAction func addButtonPressed(_ sender: UIButton) {
+    @IBAction private func addButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == "0" {
             updateExpression(nextOperator: "+")
@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         updateExpression(nextOperator: "+")
     }
     
-    @IBAction func resultButtonPressed(_ sender: UIButton) {
+    @IBAction private func resultButtonPressed(_ sender: UIButton) {
         
         if expression == "" {
             return
@@ -136,11 +136,11 @@ class ViewController: UIViewController {
         updateResult(result: result)
     }
     
-    @IBAction func CEButtonPressed(_ sender: Any) {
+    @IBAction private func CEButtonPressed(_ sender: Any) {
         operandLabel.text = "0"
     }
     
-    @IBAction func ACButtonPressed(_ sender: Any) {
+    @IBAction private func ACButtonPressed(_ sender: Any) {
         
         resetOperandLabel()
         resetOperatorLabel()
@@ -148,7 +148,7 @@ class ViewController: UIViewController {
         removeAlloperandAndOperatorStackViewSubviews()
     }
     
-    @IBAction func signChangeButtonPressed(_ sender: Any) {
+    @IBAction private func signChangeButtonPressed(_ sender: Any) {
         changeOperatorSign()
     }
     
