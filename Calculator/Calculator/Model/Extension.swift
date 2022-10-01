@@ -40,6 +40,19 @@ extension String {
         }
         return returnValue + "." + stringsSplitedByDot[1]
     }
+    
+    func removeComma() -> String {
+        return self.components(separatedBy: ",").joined()
+    }
+}
+
+extension Optional where Wrapped == String {
+    func removeComma() -> String {
+        if let strings: String = self {
+            return strings.components(separatedBy: ",").joined()
+        }
+        return ""
+    }
 }
 
 extension UIButton {

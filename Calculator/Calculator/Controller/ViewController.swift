@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         }
         
         let operatorText = sender.operatorRawValue
-        partialFormula += removeComma(operandText) + operatorText
+        partialFormula += operandText.removeComma() + operatorText
         formula = ExpressionParser.parse(from: partialFormula)
         addStackViewInScrollView()
         mainOperandLabel.text = "0"
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        operandLabelText = removeComma(mainOperandLabel.text)
+        operandLabelText = mainOperandLabel.text.removeComma()
         
         guard operandLabelText != "0" else {
             mainOperandLabel.text = sender.tag.description
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        operandLabelText = removeComma(mainOperandLabel.text)
+        operandLabelText = mainOperandLabel.text.removeComma()
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
-        operandLabelText = removeComma(mainOperandLabel.text)
+        operandLabelText = mainOperandLabel.text.removeComma()
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
@@ -98,7 +98,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        operandLabelText = removeComma(mainOperandLabel.text)
+        operandLabelText = mainOperandLabel.text.removeComma()
         
         guard operandLabelText != ".",
               operandLabelText.contains(".") == false else {
@@ -106,13 +106,6 @@ class ViewController: UIViewController {
         }
         
         mainOperandLabel.text = operandLabelText.applyNumberFormatter() + "."
-    }
-    
-    func removeComma(_ string: String?) -> String {
-        guard let returnValue = string?.components(separatedBy: ",").joined() else {
-            return ""
-        }
-        return returnValue
     }
 }
 
