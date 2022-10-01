@@ -26,13 +26,13 @@ class ViewController: UIViewController {
             
             calculatorDisplayLabel.text = displayLabelText
             
-            guard let textToDouble = Double(displayLabelText) else {
+            guard let convertedTextToDouble = Double(displayLabelText) else {
                 return
             }
             
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
-            calculatorDisplayLabel.text = numberFormatter.string(from: textToDouble as NSNumber)
+            calculatorDisplayLabel.text = numberFormatter.string(from: convertedTextToDouble as NSNumber)
         }
     }
     
