@@ -99,7 +99,7 @@ class ViewController: UIViewController {
             pushInArchive(operand: displayText, operator: operatorText)
         }
         
-        if formula.isEmpty == false {
+        if self.formula.isEmpty == false {
             operatorDisplayLabel.text = titleText
         }
         
@@ -108,9 +108,9 @@ class ViewController: UIViewController {
     
     func pushInFormula(operand: String, `operator`: String) {
         if self.formula.isEmpty {
-            formula += operand
+            self.formula += operand
         } else {
-            formula += `operator` + operand
+            self.formula += `operator` + operand
         }
     }
     
@@ -147,7 +147,7 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         displayLabelText = nameSpace.zero
         operatorDisplayLabel.text = nameSpace.empty
-        formula = nameSpace.empty
+        self.formula = nameSpace.empty
         
         allClearArchive()
     }
@@ -160,7 +160,7 @@ class ViewController: UIViewController {
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
         guard let operatorText = operatorDisplayLabel.text,
-              formula != nameSpace.empty else {
+              self.formula != nameSpace.empty else {
             return
         }
         
@@ -173,7 +173,7 @@ class ViewController: UIViewController {
             let result = try parsedFormula.result()
             displayLabelText = String(result)
             
-            formula = nameSpace.empty
+            self.formula = nameSpace.empty
             operatorDisplayLabel.text = nameSpace.empty
         } catch CalculatorError.divideZero {
             displayLabelText = nameSpace.nan
