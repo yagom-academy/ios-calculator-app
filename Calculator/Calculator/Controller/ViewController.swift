@@ -67,6 +67,7 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonPressed(_ sender: UIButton) {
         componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         resetOperatorLabel()
+        resetCurrentEntry()
     }
     
     @IBAction func calculateButtonPressed(_ sender: UIButton) {
@@ -85,7 +86,7 @@ class ViewController: UIViewController {
         
         do {
             let result = try calculate(input: formulaInput)
-            currentEntryLabel.text = result.description
+            currentEntryLabel.text = result.description.formatNumberToDecimal()
             resetOperatorLabel()
             componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         } catch CalculatorError.dividedByZero {
@@ -119,7 +120,7 @@ class ViewController: UIViewController {
         }
         
         if input != "." {
-            guard let convertedEntry = formatNumber(input: currentEntry) else { return }
+            guard let convertedEntry = currentEntry.formatNumberToDecimal() else { return }
             currentEntryLabel.text = convertedEntry
         } else {
             currentEntryLabel.text = currentEntry
