@@ -18,11 +18,11 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         calculatorController = CalculatorController(view: self)
-        configureDisplayLabels()
+        resetDisplayLabels()
         configureNumberFormatter()
     }
     
-    private func configureDisplayLabels() {
+    private func resetDisplayLabels() {
         displaySignLabel.text = ""
         displayNumberLabel.text = "0"
         formulaVerticalStackView.subviews.forEach {
@@ -31,16 +31,14 @@ final class MainViewController: UIViewController {
     }
     
     private func configureNumberFormatter() {
-        self.numberFormatter.maximumFractionDigits = 16
-        self.numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 16
+        numberFormatter.numberStyle = .decimal
     }
     
     private func changeCalculateResultFormat(result: String?) -> String? {
         guard let text = result,
               let number = Double(text),
-              let changedFormatResult: String = numberFormatter.string(from: NSNumber(value: number)) else {
-            return nil
-        }
+              let changedFormatResult: String = numberFormatter.string(from: NSNumber(value: number)) else { return nil }
         
         return changedFormatResult
     }
@@ -67,7 +65,7 @@ final class MainViewController: UIViewController {
         formulaScrollView.setContentOffset(contentOffsetPoint, animated: false)
     }
     
-    func resetDisplayNumberLabel() {
+    private func resetDisplayNumberLabel() {
         displayNumberLabel.text = "0"
         calculatorController.viewDisplayNumber = "0"
     }
@@ -106,7 +104,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func tapACButton(_ sender: UIButton) {
-        configureDisplayLabels()
+        resetDisplayLabels()
         calculatorController.tappedACButton()
     }
     
