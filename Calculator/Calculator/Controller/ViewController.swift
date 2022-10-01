@@ -101,6 +101,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonTapped(_ sender: Any) {
+        if operand.isEmpty {
+            return
+        }
+        
         if !isNegativeSign {
             operand = "-" + operand
         } else {
