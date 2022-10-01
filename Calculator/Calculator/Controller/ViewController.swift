@@ -29,9 +29,7 @@ class ViewController: UIViewController {
         
         resetCurrentEntry()
         resetOperatorLabel()
-        componentsStackView.arrangedSubviews.forEach({
-            $0.removeFromSuperview()
-        })
+        resetScrollView()
     }
     
     @IBAction private func clearEntryButtonPressed(_ sender: UIButton) {
@@ -77,7 +75,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func allClearButtonPressed(_ sender: UIButton) {
-        componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+        resetScrollView()
         resetOperatorLabel()
         resetCurrentEntry()
     }
@@ -100,11 +98,11 @@ class ViewController: UIViewController {
             let result = try calculate(input: formulaInput)
             currentEntryLabel.text = result.description.formatNumberToDecimal()
             resetOperatorLabel()
-            componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+            resetScrollView()
         } catch CalculatorError.dividedByZero {
             currentEntryLabel.text = CalculatorItems.nan
             resetOperatorLabel()
-            componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+            resetScrollView()
         } catch {
             print(error)
         }
@@ -116,6 +114,10 @@ class ViewController: UIViewController {
     
     private func resetCurrentEntry() {
         currentEntryLabel.text = CalculatorItems.zero
+    }
+    
+    private func resetScrollView() {
+        componentsStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func updateEntry(using input: String) {
