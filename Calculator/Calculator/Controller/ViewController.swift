@@ -9,11 +9,53 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var mainOperandLabel: UILabel!
+    @IBOutlet weak var mainOperatorLabel: UILabel!
+    @IBOutlet weak var formulaHistoryView: UIStackView!
+    @IBOutlet weak var addButton: UIButton!
     var operandLabelText: String = ""
+    var partialFormula: String = ""
+    var formula: Formula = ExpressionParser.parse(from: "")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainOperandLabel.text = mainOperandLabel.text ?? "".applyNumberFormatter()
+        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatter()
+    }
+    
+    @IBAction func touchUpAddButton(_ sender: UIButton) {
+        guard let operandText = mainOperandLabel.text,
+              operandText != "0" else {
+            return
+        }
+        
+        sender.accessibilityLabel = "+"
+        let operatorText = sender.accessibilityLabel ?? ""
+        partialFormula += removeComma(operandText) + operatorText
+        formula = ExpressionParser.parse(from: partialFormula)
+        addStackViewInScrollView()
+        mainOperandLabel.text = "0"
+        mainOperatorLabel.text = operatorText
+    }
+    
+    func addStackViewInScrollView() {
+        let stackView: UIStackView = UIStackView(frame: CGRect())
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        let operandLabel: UILabel = UILabel()
+        let operatorLabel: UILabel = UILabel()
+        operandLabel.text = mainOperandLabel.text
+        operandLabel.textColor = .white
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.text = mainOperatorLabel.text
+        operatorLabel.textColor = .white
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        [operatorLabel, operandLabel].map {
+                stackView.addArrangedSubview($0)
+            }
+        
+        formulaHistoryView.addArrangedSubview(stackView)
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
