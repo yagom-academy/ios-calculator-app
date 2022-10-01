@@ -9,20 +9,20 @@ import UIKit
 struct CalculatorItems {
     private init() { }
     
-    static let zero = "0"
-    static let doubleZero = "00"
-    static let negativeSign = "-"
-    static let dot = "."
-    static let comma = ","
-    static let nan = "NaN"
-    static let empty = ""
+    fileprivate static let zero = "0"
+    fileprivate static let doubleZero = "00"
+    fileprivate static let negativeSign = "-"
+    fileprivate static let dot = "."
+    fileprivate static let comma = ","
+    fileprivate static let nan = "NaN"
+    fileprivate static let empty = ""
 }
 
 class ViewController: UIViewController {
-    @IBOutlet weak var currentEntryLabel: UILabel!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var componentsStackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var currentEntryLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var componentsStackView: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +34,11 @@ class ViewController: UIViewController {
         })
     }
     
-    @IBAction func clearEntryButtonPressed(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonPressed(_ sender: UIButton) {
         resetCurrentEntry()
     }
     
-    @IBAction func signChangeButtonPressed(_ sender: UIButton) {
+    @IBAction private func signChangeButtonPressed(_ sender: UIButton) {
         guard var currentEntry = currentEntryLabel.text,
               currentEntry != CalculatorItems.zero else { return }
         
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         currentEntryLabel.text = currentEntry
     }
     
-    @IBAction func operandButtonPressed(_ sender: UIButton) {
+    @IBAction private func operandButtonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 0...9:
             updateEntry(using: sender.tag.description)
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+    @IBAction private func operatorButtonPressed(_ sender: UIButton) {
         guard let operand = currentEntryLabel.text, operand != CalculatorItems.zero ||
               !componentsStackView.subviews.isEmpty else { return }
         
@@ -76,13 +76,13 @@ class ViewController: UIViewController {
         resetCurrentEntry()
     }
     
-    @IBAction func allClearButtonPressed(_ sender: UIButton) {
+    @IBAction private func allClearButtonPressed(_ sender: UIButton) {
         componentsStackView.subviews.forEach { $0.removeFromSuperview() }
         resetOperatorLabel()
         resetCurrentEntry()
     }
     
-    @IBAction func calculateButtonPressed(_ sender: UIButton) {
+    @IBAction private func calculateButtonPressed(_ sender: UIButton) {
         guard !componentsStackView.subviews.isEmpty else { return }
         guard let operand = currentEntryLabel.text else { return }
         
@@ -110,15 +110,15 @@ class ViewController: UIViewController {
         }
     }
     
-    func resetOperatorLabel() {
+    private func resetOperatorLabel() {
         currentOperatorLabel.text = CalculatorItems.empty
     }
     
-    func resetCurrentEntry() {
+    private func resetCurrentEntry() {
         currentEntryLabel.text = CalculatorItems.zero
     }
     
-    func updateEntry(using input: String) {
+    private func updateEntry(using input: String) {
         guard var currentEntry = currentEntryLabel.text,
                   currentEntry != CalculatorItems.zero || input != CalculatorItems.doubleZero else { return }
         guard input != CalculatorItems.dot || !currentEntry.contains(input) else { return }
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addLabel(text: String) -> UILabel {
+    private func addLabel(text: String) -> UILabel {
         let label = UILabel()
         label.text = text
         label.textColor = .white
@@ -147,20 +147,20 @@ class ViewController: UIViewController {
         return label
     }
     
-    func addStackView(operandLabel: UILabel, operatorLabel: UILabel) -> UIStackView {
+    private func addStackView(operandLabel: UILabel, operatorLabel: UILabel) -> UIStackView {
         let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         stackView.spacing = 10
         
         return stackView
     }
     
-    func addFormula(operand: String) {
+    private func addFormula(operand: String) {
         let operatorLabel = addLabel(text: currentOperatorLabel.text ?? CalculatorItems.empty)
         let operandLabel = addLabel(text: operand)
         componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
     }
     
-    func calculate(input: String) throws -> Double {
+    private func calculate(input: String) throws -> Double {
         let formula = ExpressionParser.parse(from: input)
         
         return try formula.result()
