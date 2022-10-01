@@ -3,12 +3,11 @@
 //  Created by 미니.
 //
 
-import Foundation
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operands = componenetsByOperators(from: input).compactMap(Double.init)
         let operators = componentsByOperands(from: input).compactMap { Operator(rawValue: $0) }
+        
         return Formula(operands: operands, operators: operators)
     }
     
@@ -45,7 +44,6 @@ enum ExpressionParser {
         operators.forEach { sign in
             input = input.replacingOccurrences(of: "\(sign)-", with: "\(sign)")
         }
-        
         return input.filter { !$0.isNumber }
     }
 }
