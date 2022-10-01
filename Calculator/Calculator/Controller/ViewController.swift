@@ -36,21 +36,34 @@ class ViewController: UIViewController {
     
     @IBAction func dotButtonTapped(_ sender: Any) {
         if !operand.isEmpty && !isDotButtonTapped {
-            updateOperandLabel(with: ".")
+            operandLabel.text = setNumberFormat(with: operand) + "."
+            operand += "."
             isDotButtonTapped = true
         }
     }
     
     @IBAction func zeroButtonTapped(_ sender: Any) {
-        if !operand.isEmpty {
-            updateOperandLabel(with: "0")
+        var input: String = ""
+        if operand.last == "." {
+            input = ".0"
+        } else if !operand.isEmpty {
+            input = "0"
         }
+        
+        operandLabel.text = setNumberFormat(with: operand) + input
+        operand += "0"
     }
     
     @IBAction func doubleZeroButtonTapped(_ sender: Any) {
-        if !operand.isEmpty {
-            updateOperandLabel(with: "00")
+        var input: String = ""
+        if operand.last == "." {
+            input = ".00"
+        } else if !operand.isEmpty {
+            input = "00"
         }
+        
+        operandLabel.text = setNumberFormat(with: operand) + input
+        operand += "0"
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
@@ -131,13 +144,13 @@ class ViewController: UIViewController {
     
     func updateOperandLabel(with input: String) {
         operand += input
-        operandLabel.text = operand
+        operandLabel.text = setNumberFormat(with: operand)
     }
     
     func updateOperatorLabel(with input: String) {
         if !isCalculate {
             arithmeticOperator = input
-            operatorLabel.text = arithmeticOperator
+            operatorLabel.text = setNumberFormat(with: arithmeticOperator)
         }
     }
 
@@ -147,6 +160,18 @@ class ViewController: UIViewController {
     
     func setOperatorLabelEmpty() {
         operatorLabel.text = ""
+    }
+    
+    func setNumberFormat(with input: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
+        guard let result = numberFormatter.string(for: Double(input)) else {
+            return input
+        }
+        
+        return result
     }
 }
 
