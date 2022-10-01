@@ -58,6 +58,19 @@ class ViewController: UIViewController {
             return
         }
     }
+
+    @IBAction func operatorButtonPressed(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle else { return }
+        operatorLabel.text = `operator`
+        
+        if let currentEntry = currentEntryLabel.text, currentEntry != "0" {
+            let operatorLabel = addLabel(text: `operator`)
+            let operandLabel = addLabel(text: currentEntry)
+            
+            componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
+            resetCurrentEntry()
+        }
+    }
     
     func resetCurrentEntry() {
         currentEntryLabel.text = "0"
@@ -101,7 +114,7 @@ class ViewController: UIViewController {
     }
     
     func addStackView(operandLabel: UILabel, operatorLabel: UILabel) -> UIStackView {
-        let stackView = UIStackView(arrangedSubviews: [operandLabel, operatorLabel])
+        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         stackView.spacing = 10
         
         return stackView
