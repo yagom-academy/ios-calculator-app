@@ -163,7 +163,8 @@ class ViewController: UIViewController {
     }
     
     func creatStackView() {
-        let stackView = LogStackView(operand: operand, arithmeticOperator: arithmeticOperator)
+        let logOperand = setNumberFormat(with: operand)
+        let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
         formulaStackView.addArrangedSubview(stackView)
     }
     
