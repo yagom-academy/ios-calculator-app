@@ -45,7 +45,7 @@ class MainViewController: UIViewController {
         return changedFormatResult
     }
     
-    func makeStakView() {
+    func makeStackView() {
         let operandLabel = UILabel()
         operandLabel.text = displayNumberLabel.text
         operandLabel.textColor = .white
@@ -95,7 +95,7 @@ class MainViewController: UIViewController {
         
         if displaySignLabel.text != "" {
             displaySignLabel.text = ""
-            makeStakView()
+            makeStackView()
         }
     }
     

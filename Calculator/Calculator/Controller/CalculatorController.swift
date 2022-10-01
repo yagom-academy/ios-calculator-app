@@ -4,7 +4,7 @@
 final class CalculatorController {
     let view: MainViewController
     var formula: Formula?
-    private var Expression: String = ""
+    private var expression: String = ""
     var viewDisplayNumber: String = "0"
     private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
@@ -12,10 +12,10 @@ final class CalculatorController {
     
     init(view: MainViewController) {
         self.view = view
-        self.formula = ExpressionParser.parse(from: Expression)
+        self.formula = ExpressionParser.parse(from: expression)
     }
     
-    private func isStartZero(stringNumber: String) -> Bool {
+    private func isFirstCharacterZero(stringNumber: String) -> Bool {
         if stringNumber.first == "0" {
             return true
         } else {
@@ -23,7 +23,7 @@ final class CalculatorController {
         }
     }
     
-    private func isOverCount20(stringNumber: String, input: String?) -> Bool {
+    private func isOverExpressionLimit(stringNumber: String, input: String?) -> Bool {
         var inputLimit: Int = 20
         
         if stringNumber.contains(".") == true {
@@ -44,7 +44,7 @@ final class CalculatorController {
     }
     
     private func canMakeHorizontalStackView() -> Bool {
-        if displaySign.rawValue != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
+        if displaySign.rawValue != " " && isFirstCharacterZero(stringNumber: viewDisplayNumber) == false {
             return true
         }
         
@@ -52,15 +52,15 @@ final class CalculatorController {
     }
     
     private func canChangedOperator() -> Bool {
-        return isStartZero(stringNumber: viewDisplayNumber) ? true : false
+        return isFirstCharacterZero(stringNumber: viewDisplayNumber) ? true : false
     }
     
     func tappedNumberButton(input: String?) -> String {
-        if isOverCount20(stringNumber: viewDisplayNumber, input: input) {
+        if isOverExpressionLimit(stringNumber: viewDisplayNumber, input: input) {
             return viewDisplayNumber
         }
         
-        if isStartZero(stringNumber: viewDisplayNumber) == true &&
+        if isFirstCharacterZero(stringNumber: viewDisplayNumber) == true &&
             viewDisplayNumber.contains(".") == false
         {
             input == "00" ? (viewDisplayNumber = "0") : (viewDisplayNumber = input ?? "0")
@@ -82,9 +82,9 @@ final class CalculatorController {
             
             return String(displaySign.rawValue)
         } else {
-            Expression += String(displaySign.rawValue) + viewDisplayNumber
+            expression += String(displaySign.rawValue) + viewDisplayNumber
             viewDisplayNumber = "0"
-            view.makeStakView()
+            view.makeStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
             
@@ -114,17 +114,17 @@ final class CalculatorController {
         if view.displaySignLabel.text == "" {
             displaySign = Operator.unknown
             view.displaySignLabel.text = ""
-            Expression = ""
+            expression = ""
         }
     }
     
-    private func callbackCalculateResult() -> String {
-        Expression += String(displaySign.rawValue) + viewDisplayNumber
-        Expression = Expression.trimmingCharacters(in: .whitespaces)
+    private func calculateResult() -> String {
+        expression += String(displaySign.rawValue) + viewDisplayNumber
+        expression = expression.trimmingCharacters(in: .whitespaces)
         canCalculate = false
-        view.makeStakView()
+        view.makeStackView()
         view.resetDisplayNumberLabel()
-        formula = ExpressionParser.parse(from: Expression)
+        formula = ExpressionParser.parse(from: expression)
         
         let result = formula?.result() ?? .nan
         
@@ -133,7 +133,7 @@ final class CalculatorController {
     
     func tappedCalculateButton() -> String {
         if canCalculate == true {
-            return callbackCalculateResult()
+            return calculateResult()
         } else {
             guard let calculatedResult = view.displayNumberLabel.text else { return "" }
             
@@ -152,7 +152,7 @@ final class CalculatorController {
     }
     
     func tappedACButton() {
-        Expression = ""
+        expression = ""
         viewDisplayNumber = "0"
         displaySign = Operator.unknown
         isFirstClick = true
