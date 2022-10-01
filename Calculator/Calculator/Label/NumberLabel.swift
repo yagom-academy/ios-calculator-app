@@ -11,12 +11,12 @@ class NumberLabel: UILabel {
     //MARK: - NumberLabel Properties
     private var decimal: String = "" {
         didSet {
-            self.text = interger + decimal
+            self.text = integer + decimal
         }
     }
-    private var interger: String = "0" {
+    private var integer: String = "0" {
         didSet {
-            self.text = decimal + interger
+            self.text = decimal + integer
         }
     }
     
@@ -31,7 +31,7 @@ class NumberLabel: UILabel {
         return number.isZero
     }
     private var isPositiveNumber: Bool {
-        return interger.contains(negativeNumberSign) == false
+        return integer.contains(negativeNumberSign) == false
     }
     private var hasDecimalPoints: Bool {
         return decimal.contains(decimalPoints)
@@ -47,20 +47,20 @@ class NumberLabel: UILabel {
             if number == zero || number == doublyZero {
                 return
             }
-            self.interger = number
+            self.integer = number
         } else if hasDecimalPoints == true {
             self.decimal += number
         } else {
             text.append(number)
-            appendInterger(for: text)
+            appendInteger(for: text)
         }
     }
     
-    private func appendInterger(for numberOfString: String) {
+    private func appendInteger(for numberOfString: String) {
         guard let number = CalculatorNumberFormatter.shared.number(from: numberOfString) else {
             return
         }
-        self.interger = CalculatorNumberFormatter.shared.string(for: number)!
+        self.integer = CalculatorNumberFormatter.shared.string(for: number)!
     }
     
     func appendDecimalPoints() {
@@ -75,17 +75,17 @@ class NumberLabel: UILabel {
             return
         }
         if isPositiveNumber == true {
-            self.interger = negativeNumberSign + self.interger
+            self.integer = negativeNumberSign + self.integer
         } else {
-            self.interger.removeFirst()
+            self.integer.removeFirst()
         }
     }
 }
 
 //MARK: - extension
-extension NumberLabel: InitializationProtocol {
-    func initialization() {
-        self.interger = initialValue
+extension NumberLabel: Resettable {
+    func reset() {
+        self.integer = initialValue
         self.decimal = ""
     }
 }

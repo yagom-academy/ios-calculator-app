@@ -49,8 +49,8 @@ class FormulaStackView: UIStackView {
     }
 }
 //MARK: - Extension
-extension FormulaStackView: InitializationProtocol {
-    func initialization() {
+extension FormulaStackView: Resettable {
+    func reset() {
         formula = ""
         self.arrangedSubviews.forEach {
             $0.removeFromSuperview()

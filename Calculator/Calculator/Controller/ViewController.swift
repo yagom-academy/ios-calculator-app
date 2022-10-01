@@ -8,18 +8,18 @@ import UIKit
 
 class ViewController: UIViewController {
     //MARK: - IBOutlet
-    @IBOutlet weak var numberLabel: NumberLabel!
-    @IBOutlet weak var operatorLabel: OperatorLabel!
-    @IBOutlet weak var formulaStackView: FormulaStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak private var numberLabel: NumberLabel!
+    @IBOutlet weak private var operatorLabel: OperatorLabel!
+    @IBOutlet weak private var formulaStackView: FormulaStackView!
+    @IBOutlet weak private var scrollView: UIScrollView!
     //MARK: - Properties
-    private var initializationList: [InitializationProtocol] = []
+    private var resetList: [Resettable] = []
     private var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initializationList = [numberLabel, operatorLabel, formulaStackView]
+        resetList = [numberLabel, operatorLabel, formulaStackView]
         initialization()
     }
     //MARK: - IBAction
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         if numberLabel.isReceiving == true && numberLabel.isZero == false {
             appendFormulaIntoStackView()
-            numberLabel.initialization()
+            numberLabel.reset()
         }
         
         operatorLabel.text = sender.operatorSign
@@ -50,15 +50,15 @@ class ViewController: UIViewController {
         }
         
         switch command {
-        case .AllClear:
+        case .allClear:
             initialization()
-        case .ClearElement:
-            numberLabel.initialization()
-        case .SwapNumberSign:
+        case .clearElement:
+            numberLabel.reset()
+        case .swapNumberSign:
             if isCalculated == false{
                 numberLabel.swapNumberSign()
             }
-        case .EnterDecimalPoints:
+        case .enterDecimalPoints:
             numberLabel.appendDecimalPoints()
         case .calculation:
             if isCalculated == false {
@@ -69,8 +69,8 @@ class ViewController: UIViewController {
     }
     //MARK: - Method
     private func initialization() {
-        initializationList.forEach {
-            $0.initialization()
+        resetList.forEach {
+            $0.reset()
         }
     }
     
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
             numberLabel.text = CalculatorNumberFormatter.shared.string(for: result)
         }
         
-        operatorLabel.initialization()
+        operatorLabel.reset()
         isCalculated = true
     }
     

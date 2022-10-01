@@ -10,9 +10,9 @@ class CommandButton: UIButton {
 }
 
 enum Command: String {
-    case AllClear = "AC"
-    case ClearElement = "CE"
-    case SwapNumberSign
-    case EnterDecimalPoints
+    case allClear = "AC"
+    case clearElement = "CE"
+    case swapNumberSign
+    case enterDecimalPoints
     case calculation
 }

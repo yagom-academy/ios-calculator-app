@@ -1,3 +1,0 @@
-protocol InitializationProtocol {
-    func initialization()
-}
