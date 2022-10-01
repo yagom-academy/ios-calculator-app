@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var clearEntryButton: UIButton!
     @IBOutlet weak var signChangeButton: UIButton!
     @IBOutlet weak var currentEntryLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var componentsStackView: UIStackView!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         resetCurrentEntry()
         resetOperatorLabel()
         componentsStackView.arrangedSubviews.forEach({
-            $0.isHidden = true
+            $0.removeFromSuperview()
         })
     }
     
@@ -61,16 +61,17 @@ class ViewController: UIViewController {
     }
 
     @IBAction func operatorButtonPressed(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle else { return }
-        operatorLabel.text = `operator`
+        guard let operand = currentEntryLabel.text, operand != "0" ||
+              !componentsStackView.subviews.isEmpty else { return }
         
-        if let currentEntry = currentEntryLabel.text, currentEntry != "0" {
-            let operatorLabel = addLabel(text: `operator`)
-            let operandLabel = addLabel(text: currentEntry)
-            
+        if operand != "0" {
+            let operatorLabel = addLabel(text: currentOperatorLabel.text ?? "")
+            let operandLabel = addLabel(text: operand)
             componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
-            resetCurrentEntry()
         }
+        
+        currentOperatorLabel.text = sender.currentTitle
+        resetCurrentEntry()
     }
     
     @IBAction func allClearButtonPressed(_ sender: UIButton) {
@@ -79,7 +80,7 @@ class ViewController: UIViewController {
     }
     
     func resetOperatorLabel() {
-        operatorLabel.text = ""
+        currentOperatorLabel.text = ""
     }
     
     func resetCurrentEntry() {
