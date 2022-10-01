@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = addComma(number: String(result))
+            operandLabel.text = String(result).addComma()
         }
         
         operatorLabel.text = ""
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     @IBAction func tapSignButton(_ sender: UIButton) {
         handleSignButton()
         isCalculated = false
-        operandLabel.text = addComma(number: currentOperand)
+        operandLabel.text = currentOperand.addComma()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -90,14 +90,6 @@ class ViewController: UIViewController {
         
         clearOperand()
         operatorLabel.text = ""
-    }
-}
-
-// handling number
-extension ViewController {
-    private func addComma(number: String) -> String {
-        guard let result = numberFormatter.string(for: Double(number)) else { return number }
-        return result
     }
 }
 
@@ -141,12 +133,12 @@ extension ViewController {
         let integerPart: String = currentOperand.components(separatedBy: ".")[0]
         
         if currentOperand.last == "." {
-            operandLabel.text = addComma(number: integerPart) + "."
+            operandLabel.text = integerPart.addComma() + "."
         } else if currentOperand.contains("."), currentOperand.last != "." {
             let decimalPart: String = currentOperand.components(separatedBy: ".")[1]
-            operandLabel.text = addComma(number: integerPart) + "." + decimalPart
+            operandLabel.text = integerPart.addComma() + "." + decimalPart
         } else {
-            operandLabel.text = addComma(number: currentOperand)
+            operandLabel.text = currentOperand.addComma()
         }
     }
 }
@@ -185,7 +177,7 @@ extension ViewController {
             stackView.addArrangedSubview(operatorLabel)
             expression.append(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(addComma(number: currentOperand))
+        let operandLabel: UILabel = makeExpressionLabel(currentOperand.addComma())
         stackView.addArrangedSubview(operandLabel)
         expression.append(" \(currentOperand)")
         
