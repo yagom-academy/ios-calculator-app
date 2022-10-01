@@ -12,6 +12,7 @@ extension String {
         let numberValue = NSDecimalNumber(string: self)
         
         Self.formatter.numberStyle = .decimal
+        Self.formatter.usesSignificantDigits = true
         Self.formatter.maximumFractionDigits = 10
         Self.formatter.maximumIntegerDigits = 20
         Self.formatter.maximumSignificantDigits = 20
@@ -20,9 +21,5 @@ extension String {
     
     func split(with target: Character) -> [String] {
         return split(separator: target, omittingEmptySubsequences: false).map { $0.description }
-    }
-    
-    var isNotEmpty: Bool {
-        return !self.isEmpty
     }
 }

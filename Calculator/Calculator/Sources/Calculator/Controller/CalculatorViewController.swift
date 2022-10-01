@@ -28,7 +28,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         if let lastElement = mathExpression.last,
-           lastElement.shouldConvertOperator {
+           !lastElement.shouldConvertOperator {
             mathExpression.append(selectedOperator)
         }
 
@@ -47,8 +47,6 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        print(selectedOperator)
-        
         if selectedNumbers.isNotEmpty {
             addLogStackView()
         }
@@ -63,6 +61,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedEqualButton(_ sender: UIButton) {
+        
         guard didNotCalculate,
               selectedNumbers.isNotEmpty else {
             return
@@ -99,6 +98,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTappedPointButton(_ sender: UIButton) {
+        
         guard selectedNumbers.isNotEmpty,
               !selectedNumbers.contains(Constant.Calculator.defaultPoint) else {
             return
@@ -222,14 +222,16 @@ private extension CalculatorViewController {
     
 }
 
+// MARK: - Character Extension 관련 메서드
 private extension Character {
     var shouldConvertOperator: Bool {
         return Operator(rawValue: self) != nil
     }
 }
 
-private extension Bool {
-    mutating func toggle() {
-        self = !self
+// MARK: - String Extension 관련 메서드
+private extension String {
+    var isNotEmpty: Bool {
+        return !self.isEmpty
     }
 }
