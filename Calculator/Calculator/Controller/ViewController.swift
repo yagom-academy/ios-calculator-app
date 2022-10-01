@@ -100,8 +100,12 @@ class ViewController: UIViewController {
             }
         }
         
-        guard let convertedEntry = formatNumber(input: currentEntry) else { return }
-        currentEntryLabel.text = convertedEntry
+        if input != "." {
+            guard let convertedEntry = formatNumber(input: currentEntry) else { return }
+            currentEntryLabel.text = convertedEntry
+        } else {
+            currentEntryLabel.text = currentEntry
+        }
     }
     
     func formatNumber(input: String) -> String? {
