@@ -7,7 +7,8 @@ import UIKit
 
 class ViewController: UIViewController {
     private var isCalculated: Bool = false
-    private var operandHandler: OperandHandler = OperandHandler()
+    private var operandManager: OperandManager = OperandManager()
+    private let componentMaker: ComponentMaker = ComponentMaker()
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -33,18 +34,18 @@ class ViewController: UIViewController {
         
         switch tappedOperand {
         case ".":
-            operandHandler.handleDotButton()
+            operandManager.handleDotButton()
         case "0", "00":
-            operandHandler.handleZeroButtons(from: tappedOperand)
+            operandManager.handleZeroButtons(from: tappedOperand)
         default:
-            operandHandler.appendOperands(from: tappedOperand)
+            operandManager.appendOperands(from: tappedOperand)
         }
         
-        operandHandler.displayOperand(to: operandLabel)
+        operandManager.displayOperand(to: operandLabel)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let tappedOperator = sender.currentTitle, Double(operandHandler.currentOperand) != .zero else {
+        guard let tappedOperator = sender.currentTitle, Double(operandManager.currentOperand) != .zero else {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -56,10 +57,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
-        guard !operandHandler.expression.isEmpty else { return }
+        guard !operandManager.expression.isEmpty else { return }
         appendExpressionQueue()
         
-        var components = ExpressionParser.parse(from: operandHandler.expression)
+        var components = ExpressionParser.parse(from: operandManager.expression)
         let result = components.result()
         
         if result.isNaN {
@@ -70,14 +71,14 @@ class ViewController: UIViewController {
         
         operatorLabel.text = ""
         isCalculated = true
-        operandHandler.setCurrentOperand("\(result)")
-        operandHandler.clearExpression()
+        operandManager.setCurrentOperand("\(result)")
+        operandManager.clearExpression()
     }
     
     @IBAction func tapSignButton(_ sender: UIButton) {
-        operandHandler.handleSignButton()
+        operandManager.handleSignButton()
         isCalculated = false
-        operandLabel.text = operandHandler.currentOperand.addComma()
+        operandLabel.text = operandManager.currentOperand.addComma()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -88,65 +89,36 @@ class ViewController: UIViewController {
         expressionQueue.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         clearOperandLabel()
-        operandHandler.clearExpression()
+        operandManager.clearExpression()
         operatorLabel.text = ""
     }
 }
 
-// handling OperandsLabel
+// handling view
 extension ViewController {
     private func clearOperandLabel() {
         isCalculated = false
-        operandHandler.setCurrentOperand("0")
+        operandManager.setCurrentOperand("0")
         operandLabel.text = "0"
     }
-}
 
-// handling stackView
-extension ViewController {
-    private func makeExpressionLabel(_ expr: String?) -> UILabel {
-        let label: UILabel = UILabel()
-        
-        label.text = expr
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        return label
-    }
-    
-    private func makeExpressionStackView() -> UIStackView {
-        let stackView: UIStackView = UIStackView()
-        
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return stackView
-    }
-    
     private func appendExpressionQueue() {
-        let stackView: UIStackView = makeExpressionStackView()
+        let stackView: UIStackView = componentMaker.makeStackView()
         
         guard let currentOperator = operatorLabel.text else { return }
         if !expressionQueue.arrangedSubviews.isEmpty {
-            let operatorLabel: UILabel = makeExpressionLabel(currentOperator)
+            let operatorLabel: UILabel = componentMaker.makeLabel(currentOperator)
             stackView.addArrangedSubview(operatorLabel)
-            operandHandler.appendToExpression(" \(currentOperator)")
+            operandManager.appendToExpression(" \(currentOperator)")
         }
-        let operandLabel: UILabel = makeExpressionLabel(operandHandler.currentOperand.addComma())
+        let operandLabel: UILabel = componentMaker.makeLabel(operandManager.currentOperand.addComma())
         stackView.addArrangedSubview(operandLabel)
-        operandHandler.appendToExpression(" \(operandHandler.currentOperand)")
+        operandManager.appendToExpression(" \(operandManager.currentOperand)")
         
         expressionQueue.addArrangedSubview(stackView)
         updateScroll()
     }
-}
-
-// handling scrollView
-extension ViewController {
+    
     func updateScroll() {
         expressionScrollView.layoutIfNeeded()
         expressionScrollView.setContentOffset(CGPoint(x: 0,

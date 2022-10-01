@@ -5,7 +5,7 @@
 
 import UIKit
 
-struct OperandHandler {
+struct OperandManager {
     private(set) var currentOperand: String = "0"
     private(set) var expression: String = ""
     
