@@ -47,6 +47,9 @@ class ViewController: UIViewController {
             operandLabel.text = setNumberFormat(with: operand) + "."
             operand += "."
             isDotButtonTapped = true
+        } else if operand.isEmpty {
+            operand += "0" + "."
+            operandLabel.text = operand
         }
     }
     
