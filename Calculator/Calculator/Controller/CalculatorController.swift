@@ -6,7 +6,7 @@ final class CalculatorController {
     var formula: Formula?
     private var Expression: String = ""
     var viewDisplayNumber: String = "0"
-    private var displaySign: Operator.RawValue = Operator.unknown.rawValue
+    private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
     
@@ -44,7 +44,7 @@ final class CalculatorController {
     }
     
     private func canMakeHorizontalStackView() -> Bool {
-        if displaySign != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
+        if displaySign.rawValue != " " && isStartZero(stringNumber: viewDisplayNumber) == false {
             return true
         }
         
@@ -80,30 +80,30 @@ final class CalculatorController {
         } else if canChangedOperator() == true {
             determineOperator(stringOperator: input)
             
-            return String(displaySign)
+            return String(displaySign.rawValue)
         } else {
-            Expression += String(displaySign) + viewDisplayNumber
+            Expression += String(displaySign.rawValue) + viewDisplayNumber
             viewDisplayNumber = "0"
             view.makeStakView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
             
-            return String(displaySign)
+            return String(displaySign.rawValue)
         }
     }
     
     private func determineOperator(stringOperator: String?) {
         switch stringOperator {
         case "+":
-            displaySign = Operator.add.rawValue
+            displaySign = Operator.add
         case "−":
-            displaySign = Operator.subtract.rawValue
+            displaySign = Operator.subtract
         case "×":
-            displaySign = Operator.multiply.rawValue
+            displaySign = Operator.multiply
         case "÷":
-            displaySign = Operator.divide.rawValue
+            displaySign = Operator.divide
         default:
-            displaySign = Operator.add.rawValue
+            displaySign = Operator.add
         }
     }
     
@@ -112,14 +112,14 @@ final class CalculatorController {
         view.displayNumberLabel.text = "0"
         
         if view.displaySignLabel.text == "" {
-            displaySign = Operator.unknown.rawValue
+            displaySign = Operator.unknown
             view.displaySignLabel.text = ""
             Expression = ""
         }
     }
     
     private func callbackCalculateResult() -> String {
-        Expression += String(displaySign) + viewDisplayNumber
+        Expression += String(displaySign.rawValue) + viewDisplayNumber
         Expression = Expression.trimmingCharacters(in: .whitespaces)
         canCalculate = false
         view.makeStakView()
@@ -154,7 +154,7 @@ final class CalculatorController {
     func tappedACButton() {
         Expression = ""
         viewDisplayNumber = "0"
-        displaySign = Operator.unknown.rawValue
+        displaySign = Operator.unknown
         isFirstClick = true
     }
     
