@@ -157,7 +157,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if operand.isEmpty {
+        guard !operand.isEmpty else{
             return
         }
         
