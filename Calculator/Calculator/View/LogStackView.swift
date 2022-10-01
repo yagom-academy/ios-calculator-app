@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogStackView: UIStackView {
+final class LogStackView: UIStackView {
     private let operandLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
