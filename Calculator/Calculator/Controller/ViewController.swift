@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var formulaStackView: UIStackView!
+    @IBOutlet weak var logScrollView: UIScrollView!
     
     private var operand: String = ""
     private var arithmeticOperator: String = ""
@@ -166,6 +167,7 @@ class ViewController: UIViewController {
         let logOperand = setNumberFormat(with: operand)
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
         formulaStackView.addArrangedSubview(stackView)
+        updateLogScrollViewContentOffset()
     }
     
     func removeLastDot() {
@@ -228,6 +230,15 @@ class ViewController: UIViewController {
         
         updateOperandLabel(with: String(result))
         return
+    }
+    
+    func updateLogScrollViewContentOffset() {
+        let contentOffset = CGPoint(
+            x: 0,
+            y: logScrollView.contentSize.height - logScrollView.bounds.height
+        )
+        
+        logScrollView.setContentOffset(contentOffset, animated: true)
     }
 }
 

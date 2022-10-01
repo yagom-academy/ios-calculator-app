@@ -365,6 +365,7 @@
                     </view>
                     <connections>
                         <outlet property="formulaStackView" destination="XRe-QE-UJf" id="6IY-Zw-q7H"/>
+                        <outlet property="logScrollView" destination="BOT-7g-vxv" id="PkD-yi-I0r"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="WQ6-l4-LTk"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Vgn-Fv-CXd"/>
                     </connections>
