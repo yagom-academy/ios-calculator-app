@@ -8,7 +8,7 @@
 import Foundation
 
 enum accessibilityIdentifier {
-    static let calculatorDisplayLabel = "calculatorDisplayLabel"
-    static let operatorDisplayLabel = "operatorDisplayLabel"
-    static let calculatorArchive = "calculatorArchive"
+    static let CalculatorDisplayLabel = "calculatorDisplayLabel"
+    static let OperatorDisplayLabel = "operatorDisplayLabel"
+    static let CalculatorArchive = "calculatorArchive"
 }

@@ -5,9 +5,9 @@
 //  Created by 이정민 on 2022/09/29.
 //
 
-enum nameSpace {
-    static let zero = "0"
-    static let negative = "-"
-    static let empty = ""
-    static let nan = "nan"
+enum namespace {
+    static let Zero = "0"
+    static let Negative = "-"
+    static let Empty = ""
+    static let NaN = "NaN"
 }
