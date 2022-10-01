@@ -29,9 +29,11 @@
       - `enqueue`, `dequeue`, `peek`, `isEmpty`, `clear`
   - `Generic`, `Element`
   - `Protocol`, `extension`
-  - `High Order Functions` - `map`, `compactMap`, `split`, `components`
+  - `High Order Functions` - `map`, `reduce`, `filter`
   - `UML`
-  - `TDD`
+  - `TDD`, `unit test`
+  - `numberFormatter`
+  - `UIStackView`, `UIScrollView`
 
 ## 🌲 Tree
 
@@ -97,8 +99,7 @@
 ### Step 3
 
 - UIScrollView에서 `setContentOffset`메서드를 이용하여 새로운 식을 입력하는 경우 최하단으로 스크롤 이동 시, 마지막 StackView가 보이지 않는 문제에 대해 고민해 보았습니다.
-    - 문제 해결을 위해 찾아보던 중 `View Drawing Cycle
-`에 대해서 알게 되었고 공부해 보았습니다.
+    - 문제 해결을 위해 찾아보던 중 `View Drawing Cycle`에 대해서 알게 되었고 공부해 보았습니다.
 
 - `numberFormatter`를 사용하여 3자리마다 ,가 표시되고 불필요한 소숫점 뒤쪽의 0을 노출하지 않도록 처리하였는데 소숫점 뒤에 바로 0이 붙어 있는 경우 (`12.0`) 자동으로 정수로 변환되어 노출되다가 0뒤에 숫자가 더해지면 한꺼번에 노출되는 문제를 해결하기 위해 고민해 보았습니다.
     
@@ -196,6 +197,10 @@
     - 버튼 원형으로 바꾸기 위한 CircleButton 클라스 생성하고 디자인 적용
     
 - **220930**
+    - 소숫점 이하 숫자 표시를 위한 `noneNumberFormatter` 생성
+    - 소숫점 뒤의 0이 노출되지 않는 문제 해결을 위해 정수부와 소수부를 분리하여 출력하도록 수정
+    - `12.0`과 같이 소수점영역이 0인경우 정수값으로 표시되는 오류 수정
+    - 결과값이 infinity이거나 Nan인 경우 "NaN"이 노출되도록 예외추가
     
  </details>
     
@@ -306,24 +311,37 @@
 
 ### Step 3
 
-- 내용
+- 스크롤 뷰에서 `setContentOffset` 메서드를 이용하여 스택뷰를 추가하며 스크롤을 하단으로 이동 시, 맨 아래에서 하나 위로 이동하고 맨 마지막 스택뷰가 보이지 않는 문제를 해결하기 위해 고민해 보았습니다.
+    - 한 칸만큼 더 내려가기 위해 (contentSize height - bounds height)에서 -20, +20 등으로 y축을 이동해보기도 했지만 해결되지 않았습니다.
+    - 계속해서 해결 방법을 찾다가 `drawing cycle`에 대해 알게 되었고, 간단히 공부해 본 후에 `layoutIfNeeded` 메서드를 사용하여 해결하였습니다.
+
+- 세자리마다 콤마를 찍어주고, 불필요한 소숫점 뒤의 0을 제거해 주기 위해 numberFormater를 사용하면서 `12.0`과 같이 입력되면 `12`정수형으로 변환되고 00000을 입력하여도 반응하지 않다가 0뒤에 숫자가 입력되는 순간 값이 노출되는 문제를 해결하기 위해 고민해 보았습니다.
+    -  `minimumFractionDigits`을 설정하여 보았지만, 정수값 입력 시 불필요한 000이 뒤쪽에 노출되었습니다.
+    -  `.`을 포함하는 경우 정수부와 소수부 2개의 스트링으로 분리하여 정수부에만 넘버 포매터를 적용하여 주고 `.`을 포함하여 다시 합쳐서 노출되는 방법으로 해결하였습니다.
+
+    |![](https://i.imgur.com/8hEJKy6.gif)|![](https://i.imgur.com/LoOiVE3.gif)|
+    |:--:|:--:|
+    |오류 수정 전|오류 수정 후|
+
 
 
 ## 🔗 참고 링크
 
 [Swift Language Guide - Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)  
 [Swift Language Guide - Extentions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)  
-[Swift Language Guide - Error Handling](https://docs.swift.org/swift-book/LanguageGuide/ErrorHandling.html)  
-[Set Up and Tear Down State in Your Tests](https://developer.apple.com/documentation/xctest/xctestcase/set_up_and_tear_down_state_in_your_tests)  
+[Swift Language Guide - Error Handling](https://docs.swift.org/swift-book/LanguageGuide/ErrorHandling.html)   
+[Set Up and Tear Down State in Your Tests](https://developer.apple.com/documentation/xctest/xctestcase/set_up_and_tear_down_state_in_your_tests)
 [removeAll(keepingCapacity:)](https://developer.apple.com/documentation/swift/array/removeall(keepingcapacity:)-1er5)  
 [Swift) 큐(Queue) 구현 해보기](https://babbab2.tistory.com/84)  
 [Swift로 효율적인 dequeue 구현하기](https://iamcho2.github.io/2021/10/04/Swift-dequeue)  
 [WWDC2017 - Engineering for Testability](https://devstreaming-cdn.apple.com/videos/wwdc/2017/414qr3121b1oieq/414/414_engineering_for_testability.pdf)  
 [소프트웨어 테스팅과 스위프트에서의 Unit Testing](https://seizze.github.io/2020/01/08/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4-%ED%85%8C%EC%8A%A4%ED%8C%85%EA%B3%BC-%EC%8A%A4%EC%9C%84%ED%94%84%ED%8A%B8%EC%97%90%EC%84%9C%EC%9D%98-Unit-Testing.html)  
-[Documentation Archive - iOS Drawing Concepts](https://developer.apple.com/library/archive/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/GraphicsDrawingOverview/GraphicsDrawingOverview.html)  
+[UIStackView 코드로 작성하기](https://velog.io/@sun02/UIStackView-%EC%BD%94%EB%93%9C%EB%A1%9C-%EC%9E%91%EC%84%B1%ED%95%98%EA%B8%B0)  
+[Documentation Archive - iOS Drawing Concepts](https://developer.apple.com/library/archive/documentation/2DDrawing/Conceptual/DrawingPrintingiOS/GraphicsDrawingOverview/GraphicsDrawingOverview.html)    
 [Apple Developer Doc - UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview)  
-[Apple Developer Doc - numberformatter](https://developer.apple.com/documentation/foundation/numberformatter)  
+[Apple Developer Doc - NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)  
+[오토레이아웃 정복하기 - 야곰닷넷](https://yagom.net/courses/autolayout/)  
 
 ---
 
-[🔝 맨 위로 이동하기](#-계산기) 
+[🔝 맨 위로 이동하기](#계산기) 
