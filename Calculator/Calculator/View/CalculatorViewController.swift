@@ -77,10 +77,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpSymbolChangeButton(_ sender: UIButton) {
-        changeSymbol()
-    }
-    
-    private func changeSymbol() {
         guard isInputZero else { return }
         
         guard var currentNumber = currentNumberLabel.text,
@@ -96,28 +92,28 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpPlusButton(_ sender: UIButton) {
-        updateOperatorLabel(Constants.plusSymbol)
+        updateOperatorLabel(with: Constants.plusSymbol)
     }
     
     @IBAction private func touchUpMinusButton(_ sender: UIButton) {
-        updateOperatorLabel(Constants.minusSymbol)
+        updateOperatorLabel(with: Constants.minusSymbol)
     }
     
     @IBAction private func touchUpMultiplyButton(_ sender: UIButton) {
-        updateOperatorLabel(Constants.multiplySymbol)
+        updateOperatorLabel(with: Constants.multiplySymbol)
     }
     
     @IBAction private func touchUpDivideButton(_ sender: UIButton) {
-        updateOperatorLabel(Constants.divideSymbol)
+        updateOperatorLabel(with: Constants.divideSymbol)
     }
     
-    private func updateOperatorLabel(_ operatorSign: String) {
+    private func updateOperatorLabel(with operatorSign: String) {
         guard isInputZero else {
             lastOperatorLabel.text = operatorSign
             return
         }
         
-        addToStackView()
+        addSingleFormulaLineToStackView()
         
         guard let operatorToAppend = lastOperatorLabel.text,
               let numberToAppend = currentNumberLabel.text else { return }
@@ -128,7 +124,7 @@ final class CalculatorViewController: UIViewController {
         resetCurrentNumberLabel()
     }
     
-    private func addToStackView() {
+    private func addSingleFormulaLineToStackView() {
         guard let lastOperatorLabelText = lastOperatorLabel.text,
               let currentNumber = currentNumberLabel.text,
               let formattedNumber = Formatter.toFormattedString(from: currentNumber) else { return }
@@ -165,7 +161,7 @@ final class CalculatorViewController: UIViewController {
         formula += operatorToAdd
         formula += numberToAdd.replacingOccurrences(of: Constants.comma, with: Constants.empty)
         
-        addToStackView()
+        addSingleFormulaLineToStackView()
     }
     
     private func fetchResult() -> Double {
