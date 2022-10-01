@@ -2,7 +2,7 @@
 //  Operand.swift
 //  Calculator
 //
-//  Created by 이태영 on 2022/10/01.
+//  Created by Hamo on 2022/10/01.
 //
 
 enum Operand {
