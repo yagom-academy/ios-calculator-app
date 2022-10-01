@@ -8,10 +8,10 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    @IBOutlet weak var historyScrollView: UIScrollView!
-    @IBOutlet weak var historyStackView: UIStackView!
-    @IBOutlet weak var lastOperatorLabel: UILabel!
-    @IBOutlet weak var currentNumberLabel: UILabel!
+    @IBOutlet private weak var historyScrollView: UIScrollView!
+    @IBOutlet private weak var historyStackView: UIStackView!
+    @IBOutlet private weak var lastOperatorLabel: UILabel!
+    @IBOutlet private weak var currentNumberLabel: UILabel!
     
     private var isInputZero: Bool = false
     private var formula: String = Constants.empty
@@ -33,11 +33,11 @@ final class CalculatorViewController: UIViewController {
         formula = Constants.empty
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         updateCurrentNumberLabel(with: String(sender.tag))
     }
     
-    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+    @IBAction private func touchUpDoubleZeroButton(_ sender: UIButton) {
         guard isInputZero else  { return }
         updateCurrentNumberLabel(with: Constants.doubleZero)
     }
@@ -50,7 +50,7 @@ final class CalculatorViewController: UIViewController {
         return formattedNumber
     }
     
-    func updateCurrentNumberLabel(with input: String) {
+    private func updateCurrentNumberLabel(with input: String) {
         guard var currentNumber = currentNumberLabel.text else { return }
         
         if currentNumber == Constants.zero, input != Constants.doubleZero {
@@ -68,7 +68,7 @@ final class CalculatorViewController: UIViewController {
         isInputZero = true
     }
 
-    @IBAction func touchUpDecimalButton(_ sender: UIButton) {
+    @IBAction private func touchUpDecimalButton(_ sender: UIButton) {
         guard let currentNumber = currentNumberLabel.text,
               !currentNumber.contains(Constants.dot),
               isInputZero else { return }
@@ -76,7 +76,7 @@ final class CalculatorViewController: UIViewController {
         currentNumberLabel.text = currentNumber + Constants.dot
     }
     
-    @IBAction func touchUpSymbolChangeButton(_ sender: UIButton) {
+    @IBAction private func touchUpSymbolChangeButton(_ sender: UIButton) {
         changeSymbol()
     }
     
@@ -95,19 +95,19 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpPlusButton(_ sender: UIButton) {
+    @IBAction private func touchUpPlusButton(_ sender: UIButton) {
         updateOperatorLabel(Constants.plusSymbol)
     }
     
-    @IBAction func touchUpMinusButton(_ sender: UIButton) {
+    @IBAction private func touchUpMinusButton(_ sender: UIButton) {
         updateOperatorLabel(Constants.minusSymbol)
     }
     
-    @IBAction func touchUpMultiplyButton(_ sender: UIButton) {
+    @IBAction private func touchUpMultiplyButton(_ sender: UIButton) {
         updateOperatorLabel(Constants.multiplySymbol)
     }
     
-    @IBAction func touchUpDivideButton(_ sender: UIButton) {
+    @IBAction private func touchUpDivideButton(_ sender: UIButton) {
         updateOperatorLabel(Constants.divideSymbol)
     }
     
@@ -139,7 +139,7 @@ final class CalculatorViewController: UIViewController {
         historyScrollView.scrollToBottom(animated: false)
     }
     
-    @IBAction func touchUpACButton(_ sender: UIButton) {
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
         clearAll()
     }
     
@@ -149,7 +149,7 @@ final class CalculatorViewController: UIViewController {
         historyStackView.removeAllSubviews()
     }
     
-    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
         guard let lastOperator = lastOperatorLabel.text,
               lastOperator != Constants.empty else { return }
         
@@ -186,7 +186,7 @@ final class CalculatorViewController: UIViewController {
         resetFormula()
     }
 
-    @IBAction func touchUpCEButton(_ sender: UIButton) {
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
         resetCurrentNumberLabel()
     }
 }
