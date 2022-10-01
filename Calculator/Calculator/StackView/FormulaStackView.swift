@@ -1,5 +1,5 @@
 import UIKit
-//MARK: - FormulaStackView
+
 class FormulaStackView: UIStackView {
     //MARK: - FormulaStackView Properties
     private(set) var formula: String = ""

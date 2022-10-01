@@ -1,5 +1,5 @@
 protocol CalculateItem { }
-//MARK: - CalculatorItemQueue
+
 struct CalculatorItemQueue<T: CalculateItem> {
     //MARK: - CalculatorItemQueue Properties
     private(set) var head: Node<T>? = nil

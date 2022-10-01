@@ -1,4 +1,3 @@
-//MARK: - Operator
 enum Operator: Character {
     //MARK: - Operator Case
     case add = "+"
