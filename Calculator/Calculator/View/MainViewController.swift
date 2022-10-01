@@ -3,7 +3,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     @IBOutlet weak var displaySignLabel: UILabel!
     @IBOutlet weak var displayNumberLabel: UILabel!
