@@ -12,9 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulaStackView: UIStackView!
     @IBOutlet weak var logScrollView: UIScrollView!
     
-    private var operand: String = ""
-    private var arithmeticOperator: String = ""
-    private var finalFormula: String = ""
+    private var operand: String = CalculatorConstant.blank
+    private var arithmeticOperator: String = CalculatorConstant.blank
+    private var finalFormula: String = CalculatorConstant.blank
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
     private var isNegativeSign: Bool = false
@@ -45,11 +45,11 @@ class ViewController: UIViewController {
         }
         
         if !operand.isEmpty && !isDotButtonTapped {
-            operandLabel.text = setNumberFormat(with: operand) + "."
-            operand += "."
+            operandLabel.text = setNumberFormat(with: operand) + CalculatorConstant.dot
+            operand += CalculatorConstant.dot
             isDotButtonTapped = true
         } else if operand.isEmpty {
-            operand += "0" + "."
+            operand += CalculatorConstant.zero + CalculatorConstant.dot
             operandLabel.text = operand
         }
     }
@@ -59,31 +59,31 @@ class ViewController: UIViewController {
             return
         }
         
-        var input: String = ""
-        if operand.last == "." {
-            input = ".0"
+        var input: String = CalculatorConstant.blank
+        if operand.last == Character(CalculatorConstant.dot) {
+            input = CalculatorConstant.dotZero
         } else {
-            input = "0"
+            input = CalculatorConstant.zero
         }
         
         operandLabel.text = setNumberFormat(with: operand) + input
-        operand += "0"
+        operand += CalculatorConstant.zero
     }
     
     @IBAction func doubleZeroButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculate && !operand.isEmpty else {
             return
         }
         
-        var input: String = ""
-        if operand.last == "." {
-            input = ".00"
-        } else if !operand.isEmpty {
-            input = "00"
+        var input: String = CalculatorConstant.blank
+        if operand.last == Character(CalculatorConstant.dot) {
+            input = CalculatorConstant.dotDoubleZero
+        } else {
+            input = CalculatorConstant.doubleZero
         }
         
         operandLabel.text = setNumberFormat(with: operand) + input
-        operand += "0"
+        operand += CalculatorConstant.zero
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         }
         
         if operand.isEmpty {
-            operand += "0"
+            operand += CalculatorConstant.zero
         }
         
         creatFormulaLog()
@@ -154,9 +154,9 @@ class ViewController: UIViewController {
         }
         
         if !isNegativeSign {
-            operand = "-" + operand
+            operand = CalculatorConstant.negativeSign + operand
         } else {
-            operand = operand.trimmingCharacters(in: ["-"])
+            operand = operand.trimmingCharacters(in: CalculatorConstant.negativeSignSet)
         }
         
         operandLabel.text = operand
@@ -171,7 +171,7 @@ class ViewController: UIViewController {
     }
     
     func removeLastDot() {
-        operand = operand.trimmingCharacters(in: ["."])
+        operand = operand.trimmingCharacters(in: CalculatorConstant.dotSet)
     }
     
     func creatFinalFormula() {
@@ -192,11 +192,11 @@ class ViewController: UIViewController {
     }
 
     func setOperandLabelToZero() {
-        operandLabel.text = "0"
+        operandLabel.text = CalculatorConstant.zero
     }
     
     func setOperatorLabelEmpty() {
-        operatorLabel.text = ""
+        operatorLabel.text = CalculatorConstant.blank
     }
     
     func setNumberFormat(with input: String) -> String {
@@ -224,7 +224,7 @@ class ViewController: UIViewController {
         isCalculate = true
         var formula = ExpressionParser.parse(from: finalFormula)
         guard let result = try? formula.result() else {
-            operandLabel.text = "NaN"
+            operandLabel.text = CalculatorConstant.notNumber
             return
         }
         
