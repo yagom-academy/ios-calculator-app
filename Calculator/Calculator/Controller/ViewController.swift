@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         resetCurrentEntry()
+        resetOperatorLabel()
         componentsStackView.arrangedSubviews.forEach({
             $0.isHidden = true
         })
@@ -70,6 +71,15 @@ class ViewController: UIViewController {
             componentsStackView.addArrangedSubview(addStackView(operandLabel: operandLabel, operatorLabel: operatorLabel))
             resetCurrentEntry()
         }
+    }
+    
+    @IBAction func allClearButtonPressed(_ sender: UIButton) {
+        componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+        resetOperatorLabel()
+    }
+    
+    func resetOperatorLabel() {
+        operatorLabel.text = ""
     }
     
     func resetCurrentEntry() {
