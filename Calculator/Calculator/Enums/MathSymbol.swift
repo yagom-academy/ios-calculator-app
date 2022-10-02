@@ -13,5 +13,3 @@ enum MathSymbol {
     static let decimalPoint = "."
     static let negative = "−"
 }
-
-
