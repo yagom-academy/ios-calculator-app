@@ -95,10 +95,6 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        guard !isCalculated else {
-            return
-        }
-        
         guard !isFirstInput else {
             return
         }
@@ -108,6 +104,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         updateOperatorLabel(with: selectedOperator)
+        isCalculated = false
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
@@ -123,6 +120,7 @@ final class CalculatorViewController: UIViewController {
         calculate()
         setOperatorLabelEmpty()
         arithmeticOperator.removeAll()
+        finalFormula.removeAll()
         isCalculated = true
     }
     
@@ -142,13 +140,10 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
-            return
-        }
-        
         if !operand.isEmpty {
             operand.removeAll()
             setOperandLabelToZero()
+            isCalculated = false
         }
         
         if finalFormula.isEmpty {
@@ -197,10 +192,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     func updateOperatorLabel(with input: String) {
-        if !isCalculated {
             arithmeticOperator = input
             operatorLabel.text = arithmeticOperator
-        }
     }
 
     func setOperandLabelToZero() {
