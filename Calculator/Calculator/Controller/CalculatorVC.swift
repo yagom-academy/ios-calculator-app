@@ -116,10 +116,10 @@ final class CalculatorVC: UIViewController {
     }
     
     private func makeLabel(text: String?) -> UILabel {
-        let operatorLabelForStack: UILabel = UILabel()
-        operatorLabelForStack.text = text
-        operatorLabelForStack.textColor = .white
-        return operatorLabelForStack
+        let label: UILabel = UILabel()
+        label.text = text
+        label.textColor = .white
+        return label
     }
     
     private func scrollToBottom() {
