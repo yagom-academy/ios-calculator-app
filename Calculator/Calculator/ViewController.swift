@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     private var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+    private var calculationFormula: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +32,13 @@ class ViewController: UIViewController {
     }
     
     private func addZero(inputText: String, zero: String) {
-        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
-        let pointCount = numberWithOutComma.filter { $0 == "." }.count
+        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
         
         if numberWithOutComma == Literal.numberZero.value && pointCount != 1 {
             return
         } else if numberWithOutComma != Literal.numberZero.value && pointCount != 1 {
-            let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
             if let number: Double = Double(numberWithOutComma + zero) {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
@@ -58,7 +59,7 @@ class ViewController: UIViewController {
         if inputText == Literal.numberZero.value {
             inputNumberLabel.text = "\(number)"
         } else {
-            let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
             if let number: Double = Double(numberWithOutComma + number) {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
@@ -93,33 +94,19 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    private func convertOperator(operatorValue: String) -> Operator? {
+    private func convertOperator(operatorValue: String) -> String {
         switch operatorValue {
-        case "+":
-            return .add
-        case "-":
-            return .subtract
-        case "ⅹ":
-            return .multiply
-        case "÷":
-            return .divide
+        case Literal.addition.value:
+            return Literal.addition.value
+        case Literal.subtraction.value:
+            return Literal.subtraction.value
+        case Literal.multiplication.value:
+            return "*"
+        case Literal.division.value:
+            return "/"
         default:
-            return nil
+            return ""
         }
-    }
-    
-    private func insertIntoQueue(operatorValue: String, inputText: String) {
-        guard let someOperator = convertOperator(operatorValue: operatorValue) else { return }
-        
-        if let doubleValue = Double(inputText) {
-            formula.operands?.enqueue(doubleValue)
-            formula.operators?.enqueue(someOperator)
-        }
-    }
-    
-    private func insertIntoOperatorQueue(operatorValue: String) -> Operator? {
-        let someOperator = convertOperator(operatorValue: operatorValue)
-        return someOperator
     }
     
     private func addStackView(operatorText: String, inputText: String) {
@@ -131,42 +118,47 @@ class ViewController: UIViewController {
     }
     
     private func addOperator(inputText: String, operatorValue: String) {
-        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
+        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        let numberWithOutCommaAndInvertSign =
+        numberWithOutComma.replacingOccurrences(of: Literal.invertSign.value, with: Literal.subtraction.value)
         
-        if numberWithOutComma == Literal.numberZero.value && inputOperatorLabel.text == "" {
-        } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
+        if numberWithOutCommaAndInvertSign == Literal.numberZero.value && inputOperatorLabel.text == "" {
+            return
+        } else if numberWithOutCommaAndInvertSign == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
-            
-            guard let operatorText = inputOperatorLabel.text,
-                  let getOperator = insertIntoOperatorQueue(operatorValue: operatorText) else {
-                return
-            }
-            
-            _ = formula.operators?.dequeue()
-            formula.operators?.enqueue(getOperator)
+            calculationFormula.removeLast()
+            calculationFormula += convertOperator(operatorValue: operatorValue)
         } else {
             guard let operatorText = inputOperatorLabel.text,
-                  let doubleValue = numberFormatter.string(for: Double(numberWithOutComma)) else { return }
+                  let doubleValue = numberFormatter.string(for: Double(numberWithOutCommaAndInvertSign)) else { return }
             
             addStackView(operatorText: operatorText, inputText: doubleValue)
-            insertIntoQueue(operatorValue: operatorValue, inputText: numberWithOutComma)
-            
+            calculationFormula +=
+            numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
+            calculationFormula += convertOperator(operatorValue: operatorValue)
+    
             inputNumberLabel.text = Literal.numberZero.value
             inputOperatorLabel.text = operatorValue
         }
     }
     
     private func showResult(inputText: String) {
-        if ((formula.operators?.isEmpty()) == true) { return }
+        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        let numberWithOutCommaAndInvertSign =
+        numberWithOutComma.replacingOccurrences(of: Literal.invertSign.value, with: Literal.subtraction.value)
+        let operators = Operator.allCases.map { String($0.rawValue) }.joined()
+        let separators = CharacterSet(charactersIn: operators)
+        if calculationFormula.components(separatedBy: separators).count < 2 { return }
         
-        let numberWithOutComma = inputText.replacingOccurrences(of: ",", with: "")
-        
-        if let operandValue = Double(numberWithOutComma),
+        if let operandValue = Double(numberWithOutCommaAndInvertSign),
            let operatorText = inputOperatorLabel.text,
            let doubleValue = numberFormatter.string(for: operandValue) {
-            formula.operands?.enqueue(operandValue)
             addStackView(operatorText: operatorText, inputText: doubleValue)
         }
+        
+        calculationFormula += numberWithOutComma
+        formula = ExpressionParser.parse(from: calculationFormula)
+        calculationFormula = ""
         
         if let result = numberFormatter.string(for: formula.result()),
            result != Literal.infinity.value {
@@ -181,16 +173,15 @@ class ViewController: UIViewController {
     private func invertNumber(inputText: String) {
         if inputText == Literal.numberZero.value { return }
         
-        if inputText.prefix(1) != Literal.subtraction.value {
-            inputNumberLabel.text = Literal.subtraction.value + inputText
+        if inputText.prefix(1) != Literal.invertSign.value {
+            inputNumberLabel.text = Literal.invertSign.value + inputText
         } else {
-            inputNumberLabel.text = inputText.replacingOccurrences(of: "-", with: "")
+            inputNumberLabel.text = inputText.replacingOccurrences(of: Literal.invertSign.value, with: "")
         }
     }
     
     private func deleteAllHistory() {
-        formula.operands?.allDelete()
-        formula.operators?.allDelete()
+        calculationFormula = ""
         inputOperatorLabel.text = ""
         inputNumberLabel.text = Literal.numberZero.value
         
