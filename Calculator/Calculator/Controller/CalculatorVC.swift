@@ -132,7 +132,7 @@ final class CalculatorVC: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        if !totalFormulaString.isEmpty {
+        if totalFormulaString.isEmpty == false {
             totalFormulaString += operatorLabel.text ?? ""
             totalFormulaString += currentNumber
             makeFormulaStackView()
