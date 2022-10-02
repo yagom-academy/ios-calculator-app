@@ -27,7 +27,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCalculatorLabel() {
-        if calculator.isOperandDecimal {
+        if calculator.operand.last == Character(MathSymbol.decimalPoint) ||
+            calculator.isOperandDecimal {
             calculatorLabel.text = calculator.operand
             return
         }
@@ -54,11 +55,11 @@ class CalculatorViewController: UIViewController {
         }
         
         if calculator.isFormulaEmpty ||
-           calculator.isOperandZero {
+            calculator.isOperandZero {
             newOperand = number
-        } else {
-            newOperand = calculator.operand + number
         }
+        
+        newOperand = calculator.operand + number
         
         calculator.changeOperand(newOperand)
         updateCalculatorLabel()
@@ -163,16 +164,17 @@ class CalculatorViewController: UIViewController {
     }
     
     private func showCalculationResult() {
+        var result = ""
+        
         do {
-            let result = try calculator.calculate()
-            updateCalculatorLabel(to: numberFormatter.string(from: result.convertNSNumber())!)
+            result = try String(calculator.calculate())
         } catch CalculatorError.divisionByZero {
-            updateCalculatorLabel(to: numberFormatter.notANumberSymbol)
+            result = numberFormatter.notANumberSymbol
         } catch {
             return
         }
         
-        calculator.initCalculation()
+        updateCalculatorLabel(to: result)
         updateOperatorLabel()
     }
     

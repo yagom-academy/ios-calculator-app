@@ -9,7 +9,6 @@ class Calculator {
     private(set) var `operator` = ""
     private(set) var operand = "0"
     private(set) var formula = ""
-    private var calculationState = false
     
     var isOperandZero: Bool {
         return operand == "0"
@@ -17,16 +16,6 @@ class Calculator {
     
     var isFormulaEmpty: Bool {
         return formula == ""
-    }
-    
-    var isCalculateCompleted: Bool {
-        get {
-            return calculationState
-        }
-        
-        set(state) {
-            self.calculationState = state
-        }
     }
     
     var isOperandNegative: Bool {
@@ -37,17 +26,16 @@ class Calculator {
         return operand.contains(MathSymbol.decimalPoint)
     }
     
-    init(`operator`: String = "", operand: String = "", formula: String = "", calculationState: Bool = false) {
+    init(`operator`: String = "", operand: String = "0", formula: String = "") {
         self.operator = `operator`
         self.operand = operand
         self.formula = formula
-        self.calculationState = calculationState
     }
     
-    func initCalculation() {
-        self.operator = ""
-        self.operand = "0"
-        self.formula = ""
+    func initCalculation(`operator`: String = "", operand: String = "0", formula: String = "") {
+        self.operator = `operator`
+        self.operand = operand
+        self.formula = formula
     }
     
     func changeOperator(_ `operator`: String = "") {
@@ -68,10 +56,15 @@ class Calculator {
     
     func calculate() throws -> Double {
         var convertedFormula = ExpressionParser.parser(from: formula)
-        let result = try convertedFormula.result()
+        var result = 0.0
         
-        initCalculation()
-        isCalculateCompleted = true
+        do {
+            result = try convertedFormula.result()
+            initCalculation(operand: String(result))
+        } catch {
+            initCalculation()
+            throw error
+        }
         
         return result
     }
