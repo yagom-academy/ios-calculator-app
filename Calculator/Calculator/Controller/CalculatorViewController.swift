@@ -18,7 +18,7 @@ final class CalculatorViewController: UIViewController {
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
     private var isNegativeSign: Bool = false
-    private var isCalculate: Bool = false
+    private var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func oneToNineOperandButtonTapped(_ sender: UIButton) {
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -40,7 +40,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -55,7 +55,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func zeroButtonTapped(_ sender: Any) {
-        guard !isCalculate && !operand.isEmpty else {
+        guard !isCalculated && !operand.isEmpty else {
             return
         }
         
@@ -71,7 +71,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func doubleZeroButtonTapped(_ sender: Any) {
-        guard !isCalculate && !operand.isEmpty else {
+        guard !isCalculated && !operand.isEmpty else {
             return
         }
         
@@ -91,7 +91,7 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -107,7 +107,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculateButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -119,7 +119,7 @@ final class CalculatorViewController: UIViewController {
         calculate()
         setOperatorLabelEmpty()
         arithmeticOperator.removeAll()
-        isCalculate = true
+        isCalculated = true
     }
     
     @IBAction func allClearButtonTapped(_ sender: Any) {
@@ -131,14 +131,14 @@ final class CalculatorViewController: UIViewController {
         
         isFirstInput = true
         isDotButtonTapped = false
-        isCalculate = false
+        isCalculated = false
         operand.removeAll()
         arithmeticOperator.removeAll()
         finalFormula.removeAll()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -153,7 +153,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonTapped(_ sender: Any) {
-        guard !isCalculate else {
+        guard !isCalculated else {
             return
         }
         
@@ -193,7 +193,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     func updateOperatorLabel(with input: String) {
-        if !isCalculate {
+        if !isCalculated {
             arithmeticOperator = input
             operatorLabel.text = arithmeticOperator
         }
@@ -229,7 +229,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     func calculate() {
-        isCalculate = true
+        isCalculated = true
         var formula = ExpressionParser.parse(from: finalFormula)
         guard let result = try? formula.result() else {
             operandLabel.text = CalculatorConstant.notNumber
