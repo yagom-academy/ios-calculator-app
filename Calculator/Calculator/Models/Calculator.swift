@@ -7,12 +7,16 @@
 
 class Calculator {
     private(set) var `operator` = ""
-    private(set) var operand = ""
+    private(set) var operand = "0"
     private(set) var formula = ""
     private var calculationState = false
     
+    var isOperandZero: Bool {
+        return operand == "0"
+    }
+    
     var isFormulaEmpty: Bool {
-        return formula.count == 0
+        return formula == ""
     }
     
     var isCalculateCompleted: Bool {
@@ -42,20 +46,24 @@ class Calculator {
     
     func initCalculation() {
         self.operator = ""
-        self.operand = ""
+        self.operand = "0"
         self.formula = ""
     }
     
-    func changeOperator(_ `operator`: String) {
+    func changeOperator(_ `operator`: String = "") {
         self.operator = `operator`
     }
     
-    func changeOperand(_ operand: String) {
+    func changeOperand(_ operand: String = "0") {
         self.operand = operand
     }
     
     func addFormula() {
-        self.formula += self.operator + self.operand
+        if formula.isEmpty {
+            self.formula = self.operand
+        } else {
+            self.formula += self.operator + self.operand
+        }
     }
     
     func calculate() throws -> Double {
@@ -63,7 +71,7 @@ class Calculator {
         let result = try convertedFormula.result()
         
         initCalculation()
-        calculationState = true
+        isCalculateCompleted = true
         
         return result
     }
