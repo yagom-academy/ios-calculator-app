@@ -364,9 +364,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculatorLabel" destination="Lwz-OF-XHD" id="yOx-hh-8j4"/>
                         <outlet property="historyScrollView" destination="BOT-7g-vxv" id="g9A-PZ-bB5"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="f8X-8h-xhr"/>
-                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="yOx-hh-8j4"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Xs0-JW-tHz"/>
                     </connections>
                 </viewController>
