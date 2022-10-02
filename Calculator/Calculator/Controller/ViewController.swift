@@ -69,7 +69,7 @@ class ViewController: UIViewController {
               isOnlyZeroAtMainFormulaView() else {
             guard isOnlyZeroAtMainFormulaView() else {
                 updateFormulaType()
-                addStackViewInformulaHistoryView()
+                addStackViewInFormulaHistoryView()
                 resetMainFormulaView(sender)
                 scrollToBottom()
                 return
@@ -93,7 +93,7 @@ class ViewController: UIViewController {
         formula = ExpressionParser.parse(from: partialFormula)
     }
     
-    func addStackViewInformulaHistoryView() {
+    func addStackViewInFormulaHistoryView() {
         let stackView: UIStackView = UIStackView()
         stackView.spacing = 8
         
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
                 mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView() else { return }
         
         updateFormulaType()
-        addStackViewInformulaHistoryView()
+        addStackViewInFormulaHistoryView()
         showFormulaResult()
     }
     
