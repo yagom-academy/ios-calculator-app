@@ -259,7 +259,7 @@ final class ViewController: UIViewController {
                     animated: true)
     }
     
-    private func removeAlloperandAndOperatorStackViewSubviews() {
+    private func resetSubviewsIfNeeded() {
         operandAndOperatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
