@@ -65,14 +65,12 @@ extension Optional where Wrapped == String {
         }
         return ""
     }
-}
-
-extension UIButton {
+    
     var operatorRawValue: String {
-        switch self.currentTitle {
+        switch self {
         case "+":
             return String(Operator.add.rawValue)
-        case "-":
+        case "−":
             return String(Operator.subtract.rawValue)
         case "×":
             return String(Operator.multiply.rawValue)

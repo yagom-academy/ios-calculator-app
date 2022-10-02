@@ -21,42 +21,53 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
-        updateFormulaView(sender)
+        guard isOnlyZeroAtMainFormulaView(sender) else {
+            updateFormulaType()
+            addStackViewInScrollView()
+            updateMainFormulaView(sender)
+            return
+        }
     }
     
-    func updateFormulaView(_ sender: UIButton) {
+    func isOnlyZeroAtMainFormulaView(_ sender: UIButton) -> Bool {
         guard let operandText = mainOperandLabel.text,
               operandText != "0" else {
             mainOperatorLabel.text = sender.currentTitle ?? ""
-            return
+            return true
         }
+        return false
+    }
+    
+    func updateFormulaType() {
+        let operatorValue: String = mainOperatorLabel.text.operatorRawValue
+        let operandValue: String = mainOperandLabel.text.removeComma()
         
-        let operatorText = sender.operatorRawValue
-        partialFormula += operandText.removeComma() + operatorText
+        partialFormula += operatorValue + operandValue
         formula = ExpressionParser.parse(from: partialFormula)
-        addStackViewInScrollView()
+    }
+    
+    func updateMainFormulaView(_ sender: UIButton) {
         mainOperandLabel.text = "0"
         mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     func addStackViewInScrollView() {
-        let stackView: UIStackView = UIStackView(frame: CGRect())
+        let stackView: UIStackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
         
         let operandLabel: UILabel = UILabel()
-        let operatorLabel: UILabel = UILabel()
         operandLabel.text = mainOperandLabel.text?.applyNumberFormatterInFormulaHistoryView()
         operandLabel.textColor = .white
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let operatorLabel: UILabel = UILabel()
         operatorLabel.text = mainOperatorLabel.text
         operatorLabel.textColor = .white
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        [operatorLabel, operandLabel].map {
-                stackView.addArrangedSubview($0)
-            }
+        [operatorLabel, operandLabel].map { stackView.addArrangedSubview($0) }
         
         formulaHistoryView.addArrangedSubview(stackView)
     }
@@ -104,7 +115,6 @@ class ViewController: UIViewController {
               operandLabelText.contains(".") == false else {
             return
         }
-        
         mainOperandLabel.text = operandLabelText.applyNumberFormatterInMainLabel() + "."
     }
 }
