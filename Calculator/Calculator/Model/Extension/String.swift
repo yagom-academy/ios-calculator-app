@@ -16,6 +16,10 @@ extension String {
         return strings
     }
     
+    func removeComma() -> String {
+        return self.components(separatedBy: ",").joined()
+    }
+    
     func applyNumberFormatterAtMainLabel() -> String {
         numberFormatter.setDefaultFormat()
         let splitedByDot: [String] = self.split(with: ".")
@@ -24,7 +28,7 @@ extension String {
               let stringBeforeDot: String = numberFormatter.string(from: number) else {
             return ""
         }
-        return splitedByDot[1...].reduce(into: [stringBeforeDot]) { $0.append("." + $1) }.joined()
+        return splitedByDot[1...].reduce(into: stringBeforeDot) { $0.append("." + $1) }
     }
     
     func applyNumberFormatterAtFormulaHistoryView() -> String {
@@ -35,10 +39,6 @@ extension String {
             return ""
         }
         return returnValue
-    }
-    
-    func removeComma() -> String {
-        return self.components(separatedBy: ",").joined()
     }
 }
 

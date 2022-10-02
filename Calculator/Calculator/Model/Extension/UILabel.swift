@@ -6,7 +6,7 @@
 import UIKit
 
 extension UILabel {
-    var rawvalueByOperatorLabelText: String {
+    var rawValueByOperatorLabelText: String {
         switch self.text {
         case "+":
             return String(Operator.add.rawValue)

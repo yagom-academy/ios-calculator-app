@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     
     //MARK: - 사칙연산 메서드
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
-        guard isOnlyZeroAtMainFormulaView(sender) else {
+        guard isOnlyZeroAtMainFormulaView() else {
             updateFormulaType()
             addStackViewInScrollView()
             updateMainFormulaView(sender)
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
         mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
-    func isOnlyZeroAtMainFormulaView(_ sender: UIButton) -> Bool {
+    func isOnlyZeroAtMainFormulaView() -> Bool {
         guard let operandText = mainOperandLabel.text,
               operandText != "0" else {
             return true
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
     }
     
     func updateFormulaType() {
-        let operatorValue: String = mainOperatorLabel.rawvalueByOperatorLabelText
+        let operatorValue: String = mainOperatorLabel.rawValueByOperatorLabelText
         let operandValue: String = mainOperandLabel.text.removeComma()
         
         partialFormula += operatorValue + operandValue
