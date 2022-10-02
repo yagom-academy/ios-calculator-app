@@ -210,7 +210,7 @@ class ViewController: UIViewController {
     
     private func updateOperandLabel(with number: String) {
         
-        if operandLabel.text == "0" {
+        if operandLabel.text == Constant.zero {
             operandLabel.text = number
         } else {
             if let operandText = operandLabel.text {
