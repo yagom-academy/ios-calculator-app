@@ -26,7 +26,7 @@ final class CalculatorViewController: UIViewController {
         setOperatorLabelEmpty()
     }
     
-    @IBAction func oneToNineOperandButtonTapped(_ sender: UIButton) {
+    @IBAction func operandButtonTapped(_ sender: UIButton) {
         guard !isCalculated else {
             return
         }
