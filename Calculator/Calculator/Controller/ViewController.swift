@@ -70,7 +70,7 @@ class ViewController: UIViewController {
             guard isOnlyZeroAtMainFormulaView() else {
                 updateFormulaType()
                 addStackViewInformulaHistoryView()
-                updateMainFormulaView(sender)
+                resetMainFormulaView(sender)
                 scrollToBottom()
                 return
             }
@@ -120,7 +120,7 @@ class ViewController: UIViewController {
             ), animated: false)
     }
     
-    func updateMainFormulaView(_ sender: UIButton) {
+    func resetMainFormulaView(_ sender: UIButton) {
         mainOperandLabel.text = "0"
         mainOperatorLabel.text = sender.currentTitle ?? ""
     }
