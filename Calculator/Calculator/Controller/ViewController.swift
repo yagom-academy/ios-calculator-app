@@ -7,8 +7,8 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var expressionString: String = ""
-    private var totalString: String = ""
+    private var currentExpressionString: String = ""
+    private var totalExpressionString: String = ""
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet private weak var stackView: UIStackView!
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
     }
     
     private func resetExpressionString() {
-        expressionString = ""
+        currentExpressionString = ""
     }
     
     private func resetValueToZero() {
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
     }
     
     private func resetTotalString() {
-        totalString = ""
+        totalExpressionString = ""
     }
     
     private func resetSignLabel() {
@@ -101,11 +101,11 @@ class ViewController: UIViewController {
     }
     
     private func assignTotalString(value: String) {
-        totalString += value
+        totalExpressionString += value
     }
     
     private func executeExpression() {
-        var expression = ExpressionParser.parse(from: totalString)
+        var expression = ExpressionParser.parse(from: totalExpressionString)
         do {
             let result = try expression.result()
             let converted = NSDecimalNumber(string: String(result))
@@ -133,43 +133,43 @@ class ViewController: UIViewController {
     @IBAction private func tappedOperandButton(_ sender: UIButton) {
         switch sender {
         case oneButton:
-            expressionString += CalculatorNameSpace.one
+            currentExpressionString += CalculatorNameSpace.one
         case twoButton:
-            expressionString += CalculatorNameSpace.two
+            currentExpressionString += CalculatorNameSpace.two
         case threeButton:
-            expressionString += CalculatorNameSpace.three
+            currentExpressionString += CalculatorNameSpace.three
         case fourButton:
-            expressionString += CalculatorNameSpace.four
+            currentExpressionString += CalculatorNameSpace.four
         case fiveButton:
-            expressionString += CalculatorNameSpace.five
+            currentExpressionString += CalculatorNameSpace.five
         case sixButton:
-            expressionString += CalculatorNameSpace.six
+            currentExpressionString += CalculatorNameSpace.six
         case sevenButton:
-            expressionString += CalculatorNameSpace.seven
+            currentExpressionString += CalculatorNameSpace.seven
         case eightButton:
-            expressionString += CalculatorNameSpace.eight
+            currentExpressionString += CalculatorNameSpace.eight
         case nineButton:
-            expressionString += CalculatorNameSpace.nine
+            currentExpressionString += CalculatorNameSpace.nine
         case zeroButton:
-            expressionString += CalculatorNameSpace.zero
+            currentExpressionString += CalculatorNameSpace.zero
         case doubleZeroButton:
-            expressionString += CalculatorNameSpace.doubleZero
+            currentExpressionString += CalculatorNameSpace.doubleZero
         case dotButton:
-            expressionString += CalculatorNameSpace.dot
+            currentExpressionString += CalculatorNameSpace.dot
         default:
             return
         }
-        let converted = NSDecimalNumber(string: expressionString)
+        let converted = NSDecimalNumber(string: currentExpressionString)
         let result = numberFormatter.string(from: converted)
         expressionLabel.text = result
     }
     
     @IBAction private func tappedOperatorButton(_ sender: UIButton) {
-        guard expressionString.count != 0 && expressionLabel.text != "" else {
+        guard currentExpressionString.count != 0 && expressionLabel.text != "" else {
             return
         }
         
-        if totalString.isEmpty {
+        if totalExpressionString.isEmpty {
             guard let value = expressionLabel.text else { return }
             assignTotalString(value: value)
             addLabelAndSign(value: value, sender: sender)
@@ -181,7 +181,7 @@ class ViewController: UIViewController {
                 guard let sign = signLabel.text else { return }
                 guard let value = expressionLabel.text else { return }
                 resetExpressionString()
-                totalString += " \(sign) "
+                totalExpressionString += " \(sign) "
                 assignTotalString(value: value)
                 addLabelAndSign(value: sign + value, sender: sender)
                 initializeExpression()
@@ -190,15 +190,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func tappedEqualButton(_ sender: UIButton) {
-        if totalString.isEmpty {
+        if totalExpressionString.isEmpty {
             return
         } else {
             guard let sign = signLabel.text else { return }
             guard let value = expressionLabel.text else { return }
-            expressionString = "\(sign) \(value)"
-            addNewLabelToStackView(message: expressionString, stackView: stackView)
-            totalString += " \(sign) "
-            totalString += value
+            currentExpressionString = "\(sign) \(value)"
+            addNewLabelToStackView(message: currentExpressionString, stackView: stackView)
+            totalExpressionString += " \(sign) "
+            totalExpressionString += value
             executeExpression()
             resetExpressionString()
             resetSignLabel()
@@ -215,7 +215,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func tappedCEButton(_ sender: UIButton) {
-        if expressionString.isEmpty && totalString.isEmpty {
+        if currentExpressionString.isEmpty && totalExpressionString.isEmpty {
             resetValueToZero()
         } else {
             expressionLabel.text = ""
