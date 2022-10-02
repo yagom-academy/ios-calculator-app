@@ -67,7 +67,7 @@ class ViewController: UIViewController {
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
         guard isOnlyZeroAtMainFormulaView() else {
             updateFormulaType()
-            addStackViewInScrollView()
+            addStackViewInformulaHistoryView()
             updateMainFormulaView(sender)
             return
         }
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         formula = ExpressionParser.parse(from: partialFormula)
     }
     
-    func addStackViewInScrollView() {
+    func addStackViewInformulaHistoryView() {
         let stackView: UIStackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -125,6 +125,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
+        deleteStackViewInScrollView()
+        mainOperatorLabel.text = ""
+        mainOperandLabel.text = "0"
+        formula.operands.removeAll()
+        formula.operators.removeAll()
+    }
+    
+    func deleteStackViewInScrollView() {
+        formulaHistoryView.subviews.forEach {
+            $0.isHidden = true
+        }
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
