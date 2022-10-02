@@ -266,7 +266,7 @@ class ViewController: UIViewController {
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = "0"
+        operandLabel.text = Constant.zero
     }
     
     private func resetOperatorLabel() {
