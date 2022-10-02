@@ -131,11 +131,11 @@ class ViewController: UIViewController {
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == Constant.zero {
-            updateExpression(nextOperator: Constant.minus)
+            updateExpression(nextOperator: Constant.substract)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.minus)
+        updateExpression(nextOperator: Constant.substract)
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
