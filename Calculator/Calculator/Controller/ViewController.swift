@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         let operatorValue: String = mainOperatorLabel.rawValueByOperatorLabelText
         let operandValue: String = mainOperandLabel.text.removeComma()
         
-        partialFormula += operatorValue + operandValue
+        partialFormula += operatorValue + " " + operandValue + " "
         formula = ExpressionParser.parse(from: partialFormula)
     }
     
@@ -128,6 +128,7 @@ class ViewController: UIViewController {
         deleteStackViewInScrollView()
         mainOperatorLabel.text = ""
         mainOperandLabel.text = "0"
+        partialFormula = ""
         formula.operands.removeAll()
         formula.operators.removeAll()
     }
@@ -139,6 +140,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
+        guard let operandLabelText = mainOperandLabel.text,
+        operandLabelText != "0" else {
+            return
+        }
+        
+        operandLabelText.contains("-") ?
+        (mainOperandLabel.text = operandLabelText.split(with: "-").joined()) :
+        (mainOperandLabel.text = "-" + operandLabelText)
     }
 }
-

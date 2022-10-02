@@ -10,25 +10,24 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
-        componentsByOperators(from: input).forEach {
-            if let operand: Double = Double($0) {
-                operands.enqueue(operand)
-            }
+        componentsByOperators(from: input).enumerated().filter { (index, element) in
+            index % 2 == 0
+        }.forEach {
+            guard let operandValue = Double($1) else { return }
+            operands.enqueue(operandValue)
         }
         
-        input.filter {
-            Operator.allCases.map { $0.rawValue }.contains($0)
+        componentsByOperators(from: input).enumerated().filter { (index, element) in
+            index % 2 != 0
         }.forEach {
-            if let operatorByRawValue = Operator(rawValue: $0) {
-                operators.enqueue(operatorByRawValue)
-            }
+            guard let operatorValue = Operator(rawValue: Character($1)) else { return }
+            operators.enqueue(operatorValue)
         }
         
         return Formula(operands: operands, operators: operators)
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let operators: String = Operator.allCases.map{ String($0.rawValue) }.joined()
-        return input.components(separatedBy: CharacterSet(charactersIn: operators))
+        return input.split(with: " ")
     }
 }
