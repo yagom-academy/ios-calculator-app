@@ -62,13 +62,13 @@ class ViewController: UIViewController {
     
     @IBAction private func decimalPointButtonPressed(_ sender: UIButton) {
         
-        guard let isContainingPoint = operandLabel.text?.contains(".") else { return }
+        guard let isContainingPoint = operandLabel.text?.contains(Constant.dot) else { return }
         if isContainingPoint {
             return
-        } else if operandLabel.text == "0" {
+        } else if operandLabel.text == Constant.zero {
             updateOperandLabel(with: "0.")
         } else {
-            updateOperandLabel(with: ".")
+            updateOperandLabel(with: Constant.dot)
         }
     }
     
