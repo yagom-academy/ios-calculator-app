@@ -20,6 +20,50 @@ class ViewController: UIViewController {
         mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterInMainLabel()
     }
     
+    //MARK: - NumberPad 메서드
+    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+        operandLabelText = mainOperandLabel.text.removeComma()
+        
+        guard operandLabelText != "0" else {
+            mainOperandLabel.text = sender.tag.description
+            return
+        }
+        
+        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterInMainLabel()
+        // 20자리가 넘어가는 경우, alert 띄우기
+    }
+    
+    @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        operandLabelText = mainOperandLabel.text.removeComma()
+        
+        guard operandLabelText.count == 1,
+              operandLabelText.last == "0" else {
+            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterInMainLabel()
+            return
+        }
+    }
+    
+    @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
+        operandLabelText = mainOperandLabel.text.removeComma()
+        
+        guard operandLabelText.count == 1,
+              operandLabelText.last == "0" else {
+            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterInMainLabel()
+            return
+        }
+    }
+    
+    @IBAction func touchUpDotButton(_ sender: UIButton) {
+        operandLabelText = mainOperandLabel.text.removeComma()
+        
+        guard operandLabelText != ".",
+              operandLabelText.contains(".") == false else {
+            return
+        }
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterInMainLabel() + "."
+    }
+    
+    //MARK: - 사칙연산 메서드
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
         guard isOnlyZeroAtMainFormulaView(sender) else {
             updateFormulaType()
@@ -72,50 +116,11 @@ class ViewController: UIViewController {
         formulaHistoryView.addArrangedSubview(stackView)
     }
     
+    // MARK: - 기능 메서드
     @IBAction func touchUpCEButton(_ sender: UIButton) {
         mainOperandLabel.text = "0"
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText != "0" else {
-            mainOperandLabel.text = sender.tag.description
-            return
-        }
-        
-        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterInMainLabel()
-        // 20자리가 넘어가는 경우, alert 띄우기
-    }
     
-    @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText.count == 1,
-              operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterInMainLabel()
-            return
-        }
-    }
-    
-    @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText.count == 1,
-              operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterInMainLabel()
-            return
-        }
-    }
-    
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText != ".",
-              operandLabelText.contains(".") == false else {
-            return
-        }
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterInMainLabel() + "."
-    }
 }
 
