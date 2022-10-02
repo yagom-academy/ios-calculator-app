@@ -160,7 +160,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func CEButtonPressed(_ sender: Any) {
-        operandLabel.text = "0"
+        operandLabel.text = Constant.zero
     }
     
     @IBAction private func ACButtonPressed(_ sender: Any) {
