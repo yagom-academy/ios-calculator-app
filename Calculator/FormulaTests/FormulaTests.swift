@@ -16,7 +16,7 @@ class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-
+    
     func test_숫자3개_혼합연산하는_경우() {
         //given
         sut.operands.enqueue(element: 5.0)
@@ -26,10 +26,14 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
         
         //then
-        print(result)
         XCTAssertEqual(result, -15)
     }
     
@@ -44,10 +48,14 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
         
         //then
-        print(result)
         XCTAssertEqual(result, 14)
     }
     
@@ -61,10 +69,14 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .multiply)
 
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
         
         //then
-        print(result)
         XCTAssertEqual(result, -2)
     }
     
@@ -75,7 +87,12 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .subtract)
         
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
 
         //then
         XCTAssertEqual(result, 15.0)
@@ -88,7 +105,12 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .multiply)
         
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
 
         //then
         XCTAssertEqual(result, -50)
@@ -101,7 +123,12 @@ class FormulaTests: XCTestCase {
          sut.operators.enqueue(element: .divide)
          
          //when
-         let result = sut.result()
+         var result: Double?
+         do {
+             result = try sut.result()
+         } catch OccuredError.emptyOperator {
+             print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+         } catch { }
 
          //then
          XCTAssertEqual(result, 3)
@@ -114,12 +141,34 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(element: .divide)
         
         //when
-        let result = sut.result()
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
         if result == Double.infinity {
             print("\(Double.nan)")
         }
         
         //then
         XCTAssertEqual(result,Double.infinity)
+    }
+
+    func test_연산자입력_안되었을_경우_오류처리_하는지() {
+        //given
+        sut.operands.enqueue(element: 5.0)
+        sut.operands.enqueue(element: -10.0)
+        
+        //when
+        var result: Double?
+        do {
+            result = try sut.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다. 연산자를 포함하여 입력해주세요.")
+        } catch { }
+        
+        //then
+        XCTAssertEqual(result, nil)
     }
 }

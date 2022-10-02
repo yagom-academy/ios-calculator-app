@@ -33,7 +33,8 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeueStack이_비어있지않은경우_값을_넣지않는지() {
         //given
-        sut.enqueueStack = [100.0, 200.0]
+        sut.enqueue(element: 100.0)
+        sut.enqueue(element: 200.0)
         var result = sut.dequeue()
         sut.enqueue(element: 300.0)
         sut.enqueue(element: 400.0)

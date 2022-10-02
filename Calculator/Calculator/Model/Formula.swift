@@ -8,18 +8,29 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() -> Double {
-        var lhs = operands.dequeue() ?? 99.999
-        var rhs = operands.dequeue() ?? 99.999
-        var operatorsValue = operators.dequeue()
+    mutating func result() throws -> Double? {
         
-        var result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+        guard let firstLhs: Double = operands.dequeue(),
+              let firstRhs: Double = operands.dequeue() else {
+            return nil
+        }
+        guard let firstOperatorsValue: Operator = operators.dequeue() else {
+            throw OccuredError.emptyOperator
+        }
+        var result: Double? = firstOperatorsValue.calculate(lhs: firstLhs, rhs: firstRhs)
         
         while !operands.dequeueStack.isEmpty {
-            lhs = result
-            rhs = operands.dequeue() ?? 99.999
-            operatorsValue = operators.dequeue()
-            result = operatorsValue?.calculate(lhs: lhs, rhs: rhs) ?? 99.999
+            guard let lhs: Double = result,
+                  let rhs: Double = operands.dequeue() else {
+                return nil
+            }
+            guard let operatorsValue: Operator = operators.dequeue() else {
+                throw OccuredError.emptyOperator
+            }
+            result = operatorsValue.calculate(lhs: lhs, rhs: rhs)
+        }
+        if result == nil {
+            throw OccuredError.emptyOperator
         }
         if operators.dequeueStack.isEmpty == false {
             operators.dequeueStack.removeAll()

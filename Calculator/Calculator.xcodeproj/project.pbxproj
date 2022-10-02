@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		90894BD128DF3B9300E061B6 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90894BD028DF3B9300E061B6 /* String.swift */; };
+		90894C2628E95B0400E061B6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90894C2528E95B0400E061B6 /* Error.swift */; };
 		90A727E428DD994A0037ACEA /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A727E328DD994A0037ACEA /* ExpressionParser.swift */; };
 		90A727EC28DD9DEA0037ACEA /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A727EB28DD9DEA0037ACEA /* ExpressionParserTests.swift */; };
 		90CF59B528D9930000668BB5 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90CF59B428D9930000668BB5 /* Operator.swift */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		90894BD028DF3B9300E061B6 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		90894C2528E95B0400E061B6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		90A727E328DD994A0037ACEA /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		90A727E928DD9DEA0037ACEA /* ExpressionParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A727EB28DD9DEA0037ACEA /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				90CF59C128DC47A500668BB5 /* Formula.swift */,
 				90A727E328DD994A0037ACEA /* ExpressionParser.swift */,
 				90894BD028DF3B9300E061B6 /* String.swift */,
+				90894C2528E95B0400E061B6 /* Error.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				90D37FD228D8A2D500261435 /* CalculatorItemQueue.swift in Sources */,
 				90CF59C228DC47A500668BB5 /* Formula.swift in Sources */,
 				90A727E428DD994A0037ACEA /* ExpressionParser.swift in Sources */,
+				90894C2628E95B0400E061B6 /* Error.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
