@@ -19,7 +19,7 @@ struct Formula {
                 return result
             }
             
-            if operatorToCalculate.value.rawValue == Operator.divide.rawValue,
+            if operatorToCalculate.value == Operator.divide,
                 nextOperand.value == 0 {
                 throw CalculationError.dividedZero
             } else {

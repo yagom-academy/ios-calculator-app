@@ -29,8 +29,8 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterAtMainLabel()
-        // 20자리가 넘어가는 경우, alert 띄우기
+        mainOperandLabel.text =
+        (operandLabelText + sender.tag.description).applyNumberFormatterAtMainLabel()
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
@@ -129,7 +129,7 @@ class ViewController: UIViewController {
             mainOperandLabel.text =
             try formula.result().description.applyNumberFormatterAtFormulaHistoryView()
         } catch CalculationError.dividedZero {
-            
+            mainOperandLabel.text = "NaN"
         } catch {}
         mainOperatorLabel.text = ""
     }
