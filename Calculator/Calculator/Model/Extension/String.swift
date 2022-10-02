@@ -17,9 +17,7 @@ extension String {
     }
     
     func applyNumberFormatterAtMainLabel() -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.setDefaultFormat()
         
         if self.contains(".") {
             let splitedByDot: [String] = self.split(with: ".")
@@ -39,9 +37,7 @@ extension String {
     }
     
     func applyNumberFormatterAtFormulaHistoryView() -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.setDefaultFormat()
         
         guard let number: NSNumber = numberFormatter.number(from: self),
               let returnValue: String = numberFormatter.string(from: number) else {
