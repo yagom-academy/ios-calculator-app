@@ -331,6 +331,7 @@
                         <outlet property="formulaHistoryView" destination="XRe-QE-UJf" id="8Dy-Af-wde"/>
                         <outlet property="mainOperandLabel" destination="Lwz-OF-XHD" id="5pQ-pd-tgn"/>
                         <outlet property="mainOperatorLabel" destination="HPC-iy-qdm" id="GSN-ox-kF4"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="zSh-Tq-005"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

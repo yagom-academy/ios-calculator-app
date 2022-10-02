@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mainOperandLabel: UILabel!
     @IBOutlet weak var mainOperatorLabel: UILabel!
     @IBOutlet weak var formulaHistoryView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     var operandLabelText: String = ""
     var partialFormula: String = ""
     var formula: Formula = ExpressionParser.parse(from: "")
@@ -68,6 +69,7 @@ class ViewController: UIViewController {
             updateFormulaType()
             addStackViewInformulaHistoryView()
             updateMainFormulaView(sender)
+            scrollToBottom()
             return
         }
         mainOperatorLabel.text = sender.currentTitle ?? ""
@@ -106,6 +108,14 @@ class ViewController: UIViewController {
         }
         
         formulaHistoryView.addArrangedSubview(stackView)
+    }
+    
+    func scrollToBottom() {
+        scrollView.setContentOffset(
+            CGPoint(
+                x: 0,
+                y: scrollView.contentSize.height - scrollView.bounds.height
+            ), animated: false)
     }
     
     func updateMainFormulaView(_ sender: UIButton) {
