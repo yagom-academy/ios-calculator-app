@@ -77,6 +77,7 @@ class ViewController: UIViewController {
             addFormula(operand: operand)
         }
         
+        scrollToBottom()
         currentOperatorLabel.text = sender.currentTitle
         resetCurrentEntry()
     }
@@ -104,6 +105,7 @@ class ViewController: UIViewController {
             calculateResult = formattedResult
             resetOperatorLabel()
             resetFormula()
+            scrollToBottom()
         } catch CalculatorError.dividedByZero {
             currentEntryLabel.text = CalculatorItems.nan
             resetOperatorLabel()
@@ -177,6 +179,11 @@ class ViewController: UIViewController {
         let formula = ExpressionParser.parse(from: inputWithoutComma)
 
         return try formula.result()
+    }
+    
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
+        scrollView.setContentOffset(bottomOffset, animated: false)
     }
 }
 
