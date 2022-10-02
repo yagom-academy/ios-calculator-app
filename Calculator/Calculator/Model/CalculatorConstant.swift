@@ -5,8 +5,6 @@
 //  Created by Hamo on 2022/10/02.
 //
 
-import Foundation
-
 enum CalculatorConstant {
     static let blank: String = ""
     static let zero: String = "0"
