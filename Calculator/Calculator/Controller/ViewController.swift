@@ -126,17 +126,25 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
         deleteStackViewInScrollView()
-        mainOperatorLabel.text = ""
-        mainOperandLabel.text = "0"
-        partialFormula = ""
-        formula.operands.removeAll()
-        formula.operators.removeAll()
+        resetMainLabelText()
+        resetFormulaType()
     }
     
     func deleteStackViewInScrollView() {
         formulaHistoryView.subviews.forEach {
             $0.isHidden = true
         }
+    }
+    
+    func resetMainLabelText() {
+        mainOperatorLabel.text = ""
+        mainOperandLabel.text = "0"
+    }
+    
+    func resetFormulaType() {
+        partialFormula = ""
+        formula.operands.removeAll()
+        formula.operators.removeAll()
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
