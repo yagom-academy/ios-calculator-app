@@ -57,9 +57,8 @@ class ViewController: UIViewController {
         operandLabelText = mainOperandLabel.text.removeComma()
         
         guard operandLabelText != ".",
-              operandLabelText.contains(".") == false else {
-            return
-        }
+              operandLabelText.contains(".") == false else { return }
+        
         mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel() + "."
     }
     
@@ -76,9 +75,7 @@ class ViewController: UIViewController {
     
     func isOnlyZeroAtMainFormulaView() -> Bool {
         guard let operandText = mainOperandLabel.text,
-              operandText != "0" else {
-            return true
-        }
+              operandText != "0" else { return true }
         return false
     }
     
@@ -117,10 +114,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        guard let result = try? formula.result().description.applyNumberFormatterAtFormulaHistoryView(),
-              result != mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView() else {
-            return
-        }
+        guard let result =
+                try? formula.result().description.applyNumberFormatterAtFormulaHistoryView(),
+              result !=
+                mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView() else { return }
+        
         updateFormulaType()
         addStackViewInformulaHistoryView()
         showFormulaResult()
@@ -128,7 +126,8 @@ class ViewController: UIViewController {
     
     func showFormulaResult() {
         do {
-            mainOperandLabel.text = try formula.result().description.applyNumberFormatterAtFormulaHistoryView()
+            mainOperandLabel.text =
+            try formula.result().description.applyNumberFormatterAtFormulaHistoryView()
         } catch CalculationError.dividedZero {
             
         } catch {}
@@ -165,9 +164,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
         guard let operandLabelText = mainOperandLabel.text,
-        operandLabelText != "0" else {
-            return
-        }
+        operandLabelText != "0" else { return }
         
         operandLabelText.contains("-") ?
         (mainOperandLabel.text = operandLabelText.split(with: "-").joined()) :

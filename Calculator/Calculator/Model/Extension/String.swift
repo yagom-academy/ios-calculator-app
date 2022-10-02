@@ -25,9 +25,7 @@ extension String {
         let splitedByDot: [String] = self.split(with: ".")
         
         guard let number: NSNumber = numberFormatter.number(from: splitedByDot[0]),
-              let stringBeforeDot: String = numberFormatter.string(from: number) else {
-            return ""
-        }
+              let stringBeforeDot: String = numberFormatter.string(from: number) else { return "" }
         return splitedByDot[1...].reduce(into: stringBeforeDot) { $0.append("." + $1) }
     }
     
@@ -35,9 +33,7 @@ extension String {
         numberFormatter.setDefaultFormat()
         
         guard let number: NSNumber = numberFormatter.number(from: self),
-              let returnValue: String = numberFormatter.string(from: number) else {
-            return ""
-        }
+              let returnValue: String = numberFormatter.string(from: number) else { return "" }
         return returnValue
     }
 }
