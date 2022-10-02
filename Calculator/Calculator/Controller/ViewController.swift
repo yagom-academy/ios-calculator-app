@@ -103,15 +103,15 @@ class ViewController: UIViewController {
         
         let operandLabel: UILabel = UILabel()
         operandLabel.text = mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView()
-        operandLabel.textColor = .white
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let operatorLabel: UILabel = UILabel()
         operatorLabel.text = mainOperatorLabel.text
-        operatorLabel.textColor = .white
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        [operatorLabel, operandLabel].map { stackView.addArrangedSubview($0) }
+        [operatorLabel, operandLabel].forEach {
+            $0.textColor = .white
+            $0.font = UIFont.preferredFont(forTextStyle: .title3)
+            stackView.addArrangedSubview($0)
+        }
         
         formulaHistoryView.addArrangedSubview(stackView)
     }
@@ -120,7 +120,5 @@ class ViewController: UIViewController {
     @IBAction func touchUpCEButton(_ sender: UIButton) {
         mainOperandLabel.text = "0"
     }
-    
-    
 }
 
