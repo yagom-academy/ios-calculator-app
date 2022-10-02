@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatter()
+        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterInMainLabel()
     }
     
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
         
         let operandLabel: UILabel = UILabel()
         let operatorLabel: UILabel = UILabel()
-        operandLabel.text = mainOperandLabel.text
+        operandLabel.text = mainOperandLabel.text?.applyNumberFormatterInFormulaHistoryView()
         operandLabel.textColor = .white
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operatorLabel.text = mainOperatorLabel.text
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatter()
+        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterInMainLabel()
         // 20자리가 넘어가는 경우, alert 띄우기
     }
     
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatter()
+            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterInMainLabel()
             return
         }
     }
@@ -92,7 +92,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatter()
+            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterInMainLabel()
             return
         }
     }
@@ -105,7 +105,7 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = operandLabelText.applyNumberFormatter() + "."
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterInMainLabel() + "."
     }
 }
 

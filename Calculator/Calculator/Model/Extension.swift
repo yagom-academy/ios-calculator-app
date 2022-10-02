@@ -19,26 +19,38 @@ extension String {
         return strings
     }
     
-    func applyNumberFormatter() -> String {
+    func applyNumberFormatterInMainLabel() -> String {
         numberFormatter.numberStyle = .decimal // 3자리마다 , 를 찍어주는 역할
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20 // 유효자리수를 설정해주는 역할
         
-        guard self.contains(".") else {
-            guard let number: NSNumber = numberFormatter.number(from: self),
-                  let returnValue = numberFormatter.string(from: number) else {
-                return ""
-            }
-            return returnValue
+        if self.contains(".") {
+            let splitedByDot: [String] = self.split(with: ".")
+            
+            guard let number: NSNumber = numberFormatter.number(from: splitedByDot[0]),
+                  let stringBeforeDot: String = numberFormatter.string(from: number) else {
+                      return ""
+                  }
+            return stringBeforeDot + "." + splitedByDot[1]
         }
         
-        let stringsSplitedByDot: [String] = self.split(with: ".")
-        
-        guard let numberBeforeDot: NSNumber = numberFormatter.number(from: stringsSplitedByDot[0]),
-              let returnValue = numberFormatter.string(from: numberBeforeDot) else {
+        guard let number: NSNumber = numberFormatter.number(from: self),
+              let returnValue: String = numberFormatter.string(from: number) else {
             return ""
         }
-        return returnValue + "." + stringsSplitedByDot[1]
+        return returnValue
+    }
+    
+    func applyNumberFormatterInFormulaHistoryView() -> String {
+        numberFormatter.numberStyle = .decimal // 3자리마다 , 를 찍어주는 역할
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20 // 유효자리수를 설정해주는 역할
+        
+        guard let number: NSNumber = numberFormatter.number(from: self),
+              let returnValue: String = numberFormatter.string(from: number) else {
+            return ""
+        }
+        return returnValue
     }
     
     func removeComma() -> String {
