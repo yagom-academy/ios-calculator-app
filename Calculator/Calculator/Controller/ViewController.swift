@@ -23,7 +23,9 @@ class ViewController: UIViewController {
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var componentsStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
-
+    
+    private var formula: String = CalculatorItems.empty
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,6 +72,7 @@ class ViewController: UIViewController {
             if last == Character(CalculatorItems.dot) {
                 operand.removeLast()
             }
+            formula += "\(currentOperatorLabel.text ?? CalculatorItems.empty) \(operand) "
             addFormula(operand: operand)
         }
         
@@ -81,29 +84,25 @@ class ViewController: UIViewController {
         resetScrollView()
         resetOperatorLabel()
         resetCurrentEntry()
+        resetFormula()
     }
     
     @IBAction private func calculateButtonPressed(_ sender: UIButton) {
         guard !componentsStackView.subviews.isEmpty else { return }
         guard let operand = currentEntryLabel.text else { return }
         
-        var formulaInput: String = CalculatorItems.empty
-        
+        formula += "\(currentOperatorLabel.text ?? CalculatorItems.empty) \(operand) "
         addFormula(operand: operand)
         
-        componentsStackView.subviews.forEach { $0.subviews.forEach({
-            if let label = $0 as? UILabel, let text = label.text, !text.isEmpty {
-                formulaInput += "\(text) "
-            }
-        }) }
-        
         do {
-            let result = try calculate(input: formulaInput)
+            let result = try calculate(input: formula)
             currentEntryLabel.text = result.description.formatNumberToDecimal()
             resetOperatorLabel()
+            resetFormula()
         } catch CalculatorError.dividedByZero {
             currentEntryLabel.text = CalculatorItems.nan
             resetOperatorLabel()
+            resetFormula()
         } catch {
             print(error)
         }
@@ -119,6 +118,10 @@ class ViewController: UIViewController {
     
     private func resetScrollView() {
         componentsStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func resetFormula() {
+        formula = CalculatorItems.empty
     }
     
     private func updateEntry(using input: String) {
@@ -165,8 +168,9 @@ class ViewController: UIViewController {
     }
     
     private func calculate(input: String) throws -> Double {
-        let formula = ExpressionParser.parse(from: input)
-        
+        let inputWithoutComma = input.replacingOccurrences(of: CalculatorItems.comma, with: CalculatorItems.empty)
+        let formula = ExpressionParser.parse(from: inputWithoutComma)
+
         return try formula.result()
     }
 }
