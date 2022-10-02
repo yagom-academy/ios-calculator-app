@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private var formula: String = CalculatorItems.empty
+    private var calculateResult: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,14 +90,18 @@ class ViewController: UIViewController {
     
     @IBAction private func calculateButtonPressed(_ sender: UIButton) {
         guard !componentsStackView.subviews.isEmpty else { return }
-        guard let operand = currentEntryLabel.text else { return }
+        guard let operand = currentEntryLabel.text,
+              operand != calculateResult?.description else { return }
         
         formula += "\(currentOperatorLabel.text ?? CalculatorItems.empty) \(operand) "
         addFormula(operand: operand)
         
         do {
             let result = try calculate(input: formula)
-            currentEntryLabel.text = result.description.formatNumberToDecimal()
+            let formattedResult = result.description.formatNumberToDecimal()
+            
+            currentEntryLabel.text = formattedResult
+            calculateResult = formattedResult
             resetOperatorLabel()
             resetFormula()
         } catch CalculatorError.dividedByZero {
