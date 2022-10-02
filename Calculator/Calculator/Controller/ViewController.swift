@@ -91,8 +91,6 @@ class ViewController: UIViewController {
     
     func addStackViewInformulaHistoryView() {
         let stackView: UIStackView = UIStackView()
-        stackView.alignment = .fill
-        stackView.distribution = .fill
         stackView.spacing = 8
         
         let operandLabel: UILabel = UILabel()
