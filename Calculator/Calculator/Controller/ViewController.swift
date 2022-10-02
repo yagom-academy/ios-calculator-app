@@ -117,6 +117,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
+        guard let result = try? formula.result().description.applyNumberFormatterAtFormulaHistoryView(),
+              result != mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView() else {
+            return
+        }
+        updateFormulaType()
+        addStackViewInformulaHistoryView()
+        showFormulaResult()
+    }
+    
+    func showFormulaResult() {
+        do {
+            mainOperandLabel.text = try formula.result().description.applyNumberFormatterAtFormulaHistoryView()
+        } catch CalculationError.dividedZero {
+            
+        } catch {}
+        mainOperatorLabel.text = ""
     }
     
     // MARK: - 기능 메서드
