@@ -39,28 +39,40 @@ class ExpressionParserTests: XCTestCase {
                        [.add,.multiply,.divide,.add,.subtract,.multiply])
     }
     
-    func test_숫자2개_연산자1개_계산되는지(){
+    func test_숫자2개_연산자1개_계산되는지() {
         //given
         let input: String = "99.9+0.1"
 
         //when
-        var resultFormula: Formula = ExpressionParser.parse(from: input)
-        let resultValue: Double = resultFormula.result()
+//        var resultFormula: Formula = ExpressionParser.parse(from: input)
+//        let resultValue: Double = resultFormula.result()
 
+        var resultFormula: Formula = ExpressionParser.parse(from: input)
+        var resultValue: Double?
+        do {
+            resultValue = try resultFormula.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다.")
+        } catch { }
+        
         //then
         XCTAssertEqual(resultValue, 100.0)
     }
 
-    func test_숫자3개_연산자3개_계산되는지(){
+    func test_숫자3개_연산자2개_계산되는지(){
         //given
-        let input: String = "10+20-10"
+        let input: String = "10+20-5"
 
         //when
         var resultFormula: Formula = ExpressionParser.parse(from: input)
-        let resultValue: Double = resultFormula.result()
-        print(resultValue)
+        var resultValue: Double?
+        do {
+            resultValue = try resultFormula.result()
+        } catch OccuredError.emptyOperator {
+            print("잘못된 입력입니다.")
+        } catch { }
 
         //then
-        XCTAssertEqual(resultValue, 20)
+        XCTAssertEqual(resultValue, 25)
     }
 }
