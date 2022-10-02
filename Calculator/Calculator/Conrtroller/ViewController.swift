@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
-    private var formula: String = ""
+    private var rawFormula: String = ""
     private var result: Double = 0.0
     private var inputNumber: String = "" {
         willSet {
