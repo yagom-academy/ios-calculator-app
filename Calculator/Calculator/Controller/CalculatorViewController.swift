@@ -99,6 +99,10 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
+        if isCalculated {
+            finalFormula.removeAll()
+        }
+        
         if !operand.isEmpty {
             creatFormulaLog()
         }
@@ -120,16 +124,13 @@ final class CalculatorViewController: UIViewController {
         calculate()
         setOperatorLabelEmpty()
         arithmeticOperator.removeAll()
-        finalFormula.removeAll()
         isCalculated = true
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
         setOperandLabelToZero()
         setOperatorLabelEmpty()
-        formulaStackView.arrangedSubviews.forEach { view in
-            view.removeFromSuperview()
-        }
+        removeAllLogStackView()
         
         isFirstInput = true
         isDotButtonTapped = false
@@ -244,6 +245,12 @@ final class CalculatorViewController: UIViewController {
             y: logScrollView.contentSize.height - logScrollView.bounds.height
         )
         logScrollView.setContentOffset(contentOffset, animated: true)
+    }
+    
+    func removeAllLogStackView() {
+        formulaStackView.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
     }
 }
 
