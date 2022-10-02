@@ -25,6 +25,14 @@ class Calculator {
         }
     }
     
+    var isOperandNegative: Bool {
+        return operand.contains(MathSymbol.negative)
+    }
+    
+    var isOperandDecimal: Bool {
+        return operand.contains(MathSymbol.decimalPoint)
+    }
+    
     init(`operator`: String = "", operand: String = "", formula: String = "", calculationState: Bool = false) {
         self.operator = `operator`
         self.operand = operand
