@@ -26,6 +26,7 @@ enum ExpressionParser {
             operators.insert(charactersIn: String($0.rawValue))
         }
 
-        return input.components(separatedBy: operators).map { $0.replacingOccurrences(of: "−", with: "-") }
+        return input.components(separatedBy: operators)
+                    .map { $0.replacingOccurrences(of: MathSymbol.negative, with: MathSymbol.minus) }
     }
 }
