@@ -7,27 +7,27 @@
 
 import Foundation
 
-enum CalculatorNameSpace: String {
-    case zero = "0"
-    case doubleZero = "00"
-    case one = "1"
-    case two = "2"
-    case three = "3"
-    case four = "4"
-    case five = "5"
-    case six = "6"
-    case seven = "7"
-    case eight = "8"
-    case nine = "9"
+class CalculatorNameSpace {
+    static let zero = "0"
+    static let doubleZero = "00"
+    static let one = "1"
+    static let two = "2"
+    static let three = "3"
+    static let four = "4"
+    static let five = "5"
+    static let six = "6"
+    static let seven = "7"
+    static let eight = "8"
+    static let nine = "9"
     
-    case dot = "."
-    case minusSign = "-"
+    static let dot = "."
+    static let minusSign = "-"
     
-    case exclamationMark = "!"
-    case questionMark = "?"
+    static let exclamationMark = "!"
+    static let questionMark = "?"
     
-    case emptyOperand = "Operand is Empty"
-    case emptyOperator = "Operator is Empty"
-    case nan = "NaN"
-    case error = "Error"
+    static let emptyOperand = "Operand is Empty"
+    static let emptyOperator = "Operator is Empty"
+    static let nan = "NaN"
+    static let error = "Error"
 }
