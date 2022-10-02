@@ -71,12 +71,12 @@ class ViewController: UIViewController {
             updateMainFormulaView(sender)
             return
         }
+        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     func isOnlyZeroAtMainFormulaView(_ sender: UIButton) -> Bool {
         guard let operandText = mainOperandLabel.text,
               operandText != "0" else {
-            mainOperatorLabel.text = sender.currentTitle ?? ""
             return true
         }
         return false
