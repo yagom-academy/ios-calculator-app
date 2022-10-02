@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterInMainLabel()
+        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterAtMainLabel()
     }
     
     //MARK: - NumberPad 메서드
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
             return
         }
         
-        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterInMainLabel()
+        mainOperandLabel.text = (operandLabelText + sender.tag.description).applyNumberFormatterAtMainLabel()
         // 20자리가 넘어가는 경우, alert 띄우기
     }
     
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterInMainLabel()
+            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterAtMainLabel()
             return
         }
     }
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         
         guard operandLabelText.count == 1,
               operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterInMainLabel()
+            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterAtMainLabel()
             return
         }
     }
@@ -60,7 +60,7 @@ class ViewController: UIViewController {
               operandLabelText.contains(".") == false else {
             return
         }
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterInMainLabel() + "."
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel() + "."
     }
     
     //MARK: - 사칙연산 메서드
@@ -83,7 +83,7 @@ class ViewController: UIViewController {
     }
     
     func updateFormulaType() {
-        let operatorValue: String = mainOperatorLabel.text.operatorRawValue
+        let operatorValue: String = mainOperatorLabel.rawvalueByOperatorLabelText
         let operandValue: String = mainOperandLabel.text.removeComma()
         
         partialFormula += operatorValue + operandValue
@@ -102,7 +102,7 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         
         let operandLabel: UILabel = UILabel()
-        operandLabel.text = mainOperandLabel.text?.applyNumberFormatterInFormulaHistoryView()
+        operandLabel.text = mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView()
         operandLabel.textColor = .white
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         

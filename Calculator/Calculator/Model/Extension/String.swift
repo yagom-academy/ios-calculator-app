@@ -1,14 +1,11 @@
 //
-//  Extension.swift
+//  String.swift
 //  Calculator
 //
 
 import Foundation
-import UIKit
 
 let numberFormatter = NumberFormatter()
-
-extension Double: CalculateItem {}
 
 extension String {
     func split(with target: Character) -> [String] {
@@ -19,10 +16,10 @@ extension String {
         return strings
     }
     
-    func applyNumberFormatterInMainLabel() -> String {
-        numberFormatter.numberStyle = .decimal // 3자리마다 , 를 찍어주는 역할
+    func applyNumberFormatterAtMainLabel() -> String {
+        numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20 // 유효자리수를 설정해주는 역할
+        numberFormatter.maximumSignificantDigits = 20
         
         if self.contains(".") {
             let splitedByDot: [String] = self.split(with: ".")
@@ -41,10 +38,10 @@ extension String {
         return returnValue
     }
     
-    func applyNumberFormatterInFormulaHistoryView() -> String {
-        numberFormatter.numberStyle = .decimal // 3자리마다 , 를 찍어주는 역할
+    func applyNumberFormatterAtFormulaHistoryView() -> String {
+        numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20 // 유효자리수를 설정해주는 역할
+        numberFormatter.maximumSignificantDigits = 20
         
         guard let number: NSNumber = numberFormatter.number(from: self),
               let returnValue: String = numberFormatter.string(from: number) else {
@@ -64,20 +61,5 @@ extension Optional where Wrapped == String {
             return strings.components(separatedBy: ",").joined()
         }
         return ""
-    }
-    
-    var operatorRawValue: String {
-        switch self {
-        case "+":
-            return String(Operator.add.rawValue)
-        case "−":
-            return String(Operator.subtract.rawValue)
-        case "×":
-            return String(Operator.multiply.rawValue)
-        case "÷":
-            return String(Operator.divide.rawValue)
-        default:
-            return ""
-        }
     }
 }
