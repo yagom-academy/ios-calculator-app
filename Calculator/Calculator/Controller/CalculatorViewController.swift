@@ -44,7 +44,11 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if !operand.isEmpty && !isDotButtonTapped {
+        guard !isDotButtonTapped else {
+            return
+        }
+        
+        if !operand.isEmpty  {
             operandLabel.text = setNumberFormat(with: operand) + CalculatorConstant.dot
             operand += CalculatorConstant.dot
             isDotButtonTapped = true
