@@ -90,11 +90,6 @@ class ViewController: UIViewController {
         formula = ExpressionParser.parse(from: partialFormula)
     }
     
-    func updateMainFormulaView(_ sender: UIButton) {
-        mainOperandLabel.text = "0"
-        mainOperatorLabel.text = sender.currentTitle ?? ""
-    }
-    
     func addStackViewInScrollView() {
         let stackView: UIStackView = UIStackView()
         stackView.alignment = .fill
@@ -114,6 +109,11 @@ class ViewController: UIViewController {
         }
         
         formulaHistoryView.addArrangedSubview(stackView)
+    }
+    
+    func updateMainFormulaView(_ sender: UIButton) {
+        mainOperandLabel.text = "0"
+        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     // MARK: - 기능 메서드
