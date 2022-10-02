@@ -65,14 +65,18 @@ class ViewController: UIViewController {
     
     //MARK: - 사칙연산 메서드
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
-        guard isOnlyZeroAtMainFormulaView() else {
-            updateFormulaType()
-            addStackViewInformulaHistoryView()
-            updateMainFormulaView(sender)
-            scrollToBottom()
+        guard formula.operands.count == 0,
+              isOnlyZeroAtMainFormulaView() else {
+            guard isOnlyZeroAtMainFormulaView() else {
+                updateFormulaType()
+                addStackViewInformulaHistoryView()
+                updateMainFormulaView(sender)
+                scrollToBottom()
+                return
+            }
+            mainOperatorLabel.text = sender.currentTitle ?? ""
             return
         }
-        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     func isOnlyZeroAtMainFormulaView() -> Bool {
