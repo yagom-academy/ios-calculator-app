@@ -54,10 +54,10 @@ class ViewController: UIViewController {
     
     @IBAction private func numberDoubleZeroButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == "0" {
+        if operandLabel.text == Constant.zero {
             return
         }
-        updateOperandLabel(with: "00")
+        updateOperandLabel(with: Constant.doubleZero)
     }
     
     @IBAction private func decimalPointButtonPressed(_ sender: UIButton) {
