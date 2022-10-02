@@ -195,6 +195,8 @@
     - `touchUpDotButton`함수에서 마지막이`.` 일때 `.`표시되도록 수정
     - `touchUpEqualButton`함수에서 연산후 `=` 버튼을 다시 눌러도 재연산되지 않도록 수정
     - 버튼 원형으로 바꾸기 위한 CircleButton 클라스 생성하고 디자인 적용
+    - Step3 PR 리뷰 요청
+        - [PR보러가기](https://github.com/yagom-academy/ios-calculator-app/pull/381)
     
 - **220930**
     - 소숫점 이하 숫자 표시를 위한 `noneNumberFormatter` 생성
@@ -202,6 +204,12 @@
     - `12.0`과 같이 소수점영역이 0인경우 정수값으로 표시되는 오류 수정
     - 결과값이 infinity이거나 Nan인 경우 "NaN"이 노출되도록 예외추가
     
+- **221002**
+    - 스택뷰 생성시 레이블을 만들어주는 작업을 `makeLabel` 하나로 변경하고 각각 호출하여 사용하도록 수정
+    - touchUpEqualButton 함수에서 가독성을 위해 `!`대신 `.isEmpty == false`로 수정
+    - CalculatorFormatter 싱글턴으로 생성하고 사용하도록 리팩토링
+    - UIButton text extension 생성하여 적용
+ 
  </details>
     
 ## 📱 실행 화면
@@ -237,7 +245,7 @@
 13. 숫자는 3자리마다 쉼표(,)를 표기
 14. 0으로 나누기에 대해서는 결과값을 `NaN`으로 표시
 15. 숫자 0일때 `.`클릭하면 0.으로 표시
-16. .이 2개 이상 찍히지 않도록 처리
+16. `.`이 2개 이상 찍히지 않도록 처리
 
 ## ❓ 트러블 슈팅
 
@@ -323,14 +331,12 @@
     |:--:|:--:|
     |오류 수정 전|오류 수정 후|
 
-
-
 ## 🔗 참고 링크
 
 [Swift Language Guide - Protocols](https://docs.swift.org/swift-book/LanguageGuide/Protocols.html)  
 [Swift Language Guide - Extentions](https://docs.swift.org/swift-book/LanguageGuide/Extensions.html)  
 [Swift Language Guide - Error Handling](https://docs.swift.org/swift-book/LanguageGuide/ErrorHandling.html)   
-[Set Up and Tear Down State in Your Tests](https://developer.apple.com/documentation/xctest/xctestcase/set_up_and_tear_down_state_in_your_tests)
+[Set Up and Tear Down State in Your Tests](https://developer.apple.com/documentation/xctest/xctestcase/set_up_and_tear_down_state_in_your_tests)  
 [removeAll(keepingCapacity:)](https://developer.apple.com/documentation/swift/array/removeall(keepingcapacity:)-1er5)  
 [Swift) 큐(Queue) 구현 해보기](https://babbab2.tistory.com/84)  
 [Swift로 효율적인 dequeue 구현하기](https://iamcho2.github.io/2021/10/04/Swift-dequeue)  
@@ -345,4 +351,4 @@
 
 ---
 
-[🔝 맨 위로 이동하기](#계산기)
+[🔝 맨 위로 이동하기](#-계산기)
