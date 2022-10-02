@@ -41,9 +41,9 @@ final class CalculatorVC: UIViewController {
                   let fractionPart = currentNumber.components(separatedBy: ".").last else {
                 return
             }
-            operandLabel.text = numberFormatter(number: integerPart) + "." + fractionPart
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: integerPart) + "." + fractionPart
         } else {
-            operandLabel.text = numberFormatter(number: currentNumber)
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: currentNumber)
         }
     }
     
@@ -57,9 +57,9 @@ final class CalculatorVC: UIViewController {
         }
         
         if currentNumber.last == "." {
-            operandLabel.text = "\(numberFormatter(number: currentNumber))."
+            operandLabel.text = "\(CalculatorFormatter.shared.numberFormatter(number: currentNumber))."
         } else {
-            operandLabel.text = numberFormatter(number: currentNumber)
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: currentNumber)
         }
     }
     
@@ -142,18 +142,9 @@ final class CalculatorVC: UIViewController {
             if result.isInfinite || result.isNaN {
                 operandLabel.text = "NaN"
             } else {
-                operandLabel.text = numberFormatter(number: String(result))
+                operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: String(result))
             }
             totalFormulaString = ""
         }
-    }
-    
-    private func numberFormatter(number: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        guard let decimalNumber = Double(number) else {
-            return number
-        }
-        return numberFormatter.string(from: NSNumber(value: decimalNumber))!
     }
 }
