@@ -11,8 +11,6 @@ extension Double: CalculateItem { }
 
 extension Double {
     func convertNSNumber() -> NSNumber {
-        let string = self.replacingOccurrences(of: MathSymbol.negative, with: MathSymbol.minus)
-        
-        return (Double(string) ?? 0) as NSNumber
+        return self as NSNumber
     }
 }
