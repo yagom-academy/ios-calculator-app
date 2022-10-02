@@ -110,42 +110,42 @@ class ViewController: UIViewController {
     
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == "0" {
-            updateExpression(nextOperator: "÷")
+        if operandLabel.text == Constant.zero {
+            updateExpression(nextOperator: Constant.divide)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: "÷")
+        updateExpression(nextOperator: Constant.divide)
     }
     
     @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == "0" {
-            updateExpression(nextOperator: "×")
+        if operandLabel.text == Constant.zero {
+            updateExpression(nextOperator: Constant.multiply)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: "×")
+        updateExpression(nextOperator: Constant.multiply)
     }
     
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == "0" {
-            updateExpression(nextOperator: "−")
+        if operandLabel.text == Constant.zero {
+            updateExpression(nextOperator: Constant.minus)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: "−")
+        updateExpression(nextOperator: Constant.minus)
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == "0" {
-            updateExpression(nextOperator: "+")
+        if operandLabel.text == Constant.zero {
+            updateExpression(nextOperator: Constant.add)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: "+")
+        updateExpression(nextOperator: Constant.add)
     }
     
     @IBAction private func resultButtonPressed(_ sender: UIButton) {
