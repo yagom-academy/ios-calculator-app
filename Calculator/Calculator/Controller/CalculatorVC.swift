@@ -34,7 +34,7 @@ final class CalculatorVC: UIViewController {
         if operandLabel.text?.first == "0" {
             operandLabel.text?.removeFirst()
         }
-        currentNumber.append(sender.titleLabel?.text ?? "")
+        currentNumber.append(sender.text)
         
         if currentNumber.contains(".") {
             guard let integerPart = currentNumber.components(separatedBy: ".").first,
@@ -53,7 +53,7 @@ final class CalculatorVC: UIViewController {
         } else if operandLabel.text == "0" {
             currentNumber = "0."
         } else {
-            currentNumber.append(sender.titleLabel?.text ?? "")
+            currentNumber.append(sender.text)
         }
         
         if currentNumber.last == "." {
@@ -85,7 +85,7 @@ final class CalculatorVC: UIViewController {
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         if operandLabel.text == "0" {
-            operatorLabel.text = sender.titleLabel?.text
+            operatorLabel.text = sender.text
         } else {
             makeFormulaStackView()
             scrollToBottom()
@@ -95,7 +95,7 @@ final class CalculatorVC: UIViewController {
                 totalFormulaString.append(operatorLabel.text ?? "")
                 totalFormulaString.append(currentNumber)
             }
-            operatorLabel.text = sender.titleLabel?.text
+            operatorLabel.text = sender.text
             currentNumber = ""
             operandLabel.text = "0"
         }
@@ -144,7 +144,13 @@ final class CalculatorVC: UIViewController {
             } else {
                 operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: String(result))
             }
-            totalFormulaString = ""
+            totalFormulaString = "" 
         }
     }
+}
+
+extension UIButton {
+   var text: String {
+        self.titleLabel?.text ?? ""
+   }
 }
