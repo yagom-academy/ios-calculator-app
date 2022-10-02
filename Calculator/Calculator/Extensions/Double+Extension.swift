@@ -7,8 +7,6 @@
 
 import Foundation
 
-extension Double: CalculateItem { }
-
 extension Double {
     func convertNSNumber() -> NSNumber {
         return self as NSNumber
