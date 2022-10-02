@@ -59,7 +59,9 @@ class CalculatorViewController: UIViewController {
             newOperand = number
         }
         
-        newOperand = calculator.operand + number
+        if !calculator.isOperandZero {
+            newOperand = calculator.operand + number
+        }
         
         calculator.changeOperand(newOperand)
         updateCalculatorLabel()
