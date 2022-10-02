@@ -73,39 +73,39 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func numberOnePressed(_ sender: UIButton) {
-        updateOperandLabel(with: "1")
+        updateOperandLabel(with: Constant.one)
     }
     
     @IBAction private func numberTwoButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "2")
+        updateOperandLabel(with: Constant.two)
     }
     
     @IBAction private func numberThreeButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "3")
+        updateOperandLabel(with: Constant.three)
     }
     
     @IBAction private func numberFourButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "4")
+        updateOperandLabel(with: Constant.four)
     }
     
     @IBAction private func numberFiveButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "5")
+        updateOperandLabel(with: Constant.five)
     }
     
     @IBAction private func numberSixButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "6")
+        updateOperandLabel(with: Constant.six)
     }
     
     @IBAction private func numberSevenButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "7")
+        updateOperandLabel(with: Constant.seven)
     }
     
     @IBAction private func numberEightButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "8")
+        updateOperandLabel(with: Constant.eight)
     }
     
     @IBAction private func numberNineButtonPressed(_ sender: UIButton) {
-        updateOperandLabel(with: "9")
+        updateOperandLabel(with: Constant.nine)
     }
     
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
