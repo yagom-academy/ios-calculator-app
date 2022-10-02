@@ -5,7 +5,7 @@
 //  Created by Jeremy on 2022/09/20.
 //
 
-class Node<Element> {
+final class Node<Element: CalculateItem> {
     var value: Element
     var next: Node?
     
@@ -15,32 +15,33 @@ class Node<Element> {
     }
 }
 
-class CalculatorItemQueue<Element> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     init(head: Node<Element>? = nil) {
         self.head = head
         self.tail = head
     }
     
-    func enqueue(newNode: Node<Element>) {
+    mutating func enqueue(data: Element) {
         if head != nil {
-            tail?.next = newNode
-            tail = newNode
+            tail?.next = Node(value: data)
+            tail = tail?.next
         } else {
-            head = newNode
-            tail = newNode
+            head = Node(value: data)
+            tail = head
         }
     }
     
-    func dequeue() -> Node<Element>? {
+    mutating func dequeue() -> Element? {
         let result: Node? = head
         head = head?.next
-        return result
+        
+        return result?.value
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
     }

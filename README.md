@@ -37,6 +37,9 @@
 > **현재 사용중인 방법 - 단방향 Linked List**
 <img src="https://i.imgur.com/FCUrHu7.jpg"/>  
 
+> **Formula 계산방식**
+<img src="https://i.imgur.com/wkpvxYC.gif"/>
+
 # 3.🗿**고민한 점**🗿
 ***Dictionary*** 🆚 ***Linked List*** 🆚  ***Array***
 > 왜 Linked List, Array가 Queue 구현에 있어 자주 사용이 될까? Dictionary는 왜 쓰지 않는가?
@@ -48,8 +51,12 @@
 > Dictionary method getFirst()
 - RandomAcessCollection인 딕셔너리에 무용지물인 메소드이다.. 
 
-> 
+***Linked List***
+> 자기 참조, 메모리
+
+- 처음 Linked List의 head와 tail에 자기참조하도록 만들지 않고 Node인스턴스를 넣어주기만 해서 사실상 head가 계속 바뀌는 문제가 있었습니다. 자기참조, 메모리 메모...
     
+*** ***  
     
 # 4.**트러블 슈팅**
     
@@ -111,9 +118,18 @@ struct CalculatorItemQueue {
     }
 }
 ```
-> 딕셔너리의 불필요한 space memory 소모
 
------> 진행중 Linked List 사용
+> split 메소드에서 String의 split 메소드
+
+그저 self만 붙여주면 해결되는 문제였습니다...
+```swift!
+extension String: CalculateItem {
+    func split(with target: Character) -> [String] {
+        return self.split(separator: target).map { String($0) }
+    }
+}
+```
+
 
 
 
