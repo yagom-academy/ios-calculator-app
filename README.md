@@ -49,8 +49,9 @@
 │   │   ├── CalculateItem.swift
 │   │   ├── CalculatorItemQueue.swift
 │   │   ├── ExpressionParser.swift
-│   │   ├── Formula.swift
-│   │   └── Operator.swift
+│   │   ├── Formula.swift
+│   │   ├── NumberFormatter.swift
+│   │   └── Operator.swift
 │   └── View
 │       ├── Assets.xcassets
 │       ├── CircleButton.swift
