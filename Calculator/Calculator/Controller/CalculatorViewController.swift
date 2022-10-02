@@ -39,7 +39,7 @@ final class CalculatorViewController: UIViewController {
         isFirstInput = false
     }
     
-    @IBAction func dotButtonTapped(_ sender: Any) {
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard !isCalculated else {
             return
         }
@@ -54,7 +54,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func zeroButtonTapped(_ sender: Any) {
+    @IBAction func zeroButtonTapped(_ sender: UIButton) {
         guard !isCalculated && !operand.isEmpty else {
             return
         }
@@ -70,7 +70,7 @@ final class CalculatorViewController: UIViewController {
         operand += CalculatorConstant.zero
     }
     
-    @IBAction func doubleZeroButtonTapped(_ sender: Any) {
+    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
         guard !isCalculated && !operand.isEmpty else {
             return
         }
@@ -106,7 +106,7 @@ final class CalculatorViewController: UIViewController {
         updateOperatorLabel(with: selectedOperator)
     }
     
-    @IBAction func calculateButtonTapped(_ sender: Any) {
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
         guard !isCalculated else {
             return
         }
@@ -122,7 +122,7 @@ final class CalculatorViewController: UIViewController {
         isCalculated = true
     }
     
-    @IBAction func allClearButtonTapped(_ sender: Any) {
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
         setOperandLabelToZero()
         setOperatorLabelEmpty()
         formulaStackView.arrangedSubviews.forEach { view in
@@ -137,7 +137,7 @@ final class CalculatorViewController: UIViewController {
         finalFormula.removeAll()
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: Any) {
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         guard !isCalculated else {
             return
         }
@@ -152,7 +152,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func toggleSignButtonTapped(_ sender: Any) {
+    @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
         guard !isCalculated else {
             return
         }
