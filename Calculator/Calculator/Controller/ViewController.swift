@@ -119,7 +119,6 @@ class ViewController: UIViewController {
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
     }
     
-    
     // MARK: - 기능 메서드
     @IBAction func touchUpCEButton(_ sender: UIButton) {
         mainOperandLabel.text = "0"
