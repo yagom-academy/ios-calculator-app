@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     }
     
     private func autoSlideScrollView() {
+        historyInputScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: historyInputScrollView.contentSize.height - historyInputScrollView.bounds.size.height + historyInputScrollView.contentInset.bottom)
             historyInputScrollView.setContentOffset(bottomOffset, animated: true)
     }
