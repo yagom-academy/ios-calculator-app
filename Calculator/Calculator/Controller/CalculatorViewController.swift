@@ -104,7 +104,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         if !operand.isEmpty {
-            creatFormulaLog()
+            createFormulaLog()
         }
         
         updateOperatorLabel(with: selectedOperator)
@@ -120,7 +120,7 @@ final class CalculatorViewController: UIViewController {
             operand += CalculatorConstant.zero
         }
         
-        creatFormulaLog()
+        createFormulaLog()
         calculate()
         setOperatorLabelEmpty()
         arithmeticOperator.removeAll()
@@ -171,7 +171,7 @@ final class CalculatorViewController: UIViewController {
         isNegativeSign.toggle()
     }
     
-    func creatStackView() {
+    func createStackView() {
         let logOperand = setNumberFormat(with: operand)
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
         formulaStackView.addArrangedSubview(stackView)
@@ -182,7 +182,7 @@ final class CalculatorViewController: UIViewController {
         operand = operand.trimmingCharacters(in: CalculatorConstant.dotSet)
     }
     
-    func creatFinalFormula() {
+    func createFinalFormula() {
         finalFormula += arithmeticOperator
         finalFormula += operand
     }
@@ -217,11 +217,11 @@ final class CalculatorViewController: UIViewController {
         return result
     }
     
-    func creatFormulaLog() {
+    func createFormulaLog() {
         removeLastDot()
-        creatStackView()
+        createStackView()
         setOperandLabelToZero()
-        creatFinalFormula()
+        createFinalFormula()
         operand.removeAll()
         isDotButtonTapped = false
     }
