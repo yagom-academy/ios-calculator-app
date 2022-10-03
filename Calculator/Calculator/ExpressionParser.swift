@@ -14,7 +14,6 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         var formula = Formula(operands: operands, operators: operators)
         
-        // 아직 처리가 안된부분
         for number in numberArray {
             if let doubleNumber =
                 Double(number.replacingOccurrences(

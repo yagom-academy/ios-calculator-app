@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         if numberWithOutComma == Literal.numberZero.value && pointCount != 1 {
             return
         } else if numberWithOutComma != Literal.numberZero.value && pointCount != 1 {
-            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
             if let number: Double = Double(numberWithOutComma + zero) {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
@@ -62,7 +61,7 @@ class ViewController: UIViewController {
         if inputText == Literal.numberZero.value {
             inputNumberLabel.text = "\(number)"
         } else {
-            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+            let numberWithOutComma = convertInvertSignToSubtraction(inputText).replacingOccurrences(of: Literal.comma.value, with: "")
             if let number: Double = Double(numberWithOutComma + number) {
                 inputNumberLabel.text = numberFormatter.string(for: number)
             }
@@ -132,8 +131,7 @@ class ViewController: UIViewController {
                   let doubleValue = numberFormatter.string(for: Double(numberWithOutCommaAndInvertSign)) else { return }
             
             addStackView(operatorText: operatorText, inputText: doubleValue)
-            calculationFormula +=
-            numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
+            calculationFormula += numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
             calculationFormula += convertOperator(operatorValue)
     
             inputNumberLabel.text = Literal.numberZero.value
@@ -164,12 +162,20 @@ class ViewController: UIViewController {
         
         if let result = numberFormatter.string(for: formula.result()),
            result != Literal.infinity.value {
-            inputNumberLabel.text = String(result)
+            inputNumberLabel.text = convertSubtractionToInvertSign(result)
             inputOperatorLabel.text = ""
         } else {
             inputNumberLabel.text = Literal.nan.value
             inputOperatorLabel.text = ""
         }
+    }
+    
+    private func convertSubtractionToInvertSign(_ result: String) -> String {
+        return result.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
+    }
+    
+    private func convertInvertSignToSubtraction(_ result: String) -> String {
+        return result.replacingOccurrences(of: Literal.invertSign.value, with: Literal.subtraction.value)
     }
     
     private func invertNumber(inputText: String) {
@@ -203,7 +209,7 @@ class ViewController: UIViewController {
             deleteAllHistory()
         case Literal.ce.value:
             inputNumberLabel.text = Literal.numberZero.value
-        case Literal.numberInvertion.value:
+        case Literal.invertSymbol.value:
             invertNumber(inputText: inputText)
         case Literal.result.value:
             showResult(inputText: inputText)

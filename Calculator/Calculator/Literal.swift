@@ -20,6 +20,7 @@ enum Literal {
     case subtraction
     case result
     case invertSign
+    case invertSymbol
     case infinity
     case comma
     case point
@@ -62,6 +63,8 @@ enum Literal {
             return "/"
         case .realMultiplication:
             return "*"
+        case .invertSymbol:
+            return "⁺⁄₋"
         }
     }
 }
