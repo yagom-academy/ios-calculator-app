@@ -30,7 +30,7 @@ final class StringSplitTests: XCTestCase {
     
     func test_4곱하기5를split했을때_결과가4_5인지() {
         //given
-        let str = "4*5"
+        let str = "4×5"
         
         //when
         let result = str.split(with: Operator.multiply.rawValue)

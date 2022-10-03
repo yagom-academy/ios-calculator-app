@@ -103,7 +103,7 @@ final class CalculatorController {
         case "÷":
             displaySign = Operator.divide
         default:
-            displaySign = Operator.add
+            displaySign = Operator.unknown
         }
     }
     
