@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
@@ -45,7 +45,10 @@ final class ViewController: UIViewController {
     private func applyNumberFormatter(number: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 4
+        numberFormatter.maximumSignificantDigits = 20
         guard let result = numberFormatter.string(for: number) else { return Constant.empty }
         
         return result
