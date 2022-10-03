@@ -8,6 +8,9 @@
 struct CalculatorItemQueue<Type: CalculateItem> {
     private var enqueueStack: [Type] = []
     private var dequeueStack: [Type] = []
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
     
     mutating func push(_ element: Type) {
         enqueueStack.append(element)
@@ -25,5 +28,4 @@ struct CalculatorItemQueue<Type: CalculateItem> {
         
         return dequeueStack.popLast()
     }
-    
 }
