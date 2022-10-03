@@ -69,7 +69,15 @@ struct Calculator {
     }
     
     mutating func switchPositiveNegativeOfCurrentOperand() {
-        
+        guard currentOperand != Calculator.defaultOperand else {
+            return
+        }
+        let isNegative: Bool = currentOperand.hasPrefix(Calculator.negativeSymbol)
+        if isNegative {
+            currentOperand.removeFirst()
+        } else {
+            currentOperand = "\(Calculator.negativeSymbol)\(currentOperand)"
+        }
     }
     
     mutating func result() -> String {
