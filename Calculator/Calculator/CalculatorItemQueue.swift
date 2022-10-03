@@ -32,12 +32,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         front = front?.next
         return data
     }
-    
-    mutating func allDelete() {
-        var data: T?
-        
-        repeat {
-            data = dequeue()
-        } while data != nil
+
+    mutating func deleteAll() {
+        front = nil
     }
 }

@@ -14,20 +14,22 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         var formula = Formula(operands: operands, operators: operators)
         
+        // 아직 처리가 안된부분
         for number in numberArray {
             if let doubleNumber =
-                Double(number.replacingOccurrences(of: Literal.invertSign.value, with: Literal.subtraction.value)) {
+                Double(number.replacingOccurrences(
+                    of: Literal.invertSign.value,
+                    with: Literal.subtraction.value
+                )) {
                 formula.operands?.enqueue(doubleNumber)
             }
         }
         
         let allOperators = Operator.allCases.map { $0.rawValue }
-        let operatorArray = input.filter { allOperators.contains($0) }.map { Operator.init(rawValue: $0) }
+        let operatorArray = input.filter { allOperators.contains($0) }.compactMap { Operator.init(rawValue: $0) }
         
         for someOperator in operatorArray {
-            if let someOperator = someOperator {
-                formula.operators?.enqueue(someOperator)
-            }
+            formula.operators?.enqueue(someOperator)
         }
         return formula
     }
