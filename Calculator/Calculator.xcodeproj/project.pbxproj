@@ -10,6 +10,7 @@
 		1AAF488A28EAB0CF00DD5781 /* Double+CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF488928EAB0CF00DD5781 /* Double+CalculateItem.swift */; };
 		1AAF488D28EAB7BA00DD5781 /* CalculateItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF488C28EAB7BA00DD5781 /* CalculateItemQueue.swift */; };
 		1AAF489228EABE6B00DD5781 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF489128EABE6B00DD5781 /* CalculatorError.swift */; };
+		1AAF489528EAC13700DD5781 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AAF489428EAC13700DD5781 /* ExpressionParser.swift */; };
 		90D8AB6928EAAFF700C7F98D /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8AB6828EAAFF700C7F98D /* CalculateItem.swift */; };
 		90D8AB7128EABAFB00C7F98D /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8AB7028EABAFB00C7F98D /* Operator.swift */; };
 		90D8AB7528EABED800C7F98D /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8AB7428EABED800C7F98D /* Formula.swift */; };
@@ -25,6 +26,7 @@
 		1AAF488928EAB0CF00DD5781 /* Double+CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+CalculateItem.swift"; sourceTree = "<group>"; };
 		1AAF488C28EAB7BA00DD5781 /* CalculateItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemQueue.swift; sourceTree = "<group>"; };
 		1AAF489128EABE6B00DD5781 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
+		1AAF489428EAC13700DD5781 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		90D8AB6828EAAFF700C7F98D /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		90D8AB7028EABAFB00C7F98D /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		90D8AB7428EABED800C7F98D /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 			children = (
 				1AAF489128EABE6B00DD5781 /* CalculatorError.swift */,
 				90D8AB7028EABAFB00C7F98D /* Operator.swift */,
+				1AAF489428EAC13700DD5781 /* ExpressionParser.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AAF489528EAC13700DD5781 /* ExpressionParser.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				1AAF488A28EAB0CF00DD5781 /* Double+CalculateItem.swift in Sources */,
