@@ -62,7 +62,7 @@ class OperatorTests: XCTestCase {
         let rhs =  0.0
         
         XCTAssertThrowsError(try sut.calculate(lhs: lhs, rhs: rhs)) { error in
-            XCTAssertEqual(error as? OperatorError, OperatorError.divideWithZero)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideWithZero)
         }
     }
 }
