@@ -6,8 +6,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
-    private var isInputtingOperand = false
     private let calculator = Calculator()
+    private var isInputtingOperand = false
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.usesSignificantDigits = true
