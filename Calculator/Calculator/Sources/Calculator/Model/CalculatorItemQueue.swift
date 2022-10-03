@@ -4,15 +4,11 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var inputStack: [Element] = []
-    private var outputStack: [Element] = []
+    private(set) var inputStack: [Element] = []
+    private(set) var outputStack: [Element] = []
     
     var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
-    }
-    
-    init(elements: [Element] = []) {
-        self.inputStack = elements
     }
     
     mutating func enqueue(_ element: Element) {
