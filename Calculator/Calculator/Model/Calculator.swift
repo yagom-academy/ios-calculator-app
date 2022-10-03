@@ -85,6 +85,27 @@ struct Calculator {
     }
     
     private func applyFormat(to input: String) -> String {
-        return ""
+        let inputNumber: Double = Double.convertStringContainingCommaToDouble(input) ?? 0
+        let integerNumber: Int = Int(inputNumber)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let formatIntegerNumber: String = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
+        
+        let separatedInput: [String] = input.components(separatedBy: ".")
+        let hasDecimalPart: Bool = separatedInput.count >= 2
+        if hasDecimalPart {
+            return "\(formatIntegerNumber).\(separatedInput[1])"
+        } else {
+            return formatIntegerNumber
+        }
+    }
+    
+    private func removeLastCommaZero(_ input: String) -> String {
+        var result: String = input
+        if result.hasSuffix(".0") {
+            result.removeLast(2)
+        }
+        return result
     }
 }
