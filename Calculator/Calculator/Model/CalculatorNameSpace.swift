@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CalculatorNameSpace {
+enum CalculatorNameSpace {
     static let zero = "0"
     static let doubleZero = "00"
     static let one = "1"
