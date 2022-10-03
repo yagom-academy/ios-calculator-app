@@ -10,7 +10,7 @@ import XCTest
 
 final class ExpressionParserTests: XCTestCase {
 
-    func test_parse_operands에_input을_넣었을때_dequeue값이_operand만_나와야함() {
+    func test_parse_operands에_input을_넣었을때_dequeue값이_순서에맞게_operand만_나와야함() {
         let input = "23 + 13 - 53 * 14 / 6"
         var result = ExpressionParser.parse(from: input).operands
         
@@ -23,7 +23,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(testOperands[4], result.dequeue())
     }
     
-    func test_parse_operators에_input을_넣었을때_dequeue값이_operator만_나와야함() {
+    func test_parse_operators에_input을_넣었을때_dequeue값이_operator값과_순서가_동일해야함() {
         let input = "23 + 13 - 53 * 14 / 6"
         var result = ExpressionParser.parse(from: input).operators
         let testOperators = ["+", "-", "*", "/"]
