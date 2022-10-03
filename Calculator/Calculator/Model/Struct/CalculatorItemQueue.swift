@@ -7,8 +7,13 @@
 
 struct CalculatorItemQueue<Item: CalculateItem> {
     private var calculateItemList = [Item]()
+    
     var count: Int {
         return calculateItemList.count
+    }
+    
+    var isEmpty: Bool {
+        calculateItemList.isEmpty
     }
     
     init() {}
@@ -31,9 +36,5 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     
     mutating func clear() {
         return calculateItemList.removeAll()
-    }
-    
-    func isEmpty() -> Bool {
-        return calculateItemList.isEmpty
     }
 }
