@@ -45,4 +45,3 @@ struct LinkedList<Element: CalculateItem> {
         }
     }
 }
-

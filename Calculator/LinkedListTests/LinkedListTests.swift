@@ -59,4 +59,3 @@ class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, 10.0)
     }
 }
-

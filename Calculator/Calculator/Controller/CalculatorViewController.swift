@@ -131,7 +131,6 @@ final class CalculatorViewController: UIViewController {
         setOperandLabelToZero()
         setOperatorLabelEmpty()
         removeAllLogStackView()
-        
         isFirstInput = true
         isDotButtonTapped = false
         isCalculated = false
@@ -253,4 +252,3 @@ final class CalculatorViewController: UIViewController {
         }
     }
 }
-
