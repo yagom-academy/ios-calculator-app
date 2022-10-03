@@ -92,6 +92,7 @@ final class ViewController: UIViewController {
         }
         if calculator.inputOperator(inputOperator) {
             addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
+            scrollToBottom()
         }
         operandLabel.text = calculator.currentOperand
         operatorLabel.text = calculator.currentOperator
@@ -102,6 +103,7 @@ final class ViewController: UIViewController {
         let currentOperand: String = calculator.currentOperand
         if let result: String = calculator.inputEqual() {
             addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
+            scrollToBottom()
             operandLabel.text = result
             operatorLabel.text = calculator.currentOperator
         }
