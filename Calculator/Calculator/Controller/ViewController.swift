@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         resetList = [numberLabel, operatorLabel, formulaStackView]
-        initialization()
+        reset()
     }
     //MARK: - IBAction
     @IBAction func touchUpOperandButton(_ sender: OperandButton) {
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         
         switch command {
         case .allClear:
-            initialization()
+            reset()
         case .clearElement:
             numberLabel.reset()
         case .swapNumberSign:
@@ -68,7 +68,7 @@ class ViewController: UIViewController {
         }
     }
     //MARK: - Method
-    private func initialization() {
+    private func reset() {
         resetList.forEach {
             $0.reset()
         }
@@ -95,7 +95,7 @@ class ViewController: UIViewController {
     
     private func checkCalculated() {
         if isCalculated == true {
-            initialization()
+            reset()
             isCalculated = false
         }
     }
