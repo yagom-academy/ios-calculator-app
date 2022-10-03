@@ -7,7 +7,7 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var enqueueStack: [T]
+    private(set) var enqueueStack: [T] = []
     private(set) var dequeueStack: [T] = []
     
     var mergedQueue: [T] {

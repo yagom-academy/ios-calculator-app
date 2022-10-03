@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -18,19 +18,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
-        Double(sender.accessibilityLabel)
-    }
-    
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
-    }
-    
-    @IBAction func acButtonTapped(_ sender: UIButton) {
-    }
-    @IBAction func ceButtonTapped(_ sender: UIButton) {
-    }
-    @IBAction func pmButtonTapped(_ sender: Any) {
-    }
+//    @IBAction func numberButtonTapped(_ sender: UIButton) {
+//        Double(sender.accessibilityLabel)
+//    }
+//
+//    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+//    }
+//
+//    @IBAction func acButtonTapped(_ sender: UIButton) {
+//    }
+//    @IBAction func ceButtonTapped(_ sender: UIButton) {
+//    }
+//    @IBAction func pmButtonTapped(_ sender: Any) {
+//    }
     
 }
 
