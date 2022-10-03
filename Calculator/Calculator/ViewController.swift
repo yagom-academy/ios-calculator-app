@@ -50,7 +50,7 @@ final class ViewController: UIViewController {
             if operand == "." {
                 newLabelText = "\(currentLabelText)\(operand)"
             } else {
-                newLabelText = formatNumber("\(removeComma(currentLabelText))\(operand)")
+                newLabelText = formatNumber("\(currentLabelText)\(operand)")
             }
             changeOperandLabelText(to: newLabelText)
         }
@@ -108,10 +108,6 @@ final class ViewController: UIViewController {
             formatNumber.removeLast(formatNumber.count - 20)
         }
         return formatNumber
-    }
-    
-    private func removeComma(_ input: String) -> String {
-        return input.replacingOccurrences(of: ",", with: "")
     }
     
     private func removeLastCommaZero(_ input: String) -> String {
@@ -190,7 +186,7 @@ final class ViewController: UIViewController {
         let currentOperandLabelText: String = operandLabel.text ?? ""
         addSubViewInHistoryStackView(operatorText: currentOperatorLabelText, operandText: currentOperandLabelText)
         calculateInput += "\(currentOperatorLabelText)\(currentOperandLabelText)"
-        let calculateInputRemovedComma: String = removeComma(calculateInput)
+        let calculateInputRemovedComma: String = calculateInput
         var formula: Formula = ExpressionParser.parse(from: calculateInputRemovedComma)
         let result = formula.result()
         switch result {

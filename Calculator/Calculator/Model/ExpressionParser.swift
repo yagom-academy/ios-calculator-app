@@ -11,7 +11,9 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var result: Formula = Formula()
         
-        componentsByOperators(from: input).compactMap { Double($0) }.forEach {
+        componentsByOperators(from: input).compactMap {
+            Double.convertStringContainingCommaToDouble($0)
+        }.forEach {
             result.operands.enqueue($0)
         }
         
