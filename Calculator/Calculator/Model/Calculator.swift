@@ -44,12 +44,9 @@ struct Calculator {
         if isZeroDuplication || isPointDuplication {
             return
         }
-        if currentOperand == CalculateError.dividedByZero.localizedDescription {
-            resetCurrentOperand()
-        }
         
         let isInitialState: Bool = currentOperand == Calculator.defaultOperand && input != "."
-        if isInitialState{
+        if isInitialState {
             currentOperand = input
         } else {
             currentOperand = applyFormat(to: "\(removeComma(currentOperand))\(input)")
