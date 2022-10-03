@@ -86,7 +86,7 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
         showingOperationsStackView.subviews.forEach { $0.removeFromSuperview() }
-        formula = Text.noValue
+        rawFormula = Text.noValue
         inputNumber = Text.noValue
         operatorLabel.text = Text.blank
     }
@@ -101,7 +101,7 @@ class ViewController: UIViewController {
         operatorLabel.text = Text.blank
        
         do {
-            var formulaQueue = ExpressionParser.parse(from: formula)
+            var formulaQueue = ExpressionParser.parse(from: rawFormula)
             result = try formulaQueue.result()
             operandLabel.text = String(result.changeToDemical)
         } catch CalculatorError.divideByZeroError {
@@ -118,9 +118,9 @@ class ViewController: UIViewController {
         }
         
         if `operator` == Text.blank {
-            formula += (String(Operator.add.rawValue) + operand)
+            rawFormula += (String(Operator.add.rawValue) + operand)
         } else {
-            formula += (`operator` + operand)
+            rawFormula += (`operator` + operand)
         }
     }
     
