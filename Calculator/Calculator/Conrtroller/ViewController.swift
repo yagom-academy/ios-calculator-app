@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         
         guard inputNumber.split(with: Text.dot).count <= 2,
               inputNumber != String(Text.dot) else {
-                  inputNumber = Text.noValue
+                  resetInputNumber()
                   operandLabel.text = numberFormatter.notANumberSymbol
                   return
               }
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         addFormula()
         MakeOperationStackView()
         scrollTobottom()
-        inputNumber = Text.noValue
+        resetInputNumber()
         operatorLabel.text = sender.titleLabel?.text
     }
     
@@ -81,14 +81,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
-        inputNumber = Text.noValue
+        resetInputNumber()
+        resetOperatorLabel()
     }
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
-        showingOperationsStackView.subviews.forEach { $0.removeFromSuperview() }
-        rawFormula = Text.noValue
-        inputNumber = Text.noValue
-        operatorLabel.text = Text.blank
+        showingOperationsStackView.removeSubViewAll()
+        resetRawFormula()
+        resetInputNumber()
+        resetOperatorLabel()
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
@@ -97,8 +98,8 @@ class ViewController: UIViewController {
         addFormula()
         MakeOperationStackView()
         scrollTobottom()
-        inputNumber = Text.noValue
-        operatorLabel.text = Text.blank
+        resetInputNumber()
+        resetOperatorLabel()
        
         do {
             var formulaQueue = ExpressionParser.parse(from: rawFormula)
@@ -165,5 +166,19 @@ class ViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
                                     animated: false)
+    }
+}
+
+extension ViewController {
+    private func resetInputNumber() {
+        inputNumber = Text.noValue
+    }
+    
+    private func resetInputNumber() {
+        operatorLabel.text = Text.blank
+    }
+    
+    private func resetRawFormula() {
+        rawFormula = Text.noValue
     }
 }
