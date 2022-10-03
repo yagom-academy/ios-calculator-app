@@ -39,7 +39,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func updateResultLabel() {
-        resultLabel.text = currentOperand
+        guard let convertToDouble = Double(currentOperand) else { return }
+        let currentExpression = applyNumberFormatter(number: convertToDouble)
+        resultLabel.text = currentExpression
     }
     
     private func applyNumberFormatter(number: Double) -> String {
