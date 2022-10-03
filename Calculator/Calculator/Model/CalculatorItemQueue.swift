@@ -21,6 +21,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func isEmpty() -> Bool {
-        queue.isEmpty()
+        return queue.isEmpty
     }
 }
