@@ -9,16 +9,16 @@ extension String {
     func split(with target: Character) -> [String] {
         var result: [String] = []
         var nonTargets: [String] = []
-        var isNegative: Bool = true
+        var isSign: Bool = true
         
         self.forEach { character in
-            if character == target && !isNegative {
-                isNegative = true
+            if character == target && !isSign {
+                isSign = true
                 result.append(nonTargets.joined(separator: ""))
                 result.append(String(character))
                 nonTargets = []
             } else {
-                isNegative = false
+                isSign = false
                 nonTargets.append(String(character))
             }
         }
