@@ -9,7 +9,6 @@ import UIKit
 struct Text {
     fileprivate static let zero: String = "0"
     fileprivate static let noValue: String = ""
-    fileprivate static let blank: String = " "
     fileprivate static let negativeSymbol: String = "-"
     fileprivate static let dot: Character = "."
 }
@@ -21,7 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
-    private var rawFormula: String = ""
+    private var rawFormula: [String] = []
     private var result: Double = 0.0
     private var inputNumber: String = "" {
         willSet {
@@ -31,7 +30,7 @@ class ViewController: UIViewController {
                 return
             }
             
-            operandLabel.text = newValue
+        operandLabel.text = newValue
         }
     }
     
@@ -82,7 +81,6 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpCEButton(_ sender: UIButton) {
         resetInputNumber()
-        resetOperatorLabel()
     }
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
@@ -100,9 +98,9 @@ class ViewController: UIViewController {
         scrollTobottom()
         resetInputNumber()
         resetOperatorLabel()
-       
+        
         do {
-            var formulaQueue = ExpressionParser.parse(from: rawFormula)
+            var formulaQueue = ExpressionParser.parse(from: rawFormula.joined(separator: " "))
             result = try formulaQueue.result()
             operandLabel.text = String(result.changeToDemical)
         } catch CalculatorError.divideByZeroError {
@@ -117,12 +115,8 @@ class ViewController: UIViewController {
               let operand = operandLabel.text else {
             return
         }
-        
-        if `operator` == Text.blank {
-            rawFormula += (String(Operator.add.rawValue) + operand)
-        } else {
-            rawFormula += (`operator` + operand)
-        }
+        rawFormula.append(`operator`)
+        rawFormula.append(operand)
     }
     
     private func MakeOperationStackView() {
@@ -175,10 +169,10 @@ extension ViewController {
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = Text.blank
+        operatorLabel.text = Text.noValue
     }
     
     private func resetRawFormula() {
-        rawFormula = Text.noValue
+        rawFormula = []
     }
 }
