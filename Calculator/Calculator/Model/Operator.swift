@@ -3,6 +3,7 @@
 //  Calculator
 //
 
+
 enum Operator: Character, CaseIterable {
     case add = "+"
     case substract = "-"
