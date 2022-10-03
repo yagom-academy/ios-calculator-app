@@ -43,10 +43,7 @@ class ViewController: UIViewController {
             updateCalculatorStackView()
         }
         
-        finalCalculation = finalCalculation + "/"
-        stackCalculation = ""
-        operatorLabel.text = "÷"
-        operandLabel.text = ""
+        pushOperator(finalCalculationInput: "/", operatorInput: "÷")
     }
     
     @IBAction func multiplyButton(_ sender: UIButton) {
@@ -54,10 +51,7 @@ class ViewController: UIViewController {
             updateCalculatorStackView()
         }
         
-        finalCalculation = finalCalculation + "*"
-        stackCalculation = ""
-        operatorLabel.text = "x"
-        operandLabel.text = ""
+        pushOperator(finalCalculationInput: "*", operatorInput: "x")
     }
     
     @IBAction func subtractButton(_ sender: UIButton) {
@@ -66,15 +60,9 @@ class ViewController: UIViewController {
         }
         
         if checkSign.contains("-") {
-            finalCalculation = finalCalculation + "+"
-            stackCalculation = ""
-            operatorLabel.text = "-"
-            operandLabel.text = ""
+            pushOperator(finalCalculationInput: "+", operatorInput: "-")
         } else {
-            finalCalculation = finalCalculation + "-"
-            stackCalculation = ""
-            operatorLabel.text = "-"
-            operandLabel.text = ""
+            pushOperator(finalCalculationInput: "-", operatorInput: "-")
         }
     }
     
@@ -84,15 +72,9 @@ class ViewController: UIViewController {
         }
         
         if checkSign.contains("-") {
-            finalCalculation = finalCalculation + "-"
-            stackCalculation = ""
-            operatorLabel.text = "+"
-            operandLabel.text = ""
+            pushOperator(finalCalculationInput: "-", operatorInput: "+")
         } else {
-            finalCalculation = finalCalculation + "+"
-            stackCalculation = ""
-            operatorLabel.text = "+"
-            operandLabel.text = ""
+            pushOperator(finalCalculationInput: "+", operatorInput: "+")
         }
     }
     
@@ -106,51 +88,51 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pointButton(_ sender: UIButton) {
-        pushInput(".")
+        pushOperand(".")
     }
     
     @IBAction func zeroButton(_ sender: UIButton) {
-        pushInput("0")
+        pushOperand("0")
     }
     
     @IBAction func doubleZeroButton(_ sender: UIButton) {
-        pushInput("00")
+        pushOperand("00")
     }
     
     @IBAction func oneButton(_ sender: UIButton) {
-        pushInput("1")
+        pushOperand("1")
     }
     
     @IBAction func twoButton(_ sender: UIButton) {
-        pushInput("2")
+        pushOperand("2")
     }
     
     @IBAction func threeCButton(_ sender: UIButton) {
-        pushInput("3")
+        pushOperand("3")
     }
     
     @IBAction func fourButton(_ sender: UIButton) {
-        pushInput("4")
+        pushOperand("4")
     }
     
     @IBAction func fiveButton(_ sender: UIButton) {
-        pushInput("5")
+        pushOperand("5")
     }
     
     @IBAction func sixButton(_ sender: UIButton) {
-        pushInput("6")
+        pushOperand("6")
     }
     
     @IBAction func sevenButton(_ sender: UIButton) {
-        pushInput("7")
+        pushOperand("7")
     }
     
     @IBAction func eightButton(_ sender: UIButton) {
-        pushInput("8")
+        pushOperand("8")
     }
     
     @IBAction func nineButton(_ sender: UIButton) {
-        pushInput("9")
+        pushOperand("9")
     }
     
     override func viewDidLoad() {
@@ -169,10 +151,17 @@ class ViewController: UIViewController {
         }
     }
     
-    private func pushInput(_ userInput: String) {
+    private func pushOperand(_ userInput: String) {
         stackCalculation = stackCalculation + userInput
         finalCalculation = finalCalculation + userInput
         operandLabel.text = stackCalculation
+    }
+    
+    private func pushOperator(finalCalculationInput: String, operatorInput: String) {
+        finalCalculation = finalCalculation + finalCalculationInput
+        stackCalculation = ""
+        operatorLabel.text = operatorInput
+        operandLabel.text = ""
     }
     
     private func updateCalculatorStackView() {
@@ -187,7 +176,6 @@ class ViewController: UIViewController {
     private func showResult() throws {
         let calculation = ExpressionParser.parse(from: finalCalculation)
         formula = Formula(operands: calculation.operands, operators: calculation.operators)
-        print(calculation.operands, calculation.operators)
         
         do {
             let result = try formula?.result()
