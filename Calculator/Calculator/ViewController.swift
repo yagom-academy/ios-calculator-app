@@ -8,7 +8,7 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    private var calculateInput: String = ""
+    private var calculator: Calculator = Calculator()
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
@@ -18,64 +18,23 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         resetOperatorLabel()
         resetOperandLabel()
-        removeAllsubviewsInHistoryStackView()
+        removeAllSubviewsInHistoryStackView()
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = ""
+        calculator.resetCurrentOperator()
+        operatorLabel.text = calculator.currentOperator
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = "0"
+        calculator.resetCurrentOperand()
+        operandLabel.text = calculator.currentOperand
     }
     
-    private func removeAllsubviewsInHistoryStackView() {
+    private func removeAllSubviewsInHistoryStackView() {
         historyStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-    }
-    
-    private func addOperandToOperandLabel(_ operand: String) {
-        let currentLabelText: String = operandLabel.text ?? ""
-        let isPointDuplication: Bool = operand == "." && currentLabelText.contains(".")
-        let isZeroDuplication: Bool = currentLabelText == "0" && ["0", "00"].contains(operand)
-        if isZeroDuplication || isPointDuplication {
-            return
-        }
-        let isInitialState: Bool = currentLabelText == "0" && operand != "."
-        if isInitialState {
-            changeOperandLabelText(to: operand)
-        } else {
-            let newLabelText: String
-            if operand == "." {
-                newLabelText = "\(currentLabelText)\(operand)"
-            } else {
-                newLabelText = formatNumber("\(currentLabelText)\(operand)")
-            }
-            changeOperandLabelText(to: newLabelText)
-        }
-    }
-    
-    private func changeOperandLabelText(to operand: String) {
-        operandLabel.text = operand
-    }
-    
-    private func switchPositiveNegativeOfOperandLabelText() {
-        var labelText: String = operandLabel.text ?? ""
-        if labelText == "0" {
-            return
-        }
-        let isNegativeNumber: Bool = labelText.hasPrefix("-")
-        if isNegativeNumber {
-            labelText.removeFirst()
-            operandLabel.text = labelText
-        } else {
-            operandLabel.text = "-\(labelText)"
-        }
-    }
-    
-    private func changeOperatorLabelText(to newOperator: String) {
-        operatorLabel.text = newOperator
     }
     
     private func addSubViewInHistoryStackView(operatorText: String, operandText: String) {
@@ -95,30 +54,7 @@ final class ViewController: UIViewController {
         label.textColor = .white
         return label
     }
-    
-    private func formatNumber(_ number: String) -> String {
-        let intNumber: Int = Int(floor(Double(number) ?? 0))
-        let decimalRange = number.index(number.startIndex, offsetBy: String(intNumber).count)..<number.endIndex
-        let decimalNumber: String = String(number[decimalRange])
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        var formatNumber: String = "\(numberFormatter.string(from: NSNumber(value: intNumber)) ?? "")\(decimalNumber)"
-        if formatNumber.count > 20 {
-            formatNumber.removeLast(formatNumber.count - 20)
-        }
-        return formatNumber
-    }
-    
-    private func removeLastCommaZero(_ input: String) -> String {
-        var result: String = input
-        if result.hasSuffix(".0") {
-            result.removeLast(2)
-            return result
-        }
-        return result
-    }
-    
+      
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
         if(bottomOffset.y > 0) {
@@ -131,78 +67,44 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpAllClearButton(_ sender: UIButton) {
-        resetOperatorLabel()
         resetOperandLabel()
-        removeAllsubviewsInHistoryStackView()
-        calculateInput = ""
+        resetOperatorLabel()
+        removeAllSubviewsInHistoryStackView()
     }
     
     @IBAction private func touchUpNumberPadButton(_ sender: UIButton) {
         if let operand: String = sender.titleLabel?.text {
-            addOperandToOperandLabel(operand)
+            calculator.inputOperand(operand)
+            operandLabel.text = calculator.currentOperand
         }
     }
     
     @IBAction private func touchUpPositiveNegativeButton(_ sender: UIButton) {
-        switchPositiveNegativeOfOperandLabelText()
+        calculator.switchPositiveNegativeOfCurrentOperand()
+        operandLabel.text = calculator.currentOperand
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        let currentOperator: String = calculator.currentOperator
+        let currentOperand: String = calculator.currentOperand
         guard let inputOperator: String = sender.titleLabel?.text else {
             return
         }
-        let currentOperatorLabelText: String = operatorLabel.text ?? ""
-        let currentOperandLabelText: String = operandLabel.text ?? ""
-        changeOperatorLabelText(to: inputOperator)
-        let newOperatorLabelText: String
-        let isEmptyCalculateInput: Bool = calculateInput == ""
-        if isEmptyCalculateInput {
-            newOperatorLabelText = ""
-        } else {
-            newOperatorLabelText = currentOperatorLabelText
+        if calculator.inputOperator(inputOperator) {
+            addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
         }
-        let newOperandLabelText: String
-        let isNanError: Bool = currentOperandLabelText == CalculateError.dividedByZero.localizedDescription
-        if isNanError {
-            newOperandLabelText = "0"
-        } else {
-            newOperandLabelText = currentOperandLabelText
-        }
-        let isEditing: Bool = currentOperandLabelText != "0"
-        if isEditing {
-            addSubViewInHistoryStackView(operatorText: newOperatorLabelText, operandText: currentOperandLabelText)
-            calculateInput += "\(newOperatorLabelText)\(newOperandLabelText)"
-            resetOperandLabel()
-            scrollToBottom()
-        }
+        operandLabel.text = calculator.currentOperand
+        operatorLabel.text = calculator.currentOperator
     }
     
     @IBAction private func touchUpEqualButton(_ sender: Any) {
-        let isEmptyCalculateInput: Bool = calculateInput == ""
-        if isEmptyCalculateInput {
-            return
+        let currentOperator: String = calculator.currentOperator
+        let currentOperand: String = calculator.currentOperand
+        if let result: String = calculator.inputEqual() {
+            addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
+            operandLabel.text = result
+            operatorLabel.text = calculator.currentOperator
         }
-        let currentOperatorLabelText: String = operatorLabel.text ?? ""
-        let currentOperandLabelText: String = operandLabel.text ?? ""
-        addSubViewInHistoryStackView(operatorText: currentOperatorLabelText, operandText: currentOperandLabelText)
-        calculateInput += "\(currentOperatorLabelText)\(currentOperandLabelText)"
-        let calculateInputRemovedComma: String = calculateInput
-        var formula: Formula = ExpressionParser.parse(from: calculateInputRemovedComma)
-        let result = formula.result()
-        switch result {
-        case .failure(let error):
-            changeOperandLabelText(to: error.localizedDescription)
-            resetOperatorLabel()
-            calculateInput = ""
-        case .success(let result):
-            if let result {
-                let resultToDisplay: String = removeLastCommaZero(formatNumber(String(result)))
-                changeOperandLabelText(to: resultToDisplay)
-                resetOperatorLabel()
-                calculateInput = ""
-            }
-        }
-        scrollToBottom()
     }
 }
 

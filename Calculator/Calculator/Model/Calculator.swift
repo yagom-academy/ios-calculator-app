@@ -56,16 +56,17 @@ struct Calculator {
         }
     }
     
-    mutating func inputOperator(_ input: String) {
+    mutating func inputOperator(_ input: String) -> Bool {
         currentOperator = input
         let isEditing: Bool = currentOperand != Calculator.defaultOperand
         let isNotNanError: Bool = currentOperand != CalculateError.dividedByZero.localizedDescription
         guard isEditing, isNotNanError else {
-            return
+            return false
         }
         operators.append(currentOperator)
         operands.append(currentOperand)
         resetCurrentOperand()
+        return true
     }
     
     mutating func switchPositiveNegativeOfCurrentOperand() {
