@@ -26,45 +26,6 @@ enum Literal {
     case realDivision
     case realMultiplication
     
-    var buttonID: String {
-        switch self {
-        case .numberZero:
-            return "number_0"
-        case .numberDoubleZero:
-            return "number_00"
-        case .numberPoint:
-            return "number_point"
-        case .ac:
-            return "button_AC"
-        case .ce:
-            return "button_CE"
-        case .numberInvertion:
-            return "number_Invertion"
-        case .division:
-            return "button_Division"
-        case .multiplication:
-            return "button_Multiplication"
-        case .subtraction:
-            return "button_Subtraction"
-        case .result:
-            return "button_Result"
-        case .nan:
-            return "NaN"
-        case .infinity:
-            return "infinity"
-        case .invertSign:
-            return "invertSign"
-        case .comma:
-            return "comma"
-        case .point:
-            return "."
-        case .realDivision:
-            return "realDivision"
-        case .realMultiplication:
-            return "realMultiplication"
-        }
-    }
-    
     var value: String {
         switch self {
         case .numberZero:
