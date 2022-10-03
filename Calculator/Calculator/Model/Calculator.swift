@@ -52,7 +52,7 @@ struct Calculator {
         if isInitialState{
             currentOperand = input
         } else {
-            currentOperand = applyFormat(to: "\(currentOperand)\(input)")
+            currentOperand = applyFormat(to: "\(removeComma(currentOperand))\(input)")
         }
     }
     
@@ -99,7 +99,8 @@ struct Calculator {
         switch formulaResult {
         case .success(let formulaResult):
             if let formulaResult {
-                result = removeLastCommaZero(String(formulaResult))
+                result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
+                currentOperand = result
             }
         case .failure(let error):
             result = error.localizedDescription
@@ -123,20 +124,35 @@ struct Calculator {
     }
     
     private func applyFormat(to input: String) -> String {
+        let result: String
         let inputNumber: Double = Double.convertStringContainingCommaToDouble(input) ?? 0
         let integerNumber: Int = Int(inputNumber)
-        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        let formatIntegerNumber: String = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-        
+        numberFormatter.maximumSignificantDigits = 20
         let separatedInput: [String] = input.components(separatedBy: ".")
         let hasDecimalPart: Bool = separatedInput.count >= 2
-        if hasDecimalPart {
-            return "\(formatIntegerNumber).\(separatedInput[1])"
-        } else {
-            return formatIntegerNumber
+        guard hasDecimalPart else {
+            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
+            return result
         }
+        let decimalPart: String = separatedInput[1]
+        let hasOnlyPoint: Bool = decimalPart == ""
+        let hasZeroAtTheEnd: Bool = decimalPart.hasSuffix("0")
+        if hasOnlyPoint {
+            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
+            return "\(result)."
+        } else if hasZeroAtTheEnd {
+            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
+            return "\(result).\(decimalPart)"
+        } else {
+            result = numberFormatter.string(from: NSNumber(value: inputNumber)) ?? ""
+            return result
+        }
+    }
+    
+    private func removeComma(_ input: String) -> String {
+        return input.replacingOccurrences(of: ",", with: "")
     }
     
     private func removeLastCommaZero(_ input: String) -> String {
