@@ -10,8 +10,8 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() throws -> Double {
-        var result: Double = 0.0
-        
+        guard var result: Double = self.operands.dequeue()?.data else { throw CalculatorError.unknown }
+
         while operands.isEmpty == false {
             guard let operatorCase: Operator = self.operators.dequeue()?.data,
                   let operand: Double = self.operands.dequeue()?.data else {
