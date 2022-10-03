@@ -20,7 +20,6 @@ struct Formula {
               let someOperand: Double = operands?.dequeue() {
             result = someOperator.calculate(lhs: result, rhs: someOperand)
         }
-        
         return result
     }
 }

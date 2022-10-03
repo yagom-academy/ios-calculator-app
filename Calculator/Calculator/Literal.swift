@@ -23,6 +23,8 @@ enum Literal {
     case infinity
     case comma
     case point
+    case realDivision
+    case realMultiplication
     
     var buttonID: String {
         switch self {
@@ -56,6 +58,10 @@ enum Literal {
             return "comma"
         case .point:
             return "."
+        case .realDivision:
+            return "realDivision"
+        case .realMultiplication:
+            return "realMultiplication"
         }
     }
     
@@ -91,6 +97,10 @@ enum Literal {
             return ","
         case .point:
             return "."
+        case .realDivision:
+            return "/"
+        case .realMultiplication:
+            return "*"
         }
     }
 }

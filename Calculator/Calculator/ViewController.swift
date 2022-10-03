@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    // 서순 바꾸기
     @IBOutlet private weak var inputNumberLabel: UILabel!
     @IBOutlet private weak var inputOperatorLabel: UILabel!
     @IBOutlet private weak var historyInputOperatorLabel: UILabel!
@@ -98,12 +97,12 @@ class ViewController: UIViewController {
         return stackView
     }
     
-    private func convertOperator(operatorValue: String) -> String {
+    private func convertOperator(_ operatorValue: String) -> String {
         switch operatorValue {
         case Literal.multiplication.value:
-            return "*"
+            return Literal.realMultiplication.value
         case Literal.division.value:
-            return "/"
+            return Literal.realDivision.value
         default:
             return operatorValue
         }
@@ -127,7 +126,7 @@ class ViewController: UIViewController {
         } else if numberWithOutCommaAndInvertSign == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
             calculationFormula.removeLast()
-            calculationFormula += convertOperator(operatorValue: operatorValue)
+            calculationFormula += convertOperator(operatorValue)
         } else {
             guard let operatorText = inputOperatorLabel.text,
                   let doubleValue = numberFormatter.string(for: Double(numberWithOutCommaAndInvertSign)) else { return }
@@ -135,7 +134,7 @@ class ViewController: UIViewController {
             addStackView(operatorText: operatorText, inputText: doubleValue)
             calculationFormula +=
             numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
-            calculationFormula += convertOperator(operatorValue: operatorValue)
+            calculationFormula += convertOperator(operatorValue)
     
             inputNumberLabel.text = Literal.numberZero.value
             inputOperatorLabel.text = operatorValue
@@ -146,9 +145,10 @@ class ViewController: UIViewController {
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
         let numberWithOutCommaAndInvertSign =
         numberWithOutComma.replacingOccurrences(of: Literal.invertSign.value, with: Literal.subtraction.value)
-        let operators = Operator.allCases.map { String($0.rawValue) }.joined()
+        let operators = Operator.allCases.map { convertOperator(String($0.rawValue)) }.joined()
         let separators = CharacterSet(charactersIn: operators)
-        if calculationFormula.components(separatedBy: separators).count < 2 {
+        
+        if calculationFormula.components(separatedBy: separators).count <= 1 {
             return
         }
         
