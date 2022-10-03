@@ -8,36 +8,26 @@
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
-    
-    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
-        self.operands = operands
-        self.operators = operators
-    }
-    
+
     mutating func result() throws -> Double? {
-        var result: Double?
-        
         guard var lhs = operands.dequeue() else {
             return nil
         }
         
         while !operators.isEmpty() {
             guard let rhs = operands.dequeue() else {
-                return nil
+                return lhs
             }
             
             guard let arithmeticOperator = operators.dequeue() else {
-                return nil
+                throw CalculatorError.emptyOperator
             }
             
-            result = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
-            guard let result = result else {
-                return nil
-            }
-            
-            lhs = result
+            lhs = try arithmeticOperator.calculate(lhs: lhs, rhs: rhs)
         }
-
+        
+        let result = lhs
+        
         return result
     }
 }
