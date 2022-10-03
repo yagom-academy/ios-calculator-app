@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     private let numberFormatter = NumberFormatter()
     private var rawFormula: [String] = []
     private var result: Double = 0.0
+    private var isCalculated: Bool = false
     private var inputNumber: String = "" {
         willSet {
             guard newValue != Text.noValue,
@@ -50,6 +51,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        if isCalculated {
+            makeOperationStackView()
+            addFormula()
+            resetInputNumber()
+            isCalculated = false
+        }
+        
         guard inputNumber != Text.noValue else {
             operatorLabel.text = sender.titleLabel?.text
             return
@@ -63,7 +71,7 @@ class ViewController: UIViewController {
               }
         
         addFormula()
-        MakeOperationStackView()
+        makeOperationStackView()
         scrollTobottom()
         resetInputNumber()
         operatorLabel.text = sender.titleLabel?.text
@@ -94,7 +102,7 @@ class ViewController: UIViewController {
         guard operandLabel.text != result.changeToDemical else { return }
 
         addFormula()
-        MakeOperationStackView()
+        makeOperationStackView()
         scrollTobottom()
         resetInputNumber()
         resetOperatorLabel()
@@ -103,6 +111,8 @@ class ViewController: UIViewController {
             var formulaQueue = ExpressionParser.parse(from: rawFormula.joined(separator: " "))
             result = try formulaQueue.result()
             operandLabel.text = String(result.changeToDemical)
+            isCalculated = true
+            resetRawFormula()
         } catch CalculatorError.divideByZeroError {
             operandLabel.text = numberFormatter.notANumberSymbol
         } catch {
@@ -115,11 +125,12 @@ class ViewController: UIViewController {
               let operand = operandLabel.text else {
             return
         }
+        
         rawFormula.append(`operator`)
         rawFormula.append(operand)
     }
     
-    private func MakeOperationStackView() {
+    private func makeOperationStackView() {
         let operationStackView = UIStackView()
         operationStackView.axis = .horizontal
         operationStackView.translatesAutoresizingMaskIntoConstraints = false
