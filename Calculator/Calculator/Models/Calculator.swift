@@ -26,11 +26,7 @@ class Calculator {
         return operand.contains(MathSymbol.decimalPoint)
     }
     
-    init(`operator`: String = "", operand: String = "0", formula: String = "") {
-        self.operator = `operator`
-        self.operand = operand
-        self.formula = formula
-    }
+    init() { }
     
     func initCalculation(`operator`: String = "", operand: String = "0", formula: String = "") {
         self.operator = `operator`
