@@ -60,4 +60,20 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, "-123")
     }
+    
+    func test_마이너스1더하기4나누기3을입력한후_result를호출하면_결과가1인지() {
+        // given
+        sut.inputOperand("1")
+        sut.switchPositiveNegativeOfCurrentOperand()
+        sut.inputOperator("+")
+        sut.inputOperand("4")
+        sut.inputOperator("÷")
+        sut.inputOperand("3")
+        
+        // when
+        let result: String = sut.inputEqual()!
+        
+        // then
+        XCTAssertEqual(result, "1")
+    }
 }

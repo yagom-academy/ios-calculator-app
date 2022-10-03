@@ -80,8 +80,46 @@ struct Calculator {
         }
     }
     
+    mutating func inputEqual() -> String? {
+        let isInitialState: Bool = operators.isEmpty
+        if isInitialState {
+            return nil
+        }
+        operands.append(currentOperand)
+        operators.append(currentOperator)
+        resetCurrentOperand()
+        resetCurrentOperator()
+        return result()
+    }
+    
     mutating func result() -> String {
-        return ""
+        var result: String = ""
+        var formula: Formula = ExpressionParser.parse(from: convertOperatorsOperandsToString())
+        let formulaResult = formula.result()
+        switch formulaResult {
+        case .success(let formulaResult):
+            if let formulaResult {
+                result = removeLastCommaZero(String(formulaResult))
+            }
+        case .failure(let error):
+            result = error.localizedDescription
+        }
+        return result
+    }
+    
+    mutating private func convertOperatorsOperandsToString() -> String {
+        var result: String = ""
+        operands.reverse()
+        operators.reverse()
+        while operands.isEmpty == false || operators.isEmpty == false {
+            if let input: String = operands.popLast() {
+                result.append(input)
+            }
+            if let input: String = operators.popLast() {
+                result.append(input)
+            }
+        }
+        return result
     }
     
     private func applyFormat(to input: String) -> String {
