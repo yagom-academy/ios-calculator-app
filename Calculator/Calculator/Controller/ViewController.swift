@@ -7,21 +7,21 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var stackCalculation = ""
-    var finalCalculation = ""
-    var checkSign = ""
-    var formula: Formula?
+    private var stackCalculation = ""
+    private var finalCalculation = ""
+    private var checkSign = ""
+    private var formula: Formula?
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    @IBAction func ACButton(_ sender: UIButton) {
-        initCalculator()
+    @IBAction func acButton(_ sender: UIButton) {
+        resetCalculator()
     }
     
-    @IBAction func CEButton(_ sender: UIButton) {
+    @IBAction func ceButton(_ sender: UIButton) {
         stackCalculation = ""
         operandLabel.text = ""
     }
@@ -155,11 +155,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initCalculator()
+        resetCalculator()
         // Do any additional setup after loading the view.
     }
     
-    private func initCalculator() {
+    private func resetCalculator() {
         operandLabel.text = ""
         operatorLabel.text = ""
         stackCalculation = ""
