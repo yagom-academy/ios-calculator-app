@@ -6,6 +6,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     
+    private var isInputtingOperand = false
     private let calculator = Calculator()
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
@@ -54,13 +55,11 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if calculator.isFormulaEmpty ||
-            calculator.isOperandZero {
+        if !isInputtingOperand {
+            isInputtingOperand = true
             newOperand = number
-        }
-        
-        if !calculator.isOperandZero {
-            newOperand = calculator.operand + number
+        } else {
+            newOperand +=  calculator.operand + number
         }
         
         calculator.changeOperand(newOperand)
@@ -70,6 +69,10 @@ class CalculatorViewController: UIViewController {
     private func inputDecimalPoint() {
         if calculator.isOperandDecimal {
             return
+        }
+        
+        if !isInputtingOperand {
+            isInputtingOperand = true
         }
         
         let newOperand = calculator.operand + MathSymbol.decimalPoint
@@ -140,6 +143,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputOperator(by key: NumericKeypad) {
+        isInputtingOperand = false
+        
         let `operator` = key.rawValue
  
         if calculator.operand.last == Character(MathSymbol.decimalPoint) { return }
@@ -158,6 +163,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputEqual() {
+        isInputtingOperand = false
+        
         if calculator.operand.last == Character(MathSymbol.decimalPoint) ||
            calculator.isFormulaEmpty { return }
         
