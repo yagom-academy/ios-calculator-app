@@ -33,7 +33,7 @@ final class CalculatorViewController: UIViewController {
         resultLabel.text = Constant.zero
         currentOperand = Constant.defaultZero
     }
-
+    
     private func clearCalculateHistory() {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
     }
@@ -161,6 +161,10 @@ final class CalculatorViewController: UIViewController {
         
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
+        executeCalculate(formula)
+    }
+    
+    private func executeCalculate(_ formula: Formula) {
         do {
             let result = try formula.result()
             if result.isNaN {
