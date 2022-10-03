@@ -19,13 +19,10 @@ extension Formatter {
         return formatter
     }()
     
-    static func toFormattedString(from number: String) -> String? {
-        let pureNumber = number.replacingOccurrences(of: ",", with: "")
-        
-        guard let formattedNumber = formatter.number(from: pureNumber) else {
-            return nil
-        }
-
-        return formatter.string(from: formattedNumber)
+    static func toFormattedString(from number: String?) -> String? {
+        let pureNumber = number?.replacingOccurrences(of: ",", with: "")
+        return pureNumber
+            .flatMap(formatter.number(from:))
+            .flatMap(formatter.string(from:))
     }
 }

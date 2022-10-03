@@ -34,12 +34,51 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
-        updateCurrentNumberLabel(with: String(sender.tag))
+        guard var currentNumber = currentNumberLabel.text else { return }
+        
+        if currentNumber.contains(Constants.dot) {
+            currentNumberLabel.text = currentNumber + String(sender.tag)
+        } else {
+            currentNumber += String(sender.tag)
+            currentNumberLabel.text = Formatter.toFormattedString(from: currentNumber)
+        }
+
+        isInputZero = true
+    }
+    
+    @IBAction private func touchUpZeroButton(_ sender: UIButton) {
+        guard var currentNumber = currentNumberLabel.text else { return }
+        
+        if currentNumber.contains(Constants.dot) {
+            currentNumberLabel?.text = currentNumber + Constants.zero
+            return
+        }
+        
+        if currentNumber == Constants.zero, !isInputZero {
+            currentNumberLabel?.text = Constants.zero
+            isInputZero = true
+            return
+        }
+        
+        if currentNumber == Constants.zero, isInputZero {
+            return
+        }
+        
+        currentNumber += Constants.zero
+        currentNumberLabel.text = currentNumber
     }
     
     @IBAction private func touchUpDoubleZeroButton(_ sender: UIButton) {
-        guard isInputZero else  { return }
-        updateCurrentNumberLabel(with: Constants.doubleZero)
+        guard var currentNumber = currentNumberLabel.text else { return }
+        
+        if currentNumber.contains(Constants.dot) {
+            currentNumberLabel?.text = currentNumber + Constants.doubleZero
+        } else {
+            currentNumber += String(Constants.doubleZero)
+            currentNumberLabel.text = Formatter.toFormattedString(from: currentNumber)
+        }
+        
+        isInputZero = true
     }
 
     private func formatToNumber(_ number: String) -> String {
@@ -49,24 +88,6 @@ final class CalculatorViewController: UIViewController {
         
         return formattedNumber
     }
-    
-    private func updateCurrentNumberLabel(with input: String) {
-        guard var currentNumber = currentNumberLabel.text else { return }
-        
-        if currentNumber == Constants.zero, input != Constants.doubleZero {
-            currentNumber = input
-        } else if currentNumber != Constants.zero {
-            currentNumber += input
-        }
-        
-        if currentNumber.contains(Constants.dot) {
-            currentNumberLabel.text = currentNumber
-        } else {
-            currentNumberLabel.text = Formatter.toFormattedString(from: currentNumber)
-        }
-        
-        isInputZero = true
-    }
 
     @IBAction private func touchUpDecimalButton(_ sender: UIButton) {
         guard let currentNumber = currentNumberLabel.text,
@@ -74,13 +95,14 @@ final class CalculatorViewController: UIViewController {
               isInputZero else { return }
         
         currentNumberLabel.text = currentNumber + Constants.dot
+        isInputZero = true
     }
     
     @IBAction private func touchUpSymbolChangeButton(_ sender: UIButton) {
         guard isInputZero else { return }
         
         guard var currentNumber = currentNumberLabel.text,
-              currentNumber != "0" else { return }
+              currentNumber != Constants.zero else { return }
         
         if currentNumber.first == Character(Constants.minusSymbol) {
             currentNumber.removeFirst()
@@ -125,11 +147,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addSingleFormulaLineToStackView() {
-        guard let lastOperatorLabelText = lastOperatorLabel.text,
-              let currentNumber = currentNumberLabel.text,
-              let formattedNumber = Formatter.toFormattedString(from: currentNumber) else { return }
+        let formattedNumber = Formatter.toFormattedString(from: currentNumberLabel.text)
 
-        let formulaLine = LineStackView(operatorLabelText: lastOperatorLabelText, operandLabelText: formattedNumber)
+        let formulaLine = LineStackView(operatorLabelText: lastOperatorLabel.text, operandLabelText: formattedNumber)
         
         historyStackView.addArrangedSubview(formulaLine)
         historyScrollView.scrollToBottom(animated: false)

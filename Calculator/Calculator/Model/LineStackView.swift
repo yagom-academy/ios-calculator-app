@@ -28,10 +28,10 @@ final class LineStackView: UIStackView {
     }
     
     required init(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
     
-    init(operatorLabelText: String, operandLabelText: String) {
+    init(operatorLabelText: String?, operandLabelText: String?) {
         self.operatorLabelToPush.text = operatorLabelText
         self.operandLabelToPush.text = operandLabelText
         super.init(arrangedSubviews: [operatorLabelToPush, operandLabelToPush])
