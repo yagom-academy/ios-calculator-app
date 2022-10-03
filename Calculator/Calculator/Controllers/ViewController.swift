@@ -160,17 +160,17 @@ final class ViewController: UIViewController {
         do {
             let result = try formula.result()
             if result.isNaN {
-                resultLabel.text = "NaN"
+                resultLabel.text = Constant.nan
             } else {
                 resultLabel.text = applyNumberFormatter(number: result)
             }
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
-            print("None Operand Error")
+            print(Constant.noneOperand)
         } catch CalculatorError.noneOperator {
-            print("None Operator Error")
+            print(Constant.noneOperator)
         } catch {
-            print("Some Error")
+            print(Constant.error)
         }
     }
     
