@@ -4,38 +4,24 @@
 //
 
 struct Formula {
-    private let operands: CalculatorItemQueue<Double>
-    private let operators: CalculatorItemQueue<Operator>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
     
     init(operands: [Double], operators: [Operator]) {
         self.operands = CalculatorItemQueue(elements: operands)
         self.operators = CalculatorItemQueue(elements: operators)
     }
     
-    func result() throws -> Double {
-        var operands = operands, operators = operators
+    mutating func result() -> Double? {
+        guard var result = operands.dequeue() else { return nil }
         
-        guard var calculatedValue: Double = operands.dequeue() else {
-            throw FormulaError.emptyQueue
-        }
-        
-        while !operands.isEmpty {
-            let rhs = operands.dequeue()
-            let firstOperator = operators.dequeue()
+        while !operands.isEmpty && !operators.isEmpty {
+            guard let operatorSign = operators.dequeue(),
+                  let rhs = operands.dequeue() else { return result }
             
-            guard let firstOperator = firstOperator,
-                  let rhs = rhs else {
-                break
-            }
-            
-            do {
-                calculatedValue = try firstOperator.calculate(lhs: calculatedValue, rhs: rhs)
-            } catch {
-                throw FormulaError.dividedByZero
-            }
+            result = operatorSign.calculate(lhs: result, rhs: rhs)
         }
-        
-        
-        return calculatedValue
+
+        return result
     }
 }

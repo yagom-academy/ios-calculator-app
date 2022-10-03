@@ -7,7 +7,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var inputStack: [Element] = []
     private var outputStack: [Element] = []
     
-    private(set) var isEmpty: Bool {
+    var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
     }
     
