@@ -6,48 +6,36 @@
 protocol CalculateItem {
 }
 
-struct CalculatorItemQueue {
-    var enqueue: [CalculateItem]
-    var dequeue: [CalculateItem] = []
+struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var enqueueStack: [T]
+    private(set) var dequeueStack: [T] = []
     
-    var mergedQueue: [CalculateItem] {
-        return enqueue + dequeue.reversed()
+    var mergedQueue: [T] {
+        return enqueueStack + dequeueStack.reversed()
     }
     
     var isEmpty: Bool {
-        return enqueue.isEmpty && dequeue.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    init(_ queue: [CalculateItem]) {
-        enqueue = queue
+    init(_ queue: [T]) {
+        enqueueStack = queue
     }
     
-    mutating func pushLast(_ n: CalculateItem) {
-        enqueue.append(n)
+    mutating func enqueue(_ n: T) {
+        enqueueStack.append(n)
     }
     
-    mutating func popFirst() -> CalculateItem? {
-        if dequeue.isEmpty {
-            dequeue = enqueue.reversed()
-            enqueue.removeAll()
+    mutating func dequeue() -> T? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return dequeue.popLast()
-    }
-    
-    mutating func popLast() -> CalculateItem? {
-        var returnValue: CalculateItem?
-        if enqueue.isEmpty {
-            dequeue.reverse()
-            returnValue = dequeue.popLast()
-            dequeue.reverse()
-        } else {
-            returnValue = enqueue.popLast()
-        }
-        return returnValue
+        return dequeueStack.popLast()
     }
 
     mutating func removeAll() {
-        enqueue.removeAll()
-        dequeue.removeAll()
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
