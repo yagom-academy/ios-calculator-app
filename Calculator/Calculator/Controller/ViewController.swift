@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     @IBAction func acButton(_ sender: UIButton) {
-        resetCalculator()
+        resetCalculator(operandText: "", operatorText: "")
     }
     
     @IBAction func ceButton(_ sender: UIButton) {
@@ -87,63 +87,28 @@ class ViewController: UIViewController {
         try? showResult()
     }
     
-    @IBAction func pointButton(_ sender: UIButton) {
-        pushOperand(".")
-    }
-    
-    @IBAction func zeroButton(_ sender: UIButton) {
-        pushOperand("0")
-    }
-    
-    @IBAction func doubleZeroButton(_ sender: UIButton) {
-        pushOperand("00")
-    }
-    
-    @IBAction func oneButton(_ sender: UIButton) {
-        pushOperand("1")
-    }
-    
-    @IBAction func twoButton(_ sender: UIButton) {
-        pushOperand("2")
-    }
-    
-    @IBAction func threeCButton(_ sender: UIButton) {
-        pushOperand("3")
-    }
-    
-    @IBAction func fourButton(_ sender: UIButton) {
-        pushOperand("4")
-    }
-    
-    @IBAction func fiveButton(_ sender: UIButton) {
-        pushOperand("5")
-    }
-    
-    @IBAction func sixButton(_ sender: UIButton) {
-        pushOperand("6")
-    }
-    
-    @IBAction func sevenButton(_ sender: UIButton) {
-        pushOperand("7")
-    }
-    
-    @IBAction func eightButton(_ sender: UIButton) {
-        pushOperand("8")
-    }
-    
-    @IBAction func nineButton(_ sender: UIButton) {
-        pushOperand("9")
+    @IBAction func inputNumberButton(_ sender: UIButton) {
+        switch sender.tag {
+        case -1:
+            pushOperand(".")
+        case 0, 1, 2, 3, 4, 5, 6 ,7, 8, 9:
+            pushOperand("\(sender.tag)")
+        case 10:
+            pushOperand("00")
+        default:
+            break
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetCalculator()
+        resetCalculator(operandText: "", operatorText: "")
         // Do any additional setup after loading the view.
     }
     
-    private func resetCalculator() {
-        operandLabel.text = ""
-        operatorLabel.text = ""
+    private func resetCalculator(operandText: String, operatorText: String) {
+        operandLabel.text = operandText
+        operatorLabel.text = operatorText
         stackCalculation = ""
         finalCalculation = ""
         calculatorStackView.subviews.forEach { (view) in
@@ -166,7 +131,8 @@ class ViewController: UIViewController {
     
     private func updateCalculatorStackView() {
         let calculatorLabel = UILabel()
-        calculatorLabel.text = (operatorLabel.text ?? "") + " " + (operandLabel.text ?? "")
+        let whiteSpace = " "
+        calculatorLabel.text = (operatorLabel.text ?? "") + whiteSpace + (operandLabel.text ?? "")
         calculatorLabel.textColor = .white
         calculatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -184,12 +150,7 @@ class ViewController: UIViewController {
             operandLabel.text = String(calculatorResult)
             stackCalculation = String(calculatorResult)
         } catch CalculatorError.invalidNumber {
-            operandLabel.text = "invalid Number"
-            stackCalculation = ""
-            finalCalculation = ""
-            calculatorStackView.subviews.forEach { (view) in
-                view.removeFromSuperview()
-            }
+            resetCalculator(operandText: "invalid Number", operatorText: "Error")
         }
     }
 }
