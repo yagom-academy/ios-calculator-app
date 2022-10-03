@@ -9,7 +9,6 @@ class ViewController: UIViewController {
     private var isCalculated: Bool = false
     private var operandManager: OperandManager = OperandManager()
     private let componentMaker: ComponentMaker = ComponentMaker()
-    private let numberFormatter: NumberFormatter = NumberFormatter()
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -22,10 +21,6 @@ class ViewController: UIViewController {
         operatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
@@ -103,9 +98,9 @@ extension ViewController {
     }
 
     private func appendExpressionQueue() {
+        guard let currentOperator = operatorLabel.text else { return }
         let stackView: UIStackView = componentMaker.makeStackView()
         
-        guard let currentOperator = operatorLabel.text else { return }
         if !expressionQueue.arrangedSubviews.isEmpty {
             let operatorLabel: UILabel = componentMaker.makeLabel(currentOperator)
             stackView.addArrangedSubview(operatorLabel)
