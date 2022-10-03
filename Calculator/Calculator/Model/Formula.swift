@@ -6,10 +6,10 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+    private var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    private var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() throws -> Double? {
+    mutating func result() throws -> Double {
         guard var result = operands.pop() else {
             throw CalculatorError.queueIsEmpty
         }
