@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
         
-        if operandLabelText.contains("-") {
+        if Character(operandLabelText) == Operator.subtract.rawValue {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
             checkSign = operandLabel.text ?? ""
         } else {
@@ -151,6 +151,12 @@ class ViewController: UIViewController {
             stackCalculation = String(calculatorResult)
         } catch CalculatorError.invalidNumber {
             resetCalculator(operandText: "invalid Number", operatorText: "Error")
+        } catch CalculatorError.emptyOperands {
+            resetCalculator(operandText: "empty Operands", operatorText: "Error")
+        } catch CalculatorError.emptyOperators {
+            resetCalculator(operandText: "empty Operators", operatorText: "Error")
+        } catch CalculatorError.noMoreOperands {
+            resetCalculator(operandText: "no More Operands", operatorText: "Error")
         }
     }
 }
