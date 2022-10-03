@@ -3,7 +3,7 @@
 //  Created by 미니.
 //
 
-enum `Operator`: Character, CaseIterable, CalculateItem {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "÷"
