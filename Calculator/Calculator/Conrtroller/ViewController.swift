@@ -174,7 +174,7 @@ extension ViewController {
         inputNumber = Text.noValue
     }
     
-    private func resetInputNumber() {
+    private func resetOperatorLabel() {
         operatorLabel.text = Text.blank
     }
     
