@@ -18,7 +18,7 @@ struct Formula {
             
             result = operatorSign.calculate(lhs: result, rhs: rhs)
         }
-        
+
         return result
     }
 }
