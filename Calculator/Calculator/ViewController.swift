@@ -57,7 +57,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func numberDoubleZeroButtonPressed(_ sender: UIButton) {
         
-        if ooperandLabel.isZero {
+        if operandLabel.isZero {
             return
         }
         updateOperandLabel(with: Constant.doubleZero)
@@ -68,7 +68,7 @@ final class ViewController: UIViewController {
         guard let isContainingPoint = operandLabel.text?.contains(Constant.dot) else { return }
         if isContainingPoint {
             return
-        } else if operandLabel.text == Constant.zero {
+        } else if operandLabel.isZero {
             updateOperandLabel(with: "0.")
         } else {
             updateOperandLabel(with: Constant.dot)
@@ -213,7 +213,7 @@ final class ViewController: UIViewController {
     
     private func updateOperandLabel(with number: String) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             operandLabel.text = number
         } else {
             if let operandText = operandLabel.text {
