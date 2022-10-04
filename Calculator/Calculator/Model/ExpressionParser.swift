@@ -12,8 +12,8 @@ enum ExpressionParser {
         let operatorsQueue: [Operator] = input.compactMap{
             Operator(rawValue: $0)
         }
-        let formula = Formula(operands: CalculatorItemQueue(enqueueStack: operandsQueue),
-                              operators: CalculatorItemQueue(enqueueStack: operatorsQueue))
+        let formula = Formula(operands: CalculatorItemQueue(operandsQueue),
+                              operators: CalculatorItemQueue(operatorsQueue))
         
         return formula
     }
@@ -21,8 +21,8 @@ enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         var separators: CharacterSet = CharacterSet()
         
-        Operator.allCases.forEach {
-            separators.insert(charactersIn: Character(operators.description))
+        Operator.allCases.forEach { `operator` in
+            separators.insert(charactersIn: `operator`.description)
         }
         
         let result = input.components(separatedBy: separators)
