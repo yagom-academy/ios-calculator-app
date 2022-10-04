@@ -22,6 +22,7 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setOperandLabelToZero()
         setOperatorLabelEmpty()
     }
@@ -53,13 +54,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard let selectedOperator = sender.currentTitle else {
-            return
-        }
-        
-        guard !isFirstInput else {
-            return
-        }
+        guard let selectedOperator = sender.currentTitle else { return }
+        guard !isFirstInput else { return }
         
         if isCalculated {
             finalFormula.removeAll()
@@ -74,9 +70,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
-            return
-        }
+        guard !isCalculated else { return }
         
         if operand.isEmpty {
             operand += CalculatorConstant.zero
@@ -97,6 +91,7 @@ final class CalculatorViewController: UIViewController {
         isFirstInput = true
         isDotButtonTapped = false
         isCalculated = false
+        
         operand.removeAll()
         arithmeticOperator.removeAll()
         finalFormula.removeAll()
@@ -115,13 +110,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
-            return
-        }
-        
-        guard !operand.isEmpty else{
-            return
-        }
+        guard !isCalculated else { return }
+        guard !operand.isEmpty else{ return }
         
         if !isNegativeSign {
             operand = CalculatorConstant.negativeSign + operand
@@ -136,6 +126,7 @@ final class CalculatorViewController: UIViewController {
     func createStackView() {
         let logOperand = operand.formatStyleToDecimal()
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
+        
         formulaStackView.addArrangedSubview(stackView)
         updateLogScrollViewContentOffset()
     }
@@ -190,10 +181,9 @@ final class CalculatorViewController: UIViewController {
     func calculate() {
         isCalculated = true
         var formula = ExpressionParser.parse(from: finalFormula)
+        
         do {
-            guard let result = try formula.result() else {
-                return
-            }
+            guard let result = try formula.result() else { return }
             
             updateOperandLabel(with: String(result))
         } catch CalculatorError.divideWithZero {
@@ -204,11 +194,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     func updateLogScrollViewContentOffset() {
-        logScrollView.layoutIfNeeded()
         let contentOffset = CGPoint(
             x: 0,
             y: logScrollView.contentSize.height - logScrollView.bounds.height
         )
+        logScrollView.layoutIfNeeded()
         logScrollView.setContentOffset(contentOffset, animated: true)
     }
     
