@@ -14,7 +14,7 @@ final class ViewController: UIViewController {
 
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private var displayLabelText: String = namespace.Zero {
+    private var displayLabelText: String = Namespace.zero {
         didSet {
             if displayLabelText.count >= 20 {
                 let index = displayLabelText.index(displayLabelText.startIndex, offsetBy: 19)
@@ -36,7 +36,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    private(set) var formula: String = namespace.Empty
+    private(set) var formula: String = Namespace.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,22 +45,22 @@ final class ViewController: UIViewController {
     
     private func setAccessibilityIdentifier() {
         calculatorDisplayLabel.isAccessibilityElement = true
-        calculatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.CalculatorDisplayLabel
+        calculatorDisplayLabel.accessibilityIdentifier = AccessibilityIdentifier.calculatorDisplayLabel
         
         operatorDisplayLabel.isAccessibilityElement = true
-        operatorDisplayLabel.accessibilityIdentifier = accessibilityIdentifier.OperatorDisplayLabel
+        operatorDisplayLabel.accessibilityIdentifier = AccessibilityIdentifier.operatorDisplayLabel
         
         calculatorArchive.isAccessibilityElement = true
-        calculatorArchive.accessibilityIdentifier = accessibilityIdentifier.CalculatorArchive
+        calculatorArchive.accessibilityIdentifier = AccessibilityIdentifier.calculatorArchive
     }
 
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
-              displayLabelText != namespace.NaN else {
+              displayLabelText != Namespace.nan else {
             return
         }
         
-        if displayLabelText == namespace.Zero {
+        if displayLabelText == Namespace.zero {
             displayLabelText = titleText
         } else {
             displayLabelText = displayLabelText + titleText
@@ -69,18 +69,18 @@ final class ViewController: UIViewController {
     
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
-              displayLabelText != namespace.NaN else {
+              displayLabelText != Namespace.nan else {
             return
         }
         
-        if displayLabelText != namespace.Zero {
+        if displayLabelText != Namespace.zero {
             displayLabelText = displayLabelText + titleText
         }
     }
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard let titleText = sender.currentTitle,
-              displayLabelText != namespace.NaN else {
+              displayLabelText != Namespace.nan else {
             return
         }
         
@@ -94,7 +94,7 @@ final class ViewController: UIViewController {
             return
         }
         
-        if displayLabelText != namespace.Zero {
+        if displayLabelText != Namespace.zero {
             pushInFormula(operand: displayLabelText, operator: operatorText)
             pushInArchive(operand: displayText, operator: operatorText)
         }
@@ -103,7 +103,7 @@ final class ViewController: UIViewController {
             operatorDisplayLabel.text = titleText
         }
         
-        displayLabelText = namespace.Zero
+        displayLabelText = Namespace.zero
     }
     
     private func pushInFormula(operand: String, `operator`: String) {
@@ -130,28 +130,28 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
-        if displayLabelText != namespace.Zero {
+        if displayLabelText != Namespace.zero {
             displayLabelText = changeSign(displayLabelText)
         }
     }
     
     private func changeSign(_ text: String) -> String {
-        if text.first == Character(namespace.Negative) {
+        if text.first == Character(Namespace.negative) {
             let secondIndex = text.index(after: text.startIndex)
             return String(text[secondIndex...])
         } else {
-            return namespace.Negative + text
+            return Namespace.negative + text
         }
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
-        displayLabelText = namespace.Zero
+        displayLabelText = Namespace.zero
     }
     
     @IBAction private func allClearButtonTapped(_ sender: UIButton) {
-        displayLabelText = namespace.Zero
-        operatorDisplayLabel.text = namespace.Empty
-        self.formula = namespace.Empty
+        displayLabelText = Namespace.zero
+        operatorDisplayLabel.text = Namespace.empty
+        self.formula = Namespace.empty
         
         resetArchive()
     }
@@ -164,7 +164,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard let operatorText = operatorDisplayLabel.text,
-              self.formula != namespace.Empty else {
+              self.formula != Namespace.empty else {
             return
         }
         
@@ -177,10 +177,10 @@ final class ViewController: UIViewController {
             let result = try parsedFormula.result()
             displayLabelText = String(result)
             
-            self.formula = namespace.Empty
-            operatorDisplayLabel.text = namespace.Empty
+            self.formula = Namespace.empty
+            operatorDisplayLabel.text = Namespace.empty
         } catch CalculatorError.divideZero {
-            displayLabelText = namespace.NaN
+            displayLabelText = Namespace.nan
         } catch {
             print(error.localizedDescription)
         }

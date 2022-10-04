@@ -42,8 +42,8 @@
 		ACF4FD8B28E4F17700CB961E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FCED28DD9BFA00CB961E /* Double.swift */; };
 		ACF4FD8C28E4F17900CB961E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FCEF28DD9C0F00CB961E /* String.swift */; };
 		ACF4FD8D28E4F17900CB961E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FCEF28DD9C0F00CB961E /* String.swift */; };
-		ACF4FD8F28E4F34C00CB961E /* accessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FD8E28E4F34C00CB961E /* accessibilityIdentifier.swift */; };
-		ACF4FD9128E4F3C900CB961E /* nameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FD9028E4F3C900CB961E /* nameSpace.swift */; };
+		ACF4FD8F28E4F34C00CB961E /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FD8E28E4F34C00CB961E /* AccessibilityIdentifier.swift */; };
+		ACF4FD9128E4F3C900CB961E /* Namespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACF4FD9028E4F3C900CB961E /* Namespace.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -89,8 +89,8 @@
 		ACF4FD6428E4A29200CB961E /* CalculatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACF4FD6628E4A29200CB961E /* CalculatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITests.swift; sourceTree = "<group>"; };
 		ACF4FD6828E4A29200CB961E /* CalculatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		ACF4FD8E28E4F34C00CB961E /* accessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = accessibilityIdentifier.swift; sourceTree = "<group>"; };
-		ACF4FD9028E4F3C900CB961E /* nameSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = nameSpace.swift; sourceTree = "<group>"; };
+		ACF4FD8E28E4F34C00CB961E /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
+		ACF4FD9028E4F3C900CB961E /* Namespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Namespace.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,8 +146,8 @@
 				AC94A1BE28D888FC00256CE8 /* CalculatorItemQueue.swift */,
 				ACF4FCD728DD7FDC00CB961E /* Formula.swift */,
 				ACF4FCDD28DD889300CB961E /* Operator.swift */,
-				ACF4FD8E28E4F34C00CB961E /* accessibilityIdentifier.swift */,
-				ACF4FD9028E4F3C900CB961E /* nameSpace.swift */,
+				ACF4FD8E28E4F34C00CB961E /* AccessibilityIdentifier.swift */,
+				ACF4FD9028E4F3C900CB961E /* Namespace.swift */,
 				ACF4FCE128DD8FEF00CB961E /* ExpressionParser.swift */,
 				AC4159A028E5272000B98F58 /* StackViewCell.swift */,
 				ACF4FCF328DDBBF000CB961E /* Error */,
@@ -399,10 +399,10 @@
 				ACF4FCE228DD8FEF00CB961E /* ExpressionParser.swift in Sources */,
 				ACF4FCD828DD7FDC00CB961E /* Formula.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
-				ACF4FD9128E4F3C900CB961E /* nameSpace.swift in Sources */,
+				ACF4FD9128E4F3C900CB961E /* Namespace.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				AC4159A128E5272000B98F58 /* StackViewCell.swift in Sources */,
-				ACF4FD8F28E4F34C00CB961E /* accessibilityIdentifier.swift in Sources */,
+				ACF4FD8F28E4F34C00CB961E /* AccessibilityIdentifier.swift in Sources */,
 				AC94A1C128D889AB00256CE8 /* CalculateItem.swift in Sources */,
 				ACF4FCDE28DD889300CB961E /* Operator.swift in Sources */,
 				ACF4FCF528DDBC0A00CB961E /* CalculatorError.swift in Sources */,

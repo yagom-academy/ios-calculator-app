@@ -81,7 +81,7 @@ final class FormulaTests: XCTestCase {
     
     func test_when_divide_0_then_throw_Error() {
         // given
-        let testString = "1/0"
+        let testString = "1÷0"
         
         // when
         sut = ExpressionParser.parse(from: testString)
@@ -92,7 +92,7 @@ final class FormulaTests: XCTestCase {
     
     func test_when_formula_is_wrong_then_throw_wrongFormulaError() {
         // given
-        let testString = "1+2/"
+        let testString = "1+2÷"
         
         // when
         sut = ExpressionParser.parse(from: testString)
