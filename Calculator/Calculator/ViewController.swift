@@ -60,12 +60,13 @@ class ViewController: UIViewController {
               let senderText = senderLabel.text
         else { return }
         
-        updateOperatorLabel(with: senderText)
         if operandLabel.isZero {
+            updateOperatorLabel(with: senderText)
             return
         }
         addSubviewToStackView()
         updateExpression()
+        updateOperatorLabel(with: senderText)
     }
     
     @IBAction func ACButtonPressed(_ sender: UIButton) {
