@@ -3,7 +3,6 @@
 
 final class CalculatorController {
     let view: MainViewController
-    var formula: Formula?
     private var expression: String = ""
     var viewDisplayNumber: String = "0"
     private var displaySign: Operator = Operator.unknown
@@ -12,7 +11,6 @@ final class CalculatorController {
     
     init(view: MainViewController) {
         self.view = view
-        self.formula = ExpressionParser.parse(from: expression)
     }
     
     private func isFirstCharacterZero(stringNumber: String) -> Bool {
@@ -124,11 +122,14 @@ final class CalculatorController {
         canCalculate = false
         view.makeStackView()
         view.resetDisplayNumberLabel()
-        formula = ExpressionParser.parse(from: expression)
+        var formula = ExpressionParser.parse(from: expression)
         
-        let result = try? formula?.result() ?? .nan
-        
-        return String(result!)
+        do {
+            let result = try formula.result()
+            return String(result)
+        } catch {
+            return error.localizedDescription
+        }
     }
     
     func tappedCalculateButton() -> String {
