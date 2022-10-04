@@ -8,13 +8,14 @@ final class CalculatorController {
     private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
+    var calculatedNumber: String = ""
     
     init(view: MainViewController) {
         self.view = view
     }
     
     private func isFirstCharacterZero(stringNumber: String) -> Bool {
-        if stringNumber.first == "0" {
+        if stringNumber == "0" {
             return true
         } else {
             return false
@@ -73,6 +74,14 @@ final class CalculatorController {
     }
     
     func tappedOperatorButton(input: String?) -> String {
+        if calculatedNumber != "" {
+            view.makeStackView()
+            view.resetDisplayNumberLabel()
+            determineOperator(stringOperator: input)
+            
+            return String(displaySign.rawValue)
+        }
+        
         if isFirstClick == true {
             return ""
         } else if canChangedOperator() == true {
@@ -81,7 +90,7 @@ final class CalculatorController {
             return String(displaySign.rawValue)
         } else {
             expression += String(displaySign.rawValue) + viewDisplayNumber
-            viewDisplayNumber = "0"
+            //viewDisplayNumber = "0"
             view.makeStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
@@ -108,6 +117,7 @@ final class CalculatorController {
     func tappedCEButton() {
         viewDisplayNumber = "0"
         view.displayNumberLabel.text = "0"
+        calculatedNumber = ""
         
         if view.displaySignLabel.text == "" {
             displaySign = Operator.unknown
@@ -126,19 +136,19 @@ final class CalculatorController {
         
         do {
             let result = try formula.result()
+            calculatedNumber = String(result)
             return String(result)
         } catch {
             return error.localizedDescription
         }
     }
     
-    func tappedCalculateButton() -> String {
+    func tappedCalculateButton() -> String? {
         if canCalculate == true {
+            isFirstClick = true
             return calculateResult()
         } else {
-            guard let calculatedResult = view.displayNumberLabel.text else { return "" }
-            
-            return calculatedResult
+            return view.displayNumberLabel.text
         }
     }
     
@@ -155,6 +165,7 @@ final class CalculatorController {
     func tappedACButton() {
         expression = ""
         viewDisplayNumber = "0"
+        calculatedNumber = ""
         displaySign = Operator.unknown
         isFirstClick = true
     }

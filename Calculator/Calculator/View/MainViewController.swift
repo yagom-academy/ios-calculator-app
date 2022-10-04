@@ -84,7 +84,6 @@ final class MainViewController: UIViewController {
         
         if displaySignLabel.text != "" {
             displaySignLabel.text = ""
-            makeStackView()
         }
     }
     
