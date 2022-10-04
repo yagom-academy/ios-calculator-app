@@ -7,7 +7,7 @@ class ExpressionParserTests: XCTestCase {
     
     func test_문자열로수식을입력받았을때_parse호출및result호출시_피연산자와연산자가분리돼계산되어야한다() {
         // given
-        let input = "1 + 2 - 3 * 0"
+        let input = "10 + 90 / 10"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -22,6 +22,6 @@ class ExpressionParserTests: XCTestCase {
         }
         
         // then
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(result, 10.0)
     }
 }
