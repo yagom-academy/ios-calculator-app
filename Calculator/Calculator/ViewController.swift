@@ -57,5 +57,9 @@ class ViewController: UIViewController {
     private func updateOperatorLabel(with `operator`: String) {
         operatorLabel.text = `operator`
     }
+    
+    private func resetOperandLabel() {
+        operandLabel.text = "0"
+    }
 }
 
