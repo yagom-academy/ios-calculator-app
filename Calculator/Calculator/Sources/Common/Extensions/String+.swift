@@ -6,17 +6,22 @@
 import Foundation
 
 extension String {
-    static var formatter = NumberFormatter()
-    
-    var calNumber: String {
-        let numberValue = NSDecimalNumber(string: self)
+    static let calculatorNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.usesSignificantDigits = true
+        formatter.maximumFractionDigits = 10
+        formatter.maximumIntegerDigits = 20
+        formatter.maximumSignificantDigits = 20
         
-        Self.formatter.numberStyle = .decimal
-        Self.formatter.usesSignificantDigits = true
-        Self.formatter.maximumFractionDigits = 10
-        Self.formatter.maximumIntegerDigits = 20
-        Self.formatter.maximumSignificantDigits = 20
-        return Self.formatter.string(from: numberValue) ?? "0"
+        return formatter
+    }()
+    
+    func toFormattedString() -> Self? {
+        let pureNumber: String? = self.replacingOccurrences(of: ",", with: "")
+        return pureNumber
+            .flatMap(Self.calculatorNumberFormatter.number(from:))
+            .flatMap(Self.calculatorNumberFormatter.string(from:))
     }
     
     func split(with target: Character) -> [String] {

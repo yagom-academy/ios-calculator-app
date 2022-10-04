@@ -20,7 +20,7 @@ final class CalculatedLogStackView: UIStackView {
         return label
     }()
     
-    init(operatorValue: String, operandValue: String) {
+    init(operatorValue: String, operandValue: String?) {
         operatorLabel.text = operatorValue
         operandLabel.text = operandValue
         

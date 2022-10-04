@@ -37,7 +37,7 @@ final class CalculatorViewController: UIViewController {
         if selectedNumbers.contains(Constant.Calculator.defaultPoint) {
             updateNumberLabelTo(numbers: selectedNumbers)
         } else {
-            updateNumberLabelTo(numbers: selectedNumbers.calNumber)
+            updateNumberLabelTo(numbers: selectedNumbers.toFormattedString()!)
         }
     }
     
@@ -124,7 +124,7 @@ final class CalculatorViewController: UIViewController {
             )
         }
         
-        updateNumberLabelTo(numbers: selectedNumbers.calNumber)
+        updateNumberLabelTo(numbers: selectedNumbers.toFormattedString())
     }
 }
 
@@ -135,7 +135,7 @@ private extension CalculatorViewController {
         
         let childView = CalculatedLogStackView(
             operatorValue: operatorValue,
-            operandValue: selectedNumbers.calNumber
+            operandValue: selectedNumbers.toFormattedString()
         )
         
         recordedCalculatedStackView.addArrangedSubview(childView)
@@ -183,7 +183,7 @@ private extension CalculatorViewController {
         var formula = ExpressionParser.parse(from: mathExpression)
 
             let calculatedValue = formula.result()
-        let calNumber = calculatedValue!.description.calNumber
+            let calNumber = calculatedValue?.description.toFormattedString()
 
             updateNumberLabelTo(numbers: calNumber)
             resetOperatorLabel()
@@ -208,7 +208,7 @@ private extension CalculatorViewController {
         currentOperatorLabel.text = Constant.Calculator.defaultOperator
     }
     
-    func updateNumberLabelTo(numbers: String) {
+    func updateNumberLabelTo(numbers: String?) {
         currentNumbersLabel.text = numbers
     }
     
