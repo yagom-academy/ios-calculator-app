@@ -18,4 +18,8 @@ struct CalculatorItemQueueByLinkedList<T: CalculateItem> {
     mutating func dequeue() -> T? {
         return self.linkedList.removeHead()
     }
+    
+    mutating func clear() {
+        self.linkedList.clearQueue()
+    }
 }

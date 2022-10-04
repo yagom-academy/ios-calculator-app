@@ -50,4 +50,19 @@ class CalculatorModelTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_큐에요소들이enqueue된상태에서_clear함수호출시_isEmpty가true를반환해야한다() {
+        // given
+        let input: [Double] = [1, 2, 3, 4, 5]
+        for element in input {
+            sutByLinkedList.enqueue(element)
+        }
+        
+        // when
+        sutByLinkedList.clear()
+        let result = sutByLinkedList.isEmpty
+        
+        // then
+        XCTAssertEqual(result, true)
+    }
 }
