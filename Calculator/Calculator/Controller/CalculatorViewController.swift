@@ -190,13 +190,17 @@ final class CalculatorViewController: UIViewController {
     func calculate() {
         isCalculated = true
         var formula = ExpressionParser.parse(from: finalFormula)
-        guard let result = try? formula.result() else {
+        do {
+            guard let result = try formula.result() else {
+                return
+            }
+            
+            updateOperandLabel(with: String(result))
+        } catch CalculatorError.divideWithZero {
             operandLabel.text = CalculatorConstant.notNumber
-            return
+        } catch {
+            print(error)
         }
-        
-        updateOperandLabel(with: String(result))
-        return
     }
     
     func updateLogScrollViewContentOffset() {
