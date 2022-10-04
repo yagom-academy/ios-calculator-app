@@ -9,10 +9,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "÷"
     case multiply = "×"
     
-    var identifier: Character {
-        self.rawValue
-    }
-    
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
