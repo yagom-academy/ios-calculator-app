@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     private func makeStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
-        let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
+        let formulaStackView: UIStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.spacing = Constants.spacing
         return formulaStackView
     }
