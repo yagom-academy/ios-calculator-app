@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class CalculatorItemQueue<T> {
+final class CalculatorItemQueue<T:CalculateItem> {
     
     private var queue: LinkedList = LinkedList<T>()
     
