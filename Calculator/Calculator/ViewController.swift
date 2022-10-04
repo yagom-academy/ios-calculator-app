@@ -114,7 +114,7 @@ final class ViewController: UIViewController {
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
         if operandLabel.isZero {
-            updateExpression(nextOperator: Constant.divide)
+            updateOpratorLabel(with: Constant.divide)
             return
         }
         updateOperandAndOperatorStackView()
@@ -124,7 +124,7 @@ final class ViewController: UIViewController {
     @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
         if operandLabel.isZero {
-            updateExpression(nextOperator: Constant.multiply)
+            updateOpratorLabel(with: Constant.multiply)
             return
         }
         updateOperandAndOperatorStackView()
@@ -134,7 +134,7 @@ final class ViewController: UIViewController {
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
         if operandLabel.isZero {
-            updateExpression(nextOperator: Constant.subtract)
+            updateOpratorLabel(with: Constant.subtract)
             return
         }
         updateOperandAndOperatorStackView()
@@ -144,7 +144,7 @@ final class ViewController: UIViewController {
     @IBAction private func addButtonPressed(_ sender: UIButton) {
         
         if operandLabel.isZero {
-            updateExpression(nextOperator: Constant.add)
+            updateOpratorLabel(with: Constant.add)
             return
         }
         updateOperandAndOperatorStackView()
@@ -278,6 +278,10 @@ final class ViewController: UIViewController {
     
     private func resetExpression() {
         expression = ""
+    }
+    
+    private func updateOpratorLabel(with `operator`: String) {
+        operandLabel.text = `operator`
     }
 }
 
