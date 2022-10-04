@@ -150,27 +150,27 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
-extension CalculatorViewController {
-    private func calculatorSetup() {
+private extension CalculatorViewController {
+    func calculatorSetup() {
         resetInputNumber()
         resetInputOperator()
         resetCalculationRecord()
         enterdFormulaStackView.removeSubViewAll()
     }
     
-    private func resetInputNumber() {
+    func resetInputNumber() {
         inputNumberLabel.text = CalculatorNameSpace.zero
     }
     
-    private func resetInputOperator() {
+    func resetInputOperator() {
         inputOperatorLabel.text = ""
     }
     
-    private func resetCalculationRecord() {
+    func resetCalculationRecord() {
         calculationRecord = []
     }
     
-    private func addSubStackView(){
+    func addSubStackView(){
         let stackView = formulaStackView
         let operandLabel = operandLabel
         let operatorLabel = operatorLabel
@@ -181,19 +181,19 @@ extension CalculatorViewController {
         scrollViewScrollToBottom()
     }
     
-    private func scrollViewScrollToBottom() {
+    func scrollViewScrollToBottom() {
         formulaScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.size.height)
         formulaScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func addCalculationRecord(_ operatorAndOperands: [String?]) {
+    func addCalculationRecord(_ operatorAndOperands: [String?]) {
         operatorAndOperands.forEach {
             calculationRecord.append($0?.components(separatedBy: [","]).joined())
         }
     }
     
-    private func numberFomatter(_ numberString: String) -> String? {
+    func numberFomatter(_ numberString: String) -> String? {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         guard let number = numberFormatter.number(from: numberString) else { return nil }
