@@ -9,43 +9,17 @@ class FormulaStackView: UIStackView {
             return
         }
         
-        if formula.isEmpty == true {
-            formula.append(number)
-            addSubStackView(including: number)
+        let stackViewCell: UIStackView
+        
+        if let `operator` = operatorLabel.text {
+            formula += `operator` + number
+            stackViewCell = StackViewCell(operand: number, operator: `operator`).generateStackView()
         } else {
-            guard let operatorSign = operatorLabel.text else {
-                return
-            }
-            formula.append(operatorSign + number)
-            addSubStackView(including: number, and: operatorSign)
+            formula = number
+            stackViewCell = StackViewCell(operand: number, operator: "").generateStackView()
         }
-    }
-    
-    private func addSubStackView(including number: String, and operatorSign: String = "") {
-        let subStackView: UIStackView = makeSubStackView()
-        let numberLabel: UILabel = UILabel()
-        let operatorLabel: UILabel = UILabel()
         
-        numberLabel.text = number
-        numberLabel.textColor = .white
-        operatorLabel.text = operatorSign
-        operatorLabel.textColor = .white
-        
-        subStackView.addArrangedSubview(operatorLabel)
-        subStackView.addArrangedSubview(numberLabel)
-        
-        self.addArrangedSubview(subStackView)
-    }
-    
-    private func makeSubStackView() -> UIStackView {
-        let subStackView: UIStackView = UIStackView()
-        
-        subStackView.axis = .horizontal
-        subStackView.alignment = .fill
-        subStackView.distribution = .fill
-        subStackView.spacing = 8.0
-        
-        return subStackView
+        self.addArrangedSubview(stackViewCell)
     }
 }
 //MARK: - Extension
