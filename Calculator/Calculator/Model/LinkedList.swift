@@ -16,6 +16,7 @@ struct LinkedList<T: CalculateItem> {
     
     private(set) var head: Node<T>?
     private(set) var nodeCount: Int = 0
+    
     var isEmpty: Bool {
         if nodeCount == 0 {
             return true
@@ -40,22 +41,13 @@ struct LinkedList<T: CalculateItem> {
         nodeCount += 1
     }
     
-    mutating func removeFirst() {
+    mutating func removeFirst() -> T? {
+        let value = head?.value
+        
         head = head?.next
         nodeCount -= 1
-    }
-    
-    mutating func removeLast() {
-        if head == nil { return }
         
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        
-        node = nil
-        nodeCount -= 1
-    }
+        return value
     
     mutating func removeAll() {
         head = nil
