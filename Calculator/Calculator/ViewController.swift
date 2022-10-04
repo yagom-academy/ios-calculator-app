@@ -40,5 +40,9 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    private func updateOperatorLabel(with `operator`: String) {
+        operatorLabel.text = `operator`
+    }
 }
 
