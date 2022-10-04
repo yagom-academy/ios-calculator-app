@@ -29,13 +29,18 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        operandsLabel.text = Constants.zero
-        operatorLabel.text = stringOperators
-        recentNumbersStackView.arrangedSubviews.forEach {
-            $0.isHidden = true
-        }
+        resetAll()
         applyNumberFormatter()
+    }
+    
+    private func resetAll() {
+        stringOperators = Constants.empty
+        operatorLabel.text = stringOperators
+        stringNumbers = Constants.empty
+        operandsLabel.text = Constants.zero
+        recentNumbersStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
     
     private func makeLabel(labelText: String) -> UILabel {
@@ -62,15 +67,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        stringOperators = Constants.empty
-        operatorLabel.text = stringOperators
-        stringNumbers = Constants.empty
-        operandsLabel.text = Constants.zero
-        recentNumbersStackView.arrangedSubviews.forEach {
-            $0.removeFromSuperview()
-        }
-        operandsLabel.text = Constants.zero
-        fullFormula = Constants.empty
+        resetAll()
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
