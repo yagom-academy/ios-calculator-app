@@ -54,7 +54,7 @@ enum Literal {
         case .infinity:
             return "+∞"
         case .invertSign:
-            return "−"
+            return "-"
         case .comma:
             return ","
         case .point:

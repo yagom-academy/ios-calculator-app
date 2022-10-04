@@ -15,10 +15,7 @@ enum ExpressionParser {
         var formula = Formula(operands: operands, operators: operators)
         
         for item in components {
-            if let doubleNumber = Double(item.replacingOccurrences(
-                    of: Literal.invertSign.value,
-                    with: Literal.subtraction.value
-                )) {
+            if let doubleNumber = Double(item) {
                 formula.operands?.enqueue(doubleNumber)
             } else {
                 if let a = Operator.init(rawValue: Character(item)) {
