@@ -2,27 +2,25 @@
 //  Created by zhilly and Gundy on 2022/10/04.
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
     
     init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
         self.operators = operators
     }
     
-    mutating func result() -> Double {
-        if operands.isEmpty == true {
-            return 0.0
+    mutating func result() throws -> Double {
+        guard var leftNumber = operands.dequeue() else { return Double.zero }
+        
+        while let rightNumber = operands.dequeue() {
+            guard let operatorSign = operators.dequeue() else {
+                throw FormulaError.unexpectedError
+            }
+            leftNumber = operatorSign.calculate(lhs: leftNumber, rhs: rightNumber)
         }
         
-        var formulaResult: Double? = operands.dequeue()
-        
-        while operands.isEmpty == false || operators.isEmpty == false {
-            guard let lhs = formulaResult else { return .nan }
-            guard let rhs = operands.dequeue() else { return .nan }
-            formulaResult = operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
-        }
-        
-        return formulaResult ?? .nan
+        return leftNumber
     }
 }
+
