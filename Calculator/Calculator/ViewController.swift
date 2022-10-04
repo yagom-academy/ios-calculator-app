@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     private func addNumber(inputText: String, number: String) {
         if inputText == Literal.numberZero.value {
-            inputNumberLabel.text = "\(number)"
+            inputNumberLabel.text = number
         } else {
             let numberWithOutComma = convertInvertSignToSubtraction(inputText).replacingOccurrences(of: Literal.comma.value, with: "")
             if let number: Double = Double(numberWithOutComma + number) {
@@ -128,16 +128,19 @@ class ViewController: UIViewController {
             return
         } else if numberWithOutCommaAndInvertSign == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
-            calculationFormula.removeLast()
-            calculationFormula += convertOperator(operatorValue)
+            let suffix = calculationFormula.suffix(1)
+            if suffix == Literal.realDivision.value || suffix == Literal.realMultiplication.value || suffix == Literal.add.value || suffix == Literal.subtraction.value {
+                calculationFormula.removeLast()
+                calculationFormula.removeLast()
+            }
+            calculationFormula += " " + convertOperator(operatorValue)
         } else {
             guard let operatorText = inputOperatorLabel.text,
                   let doubleValue = numberFormatter.string(for: Double(numberWithOutCommaAndInvertSign)) else { return }
             
             addStackView(operatorText: operatorText, inputText: doubleValue)
-            calculationFormula += numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
-            calculationFormula += convertOperator(operatorValue)
-    
+            calculationFormula += " " + numberWithOutComma.replacingOccurrences(of: Literal.subtraction.value, with: Literal.invertSign.value)
+            calculationFormula += " " + convertOperator(operatorValue)
             inputNumberLabel.text = Literal.numberZero.value
             inputOperatorLabel.text = operatorValue
         }
@@ -160,7 +163,8 @@ class ViewController: UIViewController {
             addStackView(operatorText: operatorText, inputText: doubleValue)
         }
         
-        calculationFormula += numberWithOutComma
+        calculationFormula += " " + numberWithOutComma
+        calculationFormula.removeFirst()
         formula = ExpressionParser.parse(from: calculationFormula)
         calculationFormula = ""
         

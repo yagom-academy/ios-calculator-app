@@ -16,6 +16,7 @@ enum Literal {
     case nan
     case numberInvertion
     case division
+    case add
     case multiplication
     case subtraction
     case result
@@ -47,6 +48,8 @@ enum Literal {
             return "ⅹ"
         case .subtraction:
             return "-"
+        case .add:
+            return "+"
         case .result:
             return "="
         case .nan:
