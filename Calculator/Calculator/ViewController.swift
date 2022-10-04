@@ -110,42 +110,43 @@ final class ViewController: UIViewController {
     
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
+        updateOpratorLabel(with: Constant.divide)
         if operandLabel.isZero {
-            updateOpratorLabel(with: Constant.divide)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.divide)
+        updateExpression()
     }
     
     @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
+        updateOpratorLabel(with: Constant.multiply)
         if operandLabel.isZero {
-            updateOpratorLabel(with: Constant.multiply)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.multiply)
+        updateExpression()
     }
     
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
+        updateOpratorLabel(with: Constant.subtract)
         if operandLabel.isZero {
-            updateOpratorLabel(with: Constant.subtract)
             return
         }
+        
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.subtract)
+        updateExpression()
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
         
+        updateOpratorLabel(with: Constant.add)
         if operandLabel.isZero {
-            updateOpratorLabel(with: Constant.add)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.add)
+        updateExpression()
     }
     
     @IBAction private func resultButtonPressed(_ sender: UIButton) {
@@ -219,14 +220,13 @@ final class ViewController: UIViewController {
         }
     }
     
-    private func updateExpression(nextOperator: String = "") {
+    private func updateExpression() {
         
         guard let operand = operandLabel.text,
               let `operator` = operatorLabel.text else { return }
         expression += `operator`
         expression += operand
         resetOperandLabel()
-        operatorLabel.text = nextOperator
     }
     
     private func updateOperandAndOperatorStackView() {
