@@ -1,32 +1,29 @@
 //
 //  CalculatorItemQueue.swift
-//  Created by Wonbi
+//  Created by Wonbi, Ash
 //
 
-import Foundation
-
-struct CalculatorItemQueue {
-    private var input: [CalculateItem] = []
-    private var output: [CalculateItem] = []
-    
-    var isEmpty: Bool {
-        input.isEmpty && output.isEmpty
-    }
+struct CalculatorItemQueue<T: CalculateItem> {
+    var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
-        input.count + output.count
+        return list.nodeCount
     }
     
-    mutating func enqueue(_ element: CalculateItem) {
-        input.append(element)
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+    
+    mutating func enqueue(_ element: T) {
+        list.append(element)
     }
     
     @discardableResult
-    mutating func dequeue() -> CalculateItem? {
-        if output.isEmpty {
-            output = input.reversed()
-            input.removeAll()
-        }
-        return output.popLast()
+    mutating func dequeue() -> T? {
+        list.removeFirst()
+    }
+    
+    mutating func removeAll() {
+        list.removeAll()
     }
 }
