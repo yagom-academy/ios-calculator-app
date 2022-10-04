@@ -39,7 +39,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        removeAlloperandAndOperatorStackViewSubviews()
+        resetSubviewsIfNeeded()
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
     }
@@ -168,7 +168,7 @@ final class ViewController: UIViewController {
         resetOperandLabel()
         resetOperatorLabel()
         resetExpression()
-        removeAlloperandAndOperatorStackViewSubviews()
+        resetSubviewsIfNeeded()
     }
     
     @IBAction private func signChangeButtonPressed(_ sender: Any) {
