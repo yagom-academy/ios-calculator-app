@@ -20,7 +20,7 @@ final class ExpressionParserTests: XCTestCase {
         var formula: Formula = ExpressionParser.parse(from: input)
         
         //when
-        let result = formula.result()
+        let result = try? formula.result()
         
         //then
         XCTAssertEqual(result, -2.75)
