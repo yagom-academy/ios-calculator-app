@@ -154,5 +154,10 @@ class ViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
     }
+    
+    private func fetchformattedNumbers(number: Double) -> String {
+        guard let result = numberFormatter.string(for: number) else { return "" }
+        return result
+    }
 }
 
