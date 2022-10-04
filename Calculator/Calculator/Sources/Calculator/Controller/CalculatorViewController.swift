@@ -134,10 +134,6 @@ private extension CalculatorViewController {
         parentLogStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom(animated: true)
     }
-    
-    func removeAllLogStackView() {
-        parentLogStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
 }
 
 // MARK: - 계산기 사용자 입력 상태 관리 메서드
@@ -151,7 +147,7 @@ private extension CalculatorViewController {
         resetLabels()
         resetCurrentCalculatorState()
         resetExpression()
-        removeAllLogStackView()
+        parentLogStackView.removeAllSubviews()
         toggleButtonState()
     }
     
