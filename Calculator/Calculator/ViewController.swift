@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,18 @@ class ViewController: UIViewController {
                 operandLabel.text = operandText + number
             }
         }
+    }
+    
+    private func addSubviewToStackView() {
+        guard let operandText = operandLabel.text,
+              let operatorText = operatorLabel.text else { return }
+        
+        let textLabel = UILabel()
+        textLabel.text = operatorText + " " + operandText
+        textLabel.textColor = .white
+        textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        stackView.addArrangedSubview(textLabel)
     }
     
     private func updateOperatorLabel(with `operator`: String) {
