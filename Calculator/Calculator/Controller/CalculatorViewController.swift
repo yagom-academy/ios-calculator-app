@@ -49,7 +49,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         if !operand.isEmpty  {
-            operandLabel.text = setNumberFormat(with: operand) + CalculatorConstant.dot
+            operandLabel.text = operand.formatStyleToDecimal() + CalculatorConstant.dot
             operand += CalculatorConstant.dot
             isDotButtonTapped = true
         } else if operand.isEmpty {
@@ -70,7 +70,7 @@ final class CalculatorViewController: UIViewController {
             input = CalculatorConstant.zero
         }
         
-        operandLabel.text = setNumberFormat(with: operand) + input
+        operandLabel.text = operand.formatStyleToDecimal() + input
         operand += CalculatorConstant.zero
     }
     
@@ -86,7 +86,7 @@ final class CalculatorViewController: UIViewController {
             input = CalculatorConstant.doubleZero
         }
         
-        operandLabel.text = setNumberFormat(with: operand) + input
+        operandLabel.text = operand.formatStyleToDecimal() + input
         operand += CalculatorConstant.zero
     }
     
@@ -172,7 +172,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     func createStackView() {
-        let logOperand = setNumberFormat(with: operand)
+        let logOperand = operand.formatStyleToDecimal()
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
         formulaStackView.addArrangedSubview(stackView)
         updateLogScrollViewContentOffset()
@@ -189,12 +189,12 @@ final class CalculatorViewController: UIViewController {
     
     func updateOperandLabel(with input: String) {
         operand += input
-        operandLabel.text = setNumberFormat(with: operand)
+        operandLabel.text = operand.formatStyleToDecimal()
     }
     
     func updateOperatorLabel(with input: String) {
-            arithmeticOperator = input
-            operatorLabel.text = arithmeticOperator
+        arithmeticOperator = input
+        operatorLabel.text = arithmeticOperator
     }
 
     func setOperandLabelToZero() {
@@ -203,18 +203,6 @@ final class CalculatorViewController: UIViewController {
     
     func setOperatorLabelEmpty() {
         operatorLabel.text = CalculatorConstant.blank
-    }
-    
-    func setNumberFormat(with input: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumFractionDigits = 20
-        guard let result = numberFormatter.string(for: Double(input)) else {
-            return input
-        }
-        
-        return result
     }
     
     func createFormulaLog() {

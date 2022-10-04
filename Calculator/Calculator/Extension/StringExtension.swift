@@ -5,6 +5,8 @@
 //  Created by Hamo on 2022/09/27.
 //
 
+import Foundation
+
 extension String {
     func split(with target: Character) -> [String] {
         var result: [String] = []
@@ -25,5 +27,17 @@ extension String {
         
         result.append(nonTargets.joined(separator: ""))
         return result.filter { $0 != "" }
+    }
+    
+    func formatStyleToDecimal() -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
+        guard let result = numberFormatter.string(for: Double(self)) else {
+            return self
+        }
+        
+        return result
     }
 }
