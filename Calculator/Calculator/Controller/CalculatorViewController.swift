@@ -79,28 +79,39 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func operandsInputButtonTapped(_ sender: UIButton) {
-        guard let value = sender.currentTitle, inputNumberLabel.text != CalculatorNameSpace.nan  else { return }
-        
+        guard let value = sender.currentTitle,
+              var numberLabel = inputNumberLabel.text, numberLabel != CalculatorNameSpace.nan  else { return }
         if calculationRecord == [] {
             inputOperatorLabel.text = ""
         }
-        
-        if inputNumberLabel.text == CalculatorNameSpace.zero {
-            guard value != CalculatorNameSpace.doubleZero else { return }
+    
+        switch value {
+        case CalculatorNameSpace.dot:
+            if numberLabel.contains(".") { return }
             
-            if value == CalculatorNameSpace.dot {
-                inputNumberLabel.text?.append(value)
+            if numberLabel == CalculatorNameSpace.zero {
+                numberLabel.append(".")
+                inputNumberLabel.text = numberLabel
                 return
             }
+            numberLabel.append(value)
+            inputNumberLabel.text = numberLabel
+        case CalculatorNameSpace.zero:
+            if numberLabel == CalculatorNameSpace.zero { return }
             
-            inputNumberLabel.text = value
-            return
+            if numberLabel.contains(".") {
+                numberLabel.append(value)
+                inputNumberLabel.text = numberLabel
+                return
+            }
+            fallthrough
+        case CalculatorNameSpace.doubleZero:
+            if numberLabel == CalculatorNameSpace.zero { return }
+            fallthrough
+        default:
+            numberLabel.append(value)
+            inputNumberLabel.text = numberFomatter(numberLabel.components(separatedBy: ",").joined())
         }
-        
-        if inputNumberLabel.text?.contains(CalculatorNameSpace.dot) == true, value == CalculatorNameSpace.dot { return }
-        
-        inputNumberLabel.text?.append(value)
-        
     }
     
     @IBAction private func operatorsInputButtonTapped(_ sender: UIButton) {
@@ -128,7 +139,7 @@ final class CalculatorViewController: UIViewController {
         do {
             addSubStackView()
             resetInputOperator()
-            inputNumberLabel.text = numberFomatter(try parse.result())
+            inputNumberLabel.text = numberFomatter("\(try parse.result())")
             calculationRecord = []
             isCalculated = true
         } catch {
@@ -182,10 +193,10 @@ private extension CalculatorViewController {
         }
     }
     
-    func numberFomatter(_ number: Double) -> String? {
+    func numberFomatter(_ numberString: String) -> String? {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
+        guard let number = numberFormatter.number(from: numberString) else { return nil }
         return numberFormatter.string(for: number)
     }
-    
 }
