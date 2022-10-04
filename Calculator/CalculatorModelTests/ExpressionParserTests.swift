@@ -15,7 +15,7 @@ class ExpressionParserTests: XCTestCase {
         
         do {
             result = try formula.result()
-        } catch CalculateError.divideByZero {
+        } catch CalculateError.invalidNumber {
             print("0으로 나눌 수 없습니다")
         } catch {
             
