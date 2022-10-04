@@ -84,7 +84,6 @@ struct Calculator {
             return nil
         }
         operands.append(currentOperand)
-        operators.append(currentOperator)
         resetCurrentOperand()
         resetCurrentOperator()
         return result()
@@ -92,7 +91,7 @@ struct Calculator {
     
     mutating func result() -> String {
         var result: String = ""
-        var formula: Formula = ExpressionParser.parse(from: convertOperatorsOperandsToString())
+        var formula: Formula = try! ExpressionParser.parse(from: convertOperatorsOperandsToString())
         let formulaResult = formula.result()
         switch formulaResult {
         case .success(let formulaResult):
@@ -112,10 +111,10 @@ struct Calculator {
         operators.reverse()
         while operands.isEmpty == false || operators.isEmpty == false {
             if let input: String = operands.popLast() {
-                result.append(input)
+                result.append(" \(input)")
             }
             if let input: String = operators.popLast() {
-                result.append(input)
+                result.append(" \(input)")
             }
         }
         return result
