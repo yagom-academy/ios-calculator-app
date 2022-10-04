@@ -26,11 +26,11 @@ class ViewController: UIViewController {
       return numberFormatter
     }()
     
-    @IBOutlet weak var recentNumbersStackView: UIStackView!
-    @IBOutlet weak var recentNumbersScrollView: UIScrollView!
+    @IBOutlet private weak var recentNumbersStackView: UIStackView!
+    @IBOutlet private weak var recentNumbersScrollView: UIScrollView!
     
-    @IBOutlet weak var operandsLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandsLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         operatorLabel.text = stringOperators
         stringNumbers = Constants.empty
         operandsLabel.text = Constants.zero
+        fullFormula = Constants.empty
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
@@ -65,16 +66,16 @@ class ViewController: UIViewController {
         recentNumbersScrollView.setContentOffset(CGPoint(x: CGFloat(Double.zero), y: recentNumbersScrollView.contentSize.height - recentNumbersScrollView.bounds.height), animated: false)
     }
     
-    @IBAction func touchUpACButton(_ sender: UIButton) {
+    @IBAction private func touchUpACButton(_ sender: UIButton) {
         resetAll()
     }
     
-    @IBAction func touchUpCEButton(_ sender: UIButton) {
+    @IBAction private func touchUpCEButton(_ sender: UIButton) {
         stringNumbers = Constants.zero
         operandsLabel.text = stringNumbers
     }
     
-    @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
+    @IBAction private func touchUpPositiveNegativeButton(_ sender: UIButton) {
         guard operandsLabel.text != Constants.zero else { return }
         if !stringNumbers.contains("-") {
             stringNumbers = "-\(stringNumbers)"
@@ -85,7 +86,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
+    @IBAction private func touchUpOperatorsButton(_ sender: UIButton) {
         var formulaStackView = UIStackView()
         var operatorUILabel = UILabel()
         
@@ -106,7 +107,7 @@ class ViewController: UIViewController {
         placeScroll()
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         guard stringNumbers.count < Constants.maximumNumber else { return }
         
         if operandsLabel.text == Constants.zero {
@@ -119,14 +120,14 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+    @IBAction private func touchUpDoubleZeroButton(_ sender: UIButton) {
         if operandsLabel.text != Constants.zero {
             stringNumbers += Constants.doubleZero
             operandsLabel.text = stringNumbers
         }
     }
     
-    @IBAction func touchUpDotButton(_ sender: UIButton) {
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
         guard !stringNumbers.contains(".") else { return }
         if operandsLabel.text == Constants.zero {
             stringNumbers = Constants.zero + "."
@@ -137,7 +138,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func touchUpEqualButton(_ sender: UIButton) {
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
         guard operatorLabel.text != Constants.empty else { return }
         stringOperators = Constants.empty
         operatorLabel.text = stringOperators
