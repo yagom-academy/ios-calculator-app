@@ -110,43 +110,48 @@ final class ViewController: UIViewController {
     
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
-        updateOpratorLabel(with: Constant.divide)
         if operandLabel.isZero {
+            updateOpratorLabel(with: Constant.divide)
             return
         }
         updateOperandAndOperatorStackView()
         updateExpression()
+        updateOpratorLabel(with: Constant.divide)
     }
     
     @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
-        updateOpratorLabel(with: Constant.multiply)
         if operandLabel.isZero {
+            updateOpratorLabel(with: Constant.multiply)
             return
         }
         updateOperandAndOperatorStackView()
         updateExpression()
+        updateOpratorLabel(with: Constant.multiply)
     }
     
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
-        updateOpratorLabel(with: Constant.subtract)
         if operandLabel.isZero {
+            updateOpratorLabel(with: Constant.subtract)
             return
         }
         
         updateOperandAndOperatorStackView()
         updateExpression()
+        updateOpratorLabel(with: Constant.subtract)
+
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
         
-        updateOpratorLabel(with: Constant.add)
         if operandLabel.isZero {
+            updateOpratorLabel(with: Constant.add)
             return
         }
         updateOperandAndOperatorStackView()
         updateExpression()
+        updateOpratorLabel(with: Constant.add)
     }
     
     @IBAction private func resultButtonPressed(_ sender: UIButton) {
