@@ -9,29 +9,27 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() -> Double? {
+    mutating func result() -> Result<Double?, CalculateError> {
         var result: Double?
         while !operators.isEmpty {
             let leftHandSide: Double?
-            if result != nil {
+            if let result {
                 leftHandSide = result
             } else {
                 leftHandSide = operands.dequeue()
             }
             guard let lhs: Double = leftHandSide,
                   let rhs: Double = operands.dequeue() else {
-                return result
+                return .success(result)
             }
             do {
                 result = try operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
             } catch CalculateError.dividedByZero {
-                result = nil
-                print(CalculateError.dividedByZero.localizedDescription)
+                return .failure(.dividedByZero)
             } catch {
-                result = nil
-                print(error.localizedDescription)
+                return .failure(.unexpectedError)
             }
         }
-        return result
+        return .success(result)
     }
 }

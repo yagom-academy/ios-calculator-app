@@ -11,12 +11,14 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var result: Formula = Formula()
         
-        componentsByOperators(from: input).compactMap { Double($0) }.forEach {
+        componentsByOperators(from: input).compactMap {
+            Double.convertStringContainingCommaToDouble($0)
+        }.forEach {
             result.operands.enqueue($0)
         }
         
         var inputRemovedFirstNegative: String = input
-        let isFirstLetterNegative: Bool = inputRemovedFirstNegative.hasPrefix("-")
+        let isFirstLetterNegative: Bool = inputRemovedFirstNegative.hasPrefix("−")
         if isFirstLetterNegative {
             inputRemovedFirstNegative.removeFirst()
         }
@@ -37,7 +39,7 @@ enum ExpressionParser {
     private static func removeNegative(from input: String) -> String {
         var inputRemovedNegative: String = input
         Operator.allCases.forEach {
-            inputRemovedNegative = inputRemovedNegative.replacingOccurrences(of: "\($0.rawValue)-", with: "\($0.rawValue)")
+            inputRemovedNegative = inputRemovedNegative.replacingOccurrences(of: "\($0.rawValue)−", with: "\($0.rawValue)")
         }
         return inputRemovedNegative
     }
@@ -51,7 +53,7 @@ enum ExpressionParser {
         result = result.compactMap {
             let isNumber: Bool = $0 != ""
             if isNumber {
-                let value: String = isNegative ? "-\($0)" : $0
+                let value: String = isNegative ? "−\($0)" : $0
                 isNegative = false
                 return value
             } else {
