@@ -186,8 +186,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     func updateOperatorLabel(with input: String) {
-            arithmeticOperator = input
-            operatorLabel.text = arithmeticOperator
+        arithmeticOperator = input
+        operatorLabel.text = arithmeticOperator
     }
 
     func setOperandLabelToZero() {
