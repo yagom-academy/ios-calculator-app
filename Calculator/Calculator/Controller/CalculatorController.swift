@@ -90,7 +90,6 @@ final class CalculatorController {
             return String(displaySign.rawValue)
         } else {
             expression += String(displaySign.rawValue) + viewDisplayNumber
-            //viewDisplayNumber = "0"
             view.makeStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
