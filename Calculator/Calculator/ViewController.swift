@@ -281,7 +281,7 @@ final class ViewController: UIViewController {
     }
     
     private func updateOpratorLabel(with `operator`: String) {
-        operandLabel.text = `operator`
+        operatorLabel.text = `operator`
     }
 }
 
