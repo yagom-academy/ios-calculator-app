@@ -20,11 +20,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
+    let numberFormatter: NumberFormatter = NumberFormatter()
     private var expression: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetSubviewsIfNeeded()
+        setNumberFormatter()
     }
     
     @IBAction private func numberButtonPressed(_ sender: UIButton) {
@@ -146,6 +148,11 @@ class ViewController: UIViewController {
     
     private func resetSubviewsIfNeeded() {
         stackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func setNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
     }
 }
 
