@@ -1,6 +1,6 @@
 //
 //  String+.swift
-//  Created by 미니.
+//  Created by SummerCat.
 //
 
 import Foundation

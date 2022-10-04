@@ -1,5 +1,5 @@
 //
-//  Calculator - AppDelegate.swift
+//  AppDelegate.swift
 //  Created by 미니.
 // 
 

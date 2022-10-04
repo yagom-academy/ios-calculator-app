@@ -1,11 +1,7 @@
 //
 //  UIStackView+.swift
-//  Calculator
+//  Created by SummerCat
 //
-//  Created by SummerCat on 2022/10/04.
-//
-
-import Foundation
 
 import UIKit
 

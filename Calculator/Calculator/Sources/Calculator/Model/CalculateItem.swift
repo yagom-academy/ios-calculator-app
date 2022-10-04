@@ -1,8 +1,6 @@
 //
 //  CalculateItem.swift
-//  Calculator
-//
-//  Created by SummerCat on 2022/10/03.
+//  Created by 미니
 //
 
 protocol CalculateItem { }

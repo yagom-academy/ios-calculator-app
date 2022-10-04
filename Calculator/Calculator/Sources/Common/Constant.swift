@@ -1,9 +1,8 @@
 //
-//  Constants.swift
-//  Calculator
+//  Constant.swift
+//  Created by SummerCat
 //
-//  Created by 이경민 on 2022/09/29.
-//
+
 
 enum Constant {
     enum Calculator {

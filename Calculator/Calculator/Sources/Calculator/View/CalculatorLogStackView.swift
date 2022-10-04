@@ -1,8 +1,6 @@
 //
 //  CalculatorLogStackView.swift
-//  Calculator
-//
-//  Created by 미니 on 2022/09/29.
+//  Created by 미니
 //
 
 import UIKit

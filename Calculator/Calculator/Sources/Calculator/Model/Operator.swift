@@ -1,6 +1,6 @@
 //
 //  Operator.swift
-//  Created by 미니.
+//  Created by SummerCat.
 //
 
 enum Operator: Character, CaseIterable, CalculateItem {

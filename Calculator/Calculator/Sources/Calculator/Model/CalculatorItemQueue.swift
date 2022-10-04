@@ -1,6 +1,6 @@
 //
 //  CalculatorItemQueue.swift
-//  Created by 미니.
+//  Created by SummerCat.
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {

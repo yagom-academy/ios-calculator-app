@@ -1,5 +1,5 @@
 //
-//  Calculator - CalculatorViewController.swift
+//  CalculatorViewController.swift
 //  Created by 미니, SummerCat.
 //
 
