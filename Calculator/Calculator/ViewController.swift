@@ -22,6 +22,14 @@ class ViewController: UIViewController {
         updateOperandLabel(with: senderText)
     }
     
+    @IBAction private func numberDoubleZeroButtonPressed(_ sender: UIButton) {
+        if operandLabel.isZero {
+            return
+        }
+        
+        updateOperandLabel(with: "00")
+    }
+    
     private func updateOperandLabel(with number: String) {
         
         if operandLabel.isZero {
