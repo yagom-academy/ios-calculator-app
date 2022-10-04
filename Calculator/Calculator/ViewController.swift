@@ -68,8 +68,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        stringOperators = sender.titleLabel?.text ?? ""
-        operatorLabel.text = stringNumbers
+        stringNumbers = zero
+        operandsLabel.text = stringNumbers
     }
     
     @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
