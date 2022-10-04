@@ -1,6 +1,6 @@
 //
 //  Operator.swift
-//  Created by Wonbi
+//  Created by Wonbi, Ash
 //
 
 enum Operator: Character, CaseIterable, CalculateItem {
