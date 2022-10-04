@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC4159BC28EC019200B98F58 /* StackViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4159BB28EC019100B98F58 /* StackViewCell.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AC4159BB28EC019100B98F58 /* StackViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewCell.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				D3D44E8128E61CB90001B9CA /* FormulaStackView.swift */,
+				AC4159BB28EC019100B98F58 /* StackViewCell.swift */,
 			);
 			path = StackView;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				D3D44E8228E61CB90001B9CA /* FormulaStackView.swift in Sources */,
 				D3D44E8828E63E680001B9CA /* CalculatorNumberFormatter.swift in Sources */,
 				D3D44E8528E6314B0001B9CA /* UIScrollView.swift in Sources */,
+				AC4159BC28EC019200B98F58 /* StackViewCell.swift in Sources */,
 				D359BBCA28DD69EA00D015C2 /* Formula.swift in Sources */,
 				D3D44E7B28E616AF0001B9CA /* OperandButton.swift in Sources */,
 				D3D44E7D28E616B80001B9CA /* OperatorButton.swift in Sources */,
