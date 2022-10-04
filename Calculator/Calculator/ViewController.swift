@@ -57,14 +57,14 @@ class ViewController: UIViewController {
         }
     }
     
-    private func makeLabel(labelText :String) -> UILabel {
+    private func fetchLabel(labelText :String) -> UILabel {
         let label = UILabel()
         label.text = labelText
         label.textColor = .white
         return label
     }
     
-    private func makeStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+    private func fetchStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
         let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.spacing = 8
         return formulaStackView
@@ -74,10 +74,10 @@ class ViewController: UIViewController {
         guard let operandText = operandLabel.text,
               let operatorText = operatorLabel.text else { return }
         
-        let operandLabel = makeLabel(labelText: operandText)
-        let operatorLabel = makeLabel(labelText: operatorText)
+        let operandLabel = fetchLabel(labelText: operandText)
+        let operatorLabel = fetchLabel(labelText: operatorText)
         
-        let subStackView = makeStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        let subStackView = fetchStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         stackView.addArrangedSubview(subStackView)
     }
     
