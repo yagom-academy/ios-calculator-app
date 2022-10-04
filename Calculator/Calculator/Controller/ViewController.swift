@@ -135,11 +135,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func tapACButton(_ sender: UIButton) {
-        expressionQueue.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
+        deleteStackViewInScrollView()
         clearOperandLabel()
         operandManager.clearExpression()
         mainOperatorLabel.text = ""
+    }
+    
+    func deleteStackViewInScrollView() {
+        expressionScrollView.subviews.forEach {
+            $0.isHidden = true
+        }
     }
 }
 
