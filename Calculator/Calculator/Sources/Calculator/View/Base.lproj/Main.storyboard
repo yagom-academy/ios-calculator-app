@@ -102,7 +102,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTappedOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y0k-2D-KA1"/>
+                                                    <action selector="didTappedDivideButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XY5-ef-kiO"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -151,7 +151,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTappedOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hHC-z0-jjA"/>
+                                                    <action selector="didTappedMultiplyButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fxQ-eW-g91"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -200,7 +200,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTappedOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PSB-Lb-fa9"/>
+                                                    <action selector="didTappedSubtractButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jSv-2c-ixC"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -249,7 +249,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTappedOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fTa-Yv-kDX"/>
+                                                    <action selector="didTappedAddButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gy6-Bp-ctK"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -276,7 +276,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTappedNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5kR-3b-DDM"/>
+                                                    <action selector="didTappedDoubleZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FGp-eY-jEw"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -347,15 +347,33 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currentNumbersLabel" destination="Lwz-OF-XHD" id="4rz-mG-79t"/>
+                        <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="DYE-Rj-701"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Wsh-g0-pWE"/>
-                        <outlet property="recordedCalculatedStackView" destination="XRe-QE-UJf" id="2Pl-TT-Ilo"/>
+                        <outlet property="parentLogStackView" destination="XRe-QE-UJf" id="uSy-Zx-LC6"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="aic-aE-121"/>
+                        <outletCollection property="calculatorButtons" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="HhA-jg-aZT"/>
+                        <outletCollection property="calculatorButtons" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="VIM-DO-6Mq"/>
+                        <outletCollection property="calculatorButtons" destination="h8q-5h-bnb" collectionClass="NSMutableArray" id="MU6-RC-1Ed"/>
+                        <outletCollection property="calculatorButtons" destination="Daw-iX-Owl" collectionClass="NSMutableArray" id="VYM-el-myA"/>
+                        <outletCollection property="calculatorButtons" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="mm0-qC-APN"/>
+                        <outletCollection property="calculatorButtons" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="cu0-IU-7ZO"/>
+                        <outletCollection property="calculatorButtons" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="m99-0r-GGJ"/>
+                        <outletCollection property="calculatorButtons" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="KaW-FY-ybw"/>
+                        <outletCollection property="calculatorButtons" destination="hQm-yz-XvG" collectionClass="NSMutableArray" id="jvI-aK-fjE"/>
+                        <outletCollection property="calculatorButtons" destination="vpW-df-OLm" collectionClass="NSMutableArray" id="dIA-iY-Pnz"/>
+                        <outletCollection property="calculatorButtons" destination="OaY-Mw-CPv" collectionClass="NSMutableArray" id="T82-Ie-7pk"/>
+                        <outletCollection property="calculatorButtons" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="JoI-gU-L0d"/>
+                        <outletCollection property="calculatorButtons" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="gcl-hk-oV0"/>
+                        <outletCollection property="calculatorButtons" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="xQJ-Kw-cA7"/>
+                        <outletCollection property="calculatorButtons" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="ypW-JH-m6t"/>
+                        <outletCollection property="calculatorButtons" destination="811-Pz-An6" collectionClass="NSMutableArray" id="VsM-dR-Mvf"/>
+                        <outletCollection property="calculatorButtons" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="hjL-T0-UhH"/>
+                        <outletCollection property="calculatorButtons" destination="ows-U7-mNc" collectionClass="NSMutableArray" id="Rdg-n9-PPk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="-62"/>
+            <point key="canvasLocation" x="-288" y="-103"/>
         </scene>
     </scenes>
     <resources>
