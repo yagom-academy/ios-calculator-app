@@ -95,7 +95,7 @@ struct Calculator {
         let formulaResult = formula.result()
         switch formulaResult {
         case .success(let formulaResult):
-            if let formulaResult {
+            if let formulaResult = formulaResult {
                 result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
                 currentOperand = result
             }
