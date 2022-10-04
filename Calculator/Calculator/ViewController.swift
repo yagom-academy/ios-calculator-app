@@ -7,9 +7,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let doubleZero = "00"
-    let zero = "0"
-    let empty = ""
+    
+    private enum Constants {
+        static let doubleZero = "00"
+        static let zero = "0"
+        static let empty = ""
+        static let spacing = CGFloat(8)
+        static let maximumNumber = 20
+    }
+    
     var stringNumbers: String = ""
     var stringOperators: String = ""
     var fullFormula: String = ""
@@ -24,7 +30,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operandsLabel.text = zero
+        operandsLabel.text = Constants.zero
         operatorLabel.text = stringOperators
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.isHidden = true
@@ -41,39 +47,39 @@ class ViewController: UIViewController {
     
     private func makeStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
         let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
-        formulaStackView.spacing = 8
+        formulaStackView.spacing = Constants.spacing
         return formulaStackView
     }
     
     private func applyNumberFormatter() {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumSignificantDigits = Constants.maximumNumber
     }
     
     private func placeScroll() {
         recentNumbersScrollView.layoutIfNeeded()
-        recentNumbersScrollView.setContentOffset(CGPoint(x: 0, y: recentNumbersScrollView.contentSize.height - recentNumbersScrollView.bounds.height), animated: false)
+        recentNumbersScrollView.setContentOffset(CGPoint(x: CGFloat(Double.zero), y: recentNumbersScrollView.contentSize.height - recentNumbersScrollView.bounds.height), animated: false)
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        stringOperators = empty
+        stringOperators = Constants.empty
         operatorLabel.text = stringOperators
-        stringNumbers = empty
-        operandsLabel.text = zero
+        stringNumbers = Constants.empty
+        operandsLabel.text = Constants.zero
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
-        operandsLabel.text = zero
-        fullFormula = empty
+        operandsLabel.text = Constants.zero
+        fullFormula = Constants.empty
     }
     
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        stringNumbers = zero
+        stringNumbers = Constants.zero
         operandsLabel.text = stringNumbers
     }
     
     @IBAction func touchUpPositiveNegativeButton(_ sender: UIButton) {
-        guard operandsLabel.text != zero else { return }
+        guard operandsLabel.text != Constants.zero else { return }
         if !stringNumbers.contains("-") {
             stringNumbers = "-\(stringNumbers)"
             operandsLabel.text = stringNumbers
@@ -87,7 +93,7 @@ class ViewController: UIViewController {
         var formulaStackView = UIStackView()
         var operatorUILabel = UILabel()
         
-        if fullFormula != empty {
+        if fullFormula != Constants.empty {
             operatorUILabel = makeLabel(labelText: stringOperators)
         }
         
@@ -96,7 +102,7 @@ class ViewController: UIViewController {
         
         let operandsUILabel = makeLabel(labelText: stringNumbers)
         fullFormula += stringNumbers + stringOperators
-        stringNumbers = zero
+        stringNumbers = Constants.zero
         operandsLabel.text = stringNumbers
         
         formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
@@ -105,9 +111,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        guard stringNumbers.count < 20 else { return }
+        guard stringNumbers.count < Constants.maximumNumber else { return }
         
-        if operandsLabel.text == zero {
+        if operandsLabel.text == Constants.zero {
             stringNumbers = sender.titleLabel?.text ?? ""
             operandsLabel.text = stringNumbers
         } else {
@@ -118,16 +124,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        if operandsLabel.text != zero {
-            stringNumbers += doubleZero
+        if operandsLabel.text != Constants.zero {
+            stringNumbers += Constants.doubleZero
             operandsLabel.text = stringNumbers
         }
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
         guard !stringNumbers.contains(".") else { return }
-        if operandsLabel.text == zero {
-            stringNumbers = zero + "."
+        if operandsLabel.text == Constants.zero {
+            stringNumbers = Constants.zero + "."
             operandsLabel.text = stringNumbers
         } else {
             stringNumbers += "."
@@ -136,10 +142,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        guard operatorLabel.text != empty else { return }
-        stringOperators = empty
+        guard operatorLabel.text != Constants.empty else { return }
+        stringOperators = Constants.empty
         operatorLabel.text = stringOperators
-        stringNumbers = empty
+        stringNumbers = Constants.empty
         recentNumbersStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
@@ -150,12 +156,8 @@ class ViewController: UIViewController {
         var parsedFullFormula = ExpressionParser.parse(from: fullFormula)
         let calculatedFormula = parsedFullFormula.result()
         
-        if calculatedFormula.isNaN || calculatedFormula.isInfinite {
-            operandsLabel.text = "NaN"
-        } else {
-            operandsLabel.text = numberFormatter.string(for: calculatedFormula)
-            stringNumbers = String(calculatedFormula)
-        }
+        operandsLabel.text = numberFormatter.string(for: calculatedFormula)
+        stringNumbers = String(calculatedFormula)
     }
 }
 
