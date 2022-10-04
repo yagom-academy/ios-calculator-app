@@ -1,5 +1,5 @@
 //  Double+Extensions.swift
-//  Created by zhilly on 2022/09/27.
+//  Created by zhilly and Gundy on 2022/10/04.
 
 extension Double: CalculateItem {
     
