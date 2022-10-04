@@ -11,7 +11,7 @@ struct Formula {
         guard let firstOperand = operands.dequeue() else { return .zero }
         var result = firstOperand
 
-        while !operators.isEmpty || !operands.isEmpty {
+        while !operators.isEmpty {
             let firstOperand = result
             let secondOperand = operands.dequeue()
             let currentOperator = operators.dequeue()
