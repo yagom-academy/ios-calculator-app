@@ -6,14 +6,15 @@
 
 import UIKit
 
-struct Text {
-    fileprivate static let zero: String = "0"
-    fileprivate static let noValue: String = ""
-    fileprivate static let negativeSymbol: String = "-"
-    fileprivate static let dot: Character = "."
-}
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
+    enum Text {
+        static let zero: String = "0"
+        static let noValue: String = ""
+        static let negativeSymbol: String = "-"
+        static let dot: Character = "."
+    }
+    
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var showingOperationsStackView: UIStackView!
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
                 return
             }
             
-        operandLabel.text = newValue
+            operandLabel.text = newValue
         }
     }
     
@@ -65,10 +66,10 @@ class ViewController: UIViewController {
         
         guard inputNumber.split(with: Text.dot).count <= 2,
               inputNumber != String(Text.dot) else {
-                  resetInputNumber()
-                  operandLabel.text = numberFormatter.notANumberSymbol
-                  return
-              }
+            resetInputNumber()
+            operandLabel.text = numberFormatter.notANumberSymbol
+            return
+        }
         
         addFormula()
         makeOperationStackView()
@@ -79,7 +80,7 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpConvertingPositiveNegativeButton() {
         guard inputNumber != Text.zero else { return }
-    
+        
         if inputNumber.prefix(1) == Text.negativeSymbol {
             inputNumber.removeFirst()
         } else {
@@ -93,14 +94,15 @@ class ViewController: UIViewController {
     
     @IBAction private func touchUpACButton(_ sender: UIButton) {
         showingOperationsStackView.removeSubViewAll()
+        isCalculated = false
         resetRawFormula()
         resetInputNumber()
         resetOperatorLabel()
     }
     
     @IBAction private func touchUpResultButton(_ sender: UIButton) {
-        guard operandLabel.text != result.changeToDemical else { return }
-
+        guard !isCalculated else { return }
+        
         addFormula()
         makeOperationStackView()
         scrollTobottom()
@@ -111,23 +113,14 @@ class ViewController: UIViewController {
             var formulaQueue = ExpressionParser.parse(from: rawFormula.joined(separator: " "))
             result = try formulaQueue.result()
             operandLabel.text = String(result.changeToDemical)
-            isCalculated = true
             resetRawFormula()
         } catch CalculatorError.divideByZeroError {
             operandLabel.text = numberFormatter.notANumberSymbol
         } catch {
             operandLabel.text = "Error: Please retry"
         }
-    }
-    
-    private func addFormula() {
-        guard let`operator` = operatorLabel.text,
-              let operand = operandLabel.text else {
-            return
-        }
         
-        rawFormula.append(`operator`)
-        rawFormula.append(operand)
+        isCalculated = true
     }
     
     private func makeOperationStackView() {
@@ -167,14 +160,9 @@ class ViewController: UIViewController {
         return label
     }
     
-    private func scrollTobottom() {
-        scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
-                                    animated: false)
-    }
 }
 
-extension ViewController {
+private extension CalculatorViewController {
     private func resetInputNumber() {
         inputNumber = Text.noValue
     }
@@ -185,5 +173,21 @@ extension ViewController {
     
     private func resetRawFormula() {
         rawFormula = []
+    }
+    
+    private func addFormula() {
+        guard let`operator` = operatorLabel.text,
+              let operand = operandLabel.text else {
+            return
+        }
+        
+        rawFormula.append(`operator`)
+        rawFormula.append(operand)
+    }
+    
+    private func scrollTobottom() {
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+                                    animated: false)
     }
 }
