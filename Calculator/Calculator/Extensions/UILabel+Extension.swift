@@ -4,6 +4,7 @@
 import UIKit
 
 extension UILabel {
+    
     var isZero: Bool {
         self.text == "0"
     }

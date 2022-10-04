@@ -4,6 +4,7 @@
 import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
+    
     case add = "+"
     case subtract = "−"
     case divide = "÷"
