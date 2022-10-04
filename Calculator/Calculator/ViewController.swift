@@ -22,11 +22,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         numberFormatter.numberStyle = .decimal
-//        numberFormatter.usesSignificantDigits = true
-//        numberFormatter.maximumSignificantDigits = 20
-//        numberFormatter.accessibilityRespondsToUserInteraction = true
-//        numberFormatter.maximumIntegerDigits = 20
-//        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 20
     }
     
     private func autoSlideScrollView() {
@@ -127,10 +124,13 @@ class ViewController: UIViewController {
         } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
             let suffix = calculationFormula.suffix(1)
-            if suffix == Literal.realDivision.value || suffix == Literal.realMultiplication.value || suffix == Literal.add.value || suffix == Literal.subtraction.value {
+            let operators = Operator.allCases.map { String($0.rawValue) }
+            
+            if operators.contains(String(suffix)) {
                 calculationFormula.removeLast()
                 calculationFormula.removeLast()
             }
+            
             calculationFormula += " " + convertOperator(operatorValue)
         } else {
             guard let operatorText = inputOperatorLabel.text,
