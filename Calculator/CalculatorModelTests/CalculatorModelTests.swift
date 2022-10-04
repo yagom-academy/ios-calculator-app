@@ -51,6 +51,16 @@ class CalculatorModelTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
+    func test_dequeue할때_리스트에값이없을경우_nil가져와야한다() {
+        // Given
+        
+        // When
+        let result = sutByLinkedList.dequeue()
+        
+        // Then
+        XCTAssertNil(result)
+    }
+    
     func test_큐에요소들이enqueue된상태에서_clear함수호출시_isEmpty가true를반환해야한다() {
         // given
         let input: [Double] = [1, 2, 3, 4, 5]
@@ -63,6 +73,6 @@ class CalculatorModelTests: XCTestCase {
         let result = sutByLinkedList.isEmpty
         
         // then
-        XCTAssertEqual(result, true)
+        XCTAssertTrue(result)
     }
 }

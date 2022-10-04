@@ -8,8 +8,4 @@ class LinkedListNode<T> {
     init(value: T) {
         self.value = value
     }
-    
-    deinit {
-        print("\(self.value)가 메모리에서 해제됨")
-    }
 }
