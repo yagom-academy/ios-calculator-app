@@ -10,21 +10,21 @@ class ViewController: UIViewController {
     private var operandManager: OperandManager = OperandManager()
     private let componentMaker: ComponentMaker = ComponentMaker()
     
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var mainOperandLabel: UILabel!
+    @IBOutlet weak var mainOperatorLabel: UILabel!
     @IBOutlet weak var expressionQueue: UIStackView!
     @IBOutlet weak var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         clearOperandLabel()
-        operatorLabel.text = ""
+        mainOperatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
-        guard let tappedOperand = sender.currentTitle, operandLabel.text?.count ?? 0 <= 18 else { return }
+        guard let tappedOperand = sender.currentTitle, mainOperandLabel.text?.count ?? 0 <= 18 else { return }
         if isCalculated { clearOperandLabel() }
         
         switch tappedOperand {
@@ -36,19 +36,67 @@ class ViewController: UIViewController {
             operandManager.appendOperands(from: tappedOperand)
         }
         
-        operandManager.displayOperand(to: operandLabel)
+        operandManager.displayOperand(to: mainOperandLabel)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let tappedOperator = sender.currentTitle, Double(operandManager.currentOperand) != .zero else {
-            operatorLabel.text = sender.currentTitle
+        guard operandManager.expression.isEmpty, isOnlyZeroAtMainFormulaView() else {
+            guard isOnlyZeroAtMainFormulaView() else {
+                updateFormulaType()
+                addStackViewInFormulaHistoryView()
+                resetMainFormulaView(sender)
+                scrollToBottom()
+                return
+            }
+            mainOperatorLabel.text = sender.currentTitle ?? ""
             return
         }
+    }
+    
+    func isOnlyZeroAtMainFormulaView() -> Bool {
+        guard let operandText = mainOperandLabel.text,
+              operandText != "0" else { return true }
+        return false
+    }
+    
+    func updateFormulaType() {
+        let operatorValue: String = mainOperatorLabel.text ?? ""
+        let operandValue: String = mainOperandLabel.text?.components(separatedBy: ",").joined() ?? ""
         
-        appendExpressionQueue()
+        operandManager.appendToExpression(" " + operatorValue + " " + operandValue)
+    }
+    
+    func addStackViewInFormulaHistoryView() {
+        let stackView: UIStackView = UIStackView()
+        stackView.spacing = 8
         
-        clearOperandLabel()
-        operatorLabel.text = tappedOperator
+        let operandLabel: UILabel = UILabel()
+        operandLabel.text = mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView()
+        
+        let operatorLabel: UILabel = UILabel()
+        operatorLabel.text = mainOperatorLabel.text
+        
+        [operatorLabel, operandLabel].forEach {
+            $0.textColor = .white
+            $0.font = UIFont.preferredFont(forTextStyle: .title3)
+            stackView.addArrangedSubview($0)
+        }
+        
+        expressionQueue.addArrangedSubview(stackView)
+    }
+    
+    func scrollToBottom() {
+        expressionScrollView.setContentOffset(
+            CGPoint(
+                x: 0,
+                y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height
+            ), animated: false)
+    }
+    
+    func resetMainFormulaView(_ sender: UIButton) {
+        mainOperandLabel.text = "0"
+        operandManager.setCurrentOperand("0")
+        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -59,12 +107,12 @@ class ViewController: UIViewController {
         let result = components.result()
         
         if result.isNaN {
-            operandLabel.text = "NaN"
+            mainOperandLabel.text = "NaN"
         } else {
-            operandLabel.text = String(result).addComma()
+            mainOperandLabel.text = String(result).addComma()
         }
         
-        operatorLabel.text = ""
+        mainOperatorLabel.text = ""
         isCalculated = true
         operandManager.setCurrentOperand("\(result)")
         operandManager.clearExpression()
@@ -73,7 +121,7 @@ class ViewController: UIViewController {
     @IBAction func tapSignButton(_ sender: UIButton) {
         operandManager.handleSignButton()
         isCalculated = false
-        operandLabel.text = operandManager.currentOperand.addComma()
+        mainOperandLabel.text = operandManager.currentOperand.addComma()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -85,7 +133,7 @@ class ViewController: UIViewController {
         
         clearOperandLabel()
         operandManager.clearExpression()
-        operatorLabel.text = ""
+        mainOperatorLabel.text = ""
     }
 }
 
@@ -94,11 +142,11 @@ extension ViewController {
     private func clearOperandLabel() {
         isCalculated = false
         operandManager.setCurrentOperand("0")
-        operandLabel.text = "0"
+        mainOperandLabel.text = "0"
     }
 
     private func appendExpressionQueue() {
-        guard let currentOperator = operatorLabel.text else { return }
+        guard let currentOperator = mainOperatorLabel.text else { return }
         let stackView: UIStackView = componentMaker.makeStackView()
         
         if !expressionQueue.arrangedSubviews.isEmpty {
