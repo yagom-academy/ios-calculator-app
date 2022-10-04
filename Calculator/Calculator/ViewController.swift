@@ -121,11 +121,10 @@ class ViewController: UIViewController {
     
     private func addOperator(inputText: String, operatorValue: String) {
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
-        let numberWithOutCommaAndInvertSign = numberWithOutComma
         
-        if numberWithOutCommaAndInvertSign == Literal.numberZero.value && inputOperatorLabel.text == "" {
+        if numberWithOutComma == Literal.numberZero.value && inputOperatorLabel.text == "" {
             return
-        } else if numberWithOutCommaAndInvertSign == Literal.numberZero.value && operatorValue != "" {
+        } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
             inputOperatorLabel.text = operatorValue
             let suffix = calculationFormula.suffix(1)
             if suffix == Literal.realDivision.value || suffix == Literal.realMultiplication.value || suffix == Literal.add.value || suffix == Literal.subtraction.value {
@@ -135,7 +134,7 @@ class ViewController: UIViewController {
             calculationFormula += " " + convertOperator(operatorValue)
         } else {
             guard let operatorText = inputOperatorLabel.text,
-                  let doubleValue = numberFormatter.string(for: Double(numberWithOutCommaAndInvertSign)) else { return }
+                  let doubleValue = numberFormatter.string(for: Double(numberWithOutComma)) else { return }
             
             addStackView(operatorText: operatorText, inputText: doubleValue)
             calculationFormula += " " + numberWithOutComma
@@ -147,7 +146,6 @@ class ViewController: UIViewController {
     
     private func showResult(inputText: String) {
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
-        let numberWithOutCommaAndInvertSign = numberWithOutComma
         let operators = Operator.allCases.map { convertOperator(String($0.rawValue)) }.joined()
         let separators = CharacterSet(charactersIn: operators)
         
@@ -155,7 +153,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if let operandValue = Double(numberWithOutCommaAndInvertSign),
+        if let operandValue = Double(numberWithOutComma),
            let operatorText = inputOperatorLabel.text,
            let doubleValue = numberFormatter.string(for: operandValue) {
             addStackView(operatorText: operatorText, inputText: doubleValue)
