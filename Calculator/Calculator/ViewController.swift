@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     @IBAction func dotButtonPressed(_ sender: UIButton) {
         guard let isContainingPoint = operandLabel.text?.contains(Constant.dot),
-            !isContainingPoint else { return }
+              !isContainingPoint else { return }
         if operandLabel.isZero {
             updateOperandLabel(with: Constant.zero + Constant.dot)
         } else {
@@ -91,6 +91,23 @@ class ViewController: UIViewController {
         } else {
             operandLabel.text = Constant.minus + operandLabelText
         }
+    }
+    
+    @IBAction private func resultButtonPressed(_ sender: UIButton) {
+        if expression == "" {
+            return
+        }
+        addSubviewToStackView()
+        updateExpression()
+        let result = fetchCalculatedResult()
+    }
+    
+    private func fetchCalculatedResult() -> String {
+        
+        var unFormattedNumber = ExpressionParser.parse(from: expression)
+        let result = fetchformattedNumbers(number: unFormattedNumber.result())
+        
+        return result
     }
     
     private func updateOperandLabel(with number: String) {
