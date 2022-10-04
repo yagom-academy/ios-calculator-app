@@ -100,13 +100,14 @@ class ViewController: UIViewController {
         addSubviewToStackView()
         updateExpression()
         let result = fetchCalculatedResult()
+        updateResult(result: result)
     }
     
     private func fetchCalculatedResult() -> String {
         
         var unFormattedNumber = ExpressionParser.parse(from: expression)
         let result = fetchformattedNumbers(number: unFormattedNumber.result())
-        
+
         return result
     }
     
@@ -175,6 +176,12 @@ class ViewController: UIViewController {
     private func fetchformattedNumbers(number: Double) -> String {
         guard let result = numberFormatter.string(for: number) else { return "" }
         return result
+    }
+    
+    private func updateResult(result: String) {
+        operandLabel.text = result
+        operatorLabel.text = Constant.empty
+        expression = Constant.empty
     }
 }
 
