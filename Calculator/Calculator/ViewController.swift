@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         operatorLabel.text = Constant.empty
         operandLabel.text = Constant.zero
         expression = Constant.empty
+        resetSubviewsIfNeeded()
     }
     
     
@@ -111,7 +112,11 @@ class ViewController: UIViewController {
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = "0"
+        operandLabel.text = Constant.zero
+    }
+    
+    private func resetSubviewsIfNeeded() {
+        stackView.subviews.forEach { $0.removeFromSuperview() }
     }
 }
 
