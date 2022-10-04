@@ -13,6 +13,7 @@ class ViewController: UIViewController {
         static let doubleZero = "00"
         static let empty = ""
         static let dot = "."
+        static let minus = "-"
     }
     
     @IBOutlet weak var operandLabel: UILabel!
@@ -65,6 +66,20 @@ class ViewController: UIViewController {
         operandLabel.text = Constant.zero
     }
     
+    @IBAction func signChangeButtonPressed(_ sender: UIButton) {
+        if operandLabel.isZero {
+            return
+        }
+        
+        guard var operandLabelText = operandLabel.text else { return }
+        
+        if operandLabelText.contains(Constant.minus) {
+            operandLabelText.removeFirst()
+            operandLabel.text = operandLabelText
+        } else {
+            operandLabel.text = Constant.minus + operandLabelText
+        }
+    }
     
     private func updateOperandLabel(with number: String) {
         
