@@ -18,7 +18,7 @@ struct Formula {
         
         result = firstNumber
         
-        while operators.isEmpty != true {
+        while operators.isEmpty() != true {
             guard let operators = operators.dequeue() else { return 0.0 }
             guard let operands = operands.dequeue() else { return 0.0 }
             
