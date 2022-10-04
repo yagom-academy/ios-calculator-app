@@ -13,24 +13,22 @@ struct CalculatorItemQueue<T: CalculateItem> {
         let node: Node<T> = Node<T>(data: element)
         
         if isEmpty {
-            head = node
-        } else if count == 1 {
-            head?.next = node
+            self.head = node
         } else {
-            tail?.next = node
+            self.tail?.next = node
         }
         
-        tail = node
+        self.tail = node
         self.count += 1
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         guard let currentHead: Node<T> = self.head else {
             return nil
         }
         let nextHead: Node<T>? = currentHead.next
         
-        self.head = nil
         self.head = nextHead
         self.count -= 1
         
