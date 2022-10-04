@@ -1,8 +1,5 @@
-//
-//  Calculator - AppDelegate.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+
+//  Created by tottalE, Bella, woong
 
 import UIKit
 

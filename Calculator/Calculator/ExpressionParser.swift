@@ -1,9 +1,5 @@
-//
-//  ExpressionParser.swift
-//  Calculator
-//
-//  Created by hy on 2022/10/04.
-//
+
+//  Created by tottalE, Bella, woong
 
 import Foundation
 

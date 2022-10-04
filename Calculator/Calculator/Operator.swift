@@ -1,9 +1,5 @@
-//
-//  Operator.swift
-//  Calculator
-//
-//  Created by jin on 10/4/22.
-//
+
+//  Created by tottalE, Bella, woong
 
 import Foundation
 
