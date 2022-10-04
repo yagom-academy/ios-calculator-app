@@ -132,13 +132,14 @@ final class CalculatorViewController: UIViewController {
 private extension CalculatorViewController {
     func addLogStackView() {
         let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
+        
         let childView = CalculatedLogStackView(
             operatorValue: operatorValue,
             operandValue: selectedNumbers.calNumber
         )
         
         recordedCalculatedStackView.addArrangedSubview(childView)
-        scrollView.scrollToBottom()
+        scrollView.scrollToBottom(animated: true)
     }
     
     func removeAllLogStackView() {
@@ -179,21 +180,16 @@ private extension CalculatorViewController {
     }
     
     func calculateExpression() {
-        let formula = ExpressionParser.parse(from: mathExpression)
-        do {
-            let calculatedValue = try formula.result()
-            let calNumber = calculatedValue.description.calNumber
+        var formula = ExpressionParser.parse(from: mathExpression)
+
+            let calculatedValue = formula.result()
+        let calNumber = calculatedValue!.description.calNumber
 
             updateNumberLabelTo(numbers: calNumber)
             resetOperatorLabel()
 
             resetSelected()
-        } catch FormulaError.dividedByZero {
-            let errorValue = Constant.Calculator.errorNumber
-            updateNumberLabelTo(numbers: errorValue)
-        } catch {
-            // no op
-        }
+
     }
 }
 
