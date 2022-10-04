@@ -38,7 +38,13 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateCalculatorLabel(to string: String) {
-        calculatorLabel.text = numberFormatter.string(from: string.convertNSNumber())
+        let nsNumber = string.convertNSNumber()
+        
+        if nsNumber != 0 {
+            calculatorLabel.text = numberFormatter.string(from: string.convertNSNumber())
+        } else {
+            calculatorLabel.text = string
+        }
     }
     
     private func updateAllCalculatorLabels() {
@@ -180,7 +186,7 @@ class CalculatorViewController: UIViewController {
         } catch CalculatorError.divisionByZero {
             result = numberFormatter.notANumberSymbol
         } catch {
-            return
+            result = CalculatorError.unknownError.description
         }
         
         updateCalculatorLabel(to: result)
