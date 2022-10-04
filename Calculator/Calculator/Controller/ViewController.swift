@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -18,35 +18,49 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        operandLabelText = mainOperandLabel.text ?? ""
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
+        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterAtMainLabel()
     }
     
     //MARK: - NumberPad 메서드
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        operandLabelText += sender.tag.description
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
+        operandLabelText = mainOperandLabel.text.removeComma()
+        
+        if operandLabelText == "0" {
+            mainOperandLabel.text = sender.tag.description
+        } else {
+            mainOperandLabel.text =
+            (operandLabelText + sender.tag.description).applyNumberFormatterAtMainLabel()
+        }
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        guard Double(operandLabelText) != 0 else { return }
+        operandLabelText = mainOperandLabel.text.removeComma()
         
-        operandLabelText += sender.currentTitle ?? ""
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
+        if operandLabelText == "0" {
+            return
+        } else {
+            operandLabelText += sender.currentTitle ?? ""
+            mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
+        }
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        guard !operandLabelText.contains(".") else { return }
+        operandLabelText = mainOperandLabel.text.removeComma()
         
-        operandLabelText += "."
-        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel() + "."
+        if operandLabelText.contains(".") {
+            return
+        } else {
+            operandLabelText += sender.currentTitle ?? ""
+            mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel() + "."
+        }
     }
     
     //MARK: - 사칙연산 메서드
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
-        if formula.operands.isEmpty, mainOperandLabel.text == "0" {
+        if formula.operands.isEmpty,
+           isOnlyZeroAtMainFormulaView() {
             return
-        } else if mainOperandLabel.text == "0" {
+        } else if isOnlyZeroAtMainFormulaView() {
             mainOperatorLabel.text = sender.currentTitle ?? ""
         } else {
             updateFormulaType()
@@ -56,9 +70,15 @@ class ViewController: UIViewController {
         }
     }
     
+    func isOnlyZeroAtMainFormulaView() -> Bool {
+        guard let operandText = mainOperandLabel.text,
+              operandText != "0" else { return true }
+        return false
+    }
+    
     func updateFormulaType() {
         let operatorValue: String = mainOperatorLabel.rawValueByOperatorLabelText
-        let operandValue: String = operandLabelText
+        let operandValue: String = mainOperandLabel.text.removeComma()
         
         partialFormula += operatorValue + " " + operandValue + " "
         formula = ExpressionParser.parse(from: partialFormula)
@@ -90,14 +110,13 @@ class ViewController: UIViewController {
     }
     
     func resetMainFormulaView(_ sender: UIButton) {
-        operandLabelText = ""
         mainOperandLabel.text = "0"
         mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
         guard let result =
-                try? formula.result().description.applyNumberFormatterAtFormulaHistoryView(),
+                try? formula.result(formula.operators.count).description.applyNumberFormatterAtFormulaHistoryView(),
               result !=
                 mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView() else { return }
         
@@ -109,7 +128,7 @@ class ViewController: UIViewController {
     func showFormulaResult() {
         do {
             mainOperandLabel.text =
-            try formula.result().description.applyNumberFormatterAtFormulaHistoryView()
+            try formula.result(formula.operators.count).description.applyNumberFormatterAtFormulaHistoryView()
         } catch CalculationError.dividedZero {
             mainOperandLabel.text = "NaN"
         } catch {}
@@ -118,12 +137,10 @@ class ViewController: UIViewController {
     
     // MARK: - 기능 메서드
     @IBAction func touchUpCEButton(_ sender: UIButton) {
-        operandLabelText = ""
         mainOperandLabel.text = "0"
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
-        operandLabelText = ""
         deleteStackViewInScrollView()
         resetMainLabelText()
         resetFormulaType()
@@ -148,7 +165,7 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
         guard let operandLabelText = mainOperandLabel.text,
-        operandLabelText != "0" else { return }
+        Double(operandLabelText) != 0 else { return }
         
         operandLabelText.contains("-") ?
         (mainOperandLabel.text = operandLabelText.split(with: "-").joined()) :
