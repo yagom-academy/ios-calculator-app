@@ -18,76 +18,47 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainOperandLabel.text = (mainOperandLabel.text ?? "").applyNumberFormatterAtMainLabel()
+        operandLabelText = mainOperandLabel.text ?? ""
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
     }
     
     //MARK: - NumberPad 메서드
     @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText != "0" else {
-            mainOperandLabel.text = sender.tag.description
-            return
-        }
-        
-        mainOperandLabel.text =
-        (operandLabelText + sender.tag.description).applyNumberFormatterAtMainLabel()
+        operandLabelText += sender.tag.description
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
+        guard Double(operandLabelText) != 0 else { return }
         
-        guard operandLabelText.count == 1,
-              operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "0").applyNumberFormatterAtMainLabel()
-            return
-        }
-    }
-    
-    @IBAction func touchUpZeroZeroButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
-        
-        guard operandLabelText.count == 1,
-              operandLabelText.last == "0" else {
-            mainOperandLabel.text = (operandLabelText + "00").applyNumberFormatterAtMainLabel()
-            return
-        }
+        operandLabelText += sender.currentTitle ?? ""
+        mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel()
     }
     
     @IBAction func touchUpDotButton(_ sender: UIButton) {
-        operandLabelText = mainOperandLabel.text.removeComma()
+        guard !operandLabelText.contains(".") else { return }
         
-        guard operandLabelText != ".",
-              operandLabelText.contains(".") == false else { return }
-        
+        operandLabelText += "."
         mainOperandLabel.text = operandLabelText.applyNumberFormatterAtMainLabel() + "."
     }
     
     //MARK: - 사칙연산 메서드
     @IBAction func touchUpFormulaButton(_ sender: UIButton) {
-        guard formula.operands.count == 0,
-              isOnlyZeroAtMainFormulaView() else {
-            guard isOnlyZeroAtMainFormulaView() else {
-                updateFormulaType()
-                addStackViewInFormulaHistoryView()
-                resetMainFormulaView(sender)
-                scrollToBottom()
-                return
-            }
-            mainOperatorLabel.text = sender.currentTitle ?? ""
+        if formula.operands.isEmpty, mainOperandLabel.text == "0" {
             return
+        } else if mainOperandLabel.text == "0" {
+            mainOperatorLabel.text = sender.currentTitle ?? ""
+        } else {
+            updateFormulaType()
+            addStackViewInFormulaHistoryView()
+            resetMainFormulaView(sender)
+            scrollToBottom()
         }
-    }
-    
-    func isOnlyZeroAtMainFormulaView() -> Bool {
-        guard let operandText = mainOperandLabel.text,
-              operandText != "0" else { return true }
-        return false
     }
     
     func updateFormulaType() {
         let operatorValue: String = mainOperatorLabel.rawValueByOperatorLabelText
-        let operandValue: String = mainOperandLabel.text.removeComma()
+        let operandValue: String = operandLabelText
         
         partialFormula += operatorValue + " " + operandValue + " "
         formula = ExpressionParser.parse(from: partialFormula)
@@ -114,13 +85,12 @@ class ViewController: UIViewController {
     
     func scrollToBottom() {
         scrollView.setContentOffset(
-            CGPoint(
-                x: 0,
-                y: scrollView.contentSize.height - scrollView.bounds.height
-            ), animated: false)
+            CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+            animated: false)
     }
     
     func resetMainFormulaView(_ sender: UIButton) {
+        operandLabelText = ""
         mainOperandLabel.text = "0"
         mainOperatorLabel.text = sender.currentTitle ?? ""
     }
@@ -148,10 +118,12 @@ class ViewController: UIViewController {
     
     // MARK: - 기능 메서드
     @IBAction func touchUpCEButton(_ sender: UIButton) {
+        operandLabelText = ""
         mainOperandLabel.text = "0"
     }
     
     @IBAction func touchUpACButton(_ sender: UIButton) {
+        operandLabelText = ""
         deleteStackViewInScrollView()
         resetMainLabelText()
         resetFormulaType()
