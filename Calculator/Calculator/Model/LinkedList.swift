@@ -3,8 +3,8 @@
 //  Calculator
 //
 
-struct LinkedList<T> {
-    class Node<T>: CalculateItem {
+struct LinkedList<T: CalculateItem> {
+    class Node<T: CalculateItem> {
         var value: T
         var next: Node?
         

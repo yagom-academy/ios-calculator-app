@@ -3,7 +3,7 @@
 //  Calculator
 //
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
