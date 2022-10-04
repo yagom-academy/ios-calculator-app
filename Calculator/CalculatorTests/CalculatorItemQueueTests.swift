@@ -83,7 +83,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // When
         sut.clear()
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         
         // Then
         XCTAssertTrue(result)
