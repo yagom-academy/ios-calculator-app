@@ -2,8 +2,8 @@
 //  Created by zhilly and Gundy on 2022/10/04.
 
 struct Formula {
-    private var operands: CalculatorItemQueue<Double>
-    private var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
