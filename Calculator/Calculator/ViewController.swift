@@ -19,7 +19,12 @@ class ViewController: UIViewController {
     var stringNumbers: String = ""
     var stringOperators: String = ""
     var fullFormula: String = ""
-    let numberFormatter = NumberFormatter()
+    let numberFormatter: NumberFormatter = {
+      let numberFormatter = NumberFormatter()
+      numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = Constants.maximumNumber
+      return numberFormatter
+    }()
     
     @IBOutlet weak var recentNumbersStackView: UIStackView!
     @IBOutlet weak var recentNumbersScrollView: UIScrollView!
@@ -30,7 +35,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resetAll()
-        applyNumberFormatter()
     }
     
     private func resetAll() {
@@ -54,11 +58,6 @@ class ViewController: UIViewController {
         let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
         formulaStackView.spacing = Constants.spacing
         return formulaStackView
-    }
-    
-    private func applyNumberFormatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = Constants.maximumNumber
     }
     
     private func placeScroll() {
