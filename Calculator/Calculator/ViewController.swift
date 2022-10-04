@@ -15,6 +15,13 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    @IBAction private func numberButtonPressed(_ sender: UIButton) {
+        guard let senderLabel = sender.titleLabel,
+              let senderText = senderLabel.text
+        else { return }
+        updateOperandLabel(with: senderText)
+    }
+    
     private func updateOperandLabel(with number: String) {
         
         if operandLabel.isZero {
@@ -25,6 +32,5 @@ class ViewController: UIViewController {
             }
         }
     }
-
 }
 
