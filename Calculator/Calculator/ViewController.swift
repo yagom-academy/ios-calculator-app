@@ -66,7 +66,7 @@ final class ViewController: UIViewController {
         if isContainingPoint {
             return
         } else if operandLabel.isZero {
-            updateOperandLabel(with: "0.")
+            updateOperandLabel(with: Constant.zero + Constant.dot)
         } else {
             updateOperandLabel(with: Constant.dot)
         }
