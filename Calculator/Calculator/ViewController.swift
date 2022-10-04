@@ -22,7 +22,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+//        numberFormatter.usesSignificantDigits = true
+//        numberFormatter.maximumSignificantDigits = 20
+//        numberFormatter.accessibilityRespondsToUserInteraction = true
+//        numberFormatter.maximumIntegerDigits = 20
+//        numberFormatter.maximumFractionDigits = 20
     }
     
     private func autoSlideScrollView() {
