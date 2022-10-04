@@ -30,6 +30,9 @@ final class ViewController: UIViewController {
     
     private var expression: String = ""
     let numberFormatter: NumberFormatter = NumberFormatter()
+    private var isZero: Bool {
+        operandLabel.text == Constant.zero
+    }
     
     @IBOutlet private weak var operandAndOperatorScrollView: UIScrollView!
     @IBOutlet private weak var operandAndOperatorStackView: UIStackView!
@@ -46,7 +49,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func numberZeroButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             return
         }
         updateOperandLabel(with: Constant.zero)
@@ -54,7 +57,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func numberDoubleZeroButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if ooperandLabel.isZero {
             return
         }
         updateOperandLabel(with: Constant.doubleZero)
@@ -110,7 +113,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func divideButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             updateExpression(nextOperator: Constant.divide)
             return
         }
@@ -120,7 +123,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func multiplyButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             updateExpression(nextOperator: Constant.multiply)
             return
         }
@@ -130,7 +133,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             updateExpression(nextOperator: Constant.subtract)
             return
         }
@@ -140,7 +143,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             updateExpression(nextOperator: Constant.add)
             return
         }
@@ -197,7 +200,7 @@ final class ViewController: UIViewController {
     
     private func changeOperatorSign() {
         
-        if operandLabel.text == Constant.zero {
+        if operandLabel.isZero {
             return
         }
         guard let operandLabelText = operandLabel.text else { return }
