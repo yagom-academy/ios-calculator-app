@@ -20,11 +20,12 @@ enum ExpressionParser {
     
     private static func componentsByOperator(from input: String) -> [String] {
         var inputString: String = input
+        let whiteSpace: String = " "
         
-        for caseOperator in Operator.allCases {
-            inputString = inputString.replacingOccurrences(of: "\(caseOperator.rawValue)", with: " ")
+        Operator.allCases.forEach {
+            inputString = inputString.replacingOccurrences(of: String($0.rawValue), with: whiteSpace)
         }
         
-        return inputString.split(with: " ")
+        return inputString.split(with: Character(whiteSpace))
     }
 }
