@@ -36,6 +36,39 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private var makeStackView: UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.spacing = 8
+        
+        return stackView
+    }
+    
+    private var makeOperatorLabel: UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = operatorLabel.text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        return label
+    }
+    
+    private var makeOperandLabel: UILabel {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = operandLabel.text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        label.setContentCompressionResistancePriority(.defaultHigh , for: .horizontal)
+        
+        return label
+    }
+    
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
         
@@ -53,7 +86,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         if isCalculated {
-            makeOperationStackView()
+            addStackView()
             addFormula()
             resetInputNumber()
             isCalculated = false
@@ -72,7 +105,7 @@ class CalculatorViewController: UIViewController {
         }
         
         addFormula()
-        makeOperationStackView()
+        addStackView()
         scrollTobottom()
         resetInputNumber()
         operatorLabel.text = sender.titleLabel?.text
@@ -104,7 +137,7 @@ class CalculatorViewController: UIViewController {
         guard !isCalculated else { return }
         
         addFormula()
-        makeOperationStackView()
+        addStackView()
         scrollTobottom()
         resetInputNumber()
         resetOperatorLabel()
@@ -122,44 +155,6 @@ class CalculatorViewController: UIViewController {
         
         isCalculated = true
     }
-    
-    private func makeOperationStackView() {
-        let operationStackView = UIStackView()
-        operationStackView.axis = .horizontal
-        operationStackView.translatesAutoresizingMaskIntoConstraints = false
-        operationStackView.distribution = .fill
-        operationStackView.alignment = .fill
-        operationStackView.spacing = 8
-        
-        operationStackView.addArrangedSubview(makeOperatorLabel())
-        operationStackView.addArrangedSubview(makeOperandLabel())
-        
-        showingOperationsStackView.insertArrangedSubview(operationStackView,
-                                                         at: showingOperationsStackView.arrangedSubviews.count)
-    }
-    
-    private func makeOperatorLabel() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = operatorLabel.text
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        return label
-    }
-    
-    private func makeOperandLabel() -> UILabel {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = operandLabel.text
-        label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        label.setContentCompressionResistancePriority(.defaultHigh , for: .horizontal)
-        
-        return label
-    }
-    
 }
 
 private extension CalculatorViewController {
@@ -183,6 +178,16 @@ private extension CalculatorViewController {
         
         rawFormula.append(`operator`)
         rawFormula.append(operand)
+    }
+    
+    private func addStackView() {
+        let stackView = makeStackView
+
+        stackView.addArrangedSubview(makeOperatorLabel)
+        stackView.addArrangedSubview(makeOperandLabel)
+        
+        showingOperationsStackView.insertArrangedSubview(stackView,
+                                                         at: showingOperationsStackView.arrangedSubviews.count)
     }
     
     private func scrollTobottom() {
