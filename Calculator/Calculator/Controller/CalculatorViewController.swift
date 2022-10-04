@@ -27,11 +27,13 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
+        guard let selectedOperand = Operand.matchOperandButtonTag(location: sender.tag) else {
             return
         }
         
-        guard let selectedOperand = Operand.matchOperandButtonTag(location: sender.tag) else {
+        guard !isCalculated else {
+            reset()
+            updateOperandLabel(with: selectedOperand.bringOperandSymbol)
             return
         }
         
@@ -128,15 +130,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        setOperandLabelToZero()
-        setOperatorLabelEmpty()
-        removeAllLogStackView()
-        isFirstInput = true
-        isDotButtonTapped = false
-        isCalculated = false
-        operand.removeAll()
-        arithmeticOperator.removeAll()
-        finalFormula.removeAll()
+        reset()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
@@ -250,5 +244,17 @@ final class CalculatorViewController: UIViewController {
         formulaStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
+    }
+    
+    func reset() {
+        setOperandLabelToZero()
+        setOperatorLabelEmpty()
+        removeAllLogStackView()
+        isFirstInput = true
+        isDotButtonTapped = false
+        isCalculated = false
+        operand.removeAll()
+        arithmeticOperator.removeAll()
+        finalFormula.removeAll()
     }
 }
