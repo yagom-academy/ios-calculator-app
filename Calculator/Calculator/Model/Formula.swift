@@ -14,7 +14,7 @@ struct Formula {
             return nil
         }
         
-        while !operators.isEmpty() {
+        while !operators.isEmpty {
             guard let rhs = operands.dequeue() else {
                 return lhs
             }

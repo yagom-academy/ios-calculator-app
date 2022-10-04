@@ -20,7 +20,7 @@ class ExpressionParserTests: XCTestCase {
     
     func testParse_두종류이상의연산자와양수피연산자문자열이입력됐을때_반환된Formula의result값이_문자열의계산결과와동일해야한다() {
         // given
-        let input = "1+2-3+4"
+        let input = "1+2−3+4"
         // when
         var result = ExpressionParser.parse(from: input)
         // then
@@ -29,7 +29,7 @@ class ExpressionParserTests: XCTestCase {
     
     func testParse_두종류이상의연산자와음수양수피연산자문자열이입력됐을때_반환된Formula의result값이_문자열의계산결과와동일해야한다() {
         // given
-        let input = "1+-2-3+4"
+        let input = "1+-2−3+4"
         // when
         var result = ExpressionParser.parse(from: input)
         // then
