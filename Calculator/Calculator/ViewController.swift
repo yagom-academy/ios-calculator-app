@@ -54,6 +54,13 @@ class ViewController: UIViewController {
         updateExpression()
     }
     
+    @IBAction func ACButtonPressed(_ sender: UIButton) {
+        operatorLabel.text = Constant.empty
+        operandLabel.text = Constant.zero
+        expression = Constant.empty
+    }
+    
+    
     private func updateOperandLabel(with number: String) {
         
         if operandLabel.isZero {
