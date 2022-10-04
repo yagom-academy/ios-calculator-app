@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     let numberFormatter: NumberFormatter = NumberFormatter()
     private var expression: String = ""
@@ -107,7 +108,7 @@ class ViewController: UIViewController {
         
         var unFormattedNumber = ExpressionParser.parse(from: expression)
         let result = fetchformattedNumbers(number: unFormattedNumber.result())
-
+        
         return result
     }
     
@@ -144,6 +145,7 @@ class ViewController: UIViewController {
         
         let subStackView = fetchStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         stackView.addArrangedSubview(subStackView)
+        setScrollToBottom()
     }
     
     private func updateExpression() {
@@ -182,6 +184,11 @@ class ViewController: UIViewController {
         operandLabel.text = result
         operatorLabel.text = Constant.empty
         expression = Constant.empty
+    }
+    
+    private func setScrollToBottom() {
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: false)
     }
 }
 
