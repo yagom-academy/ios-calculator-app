@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B40470DE28EBC81C0018D44C /* FormulaError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40470DD28EBC81C0018D44C /* FormulaError.swift */; };
+		B40470E328EBCF9C0018D44C /* FormulaStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40470E228EBCF9C0018D44C /* FormulaStackView.swift */; };
 		B423239A28E1A7490026DC53 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423239928E1A7490026DC53 /* String+Extensions.swift */; };
 		B423239C28E1A8B50026DC53 /* StringSplitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423239B28E1A8B50026DC53 /* StringSplitTests.swift */; };
 		B423239E28E1C32E0026DC53 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B423239D28E1C32E0026DC53 /* FormulaTests.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		B40470DD28EBC81C0018D44C /* FormulaError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaError.swift; sourceTree = "<group>"; };
+		B40470E228EBCF9C0018D44C /* FormulaStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaStackView.swift; sourceTree = "<group>"; };
 		B423239928E1A7490026DC53 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		B423239B28E1A8B50026DC53 /* StringSplitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringSplitTests.swift; sourceTree = "<group>"; };
 		B423239D28E1C32E0026DC53 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 				B4B4DE5E28E1D53E003953A6 /* ExpressionsParser.swift */,
 				B423239F28E1C36B0026DC53 /* Formula.swift */,
 				BF0638BF28EBCEA80066547D /* FormulaLabel.swift */,
+				B40470E228EBCF9C0018D44C /* FormulaStackView.swift */,
 				B46F838228DF055100C28767 /* Operator.swift */,
 			);
 			path = Model;
@@ -314,6 +317,7 @@
 				B45C691528DDE2D600E02CD2 /* Node.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* MainViewController.swift in Sources */,
 				B40470DE28EBC81C0018D44C /* FormulaError.swift in Sources */,
+				B40470E328EBCF9C0018D44C /* FormulaStackView.swift in Sources */,
 				B4876A9028D9956000D17608 /* CalculateItemProtocol.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				B423239A28E1A7490026DC53 /* String+Extensions.swift in Sources */,
