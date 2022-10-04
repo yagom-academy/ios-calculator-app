@@ -17,7 +17,6 @@ final class CalculatorViewController: UIViewController {
     private var finalFormula: String = CalculatorConstant.blank
     private var isDotButtonTapped: Bool = false
     private var isFirstInput: Bool = true
-    private var isNegativeSign: Bool = false
     private var isCalculated: Bool = false
     
     override func viewDidLoad() {
@@ -113,14 +112,13 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated else { return }
         guard !operand.isEmpty else{ return }
         
-        if !isNegativeSign {
-            operand = CalculatorConstant.negativeSign + operand
+        if operand.starts(with: CalculatorConstant.negativeSign) {
+            operand.removeFirst()
         } else {
-            operand = operand.trimmingCharacters(in: CalculatorConstant.negativeSignSet)
+            operand = CalculatorConstant.negativeSign + operand
         }
-        
+
         operandLabel.text = operand
-        isNegativeSign.toggle()
     }
     
     func createStackView() {
