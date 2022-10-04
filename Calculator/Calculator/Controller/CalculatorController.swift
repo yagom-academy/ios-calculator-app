@@ -126,9 +126,9 @@ final class CalculatorController {
         view.resetDisplayNumberLabel()
         formula = ExpressionParser.parse(from: expression)
         
-        let result = formula?.result() ?? .nan
+        let result = try? formula?.result() ?? .nan
         
-        return String(result)
+        return String(result!)
     }
     
     func tappedCalculateButton() -> String {

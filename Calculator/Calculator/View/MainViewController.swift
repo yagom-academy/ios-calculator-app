@@ -44,19 +44,10 @@ final class MainViewController: UIViewController {
     }
     
     func makeStackView() {
-        let operandLabel = UILabel()
-        operandLabel.text = displayNumberLabel.text
-        operandLabel.textColor = .white
+        let stackView = FormulaStackView()
         
-        let operatorLabel = UILabel()
-        operatorLabel.text = displaySignLabel.text
-        operatorLabel.textColor = .white
-        
-        let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-        stackView.spacing = 8
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.configure(operatorText: displaySignLabel.text, operandText: displayNumberLabel.text)
         formulaVerticalStackView.addArrangedSubview(stackView)
-        
         autoScroll()
     }
     
