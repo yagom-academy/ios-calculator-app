@@ -48,7 +48,6 @@ struct LinkedList<T: CalculateItem> {
         nodeCount -= 1
         
         return value
-    }
     
     mutating func removeAll() {
         head = nil
