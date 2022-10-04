@@ -119,9 +119,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapSignButton(_ sender: UIButton) {
-        operandManager.handleSignButton()
+        guard let operandLabelText = mainOperandLabel.text,
+              operandLabelText != "0" else { return }
+        
+        operandLabelText.contains("-") ?
+        (mainOperandLabel.text = operandLabelText.split(with: "-").joined()) :
+        (mainOperandLabel.text = "-" + operandLabelText)
+        
         isCalculated = false
-        mainOperandLabel.text = operandManager.currentOperand.addComma()
+        operandManager.handleSignButton()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
