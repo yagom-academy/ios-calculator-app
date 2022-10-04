@@ -74,4 +74,21 @@ class FormulaTests: XCTestCase {
         operatorComponents.compactMap { Operator(rawValue: Character($0)) }.forEach { operators.enqueue($0) }
         XCTAssertThrowsError(try sut.result())
     }
+    
+    func test_1_더하기_3_빼기_2_곱하기_10_나누기_2은_10로_나오는가() {
+        let result = 10.0
+        
+        operands.enqueue(1.0)
+        operands.enqueue(3.0)
+        operands.enqueue(2.0)
+        operands.enqueue(10.0)
+        operands.enqueue(2.0)
+        
+        operators.enqueue(Operator.add)
+        operators.enqueue(Operator.subtract)
+        operators.enqueue(Operator.multifly)
+        operators.enqueue(Operator.divide)
+        
+        XCTAssertEqual(result, try sut.result())
+    }
 }

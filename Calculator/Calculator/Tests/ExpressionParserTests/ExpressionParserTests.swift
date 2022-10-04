@@ -82,4 +82,29 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertFalse(testResult)
     }
     
+    func test_10_더하기_20_곱하기_30_나누기_3은_300인가() throws {
+        let input = "10+20*30/3"
+        let result = ExpressionParser.parse(from: input).operators
+        
+        let inputOperators = ["+", "*", "/"]
+        var testResult = true
+        
+    
+        for item in inputOperators {
+            if Operator(rawValue: Character(item)) == result.dequeue() {
+                testResult = true
+            } else {
+                testResult = false
+            }
+        }
+        XCTAssertTrue(testResult)
+    }
+    
+    func test_2_더하기_마이너스1은_1인가() throws {
+        let input = "2+-1"
+        var parseTest = ExpressionParser.parse(from: input)
+        let result = try parseTest.result()
+        
+        XCTAssertEqual(result, 1.0)
+    }
 }
