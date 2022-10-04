@@ -2,5 +2,7 @@
 
 enum CalculateError: Error {
     case invalidNumber
+    case emptyOperands
+    case emptyOperators
 }
 
