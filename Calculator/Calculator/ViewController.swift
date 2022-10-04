@@ -30,9 +30,6 @@ final class ViewController: UIViewController {
     
     private var expression: String = ""
     let numberFormatter: NumberFormatter = NumberFormatter()
-    private var isZero: Bool {
-        operandLabel.text == Constant.zero
-    }
     
     @IBOutlet private weak var operandAndOperatorScrollView: UIScrollView!
     @IBOutlet private weak var operandAndOperatorStackView: UIStackView!
