@@ -20,6 +20,20 @@ extension String {
         return result
     }
     
+    func applyNumberFormatterAtMainLabel() -> String {
+        let splitedByDot: [String] = self.split(with: ".")
+        
+        guard let number: NSNumber = numberFormatter.number(from: splitedByDot[0]),
+              let stringBeforeDot: String = numberFormatter.string(from: number) else { return "" }
+        return splitedByDot[1...].reduce(into: stringBeforeDot) { $0.append("." + $1) }
+    }
+    
+    func applyNumberFormatterAtFormulaHistoryView() -> String {
+        guard let number: NSNumber = numberFormatter.number(from: self),
+              let returnValue: String = numberFormatter.string(from: number) else { return "" }
+        return returnValue
+    }
+    
     func split(with target: Character) -> [String] {
         let splitComponents = self.split(separator: target, omittingEmptySubsequences: true)
         
