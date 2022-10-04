@@ -7,30 +7,154 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var accumulatedStackView: UIStackView!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var nowOperand: UILabel!
     
-    private var nowOperands: String = ""
-    private var nowOperandsDouble1: Double = 0
-    private var nowOperandsDouble2: Double = 0
+    private var totalFormulaString: String = ""
+    private var currentNumber: String = ""
+    
+    @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var mainStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        resetAllUI()
     }
-//    @IBAction func numberButtonTapped(_ sender: UIButton) {
-//        Double(sender.accessibilityLabel)
-//    }
-//
-//    @IBAction func operatorButtonTapped(_ sender: UIButton) {
-//    }
-//
-//    @IBAction func acButtonTapped(_ sender: UIButton) {
-//    }
-//    @IBAction func ceButtonTapped(_ sender: UIButton) {
-//    }
-//    @IBAction func pmButtonTapped(_ sender: Any) {
-//    }
     
+    private func resetAllUI() {
+        mainStackView.subviews.forEach { $0.removeFromSuperview()
+        }
+        operatorLabel.text = ""
+        operandLabel.text = "0"
+        currentNumber = ""
+        totalFormulaString = "+"
+    }
+    
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
+        if operandLabel.text?.first == "0" {
+            operandLabel.text?.removeFirst()
+        }
+        currentNumber.append(sender.text)
+        
+        if currentNumber.contains(".") {
+            guard let integerPart = currentNumber.components(separatedBy: ".").first,
+                  let fractionPart = currentNumber.components(separatedBy: ".").last else {
+                return
+            }
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: integerPart) + "." + fractionPart
+        } else {
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: currentNumber)
+        }
+    }
+    
+    @IBAction private func touchUpDotButton(_ sender: UIButton) {
+        if currentNumber.contains(".") {
+            return
+        } else if operandLabel.text == "0" {
+            currentNumber = "0."
+        } else {
+            currentNumber.append(sender.text)
+        }
+        
+        if currentNumber.last == "." {
+            operandLabel.text = "\(CalculatorFormatter.shared.numberFormatter(number: currentNumber))."
+        } else {
+            operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: currentNumber)
+        }
+    }
+    
+    @IBAction private func touchUpAcButton(_ sender: UIButton) {
+        resetAllUI()
+    }
+    
+    @IBAction private func touchUpCeButton(_ sender: UIButton) {
+        currentNumber = ""
+        operandLabel.text = "0"
+    }
+    
+    @IBAction private func touchUpConvertPlusMinusButton(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            return
+        } else if currentNumber.first == "-" {
+            currentNumber.remove(at: currentNumber.startIndex)
+        } else {
+            currentNumber = "-\(currentNumber)"
+        }
+        operandLabel.text = currentNumber
+    }
+    
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        if operandLabel.text == "0" {
+            operatorLabel.text = sender.text
+        } else {
+            makeFormulaStackView()
+            scrollToBottom()
+            if totalFormulaString.isEmpty {
+                totalFormulaString.append(currentNumber)
+            } else {
+                totalFormulaString.append(operatorLabel.text ?? "")
+                totalFormulaString.append(currentNumber)
+            }
+            operatorLabel.text = sender.text
+            currentNumber = ""
+            operandLabel.text = "0"
+        }
+    }
+    
+    private func makeFormulaStackView() {
+        let operatorLabel = makeLabel(text: operatorLabel.text)
+        let operandLabel = makeLabel(text: operandLabel.text)
+        let formulaStackView: UIStackView
+        
+        if totalFormulaString.isEmpty {
+            formulaStackView = UIStackView(arrangedSubviews: [operandLabel])
+        } else {
+            formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
+        }
+        formulaStackView.spacing = 8
+        mainStackView.addArrangedSubview(formulaStackView)
+    }
+    
+    private func makeLabel(text: String?) -> UILabel {
+        let label: UILabel = UILabel()
+        label.text = text
+        label.textColor = .white
+        return label
+    }
+    
+    private func scrollToBottom() {
+        view.layoutIfNeeded()
+        calculationFormulaScroll.setContentOffset(
+            CGPoint(x: 0,
+                    y: calculationFormulaScroll.contentSize.height
+                    - calculationFormulaScroll.bounds.height),
+            animated: true)
+    }
+    
+    @IBAction private func touchUpEqualButton(_ sender: UIButton) {
+        if totalFormulaString.isEmpty == false {
+            totalFormulaString += operatorLabel.text ?? ""
+            totalFormulaString += currentNumber
+            makeFormulaStackView()
+            scrollToBottom()
+            var formula = ExpressionParser.parse(from: totalFormulaString)
+            do {
+                let result = try formula.result()
+                operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: String(result))
+            } catch CalculatorError.shortOperator {
+                operandLabel.text = "NaN"
+            } catch CalculatorError.divideByZero {
+                operandLabel.text = "NaN"
+            } catch {
+                operandLabel.text = "unknown Error"
+            }
+            totalFormulaString = ""
+        }
+    }
+}
+extension UIButton {
+    var text: String {
+        self.titleLabel?.text ?? ""
+    }
 }
 
