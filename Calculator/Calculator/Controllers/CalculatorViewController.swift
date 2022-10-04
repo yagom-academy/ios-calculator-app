@@ -57,43 +57,27 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func makeHistoryStackViewLabel(item: String) -> UILabel {
-        let label: UILabel = {
-            let label = UILabel()
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            label.textAlignment = .right
-            label.text = item
-            label.textColor = .white
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.text = "\(item)"
+        label.textAlignment = .right
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.adjustsFontForContentSizeCategory = true
+        UIView.animate(withDuration: 0.3) {
+            label.isHidden = false
+        }
         return label
-    }
-    
-    private func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
-        let stackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-            stackView.spacing = 8
-            stackView.axis = .horizontal
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            return stackView
-        }()
-        
-        return stackView
     }
     
     private func updateCalculateHistory(currentOperator: String, currentOperand: String) {
         guard let operand = Double(currentOperand) else { return }
         
-        let operatorLabel = makeHistoryStackViewLabel(item: currentOperator)
-        let operandLabel = makeHistoryStackViewLabel(item: applyNumberFormatter(number: operand) )
-        let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-        
-        historyStackView.addArrangedSubview(stackView)
-        
+        let label = makeHistoryStackViewLabel(item: currentOperator + Constant.space + applyNumberFormatter(number: operand))
+        historyStackView.addArrangedSubview(label)
         view.layoutIfNeeded()
+        
         let contentOffsetValue: CGFloat = historyScrollView.contentSize.height - historyScrollView.frame.height
         historyScrollView.setContentOffset(CGPoint(x: 0, y: contentOffsetValue), animated: true)
     }
