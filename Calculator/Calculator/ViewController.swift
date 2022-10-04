@@ -42,6 +42,16 @@ class ViewController: UIViewController {
         updateOperandLabel(with: Constant.doubleZero)
     }
     
+    @IBAction func dotButtonPressed(_ sender: UIButton) {
+        guard let isContainingPoint = operandLabel.text?.contains(Constant.dot),
+            !isContainingPoint else { return }
+        if operandLabel.isZero {
+            updateOperandLabel(with: Constant.zero + Constant.dot)
+        } else {
+            updateOperandLabel(with: Constant.dot)
+        }
+    }
+    
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
         guard let senderLabel = sender.titleLabel,
               let senderText = senderLabel.text
