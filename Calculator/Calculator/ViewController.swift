@@ -61,6 +61,10 @@ class ViewController: UIViewController {
         resetSubviewsIfNeeded()
     }
     
+    @IBAction func CEButtonPressed(_ sender: UIButton) {
+        operandLabel.text = Constant.zero
+    }
+    
     
     private func updateOperandLabel(with number: String) {
         
