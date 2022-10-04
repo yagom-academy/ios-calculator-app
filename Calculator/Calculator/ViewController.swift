@@ -33,6 +33,19 @@ class ViewController: UIViewController {
         updateOperandLabel(with: "00")
     }
     
+    @IBAction private func operatorButtonPressed(_ sender: UIButton) {
+        guard let senderLabel = sender.titleLabel,
+              let senderText = senderLabel.text
+        else { return }
+        
+        updateOperatorLabel(with: senderText)
+        if operandLabel.isZero {
+            return
+        }
+        addSubviewToStackView()
+        updateExpression()
+    }
+    
     private func updateOperandLabel(with number: String) {
         
         if operandLabel.isZero {
