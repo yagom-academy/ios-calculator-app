@@ -91,7 +91,8 @@ struct Calculator {
     
     mutating func result() -> String {
         var result: String = ""
-        var formula: Formula = try! ExpressionParser.parse(from: convertOperatorsOperandsToString())
+        
+        var formula: Formula = ExpressionParser.parse(from: convertOperatorsOperandsToString())
         let formulaResult = formula.result()
         switch formulaResult {
         case .success(let formulaResult):
@@ -102,6 +103,8 @@ struct Calculator {
         case .failure(let error):
             result = error.localizedDescription
         }
+        
+        
         return result
     }
     

@@ -6,14 +6,14 @@
 //
 
 enum ExpressionParser {
-    static func parse(from input: String) throws -> Formula {
+    static func parse(from input: String) -> Formula {
         var result: Formula = Formula()
         
         if isFirstIndexMinus(of: input) {
             result.operands.enqueue(0.0)
         }
         
-        try componentsByOperator(from: input).forEach {
+        componentsByOperator(from: input).forEach {
             switch $0 {
             case String(Operator.add.rawValue):
                 result.operators.enqueue(Operator.add)
@@ -24,10 +24,9 @@ enum ExpressionParser {
             case "÷":
                 result.operators.enqueue(Operator.divide)
             default:
-                guard let double = Double.convertStringContainingCommaToDouble($0) else {
-                    throw ExpressionParserError.canNotChangeDouble
+                if let double = Double.convertStringContainingCommaToDouble($0) {
+                    result.operands.enqueue(double)
                 }
-                result.operands.enqueue(double)
             }
         }
         
