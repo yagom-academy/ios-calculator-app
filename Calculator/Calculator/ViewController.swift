@@ -7,6 +7,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private enum Constant {
+        static let zero = "0"
+        static let doubleZero = "00"
+        static let empty = ""
+        static let dot = "."
+    }
+    
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
@@ -30,7 +38,7 @@ class ViewController: UIViewController {
             return
         }
         
-        updateOperandLabel(with: "00")
+        updateOperandLabel(with: Constant.doubleZero)
     }
     
     @IBAction private func operatorButtonPressed(_ sender: UIButton) {
