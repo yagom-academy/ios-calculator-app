@@ -32,8 +32,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         front = front?.next
         return data
     }
-    
-    func peek() -> T? {
-        front?.data
+
+    mutating func deleteAll() {
+        front = nil
     }
 }
