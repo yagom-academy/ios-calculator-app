@@ -19,7 +19,7 @@ final class ViewController: UIViewController {
         static let eight = "8"
         static let nine = "9"
         static let add = "+"
-        static let substract = "−"
+        static let subtract = "−"
         static let multiply = "×"
         static let divide = "÷"
         static let minus = "-"
@@ -131,11 +131,11 @@ final class ViewController: UIViewController {
     @IBAction private func subtractButtonPressed(_ sender: UIButton) {
         
         if operandLabel.text == Constant.zero {
-            updateExpression(nextOperator: Constant.substract)
+            updateExpression(nextOperator: Constant.subtract)
             return
         }
         updateOperandAndOperatorStackView()
-        updateExpression(nextOperator: Constant.substract)
+        updateExpression(nextOperator: Constant.subtract)
     }
     
     @IBAction private func addButtonPressed(_ sender: UIButton) {
