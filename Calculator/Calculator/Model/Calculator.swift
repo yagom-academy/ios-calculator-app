@@ -53,6 +53,7 @@ struct Calculator {
         }
     }
     
+    @discardableResult
     mutating func inputOperator(_ input: String) -> Bool {
         currentOperator = input
         let isEditing: Bool = currentOperand != Calculator.defaultOperand
