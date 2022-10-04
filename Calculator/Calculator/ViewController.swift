@@ -153,8 +153,8 @@ class ViewController: UIViewController {
         
         guard let operandText = operandLabel.text,
               let operatorText = operatorLabel.text else { return }
-        expression += operandText
         expression += operatorText
+        expression += operandText
         
         resetOperandLabel()
     }
