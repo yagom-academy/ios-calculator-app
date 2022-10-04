@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         applyNumberFormatter()
     }
     
-    private func makeLabel(labelText :String) -> UILabel {
+    private func makeLabel(labelText: String) -> UILabel {
         let label = UILabel()
         label.text = labelText
         label.textColor = .white
@@ -85,32 +85,21 @@ class ViewController: UIViewController {
     
     @IBAction func touchUpOperatorsButton(_ sender: UIButton) {
         var formulaStackView = UIStackView()
+        var operatorUILabel = UILabel()
         
-        if fullFormula == empty {
-            stringOperators = sender.titleLabel?.text ?? ""
-            let operatorUILabel = makeLabel(labelText: empty)
-            operatorLabel.text = stringOperators
-            
-            let operandsUILabel = makeLabel(labelText: stringNumbers)
-            fullFormula += stringNumbers + stringOperators
-            stringNumbers = zero
-            operandsLabel.text = stringNumbers
-            
-            formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
-            
-        } else {
-            let operatorUILabel = makeLabel(labelText: stringOperators)
-            stringOperators = sender.titleLabel?.text ?? ""
-            operatorLabel.text = stringOperators
-            
-            let operandsUILabel = makeLabel(labelText: stringNumbers)
-            fullFormula += stringNumbers + stringOperators
-            stringNumbers = zero
-            operandsLabel.text = stringNumbers
-            
-            formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
+        if fullFormula != empty {
+            operatorUILabel = makeLabel(labelText: stringOperators)
         }
         
+        stringOperators = sender.titleLabel?.text ?? ""
+        operatorLabel.text = stringOperators
+        
+        let operandsUILabel = makeLabel(labelText: stringNumbers)
+        fullFormula += stringNumbers + stringOperators
+        stringNumbers = zero
+        operandsLabel.text = stringNumbers
+        
+        formulaStackView = makeStackView(operatorLabel: operatorUILabel, operandLabel: operandsUILabel)
         recentNumbersStackView.addArrangedSubview(formulaStackView)
         placeScroll()
     }
