@@ -22,8 +22,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setOperandLabelToZero()
-        setOperatorLabelEmpty()
+        resetOperandLabel()
+        resetOperatorLabel()
     }
     
     @IBAction func operandButtonTapped(_ sender: UIButton) {
@@ -77,29 +77,25 @@ final class CalculatorViewController: UIViewController {
         
         createFormulaLog()
         calculate()
-        setOperatorLabelEmpty()
-        arithmeticOperator.removeAll()
+        resetOperatorLabel()
         isCalculated = true
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        setOperandLabelToZero()
-        setOperatorLabelEmpty()
+        resetOperandLabel()
+        resetOperatorLabel()
         removeAllLogStackView()
         
         isFirstInput = true
         isDotButtonTapped = false
         isCalculated = false
         
-        operand.removeAll()
-        arithmeticOperator.removeAll()
         finalFormula.removeAll()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         if !operand.isEmpty {
-            operand.removeAll()
-            setOperandLabelToZero()
+            resetOperandLabel()
             isCalculated = false
         }
         
@@ -159,20 +155,21 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = arithmeticOperator
     }
 
-    func setOperandLabelToZero() {
+    func resetOperandLabel() {
+        operand.removeAll()
         operandLabel.text = CalculatorConstant.zero
     }
     
-    func setOperatorLabelEmpty() {
+    func resetOperatorLabel() {
+        arithmeticOperator.removeAll()
         operatorLabel.text = CalculatorConstant.blank
     }
     
     func createFormulaLog() {
         removeLastDot()
         createStackView()
-        setOperandLabelToZero()
         createFinalFormula()
-        operand.removeAll()
+        resetOperandLabel()
         isDotButtonTapped = false
     }
     
