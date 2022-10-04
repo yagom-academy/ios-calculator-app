@@ -6,15 +6,15 @@
 
 import UIKit
 
-struct Text {
-    fileprivate static let zero: String = "0"
-    fileprivate static let noValue: String = ""
-    fileprivate static let blank: String = " "
-    fileprivate static let negativeSymbol: String = "-"
-    fileprivate static let dot: Character = "."
-}
-
 class ViewController: UIViewController {
+    private enum Text {
+        static let zero: String = "0"
+        static let noValue: String = ""
+        static let blank: String = " "
+        static let negativeSymbol: String = "-"
+        static let dot: Character = "."
+    }
+    
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var showingOperationsStackView: UIStackView!
