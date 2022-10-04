@@ -1,46 +1,71 @@
-////
-////  ExpressionParserTests.swift
-////  CalculatorTests
-////
 //
-//import XCTest
-//@testable import Calculator
+//  ExpressionParserTests.swift
+//  CalculatorTests
 //
-//class ExpressionParserTests: XCTestCase {
-//    var sut: ExpressionParser.Type?
-//    
-//    let testCase1 = "1-fa2-2143+ㄹ"
-//    let testCase2 = "11/s*3a4+a-1243"
-//    let testCase3 = "1+sw10/sd/1a*s12f="
-//    let testCase4 = "12+3/a1s-12jsl"
-//    
-//    override func setUpWithError() throws {
-//        sut = ExpressionParser.self
-//    }
-//
-//    override func tearDownWithError() throws {
-//        sut = nil
-//    }
-//
-//    func test_parse함수실행시_Formula타입리턴하면_true() {
-//        guard let formula = sut?.parse(from: testCase1) else {
-//            XCTAssert(false)
-//            return
-//        }
-//        
-//        XCTAssert(type(of: formula) == Formula.self)
-//    }
-//    
-//    func test_parse함수의_operands와operators_분리하면_true() {
-//        guard let formula = sut?.parse(from: testCase1) else {
-//            XCTAssert(false)
-//            return
-//        }
-//        
-//        let testOperands = [Double(1), Double(2143)]
-//        let testOperators = [Operator.substract, Operator.substract, Operator.add]
-//        
-//        XCTAssert(formula.operands.mergedQueue.compactMap { $0 as? Double } == testOperands)
-//        XCTAssert(formula.operators.mergedQueue.compactMap { $0 as? Operator } == testOperators)
-//    }
-//}
+
+import XCTest
+@testable import Calculator
+
+class ExpressionParserTests: XCTestCase {
+    var sut: ExpressionParser.Type?
+    
+    let testCase1 = "12+34+56+78"
+    let testCase2 = "12-34-56-78"
+    let testCase3 = "12*34*56*78"
+    let testCase4 = "12/34/56/78"
+    let testCase5 = "12+34-56*78/910"
+    let testCase6 = "12.3+17.7"
+    
+    let testResult1 = ["12", "34", "56", "78"]
+    let testResult5 = ["12", "34", "56", "78", "910"]
+    let testResult6 = ["12.3", "17.7"]
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = ExpressionParser.self
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    // MARK: - componentsByOperators test
+    func test_더하기연산자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase1)
+        
+        XCTAssertEqual(result, testResult1)
+    }
+    
+    func test_빼기연산자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase2)
+        
+        XCTAssertEqual(result, testResult1)
+    }
+    
+    func test_곱하기연산자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase3)
+
+        XCTAssertEqual(result, testResult1)
+    }
+    
+    func test_나누기연산자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase4)
+        
+        XCTAssertEqual(result, testResult1)
+    }
+    
+    func test_여러연산자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase5)
+        
+        XCTAssertEqual(result, testResult5)
+    }
+    
+    func test_더블타입의_숫자가_포함되어있을때_배열이_순서대로_반환되는지() {
+        let result = sut?.componentsByOperators(from: testCase6)
+
+        XCTAssertEqual(result, testResult6)
+    }
+    
+    
+}

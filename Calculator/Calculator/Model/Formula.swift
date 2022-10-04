@@ -13,7 +13,7 @@ struct Formula {
             guard let nowOperator = operators.dequeue() else {
                 throw CalculatorError.shortOperator
             }
-            return try nowOperator.calculate(lhs: accumulatingResult, rhs: operands)
+            return try nowOperator.calculate(lhs: accumulatingResult, rhs: nextOperand)
         }
         return result
     }
