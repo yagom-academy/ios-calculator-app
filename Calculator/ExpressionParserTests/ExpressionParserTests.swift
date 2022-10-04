@@ -36,8 +36,6 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, 60)
     }
     
-    
-    
     func test_곱하기_string타입_식이_주어지면_파싱하여_결과가_나오는지_확인() {
         let stringFormula = "12×25×78×4"
         
