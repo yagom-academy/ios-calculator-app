@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
+    private var expression: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -52,6 +54,16 @@ class ViewController: UIViewController {
         textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         stackView.addArrangedSubview(textLabel)
+    }
+    
+    private func updateExpression() {
+        
+        guard let operandText = operandLabel.text,
+              let operatorText = operatorLabel.text else { return }
+        expression += operandText
+        expression += operatorText
+        
+        resetOperandLabel()
     }
     
     private func updateOperatorLabel(with `operator`: String) {
