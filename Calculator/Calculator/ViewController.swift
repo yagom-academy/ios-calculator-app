@@ -57,16 +57,28 @@ class ViewController: UIViewController {
         }
     }
     
+    private func makeLabel(labelText :String) -> UILabel {
+        let label = UILabel()
+        label.text = labelText
+        label.textColor = .white
+        return label
+    }
+    
+    private func makeStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        let formulaStackView: UIStackView = .init(arrangedSubviews: [operatorLabel, operandLabel])
+        formulaStackView.spacing = 8
+        return formulaStackView
+    }
+    
     private func addSubviewToStackView() {
         guard let operandText = operandLabel.text,
               let operatorText = operatorLabel.text else { return }
         
-        let textLabel = UILabel()
-        textLabel.text = operatorText + " " + operandText
-        textLabel.textColor = .white
-        textLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        let operandLabel = makeLabel(labelText: operandText)
+        let operatorLabel = makeLabel(labelText: operatorText)
         
-        stackView.addArrangedSubview(textLabel)
+        let subStackView = makeStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        stackView.addArrangedSubview(subStackView)
     }
     
     private func updateExpression() {
