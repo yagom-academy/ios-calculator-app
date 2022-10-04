@@ -37,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         }
         
         for index in 1..<routine {
-            input.append(" \(String(inputOperators[index - 1].identifier))")
+            input.append(" \(String(inputOperators[index - 1].rawValue))")
             input.append(" \(String(inputOperands[index]))")
         }
         
