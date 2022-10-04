@@ -27,67 +27,29 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
-            return
-        }
+        guard !isCalculated else { return }
         
-        guard let selectedOperand = Operand.matchOperandButtonTag(location: sender.tag) else {
-            return
-        }
-        
-        updateOperandLabel(with: selectedOperand.bringOperandSymbol)
-        isFirstInput = false
-    }
-    
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else {
-            return
-        }
-        
-        guard !isDotButtonTapped else {
-            return
-        }
-        
-        if !operand.isEmpty  {
-            operandLabel.text = operand.formatStyleToDecimal() + CalculatorConstant.dot
-            operand += CalculatorConstant.dot
+        switch sender.tag {
+        case 0:
+            guard !operand.isEmpty else { return }
+            
+            updateOperandLabel(with: sender.tag.description)
+        case 1...9:
+            updateOperandLabel(with: sender.tag.description)
+        case 10:
+            guard !operand.isEmpty else { return }
+            
+            updateOperandLabel(with: CalculatorConstant.doubleZero)
+        case 11:
+            guard !isDotButtonTapped else { return }
+            
+            updateOperandLabel(with: CalculatorConstant.dot)
             isDotButtonTapped = true
-        } else if operand.isEmpty {
-            operand += CalculatorConstant.zero + CalculatorConstant.dot
-            operandLabel.text = operand
-        }
-    }
-    
-    @IBAction func zeroButtonTapped(_ sender: UIButton) {
-        guard !isCalculated && !operand.isEmpty else {
+        default:
             return
         }
         
-        var input: String = CalculatorConstant.blank
-        if operand.last == Character(CalculatorConstant.dot) {
-            input = CalculatorConstant.dotZero
-        } else {
-            input = CalculatorConstant.zero
-        }
-        
-        operandLabel.text = operand.formatStyleToDecimal() + input
-        operand += CalculatorConstant.zero
-    }
-    
-    @IBAction func doubleZeroButtonTapped(_ sender: UIButton) {
-        guard !isCalculated && !operand.isEmpty else {
-            return
-        }
-        
-        var input: String = CalculatorConstant.blank
-        if operand.last == Character(CalculatorConstant.dot) {
-            input = CalculatorConstant.dotDoubleZero
-        } else {
-            input = CalculatorConstant.doubleZero
-        }
-        
-        operandLabel.text = operand.formatStyleToDecimal() + input
-        operand += CalculatorConstant.zero
+        isFirstInput = false
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
@@ -188,8 +150,19 @@ final class CalculatorViewController: UIViewController {
     }
     
     func updateOperandLabel(with input: String) {
-        operand += input
-        operandLabel.text = operand.formatStyleToDecimal()
+        if input == CalculatorConstant.dot {
+            if isFirstInput {
+                operand += CalculatorConstant.zero + input
+                operandLabel.text = operand
+                
+                return
+            }
+            operand += input
+            operandLabel.text = operand
+        } else {
+            operand += input
+            operandLabel.text = operand.formatStyleToDecimal()
+        }
     }
     
     func updateOperatorLabel(with input: String) {
