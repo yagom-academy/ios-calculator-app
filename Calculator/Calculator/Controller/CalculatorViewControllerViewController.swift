@@ -15,8 +15,30 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        clearAll()
     }
-
+    
+    private func updateOperatorLabel(to string: String = "") {
+        operatorLabel.text = string
+    }
+    
+    private func updatenumberLabel(to string: String = "") {
+        numberLabel.text = string
+    }
+    
+    private func removeAllStackView() {
+        historyStackView.arrangedSubviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
+    
+    private func clearAll() {
+        updateOperatorLabel()
+        updatenumberLabel()
+        removeAllStackView()
+    }
+    
     @IBAction func touchCalculatorButton(_ sender: UIButton) {
         
         guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
@@ -32,7 +54,7 @@ class CalculatorViewController: UIViewController {
         case .add, .subtract, .multiply, .divide:
             print(key.rawValue)
         case .ac:
-            print(key.rawValue)
+            clearAll()
         case .ce:
             print(key.rawValue)
         case .plusMinus:
