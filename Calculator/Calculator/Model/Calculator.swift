@@ -116,31 +116,32 @@ struct Calculator {
     }
     
     private func applyFormat(to input: String) -> String {
-        let result: String
         let inputNumber: Double = Double.convertStringContainingCommaToDouble(input) ?? 0
         let integerNumber: Int = Int(inputNumber)
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
         let separatedInput: [String] = input.components(separatedBy: ".")
         let hasDecimalPart: Bool = separatedInput.count >= 2
         guard hasDecimalPart else {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return result
+            return applyNumberFormat(to: NSNumber(value: integerNumber))
         }
         let decimalPart: String = separatedInput[1]
-        let hasOnlyPoint: Bool = decimalPart == ""
+        let hasOnlyPoint: Bool = decimalPart.isEmpty
         let hasZeroAtTheEnd: Bool = decimalPart.hasSuffix("0")
+        let formattedIntegerNumber: String = applyNumberFormat(to: NSNumber(value: integerNumber))
         if hasOnlyPoint {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return "\(result)."
-        } else if hasZeroAtTheEnd {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return "\(result).\(decimalPart)"
-        } else {
-            result = numberFormatter.string(from: NSNumber(value: inputNumber)) ?? ""
-            return result
+            return "\(formattedIntegerNumber)."
         }
+        else if hasZeroAtTheEnd {
+            return "\(formattedIntegerNumber).\(decimalPart)"
+        } else {
+            return applyNumberFormat(to: NSNumber(value: inputNumber))
+        }
+    }
+    
+    private func applyNumberFormat(to input: NSNumber) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        return numberFormatter.string(from: input) ?? ""
     }
     
     private func removeComma(_ input: String) -> String {
