@@ -6,9 +6,8 @@
 
 import UIKit
 
-
-class CalculatorViewController: UIViewController {
-    enum Text {
+final class CalculatorViewController: UIViewController {
+    private enum Text {
         static let zero: String = "0"
         static let noValue: String = ""
         static let negativeSymbol: String = "-"
