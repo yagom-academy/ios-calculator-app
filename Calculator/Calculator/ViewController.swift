@@ -90,10 +90,12 @@ final class ViewController: UIViewController {
         guard let inputOperator: String = sender.titleLabel?.text else {
             return
         }
-        if calculator.inputOperator(inputOperator) {
+        if calculator.isEditingState {
             addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
             scrollToBottom()
+            
         }
+        calculator.inputOperator(inputOperator)
         operandLabel.text = calculator.currentOperand
         operatorLabel.text = calculator.currentOperator
     }

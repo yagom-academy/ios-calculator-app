@@ -16,6 +16,11 @@ struct Calculator {
     private(set) var currentOperator: String = defaultOperator
     private var operands: [String] = []
     private var operators: [String] = []
+    var isEditingState: Bool {
+        get {
+            return currentOperand != Calculator.defaultOperand
+        }
+    }
     
     mutating func resetCurrentOperand() {
         currentOperand = Calculator.defaultOperand
@@ -53,18 +58,14 @@ struct Calculator {
         }
     }
     
-    @discardableResult
-    mutating func inputOperator(_ input: String) -> Bool {
+    mutating func inputOperator(_ input: String) {
         currentOperator = input
-        let isEditing: Bool = currentOperand != Calculator.defaultOperand
-        let isNotNanError: Bool = currentOperand != CalculateError.dividedByZero.localizedDescription
-        guard isEditing, isNotNanError else {
-            return false
+        guard isEditingState else {
+            return
         }
         operators.append(currentOperator)
         operands.append(currentOperand)
         resetCurrentOperand()
-        return true
     }
     
     mutating func switchPositiveNegativeOfCurrentOperand() {
