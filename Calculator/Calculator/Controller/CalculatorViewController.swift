@@ -50,7 +50,7 @@ class CalculatorViewController: UIViewController {
         case .dot:
             inputDot()
         case .add, .subtract, .multiply, .divide:
-            print(key.rawValue)
+            inputOperator(key.rawValue)
         case .ac:
             clearAll()
         case .ce:
@@ -95,6 +95,13 @@ class CalculatorViewController: UIViewController {
         
         calculator.updateCurrentOperand(currentOperand)
         updateNumberLabel(to: calculator.currentOperand)
+    }
+    
+    private func inputOperator(_ `operator`: String) {
+        calculator.updateExpression()
+        clearEntry()
+        calculator.updateCurrentOperator(`operator`)
+        updateOperatorLabel(to: calculator.currentOperator)
     }
 }
 

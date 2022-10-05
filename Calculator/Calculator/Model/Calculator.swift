@@ -27,4 +27,12 @@ class Calculator {
     func updateCurrentOperand(_ number: String) {
         currentOperand = number
     }
+    
+    func updateCurrentOperator(_ `operator`: String) {
+        currentOperator = `operator`
+    }
+    
+    func updateExpression() {
+        expression += currentOperator + currentOperand
+    }
 }
