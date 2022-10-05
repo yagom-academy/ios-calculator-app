@@ -7,10 +7,10 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var formulaStackView: UIStackView!
-    @IBOutlet weak var logScrollView: UIScrollView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var formulaStackView: UIStackView!
+    @IBOutlet private weak var logScrollView: UIScrollView!
     
     private var operand: String = CalculatorConstant.blank
     private var arithmeticOperator: String = CalculatorConstant.blank
@@ -26,7 +26,7 @@ final class CalculatorViewController: UIViewController {
         resetOperatorLabel()
     }
     
-    @IBAction func operandButtonTapped(_ sender: UIButton) {
+    @IBAction private func operandButtonTapped(_ sender: UIButton) {
         guard !isCalculated else { return }
         
         switch sender.tag {
@@ -52,7 +52,7 @@ final class CalculatorViewController: UIViewController {
         isFirstInput = false
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let selectedOperator = sender.currentTitle else { return }
         guard !isFirstInput else { return }
         
@@ -68,7 +68,7 @@ final class CalculatorViewController: UIViewController {
         isCalculated = false
     }
     
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard !isCalculated else { return }
         
         if operand.isEmpty {
@@ -81,7 +81,7 @@ final class CalculatorViewController: UIViewController {
         isCalculated = true
     }
     
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         resetOperandLabel()
         resetOperatorLabel()
         removeAllLogStackView()
@@ -93,7 +93,7 @@ final class CalculatorViewController: UIViewController {
         finalFormula.removeAll()
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         if !operand.isEmpty {
             resetOperandLabel()
             isCalculated = false
@@ -104,7 +104,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func toggleSignButtonTapped(_ sender: UIButton) {
+    @IBAction private func toggleSignButtonTapped(_ sender: UIButton) {
         guard !isCalculated else { return }
         guard !operand.isEmpty else{ return }
         
@@ -117,7 +117,7 @@ final class CalculatorViewController: UIViewController {
         operandLabel.text = operand
     }
     
-    func createStackView() {
+    private func createStackView() {
         let logOperand = operand.formatStyleToDecimal()
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
         
@@ -125,16 +125,16 @@ final class CalculatorViewController: UIViewController {
         updateLogScrollViewContentOffset()
     }
     
-    func removeLastDot() {
+    private func removeLastDot() {
         operand = operand.trimmingCharacters(in: CalculatorConstant.dotSet)
     }
     
-    func createFinalFormula() {
+    private func createFinalFormula() {
         finalFormula += arithmeticOperator
         finalFormula += operand
     }
     
-    func updateOperandLabel(with input: String) {
+    private func updateOperandLabel(with input: String) {
         if input == CalculatorConstant.dot {
             if isFirstInput {
                 operand += CalculatorConstant.zero + input
@@ -150,22 +150,22 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    func updateOperatorLabel(with input: String) {
+    private func updateOperatorLabel(with input: String) {
         arithmeticOperator = input
         operatorLabel.text = arithmeticOperator
     }
 
-    func resetOperandLabel() {
+    private func resetOperandLabel() {
         operand.removeAll()
         operandLabel.text = CalculatorConstant.zero
     }
     
-    func resetOperatorLabel() {
+    private func resetOperatorLabel() {
         arithmeticOperator.removeAll()
         operatorLabel.text = CalculatorConstant.blank
     }
     
-    func createFormulaLog() {
+    private func createFormulaLog() {
         removeLastDot()
         createStackView()
         createFinalFormula()
@@ -173,7 +173,7 @@ final class CalculatorViewController: UIViewController {
         isDotButtonTapped = false
     }
     
-    func calculate() {
+    private func calculate() {
         isCalculated = true
         var formula = ExpressionParser.parse(from: finalFormula)
         
@@ -188,7 +188,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    func updateLogScrollViewContentOffset() {
+    private func updateLogScrollViewContentOffset() {
         let contentOffset = CGPoint(
             x: 0,
             y: logScrollView.contentSize.height - logScrollView.bounds.height
@@ -197,7 +197,7 @@ final class CalculatorViewController: UIViewController {
         logScrollView.setContentOffset(contentOffset, animated: true)
     }
     
-    func removeAllLogStackView() {
+    private func removeAllLogStackView() {
         formulaStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
