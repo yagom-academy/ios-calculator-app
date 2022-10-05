@@ -5,7 +5,7 @@
 //  Created by Hamo on 2022/10/02.
 //
 
-import Foundation
+import UIKit
 
 enum CalculatorConstant {
     static let blank: String = ""
@@ -19,4 +19,5 @@ enum CalculatorConstant {
     static let dotSet: CharacterSet = ["."]
     static let notNumber: String = "NaN"
     static let unexpectedError: String = "Error"
+    static let logStackViewSpacing: CGFloat = 8
 }

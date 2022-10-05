@@ -24,6 +24,7 @@ final class LogStackView: UIStackView {
         operandLabel.text = operand
         operatorLabel.text = arithmeticOperator
         super.init(arrangedSubviews: [operatorLabel, operandLabel])
+        addSpacing()
     }
     
     override init(frame: CGRect) {
@@ -32,5 +33,9 @@ final class LogStackView: UIStackView {
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addSpacing() {
+        self.spacing = CalculatorConstant.logStackViewSpacing
     }
 }
