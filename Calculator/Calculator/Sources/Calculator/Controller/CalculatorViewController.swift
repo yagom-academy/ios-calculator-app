@@ -67,7 +67,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTappedACButton(_ sender: UIButton) { resetInitState() }
     
     @IBAction private func didTappedCEButton(_ sender: UIButton) {
-        guard calculatorButtons.allSatisfy ({ $0.isEnabled == true }) else {
+        guard calculatorButtons.allSatisfy(\.isEnabled) else {
             resetInitState()
             return
         }
