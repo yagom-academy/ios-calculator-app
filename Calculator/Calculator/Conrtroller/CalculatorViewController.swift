@@ -175,6 +175,13 @@ private extension CalculatorViewController {
             return
         }
         
+        if value.components(separatedBy: NameSpace.dot).count > 1 {
+            let values = value.components(separatedBy: NameSpace.dot)
+            inputOperandLabel.text =
+                (Double(values[0]) ?? 0).changeToDemical + NameSpace.dot + values[1]
+            return
+        }
+        
         inputOperandLabel.text = String((Double(value) ?? 0).changeToDemical)
     }
     
