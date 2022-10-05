@@ -24,7 +24,7 @@ struct LinkedList<Element: CalculateItem> {
         }
         
         let newElement = Node(data: data)
-        self.tail?.setNextNode(destination: newElement)
+        self.tail?.setNext(destination: newElement)
         self.tail = newElement
     }
     

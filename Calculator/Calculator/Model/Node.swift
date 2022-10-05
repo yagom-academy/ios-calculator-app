@@ -13,7 +13,7 @@ final class Node<Element: CalculateItem> {
         self.data = data
     }
     
-    func setNextNode(destination: Node) {
+    func setNext(destination: Node) {
         next = destination
     }
 }
