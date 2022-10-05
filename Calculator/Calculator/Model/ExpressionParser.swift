@@ -42,7 +42,7 @@ enum ExpressionParser {
         var preCharacter = components[0]
         var index = 1
         
-        if Int(preCharacter) == nil {
+        if Double(preCharacter) == nil {
             preCharacter += components[1]
             index = 2
         }
@@ -50,7 +50,7 @@ enum ExpressionParser {
         while index < components.count {
             var currentCharacter = components[index]
             
-            if Int(preCharacter) == nil && Int(currentCharacter) == nil {
+            if Double(preCharacter) == nil && Double(currentCharacter) == nil {
                 currentCharacter += components[index + 1]
                 index += 1
             }
@@ -61,7 +61,6 @@ enum ExpressionParser {
         }
         
         result.append(preCharacter)
-        
         return result
     }
     

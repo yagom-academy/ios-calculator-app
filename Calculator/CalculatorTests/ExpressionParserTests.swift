@@ -10,7 +10,7 @@ import XCTest
 
 final class ExpressionParserTests: XCTestCase {
     
-    func test_When_generate_parse_Then_expect_Not_nil() {
+    func test_when_generate_parse_then_expect_Not_nil() {
         // given
         let testString = "1+2+3"
         
@@ -21,7 +21,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertNotNil(result)
     }
     
-    func test_When_given_testString_Then_return_Formula_Instance() {
+    func test_when_given_testString_then_return_Formula_Instance() {
         // given
         let testString = "1+23-4*567/8+9+010"
         let resultOperands: [Double] = [1, 23, 4, 567, 8, 9, 10]
@@ -39,7 +39,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operators, resultOperators)
     }
     
-    func test_When_given_minus_Number_Then_return_right_Formula() {
+    func test_when_given_minus_Number_then_return_right_Formula() {
         // given
         let testString1 = "-1+-3"
         let resultOperands1: [Double] = [-1, -3]
