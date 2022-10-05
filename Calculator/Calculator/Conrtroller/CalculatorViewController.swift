@@ -67,6 +67,11 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         guard let number = sender.titleLabel?.text else { return }
         
+        if isCalculated {
+            showingOperationsStackView.removeSubViewAll()
+            resetRawFormula()
+        }
+        
         switch number {
         case NameSpace.zero:
             guard userInput != NameSpace.zero else { return }
@@ -84,6 +89,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard !rawFormulas.isEmpty || userInput != NameSpace.zero || isCalculated else { return }
+        
         if isCalculated {
             addStackView()
             addFormula()
