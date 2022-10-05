@@ -170,13 +170,12 @@ private extension CalculatorViewController {
     }
     
     func changeOperandLabelByUserInput(_ value: String) {
-        guard value != NameSpace.zero,
-              value != NameSpace.negativeSymbol else {
+        guard value != NameSpace.negativeSymbol else {
             inputOperandLabel.text = NameSpace.zero
             return
         }
         
-        inputOperandLabel.text = value
+        inputOperandLabel.text = String((Double(value) ?? 0).changeToDemical)
     }
     
     func addFormula() {

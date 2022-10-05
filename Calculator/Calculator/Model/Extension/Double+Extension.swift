@@ -11,10 +11,10 @@ extension Double: CalculateItem {
     static let numberFormatter = NumberFormatter()
 
     var changeToDemical: String {
-        let twenty: Int = 20
+        let maxDigits: Int = 20
         
         Self.numberFormatter.numberStyle = .decimal
-        Self.numberFormatter.maximumSignificantDigits = twenty
+        Self.numberFormatter.maximumSignificantDigits = maxDigits
         Self.numberFormatter.roundingMode = .up
     
         let result = Self.numberFormatter.string(from: self as NSNumber) ?? "0"
