@@ -19,6 +19,12 @@ class Calculator {
         return currentOperand.contains(MathSymbol.dot)
     }
     
+    func clearCalculator() {
+        expression = ""
+        currentOperator = ""
+        currentOperand = "0"
+    }
+    
     func calculatedResult() -> Double {
         var formula: Formula = ExpressionParser.parser(from: expression)
         return 0.0

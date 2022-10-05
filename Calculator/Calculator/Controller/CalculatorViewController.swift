@@ -34,8 +34,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func clearAll() {
-        updateOperatorLabel()
-        updateNumberLabel()
+        calculator.clearCalculator()
+        updateOperatorLabel(to: calculator.currentOperator)
+        updateNumberLabel(to: calculator.currentOperand)
         removeAllStackView()
     }
     
@@ -58,7 +59,7 @@ class CalculatorViewController: UIViewController {
         case .plusMinus:
             changeSign()
         case .equal:
-            print(key.rawValue)
+            inputEqual()
         }
     }
     
@@ -102,6 +103,10 @@ class CalculatorViewController: UIViewController {
         clearEntry()
         calculator.updateCurrentOperator(`operator`)
         updateOperatorLabel(to: calculator.currentOperator)
+    }
+    
+    private func inputEqual() {
+        calculator.updateExpression()
     }
 }
 
