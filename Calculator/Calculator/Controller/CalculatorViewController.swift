@@ -12,6 +12,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
     var currentInputNumber: String = ""
+    let calculator: Calculator = Calculator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = string
     }
     
-    private func updatenumberLabel(to string: String = "") {
+    private func updateNumberLabel(to string: String = "") {
         numberLabel.text = string
     }
     
@@ -35,12 +36,11 @@ class CalculatorViewController: UIViewController {
     
     private func clearAll() {
         updateOperatorLabel()
-        updatenumberLabel()
+        updateNumberLabel()
         removeAllStackView()
     }
     
     @IBAction func touchCalculatorButton(_ sender: UIButton) {
-        
         guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
             return
         }
@@ -65,7 +65,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputNumber(_ number: String) {
-        currentInputNumber += number
+        calculator.updateCurrentOperand(number)
+        updateNumberLabel(to: calculator.currentOperand)
     }
 }
 
