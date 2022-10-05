@@ -79,7 +79,7 @@ struct Calculator {
         }
     }
     
-    mutating func inputEqual() -> String? {
+    mutating func inputEqual() throws -> String? {
         let isInitialState: Bool = operators.isEmpty
         if isInitialState {
             return nil
@@ -87,25 +87,16 @@ struct Calculator {
         operands.append(currentOperand)
         resetCurrentOperand()
         resetCurrentOperator()
-        return result()
+        return try result()
     }
     
-    mutating func result() -> String {
-        var result: String = ""
-        
+    mutating func result() throws -> String {
         var formula: Formula = ExpressionParser.parse(from: convertOperatorsOperandsToString())
-        let formulaResult = formula.result()
-        switch formulaResult {
-        case .success(let formulaResult):
-            if let formulaResult = formulaResult {
-                result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
-                currentOperand = result
-            }
-        case .failure(let error):
-            result = error.localizedDescription
+        guard let formulaResult = try formula.result() else {
+            return ""
         }
-        
-        
+        let result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
+        currentOperand = result
         return result
     }
     

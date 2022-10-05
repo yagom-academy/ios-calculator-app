@@ -9,7 +9,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() -> Result<Double?, CalculateError> {
+    mutating func result() throws -> Double? {
         var result: Double?
         while !operators.isEmpty {
             let leftHandSide: Double?
@@ -20,16 +20,10 @@ struct Formula {
             }
             guard let lhs: Double = leftHandSide,
                   let rhs: Double = operands.dequeue() else {
-                return .success(result)
+                return result
             }
-            do {
-                result = try operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
-            } catch CalculateError.dividedByZero {
-                return .failure(.dividedByZero)
-            } catch {
-                return .failure(.unexpectedError)
-            }
+            result = try operators.dequeue()?.calculate(lhs: lhs, rhs: rhs)
         }
-        return .success(result)
+        return result
     }
 }
