@@ -97,7 +97,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         }
         
         var result: Double?
-        for _ in 1...sut.count + 1 {
+        for _ in 0...sut.count {
             result = sut.dequeue()
         }
         
