@@ -14,9 +14,5 @@ enum Constant {
     static let space: String = " "
     static let calculate: String = "="
     static let dot: String = "."
-    
     static let nan: String = "NaN"
-    static let noneOperand: String = "None Operand Error"
-    static let noneOperator: String = "None Operator Error"
-    static let error: String = "Some Error"
 }
