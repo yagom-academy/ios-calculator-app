@@ -11,7 +11,7 @@ struct Formula {
     
     mutating func result() -> Double {
         var result: Double = 0
-        
+
         guard let firstNumber = operands.dequeue(),
               let secondNumber = operands.dequeue(),
               let operatorSymbol = operators.dequeue() else {
@@ -29,5 +29,3 @@ struct Formula {
         return result
     }
 }
-
-

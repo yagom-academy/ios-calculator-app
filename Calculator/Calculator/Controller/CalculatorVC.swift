@@ -144,6 +144,7 @@ final class CalculatorVC: UIViewController {
             } else {
                 operandLabel.text = CalculatorFormatter.shared.numberFormatter(number: String(result))
             }
+            operatorLabel.text = ""
             totalFormulaString = "" 
         }
     }
