@@ -36,7 +36,7 @@ class ViewController: UIViewController {
             operandManager.appendOperands(from: tappedOperand)
         }
         
-        operandManager.displayOperand(to: mainOperandLabel)
+        mainOperandLabel.text = operandManager.currentOperand.addCommaInteger()
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         
         let operandLabel: UILabel = UILabel()
-        operandLabel.text = mainOperandLabel.text?.applyNumberFormatterAtFormulaHistoryView()
+        operandLabel.text = mainOperandLabel.text?.addComma()
         
         let operatorLabel: UILabel = UILabel()
         operatorLabel.text = mainOperatorLabel.text

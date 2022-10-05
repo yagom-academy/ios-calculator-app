@@ -3,8 +3,6 @@
 //  Created by Wonbi
 //
 
-import UIKit
-
 struct OperandManager {
     private(set) var currentOperand: String = "0"
     private(set) var expression: String = ""
@@ -46,19 +44,6 @@ struct OperandManager {
             currentOperand = operand
         } else {
             currentOperand.append(operand)
-        }
-    }
-    
-    func displayOperand(to label: UILabel) {
-        let integerPart: String = currentOperand.components(separatedBy: ".")[0]
-        
-        if currentOperand.last == "." {
-            label.text = integerPart.addComma() + "."
-        } else if currentOperand.contains("."), currentOperand.last != "." {
-            let decimalPart: String = currentOperand.components(separatedBy: ".")[1]
-            label.text = integerPart.addComma() + "." + decimalPart
-        } else {
-            label.text = currentOperand.addComma()
         }
     }
 }

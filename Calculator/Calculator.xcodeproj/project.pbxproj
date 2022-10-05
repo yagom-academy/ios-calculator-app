@@ -27,6 +27,7 @@
 		E38B2A3728DAF3B1001CE3F7 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B2A3628DAF3B1001CE3F7 /* Formula.swift */; };
 		E38B2A3928DAF4CA001CE3F7 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B2A3828DAF4CA001CE3F7 /* FormulaTests.swift */; };
 		E38B2A3B28DAFAB1001CE3F7 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38B2A3A28DAFAB1001CE3F7 /* ExpressionParser.swift */; };
+		E3FB268528ED1D45009BA8B8 /* StringExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3FB268428ED1D45009BA8B8 /* StringExtensionTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		E38B2A3628DAF3B1001CE3F7 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		E38B2A3828DAF4CA001CE3F7 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		E38B2A3A28DAFAB1001CE3F7 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		E3FB268428ED1D45009BA8B8 /* StringExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensionTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 		E35F1B3E28D88148001C60CA /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				E3FB268428ED1D45009BA8B8 /* StringExtensionTests.swift */,
 				E34A1C1728DDE13C006D0ACE /* ExpressionParserTests.swift */,
 				E38B2A3828DAF4CA001CE3F7 /* FormulaTests.swift */,
 				E35F1B3F28D88148001C60CA /* CalculatorItemQueueTests.swift */,
@@ -291,6 +294,7 @@
 				E38B2A3928DAF4CA001CE3F7 /* FormulaTests.swift in Sources */,
 				E34A1C1028DD955B006D0ACE /* OperatorTests.swift in Sources */,
 				E34A1C1828DDE13C006D0ACE /* ExpressionParserTests.swift in Sources */,
+				E3FB268528ED1D45009BA8B8 /* StringExtensionTests.swift in Sources */,
 				E35F1B4028D88148001C60CA /* CalculatorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

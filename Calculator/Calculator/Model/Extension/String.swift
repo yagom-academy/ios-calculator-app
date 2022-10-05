@@ -20,20 +20,17 @@ extension String {
         return result
     }
     
-    func applyNumberFormatterAtMainLabel() -> String {
-        let splitedByDot: [String] = self.split(with: ".")
+    func addCommaInteger() -> String {
+        let components: [String] = self.components(separatedBy: ".")
+        guard let integerPart = numberFormatter.string(for: Double(components[0])) else { return self }
         
-        guard let number: NSNumber = numberFormatter.number(from: splitedByDot[0]),
-              let stringBeforeDot: String = numberFormatter.string(from: number) else { return "" }
-        return splitedByDot[1...].reduce(into: stringBeforeDot) { $0.append("." + $1) }
+        if components.count >= 2 {
+            return integerPart + "." + components[1]
+        } else {
+            return integerPart
+        }
     }
-    
-    func applyNumberFormatterAtFormulaHistoryView() -> String {
-        guard let number: NSNumber = numberFormatter.number(from: self),
-              let returnValue: String = numberFormatter.string(from: number) else { return "" }
-        return returnValue
-    }
-    
+
     func split(with target: Character) -> [String] {
         let splitComponents = self.split(separator: target, omittingEmptySubsequences: true)
         
