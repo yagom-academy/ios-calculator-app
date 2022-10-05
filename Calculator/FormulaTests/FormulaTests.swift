@@ -23,22 +23,24 @@ class FormulaTests: XCTestCase {
     }
 
     func test_result() throws {
-        //give (0 + 111 - 110.99) / 10.0 * 3000  일 때
+        //give (111 - 110.99) / 10.0 * 3000  일 때
         sut.operands.enqueue(111)
-        sut.operands.enqueue(110.99)
-        sut.operands.enqueue(10.0)
-        sut.operands.enqueue(3000)
-    
-        sut.operators.enqueue(.add)
         sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(110.99)
+        
         sut.operators.enqueue(.divide)
+        
+        sut.operands.enqueue(10.0)
         sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(3000)
+        
+
         
         //when result 메서드 작동 시
         let result = try sut.result()
         
-        //then 값은 (0 + 111 - 110.99) / 10.0 * 3000 = 3
-        XCTAssertEqual((0 + 111 - 110.99) / 10.0 * 3000, result)
+        //then 값은 (111 - 110.99) / 10.0 * 3000 = 3
+        XCTAssertEqual((111 - 110.99) / 10.0 * 3000, result)
         
         //의도한 fail test
         XCTAssertNotEqual(4, result)
