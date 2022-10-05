@@ -7,11 +7,13 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    private enum Text {
+    private enum NameSpace {
         static let zero: String = "0"
+        static let doubleZero: String = "00"
         static let noValue: String = ""
         static let negativeSymbol: String = "-"
         static let dot: Character = "."
+        static let spacing: CGFloat = 8
     }
     
     @IBOutlet private weak var inputOperandLabel: UILabel!
@@ -21,17 +23,11 @@ final class CalculatorViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     private var rawFormulas: [String] = []
-    private var result: Double = 0.0
+    private var result: Double = Double.zero
     private var isCalculated: Bool = false
     private var userInput: String = "" {
         willSet {
-            guard newValue != Text.noValue,
-                  newValue != Text.negativeSymbol else {
-                inputOperandLabel.text = Text.zero
-                return
-            }
-            
-            inputOperandLabel.text = newValue
+            changeOperandLabelByUserInput(newValue)
         }
     }
     
@@ -41,7 +37,7 @@ final class CalculatorViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = 8
+        stackView.spacing = NameSpace.spacing
         
         return stackView
     }
@@ -72,10 +68,10 @@ final class CalculatorViewController: UIViewController {
         guard let number = sender.titleLabel?.text else { return }
         
         switch number {
-        case "0", "00":
-            guard userInput != Text.zero else { return }
+        case NameSpace.zero, NameSpace.doubleZero:
+            guard userInput != NameSpace.zero else { return }
         default:
-            if userInput == Text.zero {
+            if userInput == NameSpace.zero {
                 userInput.removeFirst()
             }
         }
@@ -91,13 +87,13 @@ final class CalculatorViewController: UIViewController {
             isCalculated = false
         }
         
-        guard userInput != Text.noValue else {
+        guard userInput != NameSpace.noValue else {
             inputOperatorLabel.text = sender.titleLabel?.text
             return
         }
         
-        guard userInput.split(with: Text.dot).count <= 2,
-              userInput != String(Text.dot) else {
+        guard userInput.split(with: NameSpace.dot).count <= 2,
+              userInput != String(NameSpace.dot) else {
             resetInputNumber()
             inputOperandLabel.text = numberFormatter.notANumberSymbol
             return
@@ -111,12 +107,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpConvertingPositiveNegativeButton() {
-        guard userInput != Text.zero else { return }
+        guard userInput != NameSpace.zero else { return }
         
-        if userInput.prefix(1) == Text.negativeSymbol {
+        if userInput.contains(NameSpace.negativeSymbol) {
             userInput.removeFirst()
         } else {
-            userInput.insert(contentsOf: Text.negativeSymbol, at: userInput.startIndex)
+            userInput.insert(contentsOf: NameSpace.negativeSymbol, at: userInput.startIndex)
         }
     }
     
@@ -158,15 +154,25 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     private func resetInputNumber() {
-        userInput = Text.noValue
+        userInput = NameSpace.noValue
     }
     
     private func resetOperatorLabel() {
-        inputOperatorLabel.text = Text.noValue
+        inputOperatorLabel.text = NameSpace.noValue
     }
     
     private func resetRawFormula() {
         rawFormulas = []
+    }
+    
+    private func changeOperandLabelByUserInput(_ value: String) {
+        guard value != NameSpace.noValue,
+              value != NameSpace.negativeSymbol else {
+            inputOperandLabel.text = NameSpace.zero
+            return
+        }
+        
+        inputOperandLabel.text = value
     }
     
     private func addFormula() {
