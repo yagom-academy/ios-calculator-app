@@ -9,6 +9,17 @@ import XCTest
 @testable import Calculator
 
 class ExpressionParserTests: XCTestCase {
+    var sut: Formula!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = Formula()
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
     
     func test_string값의_식의_결과값이_356일때_string내부의값을_parse하여_연산한_결과값이_356와일치하는지() {
         let result: Double = 356
@@ -50,4 +61,26 @@ class ExpressionParserTests: XCTestCase {
         XCTAssertThrowsError(try parse.result())
     }
     
+    func test_parse_문자열을_연산자기호와숫자로나누어_Formula로반환확인() throws {
+        //given 연산자기호가 섞인 문자열을
+        let a = "1 + 23 × 456"
+        
+        //when 연산자기호와 숫자로나누어 큐에담은 formula를생성할시
+        sut = ExpressionParser.parse(from: a)
+        
+        //then formula의 숫자는 operands, 기호는 operators의 큐에담긴다.
+        let expectedOperand: [Double] = [1, 23, 456]
+        let expectedOperator: [Character] = ["+", "×"]
+        
+        XCTAssertEqual(expectedOperand[0], sut.operands.dequeue()?.data)
+        XCTAssertEqual(expectedOperand[1], sut.operands.dequeue()?.data)
+        XCTAssertEqual(expectedOperand[2], sut.operands.dequeue()?.data)
+
+        XCTAssertEqual(expectedOperator[0], sut.operators.dequeue()?.data?.rawValue)
+        XCTAssertEqual(expectedOperator[1], sut.operators.dequeue()?.data?.rawValue)
+        
+        //의도한 fail test
+        XCTAssertNotEqual(expectedOperand[0], sut.operands.dequeue()?.data)
+        XCTAssertNotEqual(expectedOperator[0], sut.operators.dequeue()?.data?.rawValue)
+    }
 }
