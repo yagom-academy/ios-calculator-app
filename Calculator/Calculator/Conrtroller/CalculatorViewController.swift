@@ -14,28 +14,28 @@ final class CalculatorViewController: UIViewController {
         static let dot: Character = "."
     }
     
-    @IBOutlet private weak var operandLabel: UILabel!
-    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var inputOperandLabel: UILabel!
+    @IBOutlet private weak var inputOperatorLabel: UILabel!
     @IBOutlet private weak var showingOperationsStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter()
-    private var rawFormula: [String] = []
+    private var rawFormulas: [String] = []
     private var result: Double = 0.0
     private var isCalculated: Bool = false
-    private var inputNumber: String = "" {
+    private var userInput: String = "" {
         willSet {
             guard newValue != Text.noValue,
                   newValue != Text.negativeSymbol else {
-                operandLabel.text = Text.zero
+                inputOperandLabel.text = Text.zero
                 return
             }
             
-            operandLabel.text = newValue
+            inputOperandLabel.text = newValue
         }
     }
     
-    private var makeStackView: UIStackView {
+    private var operationStackView: UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,20 +46,20 @@ final class CalculatorViewController: UIViewController {
         return stackView
     }
     
-    private var makeOperatorLabel: UILabel {
+    private var operatorLabel: UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = operatorLabel.text
+        label.text = inputOperatorLabel.text
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         
         return label
     }
     
-    private var makeOperandLabel: UILabel {
+    private var operandLabel: UILabel {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = operandLabel.text
+        label.text = inputOperandLabel.text
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.setContentHuggingPriority(.defaultLow, for: .horizontal)
@@ -73,14 +73,14 @@ final class CalculatorViewController: UIViewController {
         
         switch number {
         case "0", "00":
-            guard inputNumber != Text.zero else { return }
+            guard userInput != Text.zero else { return }
         default:
-            if inputNumber == Text.zero {
-                inputNumber.removeFirst()
+            if userInput == Text.zero {
+                userInput.removeFirst()
             }
         }
         
-        inputNumber += number
+        userInput += number
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
@@ -91,15 +91,15 @@ final class CalculatorViewController: UIViewController {
             isCalculated = false
         }
         
-        guard inputNumber != Text.noValue else {
-            operatorLabel.text = sender.titleLabel?.text
+        guard userInput != Text.noValue else {
+            inputOperatorLabel.text = sender.titleLabel?.text
             return
         }
         
-        guard inputNumber.split(with: Text.dot).count <= 2,
-              inputNumber != String(Text.dot) else {
+        guard userInput.split(with: Text.dot).count <= 2,
+              userInput != String(Text.dot) else {
             resetInputNumber()
-            operandLabel.text = numberFormatter.notANumberSymbol
+            inputOperandLabel.text = numberFormatter.notANumberSymbol
             return
         }
         
@@ -107,16 +107,16 @@ final class CalculatorViewController: UIViewController {
         addStackView()
         scrollTobottom()
         resetInputNumber()
-        operatorLabel.text = sender.titleLabel?.text
+        inputOperatorLabel.text = sender.titleLabel?.text
     }
     
     @IBAction private func touchUpConvertingPositiveNegativeButton() {
-        guard inputNumber != Text.zero else { return }
+        guard userInput != Text.zero else { return }
         
-        if inputNumber.prefix(1) == Text.negativeSymbol {
-            inputNumber.removeFirst()
+        if userInput.prefix(1) == Text.negativeSymbol {
+            userInput.removeFirst()
         } else {
-            inputNumber.insert(contentsOf: Text.negativeSymbol, at: inputNumber.startIndex)
+            userInput.insert(contentsOf: Text.negativeSymbol, at: userInput.startIndex)
         }
     }
     
@@ -142,14 +142,14 @@ final class CalculatorViewController: UIViewController {
         resetOperatorLabel()
         
         do {
-            var formulaQueue = ExpressionParser.parse(from: rawFormula.joined(separator: " "))
+            var formulaQueue = ExpressionParser.parse(from: rawFormulas.joined(separator: " "))
             result = try formulaQueue.result()
-            operandLabel.text = String(result.changeToDemical)
+            inputOperandLabel.text = String(result.changeToDemical)
             resetRawFormula()
         } catch CalculatorError.divideByZeroError {
-            operandLabel.text = numberFormatter.notANumberSymbol
+            inputOperandLabel.text = numberFormatter.notANumberSymbol
         } catch {
-            operandLabel.text = "Error: Please retry"
+            inputOperandLabel.text = "Error: Please retry"
         }
         
         isCalculated = true
@@ -158,32 +158,32 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     private func resetInputNumber() {
-        inputNumber = Text.noValue
+        userInput = Text.noValue
     }
     
     private func resetOperatorLabel() {
-        operatorLabel.text = Text.noValue
+        inputOperatorLabel.text = Text.noValue
     }
     
     private func resetRawFormula() {
-        rawFormula = []
+        rawFormulas = []
     }
     
     private func addFormula() {
-        guard let`operator` = operatorLabel.text,
-              let operand = operandLabel.text else {
+        guard let`operator` = inputOperatorLabel.text,
+              let operand = inputOperandLabel.text else {
             return
         }
         
-        rawFormula.append(`operator`)
-        rawFormula.append(operand)
+        rawFormulas.append(`operator`)
+        rawFormulas.append(operand)
     }
     
     private func addStackView() {
-        let stackView = makeStackView
+        let stackView = operationStackView
 
-        stackView.addArrangedSubview(makeOperatorLabel)
-        stackView.addArrangedSubview(makeOperandLabel)
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
         
         showingOperationsStackView.insertArrangedSubview(stackView,
                                                          at: showingOperationsStackView.arrangedSubviews.count)
