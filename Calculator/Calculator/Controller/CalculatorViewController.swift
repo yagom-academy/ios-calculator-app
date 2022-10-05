@@ -78,7 +78,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         resetOperandLabel()
         resetOperatorLabel()
-        removeAllLogStackView()
+        formulaStackView.removeAllSubViews()
         
         isFirstInput = true
         isDotButtonTapped = false
@@ -189,12 +189,6 @@ final class CalculatorViewController: UIViewController {
             y: logScrollView.contentSize.height - logScrollView.bounds.height
         )
         logScrollView.setContentOffset(contentOffset, animated: true)
-    }
-    
-    private func removeAllLogStackView() {
-        formulaStackView.arrangedSubviews.forEach { view in
-            view.removeFromSuperview()
-        }
     }
 }
 
