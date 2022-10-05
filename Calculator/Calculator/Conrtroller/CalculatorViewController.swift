@@ -25,7 +25,7 @@ final class CalculatorViewController: UIViewController {
     private var rawFormulas: [String] = []
     private var result: Double = Double.zero
     private var isCalculated: Bool = false
-    private var userInput: String = "" {
+    private var userInput: String = NameSpace.zero {
         willSet {
             changeOperandLabelByUserInput(newValue)
         }
@@ -91,7 +91,7 @@ final class CalculatorViewController: UIViewController {
             isCalculated = false
         }
         
-        guard userInput != NameSpace.noValue else {
+        guard userInput != NameSpace.zero else {
             inputOperatorLabel.text = sender.titleLabel?.text
             return
         }
@@ -151,7 +151,7 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     func resetInputNumber() {
-        userInput = NameSpace.noValue
+        userInput = NameSpace.zero
     }
     
     func resetOperatorLabel() {
@@ -163,7 +163,7 @@ private extension CalculatorViewController {
     }
     
     func changeOperandLabelByUserInput(_ value: String) {
-        guard value != NameSpace.noValue,
+        guard value != NameSpace.zero,
               value != NameSpace.negativeSymbol else {
             inputOperandLabel.text = NameSpace.zero
             return
@@ -179,7 +179,7 @@ private extension CalculatorViewController {
         }
         
         rawFormulas.append(`operator`)
-        rawFormulas.append(operand)
+        rawFormulas.append(operand.components(separatedBy: ",").joined())
     }
     
     func addStackView() {
