@@ -183,11 +183,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func updateLogScrollViewContentOffset() {
+        logScrollView.layoutIfNeeded()
         let contentOffset = CGPoint(
             x: 0,
             y: logScrollView.contentSize.height - logScrollView.bounds.height
         )
-        logScrollView.layoutIfNeeded()
         logScrollView.setContentOffset(contentOffset, animated: true)
     }
     
