@@ -11,7 +11,6 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
-    var currentInputNumber: String = ""
     let calculator: Calculator = Calculator()
     
     override func viewDidLoad() {
@@ -24,7 +23,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = string
     }
     
-    private func updateNumberLabel(to string: String = "") {
+    private func updateNumberLabel(to string: String = "0") {
         numberLabel.text = string
     }
     
@@ -48,7 +47,6 @@ class CalculatorViewController: UIViewController {
         switch key {
         case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .doubleZero:
             inputNumber(key.rawValue)
-            print(currentInputNumber)
         case .dot:
             print(key.rawValue)
         case .add, .subtract, .multiply, .divide:
@@ -56,7 +54,7 @@ class CalculatorViewController: UIViewController {
         case .ac:
             clearAll()
         case .ce:
-            print(key.rawValue)
+            clearEntry()
         case .plusMinus:
             changeSign()
         case .equal:
@@ -80,6 +78,11 @@ class CalculatorViewController: UIViewController {
         }
         
         calculator.updateCurrentOperand(currentOperand)
+        updateNumberLabel(to: calculator.currentOperand)
+    }
+    
+    private func clearEntry() {
+        calculator.updateCurrentOperand("0")
         updateNumberLabel(to: calculator.currentOperand)
     }
 }

@@ -15,7 +15,6 @@ class Calculator {
         return currentOperand.contains("−")
     }
     
-    
     func calculatedResult() -> Double {
         var formula: Formula = ExpressionParser.parser(from: expression)
         return 0.0
