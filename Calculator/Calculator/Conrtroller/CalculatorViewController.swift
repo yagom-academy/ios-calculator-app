@@ -12,7 +12,7 @@ final class CalculatorViewController: UIViewController {
         static let doubleZero: String = "00"
         static let noValue: String = ""
         static let negativeSymbol: String = "-"
-        static let dot: Character = "."
+        static let dot: String = "."
         static let spacing: CGFloat = 8
         static let errorMessage: String = "Error: Please retry"
     }
@@ -68,8 +68,12 @@ final class CalculatorViewController: UIViewController {
         guard let number = sender.titleLabel?.text else { return }
         
         switch number {
-        case NameSpace.zero, NameSpace.doubleZero:
+        case NameSpace.zero:
             guard userInput != NameSpace.zero else { return }
+        case NameSpace.doubleZero:
+            guard userInput != NameSpace.zero else { return }
+        case NameSpace.dot:
+            guard !userInput.contains(NameSpace.dot) else { return }
         default:
             if userInput == NameSpace.zero {
                 userInput.removeFirst()
@@ -89,13 +93,6 @@ final class CalculatorViewController: UIViewController {
         
         guard userInput != NameSpace.noValue else {
             inputOperatorLabel.text = sender.titleLabel?.text
-            return
-        }
-        
-        guard userInput.split(with: NameSpace.dot).count <= 2,
-              userInput != String(NameSpace.dot) else {
-            resetInputNumber()
-            inputOperandLabel.text = Double.numberFormatter.notANumberSymbol
             return
         }
         
