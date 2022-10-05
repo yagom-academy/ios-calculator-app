@@ -12,7 +12,11 @@ class Calculator {
     private(set) var currentOperator: String = ""
     private(set) var currentOperand: String = "0"
     var isNegativeOperand: Bool {
-        return currentOperand.contains("−")
+        return currentOperand.contains(MathSymbol.negative)
+    }
+    
+    var isDecimal: Bool {
+        return currentOperand.contains(MathSymbol.dot)
     }
     
     func calculatedResult() -> Double {

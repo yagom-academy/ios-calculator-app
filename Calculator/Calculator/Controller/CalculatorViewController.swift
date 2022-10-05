@@ -48,7 +48,7 @@ class CalculatorViewController: UIViewController {
         case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .doubleZero:
             inputNumber(key.rawValue)
         case .dot:
-            print(key.rawValue)
+            inputDot()
         case .add, .subtract, .multiply, .divide:
             print(key.rawValue)
         case .ac:
@@ -83,6 +83,17 @@ class CalculatorViewController: UIViewController {
     
     private func clearEntry() {
         calculator.updateCurrentOperand("0")
+        updateNumberLabel(to: calculator.currentOperand)
+    }
+    
+    private func inputDot() {
+        if calculator.isDecimal {
+            return
+        }
+        
+        let currentOperand = calculator.currentOperand + MathSymbol.dot
+        
+        calculator.updateCurrentOperand(currentOperand)
         updateNumberLabel(to: calculator.currentOperand)
     }
 }
