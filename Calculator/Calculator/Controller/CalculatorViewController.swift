@@ -30,19 +30,13 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated else { return }
         
         switch sender.tag {
-        case 0:
-            guard !operand.isEmpty else { return }
-            
+        case 0 where !operand.isEmpty:
             updateOperandLabel(with: sender.tag.description)
         case 1...9:
             updateOperandLabel(with: sender.tag.description)
-        case 10:
-            guard !operand.isEmpty else { return }
-            
+        case 10 where !operand.isEmpty:
             updateOperandLabel(with: CalculatorConstant.doubleZero)
-        case 11:
-            guard !isDotButtonTapped else { return }
-            
+        case 11 where !isDotButtonTapped:
             updateOperandLabel(with: CalculatorConstant.dot)
             isDotButtonTapped = true
         default:
