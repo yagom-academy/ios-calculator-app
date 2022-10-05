@@ -8,15 +8,16 @@
 import Foundation
 
 extension Double: CalculateItem {
+    static let numberFormatter = NumberFormatter()
+
     var changeToDemical: String {
-        let numberFormatter = NumberFormatter()
         let twenty: Int = 20
         
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = twenty
-        numberFormatter.roundingMode = .up
+        Self.numberFormatter.numberStyle = .decimal
+        Self.numberFormatter.maximumSignificantDigits = twenty
+        Self.numberFormatter.roundingMode = .up
     
-        let result = numberFormatter.string(from: self as NSNumber) ?? "0"
+        let result = Self.numberFormatter.string(from: self as NSNumber) ?? "0"
         
         return result
     }

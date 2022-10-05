@@ -14,6 +14,7 @@ final class CalculatorViewController: UIViewController {
         static let negativeSymbol: String = "-"
         static let dot: Character = "."
         static let spacing: CGFloat = 8
+        static let errorMessage: String = "Error: Please retry"
     }
     
     @IBOutlet private weak var inputOperandLabel: UILabel!
@@ -21,7 +22,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var showingOperationsStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private let numberFormatter = NumberFormatter()
     private var rawFormulas: [String] = []
     private var result: Double = Double.zero
     private var isCalculated: Bool = false
@@ -95,7 +95,7 @@ final class CalculatorViewController: UIViewController {
         guard userInput.split(with: NameSpace.dot).count <= 2,
               userInput != String(NameSpace.dot) else {
             resetInputNumber()
-            inputOperandLabel.text = numberFormatter.notANumberSymbol
+            inputOperandLabel.text = Double.numberFormatter.notANumberSymbol
             return
         }
         
@@ -143,9 +143,9 @@ final class CalculatorViewController: UIViewController {
             inputOperandLabel.text = String(result.changeToDemical)
             resetRawFormula()
         } catch CalculatorError.divideByZeroError {
-            inputOperandLabel.text = numberFormatter.notANumberSymbol
+            inputOperandLabel.text = Double.numberFormatter.notANumberSymbol
         } catch {
-            inputOperandLabel.text = "Error: Please retry"
+            inputOperandLabel.text = NameSpace.errorMessage
         }
         
         isCalculated = true
