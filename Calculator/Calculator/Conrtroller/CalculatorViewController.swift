@@ -144,7 +144,7 @@ final class CalculatorViewController: UIViewController {
         do {
             var formulaQueue = ExpressionParser.parse(from: rawFormulas.joined(separator: " "))
             result = try formulaQueue.result()
-            inputOperandLabel.text = String(result.changeToDemical)
+            inputOperandLabel.text = String(result.changeToDecimal)
             resetRawFormula()
         } catch CalculatorError.divideByZeroError {
             inputOperandLabel.text = Double.numberFormatter.notANumberSymbol
@@ -178,11 +178,11 @@ private extension CalculatorViewController {
         if value.components(separatedBy: NameSpace.dot).count > 1 {
             let values = value.components(separatedBy: NameSpace.dot)
             inputOperandLabel.text =
-                (Double(values[0]) ?? 0).changeToDemical + NameSpace.dot + values[1]
+                (Double(values[0]) ?? 0).changeToDecimal + NameSpace.dot + values[1]
             return
         }
         
-        inputOperandLabel.text = String((Double(value) ?? 0).changeToDemical)
+        inputOperandLabel.text = String((Double(value) ?? 0).changeToDecimal)
     }
     
     func addFormula() {

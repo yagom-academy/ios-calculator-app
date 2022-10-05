@@ -10,7 +10,7 @@ import Foundation
 extension Double: CalculateItem {
     static let numberFormatter = NumberFormatter()
 
-    var changeToDemical: String {
+    var changeToDecimal: String {
         let maxDigits: Int = 20
         
         Self.numberFormatter.numberStyle = .decimal
