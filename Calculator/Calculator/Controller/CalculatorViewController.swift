@@ -184,7 +184,7 @@ final class CalculatorViewController: UIViewController {
         } catch CalculatorError.divideWithZero {
             operandLabel.text = CalculatorConstant.notNumber
         } catch {
-            print(error)
+            operandLabel.text = CalculatorConstant.unexpectedError
         }
     }
     

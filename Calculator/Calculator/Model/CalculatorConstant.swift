@@ -18,4 +18,5 @@ enum CalculatorConstant {
     static let negativeSignSet: CharacterSet = ["-"]
     static let dotSet: CharacterSet = ["."]
     static let notNumber: String = "NaN"
+    static let unexpectedError: String = "Error"
 }
