@@ -69,7 +69,7 @@ class FormulaTests: XCTestCase {
         sut.operators.enqueue(.divide)
         
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? OperatorError, OperatorError.divideWithZero)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideWithZero)
         }
     }
 }

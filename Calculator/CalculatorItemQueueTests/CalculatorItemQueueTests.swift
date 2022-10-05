@@ -27,7 +27,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func testQueue_비어있는CalculatorItemQueue에_isEmpty를호출했을때_true가나와야한다() {
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }
@@ -39,7 +39,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(30.0)
         sut.removeAll()
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }

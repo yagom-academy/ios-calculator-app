@@ -26,7 +26,7 @@ class LinkedListTests: XCTestCase {
     
     func testLinkedList_비어있는LinkedList에_isEmpty를_호출했을때_정확한Bool값이나와야한다() {
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }
@@ -38,7 +38,7 @@ class LinkedListTests: XCTestCase {
         sut.append(30.0)
         sut.removeAll()
         // when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         // then
         XCTAssertTrue(result)
     }

@@ -8,6 +8,13 @@
 struct LinkedList<Element: CalculateItem> {
     private(set) var head: Node<Element>?
     private(set) var tail: Node<Element>?
+    var isEmpty: Bool {
+        guard head != nil || tail != nil else {
+            return true
+        }
+        
+        return false
+    }
     
     mutating func append(_ data: Element) {
         guard head != nil else {
@@ -35,14 +42,6 @@ struct LinkedList<Element: CalculateItem> {
     mutating func removeAll() {
         head = nil
         tail = nil
-    }
-    
-    mutating func isEmpty() -> Bool {
-        if (head == nil) && (tail == nil) {
-            return true
-        } else {
-            return false
-        }
     }
 }
 

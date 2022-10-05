@@ -5,6 +5,7 @@
 //  Created by Hamo on 2022/09/26.
 //
 
-enum OperatorError: Error {
+enum CalculatorError: Error {
+    case emptyOperator
     case divideWithZero
 }
