@@ -47,7 +47,7 @@ final class CalculatorViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = inputOperatorLabel.text
         label.textColor = .white
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.font = .preferredFont(forTextStyle: .title3)
         
         return label
     }
@@ -153,19 +153,19 @@ final class CalculatorViewController: UIViewController {
 }
 
 private extension CalculatorViewController {
-    private func resetInputNumber() {
+    func resetInputNumber() {
         userInput = NameSpace.noValue
     }
     
-    private func resetOperatorLabel() {
+    func resetOperatorLabel() {
         inputOperatorLabel.text = NameSpace.noValue
     }
     
-    private func resetRawFormula() {
+    func resetRawFormula() {
         rawFormulas = []
     }
     
-    private func changeOperandLabelByUserInput(_ value: String) {
+    func changeOperandLabelByUserInput(_ value: String) {
         guard value != NameSpace.noValue,
               value != NameSpace.negativeSymbol else {
             inputOperandLabel.text = NameSpace.zero
@@ -175,7 +175,7 @@ private extension CalculatorViewController {
         inputOperandLabel.text = value
     }
     
-    private func addFormula() {
+    func addFormula() {
         guard let`operator` = inputOperatorLabel.text,
               let operand = inputOperandLabel.text else {
             return
@@ -185,19 +185,23 @@ private extension CalculatorViewController {
         rawFormulas.append(operand)
     }
     
-    private func addStackView() {
+    func addStackView() {
         let stackView = operationStackView
-
+        
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         
-        showingOperationsStackView.insertArrangedSubview(stackView,
-                                                         at: showingOperationsStackView.arrangedSubviews.count)
+        showingOperationsStackView.insertArrangedSubview(
+            stackView,
+            at: showingOperationsStackView.arrangedSubviews.count
+        )
     }
     
-    private func scrollTobottom() {
+    func scrollTobottom() {
         scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
-                                    animated: false)
+        scrollView.setContentOffset(
+            CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
+            animated: false
+        )
     }
 }
