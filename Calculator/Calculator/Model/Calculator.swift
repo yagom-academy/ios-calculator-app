@@ -11,6 +11,10 @@ class Calculator {
     private(set) var expression: String = ""
     private(set) var currentOperator: String = ""
     private(set) var currentOperand: String = "0"
+    var isNegativeOperand: Bool {
+        return currentOperand.contains("−")
+    }
+    
     
     func calculatedResult() -> Double {
         var formula: Formula = ExpressionParser.parser(from: expression)
@@ -18,6 +22,6 @@ class Calculator {
     }
 
     func updateCurrentOperand(_ number: String) {
-        currentOperand += number
+        currentOperand = number
     }
 }

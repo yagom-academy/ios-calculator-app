@@ -58,14 +58,28 @@ class CalculatorViewController: UIViewController {
         case .ce:
             print(key.rawValue)
         case .plusMinus:
-            print(key.rawValue)
+            changeSign()
         case .equal:
             print(key.rawValue)
         }
     }
     
     private func inputNumber(_ number: String) {
-        calculator.updateCurrentOperand(number)
+        let currentOperand = calculator.currentOperand + number
+        
+        calculator.updateCurrentOperand(currentOperand)
+        updateNumberLabel(to: calculator.currentOperand)
+    }
+    
+    private func changeSign() {
+        var currentOperand = calculator.currentOperand
+        if calculator.isNegativeOperand {
+           currentOperand = String(currentOperand.dropFirst())
+        } else {
+            currentOperand = "−" + currentOperand
+        }
+        
+        calculator.updateCurrentOperand(currentOperand)
         updateNumberLabel(to: calculator.currentOperand)
     }
 }
