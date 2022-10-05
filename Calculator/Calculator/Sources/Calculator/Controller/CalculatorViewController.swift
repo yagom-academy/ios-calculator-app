@@ -1,198 +1,189 @@
 //
-//  Calculator - CalculatorViewController.swift
-//  Created by 미니.
+//  CalculatorViewController.swift
+//  Created by 미니, SummerCat.
 //
 
 import UIKit
 
 final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var recordedCalculatedStackView: UIStackView!
-    @IBOutlet private weak var currentNumbersLabel: UILabel!
+    @IBOutlet private weak var parentLogStackView: UIStackView!
+    @IBOutlet private weak var currentNumberLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
-    
-    private var mathExpression: String = ""
-    private var selectedNumbers: String = ""
-    private var selectedOperator: String = ""
-    private var didNotCalculate: Bool = true
+    @IBOutlet private var calculatorButtons: [UIButton]!
+
+    private var expression: String = ""
+    private var currentNumber: String = ""
+    private var currentOperator: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpInitState()
     }
     
-    @IBAction func didTappedNumberButton(_ sender: UIButton) {
-        guard didNotCalculate,
-              let inputNumber = sender.titleLabel?.text else {
-            return
-        }
-        
-        if let lastElement = mathExpression.last,
-           !lastElement.shouldConvertOperator {
-            mathExpression.append(selectedOperator)
-        }
-
-        selectedNumbers.append(inputNumber)
-        
-        if selectedNumbers.contains(Constant.Calculator.defaultPoint) {
-            updateNumberLabelTo(numbers: selectedNumbers)
-        } else {
-            updateNumberLabelTo(numbers: selectedNumbers.calNumber)
-        }
+    @IBAction private func didTappedNumberButton(_ sender: UIButton) {
+        let inputNumber = sender.tag.description
+        currentNumber.append(inputNumber)
+        updateNumberLabels()
     }
     
-    @IBAction func didTappedOperatorButton(_ sender: UIButton) {
-        guard didNotCalculate,
-              let inputedOperator = sender.titleLabel?.text else {
-            return
-        }
-        
-        if selectedNumbers.isNotEmpty {
-            addLogStackView()
-        }
-        
-        mathExpression.append(selectedNumbers)
-        resetSelectedNumbers()
-        
-        selectedOperator = inputedOperator
-        
-        updateOperatorLabel()
-        resetNumberLabel()
+    @IBAction private func didTappedDoubleZeroButton(_ sender: UIButton) {
+        currentNumber.append(Constant.Calculator.doubleZero)
+        updateNumberLabels()
     }
     
-    @IBAction func didTappedEqualButton(_ sender: UIButton) {
+    @IBAction private func didTappedDivideButton(_ sender: UIButton) {
+        updateExpression(symbol: Constant.Calculator.divideSymbol)
+    }
+    
+    @IBAction private func didTappedMultiplyButton(_ sender: UIButton) {
+        updateExpression(symbol: Constant.Calculator.multiplySymbol)
+    }
+    
+    @IBAction private func didTappedSubtractButton(_ sender: UIButton) {
+        updateExpression(symbol: Constant.Calculator.minusSymbol)
+    }
+    
+    @IBAction private func didTappedAddButton(_ sender: UIButton) {
+        updateExpression(symbol: Constant.Calculator.plusSymbol)
+    }
+    
+    @IBAction private func didTappedEqualButton(_ sender: UIButton) {
+        guard currentNumber.isNotEmpty else { return }
         
-        guard didNotCalculate,
-              selectedNumbers.isNotEmpty else {
-            return
-        }
+        expression.append(currentOperator)
+        expression.append(currentNumber)
         
-        guard let lastElement = mathExpression.last else {
-            resetSelected()
-            return
-        }
+        addChildLogStackView()
         
-        addLogStackView()
-        
-        if !lastElement.shouldConvertOperator {
-            mathExpression.append(selectedOperator)
-        }
-
-        mathExpression.append(selectedNumbers)
+        resetCurrentCalculatorState()
+        resetOperatorLabel()
         
         calculateExpression()
         
-        didNotCalculate.toggle()
+        toggleButtonState()
     }
     
-    @IBAction func didTappedACButton(_ sender: UIButton) { resetInitState() }
+    @IBAction private func didTappedACButton(_ sender: UIButton) { resetInitState() }
     
-    @IBAction func didTappedCEButton(_ sender: UIButton) {
-        guard didNotCalculate else {
+    @IBAction private func didTappedCEButton(_ sender: UIButton) {
+        guard calculatorButtons.allSatisfy(\.isEnabled) else {
             resetInitState()
             return
         }
         
-        resetSelectedNumbers()
+        resetCurrentNumber()
         resetNumberLabel()
     }
     
-    @IBAction func didTappedPointButton(_ sender: UIButton) {
+    @IBAction private func didTappedDecimalButton(_ sender: UIButton) {
+        guard let currentNumberText = currentNumberLabel.text,
+              !currentNumberText.contains(Constant.Calculator.decimalPoint) else { return }
         
-        guard selectedNumbers.isNotEmpty,
-              !selectedNumbers.contains(Constant.Calculator.defaultPoint) else {
-            return
-        }
-        
-        selectedNumbers.append(Constant.Calculator.defaultPoint)
-        updateNumberLabelTo(numbers: selectedNumbers)
+        currentNumberLabel.text = currentNumberText + Constant.Calculator.decimalPoint
+        currentNumber.append(Constant.Calculator.decimalPoint)
     }
     
-    
-    @IBAction func didTappedConvertSign(_ sender: UIButton) {
-        guard selectedNumbers.isNotEmpty,
-              let firstElement = selectedNumbers.first else {
+    @IBAction private func didTappedConvertSign(_ sender: UIButton) {
+        guard currentNumber.isNotEmpty else {
             return
         }
         
-        if firstElement == Constant.Calculator.minusOperator {
-            selectedNumbers.removeFirst()
+        if currentNumber.first?.description == Constant.Calculator.minusSymbol {
+            currentNumber.removeFirst()
         } else {
-            selectedNumbers.insert(
-                Constant.Calculator.minusOperator,
-                at: selectedNumbers.startIndex
+            currentNumber.insert(
+                Character(Constant.Calculator.minusSymbol),
+                at: currentNumber.startIndex
             )
         }
         
-        updateNumberLabelTo(numbers: selectedNumbers.calNumber)
+        updateNumberLabelTo(number: currentNumber)
+    }
+    
+    private func updateExpression(symbol: String) {
+        guard currentNumber.isNotEmpty else {
+            currentOperator = symbol
+            updateOperatorLabel()
+            return
+        }
+        
+        expression.append(currentOperator)
+        expression.append(currentNumber)
+        
+        addChildLogStackView()
+        
+        currentOperator = symbol
+        currentNumber = Constant.Calculator.empty
+        
+        resetNumberLabel()
+        updateOperatorLabel()
     }
 }
 
 // MARK: - StackView UI변경 관련 메서드
 private extension CalculatorViewController {
-    func addLogStackView() {
-        let operatorValue = selectedOperator.isEmpty ? Constant.Calculator.defaultInput : selectedOperator
-        let childView = CalculatedLogStackView(
-            operatorValue: operatorValue,
-            operandValue: selectedNumbers.calNumber
+    func addChildLogStackView() {
+        let operatorValue = currentOperator.isEmpty ? Constant.Calculator.empty : currentOperator
+        
+        let childView = CalculatorLogStackView(
+            operatorText: operatorValue,
+            operandText: currentNumber.toFormattedString()
         )
         
-        recordedCalculatedStackView.addArrangedSubview(childView)
-        scrollView.scrollToBottom()
-    }
-    
-    func removeAllLogStackView() {
-        recordedCalculatedStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        parentLogStackView.addArrangedSubview(childView)
+        scrollView.scrollToBottom(animated: true)
     }
 }
 
 // MARK: - 계산기 사용자 입력 상태 관리 메서드
 private extension CalculatorViewController {
     func setUpInitState() {
-        currentNumbersLabel.text = Constant.Calculator.defaultNumber
-        currentOperatorLabel.text = Constant.Calculator.defaultOperator
+        currentNumberLabel.text = Constant.Calculator.defaultNumber
+        currentOperatorLabel.text = Constant.Calculator.empty
     }
     
     func resetInitState() {
         resetLabels()
-        resetSelected()
-        resetMathExpression()
-        removeAllLogStackView()
-        didNotCalculate = true
-    }
-
-    func resetSelected() {
-        resetSelectedNumbers()
-        resetSelectedOperator()
+        resetCurrentCalculatorState()
+        resetExpression()
+        parentLogStackView.removeAllSubviews()
+        toggleButtonState()
     }
     
-    func resetSelectedNumbers() {
-        selectedNumbers = Constant.Calculator.defaultInput
+    func resetCurrentCalculatorState() {
+        resetCurrentNumber()
+        resetCurrentOperator()
     }
     
-    func resetSelectedOperator() {
-        selectedOperator = Constant.Calculator.defaultInput
+    func resetCurrentNumber() {
+        currentNumber = Constant.Calculator.empty
     }
     
-    func resetMathExpression() {
-        mathExpression = Constant.Calculator.defaultInput
+    func resetCurrentOperator() {
+        currentOperator = Constant.Calculator.empty
+    }
+    
+    func resetExpression() {
+        expression = Constant.Calculator.empty
+    }
+    
+    func toggleButtonState() {
+        calculatorButtons.forEach { $0.isEnabled.toggle() }
     }
     
     func calculateExpression() {
-        let formula = ExpressionParser.parse(from: mathExpression)
-        do {
-            let calculatedValue = try formula.result()
-            let calNumber = calculatedValue.description.calNumber
-
-            updateNumberLabelTo(numbers: calNumber)
-            resetOperatorLabel()
-
-            resetSelected()
-        } catch FormulaError.dividedByZero {
-            let errorValue = Constant.Calculator.errorNumber
-            updateNumberLabelTo(numbers: errorValue)
-        } catch {
-            // no op
+        var formula = ExpressionParser.parse(from: expression)
+        expression = Constant.Calculator.empty
+        
+        guard let result = formula.result() else {
+            return
+        }
+        
+        if result.isNaN {
+            updateNumberLabelTo(number: Constant.Calculator.nan)
+        } else {
+            updateNumberLabelTo(number: result.description.toFormattedString())
         }
     }
 }
@@ -203,29 +194,29 @@ private extension CalculatorViewController {
         resetNumberLabel()
         resetOperatorLabel()
     }
-
+    
     func resetNumberLabel() {
-        currentNumbersLabel.text = Constant.Calculator.defaultNumber
+        currentNumberLabel.text = Constant.Calculator.defaultNumber
     }
     
     func resetOperatorLabel() {
-        currentOperatorLabel.text = Constant.Calculator.defaultOperator
+        currentOperatorLabel.text = Constant.Calculator.empty
     }
     
-    func updateNumberLabelTo(numbers: String) {
-        currentNumbersLabel.text = numbers
+    func updateNumberLabelTo(number: String?) {
+        currentNumberLabel.text = number
     }
     
     func updateOperatorLabel() {
-        currentOperatorLabel.text = selectedOperator
+        currentOperatorLabel.text = currentOperator
     }
     
-}
-
-// MARK: - Character Extension 관련 메서드
-private extension Character {
-    var shouldConvertOperator: Bool {
-        return Operator(rawValue: self) != nil
+    func updateNumberLabels() {
+        if currentNumber.contains(Constant.Calculator.decimalPoint) {
+            updateNumberLabelTo(number: currentNumber)
+        } else {
+            updateNumberLabelTo(number: currentNumber.toFormattedString())
+        }
     }
 }
 

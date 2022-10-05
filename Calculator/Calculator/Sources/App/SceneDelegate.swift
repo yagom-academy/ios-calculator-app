@@ -1,5 +1,5 @@
 //
-//  Calculator - SceneDelegate.swift
+//  SceneDelegate.swift
 //  Created by 미니.
 // 
 

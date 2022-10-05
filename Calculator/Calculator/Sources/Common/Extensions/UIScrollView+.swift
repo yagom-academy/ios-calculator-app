@@ -1,17 +1,15 @@
 //
-//  ScrollView+.swift
-//  Calculator
-//
-//  Created by 이경민 on 2022/09/29.
+//  UIScrollView+.swift
+//  Created by 미니
 //
 
 import UIKit
 
 extension UIScrollView {
-    func scrollToBottom() {
+    func scrollToBottom(animated: Bool) {
         layoutIfNeeded()
         let offset = (contentSize.height - frame.height)
         let bottomOffset = CGPoint(x: 0, y: offset)
-        setContentOffset(bottomOffset, animated: true)
+        setContentOffset(bottomOffset, animated: animated)
     }
 }

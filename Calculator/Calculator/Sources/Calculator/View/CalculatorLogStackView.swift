@@ -1,13 +1,11 @@
 //
-//  CalculatedRecordStackView.swift
-//  Calculator
-//
-//  Created by 이경민 on 2022/09/29.
+//  CalculatorLogStackView.swift
+//  Created by 미니
 //
 
 import UIKit
 
-final class CalculatedLogStackView: UIStackView {
+final class CalculatorLogStackView: UIStackView {
     private let operatorLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -20,9 +18,9 @@ final class CalculatedLogStackView: UIStackView {
         return label
     }()
     
-    init(operatorValue: String, operandValue: String) {
-        operatorLabel.text = operatorValue
-        operandLabel.text = operandValue
+    init(operatorText: String, operandText: String?) {
+        operatorLabel.text = operatorText
+        operandLabel.text = operandText
         
         super.init(arrangedSubviews: [operatorLabel, operandLabel])
         self.configureStackView()
