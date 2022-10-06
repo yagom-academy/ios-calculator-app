@@ -1,14 +1,14 @@
 //  CalculatorController.swift
 //  Created by zhilly and Gundy on 2022/10/04.
 
-final class CalculatorController {
+final class CalculatorController: CalculatorControllerProtocol {
     let view: MainViewControllerDelegate
-    private var expression: String = ""
     var viewDisplayNumber: String = "0"
+    private var expression: String = ""
+    private var calculatedNumber: String = ""
     private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
-    var calculatedNumber: String = ""
     
     init(view: MainViewControllerDelegate) {
         self.view = view

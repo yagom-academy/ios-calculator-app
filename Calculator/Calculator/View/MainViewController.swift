@@ -3,13 +3,6 @@
 
 import UIKit
 
-protocol MainViewControllerDelegate {
-    var displaySignLabel: UILabel! { get set }
-    var displayNumberLabel: UILabel! { get set }
-    func makeStackView()
-    func resetDisplayNumberLabel()
-}
-
 final class MainViewController: UIViewController, MainViewControllerDelegate {
     
     @IBOutlet weak var displaySignLabel: UILabel!
@@ -19,7 +12,7 @@ final class MainViewController: UIViewController, MainViewControllerDelegate {
     @IBOutlet weak private var formulaHorizontalStackView: UIStackView!
     @IBOutlet weak private var formulaVerticalStackView: UIStackView!
     
-    private var calculatorController: CalculatorController!
+    private var calculatorController: CalculatorControllerProtocol!
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
@@ -50,10 +43,31 @@ final class MainViewController: UIViewController, MainViewControllerDelegate {
         return changedFormatResult
     }
     
+    private func displayChangeCalculateResultFormat(result: String?) -> String? {
+        var changedFormatResult: String
+        guard let nonOptionalResult = result else { return nil }
+        
+        if nonOptionalResult.split(with: ".").count >= 2 {
+            let splitResult = nonOptionalResult.split(with: ".")
+            let integerNumber = Double(splitResult[0]) ?? .nan
+            let changedFormatIntegerNumber: String = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
+            let decimalNumber = splitResult[1]
+            changedFormatResult = changedFormatIntegerNumber + "." + decimalNumber
+        } else if nonOptionalResult.contains(".") == true {
+            let number = Double(nonOptionalResult) ?? .nan
+            changedFormatResult = (numberFormatter.string(from: NSNumber(value: number)) ?? "") + "."
+        } else {
+            let number = Double(nonOptionalResult) ?? .nan
+            changedFormatResult = numberFormatter.string(from: NSNumber(value: number)) ?? ""
+        }
+        
+        return changedFormatResult
+    }
+    
     func makeStackView() {
         let stackView = FormulaStackView()
-        
-        stackView.configure(operatorText: displaySignLabel.text, operandText: displayNumberLabel.text)
+        let operandText = changeCalculateResultFormat(result: displayNumberLabel.text?.split(with: ",").joined())
+        stackView.configure(operatorText: displaySignLabel.text, operandText: operandText)
         formulaVerticalStackView.addArrangedSubview(stackView)
         autoScroll()
     }
@@ -75,7 +89,7 @@ final class MainViewController: UIViewController, MainViewControllerDelegate {
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(
+        displayNumberLabel.text = displayChangeCalculateResultFormat(
             result: calculatorController.tappedNumberButton(input: sender.titleLabel?.text)
         )
     }
@@ -95,7 +109,7 @@ final class MainViewController: UIViewController, MainViewControllerDelegate {
     }
     
     @IBAction private func tapDotButton(_ sender: UIButton) {
-        displayNumberLabel.text = changeCalculateResultFormat(
+        displayNumberLabel.text = displayChangeCalculateResultFormat(
             result: calculatorController.tappedDotButton()
         )
     }
