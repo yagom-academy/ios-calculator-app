@@ -29,12 +29,12 @@ class ViewController: UIViewController {
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
 
-        if Character(operandLabelText) == Operator.subtract.rawValue {
+        if operandLabelText.contains(Operator.subtract.rawValue) {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
-            checkSign = operandLabel.text ?? ""
+            changeSignFinalCalculation(from: "+", to: "-")
         } else {
             operandLabel.text = "-" + operandLabelText
-            checkSign = operandLabel.text ?? ""
+            changeSignFinalCalculation(from: "-", to: "+")
         }
     }
     
@@ -59,11 +59,7 @@ class ViewController: UIViewController {
             updateCalculatorStackView()
         }
         
-        if checkSign.contains("-") {
-            pushOperator(finalCalculationInput: "+", operatorInput: "-")
-        } else {
-            pushOperator(finalCalculationInput: "-", operatorInput: "-")
-        }
+        pushOperator(finalCalculationInput: "-", operatorInput: "-")
     }
     
     @IBAction func addButton(_ sender: UIButton) {
@@ -71,11 +67,7 @@ class ViewController: UIViewController {
             updateCalculatorStackView()
         }
         
-        if checkSign.contains("-") {
-            pushOperator(finalCalculationInput: "-", operatorInput: "+")
-        } else {
-            pushOperator(finalCalculationInput: "+", operatorInput: "+")
-        }
+        pushOperator(finalCalculationInput: "+", operatorInput: "+")
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
@@ -127,6 +119,26 @@ class ViewController: UIViewController {
         stackCalculation = ""
         operatorLabel.text = operatorInput
         operandLabel.text = ""
+    }
+    
+    private func changeSignFinalCalculation(from target: String, to replacement: String) {
+        if finalCalculation.count == 0 {
+            return
+        }
+        
+        var finalCalculationList = Array(finalCalculation).map { String($0) }
+        
+        for count in (0...finalCalculationList.count-1).reversed() {
+            if finalCalculationList[count] == target {
+                finalCalculationList[count] = replacement
+                finalCalculation = finalCalculationList.joined()
+                return
+            } else if finalCalculationList[count] == replacement {
+                finalCalculationList[count] = target
+                finalCalculation = finalCalculationList.joined()
+                return
+            }
+        }
     }
     
     private func updateCalculatorStackView() {
