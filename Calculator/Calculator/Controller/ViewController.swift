@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     private var stackCalculation = ""
     private var finalCalculation = ""
-    private var checkSign = ""
+    private var result = 0.0
     private var formula: Formula?
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
@@ -78,6 +78,7 @@ class ViewController: UIViewController {
         stackCalculation = ""
         
         try? showResult()
+        operandLabel.text = String(result)
     }
     
     @IBAction func inputNumberButton(_ sender: UIButton) {
@@ -142,6 +143,14 @@ class ViewController: UIViewController {
                 finalCalculationList[count] = target
                 finalCalculation = finalCalculationList.joined()
                 return
+            } else if finalCalculationList[count] == "*" {
+                try? showResult()
+                finalCalculation = "0" + "-" + "\(result)"
+                return
+            } else if finalCalculationList[count] == "/" {
+                try? showResult()
+                finalCalculation = "0" + "-" + "\(result)"
+                return
             }
         }
     }
@@ -169,10 +178,9 @@ class ViewController: UIViewController {
         formula = Formula(operands: calculation.operands, operators: calculation.operators)
         
         do {
-            let result = try formula?.result()
-            guard let calculatorResult = result else { return }
-            
-            operandLabel.text = String(calculatorResult)
+            guard let calculatorResult = try formula?.result() else { return }
+            result = calculatorResult
+        
             resetCalculation()
         } catch CalculateError.invalidNumber {
             showErrorMessage(CalculateError.invalidNumber)
