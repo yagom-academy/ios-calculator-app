@@ -113,7 +113,7 @@ final class ViewController: UIViewController {
         } catch CalculateError.dividedByZero {
             operandLabel.text = CalculateError.dividedByZero.localizedDescription
         } catch {
-            print(error.localizedDescription)
+            operandLabel.text = error.localizedDescription
         }
     }
 }
