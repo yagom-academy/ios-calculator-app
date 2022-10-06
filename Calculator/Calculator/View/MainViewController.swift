@@ -3,7 +3,14 @@
 
 import UIKit
 
-final class MainViewController: UIViewController {
+protocol MainViewControllerDelegate {
+    var displaySignLabel: UILabel! { get set }
+    var displayNumberLabel: UILabel! { get set }
+    func makeStackView()
+    func resetDisplayNumberLabel()
+}
+
+final class MainViewController: UIViewController, MainViewControllerDelegate {
     
     @IBOutlet weak var displaySignLabel: UILabel!
     @IBOutlet weak var displayNumberLabel: UILabel!
@@ -12,7 +19,7 @@ final class MainViewController: UIViewController {
     @IBOutlet weak private var formulaHorizontalStackView: UIStackView!
     @IBOutlet weak private var formulaVerticalStackView: UIStackView!
     
-    var calculatorController: CalculatorController!
+    private var calculatorController: CalculatorController!
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
