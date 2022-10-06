@@ -19,15 +19,17 @@ class Calculator {
         return currentOperand.contains(MathSymbol.dot)
     }
     
-    func clearCalculator() {
-        expression = ""
+    func clearCalculator(expression: String = "") {
+        self.expression = expression
         currentOperator = ""
         currentOperand = "0"
     }
     
-    func calculatedResult() -> Double {
+    func calculatedResult() throws -> Double {
+        var result: Double
         var formula: Formula = ExpressionParser.parser(from: expression)
-        return 0.0
+        result = try formula.result()
+        return result
     }
 
     func updateCurrentOperand(_ number: String) {

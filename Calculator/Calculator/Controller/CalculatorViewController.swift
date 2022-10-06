@@ -60,6 +60,7 @@ class CalculatorViewController: UIViewController {
             changeSign()
         case .equal:
             inputEqual()
+            showResult()
         }
     }
     
@@ -107,6 +108,22 @@ class CalculatorViewController: UIViewController {
     
     private func inputEqual() {
         calculator.updateExpression()
+    }
+    
+    private func showResult() {
+        let result: String
+        do {
+            result = String(try calculator.calculatedResult())
+        } catch CalculatorError.queueIsEmpty {
+            result = CalculatorError.queueIsEmpty.description
+        } catch CalculatorError.divisionByZero {
+            result = CalculatorError.divisionByZero.description
+        } catch {
+            result = CalculatorError.unknown.description
+        }
+        calculator.clearCalculator(expression: result)
+        updateOperatorLabel(to: calculator.currentOperator)
+        updateNumberLabel(to: result)
     }
 }
 
