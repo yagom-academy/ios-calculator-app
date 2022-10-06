@@ -64,6 +64,8 @@ class ViewController: UIViewController {
         
         isCalculated = true
         mainOperatorLabel.text = ExpressionText.empty
+        result.description.hasSuffix(".0") ?
+        operandManager.setCurrentOperand("\(Int(result))") :
         operandManager.setCurrentOperand("\(result)")
         operandManager.clearExpression()
     }
