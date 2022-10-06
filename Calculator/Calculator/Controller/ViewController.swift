@@ -40,56 +40,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard !operandManager.expression.isEmpty, mainOperandLabel.text != "0" else { return }
+        guard !operandManager.expression.isEmpty || mainOperandLabel.text != "0" else { return }
         
-        if mainOperandLabel.text == "0" {
-            mainOperatorLabel.text = sender.currentTitle ?? ""
-        } else {
-            updateFormulaType()
-            addStackViewInFormulaHistoryView()
-            resetMainFormulaView(sender)
-            scrollToBottom()
+        if mainOperandLabel.text != "0" {
+            updateExpression()
+            appendExpressionQueue()
+            resetMainOperand()
         }
+        mainOperatorLabel.text = sender.currentTitle
     }
     
-    func updateFormulaType() {
-        let operatorValue: String = mainOperatorLabel.text ?? ""
-        let operandValue: String = mainOperandLabel.text?.components(separatedBy: ",").joined() ?? ""
-        
-        operandManager.appendToExpression(" " + operatorValue + " " + operandValue)
-    }
-    
-    func addStackViewInFormulaHistoryView() {
-        let stackView: UIStackView = UIStackView()
-        stackView.spacing = 8
-        
-        let operandLabel: UILabel = UILabel()
-        operandLabel.text = mainOperandLabel.text?.addComma()
-        
-        let operatorLabel: UILabel = UILabel()
-        operatorLabel.text = mainOperatorLabel.text
-        
-        [operatorLabel, operandLabel].forEach {
-            $0.textColor = .white
-            $0.font = UIFont.preferredFont(forTextStyle: .title3)
-            stackView.addArrangedSubview($0)
+    private func updateExpression() {
+            let operatorValue: String = mainOperatorLabel.text ?? ""
+
+            operandManager.appendToExpression(" \(operatorValue) \(operandManager.currentOperand)")
         }
-        
-        expressionQueue.addArrangedSubview(stackView)
-    }
     
-    func scrollToBottom() {
-        expressionScrollView.setContentOffset(
-            CGPoint(
-                x: 0,
-                y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height
-            ), animated: false)
-    }
-    
-    func resetMainFormulaView(_ sender: UIButton) {
+    private func resetMainOperand() {
         mainOperandLabel.text = "0"
         operandManager.setCurrentOperand("0")
-        mainOperatorLabel.text = sender.currentTitle ?? ""
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
