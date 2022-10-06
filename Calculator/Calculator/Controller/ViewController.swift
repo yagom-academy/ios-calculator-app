@@ -8,7 +8,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var totalFormulaString: String = ""
+    private var totalFormulaString: String = "+"
     private var currentNumber: String = ""
     
     @IBOutlet private weak var calculationFormulaScroll: UIScrollView!
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
             if totalFormulaString.hasPrefix("+-") {
                 totalFormulaString.removeFirst()
                 totalFormulaString.removeFirst()
-
+                
                 totalFormulaString.insert("−", at: totalFormulaString.startIndex)
             }
             
@@ -156,7 +156,8 @@ class ViewController: UIViewController {
             } catch {
                 operandLabel.text = "unknown Error"
             }
-            totalFormulaString = ""
+            totalFormulaString = "+"
+            operatorLabel.text = ""
         }
     }
 }
@@ -165,4 +166,3 @@ extension UIButton {
         self.titleLabel?.text ?? ""
     }
 }
-
