@@ -3,9 +3,9 @@
 
 final class CalculatorController: CalculatorControllerProtocol {
     let view: MainViewControllerDelegate
-    var viewDisplayNumber: String = "0"
-    private var expression: String = ""
-    private var calculatedNumber: String = ""
+    var viewDisplayNumber: String = String(Int.zero)
+    private var expression: String = String()
+    private var calculatedNumber: String = String()
     private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
@@ -15,7 +15,7 @@ final class CalculatorController: CalculatorControllerProtocol {
     }
     
     private func isFirstCharacterZero(stringNumber: String) -> Bool {
-        if stringNumber == "0" {
+        if stringNumber == String(Int.zero) {
             return true
         } else {
             return false
@@ -25,17 +25,17 @@ final class CalculatorController: CalculatorControllerProtocol {
     private func isOverExpressionLimit(stringNumber: String, input: String?) -> Bool {
         var inputLimit: Int = 20
         
-        if stringNumber.contains(".") == true {
+        if stringNumber.contains(Constants.dot) == true {
             inputLimit += 1
         }
         
-        if stringNumber.contains("-") == true {
+        if stringNumber.contains(Constants.negativeSign) == true {
             inputLimit += 1
         }
         
-        if input != "00" && stringNumber.count >= inputLimit {
+        if input != Constants.doubleZero && stringNumber.count >= inputLimit {
             return true
-        } else if input == "00" && stringNumber.count >= inputLimit - 1 {
+        } else if input == Constants.doubleZero && stringNumber.count >= inputLimit - 1 {
             return true
         }
         
@@ -43,7 +43,7 @@ final class CalculatorController: CalculatorControllerProtocol {
     }
     
     private func canMakeHorizontalStackView() -> Bool {
-        if displaySign.rawValue != " " && isFirstCharacterZero(stringNumber: viewDisplayNumber) == false {
+        if displaySign.rawValue != Constants.whitespace && isFirstCharacterZero(stringNumber: viewDisplayNumber) == false {
             return true
         }
         
@@ -60,11 +60,11 @@ final class CalculatorController: CalculatorControllerProtocol {
         }
         
         if isFirstCharacterZero(stringNumber: viewDisplayNumber) == true &&
-            viewDisplayNumber.contains(".") == false
+            viewDisplayNumber.contains(Constants.dot) == false
         {
-            input == "00" ? (viewDisplayNumber = "0") : (viewDisplayNumber = input ?? "0")
+            input == Constants.doubleZero ? (viewDisplayNumber = String(Int.zero)) : (viewDisplayNumber = input ?? String(Int.zero))
         } else {
-            viewDisplayNumber += input ?? "0"
+            viewDisplayNumber += input ?? String(Int.zero)
         }
         
         canCalculate = true
@@ -74,7 +74,7 @@ final class CalculatorController: CalculatorControllerProtocol {
     }
     
     func tappedOperatorButton(input: String?) -> String {
-        if calculatedNumber != "" {
+        if calculatedNumber != String() {
             view.makeStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
@@ -83,7 +83,7 @@ final class CalculatorController: CalculatorControllerProtocol {
         }
         
         if isFirstClick == true {
-            return ""
+            return String()
         } else if canChangedOperator() == true {
             determineOperator(stringOperator: input)
             
@@ -114,14 +114,14 @@ final class CalculatorController: CalculatorControllerProtocol {
     }
     
     func tappedCEButton() {
-        viewDisplayNumber = "0"
-        view.displayNumberLabel.text = "0"
-        calculatedNumber = ""
+        viewDisplayNumber = String(Int.zero)
+        view.displayNumberLabel.text = String(Int.zero)
+        calculatedNumber = String()
         
-        if view.displaySignLabel.text == "" {
+        if view.displaySignLabel.text == String() {
             displaySign = Operator.unknown
-            view.displaySignLabel.text = ""
-            expression = ""
+            view.displaySignLabel.text = String()
+            expression = String()
         }
     }
     
@@ -152,32 +152,32 @@ final class CalculatorController: CalculatorControllerProtocol {
     }
     
     func tappedDotButton() -> String {
-        if viewDisplayNumber.contains(".") == true {
+        if viewDisplayNumber.contains(Constants.dot) == true {
             return viewDisplayNumber
         } else {
-            viewDisplayNumber += "."
+            viewDisplayNumber += Constants.dot
             
             return viewDisplayNumber
         }
     }
     
     func tappedACButton() {
-        expression = ""
-        viewDisplayNumber = "0"
-        calculatedNumber = ""
+        expression = String()
+        viewDisplayNumber = String(Int.zero)
+        calculatedNumber = String()
         displaySign = Operator.unknown
         isFirstClick = true
     }
     
     func tappedReverseSignButton() -> String {
-        if viewDisplayNumber == "0" {
+        if viewDisplayNumber == String(Int.zero) {
             return viewDisplayNumber
         }
         
-        if viewDisplayNumber.first == "-" {
-            viewDisplayNumber = viewDisplayNumber.trimmingCharacters(in: ["-"])
+        if viewDisplayNumber.first == Character(Constants.negativeSign) {
+            viewDisplayNumber = viewDisplayNumber.split(with: Character(Constants.negativeSign)).joined()
         } else {
-            viewDisplayNumber = "-" + viewDisplayNumber
+            viewDisplayNumber = Constants.negativeSign + viewDisplayNumber
         }
         
         return viewDisplayNumber
