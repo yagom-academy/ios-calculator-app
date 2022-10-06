@@ -15,4 +15,3 @@ enum MathSymbol {
     static let equal = "="
     static let negative = "−"
 }
-
