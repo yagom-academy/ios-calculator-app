@@ -79,6 +79,7 @@ class ViewController: UIViewController {
         
         try? showResult()
         operandLabel.text = String(result)
+        resetCalculation()
     }
     
     @IBAction func inputNumberButton(_ sender: UIButton) {
@@ -180,8 +181,6 @@ class ViewController: UIViewController {
         do {
             guard let calculatorResult = try formula?.result() else { return }
             result = calculatorResult
-        
-            resetCalculation()
         } catch CalculateError.invalidNumber {
             showErrorMessage(CalculateError.invalidNumber)
         } catch CalculateError.emptyOperands {
