@@ -8,20 +8,18 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var result: Formula = Formula()
-        
-        if isFirstIndexMinus(of: input) {
+        if isFirstCharacterMinus(of: input) {
             result.operands.enqueue(0.0)
         }
-        
         componentsByOperator(from: input).forEach {
             switch $0 {
             case String(Operator.add.rawValue):
                 result.operators.enqueue(Operator.add)
-            case "−":
+            case String(Operator.subtract.rawValue):
                 result.operators.enqueue(Operator.subtract)
-            case "×":
+            case String(Operator.multiply.rawValue):
                 result.operators.enqueue(Operator.multiply)
-            case "÷":
+            case String(Operator.divide.rawValue):
                 result.operators.enqueue(Operator.divide)
             default:
                 if let double = Double.convertStringContainingCommaToDouble($0) {
@@ -29,7 +27,6 @@ enum ExpressionParser {
                 }
             }
         }
-        
         return result
     }
     
@@ -37,11 +34,7 @@ enum ExpressionParser {
         return input.split(with: " ")
     }
     
-    private static func isFirstIndexMinus(of input: String) -> Bool {
-        if componentsByOperator(from: input).first == "-" {
-            return true
-        }
-        
-        return false
+    private static func isFirstCharacterMinus(of input: String) -> Bool {
+        return componentsByOperator(from: input).first == "-"
     }
 }
