@@ -25,7 +25,7 @@ struct OperandManager {
         if currentOperand.first == ExpressionText.minus {
             currentOperand.removeFirst()
         } else {
-            currentOperand = ExpressionText.minus + currentOperand
+            currentOperand = String(ExpressionText.minus) + currentOperand
         }
     }
     

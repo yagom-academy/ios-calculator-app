@@ -10,5 +10,5 @@ enum ExpressionText {
     static let doubleZero = "00"
     static let nan = "NaN"
     static let whiteSpace: Character = " "
-    static let minus = "-"
+    static let minus: Character = "-"
 }
