@@ -11,9 +11,9 @@ struct Formula {
     
     mutating func result() throws -> Double? {
         var result: Double?
-        while !operators.isEmpty {
+        while operators.isEmpty == false {
             let leftHandSide: Double?
-            if let result = result {
+            if let result {
                 leftHandSide = result
             } else {
                 leftHandSide = operands.dequeue()
