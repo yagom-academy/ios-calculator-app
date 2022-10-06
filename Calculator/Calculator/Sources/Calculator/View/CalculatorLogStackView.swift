@@ -5,39 +5,30 @@
 
 import UIKit
 
+protocol CalculatorLogDelegate: AnyObject {
+    func willShowLogStackView(stackView: UIStackView, operatorLabel: UILabel, operandLabel: UILabel)
+}
+
 final class CalculatorLogStackView: UIStackView {
-    private let operatorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
+    private let operatorLabel = UILabel()
+    private let operandLabel = UILabel()
     
-    private let operandLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
+    weak var delegate: CalculatorLogDelegate?
     
-    init(operatorText: String, operandText: String?) {
-        operatorLabel.text = operatorText
-        operandLabel.text = operandText
-        
-        super.init(arrangedSubviews: [operatorLabel, operandLabel])
-        self.configureStackView()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    private func configureStackView() {
+    func configureStackView() {
         spacing = 8
         distribution = .fill
         axis = .horizontal
         alignment = .fill
+        
+        delegate?.willShowLogStackView(stackView: self, operatorLabel: operatorLabel, operandLabel: operandLabel)
+        
+        [
+            operatorLabel,
+            operandLabel
+        ].forEach {
+            $0.textColor = .white
+            addArrangedSubview($0)
+        }
     }
 }

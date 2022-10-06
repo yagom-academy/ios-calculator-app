@@ -121,15 +121,25 @@ final class CalculatorViewController: UIViewController {
     }
 }
 
+// MARK: - CalculatorLogDelegate 관련 메서드
+extension CalculatorViewController: CalculatorLogDelegate {
+    func willShowLogStackView(
+        stackView: UIStackView,
+        operatorLabel: UILabel,
+        operandLabel: UILabel
+    ) {
+        let operatorValue = currentOperator.isEmpty ? Constant.Calculator.empty : currentOperator
+        operatorLabel.text = operatorValue
+        operandLabel.text = currentNumber.toFormattedString()
+    }
+}
+
 // MARK: - StackView UI변경 관련 메서드
 private extension CalculatorViewController {
     func addChildLogStackView() {
-        let operatorValue = currentOperator.isEmpty ? Constant.Calculator.empty : currentOperator
-        
-        let childView = CalculatorLogStackView(
-            operatorText: operatorValue,
-            operandText: currentNumber.toFormattedString()
-        )
+        let childView = CalculatorLogStackView()
+        childView.delegate = self
+        childView.configureStackView()
         
         parentLogStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom(animated: true)
