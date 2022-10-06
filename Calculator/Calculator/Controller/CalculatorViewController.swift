@@ -11,6 +11,7 @@ class CalculatorViewController: UIViewController {
     private var finalCalculation = ""
     private var result = 0.0
     private var formula: Formula?
+    private var isCalculateResult: Bool = false
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
@@ -31,13 +32,16 @@ class CalculatorViewController: UIViewController {
         guard let operandLabelText = operandLabel.text else { return }
         
         if operandLabelText.contains(Operator.subtract.rawValue) {
-            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
+            stackCalculation = operandLabelText.trimmingCharacters(in: ["-"])
+            operandLabel.text = stackCalculation
             changeSignFinalCalculation(from: "+", to: "-")
         } else {
-            operandLabel.text = "-" + operandLabelText
+            stackCalculation = "-" + operandLabelText
+            operandLabel.text = stackCalculation
             changeSignFinalCalculation(from: "-", to: "+")
         }
     }
+    
     @IBAction func inputOperatorButton(_ sender: UIButton) {
         if operandLabel.text != "" {
             updateCalculatorStackView()
@@ -58,7 +62,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
-        updateFinalCalculation(userInput: stackCalculation)
+        if isCalculateResult == false {
+            updateFinalCalculation(userInput: stackCalculation)
+        }
         updateCalculatorStackView()
         
         operatorLabel.text = ""
@@ -101,6 +107,7 @@ class CalculatorViewController: UIViewController {
         calculatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
+        isCalculateResult = false
     }
     
     private func pushOperand(_ userInput: String) {
@@ -126,16 +133,26 @@ class CalculatorViewController: UIViewController {
         
         for count in (0...finalCalculationList.count-1).reversed() {
             if finalCalculationList[count] == target {
+                print(finalCalculation)
                 finalCalculationList[count] = replacement
                 finalCalculation = finalCalculationList.joined()
+                print(finalCalculation)
                 return
             } else if finalCalculationList[count] == replacement {
+                print(finalCalculation)
                 finalCalculationList[count] = target
                 finalCalculation = finalCalculationList.joined()
+                print(finalCalculation)
                 return
             } else if finalCalculationList[count] == "*" || finalCalculationList[count] == "/" {
+                if isCalculateResult == false {
+                    updateFinalCalculation(userInput: stackCalculation)
+                }
+                print(finalCalculation)
                 try? showResult()
                 finalCalculation = "0" + "-" + "\(result)"
+                print(finalCalculation)
+                isCalculateResult = true
                 return
             }
         }
@@ -183,12 +200,14 @@ class CalculatorViewController: UIViewController {
     }
     
     private func showResult() throws {
+        print(finalCalculation)
         let calculation = ExpressionParser.parse(from: finalCalculation)
         formula = Formula(operands: calculation.operands, operators: calculation.operators)
         
         do {
             guard let calculatorResult = try formula?.result() else { return }
             result = calculatorResult
+            isCalculateResult = true
         } catch CalculateError.invalidNumber {
             showErrorMessage(CalculateError.invalidNumber)
         } catch CalculateError.emptyOperands {
