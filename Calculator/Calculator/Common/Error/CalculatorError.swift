@@ -9,10 +9,18 @@ enum CalculatorError: Error {
     case noneOperand
     case noneOperator
     case convertFailToDouble
+    case someError
     
-    static let noneOperandMessage: String = "None Operand Error"
-    static let noneOperatorMessage: String = "None Operator Error"
-    static let convertFailToDoubleMessage: String = "ConvertFail Error"
-    static let errorMessage: String = "Some Error"
-    
+    var message: String {
+        switch self {
+        case .noneOperand:
+            return "None Operand Error"
+        case .noneOperator:
+            return "None Operator Error"
+        case .convertFailToDouble:
+            return "ConvertFail Error"
+        case .someError:
+            return "Some Error"
+        }
+    }
 }

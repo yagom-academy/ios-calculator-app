@@ -49,9 +49,9 @@ final class CalculatorViewController: UIViewController {
             let currentExpression = applyNumberFormatter(number: convertToDouble)
             resultLabel.text = currentExpression
         } catch CalculatorError.convertFailToDouble {
-            resultLabel.text = CalculatorError.convertFailToDoubleMessage
+            resultLabel.text = CalculatorError.convertFailToDouble.message
         } catch {
-            resultLabel.text = CalculatorError.errorMessage
+            resultLabel.text = CalculatorError.someError.message
         }
     }
     
@@ -169,11 +169,11 @@ final class CalculatorViewController: UIViewController {
             }
             currentOperand = Constant.zero
         } catch CalculatorError.noneOperand {
-            resultLabel.text = CalculatorError.noneOperandMessage
+            resultLabel.text = CalculatorError.noneOperand.message
         } catch CalculatorError.noneOperator {
-            resultLabel.text = CalculatorError.noneOperatorMessage
+            resultLabel.text = CalculatorError.noneOperator.message
         } catch {
-            resultLabel.text = CalculatorError.errorMessage
+            resultLabel.text = CalculatorError.someError.message
         }
     }
     
