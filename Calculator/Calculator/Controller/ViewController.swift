@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
-
+        
         if operandLabelText.contains(Operator.subtract.rawValue) {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
             changeSignFinalCalculation(from: "+", to: "-")
@@ -155,6 +155,14 @@ class ViewController: UIViewController {
         calculatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         calculatorStackView.addArrangedSubview(calculatorLabel)
+        updateCalculatorScrollView()
+    }
+    
+    private func updateCalculatorScrollView() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.001) {
+            self.calculatorScrollView.scrollRectToVisible(CGRectMake(0, self.calculatorScrollView.contentSize.height-self.calculatorScrollView.bounds.height, self.calculatorScrollView.bounds.size.width, self.calculatorScrollView.bounds.size.height),
+                                                          animated: true)
+        }
     }
     
     private func showResult() throws {
