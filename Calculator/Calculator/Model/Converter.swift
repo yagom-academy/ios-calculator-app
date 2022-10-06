@@ -1,14 +1,14 @@
 //
-//  Double+convertStringContainingCommaToDouble.swift
+//  Converter.swift
 //  Calculator
 //
-//  Created by junho lee on 2022/10/03.
+//  Created by Junho, Baem on 2022/10/06.
 //
 
 import Foundation
 
-extension Double {
-    static func convertStringContainingCommaToDouble(_ input: String) -> Double? {
+struct Converter {
+    func convertStringContainingCommaToDouble(_ input: String) -> Double? {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.groupingSeparator = ","

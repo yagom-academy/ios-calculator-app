@@ -22,7 +22,7 @@ enum ExpressionParser {
             case String(Operator.divide.rawValue):
                 result.operators.enqueue(Operator.divide)
             default:
-                if let double = Double.convertStringContainingCommaToDouble($0) {
+                if let double = Converter().convertStringContainingCommaToDouble($0) {
                     result.operands.enqueue(double)
                 }
             }
