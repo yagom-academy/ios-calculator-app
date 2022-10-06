@@ -42,11 +42,11 @@ class ViewController: UIViewController {
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         guard !operandManager.expression.isEmpty || mainOperandLabel.text != ExpressionText.zero else { return }
         
-        mainOperatorLabel.text = sender.currentTitle
         if mainOperandLabel.text != ExpressionText.zero {
             appendExpressionQueue()
             resetMainOperand(to: ExpressionText.zero)
         }
+        mainOperatorLabel.text = sender.currentTitle
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -104,7 +104,7 @@ extension ViewController {
         guard let currentOperator = mainOperatorLabel.text else { return }
         let stackView: UIStackView = componentMaker.makeStackView()
         
-        if !expressionQueue.arrangedSubviews.isEmpty {
+        if !operandManager.expression.isEmpty {
             updateExpression(to: stackView, text: currentOperator)
         }
         updateExpression(to: stackView, text: operandManager.currentOperand)
