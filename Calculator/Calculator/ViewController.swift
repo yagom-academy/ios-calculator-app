@@ -70,6 +70,8 @@ final class ViewController: UIViewController {
     @IBAction private func touchUpAllClearButton(_ sender: UIButton) {
         resetOperandLabel()
         resetOperatorLabel()
+        calculator.clearOperands()
+        calculator.clearOperators()
         removeAllSubviewsInHistoryStackView()
     }
     
