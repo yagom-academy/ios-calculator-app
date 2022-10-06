@@ -11,7 +11,15 @@ class CalculatorViewController: UIViewController {
     @IBOutlet private weak var numberLabel: UILabel!
     @IBOutlet private weak var historyStackView: UIStackView!
     @IBOutlet private weak var historyScrollView: UIScrollView!
-    let calculator: Calculator = Calculator()
+    private let calculator = Calculator()
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.usesSignificantDigits = true
+        formatter.maximumSignificantDigits = 20
+        formatter.numberStyle = .decimal
+        
+        return formatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +32,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func updateNumberLabel(to string: String = "0") {
-        numberLabel.text = string
+        numberLabel.text = numberFormatter.string(from: string.convertNSNumber())
     }
     
     private func removeAllStackView() {
@@ -56,15 +64,14 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputOperator(_ `operator`: String) {
-        calculator.updateCurrentOperator(`operator`)
-        updateOperatorLabel(to: calculator.currentOperator)
-        
         if calculator.isOperandEmpty {
             return
         }
         
         calculator.updateExpression()
         addHistoryStackView()
+        calculator.updateCurrentOperator(`operator`)
+        updateOperatorLabel(to: calculator.currentOperator)
         clearEntry()
         view.layoutIfNeeded()
         historyScrollView.moveToBottomScroll()
