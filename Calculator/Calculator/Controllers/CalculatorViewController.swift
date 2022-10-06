@@ -20,11 +20,11 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUILabelText()
+        setLabelText()
         clearCalculateHistory()
     }
     
-    private func setUILabelText() {
+    private func setLabelText() {
         operatorLabel.text = Constant.empty
         resultLabel.text = Constant.zero
     }
@@ -201,7 +201,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
-        setUILabelText()
+        setLabelText()
         clearCalculateHistory()
         currentOperand = Constant.defaultZero
         currentOperator = Constant.empty
