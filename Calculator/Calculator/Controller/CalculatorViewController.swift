@@ -27,7 +27,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func operandButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else { return }
+        guard !isCalculated else {
+            return
+        }
         
         switch sender.tag {
         case 0 where !operand.isEmpty:
@@ -47,8 +49,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard let selectedOperator = sender.currentTitle else { return }
-        guard !isFirstInput else { return }
+        guard let selectedOperator = sender.currentTitle,
+              !isFirstInput
+        else {
+            return
+        }
         
         if isCalculated {
             finalFormula.removeAll()
@@ -63,7 +68,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else { return }
+        guard !isCalculated else {
+            return
+        }
         
         if operand.isEmpty {
             operand += CalculatorConstant.zero
@@ -99,8 +106,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func toggleSignButtonTapped(_ sender: UIButton) {
-        guard !isCalculated else { return }
-        guard !operand.isEmpty else{ return }
+        guard !isCalculated, !operand.isEmpty else {
+            return
+        }
         
         if operand.starts(with: CalculatorConstant.negativeSign) {
             operand.removeFirst()
@@ -172,7 +180,9 @@ final class CalculatorViewController: UIViewController {
         var formula = ExpressionParser.parse(from: finalFormula)
         
         do {
-            guard let result = try formula.result() else { return }
+            guard let result = try formula.result() else {
+                return
+            }
             
             updateOperandLabel(with: String(result))
         } catch CalculatorError.divideWithZero {
