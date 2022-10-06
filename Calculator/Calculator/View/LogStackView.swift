@@ -20,19 +20,12 @@ final class LogStackView: UIStackView {
         return label
     }()
     
-    init(operand: String, arithmeticOperator: String) {
+    convenience init(operand: String, arithmeticOperator: String) {
+        self.init(frame: .zero)
         operandLabel.text = operand
         operatorLabel.text = arithmeticOperator
-        super.init(arrangedSubviews: [operatorLabel, operandLabel])
+        [operatorLabel, operandLabel].forEach(addArrangedSubview(_:))
         addSpacing()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
     }
     
     func addSpacing() {
