@@ -57,7 +57,7 @@ final class FormulaTests: XCTestCase {
         
         // when
         do {
-            let result = try sut.result()
+            let _ = try sut.result()
         } catch {
         // then
             XCTAssertEqual(CalculateError.dividedByZero, error as! CalculateError)
@@ -72,5 +72,21 @@ final class FormulaTests: XCTestCase {
         
         // then
         XCTAssertNil(result)
+    }
+    
+    func test_피연산자가_4개이고_연산자가_2개일_때_피연산자의_3개까지_연산이_되는지() {
+        // given
+        sut.operands.enqueue(2)
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(4)
+        sut.operands.enqueue(5)
+        sut.operators.enqueue(.multiply)
+        sut.operators.enqueue(.subtract)
+        
+        // when
+        let result = try! sut.result()
+        
+        // then
+        XCTAssertEqual(result, 2)
     }
 }
