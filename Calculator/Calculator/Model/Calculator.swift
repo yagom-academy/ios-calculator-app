@@ -8,26 +8,31 @@
 import Foundation
 
 struct Calculator {
-    static let defaultOperand: String = "0"
-    static let defaultOperator: String = ""
-    static let negativeSymbol: String = "-"
-        
-    private(set) var currentOperand: String = defaultOperand
-    private(set) var currentOperator: String = defaultOperator
+    private let defaultOperand: String = "0"
+    private let defaultOperator: String = ""
+    private let negativeSymbol: String = "-"
+    private(set) var currentOperand: String
+    private(set) var currentOperator: String
     private var operands: [String] = []
     private var operators: [String] = []
     var isEditingState: Bool {
         get {
-            return currentOperand != Calculator.defaultOperand
+            return currentOperand != defaultOperand
         }
     }
     
+    init() {
+        currentOperand = defaultOperand
+        currentOperator = defaultOperator
+    }
+    
+    
     mutating func resetCurrentOperand() {
-        currentOperand = Calculator.defaultOperand
+        currentOperand = defaultOperand
     }
     
     mutating func resetCurrentOperator() {
-        currentOperator = Calculator.defaultOperator
+        currentOperator = defaultOperator
     }
     
     mutating func clearOperands() {
@@ -45,12 +50,12 @@ struct Calculator {
         }
         
         let isPointDuplication: Bool = input == "." && currentOperand.contains(".")
-        let isZeroDuplication: Bool = currentOperand == Calculator.defaultOperand && ["0", "00"].contains(input)
+        let isZeroDuplication: Bool = currentOperand == defaultOperand && ["0", "00"].contains(input)
         if isZeroDuplication || isPointDuplication {
             return
         }
         
-        let isInitialState: Bool = currentOperand == Calculator.defaultOperand && input != "."
+        let isInitialState: Bool = currentOperand == defaultOperand && input != "."
         if isInitialState {
             currentOperand = input
         } else {
@@ -69,14 +74,14 @@ struct Calculator {
     }
     
     mutating func switchPositiveNegativeOfCurrentOperand() {
-        guard currentOperand != Calculator.defaultOperand else {
+        guard currentOperand != defaultOperand else {
             return
         }
-        let isNegative: Bool = currentOperand.hasPrefix(Calculator.negativeSymbol)
+        let isNegative: Bool = currentOperand.hasPrefix(negativeSymbol)
         if isNegative {
             currentOperand.removeFirst()
         } else {
-            currentOperand = "\(Calculator.negativeSymbol)\(currentOperand)"
+            currentOperand = "\(negativeSymbol)\(currentOperand)"
         }
     }
     
