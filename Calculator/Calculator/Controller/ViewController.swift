@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -160,8 +160,7 @@ class ViewController: UIViewController {
     
     private func updateCalculatorScrollView() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.001) {
-            self.calculatorScrollView.scrollRectToVisible(CGRectMake(0, self.calculatorScrollView.contentSize.height-self.calculatorScrollView.bounds.height, self.calculatorScrollView.bounds.size.width, self.calculatorScrollView.bounds.size.height),
-                                                          animated: true)
+            self.calculatorScrollView.setContentOffset(CGPoint(x: 0, y: self.calculatorScrollView.contentSize.height-self.calculatorScrollView.bounds.height), animated: true)
         }
     }
     
