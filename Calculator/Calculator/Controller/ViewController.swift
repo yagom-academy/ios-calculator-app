@@ -80,15 +80,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapSignButton(_ sender: UIButton) {
-        guard let operandLabelText = mainOperandLabel.text,
-              operandLabelText != "0" else { return }
-        
-        operandLabelText.contains("-") ?
-        (mainOperandLabel.text = operandLabelText.split(with: "-").joined()) :
-        (mainOperandLabel.text = "-" + operandLabelText)
-        
+        guard mainOperandLabel.text != "0" else { return }
+
         isCalculated = false
         operandManager.handleSignButton()
+        mainOperandLabel.text = operandManager.currentOperand.addCommaInteger()
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
