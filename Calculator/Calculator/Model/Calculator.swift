@@ -26,7 +26,6 @@ struct Calculator {
         currentOperator = defaultOperator
     }
     
-    
     mutating func resetCurrentOperand() {
         currentOperand = defaultOperand
     }
@@ -44,17 +43,11 @@ struct Calculator {
     }
     
     mutating func inputOperand(_ input: String) {
-        guard input != CalculateError.dividedByZero.localizedDescription else {
-            currentOperand = input
-            return
-        }
-        
         let isPointDuplication: Bool = input == "." && currentOperand.contains(".")
         let isZeroDuplication: Bool = currentOperand == defaultOperand && ["0", "00"].contains(input)
         if isZeroDuplication || isPointDuplication {
             return
         }
-        
         let isInitialState: Bool = currentOperand == defaultOperand && input != "."
         if isInitialState {
             currentOperand = input
@@ -101,9 +94,8 @@ struct Calculator {
         guard let formulaResult = try formula.result() else {
             return ""
         }
-        let result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
-        currentOperand = result
-        return result
+        currentOperand = applyFormat(to: removeLastCommaZero(String(formulaResult)))
+        return currentOperand
     }
     
     mutating private func convertOperatorsOperandsToString() -> String {
@@ -123,16 +115,16 @@ struct Calculator {
     
     private func applyFormat(to input: String) -> String {
         let inputNumber: Double = Converter().convertStringContainingCommaToDouble(input) ?? 0
-        let integerNumber: Int = Int(inputNumber)
+        let integerPartNumber: Double = floor(inputNumber)
         let separatedInput: [String] = input.components(separatedBy: ".")
         let hasDecimalPart: Bool = separatedInput.count >= 2
         guard hasDecimalPart else {
-            return applyNumberFormat(to: NSNumber(value: integerNumber))
+            return applyNumberFormat(to: NSNumber(value: integerPartNumber))
         }
         let decimalPart: String = separatedInput[1]
         let hasOnlyPoint: Bool = decimalPart.isEmpty
         let hasZeroAtTheEnd: Bool = decimalPart.hasSuffix("0")
-        let formattedIntegerNumber: String = applyNumberFormat(to: NSNumber(value: integerNumber))
+        let formattedIntegerNumber: String = applyNumberFormat(to: NSNumber(value: integerPartNumber))
         if hasOnlyPoint {
             return "\(formattedIntegerNumber)."
         }
@@ -147,7 +139,7 @@ struct Calculator {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
-        return numberFormatter.string(from: input) ?? ""
+        return numberFormatter.string(for: input) ?? ""
     }
     
     private func removeComma(_ input: String) -> String {
