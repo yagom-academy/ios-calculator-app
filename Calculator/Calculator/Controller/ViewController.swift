@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         if mainOperandLabel.text != "0" {
             updateExpression()
             appendExpressionQueue()
-            resetMainOperand()
+            resetMainOperand(to: "0")
         }
         mainOperatorLabel.text = sender.currentTitle
     }
@@ -56,9 +56,9 @@ class ViewController: UIViewController {
             operandManager.appendToExpression(" \(operatorValue) \(operandManager.currentOperand)")
         }
     
-    private func resetMainOperand() {
+    private func resetMainOperand(to operand: String) {
         mainOperandLabel.text = "0"
-        operandManager.setCurrentOperand("0")
+        operandManager.setCurrentOperand(operand)
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -74,9 +74,8 @@ class ViewController: UIViewController {
             mainOperandLabel.text = String(result).addComma()
         }
         
-        mainOperatorLabel.text = ""
         isCalculated = true
-        operandManager.setCurrentOperand("\(result)")
+        resetMainOperand(to: "\(result)")
         operandManager.clearExpression()
     }
     
