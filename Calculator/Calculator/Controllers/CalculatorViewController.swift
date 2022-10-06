@@ -48,10 +48,10 @@ final class CalculatorViewController: UIViewController {
             let convertToDouble = try convertOperandToDouble()
             let currentExpression = applyNumberFormatter(number: convertToDouble)
             resultLabel.text = currentExpression
-        } catch CalculatorError.convertFailToDouble {
-            resultLabel.text = CalculatorError.convertFailToDouble.message
         } catch {
-            resultLabel.text = CalculatorError.someError.message
+            if let error = error as? CalculatorError {
+                resultLabel.text = error.message
+            }
         }
     }
     
@@ -168,12 +168,10 @@ final class CalculatorViewController: UIViewController {
                 resultLabel.text = applyNumberFormatter(number: result)
             }
             currentOperand = Constant.zero
-        } catch CalculatorError.noneOperand {
-            resultLabel.text = CalculatorError.noneOperand.message
-        } catch CalculatorError.noneOperator {
-            resultLabel.text = CalculatorError.noneOperator.message
         } catch {
-            resultLabel.text = CalculatorError.someError.message
+            if let error = error as? CalculatorError {
+                resultLabel.text = error.message
+            }
         }
     }
     
