@@ -112,6 +112,7 @@ class CalculatorViewController: UIViewController {
     private func resetCalculation() {
         stackCalculation = ""
         finalCalculation = "0" + "+"
+        
         calculatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
@@ -124,7 +125,8 @@ class CalculatorViewController: UIViewController {
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
         updateFinalCalculation(userInput: stackCalculation)
-        updateFinalCalculation(userInput: finalCalculationInput)
+        changeOperator(replacement: finalCalculationInput)
+        
         stackCalculation = ""
         operatorLabel.text = operatorInput
         operandLabel.text = ""
@@ -154,6 +156,25 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    private func changeOperator(replacement: String) {
+        if finalCalculation.count == 0 {
+            return
+        }
+        
+        var finalCalculationList = Array(finalCalculation).map { String($0) }
+        var lastFinalCalculation = finalCalculationList[finalCalculationList.count-1]
+        
+        if operandLabel.text == "" {
+            lastFinalCalculation = replacement
+            finalCalculationList[finalCalculationList.count-1] = lastFinalCalculation
+                finalCalculation = finalCalculationList.joined()
+                return
+        } else {
+            updateFinalCalculation(userInput: replacement)
+            return
+        }
+    }
+    
     private func updateCalculatorStackView() {
         let calculatorLabel = UILabel()
         let whiteSpace = " "
@@ -163,10 +184,10 @@ class CalculatorViewController: UIViewController {
         calculatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         calculatorStackView.addArrangedSubview(calculatorLabel)
-        updateCalculatorScrollView()
+        scrollToCalculatorScrollViewBottom()
     }
     
-    private func updateCalculatorScrollView() {
+    private func scrollToCalculatorScrollViewBottom() {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.001) {
             self.calculatorScrollView.setContentOffset(CGPoint(x: 0, y: self.calculatorScrollView.contentSize.height-self.calculatorScrollView.bounds.height), animated: true)
         }
