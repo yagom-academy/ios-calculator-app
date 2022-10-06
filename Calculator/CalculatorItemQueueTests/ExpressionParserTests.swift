@@ -1,61 +1,46 @@
-////
-////  ExpressionParserTests.swift
-////  Created by 미니.
-////
-//import XCTest
-//@testable import Calculator
 //
-//final class ExpressionParserTests: XCTestCase {
-//    func test_연산자와피연산자의문자가모드정상적인경우결과가예측치와동일한지() {
-//        // driven
-//        let input: String = "10+9×8"
-//        // when
-//        var form: Formula = ExpressionParser.parse(from: input)
-//        
-//        do {
-//            let result = try form.result()
+//  ExpressionParserTests.swift
+//  Created by 미니.
 //
-//            // then
-//            XCTAssertEqual(result, 152)
-//        } catch {
-//
-//        }
-//        
-//        XCTAssertTrue(true)
-//
-//    }
-//    
-//    func test_다른연산자와마이너스연산자가붙어서나올때결과가예측치와동일한가() {
-//        // driven
-//        let input: String = "10+9÷7"
-//        
-//        // when
-//        var form: Formula = ExpressionParser.parse(from: input)
-//        
-//        do {
-//            let result = try form.result()
-//            
-//            // then
-//            XCTAssertEqual(result, 2.7142857142857144)
-//        } catch {
-//            
-//        }
-//    }
-//    
-//    func test_첫번째피연산자에마이너스가붙은경우결과가예측치와동일한가() {
-//        // driven
-//        let input: String = "-10+9×876"
-//        // when
-//        var form: Formula = ExpressionParser.parse(from: input)
-//        
-//        do {
-//            let result = try form.result()
-//            
-//            // then
-//            XCTAssertEqual(result, -876)
-//        } catch {
-//            
-//        }
-//    }
-//}
-//
+import XCTest
+@testable import Calculator
+
+final class ExpressionParserTests: XCTestCase {
+ 
+    func test_숫자와_연산자를_구분해서_파싱했는가() {
+        // given
+        let input: String = "10+9×8"
+        
+        // when
+        var form: Formula = ExpressionParser.parse(from: input)
+        let result = form.result()
+
+        // then
+        XCTAssertEqual(result, 152)
+    }
+    
+    func test_첫번째_피연산자가_마이너스10일때_마이너스10으로_파싱했는가() {
+        // given
+        let input: String = "-10+9×876"
+        
+        // when
+        var form: Formula = ExpressionParser.parse(from: input)
+        let result = form.result()
+            
+        // then
+        XCTAssertEqual(result, -876)
+    }
+    
+    func test_빼기_연산기호_뒤에_마이너스6이_오는_경우_마이너스6으로_파싱했는가() {
+        // given
+        let input: String = "-10+9--6"
+        
+        // when
+        var form: Formula = ExpressionParser.parse(from: input)
+        let result = form.result()
+            
+        // then
+        XCTAssertEqual(result, 5)
+    }
+}
+
