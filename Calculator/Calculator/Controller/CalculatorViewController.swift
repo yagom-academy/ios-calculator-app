@@ -110,33 +110,32 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated, !operand.isEmpty else {
             return
         }
-        
+
         if operand.starts(with: CalculatorConstant.negativeSign) {
             operand.removeFirst()
+            updateOperandLabel(with: CalculatorConstant.blank)
         } else {
-            operand = CalculatorConstant.negativeSign + operand
+            updateOperandLabel(with: CalculatorConstant.negativeSign)
         }
-
-        operandLabel.text = operand
     }
-    
+
     private func createStackView() {
         let logOperand = operand.formatStyleToDecimal()
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
-        
+
         formulaStackView.addArrangedSubview(stackView)
         updateLogScrollViewContentOffset()
     }
-    
+
     private func removeLastDot() {
         operand = operand.trimmingCharacters(in: CalculatorConstant.dotSet)
     }
-    
+
     private func createFinalFormula() {
         finalFormula += arithmeticOperator
         finalFormula += operand
     }
-    
+
     private func updateOperandLabel(with input: String) {
         if input == CalculatorConstant.dot {
             if isFirstInput {
@@ -147,15 +146,17 @@ final class CalculatorViewController: UIViewController {
             }
             operand += input
             operandLabel.text = operand.formatStyleToDecimal() + CalculatorConstant.dot
-            
+
             return
+        } else if input == CalculatorConstant.negativeSign {
+            operand = input + operand
         } else {
             operand += input
         }
 
         if isDotButtonTapped {
             let (integerPart, decimalPart) = operand.splitByDot()
-            
+
             operandLabel.text = integerPart.formatStyleToDecimal() + CalculatorConstant.dot + decimalPart
         } else {
             operandLabel.text = operand.formatStyleToDecimal()
