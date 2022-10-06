@@ -101,6 +101,7 @@ class CalculatorViewController: UIViewController {
     
     private func inputOperator(_ `operator`: String) {
         calculator.updateExpression()
+        addHistoryStackView()
         clearEntry()
         calculator.updateCurrentOperator(`operator`)
         updateOperatorLabel(to: calculator.currentOperator)
@@ -108,6 +109,24 @@ class CalculatorViewController: UIViewController {
     
     private func inputEqual() {
         calculator.updateExpression()
+    }
+    
+    private func addHistoryStackView() {
+        let newStackView: UIStackView = UIStackView()
+        let signLabel: UILabel = UILabel()
+        let numberLabel: UILabel = UILabel()
+                
+        signLabel.text = calculator.currentOperator
+        numberLabel.text = calculator.currentOperand
+        signLabel.textColor = .white
+        numberLabel.textColor = .white
+        signLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        newStackView.addArrangedSubview(signLabel)
+        newStackView.addArrangedSubview(numberLabel)
+        
+        historyStackView.addArrangedSubview(newStackView)
     }
     
     private func showResult() {
