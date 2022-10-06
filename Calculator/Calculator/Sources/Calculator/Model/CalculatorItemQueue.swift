@@ -7,6 +7,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var inputStack: [Element] = []
     private(set) var outputStack: [Element] = []
     
+    init() { }
+    
     var isEmpty: Bool {
         return inputStack.isEmpty && outputStack.isEmpty
     }
@@ -15,6 +17,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         inputStack.append(element)
     }
 
+    @discardableResult
     mutating func dequeue() -> Element? {
         if outputStack.isEmpty {
             outputStack = inputStack.reversed()
