@@ -21,17 +21,6 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_플러스를_inputOperator하면_currentOperator가_플러스인지() {
-        // given
-        sut.inputOperator("+")
-        
-        // when
-        let result: String = sut.currentOperator
-        
-        // then
-        XCTAssertEqual(result, "+")
-    }
-    
     func test_마이너스1234포인트56를순서대로_inputOperand하면_currentOperand가_마이너스1콤마234포인트56인지() {
         // given
         let input: String = "-1234.56"
@@ -46,7 +35,32 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, "-1,234.56")
     }
     
-    func test_123을순서대로_inputOperand하고_switchPositiveNegativeOfCurrentOperand하면_currentOpernad가_마이너스123인지() {
+    func test_1dotdot이_입력되면_currentOperand가_1dot이_되는지() {
+        // given
+        let input: String = "1.."
+        input.forEach {
+            sut.inputOperand(String($0))
+        }
+        
+        // when
+        let result: String = sut.currentOperand
+        
+        // then
+        XCTAssertEqual(result, "1.")
+    }
+    
+    func test_플러스를_inputOperator하면_currentOperator가_플러스인지() {
+        // given
+        sut.inputOperator("+")
+        
+        // when
+        let result: String = sut.currentOperator
+        
+        // then
+        XCTAssertEqual(result, "+")
+    }
+    
+    func test_123을순서대로_inputOperand하고_switchPositiveNegativeOfCurrentOperand하면_currentOperand가_마이너스123인지() {
         // given
         let input: String = "123"
         input.forEach {
