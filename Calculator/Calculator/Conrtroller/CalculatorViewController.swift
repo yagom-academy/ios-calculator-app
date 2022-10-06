@@ -73,9 +73,7 @@ final class CalculatorViewController: UIViewController {
         }
         
         switch number {
-        case NameSpace.zero:
-            guard userInput != NameSpace.zero else { return }
-        case NameSpace.doubleZero:
+        case NameSpace.zero, NameSpace.doubleZero:
             guard userInput != NameSpace.zero else { return }
         case NameSpace.dot:
             guard !userInput.contains(NameSpace.dot) else { return }
