@@ -10,7 +10,7 @@ import Foundation
 class Calculator {
     private(set) var expression: String = ""
     private(set) var currentOperator: String = ""
-    private(set) var currentOperand: String = "0"
+    private(set) var currentOperand: String = ""
     var isNegativeOperand: Bool {
         return currentOperand.contains(MathSymbol.negative)
     }
@@ -19,10 +19,14 @@ class Calculator {
         return currentOperand.contains(MathSymbol.dot)
     }
     
+    var isOperandEmpty: Bool {
+        return currentOperand.isEmpty
+    }
+    
     func clearCalculator(expression: String = "") {
         self.expression = expression
         currentOperator = ""
-        currentOperand = "0"
+        currentOperand = ""
     }
     
     func calculatedResult() throws -> Double {

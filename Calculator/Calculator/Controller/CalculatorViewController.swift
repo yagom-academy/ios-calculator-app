@@ -33,13 +33,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func clearAll() {
-        calculator.clearCalculator()
-        updateOperatorLabel(to: calculator.currentOperator)
-        updateNumberLabel(to: calculator.currentOperand)
-        removeAllStackView()
-    }
-    
     @IBAction func touchCalculatorButton(_ sender: UIButton) {
         guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
             return
@@ -71,26 +64,12 @@ class CalculatorViewController: UIViewController {
         updateNumberLabel(to: calculator.currentOperand)
     }
     
-    private func changeSign() {
-        var currentOperand = calculator.currentOperand
-        if calculator.isNegativeOperand {
-           currentOperand = String(currentOperand.dropFirst())
-        } else {
-            currentOperand = "−" + currentOperand
-        }
-        
-        calculator.updateCurrentOperand(currentOperand)
-        updateNumberLabel(to: calculator.currentOperand)
-    }
-    
-    private func clearEntry() {
-        calculator.updateCurrentOperand("0")
-        updateNumberLabel(to: calculator.currentOperand)
-    }
-    
     private func inputDot() {
         if calculator.isDecimal {
             return
+        }
+        if calculator.isOperandEmpty {
+            calculator.updateCurrentOperand("0")
         }
         
         let currentOperand = calculator.currentOperand + MathSymbol.dot
@@ -107,28 +86,35 @@ class CalculatorViewController: UIViewController {
         updateOperatorLabel(to: calculator.currentOperator)
     }
     
+    private func clearAll() {
+        calculator.clearCalculator()
+        updateOperatorLabel(to: calculator.currentOperator)
+        updateNumberLabel(to: calculator.currentOperand)
+        removeAllStackView()
+    }
+    
+    private func clearEntry() {
+        calculator.updateCurrentOperand("")
+        updateNumberLabel(to: calculator.currentOperand)
+    }
+    
+    private func changeSign() {
+        var currentOperand = calculator.currentOperand
+        if calculator.isNegativeOperand {
+           currentOperand = String(currentOperand.dropFirst())
+        } else {
+            currentOperand = "−" + currentOperand
+        }
+        
+        calculator.updateCurrentOperand(currentOperand)
+        updateNumberLabel(to: calculator.currentOperand)
+    }
+    
     private func inputEqual() {
         calculator.updateExpression()
+        addHistoryStackView()
     }
-    
-    private func addHistoryStackView() {
-        let newStackView: UIStackView = UIStackView()
-        let signLabel: UILabel = UILabel()
-        let numberLabel: UILabel = UILabel()
-                
-        signLabel.text = calculator.currentOperator
-        numberLabel.text = calculator.currentOperand
-        signLabel.textColor = .white
-        numberLabel.textColor = .white
-        signLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        numberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        newStackView.addArrangedSubview(signLabel)
-        newStackView.addArrangedSubview(numberLabel)
-        
-        historyStackView.addArrangedSubview(newStackView)
-    }
-    
+
     private func showResult() {
         let result: String
         do {
@@ -143,6 +129,25 @@ class CalculatorViewController: UIViewController {
         calculator.clearCalculator(expression: result)
         updateOperatorLabel(to: calculator.currentOperator)
         updateNumberLabel(to: result)
+    }
+    
+    private func makeLabel(_ text: String) -> UILabel {
+        let label: UILabel = UILabel()
+        label.text = text
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        return label
+    }
+    
+    private func addHistoryStackView() {
+        let newStackView: UIStackView = UIStackView()
+        let signLabel: UILabel = makeLabel(calculator.currentOperator)
+        let numberLabel: UILabel = makeLabel(calculator.currentOperand)
+        
+        newStackView.addArrangedSubview(signLabel)
+        newStackView.addArrangedSubview(numberLabel)
+        
+        historyStackView.addArrangedSubview(newStackView)
     }
 }
 
