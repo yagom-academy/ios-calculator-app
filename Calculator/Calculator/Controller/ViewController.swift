@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  Created by Wonbi
+//  Created by Wonbi, Ash
 //
 
 import UIKit
@@ -42,12 +42,11 @@ class ViewController: UIViewController {
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         guard !operandManager.expression.isEmpty || mainOperandLabel.text != "0" else { return }
         
+        mainOperatorLabel.text = sender.currentTitle
         if mainOperandLabel.text != "0" {
-            updateExpression()
             appendExpressionQueue()
             resetMainOperand(to: "0")
         }
-        mainOperatorLabel.text = sender.currentTitle
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -64,7 +63,8 @@ class ViewController: UIViewController {
         }
         
         isCalculated = true
-        resetMainOperand(to: "\(result)")
+        mainOperatorLabel.text = ""
+        operandManager.setCurrentOperand("\(result)")
         operandManager.clearExpression()
     }
     
@@ -84,24 +84,20 @@ class ViewController: UIViewController {
         }
         resetMainOperand(to: "0")
     }
-    
-    func resetScrollView() {
-        expressionQueue.subviews.forEach { $0.removeFromSuperview() }
-    }
 }
 
-// handling view
+// MARK: handling view
 extension ViewController {
-    private func updateExpression() {
-            let operatorValue: String = mainOperatorLabel.text ?? ""
-
-            operandManager.appendToExpression(" \(operatorValue) \(operandManager.currentOperand)")
-        }
-    
     private func resetMainOperand(to operand: String) {
         isCalculated = false
         mainOperandLabel.text = "0"
         operandManager.setCurrentOperand(operand)
+    }
+    
+    private func updateExpression(to stackView: UIStackView, text: String) {
+        let label: UILabel = componentMaker.makeLabel(text.addComma())
+        stackView.addArrangedSubview(label)
+        operandManager.appendToExpression(" \(text)")
     }
 
     private func appendExpressionQueue() {
@@ -109,22 +105,22 @@ extension ViewController {
         let stackView: UIStackView = componentMaker.makeStackView()
         
         if !expressionQueue.arrangedSubviews.isEmpty {
-            let operatorLabel: UILabel = componentMaker.makeLabel(currentOperator)
-            stackView.addArrangedSubview(operatorLabel)
-            operandManager.appendToExpression(" \(currentOperator)")
+            updateExpression(to: stackView, text: currentOperator)
         }
-        let operandLabel: UILabel = componentMaker.makeLabel(operandManager.currentOperand.addComma())
-        stackView.addArrangedSubview(operandLabel)
-        operandManager.appendToExpression(" \(operandManager.currentOperand)")
+        updateExpression(to: stackView, text: operandManager.currentOperand)
         
         expressionQueue.addArrangedSubview(stackView)
         updateScroll()
     }
     
-    func updateScroll() {
+    private func updateScroll() {
         expressionScrollView.layoutIfNeeded()
         expressionScrollView.setContentOffset(CGPoint(x: 0,
                                                       y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height),
                                               animated: false)
+    }
+    
+    private func resetScrollView() {
+        expressionQueue.subviews.forEach { $0.removeFromSuperview() }
     }
 }

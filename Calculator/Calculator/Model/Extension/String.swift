@@ -16,7 +16,7 @@ extension String {
     }
     
     func addComma() -> String {
-        guard let result = numberFormatter.string(for: Double(self)) else { return self }
+        guard Double(self) != nil, let result = numberFormatter.string(for: Double(self)) else { return self }
         return result
     }
     

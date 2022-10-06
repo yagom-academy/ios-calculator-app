@@ -1,8 +1,6 @@
 //
 //  StringExtensionTests.swift
-//  CalculatorTests
-//
-//  Created by Wonbi on 2022/10/05.
+//  Created by Wonbi, Ash
 //
 
 import XCTest
