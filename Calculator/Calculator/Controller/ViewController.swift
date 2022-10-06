@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearOperandLabel()
+        resetMainOperand(to: "0")
         mainOperatorLabel.text = ""
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
         guard let tappedOperand = sender.currentTitle, mainOperandLabel.text?.count ?? 0 <= 18 else { return }
-        if isCalculated { clearOperandLabel() }
+        if isCalculated { resetMainOperand(to: "0") }
         
         switch tappedOperand {
         case ".":
@@ -48,17 +48,6 @@ class ViewController: UIViewController {
             resetMainOperand(to: "0")
         }
         mainOperatorLabel.text = sender.currentTitle
-    }
-    
-    private func updateExpression() {
-            let operatorValue: String = mainOperatorLabel.text ?? ""
-
-            operandManager.appendToExpression(" \(operatorValue) \(operandManager.currentOperand)")
-        }
-    
-    private func resetMainOperand(to operand: String) {
-        mainOperandLabel.text = "0"
-        operandManager.setCurrentOperand(operand)
     }
     
     @IBAction func tapEqualsButton(_ sender: UIButton) {
@@ -87,30 +76,32 @@ class ViewController: UIViewController {
         mainOperandLabel.text = operandManager.currentOperand.addCommaInteger()
     }
     
-    @IBAction func tapCEButton(_ sender: UIButton) {
-        clearOperandLabel()
-    }
-
-    @IBAction func tapACButton(_ sender: UIButton) {
-        deleteStackViewInScrollView()
-        clearOperandLabel()
-        operandManager.clearExpression()
-        mainOperatorLabel.text = ""
+    @IBAction func tapClearButton(_ sender: UIButton) {
+        if sender.currentTitle == "AC" {
+            resetScrollView()
+            operandManager.clearExpression()
+            mainOperatorLabel.text = ""
+        }
+        resetMainOperand(to: "0")
     }
     
-    func deleteStackViewInScrollView() {
-        expressionScrollView.subviews.forEach {
-            $0.isHidden = true
-        }
+    func resetScrollView() {
+        expressionQueue.subviews.forEach { $0.removeFromSuperview() }
     }
 }
 
 // handling view
 extension ViewController {
-    private func clearOperandLabel() {
+    private func updateExpression() {
+            let operatorValue: String = mainOperatorLabel.text ?? ""
+
+            operandManager.appendToExpression(" \(operatorValue) \(operandManager.currentOperand)")
+        }
+    
+    private func resetMainOperand(to operand: String) {
         isCalculated = false
-        operandManager.setCurrentOperand("0")
         mainOperandLabel.text = "0"
+        operandManager.setCurrentOperand(operand)
     }
 
     private func appendExpressionQueue() {
