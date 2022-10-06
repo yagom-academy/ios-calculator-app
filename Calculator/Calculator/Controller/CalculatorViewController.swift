@@ -154,10 +154,8 @@ final class CalculatorViewController: UIViewController {
         }
 
         if isDotButtonTapped {
-            let operandSplitByDot = operand.split(separator: Character(CalculatorConstant.dot))
-            let integerPart = operandSplitByDot[0].description
-            let decimalPart = operandSplitByDot[1].description
-
+            let (integerPart, decimalPart) = operand.splitByDot()
+            
             operandLabel.text = integerPart.formatStyleToDecimal() + CalculatorConstant.dot + decimalPart
         } else {
             operandLabel.text = operand.formatStyleToDecimal()

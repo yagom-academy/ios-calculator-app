@@ -40,4 +40,12 @@ extension String {
         
         return result
     }
+    
+    func splitByDot() -> (String, String) {
+        let decimalNumberComponents = self.split(separator: Character(CalculatorConstant.dot))
+        let integerPart = decimalNumberComponents[0].description
+        let decimalPart = decimalNumberComponents[1].description
+        
+        return (integerPart, decimalPart)
+    }
 }
