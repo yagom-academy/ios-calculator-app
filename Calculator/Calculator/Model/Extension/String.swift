@@ -21,11 +21,11 @@ extension String {
     }
     
     func addCommaInteger() -> String {
-        let components: [String] = self.components(separatedBy: ".")
+        let components: [String] = self.components(separatedBy: ExpressionText.dot)
         guard let integerPart = numberFormatter.string(for: Double(components[0])) else { return self }
         
         if components.count >= 2 {
-            return integerPart + "." + components[1]
+            return integerPart + ExpressionText.dot + components[1]
         } else {
             return integerPart
         }

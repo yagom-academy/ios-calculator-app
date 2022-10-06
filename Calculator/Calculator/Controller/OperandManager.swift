@@ -4,15 +4,15 @@
 //
 
 struct OperandManager {
-    private(set) var currentOperand: String = "0"
-    private(set) var expression: String = ""
+    private(set) var currentOperand: String = ExpressionText.zero
+    private(set) var expression: String = ExpressionText.empty
     
     mutating func setCurrentOperand(_ operand: String) {
         currentOperand = operand
     }
     
     mutating func clearExpression() {
-        expression = ""
+        expression = ExpressionText.empty
     }
     
     mutating func appendToExpression(_ expr: String) {
@@ -20,27 +20,27 @@ struct OperandManager {
     }
     
     mutating func handleSignButton() {
-        guard currentOperand != "0" else { return }
+        guard currentOperand != ExpressionText.zero else { return }
         
-        if currentOperand.first == "-" {
+        if currentOperand.first == ExpressionText.minus {
             currentOperand.removeFirst()
         } else {
-            currentOperand = "-" + currentOperand
+            currentOperand = ExpressionText.minus + currentOperand
         }
     }
     
     mutating func handleDotButton() {
-        guard !currentOperand.contains(".") else { return }
-        currentOperand.append(".")
+        guard !currentOperand.contains(ExpressionText.dot) else { return }
+        currentOperand.append(ExpressionText.dot)
     }
     
     mutating func handleZeroButtons(from operand: String) {
-        guard currentOperand != "0" else { return }
+        guard currentOperand != ExpressionText.zero else { return }
         currentOperand.append(operand)
     }
     
     mutating func appendOperands(from operand: String) {
-        if currentOperand == "0" {
+        if currentOperand == ExpressionText.zero {
             currentOperand = operand
         } else {
             currentOperand.append(operand)

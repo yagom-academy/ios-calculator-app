@@ -17,20 +17,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetMainOperand(to: "0")
-        mainOperatorLabel.text = ""
+        resetMainOperand(to: ExpressionText.zero)
+        mainOperatorLabel.text = ExpressionText.empty
         expressionQueue.arrangedSubviews.first?.removeFromSuperview()
         expressionScrollView.showsVerticalScrollIndicator = false
     }
     
     @IBAction func tapOperandButton(_ sender: UIButton) {
         guard let tappedOperand = sender.currentTitle, mainOperandLabel.text?.count ?? 0 <= 18 else { return }
-        if isCalculated { resetMainOperand(to: "0") }
+        if isCalculated { resetMainOperand(to: ExpressionText.zero) }
         
         switch tappedOperand {
-        case ".":
+        case ExpressionText.dot:
             operandManager.handleDotButton()
-        case "0", "00":
+        case ExpressionText.zero, ExpressionText.doubleZero:
             operandManager.handleZeroButtons(from: tappedOperand)
         default:
             operandManager.appendOperands(from: tappedOperand)
@@ -40,12 +40,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard !operandManager.expression.isEmpty || mainOperandLabel.text != "0" else { return }
+        guard !operandManager.expression.isEmpty || mainOperandLabel.text != ExpressionText.zero else { return }
         
         mainOperatorLabel.text = sender.currentTitle
-        if mainOperandLabel.text != "0" {
+        if mainOperandLabel.text != ExpressionText.zero {
             appendExpressionQueue()
-            resetMainOperand(to: "0")
+            resetMainOperand(to: ExpressionText.zero)
         }
     }
     
@@ -57,19 +57,19 @@ class ViewController: UIViewController {
         let result = components.result()
         
         if result.isNaN {
-            mainOperandLabel.text = "NaN"
+            mainOperandLabel.text = ExpressionText.nan
         } else {
             mainOperandLabel.text = String(result).addComma()
         }
         
         isCalculated = true
-        mainOperatorLabel.text = ""
+        mainOperatorLabel.text = ExpressionText.empty
         operandManager.setCurrentOperand("\(result)")
         operandManager.clearExpression()
     }
     
     @IBAction func tapSignButton(_ sender: UIButton) {
-        guard mainOperandLabel.text != "0" else { return }
+        guard mainOperandLabel.text != ExpressionText.zero else { return }
 
         isCalculated = false
         operandManager.handleSignButton()
@@ -80,9 +80,9 @@ class ViewController: UIViewController {
         if sender.currentTitle == "AC" {
             resetScrollView()
             operandManager.clearExpression()
-            mainOperatorLabel.text = ""
+            mainOperatorLabel.text = ExpressionText.empty
         }
-        resetMainOperand(to: "0")
+        resetMainOperand(to: ExpressionText.zero)
     }
 }
 
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
 extension ViewController {
     private func resetMainOperand(to operand: String) {
         isCalculated = false
-        mainOperandLabel.text = "0"
+        mainOperandLabel.text = ExpressionText.zero
         operandManager.setCurrentOperand(operand)
     }
     
