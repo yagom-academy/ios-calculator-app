@@ -71,7 +71,7 @@ final class CalculatorTests: XCTestCase {
         sut.inputOperand("3")
         
         // when
-        let result: String = sut.inputEqual()!
+        let result: String = try! sut.inputEqual()!
         
         // then
         XCTAssertEqual(result, "1")

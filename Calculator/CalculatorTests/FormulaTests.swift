@@ -28,15 +28,10 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(.add)
         
         // when
-        let result = sut.result()
+        let result = try! sut.result()
         
         // then
-        switch result {
-        case .success(let result):
-            XCTAssertEqual(result, 3)
-        case .failure:
-            XCTFail()
-        }
+        XCTAssertEqual(result, 3)
     }
     
     func test_operands와operators각각에_2와3과2_곱하기와빼기를_enque하면_4를반환하는지() {
@@ -48,15 +43,10 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(.subtract)
         
         // when
-        let result = sut.result()
+        let result = try! sut.result()
         
         // then
-        switch result {
-        case .success(let result):
-            XCTAssertEqual(result, 4)
-        case .failure:
-            XCTFail()
-        }
+        XCTAssertEqual(result, 4)
     }
     
     func test_operands와operators각각에_1과0_나누기를_enque하면_error을반환하는지() {
@@ -66,14 +56,11 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(.divide)
         
         // when
-        let result = sut.result()
-        
+        do {
+            let result = try sut.result()
+        } catch {
         // then
-        switch result {
-        case .success(_):
-            XCTFail()
-        case .failure(let error):
-            XCTAssertEqual(CalculateError.dividedByZero, error)
+            XCTAssertEqual(CalculateError.dividedByZero, error as! CalculateError)
         }
     }
     
@@ -81,14 +68,9 @@ final class FormulaTests: XCTestCase {
         // given
         
         // when
-        let result = sut.result()
+        let result = try! sut.result()
         
         // then
-        switch result {
-        case .success(let result):
-            XCTAssertNil(result)
-        case .failure:
-            XCTFail()
-        }
+        XCTAssertNil(result)
     }
 }
