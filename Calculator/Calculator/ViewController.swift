@@ -56,7 +56,8 @@ final class ViewController: UIViewController {
     }
       
     private func scrollToBottom() {
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height + scrollView.contentInset.bottom)
+        scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
         if(bottomOffset.y > 0) {
             scrollView.setContentOffset(bottomOffset, animated: true)
         }
@@ -93,7 +94,6 @@ final class ViewController: UIViewController {
         if calculator.isEditingState {
             addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
             scrollToBottom()
-            
         }
         calculator.inputOperator(inputOperator)
         operandLabel.text = calculator.currentOperand
@@ -101,16 +101,20 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: Any) {
+        guard calculator.isEmpty == false else {
+            return
+        }
         let currentOperator: String = calculator.currentOperator
         let currentOperand: String = calculator.currentOperand
+        addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
+        scrollToBottom()
         do {
             if let result: String = try calculator.inputEqual() {
-                addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
-                scrollToBottom()
                 operandLabel.text = result
                 operatorLabel.text = calculator.currentOperator
             }
         } catch CalculateError.dividedByZero {
+            resetOperatorLabel()
             operandLabel.text = CalculateError.dividedByZero.localizedDescription
         } catch {
             operandLabel.text = error.localizedDescription

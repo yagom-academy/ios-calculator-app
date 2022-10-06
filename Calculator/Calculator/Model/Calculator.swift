@@ -20,6 +20,11 @@ struct Calculator {
             return currentOperand != defaultOperand
         }
     }
+    var isEmpty: Bool {
+        get {
+            operands.isEmpty && operators.isEmpty
+        }
+    }
     
     init() {
         currentOperand = defaultOperand
@@ -102,7 +107,7 @@ struct Calculator {
         var result: String = ""
         operands.reverse()
         operators.reverse()
-        while operands.isEmpty == false || operators.isEmpty == false {
+        while isEmpty == false {
             if let input: String = operands.popLast() {
                 result.append(" \(input)")
             }
