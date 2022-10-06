@@ -107,7 +107,7 @@ class ViewController: UIViewController {
     
     private func resetCalculation() {
         stackCalculation = ""
-        finalCalculation = ""
+        finalCalculation = "0" + "+"
         calculatorStackView.subviews.forEach { (view) in
             view.removeFromSuperview()
         }
@@ -183,7 +183,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func showErrorMessage(_ errorType: CalculateError) {
+    private func showErrorMessage(_ errorType: CalculateError) {
         operandLabel.text = errorType.rawValue
         operatorLabel.text = "Error"
         resetCalculation()
