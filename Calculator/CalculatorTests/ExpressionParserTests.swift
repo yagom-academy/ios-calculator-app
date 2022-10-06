@@ -1,5 +1,5 @@
 //  ExpressionParserTests.swift
-//  Created by zhilly on 2022/09/26.
+//  Created by zhilly and Gundy on 2022/10/04.
 
 import XCTest
 @testable import Calculator
@@ -20,7 +20,7 @@ final class ExpressionParserTests: XCTestCase {
         var formula: Formula = ExpressionParser.parse(from: input)
         
         //when
-        let result = formula.result()
+        let result = try? formula.result()
         
         //then
         XCTAssertEqual(result, -2.75)

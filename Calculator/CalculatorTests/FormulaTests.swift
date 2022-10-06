@@ -1,5 +1,5 @@
 //  FormulaTests.swift
-//  Created by zhilly on 2022/09/26.
+//  Created by zhilly and Gundy on 2022/10/04.
 
 import XCTest
 @testable import Calculator
@@ -33,7 +33,7 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.divide)
         
         //when
-        let result = sut.result()
+        let result = try? sut.result()
         
         //then
         XCTAssertEqual(result, 16)
@@ -53,7 +53,7 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.multiply)
         
         //when
-        let result = sut.result()
+        let result = try? sut.result()
         
         //then
         XCTAssertEqual(result, 12000000)
@@ -64,7 +64,7 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.add)
         
         //when
-        let result = sut.result()
+        let result = try? sut.result()
         
         //then
         XCTAssertEqual(result, 0.0)
@@ -78,45 +78,24 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.divide)
         
         //when
-        let result = sut.result()
+        let result = try? sut.result()
         
         //then
-        XCTAssertTrue(result.isNaN)
+        XCTAssertEqual(result?.isNaN, true)
     }
     
-    func test_operands의개수가더부족하면_NaN을반환하는지() {
-        //given
-        sut.operands.enqueue(10.0)
-        sut.operands.enqueue(20.0)
-        sut.operands.enqueue(30.0)
-        
-        sut.operators.enqueue(Operator.multiply)
-        sut.operators.enqueue(Operator.multiply)
-        sut.operators.enqueue(Operator.multiply)
-        sut.operators.enqueue(Operator.multiply)
-        
-        //when
-        let result = sut.result()
-
-        //then
-        XCTAssertTrue(result.isNaN)
-    }
-    
-    func test_operator의개수가2개이상부족하면_NaN을반환하는지() {
+   func test_operator의개수가2개이상부족하면_Error를던지는지() {
         //given
         sut.operands.enqueue(10.0)
         sut.operands.enqueue(20.0)
         sut.operands.enqueue(30.0)
         sut.operands.enqueue(40.0)
 
-        
         sut.operators.enqueue(Operator.multiply)
         sut.operators.enqueue(Operator.multiply)
         
         //when
-        let result = sut.result()
-
         //then
-        XCTAssertTrue(result.isNaN)
+       XCTAssertThrowsError(try sut.result())
     }
 }

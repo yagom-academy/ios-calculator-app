@@ -1,22 +1,21 @@
 //  CalculatorController.swift
-//  Created by zhilly on 2022/09/29.
+//  Created by zhilly and Gundy on 2022/10/04.
 
 final class CalculatorController {
     let view: MainViewController
-    var formula: Formula?
     private var expression: String = ""
     var viewDisplayNumber: String = "0"
     private var displaySign: Operator = Operator.unknown
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
+    var calculatedNumber: String = ""
     
     init(view: MainViewController) {
         self.view = view
-        self.formula = ExpressionParser.parse(from: expression)
     }
     
     private func isFirstCharacterZero(stringNumber: String) -> Bool {
-        if stringNumber.first == "0" {
+        if stringNumber == "0" {
             return true
         } else {
             return false
@@ -75,6 +74,14 @@ final class CalculatorController {
     }
     
     func tappedOperatorButton(input: String?) -> String {
+        if calculatedNumber != "" {
+            view.makeStackView()
+            view.resetDisplayNumberLabel()
+            determineOperator(stringOperator: input)
+            
+            return String(displaySign.rawValue)
+        }
+        
         if isFirstClick == true {
             return ""
         } else if canChangedOperator() == true {
@@ -83,7 +90,6 @@ final class CalculatorController {
             return String(displaySign.rawValue)
         } else {
             expression += String(displaySign.rawValue) + viewDisplayNumber
-            viewDisplayNumber = "0"
             view.makeStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
@@ -110,6 +116,7 @@ final class CalculatorController {
     func tappedCEButton() {
         viewDisplayNumber = "0"
         view.displayNumberLabel.text = "0"
+        calculatedNumber = ""
         
         if view.displaySignLabel.text == "" {
             displaySign = Operator.unknown
@@ -124,20 +131,23 @@ final class CalculatorController {
         canCalculate = false
         view.makeStackView()
         view.resetDisplayNumberLabel()
-        formula = ExpressionParser.parse(from: expression)
+        var formula = ExpressionParser.parse(from: expression)
         
-        let result = formula?.result() ?? .nan
-        
-        return String(result)
+        do {
+            let result = try formula.result()
+            calculatedNumber = String(result)
+            return String(result)
+        } catch {
+            return error.localizedDescription
+        }
     }
     
-    func tappedCalculateButton() -> String {
+    func tappedCalculateButton() -> String? {
         if canCalculate == true {
+            isFirstClick = true
             return calculateResult()
         } else {
-            guard let calculatedResult = view.displayNumberLabel.text else { return "" }
-            
-            return calculatedResult
+            return view.displayNumberLabel.text
         }
     }
     
@@ -154,6 +164,7 @@ final class CalculatorController {
     func tappedACButton() {
         expression = ""
         viewDisplayNumber = "0"
+        calculatedNumber = ""
         displaySign = Operator.unknown
         isFirstClick = true
     }

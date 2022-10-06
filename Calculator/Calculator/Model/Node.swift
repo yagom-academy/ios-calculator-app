@@ -1,5 +1,5 @@
 //  Node.swift
-//  Created by zhilly on 2022/09/23.
+//  Created by zhilly and Gundy on 2022/10/04.
 
 class Node<T: CalculateItem> {
     let data: T
