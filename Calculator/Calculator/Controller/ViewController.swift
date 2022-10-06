@@ -18,7 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     @IBAction func acButton(_ sender: UIButton) {
-        resetCalculator(operandText: "", operatorText: "")
+        resetLabelText()
+        resetCalculation()
     }
     
     @IBAction func ceButton(_ sender: UIButton) {
@@ -94,13 +95,17 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        resetCalculator(operandText: "", operatorText: "")
+        resetLabelText()
+        resetCalculation()
         // Do any additional setup after loading the view.
     }
     
-    private func resetCalculator(operandText: String, operatorText: String) {
-        operandLabel.text = operandText
-        operatorLabel.text = operatorText
+    private func resetLabelText() {
+        operandLabel.text = ""
+        operatorLabel.text = ""
+    }
+    
+    private func resetCalculation() {
         stackCalculation = ""
         finalCalculation = ""
         calculatorStackView.subviews.forEach { (view) in
@@ -161,14 +166,20 @@ class ViewController: UIViewController {
             guard let calculatorResult = result else { return }
             
             operandLabel.text = String(calculatorResult)
-            stackCalculation = String(calculatorResult)
+            resetCalculation()
         } catch CalculateError.invalidNumber {
-            resetCalculator(operandText: "invalid Number", operatorText: "Error")
+            showErrorMessage(CalculateError.invalidNumber)
         } catch CalculateError.emptyOperands {
-            resetCalculator(operandText: "empty Operands", operatorText: "Error")
+            showErrorMessage(CalculateError.emptyOperands)
         } catch CalculateError.emptyOperators {
-            resetCalculator(operandText: "empty Operators", operatorText: "Error")
+            showErrorMessage(CalculateError.emptyOperators)
         }
+    }
+    
+    func showErrorMessage(_ errorType: CalculateError) {
+        operandLabel.text = errorType.rawValue
+        operatorLabel.text = "Error"
+        resetCalculation()
     }
 }
 
