@@ -23,16 +23,22 @@ class Calculator {
         return currentOperand.isEmpty
     }
     
-    func clearCalculator(expression: String = "") {
+    func clearCalculator(expression: String = "", currentOperator: String = "", currentOperand: String = "") {
         self.expression = expression
-        currentOperator = ""
-        currentOperand = ""
+        self.currentOperator = currentOperator
+        self.currentOperand = currentOperand
     }
     
     func calculatedResult() throws -> Double {
         var result: Double
         var formula: Formula = ExpressionParser.parser(from: expression)
-        result = try formula.result()
+        do {
+            result = try formula.result()
+            clearCalculator(currentOperand: String(result))
+        } catch {
+            clearCalculator()
+            throw error
+        }
         return result
     }
 

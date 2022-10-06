@@ -33,30 +33,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func touchCalculatorButton(_ sender: UIButton) {
-        guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
-            return
-        }
-        
-        switch key {
-        case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .doubleZero:
-            inputNumber(key.rawValue)
-        case .dot:
-            inputDot()
-        case .add, .subtract, .multiply, .divide:
-            inputOperator(key.rawValue)
-        case .ac:
-            clearAll()
-        case .ce:
-            clearEntry()
-        case .plusMinus:
-            changeSign()
-        case .equal:
-            inputEqual()
-            showResult()
-        }
-    }
-    
     private func inputNumber(_ number: String) {
         let currentOperand = calculator.currentOperand + number
         
@@ -126,7 +102,6 @@ class CalculatorViewController: UIViewController {
         } catch {
             result = CalculatorError.unknown.description
         }
-        calculator.clearCalculator(expression: result)
         updateOperatorLabel(to: calculator.currentOperator)
         updateNumberLabel(to: result)
     }
@@ -148,6 +123,30 @@ class CalculatorViewController: UIViewController {
         newStackView.addArrangedSubview(numberLabel)
         
         historyStackView.addArrangedSubview(newStackView)
+    }
+    
+    @IBAction func touchCalculatorButton(_ sender: UIButton) {
+        guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
+            return
+        }
+        
+        switch key {
+        case .one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .zero, .doubleZero:
+            inputNumber(key.rawValue)
+        case .dot:
+            inputDot()
+        case .add, .subtract, .multiply, .divide:
+            inputOperator(key.rawValue)
+        case .ac:
+            clearAll()
+        case .ce:
+            clearEntry()
+        case .plusMinus:
+            changeSign()
+        case .equal:
+            inputEqual()
+            showResult()
+        }
     }
 }
 
