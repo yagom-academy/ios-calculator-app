@@ -40,23 +40,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard operandManager.expression.isEmpty, isOnlyZeroAtMainFormulaView() else {
-            guard isOnlyZeroAtMainFormulaView() else {
-                updateFormulaType()
-                addStackViewInFormulaHistoryView()
-                resetMainFormulaView(sender)
-                scrollToBottom()
-                return
-            }
+        guard !operandManager.expression.isEmpty, mainOperandLabel.text != "0" else { return }
+        
+        if mainOperandLabel.text == "0" {
             mainOperatorLabel.text = sender.currentTitle ?? ""
-            return
+        } else {
+            updateFormulaType()
+            addStackViewInFormulaHistoryView()
+            resetMainFormulaView(sender)
+            scrollToBottom()
         }
-    }
-    
-    func isOnlyZeroAtMainFormulaView() -> Bool {
-        guard let operandText = mainOperandLabel.text,
-              operandText != "0" else { return true }
-        return false
     }
     
     func updateFormulaType() {
