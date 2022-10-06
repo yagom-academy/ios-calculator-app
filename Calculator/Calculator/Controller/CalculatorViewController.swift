@@ -98,6 +98,7 @@ final class CalculatorViewController: UIViewController {
         if !operand.isEmpty {
             resetOperandLabel()
             isCalculated = false
+            isDotButtonTapped = false
         }
         
         if finalFormula.isEmpty {
@@ -141,13 +142,24 @@ final class CalculatorViewController: UIViewController {
             if isFirstInput {
                 operand += CalculatorConstant.zero + input
                 operandLabel.text = operand
-                
+
                 return
             }
             operand += input
-            operandLabel.text = operand
+            operandLabel.text = operand.formatStyleToDecimal() + CalculatorConstant.dot
+            
+            return
         } else {
             operand += input
+        }
+
+        if isDotButtonTapped {
+            let operandSplitByDot = operand.split(separator: Character(CalculatorConstant.dot))
+            let integerPart = operandSplitByDot[0].description
+            let decimalPart = operandSplitByDot[1].description
+
+            operandLabel.text = integerPart.formatStyleToDecimal() + CalculatorConstant.dot + decimalPart
+        } else {
             operandLabel.text = operand.formatStyleToDecimal()
         }
     }
