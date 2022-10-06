@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     private var stackCalculation = ""
     private var finalCalculation = ""
     private var result = 0.0
@@ -72,7 +72,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
+        updateFinalCalculation(userInput: stackCalculation)
         updateCalculatorStackView()
+        
         operatorLabel.text = ""
         operandLabel.text = ""
         stackCalculation = ""
@@ -117,12 +119,12 @@ class ViewController: UIViewController {
     
     private func pushOperand(_ userInput: String) {
         stackCalculation = stackCalculation + userInput
-        finalCalculation = finalCalculation + userInput
         operandLabel.text = stackCalculation
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
-        finalCalculation = finalCalculation + finalCalculationInput
+        updateFinalCalculation(userInput: stackCalculation)
+        updateFinalCalculation(userInput: finalCalculationInput)
         stackCalculation = ""
         operatorLabel.text = operatorInput
         operandLabel.text = ""
@@ -144,11 +146,7 @@ class ViewController: UIViewController {
                 finalCalculationList[count] = target
                 finalCalculation = finalCalculationList.joined()
                 return
-            } else if finalCalculationList[count] == "*" {
-                try? showResult()
-                finalCalculation = "0" + "-" + "\(result)"
-                return
-            } else if finalCalculationList[count] == "/" {
+            } else if finalCalculationList[count] == "*" || finalCalculationList[count] == "/" {
                 try? showResult()
                 finalCalculation = "0" + "-" + "\(result)"
                 return
@@ -172,6 +170,10 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.001) {
             self.calculatorScrollView.setContentOffset(CGPoint(x: 0, y: self.calculatorScrollView.contentSize.height-self.calculatorScrollView.bounds.height), animated: true)
         }
+    }
+    
+    private func updateFinalCalculation(userInput: String) {
+        finalCalculation = finalCalculation + userInput
     }
     
     private func showResult() throws {
