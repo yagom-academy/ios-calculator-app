@@ -38,37 +38,23 @@ class CalculatorViewController: UIViewController {
             changeSignFinalCalculation(from: "-", to: "+")
         }
     }
-    
-    @IBAction func divideButton(_ sender: UIButton) {
+    @IBAction func inputOperatorButton(_ sender: UIButton) {
         if operandLabel.text != "" {
             updateCalculatorStackView()
         }
         
-        pushOperator(finalCalculationInput: "/", operatorInput: "÷")
-    }
-    
-    @IBAction func multiplyButton(_ sender: UIButton) {
-        if operandLabel.text != "" {
-            updateCalculatorStackView()
+        switch sender.tag {
+        case 91:
+            pushOperator(finalCalculationInput: "/", operatorInput: "÷")
+        case 92:
+            pushOperator(finalCalculationInput: "*", operatorInput: "x")
+        case 93:
+            pushOperator(finalCalculationInput: "-", operatorInput: "-")
+        case 94:
+            pushOperator(finalCalculationInput: "+", operatorInput: "+")
+        default:
+            break
         }
-        
-        pushOperator(finalCalculationInput: "*", operatorInput: "x")
-    }
-    
-    @IBAction func subtractButton(_ sender: UIButton) {
-        if operandLabel.text != "" {
-            updateCalculatorStackView()
-        }
-        
-        pushOperator(finalCalculationInput: "-", operatorInput: "-")
-    }
-    
-    @IBAction func addButton(_ sender: UIButton) {
-        if operandLabel.text != "" {
-            updateCalculatorStackView()
-        }
-        
-        pushOperator(finalCalculationInput: "+", operatorInput: "+")
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
@@ -101,7 +87,6 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         resetLabelText()
         resetCalculation()
-        // Do any additional setup after loading the view.
     }
     
     private func resetLabelText() {
@@ -167,8 +152,8 @@ class CalculatorViewController: UIViewController {
         if operandLabel.text == "" {
             lastFinalCalculation = replacement
             finalCalculationList[finalCalculationList.count-1] = lastFinalCalculation
-                finalCalculation = finalCalculationList.joined()
-                return
+            finalCalculation = finalCalculationList.joined()
+            return
         } else {
             updateFinalCalculation(userInput: replacement)
             return
