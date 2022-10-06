@@ -142,8 +142,8 @@
 				EB81D12128DD3B8700C2D3C1 /* Operator.swift */,
 				EB81D12928DD6BCB00C2D3C1 /* Formula.swift */,
 				EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */,
-				EBA926E528E299F200E661B8 /* CalculateError.swift */,
 				EBE474EB28EAABAD00D44305 /* Calculator.swift */,
+				EBA926E528E299F200E661B8 /* CalculateError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

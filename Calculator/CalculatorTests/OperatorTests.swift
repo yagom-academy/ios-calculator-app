@@ -55,7 +55,7 @@ final class OperatorTests: XCTestCase {
         
         // when
         do {
-            try sut.calculate(lhs: 2, rhs: 0)
+            _ = try sut.calculate(lhs: 2, rhs: 0)
         } catch {
             // then
             XCTAssertEqual(CalculateError.dividedByZero, error as! CalculateError)

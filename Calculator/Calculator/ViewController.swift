@@ -90,10 +90,12 @@ final class ViewController: UIViewController {
         guard let inputOperator: String = sender.titleLabel?.text else {
             return
         }
-        if calculator.inputOperator(inputOperator) {
+        if calculator.isEditingState {
             addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
             scrollToBottom()
+            
         }
+        calculator.inputOperator(inputOperator)
         operandLabel.text = calculator.currentOperand
         operatorLabel.text = calculator.currentOperator
     }
@@ -101,11 +103,17 @@ final class ViewController: UIViewController {
     @IBAction private func touchUpEqualButton(_ sender: Any) {
         let currentOperator: String = calculator.currentOperator
         let currentOperand: String = calculator.currentOperand
-        if let result: String = calculator.inputEqual() {
-            addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
-            scrollToBottom()
-            operandLabel.text = result
-            operatorLabel.text = calculator.currentOperator
+        do {
+            if let result: String = try calculator.inputEqual() {
+                addSubViewInHistoryStackView(operatorText: currentOperator, operandText: currentOperand)
+                scrollToBottom()
+                operandLabel.text = result
+                operatorLabel.text = calculator.currentOperator
+            }
+        } catch CalculateError.dividedByZero {
+            operandLabel.text = CalculateError.dividedByZero.localizedDescription
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

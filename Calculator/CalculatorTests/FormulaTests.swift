@@ -70,10 +70,10 @@ final class FormulaTests: XCTestCase {
         
         // then
         switch result {
-        case .success(let _):
+        case .success(_):
             XCTFail()
         case .failure(let error):
-            XCTAssertEqual(CalculateError.dividedByZero, error as! CalculateError)
+            XCTAssertEqual(CalculateError.dividedByZero, error)
         }
     }
     

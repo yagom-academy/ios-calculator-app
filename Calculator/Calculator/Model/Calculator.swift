@@ -8,21 +8,31 @@
 import Foundation
 
 struct Calculator {
-    static let defaultOperand: String = "0"
-    static let defaultOperator: String = ""
-    static let negativeSymbol: String = "-"
-        
-    private(set) var currentOperand: String = defaultOperand
-    private(set) var currentOperator: String = defaultOperator
+    private let defaultOperand: String = "0"
+    private let defaultOperator: String = ""
+    private let negativeSymbol: String = "-"
+    private(set) var currentOperand: String
+    private(set) var currentOperator: String
     private var operands: [String] = []
     private var operators: [String] = []
+    var isEditingState: Bool {
+        get {
+            return currentOperand != defaultOperand
+        }
+    }
+    
+    init() {
+        currentOperand = defaultOperand
+        currentOperator = defaultOperator
+    }
+    
     
     mutating func resetCurrentOperand() {
-        currentOperand = Calculator.defaultOperand
+        currentOperand = defaultOperand
     }
     
     mutating func resetCurrentOperator() {
-        currentOperator = Calculator.defaultOperator
+        currentOperator = defaultOperator
     }
     
     mutating func clearOperands() {
@@ -40,12 +50,12 @@ struct Calculator {
         }
         
         let isPointDuplication: Bool = input == "." && currentOperand.contains(".")
-        let isZeroDuplication: Bool = currentOperand == Calculator.defaultOperand && ["0", "00"].contains(input)
+        let isZeroDuplication: Bool = currentOperand == defaultOperand && ["0", "00"].contains(input)
         if isZeroDuplication || isPointDuplication {
             return
         }
         
-        let isInitialState: Bool = currentOperand == Calculator.defaultOperand && input != "."
+        let isInitialState: Bool = currentOperand == defaultOperand && input != "."
         if isInitialState {
             currentOperand = input
         } else {
@@ -53,56 +63,46 @@ struct Calculator {
         }
     }
     
-    mutating func inputOperator(_ input: String) -> Bool {
+    mutating func inputOperator(_ input: String) {
         currentOperator = input
-        let isEditing: Bool = currentOperand != Calculator.defaultOperand
-        let isNotNanError: Bool = currentOperand != CalculateError.dividedByZero.localizedDescription
-        guard isEditing, isNotNanError else {
-            return false
+        guard isEditingState else {
+            return
         }
         operators.append(currentOperator)
         operands.append(currentOperand)
         resetCurrentOperand()
-        return true
     }
     
     mutating func switchPositiveNegativeOfCurrentOperand() {
-        guard currentOperand != Calculator.defaultOperand else {
+        guard currentOperand != defaultOperand else {
             return
         }
-        let isNegative: Bool = currentOperand.hasPrefix(Calculator.negativeSymbol)
+        let isNegative: Bool = currentOperand.hasPrefix(negativeSymbol)
         if isNegative {
             currentOperand.removeFirst()
         } else {
-            currentOperand = "\(Calculator.negativeSymbol)\(currentOperand)"
+            currentOperand = "\(negativeSymbol)\(currentOperand)"
         }
     }
     
-    mutating func inputEqual() -> String? {
+    mutating func inputEqual() throws -> String? {
         let isInitialState: Bool = operators.isEmpty
         if isInitialState {
             return nil
         }
         operands.append(currentOperand)
-        operators.append(currentOperator)
         resetCurrentOperand()
         resetCurrentOperator()
-        return result()
+        return try result()
     }
     
-    mutating func result() -> String {
-        var result: String = ""
+    mutating func result() throws -> String {
         var formula: Formula = ExpressionParser.parse(from: convertOperatorsOperandsToString())
-        let formulaResult = formula.result()
-        switch formulaResult {
-        case .success(let formulaResult):
-            if let formulaResult {
-                result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
-                currentOperand = result
-            }
-        case .failure(let error):
-            result = error.localizedDescription
+        guard let formulaResult = try formula.result() else {
+            return ""
         }
+        let result = applyFormat(to: removeLastCommaZero(String(formulaResult)))
+        currentOperand = result
         return result
     }
     
@@ -112,41 +112,42 @@ struct Calculator {
         operators.reverse()
         while operands.isEmpty == false || operators.isEmpty == false {
             if let input: String = operands.popLast() {
-                result.append(input)
+                result.append(" \(input)")
             }
             if let input: String = operators.popLast() {
-                result.append(input)
+                result.append(" \(input)")
             }
         }
         return result
     }
     
     private func applyFormat(to input: String) -> String {
-        let result: String
         let inputNumber: Double = Double.convertStringContainingCommaToDouble(input) ?? 0
         let integerNumber: Int = Int(inputNumber)
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
         let separatedInput: [String] = input.components(separatedBy: ".")
         let hasDecimalPart: Bool = separatedInput.count >= 2
         guard hasDecimalPart else {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return result
+            return applyNumberFormat(to: NSNumber(value: integerNumber))
         }
         let decimalPart: String = separatedInput[1]
-        let hasOnlyPoint: Bool = decimalPart == ""
+        let hasOnlyPoint: Bool = decimalPart.isEmpty
         let hasZeroAtTheEnd: Bool = decimalPart.hasSuffix("0")
+        let formattedIntegerNumber: String = applyNumberFormat(to: NSNumber(value: integerNumber))
         if hasOnlyPoint {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return "\(result)."
-        } else if hasZeroAtTheEnd {
-            result = numberFormatter.string(from: NSNumber(value: integerNumber)) ?? ""
-            return "\(result).\(decimalPart)"
-        } else {
-            result = numberFormatter.string(from: NSNumber(value: inputNumber)) ?? ""
-            return result
+            return "\(formattedIntegerNumber)."
         }
+        else if hasZeroAtTheEnd {
+            return "\(formattedIntegerNumber).\(decimalPart)"
+        } else {
+            return applyNumberFormat(to: NSNumber(value: inputNumber))
+        }
+    }
+    
+    private func applyNumberFormat(to input: NSNumber) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        return numberFormatter.string(from: input) ?? ""
     }
     
     private func removeComma(_ input: String) -> String {
