@@ -66,6 +66,8 @@ class CalculatorViewController: UIViewController {
         calculator.updateExpression()
         addHistoryStackView()
         clearEntry()
+        view.layoutIfNeeded()
+        historyScrollView.moveToBottomScroll()
     }
     
     private func clearAll() {
