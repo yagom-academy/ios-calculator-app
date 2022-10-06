@@ -6,8 +6,8 @@
 
 enum Operator: Character, CaseIterable {
     case add = "+"
-    case substract = "-"
-    case divide = "/"
+    case substract = "−"
+    case divide = "÷"
     case multiply = "*"
     
     private func add(lhs: Double, rhs: Double) -> Double {

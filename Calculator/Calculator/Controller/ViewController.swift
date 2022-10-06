@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         } else {
             makeFormulaStackView()
             scrollToBottom()
-            if totalFormulaString.isEmpty {
+            if totalFormulaString == "+" {
                 totalFormulaString.append(currentNumber)
             } else {
                 totalFormulaString.append(operatorLabel.text ?? "")
@@ -106,7 +106,7 @@ class ViewController: UIViewController {
         let operandLabel = makeLabel(text: operandLabel.text)
         let formulaStackView: UIStackView
         
-        if totalFormulaString.isEmpty {
+        if totalFormulaString == "+" {
             formulaStackView = UIStackView(arrangedSubviews: [operandLabel])
         } else {
             formulaStackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
@@ -132,11 +132,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func touchUpEqualButton(_ sender: UIButton) {
-        if totalFormulaString.isEmpty == false {
+        if  totalFormulaString != "+" {
             totalFormulaString += operatorLabel.text ?? ""
             totalFormulaString += currentNumber
             makeFormulaStackView()
             scrollToBottom()
+            
+            if totalFormulaString.hasPrefix("+-") {
+                totalFormulaString.removeFirst()
+                totalFormulaString.removeFirst()
+
+                totalFormulaString.insert("−", at: totalFormulaString.startIndex)
+            }
+            
             var formula = ExpressionParser.parse(from: totalFormulaString)
             do {
                 let result = try formula.result()
