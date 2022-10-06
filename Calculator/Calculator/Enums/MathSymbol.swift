@@ -2,7 +2,7 @@
 //  MathSymbol.swift
 //  Calculator
 //
-//  Created by 노유빈 on 2022/10/06.
+//  Created by rhovin, LJ on 2022/10/06.
 //
 
 enum MathSymbol {

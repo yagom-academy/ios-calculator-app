@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by rhovin, LJ. 
 //  Copyright © yagom. All rights reserved.
 // 
 
@@ -44,6 +44,7 @@ class CalculatorViewController: UIViewController {
         if calculator.isDecimal {
             return
         }
+        
         if calculator.isOperandEmpty {
             calculator.updateCurrentOperand("0")
         }
@@ -55,11 +56,16 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputOperator(_ `operator`: String) {
+        calculator.updateCurrentOperator(`operator`)
+        updateOperatorLabel(to: calculator.currentOperator)
+        
+        if calculator.isOperandEmpty {
+            return
+        }
+        
         calculator.updateExpression()
         addHistoryStackView()
         clearEntry()
-        calculator.updateCurrentOperator(`operator`)
-        updateOperatorLabel(to: calculator.currentOperator)
     }
     
     private func clearAll() {
@@ -76,10 +82,11 @@ class CalculatorViewController: UIViewController {
     
     private func changeSign() {
         var currentOperand = calculator.currentOperand
+        
         if calculator.isNegativeOperand {
            currentOperand = String(currentOperand.dropFirst())
         } else {
-            currentOperand = "−" + currentOperand
+            currentOperand = MathSymbol.negative + currentOperand
         }
         
         calculator.updateCurrentOperand(currentOperand)
@@ -87,12 +94,18 @@ class CalculatorViewController: UIViewController {
     }
     
     private func inputEqual() {
+        if calculator.isOperandEmpty {
+            return
+        }
+        
         calculator.updateExpression()
         addHistoryStackView()
+        showResult()
     }
 
     private func showResult() {
         let result: String
+        
         do {
             result = String(try calculator.calculatedResult())
         } catch CalculatorError.queueIsEmpty {
@@ -102,23 +115,27 @@ class CalculatorViewController: UIViewController {
         } catch {
             result = CalculatorError.unknown.description
         }
+        
         updateOperatorLabel(to: calculator.currentOperator)
         updateNumberLabel(to: result)
     }
     
     private func makeLabel(_ text: String) -> UILabel {
         let label: UILabel = UILabel()
+        
         label.text = text
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
         return label
     }
     
     private func addHistoryStackView() {
-        let newStackView: UIStackView = UIStackView()
         let signLabel: UILabel = makeLabel(calculator.currentOperator)
         let numberLabel: UILabel = makeLabel(calculator.currentOperand)
+        let newStackView: UIStackView = UIStackView()
         
+        newStackView.spacing = 8
         newStackView.addArrangedSubview(signLabel)
         newStackView.addArrangedSubview(numberLabel)
         
@@ -126,7 +143,8 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchCalculatorButton(_ sender: UIButton) {
-        guard let key: CalculatorKeypad = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
+        guard let key: CalculatorKeypad
+                = CalculatorKeypad(rawValue: sender.currentTitle ?? "") else {
             return
         }
         
@@ -145,7 +163,6 @@ class CalculatorViewController: UIViewController {
             changeSign()
         case .equal:
             inputEqual()
-            showResult()
         }
     }
 }

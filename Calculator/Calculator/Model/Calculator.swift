@@ -2,15 +2,14 @@
 //  Calculator.swift
 //  Calculator
 //
-//  Created by 임지연 on 2022/10/05.
+//  Created by rhovin, LJ on 2022/10/05.
 //
-
-import Foundation
 
 class Calculator {
     private(set) var expression: String = ""
     private(set) var currentOperator: String = ""
     private(set) var currentOperand: String = ""
+    
     var isNegativeOperand: Bool {
         return currentOperand.contains(MathSymbol.negative)
     }
@@ -23,7 +22,9 @@ class Calculator {
         return currentOperand.isEmpty
     }
     
-    func clearCalculator(expression: String = "", currentOperator: String = "", currentOperand: String = "") {
+    func clearCalculator(expression: String = "",
+                         currentOperator: String = "",
+                         currentOperand: String = "") {
         self.expression = expression
         self.currentOperator = currentOperator
         self.currentOperand = currentOperand
@@ -32,6 +33,7 @@ class Calculator {
     func calculatedResult() throws -> Double {
         var result: Double
         var formula: Formula = ExpressionParser.parser(from: expression)
+        
         do {
             result = try formula.result()
             clearCalculator(currentOperand: String(result))
@@ -39,6 +41,7 @@ class Calculator {
             clearCalculator()
             throw error
         }
+        
         return result
     }
 
