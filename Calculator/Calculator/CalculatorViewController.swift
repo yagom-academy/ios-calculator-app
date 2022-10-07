@@ -53,9 +53,15 @@ class CalculatorViewController: UIViewController {
         return stackView
     }
     
-    private func addStackView(operatorText: String, inputText: String) {
+    private func addStackView(_ numberWithOutComma: String) {
+        guard let operatorText = inputOperatorLabel.text,
+              let operandValue = Double(numberWithOutComma),
+              let doubleValue = numberFormatter.string(for: operandValue) else {
+            return
+        }
+
         let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
-        let operandLabel = makeHistoryInputLabel(inputText: inputText)
+        let operandLabel = makeHistoryInputLabel(inputText: doubleValue)
         let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         historyInputStackView.addArrangedSubview(stackView)
         autoSlideScrollView()
@@ -142,10 +148,7 @@ class CalculatorViewController: UIViewController {
             
             calculationFormula += " " + convertOperator(operatorValue)
         } else {
-            guard let operatorText = inputOperatorLabel.text,
-                  let doubleValue = numberFormatter.string(for: Double(numberWithOutComma)) else { return }
-            
-            addStackView(operatorText: operatorText, inputText: doubleValue)
+            addStackView(numberWithOutComma)
             calculationFormula += " " + numberWithOutComma
             calculationFormula += " " + convertOperator(operatorValue)
             inputNumberLabel.text = Literal.numberZero.value
@@ -164,20 +167,21 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func showResult(inputText: String) {
-        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+    private func checkOperatorCount() -> Bool {
         let operators = Operator.allCases.map { convertOperator(String($0.rawValue)) }.joined()
         let separators = CharacterSet(charactersIn: operators)
         
         if calculationFormula.components(separatedBy: separators).count <= 1 {
-            return
+            return false
         }
+        return true
+    }
+    
+    private func showResult(inputText: String) {
+        guard checkOperatorCount() == true else { return }
         
-        if let operandValue = Double(numberWithOutComma),
-           let operatorText = inputOperatorLabel.text,
-           let doubleValue = numberFormatter.string(for: operandValue) {
-            addStackView(operatorText: operatorText, inputText: doubleValue)
-        }
+        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        addStackView(numberWithOutComma)
         
         calculationFormula += " " + numberWithOutComma
         calculationFormula.removeFirst()
