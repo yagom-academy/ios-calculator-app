@@ -9,6 +9,8 @@ import XCTest
 @testable import Calculator
 
 class StringExtensionTests: XCTestCase {
+    let numberFormatter = NumberFormatter()
+    
     func testSplit_문자하나를입력받고_해당문자를기준으로쪼갠문자열을요소로가진배열을반환해야한다() {
         // given
         let input = "1+2+3"
@@ -22,7 +24,7 @@ class StringExtensionTests: XCTestCase {
         //given
         let number = "1234"
         //when
-        let result = number.formatStyleToDecimal()
+        let result = number.formatStyleToDecimal(numberFormatter)
         //then
         XCTAssertEqual("1,234", result)
     }
@@ -31,7 +33,7 @@ class StringExtensionTests: XCTestCase {
         //given
         let number = "34.0000"
         //when
-        let result = number.formatStyleToDecimal()
+        let result = number.formatStyleToDecimal(numberFormatter)
         //then
         XCTAssertEqual("34", result)
     }
