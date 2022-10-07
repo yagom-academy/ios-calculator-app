@@ -59,7 +59,7 @@ class CalculatorViewController: UIViewController {
               let doubleValue = numberFormatter.string(for: operandValue) else {
             return
         }
-
+        
         let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
         let operandLabel = makeHistoryInputLabel(inputText: doubleValue)
         let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
@@ -90,26 +90,26 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addZero(inputText: String, zero: String) {
-            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
-            let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
-            let isTwoInsertable: (Bool, Bool) = (
-                numberWithOutComma == Literal.numberZero.value,
-                pointCount == Int(Literal.numberOne.value)
-            )
-
-            switch isTwoInsertable {
-            case (true, _):
-                return
-            case (false, false):
-                if let number: Double = Double(numberWithOutComma + zero) {
-                    inputNumberLabel.text = numberFormatter.string(for: number)
-                }
-            case (_, true):
-                inputNumberLabel.text = inputText + zero
-            default:
-                return
+        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
+        let isTwoInsertable: (Bool, Bool) = (
+            numberWithOutComma == Literal.numberZero.value,
+            pointCount == Int(Literal.numberOne.value)
+        )
+        
+        switch isTwoInsertable {
+        case (true, _):
+            return
+        case (false, false):
+            if let number: Double = Double(numberWithOutComma + zero) {
+                inputNumberLabel.text = numberFormatter.string(for: number)
             }
+        case (_, true):
+            inputNumberLabel.text = inputText + zero
+        default:
+            return
         }
+    }
     
     private func addPoint(inputText: String, point: Character) {
         if inputText.filter({ $0 == point }).count == 0 {
