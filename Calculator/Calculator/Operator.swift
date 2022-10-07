@@ -4,9 +4,9 @@ import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItemProtocol {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -30,8 +30,8 @@ enum Operator: Character, CaseIterable, CalculateItemProtocol {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        if rhs == 0 {
-            return 0
+        if rhs == .zero {
+            return .nan
         }
         return lhs / rhs
     }
