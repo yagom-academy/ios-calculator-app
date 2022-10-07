@@ -140,10 +140,15 @@ class CalculatorViewController: UIViewController {
     
     private func addOperator(inputText: String, operatorValue: String) {
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+        let isInsertable: (Bool, Bool) = (
+            numberWithOutComma == Literal.numberZero.value,
+            inputOperatorLabel.text == ""
+        )
         
-        if numberWithOutComma == Literal.numberZero.value && inputOperatorLabel.text == "" {
+        switch isInsertable {
+        case (true, true):
             return
-        } else if numberWithOutComma == Literal.numberZero.value && operatorValue != "" {
+        case (true, false):
             inputOperatorLabel.text = operatorValue
             let suffix = calculationFormula.suffix(1)
             let operators = Operator.allCases.map { String($0.rawValue) }
@@ -154,7 +159,7 @@ class CalculatorViewController: UIViewController {
             }
             
             calculationFormula += " " + convertOperator(operatorValue)
-        } else {
+        default:
             addStackView(numberWithOutComma)
             calculationFormula += " " + numberWithOutComma
             calculationFormula += " " + convertOperator(operatorValue)
