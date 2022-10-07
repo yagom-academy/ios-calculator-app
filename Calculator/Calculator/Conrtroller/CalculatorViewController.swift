@@ -63,12 +63,10 @@ final class CalculatorViewController: UIViewController {
         }
         
         switch number {
-        case Constant.zero:
-            guard userInput != Constant.zero else { return }
-        case Constant.doubleZero:
-            guard userInput != Constant.zero else { return }
-        case Constant.dot:
-            guard !userInput.contains(Constant.dot) else { return }
+        case NameSpace.zero, NameSpace.doubleZero:
+            guard userInput != NameSpace.zero else { return }
+        case NameSpace.dot:
+            guard !userInput.contains(NameSpace.dot) else { return }
         default:
             if userInput == Constant.zero {
                 userInput.removeFirst()
