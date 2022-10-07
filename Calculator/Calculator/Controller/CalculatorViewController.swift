@@ -112,11 +112,22 @@ class CalculatorViewController: UIViewController {
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
-        updateFinalCalculation(userInput: stackCalculation + finalCalculationInput)
+        updateFinalCalculation(userInput: stackCalculation)
         
-        stackCalculation = ""
+        if operandLabel.text == "" {
+            changeOperator(replacement: finalCalculationInput)
+        } else {
+            updateFinalCalculation(userInput: finalCalculationInput)
+        }
+        
         operatorLabel.text = operatorInput
         operandLabel.text = ""
+        stackCalculation = ""
+    }
+    
+    private func changeOperator(replacement: String) {
+        finalCalculation.removeLast()
+        updateFinalCalculation(userInput: replacement)
     }
     
     private func updateCalculatorStackView() {
