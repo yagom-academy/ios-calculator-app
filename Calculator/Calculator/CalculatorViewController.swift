@@ -31,10 +31,56 @@ class CalculatorViewController: UIViewController {
         let bottomOffset = CGPoint(
             x: 0,
             y: historyInputScrollView.contentSize.height
-                - historyInputScrollView.bounds.size.height
-                + historyInputScrollView.contentInset.bottom
+            - historyInputScrollView.bounds.size.height
+            + historyInputScrollView.contentInset.bottom
         )
         historyInputScrollView.setContentOffset(bottomOffset, animated: true)
+    }
+    
+    private func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        var stackView: UIStackView {
+            let stackView = UIStackView()
+            
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.axis = .horizontal
+            stackView.alignment = .fill
+            stackView.distribution = .fill
+            stackView.spacing = 8
+            stackView.addArrangedSubview(operatorLabel)
+            stackView.addArrangedSubview(operandLabel)
+            return stackView
+        }
+        return stackView
+    }
+    
+    private func addStackView(operatorText: String, inputText: String) {
+        let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
+        let operandLabel = makeHistoryInputLabel(inputText: inputText)
+        let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        historyInputStackView.addArrangedSubview(stackView)
+        autoSlideScrollView()
+    }
+    
+    private func makeHistoryInputLabel(inputText: String) -> UILabel {
+        var inputLabel: UILabel {
+            let inputLabel = UILabel()
+            
+            inputLabel.text = inputText
+            inputLabel.textColor = UIColor.white
+            inputLabel.translatesAutoresizingMaskIntoConstraints = false
+            return inputLabel
+        }
+        return inputLabel
+    }
+    
+    private func deleteAllHistory() {
+        calculationFormula = ""
+        inputOperatorLabel.text = ""
+        inputNumberLabel.text = Literal.numberZero.value
+        
+        for view in historyInputStackView.subviews {
+            view.removeFromSuperview()
+        }
     }
     
     private func addZero(inputText: String, zero: String) {
@@ -69,51 +115,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func makeHistoryInputLabel(inputText: String) -> UILabel {
-        var inputLabel: UILabel {
-            let inputLabel = UILabel()
-            
-            inputLabel.text = inputText
-            inputLabel.textColor = UIColor.white
-            inputLabel.translatesAutoresizingMaskIntoConstraints = false
-            return inputLabel
+    private func invertNumber(inputText: String) {
+        guard inputText != Literal.numberZero.value else { return }
+        
+        if inputText.prefix(1) != Literal.invertSign.value {
+            inputNumberLabel.text = Literal.invertSign.value + inputText
+        } else {
+            inputNumberLabel.text = inputText.replacingOccurrences(of: Literal.invertSign.value, with: "")
         }
-        return inputLabel
-    }
-    
-    private func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
-        var stackView: UIStackView {
-            let stackView = UIStackView()
-            
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            stackView.axis = .horizontal
-            stackView.alignment = .fill
-            stackView.distribution = .fill
-            stackView.spacing = 8
-            stackView.addArrangedSubview(operatorLabel)
-            stackView.addArrangedSubview(operandLabel)
-            return stackView
-        }
-        return stackView
-    }
-    
-    private func convertOperator(_ operatorValue: String) -> String {
-        switch operatorValue {
-        case Literal.multiplication.value:
-            return Literal.realMultiplication.value
-        case Literal.division.value:
-            return Literal.realDivision.value
-        default:
-            return operatorValue
-        }
-    }
-    
-    private func addStackView(operatorText: String, inputText: String) {
-        let operatorLabel = makeHistoryInputLabel(inputText: operatorText)
-        let operandLabel = makeHistoryInputLabel(inputText: inputText)
-        let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-        historyInputStackView.addArrangedSubview(stackView)
-        autoSlideScrollView()
     }
     
     private func addOperator(inputText: String, operatorValue: String) {
@@ -141,6 +150,17 @@ class CalculatorViewController: UIViewController {
             calculationFormula += " " + convertOperator(operatorValue)
             inputNumberLabel.text = Literal.numberZero.value
             inputOperatorLabel.text = operatorValue
+        }
+    }
+    
+    private func convertOperator(_ operatorValue: String) -> String {
+        switch operatorValue {
+        case Literal.multiplication.value:
+            return Literal.realMultiplication.value
+        case Literal.division.value:
+            return Literal.realDivision.value
+        default:
+            return operatorValue
         }
     }
     
@@ -174,32 +194,12 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func invertNumber(inputText: String) {
-        guard inputText != Literal.numberZero.value else { return }
-        
-        if inputText.prefix(1) != Literal.invertSign.value {
-            inputNumberLabel.text = Literal.invertSign.value + inputText
-        } else {
-            inputNumberLabel.text = inputText.replacingOccurrences(of: Literal.invertSign.value, with: "")
-        }
-    }
-    
-    private func deleteAllHistory() {
-        calculationFormula = ""
-        inputOperatorLabel.text = ""
-        inputNumberLabel.text = Literal.numberZero.value
-        
-        for view in historyInputStackView.subviews {
-            view.removeFromSuperview()
-        }
-    }
-    
     @IBAction private func touchUpCalculatorButton(sender: UIButton) {
         guard let operatorValue = sender.titleLabel?.text,
               let inputText = inputNumberLabel.text else {
             return
         }
-
+        
         switch operatorValue {
         case Literal.ac.value:
             deleteAllHistory()
