@@ -31,14 +31,15 @@ class CalculatorViewController: UIViewController {
         guard let operandLabelText = operandLabel.text else { return }
         
         if operandLabelText.contains("-") {
-            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
+            stackCalculation = operandLabelText.trimmingCharacters(in: ["-"])
+            operandLabel.text = stackCalculation
         } else {
-            operandLabel.text = "-" + operandLabelText
+            stackCalculation = "-" + operandLabelText
+            operandLabel.text = stackCalculation
         }
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
-        updateCalculatorStackView()
         updateFinalCalculation(userInput: stackCalculation)
         
         resetLabelText()
