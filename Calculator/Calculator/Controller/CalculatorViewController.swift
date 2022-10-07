@@ -39,6 +39,32 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    @IBAction func resultButton(_ sender: UIButton) {
+        updateCalculatorStackView()
+        updateFinalCalculation(userInput: stackCalculation)
+        
+        resetLabelText()
+        stackCalculation = ""
+        
+        try? showResult()
+        operandLabel.text = String(result)
+        resetCalculation()
+        resetCalculatorStackView()
+    }
+    
+    @IBAction func inputOperandButton(_ sender: UIButton) {
+        switch sender.tag {
+        case -1:
+            pushOperand(".")
+        case 0, 1, 2, 3, 4, 5, 6 ,7, 8, 9:
+            pushOperand("\(sender.tag)")
+        case 10:
+            pushOperand("00")
+        default:
+            break
+        }
+    }
+    
     @IBAction func inputOperatorButton(_ sender: UIButton) {
         if operandLabel.text != "" {
             updateCalculatorStackView()
@@ -53,32 +79,6 @@ class CalculatorViewController: UIViewController {
             pushOperator(finalCalculationInput: "ㅡ", operatorInput: "-")
         case 94:
             pushOperator(finalCalculationInput: "+", operatorInput: "+")
-        default:
-            break
-        }
-    }
-    
-    @IBAction func resultButton(_ sender: UIButton) {
-        updateCalculatorStackView()
-        updateFinalCalculation(userInput: stackCalculation)
-        
-        resetLabelText()
-        stackCalculation = ""
-        
-        try? showResult()
-        operandLabel.text = String(result)
-        resetCalculation()
-        resetCalculatorStackView()
-    }
-    
-    @IBAction func inputNumberButton(_ sender: UIButton) {
-        switch sender.tag {
-        case -1:
-            pushOperand(".")
-        case 0, 1, 2, 3, 4, 5, 6 ,7, 8, 9:
-            pushOperand("\(sender.tag)")
-        case 10:
-            pushOperand("00")
         default:
             break
         }
