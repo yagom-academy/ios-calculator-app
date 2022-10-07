@@ -131,7 +131,7 @@ extension CalculatorViewController: CalculatorLogDelegate {
     ) {
         let operatorValue = currentOperator.isEmpty ? Constant.Calculator.empty : currentOperator
         operatorLabel.text = operatorValue
-        operandLabel.text = currentNumber.toFormattedString()
+        operandLabel.text = currentNumber.formatNumber()
     }
 }
 
@@ -211,7 +211,7 @@ private extension CalculatorViewController {
     }
     
     func updateNumberLabel() {
-        let labelText = currentNumber.contains(Constant.Calculator.decimalPoint) ? currentNumber : currentNumber.toFormattedString()
+        let labelText = currentNumber.contains(Constant.Calculator.decimalPoint) ? currentNumber : currentNumber.formatNumber()
         currentNumberLabel.text = labelText
     }
 }

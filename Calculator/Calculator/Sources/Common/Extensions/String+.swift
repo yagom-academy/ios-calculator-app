@@ -17,7 +17,7 @@ extension String {
         return formatter
     }()
     
-    func toFormattedString() -> Self? {
+    func formatNumber() -> Self? {
         let pureNumber: String? = self.replacingOccurrences(of: ",", with: "")
         return pureNumber
             .flatMap(Self.calculatorNumberFormatter.number(from:))
