@@ -191,9 +191,7 @@ final class CalculatorViewController: UIViewController {
         var formula = ExpressionParser.parse(from: finalFormula)
         
         do {
-            guard let result = try formula.result() else {
-                return
-            }
+            let result = try formula.result()
             
             updateOperandLabel(with: String(result))
         } catch CalculatorError.divideWithZero {
