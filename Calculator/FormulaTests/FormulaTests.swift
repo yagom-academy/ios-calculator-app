@@ -20,7 +20,7 @@ class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
     }
     
-    func testFormula_result를호출하면_operands값2개와operators값1개가입력되었을때_합한결과가반환되어야한다() {
+    func testFormula_operands값2개와operators값1개가입력되었을때_result를호출하면_합한결과가반환되어야한다() {
         // given
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(2.0)
@@ -31,7 +31,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 3.0)
     }
     
-    func testFormula_result를호출하면_operands값3개와operators값2개가입력되었을때_합한결과가반환되어야한다() {
+    func testFormula_operands값3개와operators값2개가입력되었을때_result를호출하면_합한결과가반환되어야한다() {
         // given
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(2.0)
@@ -44,7 +44,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 6.0)
     }
     
-    func testFormula_operators4가지가하나씩입력되고operands5개가입력되었을때_연산결과가_연산순서대로연산된값이나와야한다() {
+    func testFormula_operators4가지가하나씩입력되고operands5개가입력되었을때_result를호출하면_연산순서대로연산된값이나와야한다() {
         // given
         let inputValue = (5.0 + 12.0 - 10.0) / 5.0 * 7.0
         sut.operands.enqueue(5.0)
@@ -67,9 +67,38 @@ class FormulaTests: XCTestCase {
         sut.operands.enqueue(5.0)
         sut.operands.enqueue(0.0)
         sut.operators.enqueue(.divide)
-        
+        // when, then
         XCTAssertThrowsError(try sut.result()) { error in
             XCTAssertEqual(error as? CalculatorError, CalculatorError.divideWithZero)
+        }
+    }
+    
+    func testFormula_operand가없을때_result를호출하면_0이반환되어야한다() {
+        // when
+        let result = try? sut.result()
+        // then
+        XCTAssertEqual(result, 0)
+    }
+    
+    func testFormula_operand와operator의개수가같을때_result를호출하면_누적된연산결과가반환되어야한다() {
+        // given
+        sut.operands.enqueue(5.0)
+        sut.operators.enqueue(.divide)
+        // when
+        let result = try? sut.result()
+        // then
+        XCTAssertEqual(result, 5.0)
+    }
+    
+    func testFormula_operator가없을때_result를호출하면_오류가발생해야한다() {
+        // given
+        sut.operands.enqueue(5.0)
+        sut.operands.enqueue(7.0)
+        sut.operands.enqueue(10.0)
+        sut.operators.enqueue(.add)
+        // when, then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.emptyOperator)
         }
     }
 }
