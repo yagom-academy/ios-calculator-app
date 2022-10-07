@@ -96,6 +96,9 @@ final class CalculatorViewController: UIViewController {
             }
             numberLabel.append(value)
             inputNumberLabel.text = numberLabel
+        case CalculatorNameSpace.doubleZero:
+            if numberLabel == CalculatorNameSpace.zero { return }
+            fallthrough
         case CalculatorNameSpace.zero:
             if numberLabel == CalculatorNameSpace.zero { return }
             
@@ -104,9 +107,6 @@ final class CalculatorViewController: UIViewController {
                 inputNumberLabel.text = numberLabel
                 return
             }
-            fallthrough
-        case CalculatorNameSpace.doubleZero:
-            if numberLabel == CalculatorNameSpace.zero { return }
             fallthrough
         default:
             numberLabel.append(value)
