@@ -10,10 +10,10 @@ class ViewController: UIViewController {
     private var operandManager: OperandManager = OperandManager()
     private let componentMaker: ComponentMaker = ComponentMaker()
     
-    @IBOutlet weak var mainOperandLabel: UILabel!
-    @IBOutlet weak var mainOperatorLabel: UILabel!
-    @IBOutlet weak var expressionQueue: UIStackView!
-    @IBOutlet weak var expressionScrollView: UIScrollView!
+    @IBOutlet private weak var mainOperandLabel: UILabel!
+    @IBOutlet private weak var mainOperatorLabel: UILabel!
+    @IBOutlet private weak var expressionQueue: UIStackView!
+    @IBOutlet private weak var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         expressionScrollView.showsVerticalScrollIndicator = false
     }
     
-    @IBAction func tapOperandButton(_ sender: UIButton) {
+    @IBAction private func tapOperandButton(_ sender: UIButton) {
         guard let tappedOperand = sender.currentTitle, mainOperandLabel.text?.count ?? 0 <= 18 else { return }
         if isCalculated { resetMainOperand(to: ExpressionText.zero) }
         
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         mainOperandLabel.text = operandManager.currentOperand.addCommaInteger()
     }
     
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard !operandManager.expression.isEmpty || mainOperandLabel.text != ExpressionText.zero else { return }
         
         if mainOperandLabel.text != ExpressionText.zero {
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
         mainOperatorLabel.text = sender.currentTitle
     }
     
-    @IBAction func tapEqualsButton(_ sender: UIButton) {
+    @IBAction private func tapEqualsButton(_ sender: UIButton) {
         guard !operandManager.expression.isEmpty else { return }
         appendExpressionQueue()
         
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         operandManager.clearExpression()
     }
     
-    @IBAction func tapSignButton(_ sender: UIButton) {
+    @IBAction private func tapSignButton(_ sender: UIButton) {
         guard mainOperandLabel.text != ExpressionText.zero else { return }
 
         isCalculated = false
@@ -78,7 +78,7 @@ class ViewController: UIViewController {
         mainOperandLabel.text = operandManager.currentOperand.addCommaInteger()
     }
     
-    @IBAction func tapClearButton(_ sender: UIButton) {
+    @IBAction private func tapClearButton(_ sender: UIButton) {
         if sender.currentTitle == "AC" {
             resetScrollView()
             operandManager.clearExpression()
