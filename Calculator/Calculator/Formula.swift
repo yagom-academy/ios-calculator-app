@@ -5,18 +5,18 @@ struct Formula {
     var operators: CalculatorItemQueueByLinkedList<Operator>
     
     mutating func result() throws -> Double {
-        var result: Double
-        
-        guard let initialValue: Double = operands.dequeue() else { return 0 }
-        var calculatingValue: Double = initialValue
+        guard var result: Double = operands.dequeue() else {
+            throw CalculateError.emptyOperands
+        }
         
         while !operands.isEmpty {
             guard let rhs = operands.dequeue(),
-                  let unitOperator = operators.dequeue() else { return 0 }
+                  let unitOperator = operators.dequeue() else {
+                throw CalculateError.emptyOperators
+            }
             
-            calculatingValue = try unitOperator.calculate(lhs: calculatingValue, rhs: rhs)
+            result = try unitOperator.calculate(lhs: result, rhs: rhs)
         }
-        result = calculatingValue
         
         return result
     }

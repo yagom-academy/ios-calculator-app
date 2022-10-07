@@ -37,4 +37,9 @@ struct LinkedList<T> {
             return removedValue
         }
     }
+    
+    mutating func clearQueue() {
+        self.head = nil
+        self.tail = nil
+    }
 }
