@@ -41,6 +41,10 @@ extension String {
     }
     
     func splitByDot() -> (String, String) {
+        guard self.contains(Character(CalculatorConstant.dot)) else {
+            return (self, CalculatorConstant.blank)
+        }
+        
         let decimalNumberComponents = self.split(separator: Character(CalculatorConstant.dot),
                                                  omittingEmptySubsequences: false)
         let integerPart = decimalNumberComponents[0].description
