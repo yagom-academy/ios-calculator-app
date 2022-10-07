@@ -117,12 +117,21 @@ extension UIScrollView {
 
 # 6.참고링크
 [Generic](https://docs.swift.org/swift-book/LanguageGuide/Generics.html)
+
 [Naming](https://www.swift.org/documentation/api-design-guidelines/#naming)
+
 [CGRect](https://developer.apple.com/documentation/corefoundation/cgrect/)
+
 [setContentOffset](https://developer.apple.com/documentation/uikit/uiscrollview/1619400-setcontentoffset/)
+
 [UIStackView](https://developer.apple.com/documentation/uikit/uistackview/)
+
 [UIScrollView](https://developer.apple.com/documentation/uikit/uiscrollview/)
+
 [NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter)
+
 [compactMap](https://developer.apple.com/documentation/applearchive/archiveheader/3589154-compactmap/)
+
 야곰닷넷 오토레이아웃 강의
+
 야곰닷넷 스위프트 기초강의
