@@ -12,7 +12,7 @@ final class CalculatorView: UIViewController, CalculatorViewDelegate {
     @IBOutlet weak private var formulaHorizontalStackView: UIStackView!
     @IBOutlet weak private var formulaVerticalStackView: UIStackView!
     
-    private var calculatorController: CalculatorControllerProtocol!
+    var calculatorController: CalculatorControllerProtocol!
     private let numberFormatter: NumberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
