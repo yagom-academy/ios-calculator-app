@@ -11,6 +11,8 @@ enum Constant {
     static let doubleZero: String = "00"
     static let negative: String = "-"
     static let empty: String = ""
+    static let space: String = " "
     static let calculate: String = "="
     static let dot: String = "."
+    static let nan: String = "NaN"
 }

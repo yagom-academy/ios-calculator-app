@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Calculator - CalculatorViewController.swift
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var resultLabel: UILabel!
@@ -20,11 +20,11 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUILabel()
+        setLabelText()
         clearCalculateHistory()
     }
     
-    private func setUILabel() {
+    private func setLabelText() {
         operatorLabel.text = Constant.empty
         resultLabel.text = Constant.zero
     }
@@ -33,62 +33,62 @@ final class ViewController: UIViewController {
         resultLabel.text = Constant.zero
         currentOperand = Constant.defaultZero
     }
-
+    
     private func clearCalculateHistory() {
         historyStackView.subviews.forEach{ $0.removeFromSuperview() }
     }
     
+    private func convertOperandToDouble() throws -> Double {
+        guard let convertToDouble = Double(currentOperand) else { throw CalculatorError.convertFailToDouble }
+        return convertToDouble
+    }
+    
     private func updateResultLabel() {
-        resultLabel.text = currentOperand
+        do {
+            let convertToDouble = try convertOperandToDouble()
+            let currentExpression = applyNumberFormatter(number: convertToDouble)
+            resultLabel.text = currentExpression
+        } catch {
+            if let error = error as? CalculatorError {
+                resultLabel.text = error.message
+            }
+        }
     }
     
     private func applyNumberFormatter(number: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 4
+        numberFormatter.maximumSignificantDigits = 20
         guard let result = numberFormatter.string(for: number) else { return Constant.empty }
         
         return result
     }
     
     private func makeHistoryStackViewLabel(item: String) -> UILabel {
-        let label: UILabel = {
-            let label = UILabel()
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            label.textAlignment = .right
-            label.text = item
-            label.textColor = .white
-            label.translatesAutoresizingMaskIntoConstraints = false
-            return label
-        }()
-        
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.text = "\(item)"
+        label.textAlignment = .right
+        label.numberOfLines = 0
+        label.isHidden = true
+        label.adjustsFontForContentSizeCategory = true
+        UIView.animate(withDuration: 0.3) {
+            label.isHidden = false
+        }
         return label
-    }
-    
-    private func makeHistoryStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
-        let stackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operatorLabel, operandLabel])
-            stackView.spacing = 8
-            stackView.axis = .horizontal
-            stackView.distribution = .fill
-            stackView.alignment = .fill
-            stackView.translatesAutoresizingMaskIntoConstraints = false
-            return stackView
-        }()
-        
-        return stackView
     }
     
     private func updateCalculateHistory(currentOperator: String, currentOperand: String) {
         guard let operand = Double(currentOperand) else { return }
         
-        let operatorLabel = makeHistoryStackViewLabel(item: currentOperator)
-        let operandLabel = makeHistoryStackViewLabel(item: applyNumberFormatter(number: operand) )
-        let stackView = makeHistoryStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
-        
-        historyStackView.addArrangedSubview(stackView)
-        
+        let label = makeHistoryStackViewLabel(item: currentOperator + Constant.space + applyNumberFormatter(number: operand))
+        historyStackView.addArrangedSubview(label)
         view.layoutIfNeeded()
+        
         let contentOffsetValue: CGFloat = historyScrollView.contentSize.height - historyScrollView.frame.height
         historyScrollView.setContentOffset(CGPoint(x: 0, y: contentOffsetValue), animated: true)
     }
@@ -120,9 +120,8 @@ final class ViewController: UIViewController {
         operatorLabel.text = operators
         
         if currentOperator == Constant.calculate {
-            currentOperand = Constant.defaultZero
             currentOperator = operators
-            resultLabel.text = Constant.zero
+            setDefaultOperand()
             return
         }
         
@@ -157,20 +156,22 @@ final class ViewController: UIViewController {
         
         let formula = ExpressionParser.parse(from: removeFirstHistory.joined())
         
+        executeCalculate(formula)
+    }
+    
+    private func executeCalculate(_ formula: Formula) {
         do {
             let result = try formula.result()
             if result.isNaN {
-                resultLabel.text = "NaN"
+                resultLabel.text = Constant.nan
             } else {
                 resultLabel.text = applyNumberFormatter(number: result)
             }
             currentOperand = Constant.zero
-        } catch CalculatorError.noneOperand {
-            print("None Operand Error")
-        } catch CalculatorError.noneOperator {
-            print("None Operator Error")
         } catch {
-            print("Some Error")
+            if let error = error as? CalculatorError {
+                resultLabel.text = error.message
+            }
         }
     }
     
@@ -198,7 +199,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tappedAllClear(_ sender: UIButton) {
-        setUILabel()
+        setLabelText()
         clearCalculateHistory()
         currentOperand = Constant.defaultZero
         currentOperator = Constant.empty
@@ -206,7 +207,6 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tappedClearEntry(_ sender: UIButton) {
-        currentOperand = Constant.defaultZero
-        resultLabel.text = Constant.zero
+        setDefaultOperand()
     }
 }
