@@ -44,7 +44,6 @@ class CalculatorViewController: UIViewController {
             updateCalculatorStackView()
         }
         
-        isCalculateResult = false
         switch sender.tag {
         case 91:
             pushOperator(finalCalculationInput: "/", operatorInput: "÷")
@@ -61,6 +60,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func resultButton(_ sender: UIButton) {
         updateCalculatorStackView()
+        updateFinalCalculation(userInput: stackCalculation)
         
         resetLabelText()
         stackCalculation = ""
@@ -98,7 +98,7 @@ class CalculatorViewController: UIViewController {
     
     private func resetCalculation() {
         stackCalculation = ""
-        finalCalculation = "0" + "+"
+        finalCalculation = ""
     }
     
     private func resetCalculatorStackView() {
@@ -112,6 +112,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
+        updateFinalCalculation(userInput: stackCalculation + finalCalculationInput)
         
         stackCalculation = ""
         operatorLabel.text = operatorInput
