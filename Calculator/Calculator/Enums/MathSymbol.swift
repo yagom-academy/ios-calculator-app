@@ -2,14 +2,16 @@
 //  MathSymbol.swift
 //  Calculator
 //
-//  Created by 노유빈 on 2022/09/30.
+//  Created by rhovin, LJ on 2022/10/06.
 //
 
 enum MathSymbol {
-    static let plus = "+"
-    static let minus = "-"
-    static let division = "÷"
-    static let multiplication = "×"
-    static let decimalPoint = "."
+    static let dot = "."
+    static let add = "+"
+    static let subtract = "-"
+    static let multiply = "×"
+    static let divide = "÷"
+    static let plusMinus = "⁺⁄₋"
+    static let equal = "="
     static let negative = "−"
 }
