@@ -12,16 +12,19 @@ enum ExpressionParser {
             result.operands.enqueue(0.0)
         }
         componentsByOperator(from: input).forEach {
-            switch $0 {
-            case String(Operator.add.rawValue):
-                result.operators.enqueue(Operator.add)
-            case String(Operator.subtract.rawValue):
-                result.operators.enqueue(Operator.subtract)
-            case String(Operator.multiply.rawValue):
-                result.operators.enqueue(Operator.multiply)
-            case String(Operator.divide.rawValue):
-                result.operators.enqueue(Operator.divide)
-            default:
+            if $0.count == 1,
+               let bindedOperator = Operator.init(rawValue: Character($0)) {
+                switch bindedOperator {
+                case .add:
+                    result.operators.enqueue(Operator.add)
+                case .subtract:
+                    result.operators.enqueue(Operator.subtract)
+                case .multiply:
+                    result.operators.enqueue(Operator.multiply)
+                case .divide:
+                    result.operators.enqueue(Operator.divide)
+                }
+            } else {
                 if let double = FormatConverter().convertStringContainingCommaToDouble($0) {
                     result.operands.enqueue(double)
                 }
@@ -35,6 +38,6 @@ enum ExpressionParser {
     }
     
     private static func isFirstCharacterMinus(of input: String) -> Bool {
-        return componentsByOperator(from: input).first == "-"
+        return componentsByOperator(from: input).first == Operator.subtract.rawValue.description
     }
 }
