@@ -65,7 +65,7 @@ class FormulaTests: XCTestCase {
         XCTAssertEqual(result, try sut.result())
     }
     
-    func test_랜덤값의_더하기연산을_100번할시_선언한_결과값의_합과_일치하는지(){
+    func test_랜덤값의_더하기연산을_100번할시_선언한_결과값의_합과_일치하는지() {
         var numbers: [Double] = []
         
         for _ in 0..<100 {
@@ -125,7 +125,7 @@ class FormulaTests: XCTestCase {
         XCTAssertThrowsError(try sut.result())
     }
     
-    func test_값이_없을때_result함수를호출하면_에러를던지는지(){
+    func test_값이_없을때_result함수를호출하면_에러를던지는지() {
         XCTAssertThrowsError(try sut.result())
     }
 }
