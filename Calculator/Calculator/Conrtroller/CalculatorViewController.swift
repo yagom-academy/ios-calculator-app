@@ -63,17 +63,15 @@ final class CalculatorViewController: UIViewController {
         }
         
         switch number {
-        case Constant.zero, Constant.doubleZero:
-            guard userInput != Constant.zero else { return }
-        case Constant.dot:
-            guard !userInput.contains(Constant.dot) else { return }
+        case Constant.zero where userInput == Constant.zero:
+            fallthrough
+        case Constant.doubleZero where userInput == Constant.zero:
+            fallthrough
+        case Constant.dot where userInput.contains(Constant.dot):
+            return
         default:
-            if userInput == Constant.zero {
-                userInput.removeFirst()
-            }
+            userInput += number
         }
-        
-        userInput += number
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
@@ -166,7 +164,7 @@ private extension CalculatorViewController {
         if value.components(separatedBy: Constant.dot).count > 1 {
             let values = value.components(separatedBy: Constant.dot)
             inputOperandLabel.text =
-                (Double(values[0]) ?? 0).changeToDecimal + Constant.dot + values[1]
+            (Double(values[0]) ?? 0).changeToDecimal + Constant.dot + values[1]
             return
         }
         
