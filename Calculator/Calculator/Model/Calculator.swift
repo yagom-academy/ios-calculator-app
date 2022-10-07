@@ -11,7 +11,7 @@ class Calculator {
     private(set) var currentOperand: String = ""
     
     var isNegativeOperand: Bool {
-        return currentOperand.contains(MathSymbol.negative)
+        return currentOperand.prefix(1) == MathSymbol.negative
     }
     
     var isDecimal: Bool {
