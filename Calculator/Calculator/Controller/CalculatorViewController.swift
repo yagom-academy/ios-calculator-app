@@ -32,15 +32,6 @@ class CalculatorViewController: UIViewController {
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
         
-        if operandLabelText.contains(Operator.subtract.rawValue) {
-            stackCalculation = operandLabelText.trimmingCharacters(in: ["-"])
-            operandLabel.text = stackCalculation
-            changeSignFinalCalculation(from: "+", to: "-")
-        } else {
-            stackCalculation = "-" + operandLabelText
-            operandLabel.text = stackCalculation
-            changeSignFinalCalculation(from: "-", to: "+")
-        }
     }
     
     @IBAction func inputOperatorButton(_ sender: UIButton) {
@@ -55,7 +46,7 @@ class CalculatorViewController: UIViewController {
         case 92:
             pushOperator(finalCalculationInput: "*", operatorInput: "x")
         case 93:
-            pushOperator(finalCalculationInput: "-", operatorInput: "-")
+            pushOperator(finalCalculationInput: "ㅡ", operatorInput: "-")
         case 94:
             pushOperator(finalCalculationInput: "+", operatorInput: "+")
         default:
@@ -64,9 +55,6 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
-        if isCalculateResult == false {
-            updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
-        }
         updateCalculatorStackView()
         
         resetLabelText()
@@ -106,7 +94,6 @@ class CalculatorViewController: UIViewController {
     private func resetCalculation() {
         stackCalculation = ""
         finalCalculation = "0" + "+"
-        isCalculateResult = false
     }
     
     private func resetCalculatorStackView() {
@@ -120,61 +107,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
-        updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
-        changeOperator(replacement: finalCalculationInput)
         
         stackCalculation = ""
         operatorLabel.text = operatorInput
         operandLabel.text = ""
-    }
-    
-    private func changeSignFinalCalculation(from target: String, to replacement: String) {
-        if finalCalculation.count == 0 {
-            return
-        }
-        
-        var finalCalculationList = Array(finalCalculation).map { String($0) }
-        
-        for count in (0...finalCalculationList.count-1).reversed() {
-            if finalCalculationList[count] == target {
-                finalCalculationList[count] = replacement
-                finalCalculation = finalCalculationList.joined()
-                return
-            } else if finalCalculationList[count] == replacement {
-                finalCalculationList[count] = target
-                finalCalculation = finalCalculationList.joined()
-                return
-            } else if finalCalculationList[count] == "*" || finalCalculationList[count] == "/" {
-                updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
-                
-                try? showResult()
-                resetCalculation()
-                
-                finalCalculation = "0" + "-" + "\(result)"
-                finalCalculation = finalCalculation.replacingOccurrences(of: "--", with: "+")
-                isCalculateResult = true
-                return
-            }
-        }
-    }
-    
-    private func changeOperator(replacement: String) {
-        if finalCalculation.count == 0 {
-            return
-        }
-        
-        var finalCalculationList = Array(finalCalculation).map { String($0) }
-        var lastFinalCalculation = finalCalculationList[finalCalculationList.count-1]
-        
-        if operandLabel.text == "" {
-            lastFinalCalculation = replacement
-            finalCalculationList[finalCalculationList.count-1] = lastFinalCalculation
-            finalCalculation = finalCalculationList.joined()
-            return
-        } else {
-            updateFinalCalculation(userInput: replacement)
-            return
-        }
     }
     
     private func updateCalculatorStackView() {
@@ -207,7 +143,6 @@ class CalculatorViewController: UIViewController {
         do {
             guard let calculatorResult = try formula?.result() else { return }
             result = calculatorResult
-            isCalculateResult = true
         } catch CalculateError.invalidNumber {
             showErrorMessage(CalculateError.invalidNumber)
         } catch CalculateError.emptyOperands {

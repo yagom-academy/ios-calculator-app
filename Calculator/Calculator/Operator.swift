@@ -2,13 +2,13 @@
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
+    case subtract = "ㅡ"
     case divide = "/"
     case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
-        case .add :
+        case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return substract(lhs: lhs, rhs: rhs)
