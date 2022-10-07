@@ -21,6 +21,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func acButton(_ sender: UIButton) {
         resetLabelText()
         resetCalculation()
+        resetCalculatorStackView()
     }
     
     @IBAction func ceButton(_ sender: UIButton) {
@@ -47,6 +48,7 @@ class CalculatorViewController: UIViewController {
             updateCalculatorStackView()
         }
         
+        isCalculateResult = false
         switch sender.tag {
         case 91:
             pushOperator(finalCalculationInput: "/", operatorInput: "÷")
@@ -63,17 +65,17 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func resultButton(_ sender: UIButton) {
         if isCalculateResult == false {
-            updateFinalCalculation(userInput: stackCalculation)
+            updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
         }
         updateCalculatorStackView()
         
-        operatorLabel.text = ""
-        operandLabel.text = ""
+        resetLabelText()
         stackCalculation = ""
         
         try? showResult()
         operandLabel.text = String(result)
         resetCalculation()
+        resetCalculatorStackView()
     }
     
     @IBAction func inputNumberButton(_ sender: UIButton) {
@@ -93,6 +95,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         resetLabelText()
         resetCalculation()
+        resetCalculatorStackView()
     }
     
     private func resetLabelText() {
@@ -103,20 +106,21 @@ class CalculatorViewController: UIViewController {
     private func resetCalculation() {
         stackCalculation = ""
         finalCalculation = "0" + "+"
-        
-        calculatorStackView.subviews.forEach { (view) in
-            view.removeFromSuperview()
-        }
         isCalculateResult = false
     }
     
+    private func resetCalculatorStackView() {
+        calculatorStackView.subviews.forEach { (view) in
+            view.removeFromSuperview()
+        }
+    }
     private func pushOperand(_ userInput: String) {
         stackCalculation = stackCalculation + userInput
         operandLabel.text = stackCalculation
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
-        updateFinalCalculation(userInput: stackCalculation)
+        updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
         changeOperator(replacement: finalCalculationInput)
         
         stackCalculation = ""
@@ -133,25 +137,21 @@ class CalculatorViewController: UIViewController {
         
         for count in (0...finalCalculationList.count-1).reversed() {
             if finalCalculationList[count] == target {
-                print(finalCalculation)
                 finalCalculationList[count] = replacement
                 finalCalculation = finalCalculationList.joined()
-                print(finalCalculation)
                 return
             } else if finalCalculationList[count] == replacement {
-                print(finalCalculation)
                 finalCalculationList[count] = target
                 finalCalculation = finalCalculationList.joined()
-                print(finalCalculation)
                 return
             } else if finalCalculationList[count] == "*" || finalCalculationList[count] == "/" {
-                if isCalculateResult == false {
-                    updateFinalCalculation(userInput: stackCalculation)
-                }
-                print(finalCalculation)
+                updateFinalCalculation(userInput: stackCalculation.trimmingCharacters(in: ["-"]))
+                
                 try? showResult()
+                resetCalculation()
+                
                 finalCalculation = "0" + "-" + "\(result)"
-                print(finalCalculation)
+                finalCalculation = finalCalculation.replacingOccurrences(of: "--", with: "+")
                 isCalculateResult = true
                 return
             }
@@ -220,7 +220,9 @@ class CalculatorViewController: UIViewController {
     private func showErrorMessage(_ errorType: CalculateError) {
         operandLabel.text = errorType.rawValue
         operatorLabel.text = "Error"
+        
         resetCalculation()
+        resetCalculatorStackView()
     }
 }
 
