@@ -32,6 +32,11 @@ class CalculatorViewController: UIViewController {
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
         
+        if operandLabelText.contains("-") {
+            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
+        } else {
+            operandLabel.text = "-" + operandLabelText
+        }
     }
     
     @IBAction func inputOperatorButton(_ sender: UIButton) {
