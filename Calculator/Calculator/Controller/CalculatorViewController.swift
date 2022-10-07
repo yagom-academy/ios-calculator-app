@@ -24,7 +24,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func inputOperandButton(_ sender: UIButton) {
         if isCalculateEnd == true {
-            resetLabelText()
+            operandLabel.text = NameSpace.emptyString
             isCalculateEnd = false
         }
         
