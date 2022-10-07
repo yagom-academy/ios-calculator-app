@@ -24,12 +24,12 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTappedNumberButton(_ sender: UIButton) {
         let inputNumber = sender.tag.description
         currentNumber.append(inputNumber)
-        updateNumberLabel()
+        updateNumberLabelToFormattedNumberWith(originalNumber: currentNumber)
     }
     
     @IBAction private func didTappedDoubleZeroButton(_ sender: UIButton) {
         currentNumber.append(Constant.Calculator.doubleZero)
-        updateNumberLabel()
+        updateNumberLabelToFormattedNumberWith(originalNumber: currentNumber)
     }
     
     @IBAction private func didTappedDivideButton(_ sender: UIButton) {
@@ -99,7 +99,7 @@ final class CalculatorViewController: UIViewController {
             )
         }
         
-        updateNumberLabel()
+        updateNumberLabelToFormattedNumberWith(originalNumber: currentNumber)
     }
     
     private func updateExpression(symbol: String) {
@@ -191,7 +191,7 @@ private extension CalculatorViewController {
         if result.isNaN {
             currentNumberLabel.text = Constant.Calculator.nan
         } else {
-            updateNumberLabel()
+            updateNumberLabelToFormattedNumberWith(originalNumber: result.description)
         }
     }
 }
@@ -210,8 +210,8 @@ private extension CalculatorViewController {
         currentOperatorLabel.text = currentOperator
     }
     
-    func updateNumberLabel() {
-        let labelText = currentNumber.contains(Constant.Calculator.decimalPoint) ? currentNumber : currentNumber.formatNumber()
+    func updateNumberLabelToFormattedNumberWith(originalNumber: String) {
+        let labelText = originalNumber.contains(Constant.Calculator.decimalPoint) ? originalNumber : originalNumber.formatNumber()
         currentNumberLabel.text = labelText
     }
 }
