@@ -14,12 +14,11 @@ enum ExpressionParser {
     
     private static func componentsByOperator(from input: String) -> [String] {
         var inputString: String = input
-        let whiteSpace: String = " "
         
         Operator.allCases.forEach {
-            inputString = inputString.replacingOccurrences(of: String($0.rawValue), with: whiteSpace)
+            inputString = inputString.replacingOccurrences(of: String($0.rawValue), with: NameSpace.whiteSpace)
         }
         
-        return inputString.split(with: Character(whiteSpace))
+        return inputString.split(with: Character(NameSpace.whiteSpace))
     }
 }

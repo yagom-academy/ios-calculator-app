@@ -7,7 +7,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    private var finalCalculation = ""
+    private var finalCalculation = NameSpace.emptyString
     private var isCalculateEnd: Bool = false
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
@@ -41,26 +41,26 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func inputOperatorButton(_ sender: UIButton) {
-        if operandLabel.text != "" {
+        if operandLabel.text != NameSpace.emptyString {
             updateCalculatorStackView()
         }
         
         switch sender.tag {
         case 91:
-            pushOperator(operatorInput: "/", operatorLabelTextInput: "÷")
+            pushOperator(operatorInput: Operator.divide, operatorLabelTextInput: NameSpace.divideText)
         case 92:
-            pushOperator(operatorInput: "*", operatorLabelTextInput: "x")
+            pushOperator(operatorInput: Operator.multiply, operatorLabelTextInput: NameSpace.multiplyText)
         case 93:
-            pushOperator(operatorInput: "−", operatorLabelTextInput: "-")
+            pushOperator(operatorInput: Operator.subtract, operatorLabelTextInput: NameSpace.subtractText)
         case 94:
-            pushOperator(operatorInput: "+", operatorLabelTextInput: "+")
+            pushOperator(operatorInput: Operator.add, operatorLabelTextInput: NameSpace.addText)
         default:
             break
         }
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
-        updateFinalCalculation(userInput: operandLabel.text ?? "")
+        updateFinalCalculation(userInput: operandLabel.text ?? NameSpace.emptyString)
         
         resetLabelText()
         try? showResult()
@@ -71,15 +71,15 @@ class CalculatorViewController: UIViewController {
     @IBAction func changeSignButton(_ sender: UIButton) {
         guard let operandLabelText = operandLabel.text else { return }
         
-        if operandLabelText.contains("-") {
+        if operandLabelText.contains(NameSpace.subtractText) {
             operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
         } else {
-            operandLabel.text = "-" + operandLabelText
+            operandLabel.text = NameSpace.subtractText + operandLabelText
         }
     }
     
     @IBAction func ceButton(_ sender: UIButton) {
-        operandLabel.text = ""
+        operandLabel.text = NameSpace.emptyString
     }
     
     @IBAction func acButton(_ sender: UIButton) {
@@ -94,17 +94,18 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func pushOperator(operatorInput: String, operatorLabelTextInput: String) {
-        updateFinalCalculation(userInput: operandLabel.text ?? "")
+    private func pushOperator(operatorInput: Operator, operatorLabelTextInput: String) {
+        let operatorString = String(operatorInput.rawValue)
+        updateFinalCalculation(userInput: operandLabel.text ?? NameSpace.emptyString)
         
-        if operandLabel.text == "" {
-            changeOperator(replacement: operatorInput)
+        if operandLabel.text == NameSpace.emptyString {
+            changeOperator(replacement: operatorString)
         } else {
-            updateFinalCalculation(userInput: operatorInput)
+            updateFinalCalculation(userInput: operatorString)
         }
         
         operatorLabel.text = operatorLabelTextInput
-        operandLabel.text = ""
+        operandLabel.text = NameSpace.emptyString
     }
     
     private func changeOperator(replacement: String) {
@@ -120,9 +121,8 @@ class CalculatorViewController: UIViewController {
     
     private func updateCalculatorStackView() {
         let calculatorLabel = UILabel()
-        let whiteSpace = " "
         
-        calculatorLabel.text = (operatorLabel.text ?? "") + whiteSpace + (operandLabel.text ?? "")
+        calculatorLabel.text = (operatorLabel.text ?? NameSpace.emptyString) + NameSpace.whiteSpace + (operandLabel.text ?? NameSpace.emptyString)
         calculatorLabel.textColor = .white
         calculatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -153,19 +153,19 @@ class CalculatorViewController: UIViewController {
     
     private func showErrorMessage(_ errorType: CalculateError) {
         operandLabel.text = errorType.rawValue
-        operatorLabel.text = "Error"
+        operatorLabel.text = NameSpace.error
         
         resetCalculation()
         resetCalculatorStackView()
     }
     
     private func resetLabelText() {
-        operandLabel.text = ""
-        operatorLabel.text = ""
+        operandLabel.text = NameSpace.emptyString
+        operatorLabel.text = NameSpace.emptyString
     }
     
     private func resetCalculation() {
-        finalCalculation = ""
+        finalCalculation = NameSpace.emptyString
     }
     
     private func resetCalculatorStackView() {
