@@ -7,7 +7,6 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    private var stackCalculation = ""
     private var finalCalculation = ""
     private var formula: Formula?
     
@@ -23,7 +22,6 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func ceButton(_ sender: UIButton) {
-        stackCalculation = ""
         operandLabel.text = ""
     }
     
@@ -31,19 +29,16 @@ class CalculatorViewController: UIViewController {
         guard let operandLabelText = operandLabel.text else { return }
         
         if operandLabelText.contains("-") {
-            stackCalculation = operandLabelText.trimmingCharacters(in: ["-"])
-            operandLabel.text = stackCalculation
+            operandLabel.text = operandLabelText.trimmingCharacters(in: ["-"])
         } else {
-            stackCalculation = "-" + operandLabelText
-            operandLabel.text = stackCalculation
+            operandLabel.text = "-" + operandLabelText
         }
     }
     
     @IBAction func resultButton(_ sender: UIButton) {
-        updateFinalCalculation(userInput: stackCalculation)
+        updateFinalCalculation(userInput: operandLabel.text ?? "")
         
         resetLabelText()
-        stackCalculation = ""
         
         try? showResult()
         resetCalculation()
@@ -95,7 +90,6 @@ class CalculatorViewController: UIViewController {
     }
     
     private func resetCalculation() {
-        stackCalculation = ""
         finalCalculation = ""
     }
     
@@ -105,12 +99,13 @@ class CalculatorViewController: UIViewController {
         }
     }
     private func pushOperand(_ userInput: String) {
-        stackCalculation = stackCalculation + userInput
-        operandLabel.text = stackCalculation
+        if let operandLabelText = operandLabel.text {
+            operandLabel.text = operandLabelText + userInput
+        }
     }
     
     private func pushOperator(finalCalculationInput: String, operatorInput: String) {
-        updateFinalCalculation(userInput: stackCalculation)
+        updateFinalCalculation(userInput: operandLabel.text ?? "")
         
         if operandLabel.text == "" {
             changeOperator(replacement: finalCalculationInput)
@@ -120,7 +115,6 @@ class CalculatorViewController: UIViewController {
         
         operatorLabel.text = operatorInput
         operandLabel.text = ""
-        stackCalculation = ""
     }
     
     private func changeOperator(replacement: String) {
