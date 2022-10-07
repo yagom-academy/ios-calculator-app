@@ -7,25 +7,15 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    private enum NameSpace {
-        static let zero: String = "0"
-        static let doubleZero: String = "00"
-        static let noValue: String = ""
-        static let negativeSymbol: String = "-"
-        static let dot: String = "."
-        static let spacing: CGFloat = 8
-        static let errorMessage: String = "Error: Please retry"
-    }
-    
     @IBOutlet private weak var inputOperandLabel: UILabel!
     @IBOutlet private weak var inputOperatorLabel: UILabel!
     @IBOutlet private weak var showingOperationsStackView: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private var rawFormulas: [String] = []
-    private var result: Double = Double.zero
+    private var result = Double.zero
     private var isCalculated: Bool = false
-    private var userInput: String = NameSpace.zero {
+    private var userInput: String = Constant.zero {
         willSet {
             changeOperandLabelByUserInput(newValue)
         }
@@ -37,7 +27,7 @@ final class CalculatorViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.distribution = .fill
         stackView.alignment = .fill
-        stackView.spacing = NameSpace.spacing
+        stackView.spacing = Constant.spacing
         
         return stackView
     }
@@ -73,14 +63,14 @@ final class CalculatorViewController: UIViewController {
         }
         
         switch number {
-        case NameSpace.zero:
-            guard userInput != NameSpace.zero else { return }
-        case NameSpace.doubleZero:
-            guard userInput != NameSpace.zero else { return }
-        case NameSpace.dot:
-            guard !userInput.contains(NameSpace.dot) else { return }
+        case Constant.zero:
+            guard userInput != Constant.zero else { return }
+        case Constant.doubleZero:
+            guard userInput != Constant.zero else { return }
+        case Constant.dot:
+            guard !userInput.contains(Constant.dot) else { return }
         default:
-            if userInput == NameSpace.zero {
+            if userInput == Constant.zero {
                 userInput.removeFirst()
             }
         }
@@ -89,7 +79,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
-        guard !rawFormulas.isEmpty || userInput != NameSpace.zero || isCalculated else { return }
+        guard !rawFormulas.isEmpty || userInput != Constant.zero || isCalculated else { return }
         
         if isCalculated {
             addStackView()
@@ -98,7 +88,7 @@ final class CalculatorViewController: UIViewController {
             isCalculated = false
         }
         
-        guard userInput != NameSpace.zero else {
+        guard userInput != Constant.zero else {
             inputOperatorLabel.text = sender.titleLabel?.text
             return
         }
@@ -111,12 +101,12 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func touchUpConvertingPositiveNegativeButton() {
-        guard userInput != NameSpace.zero else { return }
+        guard userInput != Constant.zero else { return }
         
-        if userInput.contains(NameSpace.negativeSymbol) {
+        if userInput.contains(Constant.negativeSymbol) {
             userInput.removeFirst()
         } else {
-            userInput.insert(contentsOf: NameSpace.negativeSymbol, at: userInput.startIndex)
+            userInput.insert(contentsOf: Constant.negativeSymbol, at: userInput.startIndex)
         }
     }
     
@@ -149,7 +139,7 @@ final class CalculatorViewController: UIViewController {
         } catch CalculatorError.divideByZeroError {
             inputOperandLabel.text = Double.numberFormatter.notANumberSymbol
         } catch {
-            inputOperandLabel.text = NameSpace.errorMessage
+            inputOperandLabel.text = Constant.errorMessage
         }
         
         isCalculated = true
@@ -158,11 +148,11 @@ final class CalculatorViewController: UIViewController {
 
 private extension CalculatorViewController {
     func resetInputNumber() {
-        userInput = NameSpace.zero
+        userInput = Constant.zero
     }
     
     func resetOperatorLabel() {
-        inputOperatorLabel.text = NameSpace.noValue
+        inputOperatorLabel.text = Constant.noValue
     }
     
     func resetRawFormula() {
@@ -170,15 +160,15 @@ private extension CalculatorViewController {
     }
     
     func changeOperandLabelByUserInput(_ value: String) {
-        guard value != NameSpace.negativeSymbol else {
-            inputOperandLabel.text = NameSpace.zero
+        guard value != Constant.negativeSymbol else {
+            inputOperandLabel.text = Constant.zero
             return
         }
         
-        if value.components(separatedBy: NameSpace.dot).count > 1 {
-            let values = value.components(separatedBy: NameSpace.dot)
+        if value.components(separatedBy: Constant.dot).count > 1 {
+            let values = value.components(separatedBy: Constant.dot)
             inputOperandLabel.text =
-                (Double(values[0]) ?? 0).changeToDecimal + NameSpace.dot + values[1]
+                (Double(values[0]) ?? 0).changeToDecimal + Constant.dot + values[1]
             return
         }
         
@@ -213,5 +203,17 @@ private extension CalculatorViewController {
             CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height),
             animated: false
         )
+    }
+}
+
+private extension CalculatorViewController {
+    enum Constant {
+        static let zero: String = "0"
+        static let doubleZero: String = "00"
+        static let noValue: String = ""
+        static let negativeSymbol: String = "-"
+        static let dot: String = "."
+        static let spacing: CGFloat = 8
+        static let errorMessage: String = "Error: Please retry"
     }
 }
