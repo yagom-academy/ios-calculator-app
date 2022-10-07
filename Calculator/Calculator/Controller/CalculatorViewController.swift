@@ -9,9 +9,7 @@ import UIKit
 class CalculatorViewController: UIViewController {
     private var stackCalculation = ""
     private var finalCalculation = ""
-    private var result = 0.0
     private var formula: Formula?
-    private var isCalculateResult: Bool = false
     
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
@@ -47,7 +45,6 @@ class CalculatorViewController: UIViewController {
         stackCalculation = ""
         
         try? showResult()
-        operandLabel.text = String(result)
         resetCalculation()
         resetCalculatorStackView()
     }
@@ -126,6 +123,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func changeOperator(replacement: String) {
+        guard finalCalculation.count != 0 else { return }
+        
         finalCalculation.removeLast()
         updateFinalCalculation(userInput: replacement)
     }
@@ -159,7 +158,7 @@ class CalculatorViewController: UIViewController {
         
         do {
             guard let calculatorResult = try formula?.result() else { return }
-            result = calculatorResult
+            operandLabel.text = String(calculatorResult)
         } catch CalculateError.invalidNumber {
             showErrorMessage(CalculateError.invalidNumber)
         } catch CalculateError.emptyOperands {
