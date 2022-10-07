@@ -90,19 +90,26 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addZero(inputText: String, zero: String) {
-        let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
-        let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
-        
-        if numberWithOutComma == Literal.numberZero.value && pointCount != 1 {
-            return
-        } else if numberWithOutComma != Literal.numberZero.value && pointCount != 1 {
-            if let number: Double = Double(numberWithOutComma + zero) {
-                inputNumberLabel.text = numberFormatter.string(for: number)
+            let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
+            let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
+            let isTwoInsertable: (Bool, Bool) = (
+                numberWithOutComma == Literal.numberZero.value,
+                pointCount == Int(Literal.numberOne.value)
+            )
+
+            switch isTwoInsertable {
+            case (true, _):
+                return
+            case (false, false):
+                if let number: Double = Double(numberWithOutComma + zero) {
+                    inputNumberLabel.text = numberFormatter.string(for: number)
+                }
+            case (_, true):
+                inputNumberLabel.text = inputText + zero
+            default:
+                return
             }
-        } else if numberWithOutComma != Literal.numberZero.value && pointCount == 1 {
-            inputNumberLabel.text = inputText + zero
         }
-    }
     
     private func addPoint(inputText: String, point: Character) {
         if inputText.filter({ $0 == point }).count == 0 {
@@ -188,13 +195,12 @@ class CalculatorViewController: UIViewController {
         formula = ExpressionParser.parse(from: calculationFormula)
         calculationFormula = ""
         
+        inputOperatorLabel.text = ""
         if let result = numberFormatter.string(for: formula.result()),
            result != Literal.infinity.value {
             inputNumberLabel.text = result
-            inputOperatorLabel.text = ""
         } else {
             inputNumberLabel.text = Literal.nan.value
-            inputOperatorLabel.text = ""
         }
     }
     

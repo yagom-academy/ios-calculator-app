@@ -8,6 +8,7 @@
 import Foundation
 
 enum Literal {
+    case numberOne
     case numberZero
     case numberDoubleZero
     case numberPoint
@@ -30,6 +31,8 @@ enum Literal {
     
     var value: String {
         switch self {
+        case .numberOne:
+            return "1"
         case .numberZero:
             return "0"
         case .numberDoubleZero:
