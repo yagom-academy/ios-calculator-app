@@ -177,9 +177,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				1AFBACE928DB2BC200D7E26D /* CalculatorItemQueueTests */,
-				1AFBACF728DBFA5500D7E26D /* FormulaTests */,
-				1ABBF5E428DCBB2400F26BC5 /* ExpressionParserTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -188,9 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
-				1AFBACE828DB2BC200D7E26D /* CalculatorItemQueueTests.xctest */,
-				1AFBACF628DBFA5500D7E26D /* FormulaTests.xctest */,
-				1ABBF5E328DCBB2400F26BC5 /* ExpressionParserTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,15 +200,6 @@
 				1AAF489028EAB95000DD5781 /* Controller */,
 				906ACCF128EDE6C80029BAF4 /* Error */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
-				1ABBF5EE28DCC25000F26BC5 /* Resource */,
-				1AAF488328E9CE1200DD5781 /* Utility */,
-				1ABBF5F228E14FE100F26BC5 /* Protocols */,
-				1AAF488228E9CCAC00DD5781 /* Error */,
-				1ABBF5EC28DCC1F900F26BC5 /* Extensions */,
-				1ABBF5ED28DCC20400F26BC5 /* Enums */,
-				1A8681B328D8747B00BE2837 /* Models */,
-				1A8681B428D8748B00BE2837 /* Views */,
-				1A8681B528D8749300BE2837 /* Controllers */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -237,7 +222,6 @@
 			);
 			name = ExpressionParserTests;
 			productName = ExpressionParserTests;
-			productReference = 1ABBF5E328DCBB2400F26BC5 /* ExpressionParserTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1AFBACE728DB2BC200D7E26D /* CalculatorItemQueueTests */ = {
@@ -255,7 +239,6 @@
 			);
 			name = CalculatorItemQueueTests;
 			productName = CalculatorItemQueueTests;
-			productReference = 1AFBACE828DB2BC200D7E26D /* CalculatorItemQueueTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1AFBACF528DBFA5400D7E26D /* FormulaTests */ = {
@@ -273,7 +256,6 @@
 			);
 			name = FormulaTests;
 			productName = FormulaTests;
-			productReference = 1AFBACF628DBFA5500D7E26D /* FormulaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		C713D93D2570E5EB001C3AFC /* Calculator */ = {
@@ -379,7 +361,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ABBF5E628DCBB2400F26BC5 /* ExpressionParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +368,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFBACEB28DB2BC200D7E26D /* CalculatorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +375,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AFBACF928DBFA5500D7E26D /* FormulaTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

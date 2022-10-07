@@ -117,8 +117,6 @@ class CalculatorViewController: UIViewController {
         
         do {
             result = String(try calculator.calculatedResult())
-        } catch CalculatorError.queueIsEmpty {
-            result = CalculatorError.queueIsEmpty.description
         } catch CalculatorError.divisionByZero {
             result = CalculatorError.divisionByZero.description
         } catch {

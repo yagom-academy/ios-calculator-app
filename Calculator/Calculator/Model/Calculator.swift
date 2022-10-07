@@ -31,17 +31,23 @@ class Calculator {
     }
     
     func calculatedResult() throws -> Double {
-        var result: Double
+        var result: Double = 0
         var formula: Formula = ExpressionParser.parser(from: expression)
         
         do {
             result = try formula.result()
             clearCalculator(currentOperand: String(result))
+        } catch CalculatorError.queueIsEmpty {
+            clearCalculator()
+            print(CalculatorError.queueIsEmpty.description)
+        } catch CalculatorError.divisionByZero {
+            clearCalculator()
+            throw CalculatorError.divisionByZero
         } catch {
             clearCalculator()
-            throw error
+            print(CalculatorError.unknown.description)
         }
-        
+
         return result
     }
 
