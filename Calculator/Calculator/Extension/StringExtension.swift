@@ -29,8 +29,7 @@ extension String {
         return result.filter { $0 != "" }
     }
     
-    func formatStyleToDecimal() -> String {
-        let numberFormatter = NumberFormatter()
+    func formatStyleToDecimal(_ numberFormatter: NumberFormatter) -> String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumFractionDigits = 20

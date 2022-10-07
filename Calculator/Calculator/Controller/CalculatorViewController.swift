@@ -120,7 +120,8 @@ final class CalculatorViewController: UIViewController {
     }
 
     private func createStackView() {
-        let logOperand = operand.formatStyleToDecimal()
+        let numberFormatter = NumberFormatter()
+        let logOperand = operand.formatStyleToDecimal(numberFormatter)
         let stackView = LogStackView(operand: logOperand, arithmeticOperator: arithmeticOperator)
 
         formulaStackView.addArrangedSubview(stackView)
@@ -137,6 +138,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     private func updateOperandLabel(with input: String) {
+        let numberFormatter = NumberFormatter()
         if input == CalculatorConstant.dot {
             if isFirstInput {
                 operand += CalculatorConstant.zero + input
@@ -145,7 +147,7 @@ final class CalculatorViewController: UIViewController {
                 return
             }
             operand += input
-            operandLabel.text = operand.formatStyleToDecimal() + CalculatorConstant.dot
+            operandLabel.text = operand.formatStyleToDecimal(numberFormatter) + CalculatorConstant.dot
 
             return
         } else if input == CalculatorConstant.negativeSign {
@@ -157,9 +159,9 @@ final class CalculatorViewController: UIViewController {
         if isDotButtonTapped {
             let (integerPart, decimalPart) = operand.splitByDot()
 
-            operandLabel.text = integerPart.formatStyleToDecimal() + CalculatorConstant.dot + decimalPart
+            operandLabel.text = integerPart.formatStyleToDecimal(numberFormatter) + CalculatorConstant.dot + decimalPart
         } else {
-            operandLabel.text = operand.formatStyleToDecimal()
+            operandLabel.text = operand.formatStyleToDecimal(numberFormatter)
         }
     }
     
