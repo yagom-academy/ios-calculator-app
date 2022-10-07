@@ -5,23 +5,23 @@
 
 import UIKit
 
-protocol CalculatorLogDelegate: AnyObject {
-    func willShowLogStackView(stackView: UIStackView, operatorLabel: UILabel, operandLabel: UILabel)
-}
-
 final class CalculatorLogStackView: UIStackView {
     private let operatorLabel = UILabel()
     private let operandLabel = UILabel()
     
-    weak var delegate: CalculatorLogDelegate?
+    convenience init(operatorText: String, operandText: String?) {
+        self.init(frame: .zero)
+        operatorLabel.text = operatorText
+        operandLabel.text = operandText
+        
+        configureStackView()
+    }
     
-    func configureStackView() {
+    private func configureStackView() {
         spacing = 8
         distribution = .fill
         axis = .horizontal
         alignment = .fill
-        
-        delegate?.willShowLogStackView(stackView: self, operatorLabel: operatorLabel, operandLabel: operandLabel)
         
         [
             operatorLabel,
