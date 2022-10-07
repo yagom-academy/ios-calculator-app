@@ -5,10 +5,13 @@
 //  Created by 임지연 on 2022/10/06.
 //
 
-enum CalculatorError: Error, CustomStringConvertible {
+import Foundation
+
+enum CalculatorError: LocalizedError {
     case queueIsEmpty
     case divisionByZero
     case unknown
+    
     var description: String {
         switch self {
         case .queueIsEmpty:
