@@ -87,7 +87,7 @@ MVC 패턴을 적용한 계산기 프로그램입니다!
 
 |기존|수정|
 |:-:|:-:|
-|![image](https://user-images.githubusercontent.com/99257965/194458370-b41ebc0d-cb6f-45cc-bce5-2d77bfb81f84.png) | ![image](https://user-images.githubusercontent.com/99257965/194458387-eca3be14-6a69-4507-ad0b-28c288ca55c6.png) |
+|![image](https://cdn.discordapp.com/attachments/1024185372512636948/1027776177152208926/015b19916fa02e60.gif) | ![image](https://cdn.discordapp.com/attachments/1024185372512636948/1027776176766328862/a25a7a287784edab.gif) |
 |0이 아닌 숫자를 입력시에만 입력 숫자 레이블 업데이트가 이루어진다.|0 및 어떤 버튼의 입력시에도 즉각적인 레이블 업데이트가 이루어진다.|
 
 ### 6. 트러블 슈팅
