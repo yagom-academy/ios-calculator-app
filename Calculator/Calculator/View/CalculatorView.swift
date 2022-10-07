@@ -3,7 +3,7 @@
 
 import UIKit
 
-final class CalculatorView: UIViewController, MainViewControllerDelegate {
+final class CalculatorView: UIViewController, CalculatorViewDelegate {
     
     @IBOutlet weak var displaySignLabel: UILabel!
     @IBOutlet weak var displayNumberLabel: UILabel!

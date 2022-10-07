@@ -2,7 +2,7 @@
 //  Created by zhilly and Gundy on 2022/10/04.
 
 final class CalculatorController: CalculatorControllerProtocol {
-    let view: MainViewControllerDelegate
+    let view: CalculatorViewDelegate
     var viewDisplayNumber: String = String(Int.zero)
     private var expression: String = String()
     private var calculatedNumber: String = String()
@@ -10,7 +10,7 @@ final class CalculatorController: CalculatorControllerProtocol {
     private var isFirstClick: Bool = true
     private var canCalculate: Bool = false
     
-    init(view: MainViewControllerDelegate) {
+    init(view: CalculatorViewDelegate) {
         self.view = view
     }
     

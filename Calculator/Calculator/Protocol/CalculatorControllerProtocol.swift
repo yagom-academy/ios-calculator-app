@@ -2,10 +2,10 @@
 //  Created by zhilly and Gundy on 2022/10/06.
 
 protocol CalculatorControllerProtocol {
-    var view: MainViewControllerDelegate { get }
+    var view: CalculatorViewDelegate { get }
     var viewDisplayNumber: String { get set }
     
-    init(view: MainViewControllerDelegate)
+    init(view: CalculatorViewDelegate)
     
     func tappedNumberButton(input: String?) -> String
     func tappedOperatorButton(input: String?) -> String

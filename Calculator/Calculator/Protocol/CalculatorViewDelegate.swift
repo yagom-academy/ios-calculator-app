@@ -3,7 +3,7 @@
 
 import UIKit
 
-protocol MainViewControllerDelegate {
+protocol CalculatorViewDelegate {
     var displaySignLabel: UILabel! { get set }
     var displayNumberLabel: UILabel! { get set }
     func makeStackView()
