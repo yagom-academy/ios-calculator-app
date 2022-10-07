@@ -28,7 +28,7 @@
 		EBA926E628E299F200E661B8 /* CalculateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA926E528E299F200E661B8 /* CalculateError.swift */; };
 		EBE474EC28EAABAD00D44305 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE474EB28EAABAD00D44305 /* Calculator.swift */; };
 		EBE474EE28EAAD1D00D44305 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE474ED28EAAD1D00D44305 /* CalculatorTests.swift */; };
-		F680F8C028EE757300B3A327 /* Converter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680F8BF28EE757300B3A327 /* Converter.swift */; };
+		F680F8C028EE757300B3A327 /* FormatConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680F8BF28EE757300B3A327 /* FormatConverter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,7 @@
 		EBA926E528E299F200E661B8 /* CalculateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateError.swift; sourceTree = "<group>"; };
 		EBE474EB28EAABAD00D44305 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		EBE474ED28EAAD1D00D44305 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
-		F680F8BF28EE757300B3A327 /* Converter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Converter.swift; sourceTree = "<group>"; };
+		F680F8BF28EE757300B3A327 /* FormatConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatConverter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 				EB14FE5128D966AA00D64FB3 /* CalculateItem.swift */,
 				EB81D12128DD3B8700C2D3C1 /* Operator.swift */,
 				EB81D12928DD6BCB00C2D3C1 /* Formula.swift */,
-				F680F8BF28EE757300B3A327 /* Converter.swift */,
+				F680F8BF28EE757300B3A327 /* FormatConverter.swift */,
 				EB81D12D28DD7D0A00C2D3C1 /* ExpressionParser.swift */,
 				EBE474EB28EAABAD00D44305 /* Calculator.swift */,
 				EBA926E528E299F200E661B8 /* CalculateError.swift */,
@@ -260,7 +260,7 @@
 			files = (
 				EB81D12E28DD7D0A00C2D3C1 /* ExpressionParser.swift in Sources */,
 				EB81D12628DD555A00C2D3C1 /* Double+CalculateItem.swift in Sources */,
-				F680F8C028EE757300B3A327 /* Converter.swift in Sources */,
+				F680F8C028EE757300B3A327 /* FormatConverter.swift in Sources */,
 				EBA926E628E299F200E661B8 /* CalculateError.swift in Sources */,
 				EB14FE5228D966AA00D64FB3 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,

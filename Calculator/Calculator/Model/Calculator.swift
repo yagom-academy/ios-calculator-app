@@ -115,7 +115,7 @@ struct Calculator {
     }
     
     private func applyFormat(to input: String) -> String {
-        let inputNumber: Double = Converter().convertStringContainingCommaToDouble(input) ?? 0
+        let inputNumber: Double = FormatConverter().convertStringContainingCommaToDouble(input) ?? 0
         let integerPartNumber: Double = floor(inputNumber)
         let separatedInput: [String] = input.components(separatedBy: ".")
         let hasDecimalPart: Bool = separatedInput.count >= 2
