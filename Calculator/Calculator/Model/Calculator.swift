@@ -16,14 +16,10 @@ struct Calculator {
     private var operands: [String] = []
     private var operators: [String] = []
     var isEditingState: Bool {
-        get {
-            return currentOperand != defaultOperand
-        }
+        currentOperand != defaultOperand
     }
     var isEmpty: Bool {
-        get {
-            operands.isEmpty && operators.isEmpty
-        }
+        operands.isEmpty && operators.isEmpty
     }
     
     init() {
