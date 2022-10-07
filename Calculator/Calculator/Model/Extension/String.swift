@@ -6,7 +6,7 @@
 import Foundation
 
 extension String {
-    var numberFormatter: NumberFormatter {
+    private var numberFormatter: NumberFormatter {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true

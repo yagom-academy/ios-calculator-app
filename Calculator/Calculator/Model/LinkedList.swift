@@ -5,8 +5,8 @@
 
 struct LinkedList<T: CalculateItem> {
     class Node<T: CalculateItem> {
-        var value: T
-        var next: Node?
+        fileprivate var value: T
+        fileprivate var next: Node?
         
         fileprivate init(_ value: T, next: Node? = nil) {
             self.value = value

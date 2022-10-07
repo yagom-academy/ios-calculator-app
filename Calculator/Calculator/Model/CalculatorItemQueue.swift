@@ -4,7 +4,7 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var list: LinkedList<T> = LinkedList<T>()
+    private var list: LinkedList<T> = LinkedList<T>()
     
     var count: Int {
         return list.nodeCount
