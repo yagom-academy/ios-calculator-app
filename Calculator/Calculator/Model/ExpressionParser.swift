@@ -22,4 +22,3 @@ enum ExpressionParser {
         return inputString.split(with: Character(NameSpace.whiteSpace))
     }
 }
-#imageLiteral(resourceName: "붙여넣은_이미지_2022__10__7__오후_5_54.png")
