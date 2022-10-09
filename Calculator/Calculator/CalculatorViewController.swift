@@ -176,18 +176,15 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func checkOperatorCount() -> Bool {
+    private func isOperatorIncluded() -> Bool {
         let operators = Operator.allCases.map { convertOperator(String($0.rawValue)) }.joined()
         let separators = CharacterSet(charactersIn: operators)
         
-        if calculationFormula.components(separatedBy: separators).count <= 1 {
-            return false
-        }
-        return true
+        return calculationFormula.components(separatedBy: separators).count > 1
     }
     
     private func showResult(inputText: String) {
-        guard checkOperatorCount() == true else { return }
+        guard isOperatorIncluded() else { return }
         
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
         addStackView(numberWithOutComma)
