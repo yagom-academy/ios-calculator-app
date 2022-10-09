@@ -1,85 +1,75 @@
-////
-////  CalculatorItemQueueTests.swift
-////  Created by 미니.
-////
 //
-//import XCTest
-//@testable import Calculator
+//  CalculatorItemQueueTests.swift
+//  Created by 미니.
 //
-//class CalculatorItemQueueTests: XCTestCase {
-//    var sut: CalculatorItemQueue<Double>!
-//    var testNumber: Double!
-//
-//    override func setUpWithError() throws {
-//        try super.setUpWithError()
-//        sut = CalculatorItemQueue()
-//        testNumber = Double.random(in: 1...100)
-//    }
-//    
-//    override func tearDownWithError() throws {
-//        try super.tearDownWithError()
-//        sut = nil
-//        testNumber = nil
-//    }
-//
-//    func test_초기화를통해서_빈큐를_초기화할수있는가() {
-//        // given
-//        let queue = CalculatorItemQueue<Double>()
-//
-//        // when
-//        let result = queue.isEmpty
-//
-//        // then
-//        XCTAssertTrue(result)
-//    }
-//
-//    func test_초기화와_배열을_통해서_채워져_있는_큐를_생성할_수_있는가() {
-//        // given
-//        let initArr: [Double] = [1,2,3,4]
-//        let queue = CalculatorItemQueue(elements: initArr)
-//
-//        // when
-//        let result = !queue.isEmpty
-//
-//        // then
-//        XCTAssertTrue(result)
-//    }
-//
-//    func test_enqueue로_요소을_추가하면_제일_처음에_나올_값이_추가한_요소와_동일한가() {
-//        // given
-//        sut.enqueue(testNumber)
-//
-//        // when
-//        let result = sut.front
-//
-//        // then
-//        XCTAssertEqual(testNumber, result)
-//    }
-//
-//    func test_여러번의_enqueue로_요소를_추가한후_큐의_요소개수와_동일한가() {
-//        // given
-//        let count = Int(testNumber)
-//        for value in 0..<count {
-//            let enqueueNumber = Double(value)
-//            sut.enqueue(enqueueNumber)
-//        }
-//
-//        // when
-//        let result = sut.count
-//
-//        // then
-//        XCTAssertEqual(result, count)
-//    }
-//
-//    func test_enqueue로_요소를_추가하고_dequeue실행으로_나오는값이_추가한요소와_동일한가() {
-//        // given
-//        sut.enqueue(testNumber)
-//
-//        // when
-//        let result = sut.dequeue()
-//
-//        // then
-//        XCTAssertEqual(testNumber, result)
-//    }
-//
-//}
+
+import XCTest
+@testable import Calculator
+
+class CalculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<Double>!
+    var testNumber: Double!
+
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = CalculatorItemQueue()
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+
+
+    func test_인큐를_한_후에_isEmpty가_false인가() {
+        // when
+        sut.enqueue(1)
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+
+    func test_인큐_3개_넣고_순서대로_잘들어갔는가() {
+        // given
+        let values: [Double] = [1,2,3]
+
+        // when
+        values.forEach { sut.enqueue($0) }
+        let result = sut.inputStack
+        
+        // then
+        XCTAssertEqual(result, values)
+    }
+
+    func test_인큐_3개_넣고_디큐_3번하면_isEmpty가_true인가() {
+        // given
+        let values: [Double] = [1, 2, 3]
+
+        // when
+        values.forEach { sut.enqueue($0) }
+        sut.dequeue()
+        sut.dequeue()
+        sut.dequeue()
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+
+    func test_인큐_3번하고_디큐4번했을때_마지막_반환값이_nil인가() {
+        // given
+        let values: [Double] = [1, 2, 3]
+
+        // when
+        values.forEach { sut.enqueue($0) }
+        sut.dequeue()
+        sut.dequeue()
+        sut.dequeue()
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+}

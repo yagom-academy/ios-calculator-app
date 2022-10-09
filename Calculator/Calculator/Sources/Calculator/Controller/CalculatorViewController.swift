@@ -24,12 +24,12 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTappedNumberButton(_ sender: UIButton) {
         let inputNumber = sender.tag.description
         currentNumber.append(inputNumber)
-        updateNumberLabels()
+        updateNumberLabelWith(originalNumber: currentNumber)
     }
     
     @IBAction private func didTappedDoubleZeroButton(_ sender: UIButton) {
         currentNumber.append(Constant.Calculator.doubleZero)
-        updateNumberLabels()
+        updateNumberLabelWith(originalNumber: currentNumber)
     }
     
     @IBAction private func didTappedDivideButton(_ sender: UIButton) {
@@ -56,7 +56,8 @@ final class CalculatorViewController: UIViewController {
         
         addChildLogStackView()
         
-        resetCurrentCalculatorState()
+        resetCurrentNumber()
+        resetCurrentOperator()
         resetOperatorLabel()
         
         calculateExpression()
@@ -98,7 +99,7 @@ final class CalculatorViewController: UIViewController {
             )
         }
         
-        updateNumberLabelTo(number: currentNumber)
+        updateNumberLabelWith(originalNumber: currentNumber)
     }
     
     private func updateExpression(symbol: String) {
@@ -126,10 +127,7 @@ private extension CalculatorViewController {
     func addChildLogStackView() {
         let operatorValue = currentOperator.isEmpty ? Constant.Calculator.empty : currentOperator
         
-        let childView = CalculatorLogStackView(
-            operatorText: operatorValue,
-            operandText: currentNumber.toFormattedString()
-        )
+        let childView = CalculatorLogStackView(operatorText: operatorValue, operandText: currentNumber.formatNumber())
         
         parentLogStackView.addArrangedSubview(childView)
         scrollView.scrollToBottom(animated: true)
@@ -144,16 +142,13 @@ private extension CalculatorViewController {
     }
     
     func resetInitState() {
-        resetLabels()
-        resetCurrentCalculatorState()
+        resetNumberLabel()
+        resetOperatorLabel()
+        resetCurrentNumber()
+        resetCurrentOperator()
         resetExpression()
         parentLogStackView.removeAllSubviews()
         toggleButtonState()
-    }
-    
-    func resetCurrentCalculatorState() {
-        resetCurrentNumber()
-        resetCurrentOperator()
     }
     
     func resetCurrentNumber() {
@@ -181,20 +176,15 @@ private extension CalculatorViewController {
         }
         
         if result.isNaN {
-            updateNumberLabelTo(number: Constant.Calculator.nan)
+            currentNumberLabel.text = Constant.Calculator.nan
         } else {
-            updateNumberLabelTo(number: result.description.toFormattedString())
+            updateNumberLabelWith(originalNumber: result.description)
         }
     }
 }
 
 // MARK: - 뷰 관련 메서드
 private extension CalculatorViewController {
-    func resetLabels() {
-        resetNumberLabel()
-        resetOperatorLabel()
-    }
-    
     func resetNumberLabel() {
         currentNumberLabel.text = Constant.Calculator.defaultNumber
     }
@@ -203,20 +193,13 @@ private extension CalculatorViewController {
         currentOperatorLabel.text = Constant.Calculator.empty
     }
     
-    func updateNumberLabelTo(number: String?) {
-        currentNumberLabel.text = number
-    }
-    
     func updateOperatorLabel() {
         currentOperatorLabel.text = currentOperator
     }
     
-    func updateNumberLabels() {
-        if currentNumber.contains(Constant.Calculator.decimalPoint) {
-            updateNumberLabelTo(number: currentNumber)
-        } else {
-            updateNumberLabelTo(number: currentNumber.toFormattedString())
-        }
+    func updateNumberLabelWith(currentNumber: String) {
+        let labelText = currentNumber.contains(Constant.Calculator.decimalPoint) ? currentNumber : currentNumber.formatNumber()
+        currentNumberLabel.text = labelText
     }
 }
 

@@ -6,32 +6,15 @@
 import UIKit
 
 final class CalculatorLogStackView: UIStackView {
-    private let operatorLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
+    private let operatorLabel = UILabel()
+    private let operandLabel = UILabel()
     
-    private let operandLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = .white
-        return label
-    }()
-    
-    init(operatorText: String, operandText: String?) {
+    convenience init(operatorText: String, operandText: String?) {
+        self.init(frame: .zero)
         operatorLabel.text = operatorText
         operandLabel.text = operandText
         
-        super.init(arrangedSubviews: [operatorLabel, operandLabel])
-        self.configureStackView()
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init(coder: NSCoder) {
-        super.init(coder: coder)
+        configureStackView()
     }
     
     private func configureStackView() {
@@ -39,5 +22,13 @@ final class CalculatorLogStackView: UIStackView {
         distribution = .fill
         axis = .horizontal
         alignment = .fill
+        
+        [
+            operatorLabel,
+            operandLabel
+        ].forEach {
+            $0.textColor = .white
+            addArrangedSubview($0)
+        }
     }
 }

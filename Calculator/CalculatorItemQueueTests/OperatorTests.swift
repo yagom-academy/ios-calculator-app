@@ -7,81 +7,69 @@ import XCTest
 @testable import Calculator
 
 final class OperatorTests: XCTestCase {
-    var lhs: Double!
-    var rhs: Double!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        
-        lhs = Double.random(in: -99999999...99999999)
-        rhs = Double.random(in: -99999999...99999999)
-    }
-    
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        
-        lhs = nil
-        rhs = nil
-    }
-    
-    func test_연산자가add일때에러없이연산을수행하는지() {
-        // driven
-        let targetOperator = Operator.add
+
+    func test_3더하기_9는_12인가() {
+        // given
+        let three: Double = 3
+        let nine: Double = 9
+        let add = Operator.add
 
         // when
-        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
+        let result = add.calculate(lhs: three, rhs: nine)
 
         // then
-        XCTAssertNoThrow(result)
-        XCTAssertEqual(result, (lhs + rhs))
+        XCTAssertEqual(result, 12)
     }
     
-    func test_연산자가subtract일때에러없이연산을잘수행하는지() {
-        // driven
-        let targetOperator = Operator.subtract
-        
+    func test_3빼기_9는_마이너스6인가() {
+        // given
+        let three: Double = 3
+        let nine: Double = 9
+        let subtract = Operator.subtract
+
         // when
-        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
-        
+        let result = subtract.calculate(lhs: three, rhs: nine)
+
         // then
-        XCTAssertNoThrow(result)
-        XCTAssertEqual(result, (lhs - rhs))
+        XCTAssertEqual(result, -6)
     }
     
-    func test_연산자가multiply일때연산을잘수행하는지() {
-        // driven
-        let targetOperator = Operator.multiply
-        
+    func test_3곱하기_9는_27인가() {
+        // given
+        let three: Double = 3
+        let nine: Double = 9
+        let multiply = Operator.multiply
+
         // when
-        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
-        
+        let result = multiply.calculate(lhs: three, rhs: nine)
+
         // then
-        XCTAssertNoThrow(result)
-        XCTAssertEqual(result, (lhs * rhs))
+        XCTAssertEqual(result, 27)
     }
     
-    func test_연산자가divide일때0이아닌수로연산하였을때에러없이연산을잘수행하는지() {
-        // driven
-        let targetOperator = Operator.divide
-        
+    func test_9나누기_3은_3인가() {
+        // given
+        let nine: Double = 9
+        let three: Double = 3
+        let divide = Operator.divide
+
         // when
-        if rhs == 0 { rhs = 1 }
-        let result = try? targetOperator.calculate(lhs: lhs, rhs: rhs)
-        
+        let result = divide.calculate(lhs: nine, rhs: three)
+
         // then
-        XCTAssertNoThrow(result)
-        XCTAssertEqual(result, (lhs / rhs))
+        XCTAssertEqual(result, 3)
     }
     
-    func test_연산자가divide이고0인수로연산을수행하였을때에러가발생하는지() {
-        // driven
-        let targetOperator = Operator.divide
-        
+    func test_3나누기_0은_nan인가() {
+        // given
+        let three: Double = 3
+        let zero: Double = 0
+        let divide = Operator.divide
+
         // when
-        let lhs: Double = 10
-        let rhs: Double = 0
-        
+        let result = divide.calculate(lhs: three, rhs: zero)
+
         // then
-        XCTAssertThrowsError(try targetOperator.calculate(lhs: lhs, rhs: rhs))
+        XCTAssertTrue(result.isNaN)
     }
 }
