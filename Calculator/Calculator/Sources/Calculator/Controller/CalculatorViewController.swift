@@ -197,8 +197,8 @@ private extension CalculatorViewController {
         currentOperatorLabel.text = currentOperator
     }
     
-    func updateNumberLabelWith(originalNumber: String) {
-        let labelText = originalNumber.contains(Constant.Calculator.decimalPoint) ? originalNumber : originalNumber.formatNumber()
+    func updateNumberLabelWith(currentNumber: String) {
+        let labelText = currentNumber.contains(Constant.Calculator.decimalPoint) ? currentNumber : currentNumber.formatNumber()
         currentNumberLabel.text = labelText
     }
 }
