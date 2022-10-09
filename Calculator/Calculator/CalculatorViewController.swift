@@ -91,13 +91,10 @@ class CalculatorViewController: UIViewController {
     
     private func addZero(inputText: String, zero: String) {
         let numberWithOutComma = inputText.replacingOccurrences(of: Literal.comma.value, with: "")
-        let pointCount = numberWithOutComma.filter { $0 == Character(Literal.point.value) }.count
-        let isTwoInsertable: (Bool, Bool) = (
-            numberWithOutComma == Literal.numberZero.value,
-            pointCount == Int(Literal.numberOne.value)
-        )
+        let isZero = numberWithOutComma == Literal.numberZero.value
+        let isDotIncluded = numberWithOutComma.contains(Literal.point.value)
         
-        switch isTwoInsertable {
+        switch (isZero, isDotIncluded) {
         case (true, _):
             return
         case (false, false):
