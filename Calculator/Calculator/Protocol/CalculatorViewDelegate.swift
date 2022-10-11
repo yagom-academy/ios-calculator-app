@@ -7,6 +7,6 @@ protocol CalculatorViewDelegate {
     var calculatorController: CalculatorControllerProtocol! { get set }
     var displaySignLabel: UILabel! { get set }
     var displayNumberLabel: UILabel! { get set }
-    func makeStackView()
+    func addStackView()
     func resetDisplayNumberLabel()
 }

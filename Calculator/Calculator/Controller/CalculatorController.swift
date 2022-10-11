@@ -75,7 +75,7 @@ final class CalculatorController: CalculatorControllerProtocol {
     
     func tappedOperatorButton(input: String?) -> String {
         if calculatedNumber != String() {
-            view.makeStackView()
+            view.addStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
             
@@ -90,7 +90,7 @@ final class CalculatorController: CalculatorControllerProtocol {
             return String(displaySign.rawValue)
         } else {
             expression += String(displaySign.rawValue) + viewDisplayNumber
-            view.makeStackView()
+            view.addStackView()
             view.resetDisplayNumberLabel()
             determineOperator(stringOperator: input)
             
@@ -129,7 +129,7 @@ final class CalculatorController: CalculatorControllerProtocol {
         expression += String(displaySign.rawValue) + viewDisplayNumber
         expression = expression.trimmingCharacters(in: .whitespaces)
         canCalculate = false
-        view.makeStackView()
+        view.addStackView()
         view.resetDisplayNumberLabel()
         var formula = ExpressionParser.parse(from: expression)
         

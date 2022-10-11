@@ -64,7 +64,7 @@ final class CalculatorView: UIViewController, CalculatorViewDelegate {
         return changedFormatResult
     }
     
-    func makeStackView() {
+    func addStackView() {
         let stackView = FormulaStackView()
         let operandText = changeCalculateResultFormat(result: displayNumberLabel.text?.split(with: Character(Constants.comma)).joined())
         stackView.configure(operatorText: displaySignLabel.text, operandText: operandText)
