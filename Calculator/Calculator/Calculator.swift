@@ -11,30 +11,39 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T> {
+extension String: CalculateItem {
+    
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
     var data = [T]()
     init() {}
     
     mutating func dequeue() -> T? {
-        return nil
+        guard data.count > 0 else {
+            return nil
+        }
+        return data.removeFirst()
     }
     
     func peek() -> T? {
-        return nil
+        return data.first
     }
     
     mutating func enqueue(_ element: T) {
+        data.append(element)
     }
     
     mutating func clear() {
+        data.removeAll()
     }
     
     func isEmpty() -> Bool {
-        return true
+        return data.isEmpty
     }
     
     var count: Int {
-        return 0
+        return data.count
     }
     
 }
