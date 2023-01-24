@@ -18,8 +18,8 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_queue에값이없을때_isEmpty를호출시_true가나온다() {
-        //give
+    func test_queue에_값이없을때_isEmpty를호출시_true가나온다() {
+        //given
         sut?.clear()
         //when
         let result = sut?.isEmpty
@@ -28,8 +28,24 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_enqueue를_실행할시_파라미터로_준값이_queue에들어간다() {
-        //give
+    func test_peek을_실행할때_queue의_첫번째요소가_반환된다() {
+        //given
+        let firstElement = 1
+        let secondElement = 2
+        let thirdElement = 3
+        //when
+        sut?.enqueue(firstElement)
+        sut?.enqueue(secondElement)
+        sut?.enqueue(thirdElement)
+        
+        let result = sut?.peek()
+        let expectation = firstElement
+        //then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueue를_실행할때_파라미터로_준값이_queue에들어간다() {
+        //given
         let element = 3
         //when
         sut?.enqueue(element)
@@ -39,8 +55,8 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_size를_실행할시_queue의_갯수가_반환된다() {
-        //give
+    func test_size를_실행할때_queue의_갯수가_반환된다() {
+        //given
         let firstElement = 1
         let secondElement = 2
         let thirdElement = 3
@@ -55,8 +71,8 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_dequeue를_실행할시_첫번째요소가_삭제된다() {
-        //give
+    func test_dequeue를_실행할때_첫번째요소가_삭제된다() {
+        //given
         let firstElement = 1
         let secondElement = 2
         let thirdElement = 3
@@ -65,15 +81,15 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(secondElement)
         sut?.enqueue(thirdElement)
         
-        let _ = sut?.dequeue()
+        sut?.dequeue()
         let result = sut?.count
         let expectation = 2
         //then
         XCTAssertEqual(result, expectation)
     }
 
-    func test_dequeue를_실행할시_첫번째요소가_삭제되면서_반환된다() {
-        //give
+    func test_dequeue를_실행할때_첫번째요소가_삭제되면서_반환된다() {
+        //given
         let firstElement = 1
         let secondElement = 2
         let thirdElement = 3
@@ -87,4 +103,16 @@ final class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_dequeue를_실행할때_queue가_비어있다면_nil이_반환된다() {
+        //given
+        sut?.clear()
+        //when
+        let result = sut?.dequeue()
+        let expectation: Int? = nil
+        //then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    
 }

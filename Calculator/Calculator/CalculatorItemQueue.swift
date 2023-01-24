@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> : CalculateItem  {
+
+
+struct CalculatorItemQueue<T: CalculateItem> {
+    
     private var queue: [T?] = []
     private var frontIndex: Int = 0
     
@@ -24,6 +27,7 @@ struct CalculatorItemQueue<T> : CalculateItem  {
         queue.append(element)
     }
     
+    @discardableResult 
     public mutating func dequeue() -> T? {
         guard frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
