@@ -37,7 +37,7 @@ struct CalculatorItemQueue: CalculateItem {
         self.item += number
     }
     
-    mutating func caculateItems() {
+    mutating func calculateItems() {
 //        = 버튼을 누르면 입력된 연산을 한 번에 수행합니다.
     }
 }
