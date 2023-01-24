@@ -7,6 +7,12 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue<Element> {
+    var queue: Array<Element?> = []
+    var head: Int = 0
+    var result: Double = 0
     
+    mutating func enqueue(_ element: Element) {
+        queue.append(element)
+    }
 }
