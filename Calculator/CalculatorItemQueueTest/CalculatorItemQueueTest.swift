@@ -19,7 +19,7 @@ final class CalculatorItemQueueTest: XCTestCase {
         let numbers = "123"
         sut!.item = numbers
         
-        sut?.finishInputNumbers()
+        sut?.finishInputItem()
         
         let value = sut!.items.head!.value
         let equalNumbersAndValue = numbers == value
@@ -29,7 +29,7 @@ final class CalculatorItemQueueTest: XCTestCase {
     
     func test_숫자가_아무것도_입력되지_않은_상태일_경우_items에_추가되지_않는다() {
         sut?.item = ""
-        sut?.finishInputNumbers()
+        sut?.finishInputItem()
         
         let head = sut!.items.head
         
@@ -39,7 +39,7 @@ final class CalculatorItemQueueTest: XCTestCase {
     func test_숫자값이_입력될_경우_numbers프로퍼티에_하나씩_추가된다() {
         let exception = "1"
         
-        sut.pushNumber("1")
+        sut.addNumber("1")
         
         XCTAssertEqual(sut.item, exception)
     }
