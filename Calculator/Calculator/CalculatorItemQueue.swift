@@ -40,7 +40,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     public func peek() -> T? {
-        guard frontIndex <= count,
+        guard queue.isEmpty != true,
+              frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
         
         return element
