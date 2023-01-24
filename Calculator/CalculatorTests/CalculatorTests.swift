@@ -49,7 +49,7 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(secondElement)
         sut?.enqueue(thirdElement)
         
-        let result = sut?.size
+        let result = sut?.count
         let expectation = 3
         //then
         XCTAssertEqual(result, expectation)
@@ -66,7 +66,7 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(thirdElement)
         
         let _ = sut?.dequeue()
-        let result = sut?.size
+        let result = sut?.count
         let expectation = 2
         //then
         XCTAssertEqual(result, expectation)
