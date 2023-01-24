@@ -11,7 +11,7 @@ struct CalculatorItemQueue<T>  {
     private var queue: [T?] = []
     private var frontIndex: Int = 0
     
-    public var size: Int {
+    public var count: Int {
         let count = queue.endIndex - frontIndex
         return count
     }
@@ -25,7 +25,7 @@ struct CalculatorItemQueue<T>  {
     }
     
     public mutating func dequeue() -> T? {
-        guard frontIndex <= size,
+        guard frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
 
         queue[frontIndex] = nil
@@ -35,7 +35,7 @@ struct CalculatorItemQueue<T>  {
     }
     
     public func peek() -> T? {
-        guard frontIndex <= size,
+        guard frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
         
         return element
