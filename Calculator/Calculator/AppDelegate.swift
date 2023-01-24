@@ -1,6 +1,6 @@
 //
 //  Calculator - AppDelegate.swift
-//  Created by yagom. 
+//  Created by kokkilE on 2023/01/25.
 //  Copyright © yagom. All rights reserved.
 // 
 
