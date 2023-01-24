@@ -1,9 +1,5 @@
-//
 //  Queue.swift
-//  Calculator
-//
-//  Created by 강민수 on 2023/01/24.
-//
+//  Created by 레옹아범 on 2023/01/24.
 
 struct Queue {
     var head: Node?

@@ -1,17 +1,20 @@
-//
 //  CalculatorItemQueue.swift
-//  Calculator
-//
-//  Created by 강민수 on 2023/01/24.
-//
+//  Created by 레옹아범 on 2023/01/24.
 
-struct CalculatorItemQueue: CaculateItem {
+struct CalculatorItemQueue: CalculateItem {
     var items = Queue()
-    private var numbers: String = "123"
+    var numbers: String = ""
     
     mutating func finishInputNumbers() {
-        let tempNode = Node(value: numbers)
+        if numbers == "" {
+            return
+        }
         
+        let tempNode = Node(value: numbers)
         self.items.enqueue(tempNode)
+    }
+    
+    mutating func pushNumber(_ number: String) {
+        self.numbers += number
     }
 }
