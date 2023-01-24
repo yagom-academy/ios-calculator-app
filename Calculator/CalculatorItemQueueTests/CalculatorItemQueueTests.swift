@@ -10,10 +10,10 @@ import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
 
-    var sut: CalculatorItemQueueTests!
+    var sut: CalculatorItemQueue<Any>!
     
     override func setUpWithError() throws {
-        sut = CalculatorItemQueueTests()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
@@ -23,16 +23,16 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue를실행하여_숫자3개를넣었을때_queue안에_숫자3개와동일한지() {
         
         //given
-        let input = [1,2,3]
+        let input: [Any?] = [1,2,3]
         
         //when
         for input in input {
-            sut.enqueue(input)
+            sut.enqueue(element: input)
         }
         let result = sut.queue
-        
+    
         //then
-        XCTAssertEqual(result, input)
+        XCTAssert(result, input)
     }
 
 }
