@@ -15,4 +15,14 @@ struct CalculatorItemQueue<Element> {
     mutating func enqueue(_ element: Element) {
         queue.append(element)
     }
+    
+    mutating func dequeue() -> Element? {
+        guard queue.count != 0 else {
+            return nil
+        }
+        
+        let element = queue.removeFirst()
+        
+        return element
+    }
 }
