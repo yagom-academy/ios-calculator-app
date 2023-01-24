@@ -7,26 +7,27 @@
 
 import Foundation
 
-protocol Calculate {
+protocol CalculateItem {
 }
 
-struct CalculatorItemQueue<T>: Calculate {
+struct CalculatorItemQueue<T>: CalculateItem {
     
-    public var queue: [T] = []
-        
-    public var count: Int {
+    var queue: [T] = []
+    var head: Int = 0
+    
+    var count: Int {
         return queue.count
     }
         
-    public var isEmpty: Bool {
+    var isEmpty: Bool {
         return queue.isEmpty
     }
     
-    public mutating func enqueueItem(_ element: T) {
+    mutating func enqueueItem(_ element: T) {
         queue.append(element)
     }
         
-    public mutating func dequeueItem() -> T? {
+    mutating func dequeueItem() -> T? {
         return isEmpty ? nil : queue.removeFirst()
     }
 }
