@@ -44,4 +44,24 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_값이없는상태에서_dequeue호출시_반환값은_nil이다() {
+        // when
+        let result = sut.dequeue()
+
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_배열이존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다(){
+        // given
+        sut.data = [11, 22, 33, 44]
+        let expectation = 11
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result as? Int, expectation)
+    }
 }
