@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>  {
+struct CalculatorItemQueue<T> : CalculateItem  {
     private var queue: [T?] = []
     private var frontIndex: Int = 0
     
