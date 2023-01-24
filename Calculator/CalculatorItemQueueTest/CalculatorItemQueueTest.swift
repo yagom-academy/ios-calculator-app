@@ -17,7 +17,7 @@ final class CalculatorItemQueueTest: XCTestCase {
     
     func test_숫자입력이_멈췄을_때_items에_해당_값이_추가된다() {
         let numbers = "123"
-        sut!.numbers = numbers
+        sut!.item = numbers
         
         sut?.finishInputNumbers()
         
@@ -28,7 +28,7 @@ final class CalculatorItemQueueTest: XCTestCase {
     }
     
     func test_숫자가_아무것도_입력되지_않은_상태일_경우_items에_추가되지_않는다() {
-        sut?.numbers = ""
+        sut?.item = ""
         sut?.finishInputNumbers()
         
         let head = sut!.items.head
@@ -41,7 +41,7 @@ final class CalculatorItemQueueTest: XCTestCase {
         
         sut.pushNumber("1")
         
-        XCTAssertEqual(sut.numbers, exception)
+        XCTAssertEqual(sut.item, exception)
     }
     
 }
