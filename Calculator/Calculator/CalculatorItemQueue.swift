@@ -8,5 +8,15 @@
 import Foundation
 
 struct CalculatorItemQueue<T> {
+    var data: [T] = []
+    var isEmpty: Bool {
+        return data.isEmpty
+    }
+    var count: Int {
+        return data.count
+    }
     
+    mutating func enqueue(_ element: T) {
+        data.append(element)
+    }
 }

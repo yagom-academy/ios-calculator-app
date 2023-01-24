@@ -16,6 +16,32 @@ final class CalculatorTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+    }
+    
+    func test_enqueue호출시_isEmpty는_False이다() {
+        // given
+        let input = 1
+        let expectation = false
+        
+        // when
+        sut.enqueue(input)
+        
+        // then
+        XCTAssertFalse(expectation)
+        
+    }
+    
+    func test_enqueue호출시_count가증가된다() {
+        // given
+        let input = 1
+        let expectation = 1
+        
+        // when
+        sut.enqueue(input)
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
     }
 }

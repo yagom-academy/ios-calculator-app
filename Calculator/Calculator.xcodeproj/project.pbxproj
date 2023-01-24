@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4BC06364297F908A003829EE /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC06363297F908A003829EE /* CalculatorTests.swift */; };
-		4BDFC909297FC21A009E551B /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC06363297F908A003829EE /* CalculatorTests.swift */; };
 		4BDFC90B297FC25B009E551B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFC90A297FC25B009E551B /* CalculatorItemQueue.swift */; };
 		4BDFC90C297FC25B009E551B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BDFC90A297FC25B009E551B /* CalculatorItemQueue.swift */; };
+		4BDFC910297FC9ED009E551B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
+		4BDFC911297FC9F7009E551B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
+		4BDFC913297FCA24009E551B /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC06363297F908A003829EE /* CalculatorTests.swift */; };
+		4BDFC915297FE1CF009E551B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
+		4BDFC916297FE296009E551B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
+		4BDFC917297FE296009E551B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
-		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
-		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +184,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BDFC915297FE1CF009E551B /* Main.storyboard in Resources */,
+				4BDFC917297FE296009E551B /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,9 +193,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */,
+				4BDFC916297FE296009E551B /* LaunchScreen.storyboard in Resources */,
 				C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */,
-				C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */,
+				4BDFC911297FC9F7009E551B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,8 +206,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BDFC910297FC9ED009E551B /* ViewController.swift in Sources */,
+				4BDFC913297FCA24009E551B /* CalculatorTests.swift in Sources */,
 				4BDFC90C297FC25B009E551B /* CalculatorItemQueue.swift in Sources */,
-				4BC06364297F908A003829EE /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,7 +218,6 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				4BDFC90B297FC25B009E551B /* CalculatorItemQueue.swift in Sources */,
-				4BDFC909297FC21A009E551B /* CalculatorTests.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
@@ -420,6 +424,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Calculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -440,6 +445,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Calculator/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
