@@ -47,9 +47,14 @@ struct LinkedList<T> {
         count -= 1
         
         if self.isEmpty {
-            head = nil
             tail = nil
         }
+    }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+        count = 0
     }
     
 }

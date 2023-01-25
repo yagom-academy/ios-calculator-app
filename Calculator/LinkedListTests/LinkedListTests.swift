@@ -147,5 +147,37 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+//MARK: - removeAll Test
+    func test_removeAll호출시_count가0이된다() {
+        // given
+        sut.count = 1
+        let expectation = 0
+        
+        // when
+        sut.removeAll()
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeAll호출시_Node가모두삭제된다() {
+        // given
+        sut.tail = Node(data: 3)
+        sut.head = Node(data: 1,
+                        next: Node(data: 2, next: sut.tail))
+        let expectation: Int? = nil
+        
+        // when
+        sut.removeAll()
+        let resultHead = sut.head?.data
+        let resultTail = sut.tail?.data
+        let resultCenter = sut.head?.next?.data
+        
+        // then
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultTail, expectation)
+        XCTAssertEqual(resultCenter, expectation)
+    }
     
 }
