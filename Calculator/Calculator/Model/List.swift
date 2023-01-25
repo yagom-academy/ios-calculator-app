@@ -52,12 +52,12 @@ struct List<T> {
         return head
     }
     
-    func pickHead() -> T? {
-        guard let data = head?.data else {
+    func pickHead() -> Node<T>? {
+        guard let headNode = head else {
             return nil
         }
         
-        return data
+        return headNode
     }
     
     mutating func removeLast() -> Node<T>? {

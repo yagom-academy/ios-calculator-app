@@ -153,16 +153,16 @@ final class ListTests: XCTestCase {
     }
     
     // MARK: pickHead() 메서드의 Test Cases
-    func test_1회_push후_pickHead는_첫번째_push된_Node의_data이다() {
+    func test_1회_push후_pickHead는_첫번째_push된_Node이다() {
         // given
         let input = Node("10")
         sut.push(input)
         
         // when / then
-        XCTAssertEqual(sut.pickHead()!, input.data)
+        XCTAssertEqual(sut.pickHead()!, input)
     }
     
-    func test_2회_push후_pickHead는_두번째_push된_Node의_data이다() {
+    func test_2회_push후_pickHead는_두번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -170,7 +170,7 @@ final class ListTests: XCTestCase {
         sut.push(input2)
         
         // when / then
-        XCTAssertEqual(sut.pickHead()!, input2.data)
+        XCTAssertEqual(sut.pickHead()!, input2)
     }
     
     // MARK: removeLast() 메서드의 Test Cases
