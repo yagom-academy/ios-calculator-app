@@ -137,10 +137,19 @@
 			path = CalculatorItemQueueTests;
 			sourceTree = "<group>";
 		};
+		AA90A8DF2980F4F100BC1820 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
-				AA90A8AC2980453600BC1820 /* Model */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				AA90A8B8298045C900BC1820 /* ListTests */,
 				AA90A8C5298047D500BC1820 /* NodeTests */,
@@ -163,9 +172,8 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+				AA90A8AC2980453600BC1820 /* Model */,
+				AA90A8DF2980F4F100BC1820 /* Controller */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
