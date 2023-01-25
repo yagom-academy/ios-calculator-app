@@ -24,11 +24,31 @@ final class LinkedList {
         tail = node
     }
     
-    func removeLast() -> String? {
-        return ""
+    func removeLast() -> Node? {
+        guard !isEmpty else {
+            return nil
+        }
+        
+        guard head != tail else {
+            head = nil
+            return head
+        }
+        
+        var currentNode = head
+        
+        while currentNode?.next?.next != nil {
+            currentNode = currentNode?.next
+            
+        }
+        
+        let lastNode = currentNode?.next
+        
+        currentNode?.next = nil
+        tail = currentNode
+        return lastNode
     }
     
-    func removeFirst() -> String? {
-        return ""
+    func removeFirst() -> Node? {
+        return head
     }
 }
