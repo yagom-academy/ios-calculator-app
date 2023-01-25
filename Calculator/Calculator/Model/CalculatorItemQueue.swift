@@ -47,4 +47,17 @@ struct CalculatorItemQueue: CalculateItem {
                 
         return data
     }
+    
+    mutating func removeLast() {
+        if head == nil || tail == nil { return }
+        
+        if head?.next == nil {
+            head = nil
+            tail = nil
+            return
+        }
+        
+        tail?.prev?.next = tail?.next
+        tail = tail?.prev
+    }
 }

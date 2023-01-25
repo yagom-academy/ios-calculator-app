@@ -89,4 +89,36 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_2개의_queue에서_removeLast를_한경우_size가_줄어든다() {
+        sut.enqueue(data: "111")
+        sut.enqueue(data: "222")
+        sut.removeLast()
+        let result = sut.size
+        let expectation = 1
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_2개의_queue에서_removeLast를_한경우_2번째_dequeue는_nil이다() {
+        sut.enqueue(data: "111")
+        sut.enqueue(data: "222")
+        sut.removeLast()
+        let _ = sut.dequeue()
+        let result = sut.dequeue()
+        let expectation: String? = nil
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_1개의_queue에서_removeLast를_한경우_size는_0이다() {
+        sut.enqueue(data: "111")
+        sut.removeLast()
+        let result = sut.size
+        let expectation = 0
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    
+    
 }
