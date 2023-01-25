@@ -13,7 +13,6 @@ protocol CalculateItem {
 struct CalculatorItemQueue<T>: CalculateItem {
     
     var queue: [T] = []
-    var head: Int = 0
     
     var count: Int {
         return queue.count
@@ -32,6 +31,4 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
 }
 
-
-var myQueue = CalculatorItemQueue<Int>()
 
