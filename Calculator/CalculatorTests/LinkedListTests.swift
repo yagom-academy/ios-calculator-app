@@ -63,4 +63,74 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_head가_nil일경우_removeFirst를호출하면_메서드를_종료한다() {
+        sut.removeFirst()
+        let expectation: Int? = nil
+        
+        let result = sut.head?.value
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_노드가1개있을떄_removeFirst를_호출하면_head와_tail은_nil이된다() {
+        sut.head = Node(value: 1)
+        sut.tail = sut.head
+        let expectation: Int? = nil
+        
+        sut.removeFirst()
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
+        
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultTail, expectation)
+    }
+    
+    func test_노드가2개있을때_removeFirst를_호출하면_두번째노드가_head이자_tail이된다() {
+        sut.appendLast(1)
+        sut.appendLast(2)
+        let expectation = 2
+        
+        sut.removeFirst()
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
+        
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultTail, expectation)
+    }
+    
+    func test_노드가3개있을때_removeFirst를_호출하면_두번째노드가_head가된다() {
+        sut.appendLast(1)
+        sut.appendLast(2)
+        sut.appendLast(3)
+        let expectation = 2
+        
+        sut.removeFirst()
+        let result = sut.head?.value
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeAll을_호출하면_head와tail이_nil이된다() {
+        sut.head = Node(value: 1)
+        sut.tail = sut.head
+        let expectation: Int? = nil
+        
+        sut.removeAll()
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
+        
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultTail, expectation)
+    }
+    
+    func test_removeAll을_호출하면_count는_0이다() {
+        sut.head = Node(value: 1)
+        sut.tail = sut.head
+        let expectation = 0
+        
+        sut.removeAll()
+        let result = sut.count
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
