@@ -6,5 +6,21 @@
 //
 
 struct CalculatorItemQueue: CalculateItem {
+    private(set) var queue: LinkedList = LinkedList()
     
+    func enqueue(_ data: String) {
+        queue.appendLast(data)
+    }
+    
+    func removeRear() -> Node? {
+        return queue.removeLast()
+    }
+    
+    func deququ() -> Node? {
+        return queue.removeFirst()
+    }
+    
+    func removeAll() {
+        queue.removeAll()
+    }
 }
