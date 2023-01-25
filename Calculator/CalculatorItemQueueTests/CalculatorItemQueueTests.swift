@@ -91,5 +91,22 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, [])
     }
 
+    func test_peek_output이빈배열일때_input의첫번째를반환한다() {
+        sut.output = []
+        sut.input = ["1", "2", "="]
+        let expectation = "1"
+        let result = sut.peek
+        
+        XCTAssertEqual(result, expectation)
+    }
     
+    func test_peek_output에값이있다면_output의마지막을반환한다() {
+        sut.output = ["=", "2"]
+        sut.input = ["3"]
+        
+        let expectation = "2"
+        let result = sut.peek
+        
+        XCTAssertEqual(result, expectation)
+    }
 }

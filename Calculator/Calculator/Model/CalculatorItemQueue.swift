@@ -19,6 +19,11 @@ struct CalculatorItemQueue<T: Equatable> {
         return input.count + output.count
     }
     
+    var peek: T? {
+        return output.isEmpty ? input.first : output.last
+
+    }
+    
     mutating func enqueue(_ value: T) {
         input.append(value)
     }
