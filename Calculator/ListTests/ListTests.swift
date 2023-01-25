@@ -24,7 +24,7 @@ final class ListTests: XCTestCase {
     }
     
     // MARK: push() 메서드의 Test Cases
-    func test_1회push후_리스트의_head가_push된_Node이다() {
+    func test_1회_push후_리스트의_head가_push된_Node이다() {
         // given
         let input = Node("10")
 
@@ -35,7 +35,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.head, input)
     }
     
-    func test_2회push후_리스트의_head가_두번째_push된_Node이다() {
+    func test_2회_push후_리스트의_head가_두번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -48,7 +48,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.head, input2)
     }
     
-    func test_1회push후_리스트의_tail이_push된_Node이다() {
+    func test_1회_push후_리스트의_tail이_push된_Node이다() {
         // given
         let input = Node("10")
 
@@ -59,7 +59,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.tail, input)
     }
     
-    func test_2회push후_리스트의_tail이_첫번째_push된_Node이다() {
+    func test_2회_push후_리스트의_tail이_첫번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -81,7 +81,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_1회push후_리스트의_count는_1이다() {
+    func test_1회_push후_리스트의_count는_1이다() {
         // given
         let input1 = Node("10")
         let expectation = 1
@@ -91,7 +91,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_2회push후_리스트의_count는_2이다() {
+    func test_2회_push후_리스트의_count는_2이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -105,7 +105,7 @@ final class ListTests: XCTestCase {
     
     
     // MARK: popHead() 메서드의 Test Cases
-    func test_1회push후_popHead는_첫번째_push된_Node이다() {
+    func test_1회_push후_popHead는_첫번째_push된_Node이다() {
         // given
         let input = Node("10")
         sut.push(input)
@@ -114,7 +114,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.popHead(), input)
     }
     
-    func test_2회push후_popHead는_두번째_push된_Node이다() {
+    func test_2회_push후_popHead는_두번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -125,7 +125,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.popHead(), input2)
     }
     
-    func test_2회push후_2회popHead는_첫번째_push된_Node이다() {
+    func test_2회_push후_2회popHead는_첫번째_push된_Node이다() {
         let input1 = Node("10")
         let input2 = Node("20")
         sut.push(input1)
@@ -138,7 +138,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.popHead(), input1)
     }
     
-    func test_2회push후_3회popHead는_nil이다() {
+    func test_2회_push후_3회popHead는_nil이다() {
         let input1 = Node("10")
         let input2 = Node("20")
         sut.push(input1)
@@ -153,7 +153,7 @@ final class ListTests: XCTestCase {
     }
     
     // MARK: removeLast() 메서드의 Test Cases
-    func test_1회push후_removeLast는_첫번째_push된_Node이다() {
+    func test_1회_push후_removeLast는_첫번째_push된_Node이다() {
         // given
         let input = Node("10")
         sut.push(input)
@@ -162,7 +162,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.removeLast(), input)
     }
     
-    func test_3회push후_removeLast는_첫번째_push된_Node이다() {
+    func test_3회_push후_removeLast는_첫번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -175,7 +175,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.removeLast(), input1)
     }
     
-    func test_3회push후_2회removeLast는_두번째_push된_Node이다() {
+    func test_3회_push후_2회removeLast는_두번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -191,7 +191,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.removeLast(), input2)
     }
     
-    func test_3회push후_3회removeLast는_세번째_push된_Node이다() {
+    func test_3회_push후_3회removeLast는_세번째_push된_Node이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -208,7 +208,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.removeLast(), input3)
     }
     
-    func test_3회push후_3회removeLast후_head는_nil이다() {
+    func test_3회_push후_3회removeLast후_head는_nil이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")
@@ -226,7 +226,7 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.head, nil)
     }
     
-    func test_3회push후_3회removeLast후_tail은_nil이다() {
+    func test_3회_push후_3회removeLast후_tail은_nil이다() {
         // given
         let input1 = Node("10")
         let input2 = Node("20")

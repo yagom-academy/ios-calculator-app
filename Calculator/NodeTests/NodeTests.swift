@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class NodeTests: XCTestCase {
-    var sutIntNode: Node<Int>?
+    var sutIntNode: Node<Double>?
     var sutStringNode: Node<String>?
     
     override func setUpWithError() throws {
@@ -25,7 +25,7 @@ final class NodeTests: XCTestCase {
     
     func test_정수타입_데이터를_받았을때_dataType이_CalculatorDataType_numberData이다() {
         // given
-        sutIntNode = Node<Int>(10)
+        sutIntNode = Node<Double>(10)
         let expectation = CalculatorDataType.numberData
 
         // then

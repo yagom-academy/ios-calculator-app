@@ -14,7 +14,7 @@ class Node<T> {
         self.data = data
         self.next = next
         
-        if data is Int {
+        if data is Double {
             self.dataType = CalculatorDataType.numberData
         } else {
             self.dataType = CalculatorDataType.operatorData
