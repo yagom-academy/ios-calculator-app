@@ -16,11 +16,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     var dequeueStack: [T] = []
     
     
-    var enequeueStackcount: Int {
+    var enequeueStackCount: Int {
         return enqueueStack.count
     }
     
-    var dequeueStackcount: Int {
+    var dequeueStackCount: Int {
         return dequeueStack.count
     }
         

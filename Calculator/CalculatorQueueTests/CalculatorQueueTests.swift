@@ -19,6 +19,33 @@ final class CalculatorQueueTests: XCTestCase {
         sut = nil
     }
     
+    
+    func test_enqueueStackCount는_enqueueItem에_들어온_enqueueStack의_갯수를_반환한다() {
+        let input = [2,4,6]
+        
+        sut.enqueueItem(2)
+        sut.enqueueItem(4)
+        sut.enqueueItem(6)
+        
+        let expectaiton = 3
+        let result = sut.enequeueStackCount
+        
+        XCTAssertEqual(expectaiton, result)
+    }
+    
+    func test_dequeueStackCount는_dequeueItem에_들어온_dequeueStack의_갯수를_반환한다() {
+
+        sut.enqueueItem(3)
+        sut.enqueueItem(7)
+        sut.enqueueItem(8)
+        
+        let expectaiton = 2
+        sut.dequeueItem()
+        let result = sut.dequeueStackCount
+    
+        XCTAssertEqual(expectaiton, result)
+    }
+    
     // enqueueItem test
     func test_enqueueItem에_숫자값이_입력될_경우_enqueueStack에_순서대로_담긴다(){
         
