@@ -72,6 +72,38 @@ final class ListTests: XCTestCase {
         XCTAssertEqual(sut.tail, input1)
     }
     
+    // MARK: count 프로퍼티의 Test Cases
+    func test_빈_리스트의_count는_0이다() {
+        // given
+        let expectation = 0
+
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
+    
+    func test_1회push후_리스트의_count는_1이다() {
+        // given
+        let input1 = Node("10")
+        let expectation = 1
+        sut.push(input1)
+
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
+    
+    func test_2회push후_리스트의_count는_2이다() {
+        // given
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let expectation = 2
+        sut.push(input1)
+        sut.push(input2)
+
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
+    
+    
     // MARK: popHead() 메서드의 Test Cases
     func test_1회push후_popHead는_첫번째_push된_Node이다() {
         // given

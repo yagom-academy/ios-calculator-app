@@ -13,6 +13,22 @@ struct List<T> {
         return head == nil
     }
     
+    var count: Int {
+        guard !isEmpty else {
+            return 0
+        }
+        
+        var count = 1
+        var node = head
+        
+        while node?.next != nil {
+            node = node?.next
+            count += 1
+        }
+        
+        return count
+    }
+    
     mutating func push(_ node: Node<T>) {
         if isEmpty {
             self.head = node
