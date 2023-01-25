@@ -40,15 +40,18 @@ struct LinkedList<T> {
         count += 1
     }
     
-    mutating func removeFirst() {
-        guard self.isEmpty == false else { return }
+    mutating func removeFirst() -> T? {
+        guard self.isEmpty == false else { return nil }
         
+        let returnValue = head?.data
         head = head?.next
         count -= 1
         
         if self.isEmpty {
             tail = nil
         }
+        
+        return returnValue
     }
     
     mutating func removeAll() {

@@ -8,22 +8,20 @@
 import Foundation
 
 struct CalculatorItemQueue<Element> {
-    var queue: Array<Element?> = []
-    var head: Int = 0
-    var result: Double = 0
+    
+    var queue: LinkedList<Element>
     
     mutating func enqueue(_ element: Element) {
-        queue.append(element)
+        queue.appendLast(element)
     }
     
     mutating func dequeue() -> Element? {
-        guard queue.isEmpty != true else {
-            return nil
-        }
-        
-        let element = queue.removeFirst()
-        head += 1
+        guard let element = queue.removeFirst() else { return nil }
         
         return element
+    }
+    
+    mutating func removeAll() {
+        queue.removeAll()
     }
 }
