@@ -32,7 +32,7 @@ struct CalculatorItemQueue<T> {
         guard queue.isEmpty != true,
               frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
-        //호오~? 왜그럴까 ? 이 말썽꾸러기
+       
         queue[frontIndex] = nil
         frontIndex += 1
 
