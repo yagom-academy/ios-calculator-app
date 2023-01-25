@@ -9,8 +9,8 @@ import XCTest
 @testable import Calculator
 
 final class NodeTests: XCTestCase {
-    var sutIntNode: Node<Double>?
-    var sutStringNode: Node<String>?
+    var sutIntNode: Node<Double>!
+    var sutStringNode: Node<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
