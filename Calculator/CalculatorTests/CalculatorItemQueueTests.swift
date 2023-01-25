@@ -48,5 +48,4 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
-
 }
