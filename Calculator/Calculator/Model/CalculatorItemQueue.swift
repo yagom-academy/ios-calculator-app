@@ -5,8 +5,6 @@
 //  Created by jiye Yi on 2023/01/25.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<T: Equatable> {
     var input: [T] = []
     var output: [T] = []
