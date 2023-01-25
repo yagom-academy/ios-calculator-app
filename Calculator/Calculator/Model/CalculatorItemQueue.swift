@@ -17,11 +17,12 @@ struct CalculatorItemQueue<Element> {
     }
     
     mutating func dequeue() -> Element? {
-        guard queue.count != 0 else {
+        guard queue.isEmpty != true else {
             return nil
         }
         
         let element = queue.removeFirst()
+        head += 1
         
         return element
     }

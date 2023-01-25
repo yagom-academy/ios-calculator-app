@@ -56,13 +56,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-//    func test_dequeue호출시_head에1이더해진다() {
-//        sut.queue = ["1", "2", "3"]
-//        let expectation = 1
-//        
-//        sut.dequeue()
-//        
-//        XCTAssert
-//    }
+    func test_dequeue호출시_head에1이더해진다() {
+        sut.queue = ["1", "2", "3"]
+        let expectation = 1
+        
+        sut.dequeue()
+        let result = sut.head
+        
+        XCTAssertEqual(result, expectation)
+    }
     
 }
