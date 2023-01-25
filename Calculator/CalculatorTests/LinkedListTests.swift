@@ -86,8 +86,8 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_노드가2개있을때_removeFirst를_호출하면_두번째노드가_head이자_tail이된다() {
-        sut.appendLast(1)
-        sut.appendLast(2)
+        sut.tail = Node(value: 2)
+        sut.head = Node(value: 1, next: sut.tail)
         let expectation = 2
         
         sut.removeFirst()
@@ -99,9 +99,8 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_노드가3개있을때_removeFirst를_호출하면_두번째노드가_head가된다() {
-        sut.appendLast(1)
-        sut.appendLast(2)
-        sut.appendLast(3)
+        sut.tail = Node(value: 3)
+        sut.head = Node(value: 1, next: Node(value: 2, next: sut.tail))
         let expectation = 2
         
         sut.removeFirst()
