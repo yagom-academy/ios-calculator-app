@@ -119,6 +119,15 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    
+    func test_3개의_queue에서_clear를_한경우_isEmpty는_true이다() {
+        sut.enqueue(data: "111")
+        sut.enqueue(data: "222")
+        sut.enqueue(data: "333")
+        sut.clear()
+        let result = sut.isEmpty
+        let expectation = true
+        
+        XCTAssertEqual(result, expectation)
+    }
     
 }

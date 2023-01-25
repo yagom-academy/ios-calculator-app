@@ -60,4 +60,10 @@ struct CalculatorItemQueue: CalculateItem {
         tail?.prev?.next = tail?.next
         tail = tail?.prev
     }
+    
+    mutating func clear() {
+        self.head = nil
+        self.tail = nil
+    }
+    
 }
