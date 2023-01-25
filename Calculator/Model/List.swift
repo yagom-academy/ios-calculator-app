@@ -36,8 +36,26 @@ struct List<T> {
         return head
     }
     
-    func removeLast() -> Node<T>? {
-        return nil
+    mutating func removeLast() -> Node<T>? {
+        guard !isEmpty else {
+            return nil
+        }
+        guard head?.next != nil else {
+            return popHead()
+        }
+        
+        var prevNode = head
+        var currentNode = head
+        
+        while let nextNode = currentNode?.next {
+            prevNode = currentNode
+            currentNode = nextNode
+        }
+        
+        tail = prevNode
+        tail?.next = nil
+        
+        return currentNode
     }
 }
 

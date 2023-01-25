@@ -73,5 +73,142 @@ final class ListTests: XCTestCase {
     }
     
     // MARK: popHead() 메서드의 Test Cases
+    func test_1회push후_popHead는_첫번째_push된_Node이다() {
+        // given
+        let input = Node(10)
+        sut.push(input)
+        
+        // when / then
+        XCTAssertEqual(sut.popHead(), input)
+    }
+    
+    func test_2회push후_popHead는_두번째_push된_Node이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        
+        // when / then
+        XCTAssertEqual(sut.popHead(), input2)
+    }
+    
+    func test_2회push후_2회popHead는_첫번째_push된_Node이다() {
+        let input1 = Node(10)
+        let input2 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        
+        // when
+        _ = sut.popHead()
+        
+        // then
+        XCTAssertEqual(sut.popHead(), input1)
+    }
+    
+    func test_2회push후_3회popHead는_nil이다() {
+        let input1 = Node(10)
+        let input2 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        
+        // when
+        _ = sut.popHead()
+        _ = sut.popHead()
+        
+        // then
+        XCTAssertEqual(sut.popHead(), nil)
+    }
+    
+    // MARK: removeLast() 메서드의 Test Cases
+    func test_1회push후_removeLast는_첫번째_push된_Node이다() {
+        // given
+        let input = Node(10)
+        sut.push(input)
+        
+        // when / then
+        XCTAssertEqual(sut.removeLast(), input)
+    }
+    
+    func test_3회push후_removeLast는_첫번째_push된_Node이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        let input3 = Node(30)
+        sut.push(input1)
+        sut.push(input2)
+        sut.push(input3)
+        
+        // when / then
+        XCTAssertEqual(sut.removeLast(), input1)
+    }
+    
+    func test_3회push후_2회removeLast는_두번째_push된_Node이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        let input3 = Node(30)
+        sut.push(input1)
+        sut.push(input2)
+        sut.push(input3)
+        
+        // when
+        let temp1 = sut.removeLast()
 
+        // when / then
+        XCTAssertEqual(sut.removeLast(), input2)
+    }
+    
+    func test_3회push후_3회removeLast는_세번째_push된_Node이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        let input3 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        sut.push(input3)
+        
+        // when
+        _ = sut.removeLast()
+        _ = sut.removeLast()
+        
+        // when / then
+        XCTAssertEqual(sut.removeLast(), input3)
+    }
+    
+    func test_3회push후_3회removeLast후_head는_nil이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        let input3 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        sut.push(input3)
+        
+        // when
+        _ = sut.removeLast()
+        _ = sut.removeLast()
+        _ = sut.removeLast()
+        
+        // when / then
+        XCTAssertEqual(sut.head, nil)
+    }
+    
+    func test_3회push후_3회removeLast후_tail은_nil이다() {
+        // given
+        let input1 = Node(10)
+        let input2 = Node(20)
+        let input3 = Node(20)
+        sut.push(input1)
+        sut.push(input2)
+        sut.push(input3)
+        
+        // when
+        _ = sut.removeLast()
+        _ = sut.removeLast()
+        _ = sut.removeLast()
+        
+        // when / then
+        XCTAssertEqual(sut.tail, nil)
+    }
 }
