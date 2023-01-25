@@ -35,4 +35,16 @@ struct CalculatorItemQueue: CalculateItem {
         newNode.prev = tail
         tail = newNode
     }
+    
+    mutating func dequeue() -> String? {
+        if head == nil || tail == nil { return nil }
+        
+        let dequeue = self.head
+        self.head = self.head?.next
+        dequeue?.next = nil
+        
+        guard let data = dequeue?.data as? String else { return nil }
+                
+        return data
+    }
 }

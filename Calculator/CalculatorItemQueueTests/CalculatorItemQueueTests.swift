@@ -61,4 +61,32 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_dequeue_됐을경우_처음에_enqueue_해준_데이터가_반환된다() {
+        sut.enqueue(data: "111")
+        sut.enqueue(data: "222")
+        sut.enqueue(data: "333")
+        let result = sut.dequeue()!
+        let expectation = "111"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_됐을경우_size가_감소한다() {
+        sut.enqueue(data: "111")
+        sut.enqueue(data: "222")
+        sut.enqueue(data: "333")
+        let _ = sut.dequeue()
+        let result = sut.size
+        let expectation = 2
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_빈queue를_dequeue_할경우_nil이_반환된다() {
+        let result = sut.dequeue()
+        let expectation: String? = nil
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
 }
