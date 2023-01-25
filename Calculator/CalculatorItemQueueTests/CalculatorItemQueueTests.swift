@@ -119,6 +119,17 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_빈_큐의_하나의_node를_넣고_dequeue를_한번_하면_head의_값이_nil이_된다() {
+        sut.head = Node(data: "head")
+        
+        let _ = sut.dequeue()
+        let result = sut.head
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
+    
     func test_빈_큐의_두개의_node를_넣고_dequeue를_한번_하면_head의_값이_다음값으로_바뀐다() {
         sut.head = Node(data: "head")
         sut.head?.next = Node(data: "middle")
@@ -152,5 +163,33 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = result == nil ? true : false
         
         XCTAssertTrue(expectation)
+    }
+    
+    // peek test
+    func test_빈_큐에서_peek연산_프로퍼티_실행하면_nil이_나온다() {
+        let result = sut.peek
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
+    
+    func test_큐에_한개의_노드를_넣고_peek을_실행하면_head의_값이_나온다() {
+        sut.head = Node(data: "head")
+        
+        let result = sut.peek
+        let expectation = "head"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_큐에_두개의_노드를_넣고_하나를_삭제한_후_peek을_실행하면_바뀐_head의_값이_나온다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        
+        sut.head = sut.head?.next
+        let result = sut.peek
+        let expectation = "middle"
+        
+        XCTAssertEqual(result, expectation)
     }
 }

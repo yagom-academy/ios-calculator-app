@@ -22,6 +22,10 @@ struct CalculatorItemQueue<T: CalculatorItemProtocol> {
         return count
     }
     
+    var peek: T? {
+        return head?.data
+    }
+    
     mutating func enqueue(newData: Node<T>) {
         if head == nil {
             head = newData
@@ -39,14 +43,6 @@ struct CalculatorItemQueue<T: CalculatorItemProtocol> {
             let node = head
             head = head?.next
             return node?.data
-        }
-    }
-    
-    func peek() -> T? {
-        if head == nil {
-            return nil
-        } else {
-            return head?.data
         }
     }
     
