@@ -11,13 +11,14 @@ final class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>!
 
     override func setUpWithError() throws {
-        sut = LinkedList(count: 0)
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
     
+    // MARK: - isEmpty Test
     func test_isEmpty접근시count가0일떄_true를반환한다() {
         // given
         sut.count = 0
@@ -28,6 +29,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    // MARK: - appendLast Test
     func test_head가nil이면_appendLast호출시_새노드가_head가된다() {
         let headValue = 1
         let expectation = 1
@@ -63,6 +65,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    // MARK: - removeFirst Test
     func test_head가_nil일경우_removeFirst를호출하면_메서드를_종료한다() {
         sut.removeFirst()
         let expectation: Int? = nil
@@ -109,6 +112,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    // MARK: - removeAll Test
     func test_removeAll을_호출하면_head와tail이_nil이된다() {
         sut.head = Node(value: 1)
         sut.tail = sut.head

@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A028ECD2980F9DE002318CE /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D63E2980BA3100D9F2B9 /* LinkedList.swift */; };
+		4A028ECE2980F9EF002318CE /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D636297FB9BE00D9F2B9 /* CalculatorItemQueueTests.swift */; };
+		4A028ED02980FA69002318CE /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D6542980C70900D9F2B9 /* CalculateItem.swift */; };
+		4A028ED12980FBFF002318CE /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D6402980BA3D00D9F2B9 /* Node.swift */; };
 		4A12D62F297FB9AB00D9F2B9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D62E297FB9AB00D9F2B9 /* CalculatorItemQueue.swift */; };
-		4A12D637297FB9BE00D9F2B9 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D636297FB9BE00D9F2B9 /* CalculatorItemQueueTests.swift */; };
 		4A12D63D297FB9D800D9F2B9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D62E297FB9AB00D9F2B9 /* CalculatorItemQueue.swift */; };
 		4A12D63F2980BA3100D9F2B9 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D63E2980BA3100D9F2B9 /* LinkedList.swift */; };
 		4A12D6412980BA3D00D9F2B9 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A12D6402980BA3D00D9F2B9 /* Node.swift */; };
@@ -285,8 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A028ECE2980F9EF002318CE /* CalculatorItemQueueTests.swift in Sources */,
+				4A028ED12980FBFF002318CE /* Node.swift in Sources */,
+				4A028ECD2980F9DE002318CE /* LinkedList.swift in Sources */,
 				4A12D63D297FB9D800D9F2B9 /* CalculatorItemQueue.swift in Sources */,
-				4A12D637297FB9BE00D9F2B9 /* CalculatorItemQueueTests.swift in Sources */,
+				4A028ED02980FA69002318CE /* CalculateItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

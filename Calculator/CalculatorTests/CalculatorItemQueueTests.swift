@@ -8,44 +8,65 @@
 import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculaterItemQueue<String>!
+    var sut: CalculaterItemQueue<CalculateItem>!
     
     override func setUpWithError() throws {
-        sut = CalculaterItemQueue<String>()
+        sut = CalculaterItemQueue<CalculateItem>(queue: LinkedList<CalculateItem>())
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
-    
-    func test_enqueue호출시_queue가_element를포함한다() {
+    // MARK: - enqueue Test
+    func test_enqueue호출시_queue의_count가_1증가한다() {
         // given
         let element = "+"
-        let expectation = true
+        let expectation = sut.queue.count + 1
 
         // when
         sut.enqueue(element)
-        let result = sut.queue.contains(element)
+        let result = sut.queue.count
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_dequeue호출시_queue에아무것도없다면_nil반환한다() {
-        sut.queue = []
-        let expectation: String? = nil
+    func test_enqueue호출시_파라미터로_전달한값과_queue에추가된value가같다() {
+        // given
+        let expectation = "+"
+
+        // when
+        sut.enqueue("+")
+        let result = sut.queue.tail?.value as! String
         
-        let result = sut.dequeue()
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
+    // MARK: - dequeue Test
+    func test_dequeue호출시_queue의_count가0이면_nil반환한다() {
+        let countExpectation = 0
+        let dequeueExpectation: String? = nil
+
+        let countResult = sut.queue.count
+        let dequeueResult = sut.dequeue() as? String
+
+        XCTAssertEqual(countResult, countExpectation)
+        XCTAssertEqual(dequeueResult, dequeueExpectation)
+    }
+
     func test_dequeue호출시_queue의_첫번쨰element를_제거하고_반환한다() {
-        sut.queue = ["1", "+", "2"]
-        let expectation = "1"
+        sut.queue.tail = Node(value: 3)
+        sut.queue.head = Node(value: 1, next: Node(value: "+", next: sut.queue.tail))
+        sut.queue.count = 3
         
-        let result = sut.dequeue()
-        
-        XCTAssertEqual(result, expectation)
+        let returnExpectation = 1
+        let queueCountExpectation = 2
+
+        let dequeueReturn = sut.dequeue() as? Int
+        let queueCount = sut.queue.count
+
+        XCTAssertEqual(dequeueReturn, returnExpectation)
+        XCTAssertEqual(queueCount, queueCountExpectation)
     }
 }
