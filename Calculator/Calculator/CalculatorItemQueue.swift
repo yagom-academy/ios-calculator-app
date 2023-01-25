@@ -12,23 +12,35 @@ protocol CalculateItem {
 
 struct CalculatorItemQueue<T>: CalculateItem {
     
-    var queue: [T] = []
+    var enqueueStack: [T] = []
+    var dequeueStack: [T] = []
     
-    var count: Int {
-        return queue.count
+    
+    var enequeueStackcount: Int {
+        return enqueueStack.count
+    }
+    
+    var dequeueStackcount: Int {
+        return dequeueStack.count
     }
         
     var isEmpty: Bool {
-        return queue.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
     mutating func enqueueItem(_ element: T) {
-        queue.append(element)
+        enqueueStack.append(element)
     }
-        
+    
+    @discardableResult
     mutating func dequeueItem() -> T? {
-        return isEmpty ? nil : queue.removeFirst()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+            return dequeueStack.popLast()
     }
 }
+
 
 
