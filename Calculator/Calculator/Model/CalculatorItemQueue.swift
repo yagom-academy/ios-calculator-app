@@ -35,10 +35,6 @@ struct CalculatorItemQueue: CalculateItem {
     mutating func dequeueOperationResultQueue() -> Node<Double>? {
         return operationResultQueue.removeLast()
     }
-    
-    mutating func addUserInputItems(_ data: String) {
-        
-    }
 }
 
 

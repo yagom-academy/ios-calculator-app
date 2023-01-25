@@ -102,5 +102,4 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut?.operationResultCount, expectation)
     }
-
 }
