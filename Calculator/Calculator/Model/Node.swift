@@ -6,7 +6,7 @@
 //
 
 class Node<T> {
-    private var data: T
+    private(set) var data: T
     private(set) var dataType: CalculatorDataType
     var next: Node<T>?
     

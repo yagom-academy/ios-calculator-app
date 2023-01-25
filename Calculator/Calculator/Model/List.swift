@@ -52,6 +52,14 @@ struct List<T> {
         return head
     }
     
+    func pickHead() -> T? {
+        guard let data = head?.data else {
+            return nil
+        }
+        
+        return data
+    }
+    
     mutating func removeLast() -> Node<T>? {
         guard !isEmpty else {
             return nil
