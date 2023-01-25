@@ -23,6 +23,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
+    // MARK: enqueueUserInputData() 메서드의 Test Cases
     func test_2회_enqueueUserInputData후_userInputDataQueue의_count는_2이다() {
         // given
         sut?.enqueueUserInputData("10")
@@ -33,6 +34,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut?.userInputDataCount, expectation)
     }
     
+    // MARK: enqueueOperationResultQueue() 메서드의 Test Cases
     func test_2회_enqueueOperationResultQueue후_operationResultQueue의_count는_2이다() {
         // given
         sut?.enqueueOperationResultQueue(10)
@@ -43,6 +45,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut?.operationResultCount, expectation)
     }
     
+    // MARK: dequeueUserInputData() 메서드의 Test Cases
     func test_2회_enqueueUserInputData후_1회_dequeueUserInputData후_userInputDataQueue의_count는_1이다() {
         // given
         sut?.enqueueUserInputData("10")
@@ -54,19 +57,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut?.userInputDataCount, expectation)
-    }
-    
-    func test_2회_enqueueOperationResultQueue후_1회_dequeueOperationResultQueue후_operationResultQueue의_count는_1이다() {
-        // given
-        sut?.enqueueOperationResultQueue(10)
-        sut?.enqueueOperationResultQueue(20)
-        let expectation = 1
-        
-        // when
-        _ = sut?.dequeueOperationResultQueue()
-        
-        // then
-        XCTAssertEqual(sut?.operationResultCount, expectation)
     }
     
     func test_2회_enqueueUserInputData후_3회_dequeueUserInputData후_userInputDataQueue의_count는_0이다() {
@@ -82,6 +72,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut?.userInputDataCount, expectation)
+    }
+    
+    // MARK: dequeueOperationResultQueue() 메서드의 Test Cases
+    func test_2회_enqueueOperationResultQueue후_1회_dequeueOperationResultQueue후_operationResultQueue의_count는_1이다() {
+        // given
+        sut?.enqueueOperationResultQueue(10)
+        sut?.enqueueOperationResultQueue(20)
+        let expectation = 1
+        
+        // when
+        _ = sut?.dequeueOperationResultQueue()
+        
+        // then
+        XCTAssertEqual(sut?.operationResultCount, expectation)
     }
     
     func test_2회_enqueueOperationResultQueue후_3회_dequeueOperationResultQueue후_operationResultQueue의_count는_0이다() {

@@ -6,12 +6,12 @@
 //
 
 struct CalculatorItemQueue: CalculateItem {
-    var userInputDataQueue = List<String>()
-    var operationResultQueue = List<Double>()
-    var operationResult: Double = 0
+    private var userInputItems = List<String>()
+    private var operationResultQueue = List<Double>()
+    private var operationResult: Double = 0
     
     var userInputDataCount: Int {
-        return userInputDataQueue.count
+        return userInputItems.count
     }
     
     var operationResultCount: Int {
@@ -20,11 +20,11 @@ struct CalculatorItemQueue: CalculateItem {
     
     mutating func enqueueUserInputData(_ data: String) {
         let node = Node(data)
-        userInputDataQueue.push(node)
+        userInputItems.push(node)
     }
     
     mutating func dequeueUserInputData() -> Node<String>? {
-        return userInputDataQueue.removeLast()
+        return userInputItems.removeLast()
     }
     
     mutating func enqueueOperationResultQueue(_ data: Double) {

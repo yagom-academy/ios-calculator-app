@@ -6,8 +6,8 @@
 //
 
 class Node<T> {
-    var data: T
-    var dataType: CalculatorDataType
+    private var data: T
+    private(set) var dataType: CalculatorDataType
     var next: Node<T>?
     
     init(_ data: T, next: Node<T>? = nil) {
