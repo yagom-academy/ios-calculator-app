@@ -62,4 +62,44 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    // enqueue method test
+    func test_빈_큐에_enqueue하면_head에_들어간다() {
+        sut.enqueue(newData: Node(data: "head"))
+        
+        let result = sut.head?.data
+        let expectation = "head"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_빈_큐에_enqueue하면_head랑_tail에_들어간다() {
+        sut.enqueue(newData: Node(data: "head"))
+        
+        let result = sut.tail?.data
+        let expectation = "head"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_큐에_두번_enqueue해도_head는_바뀌지_않는다() {
+        sut.enqueue(newData: Node(data: "head"))
+        sut.enqueue(newData: Node(data: "tail"))
+        
+        let result = sut.head?.data
+        let expectation = "head"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_큐에_enqueue를_여러변하면_tail에_추가된다() {
+        sut.enqueue(newData: Node(data: "head"))
+        sut.enqueue(newData: Node(data: "middle"))
+        sut.enqueue(newData: Node(data: "tail"))
+        
+        let result = sut.tail?.data
+        let expectation = "tail"
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
