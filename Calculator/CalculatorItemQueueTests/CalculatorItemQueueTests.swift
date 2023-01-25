@@ -192,4 +192,29 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    // clear method test
+    func test_큐에_두개의_노드를_넣고_clear메소드를_호출하면_head가_nil이_된다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        
+        sut.clear()
+        
+        let result = sut.head
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
+    
+    func test_큐에_두개의_노드를_넣고_clear메소드를_호출하면_tail가_nil이_된다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        
+        sut.clear()
+        
+        let result = sut.tail
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
 }

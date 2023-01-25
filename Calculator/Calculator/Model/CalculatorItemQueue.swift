@@ -46,7 +46,7 @@ struct CalculatorItemQueue<T: CalculatorItemProtocol> {
         }
     }
     
-    mutating func queueClear() {
+    mutating func clear() {
         self.head = nil
         self.tail = nil
     }
