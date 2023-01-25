@@ -102,4 +102,55 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    // dequeue method test
+    func test_빈_큐에_dequeue하면_nil이_반환되면_true() {
+        let result = sut.dequeue()
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
+    
+    func test_빈_큐의_하나의_node를_넣고_dequeue를_한번_하면_head의_data값이_반환된다() {
+        sut.head = Node(data: "head")
+        
+        let result = sut.dequeue()
+        let expectation = "head"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    func test_빈_큐의_두개의_node를_넣고_dequeue를_한번_하면_head의_값이_다음값으로_바뀐다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        
+        let _ = sut.dequeue()
+        let result = sut.head?.data
+        let expectation = "middle"
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_빈_큐의_두개의_node를_넣고_dequeue를_두번_하면_head의_값이_nil이된다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        
+        let _ = sut.dequeue()
+        let _ = sut.dequeue()
+        let result = sut.head
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
+    
+    func test_빈_큐의_두개의_node를_넣고_dequeue를_두번_하면_tail의_값이_nil이된다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+
+        let _ = sut.dequeue()
+        let _ = sut.dequeue()
+        let result = sut.tail
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
 }
