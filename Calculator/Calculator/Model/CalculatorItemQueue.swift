@@ -4,14 +4,22 @@
 struct CalculatorItemQueue<T: CalculatorItemProtocol> {
     var head: Node<T>?
     var tail: Node<T>?
-    var count: Int = 0
     
     var isEmpty: Bool {
         return head == nil
     }
     
     var size: Int {
-        return self.count
+        var count: Int = 0
+        
+        var node = self.head
+        
+        while node != nil {
+            count += 1
+            node = node?.next
+        }
+        
+        return count
     }
     
     mutating func enqueue(newData: Node<T>) {
@@ -22,7 +30,6 @@ struct CalculatorItemQueue<T: CalculatorItemProtocol> {
             tail?.next = newData
             tail = newData
         }
-        self.count += 1
     }
     
     mutating func dequeue() -> T? {
@@ -31,7 +38,6 @@ struct CalculatorItemQueue<T: CalculatorItemProtocol> {
         } else {
             let node = head
             head = head?.next
-            self.count -= 1
             return node?.data
         }
     }
