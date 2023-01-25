@@ -15,6 +15,7 @@
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		FB57DB842980C0EF00BEEE09 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57DB832980C0EF00BEEE09 /* CalculatorItemQueue.swift */; };
 		FB57DB9D2980DBCF00BEEE09 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57DB9C2980DBCF00BEEE09 /* CalculatorItemQueueTests.swift */; };
+		FB57DBA429811E4B00BEEE09 /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB57DBA329811E4B00BEEE09 /* CalculateItemProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		FB57DB832980C0EF00BEEE09 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		FB57DB9A2980DBCF00BEEE09 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB57DB9C2980DBCF00BEEE09 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
+		FB57DBA329811E4B00BEEE09 /* CalculateItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FB57DB832980C0EF00BEEE09 /* CalculatorItemQueue.swift */,
+				FB57DBA329811E4B00BEEE09 /* CalculateItemProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				FB57DBA429811E4B00BEEE09 /* CalculateItemProtocol.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				FB57DB842980C0EF00BEEE09 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

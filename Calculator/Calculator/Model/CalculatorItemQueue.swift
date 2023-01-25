@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 struct CalculatorItemQueue<T: Equatable> {
     var input: [T] = []
     var output: [T] = []
