@@ -25,35 +25,33 @@ final class LinkedList {
     }
     
     func removeLast() -> Node? {
+        var currentNode = head
+        
         guard !isEmpty else {
             return nil
         }
         
         guard head != tail else {
             head = nil
-            return head
+            return currentNode
         }
-        
-        var currentNode = head
         
         while currentNode?.next?.next != nil {
             currentNode = currentNode?.next
-            
         }
         
         let lastNode = currentNode?.next
-        
         currentNode?.next = nil
         tail = currentNode
         return lastNode
     }
     
     func removeFirst() -> Node? {
+        let firstNode = head
+        
         guard !isEmpty else {
             return nil
         }
-        
-        let firstNode = head
         head = firstNode?.next
         return firstNode
     }
