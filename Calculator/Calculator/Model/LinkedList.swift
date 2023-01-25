@@ -13,14 +13,14 @@ final class LinkedList {
     }
     
     func appendLast(_ data: String) {
-        guard !isEmpty, let last = tail else {
-            head = Node(value: data)
+        let node = Node(value: data)
+        
+        guard !isEmpty else {
+            head = node
             tail = head
             return
         }
-        
-        let node = Node(value: data)
-        last.next = node
+        tail?.next = node
         tail = node
     }
     
