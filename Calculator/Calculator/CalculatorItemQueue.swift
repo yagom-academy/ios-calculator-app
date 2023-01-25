@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculatorItem> {
     
     private(set) var enqueueStack: [T] = []
     private(set) var dequeueStack: [T] = []

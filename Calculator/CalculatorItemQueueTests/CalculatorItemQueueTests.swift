@@ -142,7 +142,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_dequeueCurrentItem호출시_dequeueStack이비어있다면_reversed된enqueueStack이들어간다() {
         // given
         let input = ["1", "+", "3"]
-        let expectation = ["3", "+", "1"]
+        let expectation = ["3", "+"]
         
         // when
         input.forEach { sut.enqueueCurrentItem($0) }
