@@ -5,8 +5,6 @@
 //  Created by Rowan on 2023/01/25.
 //
 
-import Foundation
-
 class Node<T> {
     
     var data: T

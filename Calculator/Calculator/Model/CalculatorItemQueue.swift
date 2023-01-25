@@ -5,8 +5,6 @@
 //  Created by Rowan on 2023/01/24.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<Element> {
     
     var queue: LinkedList<Element>
