@@ -97,7 +97,7 @@ final class CalculatorTests: XCTestCase {
         // given
         sut.data = [2, 3, 4, 1, 6, 7, 8, 0]
         let expectation = 2
-        
+
         // when
         sut.dequeue()
         sut.dequeue()
@@ -113,6 +113,7 @@ final class CalculatorTests: XCTestCase {
         // given
         sut.data = [1, 2, 3, 4, 5]
         let expectation = 0
+        
         // when
         sut.clearAll()
         let result = sut.count
