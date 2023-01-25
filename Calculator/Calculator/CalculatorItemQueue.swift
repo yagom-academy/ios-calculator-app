@@ -20,6 +20,10 @@ struct CalculatorItemQueue<T> {
         return enqueueStack.count + dequeueStack.count
     }
     
+    var peek: T? {
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
+    }
+    
     mutating func resetAllElement() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
