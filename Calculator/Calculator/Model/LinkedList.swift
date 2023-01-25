@@ -28,7 +28,15 @@ struct LinkedList<T> {
     
     mutating func appendLast(_ data: T) {
         let newNode = Node(data: data)
-        self.head = newNode
+        
+        if self.isEmpty {
+            head = newNode
+            tail = head
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
+        
         count += 1
     }
     
