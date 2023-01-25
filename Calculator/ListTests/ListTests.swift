@@ -9,12 +9,12 @@ import XCTest
 @testable import Calculator
 
 final class ListTests: XCTestCase {
-    var sut: List<Int>!
+    var sut: List<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = List<Int>()
+        sut = List<String>()
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +26,7 @@ final class ListTests: XCTestCase {
     // MARK: push() 메서드의 Test Cases
     func test_1회push후_리스트의_head가_push된_Node이다() {
         // given
-        let input = Node(10)
+        let input = Node("10")
 
         // when
         sut.push(input)
@@ -37,8 +37,8 @@ final class ListTests: XCTestCase {
     
     func test_2회push후_리스트의_head가_두번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
         
         // when
         sut.push(input1)
@@ -50,7 +50,7 @@ final class ListTests: XCTestCase {
     
     func test_1회push후_리스트의_tail이_push된_Node이다() {
         // given
-        let input = Node(10)
+        let input = Node("10")
 
         // when
         sut.push(input)
@@ -61,8 +61,8 @@ final class ListTests: XCTestCase {
     
     func test_2회push후_리스트의_tail이_첫번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
         
         // when
         sut.push(input1)
@@ -75,7 +75,7 @@ final class ListTests: XCTestCase {
     // MARK: popHead() 메서드의 Test Cases
     func test_1회push후_popHead는_첫번째_push된_Node이다() {
         // given
-        let input = Node(10)
+        let input = Node("10")
         sut.push(input)
         
         // when / then
@@ -84,8 +84,8 @@ final class ListTests: XCTestCase {
     
     func test_2회push후_popHead는_두번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
         sut.push(input1)
         sut.push(input2)
         
@@ -94,8 +94,8 @@ final class ListTests: XCTestCase {
     }
     
     func test_2회push후_2회popHead는_첫번째_push된_Node이다() {
-        let input1 = Node(10)
-        let input2 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
         sut.push(input1)
         sut.push(input2)
         
@@ -107,8 +107,8 @@ final class ListTests: XCTestCase {
     }
     
     func test_2회push후_3회popHead는_nil이다() {
-        let input1 = Node(10)
-        let input2 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
         sut.push(input1)
         sut.push(input2)
         
@@ -123,7 +123,7 @@ final class ListTests: XCTestCase {
     // MARK: removeLast() 메서드의 Test Cases
     func test_1회push후_removeLast는_첫번째_push된_Node이다() {
         // given
-        let input = Node(10)
+        let input = Node("10")
         sut.push(input)
         
         // when / then
@@ -132,9 +132,9 @@ final class ListTests: XCTestCase {
     
     func test_3회push후_removeLast는_첫번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
-        let input3 = Node(30)
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let input3 = Node("30")
         sut.push(input1)
         sut.push(input2)
         sut.push(input3)
@@ -145,15 +145,15 @@ final class ListTests: XCTestCase {
     
     func test_3회push후_2회removeLast는_두번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
-        let input3 = Node(30)
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let input3 = Node("30")
         sut.push(input1)
         sut.push(input2)
         sut.push(input3)
         
         // when
-        let temp1 = sut.removeLast()
+        _ = sut.removeLast()
 
         // when / then
         XCTAssertEqual(sut.removeLast(), input2)
@@ -161,9 +161,9 @@ final class ListTests: XCTestCase {
     
     func test_3회push후_3회removeLast는_세번째_push된_Node이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
-        let input3 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let input3 = Node("30")
         sut.push(input1)
         sut.push(input2)
         sut.push(input3)
@@ -178,9 +178,9 @@ final class ListTests: XCTestCase {
     
     func test_3회push후_3회removeLast후_head는_nil이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
-        let input3 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let input3 = Node("30")
         sut.push(input1)
         sut.push(input2)
         sut.push(input3)
@@ -196,9 +196,9 @@ final class ListTests: XCTestCase {
     
     func test_3회push후_3회removeLast후_tail은_nil이다() {
         // given
-        let input1 = Node(10)
-        let input2 = Node(20)
-        let input3 = Node(20)
+        let input1 = Node("10")
+        let input2 = Node("20")
+        let input3 = Node("30")
         sut.push(input1)
         sut.push(input2)
         sut.push(input3)
