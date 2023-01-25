@@ -5,7 +5,7 @@
 //  Created by Harry on 2023/01/24.
 //
 
-struct CalculaterItemQueue<Element> {
+struct CalculaterItemQueue<Element: CalculateItem> {
     var queue: LinkedList<Element>
     
     mutating func enqueue(_ element: Element) {
