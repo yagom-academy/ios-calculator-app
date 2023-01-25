@@ -69,4 +69,29 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(dequeueReturn, returnExpectation)
         XCTAssertEqual(queueCount, queueCountExpectation)
     }
+    
+    // MARK: - removeAll Test
+    func test_removeAll호출시_queue의_head와_tail은_nil이다() {
+        sut.queue.tail = Node(value: 3)
+        sut.queue.head = Node(value: 1, next: Node(value: "+", next: sut.queue.tail))
+        let headExpectation: Int? = nil
+        let tailExpectation: Int? = nil
+        
+        sut.removeAll()
+        let headValueResult = sut.queue.head?.value as? Int
+        let tailValueResult = sut.queue.tail?.value as? Int
+        
+        XCTAssertEqual(headValueResult, headExpectation)
+        XCTAssertEqual(tailValueResult, tailExpectation)
+    }
+    
+    func test_removeAll호출시_queue의_count는_0이다() {
+        sut.queue.count = 3
+        let expectation = 0
+        
+        sut.removeAll()
+        let result = sut.queue.count
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
