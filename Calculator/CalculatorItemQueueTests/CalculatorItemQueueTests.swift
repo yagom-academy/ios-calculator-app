@@ -217,4 +217,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(expectation)
     }
+    func test_큐에_세개의_노드를_넣고_clear메소드를_호출하면_중간의_노드가_nil이_된다() {
+        sut.head = Node(data: "head")
+        sut.head?.next = Node(data: "middle")
+        sut.head?.next?.next = Node(data: "tail")
+        
+        sut.clear()
+        
+        let result = sut.head?.next?.data
+        let expectation = result == nil ? true : false
+        
+        XCTAssertTrue(expectation)
+    }
 }
