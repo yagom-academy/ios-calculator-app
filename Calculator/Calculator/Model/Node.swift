@@ -5,7 +5,7 @@
 //  Created by 혜모리 on 2023/01/25.
 //
 
-class Node {
+final class Node {
     var value: String
     var next: Node?
     
