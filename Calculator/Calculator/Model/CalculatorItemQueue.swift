@@ -1,7 +1,7 @@
 //  Calculator - CalculatorItemQueue.swift
 //  created by vetto on 2023/01/25
 
-struct CalculatorItemQueue<T: CalculatorItemProtocol> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var head: Node<T>?
     var tail: Node<T>?
     
