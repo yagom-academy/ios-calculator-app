@@ -2,7 +2,7 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by 박소연 on 2023/01/24.
+//  Created by 무리 on 2023/01/24.
 //
 
 import XCTest
@@ -27,9 +27,10 @@ final class CalculatorTests: XCTestCase {
         
         // when
         sut.enqueue(input)
+        let result = sut.isEmpty
         
         // then
-        XCTAssertFalse(expectation)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_enqueue호출시_count가증가된다() {
@@ -80,7 +81,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_data배열값이_여러개존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다(){
+    func test_data배열값이_여러개존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다() {
         // given
         sut.data = [11, 22, 33, 44]
         let expectation = 11
@@ -92,8 +93,23 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_data배열값삭제시_first의인덱스를가르키는_head의값이증가한다() {
+        // given
+        sut.data = [2, 3, 4, 1, 6, 7, 8, 0]
+        let expectation = 2
+        
+        // when
+        sut.dequeue()
+        sut.dequeue()
+        let result = sut.head
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    
     //MARK: - clearAll test code
-    func test_clearAll호출시_data배열값이_모두삭제되어_count가0이다(){
+    func test_clearAll호출시_data배열값이_모두삭제되어_count가0이다() {
         // given
         sut.data = [1, 2, 3, 4, 5]
         let expectation = 0
@@ -103,5 +119,46 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    //MARK: - first, last test code
+    func test_data배열의첫번째값과_first변수의값이_같다() {
+        // given
+        sut.data = [94, 1, 17]
+        let expectation = 94
+        
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_data배열값이없을때_first는nil을반환한다() {
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_data배열의마지막값과_last변수의값이_같다() {
+        // given
+        sut.data = [92, 5, 19]
+        let expectation = 19
+        
+        // when
+        let result = sut.last
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_data배열값이없을때_last는nil을반환한다() {
+        // when
+        let result = sut.last
+        
+        // then
+        XCTAssertNil(result)
     }
 }
