@@ -34,11 +34,25 @@ final class CalculatorTests: XCTestCase {
         //given
         sut.data = ["1", "2", "3"]
         let expectation = "1"
+        let expectedData = ["2", "3"]
         //when
         let result = sut.dequeue()
         //then
         XCTAssertEqual(expectation, result)
-        XCTAssertEqual(["2", "3"], sut.data)
+        XCTAssertEqual(expectedData, sut.data)
+        
+    }
+    
+    func test_dequeue호출시_큐에하나의요소가있을경우_첫번째요소를빼서반환하고빈배열이남는다() {
+        //given
+        sut.data = ["1"]
+        let expectation = "1"
+        let expectedData:[String] = []
+        //when
+        let result = sut.dequeue()
+        //then
+        XCTAssertEqual(expectation, result)
+        XCTAssertEqual(expectedData, sut.data)
         
     }
     
@@ -55,32 +69,43 @@ final class CalculatorTests: XCTestCase {
         //given
         sut.data = ["1", "2", "3"]
         let expectation = "1"
+        let expectedData = ["1", "2", "3"]
         //when
         let result = sut.peek()
         //then
         XCTAssertEqual(expectation, result)
-        XCTAssertEqual(["1", "2", "3"], sut.data)
+        XCTAssertEqual(expectedData, sut.data)
         
     }
     
     func test_enqueue호출시_맨뒤에요소가추가된다() {
         //given
         sut.data = ["1", "2", "3"]
-        let expectation = ["1", "2", "3", "4"]
+        let expectedData = ["1", "2", "3", "4"]
         //when
         sut.enqueue("4")
         //then
-        XCTAssertEqual(expectation, sut.data)
+        XCTAssertEqual(expectedData, sut.data)
+    }
+    
+    func test_enqueue호출시_큐가비었을경우_요소가추가된다() {
+        //given
+        sut.data = []
+        let expectedData = ["4"]
+        //when
+        sut.enqueue("4")
+        //then
+        XCTAssertEqual(expectedData, sut.data)
     }
     
     func test_clear호출시_모든요소가삭제된다() {
         //given
         sut.data = ["1", "2", "3"]
-        let expectation: [String] = []
+        let expectedData: [String] = []
         //when
         sut.clear()
         //then
-        XCTAssertEqual(expectation, sut.data)
+        XCTAssertEqual(expectedData, sut.data)
     }
     
     func test_isEmpty호출시_비어있을때_True를반환한다() {
