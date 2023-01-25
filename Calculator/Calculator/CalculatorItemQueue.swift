@@ -16,4 +16,13 @@ struct CalculatorItemQueue<T> {
     mutating func enqueueCurrentItem(_ element: T) {
         enqueueStack.append(element)
     }
+    
+    @discardableResult
+    mutating func dequeueCurrentItem() -> T? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+        return dequeueStack.popLast()
+    }
 }
