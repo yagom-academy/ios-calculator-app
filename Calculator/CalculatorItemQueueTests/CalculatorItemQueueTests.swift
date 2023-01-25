@@ -18,6 +18,24 @@ final class CalculatorItemQueueTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_resetAllElement호출시_enqueueStack과dequeueStack에요소가있을때_enqueueStack과dequeueStack이지워진다() {
+        // given
+        let input = ["1", "2"]
+        let inputAfterEnqueue = ["3", "4"]
+        let expectation = 0
+        
+        // when
+        input.forEach { sut.enqueueCurrentItem($0) }
+        sut.dequeueCurrentItem()
+        inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
+        
+        sut.resetAllElement()
+        let result = sut.dequeueStack.count + sut.enqueueStack.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 
     func test_enqueueCurrentItem호출시_3을넣으면_enqueueStack이3을포함한다() {
         // given

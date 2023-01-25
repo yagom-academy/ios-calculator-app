@@ -12,6 +12,10 @@ struct CalculatorItemQueue<T> {
     private(set) var enqueueStack: [T] = []
     private(set) var dequeueStack: [T] = []
     
+    mutating func resetAllElement() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
+    }
     
     mutating func enqueueCurrentItem(_ element: T) {
         enqueueStack.append(element)
