@@ -52,7 +52,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(secondValue, result)
     }
     
-    func test_appendLast3번호출시_count가3이다() {
+    func test_appendLast_3번_호출시_count가3이다() {
         sut.appendLast(1)
         sut.appendLast(2)
         sut.appendLast(3)
@@ -132,5 +132,20 @@ final class LinkedListTests: XCTestCase {
         let result = sut.count
         
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_node가_3개일때_removeAll을_호출하면_node가_모두삭제된다() {
+        sut.tail = Node(value: 3)
+        sut.head = Node(value: 1, next: Node(value: 2, next: sut.tail))
+        let expectation: Int? = nil
+        
+        sut.removeAll()
+        let resultHead = sut.head?.value
+        let resultCenter = sut.head?.next?.value
+        let resultTail = sut.tail?.value
+        
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultCenter, expectation)
+        XCTAssertEqual(resultTail, expectation)
     }
 }
