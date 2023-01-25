@@ -1,8 +1,6 @@
-//
 //  Calculator - ViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
+//  Created by 레옹아범.
+
 
 import UIKit
 
