@@ -53,7 +53,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_배열이존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다(){
+    func test_data배열이존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다(){
         // given
         sut.data = [11, 22, 33, 44]
         let expectation = 11
@@ -63,5 +63,17 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result as? Int, expectation)
+    }
+    
+    func test_clearAll호출시_data배열값이_모두삭제되어_count가0이다(){
+        // given
+        sut.data = [1, 2, 3, 4, 5]
+        let expectation = 0
+        // when
+        sut.clearAll()
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
     }
 }
