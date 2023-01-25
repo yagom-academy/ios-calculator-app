@@ -49,6 +49,17 @@ final class LinkedList {
     }
     
     func removeFirst() -> Node? {
-        return head
+        guard !isEmpty else {
+            return nil
+        }
+        
+        let firstNode = head
+        head = firstNode?.next
+        return firstNode
+    }
+    
+    func removeAll() {
+        head = nil
+        tail = nil
     }
 }

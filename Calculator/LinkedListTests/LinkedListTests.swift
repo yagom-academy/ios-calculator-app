@@ -104,4 +104,50 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.tail?.value, expectation)
     }
+    
+    func test_removeFirst호출시_빈List인경우_nil을반환한다() {
+        // given, when
+        let result = sut.removeFirst()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_removeFirst호출시_List에head하나만있는경우_head를삭제하면_head는nil이된다() {
+        // given
+        sut.appendLast("1")
+        
+        // when
+        let _ = sut.removeFirst()
+        
+        // then
+        XCTAssertNil(sut.head)
+    }
+    
+    func test_removeFirst호출시_List에head하나만있는경우_head를삭제하고_삭제한node를반환한다() {
+        // given
+        sut.appendLast("1")
+        let expectation = sut.head
+        
+        // when
+        let result = sut.removeFirst()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeAll호출시_head와tail모두nil이된다() {
+        // given
+        let head = sut.head
+        let tail = sut.tail
+        var condition: Bool {
+            head == nil && tail == nil
+        }
+        
+        // when
+        sut.removeAll()
+        
+        // then
+        XCTAssertTrue(condition)
+    }
 }
