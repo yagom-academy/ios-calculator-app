@@ -16,6 +16,10 @@ struct CalculatorItemQueue<T> {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
+    var count: Int {
+        return enqueueStack.count + dequeueStack.count
+    }
+    
     mutating func resetAllElement() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
