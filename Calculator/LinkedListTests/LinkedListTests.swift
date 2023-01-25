@@ -31,12 +31,52 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_appendLast호출시count가1증가한다() {
+        // given
+        let data = 1
+        let expectation = 1
+        
+        // when
+        sut.appendLast(data)
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_appendLast호출시_새Node를head로지정한다() {
+        // given
+        let input = 1
+        let expectation = 1
+        // when
+        sut.appendLast(input)
+        let result = sut.head?.data
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
     func test_() {
         // given
         
+        
         // when
+        
         
         // then
         
     }
+    
+    func test_3() {
+        // given
+        
+        
+        // when
+        
+        
+        // then
+        
+    }
+    
+    
 }

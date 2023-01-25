@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<T> {
+    
     var data: T
     var next: Node?
     
@@ -15,13 +16,20 @@ class Node<T> {
         self.data = data
         self.next = next
     }
+    
 }
 
 struct LinkedList<T> {
+    
     var head: Node<T>?
     var tail: Node<T>?
     var count: Int = 0
     var isEmpty: Bool { self.count == 0 }
     
+    mutating func appendLast(_ data: T) {
+        let newNode = Node(data: data)
+        self.head = newNode
+        count += 1
+    }
     
 }
