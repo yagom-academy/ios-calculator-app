@@ -7,12 +7,14 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculatorItem {
+struct CalculatorItemQueue<T> {
     var data: [T?] = []
     var head: Int = 0
+    
     var isEmpty: Bool {
         return data.isEmpty
     }
+    
     var count: Int {
         return data.count - head
     }
@@ -27,7 +29,6 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return element
     }
     
-    
     mutating func enqueue(_ element: T) {
         data.append(element)
     }
@@ -36,6 +37,13 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         guard head < data.count, let element = data[head] else { return nil }
         data[head] = nil
         head += 1
+        
+        let percentage = Double(head)/Double(data.count)
+        
+        if data.count >= 40 && percentage >= 0.25 {
+            data.removeFirst(head)
+            head = 0
+        }
         
         return element
     }

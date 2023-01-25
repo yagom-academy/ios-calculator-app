@@ -107,6 +107,16 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_data배열의count가40이상이고_퍼센트가25이상일시_배열의nil값을포함하여_dequeue한다() {
+        for number in 1...40 {
+            sut.enqueue(number)
+        }
+        print(sut.data)
+        for number in 1...10 {
+            sut.dequeue()
+        }
+        print(sut.data)
+    }
     
     //MARK: - clearAll test code
     func test_clearAll호출시_data배열값이_모두삭제되어_count가0이다() {
