@@ -7,8 +7,4 @@
 
 protocol CalculateItem { }
 
-extension Double: CalculateItem { }
-
-extension Int: CalculateItem { }
-
 extension String: CalculateItem { }
