@@ -19,6 +19,7 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
 
+//MARK: - isEmpty Test
     func test_isEmpty접근시count가0일때_true를반환한다() {
         // given
         sut.count = 0
@@ -31,6 +32,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+//MARK: - appendLast Test
     func test_appendLast호출시count가1증가한다() {
         // given
         let data = 1
@@ -86,6 +88,61 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
         XCTAssertEqual(secondData, expectation)
+    }
+    
+//MARK: removeFirst Test
+    func test_removeFirst호출시_count가1감소한다() {
+        // given
+        sut.appendLast(1)
+        let expectation = 0
+        
+        // when
+        sut.removeFirst()
+        let result = sut.count
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeFirst호출시_count가0인경우메서드를종료한다() {
+        // given
+        let expectation = 0
+        
+        // when
+        sut.removeFirst()
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeFirst호출후_count가0이될경우head와tail에nil을할당한다() {
+        // given
+        sut.appendLast(1)
+        let expectation: Int? = nil
+        
+        // when
+        sut.removeFirst()
+        let resultHead = sut.head?.data
+        let resultTail = sut.tail?.data
+        
+        // then
+        XCTAssertEqual(resultHead, expectation)
+        XCTAssertEqual(resultTail, expectation)
+    }
+    
+    func test_removeFirst호출시_현재head의Node를삭제하고_다음데이터로붙인다() {
+        // given
+        sut.appendLast(1)
+        sut.appendLast(2)
+        sut.appendLast(3)
+        let expectation = 2
+        
+        // when
+        sut.removeFirst()
+        let result = sut.head?.data
+        
+        // then
+        XCTAssertEqual(result, expectation)
     }
     
     

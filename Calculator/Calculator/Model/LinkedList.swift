@@ -40,4 +40,16 @@ struct LinkedList<T> {
         count += 1
     }
     
+    mutating func removeFirst() {
+        guard self.isEmpty == false else { return }
+        
+        head = head?.next
+        count -= 1
+        
+        if self.isEmpty {
+            head = nil
+            tail = nil
+        }
+    }
+    
 }
