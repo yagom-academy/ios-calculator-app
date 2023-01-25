@@ -12,6 +12,10 @@ struct CalculatorItemQueue<T> {
     private(set) var enqueueStack: [T] = []
     private(set) var dequeueStack: [T] = []
     
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    
     mutating func resetAllElement() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
