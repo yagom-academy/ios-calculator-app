@@ -93,7 +93,7 @@ final class LinkedListTests: XCTestCase {
 //MARK: removeFirst Test
     func test_removeFirst호출시_count가1감소한다() {
         // given
-        sut.appendLast(1)
+        sut.count = 1
         let expectation = 0
         
         // when
@@ -117,7 +117,9 @@ final class LinkedListTests: XCTestCase {
     
     func test_removeFirst호출후_count가0이될경우head와tail에nil을할당한다() {
         // given
-        sut.appendLast(1)
+        sut.head = Node(data: 1)
+        sut.tail = sut.head
+        sut.count = 1
         let expectation: Int? = nil
         
         // when
@@ -132,9 +134,9 @@ final class LinkedListTests: XCTestCase {
     
     func test_removeFirst호출시_현재head의Node를삭제하고_다음데이터로붙인다() {
         // given
-        sut.appendLast(1)
-        sut.appendLast(2)
-        sut.appendLast(3)
+        sut.tail = Node(data: 2)
+        sut.head = Node(data: 1, next: sut.tail)
+        sut.count = 2
         let expectation = 2
         
         // when
