@@ -7,6 +7,8 @@
 
 import XCTest
 
+import Foundation
+
 final class CalculatorQueueTests: XCTestCase {
     
     var sut: CalculatorItemQueue<Int>!
@@ -19,13 +21,11 @@ final class CalculatorQueueTests: XCTestCase {
         sut = nil
     }
     
-    
-    func test_enqueueStackCount는_enqueueItem에_들어온_enqueueStack의_갯수를_반환한다() {
-        let input = [2,4,6]
+    func test_enequeueStackcount은_enqueueItem에_들어온_값의갯수를_반환한다() {
         
         sut.enqueueItem(2)
-        sut.enqueueItem(4)
-        sut.enqueueItem(6)
+        sut.enqueueItem(3)
+        sut.enqueueItem(7)
         
         let expectaiton = 3
         let result = sut.enequeueStackCount
@@ -33,20 +33,19 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(expectaiton, result)
     }
     
-    func test_dequeueStackCount는_dequeueItem에_들어온_dequeueStack의_갯수를_반환한다() {
-
+    func test_deequeueStackcount은_dequeueItem을_통해_전달받은_값의갯수를__반환한다() {
+        
         sut.enqueueItem(3)
-        sut.enqueueItem(7)
-        sut.enqueueItem(8)
+        sut.enqueueItem(4)
+        sut.enqueueItem(13)
         
         let expectaiton = 2
         sut.dequeueItem()
         let result = sut.dequeueStackCount
-    
+        
         XCTAssertEqual(expectaiton, result)
     }
     
-    // enqueueItem test
     func test_enqueueItem에_숫자값이_입력될_경우_enqueueStack에_순서대로_담긴다(){
         
         sut.enqueueItem(2)
@@ -60,7 +59,6 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    // dequeueItem test
     func test_dequeueStack에_값이_없을경우_dequeueItem실행시_enqueueStack의_값은_초기화된다() {
         
         let dequeueEmpty = sut.dequeueStack.isEmpty
@@ -84,12 +82,12 @@ final class CalculatorQueueTests: XCTestCase {
         sut.enqueueItem(5)
         sut.enqueueItem(9)
         
-        let expection = [9,5]
-        let result = sut.dequeueStack
+        let expectation = [9,5]
         
         if dequeueEmpty == true {
             sut.dequeueItem()
-            XCTAssertEqual(result,expection)
+            let result = sut.dequeueStack
+            XCTAssertEqual(result, expectation)
         }
     }
     
