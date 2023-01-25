@@ -5,7 +5,7 @@
 //  Created by Rowan on 2023/01/24.
 //
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     
     var queue: LinkedList<Element>
     
