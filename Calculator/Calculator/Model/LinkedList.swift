@@ -13,7 +13,15 @@ final class LinkedList {
     }
     
     func appendLast(_ data: String) {
+        guard !isEmpty, let last = tail else {
+            head = Node(value: data)
+            tail = head
+            return
+        }
         
+        let node = Node(value: data)
+        last.next = node
+        tail = node
     }
     
     func removeLast() -> String? {

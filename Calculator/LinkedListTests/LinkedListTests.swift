@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Calculator
 
 final class LinkedListTests: XCTestCase {
     var sut: LinkedList!
@@ -20,13 +21,40 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
 
-    func test_appendLast호출시_빈List인경우_1을추가하면_마지막값이1이다() {
+    func test_빈List인경우_1을추가하면_마지막값이1이다() {
         // given
         let expectation = "1"
-        let tailOfQueue = sut.tail
+        
         // when
         sut.appendLast(expectation)
+        let tailOfQueue = sut.tail?.value
+        
         // then
         XCTAssertEqual(expectation, tailOfQueue)
+    }
+    
+    func test_값이들어있는List인경우_2를추가하면_마지막값이2이다() {
+        // given
+        sut.appendLast("1")
+        let expectation = "2"
+        
+        // when
+        sut.appendLast(expectation)
+        let tailOfQueue = sut.tail?.value
+        
+        // then
+        XCTAssertEqual(expectation, tailOfQueue)
+    }
+    
+    func test_List에1_2_3을추가하는경우_head의next는2의node이다() {
+        // given, when
+        sut.appendLast("1")
+        let targetNode = sut.head
+        sut.appendLast("2")
+        let expectation = sut.tail
+        sut.appendLast("3")
+        
+        // then
+        XCTAssertEqual(targetNode?.next, expectation)
     }
 }
