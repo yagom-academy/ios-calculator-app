@@ -5,7 +5,7 @@
 //  Created by kokkilE on 2023/01/25.
 //
 
-struct List<T> {
+struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     
