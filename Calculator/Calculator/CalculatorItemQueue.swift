@@ -26,4 +26,8 @@ struct CalculatorItemQueue<T> {
     mutating func clearAll() {
         return data.removeAll()
     }
+    
+    mutating func enqueue(_ element: T) {
+        data.append(element)
+    }
 }

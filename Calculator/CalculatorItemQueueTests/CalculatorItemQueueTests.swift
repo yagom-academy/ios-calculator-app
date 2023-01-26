@@ -89,4 +89,15 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+    func test_enqueue호출시_마지막에_값을넣고_반환한다() {
+        // given
+        sut.data = ["1", "2", "3", "4"]
+        let expectation = ["1", "2", "3", "4", "5"]
+
+        // when
+        sut.enqueue("5")
+
+        // then
+        XCTAssertEqual(sut.data, expectation)
+    }
 }
