@@ -18,9 +18,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.items.append(element)
     }
     
-//    func dequeue() -> Element? {
-//
-//    }
+    func dequeue() -> Element? {
+        return nil
+    }
     
     func removeAll() {
         
