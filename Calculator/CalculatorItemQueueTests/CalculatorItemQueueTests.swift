@@ -26,7 +26,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         let result = sut.isEmpty
         
         // then
@@ -41,7 +41,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         inputAfterEnqueue.forEach { sut.enqueue($0) }
         
         sut.removeAllElement()
@@ -58,7 +58,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         let result = sut.count
         
         // then
@@ -73,7 +73,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         inputAfterEnqueue.forEach { sut.enqueue($0) }
         let result = sut.count
         
@@ -89,7 +89,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         inputAfterEnqueue.forEach { sut.enqueue($0) }
         
         sut.removeAllElement()
@@ -120,7 +120,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         // when
         input.forEach { sut.enqueue($0) }
         
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         let result = sut.dequeueStack
         
         // then
@@ -134,7 +134,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
+        sut.dequeue()
         let result = sut.enqueueStack.isEmpty
         
         // then
@@ -148,8 +148,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeueCurrentItem()
-        let result = sut.dequeueCurrentItem()
+        sut.dequeue()
+        let result = sut.dequeue()
         
         // then
         XCTAssertEqual(result, expectation)

@@ -30,7 +30,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     }
     
     @discardableResult
-    mutating func dequeueCurrentItem() -> Item? {
+    mutating func dequeue() -> Item? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
