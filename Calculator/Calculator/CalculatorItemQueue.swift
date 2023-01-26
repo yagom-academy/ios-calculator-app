@@ -7,8 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {}
-
 struct CalculatorItemQueue<T>: CalculateItem {
     
     private(set) var enqueueStack: [T] = []
