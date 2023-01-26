@@ -81,6 +81,56 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     // MARK: - dequeue method test
+    func test_빈_큐에서_dequeue호출시_nil값이_반환된다() {
+        // given
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_요소가_1개이상_존재하는_큐에서_dequeue호출시_head에_있는_값이_반환된다() {
+        // given
+        sut.enqueue(data: "head")
+        sut.enqueue(data: "middle")
+        
+        // when
+        let result = sut.dequeue()
+        let expectation = "head"
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_요소가_2개이상_존재하는_큐에서_dequeue호출시_head가_다음_노드로_바뀐다() {
+        // given
+        sut.enqueue(data: "head")
+        sut.enqueue(data: "middle")
+        
+        // when
+        let _ = sut.dequeue()
+        let result = sut.head?.data
+        let expectation = "middle"
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
     
     // MARK: - clear method test
+    func test_큐에_두개의_노드를_넣고_clear메소드를_호출하면_head랑_tail이_nil이_된다() {
+        // given
+        sut.enqueue(data: "head")
+        sut.enqueue(data: "middle")
+        sut.clear()
+        
+        // when
+        let resultOfHead = sut.head
+        let resultOfTail = sut.tail
+        
+        // then
+        XCTAssertNil(resultOfHead)
+        XCTAssertNil(resultOfTail)
+    }
 }
