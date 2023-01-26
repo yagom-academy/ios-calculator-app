@@ -2,8 +2,8 @@
 //  created by vetto on 2023/01/25
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
@@ -20,13 +20,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element? {
-        if head == nil {
+        guard let node = head else {
             return nil
-        } else {
-            let node = head
-            head = head?.next
-            return node?.data
         }
+        self.head = head?.next
+        return node.data
     }
     
     mutating func clear() {
