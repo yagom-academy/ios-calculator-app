@@ -6,14 +6,13 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var calculateItems = List<T>()
+    private var calculateItems = LinkedList<T>()
     
-    var userInputDataCount: Int {
+    var calculateItemsCount: Int {
         return calculateItems.count
     }
     
-    mutating func enqueueCalculateItems(_ data: T) {
-        let node = Node(data)
+    mutating func enqueueCalculateItems(_ node: Node<T>) {
         calculateItems.push(node)
     }
     

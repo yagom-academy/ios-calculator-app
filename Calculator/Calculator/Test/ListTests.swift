@@ -9,12 +9,12 @@ import XCTest
 @testable import Calculator
 
 final class ListTests: XCTestCase {
-    var sut: List<String>!
+    var sut: LinkedList<String>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         
-        sut = List<String>()
+        sut = LinkedList<String>()
     }
 
     override func tearDownWithError() throws {
