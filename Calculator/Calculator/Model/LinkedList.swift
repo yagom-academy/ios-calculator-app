@@ -25,7 +25,7 @@ struct LinkedList<T> {
     @discardableResult
     mutating func removeFirst() -> T? {
         guard isEmpty == false else { return nil }
-        guard let value = head?.value else { return nil}
+        guard let value = head?.value else { return nil }
         
         head = head?.next
         count -= 1
