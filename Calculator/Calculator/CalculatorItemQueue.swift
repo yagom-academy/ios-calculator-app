@@ -55,16 +55,3 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
 }
-
-//MARK: Node 타입 생성
-class Node<T> {
-    
-    var data: T
-    var nextData: Node?
-    
-    init(data: T, nextData: Node? = nil) {
-        self.data = data
-        self.nextData = nextData
-    }
-    
-}
