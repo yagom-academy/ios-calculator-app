@@ -8,6 +8,9 @@
 import XCTest
 @testable import Calculator
 
+extension String: CalculateItem {
+}
+
 final class LinkedListTest: XCTestCase {
     
     var sut: LinkedList<String>!
@@ -93,5 +96,19 @@ final class LinkedListTest: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
         // then
         XCTAssertNil(sut.removeFirst())
+    }
+    
+    func test_a와b를_append하고_removeAll을_할_경우_head와_tail은_nil이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        // when
+        sut.append(firstValue)
+        sut.append(secondValue)
+        
+        sut.removeAll()
+        // then
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
 }

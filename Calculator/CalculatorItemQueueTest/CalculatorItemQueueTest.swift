@@ -4,44 +4,43 @@
 import XCTest
 @testable import Calculator
 
-//final class CalculatorItemQueueTest: XCTestCase {
-//    var sut: CalculatorItemQueue!
-//
-//    override func setUpWithError() throws {
-//        sut = CalculatorItemQueue()
-//    }
-//
-//    override func tearDownWithError() throws {
-//        sut = nil
-//    }
-//
-//    func test_숫자입력이_멈췄을_때_items에_해당_값이_추가된다() {
-//        let numbers = "123"
-//        sut!.item = numbers
-//
-//        sut?.finishInputItem()
-//
-//        let value = sut!.items.head!.value
-//        let equalNumbersAndValue = numbers == value
-//
-//        XCTAssertTrue(equalNumbersAndValue)
-//    }
-//
-//    func test_숫자가_아무것도_입력되지_않은_상태일_경우_items에_추가되지_않는다() {
-//        sut?.item = ""
-//        sut?.finishInputItem()
-//
-//        let head = sut!.items.head
-//
-//        XCTAssertNil(head)
-//    }
-//
-//    func test_숫자값이_입력될_경우_numbers프로퍼티에_하나씩_추가된다() {
-//        let exception = "1"
-//
-//        sut.addNumber("1")
-//
-//        XCTAssertEqual(sut.item, exception)
-//    }
-//
-//}
+extension String: CalculateItem {
+}
+
+final class CalculatorItemQueueTest: XCTestCase {
+    var sut: CalculatorItemQueue<String>!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        sut = CalculatorItemQueue<String>()
+    }
+    
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_a를_enqueue한다면_peek는_a다() {
+        // given
+        let value = "a"
+        let exception = "a"
+        // when
+        sut.enqueue(value)
+        let peekValue = sut.peek!
+        // then
+        XCTAssertEqual(peekValue, exception)
+    }
+    
+    func test_a와_b를_enqueue한다면_back은_b다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        let exception = "b"
+        // when
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
+        let backValue = sut.back!
+        // then
+        XCTAssertEqual(exception, backValue)
+    }
+}

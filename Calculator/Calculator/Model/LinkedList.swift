@@ -1,9 +1,6 @@
 //  Queue.swift
 //  Created by 레옹아범 on 2023/01/24.
 
-extension String: CalculateItem {
-}
-
 struct LinkedList<Element: CalculateItem> {
     var head: Node<Element>?
     var tail: Node<Element>?

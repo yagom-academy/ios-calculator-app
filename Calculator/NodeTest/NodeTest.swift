@@ -4,6 +4,9 @@
 import XCTest
 @testable import Calculator
 
+extension String: CalculateItem {
+}
+
 final class NodeTest: XCTestCase {
 
     var sut: Node<String>!
