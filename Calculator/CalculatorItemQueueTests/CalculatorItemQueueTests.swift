@@ -21,32 +21,27 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_isEmpty호출시_dequeueStack은요소가있고enqueueStack은요소가없다면_false를반환한다() {
+    func test_isEmpty호출시_큐가비어있는상태라면_true를반환한다() {
         // given
         let input = ["1", "2", "3"]
-        let expectation = false
+        let expectation = true
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeue()
+        sut.removeAllElement()
         let result = sut.isEmpty
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_isEmpty호출시_dequeueStack과enqueueStack모두비어있다면_true를반환한다() {
+    func test_isEmpty호출시_큐에1과2와3이들어있다면_false를반환한다() {
         // given
         let input = ["1", "2", "3"]
-        let inputAfterEnqueue = ["4", "5", "6"]
-        let expectation = true
+        let expectation = false
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeue()
-        inputAfterEnqueue.forEach { sut.enqueue($0) }
-        
-        sut.removeAllElement()
         let result = sut.isEmpty
         
         // then
