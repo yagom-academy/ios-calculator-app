@@ -202,6 +202,7 @@
 			files = (
 				36CA534029828AAF00622D91 /* CalculatorItem.swift in Sources */,
 				36CA533A29826D2500622D91 /* CalculatorItemQueue.swift in Sources */,
+				36CA5345298296BF00622D91 /* CalculatorItemNode.swift in Sources */,
 				36CA531D2982208000622D91 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
