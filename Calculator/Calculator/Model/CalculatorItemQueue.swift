@@ -2,8 +2,8 @@
 //  created by vetto on 2023/01/25
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+    private(set) var head: Node<Element>?
+    private(set) var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
