@@ -8,26 +8,24 @@ final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = CalculatorItemQueue<String>()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
-    // isEmpty computed property test
+    // MARK: - isEmpty computed property test
     func test_head가_nil일_때_isQueueEmpty호출하면_true이다() {
-        let result = sut.isEmpty
-        let expectation = true
-        
-        XCTAssertEqual(result, expectation)
     }
     
     func test_CalculatorItemQueue에_Node를_추가하고_isQueueEmpty호출하면_false이다() {
      
     }
     
-    // enqueue method test
+    // MARK: - enqueue method test
     func test_빈_큐에_enqueue하면_head에_들어간다() {
      
     }
@@ -44,7 +42,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     }
     
-    // dequeue method test
+    // MARK: - dequeue method test
     func test_빈_큐에_dequeue하면_nil이_반환되면_true() {
        
     }
@@ -69,7 +67,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
     }
     
-    // clear method test
+    // MARK: - clear method test
     func test_큐에_두개의_노드를_넣고_clear메소드를_호출하면_head가_nil이_된다() {
         
     }

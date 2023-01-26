@@ -10,8 +10,6 @@
 		98B18848297FE9C7008D8AC2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B18847297FE9C7008D8AC2 /* Node.swift */; };
 		98B1885029810F72008D8AC2 /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B1884F29810F72008D8AC2 /* CalculateItemProtocol.swift */; };
 		98B188782981158D008D8AC2 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B188772981158D008D8AC2 /* CalculatorItemQueueTests.swift */; };
-		98B1887F298115DD008D8AC2 /* CalculateItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B1884F29810F72008D8AC2 /* CalculateItemProtocol.swift */; };
-		98B18880298115E3008D8AC2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B18847297FE9C7008D8AC2 /* Node.swift */; };
 		98B1DF3E2982ACEF001C9AEF /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B1884D29810CF4008D8AC2 /* CalculatorItemQueue.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
@@ -217,8 +215,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				98B188782981158D008D8AC2 /* CalculatorItemQueueTests.swift in Sources */,
-				98B1887F298115DD008D8AC2 /* CalculateItemProtocol.swift in Sources */,
-				98B18880298115E3008D8AC2 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
