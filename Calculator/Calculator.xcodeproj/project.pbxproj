@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F4AC8EA298276630065B5D9 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4AC8E9298276630065B5D9 /* CalculatorItemQueueTests.swift */; };
 		7F4AC8F0298276710065B5D9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB55CA0297FEADE00D35B66 /* CalculatorItemQueue.swift */; };
+		7F4AC8F12982D2C40065B5D9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB55CA0297FEADE00D35B66 /* CalculatorItemQueue.swift */; };
 		7FB55CA3297FEAF800D35B66 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FB55CA2297FEAF800D35B66 /* CalculateItem.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
@@ -213,6 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FB55CA3297FEAF800D35B66 /* CalculateItem.swift in Sources */,
+				7F4AC8F12982D2C40065B5D9 /* CalculatorItemQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

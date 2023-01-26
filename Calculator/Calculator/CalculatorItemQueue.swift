@@ -7,3 +7,15 @@
 
 import Foundation
 
+struct CalculatorItemQueue<T> {
+    var data = [T] ()
+    init() {}
+    
+    var count: Int {
+        return data.count
+    }
+    
+    func isEmpty() -> Bool {
+        return data.isEmpty
+    }
+}
