@@ -55,6 +55,7 @@ final class CalculatorTests: XCTestCase {
         guard let result = sut.peek else {
             return
         }
+        
         //then
         XCTAssertEqual(result, expectation)
     }

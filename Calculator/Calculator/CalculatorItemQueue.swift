@@ -12,14 +12,14 @@ protocol CalculatorItem {
 
 struct CalculatorItemQueue<T>: CalculatorItem {
     
-    var dequeueStack: [T] = []
-    var enqueueStack: [T] = []
+    private(set) var dequeueStack: [T] = []
+    private(set) var enqueueStack: [T] = []
     
     var isEmpty: Bool {
         return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     var peek: T? {
-        return !dequeueStack.isEmpty ? dequeueStack.last : enqueueStack.first
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
     
