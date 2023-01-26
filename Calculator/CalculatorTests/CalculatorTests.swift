@@ -22,30 +22,30 @@ final class CalculatorTests: XCTestCase {
 
     func test_dequeueStack이_비어져있을때_isEmpty프로퍼티가_true를반환한다() {
         //given
-        let expectation = true
+        let expectedValue = true
         
         //when
         let result = sut.isEmpty
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_enqueueStack이_비어져있을때_isEmpty프로퍼티가_true를반환한다() {
         //given
-        let expectation = true
+        let expectedValue = true
         
         //when
         let result = sut.isEmpty
     
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_peek프로퍼티가_dequeueStack에값들이있을때_dequeueStack의last를반환한다() {
         //given
         let input = ["1", "2", "3", "4"]
-        let expectation = "2"
+        let expectedValue = "2"
         
         //when
         for value in input {
@@ -57,13 +57,13 @@ final class CalculatorTests: XCTestCase {
         }
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_peek프로퍼티가_dequeueStack이비어있을때_enqueueStack의first를반환한다() {
         //given
         let input = ["1", "2", "3", "4"]
-        let expectation = "1"
+        let expectedValue = "1"
         
         //when
         for value in input {
@@ -74,13 +74,13 @@ final class CalculatorTests: XCTestCase {
         }
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_enqueue실행시_enqueueStack에_3개의값이_넣어진다() {
         //given
         let input = ["3", "+", "4"]
-        let expectation = ["3", "+", "4"]
+        let expectedValue = ["3", "+", "4"]
         
         //when
         for value in input {
@@ -89,13 +89,13 @@ final class CalculatorTests: XCTestCase {
         let result = sut.enqueueStack
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_dequeueStack이_비어있을때_enqueueStack의reversed값을_가져온다() {
         //given
         let input = ["3", "+", "4"]
-        let expectation = ["4", "+"]
+        let expectedValue = ["4", "+"]
         
         //when
         for value in input {
@@ -105,13 +105,13 @@ final class CalculatorTests: XCTestCase {
         let result = sut.dequeueStack
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_dequeueStack이_비어있을때_enqueueStack값을_비운다() {
         //given
         let input = ["3", "+", "4"]
-        let expectation = [String]()
+        let expectedValue = [String]()
         
         //when
         for value in input {
@@ -121,14 +121,14 @@ final class CalculatorTests: XCTestCase {
         let result = sut.enqueueStack
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_dequeueStack이_마지막값을_반환한다() {
         //given
         
         let input = ["3", "+", "4"]
-        let expectation = "3"
+        let expectedValue = "3"
         
         //when
         for value in input {
@@ -137,6 +137,6 @@ final class CalculatorTests: XCTestCase {
         let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedValue)
     }
 }
