@@ -66,14 +66,6 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
-		36CA533B29826D9100622D91 /* protocol */ = {
-			isa = PBXGroup;
-			children = (
-				36CA533629826CC100622D91 /* CalculatorItem.swift */,
-			);
-			path = protocol;
-			sourceTree = "<group>";
-		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -95,7 +87,6 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				36CA533B29826D9100622D91 /* protocol */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
@@ -209,6 +200,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36CA534029828AAF00622D91 /* CalculatorItem.swift in Sources */,
 				36CA533A29826D2500622D91 /* CalculatorItemQueue.swift in Sources */,
 				36CA531D2982208000622D91 /* CalculatorTests.swift in Sources */,
 			);
@@ -220,6 +212,7 @@
 			files = (
 				ADE78A9C2990EDBD00AC109C /* CalculateItemStackView.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				36CA533F2982855800622D91 /* CalculatorTests.swift in Sources */,
 				36CA533929826D2500622D91 /* CalculatorItemQueue.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
@@ -339,8 +332,10 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -402,7 +397,9 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_ON_DEMAND_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
