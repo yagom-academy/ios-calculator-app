@@ -8,7 +8,7 @@
 import Foundation
 
 protocol CalculatorItem {
-    
+
 }
 
 extension String: CalculatorItem { }
