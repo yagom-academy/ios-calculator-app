@@ -25,7 +25,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = false
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
         let result = sut.isEmpty
         
@@ -40,9 +40,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = true
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
-        inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
+        inputAfterEnqueue.forEach { sut.enqueue($0) }
         
         sut.removeAllElement()
         let result = sut.isEmpty
@@ -57,7 +57,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 2
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
         let result = sut.count
         
@@ -72,9 +72,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 5
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
-        inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
+        inputAfterEnqueue.forEach { sut.enqueue($0) }
         let result = sut.count
         
         // then
@@ -88,9 +88,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 0
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
-        inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
+        inputAfterEnqueue.forEach { sut.enqueue($0) }
         
         sut.removeAllElement()
         let result = sut.dequeueStack.count + sut.enqueueStack.count
@@ -99,13 +99,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_enqueueCurrentItem호출시_3을넣으면_enqueueStack이3을포함한다() {
+    func test_enqueue호출시_3을넣으면_enqueueStack이3을포함한다() {
         // given
         let input = "3"
         let expectation = true
         
         // when
-        sut.enqueueCurrentItem(input)
+        sut.enqueue(input)
         let result = sut.enqueueStack.contains("3")
         
         // then
@@ -118,7 +118,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = ["3", "+"]
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         
         sut.dequeueCurrentItem()
         let result = sut.dequeueStack
@@ -133,7 +133,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = true
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
         let result = sut.enqueueStack.isEmpty
         
@@ -147,7 +147,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = "2"
         
         // when
-        input.forEach { sut.enqueueCurrentItem($0) }
+        input.forEach { sut.enqueue($0) }
         sut.dequeueCurrentItem()
         let result = sut.dequeueCurrentItem()
         

@@ -25,7 +25,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
         dequeueStack.removeAll()
     }
     
-    mutating func enqueueCurrentItem(_ element: Item) {
+    mutating func enqueue(_ element: Item) {
         enqueueStack.append(element)
     }
     
