@@ -18,4 +18,12 @@ struct CalculatorItemQueue<T> {
     func isEmpty() -> Bool {
         return data.isEmpty
     }
+    
+    func peek() -> T? {
+        return isEmpty() ? nil : data.first
+    }
+    
+    mutating func clearAll() {
+        return data.removeAll()
+    }
 }

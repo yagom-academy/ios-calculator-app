@@ -14,7 +14,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = CalculatorItemQueue<String>()
         
     }
-
+    
     override func tearDownWithError() throws {
         sut = nil
     }
@@ -40,4 +40,53 @@ final class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertFalse(result)
     }
+    
+    func test_데이터가_들어있을때_count호출시_갯수를반환한다() {
+        //given
+        sut.data = ["1", "2", "3", "4", "5"]
+        let expectation = 5
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_clearAllNumbers호출시_배열에있는_data를_전부삭제한다() {
+        // given
+        sut.data = ["1", "2", "3"]
+        let expectation = 0
+
+        // when
+        sut.clearAll()
+        let result = sut.count
+
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_데이터가_들어있을때_peek호출시_첫번째요소를_불러온다() {
+        // given
+        sut.data = ["1", "2", "3"]
+        let expectation = "1"
+
+        // when
+        let result = sut.peek()
+
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_데이터가_비어있을때_peek호출시_nil을_반환한다() {
+        // given
+        sut.data = []
+
+        // when
+        let result = sut.peek()
+
+        // then
+        XCTAssertNil(result)
+    }
+    
 }
