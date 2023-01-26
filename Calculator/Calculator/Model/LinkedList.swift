@@ -2,11 +2,17 @@
 //  Created by 레옹아범 on 2023/01/24.
 
 struct LinkedList<Element: CalculateItem> {
-    var head: Node<Element>?
-    var tail: Node<Element>?
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return self.head == nil
+    }
+    var peek: Element? {
+        return self.head?.value
+    }
+    var back: Element? {
+        return self.tail?.value
     }
     
     mutating func append(_ element: Element) {
