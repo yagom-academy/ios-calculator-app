@@ -7,7 +7,7 @@
 
 import XCTest
 
-import Foundation
+@testable import Calculator
 
 final class CalculatorQueueTests: XCTestCase {
     
@@ -21,31 +21,22 @@ final class CalculatorQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enequeueStackcount은_enqueueItem에_들어온_값의갯수를_반환한다() {
+    func test_currentStackCount는_현재들어와있는_enqueueStack과_dequeueStack의_값을_반환한다() {
+        sut.enqueueItem(4)
+        sut.enqueueItem(7)
+        sut.enqueueItem(28)
+        
+        sut.dequeueItem()
         
         sut.enqueueItem(2)
-        sut.enqueueItem(3)
         sut.enqueueItem(7)
         
-        let expectaiton = 3
-        let result = sut.enequeueStackCount
+        let expectedResult = 4
+        let result = sut.currentStackCount
         
-        XCTAssertEqual(expectaiton, result)
+        XCTAssertEqual(expectedResult, result)
     }
-    
-    func test_deequeueStackcount은_dequeueItem을_통해_전달받은_값의갯수를__반환한다() {
-        
-        sut.enqueueItem(3)
-        sut.enqueueItem(4)
-        sut.enqueueItem(13)
-        
-        let expectaiton = 2
-        sut.dequeueItem()
-        let result = sut.dequeueStackCount
-        
-        XCTAssertEqual(expectaiton, result)
-    }
-    
+
     func test_enqueueItem에_숫자값이_입력될_경우_enqueueStack에_순서대로_담긴다(){
         
         sut.enqueueItem(2)
@@ -54,9 +45,9 @@ final class CalculatorQueueTests: XCTestCase {
         
         let result = sut.enqueueStack
         
-        let expectation = [2,3,7]
+        let expectedResult = [2,3,7]
         
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(expectedResult, result)
     }
     
     func test_dequeueStack에_값이_없을경우_dequeueItem실행시_enqueueStack의_값은_초기화된다() {
@@ -82,12 +73,12 @@ final class CalculatorQueueTests: XCTestCase {
         sut.enqueueItem(5)
         sut.enqueueItem(9)
         
-        let expectation = [9,5]
+        let expectedResult = [9,5]
         
         if dequeueEmpty == true {
             sut.dequeueItem()
             let result = sut.dequeueStack
-            XCTAssertEqual(result, expectation)
+            XCTAssertEqual(result, expectedResult)
         }
     }
     
@@ -112,6 +103,3 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(dequeueExpectation, dequeueResult)
     }
 }
-    
-    
-    

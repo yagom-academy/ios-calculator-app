@@ -8,13 +8,9 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var myQueue = CalculatorItemQueue<Int>()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
        
     }
-
 }
 

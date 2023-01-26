@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		583D1130298047280097CC18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		583D1133298048060097CC18 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D1132298048060097CC18 /* CalculatorItemQueue.swift */; };
-		583D113B29804ECB0097CC18 /* CalculatorQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */; };
-		583D114129804F350097CC18 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D1132298048060097CC18 /* CalculatorItemQueue.swift */; };
+		584146D0298246FC00817FFB /* CalculatorQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
@@ -200,8 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				583D114129804F350097CC18 /* CalculatorItemQueue.swift in Sources */,
-				583D113B29804ECB0097CC18 /* CalculatorQueueTests.swift in Sources */,
+				584146D0298246FC00817FFB /* CalculatorQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -436,6 +435,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				ENABLE_TESTABILITY = YES;
 				INFOPLIST_FILE = Calculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -7,21 +7,15 @@
 
 import Foundation
 
-protocol CalculateItem {
-}
+protocol CalculateItem {}
 
 struct CalculatorItemQueue<T>: CalculateItem {
     
-    var enqueueStack: [T] = []
-    var dequeueStack: [T] = []
-    
-    
-    var enequeueStackCount: Int {
-        return enqueueStack.count
-    }
-    
-    var dequeueStackCount: Int {
-        return dequeueStack.count
+    private(set) var enqueueStack: [T] = []
+    private(set) var dequeueStack: [T] = []
+
+    var currentStackCount: Int {
+        return enqueueStack.count + dequeueStack.count
     }
         
     var isEmpty: Bool {
@@ -38,9 +32,6 @@ struct CalculatorItemQueue<T>: CalculateItem {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
-            return dequeueStack.popLast()
+        return dequeueStack.popLast()
     }
 }
-
-
-
