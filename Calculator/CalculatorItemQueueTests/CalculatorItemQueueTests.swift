@@ -18,7 +18,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     // MARK: - isEmpty computed property test
-    func test_비어있는_큐_생성_시_isEmpty호출하면_true이다() {
+    func test_queue생성_후_비어있는_상태에서_isEmpty호출하면_true이다() {
         // given
         
         // when
@@ -28,9 +28,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_Queue생성_후에_enqueue를_하고_isEmpty호출시_false이다() {
+    func test_queue생성_후에_enqueue를_하고_isEmpty호출시_false이다() {
         // given
-        sut.enqueue(data: "head")
+        sut.enqueue("head")
         
         // when
         let result = sut.isEmpty
@@ -42,7 +42,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     // MARK: - enqueue method test
     func test_빈_큐에_enqueue하면_head랑_tail의_값이_같다() {
         // given
-        sut.enqueue(data: "head")
+        sut.enqueue("head")
         
         // when
         let resultOfHead = sut.head?.data
@@ -54,9 +54,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue_여러번_호출해도_head는_바뀌지_않는다() {
         // given
-        sut.enqueue(data: "head")
-        sut.enqueue(data: "middle")
-        sut.enqueue(data: "tail")
+        sut.enqueue("head")
+        sut.enqueue("middle")
+        sut.enqueue("tail")
         
         // when
         let result = sut.head?.data
@@ -68,9 +68,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue를_여러변_호출시_마지막에enqueue한_값이_tail로_들어간다() {
         // given
-        sut.enqueue(data: "head")
-        sut.enqueue(data: "middle")
-        sut.enqueue(data: "tail")
+        sut.enqueue("head")
+        sut.enqueue("middle")
+        sut.enqueue("tail")
         
         // when
         let result = sut.tail?.data
@@ -93,8 +93,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_요소가_1개이상_존재하는_큐에서_dequeue호출시_head에_있는_값이_반환된다() {
         // given
-        sut.enqueue(data: "head")
-        sut.enqueue(data: "middle")
+        sut.enqueue("head")
+        sut.enqueue("middle")
         
         // when
         let result = sut.dequeue()
@@ -106,8 +106,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_요소가_2개이상_존재하는_큐에서_dequeue호출시_head가_다음_노드로_바뀐다() {
         // given
-        sut.enqueue(data: "head")
-        sut.enqueue(data: "middle")
+        sut.enqueue("head")
+        sut.enqueue("middle")
         
         // when
         let _ = sut.dequeue()
@@ -121,8 +121,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     // MARK: - clear method test
     func test_큐에_두개의_노드를_넣고_clear메소드를_호출하면_head랑_tail이_nil이_된다() {
         // given
-        sut.enqueue(data: "head")
-        sut.enqueue(data: "middle")
+        sut.enqueue("head")
+        sut.enqueue("middle")
         sut.clear()
         
         // when
