@@ -100,4 +100,30 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut.data, expectation)
     }
+    
+    func test_데이터가_비어있을때_dequeue호출시_nil을_반환한다() {
+        // given
+        sut.data = []
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_데이터가_있을때_dequeue호출시_첫번째요소를_불러오고_제거한다() {
+        // given
+        sut.data = ["1", "2", "3", "4"]
+        let expectation = "1"
+        let countExpectation = 3
+        
+        // when
+        let result = sut.dequeue()
+        let countResult = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(countResult, countExpectation)
+    }
 }
