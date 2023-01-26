@@ -4,7 +4,7 @@
 extension String: CalculateItem {
 }
 
-struct Queue {
+struct LinkedList {
     var head: Node<String>?
     var tail: Node<String>?
     
