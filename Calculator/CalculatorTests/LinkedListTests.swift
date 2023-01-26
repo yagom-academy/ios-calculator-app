@@ -23,8 +23,10 @@ final class LinkedListTests: XCTestCase {
         // given
         sut.count = 0
         let expectation = true
+        
         // when
         let result = sut.isEmpty
+        
         // then
         XCTAssertEqual(result, expectation)
     }
