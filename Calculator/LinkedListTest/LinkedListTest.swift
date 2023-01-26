@@ -62,7 +62,7 @@ final class LinkedListTest: XCTestCase {
         let secondValue = "b"
         let headException = "a"
         let tailException = "b"
-        //when
+        // when
         sut.append(firstValue)
         sut.append(secondValue)
         let headValue = sut.head!.value
@@ -70,5 +70,26 @@ final class LinkedListTest: XCTestCase {
         // then
         XCTAssertEqual(headValue, headException)
         XCTAssertEqual(tailValue, tailException)
+    }
+    
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeLast를_한다면_반환값은_b이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        let exception = "b"
+        // when
+        sut.append(firstValue)
+        sut.append(secondValue)
+        let removedValue = sut.removeLast()!
+        // then
+        XCTAssertEqual(exception, removedValue)
+    }
+    
+    func test_isEmpty가_true인_상태에서_removeLast를_한다면_nil이_반환된다() {
+        // given
+        // when
+        XCTAssertTrue(sut.isEmpty)
+        // then
+        XCTAssertNil(sut.removeLast())
     }
 }

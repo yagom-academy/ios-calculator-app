@@ -24,9 +24,8 @@ struct LinkedList<Element: CalculateItem> {
         self.tail = node
     }
     
-    mutating func dequeue() -> CalculateItem {
-        //
-        return "abc"
+    mutating func removeLast() -> Element? {
+        return nil
     }
     
     mutating func removeAll() {
