@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T: CalculatorItem> {
+struct CalculatorItemQueue<Item: CalculatorItem> {
     
-    private(set) var enqueueStack: [T] = []
-    private(set) var dequeueStack: [T] = []
+    private(set) var enqueueStack: [Item] = []
+    private(set) var dequeueStack: [Item] = []
     
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
@@ -20,7 +20,7 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         return enqueueStack.count + dequeueStack.count
     }
     
-    var peek: T? {
+    var peek: Item? {
         return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
@@ -29,12 +29,12 @@ struct CalculatorItemQueue<T: CalculatorItem> {
         dequeueStack.removeAll()
     }
     
-    mutating func enqueueCurrentItem(_ element: T) {
+    mutating func enqueueCurrentItem(_ element: Item) {
         enqueueStack.append(element)
     }
     
     @discardableResult
-    mutating func dequeueCurrentItem() -> T? {
+    mutating func dequeueCurrentItem() -> Item? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
