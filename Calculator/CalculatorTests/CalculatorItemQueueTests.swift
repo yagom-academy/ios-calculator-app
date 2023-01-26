@@ -8,15 +8,16 @@
 import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: StubCalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue<Int>(list: LinkedList<Int>())
+        sut = StubCalculatorItemQueue<Int>(list: LinkedList())
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
+    
     // MARK: - enqueue Test
     func test_enqueue호출시_queue의_count가_1증가한다() {
         // given
@@ -37,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
         // when
         sut.enqueue(1)
-        let result = sut.list.tail?.value
+        let result = sut.list.first as? Int
         
         // then
         XCTAssertEqual(result, expectedResult)
@@ -55,11 +56,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(dequeueResult, dequeueExpectation)
     }
 
-    func test_dequeue호출시_queue의_첫번쨰element를_제거하고_반환한다() {
-        sut.list.tail = Node(value: 3)
-        sut.list.head = Node(value: 1, next: Node(value: 2, next: sut.list.tail))
-        sut.list.count = 3
-        
+    func test_dequeue호출시_queue의_첫번째element를_제거하고_반환한다() {
+        sut.list.appendLast(1)
+        sut.list.appendLast(2)
+        sut.list.appendLast(3)
         let returnExpectation = 1
         let queueCountExpectation = 2
 
@@ -72,14 +72,15 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     // MARK: - removeAll Test
     func test_removeAll호출시_queue의_head와_tail은_nil이다() {
-        sut.list.tail = Node(value: 3)
-        sut.list.head = Node(value: 1, next: Node(value: 2, next: sut.list.tail))
+        sut.list.appendLast(1)
+        sut.list.appendLast(2)
+        sut.list.appendLast(3)
         let headExpectation: Int? = nil
         let tailExpectation: Int? = nil
         
         sut.removeAll()
-        let headValueResult = sut.list.head?.value
-        let tailValueResult = sut.list.tail?.value
+        let headValueResult: Int? = sut.list.first as? Int
+        let tailValueResult: Int? = sut.list.last as? Int
         
         XCTAssertEqual(headValueResult, headExpectation)
         XCTAssertEqual(tailValueResult, tailExpectation)

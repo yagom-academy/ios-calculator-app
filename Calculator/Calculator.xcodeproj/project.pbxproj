@@ -19,6 +19,7 @@
 		4ABCF25C29811E860049C4AB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABCF25029811DCF0049C4AB /* Node.swift */; };
 		4ABCF25D29811E860049C4AB /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABCF25029811DCF0049C4AB /* Node.swift */; };
 		4ABCF25E29811E9C0049C4AB /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABCF25529811E140049C4AB /* CalculateItem.swift */; };
+		4ABCF264298295D70049C4AB /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ABCF25529811E140049C4AB /* CalculateItem.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -300,6 +301,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ABCF264298295D70049C4AB /* CalculateItem.swift in Sources */,
 				4ABCF25D29811E860049C4AB /* Node.swift in Sources */,
 				4ABCF25A29811E7D0049C4AB /* LinkedList.swift in Sources */,
 				4A12D6522980BB5F00D9F2B9 /* LinkedListTests.swift in Sources */,

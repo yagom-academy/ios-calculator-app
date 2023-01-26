@@ -8,10 +8,10 @@
 import XCTest
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>!
+    var sut: StubLinkedList!
 
     override func setUpWithError() throws {
-        sut = LinkedList()
+        sut = StubLinkedList()
     }
 
     override func tearDownWithError() throws {
@@ -32,15 +32,13 @@ final class LinkedListTests: XCTestCase {
     }
     
     // MARK: - appendLast Test
-    func test_head가nil이면_appendLast호출시_새노드가_head가된다() {
-        let headValue = 1
+    func test_head가nil이면_appendLast호출시_count가_1이된다() {
         let expectedResult = 1
         
-        if sut.head == nil {
-            sut.appendLast(headValue)
+        if sut.isEmpty {
+            sut.appendLast(1)
         }
-        
-        let result = sut.head?.value
+        let result = sut.count
         
         XCTAssertEqual(result, expectedResult)
     }
@@ -51,7 +49,7 @@ final class LinkedListTests: XCTestCase {
         sut.appendLast(headValue)
         sut.appendLast(secondValue)
         
-        let result = sut.head?.next?.value
+        let result = sut.head?.next?.value as? Int
         
         XCTAssertEqual(secondValue, result)
     }
@@ -72,7 +70,7 @@ final class LinkedListTests: XCTestCase {
         sut.removeFirst()
         let expectedResult: Int? = nil
         
-        let result = sut.head?.value
+        let result = sut.head?.value as? Int
         
         XCTAssertEqual(result, expectedResult)
     }
@@ -83,8 +81,8 @@ final class LinkedListTests: XCTestCase {
         let expectedResult: Int? = nil
         
         sut.removeFirst()
-        let resultHead = sut.head?.value
-        let resultTail = sut.tail?.value
+        let resultHead = sut.head?.value as? Int
+        let resultTail = sut.tail?.value as? Int
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
@@ -96,8 +94,8 @@ final class LinkedListTests: XCTestCase {
         let expectedResult = 2
         
         sut.removeFirst()
-        let resultHead = sut.head?.value
-        let resultTail = sut.tail?.value
+        let resultHead = sut.head?.value as? Int
+        let resultTail = sut.tail?.value as? Int
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
@@ -109,7 +107,7 @@ final class LinkedListTests: XCTestCase {
         let expectedResult = 2
         
         sut.removeFirst()
-        let result = sut.head?.value
+        let result = sut.head?.value as? Int
         
         XCTAssertEqual(result, expectedResult)
     }
@@ -121,8 +119,8 @@ final class LinkedListTests: XCTestCase {
         let expectedResult: Int? = nil
         
         sut.removeAll()
-        let resultHead = sut.head?.value
-        let resultTail = sut.tail?.value
+        let resultHead = sut.head?.value as? Int
+        let resultTail = sut.tail?.value as? Int
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
@@ -145,9 +143,9 @@ final class LinkedListTests: XCTestCase {
         let expectedResult: Int? = nil
         
         sut.removeAll()
-        let resultHead = sut.head?.value
-        let resultCenter = sut.head?.next?.value
-        let resultTail = sut.tail?.value
+        let resultHead = sut.head?.value as? Int
+        let resultCenter = sut.head?.next?.value as? Int
+        let resultTail = sut.tail?.value as? Int
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultCenter, expectedResult)
