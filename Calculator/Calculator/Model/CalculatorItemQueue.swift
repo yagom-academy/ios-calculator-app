@@ -39,8 +39,8 @@ struct CalculatorItemQueue: CalculateItem {
     mutating func dequeue() -> String? {
         if head == nil || tail == nil { return nil }
         
-        let dequeue = self.head
-        self.head = self.head?.next
+        let dequeue = head
+        head = head?.next
         dequeue?.next = nil
         
         guard let data = dequeue?.data as? String else { return nil }
@@ -62,8 +62,8 @@ struct CalculatorItemQueue: CalculateItem {
     }
     
     mutating func clear() {
-        self.head = nil
-        self.tail = nil
+        head = nil
+        tail = nil
     }
     
 }
