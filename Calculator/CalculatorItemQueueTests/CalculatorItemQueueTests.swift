@@ -21,14 +21,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_비었을경우_isEmpty가_true이다() {
+    func test_큐가_비었을경우_isEmpty가_true이다() {
         let result = sut.isEmpty
         let expectation = true
         
         XCTAssertEqual(result, expectation)
     }
     
-    func test_비었을경우_size가_0이다() {
+    func test_큐가_비었을경우_size가_0이다() {
         let result = sut.size
         let expectation = 0
         
@@ -129,5 +129,4 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
-    
 }

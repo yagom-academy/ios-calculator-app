@@ -63,5 +63,4 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         head = nil
         tail = nil
     }
-    
 }
