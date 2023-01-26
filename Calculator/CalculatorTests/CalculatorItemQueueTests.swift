@@ -21,26 +21,26 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출시_queue의_count가_1증가한다() {
         // given
         let element = 1
-        let expectation = sut.list.count + 1
+        let expectedResult = sut.list.count + 1
 
         // when
         sut.enqueue(element)
         let result = sut.list.count
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedResult)
     }
     
     func test_enqueue호출시_파라미터로_전달한값과_queue에추가된value가같다() {
         // given
-        let expectation = 1
+        let expectedResult = 1
 
         // when
         sut.enqueue(1)
         let result = sut.list.tail?.value
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedResult)
     }
     
     // MARK: - dequeue Test
@@ -87,11 +87,11 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_removeAll호출시_queue의_count는_0이다() {
         sut.list.count = 3
-        let expectation = 0
+        let expectedResult = 0
         
         sut.removeAll()
         let result = sut.list.count
         
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result, expectedResult)
     }
 }
