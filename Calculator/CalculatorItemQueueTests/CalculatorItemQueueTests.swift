@@ -12,13 +12,14 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue(itemArray: [], reversedItemArray: [])
+        sut = CalculatorItemQueue(items: [], reversedItems: [])
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
+    
     func test_input과output_둘중하나라도_빈배열이라면_true이다() {
     
         //when
@@ -27,13 +28,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         //then
         XCTAssertTrue(result)
     }
+    
     func test_enqueue_를실행하면_input에값이입력된다() {
         //given
         let input = "3"
         
         //when
         let _ = sut.enqueue(input)
-        let result = sut.itemArray
+        let result = sut.items
         
         //then
         XCTAssertEqual(result, ["3"])

@@ -5,23 +5,23 @@
 //  Created by jiye Yi on 2023/01/25.
 //
 
-struct CalculatorItemQueue<item: CalculateItemProtocol> {
-    private(set) var itemArray: [item] = []
-    private(set) var reversedItemArray: [item] = []
+struct CalculatorItemQueue<Item: CalculateItemProtocol> {
+    private(set) var items: [Item] = []
+    private(set) var reversedItems: [Item] = []
     
     var isEmpty: Bool {
-        return itemArray.isEmpty && reversedItemArray.isEmpty
+        return items.isEmpty && reversedItems.isEmpty
     }
     
-    mutating func enqueue(_ value: item) {
-        itemArray.append(value)
+    mutating func enqueue(_ value: Item) {
+        items.append(value)
     }
     
-    mutating func dequeue() -> item? {
-        if reversedItemArray.isEmpty {
-            reversedItemArray = itemArray.reversed()
-            itemArray.removeAll()
+    mutating func dequeue() -> Item? {
+        if reversedItems.isEmpty {
+            reversedItems = items.reversed()
+            items.removeAll()
         }
-        return reversedItemArray.popLast()
+        return reversedItems.popLast()
     }
 }
