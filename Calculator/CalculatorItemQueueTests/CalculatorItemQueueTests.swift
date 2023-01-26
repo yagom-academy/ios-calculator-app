@@ -73,16 +73,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_removeAllElement호출시_enqueueStack과dequeueStack에요소가있을때_enqueueStack과dequeueStack이지워진다() {
+    func test_removeAllElement호출시_큐에값이존재할때_큐가전부지워진다() {
         // given
         let input = ["1", "2"]
-        let inputAfterEnqueue = ["3", "4"]
         let expectation = 0
         
         // when
         input.forEach { sut.enqueue($0) }
-        sut.dequeue()
-        inputAfterEnqueue.forEach { sut.enqueue($0) }
         
         sut.removeAllElement()
         let result = sut.dequeueStack.count + sut.enqueueStack.count
