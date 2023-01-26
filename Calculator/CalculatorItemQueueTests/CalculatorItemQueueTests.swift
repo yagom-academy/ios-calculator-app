@@ -28,14 +28,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
-    func test_input_output_배열의수를반환한다() {
-        sut.input = ["1", "2"]
-        sut.output = ["2", "3"]
-        let expectation = 4
-        
-        let result = sut.count
-        XCTAssertEqual(result, expectation)
-    }
     
     func test_enqueue_를실행하면_input배열에값이입력된다() {
         let input = "1"

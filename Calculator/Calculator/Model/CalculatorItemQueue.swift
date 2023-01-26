@@ -13,15 +13,6 @@ struct CalculatorItemQueue<item: CalculateItemProtocol> {
         return input.isEmpty && output.isEmpty
     }
     
-    var count: Int {
-        return input.count + output.count
-    }
-    
-    var peek: item? {
-        return output.isEmpty ? input.first : output.last
-
-    }
-    
     mutating func enqueue(_ value: item) {
         input.append(value)
     }
