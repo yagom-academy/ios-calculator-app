@@ -24,7 +24,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_isEmpty호출시_큐가비어있는상태라면_true를반환한다() {
         // given
         let input = ["1", "2", "3"]
-        let expectation = true
         
         // when
         input.forEach { sut.enqueue($0) }
@@ -32,20 +31,19 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.isEmpty
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertTrue(result)
     }
     
     func test_isEmpty호출시_큐에1과2와3이들어있다면_false를반환한다() {
         // given
         let input = ["1", "2", "3"]
-        let expectation = false
         
         // when
         input.forEach { sut.enqueue($0) }
         let result = sut.isEmpty
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertFalse(result)
     }
     
     func test_count호출시_큐에1과2와3이존재한다면_3을반환한다() {
@@ -91,14 +89,13 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출시_3을넣으면_enqueueStack이3을포함한다() {
         // given
         let input = "3"
-        let expectation = true
         
         // when
         sut.enqueue(input)
         let result = sut.enqueueStack.contains("3")
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertTrue(result)
     }
     
     func test_dequeue호출시_큐가비어있다면_nil을반환한다() {
