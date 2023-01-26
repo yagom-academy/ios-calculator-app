@@ -46,7 +46,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_removeAllElement호출시_큐에값이존재할때_큐가전부지워진다() {
+    func test_removeAllElement호출시_큐에값이존재할때_count가0이된다() {
         // given
         let input = ["1", "2"]
         let expectation = 0
