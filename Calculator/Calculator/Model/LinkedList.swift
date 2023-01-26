@@ -29,7 +29,7 @@ struct LinkedList<T> {
         return count
     }
     
-    mutating func push(_ node: Node<T>) {
+    mutating func add(_ node: Node<T>) {
         if isEmpty {
             self.head = node
             self.tail = node
@@ -40,7 +40,7 @@ struct LinkedList<T> {
         head = node
     }
     
-    mutating func popHead() -> Node<T>? {
+    mutating func removeFirst() -> Node<T>? {
         defer {
             head = head?.next
             
@@ -52,7 +52,7 @@ struct LinkedList<T> {
         return head
     }
     
-    func pickHead() -> Node<T>? {
+    func peekFirst() -> Node<T>? {
         guard let headNode = head else {
             return nil
         }
@@ -65,7 +65,7 @@ struct LinkedList<T> {
             return nil
         }
         guard head?.next != nil else {
-            return popHead()
+            return removeFirst()
         }
         
         var prevNode = head

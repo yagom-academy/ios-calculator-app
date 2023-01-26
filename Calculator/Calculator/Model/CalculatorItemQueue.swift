@@ -13,7 +13,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func enqueueCalculateItems(_ node: Node<T>) {
-        calculateItems.push(node)
+        calculateItems.add(node)
     }
     
     mutating func dequeueCalculateItems() -> Node<T>? {

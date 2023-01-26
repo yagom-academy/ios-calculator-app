@@ -34,7 +34,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AACBF049298026DB00F128B6"
+               BlueprintIdentifier = "AA90A8D42980D9BA00BC1820"
                BuildableName = "CalculatorItemQueueTests.xctest"
                BlueprintName = "CalculatorItemQueueTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
@@ -45,8 +45,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA90A8B6298045C900BC1820"
-               BuildableName = "ListTests.xctest"
-               BlueprintName = "ListTests"
+               BuildableName = "LinkedListTests.xctest"
+               BlueprintName = "LinkedListTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
