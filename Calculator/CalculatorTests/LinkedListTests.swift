@@ -8,10 +8,10 @@
 import XCTest
 
 final class LinkedListTests: XCTestCase {
-    var sut: StubLinkedList!
+    var sut: LinkedList<Int>!
 
     override func setUpWithError() throws {
-        sut = StubLinkedList()
+        sut = LinkedList<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -49,7 +49,7 @@ final class LinkedListTests: XCTestCase {
         sut.appendLast(headValue)
         sut.appendLast(secondValue)
         
-        let result = sut.head?.next?.value as? Int
+        let result = sut.head?.next?.value
         
         XCTAssertEqual(secondValue, result)
     }
@@ -70,65 +70,71 @@ final class LinkedListTests: XCTestCase {
         sut.removeFirst()
         let expectedResult: Int? = nil
         
-        let result = sut.head?.value as? Int
+        let result = sut.head?.value
         
         XCTAssertEqual(result, expectedResult)
     }
     
     func test_노드가1개있을떄_removeFirst를_호출하면_head와_tail은_nil이된다() {
-        sut.head = Node(value: 1)
-        sut.tail = sut.head
+        let headNode = Node(value: 1)
+        let tailNode = headNode
+        sut = LinkedList(head: headNode, tail: tailNode, count: 1)
         let expectedResult: Int? = nil
         
         sut.removeFirst()
-        let resultHead = sut.head?.value as? Int
-        let resultTail = sut.tail?.value as? Int
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
     }
     
     func test_노드가2개있을때_removeFirst를_호출하면_두번째노드가_head이자_tail이된다() {
-        sut.tail = Node(value: 2)
-        sut.head = Node(value: 1, next: sut.tail)
+        let tailNode = Node(value: 2)
+        let headNode = Node(value: 1, next: tailNode)
+        sut = LinkedList(head: headNode, tail: tailNode, count: 2)
         let expectedResult = 2
         
         sut.removeFirst()
-        let resultHead = sut.head?.value as? Int
-        let resultTail = sut.tail?.value as? Int
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
     }
     
     func test_노드가3개있을때_removeFirst를_호출하면_두번째노드가_head가된다() {
-        sut.tail = Node(value: 3)
-        sut.head = Node(value: 1, next: Node(value: 2, next: sut.tail))
+        let tailNode = Node(value: 3)
+        let centerNode = Node(value: 2, next: tailNode)
+        let headNode = Node(value: 1, next: centerNode)
+        sut = LinkedList(head: headNode, tail: tailNode, count: 3)
         let expectedResult = 2
         
         sut.removeFirst()
-        let result = sut.head?.value as? Int
+        let result = sut.head?.value
         
         XCTAssertEqual(result, expectedResult)
     }
     
     // MARK: - removeAll Test
     func test_removeAll을_호출하면_head와tail이_nil이된다() {
-        sut.head = Node(value: 1)
-        sut.tail = sut.head
+        let headNode = Node(value: 1)
+        let tailNode = headNode
+        sut = LinkedList(head: headNode, tail: tailNode, count: 1)
         let expectedResult: Int? = nil
         
         sut.removeAll()
-        let resultHead = sut.head?.value as? Int
-        let resultTail = sut.tail?.value as? Int
+        let resultHead = sut.head?.value
+        let resultTail = sut.tail?.value
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultTail, expectedResult)
     }
     
     func test_removeAll을_호출하면_count는_0이다() {
-        sut.head = Node(value: 1)
-        sut.tail = sut.head
+        let headNode = Node(value: 1)
+        let tailNode = headNode
+        sut = LinkedList(head: headNode, tail: tailNode, count: 1)
         let expectedResult = 0
         
         sut.removeAll()
@@ -138,14 +144,16 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_node가_3개일때_removeAll을_호출하면_node가_모두삭제된다() {
-        sut.tail = Node(value: 3)
-        sut.head = Node(value: 1, next: Node(value: 2, next: sut.tail))
+        let tailNode = Node(value: 3)
+        let centerNode = Node(value: 2, next: tailNode)
+        let headNode = Node(value: 1, next: centerNode)
+        sut = LinkedList(head: headNode, tail: tailNode, count: 3)
         let expectedResult: Int? = nil
         
         sut.removeAll()
-        let resultHead = sut.head?.value as? Int
-        let resultCenter = sut.head?.next?.value as? Int
-        let resultTail = sut.tail?.value as? Int
+        let resultHead = sut.head?.value
+        let resultCenter = sut.head?.next?.value
+        let resultTail = sut.tail?.value
         
         XCTAssertEqual(resultHead, expectedResult)
         XCTAssertEqual(resultCenter, expectedResult)

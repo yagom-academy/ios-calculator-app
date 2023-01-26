@@ -8,10 +8,10 @@
 import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: StubCalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Int>!
     
-    override func setUpWithError() throws {
-        sut = StubCalculatorItemQueue<Int>(list: LinkedList())
+    override func setUpWithError() throws {        
+        sut = CalculatorItemQueue<Int>(list: LinkedList())
     }
 
     override func tearDownWithError() throws {
@@ -38,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
         // when
         sut.enqueue(1)
-        let result = sut.list.first as? Int
+        let result = sut.list.head?.value
         
         // then
         XCTAssertEqual(result, expectedResult)
@@ -57,9 +57,12 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
 
     func test_dequeue호출시_queue의_첫번째element를_제거하고_반환한다() {
-        sut.list.appendLast(1)
-        sut.list.appendLast(2)
-        sut.list.appendLast(3)
+        var list = LinkedList<Int>()
+        list.appendLast(1)
+        list.appendLast(2)
+        list.appendLast(3)
+        list.count = 3
+        sut = CalculatorItemQueue(list: list)
         let returnExpectation = 1
         let queueCountExpectation = 2
 
@@ -72,22 +75,30 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     // MARK: - removeAll Test
     func test_removeAll호출시_queue의_head와_tail은_nil이다() {
-        sut.list.appendLast(1)
-        sut.list.appendLast(2)
-        sut.list.appendLast(3)
+        var list = LinkedList<Int>()
+        list.appendLast(1)
+        list.appendLast(2)
+        list.appendLast(3)
+        list.count = 3
+        sut = CalculatorItemQueue(list: list)
         let headExpectation: Int? = nil
         let tailExpectation: Int? = nil
         
         sut.removeAll()
-        let headValueResult: Int? = sut.list.first as? Int
-        let tailValueResult: Int? = sut.list.last as? Int
+        let headValueResult: Int? = sut.list.head?.value
+        let tailValueResult: Int? = sut.list.tail?.value
         
         XCTAssertEqual(headValueResult, headExpectation)
         XCTAssertEqual(tailValueResult, tailExpectation)
     }
     
     func test_removeAll호출시_queue의_count는_0이다() {
-        sut.list.count = 3
+        var list = LinkedList<Int>()
+        list.appendLast(1)
+        list.appendLast(2)
+        list.appendLast(3)
+        list.count = 3
+        sut = CalculatorItemQueue(list: list)
         let expectedResult = 0
         
         sut.removeAll()
