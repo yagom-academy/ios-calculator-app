@@ -5,9 +5,9 @@
 //  Created by Rowan on 2023/01/25.
 //
 
-class Node<T> {
+final class Node<T> {
     
-    var data: T
+    let data: T
     var next: Node?
     
     init(data: T, next: Node? = nil) {
@@ -19,13 +19,28 @@ class Node<T> {
 
 struct LinkedList<T> {
     
-    var head: Node<T>?
-    var tail: Node<T>?
-    var count: Int = 0
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    private(set) var count: Int
+    
+    var headData: T? {
+        return self.head?.data
+    }
+    
+    var tailData: T? {
+        return self.tail?.data
+    }
+    
     var isEmpty: Bool { self.count == 0 }
     
+    private func generateNode(for data: T) -> Node<T> {
+        let node = Node(data: data)
+        
+        return node
+    }
+    
     mutating func appendLast(_ data: T) {
-        let newNode = Node(data: data)
+        let newNode = generateNode(for: data)
         
         if self.isEmpty {
             head = newNode
@@ -38,6 +53,7 @@ struct LinkedList<T> {
         count += 1
     }
     
+    @discardableResult
     mutating func removeFirst() -> T? {
         guard self.isEmpty == false else { return nil }
         
@@ -56,6 +72,12 @@ struct LinkedList<T> {
         head = nil
         tail = nil
         count = 0
+    }
+    
+    init(head: Node<T>? = nil, tail: Node<T>? = nil, count: Int = 0) {
+        self.head = head
+        self.tail = tail
+        self.count = count
     }
     
 }

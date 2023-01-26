@@ -7,12 +7,23 @@
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     
-    var queue: LinkedList<Element>
+    private var queue: LinkedList<Element>
+    
+    var itemCount: Int {
+        return self.queue.count
+    }
+    
+    func isEmpty() -> Bool {
+        let result = self.queue.isEmpty
+        
+        return result
+    }
     
     mutating func enqueue(_ element: Element) {
         queue.appendLast(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> Element? {
         guard let element = queue.removeFirst() else { return nil }
         
@@ -22,4 +33,9 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     mutating func removeAll() {
         queue.removeAll()
     }
+    
+    init(queueList: LinkedList<Element>) {
+        self.queue = queueList
+    }
+    
 }
