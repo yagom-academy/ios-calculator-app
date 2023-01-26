@@ -22,111 +22,135 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_큐가_비었을경우_isEmpty가_true이다() {
-        let result = sut.isEmpty
+        // given
         let expectation = true
-        
+        // when
+        let result = sut.isEmpty
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_큐가_비었을경우_size가_0이다() {
-        let result = sut.size
+        // given
         let expectation = 0
-        
+        // when
+        let result = sut.size
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_enqueue_됐을경우_isEmpty가_false이다() {
+        // given
+        let expectation = false
+        // when
         sut.enqueue(111)
         let result = sut.isEmpty
-        let expectation = false
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_한번_enqueue_됐을경우_size가_1이다() {
+        // given
+        let expectation = 1
+        // when
         sut.enqueue(111)
         let result = sut.size
-        let expectation = 1
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_세번_enqueue_됐을경우_size가_3이다() {
+        // given
+        let expectation = 3
+        // when
         sut.enqueue(111)
         sut.enqueue(222)
         sut.enqueue(333)
         let result = sut.size
-        let expectation = 3
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_dequeue_됐을경우_처음에_enqueue_해준_데이터가_반환된다() {
+        // given
         sut.enqueue(111)
         sut.enqueue(222)
         sut.enqueue(333)
-        let result = sut.dequeue()!
         let expectation: Double = 111
-        
+        // when
+        let result = sut.dequeue()!
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_dequeue_됐을경우_size가_감소한다() {
+        // given
         sut.enqueue(111)
         sut.enqueue(222)
         sut.enqueue(333)
+        let expectation = 2
+        // when
         let _ = sut.dequeue()
         let result = sut.size
-        let expectation = 2
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_빈queue를_dequeue_할경우_nil이_반환된다() {
-        let result = sut.dequeue()
+        // given
         let expectation: Double? = nil
-        
+        // when
+        let result = sut.dequeue()
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_2개의_queue에서_removeLast를_한경우_size가_줄어든다() {
+        // given
         sut.enqueue(111)
         sut.enqueue(222)
+        let expectation = 1
+        // when
         sut.removeLast()
         let result = sut.size
-        let expectation = 1
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_2개의_queue에서_removeLast를_한경우_2번째_dequeue는_nil이다() {
+        // given
         sut.enqueue(111)
         sut.enqueue(222)
+        let expectation: Double? = nil
+        // when
         sut.removeLast()
         let _ = sut.dequeue()
         let result = sut.dequeue()
-        let expectation: Double? = nil
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_1개의_queue에서_removeLast를_한경우_size는_0이다() {
+        // given
         sut.enqueue(111)
+        let expectation = 0
+        // when
         sut.removeLast()
         let result = sut.size
-        let expectation = 0
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
     
     func test_3개의_queue에서_clear를_한경우_isEmpty는_true이다() {
+        // given
         sut.enqueue(111)
         sut.enqueue(222)
         sut.enqueue(333)
+        let expectation = true
+        // when
         sut.clear()
         let result = sut.isEmpty
-        let expectation = true
-        
+        // then
         XCTAssertEqual(result, expectation)
     }
 }
