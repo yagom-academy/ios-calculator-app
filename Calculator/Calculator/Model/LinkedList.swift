@@ -22,11 +22,12 @@ struct LinkedList<Element: CalculateItem> {
     }
     
     mutating func removeFirst() -> Element? {
-        if isEmpty {
-            return nil
+        let value = self.head?.value
+        
+        if self.head?.next == nil {
+            self.tail = nil
         }
         
-        let value = self.head?.value
         self.head = self.head?.next
         
         return value

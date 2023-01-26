@@ -39,7 +39,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_a의_값을_처음_append한다면_head값은_a이다() {
+    func test_a의_값을_append한다면_head값은_a이다() {
         // given
         let value = "a"
         let exception = "a"
@@ -90,6 +90,36 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(exception, removedValue)
     }
     
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_반환값은_head와_tail은_nil이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        // when
+        sut.append(firstValue)
+        sut.append(secondValue)
+        _ = sut.removeFirst()
+        _ = sut.removeFirst()
+
+        let headValue = sut.head
+        let tailValue = sut.tail
+        // then
+        XCTAssertNil(headValue)
+        XCTAssertNil(tailValue)
+    }
+    
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_반환값은_isEmpty는_true이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        // when
+        sut.append(firstValue)
+        sut.append(secondValue)
+        _ = sut.removeFirst()
+        _ = sut.removeFirst()
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
     func test_isEmpty가_true인_상태에서_removeFirst를_한다면_nil이_반환된다() {
         // given
         // when
@@ -97,7 +127,7 @@ final class LinkedListTest: XCTestCase {
         // then
         XCTAssertNil(sut.removeFirst())
     }
-    
+
     func test_a와b를_append하고_removeAll을_할_경우_head와_tail은_nil이다() {
         // given
         let firstValue = "a"
