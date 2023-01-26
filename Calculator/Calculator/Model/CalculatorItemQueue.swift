@@ -1,15 +1,15 @@
 //  Calculator - CalculatorItemQueue.swift
 //  created by vetto on 2023/01/25
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    var head: Node<T>?
-    var tail: Node<T>?
+struct CalculatorItemQueue<Element: CalculateItem> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func enqueue(newData: Node<T>) {
+    mutating func enqueue(newData: Node<Element>) {
         if head == nil {
             head = newData
             tail = newData
@@ -19,7 +19,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         }
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         if head == nil {
             return nil
         } else {

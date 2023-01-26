@@ -1,11 +1,11 @@
 //  Calculator - Node.swift
 //  created by vetto on 2023/01/24
 
-class Node<T: CalculateItem> {
-    let data: T?
-    var next: Node<T>?
+class Node<Element: CalculateItem> {
+    let data: Element?
+    var next: Node<Element>?
     
-    init(data: T?, next: Node<T>? = nil) {
+    init(data: Element?, next: Node<Element>? = nil) {
         self.data = data
         self.next = next
     }
