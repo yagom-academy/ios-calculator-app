@@ -2,7 +2,7 @@
 //  Created by 레옹아범 on 2023/01/24.
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var items = LinkedList<Element>()
+    private var items = LinkedList<Element>()
     
     var isEmpty: Bool {
         self.items.isEmpty
@@ -18,11 +18,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.items.append(element)
     }
     
-    func dequeue() -> Element? {
-        return nil
+    mutating func dequeue() -> Element? {
+        return self.items.removeFirst()
     }
     
     func removeAll() {
-        
     }
 }

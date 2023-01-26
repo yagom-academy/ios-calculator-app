@@ -83,4 +83,47 @@ final class CalculatorItemQueueTest: XCTestCase {
         // then
         XCTAssertEqual(peekValue, exception)
     }
+    
+    func test_a와_b를_enqueue하고_dequeue를_한다면_back의_값은_b이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        let exception = "b"
+        // when
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
+        _ = sut.dequeue()
+        let peekValue = sut.peek!
+        // then
+        XCTAssertEqual(peekValue, exception)
+    }
+    
+    func test_a와b_그리고_c를_enqueue한_후_removeAll을_한다면_peek는_nil이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        let thirdValue = "c"
+        // when
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
+        sut.enqueue(thirdValue)
+        sut.removeAll()
+        // then
+        XCTAssertNil(sut.peek)
+    }
+    
+    func test_a와b_그리고_c를_enqueue한_후_removeAll을_한다면_back은_nil이다() {
+        // given
+        let firstValue = "a"
+        let secondValue = "b"
+        let thirdValue = "c"
+        // when
+        sut.enqueue(firstValue)
+        sut.enqueue(secondValue)
+        sut.enqueue(thirdValue)
+        sut.removeAll()
+        // then
+        XCTAssertNil(sut.back)
+    }
+    
 }
