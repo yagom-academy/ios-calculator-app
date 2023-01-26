@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue<item: CalculateItemProtocol> {
-    var input: [item] = []
-    var output: [item] = []
+    private(set) var input: [item] = []
+    private(set) var output: [item] = []
     
     var isEmpty: Bool {
         return input.isEmpty && output.isEmpty
