@@ -12,7 +12,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue(input: [], output: [])
+        sut = CalculatorItemQueue(itemArray: [], reversedItemArray: [])
     }
     
     override func tearDownWithError() throws {
@@ -33,7 +33,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         //when
         let _ = sut.enqueue(input)
-        let result = sut.input
+        let result = sut.itemArray
         
         //then
         XCTAssertEqual(result, ["3"])
@@ -42,10 +42,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_dequeue_를실행했을때_output과_input이비어있다면_nil을반환한다() {
         //when
         let result = sut.dequeue()
-        let expectation: String? = nil
-        
+
         //then
-        XCTAssertEqual(result, expectation)
+        XCTAssertNil(result)
        
     }
     

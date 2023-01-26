@@ -6,22 +6,22 @@
 //
 
 struct CalculatorItemQueue<item: CalculateItemProtocol> {
-    private(set) var input: [item] = []
-    private(set) var output: [item] = []
+    private(set) var itemArray: [item] = []
+    private(set) var reversedItemArray: [item] = []
     
     var isEmpty: Bool {
-        return input.isEmpty && output.isEmpty
+        return itemArray.isEmpty && reversedItemArray.isEmpty
     }
     
     mutating func enqueue(_ value: item) {
-        input.append(value)
+        itemArray.append(value)
     }
     
     mutating func dequeue() -> item? {
-        if output.isEmpty {
-            output = input.reversed()
-            input.removeAll()
+        if reversedItemArray.isEmpty {
+            reversedItemArray = itemArray.reversed()
+            itemArray.removeAll()
         }
-        return output.popLast()
+        return reversedItemArray.popLast()
     }
 }
