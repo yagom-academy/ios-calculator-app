@@ -48,17 +48,5 @@ final class CalculatorTests: XCTestCase {
         let result = [3,4,11]
         
     }
-    
-    func test_queue에서_첫번째요소를찾는함수() {
-        // given
-        sut.enqueue(element: 9)
-        sut.enqueue(element: 3)
-        sut.enqueue(element: 4)
-        sut.enqueue(element: 11)
-        sut.dequeue()
-        // when
-        let result = 9
-        // then
-    }
 
 }
