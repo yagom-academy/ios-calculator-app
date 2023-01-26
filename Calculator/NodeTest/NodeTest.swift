@@ -16,7 +16,7 @@ final class NodeTest: XCTestCase {
         sut = nil
     }
     
-    func test_Node생성_시_123값에_추가문자열_0을_맨앞에_넣을시_기존value가_바뀐다() {
+    func test_123값을_가진_Node에_추가문자열_0을_맨앞에_넣을시_0123으로_값이_바뀐다() {
         // given
         let initValue = "123"
         let exception = "0123"
