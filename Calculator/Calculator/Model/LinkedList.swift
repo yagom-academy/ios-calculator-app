@@ -12,7 +12,16 @@ struct LinkedList<Element: CalculateItem> {
         return self.head == nil
     }
     
-    mutating func append(_ element: String) {
+    mutating func append(_ element: Element) {
+        if isEmpty {
+            self.head = Node(value: element)
+            self.tail = self.head
+            return
+        }
+        
+        let node = Node(value: element)
+        self.tail?.next = node
+        self.tail = node
     }
     
     mutating func dequeue() -> CalculateItem {

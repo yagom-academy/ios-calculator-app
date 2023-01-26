@@ -20,12 +20,21 @@ final class LinkedListTest: XCTestCase {
         sut = nil
     }
     
-    func test_초기_인스턴스_생성시_isEmpty는_True이다() {
+    func test_초기_인스턴스_생성시_isEmpty는_true이다() {
         // then
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_처음_인스턴스_생성_후_append에_a를_넣는다면_head값은_a이다() {
+    func test_a의_값을_append하면_isEmpty는_false이다() {
+        // given
+        let firstValue = "a"
+        // when
+        sut.append(firstValue)
+        // then
+        XCTAssertFalse(sut.isEmpty)
+    }
+    
+    func test_a의_값을_처음_append한다면_head값은_a이다() {
         // given
         let value = "a"
         let exception = "a"
@@ -34,6 +43,17 @@ final class LinkedListTest: XCTestCase {
         let headValue = sut.head!.value
         // then
         XCTAssertEqual(headValue, exception)
+    }
+    
+    func test_a의_값을_처음_append한다면_tail값은_a이다() {
+        // given
+        let value = "a"
+        let exception = "a"
+        // when
+        sut.append(value)
+        let tailValue = sut.tail!.value
+        // then
+        XCTAssertEqual(tailValue, exception)
     }
     
     func test_a과_b_두개의_값을_append한다면_head는_a_tail은_b다() {
