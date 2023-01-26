@@ -7,17 +7,22 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
+protocol CalculateItem {}
 
-extension String: CalculateItem {
-    
-}
+extension String: CalculateItem {}
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var data = [T]()
-    init() {}
+    private(set) var data: [T]
+    var isEmpty: Bool {
+        return data.isEmpty
+    }
+    var count: Int {
+        return data.count
+    }
+    
+    init(_ data: [T] = []) {
+        self.data = data
+    }
     
     mutating func dequeue() -> T? {
         guard data.count > 0 else {
@@ -37,13 +42,4 @@ struct CalculatorItemQueue<T: CalculateItem> {
     mutating func clear() {
         data.removeAll()
     }
-    
-    func isEmpty() -> Bool {
-        return data.isEmpty
-    }
-    
-    var count: Int {
-        return data.count
-    }
-    
 }
