@@ -22,6 +22,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return self.items.removeFirst()
     }
     
-    func removeAll() {
+    mutating func removeAll() {
+        self.items.removeAll()
     }
 }
