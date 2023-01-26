@@ -31,38 +31,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    // size computed property test
-    func test_빈_queue에서_size를_호출하면_0이다() {
-        let result = sut.size
-        let expectation = 0
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_queue에_Node를_1개넣고_size를_호출하면_1이다() {
-        let headNode: Node = Node(data: "head")
-        
-        sut.head = headNode
-        
-        let result = sut.size
-        let expectation = 1
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_queue에_Node를_2개넣고_size를_호출하면_2이다() {
-        let headNode: Node = Node(data: "head")
-        let nextNode: Node = Node(data: "next")
-        
-        sut.head = headNode
-        sut.head?.next = nextNode
-        
-        let result = sut.size
-        let expectation = 2
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
     // enqueue method test
     func test_빈_큐에_enqueue하면_head에_들어간다() {
         sut.enqueue(newData: Node(data: "head"))
@@ -163,34 +131,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = result == nil ? true : false
         
         XCTAssertTrue(expectation)
-    }
-    
-    // peek test
-    func test_빈_큐에서_peek연산_프로퍼티_실행하면_nil이_나온다() {
-        let result = sut.peek
-        let expectation = result == nil ? true : false
-        
-        XCTAssertTrue(expectation)
-    }
-    
-    func test_큐에_한개의_노드를_넣고_peek을_실행하면_head의_값이_나온다() {
-        sut.head = Node(data: "head")
-        
-        let result = sut.peek
-        let expectation = "head"
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_큐에_두개의_노드를_넣고_하나를_삭제한_후_peek을_실행하면_바뀐_head의_값이_나온다() {
-        sut.head = Node(data: "head")
-        sut.head?.next = Node(data: "middle")
-        
-        sut.head = sut.head?.next
-        let result = sut.peek
-        let expectation = "middle"
-        
-        XCTAssertEqual(result, expectation)
     }
     
     // clear method test
