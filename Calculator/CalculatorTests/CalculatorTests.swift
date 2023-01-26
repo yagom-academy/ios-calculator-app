@@ -60,7 +60,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_data배열에_값이하나인상태에서_dequeue호출시_빈배열을반환한다() {
+    func test_data배열에_값이하나인상태에서_dequeue호출시_data배열은_빈배열이된다() {
         // given
         sut.data = [1]
         let expectation: [Int] = []
@@ -108,13 +108,17 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_data배열의count가40이상이고_퍼센트가25이상일시_배열의nil값을포함하여_dequeue한다() {
+        // given
         for number in 1...40 {
             sut.enqueue(number)
         }
-        print(sut.data)
+        
+        // when
         for number in 1...10 {
             sut.dequeue()
         }
+        
+        // then
         print(sut.data)
     }
     
