@@ -20,7 +20,7 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
         return enqueueStack.count + dequeueStack.count
     }
     
-    mutating func resetAllElement() {
+    mutating func removeAllElement() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
     }

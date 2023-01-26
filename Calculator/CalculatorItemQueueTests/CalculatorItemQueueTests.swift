@@ -44,7 +44,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.dequeueCurrentItem()
         inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
         
-        sut.resetAllElement()
+        sut.removeAllElement()
         let result = sut.isEmpty
         
         // then
@@ -81,7 +81,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_resetAllElement호출시_enqueueStack과dequeueStack에요소가있을때_enqueueStack과dequeueStack이지워진다() {
+    func test_removeAllElement호출시_enqueueStack과dequeueStack에요소가있을때_enqueueStack과dequeueStack이지워진다() {
         // given
         let input = ["1", "2"]
         let inputAfterEnqueue = ["3", "4"]
@@ -92,7 +92,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.dequeueCurrentItem()
         inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
         
-        sut.resetAllElement()
+        sut.removeAllElement()
         let result = sut.dequeueStack.count + sut.enqueueStack.count
         
         // then
