@@ -7,8 +7,11 @@
 
 import XCTest
 
+extension Int : CalculateItem { }
+
 final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<CalculateItem>?
+    
+    var sut: CalculatorItemQueue<Int>?
     
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -34,7 +37,7 @@ final class CalculatorTests: XCTestCase {
         //given
         sut?.clear()
         //when
-        let result = sut?.peek() as? Int
+        let result = sut?.peek()
         let expectation: Int? = nil
         //then
         XCTAssertEqual(result, expectation)
@@ -50,8 +53,10 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(secondElement)
         sut?.enqueue(thirdElement)
 
-        let result = sut?.peek() as? Int
-        let expectation = firstElement
+        sut?.dequeue()
+        
+        let result = sut?.queue.first
+        let expectation: Int? = nil
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -61,7 +66,7 @@ final class CalculatorTests: XCTestCase {
         let element = 3
         //when
         sut?.enqueue(element)
-        let result = sut?.peek() as? Int
+        let result = sut?.peek()
         let expectation = element
         //then
         XCTAssertEqual(result, expectation)
@@ -94,8 +99,9 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(thirdElement)
 
         sut?.dequeue()
-        let result = sut?.count
-        let expectation = 2
+        
+        let result = sut?.queue.first
+        let expectation: Int? = nil
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -110,7 +116,7 @@ final class CalculatorTests: XCTestCase {
         sut?.enqueue(secondElement)
         sut?.enqueue(thirdElement)
 
-        let result = sut?.dequeue() as? Int
+        let result = sut?.dequeue()
         let expectation = firstElement
         //then
         XCTAssertEqual(result, expectation)
@@ -120,7 +126,7 @@ final class CalculatorTests: XCTestCase {
         //given
         sut?.clear()
         //when
-        let result = sut?.dequeue() as? Int
+        let result = sut?.dequeue()
         let expectation: Int? = nil
         //then
         XCTAssertEqual(result, expectation)

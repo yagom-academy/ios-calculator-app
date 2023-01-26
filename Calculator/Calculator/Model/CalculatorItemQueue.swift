@@ -7,12 +7,9 @@
 
 import Foundation
 
-
-
-struct CalculatorItemQueue<T> {
-    
-    private var queue: [T?] = []
-    private var frontIndex: Int = 0
+struct CalculatorItemQueue<T: CalculateItem> {
+    private(set) var queue: [T?] = []
+    private(set) var frontIndex: Int = 0
     
     public var count: Int {
         let count = queue.endIndex - frontIndex
@@ -23,12 +20,12 @@ struct CalculatorItemQueue<T> {
         return queue.isEmpty
     }
     
-    public mutating func enqueue(_ element: T) {
+    mutating func enqueue(_ element: T) {
         queue.append(element)
     }
     
     @discardableResult 
-    public mutating func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         guard queue.isEmpty != true,
               frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
@@ -39,7 +36,7 @@ struct CalculatorItemQueue<T> {
         return element
     }
     
-    public func peek() -> T? {
+    func peek() -> T? {
         guard queue.isEmpty != true,
               frontIndex <= count,
               let element = queue[frontIndex] else { return nil }
@@ -47,7 +44,7 @@ struct CalculatorItemQueue<T> {
         return element
     }
     
-    public mutating func clear() {
+    mutating func clear() {
         queue = []
     }
     
