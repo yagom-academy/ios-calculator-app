@@ -6,29 +6,24 @@ import XCTest
 
 final class NodeTest: XCTestCase {
 
-    var sut: Node?
+    var sut: Node<String>!
     
     override func setUpWithError() throws {
-        sut = Node(value: "123456")
+        sut = Node(value: "")
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
     
-    func test_Node가_생성되면_prev와_next가_nil이며_value는_초기값이다() {
-        let value = "123456"
-        
-        XCTAssertTrue(sut?.prev == nil)
-        XCTAssertTrue(sut?.next == nil)
-        XCTAssertEqual(value, sut?.value)
-    }
-    
-    func test_Node의_value의_값을_바꿀수있다() {
-        let value = "+ 123456"
-        
-        sut?.value = "+ " + (sut?.value)!
-        
-        XCTAssertEqual(value, sut?.value)
+    func test_Node생성_시_123값에_추가문자열_0을_맨앞에_넣을시_기존value가_바뀐다() {
+        // given
+        let initValue = "123"
+        let exception = "0123"
+        sut.value = initValue
+        // when
+        sut.value = "0" + sut.value
+        // then
+        XCTAssertEqual(exception, sut?.value)
     }
 }

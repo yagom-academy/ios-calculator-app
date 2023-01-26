@@ -1,44 +1,23 @@
 //  Queue.swift
 //  Created by 레옹아범 on 2023/01/24.
 
+extension String: CalculateItem {
+}
+
 struct Queue {
-    var head: Node?
-    var tail: Node?
+    var head: Node<String>?
+    var tail: Node<String>?
     
     var isEmpty: Bool {
         return self.head == nil
     }
     
-    mutating func enqueue(_ node: Node) {
-        if isEmpty {
-            self.head = node
-            self.tail = node
-            
-            return
-        }
-        
-        node.prev = self.tail
-        self.tail?.next = node
-        self.tail = node
-        self.tail?.next = self.head
+    mutating func enqueue(_ node: String) {
     }
     
-    mutating func dequeue() -> Node? {
-        if isEmpty {
-            return nil
-        }
-        
-        let dequeueNode = self.head
-        
-        self.head = self.head?.next
-        self.head?.prev = self.tail
-        
-        self.tail?.next = self.head
-        
-        dequeueNode?.prev = nil
-        dequeueNode?.next = nil
-        
-        return dequeueNode
+    mutating func dequeue() -> CalculateItem {
+        //
+        return "abc"
     }
     
     mutating func removeAll() {

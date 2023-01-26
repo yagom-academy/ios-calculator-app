@@ -1,13 +1,11 @@
 //  Node.swift
 //  Created by 레옹아범 on 2023/01/24.
 
-final class Node {
-    weak var prev: Node?
-    weak var next: Node?
-    var value: String
+final class Node<Element: CalculateItem> {
+    var next: Node?
+    var value: Element
     
-    init(prev: Node? = nil, next: Node? = nil, value: String) {
-        self.prev = prev
+    init(prev: Node? = nil, next: Node? = nil, value: Element) {
         self.next = next
         self.value = value
     }

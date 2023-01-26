@@ -1,7 +1,7 @@
 //  CalculatorItemQueue.swift
 //  Created by 레옹아범 on 2023/01/24.
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue {
     var items = Queue()
     var item: String = ""
     
@@ -23,12 +23,6 @@ struct CalculatorItemQueue: CalculateItem {
     
     mutating func finishInputItem() {
 //        숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력받습니다.
-        if item == "" {
-            return
-        }
-        
-        let tempNode = Node(value: item)
-        self.items.enqueue(tempNode)
     }
     
     mutating func addNumber(_ number: String) {
