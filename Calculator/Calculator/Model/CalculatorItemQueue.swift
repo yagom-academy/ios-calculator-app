@@ -5,9 +5,9 @@
 //  Created by jiye Yi on 2023/01/25.
 //
 
-struct CalculatorItemQueue<T: Equatable> {
-    var input: [T] = []
-    var output: [T] = []
+struct CalculatorItemQueue<item: CalculateItemProtocol> {
+    var input: [item] = []
+    var output: [item] = []
     
     var isEmpty: Bool {
         return input.isEmpty && output.isEmpty
@@ -17,20 +17,20 @@ struct CalculatorItemQueue<T: Equatable> {
         return input.count + output.count
     }
     
-    var peek: T? {
+    var peek: item? {
         return output.isEmpty ? input.first : output.last
 
     }
     
-    mutating func enqueue(_ value: T) {
+    mutating func enqueue(_ value: item) {
         input.append(value)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> item? {
         if output.isEmpty {
             output = input.reversed()
             input.removeAll()
         }
-        return output.removeLast()
+        return output.popLast()
     }
 }
