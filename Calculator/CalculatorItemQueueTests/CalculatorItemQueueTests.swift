@@ -81,33 +81,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_peek호출시_dequeueStack이비어있다면_enqueueStack의첫번째값을반환한다() {
-        // given
-        let input = ["1", "2", "3"]
-        let expectation = "1"
-        
-        // when
-        input.forEach { sut.enqueueCurrentItem($0) }
-        let result = sut.peek
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_peek호출시_dequeueStack이비어있지않다면_dequeueStack의마지막값을반환한다() {
-        // given
-        let input = ["1", "2", "3", "4", "5"]
-        let expectation = "2"
-        
-        // when
-        input.forEach { sut.enqueueCurrentItem($0) }
-        sut.dequeueCurrentItem()
-        let result = sut.peek
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
     func test_resetAllElement호출시_enqueueStack과dequeueStack에요소가있을때_enqueueStack과dequeueStack이지워진다() {
         // given
         let input = ["1", "2"]
