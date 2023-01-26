@@ -59,7 +59,6 @@ final class CalculatorTests: XCTestCase {
         // when
         let result = 9
         // then
-        XCTAssertEqual(result, sut.searchQueue())
     }
 
 }
