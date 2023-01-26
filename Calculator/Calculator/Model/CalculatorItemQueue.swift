@@ -9,7 +9,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return head == nil
     }
     
-    mutating func enqueue(data: Element) {
+    mutating func enqueue(_ data: Element) {
         let node = Node(data: data)
         if head == nil {
             head = node
