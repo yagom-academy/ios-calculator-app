@@ -2,7 +2,7 @@
 //  Created by 레옹아범 on 2023/01/24.
 
 struct CalculatorItemQueue {
-    var items = Queue()
+    var items: LinkedList<String>
     var item: String = ""
     
     mutating func removeAllItems() {

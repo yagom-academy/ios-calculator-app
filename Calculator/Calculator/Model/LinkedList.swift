@@ -4,15 +4,15 @@
 extension String: CalculateItem {
 }
 
-struct LinkedList {
-    var head: Node<String>?
-    var tail: Node<String>?
+struct LinkedList<Element: CalculateItem> {
+    var head: Node<Element>?
+    var tail: Node<Element>?
     
     var isEmpty: Bool {
         return self.head == nil
     }
     
-    mutating func enqueue(_ node: String) {
+    mutating func append(_ element: String) {
     }
     
     mutating func dequeue() -> CalculateItem {
