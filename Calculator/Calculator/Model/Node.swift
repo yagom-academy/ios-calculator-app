@@ -1,7 +1,7 @@
 //  Calculator - Node.swift
 //  created by vetto on 2023/01/24
 
-class Node<Element: CalculateItem> {
+final class Node<Element: CalculateItem> {
     let data: Element?
     var next: Node<Element>?
     

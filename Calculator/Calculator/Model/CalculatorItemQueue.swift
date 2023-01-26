@@ -9,13 +9,13 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return head == nil
     }
     
-    mutating func enqueue(newData: Node<Element>) {
+    mutating func enqueue(node: Node<Element>) {
         if head == nil {
-            head = newData
-            tail = newData
+            head = node
+            tail = node
         } else {
-            tail?.next = newData
-            tail = newData
+            tail?.next = node
+            tail = node
         }
     }
     
