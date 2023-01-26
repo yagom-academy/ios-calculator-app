@@ -16,10 +16,6 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    var count: Int {
-        return enqueueStack.count + dequeueStack.count
-    }
-    
     mutating func removeAllElement() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()

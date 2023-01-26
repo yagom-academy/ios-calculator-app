@@ -46,31 +46,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_count호출시_큐에1과2와3이존재한다면_3을반환한다() {
-        // given
-        let input = ["1", "2", "3"]
-        let expectation = 3
-        
-        // when
-        input.forEach { sut.enqueue($0) }
-        let result = sut.count
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_count호출시_큐에값이존재하지않는다면_0을반환한다() {
-        // given
-        let expectation = 0
-        
-        // when
-        sut.removeAllElement()
-        let result = sut.count
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
     func test_removeAllElement호출시_큐에값이존재할때_큐가전부지워진다() {
         // given
         let input = ["1", "2"]
