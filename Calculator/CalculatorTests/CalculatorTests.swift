@@ -10,7 +10,7 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
 
-    var sut: CalculatorItemQueue <String>!
+    var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -37,7 +37,7 @@ final class CalculatorTests: XCTestCase {
         
         //when
         let result = sut.isEmpty
-        
+    
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -72,11 +72,10 @@ final class CalculatorTests: XCTestCase {
         guard let result = sut.peek else {
             return
         }
+        
         //then
         XCTAssertEqual(result, expectation)
     }
-    
-//    func test_dequeueStack이_비어져있을때_
     
     func test_enqueue실행시_enqueueStack에_3개의값이_넣어진다() {
         //given
@@ -97,6 +96,7 @@ final class CalculatorTests: XCTestCase {
         //given
         let input = ["3", "+", "4"]
         let expectation = ["4", "+"]
+        
         //when
         for value in input {
             sut.enqueue(item: value)
@@ -112,6 +112,7 @@ final class CalculatorTests: XCTestCase {
         //given
         let input = ["3", "+", "4"]
         let expectation = [String]()
+        
         //when
         for value in input {
             sut.enqueue(item: value)
@@ -125,17 +126,17 @@ final class CalculatorTests: XCTestCase {
     
     func test_dequeueStack이_마지막값을_반환한다() {
         //given
+        
         let input = ["3", "+", "4"]
         let expectation = "3"
+        
         //when
         for value in input {
             sut.enqueue(item: value)
         }
         let result = sut.dequeue()
+        
         //then
         XCTAssertEqual(result, expectation)
     }
-    
-
 }
-
