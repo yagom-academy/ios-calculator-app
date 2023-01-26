@@ -93,7 +93,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_data배열값삭제시_first의인덱스를가르키는_head의값이증가한다() {
+    func test_data배열_dequeue실행시_first의인덱스를가르키는_head의값이증가한다() {
         // given
         sut.data = [2, 3, 4, 1, 6, 7, 8, 0]
         let expectation = 2
