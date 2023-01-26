@@ -5,9 +5,7 @@
 
 import Foundation
 
-protocol CalculatorItem {
-    
-}
+protocol CalculatorItem { }
 
 
 struct CalculatorItemQueue<T>: CalculatorItem {
