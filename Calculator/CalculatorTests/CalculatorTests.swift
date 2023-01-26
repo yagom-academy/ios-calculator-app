@@ -38,15 +38,5 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertNil(sut.dequeue())
     }
-    
-    func test_요소를삭제할때_첫번째요소가삭제되는지_확인하는함수() {
-        sut.enqueue(element: 9)
-        sut.enqueue(element: 3)
-        sut.enqueue(element: 4)
-        sut.enqueue(element: 11)
-        sut.dequeue()
-        let result = [3,4,11]
-        
-    }
 
 }
