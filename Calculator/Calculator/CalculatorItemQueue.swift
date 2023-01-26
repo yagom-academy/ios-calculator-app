@@ -7,7 +7,7 @@
 //MARK: Queue 타입 구현
 struct CalculatorItemQueue<T>: CalculateItem {
     
-    private var head: Node<T>?
+    var head: Node<T>?
     
     var last: Node<T>? {
         if head == nil {
@@ -39,17 +39,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func dequeue() -> T? {
         if head == nil { return nil }
         
-        if head?.nextData == nil {
-            head = nil
-            return head?.data
+        guard let nowhead = head else {
+            return nil
         }
-        
-        var node = head
-        while node?.nextData?.nextData != nil {
-            node = node?.nextData
-        }
-        
-        return node?.data
+        head = nowhead.nextData
+        return nowhead.data
     }
     
     mutating func removeAll() {
