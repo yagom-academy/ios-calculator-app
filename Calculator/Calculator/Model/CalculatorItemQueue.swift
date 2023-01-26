@@ -5,9 +5,9 @@
 //  Created by kaki on 2023/01/25.
 //
 
-struct CalculatorItemQueue: CalculateItem {
-    private var head: Node?
-    private var tail: Node?
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
@@ -23,7 +23,7 @@ struct CalculatorItemQueue: CalculateItem {
         return count
     }
     
-    mutating func enqueue(data: CalculateItem) {
+    mutating func enqueue(_ data: Element) {
         if head == nil || tail == nil {
             head = Node.init(data)
             tail = head
@@ -36,16 +36,14 @@ struct CalculatorItemQueue: CalculateItem {
         tail = newNode
     }
     
-    mutating func dequeue() -> String? {
+    mutating func dequeue() -> Element? {
         if head == nil || tail == nil { return nil }
         
         let dequeue = head
         head = head?.next
         dequeue?.next = nil
         
-        guard let data = dequeue?.data as? String else { return nil }
-                
-        return data
+        return dequeue?.data
     }
     
     mutating func removeLast() {
