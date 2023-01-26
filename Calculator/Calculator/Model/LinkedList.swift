@@ -24,7 +24,7 @@ struct LinkedList<Element: CalculateItem> {
         self.tail = node
     }
     
-    mutating func removeLast() -> Element? {
+    mutating func removeFirst() -> Element? {
         return nil
     }
     

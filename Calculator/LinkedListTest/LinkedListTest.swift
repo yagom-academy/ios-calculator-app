@@ -72,7 +72,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(tailValue, tailException)
     }
     
-    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeLast를_한다면_반환값은_b이다() {
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_한다면_반환값은_b이다() {
         // given
         let firstValue = "a"
         let secondValue = "b"
@@ -85,7 +85,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(exception, removedValue)
     }
     
-    func test_isEmpty가_true인_상태에서_removeLast를_한다면_nil이_반환된다() {
+    func test_isEmpty가_true인_상태에서_removeFirst를_한다면_nil이_반환된다() {
         // given
         // when
         XCTAssertTrue(sut.isEmpty)
