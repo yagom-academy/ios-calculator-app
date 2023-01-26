@@ -4,9 +4,6 @@
 import XCTest
 @testable import Calculator
 
-extension String: CalculateItem {
-}
-
 final class CalculatorItemQueueTest: XCTestCase {
     var sut: CalculatorItemQueue<String>!
     
