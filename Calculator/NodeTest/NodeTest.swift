@@ -9,10 +9,12 @@ final class NodeTest: XCTestCase {
     var sut: Node<String>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = Node(value: "")
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     

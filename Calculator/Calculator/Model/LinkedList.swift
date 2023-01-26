@@ -25,7 +25,14 @@ struct LinkedList<Element: CalculateItem> {
     }
     
     mutating func removeFirst() -> Element? {
-        return nil
+        if isEmpty {
+            return nil
+        }
+        
+        let value = self.head?.value
+        self.head = self.head?.next
+        
+        return value
     }
     
     mutating func removeAll() {
