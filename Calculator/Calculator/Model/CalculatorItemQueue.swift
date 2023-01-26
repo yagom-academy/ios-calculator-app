@@ -5,36 +5,19 @@
 //  Created by kokkilE on 2023/01/25.
 //
 
-struct CalculatorItemQueue: CalculateItem {
-    private var userInputItems = List<String>()
-    private var operationResultQueue = List<Double>()
-    private var operationResult: Double = 0
+struct CalculatorItemQueue<T: CalculateItem> {
+    private var calculateItems = List<T>()
     
     var userInputDataCount: Int {
-        return userInputItems.count
+        return calculateItems.count
     }
     
-    var operationResultCount: Int {
-        return operationResultQueue.count
-    }
-    
-    mutating func enqueueUserInputData(_ data: String) {
+    mutating func enqueueCalculateItems(_ data: T) {
         let node = Node(data)
-        userInputItems.push(node)
+        calculateItems.push(node)
     }
     
-    mutating func dequeueUserInputData() -> Node<String>? {
-        return userInputItems.removeLast()
-    }
-    
-    mutating func enqueueOperationResultQueue(_ data: Double) {
-        let node = Node(data)
-        operationResultQueue.push(node)
-    }
-    
-    mutating func dequeueOperationResultQueue() -> Node<Double>? {
-        return operationResultQueue.removeLast()
+    mutating func dequeueCalculateItems() -> Node<T>? {
+        return calculateItems.removeLast()
     }
 }
-
-
