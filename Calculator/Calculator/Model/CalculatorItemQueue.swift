@@ -9,23 +9,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return head == nil
     }
     
-    var size: Int {
-        var count: Int = 0
-        
-        var node = self.head
-        
-        while node != nil {
-            count += 1
-            node = node?.next
-        }
-        
-        return count
-    }
-    
-    var peek: T? {
-        return head?.data
-    }
-    
     mutating func enqueue(newData: Node<T>) {
         if head == nil {
             head = newData
