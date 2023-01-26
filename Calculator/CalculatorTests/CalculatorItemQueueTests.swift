@@ -8,10 +8,10 @@
 import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculaterItemQueue<Int>!
+    var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
-        sut = CalculaterItemQueue<Int>(queue: LinkedList<Int>())
+        sut = CalculatorItemQueue<Int>(list: LinkedList<Int>())
     }
 
     override func tearDownWithError() throws {
@@ -21,11 +21,11 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출시_queue의_count가_1증가한다() {
         // given
         let element = 1
-        let expectation = sut.queue.count + 1
+        let expectation = sut.list.count + 1
 
         // when
         sut.enqueue(element)
-        let result = sut.queue.count
+        let result = sut.list.count
         
         // then
         XCTAssertEqual(result, expectation)
@@ -37,7 +37,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
         // when
         sut.enqueue(1)
-        let result = sut.queue.tail?.value
+        let result = sut.list.tail?.value
         
         // then
         XCTAssertEqual(result, expectation)
@@ -48,7 +48,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let countExpectation = 0
         let dequeueExpectation: Int? = nil
 
-        let countResult = sut.queue.count
+        let countResult = sut.list.count
         let dequeueResult = sut.dequeue()
 
         XCTAssertEqual(countResult, countExpectation)
@@ -56,15 +56,15 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
 
     func test_dequeue호출시_queue의_첫번쨰element를_제거하고_반환한다() {
-        sut.queue.tail = Node(value: 3)
-        sut.queue.head = Node(value: 1, next: Node(value: 2, next: sut.queue.tail))
-        sut.queue.count = 3
+        sut.list.tail = Node(value: 3)
+        sut.list.head = Node(value: 1, next: Node(value: 2, next: sut.list.tail))
+        sut.list.count = 3
         
         let returnExpectation = 1
         let queueCountExpectation = 2
 
         let dequeueReturn = sut.dequeue()
-        let queueCount = sut.queue.count
+        let queueCount = sut.list.count
 
         XCTAssertEqual(dequeueReturn, returnExpectation)
         XCTAssertEqual(queueCount, queueCountExpectation)
@@ -72,25 +72,25 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     // MARK: - removeAll Test
     func test_removeAll호출시_queue의_head와_tail은_nil이다() {
-        sut.queue.tail = Node(value: 3)
-        sut.queue.head = Node(value: 1, next: Node(value: 2, next: sut.queue.tail))
+        sut.list.tail = Node(value: 3)
+        sut.list.head = Node(value: 1, next: Node(value: 2, next: sut.list.tail))
         let headExpectation: Int? = nil
         let tailExpectation: Int? = nil
         
         sut.removeAll()
-        let headValueResult = sut.queue.head?.value
-        let tailValueResult = sut.queue.tail?.value
+        let headValueResult = sut.list.head?.value
+        let tailValueResult = sut.list.tail?.value
         
         XCTAssertEqual(headValueResult, headExpectation)
         XCTAssertEqual(tailValueResult, tailExpectation)
     }
     
     func test_removeAll호출시_queue의_count는_0이다() {
-        sut.queue.count = 3
+        sut.list.count = 3
         let expectation = 0
         
         sut.removeAll()
-        let result = sut.queue.count
+        let result = sut.list.count
         
         XCTAssertEqual(result, expectation)
     }

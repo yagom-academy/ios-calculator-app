@@ -5,20 +5,20 @@
 //  Created by Harry on 2023/01/24.
 //
 
-struct CalculaterItemQueue<Element: CalculateItem> {
-    var queue: LinkedList<Element>
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var list: LinkedList<Element>
     
     mutating func enqueue(_ element: Element) {
-        queue.appendLast(element)
+        list.appendLast(element)
     }
     
     mutating func dequeue() -> Element? {
-        guard let element = queue.removeFirst() else { return nil }
+        guard let element = list.removeFirst() else { return nil }
         
         return element
     }
     
     mutating func removeAll() {
-        queue.removeAll()
+        list.removeAll()
     }
 }
