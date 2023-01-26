@@ -50,7 +50,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(headValue, exception)
     }
     
-    func test_a의_값을_처음_append한다면_tail값은_a이다() {
+    func test_a의_값을_append한다면_tail값은_a이다() {
         // given
         let value = "a"
         let exception = "a"
