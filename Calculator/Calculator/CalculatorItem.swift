@@ -8,3 +8,7 @@
 protocol CalculatorItem {
     
 }
+
+extension Int: CalculatorItem {
+    
+}
