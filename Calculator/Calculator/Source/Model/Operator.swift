@@ -5,8 +5,6 @@
 //  Created by Harry on 2023/01/27.
 //
 
-import Foundation
-
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"

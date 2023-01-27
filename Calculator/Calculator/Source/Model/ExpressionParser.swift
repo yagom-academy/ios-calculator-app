@@ -5,10 +5,8 @@
 //  Created by Harry on 2023/01/27.
 //
 
-import Foundation
-
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>(list: LinkedList())
         var operators = CalculatorItemQueue<Operator>(list: LinkedList())
         
@@ -27,7 +25,7 @@ enum ExpressionParser {
         return formula
     }
 
-    func componentsByOperators(from input: String) -> [String] {
+    static func componentsByOperators(from input: String) -> [String] {
         let components = input.split(with: " ")
         
         return components

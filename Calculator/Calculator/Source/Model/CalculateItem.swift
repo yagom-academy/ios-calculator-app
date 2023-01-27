@@ -8,3 +8,4 @@
 protocol CalculateItem {}
 
 extension Double: CalculateItem {}
+extension Int: CalculateItem {}
