@@ -16,7 +16,7 @@ struct CalculatorItemQueue: CalculateItem {
         return queue.removeLast()
     }
     
-    func deququ() -> Node? {
+    func dequeue() -> Node? {
         return queue.removeFirst()
     }
     

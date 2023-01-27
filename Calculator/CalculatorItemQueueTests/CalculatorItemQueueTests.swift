@@ -69,7 +69,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = "2"
         
         // when
-        let _ = sut.deququ()
+        let _ = sut.dequeue()
         
         // then
         XCTAssertEqual(sut.queue.head?.value, expectation)

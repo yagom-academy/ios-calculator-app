@@ -15,7 +15,7 @@ final class LinkedList {
     func appendLast(_ data: String) {
         let node = Node(value: data)
         
-        guard !isEmpty else {
+        guard isEmpty == false else {
             head = node
             tail = head
             return
@@ -27,7 +27,7 @@ final class LinkedList {
     func removeLast() -> Node? {
         var currentNode = head
         
-        guard !isEmpty else {
+        guard isEmpty == false else {
             return nil
         }
         
@@ -49,7 +49,7 @@ final class LinkedList {
     func removeFirst() -> Node? {
         let firstNode = head
         
-        guard !isEmpty else {
+        guard isEmpty == false else {
             return nil
         }
         head = firstNode?.next
