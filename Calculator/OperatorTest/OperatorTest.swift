@@ -129,5 +129,33 @@ final class OperatorTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_multiply호출시_피연산자가2와4라면_8을반환한다() {
+        // given
+        let operand1 = 2.0
+        let operand2 = 4.0
+        sut = Operator.multiply
+        let expectation = 8.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_multiply호출시_피연산자가마이너스2와마이너스4라면_8을반환한다() {
+        // given
+        let operand1 = -2.0
+        let operand2 = -4.0
+        sut = Operator.multiply
+        let expectation = 8.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 
 }
