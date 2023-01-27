@@ -4,7 +4,7 @@
 ## 목차 📋
 1. [팀원 소개](#1-팀원-소개)
 2. [타임 라인](#2-타임라인-230124--230203)
-3. [프로젝트 순서도](#3-프로젝트-순서도)
+3. [UML](#3-uml)
 4. [실행화면](#4-실행화면)
 5. [트러블 슈팅](#5-트러블-슈팅)
 6. [참고 링크](#6-참고-링크)
@@ -13,7 +13,7 @@
 ## 1. 팀원 소개
 |[혜모리](https://github.com/hyemory)|
 |---|
-|<img src="https://github.com/Andrew-0411/ios-juice-maker/blob/step1/images/hyemory.png" width="200">|
+|<img src="https://user-images.githubusercontent.com/115605734/215022900-d0d7bcb8-b9b3-4614-8687-e01185f0a33e.png" width="200">|
 
 ## 2. 타임라인 (23.01.24. ~ 23.02.03.)
 |날짜|진행 내용|
@@ -23,17 +23,12 @@
 |2023-01-26|Generic 학습, 리뷰 내용 검토|
 |2023-01-27|코드 리팩토링 진행(네이밍, Unit test, UML 수정, 제네릭 추가)|
 
-## 3. 프로젝트 순서도
+## 3. UML
 
-<details>
-<summary> Class Diagram 보기 </summary> <br/>
 <img src="https://github.com/hyemory/ios-calculator-app/blob/step1/Class_Diagram.png?raw=true">
-</details>
-<br/>
 
 ## 4. 실행화면
 - *UI 부분 작업 진행 시 추가예정*
-![fruitStore](https://user-images.githubusercontent.com/45560895/212246572-87854fb2-1b59-4c61-9c41-3e5d6802f328.gif)
 
 ## 5. 트러블 슈팅
 #### 🔒 **오버헤드 및 시간 복잡도 줄이기** <br/> 
