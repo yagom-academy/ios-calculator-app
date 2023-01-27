@@ -74,9 +74,9 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(Double(-3))
         sut.operands.enqueue(Double(-1))
         sut.operands.enqueue(Double(-2))
-        sut.operators.enqueue(Operator(rawValue: "+")!)
+        sut.operators.enqueue(Operator(rawValue: "-")!)
         sut.operators.enqueue(Operator(rawValue: "*")!)
-        let expectedResult: Double = 8
+        let expectedResult: Double = 4
         
         // when
         let result = sut.result()

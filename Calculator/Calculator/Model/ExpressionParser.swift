@@ -7,30 +7,22 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operands = self.componentsByOperators(from: input)
-        let characterArray = input.split(with: " ")
+        let components = self.componentsByOperators(from: input)
         var currentFormula = Formula()
         
-        for member in operands {
-            guard let operand = Double(member) else { break }
-            currentFormula.operands.enqueue(operand)
-        }
-        
-        for member in characterArray {
-            let convertedMember = Character(member)
-            
-            if convertedMember.isNumber == false,
-               let `operator` = Operator(rawValue: convertedMember) {
+        for member in components {
+            if let operand = Double(member) {
+                currentFormula.operands.enqueue(operand)
+            } else if let `operator` = Operator(rawValue: Character(member)) {
                 currentFormula.operators.enqueue(`operator`)
             }
         }
-        
+
         return currentFormula
     }
-    
+
     static private func componentsByOperators(from input: String) -> [String] {
-        let inputWithoutOperators = input.components(separatedBy: ["+", "-", "/", "*"]).joined(separator: " ")
-        let result = inputWithoutOperators.split(with: " ")
+        let result = input.split(with: " ")
         
         return result
     }
