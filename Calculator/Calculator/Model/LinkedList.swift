@@ -5,15 +5,15 @@
 //  Created by 혜모리 on 2023/01/25.
 //
 
-final class LinkedList {
-    private(set) var head: Node?
-    private(set) var tail: Node?
+final class LinkedList<T: CalculateItem> {
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     var isEmpty: Bool {
         head == nil
     }
     
-    func appendLast(_ data: String) {
-        let node = Node(value: data)
+    func appendLast(_ data: T) {
+        let node = Node<T>(value: data)
         
         guard isEmpty == false else {
             head = node
@@ -24,14 +24,14 @@ final class LinkedList {
         tail = node
     }
     
-    func removeLast() -> Node? {
+    func removeLast() -> Node<T>? {
         var currentNode = head
         
         guard isEmpty == false else {
             return nil
         }
         
-        guard head != tail else {
+        guard tail != nil else {
             head = nil
             return currentNode
         }
@@ -46,7 +46,7 @@ final class LinkedList {
         return lastNode
     }
     
-    func removeFirst() -> Node? {
+    func removeFirst() -> Node<T>? {
         let firstNode = head
         
         guard isEmpty == false else {
