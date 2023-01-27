@@ -5,53 +5,34 @@
 //  Created by Seoyeon Hong on 2023/01/26.
 //
 //MARK: Queue 타입 구현
-struct CalculatorItemQueue<T>: CalculateItem {
+
+struct CalculatorItemQueue<T: CalculateItem> {
     
-    var head: Node<T>?
+    private var leftStack: [T] = []
+    private var rightStack: [T] = []
     
-    var last: Node<T>? {
-        if head == nil {
-            return nil
-        }
-        var node = head
-        while node?.nextData != nil {
-            node = node?.nextData
-        }
-        return node
-    }
+    init() {}
     
     var isEmpty: Bool {
-        if head == nil {
-            return true
-        }else {
-            return false
-        }
+        leftStack.isEmpty && rightStack.isEmpty
+    }
+    
+    var peek: T? {
+        !leftStack.isEmpty ? leftStack.last : rightStack.first
     }
     
     mutating func enqueue(_ element: T) {
-        if let lastNode = last{
-            lastNode.nextData = Node(data: element)
-        }else {
-            head = Node(data: element)
-        }
+        rightStack.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
-        if head == nil { return nil }
-        
-        guard let nowhead = head else {
-            return nil
+        if leftStack.isEmpty {
+            leftStack = rightStack.reversed()
+            rightStack.removeAll()
         }
-        head = nowhead.nextData
-        return nowhead.data
-    }
-    
-    mutating func removeAll() {
-        guard head != nil else {
-            return
-        }
-        
-        head = nil
+        return leftStack.popLast()
     }
     
 }
+
