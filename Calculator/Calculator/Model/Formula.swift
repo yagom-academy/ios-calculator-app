@@ -8,17 +8,14 @@ struct Formula {
     mutating func result() -> Double {
         var result: Double = 0
         
-        if let firstOperand = operands.dequeue() {
-            result = firstOperand
-        }
+        guard let firstOperand = operands.dequeue() else { return result }
+        result = firstOperand
         
         while !operands.isEmpty {
             guard let operand = operands.dequeue(),
                   let `operator` = operators.dequeue() else { return result }
             
-            let operateResult = `operator`.calculate(lhs: result, rhs: operand)
-            
-            result = operateResult
+            result = `operator`.calculate(lhs: result, rhs: operand)
         }
         
         return result
