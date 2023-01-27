@@ -12,14 +12,13 @@ struct Formula {
             result = firstOperand
         }
         
-        while !operands.isEmpty && !operators.isEmpty {
-            guard let rhs = operands.dequeue(),
+        while !operands.isEmpty {
+            guard let operand = operands.dequeue(),
                   let `operator` = operators.dequeue() else { return result }
             
-            let lhs = result
-            let operateResult = `operator`.calculate(lhs: lhs, rhs: rhs)
+            let operateResult = `operator`.calculate(lhs: result, rhs: operand)
             
-            result += operateResult
+            result = operateResult
         }
         
         return result
