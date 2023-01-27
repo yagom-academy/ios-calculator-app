@@ -14,6 +14,6 @@ struct Formula {
     
     func result() -> Double {
         
-        return
+        return Double()
     }
 }
