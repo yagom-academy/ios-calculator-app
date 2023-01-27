@@ -39,6 +39,16 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
+    func test_3_곱하기_8_빼기_음수2_나누기_2은_28이다() {
+        let input = "3 * 8 - -2 / 2"
+        let expectedResult: Double = 13
+        
+        var formula = ExpressionParser.parse(from: input)
+        let result = formula.result()
+        
+        XCTAssertEqual(result, expectedResult)
+    }
+    
     func test_3_곱하기_8_빼기_2_나누기_0은_nan이다() {
         let input = "3 * 8 - 2 / 0"
         
