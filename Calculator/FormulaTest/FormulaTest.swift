@@ -51,5 +51,7 @@ final class FormulaTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
+    
+    // rhs == 0일 경우
 
 }

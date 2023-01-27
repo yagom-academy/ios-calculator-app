@@ -5,7 +5,10 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    func result() -> Double {
-        return 0.0
+    mutating func result() -> Double {
+        guard let lhs = operands.dequeue(),
+              let rhs = operands.dequeue(),
+              let formula = operators.dequeue() else { return 0.0 }
+        return formula.calculate(lhs: lhs, rhs: rhs)
     }
 }
