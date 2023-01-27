@@ -15,11 +15,11 @@ struct Formula {
         
         while !operands.isEmpty || !operaters.isEmpty {
             let lhsOperands = result
-            let operaters = operaters.dequeue()
+            let `operator` = operaters.dequeue()
             let rhsOperands = operands.dequeue()
             
-            if let operaters = operaters, let rhsOperands = rhsOperands {
-                result = operaters.calculate(lhs: lhsOperands, rhs: rhsOperands)
+            if let `operator` = `operator`, let rhsOperands = rhsOperands {
+                result = `operator`.calculate(lhs: lhsOperands, rhs: rhsOperands)
             }
         }
         
