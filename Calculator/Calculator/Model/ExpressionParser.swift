@@ -5,8 +5,7 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operatorsCases = Operator.allCases.map{ $0.rawValue }
-        var components = ExpressionParser.componentsByOperators(from: input)
+        let components = ExpressionParser.componentsByOperators(from: input)
         
         var operators: [Operator] = []
         var operands: [Double] = []
@@ -23,7 +22,7 @@ enum ExpressionParser {
         return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         let operatorsCases = Operator.allCases.map { $0.rawValue }
         var number: String = ""
         var components: [String] = []
@@ -31,11 +30,14 @@ enum ExpressionParser {
         input.forEach { atom in
             if operatorsCases.contains(atom) {
                 components.append(number)
+                number = ""
+                
                 components.append("\(atom)")
             } else {
                 number += "\(atom)"
             }
         }
+        components.append(number)
         
         return components
     }

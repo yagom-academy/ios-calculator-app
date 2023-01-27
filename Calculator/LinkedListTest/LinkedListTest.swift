@@ -1,9 +1,5 @@
-//
 //  LinkedListTest.swift
-//  LinkedListTest
-//
-//  Created by 강민수 on 2023/01/26.
-//
+//  Created by 레옹아범 on 2023/01/26.
 
 import XCTest
 @testable import Calculator

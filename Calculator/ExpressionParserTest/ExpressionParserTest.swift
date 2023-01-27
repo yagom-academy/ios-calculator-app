@@ -1,26 +1,19 @@
-//
 //  ExpressionParserTest.swift
-//  ExpressionParserTest
-//
-//  Created by 강민수 on 2023/01/27.
-//
+//  Created by 레옹아범 on 2023/01/27.
 
 import XCTest
+@testable import Calculator
 
 final class ExpressionParserTest: XCTestCase {
-    
-    var sut: String!
-
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        sut = "1+2"
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
+    func test_1더하기2의_문자열이_parse한_Formula의_result값은_3이다() {
+        var formula = ExpressionParser.parse(from: "1+2")
+        let result = formula.result()
+        XCTAssertEqual(result, 3)
     }
     
-    func test_1더하기2의_문자열이_들어갈_경우_1과_2를_반환한다() {
+    func test_1더하기2곱하기3빼기1의_문자열을_parse한_Formula의_result값은_8이다() {
+        var formula = ExpressionParser.parse(from: "1+2*3-1")
+        let result = formula.result()
+        XCTAssertEqual(result, 8)
     }
 }

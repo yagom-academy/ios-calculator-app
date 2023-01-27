@@ -1,9 +1,5 @@
-//
 //  FormulaTest.swift
-//  FormulaTest
-//
-//  Created by 강민수 on 2023/01/27.
-//
+//  Created by 레옹아범 on 2023/01/27.
 
 import XCTest
 @testable import Calculator
