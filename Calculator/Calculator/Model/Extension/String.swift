@@ -3,6 +3,6 @@
 
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        return ["0"]
+        return self.split(separator: target).map{ String($0) }
     }
 }
