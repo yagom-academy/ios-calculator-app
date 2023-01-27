@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element: CalculatorItem> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private var data: [Element?] = []
     var head: Int = 0
     
