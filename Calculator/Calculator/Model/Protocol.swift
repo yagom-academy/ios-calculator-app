@@ -12,13 +12,6 @@ extension Double: CalculateItem {}
 
 extension String {
     func split(with target: Character) -> [String] {
-        let saparatedSubstring = self.split(separator: target)
-        var result: [String] = []
-        
-        for member in saparatedSubstring {
-            result.append(String(member))
-        }
-        
-        return result
+        return self.split(separator: target).map { String($0) }
     }
 }
