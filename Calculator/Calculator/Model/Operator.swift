@@ -11,20 +11,20 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return 1
     }
     
-    func add(lhs: Double, rhs: Double) -> Double {
+    private func add(lhs: Double, rhs: Double) -> Double {
         return lhs + rhs
     }
     
-    func subtract(lhs: Double, rhs: Double) -> Double {
+    private func subtract(lhs: Double, rhs: Double) -> Double {
         return lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) -> Double? {
+    private func divide(lhs: Double, rhs: Double) -> Double? {
         guard rhs != 0 else { return nil }
         return lhs / rhs
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
 }
