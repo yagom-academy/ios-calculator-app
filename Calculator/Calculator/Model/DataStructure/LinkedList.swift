@@ -2,8 +2,11 @@
 //  Created by 레옹아범 on 2023/01/24.
 
 struct LinkedList<Element: CalculateItem> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+//    private var head: Node<Element>?
+//    private var tail: Node<Element>?
+    
+    var head: Node<Element>?
+    var tail: Node<Element>?
     
     var isEmpty: Bool {
         return self.head == nil

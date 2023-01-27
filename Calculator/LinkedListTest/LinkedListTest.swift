@@ -8,9 +8,6 @@
 import XCTest
 @testable import Calculator
 
-extension String: CalculateItem {
-}
-
 final class LinkedListTest: XCTestCase {
     
     var sut: LinkedList<String>!
