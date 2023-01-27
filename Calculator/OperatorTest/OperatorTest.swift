@@ -88,5 +88,46 @@ final class OperatorTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_divide호출시_피연산자가3과1이라면_3을반환한다() {
+        // given
+        let operand1 = 3.0
+        let operand2 = 1.0
+        sut = Operator.divide
+        let expectation = 3.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_divide호출시_피연산자가3과0이라면_NaN을반환한다() {
+        // given
+        let operand1 = 3.0
+        let operand2 = 0.0
+        sut = Operator.divide
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertTrue(result.isNaN)
+    }
+    
+    func test_divide호출시_피연산자가1과2이라면_소수점을반환한다() {
+        // given
+        let operand1 = 1.0
+        let operand2 = 2.0
+        sut = Operator.divide
+        let expectation = 0.5
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 
 }

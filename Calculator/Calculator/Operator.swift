@@ -35,7 +35,8 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+        if rhs == 0 { return .nan }
+        return lhs/rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
