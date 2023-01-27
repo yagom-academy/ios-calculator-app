@@ -73,7 +73,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(first, 2)
     }
     
-    func test_putValueAndRemove_Check_ResultIsEmpty() {
+    func test_IsEmpty() {
         //when
         sut.enqueue(1)
         sut.dequeue()
@@ -82,7 +82,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_putValueAnd_Check_Result_IsNotEmpty() {
+    func test_IsNotEmpty() {
         //when
         sut.enqueue(1)
         
@@ -91,3 +91,5 @@ final class CalculatorTests: XCTestCase {
     }
     
 }
+
+extension Int: CalculateItem {}
