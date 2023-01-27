@@ -80,11 +80,11 @@ final class Node {
     }
 }
 
-struct CalculatorItemQueue: CalculateItem {
-    private var head: Node?
-    private var tail: Node?
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
-    mutating func enqueue(data: CalculateItem) {
+    mutating func enqueue(_ data: Element) {
         if head == nil || tail == nil {
             head = Node.init(data)
             tail = head
@@ -97,16 +97,14 @@ struct CalculatorItemQueue: CalculateItem {
         tail = newNode
     }
     
-    mutating func dequeue() -> String? {
+    mutating func dequeue() -> Element? {
         if head == nil || tail == nil { return nil }
         
-        let dequeue = self.head
-        self.head = self.head?.next
+        let dequeue = head
+        head = head?.next
         dequeue?.next = nil
         
-        guard let data = dequeue?.data as? String else { return nil }
-                
-        return data
+        return dequeue?.data
     }
     
     mutating func removeLast() {
@@ -123,10 +121,9 @@ struct CalculatorItemQueue: CalculateItem {
     }
     
     mutating func clear() {
-        self.head = nil
-        self.tail = nil
+        head = nil
+        tail = nil
     }
-    
 }
 ```
 
