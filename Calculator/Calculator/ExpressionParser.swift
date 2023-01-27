@@ -7,12 +7,29 @@
 
 import Foundation
 
-class ExpressionParser {
-    func parse(from input: String) {
+enum ExpressionParser {
+    static func parse(from input: String) -> Formula {
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
+        let opers = input.split(whereSeparator: { $0.isNumber || $0 == "." })
+            
+        opers.forEach { oper in
+            if let operChar = oper.first, let oper = Operator.init(rawValue: operChar) {
+                operators.enqueue(oper)
+            }
+        }
+    
+        componentnsByOperators(from: input)
+            .map { $0.contains("⎼") ? ("-" + $0[$0.index(after: $0.startIndex)...]) : $0 }
+            .map { Double($0) }
+            .compactMap{ $0 }
+            .forEach { operands.enqueue($0) }
+        
+        return Formula(operands: operands, operators: operators)
     }
     
-    func componentnsByOperators(from input: String) -> [String] {
+    static func componentnsByOperators(from input: String) -> [String] {
         var results: [String] = [input]
         
         Operator.allCases.forEach { oper in
