@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var `operator`: CalculatorItemQueue<Operator>
+    var operands = CalculatorItemQueue<Double>(queueList: LinkedList())
+    var `operators` = CalculatorItemQueue<Operator>(queueList: LinkedList())
     
     mutating func result() -> Double {
         var result: Double = 0
@@ -18,7 +18,7 @@ struct Formula {
         
         while operands.isEmpty() == false {
             guard let rhs = operands.dequeue() else { break }
-            guard let `operator` = self.operator.dequeue() else { break }
+            guard let `operator` = self.operators.dequeue() else { break }
             let lhs = result
             let operatedResult = `operator`.calculate(lhs: lhs, rhs: rhs)
             
