@@ -9,6 +9,10 @@ extension Double: CalculateItem {
     
 }
 
+extension Character: CalculateItem {
+    
+}
+
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
         let splitComponent: [String] = self.split(separator: target).map{ String($0) }
