@@ -8,8 +8,9 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula {
-    }
+//    static func parse(from input: String) -> Formula {
+//        return .init(operands: <#T##CalculatorItemQueue<Double>#>, operators: <#T##CalculatorItemQueue<String>#>)
+//    }
     
     private static func componentsByOperators(from input: String) -> [String] {
         return ["0"]
