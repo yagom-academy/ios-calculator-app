@@ -44,4 +44,14 @@ final class ExpressionParserTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
+    
+    func test_1콤마000콤마000더하기1의_문자열을_parse한_Formula의_result값은_1000001이다() {
+        // given
+        var formula = ExpressionParser.parse(from: "1,000,000.0 + 1")
+        let exception: Double = 1000001
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
 }
