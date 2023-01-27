@@ -16,4 +16,11 @@ final class ExpressionParserTest: XCTestCase {
         let result = formula.result()
         XCTAssertEqual(result, 8)
     }
+    
+    func test_1빼기음수1의_문자열을_parse한_Formula의_result값은_0이다() {
+        var formula = ExpressionParser.parse(from: "1--1")
+        let result = formula.result()
+        
+        XCTAssertEqual(result, 0)
+    }
 }

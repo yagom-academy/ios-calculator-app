@@ -163,8 +163,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -199,6 +197,15 @@
 				26C0BCBE2983C25C0096EC41 /* ExpressionParserTest.swift */,
 			);
 			path = ExpressionParserTest;
+			sourceTree = "<group>";
+		};
+		26C601D42983FBB700E359A2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		26D95169298248F70099D061 /* LinkedListTest */ = {
@@ -245,6 +252,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				26C601D42983FBB700E359A2 /* Application */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				26B14594297FA4AE0059E284 /* Controller */,
