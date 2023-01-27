@@ -59,6 +59,19 @@ final class OperatorTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_operator가_divide일때_rightValue가_0일시_Nan을반환한다() {
+        //give
+        let a = 10.0
+        let b = Double.zero
+        let operators = Operator.divide
+        
+        //when
+        let result = operators.calculate(lhs: a, rhs: b)
+  
+        //then
+        XCTAssertTrue(result.isNaN)
+    }
+    
     func test_operator가_multiply일때_calculatet를_실행할시_곱셈의연산을한다() {
         //give
         let a = 10.0

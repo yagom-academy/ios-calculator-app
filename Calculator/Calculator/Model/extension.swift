@@ -5,13 +5,9 @@
 //  Created by 김성준 on 2023/01/27.
 //
 
-extension Double: CalculateItem {
-    
-}
+extension Double: CalculateItem { }
 
-extension Character: CalculateItem {
-    
-}
+extension Character: CalculateItem { }
 
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
