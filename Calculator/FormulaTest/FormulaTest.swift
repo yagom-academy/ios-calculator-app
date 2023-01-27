@@ -159,4 +159,30 @@ final class FormulaTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
+    
+    func test_1나누기0의_result값은_nan이다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(.divide)
+        // when
+        let result = sut.result().isNaN
+        // test
+        XCTAssertTrue(result)
+    }
+    
+    func test_1나누기0곱하기5빼기2의_result값은_nan이다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operators.enqueue(.divide)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(5)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(2)
+        // when
+        let result = sut.result().isNaN
+        // then
+        XCTAssertTrue(result)
+    }
 }
