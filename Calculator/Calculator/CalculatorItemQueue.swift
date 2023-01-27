@@ -12,6 +12,10 @@ struct CalculatorItemQueue<Item: CalculatorItem> {
     private(set) var enqueueStack: [Item] = []
     private(set) var dequeueStack: [Item] = []
     
+    init(enqueueStack: [Item] = []) {
+        self.enqueueStack = enqueueStack
+    }
+    
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }

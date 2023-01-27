@@ -9,9 +9,24 @@ import Foundation
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<String>()
+    var operators = CalculatorItemQueue<Operator>()
     
-    func result() -> Double {
-        return 0.0
+    init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
+        self.operands = operands
+        self.operators = operators
+    }
+    
+    mutating func result() -> Double {
+        guard let initialValue = operands.dequeue() else { return .zero }
+        
+        var sum = initialValue
+        
+        while !operands.isEmpty {
+            if let nextValue = operands.dequeue(), let oper = operators.dequeue() {
+                sum = oper.calculate(lhs: sum, rhs: nextValue)
+            }
+        }
+        
+        return sum
     }
 }

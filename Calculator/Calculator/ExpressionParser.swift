@@ -8,8 +8,7 @@
 import Foundation
 
 class ExpressionParser {
-    func parse(from input: String) -> Formula {
-        return Formula()
+    func parse(from input: String) {
     }
     func componentnsByOperators(from input: String) -> [String] {
         return [""]
