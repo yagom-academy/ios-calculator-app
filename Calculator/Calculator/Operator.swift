@@ -7,14 +7,17 @@
 
 import Foundation
 
+extension Operator: CalculateItem { }
+
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
     case divide = "*"
-    case muliply = "/"
+    case multiply = "/"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        return 1 // =
+        
+        return 1 //  = 버튼을 누르면 입력된 연산을 한 번에 수행합니다
     }
     
     func add(lhs: Double, rhs: Double) -> Double {
@@ -29,7 +32,7 @@ enum Operator: Character, CaseIterable {
        return lhs / rhs
     }
     
-    func muliply(lhs: Double, rhs: Double) -> Double {
+    func multiply(lhs: Double, rhs: Double) -> Double {
        return lhs * rhs
     }
 }

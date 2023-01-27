@@ -8,9 +8,13 @@
 import Foundation
 
 struct Formula {
-    let operands: CalculatorItemQueue
-    let operators: CalculatorItemQueue
+    let operators: CalculatorItemQueue<Character>
+    
+    let operands: CalculatorItemQueue<Double>
     
     func result() -> Double {
+        return 1
     }
 }
+
+

@@ -11,7 +11,15 @@ extension Double : CalculateItem { }
 
 extension String {
 
-    func split(_with: Character) -> [String] {
-        return [""]
+    func split(someChracter: Character) -> [String] {
+
+        var result: [String] = []
+        
+        result = self.split(separator: someChracter).map{String($0)}
+        
+        return result
     }
 }
+
+
+
