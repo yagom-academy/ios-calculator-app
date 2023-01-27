@@ -157,5 +157,4 @@ final class OperatorTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
-
 }
