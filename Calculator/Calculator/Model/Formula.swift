@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculateItem<Int>
-    var operators: CalculateItem<String>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<String>    
     
     func result() -> Double {
         return 0

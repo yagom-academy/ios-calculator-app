@@ -6,11 +6,11 @@
 //
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
-        
-    }
+//    func parse(from input: String) -> Formula {
+//        
+//    }
     
-    private componentsByOperators(from input: String) -> [String] {
-        
+    private func componentsByOperators(from input: String) -> [String] {
+        return []
     }
 }
