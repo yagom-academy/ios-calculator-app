@@ -13,3 +13,4 @@ protocol CalculatorItem {
 
 extension String: CalculatorItem { }
 
+extension Double: CalculatorItem { }
