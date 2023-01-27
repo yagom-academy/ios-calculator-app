@@ -5,6 +5,7 @@
 //  Created by Rowan on 2023/01/25.
 //
 
-protocol CalculateItem { }
+protocol CalculateItem {}
 
-extension Int: CalculateItem { }
+extension Int: CalculateItem {}
+extension Double: CalculateItem {}
