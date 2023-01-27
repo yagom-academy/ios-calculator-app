@@ -19,14 +19,9 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return data.count - head
     }
 
-    var first: Element? {
+    var peek: Element? {
         guard isEmpty == false else { return nil }
         return data[head]
-    }
-    
-    var last: Element? {
-        guard isEmpty == false, let element = data.last else { return nil }
-        return element
     }
     
     mutating func enqueue(_ element: Element) {
