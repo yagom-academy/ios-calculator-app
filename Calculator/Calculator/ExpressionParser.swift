@@ -9,9 +9,16 @@ import Foundation
 
 class ExpressionParser {
     func parse(from input: String) {
+        
     }
+    
     func componentnsByOperators(from input: String) -> [String] {
-        return [""]
+        var results: [String] = [input]
+        
+        Operator.allCases.forEach { oper in
+            results = results.map { $0.split(with: oper.rawValue) }.flatMap { $0 }
+        }
+        return results
     }
 }
 
