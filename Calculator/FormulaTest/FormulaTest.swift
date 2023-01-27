@@ -107,5 +107,56 @@ final class FormulaTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
-
+    
+    func test_2더하기3곱하기3빼기1의_result값은_14이다() {
+        // given
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(1)
+        let exception = 14.0
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
+    
+    func test_3나누기3더하기2빼기1의_result값은_2이다() {
+        // given
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.divide)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(1)
+        let exception = 2.0
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
+    
+    func test_1더하기2빼기3곱하기2빼기3나누기6의_result값은_마이너스0점5이다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.divide)
+        sut.operands.enqueue(6)
+        let exception = -0.5
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
 }
