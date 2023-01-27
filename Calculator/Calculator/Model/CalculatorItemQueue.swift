@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {}
-
-extension String: CalculateItem {}
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private(set) var data: [T]
     var isEmpty: Bool {
