@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Operator: String {
+enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
     case divide = "/"
@@ -35,6 +35,10 @@ enum Operator: String {
     }
     
     func divide(lhs: Double, rhs: Double) -> Double {
+        if rhs == 0 {
+            return Double.nan
+        }
+        
         return lhs / rhs
     }
     
