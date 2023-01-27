@@ -6,7 +6,6 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    
     private var queue: LinkedList<Element>
     
     var itemCount: Int {
@@ -37,5 +36,4 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     init(queueList: LinkedList<Element>) {
         self.queue = queueList
     }
-    
 }
