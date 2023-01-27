@@ -20,37 +20,60 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(1, expectation)
     }
     
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_enqueue실행시_처음_값을_넣어주면_처음넣은값이_출력된다() {
+        //given
+        let fisrt = sut.peek
+
+        //when
+        sut.enqueue(1)
+        
+        //then
+        XCTAssertEqual(fisrt, 1)
+    }
+    
     func test_enqueue실행시_값을_여러번_넣었을때_첫번째값이_출력된다() {
-        //given when
+        //given
+        let fisrt = sut.peek
+        
+        //when
         sut.enqueue(1)
         sut.enqueue(2)
         let expectation = sut.peek
         
         //then
-        XCTAssertEqual(1, expectation)
+        XCTAssertEqual(fisrt, 1)
     }
     
     func test_dequeue실행시_첫번째로넣어줬던값이_삭제된다() {
-        //given when
+        //given
+        let item = sut.dequeue()
+        
+        //when
         sut.enqueue(1)
-        let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(item, 1)
     }
     
     func test_값을_여러번넣고_dequeue실행시_첫번째로넣었던값이_삭제되고_두번째가남는다() {
-        //given when
+        //given
+        let first = sut.peek
+        
+        //when
         sut.enqueue(1)
         sut.enqueue(2)
         sut.dequeue()
-        let expectation = sut.peek
         
         //then
-        XCTAssertEqual(2, expectation)
+        XCTAssertEqual(first, 2)
     }
     
-    func test_putValueAndRemove_Check_ResultIsEmpty() {
+    func test_IsEmpty() {
         //when
         sut.enqueue(1)
         sut.dequeue()
@@ -59,7 +82,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
     
-    func test_putValueAnd_Check_Result_IsNotEmpty() {
+    func test_IsNotEmpty() {
         //when
         sut.enqueue(1)
         
@@ -68,3 +91,5 @@ final class CalculatorTests: XCTestCase {
     }
     
 }
+
+extension Int: CalculateItem {}
