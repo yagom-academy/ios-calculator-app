@@ -30,7 +30,7 @@ enum ExpressionParser: Formula {
             var curruentNumber: [String] = []
             
             resultNumber.forEach {
-                curruentNumber += $0.split(someChracter: number.rawValue)
+                curruentNumber += $0.split(someOperator: number.rawValue)
             }
             
             resultNumber = curruentNumber
