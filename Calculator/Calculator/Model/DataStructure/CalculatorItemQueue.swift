@@ -14,6 +14,14 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.items.back
     }
     
+    init(elements: [Element]) {
+        elements.forEach { element in
+            self.enqueue(element)
+        }
+    }
+    
+    init() { }
+    
     mutating func enqueue(_ element: Element) {
         self.items.append(element)
     }

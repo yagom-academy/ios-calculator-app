@@ -13,7 +13,7 @@ final class ExpressionParserTest: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = "+ 2"
+        sut = "1+2"
     }
 
     override func tearDownWithError() throws {

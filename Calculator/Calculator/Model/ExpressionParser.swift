@@ -1,6 +1,8 @@
 //  ExpressionParser.swift
 //  Created by 레옹아범 on 2023/01/26.
 
+import Foundation
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operatorsCases = Operator.allCases.map{ $0.rawValue }
@@ -10,15 +12,15 @@ enum ExpressionParser {
         var operands: [Double] = []
         
         components.forEach { component in
-            if let operand = component as? Double {
-                operands.append(operand)
-            } else {
-                guard let operatorCase = Operator(rawValue: Character(component)) else { return }
+            if let operatorCase = Operator(rawValue: Character(component)) {
                 operators.append(operatorCase)
+            } else {
+                let operand = (component as NSString).doubleValue
+                operands.append(operand)
             }
         }
         
-        return Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+        return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
     }
     
     static func componentsByOperators(from input: String) -> [String] {
