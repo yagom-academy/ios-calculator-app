@@ -11,25 +11,20 @@ enum Operator: Character, CaseIterable, CalculateItemProtocol {
     case divide = "%"
     case multiply = "x"
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
-        var result: Double = lhs
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            do {
-                return try divide(lhs: lhs, rhs: rhs)
-            } catch CalculatorError.divideError {
-                print("NaN")
-            } catch {
-                print(error)
+            guard rhs != Double.zero else {
+                throw CalculatorError.divideError
             }
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
-        return result
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
@@ -40,10 +35,7 @@ enum Operator: Character, CaseIterable, CalculateItemProtocol {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
-        if rhs == Double.zero {
-            throw CalculatorError.divideError
-        }
+    private func divide(lhs: Double, rhs: Double) -> Double {
         return lhs / rhs
     }
     
