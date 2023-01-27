@@ -3,24 +3,31 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let operators = Operator.allCases.map { $0.rawValue }
+        let operatorsCases = Operator.allCases.map{ $0.rawValue }
         var components = ExpressionParser.componentsByOperators(from: input)
         
+        var operators: [Operator] = []
+        var operands: [Double] = []
         
         components.forEach { component in
-            <#code#>
+            if let operand = component as? Double {
+                operands.append(operand)
+            } else {
+                guard let operatorCase = Operator(rawValue: Character(component)) else { return }
+                operators.append(operatorCase)
+            }
         }
         
         return Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map { $0.rawValue }
+        let operatorsCases = Operator.allCases.map { $0.rawValue }
         var number: String = ""
         var components: [String] = []
         
         input.forEach { atom in
-            if operators.contains(atom) {
+            if operatorsCases.contains(atom) {
                 components.append(number)
                 components.append("\(atom)")
             } else {
