@@ -11,3 +11,6 @@ extension String {
     }
 }
 
+extension String: CalculateItemProtocol {
+
+}
