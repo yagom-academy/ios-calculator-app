@@ -46,5 +46,47 @@ final class OperatorTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectaiton)
     }
+    
+    func test_subtract호출시_피연산자가5와3이라면_2를반환한다() {
+        // given
+        let operand1 = 5.0
+        let operand2 = 3.0
+        sut = Operator.subtract
+        let expectation = 2.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_subtract호출시_피연산자가2와마이너스2라면_4를반환한다() {
+        // given
+        let operand1 = 2.0
+        let operand2 = -2.0
+        sut = Operator.subtract
+        let expectation = 4.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_subtract호출시_피연산자가마이너스2와마이너스2라면_0을반환한다() {
+        // given
+        let operand1 = -2.0
+        let operand2 = -2.0
+        sut = Operator.subtract
+        let expectation = 0.0
+        
+        // when
+        let result = sut.calculate(lhs: operand1, rhs: operand2)
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 
 }
