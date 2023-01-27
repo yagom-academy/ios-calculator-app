@@ -60,20 +60,19 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_data배열에_값이하나인상태에서_dequeue호출시_data배열은_빈배열이된다() {
+    func test_data배열에_값이있는상태에서_dequeue호출시_값은nil이된다() {
         // given
         sut.data = [1]
-        let expectation: [Int] = []
         
         // when
         sut.dequeue()
-        let result = sut.data
+        let result = sut.data[0]
         
         // then
-        XCTAssertEqual(expectation, result)
+        XCTAssertNil(result)
     }
     
-    func test_값이없는상태에서_dequeue호출시_반환값은_nil이다() {
+    func test_data배열에_값이없는상태에서_dequeue호출시_반환값은_nil이다() {
         // when
         let result = sut.dequeue()
 
