@@ -49,7 +49,7 @@ final class CalculatorTests: XCTestCase {
     //MARK: - dequeue test code
     func test_data배열에_값이하나인상태에서_dequeue호출시_count는_0이다() {
         // given
-        sut.data = [1]
+        sut.enqueue(1)
         let expectation = 0
         
         // when
@@ -58,18 +58,6 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expectation)
-    }
-    
-    func test_data배열에_값이있는상태에서_dequeue호출시_값은nil이된다() {
-        // given
-        sut.data = [1]
-        
-        // when
-        sut.dequeue()
-        let result = sut.data[0]
-        
-        // then
-        XCTAssertNil(result)
     }
     
     func test_data배열에_값이없는상태에서_dequeue호출시_반환값은_nil이다() {
@@ -82,7 +70,9 @@ final class CalculatorTests: XCTestCase {
     
     func test_data배열값이_여러개존재하는상태에서_dequeue호출시_첫번째로들어온값이_삭제된다() {
         // given
-        sut.data = [11, 22, 33, 44]
+        for number in 11...15 {
+            sut.enqueue(number)
+        }
         let expectation = 11
         
         // when
@@ -92,15 +82,17 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_data배열_dequeue실행시_first의인덱스를가르키는_head의값이증가한다() {
+    func test_data배열_여러번dequeue실행시_first가_변경된다() {
         // given
-        sut.data = [2, 3, 4, 1, 6, 7, 8, 0]
-        let expectation = 2
+        for number in 5...10 {
+            sut.enqueue(number)
+        }
+        let expectation = 7
 
         // when
         sut.dequeue()
         sut.dequeue()
-        let result = sut.head
+        let result = sut.first
         
         // then
         XCTAssertEqual(result, expectation)
@@ -111,20 +103,23 @@ final class CalculatorTests: XCTestCase {
         for number in 1...40 {
             sut.enqueue(number)
         }
+        let expectation = 11
         
         // when
         for number in 1...10 {
             sut.dequeue()
         }
-        
+        let result = sut.first
         // then
-        print(sut.data)
+        XCTAssertEqual(result, expectation)
     }
     
     //MARK: - clearAll test code
     func test_clearAll호출시_data배열값이_모두삭제되어_count가0이다() {
         // given
-        sut.data = [1, 2, 3, 4, 5]
+        for number in 1...5 {
+            sut.enqueue(number)
+        }
         let expectation = 0
         
         // when
@@ -138,8 +133,10 @@ final class CalculatorTests: XCTestCase {
     //MARK: - first, last test code
     func test_data배열의첫번째값과_first변수의값이_같다() {
         // given
-        sut.data = [94, 1, 17]
-        let expectation = 94
+        for number in 30...35 {
+            sut.enqueue(number)
+        }
+        let expectation = 30
         
         // when
         let result = sut.first
@@ -158,7 +155,9 @@ final class CalculatorTests: XCTestCase {
     
     func test_data배열의마지막값과_last변수의값이_같다() {
         // given
-        sut.data = [92, 5, 19]
+        for number in 14...19 {
+            sut.enqueue(number)
+        }
         let expectation = 19
         
         // when
