@@ -181,4 +181,16 @@ final class FormulaTest: XCTestCase {
         // then
         XCTAssertTrue(result)
     }
+    
+    func test_1빼기음수1의_result값은_2이다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(-1)
+        let exception = 2.0
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
 }

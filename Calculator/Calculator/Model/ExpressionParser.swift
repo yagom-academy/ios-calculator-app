@@ -6,38 +6,35 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let components = ExpressionParser.componentsByOperators(from: input)
-        
+        let operatorValues = Operator.allCases.map{ String($0.rawValue) }
         var operators: [Operator] = []
         var operands: [Double] = []
         
         components.forEach { component in
-            if let operatorCase = Operator(rawValue: Character(component)) {
+            if operatorValues.contains(component),
+               let operatorCase = Operator(rawValue: Character(component)) {
                 operators.append(operatorCase)
-            } else {
-                let operand = (component as NSString).doubleValue
-                operands.append(operand)
+                return
             }
+            
+            let operand = (component as NSString).doubleValue
+            operands.append(operand)
         }
         
         return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let operatorsCases = Operator.allCases.map { $0.rawValue }
-        var number: String = ""
+        let inputs = input.split(with: " ")
         var components: [String] = []
         
-        input.forEach { atom in
-            if operatorsCases.contains(atom) {
-                components.append(number)
-                number = ""
-                
-                components.append("\(atom)")
-            } else {
-                number += "\(atom)"
+        inputs.forEach { component in
+            if component.contains(",") {
+                let newComponent = component.replacingOccurrences(of: ",", with: "")
+                components.append(newComponent)
             }
+            components.append(component)
         }
-        components.append(number)
         
         return components
     }
