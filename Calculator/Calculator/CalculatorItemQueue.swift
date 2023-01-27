@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
-    var data: [T?] = []
+struct CalculatorItemQueue<Element: CalculatorItem> {
+    var data: [Element?] = []
     var head: Int = 0
     
     var isEmpty: Bool {
@@ -19,21 +19,21 @@ struct CalculatorItemQueue<T> {
         return data.count - head
     }
 
-    var first: T? {
+    var first: Element? {
         guard isEmpty == false else { return nil }
         return data[head]
     }
     
-    var last: T? {
+    var last: Element? {
         guard isEmpty == false, let element = data.last else { return nil }
         return element
     }
     
-    mutating func enqueue(_ element: T) {
+    mutating func enqueue(_ element: Element) {
         data.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         guard head < data.count, let element = data[head] else { return nil }
         data[head] = nil
         head += 1
