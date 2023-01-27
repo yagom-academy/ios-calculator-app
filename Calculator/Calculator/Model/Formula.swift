@@ -12,12 +12,16 @@ struct Formula {
     mutating func result() -> Double {
         var result: Double = 0
         
-        while operands.isEmpty() {
-            guard let lhs = operands.dequeue() else { break }
+        if let firstOperand = operands.dequeue() {
+            result = firstOperand
+        }
+        
+        while operands.isEmpty() == false {
+            let lhs = result
             guard let rhs = operands.dequeue() else { break }
-            let `operator` = self.operator.dequeue()
+            guard let `operator` = self.operator.dequeue() else { break }
             
-            guard let operatedResult = `operator`?.calculate(lhs: lhs, rhs: rhs) else { break }
+            let operatedResult = `operator`.calculate(lhs: lhs, rhs: rhs)
             
             result = operatedResult
         }
