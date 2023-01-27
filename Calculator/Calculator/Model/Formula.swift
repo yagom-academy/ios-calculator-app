@@ -6,9 +6,10 @@
 //
 
 struct Formula {
-    var operands = CalculatorItemQueue<Double>(queueList: LinkedList())
-    var `operators` = CalculatorItemQueue<Operator>(queueList: LinkedList())
+    var operands = CalculatorItemQueue<Double>(list: LinkedList())
+    var `operators` = CalculatorItemQueue<Operator>(list: LinkedList())
     
+    @discardableResult
     mutating func result() -> Double {
         var result: Double = 0
         

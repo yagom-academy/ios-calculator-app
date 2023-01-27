@@ -197,4 +197,19 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
+    func test_removeAll호출시_tail이할당해제된다() {
+        let thirdNode = Node(data: 3)
+        let secondNode = Node(data: 2, next: thirdNode)
+        let firstNode = Node(data: 1, next: secondNode)
+        sut = LinkedList(head: firstNode, tail: thirdNode, count: 3)
+        let expectedResult: Int? = nil
+        
+        // when
+        sut.removeAll()
+        let result = sut.tailData
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
+    
 }

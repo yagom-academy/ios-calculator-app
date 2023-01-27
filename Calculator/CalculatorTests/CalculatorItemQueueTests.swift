@@ -13,7 +13,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         let queueList = LinkedList<Int>()
-        sut = CalculatorItemQueue(queueList: queueList)
+        sut = CalculatorItemQueue(list: queueList)
     }
 
     override func tearDownWithError() throws {
@@ -42,7 +42,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let queueList = LinkedList<Int>(head: firstNode,
                                         tail: secondNode,
                                         count: 2)
-        sut = CalculatorItemQueue(queueList: queueList)
+        sut = CalculatorItemQueue(list: queueList)
         let expectedCount = 1
 
         // when
@@ -60,7 +60,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let queueList = LinkedList<Int>(head: firstNode,
                                         tail: secondNode,
                                         count: 2)
-        sut = CalculatorItemQueue(queueList: queueList)
+        sut = CalculatorItemQueue(list: queueList)
         let expectation = 1
 
         // when
@@ -90,7 +90,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let queueList = LinkedList<Int>(head: firstNode,
                                         tail: thirdNode,
                                         count: 3)
-        sut = CalculatorItemQueue(queueList: queueList)
+        sut = CalculatorItemQueue(list: queueList)
         let expectedResult = 0
 
         // when

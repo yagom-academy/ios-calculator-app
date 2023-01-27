@@ -6,34 +6,34 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var queue: LinkedList<Element>
+    private var list: LinkedList<Element>
     
     var itemCount: Int {
-        return self.queue.count
+        return self.list.count
     }
     
     func isEmpty() -> Bool {
-        let result = self.queue.isEmpty
+        let result = self.list.isEmpty
         
         return result
     }
     
     mutating func enqueue(_ element: Element) {
-        queue.appendLast(element)
+        list.appendLast(element)
     }
     
     @discardableResult
     mutating func dequeue() -> Element? {
-        guard let element = queue.removeFirst() else { return nil }
+        guard let element = list.removeFirst() else { return nil }
         
         return element
     }
     
     mutating func removeAll() {
-        queue.removeAll()
+        list.removeAll()
     }
     
-    init(queueList: LinkedList<Element>) {
-        self.queue = queueList
+    init(list: LinkedList<Element>) {
+        self.list = list
     }
 }
