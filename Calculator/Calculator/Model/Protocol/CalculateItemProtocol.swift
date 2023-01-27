@@ -8,11 +8,3 @@
 protocol CalculateItemProtocol {
     
 }
-
-extension String: CalculateItemProtocol {
-    
-}
-
-extension Double: CalculateItemProtocol {
-    
-}
