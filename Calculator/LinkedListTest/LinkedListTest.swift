@@ -90,7 +90,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(exception, removedValue)
     }
     
-    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_반환값은_head와_tail은_nil이다() {
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_head와_tail은_nil이다() {
         // given
         let firstValue = "a"
         let secondValue = "b"
