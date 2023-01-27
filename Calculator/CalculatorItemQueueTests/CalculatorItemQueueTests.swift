@@ -12,7 +12,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         sut = CalculatorItemQueue<String>()
-        
     }
     
     override func tearDownWithError() throws {
@@ -89,7 +88,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_enqueue호출시_마지막에_값을넣고_반환한다() {
+    func test_enqueue수행시_큐의_마지막에_요소가_추가된다() {
         // given
         sut.data = ["1", "2", "3", "4"]
         let expectation = ["1", "2", "3", "4", "5"]

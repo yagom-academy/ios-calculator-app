@@ -8,7 +8,7 @@
 import Foundation
 
 struct CalculatorItemQueue<T> {
-    var data = [T] ()
+    var data = [T]()
     init() {}
     
     var count: Int {
