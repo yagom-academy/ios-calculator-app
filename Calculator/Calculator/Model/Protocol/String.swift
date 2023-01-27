@@ -11,6 +11,4 @@ extension String {
     }
 }
 
-extension String: CalculateItemProtocol {
-
-}
+extension String: CalculateItemProtocol { }
