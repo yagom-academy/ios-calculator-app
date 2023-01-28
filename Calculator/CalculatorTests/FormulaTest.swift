@@ -46,6 +46,18 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_operatorsqueue에_add를_넣고_result를_호출하면_0이_나온다() {
+        // given
+        sut.operators.enqueue(.add)
+        
+        // when
+        let result = sut.result()
+        let expectation: Double = 0
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
     func test_operandsqueue에_1과2를_넣고_operatorsqueue에_add를_넣고_실행하면_결과값은_3이다() {
         // given
         sut.operands.enqueue(1)
@@ -100,5 +112,18 @@ final class FormulaTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expecation)
+    }
+    func test_operandsqueue에_4와0을_넣고_operatorsqueue에_divide를_넣고_실행하면_결과값은_nan이다() {
+        // given
+        sut.operands.enqueue(4)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(.divide)
+        
+        // when
+        let result = sut.result()
+        let expecatation = result.isNaN
+        
+        // then
+        XCTAssertTrue(expecatation)
     }
 }

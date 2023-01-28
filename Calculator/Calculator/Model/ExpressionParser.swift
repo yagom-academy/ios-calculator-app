@@ -20,11 +20,6 @@ enum ExpressionParser {
         return Formula(operands: operandsQueue, operators: operatorQueue)
     }
     private static func componentsByOperators(from input: String) -> [String] {
-        var operatorSet = CharacterSet()
-        for `operator` in Operator.allCases {
-            operatorSet.insert(charactersIn: String(`operator`.rawValue))
-        }
-        
-        return input.components(separatedBy: operatorSet).filter{ $0 != "" }
+        return input.split(with: " ").compactMap { String(Double($0) ?? 0)}
     }
 }
