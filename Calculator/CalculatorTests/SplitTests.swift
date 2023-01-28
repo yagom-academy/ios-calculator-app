@@ -11,8 +11,6 @@ final class SplitTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
-        sut = ""
     }
     
     override func tearDownWithError() throws {
@@ -23,6 +21,7 @@ final class SplitTests: XCTestCase {
     
     func test_테스트문자열에서_split_with에_Characater_blank를_넣고_호출하면_빈_문자열배열이_반환된다() {
         // given
+        sut = ""
         
         // when
         let result = sut?.split(with: " ")
