@@ -32,6 +32,7 @@ final class FormulaTests: XCTestCase {
         sut.result()
         let result1 = sut.operators.itemCount
         let result2 = sut.operands.itemCount
+        
         // then
         XCTAssertEqual(result1, expectedResult)
         XCTAssertEqual(result2, expectedResult)

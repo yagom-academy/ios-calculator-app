@@ -10,13 +10,14 @@ enum ExpressionParser {
         let components = self.componentsByOperators(from: input)
         var formula = Formula()
         
-        for member in components {
-            if let operand = Double(member) {
-                formula.operands.enqueue(operand)
-            } else if let `operator` = Operator(rawValue: Character(member)) {
-                formula.operators.enqueue(`operator`)
-            }
-        }
+        components
+            .compactMap() { Double($0) }
+            .forEach() { formula.operands.enqueue($0) }
+        
+        components
+            .filter() { $0.count == 1 }
+            .compactMap() { Operator(rawValue: Character($0)) }
+            .forEach() { formula.operators.enqueue($0) }
 
         return formula
     }
@@ -27,3 +28,4 @@ enum ExpressionParser {
         return result
     }
 }
+
