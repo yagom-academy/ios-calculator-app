@@ -11,13 +11,13 @@ enum ExpressionParser {
         var formula = Formula()
         
         components
-            .compactMap() { Double($0) }
-            .forEach() { formula.operands.enqueue($0) }
+            .compactMap { Double($0) }
+            .forEach { formula.operands.enqueue($0) }
         
         components
-            .filter() { $0.count == 1 }
-            .compactMap() { Operator(rawValue: Character($0)) }
-            .forEach() { formula.operators.enqueue($0) }
+            .filter { $0.count == 1 }
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { formula.operators.enqueue($0) }
 
         return formula
     }
