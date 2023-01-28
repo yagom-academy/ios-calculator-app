@@ -5,25 +5,33 @@
 //  Created by 김성준 on 2023/01/27.
 //
 
+import Foundation
+
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let components: [String] = input.split(with: " ")
-        
+        let components = componentsByOperators(from: input)
+
         var operands = CalculatorItemQueue<Double>()
-        var operators = CalculatorItemQueue<String>()
-        
+        var operators = CalculatorItemQueue<Operator>()
+
         for component in components {
-            guard let operand = Double(component) else {
-                operators.enqueue(component)
-                continue
+            if let operand = Double(component) {
+                operands.enqueue(operand)
+            } else if let operatorSign = Operator(rawValue: Character(component)) {
+                operators.enqueue(operatorSign)
             }
-            operands.enqueue(operand)
         }
         let formula = Formula(operands: operands, operators: operators)
         return formula
     }
-    
+
     static private func componentsByOperators(from input: String) -> [String] {
-        return []
+        let components = input.split(with: " ")
+        return components
     }
 }
+
+
+
+
