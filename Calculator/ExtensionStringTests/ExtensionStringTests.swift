@@ -29,7 +29,5 @@ final class ExtensionStringTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
-
-
-
+    
 }

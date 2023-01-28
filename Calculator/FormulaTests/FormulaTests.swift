@@ -27,8 +27,11 @@ final class FormulaTests: XCTestCase {
     
     func test_result실행시_0을반환한다() {
         let expectation: Double = 0
+        
+        //when
         let result = sut.result()
         
+        //then
         XCTAssertEqual(result, expectation)
         
     }

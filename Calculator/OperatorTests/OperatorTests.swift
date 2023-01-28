@@ -61,6 +61,7 @@ final class OperatorTests: XCTestCase {
         let lhs: Double = 5.0
         let rhs: Double = 0
         
+        //then
         XCTAssertThrowsError(try Operator.divide.calculate(lhs: lhs, rhs: rhs)) { error in XCTAssertEqual(error as! CalculatorError, CalculatorError.divideError) }
     }
     
@@ -76,4 +77,5 @@ final class OperatorTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
+    
 }
