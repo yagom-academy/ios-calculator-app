@@ -54,4 +54,14 @@ final class ExpressionParserTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
+    
+    func test_음수1콤마000빼기1의_문자열을_parse한_Formula의_result값은_음수1001이다() {
+        // given
+        var formula = ExpressionParser.parse(from: "-1,000 - 1")
+        let exception: Double = -1001
+        // when
+        let result = formula.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
 }

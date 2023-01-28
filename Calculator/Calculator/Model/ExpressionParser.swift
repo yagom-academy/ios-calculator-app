@@ -6,7 +6,7 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let components = ExpressionParser.componentsByOperators(from: input)
-        let operatorValues = Operator.allCases.map{ String($0.rawValue) }
+        let operatorValues = Operator.allCases.map { String($0.rawValue) }
         var operators: [Operator] = []
         var operands: [Double] = []
         
@@ -27,15 +27,14 @@ enum ExpressionParser {
     static private func componentsByOperators(from input: String) -> [String] {
         let inputs = input.split(with: " ")
         
-        let components: [String] = inputs.map({ component in
+        let components: [String] = inputs.map { component in
             if component.contains(",") {
                 let newComponent = component.replacingOccurrences(of: ",", with: "")
-                
                 return newComponent
             }
             
             return component
-        })
+        }
         
         return components
     }
