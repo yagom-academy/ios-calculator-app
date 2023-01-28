@@ -113,4 +113,18 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedResult)
     }
+    
+    func test_0으로나누는식이전달될때_result호출시_NaN이반환된다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(Operator(rawValue: "/")!)
+        let expectedResult = true
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result.isNaN, expectedResult)
+    }
 }

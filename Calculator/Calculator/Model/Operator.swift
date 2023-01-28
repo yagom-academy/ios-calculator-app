@@ -40,6 +40,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         if rhs == Double.zero {
             return .nan
         }
+        
         let result = lhs / rhs
         
         return result
