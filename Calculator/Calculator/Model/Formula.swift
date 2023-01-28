@@ -12,8 +12,10 @@ struct Formula {
     @discardableResult
     mutating func result() -> Double {
         var result: Double = 0
+        let minCountForCalculate = 1
         
-        if let firstOperand = operands.dequeue() {
+        if operands.itemCount > minCountForCalculate,
+            let firstOperand = operands.dequeue() {
             result = firstOperand
         }
         
