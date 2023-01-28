@@ -15,12 +15,12 @@ struct CalculatorItemQueue<T> {
         return data.count
     }
     
-    func isEmpty() -> Bool {
+    var isEmpty: Bool {
         return data.isEmpty
     }
     
     func peek() -> T? {
-        return isEmpty() ? nil : data.first
+        return isEmpty ? nil : data.first
     }
     
     mutating func clearAll() {
@@ -32,6 +32,6 @@ struct CalculatorItemQueue<T> {
     }
     
     mutating func dequeue() -> T? {
-        return isEmpty() ? nil : data.removeFirst()
+        return isEmpty ? nil : data.removeFirst()
     }
 }

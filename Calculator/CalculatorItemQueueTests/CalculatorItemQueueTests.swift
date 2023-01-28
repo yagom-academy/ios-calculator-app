@@ -23,7 +23,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.data = []
         
         //when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         
         //then
         XCTAssertTrue(result)
@@ -34,7 +34,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.data = ["1", "2", "3"]
         
         //when
-        let result = sut.isEmpty()
+        let result = sut.isEmpty
         
         //then
         XCTAssertFalse(result)
