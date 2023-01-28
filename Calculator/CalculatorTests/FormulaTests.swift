@@ -128,4 +128,23 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result.isNaN, expectedResult)
     }
+    
+    func test_주어진조건에서_result호출시_옳은결과를반환한다() {
+        // given
+        sut.operands.enqueue(-1)
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(22)
+        sut.operators.enqueue(Operator(rawValue: "+")!)
+        sut.operators.enqueue(Operator(rawValue: "-")!)
+        sut.operators.enqueue(Operator(rawValue: "*")!)
+        let expectedResult: Double = -66
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
+    
 }
