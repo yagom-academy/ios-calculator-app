@@ -89,6 +89,19 @@ final class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_nextOperand가_없을때_firstOperand를반환한다() {
+        //given
+        sut.operands.enqueue(10)
+        sut.operators.enqueue(.add)
+        let expectation: Double = 10
+        
+        //when
+        let result = sut.result()
+        
+        //then
+        XCTAssertEqual(result, expectation)
+    }
 
    
 }
