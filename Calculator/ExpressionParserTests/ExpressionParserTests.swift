@@ -68,7 +68,19 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func
+    func test_input에_피연산자1개와_연산자1개가_입력되면_피연산자가_그대로반환된다() {
+        //given
+        let input = "1 -"
+        let expectation: Double = 1
+        
+        //when
+        var formula = ExpressionParser.parse(from: input)
+        let result = formula.result()
+        
+        //then
+        XCTAssertEqual(result, expectation)
+    }
+    
     
     
 
