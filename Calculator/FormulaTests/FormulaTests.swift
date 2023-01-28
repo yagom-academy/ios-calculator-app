@@ -34,8 +34,6 @@ final class FormulaTests: XCTestCase {
     }
     
     func test_operand가_비어있으면_0을반환한다() {
-        //given
-        let operand = sut.operands
         let expectation: Double? = .zero
         
         //when
@@ -102,6 +100,5 @@ final class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
-
    
 }
