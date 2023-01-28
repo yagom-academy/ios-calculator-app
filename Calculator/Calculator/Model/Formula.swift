@@ -13,10 +13,10 @@ struct Formula {
     mutating func result() -> Double? {
         var result: Double = 0
         
-        guard var firstOperand = operands.dequeue() else {
+        guard let firstOperand = operands.dequeue() else {
             return .zero
         }
-        
+        result = firstOperand
         while !operands.isEmpty {
             guard let nextOperand = operands.dequeue() else {
                 return .zero
@@ -25,8 +25,7 @@ struct Formula {
                 return nil
             }
             do {
-                result = try operatorType.calculate(lhs: firstOperand, rhs: nextOperand)
-                firstOperand = result
+                result = try operatorType.calculate(lhs: result, rhs: nextOperand)
             } catch CalculatorError.divideError {
                 return .nan
             } catch {
