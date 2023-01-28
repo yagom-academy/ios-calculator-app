@@ -193,4 +193,30 @@ final class FormulaTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
+    
+    func test_3더하기4와_5가_있는_result값은_7이다() {
+        // given
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(4)
+        sut.operands.enqueue(5)
+        let exception = 7.0
+        // when
+        let result = sut.result()
+        // then
+        XCTAssertEqual(result, exception)
+    }
+    
+    func test_3더하기4와_더하기가_있을경우_result값은_7이다() {
+        // given
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(4)
+        sut.operators.enqueue(.add)
+        let exception = 7.0
+        // when
+        let result = sut.result()
+        // test
+        XCTAssertEqual(result, exception)
+    }
 }
