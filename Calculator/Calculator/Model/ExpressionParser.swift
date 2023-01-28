@@ -26,15 +26,16 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         let inputs = input.split(with: " ")
-        var components: [String] = []
         
-        inputs.forEach { component in
+        let components: [String] = inputs.map({ component in
             if component.contains(",") {
                 let newComponent = component.replacingOccurrences(of: ",", with: "")
-                components.append(newComponent)
+                
+                return newComponent
             }
-            components.append(component)
-        }
+            
+            return component
+        })
         
         return components
     }
