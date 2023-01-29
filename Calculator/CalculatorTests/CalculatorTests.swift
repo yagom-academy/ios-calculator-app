@@ -8,13 +8,15 @@
 import XCTest
 
 final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Any>!
+    var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
@@ -24,8 +26,10 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(element: 3)
         sut.enqueue(element: 4)
         sut.enqueue(element: 11)
+        
         // when
         sut.clearQueue()
+        
         // then
         XCTAssertTrue(sut.isEmpty())
     }
@@ -33,8 +37,10 @@ final class CalculatorTests: XCTestCase {
     func test_빈배열에서_요소를삭제를시도할경우_nil값반환하는함수() {
         // given
         sut.enqueue(element: 9)
+        
         // when
         sut.clearQueue()
+        
         // then
         XCTAssertNil(sut.dequeue())
     }

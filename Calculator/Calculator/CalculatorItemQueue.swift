@@ -1,16 +1,16 @@
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<dataType>: CalculateItem {
 
-    private var queue: [T] = []
+    private var queue: [dataType] = []
     
-    mutating func enqueue(element: T) {
+    mutating func enqueue(element: dataType) {
         queue.append(element)
     }
     
-    mutating func isEmpty() -> Bool {
+    func isEmpty() -> Bool {
         return queue.isEmpty
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> dataType? {
         return isEmpty() ? nil : queue.removeFirst()
     }
 
@@ -18,8 +18,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         queue.removeAll()
     }
     
-    mutating func searchQueue() -> T? {
-        return queue.first
+    func peek() {
+        
     }
     
 }
+
+var a = CalculatorItemQueue<Int>()
