@@ -40,7 +40,7 @@ final class ExpressionParserTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
-    // 3*5/9-2
+    
     func test_parse호출시_3_곱하기_5_나누기_9_빼기_2를_인자로넣으면_operands에는3_5_9_2가들어가고_operators에는곱하기_나누기_빼기가_들어간다() {
         // given
         let input = "3*5/9-2"
