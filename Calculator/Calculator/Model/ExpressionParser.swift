@@ -18,7 +18,7 @@ enum ExpressionParser {
         for component in components {
             if let operand = Double(component) {
                 operands.enqueue(operand)
-            } else if let operatorSign = Operator(rawValue: Character(component)) {
+            } else if let operatorSign = Operator.returnOperator(input: component) {
                 operators.enqueue(operatorSign)
             }
         }
