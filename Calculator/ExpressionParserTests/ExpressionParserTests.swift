@@ -81,4 +81,15 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_10곱하기2더하기5나누기5는_5이다() {
+        
+        let input = "10 x 2 + 5 % 5"
+        let expectation: Double = 5
+        
+        var formula = ExpressionParser.parse(from: input)
+        let result = formula.result()
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
 }

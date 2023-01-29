@@ -11,14 +11,9 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
-        components.forEach {
-            if let validOperands = Double($0) {
-                operands.enqueue(validOperands)
-            } else if let validOperators = Operator(rawValue: Character($0)) {
-                operators.enqueue(validOperators)
-            }
-        }
-        
+        components.compactMap({ Double($0) }).forEach{ operands.enqueue($0) }
+        components.filter{ $0.count == 1 }.compactMap({ Operator(rawValue: Character($0)) }).forEach{ operators.enqueue($0) }
+
         let result: Formula = Formula(operands: operands, operators: operators)
         
         return result
