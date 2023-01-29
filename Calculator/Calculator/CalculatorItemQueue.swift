@@ -15,6 +15,11 @@ struct CalculatorItemQueue<dataType: CalculateItem> {
         return dequeueStack.popLast()
     }
     
+    mutating func clearQueue() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
+    }
+    
     func isEmpty() -> Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }

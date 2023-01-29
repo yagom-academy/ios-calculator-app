@@ -32,5 +32,17 @@ final class CalculatorTests: XCTestCase {
     }
     
 
+    
+    func test_queue에요소가들어있는상태에서_isEmpty를호출할경우_false를확인하는함수() {
+        // given
+        
+        // when
+        sut.enqueue(element: 11)
+        
+        // then
+        XCTAssertFalse(sut.isEmpty())
+    }
+    
+
 
 }
