@@ -21,6 +21,17 @@ final class FormularTests: XCTestCase {
         sut = nil
     }
     
+    func test_모든큐가비어있을때_result호출시_연산결과는0이다() {
+        // given
+        let expectation: Double = 0
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(expectation, result)
+    }
+    
     func test_result호출시_다음의연산결과는_724이다() {
         // 1000 + 30 * 2 / 2.5 - 10.8 + -89.2
         
@@ -45,5 +56,26 @@ final class FormularTests: XCTestCase {
         
         // then
         XCTAssertEqual(expectation, result)
+    }
+    
+    func test_0으로나누는것이_연산에포함되어있을때_결과는NaN이다() {
+        // 2 * 1000 / 0 + 1
+        
+        // given
+        sut.operands.enqueue(2)
+        sut.operands.enqueue(1000)
+        sut.operands.enqueue(0)
+        sut.operands.enqueue(1)
+        
+        sut.operators.enqueue(.multiply)
+        sut.operators.enqueue(.divide)
+        sut.operators.enqueue(.add)
+        
+        // when
+        let result = sut.result()
+        print(result)
+        
+        // then
+        XCTAssertTrue(result.isNaN)
     }
 }
