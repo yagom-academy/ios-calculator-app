@@ -4,22 +4,20 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operandsQueue = CalculatorItemQueue<Double>()
+        var operandQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
-        let operandsArray = componentsByOperators(from: input).compactMap { Double($0) }
-        let operatorsArray = input.compactMap{ Operator(rawValue: $0) }
+        let operandsArray = componentsByOperators(from: input).compactMap{ Double($0) }
+        let operatorsArray = input.split(with: " ")
+                                .filter{ $0.count == 1 }
+                                .compactMap{ Operator(rawValue: Character($0)) }
         
-        for operands in operandsArray {
-            operandsQueue.enqueue(operands)
-        }
+        operandsArray.forEach{ operandQueue.enqueue($0) }
+        operatorsArray.forEach{ operatorQueue.enqueue($0) }
         
-        for operators in operatorsArray {
-            operatorQueue.enqueue(operators)
-        }
-        
-        return Formula(operands: operandsQueue, operators: operatorQueue)
+        return Formula(operands: operandQueue, operators: operatorQueue)
     }
+    
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ").compactMap { String(Double($0) ?? 0)}
+        return input.split(with: " ").compactMap { Double($0) }.map{ String($0) }
     }
 }
