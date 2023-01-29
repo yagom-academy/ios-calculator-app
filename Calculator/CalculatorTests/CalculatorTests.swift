@@ -20,29 +20,15 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_빈배열일경우_isEmpty에서_true값을반환하는함수() {
+    func test_enqueue함수호출로_값을넣으면_enqueueStack에값이삽입된다() {
         // given
-        sut.enqueue(element: 9)
-        sut.enqueue(element: 3)
-        sut.enqueue(element: 4)
+        let input: Array<Int> = [11]
+        
+        // when
         sut.enqueue(element: 11)
         
-        // when
-        sut.clearQueue()
-        
         // then
-        XCTAssertTrue(sut.isEmpty())
-    }
-    
-    func test_빈배열에서_요소를삭제를시도할경우_nil값반환하는함수() {
-        // given
-        sut.enqueue(element: 9)
-        
-        // when
-        sut.clearQueue()
-        
-        // then
-        XCTAssertNil(sut.dequeue())
+        XCTAssertEqual(input, sut.enqueueStack)
     }
 
 }

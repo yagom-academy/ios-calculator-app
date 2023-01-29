@@ -1,7 +1,7 @@
 struct CalculatorItemQueue<dataType>: CalculateItem {
 
-    private var enqueueStack: [dataType] = []
-    private var dequeueStack: [dataType] = []
+    private(set) var enqueueStack: [dataType] = []
+    private(set) var dequeueStack: [dataType] = []
     
     mutating func enqueue(element: dataType) {
         enqueueStack.append(element)
