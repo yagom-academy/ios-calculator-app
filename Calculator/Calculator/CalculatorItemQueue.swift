@@ -1,27 +1,30 @@
 struct CalculatorItemQueue<dataType>: CalculateItem {
 
-    private var queue: [dataType] = []
+    private var enqueueStack: [dataType] = []
+    private var dequeueStack: [dataType] = []
     
     mutating func enqueue(element: dataType) {
-        queue.append(element)
-    }
-    
-    func isEmpty() -> Bool {
-        return queue.isEmpty
+        enqueueStack.append(element)
     }
     
     mutating func dequeue() -> dataType? {
-        return isEmpty() ? nil : queue.removeFirst()
-    }
-
-    mutating func clearQueue() {
-        queue.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
+        }
+        return dequeueStack.popLast()
     }
     
-    func peek() {
-        
+    func isEmpty() -> Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    
+    func peek() -> dataType? {
+        if dequeueStack.isEmpty {
+            return enqueueStack.first
+        } else {
+            return dequeueStack.last
+        }
     }
     
 }
-
-var a = CalculatorItemQueue<Int>()
