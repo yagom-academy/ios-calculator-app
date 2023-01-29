@@ -9,7 +9,7 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operatorValues = Operator.allCases.map { String($0.rawValue) }
         let operands = componentsByOperators(from: input)
-        let operators = input.split(with: " ").filter { return operatorValues.contains($0) }
+        let operators = input.split(with: " ").filter { operatorValues.contains($0) }
         let formula = Formula()
         
         operands
@@ -28,7 +28,7 @@ enum ExpressionParser {
         let delimiter: Character = " "
         
         inputs = input.split(with: delimiter)
-        result = inputs.filter { return operatorValues.contains($0) == false }
+        result = inputs.filter { operatorValues.contains($0) == false }
         return result
     }
 }

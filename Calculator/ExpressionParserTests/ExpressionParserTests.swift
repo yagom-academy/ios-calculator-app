@@ -21,7 +21,7 @@ final class ExpressionParserTests: XCTestCase {
         sut = nil
     }
 
-    func test_parse호출시_연산자와피연산자를나눠_Formula로반환한다() {
+    func test_parse호출시_연산자와피연산자를나눠_Formula로반환한뒤_각각맨앞의요소를비교한다() {
         // given
         let calculatorValue = "1 + 2 * 4 / 3 + -7 + 8"
         let operatorsExpectation: [Operator] = [.add, .multiply, .divide, .add, .add]
