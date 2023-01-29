@@ -13,11 +13,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     @discardableResult
-    func removeRear() -> Node<T>? {
-        return queue.removeLast()
-    }
-    
-    @discardableResult
     func dequeue() -> Node<T>? {
         return queue.removeFirst()
     }
