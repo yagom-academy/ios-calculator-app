@@ -10,7 +10,7 @@ import Foundation
 extension Double: CalculateItem {}
 
 extension String: CalculateItem {
-    func split(with target: Character) -> String {
-        return "0"
+    func split(with target: Character) -> [String] {
+        return components(separatedBy: String(target))
     }
 }

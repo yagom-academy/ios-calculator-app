@@ -16,6 +16,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
+        
         return ["0"]
     }
 }
