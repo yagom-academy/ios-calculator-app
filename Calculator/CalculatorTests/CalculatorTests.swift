@@ -36,6 +36,19 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
+    func test_모든값을dequeue하고_isEmpty를호출할경우_true를확인하는함수() {
+        // given
+        sut.enqueue(element: 9)
+        sut.enqueue(element: 3)
+        
+        // when
+        sut.dequeue()
+        sut.dequeue()
+        
+        // them
+        XCTAssertTrue(sut.isEmpty())
+    }
+    
     func test_clearQueue를호출해서값을다지우고_isEmpty를호출할경우_true를확인하는함수() {
         // given
         sut.enqueue(element: 4)
