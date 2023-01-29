@@ -20,7 +20,7 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue함수호출로_값을넣으면_enqueueStack에값이삽입된다() {
+    func test_enqueue함수호출로_값을넣으면_enqueueStack에값이삽입되는함수() {
         // given
         let input: Array<Int> = [11]
         
@@ -30,5 +30,7 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(input, sut.enqueueStack)
     }
+    
+
 
 }
