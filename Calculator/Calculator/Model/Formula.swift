@@ -8,23 +8,27 @@
 import Foundation
  
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
-//    mutating func result() -> Double {
-//        guard let formerOperand = operands.dequeue() else { return 0 }
-//        guard let latterOperand = operands.dequeue() else { return 0 }
-//        guard let operatorType = operators.dequeue() else { return 0.0 }
-//        
-//        switch operatorType {
-//        case Operator.add:
-//            return Operator.add.add(lhs: formerOperand, rhs: latterOperand)
-//        case .subtract:
-//            return Operator.subtract.subtract(lhs: formerOperand, rhs: latterOperand)
-//        case .divide:
-//            return Operator.divide.divide(lhs: formerOperand, rhs: latterOperand)
-//        case .multiply:
-//            return Operator.multiply.multiply(lhs: formerOperand, rhs: latterOperand)
-//        }
-//    }
+    
+    
+    mutating func result() -> Double {
+        var currentResult: Double = 0
+        
+        if let firstOperand = operands.dequeue() {
+            currentResult = firstOperand
+        }
+        
+        while operands.isEmpty == false {
+            
+            let formerOperand = currentResult
+            
+            if let latterOperand = operands.dequeue(), let operatorType = operators.dequeue() {
+                currentResult = operatorType.calculate(lhs: formerOperand, rhs: latterOperand)
+            }
+        }
+        
+        return currentResult
+    }
 }
