@@ -15,7 +15,7 @@ struct Formula {
         guard var lhs = operands.dequeue() else {
             return .zero
         }
-        while operands.isEmpty == false {
+        while operators.isEmpty == false {
             guard let operateSymbol = operators.dequeue(),
                   let rhs = operands.dequeue() else {
                 return lhs

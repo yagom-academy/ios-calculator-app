@@ -10,11 +10,6 @@ import XCTest
 
 final class FormulaTests: XCTestCase {
     var sut: Formula!
-    
-//    override func setUpWithError() throws {
-//        try super.setUpWithError()
-//        sut = Formula
-//    }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
@@ -48,5 +43,35 @@ final class FormulaTests: XCTestCase {
         let result = sut.result()
         //then
         XCTAssertTrue(result.isNaN)
+    }
+    
+    func test_operands가빈큐일경우_result호출시_0을반환한다() {
+        //given
+        sut = .init(operands: .init(), operators: .init())
+        let expectedValue = Double.zero
+        //when
+        let result = sut.result()
+        //then
+        XCTAssertEqual(expectedValue, result)
+    }
+    
+    func test_operands에3이들어있을경우_result호출시_3을반환한다() {
+        //given
+        sut = .init(operands: .init([3.0]), operators: .init())
+        let expectedValue = 3.0
+        //when
+        let result = sut.result()
+        //then
+        XCTAssertEqual(expectedValue, result)
+    }
+    
+    func test_operands에3이들어있고operators에더하기가있을경우_result호출시_3을반환한다() {
+        //given
+        sut = .init(operands: .init([3.0]), operators: .init([Operator.add]))
+        let expectedValue = 3.0
+        //when
+        let result = sut.result()
+        //then
+        XCTAssertEqual(expectedValue, result)
     }
 }
