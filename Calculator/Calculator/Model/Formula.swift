@@ -12,14 +12,16 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
 
     mutating func result() -> Double {
-//        let lhs = operands.dequeue()
-//        while operands.isEmpty == false {
-//            let operateSymbol = operators.dequeue()
-//            let rhs = operands.dequeue()
-//
-//        }
-//
-//        let rhs = operands.dequeue()
-        return 0.0
+        guard var lhs = operands.dequeue() else {
+            return .zero
+        }
+        while operands.isEmpty == false {
+            guard let operateSymbol = operators.dequeue(),
+                  let rhs = operands.dequeue() else {
+                return lhs
+            }
+            lhs = operateSymbol.calculate(lhs: lhs, rhs: rhs)
+        }
+        return lhs
     }
 }

@@ -41,24 +41,12 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(expectedValue, result)
     }
     
-//    func test_operands가비어있고operators에더하기가있을경우_result호출시_에러를던진다() throws {
-//        //given
-//        sut = .init(operands: .init(), operators: .init([Operator.add]))
-//        //then
-//        XCTAssertThrowsError(try sut.result())
-//    }
-//
-//    func test_operands에1과2가들어있고operators에더하기와빼기가있을경우_result호출시_에러를던진다() throws {
-//        //given
-//        sut = .init(operands: .init([1.0, 2.0]), operators: .init([Operator.add, Operator.subtract]))
-//        //then
-//        XCTAssertThrowsError(try sut.result())
-//    }
-    
-    func test_operands에3과0과2가들어있고operators에나누기와더하기가있을경우_result호출시_에러를던진다() {
+    func test_operands에3과0과2가들어있고operators에나누기와더하기가있을경우_result호출시_NaN을반환한다() {
         //given
         sut = .init(operands: .init([3.0, 0.0, 2.0]), operators: .init([Operator.devide, Operator.add]))
+        //when
+        let result = sut.result()
         //then
-        XCTAssertThrowsError(sut.result())
+        XCTAssertTrue(result.isNaN)
     }
 }

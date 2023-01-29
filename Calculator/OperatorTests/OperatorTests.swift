@@ -105,7 +105,6 @@ final class OperatorTests: XCTestCase {
         let lhs = 3.0
         let rhs = 0.0
         sut = Operator.devide
-        let expectedValue = Double.nan
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         //then
