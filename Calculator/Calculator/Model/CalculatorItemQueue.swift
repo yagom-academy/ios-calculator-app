@@ -27,7 +27,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     @discardableResult 
     mutating func dequeue() -> T? {
         guard queue.isEmpty != true,
-              frontIndex <= count,
+              frontIndex < queue.count,
               let element = queue[frontIndex] else { return nil }
        
         queue[frontIndex] = nil
@@ -38,7 +38,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     func peek() -> T? {
         guard queue.isEmpty != true,
-              frontIndex <= count,
+              frontIndex < queue.count,
               let element = queue[frontIndex] else { return nil }
         
         return element
