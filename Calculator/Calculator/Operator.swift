@@ -15,22 +15,31 @@ enum Operator: Character, CaseIterable {
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         
-        return 1 //  = 버튼을 누르면 입력된 연산을 한 번에 수행합니다
+        switch self {
+        case .add:
+            return add(lhs: lhs, rhs: rhs)
+        case .subtract:
+            return subtract(lhs: lhs, rhs: rhs)
+        case .divide:
+            return divide(lhs: lhs, rhs: rhs)
+        case .multiply:
+            return multiply(lhs: lhs, rhs: rhs)
+        }
     }
     
-    func add(lhs: Double, rhs: Double) -> Double {
+    private func add(lhs: Double, rhs: Double) -> Double {
        return lhs + rhs
     }
     
-    func subtract(lhs: Double, rhs: Double) -> Double {
+    private func subtract(lhs: Double, rhs: Double) -> Double {
        return lhs - rhs
     }
     
-    func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) -> Double {
        return lhs / rhs
     }
     
-    func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(lhs: Double, rhs: Double) -> Double {
        return lhs * rhs
     }
 }

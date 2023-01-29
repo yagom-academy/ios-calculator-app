@@ -12,8 +12,11 @@ struct Formula {
     
     let operands: CalculatorItemQueue<Double>
     
-    func result() -> Double {
-        return 1
+    mutating func result() -> Double {
+        
+        var result: Double = 1
+        
+        return result
     }
 }
 
