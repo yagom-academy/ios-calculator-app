@@ -22,8 +22,7 @@ enum ExpressionParser {
     
         componentnsByOperators(from: input)
             .map { $0.contains("⎼") ? ("-" + $0[$0.index(after: $0.startIndex)...]) : $0 }
-            .map { Double($0) }
-            .compactMap{ $0 }
+            .compactMap{ Double($0) }
             .forEach { operands.enqueue($0) }
         
         return Formula(operands: operands, operators: operators)
