@@ -19,7 +19,7 @@ enum ExpressionParser {
             }
         }
         
-        var result: Formula = Formula(operands: operands, operators: operators)
+        let result: Formula = Formula(operands: operands, operators: operators)
         
         return result
     }
