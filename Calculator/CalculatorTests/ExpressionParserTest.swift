@@ -47,7 +47,7 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     // MARK: - parse method test
-    func test_parse호출후_임시로_로만든() {
+    func test_test코드_parse호출후_나온_formula랑_임시로_만든_formula랑_같다() {
         // given
         let input: String = "123 + -3 - 34 + 123 * 2"
         var formula = Formula(operands: CalculatorItemQueue<Double>(),
