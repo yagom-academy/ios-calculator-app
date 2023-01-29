@@ -17,10 +17,15 @@ enum ExpressionParser {
         var operatorArray = CalculatorItemQueue<Operator>()
         var operandArray = CalculatorItemQueue<Double>()
         
-        let extractedOperators = extractOperators(from: input)
+        extractOperators(from: input)
+                .map {Character($0)}
+                .compactMap {Operator(rawValue: $0)}
+                .forEach {operatorArray.enqueueItem($0)}
+               
+        componentsByOperators(from: input)
+                .compactMap {Double($0)}
+                .forEach{ operandArray.enqueueItem($0)}
         
-        let extractedOperands = componentsByOperators(from: input)
-            //for문으로 돌려서 enequeue에 넣어주자
         return Formula(operators: operatorArray, operands: operandArray)
     }
     
@@ -36,7 +41,7 @@ enum ExpressionParser {
             resultNumber.forEach {
                 curruentNumber += $0.split(someOperator: operators.rawValue)
             }
-
+            
             resultNumber = curruentNumber
         }
         return resultNumber
