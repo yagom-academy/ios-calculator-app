@@ -7,7 +7,9 @@
 
 import Foundation
 
-extension Double : CalculateItem { }
+extension Operator: CalculateItem { }
+
+extension Double: CalculateItem { }
 
 extension String {
 

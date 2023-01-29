@@ -8,7 +8,7 @@
 import Foundation
 
 struct Formula {
-    let operators: CalculatorItemQueue<Character>
+    let operators: CalculatorItemQueue<Operator>
     
     let operands: CalculatorItemQueue<Double>
     
