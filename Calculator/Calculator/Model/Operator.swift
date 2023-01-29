@@ -19,25 +19,27 @@ enum Operator: Character, CaseIterable {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return add(lhs: lhs, rhs: rhs)
+            return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return add(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            return add(lhs: lhs, rhs: rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
-        return 0
     }
     
-    func add(lhs: Double, rhs: Double) ->Double {
+    private func add(lhs: Double, rhs: Double) ->Double {
         return lhs + rhs
     }
-    func subtract(lhs: Double, rhs: Double) ->Double {
+    private func subtract(lhs: Double, rhs: Double) ->Double {
         return lhs - rhs
     }
-    func divide(lhs: Double, rhs: Double) ->Double {
+    private func divide(lhs: Double, rhs: Double) ->Double {
+        if rhs == 0 {
+            return Double.nan
+        }
         return lhs / rhs
     }
-    func multiply(lhs: Double, rhs: Double) ->Double {
+    private func multiply(lhs: Double, rhs: Double) ->Double {
         return lhs * rhs
     }
 }
