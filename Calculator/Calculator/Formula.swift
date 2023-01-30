@@ -13,18 +13,18 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     
     mutating func result() -> Double {
-        var result: Double = 0
         
-        if let extractedOperand = operands.dequeueItem() {
-            result = extractedOperand
+        guard let extractedOperand = operands.dequeueItem() else {
+            return .zero
         }
-        //operand에 값이있다면
+           var result = extractedOperand
+        
         while operands.isEmpty == false {
-            let firstOperand = result
+            let lhsOperand = result
             
-            if let latterOperand = operands.dequeueItem(), let extractedOperator = operators.dequeueItem() {
+            if let rhsOperand = operands.dequeueItem(), let extractedOperator = operators.dequeueItem() {
                 
-                result = extractedOperator.calculate(lhs: firstOperand, rhs: latterOperand)
+                result = extractedOperator.calculate(lhs: lhsOperand, rhs: rhsOperand)
             }
         }
         return result
