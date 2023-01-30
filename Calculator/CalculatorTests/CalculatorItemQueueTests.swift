@@ -9,12 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<String>!
-
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        sut = CalculatorItemQueue<String>()
-    }
+    var sut: CalculatorItemQueue<Double>!
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
@@ -34,9 +29,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue호출시_큐가비지않았을경우_첫번째요소를빼서반환한다() {
         //given
-        sut = .init(["1", "2", "3"])
-        let expectedResult = "1"
-        let expectedData = ["2", "3"]
+        sut = .init([1.0, 2.0, 3.0])
+        let expectedResult = 1.0
+        let expectedData = [2.0, 3.0]
         
         //when
         let result = sut.dequeue()
@@ -49,9 +44,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue호출시_큐에하나의요소가있을경우_첫번째요소를빼서반환하고빈배열이남는다() {
         //given
-        sut = .init(["1"])
-        let expectedResult = "1"
-        let expectedData:[String] = []
+        sut = .init([1.0])
+        let expectedResult = 1.0
+        let expectedData:[Double] = []
         
         //when
         let result = sut.dequeue()
@@ -75,9 +70,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_peek호출시_큐가비지않았을경우_첫번째요소를빼지않고반환한다() {
         //given
-        sut = .init(["1", "2", "3"])
-        let expectedResult = "1"
-        let expectedData = ["1", "2", "3"]
+        sut = .init([1.0, 2.0, 3.0])
+        let expectedResult = 1.0
+        let expectedData = [1.0, 2.0, 3.0]
         
         //when
         let result = sut.peek()
@@ -90,11 +85,11 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue호출시_맨뒤에요소가추가된다() {
         //given
-        sut = .init(["1", "2", "3"])
-        let expectedData = ["1", "2", "3", "4"]
+        sut = .init([1.0, 2.0, 3.0])
+        let expectedData = [1.0, 2.0, 3.0, 4.0]
         
         //when
-        sut.enqueue("4")
+        sut.enqueue(4.0)
         
         //then
         XCTAssertEqual(expectedData, sut.data)
@@ -103,10 +98,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue호출시_큐가비었을경우_요소가추가된다() {
         //given
         sut = .init()
-        let expectedData = ["4"]
+        let expectedData = [4.0]
         
         //when
-        sut.enqueue("4")
+        sut.enqueue(4.0)
         
         //then
         XCTAssertEqual(expectedData, sut.data)
@@ -114,8 +109,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_clear호출시_모든요소가삭제된다() {
         //given
-        sut = .init(["1", "2", "3"])
-        let expectedData: [String] = []
+        sut = .init([1.0, 2.0, 3.0])
+        let expectedData: [Double] = []
         
         //when
         sut.clear()
@@ -137,7 +132,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_isEmpty호출시_요소가하나라도있을때_False를반환한다() {
         //given
-        sut = .init(["1"])
+        sut = .init([1.0])
         
         //when
         let result = sut.isEmpty
@@ -157,7 +152,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_1개의요소가있을때_count가_1이다() {
         //given
-        sut = .init(["1"])
+        sut = .init([1.0])
         let expectedCount = 1
         
         //then
