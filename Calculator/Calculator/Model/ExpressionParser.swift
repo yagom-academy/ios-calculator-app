@@ -8,7 +8,7 @@ enum ExpressionParser {
         let components = ExpressionParser.componentsByOperators(from: input)
         let operatorValues = Operator.allCases.map { String($0.rawValue) }
         
-        let operators: [Operator] = components.compactMap { component in
+        let operators: [Operator] = input.split(with: " ").compactMap { component in
             if operatorValues.contains(component) {
                 return Operator(rawValue: Character(component))
             }
@@ -24,7 +24,10 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let inputs = input.split(with: " ")
+        let operatorValues = Operator.allCases.map { $0.rawValue }
+        let inputs = input.split(with: " ").filter { value in
+            return operatorValues.contains(value) == false
+        }
         
         let components: [String] = inputs.map { component in
             if component.contains(",") {
