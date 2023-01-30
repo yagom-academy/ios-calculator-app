@@ -5,14 +5,24 @@
 //  Created by 무리 on 2023/01/27.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case substract = "-"
     case divide = "/"
     case multiply = "*"
     
-    func calculate() {
-        
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        var result: Double
+        switch self {
+        case .add: result = add(lhs: lhs, rhs: rhs)
+            return result
+        case .substract: result = substract(lhs: lhs, rhs: rhs)
+            return result
+        case .divide: result = divide(lhs: lhs, rhs: rhs)
+            return result
+        case .multiply: result = multiply(lhs: lhs, rhs: rhs)
+            return result
+        }
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
@@ -28,7 +38,7 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        let result = lhs / rhs
+        let result = lhs/rhs
         
         return result
     }

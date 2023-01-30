@@ -6,6 +6,8 @@
 //
 
 struct Formula {
+    // 공식
+    
     // 피연산자
     var operands: CalculatorItemQueue<Double>
     
