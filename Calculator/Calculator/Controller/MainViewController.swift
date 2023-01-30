@@ -7,6 +7,13 @@
 import UIKit
 
 final class MainViewController: UIViewController {
+    enum Condition {
+        static let zero = "0"
+        static let zeroTwice = "00"
+        static let empty = ""
+        static let minus = "-"
+    }
+    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
@@ -16,20 +23,20 @@ final class MainViewController: UIViewController {
     }
     
     private func initializeLabels() {
-        self.operandLabel.text = "0"
-        self.operatorLabel.text = ""
+        self.operandLabel.text = Condition.zero
+        self.operatorLabel.text = Condition.empty
     }
     
     @IBAction func addNumber(_ sender: UIButton) {
         guard let inputNumber = sender.titleLabel?.text else { return }
         
         if let operand = operandLabel.text,
-           operand != "0" {
+           operand != Condition.zero {
             operandLabel.text = operand + inputNumber
         } else if let operand = operandLabel.text,
-                  operand == "0",
-                  inputNumber != "0",
-                  inputNumber != "00" {
+                  operand == Condition.zero,
+                  inputNumber != Condition.zero,
+                  inputNumber != Condition.zeroTwice {
             operandLabel.text = inputNumber
         }
     }
