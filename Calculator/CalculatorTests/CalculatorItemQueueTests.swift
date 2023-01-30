@@ -1,5 +1,5 @@
 //
-//  CalculatorTests.swift
+//  CalculatorItemQueueTests.swift
 //  CalculatorTests
 //
 //  Created by Jinah Park on 2023/01/24.
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
+final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
