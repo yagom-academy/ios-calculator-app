@@ -18,6 +18,12 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ").compactMap { Double($0) }.map { String($0) }
+        var operatorSet = CharacterSet()
+        
+        for `operator` in Operator.allCases {
+            operatorSet.insert(charactersIn: String(`operator`.rawValue))
+        }
+        
+        return input.components(separatedBy: operatorSet).filter{ $0 != "" }
     }
 }
