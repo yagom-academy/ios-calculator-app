@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T: CalculatorItem> {
+struct CalculatorItemQueue<T> {
     var data = [T]()
     init() {}
     
