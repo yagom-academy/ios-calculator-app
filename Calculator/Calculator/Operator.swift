@@ -5,8 +5,6 @@
 //  Created by 천승현 on 2023/01/27.
 //
 
-import Foundation
-
 enum Operator: Character, CaseIterable {
     case add = "+"
     case subtract = "-"
@@ -27,19 +25,19 @@ enum Operator: Character, CaseIterable {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs+rhs
+        return lhs + rhs
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs-rhs
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        if rhs == 0 { return .nan }
-        return lhs/rhs
+        if rhs == .zero { return .nan }
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs*rhs
+        return lhs * rhs
     }
 }
