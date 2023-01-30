@@ -14,7 +14,7 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1+2-3*4/5"
         let expectedOperands = [1.0, 2.0, 3.0, 4.0, 5.0]
-        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.devide]
+        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.divide]
         //when
         let result = ExpressionParser.parse(from: input)
         //then
@@ -38,7 +38,7 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1.1+2.2-3.3*4.4/5.5"
         let expectedOperands = [1.1, 2.2, 3.3, 4.4, 5.5]
-        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.devide]
+        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.divide]
         //when
         let result = ExpressionParser.parse(from: input)
         //then

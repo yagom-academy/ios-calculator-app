@@ -38,7 +38,7 @@ final class FormulaTests: XCTestCase {
     
     func test_operands에3과0과2가들어있고operators에나누기와더하기가있을경우_result호출시_NaN을반환한다() {
         //given
-        sut = .init(operands: .init([3.0, 0.0, 2.0]), operators: .init([Operator.devide, Operator.add]))
+        sut = .init(operands: .init([3.0, 0.0, 2.0]), operators: .init([Operator.divide, Operator.add]))
         //when
         let result = sut.result()
         //then

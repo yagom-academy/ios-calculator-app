@@ -64,11 +64,11 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(expectedValue, result)
     }
     
-    func test_Operator가devide이고3과1이주어졌을때_calculate호출시_3을반환한다() {
+    func test_Operator가divide이고3과1이주어졌을때_calculate호출시_3을반환한다() {
         //given
         let lhs = 3.0
         let rhs = 1.0
-        sut = Operator.devide
+        sut = Operator.divide
         let expectedValue = lhs/rhs
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -76,11 +76,11 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(expectedValue, result)
     }
     
-    func test_Operator가devide이고1과3이주어졌을때_calculate호출시_3분지1을반환한다() {
+    func test_Operator가divide이고1과3이주어졌을때_calculate호출시_3분지1을반환한다() {
         //given
         let lhs = 1.0
         let rhs = 3.0
-        sut = Operator.devide
+        sut = Operator.divide
         let expectedValue = lhs/rhs
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -88,11 +88,11 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(expectedValue, result)
     }
     
-    func test_Operator가devide이고0과3이주어졌을때_calculate호출시_0을반환한다() {
+    func test_Operator가divide이고0과3이주어졌을때_calculate호출시_0을반환한다() {
         //given
         let lhs = 0.0
         let rhs = 3.0
-        sut = Operator.devide
+        sut = Operator.divide
         let expectedValue = lhs/rhs
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -100,11 +100,11 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(expectedValue, result)
     }
     
-    func test_Operator가devide이고3과0이주어졌을때_calculate호출시_NaN을반환한다() {
+    func test_Operator가divide이고3과0이주어졌을때_calculate호출시_NaN을반환한다() {
         //given
         let lhs = 3.0
         let rhs = 0.0
-        sut = Operator.devide
+        sut = Operator.divide
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         //then
