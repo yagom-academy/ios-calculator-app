@@ -11,8 +11,7 @@ enum ExpressionParser {
         var operands: [Double] = []
         
         components.forEach { component in
-            if operatorValues.contains(component),
-               let operatorCase = Operator(rawValue: Character(component)) {
+            if let operatorCase = Operator(rawValue: Character(component)) {
                 operators.append(operatorCase)
                 return
             }
