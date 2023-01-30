@@ -29,6 +29,4 @@ final class ExpressionTest: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
-  
-
 }

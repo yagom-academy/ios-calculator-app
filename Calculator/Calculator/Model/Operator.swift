@@ -36,14 +36,4 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func multiply(lhs: Double, rhs: Double) -> Double {
         return lhs * rhs
     }
-    
-    static func returnOperator(input: String) -> Operator? {
-        switch input {
-        case "+": return .add
-        case "-": return .subtract
-        case "/": return .divide
-        case "*": return .multiply
-        default: return nil
-        }
-    }
 }
