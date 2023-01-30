@@ -8,6 +8,10 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return calculatorQueue.isEmpty
     }
     
+    init(with queue: [Element] = []) {
+        queue.forEach{ enqueue($0) }
+    }
+    
     mutating func enqueue(_ element: Element) {
         calculatorQueue.append(element)
     }
