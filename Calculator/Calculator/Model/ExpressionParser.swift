@@ -7,17 +7,17 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let components = ExpressionParser.componentsByOperators(from: input)
         let operatorValues = Operator.allCases.map { String($0.rawValue) }
-        var operators: [Operator] = []
-        var operands: [Double] = []
         
-        components.forEach { component in
-            if let operatorCase = Operator(rawValue: Character(component)) {
-                operators.append(operatorCase)
-                return
+        let operators: [Operator] = components.compactMap { component in
+            if operatorValues.contains(component) {
+                return Operator(rawValue: Character(component))
             }
             
-            let operand = (component as NSString).doubleValue
-            operands.append(operand)
+            return nil
+        }
+        
+        let operands: [Double] = components.compactMap { component in
+            return Double(component)
         }
         
         return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
