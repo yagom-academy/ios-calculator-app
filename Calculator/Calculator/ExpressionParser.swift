@@ -7,8 +7,6 @@
 
 import Foundation
 
-var str: String = "1+2-4+23*2"
-
 enum ExpressionParser {
     
     //componentsByOperates로 변환된값이 들어오면 Formula로 분류

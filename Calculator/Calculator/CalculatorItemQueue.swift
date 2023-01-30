@@ -23,7 +23,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func enqueueItem(_ element: T) {
         enqueueStack.append(element)
     }
-    
+    // 1 + 2 - 3 * 4 + 5 =
     @discardableResult
     mutating func dequeueItem() -> T? {
         if dequeueStack.isEmpty {
