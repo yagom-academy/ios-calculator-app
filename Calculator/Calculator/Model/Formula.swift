@@ -14,11 +14,8 @@ struct Formula {
         var result = lhsOperands
         
         while !operands.isEmpty || !operaters.isEmpty {
-            let lhsOperands = result
-            let `operator` = operaters.dequeue()
-            let rhsOperands = operands.dequeue()
-            
-            if let `operator` = `operator`, let rhsOperands = rhsOperands {
+            while let `operator` = operaters.dequeue(), let rhsOperands = operands.dequeue() {
+                let lhsOperands = result
                 result = `operator`.calculate(lhs: lhsOperands, rhs: rhsOperands)
             }
         }
