@@ -42,41 +42,6 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test_peek프로퍼티가_dequeueStack에값들이있을때_dequeueStack의last를반환한다() {
-        //given
-        let input = ["1", "2", "3", "4"]
-        let expectedValue = "2"
-        
-        //when
-        for value in input {
-            sut.enqueue(item: value)
-        }
-        sut.dequeue()
-        guard let result = sut.peek else {
-            return
-        }
-        
-        //then
-        XCTAssertEqual(result, expectedValue)
-    }
-    
-    func test_peek프로퍼티가_dequeueStack이비어있을때_enqueueStack의first를반환한다() {
-        //given
-        let input = ["1", "2", "3", "4"]
-        let expectedValue = "1"
-        
-        //when
-        for value in input {
-            sut.enqueue(item: value)
-        }
-        guard let result = sut.peek else {
-            return
-        }
-        
-        //then
-        XCTAssertEqual(result, expectedValue)
-    }
-    
     func test_enqueue실행시_enqueueStack에_3개의값이_넣어진다() {
         //given
         let input = ["3", "+", "4"]

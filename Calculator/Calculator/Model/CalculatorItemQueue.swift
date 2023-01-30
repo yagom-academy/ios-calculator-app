@@ -16,9 +16,6 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     var isEmpty: Bool {
         return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
-    var peek: T? {
-        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
-    }
     
     
     mutating func enqueue(item: T) {
