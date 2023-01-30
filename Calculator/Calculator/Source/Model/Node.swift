@@ -5,7 +5,7 @@
 //  Created by Harry on 2023/01/25.
 //
 
-class Node<T> {
+final class Node<T> {
     let value: T
     var next: Node?
     
