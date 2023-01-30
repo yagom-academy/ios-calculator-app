@@ -6,11 +6,11 @@ import XCTest
 
 extension Formula: Equatable {
     public static func == (lhs: Calculator.Formula, rhs: Calculator.Formula) -> Bool {
-        var operatorsHead = lhs.operators.calculatorQueue.head
+        var operatorsHead = lhs.operators.calculatorList.head
         
         while operatorsHead != nil {
-            let lhsData = lhs.operands.calculatorQueue.head?.data
-            let rhsData = rhs.operands.calculatorQueue.head?.data
+            let lhsData = lhs.operands.calculatorList.head?.data
+            let rhsData = rhs.operands.calculatorList.head?.data
             
             if lhsData != rhsData {
                 return false
@@ -19,11 +19,11 @@ extension Formula: Equatable {
             operatorsHead = operatorsHead?.next
         }
         
-        var operandsHead = lhs.operands.calculatorQueue.head
+        var operandsHead = lhs.operands.calculatorList.head
         
         while operandsHead != nil {
-            let lhsData = lhs.operands.calculatorQueue.head?.data
-            let rhsData = rhs.operands.calculatorQueue.head?.data
+            let lhsData = lhs.operands.calculatorList.head?.data
+            let rhsData = rhs.operands.calculatorList.head?.data
             
             if lhsData != rhsData {
                 return false
