@@ -21,17 +21,33 @@ final class ExpressionParserTests: XCTestCase {
         sut = nil
     }
 
-    func test_parse호출시_연산자와피연산자를나눠_Formula로반환한뒤_각각맨앞의요소를비교한다() {
+    func test_parse호출시_operandsExpectation요소와_operands의value가모두같다() {
         // given
         let calculatorValue = "1 + 2 * 4 / 3 + -7 + 8"
-        let operatorsExpectation: [Operator] = [.add, .multiply, .divide, .add, .add]
         let operandsExpectation: [Double] = [1, 2, 4, 3, -7, 8]
+        let operandsCount = operandsExpectation.count
         
         // when
         sut = ExpressionParser.parse(from: calculatorValue)
         
         // then
-        XCTAssertEqual(operatorsExpectation[0], sut.operators.dequeue()?.value)
-        XCTAssertEqual(operandsExpectation[0], sut.operands.dequeue()?.value)
+        for count in 0..<operandsCount {
+            XCTAssertEqual(operandsExpectation[count], sut.operands.dequeue()?.value)
+        }
+    }
+    
+    func test_parse호출시_operatorsExpectation요소와_operators의value가모두같다() {
+        // given
+        let calculatorValue = "1 + 2 * 4 / 3 + -7 + 8"
+        let operatorsExpectation: [Operator] = [.add, .multiply, .divide, .add, .add]
+        let operatorsCount = operatorsExpectation.count
+        
+        // when
+        sut = ExpressionParser.parse(from: calculatorValue)
+        
+        // then
+        for count in 0..<operatorsCount {
+            XCTAssertEqual(operatorsExpectation[count], sut.operators.dequeue()?.value)
+        }
     }
 }
