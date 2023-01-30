@@ -32,29 +32,29 @@ final class LinkedListTest: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_a의_값을_append한다면_head값은_a이다() {
+    func test_a의_값을_append한다면_peek값은_a이다() {
         // given
         let value = "a"
         let exception = "a"
         // when
         sut.append(value)
-        let headValue = sut.head!.value
+        let headValue = sut.peek!
         // then
         XCTAssertEqual(headValue, exception)
     }
     
-    func test_a의_값을_append한다면_tail값은_a이다() {
+    func test_a의_값을_append한다면_back값은_a이다() {
         // given
         let value = "a"
         let exception = "a"
         // when
         sut.append(value)
-        let tailValue = sut.tail!.value
+        let tailValue = sut.back!
         // then
         XCTAssertEqual(tailValue, exception)
     }
     
-    func test_a과_b를_append한다면_head는_a_tail은_b다() {
+    func test_a과_b를_append한다면_peek는_a_back은_b다() {
         // given
         let firstValue = "a"
         let secondValue = "b"
@@ -63,8 +63,8 @@ final class LinkedListTest: XCTestCase {
         // when
         sut.append(firstValue)
         sut.append(secondValue)
-        let headValue = sut.head!.value
-        let tailValue = sut.tail!.value
+        let headValue = sut.peek!
+        let tailValue = sut.back!
         // then
         XCTAssertEqual(headValue, headException)
         XCTAssertEqual(tailValue, tailException)
@@ -83,7 +83,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertEqual(exception, removedValue)
     }
     
-    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_head와_tail은_nil이다() {
+    func test_a와_b_두개의_Node를_가진_LinkedList에서_removeFirst를_두번한다면_peek와_back은_nil이다() {
         // given
         let firstValue = "a"
         let secondValue = "b"
@@ -93,8 +93,8 @@ final class LinkedListTest: XCTestCase {
         _ = sut.removeFirst()
         _ = sut.removeFirst()
 
-        let headValue = sut.head
-        let tailValue = sut.tail
+        let headValue = sut.peek
+        let tailValue = sut.back
         // then
         XCTAssertNil(headValue)
         XCTAssertNil(tailValue)
@@ -121,7 +121,7 @@ final class LinkedListTest: XCTestCase {
         XCTAssertNil(sut.removeFirst())
     }
 
-    func test_a와b를_append하고_removeAll을_할_경우_head와_tail은_nil이다() {
+    func test_a와b를_append하고_removeAll을_할_경우_peek와_back은_nil이다() {
         // given
         let firstValue = "a"
         let secondValue = "b"
@@ -131,7 +131,7 @@ final class LinkedListTest: XCTestCase {
         
         sut.removeAll()
         // then
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
+        XCTAssertNil(sut.peek)
+        XCTAssertNil(sut.back)
     }
 }
