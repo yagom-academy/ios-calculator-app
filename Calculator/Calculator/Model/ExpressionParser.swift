@@ -8,18 +8,23 @@
 import Foundation
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
         
-        
         let separatedOperators = input.compactMap { Operator(rawValue: $0) }
-       separatedOperators.forEach { `operator` in
+        
+        separatedOperators.forEach { `operator` in
             operatorsQueue.enqueue(item: `operator`)
         }
-       
-        let separatedOperands = componentsByOperators(from: input).compactMap { Double($0) }
-            separatedOperands.forEach { operand in
+        
+        var separatedOperands = componentsByOperators(from: input)
+    
+        separatedOperands = separatedOperands.map{ if $0.contains("⎼") { return $0.replacingOccurrences(of: "⎼", with: "-")} else {
+            return $0
+        } }
+        
+        separatedOperands.compactMap { Double($0) }.forEach { operand in
             operandsQueue.enqueue(item: operand)
         }
         
@@ -29,7 +34,7 @@ enum ExpressionParser {
         return currentFomula
     }
     
-    func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         var numbers: [String] = [input]
         Operator.allCases.forEach { `operator` in
             numbers = numbers.map { $0.split(with: `operator`.rawValue) }.flatMap { $0 }
