@@ -25,7 +25,7 @@ final class FormulaTests: XCTestCase {
     }
     
     func test_operands와_operators에_값이없을때_result는_0을_반환한다() {
-        let expectedResult:Double = 0
+        let expectedResult: Double = 0
         
         let result = sut.result()
         
@@ -34,9 +34,9 @@ final class FormulaTests: XCTestCase {
     
     func test_3_더하기_4_빼기_5는_2이다() {
         sut.operands.enqueue(3)
-        sut.operators.enqueue(Operator.add)
+        sut.operators.enqueue(.add)
         sut.operands.enqueue(4)
-        sut.operators.enqueue(Operator.subtract)
+        sut.operators.enqueue(.subtract)
         sut.operands.enqueue(5)
         let expectedResult: Double = 2
         
@@ -47,9 +47,9 @@ final class FormulaTests: XCTestCase {
     
     func test_3_곱하기_음수4_빼기_5는_음수17이다() {
         sut.operands.enqueue(3)
-        sut.operators.enqueue(Operator.multiply)
+        sut.operators.enqueue(.multiply)
         sut.operands.enqueue(-4)
-        sut.operators.enqueue(Operator.subtract)
+        sut.operators.enqueue(.subtract)
         sut.operands.enqueue(5)
         let expectedResult: Double = -17
         
@@ -60,9 +60,9 @@ final class FormulaTests: XCTestCase {
     
     func test_3_더하기_5_나누기_4는_2이다() {
         sut.operands.enqueue(3)
-        sut.operators.enqueue(Operator.add)
+        sut.operators.enqueue(.add)
         sut.operands.enqueue(5)
-        sut.operators.enqueue(Operator.divide)
+        sut.operators.enqueue(.divide)
         sut.operands.enqueue(4)
         let expectedResult: Double = 2
         
@@ -73,11 +73,11 @@ final class FormulaTests: XCTestCase {
     
     func test_3_곱하기_8_빼기_2_나누기_0은_nan이다() {
         sut.operands.enqueue(3)
-        sut.operators.enqueue(Operator.multiply)
+        sut.operators.enqueue(.multiply)
         sut.operands.enqueue(8)
-        sut.operators.enqueue(Operator.subtract)
+        sut.operators.enqueue(.subtract)
         sut.operands.enqueue(2)
-        sut.operators.enqueue(Operator.divide)
+        sut.operators.enqueue(.divide)
         sut.operands.enqueue(0)
         
         let result = sut.result().isNaN
