@@ -22,7 +22,7 @@ enum Operator: Character, CaseIterable {
         case .divide:
             do {
                 calculatedValue = try self.divide(lhs: lhs, rhs: rhs)
-            } catch { // MARK: catch 구문 수정 필요
+            } catch {
                 throw OperatorError.divideByZero
             }
         case .multiply:

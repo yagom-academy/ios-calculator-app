@@ -21,11 +21,14 @@ struct Formula<T: CalculateItem> {
               let dequeuedOperator = operators.dequeueCalculateItems()?.data as? String,
               let operatorData = dequeuedOperator.first {
 
-            let operatorInstance = Operator(rawValue: operatorData)
+            guard let operatorInstance = Operator(rawValue: operatorData) else {
+                continue
+            }
+            
             do {
-                result = try operatorInstance!.calculate(lhs: result, rhs: operandData)
+                result = try operatorInstance.calculate(lhs: result, rhs: operandData)
             } catch {
-
+                result = Double.nan
             }
         }
 
