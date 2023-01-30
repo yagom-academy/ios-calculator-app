@@ -8,7 +8,7 @@ import Foundation
 protocol CalculatorItem { }
 
 
-struct CalculatorItemQueue<T>: CalculatorItem {
+struct CalculatorItemQueue<T> {
     
     private(set) var dequeueStack: [T] = []
     private(set) var enqueueStack: [T] = []
