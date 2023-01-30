@@ -22,8 +22,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 1.0
         sut = Operator.add
         let expectedValue = lhs + rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -34,8 +36,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 1.0
         sut = Operator.subtract
         let expectedValue = lhs - rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -46,8 +50,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 0.0
         sut = Operator.subtract
         let expectedValue = lhs - rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -58,8 +64,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 1.0
         sut = Operator.subtract
         let expectedValue = lhs - rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -70,8 +78,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 1.0
         sut = Operator.divide
         let expectedValue = lhs/rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -82,8 +92,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 3.0
         sut = Operator.divide
         let expectedValue = lhs/rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -94,8 +106,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 3.0
         sut = Operator.divide
         let expectedValue = lhs/rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -105,8 +119,10 @@ final class OperatorTests: XCTestCase {
         let lhs = 3.0
         let rhs = 0.0
         sut = Operator.divide
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertTrue(result.isNaN)
     }
@@ -117,8 +133,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 3.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -129,8 +147,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 1.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -141,8 +161,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 3.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -153,8 +175,10 @@ final class OperatorTests: XCTestCase {
         let rhs = -3.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -165,8 +189,10 @@ final class OperatorTests: XCTestCase {
         let rhs = 3.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -177,8 +203,10 @@ final class OperatorTests: XCTestCase {
         let rhs = -3.0
         sut = Operator.multiply
         let expectedValue = lhs * rhs
+        
         //when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }

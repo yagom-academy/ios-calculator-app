@@ -14,9 +14,11 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1+2-3*4/5"
         let expectedOperands = [1.0, 2.0, 3.0, 4.0, 5.0]
-        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.divide]
+        let expectedOperator: [Operator] = [.add, .subtract, .multiply, .divide]
+        
         //when
         let result = ExpressionParser.parse(from: input)
+        
         //then
         XCTAssertEqual(expectedOperands, result.operands.data)
         XCTAssertEqual(expectedOperator, result.operators.data)
@@ -26,9 +28,11 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1+2+3"
         let expectedOperands = [1.0, 2.0, 3.0]
-        let expectedOperator = [Operator.add, Operator.add]
+        let expectedOperator: [Operator] = [.add, .add]
+        
         //when
         let result = ExpressionParser.parse(from: input)
+        
         //then
         XCTAssertEqual(expectedOperands, result.operands.data)
         XCTAssertEqual(expectedOperator, result.operators.data)
@@ -38,9 +42,11 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1.1+2.2-3.3*4.4/5.5"
         let expectedOperands = [1.1, 2.2, 3.3, 4.4, 5.5]
-        let expectedOperator = [Operator.add, Operator.subtract, Operator.multiply, Operator.divide]
+        let expectedOperator: [Operator] = [.add, .subtract, .multiply, .divide]
+        
         //when
         let result = ExpressionParser.parse(from: input)
+        
         //then
         XCTAssertEqual(expectedOperands, result.operands.data)
         XCTAssertEqual(expectedOperator, result.operators.data)
@@ -50,9 +56,11 @@ final class ExpressionParserTests: XCTestCase {
         //given
         let input = "1.1+2.2+3.3"
         let expectedOperands = [1.1, 2.2, 3.3]
-        let expectedOperator = [Operator.add, Operator.add]
+        let expectedOperator: [Operator] = [.add, .add]
+        
         //when
         let result = ExpressionParser.parse(from: input)
+        
         //then
         XCTAssertEqual(expectedOperands, result.operands.data)
         XCTAssertEqual(expectedOperator, result.operators.data)

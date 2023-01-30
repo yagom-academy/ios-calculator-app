@@ -24,8 +24,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_dequeue호출시_큐가빈상태일경우_nil을반환한다() {
         //given
         sut = .init()
+        
         //when
         let result = sut.dequeue()
+        
         //then
         XCTAssertNil(result)
     }
@@ -35,8 +37,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = .init(["1", "2", "3"])
         let expectedResult = "1"
         let expectedData = ["2", "3"]
+        
         //when
         let result = sut.dequeue()
+        
         //then
         XCTAssertEqual(expectedResult, result)
         XCTAssertEqual(expectedData, sut.data)
@@ -48,8 +52,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = .init(["1"])
         let expectedResult = "1"
         let expectedData:[String] = []
+        
         //when
         let result = sut.dequeue()
+        
         //then
         XCTAssertEqual(expectedResult, result)
         XCTAssertEqual(expectedData, sut.data)
@@ -59,8 +65,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_peek호출시_큐가빈상태일경우_nil을반환한다() {
         //given
         sut = .init()
+        
         //when
         let result = sut.peek()
+        
         //then
         XCTAssertNil(result)
     }
@@ -70,8 +78,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = .init(["1", "2", "3"])
         let expectedResult = "1"
         let expectedData = ["1", "2", "3"]
+        
         //when
         let result = sut.peek()
+        
         //then
         XCTAssertEqual(expectedResult, result)
         XCTAssertEqual(expectedData, sut.data)
@@ -82,8 +92,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut = .init(["1", "2", "3"])
         let expectedData = ["1", "2", "3", "4"]
+        
         //when
         sut.enqueue("4")
+        
         //then
         XCTAssertEqual(expectedData, sut.data)
     }
@@ -92,8 +104,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut = .init()
         let expectedData = ["4"]
+        
         //when
         sut.enqueue("4")
+        
         //then
         XCTAssertEqual(expectedData, sut.data)
     }
@@ -102,8 +116,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut = .init(["1", "2", "3"])
         let expectedData: [String] = []
+        
         //when
         sut.clear()
+        
         //then
         XCTAssertEqual(expectedData, sut.data)
     }
@@ -111,8 +127,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_isEmpty호출시_비어있을때_True를반환한다() {
         //given
         sut = .init()
+        
         //when
         let result = sut.isEmpty
+        
         //then
         XCTAssertTrue(result)
     }
@@ -120,8 +138,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_isEmpty호출시_요소가하나라도있을때_False를반환한다() {
         //given
         sut = .init(["1"])
+        
         //when
         let result = sut.isEmpty
+        
         //then
         XCTAssertFalse(result)
     }
@@ -130,6 +150,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut = .init()
         let expectedCount = 0
+        
         //then
         XCTAssertEqual(expectedCount, sut.count)
     }
@@ -138,6 +159,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut = .init(["1"])
         let expectedCount = 1
+        
         //then
         XCTAssertEqual(expectedCount, sut.count)
     }

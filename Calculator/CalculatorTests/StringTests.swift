@@ -19,8 +19,10 @@ final class StringTests: XCTestCase {
         let character: Character = "+"
         let operandsAndOperators = "1+2-3+4"
         let expectedValue = ["1", "2-3", "4"]
+        
         //when
         let result = operandsAndOperators.split(with: character)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -30,8 +32,10 @@ final class StringTests: XCTestCase {
         let character: Character = "-"
         let operandsAndOperators = "1-2*3-4"
         let expectedValue = ["1", "2*3", "4"]
+        
         //when
         let result = operandsAndOperators.split(with: character)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -41,8 +45,10 @@ final class StringTests: XCTestCase {
         let character: Character = "*"
         let operandsAndOperators = "1*2/3*4"
         let expectedValue = ["1", "2/3", "4"]
+        
         //when
         let result = operandsAndOperators.split(with: character)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
@@ -52,8 +58,10 @@ final class StringTests: XCTestCase {
         let character: Character = "/"
         let operandsAndOperators = "1/2+3/4"
         let expectedValue = ["1", "2+3", "4"]
+        
         //when
         let result = operandsAndOperators.split(with: character)
+        
         //then
         XCTAssertEqual(expectedValue, result)
     }
