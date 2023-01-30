@@ -2,8 +2,8 @@
 //  created by vetto on 2023/01/27
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
     
     mutating func result() -> Double {
         
