@@ -14,13 +14,11 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        guard let initialValue = operands.dequeue() else { return .zero }
-        
-        var sum = initialValue
+        guard var sum = operands.dequeue() else { return .zero }
         
         while !operands.isEmpty {
-            if let nextValue = operands.dequeue(), let oper = operators.dequeue() {
-                sum = oper.calculate(lhs: sum, rhs: nextValue)
+            if let nextValue = operands.dequeue(), let `operator` = operators.dequeue() {
+                sum = `operator`.calculate(lhs: sum, rhs: nextValue)
             }
         }
         
