@@ -12,7 +12,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     
     // 연산자
-    var operators: CalculatorItemQueue<String>
+    var operators: CalculatorItemQueue<Operator>
     
     func result() -> Double {
         

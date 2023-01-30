@@ -17,6 +17,6 @@ extension Double: CalculateItem {
     
 }
 
-extension String: CalculateItem {
+extension Operator: CalculateItem {
     
 }
