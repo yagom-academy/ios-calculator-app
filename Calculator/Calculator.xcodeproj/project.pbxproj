@@ -10,7 +10,7 @@
 		622BEA382983B15D008954DD /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA372983B15D008954DD /* ExpressionParser.swift */; };
 		622BEA3A2983B233008954DD /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA392983B233008954DD /* Formula.swift */; };
 		622BEA3C2983B3BC008954DD /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3B2983B3BC008954DD /* Operator.swift */; };
-		622BEA3E2983B471008954DD /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
+		622BEA3E2983B471008954DD /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
 		622BEA462983B4C9008954DD /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA452983B4C9008954DD /* FormulaTest.swift */; };
 		623CED522983C80800D2DB61 /* FormulaTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA452983B4C9008954DD /* FormulaTest.swift */; };
 		623CED532983C8DA00D2DB61 /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623DA38A2980F6E800953161 /* CalculatorItem.swift */; };
@@ -22,22 +22,22 @@
 		623CED592983C92E00D2DB61 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA372983B15D008954DD /* ExpressionParser.swift */; };
 		623CED5A2983C93000D2DB61 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA392983B233008954DD /* Formula.swift */; };
 		623CED5B2983C93200D2DB61 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3B2983B3BC008954DD /* Operator.swift */; };
-		623CED5C2983C93500D2DB61 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
-		623CED5D2983C93500D2DB61 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
+		623CED5C2983C93500D2DB61 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
+		623CED5D2983C93500D2DB61 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
 		623CED682983F6F600D2DB61 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED672983F6F600D2DB61 /* OperatorTest.swift */; };
 		623CED6E2983F70B00D2DB61 /* OperatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED672983F6F600D2DB61 /* OperatorTest.swift */; };
-		623CED6F2983FA0100D2DB61 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
+		623CED6F2983FA0100D2DB61 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
 		623CED702983FA2E00D2DB61 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3B2983B3BC008954DD /* Operator.swift */; };
 		623CED782984034500D2DB61 /* SplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED772984034500D2DB61 /* SplitTest.swift */; };
 		623CED7E2984035000D2DB61 /* SplitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED772984034500D2DB61 /* SplitTest.swift */; };
 		623CED7F2984036100D2DB61 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623DA3822980F4D500953161 /* CalculatorItemQueueTests.swift */; };
-		623CED802984036B00D2DB61 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
+		623CED802984036B00D2DB61 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
 		623CED882984100700D2DB61 /* ExpressionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED872984100700D2DB61 /* ExpressionParserTest.swift */; };
 		623CED8E2984104000D2DB61 /* ExpressionParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623CED872984100700D2DB61 /* ExpressionParserTest.swift */; };
 		623CED8F2984104A00D2DB61 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA372983B15D008954DD /* ExpressionParser.swift */; };
 		623CED902984104D00D2DB61 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA392983B233008954DD /* Formula.swift */; };
 		623CED912984105000D2DB61 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3B2983B3BC008954DD /* Operator.swift */; };
-		623CED922984105300D2DB61 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* Extension.swift */; };
+		623CED922984105300D2DB61 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 622BEA3D2983B471008954DD /* StringExtension.swift */; };
 		623CED932984105800D2DB61 /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623DA38A2980F6E800953161 /* CalculatorItem.swift */; };
 		623CED942984105B00D2DB61 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623DA37A2980F4C700953161 /* CalculatorItemQueue.swift */; };
 		623DA37B2980F4C700953161 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623DA37A2980F4C700953161 /* CalculatorItemQueue.swift */; };
@@ -94,7 +94,7 @@
 		622BEA372983B15D008954DD /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		622BEA392983B233008954DD /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		622BEA3B2983B3BC008954DD /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
-		622BEA3D2983B471008954DD /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		622BEA3D2983B471008954DD /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		622BEA432983B4C9008954DD /* FormulaTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		622BEA452983B4C9008954DD /* FormulaTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTest.swift; sourceTree = "<group>"; };
 		623CED652983F6F600D2DB61 /* OperatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -244,7 +244,7 @@
 				622BEA372983B15D008954DD /* ExpressionParser.swift */,
 				622BEA392983B233008954DD /* Formula.swift */,
 				622BEA3B2983B3BC008954DD /* Operator.swift */,
-				622BEA3D2983B471008954DD /* Extension.swift */,
+				622BEA3D2983B471008954DD /* StringExtension.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -471,7 +471,7 @@
 			files = (
 				623CED582983C91D00D2DB61 /* CalculatorItemQueue.swift in Sources */,
 				623CED572983C90800D2DB61 /* ExpressionParser.swift in Sources */,
-				623CED5D2983C93500D2DB61 /* Extension.swift in Sources */,
+				623CED5D2983C93500D2DB61 /* StringExtension.swift in Sources */,
 				623CED532983C8DA00D2DB61 /* CalculatorItem.swift in Sources */,
 				623CED552983C90100D2DB61 /* Operator.swift in Sources */,
 				623CED562983C90500D2DB61 /* Formula.swift in Sources */,
@@ -485,7 +485,7 @@
 			files = (
 				623CED682983F6F600D2DB61 /* OperatorTest.swift in Sources */,
 				623CED702983FA2E00D2DB61 /* Operator.swift in Sources */,
-				623CED6F2983FA0100D2DB61 /* Extension.swift in Sources */,
+				623CED6F2983FA0100D2DB61 /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,7 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				623CED782984034500D2DB61 /* SplitTest.swift in Sources */,
-				623CED802984036B00D2DB61 /* Extension.swift in Sources */,
+				623CED802984036B00D2DB61 /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,7 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				623CED932984105800D2DB61 /* CalculatorItem.swift in Sources */,
-				623CED922984105300D2DB61 /* Extension.swift in Sources */,
+				623CED922984105300D2DB61 /* StringExtension.swift in Sources */,
 				623CED8F2984104A00D2DB61 /* ExpressionParser.swift in Sources */,
 				623CED942984105B00D2DB61 /* CalculatorItemQueue.swift in Sources */,
 				623CED912984105000D2DB61 /* Operator.swift in Sources */,
@@ -518,7 +518,7 @@
 			files = (
 				623CED542983C8DC00D2DB61 /* CalculatorItem.swift in Sources */,
 				623CED5B2983C93200D2DB61 /* Operator.swift in Sources */,
-				623CED5C2983C93500D2DB61 /* Extension.swift in Sources */,
+				623CED5C2983C93500D2DB61 /* StringExtension.swift in Sources */,
 				623DA3892980F4F600953161 /* CalculatorItemQueue.swift in Sources */,
 				623CED592983C92E00D2DB61 /* ExpressionParser.swift in Sources */,
 				623CED5A2983C93000D2DB61 /* Formula.swift in Sources */,
@@ -531,7 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				623CED7F2984036100D2DB61 /* CalculatorItemQueueTests.swift in Sources */,
-				622BEA3E2983B471008954DD /* Extension.swift in Sources */,
+				622BEA3E2983B471008954DD /* StringExtension.swift in Sources */,
 				623DA38B2980F6E800953161 /* CalculatorItem.swift in Sources */,
 				623CED7E2984035000D2DB61 /* SplitTest.swift in Sources */,
 				623CED8E2984104000D2DB61 /* ExpressionParserTest.swift in Sources */,

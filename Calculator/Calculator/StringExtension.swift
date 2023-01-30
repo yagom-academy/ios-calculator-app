@@ -1,5 +1,5 @@
 //
-//  Extension.swift
+//  StringExtension.swift
 //  Calculator
 //
 //  Created by 천승현 on 2023/01/27.

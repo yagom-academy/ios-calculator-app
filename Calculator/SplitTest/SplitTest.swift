@@ -44,4 +44,28 @@ final class SplitTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_split함수실행시_target이_연속하게들어가있는경우_연속된target을기준으로_분리가된다() {
+        // given
+        sut = "~~hello World~"
+        let expectation = ["hello World"]
+        
+        // when
+        let result = sut.split(with: "~")
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_split함수실행시_target이_끝에있는경우_끝에있는target을기준으로_분리가된다() {
+        // given
+        sut = "~calculator project~"
+        let expection = ["calculator project"]
+        
+        // when
+        let result = sut.split(with: "~")
+        
+        // then
+        XCTAssertEqual(result, expection)
+    }
 }
