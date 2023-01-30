@@ -6,12 +6,8 @@
 //
 
 struct Formula {
-    // 공식
-    
-    // 피연산자
     var operands: CalculatorItemQueue<Double>
     
-    // 연산자
     var operators: CalculatorItemQueue<Operator>
     
     func result() -> Double {

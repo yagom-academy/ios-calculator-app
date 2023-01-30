@@ -13,11 +13,7 @@ enum ExpressionParser {
         let components = componentsByOperators(from: input)
         let operands = CalculatorItemQueue<Double>()
         let operators = CalculatorItemQueue<Operator>()
-        
-        // 어떻게 ["1", "+", "2", "-", "3", "*", "4", "/", "2"] 얘네 구별해서 넣어주어야하나...
-        
 
-        
         return Formula(operands: <#T##CalculatorItemQueue<Double>#>, operators: <#T##CalculatorItemQueue<Operator>#>)
     }
     
