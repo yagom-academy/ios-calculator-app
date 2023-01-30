@@ -11,6 +11,8 @@ final class SplitTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
+        
+        sut = ""
     }
     
     override func tearDownWithError() throws {
