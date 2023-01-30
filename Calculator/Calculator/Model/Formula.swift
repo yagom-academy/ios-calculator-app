@@ -9,13 +9,15 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
 
-    mutating func result() -> Double {
-        guard var leftValue = operands.dequeue() else { return .nan }
-        while let rightValue = operands.dequeue() {
-            guard let operatorSign = operators.dequeue() else { return .nan }
-            leftValue = operatorSign.calculate(lhs: leftValue, rhs: rightValue)
+    mutating func result() -> Double? {
+        guard var presentValue = operands.dequeue() else { return nil }
+        while let nextValue = operands.dequeue() {
+            guard let operatorSign = operators.dequeue() else { return nil }
+            presentValue = operatorSign.calculate(lhs: presentValue, rhs: nextValue)
         }
 
-        return leftValue
+        // presentValue 현재값
+        // rightValue -> 계산할 값 : valueForCalculate
+        return presentValue
     }
 }
