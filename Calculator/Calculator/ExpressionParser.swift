@@ -13,8 +13,8 @@ enum ExpressionParser {
         input.compactMap { Operator(rawValue: $0) }
              .forEach { operatorQueue.enqueue($0) }
             
+        print(componentnsByOperators(from: input))
         componentnsByOperators(from: input)
-            .map { $0.contains("⎼") ? ("-" + $0[$0.index(after: $0.startIndex)...]) : $0 }
             .compactMap { Double($0) }
             .forEach { operandQueue.enqueue($0) }
         
