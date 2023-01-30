@@ -340,19 +340,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="eight" destination="xgT-2D-A49" id="8F5-mx-ZjP"/>
-                        <outlet property="five" destination="vpW-df-OLm" id="yeI-uh-tLK"/>
-                        <outlet property="four" destination="hQm-yz-XvG" id="UFS-EJ-Bay"/>
-                        <outlet property="nine" destination="zcj-xJ-ruw" id="wdR-48-mPe"/>
-                        <outlet property="one" destination="nCE-qB-NiN" id="BW4-4c-pod"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="94W-tU-1Hx"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="wGY-CS-aEX"/>
-                        <outlet property="seven" destination="L6z-2G-Gar" id="u2u-Ib-cig"/>
-                        <outlet property="six" destination="OaY-Mw-CPv" id="co0-qx-W5v"/>
-                        <outlet property="three" destination="X8H-iH-tSd" id="UlZ-Qf-vPt"/>
-                        <outlet property="two" destination="Rif-2S-UU2" id="n4J-Gk-Nnj"/>
-                        <outlet property="zero" destination="mSz-Y3-r5Z" id="yDr-hn-HOS"/>
-                        <outlet property="zeroDouble" destination="sH6-8l-kje" id="4ja-Bw-dJ5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
