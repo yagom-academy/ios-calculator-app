@@ -36,7 +36,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         guard rhs != 0 else {
             return Double.nan
         }
-        return lhs/rhs
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
