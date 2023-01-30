@@ -5,8 +5,6 @@
 //  Created by Jinah Park on 2023/01/27.
 //
 
-import Foundation
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandArray = componentsByOperators(from: input).compactMap { Double($0) }

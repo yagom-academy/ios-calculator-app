@@ -5,8 +5,6 @@
 //  Created by Jinah Park on 2023/01/24.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private(set) var data: [T]
     var isEmpty: Bool {
