@@ -150,4 +150,23 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_dequeue를_요소의갯수만큼_진행하면_마지막값이_나온다() {
+        //given
+        let firstElement = 1
+        let secondElement = 2
+        let thirdElement = 3
+        //when
+        sut?.enqueue(firstElement)
+        sut?.enqueue(secondElement)
+        sut?.enqueue(thirdElement)
+
+
+        sut?.dequeue()
+        sut?.dequeue()
+        let result = sut?.dequeue()
+        
+        let expectation = thirdElement
+        //then
+        XCTAssertEqual(result, expectation)
+    }
 }
