@@ -22,17 +22,43 @@ final class ExpressionParserTest: XCTestCase {
     }
     
 
-    func test_정상적인값이_주어졌을때_Parse를_실행하면_Formula인스턴스의_operator그리고operand큐에_요소가_추가된다() {
+    func test_정상적인값이_주어졌을때_Parse를_실행하면_피연산자는_Formula_인스턴스의_operands큐에_요소가_추가된다() {
         //give
         let string = "30 + 25 - 29"
 
         //when
-        let formula = ExpressionParser.parse(from: string)
-
+        var operands = ExpressionParser.parse(from: string).operands
+        var resultOperands: [Double] = []
+        
+        while operands.count > 0 {
+            guard let element = operands.dequeue() else { return }
+            resultOperands.append(element)
+        }
+        
         //then
-        let result = formula.operands.isEmpty && formula.operators.isEmpty
-        let expectation = false
+        let result = resultOperands
+        let expectation = [30.0, 25.0, 29.0]
 
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_정상적인값이_주어졌을때_Parse를_실행하면_연산자는_Formula_인스턴스의_opperator큐에_요소가_추가된다() {
+        //give
+        let string = "30 + 25 - 29"
+        
+        //when
+        var operators = ExpressionParser.parse(from: string).operators
+        var resultOperators: [Operator] = []
+        
+        while operators.count > 0 {
+            guard let element = operators.dequeue() else { return }
+            resultOperators.append(element)
+        }
+        
+        //then
+        let result = resultOperators
+        let expectation: [Operator] = [.add, .subtract]
+        
         XCTAssertEqual(result, expectation)
     }
 }
