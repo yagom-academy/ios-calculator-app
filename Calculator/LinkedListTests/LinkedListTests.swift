@@ -45,28 +45,6 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(targetNode?.next?.value, expectation)
     }
     
-    func test_removeLast호출시_빈List인경우_nil을반환한다() {
-        // given, when
-        let result = sut.removeLast()
-        
-        // then
-        XCTAssertNil(result)
-    }
-    
-    func test_removeLast호출시_List에1_2_3이있는경우_3이삭제되고_tail은2가된다() {
-        // given
-        sut.appendLast("1")
-        sut.appendLast("2")
-        sut.appendLast("3")
-        let expectation = "2"
-
-        // when
-        sut.removeLast()
-
-        // then
-        XCTAssertEqual(sut.tail?.value, expectation)
-    }
-    
     func test_removeFirst호출시_빈List인경우_nil을반환한다() {
         // given, when
         let result = sut.removeFirst()

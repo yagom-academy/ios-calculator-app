@@ -47,20 +47,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(expectation, tailOfQueue)
     }
     
-    func test_removeRear호출시_마지막으로입력한3이삭제되고_tail이2가된다() {
-        // given
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
-        let expectation = "2"
-        
-        // when
-        sut.removeRear()
-        
-        // then
-        XCTAssertEqual(sut.queue.tail?.value, expectation)
-    }
-    
     func test_deququ호출시_맨처음입력한1이삭제되고_head는2가된다() {
         // given
         sut.enqueue("1")

@@ -25,29 +25,6 @@ final class LinkedList<T: CalculateItem> {
     }
     
     @discardableResult
-    func removeLast() -> Node<T>? {
-        var currentNode = head
-        
-        guard isEmpty == false else {
-            return nil
-        }
-        
-        guard tail != nil else {
-            head = nil
-            return currentNode
-        }
-        
-        while currentNode?.next?.next != nil {
-            currentNode = currentNode?.next
-        }
-        
-        let lastNode = currentNode?.next
-        currentNode?.next = nil
-        tail = currentNode
-        return lastNode
-    }
-    
-    @discardableResult
     func removeFirst() -> Node<T>? {
         let firstNode = head
         
