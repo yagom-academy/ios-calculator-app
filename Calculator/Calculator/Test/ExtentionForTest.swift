@@ -4,6 +4,7 @@
 //
 //  Created by kokkilE on 2023/01/26.
 //
+
 @testable import Calculator
 
 extension Node: Equatable {
@@ -11,6 +12,3 @@ extension Node: Equatable {
         return lhs === rhs
     }
 }
-
-extension String: CalculateItem {}
-
