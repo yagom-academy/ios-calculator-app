@@ -6,5 +6,7 @@
 //
 
 struct Formula<T: CalculateItem> {
-
+    var operands = CalculatorItemQueue<T>()
+    var operators = CalculatorItemQueue<T>()
+    
 }
