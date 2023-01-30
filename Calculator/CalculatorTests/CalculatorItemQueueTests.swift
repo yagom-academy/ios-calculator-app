@@ -47,8 +47,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("head")
         
         // when
-        let resultOfHead = sut.calculatorQueue.head?.data
-        let resultOfTail = sut.calculatorQueue.tail?.data
+        let resultOfHead = sut.calculatorList.head?.data
+        let resultOfTail = sut.calculatorList.tail?.data
         
         // then
         XCTAssertEqual(resultOfHead, resultOfTail)
@@ -61,7 +61,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("tail")
         
         // when
-        let result = sut.calculatorQueue.head?.data
+        let result = sut.calculatorList.head?.data
         let expectation = "head"
         
         // then
@@ -75,7 +75,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("tail")
         
         // when
-        let result = sut.calculatorQueue.tail?.data
+        let result = sut.calculatorList.tail?.data
         let expectation = "tail"
         
         // then
@@ -113,7 +113,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let _ = sut.dequeue()
-        let result = sut.calculatorQueue.head?.data
+        let result = sut.calculatorList.head?.data
         let expectation = "middle"
         
         // then
@@ -128,8 +128,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.clear()
         
         // when
-        let resultOfHead = sut.calculatorQueue.head
-        let resultOfTail = sut.calculatorQueue.tail
+        let resultOfHead = sut.calculatorList.head
+        let resultOfTail = sut.calculatorList.tail
         
         // then
         XCTAssertNil(resultOfHead)

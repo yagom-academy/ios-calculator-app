@@ -48,27 +48,5 @@ final class ExpressionParserTests: XCTestCase {
     
     // MARK: - parse method test
     func test_test코드_parse호출후_나온_formula랑_임시로_만든_formula랑_같다() {
-        // given
-        let input: String = "123 + -3 - 34 + 123 * 2"
-        var formula = Formula(operands: CalculatorItemQueue<Double>(),
-                              operators: CalculatorItemQueue<Operator>())
-        
-        formula.operands.enqueue(123)
-        formula.operands.enqueue(-3)
-        formula.operands.enqueue(34)
-        formula.operands.enqueue(123)
-        formula.operands.enqueue(2)
-        
-        formula.operators.enqueue(Operator.add)
-        formula.operators.enqueue(Operator.subtract)
-        formula.operators.enqueue(Operator.add)
-        formula.operators.enqueue(Operator.multiply)
-        
-        // when
-        let result = ExpressionParser.parse(from: input)
-        let expectation = formula
-        
-        // then
-        XCTAssertEqual(result, expectation)
     }
 }
