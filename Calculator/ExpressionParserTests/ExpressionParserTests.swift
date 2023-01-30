@@ -27,7 +27,6 @@ final class ExpressionParserTests: XCTestCase {
         
         //when
         let formula = ExpressionParser.parse(from: input)
-
         let resultOfOperators = formula.operators.enqueueStack
         let resultOfOperands = formula.operands.enqueueStack
         
@@ -45,10 +44,8 @@ final class ExpressionParserTests: XCTestCase {
         
         //when
         let formula = ExpressionParser.parse(from: input)
-
         let resultOfOperators = formula.operators.enqueueStack
         let resultOfOperands = formula.operands.enqueueStack
-        
         
         //then
         XCTAssertEqual(resultOfOperators, expectedValueOfOperators)
