@@ -42,7 +42,14 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func clearOperandLabel(_ sender: UIButton) {
-        operandLabel.text = "0"
+        operandLabel.text = Condition.zero
+    }
+    
+    @IBAction func toggleSign(_ sender: UIButton) {
+        guard let operandText = operandLabel.text,
+              let currentOperand = Double(operandText) else { return }
+        
+        operandLabel.text = String(-currentOperand)
     }
     
 }
