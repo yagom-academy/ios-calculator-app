@@ -2,10 +2,10 @@
 //  created by vetto on 2023/01/25
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var calculatorQueue = LinkedList<Element>()
+    private(set) var calculatorList = LinkedList<Element>()
     
     var isEmpty: Bool {
-        return calculatorQueue.isEmpty
+        return calculatorList.isEmpty
     }
     
     init(with queue: [Element] = []) {
@@ -13,14 +13,14 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func enqueue(_ element: Element) {
-        calculatorQueue.append(element)
+        calculatorList.append(element)
     }
     
     mutating func dequeue() -> Element? {
-        return calculatorQueue.removeFirst()
+        return calculatorList.removeFirst()
     }
     
     mutating func clear() {
-        calculatorQueue.removeAll()
+        calculatorList.removeAll()
     }
 }
