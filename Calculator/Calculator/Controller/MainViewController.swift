@@ -27,7 +27,7 @@ final class MainViewController: UIViewController {
         self.operatorLabel.text = Condition.empty
     }
     
-    @IBAction func addNumber(_ sender: UIButton) {
+    @IBAction func makeOperand(_ sender: UIButton) {
         guard let inputNumber = sender.titleLabel?.text else { return }
         
         if let operand = operandLabel.text,
@@ -52,5 +52,10 @@ final class MainViewController: UIViewController {
         operandLabel.text = String(-currentOperand)
     }
     
+    @IBAction func presentOperator(_ sender: UIButton) {
+        guard let inputOperator = sender.titleLabel?.text else { return }
+        
+        operatorLabel.text = inputOperator
+    }
 }
 

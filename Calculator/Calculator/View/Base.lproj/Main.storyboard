@@ -115,6 +115,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jee-6j-yop"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -129,7 +132,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dSj-Qc-rFB"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DBZ-WF-3Pc"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="eight" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -140,7 +143,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lvo-Xc-kle"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h7q-XG-0x8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="nine" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -151,7 +154,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6EJ-5Q-Dzx"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yDq-Gb-ymm"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -161,6 +164,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="004-aX-RGq"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -175,7 +181,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TNy-ec-77L"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nYr-8r-z5A"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="five" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -186,7 +192,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="enJ-NF-WMJ"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="brH-8G-apr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="six" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -197,7 +203,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ptp-yJ-VrE"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m3w-Rg-Tli"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -207,6 +213,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GLx-YS-mxU"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -221,7 +230,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QIT-9E-uhQ"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qca-XU-0fo"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="two" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -232,7 +241,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0K9-Jd-8Jt"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7vD-Mo-V44"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="three" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -243,7 +252,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZA2-qF-xs0"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gQl-Ze-a8o"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -253,6 +262,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PnN-0l-T3S"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -267,7 +279,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rr8-6w-RRb"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yeS-9g-Nkn"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="zeroDouble" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
@@ -278,7 +290,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="addNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a6f-iS-9yI"/>
+                                                    <action selector="makeOperand:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t80-6f-uC6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
