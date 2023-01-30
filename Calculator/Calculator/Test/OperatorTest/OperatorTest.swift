@@ -17,7 +17,7 @@ final class OperatorTest: XCTestCase {
         
     }
 
-    func test_operator가_add일때_calculatet를_실행할시_덧셈의연산을한다() {
+    func test_operator가_add일때_calculate를_실행할시_덧셈의연산을한다() {
         //give
         let a = 10.0
         let b = 5.0
@@ -31,7 +31,7 @@ final class OperatorTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operator가_subtract일때_calculatet를_실행할시_뺄셈의연산을한다() {
+    func test_operator가_subtract일때_calculate를_실행할시_뺄셈의연산을한다() {
         //give
         let a = 10.0
         let b = 5.0
@@ -45,7 +45,7 @@ final class OperatorTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operator가_divide일때_calculatet를_실행할시_나눗셈의연산을한다() {
+    func test_operator가_divide일때_calculate를_실행할시_나눗셈의연산을한다() {
         //give
         let a = 10.0
         let b = 5.0
@@ -72,7 +72,7 @@ final class OperatorTest: XCTestCase {
         XCTAssertTrue(result.isNaN)
     }
     
-    func test_operator가_multiply일때_calculatet를_실행할시_곱셈의연산을한다() {
+    func test_operator가_multiply일때_calculate를_실행할시_곱셈의연산을한다() {
         //give
         let a = 10.0
         let b = 5.0

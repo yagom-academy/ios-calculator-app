@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let components = componentsByOperators(from: input)
@@ -31,7 +30,3 @@ enum ExpressionParser {
         return components
     }
 }
-
-
-
-
