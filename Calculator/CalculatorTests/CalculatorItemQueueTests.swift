@@ -9,11 +9,13 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<String>()
+        
+        sut = CalculatorItemQueue()
     }
     
     override func tearDownWithError() throws {
         try super.tearDownWithError()
+        
         sut = nil
     }
     
@@ -45,8 +47,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("head")
         
         // when
-        let resultOfHead = sut.head?.data
-        let resultOfTail = sut.tail?.data
+        let resultOfHead = sut.calculatorList.head?.data
+        let resultOfTail = sut.calculatorList.tail?.data
         
         // then
         XCTAssertEqual(resultOfHead, resultOfTail)
@@ -59,7 +61,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("tail")
         
         // when
-        let result = sut.head?.data
+        let result = sut.calculatorList.head?.data
         let expectation = "head"
         
         // then
@@ -73,7 +75,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue("tail")
         
         // when
-        let result = sut.tail?.data
+        let result = sut.calculatorList.tail?.data
         let expectation = "tail"
         
         // then
@@ -111,7 +113,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let _ = sut.dequeue()
-        let result = sut.head?.data
+        let result = sut.calculatorList.head?.data
         let expectation = "middle"
         
         // then
@@ -126,8 +128,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.clear()
         
         // when
-        let resultOfHead = sut.head
-        let resultOfTail = sut.tail
+        let resultOfHead = sut.calculatorList.head
+        let resultOfTail = sut.calculatorList.tail
         
         // then
         XCTAssertNil(resultOfHead)

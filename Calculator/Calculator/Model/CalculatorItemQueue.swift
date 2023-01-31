@@ -2,34 +2,25 @@
 //  created by vetto on 2023/01/25
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var head: Node<Element>?
-    private(set) var tail: Node<Element>?
+    private(set) var calculatorList = LinkedList<Element>()
     
     var isEmpty: Bool {
-        return head == nil
+        return calculatorList.isEmpty
     }
     
-    mutating func enqueue(_ data: Element) {
-        let node = Node(data: data)
-        if head == nil {
-            head = node
-            tail = node
-        } else {
-            tail?.next = node
-            tail = node
-        }
+    init(with queue: [Element] = []) {
+        queue.forEach{ enqueue($0) }
+    }
+    
+    mutating func enqueue(_ element: Element) {
+        calculatorList.append(element)
     }
     
     mutating func dequeue() -> Element? {
-        guard let node = head else {
-            return nil
-        }
-        self.head = head?.next
-        return node.data
+        return calculatorList.removeFirst()
     }
     
     mutating func clear() {
-        self.head = nil
-        self.tail = nil
+        calculatorList.removeAll()
     }
 }
