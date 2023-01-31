@@ -367,6 +367,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculateItemScrollView" destination="BOT-7g-vxv" id="Dum-cJ-xh5"/>
                         <outlet property="calculateItemStackView" destination="XRe-QE-UJf" id="DAU-dk-L1V"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="aNb-1d-gzA"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="ALD-pr-EPh"/>
