@@ -7,10 +7,6 @@ import XCTest
 final class OperatorTests: XCTestCase {
     var sut: Operator!
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-    
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         
@@ -21,7 +17,7 @@ final class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 3
         let rhs: Double = 4
-        sut = Operator(rawValue: "+")
+        sut = .add
         
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -35,7 +31,7 @@ final class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 10
         let rhs: Double = 15
-        sut = Operator(rawValue: "-")
+        sut = .subtract
         
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -49,7 +45,7 @@ final class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 22
         let rhs: Double = 5
-        sut = Operator(rawValue: "*")
+        sut = .multiply
         
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -63,7 +59,7 @@ final class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 21
         let rhs: Double = 7
-        sut = Operator(rawValue: "/")
+        sut = .divide
         
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
@@ -77,8 +73,7 @@ final class OperatorTests: XCTestCase {
         // given
         let lhs: Double = 9
         let rhs: Double = 0
-        sut = Operator(rawValue: "/")
-        
+        sut = .divide
         // when
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
