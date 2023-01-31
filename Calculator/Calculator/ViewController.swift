@@ -72,12 +72,10 @@ final class ViewController: UIViewController {
     func insertOperatorSign(titleName: String?) {
         let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
         let lastString = stringToBeCalculated[lastIndex]
-        if lastString.isNumber {
-            insertString(titleName: titleName)
-        } else {
+        if Operator(rawValue: lastString) != nil {
             stringToBeCalculated = String(stringToBeCalculated.dropLast())
-            insertString(titleName: titleName)
         }
+        insertString(titleName: titleName)
     }
 }
 
