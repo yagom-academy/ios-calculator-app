@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         operatorLabel.text! = `operator`
         
         if !operandLabel.text!.isEmpty && operandLabel.text! != "0" {
-            workingSpace += " " + operandLabel.text! + " " + operatorLabel.text!
+            workingSpace += operandLabel.text! + operatorLabel.text!
         }
         
         operand = ""
@@ -73,7 +73,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateButtonTapped(_ sender: UIButton) {
-        workingSpace += " " + operandLabel.text!
+        workingSpace += operandLabel.text!
+        print(workingSpace)
         var formula = ExpressionParser.parse(from: workingSpace)
         let result = formula.result()
         
