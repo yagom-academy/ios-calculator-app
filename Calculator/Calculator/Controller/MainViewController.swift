@@ -38,7 +38,7 @@ final class MainViewController: UIViewController {
             .forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction func makeOperand(_ sender: UIButton) {
+    @IBAction func touchOperandButton(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
         if let operand = operandLabel.text,
@@ -88,6 +88,11 @@ final class MainViewController: UIViewController {
         initializeCurrentCalculateItem()
     }
     
+    private func add(_ subview: UIStackView, to superview: UIStackView) {
+        let calculateItem = subview
+        superview.addArrangedSubview(calculateItem)
+    }
+    
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
         operand.text = operandLabel.text
@@ -110,11 +115,6 @@ final class MainViewController: UIViewController {
         addToCurrentInput(about: `operator`, and: operand)
         
         return result
-    }
-    
-    private func add(_ subview: UIStackView, to superview: UIStackView) {
-        let calculateItem = subview
-        superview.addArrangedSubview(calculateItem)
     }
     
     private func addToCurrentInput(about `operator`: UILabel, and operand: UILabel) {
