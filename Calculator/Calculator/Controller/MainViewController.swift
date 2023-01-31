@@ -52,6 +52,12 @@ final class MainViewController: UIViewController {
         }
     }
     
+    @IBAction func allClear(_ sender: UIButton) {
+        initializeScrollView()
+        initializeCurrentCalculateItem()
+        currentInput = Condition.empty
+    }
+    
     @IBAction func clearOperandLabel(_ sender: UIButton) {
         operandLabel.text = Condition.zero
     }
