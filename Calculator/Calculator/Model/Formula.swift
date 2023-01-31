@@ -22,10 +22,10 @@ struct Formula {
             
             do {
                 result = try operatorType.calculate(lhs: result, rhs: nextOperand)
-            } catch CalculatorError.divideByZeroError {
+            } catch CalculatorError.divideByZero {
                 return .nan
             } catch {
-                print(error)
+                return nil
             }
         }
         

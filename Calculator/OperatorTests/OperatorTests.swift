@@ -56,7 +56,7 @@ final class OperatorTests: XCTestCase {
         //then
         XCTAssertThrowsError(try Operator.divide.calculate(lhs: lhs, rhs: rhs)) { error in
             
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZeroError)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
         }
     }
     
