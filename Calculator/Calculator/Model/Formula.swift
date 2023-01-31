@@ -19,12 +19,9 @@ struct Formula {
             result = firstOperand
         }
         
-        while operands.isEmpty() == false {
-            guard let rhs = operands.dequeue() else { break }
-            guard let `operator` = self.operators.dequeue() else { break }
-            let lhs = result
-            let operatedResult = `operator`.calculate(lhs: lhs, rhs: rhs)
-            
+        while let rhs = operands.dequeue(),
+              let `operator` = self.operators.dequeue() {
+            let operatedResult = `operator`.calculate(lhs: result, rhs: rhs)
             result = operatedResult
         }
         
