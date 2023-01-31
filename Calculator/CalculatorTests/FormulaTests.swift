@@ -24,8 +24,8 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(Double(1))
         sut.operands.enqueue(Double(2))
         sut.operands.enqueue(Double(3))
-        sut.operators.enqueue(Operator(rawValue: "+")!)
-        sut.operators.enqueue(Operator(rawValue: "*")!)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.multiply)
         let expectedResult = 0
         
         // when
@@ -38,13 +38,13 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result2, expectedResult)
     }
     
-    func test_result호출시_주어진data의_연산결과가_9이다() {
+    func test_result호출시_주어진data의_연산결과가_예측한결과다() {
         // given
         sut.operands.enqueue(Double(1))
         sut.operands.enqueue(Double(2))
         sut.operands.enqueue(Double(3))
-        sut.operators.enqueue(Operator(rawValue: "+")!)
-        sut.operators.enqueue(Operator(rawValue: "*")!)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.multiply)
         let expectedResult: Double = 9
         
         // when
@@ -54,13 +54,13 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_result호출시_주어진data의_연산결과가_1이다() {
+    func test_result호출시_주어진data의_연산결과가_예측한결과다2() {
         // given
         sut.operands.enqueue(Double(3))
         sut.operands.enqueue(Double(1))
         sut.operands.enqueue(Double(2))
-        sut.operators.enqueue(Operator(rawValue: "-")!)
-        sut.operators.enqueue(Operator(rawValue: "/")!)
+        sut.operators.enqueue(.subtract)
+        sut.operators.enqueue(.divide)
         let expectedResult: Double = 1
         
         // when
@@ -70,13 +70,13 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_result호출시_주어진음수data의_연산결과가_8이다() {
+    func test_result호출시_주어진음수data의_연산결과가_예측한결과다() {
         // given
         sut.operands.enqueue(Double(-3))
         sut.operands.enqueue(Double(-1))
         sut.operands.enqueue(Double(-2))
-        sut.operators.enqueue(Operator(rawValue: "-")!)
-        sut.operators.enqueue(Operator(rawValue: "*")!)
+        sut.operators.enqueue(.subtract)
+        sut.operators.enqueue(.multiply)
         let expectedResult: Double = 4
         
         // when
@@ -86,13 +86,13 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_result호출시_주어진부호가다른data의_연산결과가_1이다() {
+    func test_result호출시_주어진부호가다른data의_예측한결과다() {
         // given
         sut.operands.enqueue(Double(-3))
         sut.operands.enqueue(Double(1))
         sut.operands.enqueue(Double(-2))
-        sut.operators.enqueue(Operator(rawValue: "+")!)
-        sut.operators.enqueue(Operator(rawValue: "/")!)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.divide)
         let expectedResult: Double = 1
         
         // when
@@ -105,7 +105,7 @@ final class FormulaTests: XCTestCase {
     func test_operator가subtract이고operands가1일때_result호출하면_minus1이다() {
         // given
         sut.operands.enqueue(1)
-        sut.operators.enqueue(Operator(rawValue: "-")!)
+        sut.operators.enqueue(.subtract)
         let expectedResult: Double = -1
         
         // when
@@ -119,7 +119,7 @@ final class FormulaTests: XCTestCase {
         // given
         sut.operands.enqueue(1)
         sut.operands.enqueue(0)
-        sut.operators.enqueue(Operator(rawValue: "/")!)
+        sut.operators.enqueue(.divide)
         let expectedResult = true
         
         // when
@@ -129,15 +129,15 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result.isNaN, expectedResult)
     }
     
-    func test_주어진조건에서_result호출시_옳은결과를반환한다() {
+    func test_주어진조건에서_result호출시_예측한결과다() {
         // given
         sut.operands.enqueue(-1)
         sut.operands.enqueue(1)
         sut.operands.enqueue(3)
         sut.operands.enqueue(22)
-        sut.operators.enqueue(Operator(rawValue: "+")!)
-        sut.operators.enqueue(Operator(rawValue: "-")!)
-        sut.operators.enqueue(Operator(rawValue: "*")!)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.subtract)
+        sut.operators.enqueue(.multiply)
         let expectedResult: Double = -66
         
         // when
