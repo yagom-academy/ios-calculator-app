@@ -9,8 +9,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "1 + 2")
         let exception: Double = 3
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -19,8 +21,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "1 + 2 * 3 - 1")
         let exception: Double = 8
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -29,8 +33,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "1 - -1")
         let exception: Double = 2
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -39,8 +45,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "1,000 + 1")
         let exception: Double = 1001
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -49,8 +57,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "1,000,000.0 + 1")
         let exception: Double = 1000001
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -59,8 +69,10 @@ final class ExpressionParserTest: XCTestCase {
         // given
         var formula = ExpressionParser.parse(from: "-1,000 - 1")
         let exception: Double = -1001
+        
         // when
         let result = formula.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }

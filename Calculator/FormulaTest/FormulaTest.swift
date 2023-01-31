@@ -26,8 +26,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(2.0)
         sut.operators.enqueue(.add)
         let exception = 3.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -38,8 +40,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(1.0)
         sut.operators.enqueue(.subtract)
         let exception = 1.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -50,8 +54,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(2.0)
         sut.operators.enqueue(.subtract)
         let exception = -1.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -62,8 +68,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(2.0)
         sut.operators.enqueue(.multiply)
         let exception = 2.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -74,8 +82,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(2.0)
         sut.operators.enqueue(.multiply)
         let exception = 0.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -86,8 +96,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(1.0)
         sut.operators.enqueue(.divide)
         let exception = 2.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -98,8 +110,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(2.0)
         sut.operators.enqueue(.divide)
         let exception = 3.5
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -114,8 +128,10 @@ final class FormulaTest: XCTestCase {
         sut.operators.enqueue(.subtract)
         sut.operands.enqueue(1)
         let exception = 14.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }
@@ -125,8 +141,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(1)
         sut.operands.enqueue(0)
         sut.operators.enqueue(.divide)
+        
         // when
         let result = sut.result().isNaN
+        
         // test
         XCTAssertTrue(result)
     }
@@ -140,8 +158,10 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(5)
         sut.operators.enqueue(.subtract)
         sut.operands.enqueue(2)
+        
         // when
         let result = sut.result().isNaN
+        
         // then
         XCTAssertTrue(result)
     }
@@ -152,8 +172,10 @@ final class FormulaTest: XCTestCase {
         sut.operators.enqueue(.subtract)
         sut.operands.enqueue(-1)
         let exception = 2.0
+        
         // when
         let result = sut.result()
+        
         // then
         XCTAssertEqual(result, exception)
     }

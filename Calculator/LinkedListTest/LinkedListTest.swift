@@ -26,8 +26,10 @@ final class LinkedListTest: XCTestCase {
     func test_a의_값을_append하면_isEmpty는_false이다() {
         // given
         let firstValue = "a"
+        
         // when
         sut.append(firstValue)
+        
         // then
         XCTAssertFalse(sut.isEmpty)
     }
@@ -36,9 +38,11 @@ final class LinkedListTest: XCTestCase {
         // given
         let value = "a"
         let exception = "a"
+        
         // when
         sut.append(value)
         let headValue = sut.peek!
+        
         // then
         XCTAssertEqual(headValue, exception)
     }
@@ -47,9 +51,11 @@ final class LinkedListTest: XCTestCase {
         // given
         let value = "a"
         let exception = "a"
+        
         // when
         sut.append(value)
         let tailValue = sut.back!
+        
         // then
         XCTAssertEqual(tailValue, exception)
     }
@@ -60,11 +66,13 @@ final class LinkedListTest: XCTestCase {
         let secondValue = "b"
         let headException = "a"
         let tailException = "b"
+        
         // when
         sut.append(firstValue)
         sut.append(secondValue)
         let headValue = sut.peek!
         let tailValue = sut.back!
+        
         // then
         XCTAssertEqual(headValue, headException)
         XCTAssertEqual(tailValue, tailException)
@@ -75,10 +83,12 @@ final class LinkedListTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let exception = "a"
+        
         // when
         sut.append(firstValue)
         sut.append(secondValue)
         let removedValue = sut.removeFirst()!
+        
         // then
         XCTAssertEqual(exception, removedValue)
     }
@@ -87,6 +97,7 @@ final class LinkedListTest: XCTestCase {
         // given
         let firstValue = "a"
         let secondValue = "b"
+        
         // when
         sut.append(firstValue)
         sut.append(secondValue)
@@ -95,6 +106,7 @@ final class LinkedListTest: XCTestCase {
 
         let headValue = sut.peek
         let tailValue = sut.back
+        
         // then
         XCTAssertNil(headValue)
         XCTAssertNil(tailValue)
@@ -104,11 +116,13 @@ final class LinkedListTest: XCTestCase {
         // given
         let firstValue = "a"
         let secondValue = "b"
+        
         // when
         sut.append(firstValue)
         sut.append(secondValue)
         _ = sut.removeFirst()
         _ = sut.removeFirst()
+        
         // then
         XCTAssertTrue(sut.isEmpty)
     }
@@ -117,6 +131,7 @@ final class LinkedListTest: XCTestCase {
         // given
         // when
         XCTAssertTrue(sut.isEmpty)
+        
         // then
         XCTAssertNil(sut.removeFirst())
     }
@@ -125,11 +140,13 @@ final class LinkedListTest: XCTestCase {
         // given
         let firstValue = "a"
         let secondValue = "b"
+        
         // when
         sut.append(firstValue)
         sut.append(secondValue)
         
         sut.removeAll()
+        
         // then
         XCTAssertNil(sut.peek)
         XCTAssertNil(sut.back)
