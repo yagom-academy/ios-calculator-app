@@ -8,8 +8,8 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    @IBOutlet weak var presentOperatorLabel: UILabel!
-    @IBOutlet weak var presentNumberLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentNumberLabel: UILabel!
         
     @IBOutlet weak var divideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
@@ -33,9 +33,11 @@ final class ViewController: UIViewController {
     @IBOutlet weak var nineButton: UIButton!
     
     var stringToBeCalculated = ""
+    var currentNumber = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initializeCurrentOperator()
     }
     
     @IBAction func tapACButton(_ sender: UIButton) {
@@ -49,20 +51,26 @@ final class ViewController: UIViewController {
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
         insertString(titleName: sender.titleLabel?.text)
+        setCurrentNumber(titleName: sender.titleLabel?.text)
         print(stringToBeCalculated)
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
         insertString(titleName: sender.titleLabel?.text)
+        setCurrentNumber(titleName: sender.titleLabel?.text)
         print(stringToBeCalculated)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         insertOperatorSign(titleName: sender.titleLabel?.text)
+        displayCurrentOperator(titleName: sender.titleLabel?.text)
+        resetCurrentNumber()
         print(stringToBeCalculated)
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
+        resetCurrentNumber()
+        initializeCurrentOperator()
     }
     
     func insertString(titleName: String?) {
@@ -76,6 +84,28 @@ final class ViewController: UIViewController {
             stringToBeCalculated = String(stringToBeCalculated.dropLast())
         }
         insertString(titleName: titleName)
+    }
+    
+    func setCurrentNumber(titleName: String?) {
+        currentNumber += titleName ?? ""
+        displayCurrentNumber()
+    }
+    
+    func displayCurrentNumber() {
+        currentNumberLabel.text = currentNumber
+    }
+    
+    func displayCurrentOperator(titleName: String?) {
+        currentOperatorLabel.text = titleName
+    }
+    
+    func resetCurrentNumber() {
+        currentNumber = ""
+        currentNumberLabel.text = currentNumber
+    }
+    
+    func initializeCurrentOperator() {
+        currentOperatorLabel.text = ""
     }
 }
 
