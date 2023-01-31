@@ -20,12 +20,18 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCurrentCalculateItem()
-        
+        initializeScrollView()
     }
     
     private func initializeCurrentCalculateItem() {
         self.operandLabel.text = Condition.zero
         self.operatorLabel.text = Condition.empty
+    }
+    
+    private func initializeScrollView() {
+        calculateItemStackView
+            .arrangedSubviews
+            .forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func makeOperand(_ sender: UIButton) {
@@ -80,17 +86,17 @@ final class MainViewController: UIViewController {
     }
     
     func generateCurrentItemStackView() -> UIStackView? {
-        var operand = UILabel()
+        let operand = UILabel()
         operand.text = currentOperandLabel.text
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        var `operator` = UILabel()
+        let `operator` = UILabel()
         `operator`.text = currentOperatorLabel.text
         `operator`.textColor = UIColor.white
         `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        var result = UIStackView()
+        let result = UIStackView()
         result.addArrangedSubview(`operator`)
         result.addArrangedSubview(operand)
         result.axis = .horizontal
