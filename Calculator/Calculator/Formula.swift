@@ -15,7 +15,7 @@ struct Formula {
     mutating func result() -> Double {
         
         guard let extractedOperand = operands.dequeueItem() else {
-            return .zero
+            return 0.0
         }
         
         var result = extractedOperand
@@ -23,14 +23,20 @@ struct Formula {
         while operands.isEmpty == false {
             let lhsOperand = result
             
-            if let rhsOperand = operands.dequeueItem(), let extractedOperator = operators.dequeueItem() {
-                
-                result = extractedOperator.calculate(lhs: lhsOperand, rhs: rhsOperand)
+            guard let rhsOperand = operands.dequeueItem(), let extractedOperator = operators.dequeueItem() else {
+                continue
             }
-        }
+                do {
+                    result = try extractedOperator.calculate(lhs: lhsOperand, rhs: rhsOperand)
+                } catch {
+                    result = Double.nan
+                    //0으로 나누기에 대해서는 결과값을 Nan으로 표시
+                }
+            }
         return result
     }
-    
+        
 }
+
 
 
