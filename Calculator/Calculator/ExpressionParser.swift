@@ -10,8 +10,12 @@ enum ExpressionParser {
         var operandQueue: CalculatorItemQueue<Double>
         var operatorQueue: CalculatorItemQueue<Operator>
         
-        operatorQueue = CalculatorItemQueue(enqueueStack: input.compactMap { Operator(rawValue: $0) })
-        operandQueue = CalculatorItemQueue(enqueueStack: componentnsByOperators(from: input).compactMap { Double($0) })
+        operatorQueue = CalculatorItemQueue(
+            enqueueStack: input.compactMap { Operator(rawValue: $0) }
+        )
+        operandQueue = CalculatorItemQueue(
+            enqueueStack: componentnsByOperators(from: input).compactMap { Double($0) }
+        )
         
         return Formula(operands: operandQueue, operators: operatorQueue)
     }

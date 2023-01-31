@@ -5,8 +5,8 @@
 //  Created by 천승현 on 2023/01/27.
 //
 struct Formula {
-    private (set) var operands = CalculatorItemQueue<Double>()
-    private (set) var operators = CalculatorItemQueue<Operator>()
+    private(set) var operands = CalculatorItemQueue<Double>()
+    private(set) var operators = CalculatorItemQueue<Operator>()
     
     init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
