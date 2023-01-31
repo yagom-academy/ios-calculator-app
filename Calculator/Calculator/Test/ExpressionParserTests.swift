@@ -28,18 +28,12 @@ extension ExpressionParser {
 }
 
 final class ExpressionParserTests: XCTestCase {
-
-    
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
-        //sut = LinkedList<String>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        
-        //sut = nil
     }
 
     func test_componentsByOperators_호출시_연산자가_제거된_String_배열을_반환한다() {

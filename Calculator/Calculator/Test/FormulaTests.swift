@@ -9,13 +9,12 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
     
     func test_operator가operand보다1개적은다항식입력후_result_호출시_다항식연산결과를_반환한다() {

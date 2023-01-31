@@ -16,7 +16,7 @@
 		AA067B5E29877A0D00573D10 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B5D29877A0D00573D10 /* OperatorTests.swift */; };
 		AA067B6B29877C5200573D10 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B6A29877C5200573D10 /* ExpressionParserTests.swift */; };
 		AA067B7829877C9400573D10 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B7729877C9400573D10 /* FormulaTests.swift */; };
-		AA067B8529877FAD00573D10 /* ExtentionStringAndDoubleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B8429877FAD00573D10 /* ExtentionStringAndDoubleTests.swift */; };
+		AA067B8529877FAD00573D10 /* ExtentionStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B8429877FAD00573D10 /* ExtentionStringTests.swift */; };
 		AA067B8C2987876E00573D10 /* ExtensionDouble.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA067B8B2987876E00573D10 /* ExtensionDouble.swift */; };
 		AA90A8AE2980454C00BC1820 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA90A8AD2980454C00BC1820 /* Node.swift */; };
 		AA90A8B02980455600BC1820 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA90A8AF2980455600BC1820 /* LinkedList.swift */; };
@@ -99,8 +99,8 @@
 		AA067B6A29877C5200573D10 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
 		AA067B7529877C9400573D10 /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA067B7729877C9400573D10 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
-		AA067B8229877FAD00573D10 /* ExtentionStringAndDoubleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtentionStringAndDoubleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AA067B8429877FAD00573D10 /* ExtentionStringAndDoubleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionStringAndDoubleTests.swift; sourceTree = "<group>"; };
+		AA067B8229877FAD00573D10 /* ExtentionStringTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtentionStringTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA067B8429877FAD00573D10 /* ExtentionStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentionStringTests.swift; sourceTree = "<group>"; };
 		AA067B8B2987876E00573D10 /* ExtensionDouble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDouble.swift; sourceTree = "<group>"; };
 		AA90A8AD2980454C00BC1820 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		AA90A8AF2980455600BC1820 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -220,7 +220,7 @@
 				AA067B7729877C9400573D10 /* FormulaTests.swift */,
 				AA067B6A29877C5200573D10 /* ExpressionParserTests.swift */,
 				AA067B5D29877A0D00573D10 /* OperatorTests.swift */,
-				AA067B8429877FAD00573D10 /* ExtentionStringAndDoubleTests.swift */,
+				AA067B8429877FAD00573D10 /* ExtentionStringTests.swift */,
 			);
 			path = Test;
 			sourceTree = "<group>";
@@ -243,7 +243,7 @@
 				AA067B5B29877A0D00573D10 /* OperatorTests.xctest */,
 				AA067B6829877C5200573D10 /* ExpressionParserTests.xctest */,
 				AA067B7529877C9400573D10 /* FormulaTests.xctest */,
-				AA067B8229877FAD00573D10 /* ExtentionStringAndDoubleTests.xctest */,
+				AA067B8229877FAD00573D10 /* ExtentionStringTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -319,9 +319,9 @@
 			productReference = AA067B7529877C9400573D10 /* FormulaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		AA067B8129877FAD00573D10 /* ExtentionStringAndDoubleTests */ = {
+		AA067B8129877FAD00573D10 /* ExtentionStringTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AA067B8829877FAD00573D10 /* Build configuration list for PBXNativeTarget "ExtentionStringAndDoubleTests" */;
+			buildConfigurationList = AA067B8829877FAD00573D10 /* Build configuration list for PBXNativeTarget "ExtentionStringTests" */;
 			buildPhases = (
 				AA067B7E29877FAD00573D10 /* Sources */,
 				AA067B7F29877FAD00573D10 /* Frameworks */,
@@ -332,9 +332,9 @@
 			dependencies = (
 				AA067B8729877FAD00573D10 /* PBXTargetDependency */,
 			);
-			name = ExtentionStringAndDoubleTests;
+			name = ExtentionStringTests;
 			productName = ExtentionStringAndDoubleTests;
-			productReference = AA067B8229877FAD00573D10 /* ExtentionStringAndDoubleTests.xctest */;
+			productReference = AA067B8229877FAD00573D10 /* ExtentionStringTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		AA90A8B6298045C900BC1820 /* LinkedListTests */ = {
@@ -470,7 +470,7 @@
 				AA067B5A29877A0D00573D10 /* OperatorTests */,
 				AA067B6729877C5200573D10 /* ExpressionParserTests */,
 				AA067B7429877C9400573D10 /* FormulaTests */,
-				AA067B8129877FAD00573D10 /* ExtentionStringAndDoubleTests */,
+				AA067B8129877FAD00573D10 /* ExtentionStringTests */,
 			);
 		};
 /* End PBXProject section */
@@ -566,7 +566,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA067B8529877FAD00573D10 /* ExtentionStringAndDoubleTests.swift in Sources */,
+				AA067B8529877FAD00573D10 /* ExtentionStringTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1181,7 +1181,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA067B8829877FAD00573D10 /* Build configuration list for PBXNativeTarget "ExtentionStringAndDoubleTests" */ = {
+		AA067B8829877FAD00573D10 /* Build configuration list for PBXNativeTarget "ExtentionStringTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA067B8929877FAD00573D10 /* Debug */,

@@ -100,8 +100,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AA067B8129877FAD00573D10"
-               BuildableName = "ExtentionStringAndDoubleTests.xctest"
-               BlueprintName = "ExtentionStringAndDoubleTests"
+               BuildableName = "ExtentionStringTests.xctest"
+               BlueprintName = "ExtentionStringTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>

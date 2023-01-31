@@ -13,8 +13,6 @@ final class OperatorTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        
-
     }
 
     override func tearDownWithError() throws {
@@ -88,5 +86,4 @@ final class OperatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
-
 }
