@@ -10,10 +10,10 @@ import Foundation
 enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
-    
+        
         var operatorArray = CalculatorItemQueue<Operator>()
         var operandArray = CalculatorItemQueue<Double>()
-        
+                
         extractOperators(from: input)
                 .map {Character($0)}
                 .compactMap {Operator(rawValue: $0)}
@@ -44,6 +44,7 @@ enum ExpressionParser {
     }
     
     static private func extractOperators(from target: String) -> [String] {
+        
         var resultOperators: [String] = []
         
         resultOperators = target.split(whereSeparator: {$0.isNumber || $0 == "."}).map{String($0)}

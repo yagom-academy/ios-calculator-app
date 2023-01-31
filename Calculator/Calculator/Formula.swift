@@ -17,7 +17,8 @@ struct Formula {
         guard let extractedOperand = operands.dequeueItem() else {
             return .zero
         }
-           var result = extractedOperand
+        
+        var result = extractedOperand
         
         while operands.isEmpty == false {
             let lhsOperand = result
