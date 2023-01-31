@@ -16,6 +16,11 @@ final class MainViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
+    
+    @IBOutlet weak var calculateItemStackView: UIStackView!
+    @IBOutlet weak var currentCalculateItem: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +40,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func makeOperand(_ sender: UIButton) {
-        guard let inputNumber = sender.titleLabel?.text else { return }
+        guard let inputNumber = sender.currentTitle else { return }
         
         if let operand = operandLabel.text,
            operand != Condition.zero {
@@ -61,7 +66,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
-        guard let inputOperator = sender.titleLabel?.text else { return }
+        guard let inputOperator = sender.currentTitle else { return }
         
         if operandLabel.text == Condition.zero {
             operatorLabel.text = inputOperator
@@ -70,14 +75,9 @@ final class MainViewController: UIViewController {
             
             add(subview, to: calculateItemStackView)
             initializeCurrentCalculateItem()
-            currentOperatorLabel.text = sender.titleLabel?.text
+            currentOperatorLabel.text = sender.currentTitle
         }
     }
-    
-    @IBOutlet weak var calculateItemStackView: UIStackView!
-    @IBOutlet weak var currentCalculateItem: UIStackView!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var currentOperandLabel: UILabel!
     
     func add(_ subview: UIStackView, to superview: UIStackView) {
         let calculateItem = subview
