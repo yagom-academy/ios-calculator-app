@@ -14,9 +14,12 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = String(Operator.allCases.map{ $0.rawValue })
-        let operatorSet = CharacterSet(charactersIn: operators)
+        var result: [String] = [input]
         
-        return input.components(separatedBy: operatorSet).filter{ $0 != "" }
+        Operator.allCases.forEach { `operator` in
+            result = result.flatMap{ $0.split(with: `operator`.rawValue) }
+        }
+        
+        return result
     }
 }
