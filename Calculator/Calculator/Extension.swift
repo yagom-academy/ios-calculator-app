@@ -7,5 +7,3 @@ extension String {
         return [String(target)]
     }
 }
-
-extension Int: CalculateItem { }
