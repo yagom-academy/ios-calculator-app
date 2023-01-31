@@ -6,15 +6,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     @IBOutlet weak var presentOperatorLabel: UILabel!
     @IBOutlet weak var presentNumberLabel: UILabel!
-    
-    @IBOutlet weak var acButton: UIButton!
-    @IBOutlet weak var ceButton: UIButton!
-    @IBOutlet weak var convertSignButton: UIButton!
-    
+        
     @IBOutlet weak var divideButton: UIButton!
     @IBOutlet weak var multiplyButton: UIButton!
     @IBOutlet weak var subtractButton: UIButton!
@@ -36,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var eightButton: UIButton!
     @IBOutlet weak var nineButton: UIButton!
     
+    var stringToBeCalculated = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -50,15 +48,36 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
+        insertString(titleName: sender.titleLabel?.text)
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
+        insertString(titleName: sender.titleLabel?.text)
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
+        insertOperatorSign(titleName: sender.titleLabel?.text)
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
+    }
+    
+    func insertString(titleName: String?) {
+        stringToBeCalculated += titleName ?? ""
+    }
+    
+    func insertOperatorSign(titleName: String?) {
+        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
+        let lastString = stringToBeCalculated[lastIndex]
+        if lastString.isNumber {
+            insertString(titleName: titleName)
+        } else {
+            stringToBeCalculated = String(stringToBeCalculated.dropLast())
+            insertString(titleName: titleName)
+        }
     }
 }
 

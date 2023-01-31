@@ -97,7 +97,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8L4-o3-pel"/>
+                                                    <action selector="tapCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lmv-T2-G11"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -108,7 +108,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapConvertSignButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ASD-Yq-XVB"/>
+                                                    <action selector="tapConvertSignButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yWR-ig-hYp"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -337,7 +337,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1234567890" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lwz-OF-XHD">
                                                 <rect key="frame" x="29" y="0.0" width="353" height="41"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -364,11 +364,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="acButton" destination="ped-N8-JbY" id="WML-IN-soM"/>
-                        <outlet property="addButton" destination="sbh-wC-koF" id="DvL-OX-9Ws"/>
+                        <outlet property="addButton" destination="sbh-wC-koF" id="j5w-E3-9wC"/>
                         <outlet property="calculateButton" destination="Daw-iX-Owl" id="OPg-dJ-v79"/>
-                        <outlet property="ceButton" destination="RLD-dY-LOA" id="xGm-OB-k1N"/>
-                        <outlet property="convertSignButton" destination="ows-U7-mNc" id="scZ-d1-cPO"/>
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="c7a-3H-nNw"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="bm2-f6-Jrg"/>
                         <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="EmA-fw-taf"/>
