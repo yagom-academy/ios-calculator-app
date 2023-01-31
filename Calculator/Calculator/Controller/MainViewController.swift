@@ -132,13 +132,18 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
-        addCurrentItem(to: calculateItemStackView)
+        guard operatorLabel.text != Condition.empty else { return }
         
+        addCurrentItem(to: calculateItemStackView)
         var formula = ExpressionParser.parse(from: currentInput)
         let result = formula.result()
-        
+
         operatorLabel.text = Condition.empty
-        operandLabel.text = String(result)
+        if result.isNaN == true {
+            operandLabel.text = "NaN"
+        } else {
+            operandLabel.text = String(result)
+        }
     }
 }
 
