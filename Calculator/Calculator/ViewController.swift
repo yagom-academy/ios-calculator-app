@@ -51,6 +51,8 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapConvertSignButton(_ sender: UIButton) {
+        convertSign()
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
@@ -147,5 +149,20 @@ final class ViewController: UIViewController {
     func displayResult(result: Double) {
         currentNumberLabel.text = String(result)
     }
+    
+    func convertSign() {
+        var count = 0
+        for input in stringToBeCalculated.reversed() {
+            if Operator(rawValue: input) == nil {
+                count -= 1
+            } else {
+                break
+            }
+        }
+        stringToBeCalculated.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.endIndex, offsetBy: count))
+        currentNumber.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.startIndex, offsetBy: 0))
+        stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: "--", with: "")
+        currentNumber = currentNumber.replacingOccurrences(of: "--", with: "")
+        displayCurrentNumber()
+    }
 }
-
