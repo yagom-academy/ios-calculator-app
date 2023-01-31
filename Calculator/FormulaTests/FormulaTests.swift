@@ -99,4 +99,16 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_operatorType이없을때_nil을반환한다() {
+        //given
+        sut.operands.enqueue(10)
+        sut.operands.enqueue(11)
+        
+        //when
+        let result = sut.result()
+        
+        //then
+        XCTAssertNil(result)
+    }
+    
 }
