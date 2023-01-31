@@ -24,7 +24,7 @@ final class FormulaTests: XCTestCase {
         let expectation: Double = 10
 
         // when
-        var formula = ExpressionParser<String>.parse(from: input)
+        var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
         
         // then
@@ -37,7 +37,7 @@ final class FormulaTests: XCTestCase {
         let expectation: Double = 5
 
         // when
-        var formula = ExpressionParser<String>.parse(from: input)
+        var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
         
         // then
@@ -50,7 +50,7 @@ final class FormulaTests: XCTestCase {
         let expectation = true
 
         // when
-        var formula = ExpressionParser<String>.parse(from: input)
+        var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
         
         // then

@@ -48,7 +48,7 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = [ "1", "2", "3", "4", "5", "10", "6", "7"]
         
         // when
-        let result = ExpressionParser<String>.exposeComponentsByOperators(from: input)
+        let result = ExpressionParser.exposeComponentsByOperators(from: input)
         
         // then
         XCTAssertEqual(result, expectation)
@@ -57,11 +57,11 @@ final class ExpressionParserTests: XCTestCase {
     func test_parse_호출시_연산자와숫자가분리된_큐데이터가저장된_Formula를_반환한다() {
         // given
         let input = "1+2-3*4+5+10/6-7"
-        let expectationOperands = [ "1", "2", "3", "4", "5", "10", "6", "7"]
+        let expectationOperands: [Double] = [ 1, 2, 3, 4, 5, 10, 6, 7]
         let expectationOperators = [ "+", "-", "*", "+", "+", "/", "-" ]
         
         // when
-        var result = ExpressionParser<String>.parse(from: input)
+        var result = ExpressionParser.parse(from: input)
         
         // then
         expectationOperands.forEach {
@@ -71,7 +71,7 @@ final class ExpressionParserTests: XCTestCase {
         
         expectationOperators.forEach {
             let resultOperator = result.operators.dequeueCalculateItems()!.data
-            XCTAssertEqual($0, resultOperator)
+            XCTAssertEqual($0.first, resultOperator.rawValue)
         }
     }
 }
