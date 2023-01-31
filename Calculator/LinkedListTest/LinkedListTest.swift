@@ -41,7 +41,7 @@ final class LinkedListTest: XCTestCase {
         
         // when
         sut.append(value)
-        let headValue = sut.peek!
+        let headValue = sut.peek
         
         // then
         XCTAssertEqual(headValue, exception)
@@ -54,7 +54,7 @@ final class LinkedListTest: XCTestCase {
         
         // when
         sut.append(value)
-        let tailValue = sut.back!
+        let tailValue = sut.back
         
         // then
         XCTAssertEqual(tailValue, exception)
@@ -70,8 +70,8 @@ final class LinkedListTest: XCTestCase {
         // when
         sut.append(firstValue)
         sut.append(secondValue)
-        let headValue = sut.peek!
-        let tailValue = sut.back!
+        let headValue = sut.peek
+        let tailValue = sut.back
         
         // then
         XCTAssertEqual(headValue, headException)
@@ -87,7 +87,7 @@ final class LinkedListTest: XCTestCase {
         // when
         sut.append(firstValue)
         sut.append(secondValue)
-        let removedValue = sut.removeFirst()!
+        let removedValue = sut.removeFirst()
         
         // then
         XCTAssertEqual(exception, removedValue)
