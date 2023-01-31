@@ -143,7 +143,7 @@ class ViewController: UIViewController {
         contentStack.addArrangedSubview(subview)
     }
     
-    func generateStackView(_ operandText: String?, _ operatorText: String?) -> UIStackView {
+    private func generateStackView(_ operandText: String?, _ operatorText: String?) -> UIStackView {
         let operandLabel = UILabel()
         operandLabel.text = operandText
         operandLabel.textColor = UIColor.white
