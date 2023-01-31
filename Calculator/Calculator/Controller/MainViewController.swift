@@ -47,6 +47,7 @@ final class MainViewController: UIViewController {
     
     @IBAction func toggleSign(_ sender: UIButton) {
         guard let operandText = operandLabel.text,
+              operandText != Condition.zero,
               let currentOperand = Double(operandText) else { return }
         
         operandLabel.text = String(-currentOperand)
