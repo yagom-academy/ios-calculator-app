@@ -112,6 +112,9 @@
                                                 <state key="normal" title="÷">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapDivision:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rYc-Yu-g2v"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -126,7 +129,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberSeven:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fjv-mP-tFc"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c6W-4p-EkE"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -137,7 +140,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberEight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MN7-4H-WXd"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V1F-rt-8sf"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -148,7 +151,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberNine:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Hb-8W-w5p"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6y0-Rw-eDM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -158,6 +161,9 @@
                                                 <state key="normal" title="×">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapDivision:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EZm-6L-8dk"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -172,7 +178,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberFour:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hb6-0F-De9"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cK5-yE-hE0"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -183,7 +189,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberFive:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N66-1Q-Qk9"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SNO-2c-cNM"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -194,7 +200,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberSix:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VXK-8s-96X"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MZM-j8-2Eh"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -204,6 +210,9 @@
                                                 <state key="normal" title="−">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapDivision:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rrW-U7-Pfl"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -218,7 +227,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberOne:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Pr-qP-JIV"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="d7h-di-4F4"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -229,7 +238,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberTwo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CSs-pf-OLJ"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AoE-E0-Dgx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -240,7 +249,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberThree:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wUa-sV-GLp"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hWt-w6-Tio"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -250,6 +259,9 @@
                                                 <state key="normal" title="+">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapDivision:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8gs-yY-8Y6"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -275,7 +287,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapNumberZeroZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u7i-oH-xYY"/>
+                                                    <action selector="didTapNumberZero:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kce-X1-eXX"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -286,7 +298,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="didTapDot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nEo-D1-8LB"/>
+                                                    <action selector="didTapDot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dce-rb-Bd5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -299,6 +311,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="didTapEquals:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gkd-pG-Xl8"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

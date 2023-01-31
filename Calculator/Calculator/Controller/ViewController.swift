@@ -1,32 +1,26 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by 혜모리.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    enum Sign {
+        static let dot: Character = "."
+        static let blank = " "
+        static let empty = ""
+        static let zero = "0"
+        static let zeroZero = "00"
+    }
+    
     let numberFormatter = NumberFormatter()
+    var parsingValue: String = Sign.empty
+    var isCalculated: Bool = false
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    
-    enum Sign {
-        static let dot = "."
-        static let blank = " "
-        static let zero = "0"
-        static let zeroZero = "00"
-        static let one = "1"
-        static let two = "2"
-        static let three = "3"
-        static let four = "4"
-        static let five = "5"
-        static let six = "6"
-        static let seven = "7"
-        static let eight = "8"
-        static let nine = "9"
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,22 +30,40 @@ class ViewController: UIViewController {
         numberFormatter.string(for: operandLabel.text)
     }
     
-    func updateOperand(with number: String) {
+    func updateOperand(with number: String?) {
+        guard let inputNumber = number else { return }
+        guard isCalculated != true else {
+            isCalculated = false
+            return operandLabel.text = inputNumber
+        }
+        
         if operandLabel.text == Sign.zero {
-            guard number != Sign.zeroZero else { return }
-            operandLabel.text = number
+            guard inputNumber != Sign.zeroZero else { return }
+            isCalculated = false
+            operandLabel.text = inputNumber
         } else {
-            operandLabel.text = (operandLabel.text ?? "") + number
+            isCalculated = false
+            operandLabel.text = (operandLabel.text ?? Sign.empty) + inputNumber
         }
     }
     
-    func updateDot(with dot: String) {
+    func updateDot() {
+        guard operandLabel.text != Sign.zero else { return }
+        guard operandLabel.text?.contains(Sign.dot) == false else { return }
+        
+        operandLabel.text = (operandLabel.text ?? Sign.empty) + String(Sign.dot)
+    }
+    
+    func updateOperator(with sign: String?) {
+        guard let operatorValue = sign else { return }
+        operatorLabel.text = operatorValue
+        isCalculated = false
+        
         if operandLabel.text == Sign.zero {
             return
-        } else if operandLabel.text?.contains(Sign.dot) == true {
-            return
         } else {
-            operandLabel.text = (operandLabel.text ?? "") + dot
+            parsingValue = (operandLabel.text ?? Sign.zero) + " \(operatorValue) "
+            operandLabel.text = Sign.zero
         }
     }
     
@@ -60,41 +72,32 @@ class ViewController: UIViewController {
         operatorLabel.text = Sign.blank
     }
     
+    @IBAction func didTapEquals(_ sender: UIButton) {
+        let input = parsingValue + (operandLabel.text ?? Sign.zero)
+        let formula = ExpressionParser.parse(from: input).result()
+        let result = String(formula).split(with: Sign.dot)
+        isCalculated = true
+        
+        guard result[1] != Sign.zero else {
+            parsingValue = Sign.empty
+            operatorLabel.text = Sign.blank
+            return operandLabel.text = result[0]
+        }
+        parsingValue = Sign.empty
+        operatorLabel.text = Sign.blank
+        operandLabel.text = String(formula)
+    }
+    
     @IBAction func didTapNumberZero(_ sender: UIButton) {
-        updateOperand(with: Sign.zero)
+        updateOperand(with: sender.titleLabel?.text)
     }
-    @IBAction func didTapNumberZeroZero(_ sender: UIButton) {
-        updateOperand(with: Sign.zeroZero)
-    }
+
     @IBAction func didTapDot(_ sender: UIButton) {
-        updateDot(with: Sign.dot)
+        updateDot()
     }
-    @IBAction func didTapNumberOne(_ sender: UIButton) {
-        updateOperand(with: Sign.one)
-    }
-    @IBAction func didTapNumberTwo(_ sender: UIButton) {
-        updateOperand(with: Sign.two)
-    }
-    @IBAction func didTapNumberThree(_ sender: UIButton) {
-        updateOperand(with: Sign.three)
-    }
-    @IBAction func didTapNumberFour(_ sender: UIButton) {
-        updateOperand(with: Sign.four)
-    }
-    @IBAction func didTapNumberFive(_ sender: UIButton) {
-        updateOperand(with: Sign.five)
-    }
-    @IBAction func didTapNumberSix(_ sender: UIButton) {
-        updateOperand(with: Sign.six)
-    }
-    @IBAction func didTapNumberSeven(_ sender: UIButton) {
-        updateOperand(with: Sign.seven)
-    }
-    @IBAction func didTapNumberEight(_ sender: UIButton) {
-        updateOperand(with: Sign.eight)
-    }
-    @IBAction func didTapNumberNine(_ sender: UIButton) {
-        updateOperand(with: Sign.nine)
+    
+    @IBAction func didTapDivision(_ sender: UIButton) {
+        updateOperator(with: sender.titleLabel?.text)
     }
     
     @IBAction func didTapACButton(_ sender: UIButton) {

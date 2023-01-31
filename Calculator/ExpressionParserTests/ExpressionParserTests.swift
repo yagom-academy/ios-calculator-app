@@ -23,8 +23,8 @@ final class ExpressionParserTests: XCTestCase {
 
     func test_parse호출시_operandsExpectation요소와_operands의value가모두같다() {
         // given
-        let calculatorValue = "1 + 2 * 4 / 3 + -7 + 8"
-        let operandsExpectation: [Double] = [1, 2, 4, 3, -7, 8]
+        let calculatorValue = "1 + 2.3 × 4 ÷ 3 + -7 + 8"
+        let operandsExpectation: [Double] = [1, 2.3, 4, 3, -7, 8]
         let operandsCount = operandsExpectation.count
         
         // when
@@ -38,7 +38,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse호출시_operatorsExpectation요소와_operators의value가모두같다() {
         // given
-        let calculatorValue = "1 + 2 * 4 / 3 + -7 + 8"
+        let calculatorValue = "1 + 2.3 × 4 ÷ 3 + -7 + 8"
         let operatorsExpectation: [Operator] = [.add, .multiply, .divide, .add, .add]
         let operatorsCount = operatorsExpectation.count
         
