@@ -106,7 +106,10 @@ final class MainViewController: UIViewController {
         
         return result
     }
-
     
+    @IBAction func calculateCurrentFormula(_ sender: UIButton) {
+        
+    }
+
 }
 
