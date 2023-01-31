@@ -116,7 +116,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jee-6j-yop"/>
+                                                    <action selector="touchOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TEL-EK-ctD"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -165,7 +165,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="004-aX-RGq"/>
+                                                    <action selector="touchOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h7I-3c-sY5"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -214,7 +214,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GLx-YS-mxU"/>
+                                                    <action selector="touchOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qen-eG-7H7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -263,7 +263,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="presentOperator:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PnN-0l-T3S"/>
+                                                    <action selector="touchOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qpu-Vw-2E6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -355,6 +355,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculateItemStackView" destination="XRe-QE-UJf" id="DAU-dk-L1V"/>
+                        <outlet property="currentCalculateItem" destination="2pK-nQ-lxl" id="frV-9t-L6X"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="94W-tU-1Hx"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="wGY-CS-aEX"/>
                     </connections>

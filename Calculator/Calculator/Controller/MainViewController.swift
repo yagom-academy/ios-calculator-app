@@ -19,10 +19,10 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeLabels()
+        initializeCurrentCalculateItem()
     }
     
-    private func initializeLabels() {
+    private func initializeCurrentCalculateItem() {
         self.operandLabel.text = Condition.zero
         self.operatorLabel.text = Condition.empty
     }
@@ -53,10 +53,35 @@ final class MainViewController: UIViewController {
         operandLabel.text = String(-currentOperand)
     }
     
-    @IBAction func presentOperator(_ sender: UIButton) {
+    @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.titleLabel?.text else { return }
         
-        operatorLabel.text = inputOperator
+        if operandLabel.text == Condition.zero {
+            operatorLabel.text = inputOperator
+        } else {
+            guard let subview = generateStackView(from: currentCalculateItem) else { return }
+            add(subview, to: calculateItemStackView)
+            
+        }
     }
+    
+    @IBOutlet weak var calculateItemStackView: UIStackView!
+    @IBOutlet weak var currentCalculateItem: UIStackView!
+    
+    func add(_ subview: UIStackView, to superview: UIStackView) {
+        let calculateItem = subview
+        
+            superview.addArrangedSubview(calculateItem)
+    }
+    
+    func generateStackView(from reference: UIStackView) -> UIStackView? {
+        let calculateItem = reference
+//        var result = UIStackView()
+//        result = calculateItem
+        
+        return calculateItem
+    }
+
+    
 }
 
