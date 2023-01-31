@@ -10,22 +10,14 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
-        guard let firstData = operands.dequeueCalculateItems()?.data as? String,
-              var result = Double(firstData) else {
-            return 0.0
+        guard var result = operands.dequeueCalculateItems()?.data else {
+            return 0
         }
         
-        while let dequeuedOperand = operands.dequeueCalculateItems()?.data as? String,
-              let operandData = Double(dequeuedOperand),
-              let dequeuedOperator = operators.dequeueCalculateItems()?.data as? String,
-              let operatorData = dequeuedOperator.first {
-
-            guard let operatorInstance = Operator(rawValue: operatorData) else {
-                continue
-            }
-            
+        while let dequeuedOperand = operands.dequeueCalculateItems()?.data,
+              let dequeuedOperator = operators.dequeueCalculateItems()?.data {
             do {
-                result = try operatorInstance.calculate(lhs: result, rhs: operandData)
+                result = try dequeuedOperator.calculate(lhs: result, rhs: dequeuedOperand)
             } catch {
                 result = Double.nan
             }
