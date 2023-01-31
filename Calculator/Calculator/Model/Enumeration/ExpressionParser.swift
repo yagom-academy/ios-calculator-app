@@ -10,8 +10,9 @@ enum ExpressionParser {
         let components = componentsByOperator(from: input)
         
         let operand: [Double] = components.compactMap { Double($0) }
-        let operators: [Operator] = components.filter { $0.count == 1 }
-            .compactMap { Operator(rawValue: Character($0)) }
+        let operators: [Operator] = input.compactMap { Operator(rawValue: $0) }
+        print(operand)
+        print(operators)
         
         let operandValue = CalculatorItemQueue<Double>(items: operand)
         let operatorValue = CalculatorItemQueue<Operator>(items: operators)
@@ -27,9 +28,11 @@ enum ExpressionParser {
         Operator.allCases.forEach { `operator` in
             result = result.map {
                 $0.split(with: `operator`.rawValue)
-            }.flatMap { $0 }
+            }.flatMap{ $0 }
         }
+        
         return result
     }
     
 }
+
