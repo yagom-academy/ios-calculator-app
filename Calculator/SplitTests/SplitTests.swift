@@ -10,14 +10,12 @@ import XCTest
 
 final class SplitTests: XCTestCase {
 
-    var sut: String!
-    
     override func setUpWithError() throws {
-        sut = String()
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        sut = nil
+        try super.tearDownWithError()
     }
 
     func test_split에_더하기를넣었을때_더하기를기준으로분리된_배열을반환한다() {
@@ -34,9 +32,11 @@ final class SplitTests: XCTestCase {
     func test_split에_빼기를넣었을때_빼기를기준으로분리된_배열을반환한다() {
         //given
         let input = "12+13-24*24.4/3"
-        let expectedValue = ["12+13", "24*24.4/3",]
+        let expectedValue = ["12+13", "24*24.4/3"]
+        
         //when
         let result = input.split(with: "-")
+        
         //then
         XCTAssertEqual(result, expectedValue)
     }
@@ -45,8 +45,10 @@ final class SplitTests: XCTestCase {
         //given
         let input = "12+13-24*24.4/3"
         let expectedValue = ["12+13-24", "24.4/3"]
+        
         //when
         let result = input.split(with: "*")
+        
         //then
         XCTAssertEqual(result, expectedValue)
     }
@@ -55,8 +57,10 @@ final class SplitTests: XCTestCase {
         //given
         let input = "12+13-24*24.4/3"
         let expectedValue = ["12+13-24*24.4", "3"]
+        
         //when
         let result = input.split(with: "/")
+        
         //then
         XCTAssertEqual(result, expectedValue)
     }

@@ -17,7 +17,7 @@ final class FormulaTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try super.tearDownWithError() 
+        try super.tearDownWithError()
         sut = nil
       
     }
