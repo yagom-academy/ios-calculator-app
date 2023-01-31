@@ -70,18 +70,16 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Condition.zero {
             operatorLabel.text = inputOperator
         } else {
-            guard let subview = generateCurrentItemStackView() else { return }
-            
-            add(subview, to: calculateItemStackView)
-            initializeCurrentCalculateItem()
+            addCurrentItem(to: calculateItemStackView)
             operatorLabel.text = sender.currentTitle
         }
     }
     
-    private func add(_ subview: UIStackView, to superview: UIStackView) {
-        let calculateItem = subview
+    private func addCurrentItem(to stackView: UIStackView) {
+        guard let subview = generateCurrentItemStackView() else { return }
         
-        superview.addArrangedSubview(calculateItem)
+        add(subview, to: stackView)
+        initializeCurrentCalculateItem()
     }
     
     private func generateCurrentItemStackView() -> UIStackView? {
@@ -103,12 +101,17 @@ final class MainViewController: UIViewController {
         result.alignment = .fill
         result.distribution = .fill
         
-        addToCurrentInput(about: `operator`, operand)
+        addToCurrentInput(about: `operator`, and: operand)
         
         return result
     }
     
-    private func addToCurrentInput(about `operator`: UILabel, _ operand: UILabel) {
+    private func add(_ subview: UIStackView, to superview: UIStackView) {
+        let calculateItem = subview
+        superview.addArrangedSubview(calculateItem)
+    }
+    
+    private func addToCurrentInput(about `operator`: UILabel, and operand: UILabel) {
         guard let input = makeInput(from: `operator`, and: operand) else { return }
         currentInput += input
     }
@@ -123,12 +126,13 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
+        addCurrentItem(to: calculateItemStackView)
+        
         var formula = ExpressionParser.parse(from: currentInput)
         let result = formula.result()
         
         operatorLabel.text = Condition.empty
         operandLabel.text = String(result)
     }
-
 }
 
