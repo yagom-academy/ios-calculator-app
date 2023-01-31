@@ -13,10 +13,12 @@ final class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
 
@@ -38,41 +40,6 @@ final class CalculatorTests: XCTestCase {
         //when
         let result = sut.isEmpty
     
-        //then
-        XCTAssertEqual(result, expectedValue)
-    }
-    
-    func test_peek프로퍼티가_dequeueStack에값들이있을때_dequeueStack의last를반환한다() {
-        //given
-        let input = ["1", "2", "3", "4"]
-        let expectedValue = "2"
-        
-        //when
-        for value in input {
-            sut.enqueue(item: value)
-        }
-        sut.dequeue()
-        guard let result = sut.peek else {
-            return
-        }
-        
-        //then
-        XCTAssertEqual(result, expectedValue)
-    }
-    
-    func test_peek프로퍼티가_dequeueStack이비어있을때_enqueueStack의first를반환한다() {
-        //given
-        let input = ["1", "2", "3", "4"]
-        let expectedValue = "1"
-        
-        //when
-        for value in input {
-            sut.enqueue(item: value)
-        }
-        guard let result = sut.peek else {
-            return
-        }
-        
         //then
         XCTAssertEqual(result, expectedValue)
     }

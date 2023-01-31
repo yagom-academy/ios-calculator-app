@@ -8,16 +8,13 @@ import Foundation
 protocol CalculatorItem { }
 
 
-struct CalculatorItemQueue<T>: CalculatorItem {
+struct CalculatorItemQueue<T> {
     
     private(set) var dequeueStack: [T] = []
     private(set) var enqueueStack: [T] = []
     
     var isEmpty: Bool {
         return dequeueStack.isEmpty && enqueueStack.isEmpty
-    }
-    var peek: T? {
-        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
     
