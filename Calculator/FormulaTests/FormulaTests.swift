@@ -12,7 +12,13 @@ final class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        let operand: [Double] = []
+        let operators: [Operator] = []
+        
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
+        
+        sut = Formula(operands: operandValue, operators: operatorValue)
     }
     
     override func tearDownWithError() throws {
