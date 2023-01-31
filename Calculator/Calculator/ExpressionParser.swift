@@ -9,7 +9,6 @@ import Foundation
 
 enum ExpressionParser {
     
-    //componentsByOperates로 변환된값이 들어오면 Formula로 분류
     static func parse(from input: String) -> Formula {
     
         var operatorArray = CalculatorItemQueue<Operator>()
@@ -27,7 +26,6 @@ enum ExpressionParser {
         return Formula(operators: operatorArray, operands: operandArray)
     }
     
-    //담아오는 String을 오퍼레이터 기준으로 분류하는 매서드
     static private func componentsByOperators(from target: String) -> [String] {
         
         var resultNumber: [String] = []
@@ -45,7 +43,6 @@ enum ExpressionParser {
         return resultNumber
     }
     
-    //담아오는 String을 숫자기준으로 분류해 오퍼레이터를 내뱉는 매서드
     static private func extractOperators(from target: String) -> [String] {
         var resultOperators: [String] = []
         
