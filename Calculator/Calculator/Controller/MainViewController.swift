@@ -72,7 +72,7 @@ final class MainViewController: UIViewController {
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle else { return }
-        
+            
         if operandLabel.text == Condition.zero {
             operatorLabel.text = inputOperator
         } else {
@@ -135,10 +135,13 @@ final class MainViewController: UIViewController {
         guard operatorLabel.text != Condition.empty else { return }
         
         addCurrentItem(to: calculateItemStackView)
+        
         var formula = ExpressionParser.parse(from: currentInput)
         let result = formula.result()
-
+        
+        currentInput = Condition.empty
         operatorLabel.text = Condition.empty
+        
         if result.isNaN == true {
             operandLabel.text = "NaN"
         } else {
