@@ -13,11 +13,13 @@ final class ViewController: UIViewController {
         static let empty = ""
         static let zero = "0"
         static let zeroZero = "00"
+        static let nan = "NaN"
     }
+    @IBOutlet weak var parsingV: UILabel!
     
     let numberFormatter = NumberFormatter()
     var parsingValue: String = Sign.empty
-    var isCalculated: Bool = false
+    var isCalculatedStatus: Bool = false
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -32,17 +34,15 @@ final class ViewController: UIViewController {
     
     func updateOperand(with number: String?) {
         guard let inputNumber = number else { return }
-        guard isCalculated != true else {
-            isCalculated = false
+        guard isCalculatedStatus != true else {
+            isCalculatedStatus = false
             return operandLabel.text = inputNumber
         }
         
         if operandLabel.text == Sign.zero {
             guard inputNumber != Sign.zeroZero else { return }
-            isCalculated = false
             operandLabel.text = inputNumber
         } else {
-            isCalculated = false
             operandLabel.text = (operandLabel.text ?? Sign.empty) + inputNumber
         }
     }
@@ -56,39 +56,56 @@ final class ViewController: UIViewController {
     
     func updateOperator(with sign: String?) {
         guard let operatorValue = sign else { return }
+        
         operatorLabel.text = operatorValue
-        isCalculated = false
+        isCalculatedStatus = false
         
         if operandLabel.text == Sign.zero {
+            parsingValue = String(parsingValue.dropLast(3))
+//            parsingValue += " \(operatorValue) "
+            operandLabel.text = Sign.zero
+            parsingV.text = parsingValue
             return
         } else {
-            parsingValue = (operandLabel.text ?? Sign.zero) + " \(operatorValue) "
+            parsingValue += (operandLabel.text ?? Sign.empty) + " \(operatorValue) "
             operandLabel.text = Sign.zero
+            parsingV.text = parsingValue
         }
     }
     
     func resetCalculator() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.blank
+        parsingValue = Sign.empty
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        let input = parsingValue + (operandLabel.text ?? Sign.zero)
+        let input = parsingValue + (operandLabel.text ?? Sign.empty)
         let formula = ExpressionParser.parse(from: input).result()
         let result = String(formula).split(with: Sign.dot)
-        isCalculated = true
+        isCalculatedStatus = true
+        
+        guard formula.isNaN == false else {
+            operatorLabel.text = Sign.blank
+            operandLabel.text = Sign.nan
+            parsingValue.removeAll()
+            return parsingV.text = parsingValue
+        }
         
         guard result[1] != Sign.zero else {
-            parsingValue = Sign.empty
             operatorLabel.text = Sign.blank
-            return operandLabel.text = result[0]
+            operandLabel.text = result[0]
+            parsingValue.removeAll()
+            return parsingV.text = parsingValue
         }
-        parsingValue = Sign.empty
+        
         operatorLabel.text = Sign.blank
         operandLabel.text = String(formula)
+        parsingValue.removeAll()
+        parsingV.text = parsingValue
     }
     
-    @IBAction func didTapNumberZero(_ sender: UIButton) {
+    @IBAction func didTapNumberButton(_ sender: UIButton) {
         updateOperand(with: sender.titleLabel?.text)
     }
 
@@ -96,11 +113,19 @@ final class ViewController: UIViewController {
         updateDot()
     }
     
-    @IBAction func didTapDivision(_ sender: UIButton) {
+    @IBAction func didTapOperatorButton(_ sender: UIButton) {
         updateOperator(with: sender.titleLabel?.text)
     }
     
     @IBAction func didTapACButton(_ sender: UIButton) {
         resetCalculator()
+    }
+    
+    @IBAction func didTapCEButton(_ sender: UIButton) {
+        operandLabel.text = Sign.zero
+    }
+    
+    @IBAction func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
+        operandLabel.text = "-" + (operandLabel.text ?? Sign.empty)
     }
 }
