@@ -76,14 +76,39 @@ class ViewController: UIViewController {
         workingSpace += " " + operandLabel.text!
         var formula = ExpressionParser.parse(from: workingSpace)
         let result = formula.result()
-        operandLabel.text! = String(result)
-        operand = ""
-        workingSpace = ""
+        
+        if result.isNaN {
+            operandLabel.text! = "NaN"
+            operatorLabel.text! = ""
+            operand = ""
+            workingSpace = ""
+        } else {
+            print(result)
+            operandLabel.text! = useNumberFormatter(result)
+            operatorLabel.text! = ""
+            operand = ""
+            workingSpace = ""
+        }
     }
     
     @IBAction func clearAllButtonTapped(_ sender: UIButton) {
         workingSpace = ""
         operand = ""
         setUp()
+    }
+    
+    func useNumberFormatter(_ input: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        var result = numberFormatter.string(for: input) ?? "0"
+        
+        if result.count >= 20 {
+            let index = result.index(result.startIndex, offsetBy: 19)
+            result = String(result[...index])
+        }
+        
+        return result
     }
 }
