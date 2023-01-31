@@ -68,4 +68,16 @@ final class SplitTests: XCTestCase {
         // then
         XCTAssertEqual(result, expecatation)
     }
+    
+    func test_테스트문자열에서_분리되는_기준이_끝에_있거나_연속으로_이어져도_기준으로_분리된다() {
+        // given
+        sut = " 12  + 123 / 23 "
+        
+        // when
+        let result = sut?.split(with: " ")
+        let expectation: [String] = ["12", "+", "123", "/", "23"]
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
