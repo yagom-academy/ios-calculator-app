@@ -23,17 +23,8 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         let operatorValues = Operator.allCases.map { $0.rawValue }
-        let inputs = input.split(with: " ").filter { value in
+        let components = input.split(with: " ").filter { value in
             return operatorValues.contains(value) == false
-        }
-        
-        let components: [String] = inputs.map { component in
-            if component.contains(",") {
-                let newComponent = component.replacingOccurrences(of: ",", with: "")
-                return newComponent
-            }
-            
-            return component
         }
         
         return components

@@ -58,49 +58,4 @@ final class ExpressionParserTest: XCTestCase {
         // then
         XCTAssertEqual(result, exception)
     }
-    
-    func test_1콤마000더하기1의_문자열이_parse인자로_들어갈경우_operands는_1콤마000_1과_operator가_add인_Formula를_반환한다() {
-        // given
-        let operands: [Double] = [1000, 1]
-        let operators: [Operator] = [.add]
-        let inputs = "1,000 + 1"
-        
-        let exception = Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
-        
-        // when
-        let result = ExpressionParser.parse(from: inputs)
-        
-        // then
-        XCTAssertEqual(result, exception)
-    }
-    
-    func test_1콤마000콤마000더하기1의_문자열이_parse의_인자값으로_들어갈경우_operands는_1콤마000콤마000_1과_operator는_add인_Formula를_반환한다() {
-        // given
-        let operands: [Double] = [1000000, 1]
-        let operators: [Operator] = [.add]
-        let inputs = "1,000,000 + 1"
-        
-        let exception = Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
-        
-        // when
-        let result = ExpressionParser.parse(from: inputs)
-        
-        // then
-        XCTAssertEqual(result, exception)
-    }
-    
-    func test_음수1콤마000빼기1의_문자열이_parse인자값으로_들어갈경우_operands는_음수1콤마000_1과_operators는_subtract인_Formula를_반환한다() {
-        // given
-        let operands: [Double] = [-1000, 1]
-        let operators: [Operator] = [.subtract]
-        let inputs = "-1,000 - 1"
-        
-        let exception = Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
-        
-        // when
-        let result = ExpressionParser.parse(from: inputs)
-        
-        // then
-        XCTAssertEqual(result, exception)
-    }
 }
