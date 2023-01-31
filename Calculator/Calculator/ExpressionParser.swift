@@ -16,6 +16,8 @@ enum ExpressionParser {
     
     static private func componentsByOperators(from input: String) -> [String] {
         
+    // split 연산자 기준으로 숫자 쪼개기
+        
         return []
     }
 }
