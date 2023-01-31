@@ -14,9 +14,7 @@ enum ExpressionParser {
             return nil
         }
         
-        let operands: [Double] = operandValues.compactMap { component in
-            return Double(component)
-        }
+        let operands: [Double] = operandValues.compactMap { Double($0) }
         
         return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
     }
