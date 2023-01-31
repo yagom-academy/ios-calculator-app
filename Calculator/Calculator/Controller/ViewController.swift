@@ -68,7 +68,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        if operatorLabel.text == "" {
+        if operatorLabel.text == "" && operandLabel.text! != "0" {
             let stackView = generateStackView(operandLabel.text, "")
             addContentStack(stackView)
             workingSpace += operandLabel.text!
@@ -78,6 +78,8 @@ class ViewController: UIViewController {
             
             operand = ""
             operandLabel.text! = "0"
+        } else if operatorLabel.text!.isEmpty && operandLabel.text! == "0" {
+            return
         } else {
             if !operandLabel.text!.isEmpty && operandLabel.text! != "0" {
                 let stackView = generateStackView(operandLabel.text, operatorLabel.text)
