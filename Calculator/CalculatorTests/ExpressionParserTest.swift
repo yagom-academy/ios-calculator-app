@@ -37,16 +37,19 @@ extension Formula: Equatable {
 }
 
 final class ExpressionParserTests: XCTestCase {
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-    
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     // MARK: - parse method test
     func test_test코드_parse호출후_나온_formula랑_임시로_만든_formula랑_같다() {
+        // given
+        let testString = "1+2+3−-3*49/7"
+        let operands = CalculatorItemQueue<Double>(with: [1, 2, 3, -3, 49, 7])
+        let operators = CalculatorItemQueue<Operator>(with: [.add, .add, .subtract, .multiply, .divide])
+        
+        // when
+        let result = ExpressionParser.parse(from: testString)
+        let expectation = Formula(operands: operands,
+                                  operators: operators)
+        
+        // then
+        XCTAssertEqual(result, expectation)
     }
 }
