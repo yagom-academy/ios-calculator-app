@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet weak var contentStack: UIStackView!
     
     private var workingSpace: String = ""
     private var operand = ""
@@ -18,6 +19,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         setUp()
+        clearAllContentStack()
+    }
+    
+    private func clearAllContentStack() {
+        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func setUp() {
@@ -61,19 +67,35 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle else { return }
-        operatorLabel.text! = `operator`
-        
-        if !operandLabel.text!.isEmpty && operandLabel.text! != "0" {
-            workingSpace += operandLabel.text! + operatorLabel.text!
+        if operatorLabel.text == "" {
+            let stackView = generateStackView(operandLabel.text, "")
+            addContentStack(stackView)
+            workingSpace += operandLabel.text!
+            
+            guard let `operator` = sender.currentTitle else { return }
+            operatorLabel.text! = `operator`
+            
+            operand = ""
+            operandLabel.text! = "0"
+        } else {
+            if !operandLabel.text!.isEmpty && operandLabel.text! != "0" {
+                let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+                addContentStack(stackView)
+                workingSpace += operatorLabel.text! + operandLabel.text!
+            }
+            
+            guard let `operator` = sender.currentTitle else { return }
+            operatorLabel.text! = `operator`
+            
+            operand = ""
+            operandLabel.text! = "0"
         }
-        
-        operand = ""
-        operandLabel.text! = "0"
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
-        workingSpace += operandLabel.text!
+        let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+        addContentStack(stackView)
+        workingSpace += operatorLabel.text! + operandLabel.text!
         print(workingSpace)
         var formula = ExpressionParser.parse(from: workingSpace)
         let result = formula.result()
@@ -96,6 +118,7 @@ class ViewController: UIViewController {
         workingSpace = ""
         operand = ""
         setUp()
+        clearAllContentStack()
     }
     
     private func useNumberFormatter(_ input: Double) -> String {
@@ -111,5 +134,31 @@ class ViewController: UIViewController {
         }
         
         return result
+    }
+    
+    private func addContentStack(_ subview: UIStackView) {
+        contentStack.addArrangedSubview(subview)
+    }
+    
+    func generateStackView(_ operandText: String?, _ operatorText: String?) -> UIStackView {
+        let operandLabel = UILabel()
+        operandLabel.text = operandText
+        operandLabel.textColor = UIColor.white
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let operatorLabel = UILabel()
+        operatorLabel.text = operatorText
+        operatorLabel.textColor = UIColor.white
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let stackView = UIStackView()
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        
+        return stackView
     }
 }
