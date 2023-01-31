@@ -47,9 +47,9 @@ LinkedList와 Queue를 활용해 사칙연산이 가능한 계산기 앱
 **프로젝트 진행 기간** 
 - **23.01.24 (화) ~ 23.01.27 (금)** 
 
-> 23.01.24 (화): **[TDD]** Queue 구현 (QueueList: Array)
-> 23.01.25 (수): **[TDD]** QueueList LinkedList로 변경 / STEP 1 PR
-> 23.01.26 (목): **[TDD]** PR 피드백 적용 - 접근제어, Test case 수정
+> 23.01.24 (화): **[TDD]** Queue 구현 (QueueList: Array) <br/>
+> 23.01.25 (수): **[TDD]** QueueList LinkedList로 변경 / STEP 1 PR <br/>
+> 23.01.26 (목): **[TDD]** PR 피드백 적용 - 접근제어, Test case 수정 <br/>
 
 <br/>
 
