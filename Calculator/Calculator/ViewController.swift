@@ -8,9 +8,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak private var currentOperatorLabel: UILabel!
-    @IBOutlet weak private var currentInputLabel: UILabel!
-    @IBOutlet weak var enteredOperandLabel: UILabel!
+    @IBOutlet weak private var operatorInput: UILabel!
+    @IBOutlet weak private var numberInput: UILabel!
+    @IBOutlet weak var enteredOperand: UILabel!
     
     
     override func viewDidLoad() {
@@ -23,8 +23,8 @@ class ViewController: UIViewController {
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         
         if let senderSign = sender.currentTitle {
-            currentOperatorLabel.text = senderSign
-            currentInputLabel.text = "0"
+            operatorInput.text = senderSign
+            numberInput.text = "0"
         }
 
     }
@@ -35,18 +35,20 @@ class ViewController: UIViewController {
         checkFirstDigit()
         
         if isFinishedEnteringOperands {
-            guard let currentNumber = currentInputLabel.text else  { return }
-            currentInputLabel.text = currentNumber + number
+            guard let currentNumber = numberInput.text else  { return }
+            numberInput.text = currentNumber + number
         } else {
-            currentInputLabel.text = number
+            numberInput.text = number
         }
         isFinishedEnteringOperands = true
     }
     
     private func checkFirstDigit() {
-        if currentInputLabel.text == "0" || currentInputLabel.text == "00" {
-            currentInputLabel.text = ""
+        if numberInput.text == "0" || numberInput.text == "00" {
+            numberInput.text = ""
         }
     }
+    
+    
 
 }

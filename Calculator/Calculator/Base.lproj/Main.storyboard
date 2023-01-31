@@ -352,9 +352,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currentInputLabel" destination="Lwz-OF-XHD" id="vRE-bn-k64"/>
-                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="YH3-3W-kKK"/>
-                        <outlet property="enteredOperandLabel" destination="Hcb-r0-27f" id="7a3-F0-lVt"/>
+                        <outlet property="enteredOperand" destination="Hcb-r0-27f" id="7a3-F0-lVt"/>
+                        <outlet property="numberInput" destination="Lwz-OF-XHD" id="vRE-bn-k64"/>
+                        <outlet property="operatorInput" destination="HPC-iy-qdm" id="YH3-3W-kKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
