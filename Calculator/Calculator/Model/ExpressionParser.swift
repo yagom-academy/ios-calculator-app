@@ -4,14 +4,11 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandValues = ExpressionParser.componentsByOperators(from: input)
-        let operatorCases = Operator.allCases.map { String($0.rawValue) }
         
-        let operators: [Operator] = input.split(with: " ").compactMap { component in
-            if operatorCases.contains(component) {
-                return Operator(rawValue: Character(component))
-            }
-            
-            return nil
+        let operators: [Operator] = input.split(with: " ")
+            .filter { $0.count == 1}
+            .compactMap { component in
+            return Operator(rawValue: Character(component))
         }
         
         let operands: [Double] = operandValues.compactMap { Double($0) }
