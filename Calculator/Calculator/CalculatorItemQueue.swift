@@ -3,6 +3,18 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var enqueueStack: [Element] = []
     private(set) var dequeueStack: [Element] = []
     
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    
+    var peek: Element? {
+        if dequeueStack.isEmpty {
+            return enqueueStack.first
+        } else {
+            return dequeueStack.last
+        }
+    }
+    
     mutating func enqueue(element: Element) {
         enqueueStack.append(element)
     }
@@ -20,16 +32,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         dequeueStack.removeAll()
     }
     
-    func isEmpty() -> Bool {
-        return enqueueStack.isEmpty && dequeueStack.isEmpty
-    }
     
-    func peek() -> Element? {
-        if dequeueStack.isEmpty {
-            return enqueueStack.first
-        } else {
-            return dequeueStack.last
-        }
-    }
     
 }
