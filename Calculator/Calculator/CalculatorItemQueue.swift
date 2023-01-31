@@ -7,8 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {}
-
 struct CalculatorItemQueue<T>: CalculateItem {
     
     private(set) var enqueueStack: [T] = []
@@ -25,7 +23,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func enqueueItem(_ element: T) {
         enqueueStack.append(element)
     }
-    
+
     @discardableResult
     mutating func dequeueItem() -> T? {
         if dequeueStack.isEmpty {
