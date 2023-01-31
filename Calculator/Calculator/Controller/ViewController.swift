@@ -57,17 +57,22 @@ final class ViewController: UIViewController {
     func updateOperator(with sign: String?) {
         guard let operatorValue = sign else { return }
         
-        operatorLabel.text = operatorValue
         isCalculatedStatus = false
         
-        if operandLabel.text == Sign.zero {
-            parsingValue = String(parsingValue.dropLast(3))
-//            parsingValue += " \(operatorValue) "
+        if parsingValue == Sign.empty {
+            operatorLabel.text = operatorValue
+            parsingValue += (operandLabel.text ?? Sign.empty)
             operandLabel.text = Sign.zero
             parsingV.text = parsingValue
-            return
+        } else if operandLabel.text == Sign.zero {
+            parsingValue += " \(operatorLabel.text ?? Sign.empty) "
+            parsingValue = String(parsingValue.dropLast(3))
+            operatorLabel.text = operatorValue
+            operandLabel.text = Sign.zero
+            parsingV.text = parsingValue
         } else {
-            parsingValue += (operandLabel.text ?? Sign.empty) + " \(operatorValue) "
+            parsingValue += " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
+            operatorLabel.text = operatorValue
             operandLabel.text = Sign.zero
             parsingV.text = parsingValue
         }
@@ -80,7 +85,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        let input = parsingValue + (operandLabel.text ?? Sign.empty)
+        let input = parsingValue + " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
         let formula = ExpressionParser.parse(from: input).result()
         let result = String(formula).split(with: Sign.dot)
         isCalculatedStatus = true
