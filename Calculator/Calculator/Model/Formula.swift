@@ -5,12 +5,11 @@
 //  Created by kokkilE on 2023/01/27.
 //
 
-struct Formula<T: CalculateItem> {
-    var operands = CalculatorItemQueue<T>()
-    var operators = CalculatorItemQueue<T>()
+struct Formula {
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
-        
         guard let firstData = operands.dequeueCalculateItems()?.data as? String,
               var result = Double(firstData) else {
             return 0.0

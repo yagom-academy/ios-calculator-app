@@ -6,7 +6,6 @@
 //
 
 enum ExpressionParser<T: CalculateItem> {
-    
     static func parse(from input: String) -> Formula<T> {
         var formula = Formula<T>()
         
