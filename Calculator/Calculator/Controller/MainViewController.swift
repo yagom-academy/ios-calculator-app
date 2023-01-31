@@ -14,6 +14,8 @@ final class MainViewController: UIViewController {
         static let minus = "-"
     }
     
+    var currentInput = ""
+    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var currentOperatorLabel: UILabel!
@@ -79,13 +81,13 @@ final class MainViewController: UIViewController {
         }
     }
     
-    func add(_ subview: UIStackView, to superview: UIStackView) {
+    private func add(_ subview: UIStackView, to superview: UIStackView) {
         let calculateItem = subview
         
         superview.addArrangedSubview(calculateItem)
     }
     
-    func generateCurrentItemStackView() -> UIStackView? {
+    private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
         operand.text = currentOperandLabel.text
         operand.textColor = UIColor.white
@@ -104,10 +106,28 @@ final class MainViewController: UIViewController {
         result.alignment = .fill
         result.distribution = .fill
         
+        addToCurrentInput(about: `operator`, operand)
+        
+        return result
+    }
+    
+    private func addToCurrentInput(about `operator`: UILabel, _ operand: UILabel) {
+        guard let input = makeInput(from: `operator`, operand) else { return }
+        currentInput += input
+    }
+    
+    private func makeInput(from `operator`: UILabel, _ operand: UILabel) -> String? {
+        guard let operatorText = `operator`.text,
+              let operandText = operand.text else { return nil }
+        
+        let result = operatorText + operandText
+        
         return result
     }
     
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
+        
+        
         
     }
 
