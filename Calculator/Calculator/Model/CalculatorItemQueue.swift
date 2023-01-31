@@ -24,4 +24,5 @@ struct CalculatorItemQueue<Item: CalculateItemProtocol> {
         }
         return reversedItems.popLast()
     }
+    
 }

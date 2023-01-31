@@ -21,7 +21,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_input과output_둘중하나라도_빈배열이라면_true이다() {
-    
         //when
         let result = sut.isEmpty
         
@@ -63,6 +62,5 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
-    
     
 }
