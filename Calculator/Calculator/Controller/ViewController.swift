@@ -8,11 +8,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
-    var workingSpace: String = ""
-    var operand = ""
+    private var workingSpace: String = ""
+    private var operand = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +20,12 @@ class ViewController: UIViewController {
         setUp()
     }
     
-    func setUp() {
+    private func setUp() {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
     
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
+    @IBAction private func numberButtonTapped(_ sender: UIButton) {
         if let number = sender.currentTitle {
             operand += number
         }
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         operandLabel.text! = operand
     }
     
-    @IBAction func zeroAndCommaButtonTapped(_ sender: UIButton) {
+    @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
         if operandLabel.text! == "0" {
             return
         }
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func chageSignButtonTapped(_ sender: UIButton) {
+    @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
         if var operand = Int(operandLabel.text!) {
             operand = -operand
             operandLabel.text! = String(operand)
@@ -56,11 +56,11 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         operandLabel.text! = "0"
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         operatorLabel.text! = `operator`
         
@@ -72,7 +72,7 @@ class ViewController: UIViewController {
         operandLabel.text! = "0"
     }
     
-    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         workingSpace += operandLabel.text!
         print(workingSpace)
         var formula = ExpressionParser.parse(from: workingSpace)
@@ -92,13 +92,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearAllButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
         workingSpace = ""
         operand = ""
         setUp()
     }
     
-    func useNumberFormatter(_ input: Double) -> String {
+    private func useNumberFormatter(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
