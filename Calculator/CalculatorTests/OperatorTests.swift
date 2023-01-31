@@ -16,7 +16,7 @@ final class OperatorTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try super.setUpWithError()
+        try super.tearDownWithError()
     }
 
     func test_calculate매서드는_각연산에_대해_lhs_rhs_두_Double값을_인자로받아_연산을_수행한다() {

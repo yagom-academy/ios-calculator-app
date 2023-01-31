@@ -16,7 +16,7 @@ final class ExpressionParserTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        try super.setUpWithError()
+        try super.tearDownWithError()
     }
     
     func test_parse에_연산String값을_입력헀을때_연산자와_피연산자를_분류해_배열로_반환한다() {
