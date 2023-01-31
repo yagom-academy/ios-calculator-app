@@ -12,17 +12,14 @@ final class MainViewController: UIViewController {
         static let zeroTwice = "00"
         static let empty = ""
         static let minus = "-"
+        static let space = " "
     }
     
-    var currentInput = ""
+    var currentInput = Condition.empty
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var currentOperandLabel: UILabel!
-    
     @IBOutlet weak var calculateItemStackView: UIStackView!
-    @IBOutlet weak var currentCalculateItem: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +74,7 @@ final class MainViewController: UIViewController {
             
             add(subview, to: calculateItemStackView)
             initializeCurrentCalculateItem()
-            currentOperatorLabel.text = sender.currentTitle
+            operatorLabel.text = sender.currentTitle
         }
     }
     
@@ -89,12 +86,12 @@ final class MainViewController: UIViewController {
     
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
-        operand.text = currentOperandLabel.text
+        operand.text = operandLabel.text
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let `operator` = UILabel()
-        `operator`.text = currentOperatorLabel.text
+        `operator`.text = operatorLabel.text
         `operator`.textColor = UIColor.white
         `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -112,23 +109,25 @@ final class MainViewController: UIViewController {
     }
     
     private func addToCurrentInput(about `operator`: UILabel, _ operand: UILabel) {
-        guard let input = makeInput(from: `operator`, operand) else { return }
+        guard let input = makeInput(from: `operator`, and: operand) else { return }
         currentInput += input
     }
     
-    private func makeInput(from `operator`: UILabel, _ operand: UILabel) -> String? {
+    private func makeInput(from `operator`: UILabel, and operand: UILabel) -> String? {
         guard let operatorText = `operator`.text,
               let operandText = operand.text else { return nil }
         
-        let result = operatorText + operandText
+        let result = Condition.space + operatorText + Condition.space + operandText
         
         return result
     }
     
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
+        var formula = ExpressionParser.parse(from: currentInput)
+        let result = formula.result()
         
-        
-        
+        operatorLabel.text = Condition.empty
+        operandLabel.text = String(result)
     }
 
 }
