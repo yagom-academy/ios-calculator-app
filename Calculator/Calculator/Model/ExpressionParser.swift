@@ -12,18 +12,13 @@ enum ExpressionParser {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
         
-        let separatedOperators = input.compactMap { Operator(rawValue: $0) }
-        
-        separatedOperators.forEach {
+        input.compactMap { Operator(rawValue: $0) }.forEach {
             operatorsQueue.enqueue(item: $0)
         }
         
-        var separatedOperands = componentsByOperators(from: input)
-        
-        separatedOperands = separatedOperands.map{
+       componentsByOperators(from: input).map{
             $0.contains("⎼") ? $0.replacingOccurrences(of: "⎼", with: "-") : $0
-        }
-        separatedOperands.compactMap { Double($0) }.forEach { operand in
+        }.compactMap { Double($0) }.forEach { operand in
             operandsQueue.enqueue(item: operand)
         }
         
