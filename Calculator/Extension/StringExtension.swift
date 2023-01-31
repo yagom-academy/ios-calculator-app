@@ -7,10 +7,6 @@
 
 import Foundation
 
-extension Operator: CalculateItem { }
-
-extension Double: CalculateItem { }
-
 extension String {
 
     func split(someOperator: Character) -> [String] {

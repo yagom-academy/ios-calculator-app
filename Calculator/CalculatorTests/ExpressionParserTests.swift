@@ -23,7 +23,7 @@ final class ExpressionParserTests: XCTestCase {
         
         let input = "1+2-23*41/12"
         let expectedOperatorResult: [Operator] = [.add, .subtract, .divide, .multiply]
-        let expectedOperandResult: [Double] = [1,2,23,41,12]
+        let expectedOperandResult: [Double] = [1, 2, 23, 41, 12]
          
         var parseTest = ExpressionParser.parse(from: input)
         let operatorResult = parseTest.operators.enqueueStack

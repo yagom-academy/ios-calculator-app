@@ -11,19 +11,19 @@ enum ExpressionParser {
     
     static func parse(from input: String) -> Formula {
         
-        var operatorArray = CalculatorItemQueue<Operator>()
-        var operandArray = CalculatorItemQueue<Double>()
+        var operatorQueue = CalculatorItemQueue<Operator>()
+        var operandQueue = CalculatorItemQueue<Double>()
                 
         extractOperators(from: input)
                 .map {Character($0)}
-                .compactMap {Operator(rawValue: $0)}
-                .forEach {operatorArray.enqueueItem($0)}
+                .compactMap { Operator(rawValue: $0) }
+                .forEach {operatorQueue.enqueueItem($0) }
                
         componentsByOperators(from: input)
-                .compactMap {Double($0)}
-                .forEach{ operandArray.enqueueItem($0)}
+                .compactMap { Double($0) }
+                .forEach{ operandQueue.enqueueItem($0) }
         
-        return Formula(operators: operatorArray, operands: operandArray)
+        return Formula(operators: operatorQueue, operands: operandQueue)
     }
     
     static private func componentsByOperators(from target: String) -> [String] {
@@ -45,11 +45,10 @@ enum ExpressionParser {
     
     static private func extractOperators(from target: String) -> [String] {
         
-        var resultOperators: [String] = []
+        return target
+            .split(whereSeparator: {$0.isNumber || $0 == "."})
+            .map{String($0)}
         
-        resultOperators = target.split(whereSeparator: {$0.isNumber || $0 == "."}).map{String($0)}
-        
-        return resultOperators
     }
     
 }
