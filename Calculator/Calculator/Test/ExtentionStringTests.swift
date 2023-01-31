@@ -17,7 +17,7 @@ final class ExtentionStringAndDoubleTests: XCTestCase {
         try super.tearDownWithError()
     }
 
-    func test_split_호출시_입력인자기준으로_분할된_배열을_반환한다() {
+    func test_split호출시_입력인자기준으로분할된배열을반환한다() {
         // given
         let input = "12a34a56"
         let expectation = ["12", "34", "56"]

@@ -12,17 +12,17 @@ enum ExpressionParser {
         let operandsArray = componentsByOperators(from: input)
         
         operatorsArray.forEach {
-            if let operatorToChar = String($0).first,
-               let operatorData = Operator(rawValue: operatorToChar) {
-                let node = Node(operatorData)
+            if let dataToChar = String($0).first,
+               let dataToOperator = Operator(rawValue: dataToChar) {
+                let node = Node(dataToOperator)
                 formula.operators.enqueueCalculateItems(node)
             }
         }
 
         operandsArray.compactMap { Double($0) }.forEach {
-                let node = Node($0)
-                formula.operands.enqueueCalculateItems(node)
-            }
+            let node = Node($0)
+            formula.operands.enqueueCalculateItems(node)
+        }
         
         return formula
     }
