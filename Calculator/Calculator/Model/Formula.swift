@@ -6,15 +6,14 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    private(set) var operands: CalculatorItemQueue<Double>
+    private(set) var operators: CalculatorItemQueue<Operator>
 
     mutating func result() -> Double? {
   
-        guard var firstOperand = operands.dequeue() else {
+        guard var result = operands.dequeue() else {
             return .zero
         }
-        var result: Double = firstOperand
         
         while let nextOperand = operands.dequeue() {
             guard let operatorType = operators.dequeue() else {

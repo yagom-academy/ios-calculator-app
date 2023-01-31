@@ -12,9 +12,7 @@ final class FormulaTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        let operands = CalculatorItemQueue<Double>()
-        let operators = CalculatorItemQueue<Operator>()
-        sut = Formula(operands: operands, operators: operators)
+        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     }
     
     override func tearDownWithError() throws {
@@ -44,12 +42,16 @@ final class FormulaTests: XCTestCase {
     
     func test_operand값이있고_operator가있으면_계산된값이_반환된다() {
         //given
-        sut.operands.enqueue(10)
-        sut.operands.enqueue(20)
-        sut.operators.enqueue(.add)
+        let operand: [Double] = [10, 20]
+        let operators: [Operator] = [.add]
+       
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
+        
         let expectation: Double = 30
         
         //when
+        sut = Formula(operands: operandValue, operators: operatorValue)
         let result = sut.result()
         
         //then
@@ -58,14 +60,16 @@ final class FormulaTests: XCTestCase {
     
     func test_operand가_여러개있고_operator가_여러개있을때_순차적으로_계산된값이_반환된다() {
         //given
-        sut.operands.enqueue(10)
-        sut.operands.enqueue(5)
-        sut.operands.enqueue(1.5)
-        sut.operators.enqueue(.add)
-        sut.operators.enqueue(.subtract)
+        let operand: [Double] = [10, 5, 1.5]
+        let operators: [Operator] = [.add, .subtract]
+        
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
+      
         let expectation: Double = 13.5
         
         //when
+        sut = Formula(operands: operandValue, operators: operatorValue)
         let result = sut.result()
         
         //then
@@ -74,12 +78,16 @@ final class FormulaTests: XCTestCase {
     
     func test_0을나눌때_오류가발생하여_NaN이된다() {
         //given
-        sut.operands.enqueue(10)
-        sut.operands.enqueue(0)
-        sut.operators.enqueue(.divide)
+        let operand: [Double] = [10, 0]
+        let operators: [Operator] = [.divide]
+        
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
+       
         let expectation: Bool = true
         
         //when
+        sut = Formula(operands: operandValue, operators: operatorValue)
         let result = sut.result()?.isNaN
         
         //then
@@ -88,11 +96,16 @@ final class FormulaTests: XCTestCase {
     
     func test_nextOperand가_없을때_firstOperand를반환한다() {
         //given
-        sut.operands.enqueue(10)
-        sut.operators.enqueue(.add)
+        let operand: [Double] = [10]
+        let operators: [Operator] = [.add]
+        
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
+        
         let expectation: Double = 10
         
         //when
+        sut = Formula(operands: operandValue, operators: operatorValue)
         let result = sut.result()
         
         //then
@@ -101,10 +114,14 @@ final class FormulaTests: XCTestCase {
     
     func test_operatorType이없을때_nil을반환한다() {
         //given
-        sut.operands.enqueue(10)
-        sut.operands.enqueue(11)
+        let operand: [Double] = [10, 11]
+        let operators: [Operator] = []
+        
+        let operandValue = CalculatorItemQueue<Double>(items: operand)
+        let operatorValue = CalculatorItemQueue<Operator>(items: operators)
         
         //when
+        sut = Formula(operands: operandValue, operators: operatorValue)
         let result = sut.result()
         
         //then
