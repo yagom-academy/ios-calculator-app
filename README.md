@@ -2,7 +2,6 @@
 
 ## 📚 목차
 * [🧮 소개](#-소개)
-* [👤 팀원](#-팀원)
 * [📁 프로젝트 구조](#-프로젝트-구조)
 * [🖥 실행화면](#-실행화면)
 * [⏱ 타임라인](#-타임라인)
@@ -15,7 +14,7 @@
 * 간단한 계산기 프로그램입니다.
 * 단, 사칙연산 우선순위를 무시합니다.
 
-## 👤 팀원
+### 프로젝트 팀원
 |⭐️Vetto|
 | :--------: |
 |<img src="https://cdn.discordapp.com/attachments/535779947118329866/1055718870951940146/1671110054020-0.jpg" width="150" height="180">|
@@ -23,9 +22,9 @@
 ## 📁 프로젝트 구조
 
 <details>
-    <summary><big>UML</big></summary>
+    <summary><big>UML</big></big></summary>
 
-step2 진행 후 작성 예정
+![ios-calculator](https://github.com/gzzjk159/ios-calculator-app/blob/step2/Calculator_step2.drawio.png?raw=true)
 
 </details>
 
@@ -34,31 +33,16 @@ step2 진행 후 작성 예정
 step3 진행 후 작성 예정
 
 ## 📌 프로젝트 수행 중 핵심 경험
- 
-<details>
-    <summary>STEP 1</summary>
-    
-* TDD 시작하기
-    * 기존의 프로젝트에 Test Target 추가
-* Queue 자료구조의 이해와 구현
-* List 자료구조 직접 구현해보기(선택)
-    * 리스트를 활용하여 Queue 구현(선택)
-    
-</details>
-    
-<details>
-    <summary>STEP 2</summary>
-    
-* UML을 기반으로 한 코드구현
-* 숫자와 연산자 입력에 큐 활용
-* TDD를 기반으로 코드 작성하기(선택)
-    
-</details>
+   
+* TDD
+* UML을 기반 코드 구현
+* Queue 자료구조의 이해와 구현  
+* 숫자와 연산자 입력에 Queue 활용
 
 ## ⏱ 타임라인
 
 <details>
-    <summary>STEP 1 [2023.01.24] ~ [2023.01.27]</summary>    
+    <summary>STEP 1 [2023.01.24] ~ [2023.01.27]</summary></summary> 
 
 - 2023.01.24
     - node 구현, node를 이용한 queue구현
