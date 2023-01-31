@@ -41,9 +41,13 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapACButton(_ sender: UIButton) {
+        allClear()
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
+        clearEntry()
+        print(stringToBeCalculated)
     }
     
     @IBAction func tapConvertSignButton(_ sender: UIButton) {
@@ -78,10 +82,17 @@ final class ViewController: UIViewController {
     }
     
     func insertOperatorSign(titleName: String?) {
-        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
-        let lastString = stringToBeCalculated[lastIndex]
-        if Operator(rawValue: lastString) != nil {
-            stringToBeCalculated = String(stringToBeCalculated.dropLast())
+        if stringToBeCalculated == "" {
+            stringToBeCalculated += "0"
+        } else {
+            let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
+            let lastString = stringToBeCalculated[lastIndex]
+            if stringToBeCalculated == "" {
+                stringToBeCalculated += "0"
+            }
+            if Operator(rawValue: lastString) != nil {
+                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+            }
         }
         insertString(titleName: titleName)
     }
@@ -106,6 +117,23 @@ final class ViewController: UIViewController {
     
     func initializeCurrentOperator() {
         currentOperatorLabel.text = ""
+    }
+    
+    func allClear() {
+        stringToBeCalculated = ""
+        currentNumberLabel.text = "0"
+        currentOperatorLabel.text = ""
+    }
+    
+    func clearEntry() {
+        for input in stringToBeCalculated.reversed() {
+            if Operator(rawValue: input) == nil {
+                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+            } else {
+                break
+            }
+        }
+        resetCurrentNumber()
     }
 }
 
