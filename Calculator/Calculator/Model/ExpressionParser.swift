@@ -14,8 +14,8 @@ enum ExpressionParser {
         
         let separatedOperators = input.compactMap { Operator(rawValue: $0) }
         
-        separatedOperators.forEach { `operator` in
-            operatorsQueue.enqueue(item: `operator`)
+        separatedOperators.forEach {
+            operatorsQueue.enqueue(item: $0)
         }
         
         var separatedOperands = componentsByOperators(from: input)
@@ -41,3 +41,4 @@ enum ExpressionParser {
         return numbers
     }
 }
+
