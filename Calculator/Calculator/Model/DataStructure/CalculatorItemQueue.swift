@@ -8,11 +8,19 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         self.items.isEmpty
     }
     var peek: Element? {
-        self.items.head?.value
+        self.items.peek
     }
     var back: Element? {
-        self.items.tail?.value
+        self.items.back
     }
+    
+    init(elements: [Element]) {
+        elements.forEach { element in
+            self.enqueue(element)
+        }
+    }
+    
+    init() { }
     
     mutating func enqueue(_ element: Element) {
         self.items.append(element)

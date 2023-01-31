@@ -4,9 +4,6 @@
 import XCTest
 @testable import Calculator
 
-extension String: CalculateItem {
-}
-
 final class CalculatorItemQueueTest: XCTestCase {
     var sut: CalculatorItemQueue<String>!
     
@@ -24,9 +21,11 @@ final class CalculatorItemQueueTest: XCTestCase {
         // given
         let value = "a"
         let exception = "a"
+        
         // when
         sut.enqueue(value)
         let peekValue = sut.peek!
+        
         // then
         XCTAssertEqual(peekValue, exception)
     }
@@ -36,10 +35,12 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let exception = "b"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         let backValue = sut.back!
+        
         // then
         XCTAssertEqual(backValue, exception)
     }
@@ -49,10 +50,12 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let exception = "a"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         let enqueueValue = sut.dequeue()!
+        
         // then
         XCTAssertEqual(enqueueValue, exception)
     }
@@ -61,10 +64,12 @@ final class CalculatorItemQueueTest: XCTestCase {
         // given
         let value = "a"
         let firstException = "a"
+        
         // when
         sut.enqueue(value)
         let firstDequeueValue = sut.dequeue()
         let secondDequeueValue = sut.dequeue()
+        
         // then
         XCTAssertEqual(firstDequeueValue, firstException)
         XCTAssertNil(secondDequeueValue)
@@ -75,11 +80,13 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let exception = "b"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         _ = sut.dequeue()
         let peekValue = sut.peek!
+        
         // then
         XCTAssertEqual(peekValue, exception)
     }
@@ -89,11 +96,13 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let exception = "b"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         _ = sut.dequeue()
         let peekValue = sut.peek!
+        
         // then
         XCTAssertEqual(peekValue, exception)
     }
@@ -103,11 +112,13 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let thirdValue = "c"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         sut.enqueue(thirdValue)
         sut.removeAll()
+        
         // then
         XCTAssertNil(sut.peek)
     }
@@ -117,11 +128,13 @@ final class CalculatorItemQueueTest: XCTestCase {
         let firstValue = "a"
         let secondValue = "b"
         let thirdValue = "c"
+        
         // when
         sut.enqueue(firstValue)
         sut.enqueue(secondValue)
         sut.enqueue(thirdValue)
         sut.removeAll()
+        
         // then
         XCTAssertNil(sut.back)
     }
