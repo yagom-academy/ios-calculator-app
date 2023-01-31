@@ -12,10 +12,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return self.list.count
     }
     
-    func isEmpty() -> Bool {
-        let result = self.list.isEmpty
-        
-        return result
+    var isEmpty: Bool {
+        return self.list.isEmpty
     }
     
     mutating func enqueue(_ element: Element) {
