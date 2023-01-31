@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
 
