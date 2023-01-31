@@ -362,6 +362,8 @@
                     <connections>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="r6J-qG-tYO"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0QT-Oq-5Qb"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="BGP-2o-U3L"/>
+                        <outlet property="stackViewInScrollView" destination="XRe-QE-UJf" id="GUH-c8-abG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
