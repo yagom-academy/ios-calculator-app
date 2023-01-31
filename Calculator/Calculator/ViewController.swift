@@ -75,6 +75,9 @@ final class ViewController: UIViewController {
     @IBAction func tapCalculateButton(_ sender: UIButton) {
         resetCurrentNumber()
         initializeCurrentOperator()
+        let result = calculate()
+        displayResult(result: result)
+        print(result)
     }
     
     func insertString(titleName: String?) {
@@ -134,6 +137,15 @@ final class ViewController: UIViewController {
             }
         }
         resetCurrentNumber()
+    }
+    
+    func calculate() -> Double {
+        var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
+        return calculateFormula.result()
+    }
+    
+    func displayResult(result: Double) {
+        currentNumberLabel.text = String(result)
     }
 }
 
