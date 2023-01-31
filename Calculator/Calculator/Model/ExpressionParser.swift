@@ -20,9 +20,9 @@ enum ExpressionParser {
         
         var separatedOperands = componentsByOperators(from: input)
         
-        separatedOperands = separatedOperands.map{ if $0.contains("⎼") { return $0.replacingOccurrences(of: "⎼", with: "-")} else {
-            return $0
-        } }
+        separatedOperands = separatedOperands.map{
+            $0.contains("⎼") ? $0.replacingOccurrences(of: "⎼", with: "-") : $0
+        }
         separatedOperands.compactMap { Double($0) }.forEach { operand in
             operandsQueue.enqueue(item: operand)
         }
