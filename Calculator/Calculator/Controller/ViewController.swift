@@ -63,6 +63,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
+        operand = ""
         operandLabel.text! = "0"
     }
     
