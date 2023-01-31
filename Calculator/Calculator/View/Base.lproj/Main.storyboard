@@ -101,7 +101,10 @@
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
                                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                                                <state key="normal" title="⁺⁄₋">
+                                                <state key="normal">
+                                                    <string key="title" base64-UTF8="YES">
+4oG64oGE4oKLEA
+</string>
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -357,6 +360,8 @@
                     <connections>
                         <outlet property="calculateItemStackView" destination="XRe-QE-UJf" id="DAU-dk-L1V"/>
                         <outlet property="currentCalculateItem" destination="2pK-nQ-lxl" id="frV-9t-L6X"/>
+                        <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="aNb-1d-gzA"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="ALD-pr-EPh"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="94W-tU-1Hx"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="wGY-CS-aEX"/>
                     </connections>

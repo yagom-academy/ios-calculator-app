@@ -20,6 +20,7 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCurrentCalculateItem()
+        
     }
     
     private func initializeCurrentCalculateItem() {
@@ -59,27 +60,45 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Condition.zero {
             operatorLabel.text = inputOperator
         } else {
-            guard let subview = generateStackView(from: currentCalculateItem) else { return }
-            add(subview, to: calculateItemStackView)
+            guard let subview = generateCurrentItemStackView() else { return }
             
+            add(subview, to: calculateItemStackView)
+            initializeCurrentCalculateItem()
+            currentOperatorLabel.text = sender.titleLabel?.text
         }
     }
     
     @IBOutlet weak var calculateItemStackView: UIStackView!
     @IBOutlet weak var currentCalculateItem: UIStackView!
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
     
     func add(_ subview: UIStackView, to superview: UIStackView) {
         let calculateItem = subview
         
-            superview.addArrangedSubview(calculateItem)
+        superview.addArrangedSubview(calculateItem)
     }
     
-    func generateStackView(from reference: UIStackView) -> UIStackView? {
-        let calculateItem = reference
-//        var result = UIStackView()
-//        result = calculateItem
+    func generateCurrentItemStackView() -> UIStackView? {
+        var operand = UILabel()
+        operand.text = currentOperandLabel.text
+        operand.textColor = UIColor.white
+        operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        return calculateItem
+        var `operator` = UILabel()
+        `operator`.text = currentOperatorLabel.text
+        `operator`.textColor = UIColor.white
+        `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        var result = UIStackView()
+        result.addArrangedSubview(`operator`)
+        result.addArrangedSubview(operand)
+        result.axis = .horizontal
+        result.spacing = 8
+        result.alignment = .fill
+        result.distribution = .fill
+        
+        return result
     }
 
     
