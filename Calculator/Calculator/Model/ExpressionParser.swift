@@ -13,7 +13,8 @@ enum ExpressionParser {
         components.forEach {
             if let operand = Double($0) {
                 formula.operands.enqueue(operand)
-            } else if let `operator` = Operator(rawValue: Character($0)) {
+            } else if $0.count == 1,
+                      let `operator` = Operator(rawValue: Character($0)) {
                 formula.operators.enqueue(`operator`)
             }
         }
