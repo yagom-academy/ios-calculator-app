@@ -9,14 +9,6 @@ import XCTest
 @testable import Calculator
 final class ExtensionStringTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        
-    }
-
-    override func tearDownWithError() throws {
-        
-    }
-    
     func test_split을_실행하면_character를기준으로_나뉜값이_배열로_반환된다() {
         //given
         let input: Character = " "

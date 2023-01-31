@@ -9,16 +9,6 @@ import XCTest
 @testable import Calculator
 final class ExpressionParserTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        
-    }
-    
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        
-    }
-    
     func test_input에_숫자를입력하면_operands에_값이입력된다() {
         //given
         let input = "1"
@@ -57,7 +47,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_input에_0을나누면_isNaN이_True이다() {
         //given
-        let input = "1 % 0"
+        let input = "1 ÷ 0"
         let expectation = true
         
         //when
@@ -83,13 +73,12 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_10곱하기2더하기5나누기5는_5이다() {
         //given
-        let input = "10 x 2 + 5 % 5"
+        let input = "10 x 2 + 5 ÷ 5"
         let expectation: Double = 5
         
         //when
         var formula = ExpressionParser.parse(from: input)
         let result = formula.result()
-        
         
         //then
         XCTAssertEqual(result, expectation)

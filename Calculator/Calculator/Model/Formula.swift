@@ -9,7 +9,6 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
 
-    
     mutating func result() -> Double? {
         var result: Double = 0
         
@@ -26,9 +25,10 @@ struct Formula {
             }
             do {
                 result = try operatorType.calculate(lhs: result, rhs: nextOperand)
-            } catch CalculatorError.divideError {
+            } catch CalculatorError.divideByZeroError {
                 return .nan
             } catch {
+                print(error)
             }
         }
         

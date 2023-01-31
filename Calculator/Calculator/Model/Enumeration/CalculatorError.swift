@@ -6,6 +6,5 @@
 //
 
 enum CalculatorError: Error {
-    case divideError
-    
+    case divideByZeroError
 }

@@ -9,19 +9,16 @@ import XCTest
 @testable import Calculator
 final class FormulaTests: XCTestCase {
     var sut: Formula!
-
+    
     override func setUpWithError() throws {
-       try super.setUpWithError()
-        
+        try super.setUpWithError()
         let operands = CalculatorItemQueue<Double>()
-     
         let operators = CalculatorItemQueue<Operator>()
-        
         sut = Formula(operands: operands, operators: operators)
     }
-
+    
     override func tearDownWithError() throws {
-      try super.tearDownWithError()
+        try super.tearDownWithError()
         sut = nil
     }
     
@@ -33,7 +30,6 @@ final class FormulaTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, expectation)
-        
     }
     
     func test_operand가_비어있으면_0을반환한다() {
@@ -44,7 +40,6 @@ final class FormulaTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, expectation)
-        
     }
     
     func test_operand값이있고_operator가있으면_계산된값이_반환된다() {
@@ -103,5 +98,5 @@ final class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
-   
+    
 }

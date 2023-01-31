@@ -9,14 +9,6 @@ import XCTest
 @testable import Calculator
 final class OperatorTests: XCTestCase {
 
-    override func setUpWithError() throws {
-       
-    }
-
-    override func tearDownWithError() throws {
-    
-    }
-
     func test_add_를실행하면_두개의값을더한값이_반환된다() throws {
         //given
         let lhs: Double = 12.5
@@ -62,7 +54,10 @@ final class OperatorTests: XCTestCase {
         let rhs: Double = 0
         
         //then
-        XCTAssertThrowsError(try Operator.divide.calculate(lhs: lhs, rhs: rhs)) { error in XCTAssertEqual(error as! CalculatorError, CalculatorError.divideError) }
+        XCTAssertThrowsError(try Operator.divide.calculate(lhs: lhs, rhs: rhs)) { error in
+            
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZeroError)
+        }
     }
     
     func test_multiply_를실행하면_첫번째값에서_두번째값을곱한값이_반환된다() throws {
