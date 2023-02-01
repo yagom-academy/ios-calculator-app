@@ -8,21 +8,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var scrollviewComponentsArray: [String] = [] //스크롤뷰에 담길 배열
-    
-    var inputtedComponents: String = "" // 데이터를 저장할 스트링
-    
     var inputNumbers = "" // 숫자값을 담을 스트링
     
     //현재 상태창
     @IBOutlet weak var currentNumberOnField: UILabel!
     
     @IBOutlet weak var currentOperatorOnField: UILabel!
-    
-    @IBOutlet weak var firstScrollViewLabel: UILabel!
-    
-    @IBOutlet weak var secondScrollViewLabel: UILabel!
-    
     
     @IBOutlet weak var operatorStackView: UILabel!
     
@@ -76,15 +67,11 @@ class ViewController: UIViewController {
         let currentOper = getInputtedOperator(sender)
         let currentNum = getInputtedNumber(sender)
         
-//        currentNumberOnField.text = currentNum
 
         if currentOper.isEmpty == false {
-            currentNumberOnField.text = "" //오퍼값이들어오면 필드의 입력숫자값을 초기화시킴
-            scrollviewComponentsArray.append(currentOper + currentNum) //현재 오퍼레이터를 스크롤뷰어레이에 넣음 [+10 이런식으로]
+            currentNumberOnField.text = ""
             inputNumbers = ""
         }
-        print(scrollviewComponentsArray)
-        
     }
     
     
@@ -139,13 +126,10 @@ class ViewController: UIViewController {
         }
         
         currentOperatorOnField.text = currentOperator
-        inputtedComponents += currentOperator  // 데이터값에 저장
         
         return currentOperator
     }
   
-        
-        
     func convertOperator(_ sender: UIButton) -> String {
             
         guard let titleLabel = sender.titleLabel?.text else {
