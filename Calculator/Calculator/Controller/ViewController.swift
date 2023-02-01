@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     private var currentOperand: String = ""
     private var currentOperator: String = ""
     private var isFractional: Bool = false
+    private var isCalculated: Bool = false
     
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var stackViewInScrollView: UIStackView!
@@ -25,6 +26,11 @@ class ViewController: UIViewController {
     
     @IBAction private func didTapButton(sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
+        
+        if self.isCalculated {
+            clearAll()
+            self.isCalculated.toggle()
+        }
         
         switch buttonTitle {
         case "=":
@@ -48,20 +54,27 @@ class ViewController: UIViewController {
     
     func setNumberFormatter() {
         self.numberFormatter.numberStyle = .decimal
-        self.numberFormatter.roundingMode = .halfEven
+        self.numberFormatter.roundingMode = .ceiling
+        self.numberFormatter.usesSignificantDigits = true
+        self.numberFormatter.minimumSignificantDigits = 0
+        self.numberFormatter.maximumSignificantDigits = 20
     }
     
     func calculate() {
+        addStackView(number: self.currentOperand, operatorType: self.currentOperator)
         self.inputs += "\(self.currentOperator) \(self.currentOperand) "
         
         var formula = ExpressionParser.parse(from: inputs)
         let result = formula.result()
         
-        clearAll()
-        
         guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)) else { return }
+        
+        self.inputs = ""
+        self.currentOperator = ""
+        self.currentOperatorLabel.text = self.currentOperator
         self.currentOperandLabel.text = resultValue
-        self.isFractional = true
+        self.isFractional = false
+        self.isCalculated = true
     }
     
     func clearAll() {
@@ -72,13 +85,13 @@ class ViewController: UIViewController {
         
         self.currentOperandLabel.text = "0"
         self.currentOperatorLabel.text = self.currentOperator
-        self.isFractional = true
+        self.isFractional = false
     }
     
     func clearCurrentOperand() {
         self.currentOperand = ""
-        self.currentOperandLabel.text = self.currentOperand
-        self.isFractional = true
+        self.currentOperandLabel.text = "0"
+        self.isFractional = false
     }
     
     func reverseOperand() {
@@ -99,10 +112,10 @@ class ViewController: UIViewController {
             
             addStackView(number: currentOperandValue, operatorType: currentOperatorValue)
             
-            self.inputs += "\(currentOperandValue) \(currentOperatorValue) "
+            self.inputs += "\(currentOperatorValue) \(currentOperandValue) "
             
             self.currentOperand = ""
-            self.currentOperandLabel.text = self.currentOperand
+            self.currentOperandLabel.text = "0"
             self.currentOperator = operatorValue
             self.currentOperatorLabel.text = self.currentOperator
         } else {
@@ -110,21 +123,17 @@ class ViewController: UIViewController {
             self.currentOperatorLabel.text = self.currentOperator
         }
         
-        self.isFractional = true
+        self.isFractional = false
     }
     
     func addZeroToOperandLabel(operand: String) {
-        if self.currentOperand.count > 0 {
-            if self.isFractional == false {
-                self.currentOperand += operand
-                
-                guard let number = Double(self.currentOperand),
-                      let formattedOperand = self.numberFormatter.string(from: NSNumber(floatLiteral: number))  else { return }
-                
-                self.currentOperand = formattedOperand
-                self.currentOperandLabel.text = self.currentOperand
-            }
-        }
+        self.currentOperand += operand
+        
+        guard let number = Double(self.currentOperand),
+              let formattedOperand = self.numberFormatter.string(from: NSNumber(floatLiteral: number))  else { return }
+        
+        self.currentOperand = formattedOperand
+        self.currentOperandLabel.text = self.currentOperand
     }
     
     func addDotToOperandLabel() {
@@ -134,17 +143,18 @@ class ViewController: UIViewController {
             self.currentOperand += "."
         }
         
+        self.currentOperandLabel.text = self.currentOperand
         self.isFractional = true
     }
     
     func addNumberToOperandLabel(operand: String) {
         self.currentOperand += operand
         
-        guard let number = Double(self.currentOperand),
-              let formattedOperand = self.numberFormatter.string(from: NSNumber(floatLiteral: number))  else { return }
+        guard let number = self.numberFormatter.number(from: self.currentOperand),
+              let formattedOperand = self.numberFormatter.string(from: number)  else { return }
         
-        self.currentOperand = formattedOperand
-        self.currentOperandLabel.text = self.currentOperand
+        self.currentOperand = "\(number)"
+        self.currentOperandLabel.text = formattedOperand
     }
 }
 
@@ -181,6 +191,8 @@ extension ViewController {
         operatorLabel.bottomAnchor.constraint(equalTo: enteredStackView.bottomAnchor, constant: 0).isActive = true
 
         self.stackViewInScrollView.addArrangedSubview(enteredStackView)
+        
+        scrollToBottom()
     }
 
     func removeAllStackView() {
