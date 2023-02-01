@@ -23,6 +23,8 @@ final class ViewController: UIViewController {
     
     var parsingValue: String = Sign.empty
     var isCalculatedStatus: Bool = false
+    var currentOperator: String { operatorLabel.text ?? Sign.zero }
+    var currentOperand: String { operandLabel.text ?? Sign.empty }
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -43,35 +45,36 @@ final class ViewController: UIViewController {
             guard inputNumber != Sign.zeroZero else { return }
             operandLabel.text = inputNumber.addComma()
         } else {
-            operandLabel.text = (operandLabel.text ?? Sign.empty) + inputNumber.addComma()
+            operandLabel.text = currentOperand + inputNumber.addComma()
         }
     }
     
     func updateDot() {
-        guard operandLabel.text != Sign.zero else { return }
-        guard operandLabel.text?.contains(Sign.dot) == false else { return }
+        guard currentOperand != Sign.zero,
+        currentOperand.contains(Sign.dot) == false
+        else { return }
         
-        operandLabel.text = (operandLabel.text ?? Sign.empty) + String(Sign.dot)
+        operandLabel.text = currentOperand + String(Sign.dot)
     }
     
     func updateOperator(with sign: String?) {
-        guard let operatorValue = sign, let operandValue = operandLabel.text else { return }
+        guard let operatorValue = sign else { return }
         
         isCalculatedStatus = false
         
         if parsingValue == Sign.empty {
             operatorLabel.text = operatorValue
-            parsingValue += (operandLabel.text ?? Sign.empty)
-            setOperationStackView(operatorValue: Sign.empty, operandValue: operandValue.addComma())
+            parsingValue += currentOperand
+            setOperationStackView(operatorValue: Sign.empty, operandValue: currentOperand.addComma())
             operandLabel.text = Sign.zero
         } else if operandLabel.text == Sign.zero {
-            parsingValue += " \(operatorLabel.text ?? Sign.empty) "
+            parsingValue += " \(currentOperator) "
             parsingValue = String(parsingValue.dropLast(3))
             operatorLabel.text = operatorValue
             operandLabel.text = Sign.zero
         } else {
-            setOperationStackView(operatorValue: operatorLabel.text ?? Sign.empty, operandValue: operandValue.addComma())
-            parsingValue += " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
+            setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand.addComma())
+            parsingValue += " \(currentOperator) " + currentOperand
             operatorLabel.text = operatorValue
             
             operandLabel.text = Sign.zero
@@ -86,12 +89,8 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        guard let operatorValue = operatorLabel.text, let operandValue = operandLabel.text else { return }
-        
-        let operandText = operandValue
-        
-        setOperationStackView(operatorValue: operatorValue, operandValue: operandText)
-        let input = parsingValue + " \(operatorValue) " + operandText
+        setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
+        let input = parsingValue + " \(currentOperator) " + currentOperand
         let formula = ExpressionParser.parse(from: input.split(with: ",").joined()).result()
         let result = String(formula).split(with: Sign.dot)
         isCalculatedStatus = true
@@ -136,8 +135,9 @@ final class ViewController: UIViewController {
     }
     
     func convertPositiveAndNegativeNumber() -> String {
-        guard let operandValue = operandLabel.text?.split(with: ",").joined()
-        else { return Sign.zero }
+        guard currentOperand != Sign.zero else { return Sign.zero }
+        
+        let operandValue = currentOperand.split(with: ",").joined()
         
         guard operandValue.prefix(1) != Sign.negative
         else { return String(operandValue.dropFirst(1)) }
