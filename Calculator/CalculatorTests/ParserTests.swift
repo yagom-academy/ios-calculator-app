@@ -9,16 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class ParserTests: XCTestCase {
-    var sut: ExpressionParser!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-    
     //MARK: - componentsByOperators Unit Test
     /* 실험을 위해 private 삭제 후 진행
     func test_componentsByOperators시_공백을기준으로_split된_문자열을반환한다() {
