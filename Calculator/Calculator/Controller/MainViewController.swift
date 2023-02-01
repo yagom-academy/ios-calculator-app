@@ -206,7 +206,7 @@ final class MainViewController: UIViewController {
         if result.isNaN == true {
             operandLabel.text = Condition.nan
         } else {
-            operandLabel.text = String(result)
+            operandLabel.text = convertToString(from: result)
         }
     }
 }
