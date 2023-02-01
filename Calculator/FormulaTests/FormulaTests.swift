@@ -9,17 +9,7 @@ import XCTest
 
 final class FormulaTests: XCTestCase {
     
-    var sut: Formula!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        sut = Formula()
-    }
-    
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
+    var sut: Formula! = Formula()
     
     func testResult_if_OperandQueue_isEmpty_returnZero() {
         //given
