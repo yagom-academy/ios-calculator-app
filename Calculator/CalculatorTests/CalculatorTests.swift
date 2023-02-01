@@ -9,7 +9,7 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     
-    var sut: CalculatorItemQueue<Int>! = CalculatorItemQueue<Int>()
+    var sut = CalculatorItemQueue<Int>()
     
     func test_enqueue실행시_처음_값을_넣어주면_처음넣은값이_출력된다() {
         //given when
