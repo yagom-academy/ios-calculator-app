@@ -26,6 +26,9 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
+        if (lhs / rhs).isNaN {
+            return Double.nan
+        }
         return lhs / rhs
     }
     
