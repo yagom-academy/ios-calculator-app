@@ -85,12 +85,13 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
+        guard let currentOperand = operandLabel.text else { return }
         
-        if let currentOperand = operandLabel.text {
-            operandLabel.text = currentOperand + dot
+        if currentOperand.contains(Condition.dot) {
+            return
+        } else {
+            operandLabel.text = currentOperand + Condition.dot
         }
-        
     }
     
     @IBAction func touchZeroButton(_ sender: UIButton) {
