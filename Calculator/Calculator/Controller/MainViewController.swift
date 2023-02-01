@@ -16,9 +16,7 @@ final class MainViewController: UIViewController {
         static let nan = "NaN"
     }
     
-    let numberFormatter = NumberFormatter()
-//    numberFormatter.numberStyle
-    
+    var numberFormatter = NumberFormatter()
     var currentInput = Condition.empty
     
     @IBOutlet weak var operatorLabel: UILabel!
@@ -30,6 +28,7 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         initializeCurrentCalculateItem()
         initializeScrollView()
+        initializeNumberFormatter()
     }
     
     private func initializeCurrentCalculateItem() {
@@ -41,6 +40,13 @@ final class MainViewController: UIViewController {
         calculateItemStackView
             .arrangedSubviews
             .forEach { $0.removeFromSuperview() }
+    }
+    
+    private func initializeNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximum = 20
     }
     
     @IBAction func touchOperandButton(_ sender: UIButton) {
