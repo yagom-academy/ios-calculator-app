@@ -182,9 +182,9 @@ final class MainViewController: UIViewController {
     private func makeInput(from `operator`: UILabel, and operand: UILabel) -> String? {
         guard let operatorText = `operator`.text,
               let operandText = operand.text,
-              let convertedOperand = convertToNone(from: operandText) else { return nil }
+              let convertedOperandText = convertToNone(from: operandText) else { return nil }
         
-        let result = Condition.space + operatorText + Condition.space + convertedOperand
+        let result = operatorText + Condition.space + convertedOperandText + Condition.space
         
         return result
     }
