@@ -2,11 +2,15 @@
 //  Calculator - ViewController.swift
 //  Created by 혜모리.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
 final class ViewController: UIViewController {
+    
+    @IBOutlet weak var operationContentStackView: UIStackView!
+    @IBOutlet weak var operationScrollView: UIScrollView!
+    
     enum Sign {
         static let dot: Character = "."
         static let blank = " "
@@ -22,8 +26,6 @@ final class ViewController: UIViewController {
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operationContentStackView: UIStackView!
-    @IBOutlet weak var operationScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +36,14 @@ final class ViewController: UIViewController {
         guard let inputNumber = number else { return }
         guard isCalculatedStatus != true else {
             isCalculatedStatus = false
-            return operandLabel.text = inputNumber
+            return operandLabel.text = inputNumber.addComma()
         }
         
         if operandLabel.text == Sign.zero {
             guard inputNumber != Sign.zeroZero else { return }
-            operandLabel.text = inputNumber
+            operandLabel.text = inputNumber.addComma()
         } else {
-            operandLabel.text = (operandLabel.text ?? Sign.empty) + inputNumber
+            operandLabel.text = (operandLabel.text ?? Sign.empty) + inputNumber.addComma()
         }
     }
     
@@ -60,7 +62,7 @@ final class ViewController: UIViewController {
         if parsingValue == Sign.empty {
             operatorLabel.text = operatorValue
             parsingValue += (operandLabel.text ?? Sign.empty)
-            setOperationStackView(operatorValue: Sign.empty, operandValue: operandValue)
+            setOperationStackView(operatorValue: Sign.empty, operandValue: operandValue.addComma())
             operandLabel.text = Sign.zero
         } else if operandLabel.text == Sign.zero {
             parsingValue += " \(operatorLabel.text ?? Sign.empty) "
@@ -68,9 +70,10 @@ final class ViewController: UIViewController {
             operatorLabel.text = operatorValue
             operandLabel.text = Sign.zero
         } else {
-            setOperationStackView(operatorValue: operatorLabel.text ?? Sign.empty, operandValue: operandValue)
+            setOperationStackView(operatorValue: operatorLabel.text ?? Sign.empty, operandValue: operandValue.addComma())
             parsingValue += " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
             operatorLabel.text = operatorValue
+            
             operandLabel.text = Sign.zero
         }
     }
@@ -85,9 +88,11 @@ final class ViewController: UIViewController {
     @IBAction func didTapEquals(_ sender: UIButton) {
         guard let operatorValue = operatorLabel.text, let operandValue = operandLabel.text else { return }
         
-        setOperationStackView(operatorValue: operatorValue, operandValue: operandValue)
-        let input = parsingValue + " \(operandValue) " + (operandLabel.text ?? Sign.empty)
-        let formula = ExpressionParser.parse(from: input).result()
+        let operandText = operandValue
+        
+        setOperationStackView(operatorValue: operatorValue, operandValue: operandText)
+        let input = parsingValue + " \(operatorValue) " + operandText
+        let formula = ExpressionParser.parse(from: input.split(with: ",").joined()).result()
         let result = String(formula).split(with: Sign.dot)
         isCalculatedStatus = true
         
@@ -100,13 +105,13 @@ final class ViewController: UIViewController {
         
         guard result[1] != Sign.zero else {
             operatorLabel.text = Sign.blank
-            operandLabel.text = result[0]
+            operandLabel.text = result[0].addComma()
             parsingValue.removeAll()
             return
         }
         
         operatorLabel.text = Sign.blank
-        operandLabel.text = String(formula)
+        operandLabel.text = String(formula).addComma()
         parsingValue.removeAll()
     }
     
@@ -131,7 +136,7 @@ final class ViewController: UIViewController {
     }
     
     func convertPositiveAndNegativeNumber() -> String {
-        guard let operandValue = operandLabel.text
+        guard let operandValue = operandLabel.text?.split(with: ",").joined()
         else { return Sign.zero }
         
         guard operandValue.prefix(1) != Sign.negative
@@ -142,7 +147,7 @@ final class ViewController: UIViewController {
     
     @IBAction func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
         let operandValue = convertPositiveAndNegativeNumber()
-        operandLabel.text = operandValue
+        operandLabel.text = operandValue.addComma()
     }
     
     func createLabel(input: String) -> UILabel {
