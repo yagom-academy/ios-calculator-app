@@ -28,6 +28,13 @@ class ViewController: UIViewController {
         self.numberFormatter.roundingMode = .halfEven
     }
     
+    func setCurrentNumberLabel(labelText: String) {
+        guard let number = Double(labelText),
+              let formattingNumber = self.numberFormatter.string(from: NSNumber(floatLiteral: number)) else { return }
+        
+        self.currentNumberLabel.text = formattingNumber
+    }
+    
     func resetCurrentNumberLabel() {
         self.currentNumber = ""
         self.currentNumberLabel.text = "0"
@@ -37,8 +44,9 @@ class ViewController: UIViewController {
         self.currentOperatorLabel.text = ""
     }
     
-    func addStackView(number: String, operatorType: String?) {
-        guard let operatorValue = operatorType else { return }
+    func addStackView(number: String?, operatorType: String?) {
+        guard let operandValue = number,
+              let operatorValue = operatorType else { return }
         
         let enteredStackView = UIStackView()
         enteredStackView.heightAnchor.constraint(equalToConstant: 24).isActive = true
@@ -52,15 +60,14 @@ class ViewController: UIViewController {
         operatorLabel.font = .preferredFont(forTextStyle: .title3)
         operatorLabel.text = operatorValue
         
-        let numberLabel = UILabel()
-        numberLabel.font = .preferredFont(forTextStyle: .title3)
-        numberLabel.text = number
+        let opernadLabel = UILabel()
+        opernadLabel.font = .preferredFont(forTextStyle: .title3)
+        opernadLabel.text = operandValue
         
         enteredStackView.addArrangedSubview(operatorLabel)
-        enteredStackView.addArrangedSubview(numberLabel)
+        enteredStackView.addArrangedSubview(opernadLabel)
         
-        operatorLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
-        numberLabel.trailingAnchor.constraint(equalTo: enteredStackView.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        opernadLabel.trailingAnchor.constraint(equalTo: enteredStackView.trailingAnchor, constant: 0).isActive = true
         
         self.stackViewInScrollView.addArrangedSubview(enteredStackView)
     }
@@ -69,13 +76,13 @@ class ViewController: UIViewController {
         for stackView in self.stackViewInScrollView.arrangedSubviews {
             self.stackViewInScrollView.removeArrangedSubview(stackView)
         }
+        
     }
     
     func addInputs() {
-        guard let nowOperand = self.currentNumberLabel.text,
-              let nowOperator = self.currentOperatorLabel.text else { return }
+        guard let nowOperator = self.currentOperatorLabel.text else { return }
         
-        self.inputs += "\(nowOperator) \(nowOperand) "
+        self.inputs += "\(nowOperator) \(self.currentNumber) "
     }
     
     func scrollToBottom() {
@@ -90,18 +97,33 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.currentTitle else { return }
         
         self.currentNumber += buttonTitle
+        
+        setCurrentNumberLabel(labelText: self.currentNumber)
+    }
+    
+    @IBAction func didTapDotButton(_ sender: UIButton) {
+        if self.currentNumber == "" {
+            self.currentNumber = "0."
+        } else {
+            self.currentNumber += "."
+        }
+        
         self.currentNumberLabel.text = self.currentNumber
     }
     
     @IBAction private func didTapOperatorButton(sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
         
-        addStackView(number: self.currentNumber, operatorType: self.currentOperatorLabel.text)
-        addInputs()
-        
-        self.currentOperatorLabel.text = buttonTitle
-        resetCurrentNumberLabel()
-        scrollToBottom()
+        if self.currentNumber == "" {
+            self.currentOperatorLabel.text = buttonTitle
+        } else {
+            addStackView(number: self.currentNumberLabel.text, operatorType: self.currentOperatorLabel.text)
+            addInputs()
+            
+            self.currentOperatorLabel.text = buttonTitle
+            resetCurrentNumberLabel()
+            scrollToBottom()
+        }
     }
     
     @IBAction private func didTapClearButton(sender: UIButton) {
@@ -124,7 +146,7 @@ class ViewController: UIViewController {
         resetCurrentNumberLabel()
         resetCurrentOperatorLabel()
         self.inputs = ""
-        self.currentNumberLabel.text = "\(resultValue)"
+        setCurrentNumberLabel(labelText: "\(resultValue)")
     }
 }
 
