@@ -21,11 +21,11 @@ struct Formula {
             guard let nextOperand = operands.dequeue() else {
                 return .zero
             }
-            guard let operatorSgin = operators.dequeue() else {
+            guard let operatorSign = operators.dequeue() else {
                 return .nan
             }
             
-            result = operatorSgin.calculate(lhs: result, rhs: nextOperand)
+            result = operatorSign.calculate(lhs: result, rhs: nextOperand)
         }
  
         return result
