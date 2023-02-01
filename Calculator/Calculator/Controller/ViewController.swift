@@ -66,7 +66,19 @@ class ViewController: UIViewController {
             let result = formula.result()
             
             guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)),
-                  let number = self.numberFormatter.number(from: resultValue) else { return }
+                  let number = self.numberFormatter.number(from: resultValue)
+            else {
+                if result.isNaN {
+                    self.inputs = ""
+                    self.currentOperator = ""
+                    self.currentOperatorLabel.text = self.currentOperator
+                    self.currentOperand = ""
+                    self.currentOperandLabel.text = "NaN"
+                    self.isCalculated = false
+                    self.isCalculated = true
+                }
+                return
+            }
             
             self.inputs = "\(resultValue)"
             self.currentOperator = ""
