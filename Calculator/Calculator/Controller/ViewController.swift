@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setNumberFormatter()
         self.currentOperatorLabel.text = ""
+        self.currentOperandLabel.text = "0"
     }
     
     @IBAction private func didTapButton(sender: UIButton) {
