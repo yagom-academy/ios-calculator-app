@@ -13,7 +13,11 @@ final class MainViewController: UIViewController {
         static let empty = ""
         static let minus = "-"
         static let space = " "
+        static let nan = "NaN"
     }
+    
+    let numberFormatter = NumberFormatter()
+//    numberFormatter.numberStyle
     
     var currentInput = Condition.empty
     
@@ -146,7 +150,7 @@ final class MainViewController: UIViewController {
         operatorLabel.text = Condition.empty
         
         if result.isNaN == true {
-            operandLabel.text = "NaN"
+            operandLabel.text = Condition.nan
         } else {
             operandLabel.text = String(result)
         }
