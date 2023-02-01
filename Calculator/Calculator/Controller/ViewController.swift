@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet weak var contentStack: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var workingSpace: String = ""
     private var operand = ""
@@ -93,6 +94,8 @@ class ViewController: UIViewController {
             operand = ""
             operandLabel.text! = "0"
         }
+        
+        setScrollViewFocus()
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
@@ -115,6 +118,8 @@ class ViewController: UIViewController {
             operand = ""
             workingSpace = ""
         }
+        
+        setScrollViewFocus()
     }
     
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
@@ -163,5 +168,10 @@ class ViewController: UIViewController {
         stackView.distribution = .fill
         
         return stackView
+    }
+    
+    private func setScrollViewFocus() {
+        let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height)
+        scrollView.setContentOffset(bottomOffset, animated: false)
     }
 }
