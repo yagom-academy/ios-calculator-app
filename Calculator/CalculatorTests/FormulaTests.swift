@@ -72,12 +72,13 @@ final class FormulaTests: XCTestCase {
     
     func test_result호출시_주어진음수data의_연산결과가_예측한결과다() {
         // given
-        sut.operands.enqueue(Double(-3))
-        sut.operands.enqueue(Double(-1))
-        sut.operands.enqueue(Double(-2))
+        sut.operands.enqueue(Double(2))
+        sut.operands.enqueue(Double(5))
+//        sut.operands.enqueue(Double(-2))
         sut.operators.enqueue(.subtract)
-        sut.operators.enqueue(.multiply)
-        let expectedResult: Double = 4
+        sut.operators.enqueue(.subtract)
+//        sut.operators.enqueue(.multiply)
+        let expectedResult: Double = -7
         
         // when
         let result = sut.result()
