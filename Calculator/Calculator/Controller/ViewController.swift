@@ -119,7 +119,7 @@ class ViewController: UIViewController {
     }
     
     func clickedOperator(_ operatorValue: String) {
-        if self.currentOperand != "" {
+        if self.currentOperandLabel.text != "0" {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
             
