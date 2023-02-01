@@ -68,8 +68,7 @@ class ViewController: UIViewController {
             let result = formula.result()
             
             guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)),
-                  let number = self.numberFormatter.number(from: resultValue)
-            else {
+                  let number = self.numberFormatter.number(from: resultValue) else {
                 if result.isNaN {
                     self.inputs = ""
                     self.currentOperator = ""
@@ -150,6 +149,8 @@ class ViewController: UIViewController {
     }
     
     func addDotToOperandLabel() {
+        guard self.currentOperand.contains(".") == false else { return }
+        
         if self.currentOperand == "" {
             self.currentOperand = "0."
         } else {
