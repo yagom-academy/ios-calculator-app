@@ -177,13 +177,21 @@ final class MainViewController: UIViewController {
     
     private func makeInput(from `operator`: UILabel, and operand: UILabel) -> String? {
         guard let operatorText = `operator`.text,
-              let operandText = operand.text else { return nil }
+              let operandText = operand.text,
+              let convertedOperand = convertToNone(from: operandText) else { return nil }
         
-        let result = Condition.space + operatorText + Condition.space + operandText
+        let result = Condition.space + operatorText + Condition.space + convertedOperand
         
         return result
     }
     
+    private func convertToNone(from decimal: String) -> String? {
+        let comma = Character(Condition.comma)
+        let noneStyle = decimal.split(with: comma).joined()
+        
+        return noneStyle
+    }
+
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
         guard operatorLabel.text != Condition.empty else { return }
         
