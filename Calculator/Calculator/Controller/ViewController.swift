@@ -46,6 +46,11 @@ class ViewController: UIViewController {
         }
     }
     
+    func setNumberFormatter() {
+        self.numberFormatter.numberStyle = .decimal
+        self.numberFormatter.roundingMode = .halfEven
+    }
+    
     func calculate() {
         self.inputs += "\(self.currentOperator) \(self.currentOperand) "
         
@@ -56,6 +61,7 @@ class ViewController: UIViewController {
         
         guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)) else { return }
         self.currentOperandLabel.text = resultValue
+        self.isFractional = true
     }
     
     func clearAll() {
@@ -66,11 +72,13 @@ class ViewController: UIViewController {
         
         self.currentOperandLabel.text = "0"
         self.currentOperatorLabel.text = self.currentOperator
+        self.isFractional = true
     }
     
     func clearCurrentOperand() {
         self.currentOperand = ""
         self.currentOperandLabel.text = self.currentOperand
+        self.isFractional = true
     }
     
     func reverseOperand() {
@@ -101,6 +109,8 @@ class ViewController: UIViewController {
             self.currentOperator = operatorValue
             self.currentOperatorLabel.text = self.currentOperator
         }
+        
+        self.isFractional = true
     }
     
     func addZeroToOperandLabel(operand: String) {
@@ -136,12 +146,6 @@ class ViewController: UIViewController {
         self.currentOperand = formattedOperand
         self.currentOperandLabel.text = self.currentOperand
     }
-        
-    func setNumberFormatter() {
-        self.numberFormatter.numberStyle = .decimal
-        self.numberFormatter.roundingMode = .halfEven
-    }
-
 }
 
 extension ViewController {
