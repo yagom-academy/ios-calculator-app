@@ -232,6 +232,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		36CA5387298A3FAD00622D91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36CA539A298A5E8D00622D91 /* CalculatorItem.swift in Sources */,
+				36CA5395298A3FC100622D91 /* ExpressionParser.swift in Sources */,
+				36CA5399298A5E8B00622D91 /* CalculatorItemQueue.swift in Sources */,
+				36CA5398298A5E8700622D91 /* Operator.swift in Sources */,
+				36CA538E298A3FAD00622D91 /* ExpressionParserTests.swift in Sources */,
+				36CA5397298A5E7800622D91 /* Formula.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C713D93A2570E5EB001C3AFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
