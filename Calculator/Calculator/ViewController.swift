@@ -14,15 +14,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        numberFormatter.numberStyle = .decimal
         
     }
     
-    private var isFinishedEnteringOperands: Bool = false
     private var isFinishedCalculating: Bool = false
     private var isEnteredOperand: Bool = false
     private var isChangeableOperator: Bool = false
     
     private var numberFormatter = NumberFormatter()
+    private var currentNumber: String = "0" {
+        didSet {
+            numberInput.text = applyDecimalPoint(number: currentNumber)
+        }
+    }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let senderSign = sender.currentTitle else { return }
@@ -37,8 +42,9 @@ class ViewController: UIViewController {
             operatorInput.text = senderSign
         }
         
-        numberInput.text = "0"
+        currentNumber = "0"
     }
+    
     
     private func operandIsZero() {
         if !stackView.subviews.isEmpty && numberInput.text == "0" {
@@ -73,21 +79,20 @@ class ViewController: UIViewController {
     @IBAction func numberButtonTapped(_ sender: UIButton) {
         
         guard let number = sender.currentTitle else { return }
-        checkFirstDigit()
-        
-        if isFinishedEnteringOperands {
-            guard let currentNumber = numberInput.text else  { return }
-            numberInput.text = currentNumber + number
+        if currentNumber == "0" {
+            currentNumber = number
         } else {
-            numberInput.text = number
+            currentNumber += number
         }
-        isFinishedEnteringOperands = true
     }
     
-    private func checkFirstDigit() {
-        if numberInput.text == "0" || numberInput.text == "00" {
-            numberInput.text = ""
-        }
+    private func applyDecimalPoint(number: String) -> String {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        guard let operand = Double(number) else { return "" }
+        guard let result = numberFormatter.string(from: NSNumber(value: operand)) else { return "" }
+        
+        return result
     }
     
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
@@ -125,7 +130,7 @@ class ViewController: UIViewController {
     }
     
     private func resetNumberInput() {
-        numberInput.text = "0"
+        currentNumber = "0"
     }
     
     private func resetOperatorInput() {
@@ -184,6 +189,5 @@ class ViewController: UIViewController {
         }
         return calculateItems.map { $0.components(separatedBy: " ").joined() }.joined(separator: "")
     }
-    
     
 }
