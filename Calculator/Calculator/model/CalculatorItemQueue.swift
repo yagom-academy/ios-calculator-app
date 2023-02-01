@@ -4,8 +4,8 @@
 //
 //  Created by Seoyeon Hong on 2023/01/26.
 //
-//MARK: Queue 타입 구현
 
+//MARK: Queue 타입 구현
 struct CalculatorItemQueue<T: CalculateItem> {
     
     private var leftStack: [T] = []

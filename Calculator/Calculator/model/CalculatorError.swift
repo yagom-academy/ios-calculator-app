@@ -8,5 +8,6 @@
 enum CalculatorError: Error {
     
     case devidedByZero
+    case emptyOperator
     
 }
