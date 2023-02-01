@@ -7,15 +7,8 @@ import UIKit
 class ViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
-    private var currentNumber: String = "" {
-        willSet {
-            guard let value = Double(newValue),
-                  let labelText = self.numberFormatter.string(from: NSNumber(floatLiteral: value)) else { return }
-            
-            self.currentNumberLabel.text = labelText
-        }
-    }
     private var inputs: String = ""
+    private var currentNumber: String = ""
     
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var stackViewInScrollView: UIStackView!
@@ -32,6 +25,7 @@ class ViewController: UIViewController {
     
     func setNumberFormatter() {
         self.numberFormatter.numberStyle = .decimal
+        self.numberFormatter.roundingMode = .halfEven
     }
     
     func resetCurrentNumberLabel() {
@@ -47,6 +41,7 @@ class ViewController: UIViewController {
         guard let operatorValue = operatorType else { return }
         
         let enteredStackView = UIStackView()
+        enteredStackView.heightAnchor.constraint(equalToConstant: 24).isActive = true
         enteredStackView.axis = .horizontal
         enteredStackView.translatesAutoresizingMaskIntoConstraints = false
         enteredStackView.alignment = .fill
@@ -54,16 +49,18 @@ class ViewController: UIViewController {
         enteredStackView.spacing = 8
         
         let operatorLabel = UILabel()
+        operatorLabel.font = .preferredFont(forTextStyle: .title3)
         operatorLabel.text = operatorValue
         
         let numberLabel = UILabel()
+        numberLabel.font = .preferredFont(forTextStyle: .title3)
         numberLabel.text = number
         
         enteredStackView.addArrangedSubview(operatorLabel)
         enteredStackView.addArrangedSubview(numberLabel)
         
+        operatorLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor).isActive = true
         numberLabel.trailingAnchor.constraint(equalTo: enteredStackView.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        
         
         self.stackViewInScrollView.addArrangedSubview(enteredStackView)
     }
@@ -80,11 +77,20 @@ class ViewController: UIViewController {
         
         self.inputs += "\(nowOperator) \(nowOperand) "
     }
+    
+    func scrollToBottom() {
+        if self.scrollView.contentSize.height < self.scrollView.bounds.size.height { return }
+        self.scrollView.layoutIfNeeded()
+        self.stackViewInScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+        self.scrollView.setContentOffset(bottomOffset, animated: true)
+    }
 
     @IBAction private func didTapNumberButton(sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
         
         self.currentNumber += buttonTitle
+        self.currentNumberLabel.text = self.currentNumber
     }
     
     @IBAction private func didTapOperatorButton(sender: UIButton) {
@@ -95,6 +101,7 @@ class ViewController: UIViewController {
         
         self.currentOperatorLabel.text = buttonTitle
         resetCurrentNumberLabel()
+        scrollToBottom()
     }
     
     @IBAction private func didTapClearButton(sender: UIButton) {
@@ -120,3 +127,4 @@ class ViewController: UIViewController {
         self.currentNumberLabel.text = "\(resultValue)"
     }
 }
+
