@@ -152,7 +152,7 @@ final class MainViewController: UIViewController {
     
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
-        operand.text = operandLabel.text
+        operand.text = convertToDecimal(from: operandLabel.text ?? "")
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
