@@ -159,7 +159,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yLK-pe-8MH"/>
-                                                    <action selector="didTapNumberButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eQA-IL-AsT"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -209,7 +208,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="psr-Qq-Sn1"/>
-                                                    <action selector="didTapNumberButtonWithSender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tj8-nT-b1j"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -329,7 +327,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="r6J-qG-tYO"/>
+                        <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="XDw-BZ-b8h"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0QT-Oq-5Qb"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="BGP-2o-U3L"/>
                         <outlet property="stackViewInScrollView" destination="XRe-QE-UJf" id="GUH-c8-abG"/>
