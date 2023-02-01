@@ -37,11 +37,11 @@ class ViewController: UIViewController {
             operand += number
         }
         
-        operandLabel.text! = operand
+        operandLabel.text = operand
     }
     
     @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
-        if operandLabel.text! == "0" {
+        if operandLabel.text == "0" {
             return
         }
         
@@ -49,7 +49,7 @@ class ViewController: UIViewController {
             operand += input
         }
         
-        operandLabel.text! = operand
+        operandLabel.text = operand
     }
     
     
@@ -65,34 +65,34 @@ class ViewController: UIViewController {
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         operand = ""
-        operandLabel.text! = "0"
+        operandLabel.text = "0"
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        if operatorLabel.text == "" && operandLabel.text! != "0" {
+        if operatorLabel.text == "" && operandLabel.text != "0" {
             let stackView = generateStackView(operandLabel.text, "")
             addContentStack(stackView)
             workingSpace += operandLabel.text!
             
             guard let `operator` = sender.currentTitle else { return }
-            operatorLabel.text! = `operator`
+            operatorLabel.text = `operator`
             
             operand = ""
-            operandLabel.text! = "0"
-        } else if operatorLabel.text!.isEmpty && operandLabel.text! == "0" {
+            operandLabel.text = "0"
+        } else if operatorLabel.text!.isEmpty && operandLabel.text == "0" {
             return
         } else {
-            if !operandLabel.text!.isEmpty && operandLabel.text! != "0" {
+            if !operandLabel.text!.isEmpty && operandLabel.text != "0" {
                 let stackView = generateStackView(operandLabel.text, operatorLabel.text)
                 addContentStack(stackView)
                 workingSpace += operatorLabel.text! + operandLabel.text!
             }
             
             guard let `operator` = sender.currentTitle else { return }
-            operatorLabel.text! = `operator`
+            operatorLabel.text = `operator`
             
             operand = ""
-            operandLabel.text! = "0"
+            operandLabel.text = "0"
         }
         
         setScrollViewFocus()
@@ -107,14 +107,14 @@ class ViewController: UIViewController {
         let result = formula.result()
         
         if result.isNaN {
-            operandLabel.text! = "NaN"
-            operatorLabel.text! = ""
+            operandLabel.text = "NaN"
+            operatorLabel.text = ""
             operand = ""
             workingSpace = ""
         } else {
             print(result)
-            operandLabel.text! = useNumberFormatter(result)
-            operatorLabel.text! = ""
+            operandLabel.text = useNumberFormatter(result)
+            operatorLabel.text = ""
             operand = ""
             workingSpace = ""
         }
