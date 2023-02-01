@@ -5,25 +5,24 @@
 //  Created by Seoyeon Hong on 2023/01/31.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     
     case add = "+"
     case substact = "-"
-    case divide = "%"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "x"
     
-    func calculate(lhs: Double, rhs:Double) throws -> Double {
+    func calculate(lhs: Double, rhs:Double) -> Double {
         switch self {
         case .add:
             return self.add(lhs: lhs, rhs: rhs)
         case .substact:
             return self.substract(lhs: lhs, rhs: rhs)
         case .divide:
-            return try self.divide(lhs: lhs, rhs: rhs)
+            return self.divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return self.multiply(lhs: lhs, rhs: rhs)
         }
-        
     }
     
     private func add(lhs: Double, rhs:Double) -> Double {
@@ -34,9 +33,9 @@ enum Operator: Character, CaseIterable {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs:Double) throws -> Double {
+    private func divide(lhs: Double, rhs:Double) -> Double {
         if rhs == .zero {
-            throw CalculatorError.devidedByZero
+            return .nan
         }
         return lhs / rhs
     }
@@ -46,5 +45,3 @@ enum Operator: Character, CaseIterable {
     }
     
 }
-
-extension Operator: CalculateItem {}
