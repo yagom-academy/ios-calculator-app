@@ -153,7 +153,7 @@ final class ViewController: UIViewController {
     }
     
     func displayResult(result: Double) {
-        currentNumberLabel.text = String(result)
+        currentNumberLabel.text = String(result).insertComma
     }
     
     func convertSign() {
