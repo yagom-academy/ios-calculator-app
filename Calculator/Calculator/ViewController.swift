@@ -18,20 +18,33 @@ class ViewController: UIViewController {
     }
     
     private var isFinishedEnteringOperands: Bool = false
+    private var isFinishedCalculating: Bool = false
+    private var isEnteredOperand: Bool = false
+    
+    private var numberFormatter = NumberFormatter()
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        
-        addStackView()
-        if let senderSign = sender.currentTitle {
+        initialCalculate()
+        if isEnteredOperand == true,
+           let senderSign = sender.currentTitle {
+            addStackView()
             operatorInput.text = senderSign
         }
         numberInput.text = "0"
     }
     
+    private func initialCalculate() {
+        if numberInput.text == "0" {
+            isEnteredOperand = false
+        } else {
+            isEnteredOperand = true
+        }
+    }
+    
     private func addStackView() {
         
         guard let operandStackLabel = numberInput.text,
-              let operatorStackLabel = operatorInput.text  else {  return  }
+              let operatorStackLabel = operatorInput.text else {  return  }
         
         let stackLabel = UILabel()
         stackLabel.text = operatorStackLabel + " " + operandStackLabel
@@ -89,6 +102,7 @@ class ViewController: UIViewController {
         resetStackView()
         resetNumberInput()
         resetOperatorInput()
+        isFinishedCalculating = false
     }
     
     private func resetStackView() {
@@ -102,4 +116,46 @@ class ViewController: UIViewController {
     private func resetOperatorInput() {
         operatorInput.text = " "
     }
+    
+    @IBAction func equalButtonTapped(_ sender: UIButton) {
+        if isFinishedCalculating == false {
+            let resultLabel = checkDecimalPoint()
+            numberInput.text = resultLabel
+            isFinishedCalculating = true
+        }
+    }
+    
+    private func checkDecimalPoint() -> String {
+        let resultLabel: String = calculate()
+        let dividedValue = resultLabel.components(separatedBy: ".")
+        guard dividedValue[1] == "0" else { return "" }
+        numberFormatter.minimumFractionDigits = 0
+        guard let number = Double(resultLabel) else { return "" }
+        guard let formatterNumber = numberFormatter.string(from: NSNumber(value: number)) else { return "" }
+        return formatterNumber
+    }
+    
+    private func calculate() -> String {
+        
+        let calculateItem = arrangeCalculateItems()
+        var formula = ExpressionParser.parse(from: calculateItem)
+        let result = formula.result()
+        guard let resultValue = result else { return "" }
+        let resultLabel = String(resultValue)
+        return resultLabel
+    }
+    
+    private func arrangeCalculateItems() -> String {
+        addStackView()
+        var calculateItems: [String] = []
+        stackView.arrangedSubviews.forEach { view in
+            if let label = view as? UILabel {
+                guard let value = label.text else { return }
+                calculateItems.append(value)
+            }
+        }
+        return calculateItems.map { $0.components(separatedBy: " ").joined() }.joined(separator: "")
+    }
+    
+    
 }
