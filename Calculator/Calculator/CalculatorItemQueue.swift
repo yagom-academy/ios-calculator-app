@@ -1,4 +1,4 @@
-struct CalculatorItemQueue<Element: CalculateItem> {
+struct CalculatorItemQueue< Element: CalculateItem > {
 
     private(set) var enqueueStack: [Element] = []
     private(set) var dequeueStack: [Element] = []

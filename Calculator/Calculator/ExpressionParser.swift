@@ -1,6 +1,4 @@
-// 표현식 분석
 enum ExpressionParser {
-    // 분석
     static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
@@ -12,7 +10,6 @@ enum ExpressionParser {
         
     }
     
-    // 구성요소 연산자
     private static func componentsByOperators(from input: String) -> [String] {
         var result: Array<String> = [input]
         

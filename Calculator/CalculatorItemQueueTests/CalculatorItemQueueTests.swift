@@ -1,14 +1,8 @@
-//
-//  CalculatorTests.swift
-//  CalculatorTests
-//
-//  Created by Andrew on 2023/01/25.
-//
-
 import XCTest
 
-final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+final class CalculatorItemQueueTests: XCTestCase {
+    
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -22,7 +16,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_enqueue함수호출로_값을넣으면_enqueueStack에값이삽입되는함수() {
         // given
-        let input: Array<Int> = [11]
+        let input: Array<Double> = [11]
         
         // when
         sut.enqueue(element: 11)
@@ -33,7 +27,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_처음Queue를생성하고_isEmpty를호출할경우_true를확인하는함수() {
         // then
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_모든값을dequeue하고_isEmpty를호출할경우_true를확인하는함수() {
@@ -46,7 +40,7 @@ final class CalculatorTests: XCTestCase {
         sut.dequeue()
         
         // them
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
     
     func test_clearQueue를호출해서값을다지우고_isEmpty를호출할경우_true를확인하는함수() {
@@ -58,7 +52,7 @@ final class CalculatorTests: XCTestCase {
         sut.clearQueue()
         
         //then
-        XCTAssertTrue(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty)
     }
 
     
@@ -69,7 +63,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(element: 11)
         
         // then
-        XCTAssertFalse(sut.isEmpty())
+        XCTAssertFalse(sut.isEmpty)
     }
     
     func test_dequeue호출시_Queue에값이존재한다면_값중에첫번째값을반환하는지_확인하는함수() {
@@ -81,7 +75,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = sut.dequeue()
-        let firstElement = 9
+        let firstElement: Double = 9
         
         // then
         XCTAssertEqual(result, firstElement)
@@ -100,3 +94,4 @@ final class CalculatorTests: XCTestCase {
 
 
 }
+
