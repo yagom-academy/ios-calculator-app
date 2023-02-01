@@ -4,12 +4,10 @@ final class ExpressionParserTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func test_1더하기2빼기3곱하기4로입력된값을_parse에넣으면_각각연산자와_피연산자로_나누어진다() {
