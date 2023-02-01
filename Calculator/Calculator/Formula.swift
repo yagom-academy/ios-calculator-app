@@ -1,7 +1,6 @@
-// Formula: 공식
 struct Formula {
-    var operands = CalculatorItemQueue<Double>()    // 피연산자
-    var operators = CalculatorItemQueue<Operator>()   // 연산자
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
     
     mutating func result() -> Double {
