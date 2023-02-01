@@ -6,7 +6,6 @@
 //
 
 final class Node<T> {
-    
     let data: T
     var next: Node?
     
@@ -14,11 +13,9 @@ final class Node<T> {
         self.data = data
         self.next = next
     }
-    
 }
 
 struct LinkedList<T> {
-    
     private var head: Node<T>?
     private var tail: Node<T>?
     private(set) var count: Int
@@ -79,5 +76,4 @@ struct LinkedList<T> {
         self.tail = tail
         self.count = count
     }
-    
 }
