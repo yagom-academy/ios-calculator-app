@@ -15,6 +15,7 @@ final class MainViewController: UIViewController {
         static let minus = "-"
         static let space = " "
         static let nan = "NaN"
+        static let comma = ","
     }
     
     var numberFormatter = NumberFormatter()
@@ -70,7 +71,8 @@ final class MainViewController: UIViewController {
     }
     
     private func convertToDouble(from labelText: String) -> Double? {
-        let splitedText = labelText.split(with: ",").joined()
+        let comma = Character(Condition.comma)
+        let splitedText = labelText.split(with: comma).joined()
         
         return Double(splitedText)
     }
