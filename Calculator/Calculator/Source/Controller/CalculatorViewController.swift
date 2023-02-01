@@ -8,14 +8,27 @@ import UIKit
 
 final class ViewController: UIViewController {
 
-    @IBOutlet private weak var operatorLabel: UILabel!
-    @IBOutlet private weak var currentNumbersLabel: UILabel!
+    @IBOutlet private weak var displayOperatorLabel: UILabel!
+    @IBOutlet private weak var displayNumbersLabel: UILabel!
     @IBOutlet private weak var historyScrollView: UIScrollView!
+    @IBOutlet private weak var historyStackView: UIStackView!
     
     private var numberFormatter: NumberFormatter = .init()
     private var currentNumbersLabelText: String = "0" {
         didSet {
-            currentNumbersLabel.text = numberFormatter.string(for: Double(currentNumbersLabelText))
+            displayNumbersLabel.text = numberFormatter.string(for: Double(currentNumbersLabelText))
+        }
+    }
+    private var currentOperatorLabelText = "" {
+        didSet {
+            displayOperatorLabel.text = currentOperatorLabelText
+        }
+    }
+    private var expression = "" {
+        didSet {
+            if currentOperatorLabelText != "" {
+                expression += " "
+            }
         }
     }
     
@@ -35,7 +48,13 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        
+        guard let `operator` = sender.currentTitle,
+              currentNumbersLabelText != "0" else { return }
+
+        currentOperatorLabelText = `operator`
+        expression += currentNumbersLabelText
+        expression += currentOperatorLabelText
+        currentNumbersLabelText = "0"
     }
     
     @IBAction private func signButtonTapped(_ sender: UIButton) {
