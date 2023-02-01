@@ -70,14 +70,12 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_result호출시_주어진음수data의_연산결과가_예측한결과다() {
+    func test_result호출시_operator와operand의개수가같을때_예측한결과가나온다() {
         // given
         sut.operands.enqueue(Double(2))
         sut.operands.enqueue(Double(5))
-//        sut.operands.enqueue(Double(-2))
         sut.operators.enqueue(.subtract)
         sut.operators.enqueue(.subtract)
-//        sut.operators.enqueue(.multiply)
         let expectedResult: Double = -7
         
         // when

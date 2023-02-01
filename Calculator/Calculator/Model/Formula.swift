@@ -15,6 +15,7 @@ struct Formula {
         let minCountForCalculate = 1
         
         if operands.itemCount > minCountForCalculate,
+           operands.itemCount != operators.itemCount,
             let firstOperand = operands.dequeue() {
             result = firstOperand
         }
