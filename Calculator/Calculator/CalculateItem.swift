@@ -5,7 +5,7 @@ protocol CalculateItem {
 }
 
 extension Double: CalculateItem { }
-extension Character: CalculateItem { }
+extension Operator: CalculateItem { }
 
 // 원래 이런 기능이 있기떄문에 바로 사용하면 되지 않을까? 왜 확장까지 하는걸까?
 extension String {

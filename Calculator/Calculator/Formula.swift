@@ -1,14 +1,19 @@
 // Formula: 공식
 struct Formula {
-    var operands: CalculatorItemQueue<Double>    // 피연산자
-    var operators: CalculatorItemQueue<Character>   // 연산자
+    var operands = CalculatorItemQueue<Double>()    // 피연산자
+    var operators = CalculatorItemQueue<Operator>()   // 연산자
     
     
     mutating func result() -> Double {
-        guard let add = operands.dequeue() else { return 0 }
+        var result: Double = 0
         
+        while !operands.isEmpty {
+            if let prev = operands.dequeue(), let next = operands.dequeue(), let `operator` = operators.dequeue() {
+                result = `operator`.calculate(lhs:prev ,rhs: next)
+            }
+        }
         
-        return add
+        return result
     }
     
 }
