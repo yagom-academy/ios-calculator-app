@@ -32,8 +32,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak var eightButton: CircleButton!
     @IBOutlet weak var nineButton: CircleButton!
     
-    var stringToBeCalculated = ""
-    var currentNumber = ""
+    var stringToBeCalculated = NameSpace.emptyString
+    var currentNumber = NameSpace.emptyString
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +62,14 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
-        insertString(titleName: sender.titleLabel?.text)
-        setCurrentNumber(titleName: sender.titleLabel?.text)
+        if currentNumber.contains(".") == false {
+            if currentNumber == NameSpace.emptyString {
+                currentNumber += NameSpace.stringZero
+                stringToBeCalculated += NameSpace.stringZero
+            }
+            insertString(titleName: sender.titleLabel?.text)
+            setCurrentNumber(titleName: sender.titleLabel?.text)
+        }
         print(stringToBeCalculated)
     }
     
@@ -83,18 +89,15 @@ final class ViewController: UIViewController {
     }
     
     func insertString(titleName: String?) {
-        stringToBeCalculated += titleName ?? ""
+        stringToBeCalculated += titleName ?? NameSpace.emptyString
     }
     
     func insertOperatorSign(titleName: String?) {
-        if stringToBeCalculated == "" {
-            stringToBeCalculated += "0"
+        if stringToBeCalculated == NameSpace.emptyString {
+            stringToBeCalculated += NameSpace.stringZero
         } else {
             let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
             let lastString = stringToBeCalculated[lastIndex]
-            if stringToBeCalculated == "" {
-                stringToBeCalculated += "0"
-            }
             if Operator(rawValue: lastString) != nil {
                 stringToBeCalculated = String(stringToBeCalculated.dropLast())
             }
@@ -103,10 +106,12 @@ final class ViewController: UIViewController {
     }
     
     func setCurrentNumber(titleName: String?) {
-        currentNumber += titleName ?? ""
+        currentNumber = currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString)
+        currentNumber += titleName ?? NameSpace.emptyString
+        currentNumber = currentNumber.insertComma
         displayCurrentNumber()
     }
-    
+
     func displayCurrentNumber() {
         currentNumberLabel.text = currentNumber
     }
@@ -116,18 +121,19 @@ final class ViewController: UIViewController {
     }
     
     func resetCurrentNumber() {
-        currentNumber = ""
+        currentNumber = NameSpace.emptyString
         currentNumberLabel.text = currentNumber
     }
     
     func initializeCurrentOperator() {
-        currentOperatorLabel.text = ""
+        currentOperatorLabel.text = NameSpace.emptyString
     }
     
     func allClear() {
-        stringToBeCalculated = ""
-        currentNumberLabel.text = "0"
-        currentOperatorLabel.text = ""
+        stringToBeCalculated = NameSpace.emptyString
+        currentNumber = NameSpace.emptyString
+        currentNumberLabel.text = NameSpace.stringZero
+        currentOperatorLabel.text = NameSpace.emptyString
     }
     
     func clearEntry() {
@@ -161,8 +167,8 @@ final class ViewController: UIViewController {
         }
         stringToBeCalculated.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.endIndex, offsetBy: count))
         currentNumber.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.startIndex, offsetBy: 0))
-        stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: "--", with: "")
-        currentNumber = currentNumber.replacingOccurrences(of: "--", with: "")
+        stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: "--", with: NameSpace.emptyString)
+        currentNumber = currentNumber.replacingOccurrences(of: "--", with: NameSpace.emptyString)
         displayCurrentNumber()
     }
 }
