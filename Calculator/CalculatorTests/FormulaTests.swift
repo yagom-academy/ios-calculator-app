@@ -133,12 +133,12 @@ final class FormulaTests: XCTestCase {
         // given
         sut.operands.enqueue(-1)
         sut.operands.enqueue(1)
-        sut.operands.enqueue(-3)
+        sut.operands.enqueue(3)
         sut.operands.enqueue(22)
         sut.operators.enqueue(.add)
         sut.operators.enqueue(.subtract)
         sut.operators.enqueue(.multiply)
-        let expectedResult: Double = 66
+        let expectedResult: Double = -66
         
         // when
         let result = sut.result()

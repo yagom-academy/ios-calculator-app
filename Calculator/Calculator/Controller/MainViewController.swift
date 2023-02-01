@@ -10,6 +10,7 @@ final class MainViewController: UIViewController {
     enum Condition {
         static let zero = "0"
         static let zeroTwice = "00"
+        static let dot = "."
         static let empty = ""
         static let minus = "-"
         static let space = " "
@@ -46,20 +47,56 @@ final class MainViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximum = 20
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction func touchOperandButton(_ sender: UIButton) {
-        guard let inputNumber = sender.currentTitle else { return }
+        guard let inputOperand = sender.currentTitle else { return }
         
-        if let operand = operandLabel.text,
-           operand != Condition.zero {
-            operandLabel.text = operand + inputNumber
-        } else if let operand = operandLabel.text,
-                  operand == Condition.zero,
-                  inputNumber != Condition.zero,
-                  inputNumber != Condition.zeroTwice {
-            operandLabel.text = inputNumber
+        if let currentOperand = operandLabel.text,
+           currentOperand != Condition.zero {
+            let nextOperand = currentOperand + inputOperand
+            operandLabel.text = convertToDecimal(from: nextOperand)
+        } else {
+            operandLabel.text = inputOperand
+        }
+    }
+    
+    private func convertToDecimal(from string: String) -> String? {
+        guard let convertedDouble = convertToDouble(from: string) else { return nil }
+        let decimalStyle = convertToString(from: convertedDouble)
+        
+        return decimalStyle
+    }
+    
+    private func convertToDouble(from labelText: String) -> Double? {
+        let splitedText = labelText.split(with: ",").joined()
+        
+        return Double(splitedText)
+    }
+    
+    private func convertToString(from double: Double) -> String? {
+        let convertedDouble = NSNumber(value: double)
+        let result = numberFormatter.string(from: convertedDouble)
+        
+        return result
+    }
+    
+    @IBAction func touchDotButton(_ sender: UIButton) {
+        guard let dot = sender.currentTitle else { return }
+        
+        if let currentOperand = operandLabel.text {
+            operandLabel.text = currentOperand + dot
+        }
+        
+    }
+    
+    @IBAction func touchZeroButton(_ sender: UIButton) {
+        guard let zero = sender.currentTitle else { return }
+        
+        if let currentOperand = operandLabel.text,
+           currentOperand != Condition.zero {
+            operandLabel.text = currentOperand + zero
         }
     }
     
@@ -76,9 +113,10 @@ final class MainViewController: UIViewController {
     @IBAction func toggleSign(_ sender: UIButton) {
         guard let operandText = operandLabel.text,
               operandText != Condition.zero,
-              let currentOperand = Double(operandText) else { return }
+              let currentOperand = convertToDouble(from: operandText),
+              let toggledOperand = convertToString(from: -currentOperand) else { return }
         
-        operandLabel.text = String(-currentOperand)
+        operandLabel.text = toggledOperand
     }
     
     @IBAction func touchOperatorButton(_ sender: UIButton) {
