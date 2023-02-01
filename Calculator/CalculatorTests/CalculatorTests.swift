@@ -92,13 +92,13 @@ final class CalculatorTests: XCTestCase {
         // when
         sut.dequeue()
         sut.dequeue()
-        let result = sut.first
+        let result = sut.peek
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_data배열의count가40이상이고_퍼센트가25이상일시_배열의nil값을포함하여_dequeue한다() {
+    func test_data배열의count가40이상이고_퍼센트가25이상일때_dequeue시_배열의nil을삭제한다() {
         // given
         for number in 1...40 {
             sut.enqueue(number)
@@ -109,7 +109,7 @@ final class CalculatorTests: XCTestCase {
         for number in 1...10 {
             sut.dequeue()
         }
-        let result = sut.first
+        let result = sut.peek
         // then
         XCTAssertEqual(result, expectation)
     }
@@ -139,7 +139,7 @@ final class CalculatorTests: XCTestCase {
         let expectation = 30
         
         // when
-        let result = sut.first
+        let result = sut.peek
         
         // then
         XCTAssertEqual(result, expectation)
@@ -147,29 +147,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_data배열값이없을때_first는nil을반환한다() {
         // when
-        let result = sut.first
-        
-        // then
-        XCTAssertNil(result)
-    }
-    
-    func test_data배열의마지막값과_last변수의값이_같다() {
-        // given
-        for number in 14...19 {
-            sut.enqueue(number)
-        }
-        let expectation = 19
-        
-        // when
-        let result = sut.last
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_data배열값이없을때_last는nil을반환한다() {
-        // when
-        let result = sut.last
+        let result = sut.peek
         
         // then
         XCTAssertNil(result)
