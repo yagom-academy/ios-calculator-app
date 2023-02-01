@@ -20,6 +20,12 @@ final class MainViewController: UIViewController {
     
     var numberFormatter = NumberFormatter()
     var currentInput = Sign.empty
+    var currentOperand: String {
+        return operandLabel.text ?? Sign.zero
+    }
+    var currentOperator: String {
+        return operatorLabel.text ?? Sign.empty
+    }
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
@@ -34,8 +40,8 @@ final class MainViewController: UIViewController {
     }
     
     private func initializeCurrentCalculateItem() {
-        self.operandLabel.text = Sign.zero
-        self.operatorLabel.text = Sign.empty
+        operandLabel.text = Sign.zero
+        operatorLabel.text = Sign.empty
     }
     
     private func initializeScrollView() {
@@ -54,8 +60,7 @@ final class MainViewController: UIViewController {
     @IBAction func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         
-        if let currentOperand = operandLabel.text,
-           currentOperand != Sign.zero {
+        if currentOperand != Sign.zero {
             let nextOperand = currentOperand + inputOperand
             operandLabel.text = convertToDecimal(from: nextOperand)
         } else {
@@ -85,8 +90,6 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
-        guard let currentOperand = operandLabel.text else { return }
-        
         if currentOperand.contains(Sign.dot) {
             return
         } else {
@@ -95,14 +98,11 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchZeroButton(_ sender: UIButton) {
-        guard let zero = sender.currentTitle,
-              let currentOperand = operandLabel.text else { return }
-        
         if currentOperand != Sign.zero,
            currentOperand.contains(Sign.dot) {
-                operandLabel.text = currentOperand + zero
+            operandLabel.text = currentOperand + Sign.zero
         } else {
-            operandLabel.text = convertToDecimal(from: currentOperand + zero)
+            operandLabel.text = convertToDecimal(from: currentOperand + Sign.zero)
         }
     }
     
@@ -117,10 +117,9 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func toggleSign(_ sender: UIButton) {
-        guard let operandText = operandLabel.text,
-              operandText != Sign.zero,
-              let currentOperand = convertToDouble(from: operandText),
-              let toggledOperand = convertToString(from: -currentOperand) else { return }
+        guard currentOperand != Sign.zero,
+              let convertedOperand = convertToDouble(from: currentOperand),
+              let toggledOperand = convertToString(from: -convertedOperand) else { return }
         
         operandLabel.text = toggledOperand
     }
@@ -145,19 +144,14 @@ final class MainViewController: UIViewController {
         initializeCurrentCalculateItem()
     }
     
-    private func add(_ subview: UIStackView, to superview: UIStackView) {
-        let calculateItem = subview
-        superview.addArrangedSubview(calculateItem)
-    }
-    
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
-        operand.text = convertToDecimal(from: operandLabel.text ?? Sign.empty)
+        operand.text = convertToDecimal(from: currentOperand)
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let `operator` = UILabel()
-        `operator`.text = operatorLabel.text
+        `operator`.text = currentOperator
         `operator`.textColor = UIColor.white
         `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -172,6 +166,11 @@ final class MainViewController: UIViewController {
         addToCurrentInput(about: `operator`, and: operand)
         
         return result
+    }
+    
+    private func add(_ subview: UIStackView, to superview: UIStackView) {
+        let calculateItem = subview
+        superview.addArrangedSubview(calculateItem)
     }
     
     private func addToCurrentInput(about `operator`: UILabel, and operand: UILabel) {
@@ -197,7 +196,7 @@ final class MainViewController: UIViewController {
     }
 
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
-        guard operatorLabel.text != Sign.empty else { return }
+        guard currentOperator != Sign.empty else { return }
         
         addCurrentItem(to: calculateItemStackView)
         
