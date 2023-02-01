@@ -79,6 +79,7 @@ final class ViewController: UIViewController {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.blank
         parsingValue = Sign.empty
+        operationContentStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
@@ -129,8 +130,19 @@ final class ViewController: UIViewController {
         operandLabel.text = Sign.zero
     }
     
+    func convertPositiveAndNegativeNumber() -> String {
+        guard let operandValue = operandLabel.text
+        else { return Sign.zero }
+        
+        guard operandValue.prefix(1) != Sign.negative
+        else { return String(operandValue.dropFirst(1)) }
+        
+        return Sign.negative + operandValue
+    }
+    
     @IBAction func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
-        operandLabel.text = Sign.negative + (operandLabel.text ?? Sign.empty)
+        let operandValue = convertPositiveAndNegativeNumber()
+        operandLabel.text = operandValue
     }
     
     func createLabel(input: String) -> UILabel {
@@ -159,5 +171,11 @@ final class ViewController: UIViewController {
         let operandLabel = createLabel(input: operandValue)
         let operationStackView = createOperationStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
         operationContentStackView.addArrangedSubview(operationStackView)
+        setScrollView()
+    }
+    
+    func setScrollView() {
+        operationScrollView.layoutIfNeeded()
+        operationScrollView.setContentOffset(CGPoint(x: 0, y: operationScrollView.contentSize.height - operationScrollView.bounds.height), animated: true)
     }
 }
