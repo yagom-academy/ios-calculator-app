@@ -10,8 +10,10 @@ class ViewController: UIViewController {
     private var inputs: String = ""
     private var currentOperand: String = ""
     private var currentOperator: String = ""
-    private var isFractional: Bool = false
     private var isCalculated: Bool = false
+    private var isFirstInput: Bool {
+        return self.stackViewInScrollView.subviews.isEmpty
+    }
     
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var stackViewInScrollView: UIStackView!
@@ -85,7 +87,6 @@ class ViewController: UIViewController {
             self.currentOperatorLabel.text = self.currentOperator
             self.currentOperand = "\(number)"
             self.currentOperandLabel.text = resultValue
-            self.isFractional = false
             self.isCalculated = true
         }
     }
@@ -98,13 +99,11 @@ class ViewController: UIViewController {
         
         self.currentOperandLabel.text = "0"
         self.currentOperatorLabel.text = self.currentOperator
-        self.isFractional = false
     }
     
     func clearCurrentOperand() {
         self.currentOperand = ""
         self.currentOperandLabel.text = "0"
-        self.isFractional = false
     }
     
     func reverseOperand() {
@@ -124,7 +123,7 @@ class ViewController: UIViewController {
     }
     
     func clickedOperator(operatorValue: String) {
-        if currentOperand != "" {
+        if self.currentOperand != "" {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
             
@@ -136,12 +135,11 @@ class ViewController: UIViewController {
             self.currentOperandLabel.text = "0"
             self.currentOperator = operatorValue
             self.currentOperatorLabel.text = self.currentOperator
-        } else {
+        } else if isFirstInput == false {
             self.currentOperator = operatorValue
             self.currentOperatorLabel.text = self.currentOperator
         }
         
-        self.isFractional = false
         self.isCalculated = false
     }
     
@@ -167,7 +165,6 @@ class ViewController: UIViewController {
         }
         
         self.currentOperandLabel.text = self.currentOperand
-        self.isFractional = true
     }
     
     func addNumberToOperandLabel(operand: String) {
