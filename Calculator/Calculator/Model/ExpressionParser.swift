@@ -8,18 +8,13 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
-        let operatorsArray = input.split { Double(String($0)) != nil }
-        let operandsArray = componentsByOperators(from: input)
         
-        operatorsArray.forEach {
-            if let dataToChar = String($0).first,
-               let dataToOperator = Operator(rawValue: dataToChar) {
-                let node = Node(dataToOperator)
-                formula.operators.enqueueCalculateItems(node)
-            }
+        input.compactMap { Operator(rawValue: $0) }.forEach {
+            let node = Node($0)
+            formula.operators.enqueueCalculateItems(node)
         }
-
-        operandsArray.compactMap { Double($0) }.forEach {
+        
+        componentsByOperators(from: input).compactMap { Double($0) }.forEach {
             let node = Node($0)
             formula.operands.enqueueCalculateItems(node)
         }
@@ -28,8 +23,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var components = [String]()
-        components.append(input)
+        var components = [input]
         
         for target in Operator.allCases {
             var splitedComponents = [String]()
