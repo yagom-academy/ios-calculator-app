@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNumberFormatter()
+        self.currentOperatorLabel.text = ""
     }
     
     @IBAction private func didTapButton(sender: UIButton) {
@@ -29,9 +30,9 @@ class ViewController: UIViewController {
         case "AC":
             return
         case "CE":
-            return
+            clearCurrentOperand()
         case "⁺⁄₋":
-            return
+            reverseOperand()
         case "÷", "×", "−", "+":
             clickedOperator(operatorValue: buttonTitle)
         case "0", "00":
@@ -43,18 +44,39 @@ class ViewController: UIViewController {
         }
     }
     
-    func clickedOperator(operatorValue: String) {
-        let operandValue = self.currentOperand
-        let operatorValue = self.currentOperator
-        
-        addStackView(number: operandValue, operatorType: operatorValue)
-        
-        self.inputs = "\(operatorValue) \(operandValue) "
-        
+    func clearCurrentOperand() {
         self.currentOperand = ""
         self.currentOperandLabel.text = self.currentOperand
-        self.currentOperator = operatorValue
-        self.currentOperatorLabel.text = self.currentOperator
+    }
+    
+    func reverseOperand() {
+        guard let firstValue = self.currentOperand.first else { return }
+        if firstValue.isNumber {
+            self.currentOperand = "-" + self.currentOperand
+            self.currentOperandLabel.text = self.currentOperand
+        } else if firstValue == "-" {
+            self.currentOperand.removeFirst()
+            self.currentOperandLabel.text = self.currentOperand
+        }
+    }
+    
+    func clickedOperator(operatorValue: String) {
+        if currentOperand != "" {
+            let currentOperandValue = self.currentOperand
+            let currentOperatorValue = self.currentOperator
+            
+            addStackView(number: currentOperandValue, operatorType: currentOperatorValue)
+            
+            self.inputs += "\(currentOperandValue) \(currentOperatorValue) "
+            
+            self.currentOperand = ""
+            self.currentOperandLabel.text = self.currentOperand
+            self.currentOperator = operatorValue
+            self.currentOperatorLabel.text = self.currentOperator
+        } else {
+            self.currentOperator = operatorValue
+            self.currentOperatorLabel.text = self.currentOperator
+        }
     }
     
     func addZeroToOperandLabel(operand: String) {
