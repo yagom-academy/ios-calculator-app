@@ -10,23 +10,39 @@ class ViewController: UIViewController {
     
     @IBOutlet weak private var operatorInput: UILabel!
     @IBOutlet weak private var numberInput: UILabel!
-    @IBOutlet weak var enteredOperand: UILabel!
     
-    
+    @IBOutlet var stackView: UIStackView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
     }
-
+    
     private var isFinishedEnteringOperands: Bool = false
+    private var isFinishedCalculate: Bool = false
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         
         if let senderSign = sender.currentTitle {
             operatorInput.text = senderSign
-            numberInput.text = "0"
+            addStackView()
         }
-
+        numberInput.text = "0"
+    }
+    
+    private func addStackView() {
+        
+        guard let operandStackLabel = numberInput.text,
+              let operatorStackLabel = operatorInput.text  else {  return  }
+        
+        let stackLabel = UILabel()
+        stackLabel.text = operatorStackLabel + " " + operandStackLabel
+        stackLabel.numberOfLines = 0
+        stackLabel.adjustsFontForContentSizeCategory = true
+        stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        stackLabel.textColor = .white
+        stackView.addArrangedSubview(stackLabel)
+        
     }
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
@@ -49,6 +65,4 @@ class ViewController: UIViewController {
         }
     }
     
-    
-
 }
