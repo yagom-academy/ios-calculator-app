@@ -154,6 +154,7 @@ final class ViewController: UIViewController {
             stringToBeCalculated = stringToBeCalculated + NameSpace.stringZero
         }
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
+        stringToBeCalculated = NameSpace.emptyString
         return calculateFormula.result()
     }
     

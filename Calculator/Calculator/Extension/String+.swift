@@ -8,10 +8,6 @@
 import Foundation
 
 extension String {
-    func split(with target: Character) -> [String] {
-        return components(separatedBy: String(target))
-    }
-    
     var insertComma: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -21,12 +17,12 @@ extension String {
             guard let intValue = Int(splittedNumber[0]) else {
                 return self
             }
-            return numberFormatter.string(from: NSNumber(value: intValue)) ?? ""
+            return numberFormatter.string(from: NSNumber(value: intValue)) ?? self
         } else if splittedNumber.count == 2 {
             guard let intNumberBeforeDecimalPoint = Int(splittedNumber[0]) else {
                 return self
             }
-            let numberBeforeDecimalPoint = numberFormatter.string(from: NSNumber(value: intNumberBeforeDecimalPoint)) ?? ""
+            let numberBeforeDecimalPoint = numberFormatter.string(from: NSNumber(value: intNumberBeforeDecimalPoint)) ?? self
             let wholeNumber = numberBeforeDecimalPoint + "." + splittedNumber[1]
             return wholeNumber
         }
@@ -42,9 +38,13 @@ extension String {
             guard let doubleNumber = Double(self) else {
                 return self
             }
-            let flooredNumber = numberFormatter.string(for: doubleNumber) ?? ""
+            let flooredNumber = numberFormatter.string(for: doubleNumber) ?? self
             return flooredNumber
         }
         return self
+    }
+    
+    func split(with target: Character) -> [String] {
+        return components(separatedBy: String(target))
     }
 }
