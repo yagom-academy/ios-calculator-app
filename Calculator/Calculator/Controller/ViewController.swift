@@ -39,13 +39,13 @@ class ViewController: UIViewController {
         case "⁺⁄₋":
             reverseOperand()
         case "÷", "×", "−", "+":
-            clickedOperator(operatorValue: buttonTitle)
+            clickedOperator(buttonTitle)
         case "0", "00":
-            addZeroToOperandLabel(operand: buttonTitle)
+            addZeroToOperandLabel(buttonTitle)
         case ".":
             addDotToOperandLabel()
         default:
-            addNumberToOperandLabel(operand: buttonTitle)
+            addNumberToOperandLabel(buttonTitle)
         }
     }
     
