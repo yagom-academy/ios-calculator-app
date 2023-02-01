@@ -279,7 +279,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="resultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bg5-7g-8Zc"/>
+                                                    <action selector="resultButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ys1-UU-p8I"/>
                                                 </connections>
                                             </button>
                                         </subviews>

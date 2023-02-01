@@ -105,12 +105,14 @@ class ViewController: UIViewController {
             partOfExpressionStackView.addArrangedSubview(operandExpressionLabel)
         
         expressionStackView.addArrangedSubview(partOfExpressionStackView)
-        expressionStackView.layoutIfNeeded()
+        maintainScrollViewBottom()
     }
     
-    func setScrollView() {
+    func maintainScrollViewBottom() {
         expressionScrollView.layoutIfNeeded()
-        expressionScrollView.setContentOffset(<#T##contentOffset: CGPoint##CGPoint#>, animated: <#T##Bool#>)
+        expressionScrollView.setContentOffset(
+            CGPoint(x: 0, y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height),
+                      animated: true)
     }
     
     @IBAction func ceButton(_ sender: Any) {
@@ -122,8 +124,11 @@ class ViewController: UIViewController {
         
     }
     
-    @IBAction func resultButton(sender: UIButton) {
+    
+    @IBAction func resultButton(_ sender: Any) {
+        calculateExpression += 
         print(calculateExpression)
     }
+    
 }
-
+ 
