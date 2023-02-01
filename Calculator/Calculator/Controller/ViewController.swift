@@ -60,20 +60,27 @@ class ViewController: UIViewController {
         operatorLabel.font = .preferredFont(forTextStyle: .title3)
         operatorLabel.text = operatorValue
         
-        let opernadLabel = UILabel()
-        opernadLabel.font = .preferredFont(forTextStyle: .title3)
-        opernadLabel.text = operandValue
+        let operandLabel = UILabel()
+        operandLabel.font = .preferredFont(forTextStyle: .title3)
+        operandLabel.text = operandValue
         
         enteredStackView.addArrangedSubview(operatorLabel)
-        enteredStackView.addArrangedSubview(opernadLabel)
+        enteredStackView.addArrangedSubview(operandLabel)
         
-        opernadLabel.trailingAnchor.constraint(equalTo: enteredStackView.trailingAnchor, constant: 0).isActive = true
+        operandLabel.trailingAnchor.constraint(equalTo: enteredStackView.trailingAnchor, constant: 0).isActive = true
+        operandLabel.topAnchor.constraint(equalTo: enteredStackView.topAnchor, constant: 0).isActive = true
+        operandLabel.bottomAnchor.constraint(equalTo: enteredStackView.bottomAnchor, constant: 0).isActive = true
+        
+        operatorLabel.leadingAnchor.constraint(equalTo: enteredStackView.leadingAnchor, constant: 0).isActive = true
+        operatorLabel.topAnchor.constraint(equalTo: enteredStackView.topAnchor, constant: 0).isActive = true
+        operatorLabel.bottomAnchor.constraint(equalTo: enteredStackView.bottomAnchor, constant: 0).isActive = true
         
         self.stackViewInScrollView.addArrangedSubview(enteredStackView)
     }
     
     func removeAllStackView() {
-        for stackView in self.stackViewInScrollView.arrangedSubviews {
+        let allSubViewsInStackVIew = self.stackViewInScrollView.arrangedSubviews
+        for stackView in allSubViewsInStackVIew {
             self.stackViewInScrollView.removeArrangedSubview(stackView)
         }
         
@@ -91,6 +98,10 @@ class ViewController: UIViewController {
         self.stackViewInScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         self.scrollView.setContentOffset(bottomOffset, animated: true)
+    }
+    
+    @IBAction private func didTapButton(sender: UIButton) {
+        
     }
 
     @IBAction private func didTapNumberButton(sender: UIButton) {
@@ -115,7 +126,9 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.currentTitle else { return }
         
         if self.currentNumber == "" {
-            self.currentOperatorLabel.text = buttonTitle
+            if self.stackViewInScrollView.subviews.count > 0 {
+                self.currentOperatorLabel.text = buttonTitle
+            }
         } else {
             addStackView(number: self.currentNumberLabel.text, operatorType: self.currentOperatorLabel.text)
             addInputs()
@@ -142,11 +155,11 @@ class ViewController: UIViewController {
         var formula: Formula = ExpressionParser.parse(from: self.inputs)
         let resultValue = formula.result()
         
-        removeAllStackView()
         resetCurrentNumberLabel()
         resetCurrentOperatorLabel()
         self.inputs = ""
         setCurrentNumberLabel(labelText: "\(resultValue)")
+        removeAllStackView()
     }
 }
 
