@@ -21,9 +21,9 @@ class ViewController: UIViewController {
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         
+        addStackView()
         if let senderSign = sender.currentTitle {
             operatorInput.text = senderSign
-            addStackView()
         }
         numberInput.text = "0"
     }
@@ -40,7 +40,6 @@ class ViewController: UIViewController {
         stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackLabel.textColor = .white
         stackView.addArrangedSubview(stackLabel)
-        
     }
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
