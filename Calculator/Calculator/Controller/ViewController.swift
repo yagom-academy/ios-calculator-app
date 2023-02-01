@@ -99,6 +99,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
+        if workingSpace == "" { return }
+        
         let stackView = generateStackView(operandLabel.text, operatorLabel.text)
         addContentStack(stackView)
         workingSpace += operatorLabel.text! + operandLabel.text!
