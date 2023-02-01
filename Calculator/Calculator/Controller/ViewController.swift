@@ -19,8 +19,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setNumberFormatter()
         
-        resetCurrentNumberLabel()
-        resetCurrentOperatorLabel()
     }
     
     func setNumberFormatter() {
@@ -28,22 +26,23 @@ class ViewController: UIViewController {
         self.numberFormatter.roundingMode = .halfEven
     }
     
-    func setCurrentNumberLabel(labelText: String) {
-        guard let number = Double(labelText),
-              let formattingNumber = self.numberFormatter.string(from: NSNumber(floatLiteral: number)) else { return }
+    @IBAction private func didTapButton(sender: UIButton) {
+        guard let buttonTitle = sender.currentTitle else { return }
         
-        self.currentNumberLabel.text = formattingNumber
+        switch buttonTitle {
+        case "AC":
+        case "CE":
+        case "⁺⁄₋":
+        case "÷", "×", "−", "+":
+        case "0", "00":
+        case ".":
+        default:
+        }
     }
-    
-    func resetCurrentNumberLabel() {
-        self.currentNumber = ""
-        self.currentNumberLabel.text = "0"
-    }
-    
-    func resetCurrentOperatorLabel() {
-        self.currentOperatorLabel.text = ""
-    }
-    
+
+}
+
+extension ViewController {
     func addStackView(number: String?, operatorType: String?) {
         guard let operandValue = number,
               let operatorValue = operatorType else { return }
@@ -83,13 +82,6 @@ class ViewController: UIViewController {
         for stackView in allSubViewsInStackVIew {
             self.stackViewInScrollView.removeArrangedSubview(stackView)
         }
-        
-    }
-    
-    func addInputs() {
-        guard let nowOperator = self.currentOperatorLabel.text else { return }
-        
-        self.inputs += "\(nowOperator) \(self.currentNumber) "
     }
     
     func scrollToBottom() {
@@ -99,67 +91,4 @@ class ViewController: UIViewController {
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         self.scrollView.setContentOffset(bottomOffset, animated: true)
     }
-    
-    @IBAction private func didTapButton(sender: UIButton) {
-        
-    }
-
-    @IBAction private func didTapNumberButton(sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle else { return }
-        
-        self.currentNumber += buttonTitle
-        
-        setCurrentNumberLabel(labelText: self.currentNumber)
-    }
-    
-    @IBAction func didTapDotButton(_ sender: UIButton) {
-        if self.currentNumber == "" {
-            self.currentNumber = "0."
-        } else {
-            self.currentNumber += "."
-        }
-        
-        self.currentNumberLabel.text = self.currentNumber
-    }
-    
-    @IBAction private func didTapOperatorButton(sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle else { return }
-        
-        if self.currentNumber == "" {
-            if self.stackViewInScrollView.subviews.count > 0 {
-                self.currentOperatorLabel.text = buttonTitle
-            }
-        } else {
-            addStackView(number: self.currentNumberLabel.text, operatorType: self.currentOperatorLabel.text)
-            addInputs()
-            
-            self.currentOperatorLabel.text = buttonTitle
-            resetCurrentNumberLabel()
-            scrollToBottom()
-        }
-    }
-    
-    @IBAction private func didTapClearButton(sender: UIButton) {
-        resetCurrentNumberLabel()
-    }
-    
-    @IBAction private func didTapAllClearButton(sender: UIButton) {
-        removeAllStackView()
-        resetCurrentNumberLabel()
-        resetCurrentOperatorLabel()
-        self.inputs = ""
-    }
-    
-    @IBAction private func didTapCalculateButton(sender: UIButton) {
-        addInputs()
-        var formula: Formula = ExpressionParser.parse(from: self.inputs)
-        let resultValue = formula.result()
-        
-        resetCurrentNumberLabel()
-        resetCurrentOperatorLabel()
-        self.inputs = ""
-        setCurrentNumberLabel(labelText: "\(resultValue)")
-        removeAllStackView()
-    }
 }
-
