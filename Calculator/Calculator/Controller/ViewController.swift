@@ -27,8 +27,10 @@ class ViewController: UIViewController {
         guard let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
+        case "=":
+            calculate()
         case "AC":
-            return
+            clearAll()
         case "CE":
             clearCurrentOperand()
         case "⁺⁄₋":
@@ -42,6 +44,28 @@ class ViewController: UIViewController {
         default:
             addNumberToOperandLabel(operand: buttonTitle)
         }
+    }
+    
+    func calculate() {
+        self.inputs += "\(self.currentOperator) \(self.currentOperand) "
+        
+        var formula = ExpressionParser.parse(from: inputs)
+        let result = formula.result()
+        
+        clearAll()
+        
+        guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)) else { return }
+        self.currentOperandLabel.text = resultValue
+    }
+    
+    func clearAll() {
+        self.removeAllStackView()
+        self.inputs = ""
+        self.currentOperand = ""
+        self.currentOperator = ""
+        
+        self.currentOperandLabel.text = "0"
+        self.currentOperatorLabel.text = self.currentOperator
     }
     
     func clearCurrentOperand() {
