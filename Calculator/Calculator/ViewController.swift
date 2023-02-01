@@ -75,4 +75,22 @@ class ViewController: UIViewController {
         numberInput.text = " "
     }
     
+    @IBAction func ACButtonTapped(_ sender: UIButton) {
+        
+        resetStackView()
+        resetNumberInput()
+        resetOperatorInput()
+    }
+    
+    private func resetStackView() {
+        stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func resetNumberInput() {
+        numberInput.text = "0"
+    }
+    
+    private func resetOperatorInput() {
+        operatorInput.text = " "
+    }
 }
