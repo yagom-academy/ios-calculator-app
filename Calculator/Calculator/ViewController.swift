@@ -121,7 +121,7 @@ final class ViewController: UIViewController {
     }
     
     func resetCurrentNumber() {
-        currentNumber = NameSpace.emptyString
+        currentNumber = NameSpace.stringZero
         currentNumberLabel.text = currentNumber
     }
     
@@ -148,6 +148,11 @@ final class ViewController: UIViewController {
     }
     
     func calculate() -> Double {
+        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
+        let lastString = stringToBeCalculated[lastIndex]
+        if Operator(rawValue: lastString) != nil {
+            stringToBeCalculated = stringToBeCalculated + NameSpace.stringZero
+        }
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
         return calculateFormula.result()
     }
