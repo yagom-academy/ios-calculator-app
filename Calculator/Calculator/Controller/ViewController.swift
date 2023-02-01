@@ -54,14 +54,17 @@ class ViewController: UIViewController {
     
     func setNumberFormatter() {
         self.numberFormatter.numberStyle = .decimal
-        self.numberFormatter.roundingMode = .ceiling
+        self.numberFormatter.roundingMode = .halfUp
         self.numberFormatter.usesSignificantDigits = true
-        self.numberFormatter.minimumSignificantDigits = 0
+//        self.numberFormatter.minimumSignificantDigits = 1
         self.numberFormatter.maximumSignificantDigits = 20
     }
     
     func calculate() {
-        addStackView(number: self.currentOperand, operatorType: self.currentOperator)
+        if self.currentOperand != "" {
+            addStackView(number: self.currentOperand, operatorType: self.currentOperator)
+        }
+        
         self.inputs += "\(self.currentOperator) \(self.currentOperand) "
         
         var formula = ExpressionParser.parse(from: inputs)
@@ -96,13 +99,18 @@ class ViewController: UIViewController {
     
     func reverseOperand() {
         guard let firstValue = self.currentOperand.first else { return }
+        
         if firstValue.isNumber {
             self.currentOperand = "-" + self.currentOperand
-            self.currentOperandLabel.text = self.currentOperand
         } else if firstValue == "-" {
             self.currentOperand.removeFirst()
-            self.currentOperandLabel.text = self.currentOperand
         }
+        
+        guard let number = self.numberFormatter.number(from: self.currentOperand),
+              let formattedOperand = self.numberFormatter.string(from: number)  else { return }
+        
+        self.currentOperand = "\(number)"
+        self.currentOperandLabel.text = formattedOperand
     }
     
     func clickedOperator(operatorValue: String) {
@@ -129,11 +137,15 @@ class ViewController: UIViewController {
     func addZeroToOperandLabel(operand: String) {
         self.currentOperand += operand
         
-        guard let number = Double(self.currentOperand),
-              let formattedOperand = self.numberFormatter.string(from: NSNumber(floatLiteral: number))  else { return }
-        
-        self.currentOperand = formattedOperand
-        self.currentOperandLabel.text = self.currentOperand
+        if Double(self.currentOperand) != 0 {
+            guard let number = self.numberFormatter.number(from: self.currentOperand),
+                  let formattedOperand = self.numberFormatter.string(from: number)  else { return }
+            
+            self.currentOperand = "\(number)"
+            self.currentOperandLabel.text = formattedOperand
+        } else {
+            self.currentOperandLabel.text = self.currentOperand
+        }
     }
     
     func addDotToOperandLabel() {
