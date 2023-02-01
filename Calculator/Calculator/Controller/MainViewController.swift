@@ -95,11 +95,14 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchZeroButton(_ sender: UIButton) {
-        guard let zero = sender.currentTitle else { return }
+        guard let zero = sender.currentTitle,
+              let currentOperand = operandLabel.text else { return }
         
-        if let currentOperand = operandLabel.text,
-           currentOperand != Condition.zero {
-            operandLabel.text = currentOperand + zero
+        if currentOperand != Condition.zero,
+           currentOperand.contains(Condition.dot) {
+                operandLabel.text = currentOperand + zero
+        } else {
+            operandLabel.text = convertToDecimal(from: currentOperand + zero)
         }
     }
     
