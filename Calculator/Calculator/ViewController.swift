@@ -11,10 +11,10 @@ class ViewController: UIViewController {
     @IBOutlet weak private var operatorInput: UILabel!
     @IBOutlet weak private var numberInput: UILabel!
     @IBOutlet var stackView: UIStackView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
     }
     
     private var isFinishedEnteringOperands: Bool = false
@@ -65,10 +65,15 @@ class ViewController: UIViewController {
     
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
         
-        guard var currentNumber = numberInput.text,
-            currentNumber != "0" else { return }
+        guard let currentNumber = numberInput.text,
+              currentNumber != "0" else { return }
         
         numberInput.text = "-" + currentNumber
+    }
+    
+    @IBAction func CEButtonTapped(_ sender: UIButton) {
+        
+        numberInput.text = " "
     }
     
 }
