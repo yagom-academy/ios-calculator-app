@@ -19,18 +19,15 @@ final class ViewController: UIViewController {
             displayNumbersLabel.text = numberFormatter.string(for: Double(currentNumbersLabelText))
         }
     }
-    private var currentOperatorLabelText = "" {
+    private var prevOperatorLabelText: String = ""
+    private var currentOperatorLabelText: String = "" {
         didSet {
             displayOperatorLabel.text = currentOperatorLabelText
         }
     }
-    private var expression = "" {
-        didSet {
-            if currentOperatorLabelText != "" {
-                expression += " "
-            }
-        }
-    }
+    
+    private var isFirstAction: Bool = true
+    private var expression: [String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,21 +45,47 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle,
-              currentNumbersLabelText != "0" else { return }
-
+        guard let `operator` = sender.currentTitle else { return }
+        
+        if currentNumbersLabelText == "0" {
+            if currentOperatorLabelText == "" {
+                return
+            } else if currentOperatorLabelText != "" {
+                currentOperatorLabelText = `operator`
+                return
+            }
+        }
+        
+        if currentOperatorLabelText != "" {
+            expression.append(currentOperatorLabelText)
+        }
+        expression.append(currentNumbersLabelText)
+        addHistoryEntry(left: currentOperatorLabelText, right: currentNumbersLabelText)
         currentOperatorLabelText = `operator`
-        expression += currentNumbersLabelText
-        expression += currentOperatorLabelText
         currentNumbersLabelText = "0"
     }
     
-    @IBAction private func signButtonTapped(_ sender: UIButton) {
+    @IBAction private func signToggleButtonTapped(_ sender: UIButton) {
         
     }
     
-    func configureCurrentNumbersLabel(number: String) {
-        
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
+        expression.removeAll()
+        currentOperatorLabelText = ""
+        currentNumbersLabelText = "0"
     }
+    
+    func addHistoryEntry(left: String, right: String) {
+        let historyEntryStackView = HistoryViewGenerator.generateStackView(operator: left, operand: right)
+        historyEntryStackView.isHidden = true
+        
+        historyStackView.addArrangedSubview(historyEntryStackView)
+        
+        UIView.animate(withDuration: 0.3) {
+            historyEntryStackView.isHidden = false
+        }
+    }
+    
+    
 }
 
