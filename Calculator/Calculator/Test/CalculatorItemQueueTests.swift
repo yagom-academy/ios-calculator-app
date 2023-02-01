@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<String>?
+    var sut: CalculatorItemQueue<Double>?
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -23,10 +23,12 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-    func test_enqueueCalculateItems_2회_호출시_count는_2이다() {
+    func test_비어있는큐에서_enqueueCalculateItems2회호출시_count는2이다() {
         // given
-        sut?.enqueueCalculateItems(Node("10"))
-        sut?.enqueueCalculateItems(Node("20"))
+        let input1 = Node(10.0)
+        let input2 = Node(20.0)
+        sut?.enqueueCalculateItems(input1)
+        sut?.enqueueCalculateItems(input2)
         let expectation = 2
 
         // when
@@ -36,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_calculateItems가_비어있을경우_dequeueCalculateItems_호출시_nil_반환한다() {
+    func test_비어있는큐에서_dequeueCalculateItems호출시_nil반환한다() {
         // given
         let input = sut?.dequeueCalculateItems()
 
@@ -44,10 +46,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(input, nil)
     }
 
-    func test_dequeueCalculateItems_호출시_먼저_enqueue된_데이터를_반환한다() {
+    func test_비어있지않은큐에서_dequeueCalculateItems호출시_먼저enqueue된데이터를반환한다() {
         // given
-        let input1 = Node("10")
-        let input2 = Node("20")
+        let input1 = Node(10.0)
+        let input2 = Node(20.0)
         sut?.enqueueCalculateItems(input1)
         sut?.enqueueCalculateItems(input2)
         let expectation = input1
@@ -59,10 +61,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_dequeueCalculateItems_호출시_count가_감소한다() {
+    func test_비어있지않은큐에서_dequeueCalculateItems호출시_count가감소한다() {
         // given
-        let input1 = Node("10")
-        let input2 = Node("20")
+        let input1 = Node(10.0)
+        let input2 = Node(20.0)
         sut?.enqueueCalculateItems(input1)
         sut?.enqueueCalculateItems(input2)
         var expectation = 2

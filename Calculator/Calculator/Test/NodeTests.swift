@@ -21,7 +21,7 @@ final class NodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_같은_메모리를_참조하는_노드간의_비교연산_결과는_true이다() {
+    func test_같은메모리를참조하는노드간의_비교연산결과는_true이다() {
         // given
         sut = Node<String>("Testing...")
         let copiedNode = sut
@@ -34,7 +34,7 @@ final class NodeTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
 
-    func test_다른_메모리를_참조하는_노드간의_비교연산_결과는_false이다() {
+    func test_다른메모리를참조하는노드간의_비교연산결과는_false이다() {
         // given
         sut = Node<String>("Testing...")
         let copiedNode = Node<String>("Testing...")
