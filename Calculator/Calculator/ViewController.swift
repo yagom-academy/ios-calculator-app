@@ -63,11 +63,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+        checkSign()
+    }
+    
+    private func checkSign() {
         
-        guard let currentNumber = numberInput.text,
+        guard var currentNumber = numberInput.text,
               currentNumber != "0" else { return }
         
-        numberInput.text = "-" + currentNumber
+        if let minus = currentNumber.firstIndex(of: "-") {
+            currentNumber.remove(at: minus)
+            numberInput.text = currentNumber
+        } else {
+            numberInput.text = "-" + currentNumber
+        }
     }
     
     @IBAction func CEButtonTapped(_ sender: UIButton) {
