@@ -190,10 +190,12 @@ extension ViewController {
         let operatorLabel = UILabel()
         operatorLabel.font = .preferredFont(forTextStyle: .title3)
         operatorLabel.text = operatorValue
+        operatorLabel.textColor = .white
 
         let operandLabel = UILabel()
         operandLabel.font = .preferredFont(forTextStyle: .title3)
         operandLabel.text = operandValue
+        operandLabel.textColor = .white
 
         enteredStackView.addArrangedSubview(operatorLabel)
         enteredStackView.addArrangedSubview(operandLabel)
