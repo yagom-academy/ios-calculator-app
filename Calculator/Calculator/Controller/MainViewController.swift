@@ -7,7 +7,7 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    enum Condition {
+    enum Sign {
         static let zero = "0"
         static let zeroTwice = "00"
         static let dot = "."
@@ -19,7 +19,7 @@ final class MainViewController: UIViewController {
     }
     
     var numberFormatter = NumberFormatter()
-    var currentInput = Condition.empty
+    var currentInput = Sign.empty
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
@@ -34,8 +34,8 @@ final class MainViewController: UIViewController {
     }
     
     private func initializeCurrentCalculateItem() {
-        self.operandLabel.text = Condition.zero
-        self.operatorLabel.text = Condition.empty
+        self.operandLabel.text = Sign.zero
+        self.operatorLabel.text = Sign.empty
     }
     
     private func initializeScrollView() {
@@ -55,7 +55,7 @@ final class MainViewController: UIViewController {
         guard let inputOperand = sender.currentTitle else { return }
         
         if let currentOperand = operandLabel.text,
-           currentOperand != Condition.zero {
+           currentOperand != Sign.zero {
             let nextOperand = currentOperand + inputOperand
             operandLabel.text = convertToDecimal(from: nextOperand)
         } else {
@@ -71,7 +71,7 @@ final class MainViewController: UIViewController {
     }
     
     private func convertToDouble(from labelText: String) -> Double? {
-        let comma = Character(Condition.comma)
+        let comma = Character(Sign.comma)
         let splitedText = labelText.split(with: comma).joined()
         
         return Double(splitedText)
@@ -87,10 +87,10 @@ final class MainViewController: UIViewController {
     @IBAction func touchDotButton(_ sender: UIButton) {
         guard let currentOperand = operandLabel.text else { return }
         
-        if currentOperand.contains(Condition.dot) {
+        if currentOperand.contains(Sign.dot) {
             return
         } else {
-            operandLabel.text = currentOperand + Condition.dot
+            operandLabel.text = currentOperand + Sign.dot
         }
     }
     
@@ -98,8 +98,8 @@ final class MainViewController: UIViewController {
         guard let zero = sender.currentTitle,
               let currentOperand = operandLabel.text else { return }
         
-        if currentOperand != Condition.zero,
-           currentOperand.contains(Condition.dot) {
+        if currentOperand != Sign.zero,
+           currentOperand.contains(Sign.dot) {
                 operandLabel.text = currentOperand + zero
         } else {
             operandLabel.text = convertToDecimal(from: currentOperand + zero)
@@ -109,16 +109,16 @@ final class MainViewController: UIViewController {
     @IBAction func allClear(_ sender: UIButton) {
         initializeScrollView()
         initializeCurrentCalculateItem()
-        currentInput = Condition.empty
+        currentInput = Sign.empty
     }
     
     @IBAction func clearOperandLabel(_ sender: UIButton) {
-        operandLabel.text = Condition.zero
+        operandLabel.text = Sign.zero
     }
     
     @IBAction func toggleSign(_ sender: UIButton) {
         guard let operandText = operandLabel.text,
-              operandText != Condition.zero,
+              operandText != Sign.zero,
               let currentOperand = convertToDouble(from: operandText),
               let toggledOperand = convertToString(from: -currentOperand) else { return }
         
@@ -128,7 +128,7 @@ final class MainViewController: UIViewController {
     @IBAction func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle else { return }
             
-        if operandLabel.text == Condition.zero {
+        if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
             addCurrentItem(to: calculateItemStackView)
@@ -152,7 +152,7 @@ final class MainViewController: UIViewController {
     
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
-        operand.text = convertToDecimal(from: operandLabel.text ?? Condition.empty)
+        operand.text = convertToDecimal(from: operandLabel.text ?? Sign.empty)
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -184,31 +184,31 @@ final class MainViewController: UIViewController {
               let operandText = operand.text,
               let convertedOperandText = convertToNone(from: operandText) else { return nil }
         
-        let result = operatorText + Condition.space + convertedOperandText + Condition.space
+        let result = operatorText + Sign.space + convertedOperandText + Sign.space
         
         return result
     }
     
     private func convertToNone(from decimal: String) -> String? {
-        let comma = Character(Condition.comma)
+        let comma = Character(Sign.comma)
         let noneStyle = decimal.split(with: comma).joined()
         
         return noneStyle
     }
 
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
-        guard operatorLabel.text != Condition.empty else { return }
+        guard operatorLabel.text != Sign.empty else { return }
         
         addCurrentItem(to: calculateItemStackView)
         
         var formula = ExpressionParser.parse(from: currentInput)
         let result = formula.result()
         
-        currentInput = Condition.empty
-        operatorLabel.text = Condition.empty
+        currentInput = Sign.empty
+        operatorLabel.text = Sign.empty
         
         if result.isNaN == true {
-            operandLabel.text = Condition.nan
+            operandLabel.text = Sign.nan
         } else {
             operandLabel.text = convertToString(from: result)
         }
