@@ -27,11 +27,6 @@ class ViewController: UIViewController {
     @IBAction private func didTapButton(sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
         
-        if self.isCalculated {
-            clearAll()
-            self.isCalculated.toggle()
-        }
-        
         switch buttonTitle {
         case "=":
             calculate()
@@ -56,28 +51,31 @@ class ViewController: UIViewController {
         self.numberFormatter.numberStyle = .decimal
         self.numberFormatter.roundingMode = .halfUp
         self.numberFormatter.usesSignificantDigits = true
-//        self.numberFormatter.minimumSignificantDigits = 1
         self.numberFormatter.maximumSignificantDigits = 20
     }
     
     func calculate() {
-        if self.currentOperand != "" {
-            addStackView(number: self.currentOperand, operatorType: self.currentOperator)
+        if self.isCalculated == false {
+            if self.currentOperand != "" {
+                addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
+            }
+            
+            self.inputs += "\(self.currentOperator) \(self.currentOperand) "
+            
+            var formula = ExpressionParser.parse(from: inputs)
+            let result = formula.result()
+            
+            guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)),
+                  let number = self.numberFormatter.number(from: resultValue) else { return }
+            
+            self.inputs = "\(resultValue)"
+            self.currentOperator = ""
+            self.currentOperatorLabel.text = self.currentOperator
+            self.currentOperand = "\(number)"
+            self.currentOperandLabel.text = resultValue
+            self.isFractional = false
+            self.isCalculated = true
         }
-        
-        self.inputs += "\(self.currentOperator) \(self.currentOperand) "
-        
-        var formula = ExpressionParser.parse(from: inputs)
-        let result = formula.result()
-        
-        guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)) else { return }
-        
-        self.inputs = ""
-        self.currentOperator = ""
-        self.currentOperatorLabel.text = self.currentOperator
-        self.currentOperandLabel.text = resultValue
-        self.isFractional = false
-        self.isCalculated = true
     }
     
     func clearAll() {
@@ -118,7 +116,7 @@ class ViewController: UIViewController {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
             
-            addStackView(number: currentOperandValue, operatorType: currentOperatorValue)
+            addStackView(number: currentOperandLabel.text, operatorType: currentOperatorValue)
             
             self.inputs += "\(currentOperatorValue) \(currentOperandValue) "
             
@@ -132,6 +130,7 @@ class ViewController: UIViewController {
         }
         
         self.isFractional = false
+        self.isCalculated = false
     }
     
     func addZeroToOperandLabel(operand: String) {
