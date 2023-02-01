@@ -82,7 +82,7 @@ class ViewController: UIViewController {
                 return
             }
             
-            self.inputs = "\(resultValue)"
+            self.inputs = ""
             self.currentOperator = ""
             self.currentOperatorLabel.text = self.currentOperator
             self.currentOperand = "\(number)"
@@ -115,14 +115,10 @@ class ViewController: UIViewController {
             self.currentOperand.removeFirst()
         }
         
-        guard let number = self.numberFormatter.number(from: self.currentOperand),
-              let formattedOperand = self.numberFormatter.string(from: number)  else { return }
-        
-        self.currentOperand = "\(number)"
-        self.currentOperandLabel.text = formattedOperand
+        updateCurrentNumberLabel(self.currentOperand)
     }
     
-    func clickedOperator(operatorValue: String) {
+    func clickedOperator(_ operatorValue: String) {
         if self.currentOperand != "" {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
@@ -143,15 +139,11 @@ class ViewController: UIViewController {
         self.isCalculated = false
     }
     
-    func addZeroToOperandLabel(operand: String) {
+    func addZeroToOperandLabel(_ operand: String) {
         self.currentOperand += operand
         
         if Double(self.currentOperand) != 0 {
-            guard let number = self.numberFormatter.number(from: self.currentOperand),
-                  let formattedOperand = self.numberFormatter.string(from: number)  else { return }
-            
-            self.currentOperand = "\(number)"
-            self.currentOperandLabel.text = formattedOperand
+            updateCurrentNumberLabel(self.currentOperand)
         } else {
             self.currentOperandLabel.text = self.currentOperand
         }
@@ -167,11 +159,15 @@ class ViewController: UIViewController {
         self.currentOperandLabel.text = self.currentOperand
     }
     
-    func addNumberToOperandLabel(operand: String) {
+    func addNumberToOperandLabel(_ operand: String) {
         self.currentOperand += operand
         
-        guard let number = self.numberFormatter.number(from: self.currentOperand),
-              let formattedOperand = self.numberFormatter.string(from: number)  else { return }
+        updateCurrentNumberLabel(self.currentOperand)
+    }
+    
+    func updateCurrentNumberLabel(_ value: String) {
+        guard let number = self.numberFormatter.number(from: value),
+              let formattedOperand = self.numberFormatter.string(from: number) else { return }
         
         self.currentOperand = "\(number)"
         self.currentOperandLabel.text = formattedOperand
