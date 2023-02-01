@@ -13,23 +13,21 @@ final class ViewController: UIViewController {
         static let empty = ""
         static let zero = "0"
         static let zeroZero = "00"
+        static let negative = "-"
         static let nan = "NaN"
     }
-    @IBOutlet weak var parsingV: UILabel!
     
-    let numberFormatter = NumberFormatter()
     var parsingValue: String = Sign.empty
     var isCalculatedStatus: Bool = false
     
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operationContentStackView: UIStackView!
+    @IBOutlet weak var operationScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetCalculator()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = -2
-        numberFormatter.string(for: operandLabel.text)
     }
     
     func updateOperand(with number: String?) {
@@ -55,26 +53,25 @@ final class ViewController: UIViewController {
     }
     
     func updateOperator(with sign: String?) {
-        guard let operatorValue = sign else { return }
+        guard let operatorValue = sign, let operandValue = operandLabel.text else { return }
         
         isCalculatedStatus = false
         
         if parsingValue == Sign.empty {
             operatorLabel.text = operatorValue
             parsingValue += (operandLabel.text ?? Sign.empty)
+            setOperationStackView(operatorValue: Sign.empty, operandValue: operandValue)
             operandLabel.text = Sign.zero
-            parsingV.text = parsingValue
         } else if operandLabel.text == Sign.zero {
             parsingValue += " \(operatorLabel.text ?? Sign.empty) "
             parsingValue = String(parsingValue.dropLast(3))
             operatorLabel.text = operatorValue
             operandLabel.text = Sign.zero
-            parsingV.text = parsingValue
         } else {
+            setOperationStackView(operatorValue: operatorLabel.text ?? Sign.empty, operandValue: operandValue)
             parsingValue += " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
             operatorLabel.text = operatorValue
             operandLabel.text = Sign.zero
-            parsingV.text = parsingValue
         }
     }
     
@@ -85,7 +82,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        let input = parsingValue + " \(operatorLabel.text ?? Sign.empty) " + (operandLabel.text ?? Sign.empty)
+        guard let operatorValue = operatorLabel.text, let operandValue = operandLabel.text else { return }
+        
+        setOperationStackView(operatorValue: operatorValue, operandValue: operandValue)
+        let input = parsingValue + " \(operandValue) " + (operandLabel.text ?? Sign.empty)
         let formula = ExpressionParser.parse(from: input).result()
         let result = String(formula).split(with: Sign.dot)
         isCalculatedStatus = true
@@ -94,20 +94,19 @@ final class ViewController: UIViewController {
             operatorLabel.text = Sign.blank
             operandLabel.text = Sign.nan
             parsingValue.removeAll()
-            return parsingV.text = parsingValue
+            return
         }
         
         guard result[1] != Sign.zero else {
             operatorLabel.text = Sign.blank
             operandLabel.text = result[0]
             parsingValue.removeAll()
-            return parsingV.text = parsingValue
+            return
         }
         
         operatorLabel.text = Sign.blank
         operandLabel.text = String(formula)
         parsingValue.removeAll()
-        parsingV.text = parsingValue
     }
     
     @IBAction func didTapNumberButton(_ sender: UIButton) {
@@ -131,6 +130,34 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
-        operandLabel.text = "-" + (operandLabel.text ?? Sign.empty)
+        operandLabel.text = Sign.negative + (operandLabel.text ?? Sign.empty)
+    }
+    
+    func createLabel(input: String) -> UILabel {
+        let label = UILabel()
+        
+        label.text = input
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
+        
+        return label
+    }
+    
+    func createOperationStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+        let stackView = UIStackView()
+        
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        
+        return stackView
+    }
+    
+    func setOperationStackView(operatorValue: String, operandValue: String) {
+        let operatorLabel = createLabel(input: operatorValue)
+        let operandLabel = createLabel(input: operandValue)
+        let operationStackView = createOperationStackView(operatorLabel: operatorLabel, operandLabel: operandLabel)
+        operationContentStackView.addArrangedSubview(operationStackView)
     }
 }

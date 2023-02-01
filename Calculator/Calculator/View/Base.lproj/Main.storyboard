@@ -347,13 +347,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ParsingValue 보여주는 곳" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22F-7X-xWz">
-                                <rect key="frame" x="20" y="61" width="374" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemBackgroundColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -372,8 +365,9 @@
                     </view>
                     <connections>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="NAV-ed-2Un"/>
+                        <outlet property="operationContentStackView" destination="XRe-QE-UJf" id="wdA-FE-oOa"/>
+                        <outlet property="operationScrollView" destination="BOT-7g-vxv" id="7v3-3H-adE"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Qz4-Ck-tsH"/>
-                        <outlet property="parsingV" destination="22F-7X-xWz" id="4zt-ph-IpO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -382,9 +376,6 @@
         </scene>
     </scenes>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
