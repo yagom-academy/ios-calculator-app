@@ -9,7 +9,7 @@ import XCTest
 
 final class FormulaTests: XCTestCase {
     
-    var sut: Formula! = Formula()
+    var sut = Formula()
     
     func testResult_if_OperandQueue_isEmpty_returnZero() {
         //given
@@ -65,7 +65,7 @@ final class FormulaTests: XCTestCase {
     func testResult_givenTwoOperands_and_subtractOperator_return1() {
         //given
         sut.operands.enqueue(2.0)
-        sut.operators.enqueue(Operator.substact)
+        sut.operators.enqueue(Operator.subtract)
         sut.operands.enqueue(1.0)
         let expectation: Double = 1.0
         
