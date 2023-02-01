@@ -66,12 +66,22 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func signToggleButtonTapped(_ sender: UIButton) {
+        guard currentNumbersLabelText != "0" else { return }
         
+        if currentNumbersLabelText.first == "-" {
+            currentNumbersLabelText.removeFirst()
+        } else {
+            currentNumbersLabelText = "-" + currentNumbersLabelText
+        }
     }
     
     @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         expression.removeAll()
         currentOperatorLabelText = ""
+        currentNumbersLabelText = "0"
+    }
+    
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         currentNumbersLabelText = "0"
     }
     
