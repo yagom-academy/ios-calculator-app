@@ -20,20 +20,35 @@ class ViewController: UIViewController {
     private var isFinishedEnteringOperands: Bool = false
     private var isFinishedCalculating: Bool = false
     private var isEnteredOperand: Bool = false
+    private var isChangeableOperator: Bool = false
     
     private var numberFormatter = NumberFormatter()
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        initialCalculate()
-        if isEnteredOperand == true,
-           let senderSign = sender.currentTitle {
+        guard let senderSign = sender.currentTitle else { return }
+        checkInitialCondition()
+        operandIsZero()
+        if isEnteredOperand == true  {
             addStackView()
             operatorInput.text = senderSign
         }
+        
+        if isChangeableOperator == true {
+            operatorInput.text = senderSign
+        }
+        
         numberInput.text = "0"
     }
     
-    private func initialCalculate() {
+    private func operandIsZero() {
+        if !stackView.subviews.isEmpty && numberInput.text == "0" {
+            isChangeableOperator = true
+        } else {
+            isChangeableOperator = false
+        }
+    }
+    
+    private func checkInitialCondition() {
         if numberInput.text == "0" {
             isEnteredOperand = false
         } else {
@@ -119,16 +134,29 @@ class ViewController: UIViewController {
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
         if isFinishedCalculating == false {
-            let resultLabel = checkDecimalPoint()
-            numberInput.text = resultLabel
-            isFinishedCalculating = true
+            handleDivideError()
         }
     }
     
-    private func checkDecimalPoint() -> String {
+    private func handleDivideError() {
+        do {
+            let resultLabel = try checkDecimalPoint()
+            numberInput.text = resultLabel
+            isFinishedCalculating = true
+        } catch CalculatorError.divideByZero {
+            numberInput.text = "NaN"
+        } catch {
+            print("계산오류")
+        }
+    }
+    
+    private func checkDecimalPoint() throws -> String {
+        
         let resultLabel: String = calculate()
         let dividedValue = resultLabel.components(separatedBy: ".")
-        guard dividedValue[1] == "0" else { return "" }
+        guard !dividedValue[0].isEmpty || dividedValue[1] == "0" else {
+            throw CalculatorError.calcuate
+        }
         numberFormatter.minimumFractionDigits = 0
         guard let number = Double(resultLabel) else { return "" }
         guard let formatterNumber = numberFormatter.string(from: NSNumber(value: number)) else { return "" }
