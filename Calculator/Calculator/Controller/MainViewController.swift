@@ -40,7 +40,7 @@ final class MainViewController: UIViewController {
     
     private func initializeScrollView() {
         calculateItemStackView
-            .arrangedSubviews
+            .subviews
             .forEach { $0.removeFromSuperview() }
     }
     
