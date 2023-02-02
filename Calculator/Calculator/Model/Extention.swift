@@ -36,4 +36,15 @@ extension NumberFormatter {
         
         return result
     }
+    
+    convenience init(numberStyle: NumberFormatter.Style,
+                     roundingMode: NumberFormatter.RoundingMode,
+                     usesSignificantDigits: Bool,
+                     maximumSignificantDigits: Int) {
+        self.init()
+        self.numberStyle = numberStyle
+        self.roundingMode = roundingMode
+        self.usesSignificantDigits = usesSignificantDigits
+        self.maximumSignificantDigits = maximumSignificantDigits
+    }
 }

@@ -17,7 +17,10 @@ final class MainViewController: UIViewController {
         static let nan = "NaN"
     }
     
-    var numberFormatter = NumberFormatter()
+    var numberFormatter = NumberFormatter(numberStyle: .decimal,
+                                          roundingMode: .halfUp,
+                                          usesSignificantDigits: true,
+                                          maximumSignificantDigits: 20)
     var currentInput = Sign.empty
     var currentOperand: String {
         return operandLabel.text ?? Sign.zero
@@ -35,19 +38,11 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         initializeCurrentCalculateItem()
         calculateItemStackView.removeAllSubviews()
-        initializeNumberFormatter()
     }
     
     private func initializeCurrentCalculateItem() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.empty
-    }
-    
-    private func initializeNumberFormatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction func touchOperandButton(_ sender: UIButton) {
