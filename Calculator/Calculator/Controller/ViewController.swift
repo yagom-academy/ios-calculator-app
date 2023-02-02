@@ -7,15 +7,45 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var expression: String = ""
-    var constraintsOfLabelView: [NSLayoutConstraint]?
+    enum DefaultValue {
+        static let empty = ""
+        static let zero = "0"
+    }
+    
+    enum SpecialCharacter {
+        static let comma = ","
+        static let dot = "."
+        static let negativeNumber = "-"
+    }
+    
+    enum ButtonID {
+        static let AC = "AC"
+        static let CE = "CE"
+        static let SC = "⁺⁄₋"
+        static let add = String(Operator.add.rawValue)
+        static let subtract = String(Operator.subtract.rawValue)
+        static let divide = String(Operator.divide.rawValue)
+        static let multiply = String(Operator.multiply.rawValue)
+        static let equal = "="
+        static let dot = "."
+        static let zero = "0"
+        static let twoZeros = "00"
+    }
+    
+    var expression: String = DefaultValue.zero
+    var isOperateComplited = false
+    
     @IBOutlet weak var scrollView: UIStackView!
     @IBOutlet weak var operatorUILabel: UILabel!
     @IBOutlet weak var operandUILabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        /*
+         2. 숫자 20자리만 표기 /-1,36/1.801/57480/31496
+         4. 자동 스크롤
+         */
+        allClear()
     }
 
     @IBAction func touchUpCalculatorButton(sender: UIButton) {
@@ -28,27 +58,31 @@ class ViewController: UIViewController {
     
     func processInput(from inputFromButton: String) {
         switch inputFromButton {
-        case "AC":
-            return
-        case "CE":
-            return
-        case "⁺⁄₋":
-            return
-        case "+", "−", "÷", "×":
-            return
-        case "=":
-            return
-        case "0", "00":
-            return
-        case ".":
+        case ButtonID.AC:
+            allClear()
+        case ButtonID.CE:
+            clearEntry()
+        case ButtonID.SC:
+            signChanger()
+        case ButtonID.add, ButtonID.subtract, ButtonID.divide, ButtonID.multiply:
+            processOperatorInput(inputFromButton)
+        case ButtonID.equal:
+            processEqualSignInput()
+            isOperateComplited = true
+        case ButtonID.dot:
             processDotInput(inputFromButton)
         default:
+            if isOperateComplited {
+                operandUILabel.text = DefaultValue.zero
+                isOperateComplited = false
+            }
+            
             processNumberInput(inputFromButton)
         }
     }
     
     func processDotInput(_ inputFromButton: String) {
-        guard operandUILabel.text?.contains(".") == false,
+        guard operandUILabel.text?.contains(SpecialCharacter.dot) == false,
               let prevOperandUILabel = operandUILabel.text else { return }
         
         operandUILabel.text = prevOperandUILabel + inputFromButton
@@ -57,47 +91,47 @@ class ViewController: UIViewController {
     func processNumberInput(_ inputFromButton: String){
         guard let prevOperandUILabel = operandUILabel.text else { return }
         
-        if operandUILabel.text == "0" {
-            operandUILabel.text = inputFromButton == "0" || inputFromButton == "00" ? "0" : inputFromButton
+        if operandUILabel.text == DefaultValue.zero {
+            operandUILabel.text = inputFromButton == ButtonID.zero || inputFromButton == ButtonID.twoZeros ? DefaultValue.zero : inputFromButton
             return
         }
         
-        if !prevOperandUILabel.contains(".") {
+        if !prevOperandUILabel.contains(SpecialCharacter.dot) {
             operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
         } else {
-            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
+            operandUILabel.text = prevOperandUILabel + inputFromButton
         }
     }
     
     func allClear() {
         scrollView.subviews.forEach { $0.removeFromSuperview() }
         
-        operatorUILabel.text = ""
-        operandUILabel.text = "0"
-        expression = ""
+        operatorUILabel.text = DefaultValue.empty
+        operandUILabel.text = DefaultValue.zero
+        expression = DefaultValue.empty
     }
     
     func clearEntry() {
-        operandUILabel.text = "0"
+        operandUILabel.text = DefaultValue.zero
     }
     
     func signChanger() {
-        guard operandUILabel.text != "0" else {
+        guard operandUILabel.text != DefaultValue.zero else {
             return
         }
         
-        if operandUILabel.text?.contains("-") == true {
+        if operandUILabel.text?.contains(SpecialCharacter.negativeNumber) == true {
             operandUILabel.text?.removeFirst()
             return
         }
         
         guard let prevOperandUILabel = operandUILabel.text else { return }
 
-        operandUILabel.text = "-" + prevOperandUILabel
+        operandUILabel.text = SpecialCharacter.negativeNumber + prevOperandUILabel
     }
     
     func processOperatorInput(_ inputFromButton: String) {
-        guard operandUILabel.text != "0"  else {
+        guard operandUILabel.text != DefaultValue.zero  else {
             if !scrollView.subviews.isEmpty {
                 operatorUILabel.text = inputFromButton
             }
@@ -107,27 +141,16 @@ class ViewController: UIViewController {
         
         stackInputToExpression()
         stackInputToScrollView()
-        operandUILabel.text = "0"
+        operandUILabel.text = DefaultValue.zero
         operatorUILabel.text = inputFromButton
     }
     
     func processEqualSignInput() {
-        guard operatorUILabel.text != "" else { return }
+        guard operatorUILabel.text != DefaultValue.empty else { return }
     
         stackInputToExpression()
         stackInputToScrollView()
         calculateExpression()
-    }
-    
-    func processZeroInput(_ inputFromButton: String) {
-        guard operandUILabel.text != "0",
-              let prevOperandUILabel = operandUILabel.text else { return }
-                
-        if !prevOperandUILabel.contains(".") {
-            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
-        } else {
-            operandUILabel.text = prevOperandUILabel + inputFromButton
-        }
     }
     
     func stackInputToScrollView() {
@@ -147,7 +170,9 @@ class ViewController: UIViewController {
         
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
-        stackView.spacing = stackView.spacing + 8
+        
+        let spaceBetweenLabels = CGFloat(8)
+        stackView.spacing = stackView.spacing + spaceBetweenLabels
         
         stackView.alignment = .fill
         stackView.axis = .horizontal
@@ -159,17 +184,16 @@ class ViewController: UIViewController {
     func scrollToBottomOfScrollView() {
         guard let parentScrollView = scrollView.superview as? UIScrollView else { return }
         
-        let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height + 25 + parentScrollView.contentInset.bottom)
-        if(bottomOffset.y > 25) {
-            parentScrollView.setContentOffset(bottomOffset, animated: true)
-        }        
+        let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height)
+                
+        parentScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     func stackInputToExpression() {
         guard let operatorText = operatorUILabel.text,
-              var operandText = operandUILabel.text?.components(separatedBy: ",").joined() else { return }
+              var operandText = operandUILabel.text?.components(separatedBy: SpecialCharacter.comma).joined() else { return }
         
-        if !operandText.contains(".") {
+        if !operandText.contains(SpecialCharacter.dot) {
             operandText = formattingNumber(for: operandText)
         }
         
@@ -177,7 +201,7 @@ class ViewController: UIViewController {
     }
     
     func calculateExpression() {
-        expression = expression.components(separatedBy: ",").joined()
+        expression = expression.components(separatedBy: SpecialCharacter.comma).joined()
         
         var formula = ExpressionParser.parse(from: expression)
         var result = String(formula.result())
@@ -190,36 +214,37 @@ class ViewController: UIViewController {
         }
         
         operandUILabel.text = result
-        operatorUILabel.text = ""
-        expression = ""
+        operatorUILabel.text = DefaultValue.empty
+        expression = DefaultValue.empty
     }
     
     func cutZerosAfterDecimalPoint(for input: String) -> String {
-        guard input.contains(".") else {
+        let zeroForRemove: Character = "0"
+        
+        guard input.contains(SpecialCharacter.dot) else {
             return input
         }
         
-        var splitedByDot = input.components(separatedBy: ".")
+        var splitedByDot = input.components(separatedBy: SpecialCharacter.dot)
         
-        while splitedByDot[1].last == "0" {
+        while splitedByDot[1].last == zeroForRemove {
             _ = splitedByDot[1].popLast()
         }
         
         if splitedByDot[1].isEmpty {
             return splitedByDot[0]
         }
-        return splitedByDot[0] + "." + splitedByDot[1]
+        return splitedByDot[0] + SpecialCharacter.dot + splitedByDot[1]
     }
     
     func formattingNumber(for input: String) -> String {
         let formatter = NumberFormatter()
-        
-        let removedComma = input.components(separatedBy: ",").joined()
+        let removedComma = input.components(separatedBy: SpecialCharacter.comma).joined()
         
         guard let inputToNSNumber = formatter.number(from: removedComma) else {
             return input
         }
-        
+
         formatter.maximumFractionDigits = 20
         formatter.roundingMode = .ceiling
         formatter.numberStyle = .decimal
