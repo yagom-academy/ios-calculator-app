@@ -46,6 +46,7 @@ class ViewController: UIViewController {
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
         currentInputFormula = currentInputFormula + "\(number)"
+        inputOperandsLabel.text = currentInputFormula
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
@@ -63,6 +64,13 @@ class ViewController: UIViewController {
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
         currentInputFormula = ""
-        inputOperandsLabel.text = currentInputFormula
+    }
+    
+    @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
+        inputOperandsLabel.text = ""
     }
 }
