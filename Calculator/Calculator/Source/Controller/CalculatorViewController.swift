@@ -27,6 +27,7 @@ final class ViewController: UIViewController {
             }
         }
     }
+    
     private var currentOperatorLabelText: String = "" {
         didSet {
             displayOperatorLabel.text = currentOperatorLabelText
@@ -98,7 +99,6 @@ final class ViewController: UIViewController {
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard expression.isEmpty == false else { return }
-        //guard currentNumbersLabelText != "0" else { return }
         
         expression.append(currentOperatorLabelText)
         expression.append(currentNumbersLabelText)
@@ -114,7 +114,8 @@ final class ViewController: UIViewController {
             displayNumbersLabel.text = "NaN"
         } else {
             clearAfterCalculate()
-            displayNumbersLabel.text = convertFormattedString(text: String(result))
+            displayNumbersLabel.text = DecimalFormatter
+                .convertFormattedString(text: String(result))
         }
     }
     
@@ -165,8 +166,7 @@ final class ViewController: UIViewController {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 20
         
         guard let formattedNumber = numberFormatter
             .string(for: Decimal(string: text)) else { return text }

@@ -11,7 +11,6 @@ enum HistoryViewGenerator {
     private static func generateLabel(text: String) -> UILabel {
         let label: UILabel = UILabel()
         
-        //label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.text = text
@@ -20,8 +19,12 @@ enum HistoryViewGenerator {
     }
     
     static func generateStackView(`operator`: String, operand: String) -> UIStackView {
+        let operandText = DecimalFormatter.convertFormattedString(text: operand)
+        
         let operatorLabel = generateLabel(text: `operator`)
-        let operandLabel = generateLabel(text: operand)
+        operatorLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
+        
+        let operandLabel = generateLabel(text: operandText)
         let horizontalStackView: UIStackView = UIStackView()
         
         horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
