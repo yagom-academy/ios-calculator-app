@@ -66,10 +66,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard let operandLabelText = operandLabel.text else { return }
+        guard var operandLabelText = operandLabel.text else { return }
         guard let `operator` = sender.currentTitle else { return }
         
         if operatorLabel.text == "" && operandLabelText != "0" {
+            if operandLabelText.contains(",") {
+                operandLabelText = operandLabelText.split(with: ",").joined()
+            }
+            
             guard let operandDouble = Double(operandLabelText) else { return }
             let stackView = generateStackView(useNumberFormatter(operandDouble), "")
             addContentStack(stackView)
