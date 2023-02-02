@@ -13,21 +13,16 @@ enum ExpressionParser {
         let operatorArray = input.compactMap { Operator(rawValue: $0) }
         let operators: CalculatorItemQueue<Operator> = .init(operatorArray)
         
-        let components = Formula(operands: operands, operators: operators)
-        return components
+        let formula = Formula(operands: operands, operators: operators)
+        return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
         var componentsByOperators = [input]
         
-        for operateSymbol in Operator.allCases {
-            var temporaryComponents: [String] = []
-            for component in componentsByOperators {
-                temporaryComponents += component.split(with: operateSymbol.rawValue)
-            }
-            componentsByOperators = temporaryComponents
+        Operator.allCases.forEach { operatorSymbol in
+            componentsByOperators = componentsByOperators.flatMap { $0.split(with: operatorSymbol.rawValue) }
         }
-        
         return componentsByOperators
     }
 }
