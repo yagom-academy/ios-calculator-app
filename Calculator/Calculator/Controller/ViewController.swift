@@ -187,16 +187,19 @@ class ViewController: UIViewController {
     }
     
     func scrollToBottomOfScrollView() {
-        guard let parentScrollView = scrollView.superview as? UIScrollView else { return }
+        guard let parentScrollView = scrollView.superview as? UIScrollView,
+              let subviewHeight = scrollView.subviews.first?.bounds.size.height else { return }
         
-        let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height)
-                
-        parentScrollView.setContentOffset(bottomOffset, animated: true)
+        let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height + subviewHeight)
+        
+        if (bottomOffset.y > subviewHeight) {
+            parentScrollView.setContentOffset(bottomOffset, animated: true)
+        }
     }
     
     func stackInputToExpression() {
         guard let operatorText = operatorUILabel.text,
-              var operandText = operandUILabel.text else { return }
+              let operandText = operandUILabel.text else { return }
         
         expression += operatorText + formattingNumber(for: operandText)
     }
