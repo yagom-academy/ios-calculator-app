@@ -33,7 +33,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20        
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction private func numericButtonTapped(_ sender: UIButton) {
@@ -65,10 +65,12 @@ final class ViewController: UIViewController {
         addHistoryEntry(left: currentOperatorLabelText, right: currentNumbersLabelText)
         currentOperatorLabelText = `operator`
         currentNumbersLabelText = "0"
+        scrollToBottom()
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard expression.isEmpty == false else { return }
+        guard currentNumbersLabelText != "0" else { return }
         
         expression.append(currentOperatorLabelText)
         expression.append(currentNumbersLabelText)
@@ -119,5 +121,10 @@ final class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             historyEntryStackView.isHidden = false
         }
+    }
+    
+    private func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height - historyScrollView.bounds.height + historyScrollView.contentInset.bottom)
+        historyScrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
