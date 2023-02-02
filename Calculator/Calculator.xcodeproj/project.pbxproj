@@ -162,10 +162,10 @@
 		AD83C116297FE4D10050F528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AD83C106297FBC740050F528 /* CalculatorItemQueue.swift */,
 				AD83C1192980BA4B0050F528 /* LinkedList.swift */,
-				ADE5AE99298363AB00449226 /* Operator.swift */,
+				AD83C106297FBC740050F528 /* CalculatorItemQueue.swift */,
 				ADE5AE9B29836CC600449226 /* Formula.swift */,
+				ADE5AE99298363AB00449226 /* Operator.swift */,
 				ADE5AE9D2983789600449226 /* ExpressionParser.swift */,
 				ADAB9AD429811E5000FEA88D /* Protocol.swift */,
 				AD35CAB32983D6CD0035751B /* Extention.swift */,

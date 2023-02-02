@@ -9,6 +9,8 @@ import UIKit
 final class CurrentInputHandler {
     static let shared = CurrentInputHandler()
     
+    private init() {}
+    
     private enum Sign {
         static let empty = ""
         static let comma = ","
