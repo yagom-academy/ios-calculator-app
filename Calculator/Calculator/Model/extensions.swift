@@ -13,6 +13,7 @@ extension String: CalculateItem {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
         return numberFormatter
     }
     
@@ -20,7 +21,7 @@ extension String: CalculateItem {
         return self.components(separatedBy: String(target))
     }
     
-    func addComma() -> String {
+    func applyFormatter() -> String {
         guard let value = numberFormatter.string(for: Double(self)) else { return "" }
         return value
     }
