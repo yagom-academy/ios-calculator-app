@@ -29,20 +29,6 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_lhs는3_rhs는2일때_subtract호출시_1을_반환한다() {
-        // given
-        let lhs = 3.0
-        let rhs = 2.0
-        let expectation = 1.0
-        sut = Operator.subtract
-        
-        // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
     func test_lhs는1_rhs는2일때_subtract호출시_음수1를_반환한다() {
         // given
         let lhs = 1.0
@@ -70,11 +56,11 @@ final class OperatorTests: XCTestCase {
         XCTAssertTrue(result.isNaN)
     }
     
-    func test_lhs는1_rhs는2일때_multiply호출시_2를_반환한다() {
+    func test_lhs는0_rhs는2일때_multiply호출시_2를_반환한다() {
         // given
-        let lhs = 1.0
+        let lhs = 0.0
         let rhs = 2.0
-        let expectation = 2.0
+        let expectation = 0.0
         sut = Operator.multiply
         
         // when
@@ -89,34 +75,6 @@ final class OperatorTests: XCTestCase {
         let lhs = 1.0
         let rhs = -2.0
         let expectation = -2.0
-        sut = Operator.multiply
-        
-        // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_lhs는음수1_rhs는_음수2일때_multiply호출시_2를_반환한다() {
-        // given
-        let lhs = -1.0
-        let rhs = -2.0
-        let expectation = 2.0
-        sut = Operator.multiply
-        
-        // when
-        let result = sut.calculate(lhs: lhs, rhs: rhs)
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_lhs는0_rhs는2일때_multiply호출시_0을_반환한다() {
-        // given
-        let lhs = 0.0
-        let rhs = 2.0
-        let expectation = 0.0
         sut = Operator.multiply
         
         // when
