@@ -17,7 +17,7 @@ final class MainViewController: UIViewController {
         static let nan = "NaN"
     }
     
-    var numberFormatter = NumberFormatter(numberStyle: .decimal,
+    let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
@@ -108,7 +108,7 @@ final class MainViewController: UIViewController {
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
         guard currentOperator != Sign.empty else { return }
         
-        addCurrentItem(to: calculateItemStackView)
+        calculateItemStackView.addCurrentItem()
         
         var formula = ExpressionParser.parse(from: currentInput)
         let result = formula.result()

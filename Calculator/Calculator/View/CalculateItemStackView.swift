@@ -8,7 +8,28 @@
 import UIKit
 
 final class CalculateItemStackView: UIStackView {
+    private enum Sign {
+        static let comma = ","
+        static let space = " "
+        static let zero = "0"
+        static let empty = ""
+    }
+    
+    let numberFormatter = NumberFormatter(numberStyle: .decimal,
+                                          roundingMode: .halfUp,
+                                          usesSignificantDigits: true,
+                                          maximumSignificantDigits: 20)
+    
     @IBOutlet weak var calculateItemScrollView: UIScrollView!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
+    
+    var currentOperand: String {
+        return operandLabel.text ?? Sign.zero
+    }
+    var currentOperator: String {
+        return operatorLabel.text ?? Sign.empty
+    }
     
     func removeAllSubviews() {
         self.subviews.forEach { $0.removeFromSuperview() }
@@ -23,7 +44,7 @@ final class CalculateItemStackView: UIStackView {
     
     private func generateCurrentItemStackView() -> UIStackView? {
         let operand = UILabel()
-        operand.text = convertToDecimal(from: currentOperand)
+        operand.text = numberFormatter.convertToDecimal(from: currentOperand)
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
@@ -50,25 +71,7 @@ final class CalculateItemStackView: UIStackView {
         superview.addArrangedSubview(calculateItem)
     }
     
-    private func addToCurrentInput(about `operator`: UILabel, and operand: UILabel) {
-        guard let input = makeInput(from: `operator`, and: operand) else { return }
-        currentInput += input
-    }
     
-    private func makeInput(from `operator`: UILabel, and operand: UILabel) -> String? {
-        guard let operatorText = `operator`.text,
-              let operandText = operand.text,
-              let convertedOperandText = convertToNone(from: operandText) else { return nil }
-        
-        let result = operatorText + Sign.space + convertedOperandText + Sign.space
-        
-        return result
-    }
     
-    private func convertToNone(from decimal: String) -> String? {
-        let comma = Character(Sign.comma)
-        let noneStyle = decimal.split(with: comma).joined()
-        
-        return noneStyle
-    }
+    
 }
