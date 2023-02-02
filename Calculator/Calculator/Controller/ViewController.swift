@@ -32,12 +32,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
-        if operandLabel.text == "0" {
+        if operandLabel.text == "0" && !(sender.currentTitle == ".") {
             return
-        }
-        
-        if let input = sender.currentTitle {
-            operand += input
+        } else if operandLabel.text == "0" && sender.currentTitle == "." {
+            operand += "0."
+        } else {
+            if let input = sender.currentTitle {
+                operand += input
+            }
         }
         
         operandLabel.text = operand
