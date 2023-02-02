@@ -1,10 +1,3 @@
-//
-//  OperatorTests.swift
-//  OperatorTests
-//
-//  Created by Andrew on 2023/02/01.
-//
-
 import XCTest
 
 final class OperatorTests: XCTestCase {

@@ -12,8 +12,8 @@ enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         var result: Array<String> = [input]
         
-        Operator.allCases.forEach { Operator in
-            result = result.map { $0.split(with: Operator.rawValue) }.flatMap { $0 }
+        Operator.allCases.forEach { operatorElement in
+            result = result.map { $0.split(with: operatorElement.rawValue) }.flatMap { $0 }
         }
         return result
     }

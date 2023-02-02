@@ -1,6 +1,6 @@
 struct Formula {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    private (set) var operands = CalculatorItemQueue<Double>()
+    private (set) var operators = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
         var result: Double = 0
