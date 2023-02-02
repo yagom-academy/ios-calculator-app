@@ -14,14 +14,19 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     
     private var expression: [String] = [String]()
-    private var numberFormatter: NumberFormatter = .init()
+    private var numberFormatter: NumberFormatter = NumberFormatter()
     private var isCalculated: Bool = false
     
     private var currentNumbersLabelText: String = "0" {
-        didSet {
-            let formattedNumber = numberFormatter.string(for: Decimal(string: currentNumbersLabelText))
-            
-            displayNumbersLabel.text = formattedNumber
+        didSet {            
+            if currentNumbersLabelText.count > 20 {
+                let numberText = String(currentNumbersLabelText.suffix(20))
+                let formattedNumber = numberFormatter.string(for: Decimal(string: numberText))
+                displayNumbersLabel.text = formattedNumber
+            } else {
+                let formattedNumber = numberFormatter.string(for: Decimal(string: currentNumbersLabelText))
+                displayNumbersLabel.text = formattedNumber
+            }
         }
     }
     private var currentOperatorLabelText: String = "" {
@@ -44,6 +49,12 @@ final class ViewController: UIViewController {
         } else {
             currentNumbersLabelText += number
         }
+    }
+    
+    @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
+        guard currentNumbersLabelText != "0" else { return }
+        guard let number = sender.currentTitle else { return }
+        currentNumbersLabelText += number
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
