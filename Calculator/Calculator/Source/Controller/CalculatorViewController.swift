@@ -13,25 +13,27 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var historyScrollView: UIScrollView!
     @IBOutlet private weak var historyStackView: UIStackView!
     
+    private var expression: [String] = [String]()
     private var numberFormatter: NumberFormatter = .init()
+    private var isCalculated: Bool = false
+    
     private var currentNumbersLabelText: String = "0" {
         didSet {
-            displayNumbersLabel.text = numberFormatter.string(for: Double(currentNumbersLabelText))
+            let formattedNumber = numberFormatter.string(for: Decimal(string: currentNumbersLabelText))
+            
+            displayNumbersLabel.text = formattedNumber
         }
     }
-    private var prevOperatorLabelText: String = ""
     private var currentOperatorLabelText: String = "" {
         didSet {
             displayOperatorLabel.text = currentOperatorLabelText
         }
     }
     
-    private var isFirstAction: Bool = true
-    private var expression: [String] = [String]()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20        
     }
     
     @IBAction private func numericButtonTapped(_ sender: UIButton) {
@@ -65,6 +67,27 @@ final class ViewController: UIViewController {
         currentNumbersLabelText = "0"
     }
     
+    @IBAction private func calculateButtonTapped(_ sender: UIButton) {
+        guard expression.isEmpty == false else { return }
+        
+        expression.append(currentOperatorLabelText)
+        expression.append(currentNumbersLabelText)
+        addHistoryEntry(left: currentOperatorLabelText, right: currentNumbersLabelText)
+        
+        let flatenedExpression: String = expression.joined(separator: " ")
+        
+        var formula = ExpressionParser.parse(from: flatenedExpression)
+        let result = formula.result()
+        
+        if result.isNaN {
+            currentNumbersLabelText = "NaN"
+        } else {
+            currentOperatorLabelText = ""
+            expression.removeAll()
+            currentNumbersLabelText = String(result)
+        }
+    }
+    
     @IBAction private func signToggleButtonTapped(_ sender: UIButton) {
         guard currentNumbersLabelText != "0" else { return }
         
@@ -79,14 +102,16 @@ final class ViewController: UIViewController {
         expression.removeAll()
         currentOperatorLabelText = ""
         currentNumbersLabelText = "0"
+        historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         currentNumbersLabelText = "0"
     }
     
-    func addHistoryEntry(left: String, right: String) {
-        let historyEntryStackView = HistoryViewGenerator.generateStackView(operator: left, operand: right)
+    private func addHistoryEntry(left: String, right: String) {
+        let historyEntryStackView = HistoryViewGenerator
+            .generateStackView(operator: left, operand: right)
         historyEntryStackView.isHidden = true
         
         historyStackView.addArrangedSubview(historyEntryStackView)
@@ -95,7 +120,4 @@ final class ViewController: UIViewController {
             historyEntryStackView.isHidden = false
         }
     }
-    
-    
 }
-

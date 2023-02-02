@@ -13,8 +13,4 @@ final class Node<T> {
         self.value = value
         self.next = next
     }
-    
-    deinit {
-        print("\(self.value) 노드 삭제!")
-    }
 }
