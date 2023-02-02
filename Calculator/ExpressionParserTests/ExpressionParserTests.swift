@@ -2,14 +2,6 @@ import XCTest
 
 final class ExpressionParserTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
-
     func test_1더하기2빼기3곱하기4로입력된값을_parse에넣으면_각각연산자와_피연산자로_나누어진다() {
         // given
         let input = "1+2-3*4"

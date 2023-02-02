@@ -14,79 +14,77 @@ final class OperatorTests: XCTestCase {
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = Operator.add
-        sut = Operator.subtract
-        sut = Operator.multiply
-        sut = Operator.divide
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
+        sut = nil
     }
     
-    func test_1더하기2는3() {
+    func test_1더하기2는_3의값을_확인하는함수() {
         // given
-        let number1: Double = 1
-        let number2: Double = 2
+        let firstNumber: Double = 1
+        let secondNumber: Double = 2
         sut = Operator.add
-        let result: Double = 3
+        let expectedValue: Double = 3
         
         // when
-        let add = sut.calculate(lhs: number1, rhs: number2)
+        let addResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         
         // then
-        XCTAssertEqual(result, add)
+        XCTAssertEqual(expectedValue, addResult)
     }
     
-    func test_1빼기2는_마이너스1() {
+    func test_1빼기2는_마이너스1값을_확인하는함수() {
         // given
-        let number1: Double = 1
-        let number2: Double = 2
+        let firstNumber: Double = 1
+        let secondNumber: Double = 2
         sut = Operator.subtract
-        let result: Double = -1
+        let expectedValue: Double = -1
         
         // when
-        let subtract = sut.calculate(lhs: number1, rhs: number2)
+        let subtractResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         
         // then
-        XCTAssertEqual(result, subtract)
+        XCTAssertEqual(expectedValue, subtractResult)
     }
     
-    func test_1곱하기2는_2() {
+    func test_1곱하기2는_2값을_확인하는함수() {
         // given
-        let number1: Double = 1
-        let number2: Double = 2
+        let firstNumber: Double = 1
+        let secondNumber: Double = 2
         sut = Operator.multiply
-        let result: Double = 2
+        let expectedValue: Double = 2
         
         // when
-        let multiply = sut.calculate(lhs: number1, rhs: number2)
+        let multiplyResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         
         // then
-        XCTAssertEqual(result, multiply)
+        XCTAssertEqual(expectedValue, multiplyResult)
     }
     
-    func test_1나누기2는_0점5() {
+    func test_1나누기2는_0점5값을_확인하는함수() {
         // given
-        let number1: Double = 1
-        let number2: Double = 2
+        let firstNumber: Double = 1
+        let secondNumber: Double = 2
         sut = Operator.divide
-        let result: Double = 0.5
+        let expectedValue: Double = 0.5
         
         // when
-        let divide = sut.calculate(lhs: number1, rhs: number2)
+        let divideResult = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         
         // then
-        XCTAssertEqual(result, divide)
+        XCTAssertEqual(expectedValue, divideResult)
     }
     
-    func test_0으로나누기를시도하면_NaN() {
+    func test_0으로나누기를시도하면_NaN값을_확인하는함수() {
         // given
-        let number1: Double = 2
-        let number2: Double = 0
+        let firstNumber: Double = 2
+        let secondNumber: Double = 0
         sut = Operator.divide
         
         // when
-        let nan = sut.calculate(lhs: number1, rhs: number2)
+        let nan = sut.calculate(lhs: firstNumber, rhs: secondNumber)
         
         // then
          XCTAssertTrue(nan.isNaN)
