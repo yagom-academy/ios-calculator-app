@@ -54,12 +54,14 @@ class ViewController: UIViewController {
     
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
-        if var operand = Int(operandLabel.text!) {
+        guard let operandLabelText = operandLabel.text else { return }
+        
+        if var operand = Int(operandLabelText) {
             operand = -operand
-            operandLabel.text! = String(operand)
-        } else if var operand = Double(operandLabel.text!) {
+            operandLabel.text = String(operand)
+        } else if var operand = Double(operandLabelText) {
             operand = -operand
-            operandLabel.text! = String(operand)
+            operandLabel.text = String(operand)
         }
     }
     
