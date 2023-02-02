@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by Harry.
 //  Copyright © yagom. All rights reserved.
 // 
 
@@ -39,6 +39,7 @@ final class ViewController: UIViewController {
     
     @IBAction private func numericButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
+        guard isCalculated == false else { return }
         
         if currentNumbersLabelText == "0" {
             currentNumbersLabelText = number
@@ -49,19 +50,32 @@ final class ViewController: UIViewController {
     
     @IBAction private func doubleZeroButtonTapped(_ sender: UIButton) {
         guard currentNumbersLabelText != "0" else { return }
-        guard let number = sender.currentTitle else { return }
-        currentNumbersLabelText += number
-        displayNumbersLabel.text = currentNumbersLabelText
+        guard let doubleZero = sender.currentTitle else { return }
+        
+        currentNumbersLabelText += doubleZero
     }
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
         guard !currentNumbersLabelText.contains(".") else { return }
+        
         currentNumbersLabelText += dot
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
+        
+        if isCalculated {
+            guard let continuedText = displayNumbersLabel.text?
+                .components(separatedBy: ",")
+                .joined() else { return }
+            
+            expression.append(continuedText)
+            addHistoryEntry(left: "", right: continuedText)
+            currentOperatorLabelText = `operator`
+            isCalculated = false
+            return
+        }
         
         if currentNumbersLabelText == "0" {
             if currentOperatorLabelText == "" {
@@ -75,16 +89,16 @@ final class ViewController: UIViewController {
         if currentOperatorLabelText != "" {
             expression.append(currentOperatorLabelText)
         }
+        
         expression.append(currentNumbersLabelText)
         addHistoryEntry(left: currentOperatorLabelText, right: currentNumbersLabelText)
         currentOperatorLabelText = `operator`
         currentNumbersLabelText = "0"
-        scrollToBottom()
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
         guard expression.isEmpty == false else { return }
-        guard currentNumbersLabelText != "0" else { return }
+        //guard currentNumbersLabelText != "0" else { return }
         
         expression.append(currentOperatorLabelText)
         expression.append(currentNumbersLabelText)
@@ -96,12 +110,19 @@ final class ViewController: UIViewController {
         let result = formula.result()
         
         if result.isNaN {
-            currentNumbersLabelText = "NaN"
+            clearAfterCalculate()
+            displayNumbersLabel.text = "NaN"
         } else {
-            currentOperatorLabelText = ""
-            expression.removeAll()
-            currentNumbersLabelText = convertFormattedString(text: String(result))
+            clearAfterCalculate()
+            displayNumbersLabel.text = convertFormattedString(text: String(result))
         }
+    }
+    
+    private func clearAfterCalculate() {
+        currentOperatorLabelText = ""
+        currentNumbersLabelText = "0"
+        expression.removeAll()
+        isCalculated = true
     }
     
     @IBAction private func signToggleButtonTapped(_ sender: UIButton) {
@@ -118,11 +139,13 @@ final class ViewController: UIViewController {
         expression.removeAll()
         currentOperatorLabelText = ""
         currentNumbersLabelText = "0"
+        isCalculated = false
         historyStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         currentNumbersLabelText = "0"
+        isCalculated = false
     }
     
     private func addHistoryEntry(left: String, right: String) {
@@ -135,6 +158,7 @@ final class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             historyEntryStackView.isHidden = false
         }
+        scrollToBottom()
     }
     
     private func convertFormattedString(text: String) -> String {
@@ -144,16 +168,9 @@ final class ViewController: UIViewController {
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
         
-        if text.count > 20 {
-            let numberText = String(text.suffix(20))
-            guard let formattedNumber = numberFormatter
-                .string(for: Decimal(string: numberText)) else { return text }
-            return formattedNumber
-        } else {
-            guard let formattedNumber = numberFormatter
-                .string(for: Decimal(string: text)) else { return text }
-            return formattedNumber
-        }
+        guard let formattedNumber = numberFormatter
+            .string(for: Decimal(string: text)) else { return text }
+        return formattedNumber
     }
     
     private func scrollToBottom() {
