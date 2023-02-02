@@ -38,7 +38,6 @@ class ViewController: UIViewController {
     
 
     //버튼탭
-    
     @IBAction func buttonTapped(sender: UIButton) {
         guard let Inputtedtitle = sender.titleLabel?.text else { return }
         
@@ -59,14 +58,24 @@ class ViewController: UIViewController {
             return
         }
         
+        
     }
-    func setUpView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(verticalStackViewInScroll)
-        self.numberOnField.text = "0"
-        self.numberInStackView.text = ""
-        self.operatorInStackView.text = ""
-    }
+        func setUpView() {
+            
+            view.addSubview(scrollView)
+            scrollView.addSubview(verticalStackViewInScroll)
+            self.numberOnField.text = "0"
+            self.numberInStackView.text = ""
+            self.operatorInStackView.text = ""
+            
+        }
+    
+        func setUpScrollViewToBottom(){
+            let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+            if(bottomOffset.y > 0) {
+                self.scrollView.setContentOffset(bottomOffset, animated: true)
+            }
+        }
         
         func allClearButtonTapped() {}
         
@@ -98,18 +107,22 @@ class ViewController: UIViewController {
         numberOnField.text = inputNumbers
     }
     
+    
     func operatorButtonTapped(sender: UIButton) {
-        let currentOper = getInputtedOperator(sender)
-
         
-        if currentOper.isEmpty == false {
+        var currentOper = getInputtedOperator(sender)
+        
+        if self.horizonStackViewVertical.subviews.isEmpty {
+            currentOper = ""
+        } else{
+            
             self.operatorOnField.text = currentOper
             
             addNewStackView(number: inputNumbers, oper: currentOper)
+            setUpScrollViewToBottom()
+            self.numberOnField.text = ""
+            self.inputNumbers = ""
         }
-     
-        self.numberOnField.text = ""
-        self.inputNumbers = ""
     }
     
     func addNewStackView(number: String, oper: String) {
@@ -134,6 +147,7 @@ class ViewController: UIViewController {
         }
 
         self.verticalStackViewInScroll.addArrangedSubview(stackView)
+        
         
     }
     
