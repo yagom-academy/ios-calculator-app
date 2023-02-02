@@ -10,12 +10,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak private var operatorInput: UILabel!
     @IBOutlet weak private var numberInput: UILabel!
-    @IBOutlet var stackView: UIStackView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberFormatter.numberStyle = .decimal
-        
     }
     
     private var isFinishedCalculating: Bool = false
@@ -74,6 +73,13 @@ class ViewController: UIViewController {
         stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackLabel.textColor = .white
         stackView.addArrangedSubview(stackLabel)
+        setScrollView()
+        
+    }
+    
+    private func setScrollView() {
+        let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height)
+        scrollView.setContentOffset(bottomOffset, animated: false)
     }
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {

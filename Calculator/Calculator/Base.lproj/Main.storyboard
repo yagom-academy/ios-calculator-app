@@ -330,6 +330,7 @@
                     <connections>
                         <outlet property="numberInput" destination="Lwz-OF-XHD" id="vRE-bn-k64"/>
                         <outlet property="operatorInput" destination="HPC-iy-qdm" id="YH3-3W-kKK"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="caX-cw-6Lj"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="2KT-ds-FgR"/>
                     </connections>
                 </viewController>
