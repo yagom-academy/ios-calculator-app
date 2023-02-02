@@ -65,8 +65,10 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        isCalculatedStatus = true
+        guard operatorLabel.text != Sign.blank else { return }
+        
         setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
+        isCalculatedStatus = true
         displayOperationResult()
     }
     
