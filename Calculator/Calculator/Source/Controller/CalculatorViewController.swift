@@ -161,18 +161,7 @@ final class ViewController: UIViewController {
         }
         scrollToBottom()
     }
-    
-    private func convertFormattedString(text: String) -> String {
-        let numberFormatter: NumberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
-        
-        guard let formattedNumber = numberFormatter
-            .string(for: Decimal(string: text)) else { return text }
-        return formattedNumber
-    }
-    
+
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height - historyScrollView.bounds.height + historyScrollView.contentInset.bottom)
         historyScrollView.setContentOffset(bottomOffset, animated: true)
