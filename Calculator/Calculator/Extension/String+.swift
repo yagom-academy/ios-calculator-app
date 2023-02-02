@@ -30,16 +30,9 @@ extension String {
     }
     
     var floorIfZero: String {
-        let numberFormatter = NumberFormatter()
-        
         let splittedNumber = self.components(separatedBy: ".")
-        if Int(splittedNumber[1]) == 0 {
-            numberFormatter.roundingMode = .floor
-            guard let doubleNumber = Double(self) else {
-                return self
-            }
-            let flooredNumber = numberFormatter.string(for: doubleNumber) ?? self
-            return flooredNumber
+        if splittedNumber.count == 2, Int(splittedNumber[1]) == 0 {
+            return splittedNumber[0]
         }
         return self
     }
