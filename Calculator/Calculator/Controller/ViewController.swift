@@ -8,9 +8,15 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    //MARK: - UIButton Outlet
     @IBOutlet var operandsButton: [UIButton]!
     @IBOutlet var operatorsButton: [UIButton]!
+    @IBOutlet weak var allClearButton: UIButton!
+    @IBOutlet weak var clearEntryButton: UIButton!
+    @IBOutlet weak var changSignButton: UIButton!
+    @IBOutlet weak var calculationButton: UIButton!
     
+    //MARK: - UILabel Outlet
     @IBOutlet weak var inputOperandsLabel: UILabel!
     @IBOutlet weak var inputOperatorsLabel: UILabel!
     
@@ -40,17 +46,23 @@ class ViewController: UIViewController {
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
         currentInputFormula = currentInputFormula + "\(number)"
-        
-        //inputOperandsLabel.text = currentInputFormula
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
         inputOperatorsLabel.text = operators[sender.tag]
         
         guard let currentSign = inputOperatorsLabel.text else { return }
-        currentInputFormula = currentInputFormula + currentSign
-
-        print(currentInputFormula)
+        currentInputFormula = currentInputFormula + " " + currentSign + " "
     }
     
+    @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
+        var parsedFormula = ExpressionParser.parse(from: currentInputFormula)
+        let result = parsedFormula.result()
+        inputOperandsLabel.text = String(result)
+    }
+    
+    @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
+        currentInputFormula = ""
+        inputOperandsLabel.text = currentInputFormula
+    }
 }

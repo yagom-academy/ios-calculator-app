@@ -301,6 +301,9 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="calculationButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QxO-d9-T7i"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -345,6 +348,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="allClearButton" destination="ped-N8-JbY" id="9xc-Cz-CBU"/>
+                        <outlet property="calculationButton" destination="Daw-iX-Owl" id="g7R-Fe-iwd"/>
+                        <outlet property="changSignButton" destination="ows-U7-mNc" id="IdK-3P-KhT"/>
+                        <outlet property="clearEntryButton" destination="RLD-dY-LOA" id="iYk-3N-Nfq"/>
                         <outlet property="inputOperandsLabel" destination="Lwz-OF-XHD" id="aXS-9e-oDW"/>
                         <outlet property="inputOperatorsLabel" destination="HPC-iy-qdm" id="9hG-qq-9tV"/>
                         <outletCollection property="operandsButton" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="k4I-Bw-z68"/>
