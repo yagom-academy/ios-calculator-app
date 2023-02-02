@@ -91,15 +91,20 @@ class ViewController: UIViewController {
     func processNumberInput(_ inputFromButton: String){
         guard let prevOperandUILabel = operandUILabel.text else { return }
         
-        if operandUILabel.text == DefaultValue.zero {
-            operandUILabel.text = inputFromButton == ButtonID.zero || inputFromButton == ButtonID.twoZeros ? DefaultValue.zero : inputFromButton
+        if prevOperandUILabel == DefaultValue.zero {
+            if inputFromButton == ButtonID.zero || inputFromButton == ButtonID.twoZeros {
+                operandUILabel.text = DefaultValue.zero
+            } else {
+                operandUILabel.text = inputFromButton
+            }
+            
             return
         }
         
-        if !prevOperandUILabel.contains(SpecialCharacter.dot) {
-            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
-        } else {
+        if prevOperandUILabel.contains(SpecialCharacter.dot) {
             operandUILabel.text = prevOperandUILabel + inputFromButton
+        } else {
+            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
         }
     }
     
@@ -191,19 +196,15 @@ class ViewController: UIViewController {
     
     func stackInputToExpression() {
         guard let operatorText = operatorUILabel.text,
-              var operandText = operandUILabel.text?.components(separatedBy: SpecialCharacter.comma).joined() else { return }
+              var operandText = operandUILabel.text else { return }
         
-        if !operandText.contains(SpecialCharacter.dot) {
-            operandText = formattingNumber(for: operandText)
-        }
-        
-        expression += operatorText + operandText
+        expression += operatorText + formattingNumber(for: operandText)
     }
     
     func calculateExpression() {
-        expression = expression.components(separatedBy: SpecialCharacter.comma).joined()
+        let removedComma = expression.components(separatedBy: SpecialCharacter.comma).joined()
         
-        var formula = ExpressionParser.parse(from: expression)
+        var formula = ExpressionParser.parse(from: removedComma)
         var result = String(formula.result())
         
         if result == "nan" {
@@ -254,4 +255,3 @@ class ViewController: UIViewController {
         return formattingResult
     }
 }
-
