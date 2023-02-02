@@ -17,22 +17,21 @@ final class MainViewController: UIViewController {
         static let nan = "NaN"
     }
     
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var calculateItemStackView: CalculateItemStackView!
+    @IBOutlet weak var calculateItemScrollView: UIScrollView!
+    
     let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
-    var currentInput = Sign.empty
     var currentOperand: String {
         return operandLabel.text ?? Sign.zero
     }
     var currentOperator: String {
         return operatorLabel.text ?? Sign.empty
     }
-    
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var calculateItemStackView: CalculateItemStackView!
-    @IBOutlet weak var calculateItemScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,7 +77,7 @@ final class MainViewController: UIViewController {
     @IBAction func allClear(_ sender: UIButton) {
         calculateItemStackView.removeAllSubviews()
         initializeCurrentCalculateItem()
-        currentInput = Sign.empty
+        CurrentInputHandler.shared.currentInput = Sign.empty
     }
     
     @IBAction func clearOperandLabel(_ sender: UIButton) {
@@ -110,10 +109,10 @@ final class MainViewController: UIViewController {
         
         calculateItemStackView.addCurrentItem()
         
-        var formula = ExpressionParser.parse(from: currentInput)
+        var formula = ExpressionParser.parse(from: CurrentInputHandler.shared.currentInput)
         let result = formula.result()
         
-        currentInput = Sign.empty
+        CurrentInputHandler.shared.currentInput = Sign.empty
         operatorLabel.text = Sign.empty
         
         if result.isNaN == true {

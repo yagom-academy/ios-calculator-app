@@ -17,7 +17,7 @@ final class CurrentInputHandler {
     
     var currentInput: String = ""
     
-    func addToCurrentInput(about `operator`: UILabel, and operand: UILabel) {
+    func addInput(about `operator`: UILabel, and operand: UILabel) {
         guard let input = makeInput(from: `operator`, and: operand) else { return }
         currentInput += input
     }

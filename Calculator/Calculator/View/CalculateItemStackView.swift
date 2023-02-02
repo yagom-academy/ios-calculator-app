@@ -61,7 +61,7 @@ final class CalculateItemStackView: UIStackView {
         result.alignment = .fill
         result.distribution = .fill
         
-        addToCurrentInput(about: `operator`, and: operand)
+        CurrentInputHandler.shared.addInput(about: `operator`, and: operand)
         
         return result
     }
