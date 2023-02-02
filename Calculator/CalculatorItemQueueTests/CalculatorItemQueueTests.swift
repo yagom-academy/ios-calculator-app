@@ -16,7 +16,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue함수호출로_값을넣으면_enqueueStack에값이삽입되는함수() {
         // given
-        let input: Array<Double> = [11]
+        let input: [Double] = [11]
         
         // when
         sut.enqueue(element: 11)
