@@ -68,6 +68,76 @@ class ViewController: UIViewController {
             operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
         }
     }
+    func stackInputToScrollView() {
+        let stackView = UIStackView()
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        operatorLabel.text = operatorUILabel.text
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = UIColor.white
+        
+        if let operandUILabelText = operandUILabel.text {
+            operandLabel.text = cutZerosAfterDecimalPoint(for: operandUILabelText)
+        }
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandLabel.textColor = UIColor.white
+        
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        stackView.spacing = stackView.spacing + 8
+        
+        stackView.alignment = .fill
+        stackView.axis = .horizontal
+        
+        scrollView.addArrangedSubview(stackView)
+    }
+    
+    func stackInputToExpression() {
+        guard let operatorText = operatorUILabel.text,
+              var operandText = operandUILabel.text?.components(separatedBy: ",").joined() else { return }
+        
+        if !operandText.contains(".") {
+            operandText = formattingNumber(for: operandText)
+        }
+        
+        expression += operatorText + operandText
+    }
+    
+    func calculateExpression() {
+        expression = expression.components(separatedBy: ",").joined()
+        
+        var formula = ExpressionParser.parse(from: expression)
+        var result = String(formula.result())
+        
+        if result == "nan" {
+            result = "NaN"
+        } else {
+            result = cutZerosAfterDecimalPoint(for: result)
+            result = formattingNumber(for: result)
+        }
+        
+        operandUILabel.text = result
+        operatorUILabel.text = ""
+        expression = ""
+    }
+    
+    func cutZerosAfterDecimalPoint(for input: String) -> String {
+        guard input.contains(".") else {
+            return input
+        }
+        
+        var splitedByDot = input.components(separatedBy: ".")
+        
+        while splitedByDot[1].last == "0" {
+            _ = splitedByDot[1].popLast()
+        }
+        
+        if splitedByDot[1].isEmpty {
+            return splitedByDot[0]
+        }
+        return splitedByDot[0] + "." + splitedByDot[1]
+    }
     
     func formattingNumber(for input: String) -> String {
         let formatter = NumberFormatter()
