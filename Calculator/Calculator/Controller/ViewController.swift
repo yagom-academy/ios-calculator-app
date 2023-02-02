@@ -68,6 +68,68 @@ class ViewController: UIViewController {
             operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
         }
     }
+    
+    func allClear() {
+        scrollView.subviews.forEach { $0.removeFromSuperview() }
+        
+        operatorUILabel.text = ""
+        operandUILabel.text = "0"
+        expression = ""
+    }
+    
+    func clearEntry() {
+        operandUILabel.text = "0"
+    }
+    
+    func signChanger() {
+        guard operandUILabel.text != "0" else {
+            return
+        }
+        
+        if operandUILabel.text?.contains("-") == true {
+            operandUILabel.text?.removeFirst()
+            return
+        }
+        
+        guard let prevOperandUILabel = operandUILabel.text else { return }
+
+        operandUILabel.text = "-" + prevOperandUILabel
+    }
+    
+    func processOperatorInput(_ inputFromButton: String) {
+        guard operandUILabel.text != "0"  else {
+            if !scrollView.subviews.isEmpty {
+                operatorUILabel.text = inputFromButton
+            }
+            
+            return
+        }
+        
+        stackInputToExpression()
+        stackInputToScrollView()
+        operandUILabel.text = "0"
+        operatorUILabel.text = inputFromButton
+    }
+    
+    func processEqualSignInput() {
+        guard operatorUILabel.text != "" else { return }
+    
+        stackInputToExpression()
+        stackInputToScrollView()
+        calculateExpression()
+    }
+    
+    func processZeroInput(_ inputFromButton: String) {
+        guard operandUILabel.text != "0",
+              let prevOperandUILabel = operandUILabel.text else { return }
+                
+        if !prevOperandUILabel.contains(".") {
+            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
+        } else {
+            operandUILabel.text = prevOperandUILabel + inputFromButton
+        }
+    }
+    
     func stackInputToScrollView() {
         let stackView = UIStackView()
         let operatorLabel = UILabel()
@@ -91,6 +153,16 @@ class ViewController: UIViewController {
         stackView.axis = .horizontal
         
         scrollView.addArrangedSubview(stackView)
+        scrollToBottomOfScrollView()
+    }
+    
+    func scrollToBottomOfScrollView() {
+        guard let parentScrollView = scrollView.superview as? UIScrollView else { return }
+        
+        let bottomOffset = CGPoint(x: 0, y: parentScrollView.contentSize.height - parentScrollView.bounds.size.height + 25 + parentScrollView.contentInset.bottom)
+        if(bottomOffset.y > 25) {
+            parentScrollView.setContentOffset(bottomOffset, animated: true)
+        }        
     }
     
     func stackInputToExpression() {
