@@ -36,6 +36,8 @@ class ViewController: UIViewController {
             return
         } else if operandLabel.text == "0" && sender.currentTitle == "." {
             operand += "0."
+        } else if operand.contains(".") && sender.currentTitle == "." {
+            return
         } else {
             if let input = sender.currentTitle {
                 operand += input
