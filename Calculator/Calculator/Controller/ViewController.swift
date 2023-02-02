@@ -118,7 +118,6 @@ class ViewController: UIViewController {
             operand = ""
             workingSpace = ""
         } else {
-            print(result)
             operandLabel.text = useNumberFormatter(result)
             operatorLabel.text = ""
             operand = ""
