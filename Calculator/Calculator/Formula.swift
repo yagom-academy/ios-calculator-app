@@ -7,10 +7,9 @@ struct Formula {
         
         while !operands.isEmpty {
             if let prev = operands.dequeue(), let next = operands.dequeue(), let `operator` = operators.dequeue() {
-                result = `operator`.calculate(lhs:prev ,rhs: next)
+                result = `operator`.calculate(lhs: prev, rhs: next)
             }
         }
-        
         return result
     }
     

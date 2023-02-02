@@ -32,6 +32,4 @@ struct CalculatorItemQueue< Element: CalculateItem > {
         dequeueStack.removeAll()
     }
     
-    
-    
 }

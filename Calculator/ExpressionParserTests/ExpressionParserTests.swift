@@ -13,7 +13,7 @@ final class ExpressionParserTests: XCTestCase {
     func test_1더하기2빼기3곱하기4로입력된값을_parse에넣으면_각각연산자와_피연산자로_나누어진다() {
         // given
         let input = "1+2-3*4"
-        let inputOperand: Array<Double> = [1,2,3,4]
+        let inputOperand: Array<Double> = [1, 2, 3, 4]
         let inputOperator = [Operator.add, Operator.subtract, Operator.multiply]
         
         // when
@@ -25,6 +25,4 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(inputOperand, resultOperand)
         XCTAssertEqual(inputOperator, resultOperator)
     }
-    
-
 }

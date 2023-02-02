@@ -55,7 +55,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty)
     }
 
-    
     func test_queue에요소가들어있는상태에서_isEmpty를호출할경우_false를확인하는함수() {
         // given
         
@@ -91,7 +90,5 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
-
-
 }
 

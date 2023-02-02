@@ -84,7 +84,6 @@ final class OperatorTests: XCTestCase {
         let number1: Double = 2
         let number2: Double = 0
         sut = Operator.divide
-        let result: Double = Double.nan
         
         // when
         let nan = sut.calculate(lhs: number1, rhs: number2)
@@ -92,7 +91,4 @@ final class OperatorTests: XCTestCase {
         // then
          XCTAssertTrue(nan.isNaN)
     }
-    
-    
-
 }
