@@ -7,7 +7,7 @@ final class ExtensionStringTests: XCTestCase {
         let inputValue = "1+2+3+4+5"
         
         // when
-        let split = inputValue.split(with: "+")
+        var split = inputValue.split(with: "+")
         let expectedValue = ["1","2","3","4","5"]
         
         // then
