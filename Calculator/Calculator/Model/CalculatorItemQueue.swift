@@ -9,7 +9,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     init(with queue: [Element] = []) {
-        queue.forEach{ enqueue($0) }
+        queue.forEach { enqueue($0) }
     }
     
     mutating func enqueue(_ element: Element) {

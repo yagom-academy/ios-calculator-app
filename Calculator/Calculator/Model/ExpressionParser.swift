@@ -5,7 +5,7 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandsArray = componentsByOperators(from: input).compactMap { Double($0) }
-        let operatorsArray = input.compactMap{ Operator(rawValue: $0) }
+        let operatorsArray = input.compactMap { Operator(rawValue: $0) }
 
         let operandQueue = CalculatorItemQueue(with: operandsArray)
         let operatorQueue = CalculatorItemQueue(with: operatorsArray)
