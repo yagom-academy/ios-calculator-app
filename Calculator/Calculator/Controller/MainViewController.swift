@@ -141,8 +141,7 @@ final class MainViewController: UIViewController {
         guard let subview = generateCurrentItemStackView() else { return }
         
         add(subview, to: stackView)
-        calculateItemScrollView.layoutIfNeeded()
-        calculateItemScrollView.setContentOffset(CGPoint(x: 0, y: calculateItemScrollView.contentSize.height - calculateItemScrollView.bounds.height), animated: true)
+        calculateItemScrollView.didAddSubview(subview)
         initializeCurrentCalculateItem()
     }
     
