@@ -23,7 +23,7 @@ extension String: CalculateItem {
     }
     
     func applyFormatter() -> String {
-        guard let value = numberFormatter.string(for: Double(self)) else { return "" }
+        guard let value = numberFormatter.string(for: Double(self.split(with: ",").joined())) else { return "" }
         return value
     }
 }

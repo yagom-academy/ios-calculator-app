@@ -18,7 +18,6 @@ final class ViewController: UIViewController {
         static let empty = ""
         static let zero = "0"
         static let zeroZero = "00"
-        static let zeroDot = "0."
         static let negative = "-"
         static let nan = "NaN"
     }
@@ -26,7 +25,7 @@ final class ViewController: UIViewController {
     var expression: String = Sign.empty
     var isCalculatedStatus: Bool = false
     var currentOperator: String { (operatorLabel.text ?? Sign.zero) }
-    var currentOperand: String { (operandLabel.text ?? Sign.empty).split(with: ",").joined() }
+    var currentOperand: String { (operandLabel.text ?? Sign.empty) }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,8 +99,7 @@ final class ViewController: UIViewController {
             operandLabel.text = inputNumber.applyFormatter()
         } else {
             guard currentOperand.contains(Sign.dot) == false else {
-                let nextLabel = currentOperand
-                operandLabel.text = nextLabel + inputNumber
+                operandLabel.text = currentOperand + inputNumber
                 return
             }
             operandLabel.text = (currentOperand + inputNumber).applyFormatter()
@@ -119,7 +117,7 @@ final class ViewController: UIViewController {
         guard let operatorValue = sign else { return }
         
         if expression == Sign.empty {
-            expression += currentOperand
+            expression += currentOperand.split(with: ",").joined()
             setOperationStackView(operatorValue: Sign.empty,
                                   operandValue: currentOperand.applyFormatter())
         } else if operandLabel.text == Sign.zero {
