@@ -10,8 +10,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak private var operatorInput: UILabel!
     @IBOutlet weak private var numberInput: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak private var stackView: UIStackView!
+    @IBOutlet weak private var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     private var isFinishedCalculating: Bool = false
     private var isEnteredOperand: Bool = false
     private var isChangeableOperator: Bool = false
-    
     private var numberFormatter = NumberFormatter()
+    
     private var currentNumber: String = "0" {
         didSet {
             numberInput.text = applyDecimalPoint(number: currentNumber)
@@ -44,8 +44,45 @@ class ViewController: UIViewController {
         currentNumber = "0"
     }
     
+    @IBAction func numberButtonTapped(_ sender: UIButton) {
+        
+        guard let number = sender.currentTitle else { return }
+        if currentNumber == "0"  {
+            currentNumber = number
+        } else {
+            currentNumber += number
+        }
+    }
+    
+    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+        checkSign()
+    }
+    
+    @IBAction func CEButtonTapped(_ sender: UIButton) {
+        
+        if isFinishedCalculating {
+            numberInput.text = "0"
+        } else {
+            numberInput.text = ""
+        }
+    }
+    
+    @IBAction func ACButtonTapped(_ sender: UIButton) {
+        
+        resetStackView()
+        resetNumberInput()
+        resetOperatorInput()
+        isFinishedCalculating = false
+    }
+    
+    @IBAction func equalButtonTapped(_ sender: UIButton) {
+        if isFinishedCalculating == false {
+            handleDivideError()
+        }
+    }
     
     private func operandIsZero() {
+        
         if !stackView.subviews.isEmpty && numberInput.text == "0" {
             isChangeableOperator = true
         } else {
@@ -54,6 +91,7 @@ class ViewController: UIViewController {
     }
     
     private func checkInitialCondition() {
+        
         if numberInput.text == "0" {
             isEnteredOperand = false
         } else {
@@ -82,27 +120,13 @@ class ViewController: UIViewController {
         scrollView.setContentOffset(bottomOffset, animated: false)
     }
     
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
-        
-        guard let number = sender.currentTitle else { return }
-        if currentNumber == "0" {
-            currentNumber = number
-        } else {
-            currentNumber += number
-        }
-    }
-    
     private func applyDecimalPoint(number: String) -> String {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
         guard let operand = Double(number) else { return "" }
         guard let result = numberFormatter.string(from: NSNumber(value: operand)) else { return "" }
         
         return result
-    }
-    
-    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
-        checkSign()
     }
     
     private func checkSign() {
@@ -118,19 +142,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func CEButtonTapped(_ sender: UIButton) {
-        
-        numberInput.text = " "
-    }
-    
-    @IBAction func ACButtonTapped(_ sender: UIButton) {
-        
-        resetStackView()
-        resetNumberInput()
-        resetOperatorInput()
-        isFinishedCalculating = false
-    }
-    
     private func resetStackView() {
         stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
@@ -143,13 +154,8 @@ class ViewController: UIViewController {
         operatorInput.text = " "
     }
     
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
-        if isFinishedCalculating == false {
-            handleDivideError()
-        }
-    }
-    
     private func handleDivideError() {
+        
         do {
             let resultLabel = try checkDecimalPoint()
             numberInput.text = resultLabel
@@ -185,6 +191,7 @@ class ViewController: UIViewController {
     }
     
     private func arrangeCalculateItems() -> String {
+        
         addStackView()
         var calculateItems: [String] = []
         stackView.arrangedSubviews.forEach { view in
