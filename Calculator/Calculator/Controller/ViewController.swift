@@ -20,18 +20,47 @@ class ViewController: UIViewController {
     //MARK: - UILabel Outlet
     @IBOutlet weak var inputOperandsLabel: UILabel!
     @IBOutlet weak var inputOperatorsLabel: UILabel!
+    @IBOutlet var stackView: UIStackView!
     
     let operrands = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    let operators = ["+", "-", "/", "*"]
+    let operators = ["+", "−", "÷", "×"]
     var currentInputFormula: String = "0"
     var oldInputFormula: String = ""
     var formula: [String] = []
+    var currentTappedNumber: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allocateOperrandsTag()
         allocateOperatorsTag()
         updateCurrentInputScreen()
+    }
+    
+    func makeStackView(_ operatorSign: String, _ operand: String) -> UIStackView {
+        let view = UIStackView()
+        let operandLabel = UILabel()
+        let operatorLabel = UILabel()
+        
+        operatorLabel.text = operatorSign
+        operatorLabel.textColor = .white
+        operandLabel.text = operand
+        operandLabel.textColor = .white
+        
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fill
+        view.spacing = 8
+
+        view.addArrangedSubview(operatorLabel)
+        view.addArrangedSubview(operandLabel)
+        //[operatorLabel, operandLabel].forEach(view.addArrangedSubview(_:))
+
+        return view
+    }
+    
+    func printex(){
+        print("current: \(currentInputFormula)")
+        print("old: \(oldInputFormula)")
     }
     
     func allocateOperrandsTag() {
@@ -52,13 +81,16 @@ class ViewController: UIViewController {
     
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
+        currentTappedNumber = "\(number)"
+        
         if currentInputFormula == "0" {
             currentInputFormula = "\(number)"
             updateCurrentInputScreen()
+            printex()
         } else {
             currentInputFormula = currentInputFormula + "\(number)"
+            printex()
         }
-
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
@@ -68,18 +100,27 @@ class ViewController: UIViewController {
         
         if oldInputFormula != "" {
             currentInputFormula = oldInputFormula + " " + currentSign + " "
-
+            printex()
         } else {
             currentInputFormula = currentInputFormula + " " + currentSign + " "
+            printex()
         }
+        
+        let newStackView = makeStackView(currentSign, currentTappedNumber)
+        print("스택뷰 연산자: \(currentSign)")
+        print("스택뷰 피연산자: \(currentInputFormula)")
+      
+        stackView.addArrangedSubview(newStackView)
     }
     
     @IBAction func dotButtonDidTapped(_ sender: UIButton) {
         if currentInputFormula.last == "." {
             updateCurrentInputScreen()
+            printex()
         } else {
             currentInputFormula += "."
             updateCurrentInputScreen()
+            printex()
         }
     }
     
@@ -88,11 +129,14 @@ class ViewController: UIViewController {
         let result = parsedFormula.result()
         inputOperandsLabel.text = String(result)
         oldInputFormula = String(result)
+        printex()
     }
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
         currentInputFormula = "0"
         oldInputFormula = ""
+        //stackView.removeArrangedSubview(newStackView)
+        printex()
     }
     
     @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
@@ -101,5 +145,6 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
         inputOperandsLabel.text = "0"
+        printex()
     }
 }
