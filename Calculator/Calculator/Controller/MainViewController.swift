@@ -15,7 +15,6 @@ final class MainViewController: UIViewController {
         static let minus = "-"
         static let space = " "
         static let nan = "NaN"
-        static let comma = ","
     }
     
     var numberFormatter = NumberFormatter()
@@ -56,31 +55,10 @@ final class MainViewController: UIViewController {
         
         if currentOperand != Sign.zero {
             let nextOperand = currentOperand + inputOperand
-            operandLabel.text = convertToDecimal(from: nextOperand)
+            operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
         } else {
             operandLabel.text = inputOperand
         }
-    }
-    
-    private func convertToDecimal(from string: String) -> String? {
-        guard let double = convertToDouble(from: string) else { return nil }
-        let decimalStyleString = convertToString(from: double)
-        
-        return decimalStyleString
-    }
-    
-    private func convertToDouble(from labelText: String) -> Double? {
-        let comma = Character(Sign.comma)
-        let splitedText = labelText.split(with: comma).joined()
-        
-        return Double(splitedText)
-    }
-    
-    private func convertToString(from double: Double) -> String? {
-        let convertedDouble = NSNumber(value: double)
-        let result = numberFormatter.string(from: convertedDouble)
-        
-        return result
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
@@ -98,7 +76,7 @@ final class MainViewController: UIViewController {
            currentOperand.contains(Sign.dot) {
             operandLabel.text = currentOperand + senderTitle
         } else {
-            operandLabel.text = convertToDecimal(from: currentOperand + senderTitle)
+            operandLabel.text = numberFormatter.convertToDecimal(from: currentOperand + senderTitle)
         }
     }
     
@@ -114,8 +92,8 @@ final class MainViewController: UIViewController {
     
     @IBAction func toggleSign(_ sender: UIButton) {
         guard currentOperand != Sign.zero,
-              let convertedOperand = convertToDouble(from: currentOperand),
-              let toggledOperand = convertToString(from: -convertedOperand) else { return }
+              let convertedOperand = numberFormatter.convertToDouble(from: currentOperand),
+              let toggledOperand = numberFormatter.convertToString(from: -convertedOperand) else { return }
         
         operandLabel.text = toggledOperand
     }
@@ -132,8 +110,6 @@ final class MainViewController: UIViewController {
         }
     }
     
-    
-
     @IBAction func calculateCurrentFormula(_ sender: UIButton) {
         guard currentOperator != Sign.empty else { return }
         
@@ -148,7 +124,7 @@ final class MainViewController: UIViewController {
         if result.isNaN == true {
             operandLabel.text = Sign.nan
         } else {
-            operandLabel.text = convertToString(from: result)
+            operandLabel.text = numberFormatter.convertToString(from: result)
         }
     }
 }
