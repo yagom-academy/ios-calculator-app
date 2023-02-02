@@ -18,13 +18,14 @@ final class ViewController: UIViewController {
         static let empty = ""
         static let zero = "0"
         static let zeroZero = "00"
+        static let zeroDot = "0."
         static let negative = "-"
         static let nan = "NaN"
     }
     
-    var parsingValue: String = Sign.empty
+    var expression: String = Sign.empty
     var isCalculatedStatus: Bool = false
-    var currentOperator: String { (operatorLabel.text ?? Sign.zero).split(with: ",").joined() }
+    var currentOperator: String { (operatorLabel.text ?? Sign.zero) }
     var currentOperand: String { (operandLabel.text ?? Sign.empty).split(with: ",").joined() }
     
     override func viewDidLoad() {
@@ -35,7 +36,7 @@ final class ViewController: UIViewController {
     func resetCalculator() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.blank
-        parsingValue = Sign.empty
+        expression.removeAll()
         operationContentStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
@@ -65,89 +66,80 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func didTapEquals(_ sender: UIButton) {
-        let input = parsingValue + " \(currentOperator) " + currentOperand
-        let formula = ExpressionParser.parse(from: input).result()
-        let result = String(formula).split(with: Sign.dot)
-        
         isCalculatedStatus = true
+        setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
+        displayOperationResult()
+    }
+    
+    func displayOperationResult() {
+        let input = expression + " \(currentOperator) " + currentOperand
+        let result = ExpressionParser.parse(from: input).result()
         
-        if isCalculatedStatus == false {
-            setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
-        }
-        
-        guard formula.isNaN == false else {
-            operatorLabel.text = Sign.blank
+        guard result.isNaN == false else {
             operandLabel.text = Sign.nan
-            parsingValue.removeAll()
-            return
-        }
-        
-        guard result[1] != Sign.zero else {
-            operatorLabel.text = Sign.blank
-            operandLabel.text = result[0].applyFormatter()
-            parsingValue.removeAll()
+            expression.removeAll()
             return
         }
         
         operatorLabel.text = Sign.blank
-        operandLabel.text = String(formula).applyFormatter()
-        parsingValue.removeAll()
+        operandLabel.text = String(result).applyFormatter()
+        expression.removeAll()
     }
     
     func updateOperand(with number: String?) {
         guard let inputNumber = number else { return }
+        
         guard isCalculatedStatus != true else {
             isCalculatedStatus = false
             operandLabel.text = inputNumber.applyFormatter()
             return
         }
         
-        if operandLabel.text == Sign.zero {
+        if currentOperand == Sign.zero {
             guard currentOperand != Sign.zeroZero else { return }
             operandLabel.text = inputNumber.applyFormatter()
         } else {
+            guard currentOperand.contains(Sign.dot) == false else {
+                let nextLabel = currentOperand
+                operandLabel.text = nextLabel + inputNumber
+                return
+            }
             operandLabel.text = (currentOperand + inputNumber).applyFormatter()
         }
     }
     
     func updateDot() {
-        guard currentOperand != Sign.zero,
-        currentOperand.contains(Sign.dot) == false
+        guard currentOperand.contains(Sign.dot) == false
         else { return }
         
-        operandLabel.text = currentOperand + String(Sign.dot)
+        operandLabel.text = currentOperand.applyFormatter() + String(Sign.dot)
     }
     
     func updateOperator(with sign: String?) {
         guard let operatorValue = sign else { return }
         
-        isCalculatedStatus = false
-        
-        if parsingValue == Sign.empty {
-            operatorLabel.text = operatorValue
-            parsingValue += currentOperand
+        if expression == Sign.empty {
+            expression += currentOperand
             setOperationStackView(operatorValue: Sign.empty,
                                   operandValue: currentOperand.applyFormatter())
-            operandLabel.text = Sign.zero
         } else if operandLabel.text == Sign.zero {
-            parsingValue += " \(currentOperator) "
-            parsingValue = String(parsingValue.dropLast(3))
-            operatorLabel.text = operatorValue
-            operandLabel.text = Sign.zero
+            expression += " \(currentOperator) "
+            expression = String(expression.dropLast(3))
         } else {
             setOperationStackView(operatorValue: currentOperator,
                                   operandValue: currentOperand.applyFormatter())
-            parsingValue += " \(currentOperator) " + currentOperand
-            operatorLabel.text = operatorValue
-            
-            operandLabel.text = Sign.zero
+            expression += " \(currentOperator) " + currentOperand
         }
+        
+        isCalculatedStatus = false
+        operatorLabel.text = operatorValue
+        operandLabel.text = Sign.zero
     }
     
     func convertPositiveAndNegativeNumber() -> String {
         guard currentOperand != Sign.zero else { return Sign.zero }
         
-        let operandValue = currentOperand.split(with: ",").joined()
+        let operandValue = currentOperand
         
         guard operandValue.prefix(1) != Sign.negative
         else { return String(operandValue.dropFirst(1)) }
@@ -174,6 +166,14 @@ final class ViewController: UIViewController {
         return stackView
     }
     
+    func setScrollView() {
+        operationScrollView.layoutIfNeeded()
+        operationScrollView.setContentOffset(CGPoint(x: 0,
+                                                     y: operationScrollView.contentSize.height
+                                                     - operationScrollView.bounds.height),
+                                             animated: true)
+    }
+    
     func setOperationStackView(operatorValue: String, operandValue: String) {
         let operatorLabel = createLabel(input: operatorValue)
         let operandLabel = createLabel(input: operandValue)
@@ -181,13 +181,5 @@ final class ViewController: UIViewController {
                                                           operandLabel: operandLabel)
         operationContentStackView.addArrangedSubview(operationStackView)
         setScrollView()
-    }
-    
-    func setScrollView() {
-        operationScrollView.layoutIfNeeded()
-        operationScrollView.setContentOffset(CGPoint(x: 0,
-                                                     y: operationScrollView.contentSize.height
-                                                     - operationScrollView.bounds.height),
-                                             animated: true)
     }
 }

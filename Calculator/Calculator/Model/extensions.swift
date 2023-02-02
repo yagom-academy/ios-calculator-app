@@ -12,6 +12,7 @@ extension String: CalculateItem {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
         return numberFormatter
