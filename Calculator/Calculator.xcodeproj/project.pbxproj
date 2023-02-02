@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD02D549298B39CA00524252 /* StackViewContoroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02D548298B39CA00524252 /* StackViewContoroller.swift */; };
+		AD02D549298B39CA00524252 /* CalculateItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02D548298B39CA00524252 /* CalculateItemScrollView.swift */; };
+		AD02D55E298B6B7C00524252 /* CalculateItemStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD02D55D298B6B7C00524252 /* CalculateItemStackView.swift */; };
 		AD20A5202983C48E002FADC2 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD20A51F2983C48E002FADC2 /* FormulaTests.swift */; };
 		AD35CAB42983D6CD0035751B /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35CAB32983D6CD0035751B /* Extention.swift */; };
 		AD35CAB52983D8500035751B /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD35CAB32983D6CD0035751B /* Extention.swift */; };
@@ -79,7 +80,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AD02D548298B39CA00524252 /* StackViewContoroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackViewContoroller.swift; sourceTree = "<group>"; };
+		AD02D548298B39CA00524252 /* CalculateItemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemScrollView.swift; sourceTree = "<group>"; };
+		AD02D55D298B6B7C00524252 /* CalculateItemStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemStackView.swift; sourceTree = "<group>"; };
 		AD20A51F2983C48E002FADC2 /* FormulaTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		AD35CAB32983D6CD0035751B /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
 		AD83C106297FBC740050F528 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -172,8 +174,10 @@
 		AD83C117297FE4E00050F528 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				AD02D548298B39CA00524252 /* CalculateItemScrollView.swift */,
+				AD02D55D298B6B7C00524252 /* CalculateItemStackView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* MainViewController.swift */,
-				AD02D548298B39CA00524252 /* StackViewContoroller.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -465,8 +468,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C713D9462570E5EB001C3AFC /* MainViewController.swift in Sources */,
+				AD02D55E298B6B7C00524252 /* CalculateItemStackView.swift in Sources */,
 				ADE5AE9E2983789600449226 /* ExpressionParser.swift in Sources */,
-				AD02D549298B39CA00524252 /* StackViewContoroller.swift in Sources */,
+				AD02D549298B39CA00524252 /* CalculateItemScrollView.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				AD83C11A2980BA4B0050F528 /* LinkedList.swift in Sources */,
 				AD35CAB42983D6CD0035751B /* Extention.swift in Sources */,

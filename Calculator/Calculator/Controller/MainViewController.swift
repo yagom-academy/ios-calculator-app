@@ -29,25 +29,19 @@ final class MainViewController: UIViewController {
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var calculateItemStackView: UIStackView!
+    @IBOutlet weak var calculateItemStackView: CalculateItemStackView!
     @IBOutlet weak var calculateItemScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCurrentCalculateItem()
-        initializeScrollView()
+        calculateItemStackView.removeAllSubviews()
         initializeNumberFormatter()
     }
     
     private func initializeCurrentCalculateItem() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.empty
-    }
-    
-    private func initializeScrollView() {
-        calculateItemStackView
-            .subviews
-            .forEach { $0.removeFromSuperview() }
     }
     
     private func initializeNumberFormatter() {
@@ -109,7 +103,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func allClear(_ sender: UIButton) {
-        initializeScrollView()
+        calculateItemStackView.removeAllSubviews()
         initializeCurrentCalculateItem()
         currentInput = Sign.empty
     }
