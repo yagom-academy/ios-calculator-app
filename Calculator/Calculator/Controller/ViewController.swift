@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var clearEntryButton: UIButton!
     @IBOutlet weak var changSignButton: UIButton!
     @IBOutlet weak var calculationButton: UIButton!
+    @IBOutlet weak var dotButton: UIButton!
     
     //MARK: - UILabel Outlet
     @IBOutlet weak var inputOperandsLabel: UILabel!
@@ -22,13 +23,15 @@ class ViewController: UIViewController {
     
     let operrands = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     let operators = ["+", "-", "/", "*"]
-    var currentInputFormula: String = ""
+    var currentInputFormula: String = "0"
+    var oldInputFormula: String = ""
     var formula: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         allocateOperrandsTag()
         allocateOperatorsTag()
+        updateCurrentInputScreen()
     }
     
     func allocateOperrandsTag() {
@@ -43,27 +46,53 @@ class ViewController: UIViewController {
         }
     }
     
+    func updateCurrentInputScreen() {
+        inputOperandsLabel.text = currentInputFormula
+    }
+    
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
-        currentInputFormula = currentInputFormula + "\(number)"
-        inputOperandsLabel.text = currentInputFormula
+        if currentInputFormula == "0" {
+            currentInputFormula = "\(number)"
+            updateCurrentInputScreen()
+        } else {
+            currentInputFormula = currentInputFormula + "\(number)"
+        }
+
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
         inputOperatorsLabel.text = operators[sender.tag]
         
         guard let currentSign = inputOperatorsLabel.text else { return }
-        currentInputFormula = currentInputFormula + " " + currentSign + " "
+        
+        if oldInputFormula != "" {
+            currentInputFormula = oldInputFormula + " " + currentSign + " "
+
+        } else {
+            currentInputFormula = currentInputFormula + " " + currentSign + " "
+        }
+    }
+    
+    @IBAction func dotButtonDidTapped(_ sender: UIButton) {
+        if currentInputFormula.last == "." {
+            updateCurrentInputScreen()
+        } else {
+            currentInputFormula += "."
+            updateCurrentInputScreen()
+        }
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
         var parsedFormula = ExpressionParser.parse(from: currentInputFormula)
         let result = parsedFormula.result()
         inputOperandsLabel.text = String(result)
+        oldInputFormula = String(result)
     }
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
-        currentInputFormula = ""
+        currentInputFormula = "0"
+        oldInputFormula = ""
     }
     
     @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
@@ -71,6 +100,6 @@ class ViewController: UIViewController {
     }
     
     @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
-        inputOperandsLabel.text = ""
+        inputOperandsLabel.text = "0"
     }
 }
