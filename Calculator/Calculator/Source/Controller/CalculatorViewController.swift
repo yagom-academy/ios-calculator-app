@@ -14,18 +14,16 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var historyStackView: UIStackView!
     
     private var expression: [String] = [String]()
-    private var numberFormatter: NumberFormatter = NumberFormatter()
     private var isCalculated: Bool = false
     
     private var currentNumbersLabelText: String = "0" {
-        didSet {            
+        didSet {
+            let numberText = currentNumbersLabelText
             if currentNumbersLabelText.count > 20 {
-                let numberText = String(currentNumbersLabelText.suffix(20))
-                let formattedNumber = numberFormatter.string(for: Decimal(string: numberText))
-                displayNumbersLabel.text = formattedNumber
+                let truncatedText = String(numberText.suffix(20))
+                displayNumbersLabel.text = truncatedText
             } else {
-                let formattedNumber = numberFormatter.string(for: Decimal(string: currentNumbersLabelText))
-                displayNumbersLabel.text = formattedNumber
+                displayNumbersLabel.text = currentNumbersLabelText
             }
         }
     }
@@ -37,8 +35,6 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
     }
     
     @IBAction private func numericButtonTapped(_ sender: UIButton) {
@@ -55,6 +51,13 @@ final class ViewController: UIViewController {
         guard currentNumbersLabelText != "0" else { return }
         guard let number = sender.currentTitle else { return }
         currentNumbersLabelText += number
+        displayNumbersLabel.text = currentNumbersLabelText
+    }
+    
+    @IBAction private func dotButtonTapped(_ sender: UIButton) {
+        guard let dot = sender.currentTitle else { return }
+        guard !currentNumbersLabelText.contains(".") else { return }
+        currentNumbersLabelText += dot
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
@@ -97,7 +100,7 @@ final class ViewController: UIViewController {
         } else {
             currentOperatorLabelText = ""
             expression.removeAll()
-            currentNumbersLabelText = String(result)
+            currentNumbersLabelText = convertFormattedString(text: String(result))
         }
     }
     
@@ -131,6 +134,25 @@ final class ViewController: UIViewController {
         
         UIView.animate(withDuration: 0.3) {
             historyEntryStackView.isHidden = false
+        }
+    }
+    
+    private func convertFormattedString(text: String) -> String {
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+        
+        if text.count > 20 {
+            let numberText = String(text.suffix(20))
+            guard let formattedNumber = numberFormatter
+                .string(for: Decimal(string: numberText)) else { return text }
+            return formattedNumber
+        } else {
+            guard let formattedNumber = numberFormatter
+                .string(for: Decimal(string: text)) else { return text }
+            return formattedNumber
         }
     }
     
