@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+extension ViewController {
     enum DefaultValue {
         static let empty = ""
         static let zero = "0"
@@ -31,7 +31,10 @@ class ViewController: UIViewController {
         static let zero = "0"
         static let twoZeros = "00"
     }
-    
+}
+
+class ViewController: UIViewController {
+
     var expression: String = DefaultValue.zero
     var isOperateComplited = false
     
@@ -41,10 +44,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
-         2. 숫자 20자리만 표기 /-1,36/1.801/57480/31496
-         4. 자동 스크롤
-         */
+
         allClear()
     }
 
@@ -168,7 +168,7 @@ class ViewController: UIViewController {
         operatorLabel.textColor = UIColor.white
         
         if let operandUILabelText = operandUILabel.text {
-            operandLabel.text = cutZerosAfterDecimalPoint(for: operandUILabelText)
+            operandLabel.text = formattingNumber(for: operandUILabelText)
         }
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operandLabel.textColor = UIColor.white
@@ -213,32 +213,12 @@ class ViewController: UIViewController {
         if result == "nan" {
             result = "NaN"
         } else {
-            result = cutZerosAfterDecimalPoint(for: result)
             result = formattingNumber(for: result)
         }
         
         operandUILabel.text = result
         operatorUILabel.text = DefaultValue.empty
         expression = DefaultValue.empty
-    }
-    
-    func cutZerosAfterDecimalPoint(for input: String) -> String {
-        let zeroForRemove: Character = "0"
-        
-        guard input.contains(SpecialCharacter.dot) else {
-            return input
-        }
-        
-        var splitedByDot = input.components(separatedBy: SpecialCharacter.dot)
-        
-        while splitedByDot[1].last == zeroForRemove {
-            _ = splitedByDot[1].popLast()
-        }
-        
-        if splitedByDot[1].isEmpty {
-            return splitedByDot[0]
-        }
-        return splitedByDot[0] + SpecialCharacter.dot + splitedByDot[1]
     }
     
     func formattingNumber(for input: String) -> String {
