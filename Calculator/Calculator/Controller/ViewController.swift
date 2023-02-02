@@ -10,11 +10,15 @@ class ViewController: UIViewController {
     
     @IBOutlet var operandsButton: [UIButton]!
     @IBOutlet var operatorsButton: [UIButton]!
+    
     @IBOutlet weak var inputOperandsLabel: UILabel!
     @IBOutlet weak var inputOperatorsLabel: UILabel!
     
-    let operrands = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 00, 000]
-    let operators = ["+", "-", "/", "*", "="]
+    let operrands = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let operators = ["+", "-", "/", "*"]
+    var currentInputFormula: String = ""
+    var formula: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         allocateOperrandsTag()
@@ -35,12 +39,18 @@ class ViewController: UIViewController {
     
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
-        var screen = inputOperandsLabel.text
+        currentInputFormula = currentInputFormula + "\(number)"
         
+        //inputOperandsLabel.text = currentInputFormula
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
-        print(operators[sender.tag])
-    }
+        inputOperatorsLabel.text = operators[sender.tag]
         
+        guard let currentSign = inputOperatorsLabel.text else { return }
+        currentInputFormula = currentInputFormula + currentSign
+
+        print(currentInputFormula)
+    }
+    
 }

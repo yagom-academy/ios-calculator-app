@@ -282,9 +282,6 @@
                                                 <state key="normal" title="00">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="operandsButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rZn-u6-4Y0"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -304,9 +301,6 @@
                                                 <state key="normal" title="=">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="operatorsButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5nM-sf-Wae"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -363,12 +357,10 @@
                         <outletCollection property="operandsButton" destination="L6z-2G-Gar" collectionClass="NSMutableArray" id="CHr-Am-4RL"/>
                         <outletCollection property="operandsButton" destination="xgT-2D-A49" collectionClass="NSMutableArray" id="WUn-7v-IQz"/>
                         <outletCollection property="operandsButton" destination="zcj-xJ-ruw" collectionClass="NSMutableArray" id="AmS-4u-GXw"/>
-                        <outletCollection property="operandsButton" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="YTU-0E-p8n"/>
                         <outletCollection property="operatorsButton" destination="sbh-wC-koF" collectionClass="NSMutableArray" id="cw1-gP-mQw"/>
                         <outletCollection property="operatorsButton" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="YOv-JL-5Gp"/>
                         <outletCollection property="operatorsButton" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="2wS-Ue-xdJ"/>
                         <outletCollection property="operatorsButton" destination="811-Pz-An6" collectionClass="NSMutableArray" id="gVf-hU-IzQ"/>
-                        <outletCollection property="operatorsButton" destination="Daw-iX-Owl" collectionClass="NSMutableArray" id="7ES-Q7-wMI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
