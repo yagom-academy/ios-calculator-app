@@ -54,6 +54,13 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        
+        guard let dot = sender.currentTitle else { return }
+        guard !currentNumber.contains(".") else { return }
+        currentNumber += dot
+    }
+    
     @IBAction func changeSignButtonTapped(_ sender: UIButton) {
         checkSign()
     }
