@@ -71,10 +71,11 @@ final class ViewController: UIViewController {
     }
     
     func displayOperationResult() {
-        let input = expression + " \(currentOperator) " + currentOperand
+        let input = expression + " \(currentOperator) " + currentOperand.split(with: ",").joined()
         let result = ExpressionParser.parse(from: input).result()
         
         guard result.isNaN == false else {
+            operatorLabel.text = Sign.blank
             operandLabel.text = Sign.nan
             expression.removeAll()
             return
@@ -126,7 +127,7 @@ final class ViewController: UIViewController {
         } else {
             setOperationStackView(operatorValue: currentOperator,
                                   operandValue: currentOperand.applyFormatter())
-            expression += " \(currentOperator) " + currentOperand
+            expression += " \(currentOperator) " + currentOperand.split(with: ",").joined()
         }
         
         isCalculatedStatus = false
