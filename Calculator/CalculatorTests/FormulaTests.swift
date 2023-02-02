@@ -34,11 +34,11 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(item: .multiply)
         
         let expectedValue: Double = 24
+        
         //when
         let result = sut.result()
         
         //then
-        
         XCTAssertEqual(result, expectedValue)
     }
     

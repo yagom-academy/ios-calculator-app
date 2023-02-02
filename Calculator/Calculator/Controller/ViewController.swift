@@ -7,72 +7,116 @@
 import UIKit
 
 class ViewController: UIViewController {
-        
     var calculateExpression: String = ""
     var operandExpression: String = ""
-    let numberFormatter = NumberFormatter()
     
-    var a: [String] = []
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var expressionStackView: UIStackView!
     @IBOutlet weak var expressionScrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func numberButton(sender: UIButton) {
- 
         guard let buttonNumberValue = sender.titleLabel?.text  else { return }
+        
+        if checkOverlappedDot(pushedNumber: buttonNumberValue) == true { return }
             operandExpression += buttonNumberValue
+        
+        if checkZeroValidate(pushedNumber: buttonNumberValue) == false { return }
             numberLabel.text = operandExpression
     }
     
     @IBAction func operatorButton(sender: UIButton) {
-                
+        
         guard let `operator` = sender.titleLabel?.text else { return }
         guard let operatorExpression = operatorLabel.text else { return }
         
         operatorLabel.text = `operator`
+        removeDot()
+        if operandExpression == "" { return }
         
-        if operandExpression == "" { return } // 맨 앞에 operator가 못오게 방지하는 것
-        
-        
-        if calculateExpression.isEmpty {
+        if calculateExpression == "" {
             calculateExpression += operandExpression
-            a.append(operandExpression)
-            makeExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
-            print(`operator`)
         
+            updateExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
         } else {
             calculateExpression += operatorExpression + operandExpression
-            a.append(operatorExpression + operandExpression)
-            makeExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
+            
+            updateExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
         }
-        
+        numberLabel.text = "0"
         operandExpression = ""
-        print(a)
     }
     
-    func makeFirstExpressionStackView(operand: String) {
-        let operandExpressionLabel: UILabel = {
-            let operandExpressionLabel = UILabel()
-            operandExpressionLabel.text = operand
-            operandExpressionLabel.textColor = .white
-            return operandExpressionLabel
-        }()
-        
-        let partOfExpressionStackView: UIStackView = { let partOfExpressionStackView = UIStackView()
-            partOfExpressionStackView.axis = .horizontal
-            partOfExpressionStackView.distribution = .fillProportionally
-            return partOfExpressionStackView
-        }()
-        partOfExpressionStackView.addArrangedSubview(operandExpressionLabel)
-        
-        expressionStackView.addArrangedSubview(partOfExpressionStackView)
+    @IBAction func ceButton(_ sender: Any) {
+        operandExpression = ""
+        numberLabel.text = "0"
     }
     
-    func makeExpressionStackView(operatorType: String, operand: String) {
+    @IBAction func acButton(_ sender: Any) {
+        calculateExpression = ""
+        numberLabel.text = "0"
+        operatorLabel.text = ""
+        operandExpression = ""
+        expressionStackView.subviews.map( { $0.removeFromSuperview() })
+    }
+    
+    @IBAction func changeNegativeButton(_ sender: Any) {
+        if numberLabel.text == "0" { return }
+        
+        guard let numberLabelText = numberLabel.text else { return }
+        
+        if numberLabelText.first == "-" && operandExpression.first == "-" {
+            numberLabel.text = numberLabelText.trimmingCharacters(in: ["-"])
+            operandExpression = numberLabelText.trimmingCharacters(in: ["-"])
+        } else {
+            numberLabel.text = "-" + numberLabelText
+            operandExpression = "-" + numberLabelText
+        }
+    }
+    
+    @IBAction func resultButton(_ sender: Any) {
+        var formula = ExpressionParser.parse(from: calculateExpression)
+        
+        removeDot()
+        
+        guard let operatorLabelText = operatorLabel.text else { return }
+        
+        calculateExpression += operatorLabelText + operandExpression
+        updateExpressionStackView(operatorType: operatorLabelText, operand: operandExpression)
+        operandExpression = ""
+        numberLabel.text = String(formula.result())
+    }
+    
+    func checkOverlappedDot(pushedNumber: String) -> Bool {
+        
+        if let lastNumber = numberLabel?.text?.last, lastNumber == ".", pushedNumber == "." {
+            return true
+        } else { return false }
+    }
+    
+    func removeDot() {
+        
+        if let lastNumber = numberLabel?.text?.last, lastNumber == "." {
+            operandExpression.removeLast()
+            numberLabel?.text?.removeLast()
+        }
+    }
+    
+    func checkZeroValidate(pushedNumber: String) -> Bool {
+        
+        guard let inputtedNumberLabel = numberLabel.text else { return true }
+        if inputtedNumberLabel == "0" && (pushedNumber == "00" || pushedNumber == "0") {
+            numberLabel.text = "0"
+            operandExpression = ""
+            return false
+        } else { return true }
+    }
+    
+    func updateExpressionStackView(operatorType: String, operand: String) {
         let operatorExpressionLabel: UILabel = {
             let operatorExpressionLabel = UILabel()
             operatorExpressionLabel.textColor = .white
@@ -95,8 +139,6 @@ class ViewController: UIViewController {
             operatorExpressionLabel.text = operatorType
             operandExpressionLabel.text = operand
         }
-            
-
             let partOfExpressionStackView = UIStackView()
             partOfExpressionStackView.axis = .horizontal
             partOfExpressionStackView.distribution = .fillProportionally
@@ -115,20 +157,8 @@ class ViewController: UIViewController {
                       animated: true)
     }
     
-    @IBAction func ceButton(_ sender: Any) {
-        operandExpression = ""
-            numberLabel.text = ""
-    }
-    
-    @IBAction func acButton(sender: UIButton) {
+    func divideIntoThreeDigit() {
         
     }
-    
-    
-    @IBAction func resultButton(_ sender: Any) {
-        calculateExpression += 
-        print(calculateExpression)
-    }
-    
 }
  
