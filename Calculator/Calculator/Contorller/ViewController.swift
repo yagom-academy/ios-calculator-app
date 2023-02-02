@@ -6,49 +6,43 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
     
-    var inputNumbers = "" // 숫자값을 담을 스트링
+    private var inputNumbers = "" // 숫자값을 담을 스트링
+    private var isFirstComponents: Bool {
+        return self.verticalStackViewInScroll.subviews.isEmpty
+        }
     
-    //현재 상태창
-    @IBOutlet weak var currentNumberOnField: UILabel!
+    @IBOutlet weak var numberOnField: UILabel!
     
-    @IBOutlet weak var currentOperatorOnField: UILabel!
+    @IBOutlet weak var operatorOnField: UILabel!
     
-    @IBOutlet weak var operatorStackView: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
-    @IBOutlet weak var numberStackView: UILabel!
+    @IBOutlet weak var verticalStackViewInScroll: UIStackView!
+
+    @IBOutlet weak var horizonStackViewVertical: UIStackView!
     
-    //    ⁺⁄₋ 버튼은 현재 입력한 숫자의 부호를 변환합니다.
-    //
-    //    입력된 숫자가 0인경우 부호를 표시하지 않고 변경하지도 않습니다.
-    //    숫자입력 중에 연산자(÷, ×, -, +)를 누르게 되면 숫자입력을 중지하고 다음 숫자를 입력받습니다.
+    @IBOutlet weak var operatorInStackView: UILabel!
+    
+    @IBOutlet weak var numberInStackView: UILabel!
     
     override func viewDidLoad() {
+      
         super.viewDidLoad()
-
+        setUpView()
         setUpComponentsOnField()
+        
     }
-    
-    //
-    func setUpComponentsOnField() {
-        currentNumberOnField.text = ""
-        currentOperatorOnField.text = ""
-    }
-    //AC는 모든 연산내역을 초기화합니다.
-    //    2+3-4+5 를 입력하고 AC를 누르면 모든 수식이 초기화되고 0의 상태가 됩니다.
-    //    2+3-4+5= 을 입력하고 AC를 누르면 모든 수식이 초기화되고 0의 상태가 됩니다.
-    
+
     @IBAction func allClearButtonTapped(_ sender: Any) {
-        self.currentNumberOnField.text = "0"
+        
         var queueStack = CalculatorItemQueue<String>()
         queueStack.removeAll()
     }
+
     
-    //    CE는 현재 입력하던 숫자 혹은 연산결과만 삭제합니다.
-    //    2+3-4+5를 입력하고 CE를 누르면 2+3-4+의 상태가 됩니다.
-    //    2+3-4+ 를 입력하고 CE를 누르면 2+3-4+의 상태가 됩니다.
-    //    2+3-4+5= 을 입력하고 CE를 누르면 0의 상태가 됩니다.
     @IBAction func clearEntryButtonTapped(_ sender: Any) {
         
     }
@@ -58,31 +52,74 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateResult(_ sender: Any) {
-        //        ExpressionParser.parse(from: inputtedComponents)
+ 
     }
     
-    //버트탭하면 가져온 입력값을 바탕으로 배열에 넣어주기
+    //버튼탭
     @IBAction func operButtonTapped(_ sender: UIButton) {
-        
+       
         let currentOper = getInputtedOperator(sender)
-        let currentNum = getInputtedNumber(sender)
-        
 
+        
         if currentOper.isEmpty == false {
-            currentNumberOnField.text = ""
-            inputNumbers = ""
+            self.operatorOnField.text = currentOper
+            
+            addNewStackView(number: inputNumbers, oper: currentOper)
         }
+     
+        self.numberOnField.text = ""
+        self.inputNumbers = ""
+        
     }
-    
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
-//        currentNumberOnField.text! += getInputtedNumber(sender)
-        // Q1.텍스트레이블에 강제 옵셔널언래핑을 써야하는가 / 아니면 전역변수를 사용해서 담아서 다시담아줘야함
-    
-//        inputNumbers += getInputtedNumber(sender)
-    
-        currentNumberOnField.text = getInputtedNumber(sender)
+        numberOnField.text = getInputtedNumber(sender)
        
+    }
+    
+    func setUpView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(verticalStackViewInScroll)
+        self.numberOnField.text = "0"
+        self.numberInStackView.text = ""
+        self.operatorInStackView.text = ""
+    }
+    
+    func setFirstStackView (number: String, oper: String) {
+        
+        numberInStackView.text = number
+        operatorInStackView.text = oper
+        verticalStackViewInScroll.addSubview(horizonStackViewVertical) // ?
+    }
+    
+    func addNewStackView(number: String, oper: String) {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 8
+        
+        let createdOperLabel = UILabel()
+            createdOperLabel.text = oper
+            createdOperLabel.textColor = .white
+            createdOperLabel.font = UIFont.systemFont(ofSize: 20)
+    
+        let createdNumberLabel = UILabel()
+            createdNumberLabel.text = number
+            createdNumberLabel.textColor = .white
+            createdNumberLabel.font = UIFont.systemFont(ofSize: 20)
+        
+        [createdOperLabel, createdNumberLabel].map {
+            stackView.addArrangedSubview($0)
+        }
+
+        self.verticalStackViewInScroll.addArrangedSubview(stackView)
+        
+    }
+    
+    func setUpComponentsOnField() {
+        numberOnField.text = ""
+        operatorOnField.text = ""
     }
     
     //숫자 입력값 가져오기
@@ -109,49 +146,22 @@ class ViewController: UIViewController {
         inputNumbers += currentInputNumber
         return inputNumbers
     }
-    
-    
+
     //연산자 입력값가져오기
     func getInputtedOperator(_ sender: UIButton) -> String {
         
         var currentOperator: String = ""
         
         switch sender.titleLabel?.text {
-        case "+": currentOperator = "+"
-        case "−": currentOperator = "−"
-        case "÷": currentOperator = "÷"
-        case "×": currentOperator = "×"
+        case "+": currentOperator += "+"
+        case "−": currentOperator += "−"
+        case "÷": currentOperator += "÷"
+        case "×": currentOperator += "×"
         default:
             break
         }
         
-        currentOperatorOnField.text = currentOperator
-        
         return currentOperator
-    }
-  
-    func convertOperator(_ sender: UIButton) -> String {
-            
-        guard let titleLabel = sender.titleLabel?.text else {
-            return ""
-           }
-        switch titleLabel {
-        case "+":
-            return "+"
-        case "−":
-            return "-" // -값 다름 case부분에 적용된건 가짜 minus
-        case "÷":
-            return "/"
-        case "×":
-            return "*"
-        default:
-            return ""
-        }
-    }
-    
-    func makeScrollViewData() -> String {
-            
-        return ""
     }
         
 }
