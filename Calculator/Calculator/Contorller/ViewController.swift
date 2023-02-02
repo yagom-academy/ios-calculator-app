@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     private var inputNumbers = "" // 숫자값을 담을 스트링
     private var isFirstComponents: Bool {
         return self.verticalStackViewInScroll.subviews.isEmpty
-        }
+    }
     
     @IBOutlet weak var numberOnField: UILabel!
     
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var verticalStackViewInScroll: UIStackView!
-
+    
     @IBOutlet weak var horizonStackViewVertical: UIStackView!
     
     @IBOutlet weak var operatorInStackView: UILabel!
@@ -29,35 +29,76 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberInStackView: UILabel!
     
     override func viewDidLoad() {
-      
+        
         super.viewDidLoad()
         setUpView()
         setUpComponentsOnField()
         
     }
+    
 
-    @IBAction func allClearButtonTapped(_ sender: Any) {
-        
-        var queueStack = CalculatorItemQueue<String>()
-        queueStack.removeAll()
-    }
-
-    
-    @IBAction func clearEntryButtonTapped(_ sender: Any) {
-        
-    }
-    
-    @IBAction func changeOperatorButtonTapped(_ sender: Any) {
-        
-    }
-    
-    @IBAction func calculateResult(_ sender: Any) {
- 
-    }
-    
     //버튼탭
-    @IBAction func operButtonTapped(_ sender: UIButton) {
-       
+    
+    @IBAction func buttonTapped(sender: UIButton) {
+        guard let Inputtedtitle = sender.titleLabel?.text else { return }
+        
+        switch Inputtedtitle {
+        case "=":
+            calculateResult()
+        case "AC":
+            allClearButtonTapped()
+        case "CE":
+            clearEntryButtonTapped()
+        case "⁺⁄₋":
+            changeOperatorButtonTapped()
+        case "÷", "×", "−", "+":
+            operatorButtonTapped(sender: sender)
+        case "0","1","2","3","4","5","7","8","9","00",".":
+            numberButtonTapped(sender: sender)
+        default:
+            return
+        }
+        
+    }
+    func setUpView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(verticalStackViewInScroll)
+        self.numberOnField.text = "0"
+        self.numberInStackView.text = ""
+        self.operatorInStackView.text = ""
+    }
+        
+        func allClearButtonTapped() {}
+        
+        func clearEntryButtonTapped(){}
+        
+        func changeOperatorButtonTapped(){}
+        
+        func calculateResult(){}
+        
+   
+    func numberButtonTapped(sender: UIButton) {
+      
+        switch sender.tag {
+        case 1: inputNumbers += "1"
+        case 2: inputNumbers += "2"
+        case 3: inputNumbers += "3"
+        case 4: inputNumbers += "4"
+        case 5: inputNumbers += "5"
+        case 6: inputNumbers += "6"
+        case 7: inputNumbers += "7"
+        case 8: inputNumbers += "8"
+        case 9: inputNumbers += "9"
+        case 0: inputNumbers += "0"
+        case 100: inputNumbers += "00"
+        case 101: inputNumbers += "."
+        default:
+            return
+        }
+        numberOnField.text = inputNumbers
+    }
+    
+    func operatorButtonTapped(sender: UIButton) {
         let currentOper = getInputtedOperator(sender)
 
         
@@ -69,27 +110,6 @@ class ViewController: UIViewController {
      
         self.numberOnField.text = ""
         self.inputNumbers = ""
-        
-    }
-    
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
-        numberOnField.text = getInputtedNumber(sender)
-       
-    }
-    
-    func setUpView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(verticalStackViewInScroll)
-        self.numberOnField.text = "0"
-        self.numberInStackView.text = ""
-        self.operatorInStackView.text = ""
-    }
-    
-    func setFirstStackView (number: String, oper: String) {
-        
-        numberInStackView.text = number
-        operatorInStackView.text = oper
-        verticalStackViewInScroll.addSubview(horizonStackViewVertical) // ?
     }
     
     func addNewStackView(number: String, oper: String) {
@@ -122,35 +142,15 @@ class ViewController: UIViewController {
         operatorOnField.text = ""
     }
     
-    //숫자 입력값 가져오기
-    func getInputtedNumber(_ sender: UIButton) -> String {
-            
-        var currentInputNumber: String = ""
-        
-        switch sender.tag {
-        case 1: currentInputNumber += "1"
-        case 2: currentInputNumber += "2"
-        case 3: currentInputNumber += "3"
-        case 4: currentInputNumber += "4"
-        case 5: currentInputNumber += "5"
-        case 6: currentInputNumber += "6"
-        case 7: currentInputNumber += "7"
-        case 8: currentInputNumber += "8"
-        case 9: currentInputNumber += "9"
-        case 0: currentInputNumber += "0"
-        case 100: currentInputNumber += "00"
-        case 101: currentInputNumber += "."
-        default: return ""
-        }
-        
-        inputNumbers += currentInputNumber
-        return inputNumbers
-    }
 
     //연산자 입력값가져오기
     func getInputtedOperator(_ sender: UIButton) -> String {
         
         var currentOperator: String = ""
+        
+        guard numberOnField.text != "" else {    //숫자값이 없는 처음엔 오퍼레이터값이 들어가지않는다
+            return currentOperator
+        }
         
         switch sender.titleLabel?.text {
         case "+": currentOperator += "+"
