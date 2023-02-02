@@ -58,6 +58,9 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
+                                        <connections>
+                                            <outlet property="calculateItemScrollView" destination="BOT-7g-vxv" id="j28-cV-anu"/>
+                                        </connections>
                                     </stackView>
                                 </subviews>
                                 <constraints>
