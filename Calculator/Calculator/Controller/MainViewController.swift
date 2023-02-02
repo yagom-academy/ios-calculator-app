@@ -69,10 +69,10 @@ final class MainViewController: UIViewController {
     }
     
     private func convertToDecimal(from string: String) -> String? {
-        guard let convertedDouble = convertToDouble(from: string) else { return nil }
-        let decimalStyle = convertToString(from: convertedDouble)
+        guard let double = convertToDouble(from: string) else { return nil }
+        let decimalStyleString = convertToString(from: double)
         
-        return decimalStyle
+        return decimalStyleString
     }
     
     private func convertToDouble(from labelText: String) -> Double? {
