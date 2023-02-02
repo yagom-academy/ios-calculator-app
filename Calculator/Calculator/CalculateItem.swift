@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol CalculatorItem { }
+protocol CalculateItem { }
 
-extension Double: CalculatorItem { }
+extension Double: CalculateItem { }
 
-extension Operator: CalculatorItem { }
+extension Operator: CalculateItem { }

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-extension String: CalculatorItem { }
+extension String: CalculateItem { }
 
 final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<String>!
