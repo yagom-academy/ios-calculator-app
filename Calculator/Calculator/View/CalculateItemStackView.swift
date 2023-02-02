@@ -70,8 +70,4 @@ final class CalculateItemStackView: UIStackView {
         let calculateItem = subview
         superview.addArrangedSubview(calculateItem)
     }
-    
-    
-    
-    
 }
