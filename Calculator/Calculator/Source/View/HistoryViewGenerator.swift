@@ -19,7 +19,7 @@ enum HistoryViewGenerator {
     }
     
     static func generateStackView(`operator`: String, operand: String) -> UIStackView {
-        let operandText = DecimalFormatter.convertFormattedString(text: operand)
+        let operandText = NumberConverter.convertFormattedString(text: operand)
         
         let operatorLabel = generateLabel(text: `operator`)
         operatorLabel.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)

@@ -7,7 +7,7 @@
 import UIKit
 
 final class ViewController: UIViewController {
-
+    
     @IBOutlet private weak var displayOperatorLabel: UILabel!
     @IBOutlet private weak var displayNumbersLabel: UILabel!
     @IBOutlet private weak var historyScrollView: UIScrollView!
@@ -114,8 +114,7 @@ final class ViewController: UIViewController {
             displayNumbersLabel.text = "NaN"
         } else {
             clearAfterCalculate()
-            displayNumbersLabel.text = DecimalFormatter
-                .convertFormattedString(text: String(result))
+            displayNumbersLabel.text = NumberConverter.convertFormattedString(text: String(result))
         }
     }
     
@@ -161,7 +160,7 @@ final class ViewController: UIViewController {
         }
         scrollToBottom()
     }
-
+    
     private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: historyScrollView.contentSize.height - historyScrollView.bounds.height + historyScrollView.contentInset.bottom)
         historyScrollView.setContentOffset(bottomOffset, animated: true)

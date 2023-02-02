@@ -331,7 +331,7 @@
                     <connections>
                         <outlet property="displayNumbersLabel" destination="Lwz-OF-XHD" id="agX-FS-tEu"/>
                         <outlet property="displayOperatorLabel" destination="HPC-iy-qdm" id="EvQ-pL-Emh"/>
-                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="BgM-g0-PrJ"/>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="oSM-zM-dgB"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="v0y-EK-YBh"/>
                     </connections>
                 </viewController>
