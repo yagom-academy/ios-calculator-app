@@ -72,21 +72,23 @@ class ViewController: UIViewController {
         if operatorLabel.text == "" && operandLabel.text != "0" {
             let stackView = generateStackView(operandLabel.text, "")
             addContentStack(stackView)
-            workingSpace += operandLabel.text!
+            
+            guard let operandLabelText = operandLabel.text else { return }
+            workingSpace += operandLabelText
             
             guard let `operator` = sender.currentTitle else { return }
             operatorLabel.text = `operator`
             
             operand = ""
             operandLabel.text = "0"
-        } else if operatorLabel.text!.isEmpty && operandLabel.text == "0" {
+        } else if operatorLabel.text == nil && operandLabel.text == "0" {
             return
-        } else {
-            if !operandLabel.text!.isEmpty && operandLabel.text != "0" {
-                let stackView = generateStackView(operandLabel.text, operatorLabel.text)
-                addContentStack(stackView)
-                workingSpace += operatorLabel.text! + operandLabel.text!
-            }
+        } else if operandLabel.text != nil && operandLabel.text != "0" {
+            let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+            addContentStack(stackView)
+            
+            guard let operatorLabelText = operatorLabel.text, let operandLabelText = operandLabel.text else { return }
+            workingSpace += operatorLabelText + operandLabelText
             
             guard let `operator` = sender.currentTitle else { return }
             operatorLabel.text = `operator`
@@ -103,8 +105,10 @@ class ViewController: UIViewController {
         
         let stackView = generateStackView(operandLabel.text, operatorLabel.text)
         addContentStack(stackView)
-        workingSpace += operatorLabel.text! + operandLabel.text!
-        print(workingSpace)
+        
+        guard let operatorLabelText = operatorLabel.text, let operandLabelText = operandLabel.text else { return }
+        workingSpace += operatorLabelText + operandLabelText
+        
         var formula = ExpressionParser.parse(from: workingSpace)
         let result = formula.result()
         
@@ -134,14 +138,10 @@ class ViewController: UIViewController {
     private func useNumberFormatter(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
         
-        var result = numberFormatter.string(for: input) ?? "0"
-        
-        if result.count >= 20 {
-            let index = result.index(result.startIndex, offsetBy: 19)
-            result = String(result[...index])
-        }
+        let result = numberFormatter.string(for: input) ?? "0"
         
         return result
     }
