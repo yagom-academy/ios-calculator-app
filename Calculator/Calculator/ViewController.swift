@@ -88,7 +88,7 @@ class ViewController: UIViewController {
     
     private func applyDecimalPoint(number: String) -> String {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumIntegerDigits = 20
         guard let operand = Double(number) else { return "" }
         guard let result = numberFormatter.string(from: NSNumber(value: operand)) else { return "" }
         
@@ -187,7 +187,8 @@ class ViewController: UIViewController {
                 calculateItems.append(value)
             }
         }
-        return calculateItems.map { $0.components(separatedBy: " ").joined() }.joined(separator: "")
+        return calculateItems.map { $0.components(separatedBy: ",").joined() }
+            .map {$0.components(separatedBy: " ").joined() }.joined(separator: "")
     }
     
 }
