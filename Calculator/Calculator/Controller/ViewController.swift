@@ -41,10 +41,50 @@ class ViewController: UIViewController {
         case "0", "00":
             return
         case ".":
-            return
+            processDotInput(inputFromButton)
         default:
+            processNumberInput(inputFromButton)
+        }
+    }
+    
+    func processDotInput(_ inputFromButton: String) {
+        guard operandUILabel.text?.contains(".") == false,
+              let prevOperandUILabel = operandUILabel.text else { return }
+        
+        operandUILabel.text = prevOperandUILabel + inputFromButton
+    }
+    
+    func processNumberInput(_ inputFromButton: String){
+        guard let prevOperandUILabel = operandUILabel.text else { return }
+        
+        if operandUILabel.text == "0" {
+            operandUILabel.text = inputFromButton == "0" || inputFromButton == "00" ? "0" : inputFromButton
             return
         }
+        
+        if !prevOperandUILabel.contains(".") {
+            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
+        } else {
+            operandUILabel.text = formattingNumber(for: prevOperandUILabel + inputFromButton)
+        }
+    }
+    
+    func formattingNumber(for input: String) -> String {
+        let formatter = NumberFormatter()
+        
+        let removedComma = input.components(separatedBy: ",").joined()
+        
+        guard let inputToNSNumber = formatter.number(from: removedComma) else {
+            return input
+        }
+        
+        formatter.maximumFractionDigits = 20
+        formatter.roundingMode = .ceiling
+        formatter.numberStyle = .decimal
+        
+        guard let formattingResult = formatter.string(for: inputToNSNumber) else { return input }
+        
+        return formattingResult
     }
 }
 
