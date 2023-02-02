@@ -64,7 +64,7 @@ final class ViewController: UIViewController {
         operandLabel.text = operandValue.applyFormatter()
     }
     
-    @IBAction func didTapEquals(_ sender: UIButton) {
+    @IBAction func didTapEqualButton(_ sender: UIButton) {
         guard operatorLabel.text != Sign.blank else { return }
         
         setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
