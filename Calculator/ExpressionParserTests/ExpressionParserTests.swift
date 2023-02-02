@@ -17,4 +17,5 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(inputOperand, resultOperand)
         XCTAssertEqual(inputOperator, resultOperator)
     }
+
 }

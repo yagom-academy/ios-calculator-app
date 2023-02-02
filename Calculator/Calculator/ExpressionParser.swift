@@ -10,7 +10,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var result: Array<String> = [input]
+        var result: [String] = [input]
         
         Operator.allCases.forEach { operatorElement in
             result = result.map { $0.split(with: operatorElement.rawValue) }.flatMap { $0 }
