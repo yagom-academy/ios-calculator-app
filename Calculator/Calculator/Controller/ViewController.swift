@@ -23,15 +23,6 @@ class ViewController: UIViewController {
         clearAllContentStack()
     }
     
-    private func clearAllContentStack() {
-        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    private func setUp() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
         if let number = sender.currentTitle {
             operand += number
@@ -71,30 +62,35 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        if operatorLabel.text == "" && operandLabel.text != "0" {
-            let stackView = generateStackView(operandLabel.text, "")
+        guard let operandLabelText = operandLabel.text else { return }
+        guard let `operator` = sender.currentTitle else { return }
+        
+        if operatorLabel.text == "" && operandLabelText != "0" {
+            guard let operandDouble = Double(operandLabelText) else { return }
+            let stackView = generateStackView(useNumberFormatter(operandDouble), "")
             addContentStack(stackView)
             
-            guard let operandLabelText = operandLabel.text else { return }
             workingSpace += operandLabelText
-            
-            guard let `operator` = sender.currentTitle else { return }
             operatorLabel.text = `operator`
-            
             operand = ""
             operandLabel.text = "0"
-        } else if operatorLabel.text == nil && operandLabel.text == "0" {
+        } else if operatorLabel.text == "" && operandLabelText == "0" {
             return
-        } else if operandLabel.text != nil && operandLabel.text != "0" {
-            let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+        } else if operatorLabel.text != "" && operandLabel.text == "0" {
+            operatorLabel.text = `operator`
+            operand = ""
+            operandLabel.text = "0"
+            
+            return
+        } else {
+            guard let operandDouble = Double(operandLabelText) else { return }
+            let stackView = generateStackView(useNumberFormatter(operandDouble), operatorLabel.text)
             addContentStack(stackView)
             
-            guard let operatorLabelText = operatorLabel.text, let operandLabelText = operandLabel.text else { return }
+            guard let operatorLabelText = operatorLabel.text else { return }
             workingSpace += operatorLabelText + operandLabelText
             
-            guard let `operator` = sender.currentTitle else { return }
             operatorLabel.text = `operator`
-            
             operand = ""
             operandLabel.text = "0"
         }
@@ -134,6 +130,15 @@ class ViewController: UIViewController {
         operand = ""
         setUp()
         clearAllContentStack()
+    }
+    
+    private func clearAllContentStack() {
+        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func setUp() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
     
     private func useNumberFormatter(_ input: Double) -> String {
