@@ -244,9 +244,6 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="operandsButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZbN-rT-d5G"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -255,9 +252,6 @@
                                                 <state key="normal" title="00">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="operandsButtonDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cbx-kW-9gL"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -335,7 +329,6 @@
                         <outlet property="inputOperandsLabel" destination="Lwz-OF-XHD" id="aXS-9e-oDW"/>
                         <outlet property="inputOperatorsLabel" destination="HPC-iy-qdm" id="9hG-qq-9tV"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="gtR-FF-5FC"/>
-                        <outletCollection property="operandsButton" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="k4I-Bw-z68"/>
                         <outletCollection property="operandsButton" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="pmH-jH-xq6"/>
                         <outletCollection property="operandsButton" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="mQo-DH-7DV"/>
                         <outletCollection property="operandsButton" destination="X8H-iH-tSd" collectionClass="NSMutableArray" id="cgq-iY-lEe"/>
@@ -349,7 +342,8 @@
                         <outletCollection property="operatorsButton" destination="nTe-Sn-Pvd" collectionClass="NSMutableArray" id="YOv-JL-5Gp"/>
                         <outletCollection property="operatorsButton" destination="Tfz-eM-jll" collectionClass="NSMutableArray" id="2wS-Ue-xdJ"/>
                         <outletCollection property="operatorsButton" destination="811-Pz-An6" collectionClass="NSMutableArray" id="gVf-hU-IzQ"/>
-                        <outletCollection property="operandsButton" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="OBe-y9-brq"/>
+                        <outletCollection property="zeroButton" destination="mSz-Y3-r5Z" collectionClass="NSMutableArray" id="hqZ-XW-peu"/>
+                        <outletCollection property="zeroButton" destination="sH6-8l-kje" collectionClass="NSMutableArray" id="BxJ-N6-zhB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
