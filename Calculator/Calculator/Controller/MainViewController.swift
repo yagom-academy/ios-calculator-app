@@ -10,7 +10,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var calculateItemStackView: CalculateItemStackView!
-    @IBOutlet private var calculateItemScrollView: UIScrollView!
+    @IBOutlet private var calculateItemScrollView: CalculateItemScrollView!
     
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
