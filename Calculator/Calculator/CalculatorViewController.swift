@@ -24,6 +24,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
+        restartCalculate()
         guard let senderSign = sender.currentTitle else { return }
         if numberInput.text != Expression.zero  {
             addStackView()
