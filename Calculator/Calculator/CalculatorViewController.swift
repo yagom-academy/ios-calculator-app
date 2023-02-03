@@ -13,13 +13,24 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var calculateStackView: UIStackView!
     @IBOutlet weak var calculateScrollView: UIScrollView!
-    
-    private var calculateSign: String = ""
-    private var calculateNumber: String = "0"
-    private var calculatorString: String = ""
+
+    private var expression: [String] = []
     
     private let numberFormatter = NumberFormatter()
-    private var isInOperand = false
+    
+    private var isCalculated: Bool = false
+    
+    private var calculateOperand: String = "0" {
+        didSet {
+            operandLabel.text = calculateOperand
+        }
+    }
+    
+    private var calculateOperator: String = "" {
+        didSet {
+            operatorLabel.text = calculateOperator
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
