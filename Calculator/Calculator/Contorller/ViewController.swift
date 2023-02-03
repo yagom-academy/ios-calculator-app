@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     
     private var calcuateComponents: String = ""
+    private var inputNumbers: String = ""
     
     @IBOutlet weak var numberOnField: UILabel!
     
@@ -103,9 +104,7 @@ class ViewController: UIViewController {
         
     }
     
-    
     private func numberButtonTapped(sender: UIButton) {
-        var inputNumbers: String = ""
         
         switch sender.tag {
         case 1: inputNumbers += "1"
@@ -122,8 +121,10 @@ class ViewController: UIViewController {
         case 101: inputNumbers += "."
         default:
             return
+
         }
         numberOnField.text = inputNumbers
+        
     }
     
     //숫자값이없을때 오퍼레이터만 스택추가되지않도록 구현필요
@@ -143,9 +144,9 @@ class ViewController: UIViewController {
             calcuateComponents += currentOper + currentNumber
             addNewStackView(number: currentNumber, oper: currentOper)
             self.numberOnField.text = ""
-            currentNumber = ""
+//            currentNumber = ""
         }
-        
+        inputNumbers = ""
         numberOnField.text = "0"
         setUpScrollViewToBottom()
     }
