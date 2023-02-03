@@ -154,8 +154,10 @@ final class CalculatorViewController: UIViewController {
         
         if self.currentOperand == CalculatorInitial.initValue {
             self.currentOperand = "0."
+            self.currentOperandLabel.text = self.currentOperand
         } else {
-            self.currentOperand += "."
+            let formattedOperand = formattingNumber(self.currentOperand)
+            self.currentOperand = formattedOperand + "."
         }
         
         self.currentOperandLabel.text = self.currentOperand
@@ -178,6 +180,7 @@ final class CalculatorViewController: UIViewController {
         formatter.numberStyle = .decimal
         formatter.usesSignificantDigits = true
         formatter.minimumSignificantDigits = 1
+        formatter.maximumSignificantDigits = 20
         
         guard let formattedNumber = formatter.number(from: value),
               let formattedOperand = formatter.string(from: formattedNumber) else { return "0" }
