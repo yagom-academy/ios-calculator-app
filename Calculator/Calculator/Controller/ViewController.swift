@@ -61,10 +61,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func calculate() {
-        if self.isCalculated == false {
-            if self.currentOperand.isEmpty == false {
-                addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
-            }
+        if self.isCalculated == false && self.currentOperand.isEmpty == false {
+            addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
             
             self.inputs += "\(self.currentOperator) \(self.currentOperand) "
             
