@@ -131,4 +131,18 @@ final class ViewController: UIViewController {
                isDotClicked = true
            }
        }
+    
+    @IBAction func allClearButtonDidTap(_ sender: UIButton) {
+        inputList.removeAll()
+        currentLabelText.removeAll()
+        OperatorLabel.text?.removeAll()
+        OperandsLabel.text?.removeAll()
+        containerStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+
+    @IBAction func clearCurrentOperands(_ sender: UIButton) {
+        currentLabelText.removeAll()
+        OperandsLabel.text = "0"
+    }
+    
 }
