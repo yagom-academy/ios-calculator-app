@@ -34,8 +34,6 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setDefault()
     }
     
     private func setDefault() {
@@ -68,7 +66,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTapResultButton() {
-        guard calculateOperator != "" else { return }
+        guard !isCalculated else { return }
         appendExpression(sign: calculateOperator, number: calculateOperand)
         addToCalculateItem(left: calculateOperator, right: calculateOperand)
 
@@ -78,13 +76,13 @@ final class CalculatorViewController: UIViewController {
         
         if result.isNaN {
             calculateOperand = "NaN"
-            resetOperator()
-            isCalculated = true
         } else {
-            calculateOperand = "\(result)"
-            resetOperator()
-            isCalculated = true
+            let resultString = "\(result)"
+            calculateOperand = resultString.numberFormatting()
         }
+        
+        resetOperator()
+        isCalculated = true
         expression.removeAll()
     }
     
@@ -104,14 +102,12 @@ final class CalculatorViewController: UIViewController {
             
             appendExpression(sign: calculateOperator, number: calculatedNumber)
             addToCalculateItem(left: calculateOperator, right: calculatedNumber)
-            scrollToBottom()
-            
         } else {
             appendExpression(sign: calculateOperator, number: calculateOperand)
             addToCalculateItem(left: calculateOperator, right: calculateOperand)
-            scrollToBottom()
         }
         
+        scrollToBottom()
         
         isCalculated = false
         calculateOperator = operatorSign
@@ -119,6 +115,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTapNumberButton(_ sender: UIButton) {
+        guard calculateOperand.count <= 20 else { return }
         guard let number = sender.currentTitle else { return }
         
         if isCalculated {
