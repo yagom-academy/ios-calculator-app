@@ -6,9 +6,9 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    private var inputs: String = ""
-    private var currentOperand: String = ""
-    private var currentOperator: String = ""
+    private var inputs: String = CalculatorInitial.initValue
+    private var currentOperand: String = CalculatorInitial.initValue
+    private var currentOperator: String = CalculatorInitial.initValue
     private var isCalculated: Bool = false
     private var isFractional: Bool {
         self.currentOperand.contains(".")
@@ -24,8 +24,8 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.currentOperatorLabel.text = ""
-        self.currentOperandLabel.text = "0"
+        self.currentOperatorLabel.text = CalculatorInitial.initValue
+        self.currentOperandLabel.text = CalculatorInitial.initLabel
     }
     
     @IBAction private func didTapNumberButton(sender: UIButton) {
@@ -76,10 +76,8 @@ final class CalculatorViewController: UIViewController {
             let result = formula.result()
             
             if result.isNaN {
-                self.inputs = ""
-                self.currentOperator = ""
-                self.currentOperatorLabel.text = self.currentOperator
-                self.currentOperand = ""
+                resetPropertity()
+                resetLabel()
                 self.currentOperandLabel.text = "NaN"
                 self.isCalculated = false
                 self.isCalculated = true
@@ -89,23 +87,18 @@ final class CalculatorViewController: UIViewController {
             
             let formattedOperand = formattingNumber("\(result)")
             
-            self.inputs = ""
-            self.currentOperator = ""
-            self.currentOperatorLabel.text = self.currentOperator
-            self.currentOperand = "\(result)"
+            resetPropertity()
+            resetLabel()
+            self.currentOperand = "\(formattedOperand)"
             self.currentOperandLabel.text = formattedOperand
             self.isCalculated = true
         }
     }
     
     private func clearAll() {
+        resetPropertity()
+        resetLabel()
         self.removeAllStackView()
-        self.inputs = ""
-        self.currentOperand = ""
-        self.currentOperator = ""
-        
-        self.currentOperandLabel.text = "0"
-        self.currentOperatorLabel.text = self.currentOperator
     }
     
     private func clearCurrentOperand() {
@@ -126,7 +119,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func touchUpOperator(_ operatorValue: String) {
-        if self.currentOperandLabel.text != "0" {
+        if self.currentOperandLabel.text != CalculatorInitial.initLabel {
             let currentOperandValue = formattingNumber(self.currentOperand)
             let currentOperatorValue = self.currentOperator
             
@@ -134,8 +127,8 @@ final class CalculatorViewController: UIViewController {
             
             self.inputs += "\(self.currentOperator) \(self.currentOperand) "
             
-            self.currentOperand = ""
-            self.currentOperandLabel.text = "0"
+            resetOperand()
+            
             self.currentOperator = operatorValue
             self.currentOperatorLabel.text = self.currentOperator
         } else if isFirstInput == false {
@@ -159,7 +152,7 @@ final class CalculatorViewController: UIViewController {
     private func addDotToOperandLabel() {
         guard self.currentOperand.contains(".") == false else { return }
         
-        if self.currentOperand == "" {
+        if self.currentOperand == CalculatorInitial.initValue {
             self.currentOperand = "0."
         } else {
             self.currentOperand += "."
@@ -190,6 +183,27 @@ final class CalculatorViewController: UIViewController {
               let formattedOperand = formatter.string(from: formattedNumber) else { return "0" }
         
         return formattedOperand
+    }
+    
+    private func resetOperand() {
+        self.currentOperand.removeAll()
+        self.currentOperandLabel.text = CalculatorInitial.initLabel
+    }
+    
+    private func resetOperator() {
+        self.currentOperator.removeAll()
+        self.currentOperatorLabel.text?.removeAll()
+    }
+    
+    private func resetPropertity() {
+        self.inputs.removeAll()
+        self.currentOperand.removeAll()
+        self.currentOperator.removeAll()
+    }
+    
+    private func resetLabel() {
+        self.currentOperandLabel.text = CalculatorInitial.initLabel
+        self.currentOperatorLabel.text?.removeAll()
     }
 }
 
