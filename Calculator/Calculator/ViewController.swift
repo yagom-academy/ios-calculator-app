@@ -22,7 +22,7 @@ class ViewController: UIViewController {
     private var isChangeableOperator: Bool = false
     private var numberFormatter = NumberFormatter()
     
-    private var currentNumber: String = "0" {
+    private var currentNumber: String = Expression.zero {
         didSet {
             numberInput.text = applyDecimalPoint(number: currentNumber)
         }
@@ -41,13 +41,13 @@ class ViewController: UIViewController {
             operatorInput.text = senderSign
         }
         
-        currentNumber = "0"
+        currentNumber = Expression.zero
     }
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
         
         guard let number = sender.currentTitle else { return }
-        if currentNumber == "0"  {
+        if currentNumber == Expression.zero  {
             currentNumber = number
         } else {
             currentNumber += number
@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     @IBAction func dotButtonTapped(_ sender: UIButton) {
         
         guard let dot = sender.currentTitle else { return }
-        guard !currentNumber.contains(".") else { return }
+        guard !currentNumber.contains(Expression.dot) else { return }
         currentNumber += dot
     }
     
@@ -68,9 +68,9 @@ class ViewController: UIViewController {
     @IBAction func CEButtonTapped(_ sender: UIButton) {
         
         if isFinishedCalculating {
-            numberInput.text = "0"
+            numberInput.text = Expression.zero
         } else {
-            numberInput.text = ""
+            numberInput.text = Expression.empty
         }
     }
     
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
     
     private func operandIsZero() {
         
-        if !stackView.subviews.isEmpty && numberInput.text == "0" {
+        if !stackView.subviews.isEmpty && numberInput.text == Expression.zero {
             isChangeableOperator = true
         } else {
             isChangeableOperator = false
@@ -99,7 +99,7 @@ class ViewController: UIViewController {
     
     private func checkInitialCondition() {
         
-        if numberInput.text == "0" {
+        if numberInput.text == Expression.zero {
             isEnteredOperand = false
         } else {
             isEnteredOperand = true
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
               let operatorStackLabel = operatorInput.text else {  return  }
         
         let stackLabel = UILabel()
-        stackLabel.text = operatorStackLabel + " " + operandStackLabel
+        stackLabel.text = operatorStackLabel + Expression.blank + operandStackLabel
         stackLabel.numberOfLines = 0
         stackLabel.adjustsFontForContentSizeCategory = true
         stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -130,7 +130,7 @@ class ViewController: UIViewController {
     private func applyDecimalPoint(number: String) -> String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
-        guard let operand = Double(number) else { return "" }
+        guard let operand = Double(number) else { return Expression.empty }
         guard let result = numberFormatter.string(from: NSNumber(value: operand)) else { return "" }
         
         return result
@@ -139,13 +139,13 @@ class ViewController: UIViewController {
     private func checkSign() {
         
         guard var currentNumber = numberInput.text,
-              currentNumber != "0" else { return }
+              currentNumber != Expression.zero else { return }
         
-        if let minus = currentNumber.firstIndex(of: "-") {
+        if let minus = currentNumber.firstIndex(of: Character(Expression.minus)) {
             currentNumber.remove(at: minus)
             numberInput.text = currentNumber
         } else {
-            numberInput.text = "-" + currentNumber
+            numberInput.text = Expression.minus + currentNumber
         }
     }
     
@@ -154,11 +154,11 @@ class ViewController: UIViewController {
     }
     
     private func resetNumberInput() {
-        currentNumber = "0"
+        currentNumber = Expression.zero
     }
     
     private func resetOperatorInput() {
-        operatorInput.text = " "
+        operatorInput.text = Expression.blank
     }
     
     private func handleDivideError() {
@@ -168,7 +168,7 @@ class ViewController: UIViewController {
             numberInput.text = resultLabel
             isFinishedCalculating = true
         } catch CalculatorError.divideByZero {
-            numberInput.text = "NaN"
+            numberInput.text = Expression.nan
         } catch {
             print("계산오류")
         }
@@ -177,13 +177,13 @@ class ViewController: UIViewController {
     private func checkDecimalPoint() throws -> String {
         
         let resultLabel: String = calculate()
-        let dividedValue = resultLabel.components(separatedBy: ".")
-        guard !dividedValue[0].isEmpty || dividedValue[1] == "0" else {
+        let dividedValue = resultLabel.components(separatedBy: Expression.dot)
+        guard !dividedValue[0].isEmpty || dividedValue[1] == Expression.zero else {
             throw CalculatorError.calcuate
         }
         numberFormatter.minimumFractionDigits = 0
-        guard let number = Double(resultLabel) else { return "" }
-        guard let formatterNumber = numberFormatter.string(from: NSNumber(value: number)) else { return "" }
+        guard let number = Double(resultLabel) else { return Expression.empty }
+        guard let formatterNumber = numberFormatter.string(from: NSNumber(value: number)) else { return Expression.empty }
         return formatterNumber
     }
     
@@ -192,7 +192,7 @@ class ViewController: UIViewController {
         let calculateItem = arrangeCalculateItems()
         var formula = ExpressionParser.parse(from: calculateItem)
         let result = formula.result()
-        guard let resultValue = result else { return "" }
+        guard let resultValue = result else { return Expression.empty }
         let resultLabel = String(resultValue)
         return resultLabel
     }
@@ -207,8 +207,8 @@ class ViewController: UIViewController {
                 calculateItems.append(value)
             }
         }
-        return calculateItems.map { $0.components(separatedBy: ",").joined() }
-            .map {$0.components(separatedBy: " ").joined() }.joined(separator: "")
+        return calculateItems.map { $0.components(separatedBy: Expression.comma).joined() }
+            .map {$0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
     }
     
 }
