@@ -7,22 +7,12 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    enum Sign {
-        static let zero = "0"
-        static let zeroTwice = "00"
-        static let dot = "."
-        static let empty = ""
-        static let minus = "-"
-        static let space = " "
-        static let nan = "NaN"
-    }
-    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var calculateItemStackView: CalculateItemStackView!
     @IBOutlet weak var calculateItemScrollView: UIScrollView!
     
-    let numberFormatter = NumberFormatter(numberStyle: .decimal,
+    private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
@@ -35,13 +25,17 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeCurrentCalculateItem()
-        calculateItemStackView.removeAllSubviews()
+        setInitialCurrentCalculateItem()
+        setInitialCalculateItemStackView()
     }
     
-    private func initializeCurrentCalculateItem() {
+    private func setInitialCurrentCalculateItem() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.empty
+    }
+    
+    private func setInitialCalculateItemStackView() {
+        calculateItemStackView.removeAllSubviews()
     }
     
     @IBAction func touchOperandButton(_ sender: UIButton) {
@@ -56,11 +50,9 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func touchDotButton(_ sender: UIButton) {
-        if currentOperand.contains(Sign.dot) {
-            return
-        } else {
-            operandLabel.text = currentOperand + Sign.dot
-        }
+        guard currentOperand.contains(Sign.dot) == false else { return }
+        
+        operandLabel.text = currentOperand + Sign.dot
     }
     
     @IBAction func touchZeroButton(_ sender: UIButton) {
@@ -75,9 +67,9 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction func allClear(_ sender: UIButton) {
-        calculateItemStackView.removeAllSubviews()
-        initializeCurrentCalculateItem()
-        CurrentInputHandler.shared.currentInput = Sign.empty
+        setInitialCalculateItemStackView()
+        setInitialCurrentCalculateItem()
+        InputHandler.shared.setEmptyInput()
     }
     
     @IBAction func clearOperandLabel(_ sender: UIButton) {
@@ -99,7 +91,7 @@ final class MainViewController: UIViewController {
             operatorLabel.text = inputOperator
         } else {
             calculateItemStackView.addCurrentItem()
-            initializeCurrentCalculateItem()
+            setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
     }
@@ -109,10 +101,10 @@ final class MainViewController: UIViewController {
         
         calculateItemStackView.addCurrentItem()
         
-        var formula = ExpressionParser.parse(from: CurrentInputHandler.shared.currentInput)
+        var formula = ExpressionParser.parse(from: InputHandler.shared.currentInput)
         let result = formula.result()
         
-        CurrentInputHandler.shared.currentInput = Sign.empty
+        InputHandler.shared.setEmptyInput()
         operatorLabel.text = Sign.empty
         
         if result.isNaN == true {

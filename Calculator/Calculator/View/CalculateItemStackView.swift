@@ -8,13 +8,6 @@
 import UIKit
 
 final class CalculateItemStackView: UIStackView {
-    private enum Sign {
-        static let comma = ","
-        static let space = " "
-        static let zero = "0"
-        static let empty = ""
-    }
-    
     let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
@@ -61,7 +54,7 @@ final class CalculateItemStackView: UIStackView {
         result.alignment = .fill
         result.distribution = .fill
         
-        CurrentInputHandler.shared.addInput(about: `operator`, and: operand)
+        InputHandler.shared.addInput(about: `operator`, and: operand)
         
         return result
     }

@@ -6,22 +6,24 @@
 //
 import UIKit
 
-final class CurrentInputHandler {
-    static let shared = CurrentInputHandler()
+final class InputHandler {
+    static let shared = InputHandler()
     
     private init() {}
+    private var input: String = Sign.empty
     
-    private enum Sign {
-        static let empty = ""
-        static let comma = ","
-        static let space = " "
+    var currentInput: String {
+        return input
     }
-    
-    var currentInput: String = ""
     
     func addInput(about `operator`: UILabel, and operand: UILabel) {
         guard let input = makeInput(from: `operator`, and: operand) else { return }
-        currentInput += input
+        
+        self.input += input
+    }
+    
+    func setEmptyInput() {
+        input = Sign.empty
     }
     
     private func makeInput(from `operator`: UILabel, and operand: UILabel) -> String? {
