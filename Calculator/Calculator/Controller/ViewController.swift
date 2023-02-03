@@ -61,13 +61,14 @@ final class ViewController: UIViewController {
     
     @IBAction private func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
         let operandValue = convertPositiveAndNegativeNumber()
+        
         operandLabel.text = operandValue.applyFormatter()
     }
     
     @IBAction private func didTapEqualButton(_ sender: UIButton) {
         guard operatorLabel.text != Sign.blank else { return }
         
-        setOperationStackView(operatorValue: currentOperator, operandValue: currentOperand)
+        setOperationContentStackView(operatorValue: currentOperator, operandValue: currentOperand)
         isCalculatedStatus = true
         displayOperationResult()
     }
@@ -99,19 +100,20 @@ final class ViewController: UIViewController {
         
         if currentOperand == Sign.zero {
             guard currentOperand != Sign.zeroZero else { return }
+            
             operandLabel.text = inputNumber.applyFormatter()
         } else {
             guard currentOperand.contains(Sign.dot) == false else {
                 operandLabel.text = currentOperand + inputNumber
                 return
             }
+            
             operandLabel.text = (currentOperand + inputNumber).applyFormatter()
         }
     }
     
     private func updateDot() {
-        guard currentOperand.contains(Sign.dot) == false
-        else { return }
+        guard currentOperand.contains(Sign.dot) == false else { return }
         
         operandLabel.text = currentOperand.applyFormatter() + String(Sign.dot)
     }
@@ -121,13 +123,13 @@ final class ViewController: UIViewController {
         
         if expression == Sign.empty {
             expression += currentOperand.removeComma()
-            setOperationStackView(operatorValue: Sign.empty,
+            setOperationContentStackView(operatorValue: Sign.empty,
                                   operandValue: currentOperand.applyFormatter())
         } else if operandLabel.text == Sign.zero {
             expression += " \(currentOperator) "
             expression = String(expression.dropLast(3))
         } else {
-            setOperationStackView(operatorValue: currentOperator,
+            setOperationContentStackView(operatorValue: currentOperator,
                                   operandValue: currentOperand.applyFormatter())
             expression += " \(currentOperator) " + currentOperand.removeComma()
         }
@@ -142,9 +144,9 @@ final class ViewController: UIViewController {
         
         let operandValue = currentOperand
         
-        guard operandValue.prefix(1) != Sign.negative
-        else { return String(operandValue.dropFirst(1)) }
-        
+        guard operandValue.prefix(1) != Sign.negative else {
+            return String(operandValue.dropFirst(1))
+        }
         return Sign.negative + operandValue
     }
     
@@ -157,7 +159,8 @@ final class ViewController: UIViewController {
         return label
     }
     
-    private func createOperationStackView(operatorLabel: UILabel, operandLabel: UILabel) -> UIStackView {
+    private func createOperationStackView(operatorLabel: UILabel,
+                                          operandLabel: UILabel) -> UIStackView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
@@ -175,7 +178,7 @@ final class ViewController: UIViewController {
                                              animated: true)
     }
     
-    private func setOperationStackView(operatorValue: String, operandValue: String) {
+    private func setOperationContentStackView(operatorValue: String, operandValue: String) {
         let operatorLabel = createLabel(input: operatorValue)
         let operandLabel = createLabel(input: operandValue)
         let operationStackView = createOperationStackView(operatorLabel: operatorLabel,
