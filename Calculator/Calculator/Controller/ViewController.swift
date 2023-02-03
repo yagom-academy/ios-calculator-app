@@ -70,9 +70,6 @@ final class CalculatorViewController: UIViewController {
     
     private func setNumberFormatter() {
         self.numberFormatter.numberStyle = .decimal
-        self.numberFormatter.roundingMode = .halfUp
-        self.numberFormatter.usesSignificantDigits = true
-        self.numberFormatter.maximumSignificantDigits = 20
     }
     
     private func calculate() {
