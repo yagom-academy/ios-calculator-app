@@ -304,6 +304,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculatorScrollView" destination="BOT-7g-vxv" id="QfN-jX-IGO"/>
+                        <outlet property="calculatorStackView" destination="XRe-QE-UJf" id="8yP-BG-EjK"/>
                         <outlet property="enteringNumberLabel" destination="Lwz-OF-XHD" id="MFk-jq-8fr"/>
                         <outlet property="enteringOperatorLabel" destination="HPC-iy-qdm" id="HNZ-jk-jMK"/>
                     </connections>
