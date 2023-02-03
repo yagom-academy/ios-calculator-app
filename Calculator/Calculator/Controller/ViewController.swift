@@ -98,22 +98,6 @@ class ViewController: UIViewController {
             //마지막이 연산자임
             currentInputFormula.append(number)
         }
-            
-        /*
-        if currentInputFormula.isEmpty {
-            
-            currentInputFormula.append(number)
-            
-        } else {
-            currentInputFormula.append(number)
-        }
-        
-        guard var currentOperand = currentInputFormula.last else { return }
-        if currentOperand.hasSuffix(".") {
-            currentOperand += number
-        }
-        */
-        
         
         IsOperatortapped = false
         inputOperandsLabel.text = lastOperand
@@ -151,45 +135,12 @@ class ViewController: UIViewController {
                 let oldOperator = currentInputFormula[currentInputFormula.count-3]
                 newStackView = makeStackView(oldOperator, lastElement)
             }
-            
-            //currentInputFormula.append(Sign.blank)
             currentInputFormula.append(currentSign)
-            //currentInputFormula.append(Sign.blank)
-            
             IsOperatortapped = true
         } else {
             currentInputFormula[currentInputFormula.count-1] = currentSign
             print("else: \(currentInputFormula.count)")
         }
-        /*
-        else if oldInputFormula != Sign.nothing {
-            print("if")
-            newStackView = makeStackView(currentSign, splitedOperand)
-            currentInputFormula = oldInputFormula + Sign.blank + currentSign + Sign.blank
-            printex()
-            
-        } else if oldInputFormula == Sign.nothing {
-            newStackView = makeStackView(currentSign, splitedOperand)
-            inputOperandsLabel.text = currentOperand
-            currentInputFormula = currentInputFormula + Sign.blank + currentSign + Sign.blank
-            
-        } else {
-            newStackView = makeStackView(currentSign, splitedOperand)
-            inputOperandsLabel.text = currentOperand
-            currentInputFormula = currentInputFormula + Sign.blank + currentSign + Sign.blank
-        }
-        
-        else if inputOperandsLabel.text == Sign.zero && currentTappedNumber != Sign.zero {
-            //currentsign만! 바뀜
-            currentInputFormula = oldInputFormula + Sign.blank + currentSign + Sign.blank
-            printex()
-        } else {
-            currentInputFormula = currentInputFormula + Sign.blank + currentSign + Sign.blank
-            printex()
-            let newStackView = makeStackView(currentSign, currentTappedNumber)
-        }
-        */
-        
         
         inputOperandsLabel.text = Sign.zero
         
@@ -198,9 +149,7 @@ class ViewController: UIViewController {
        
         stackView.addArrangedSubview(newStackView)
     }
-    
-    
-    
+
     @IBAction func dotButtonDidTapped(_ sender: UIButton) {
         if let lastElement = currentInputFormula.last {
             if lastElement.hasSuffix(".") {
@@ -212,14 +161,6 @@ class ViewController: UIViewController {
             currentInputFormula.append(Sign.zero + Sign.dot)
             print(currentInputFormula)
         }
-            
-            
-//        if currentInputFormula.last == "." {
-//            printex()
-//        } else {
-//            currentInputFormula[currentInputFormula.count-1] += Sign.dot
-//            printex()
-//        }
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
@@ -237,7 +178,6 @@ class ViewController: UIViewController {
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
         currentInputFormula = []
         oldInputFormula = []
-        //stackView.removeArrangedSubview(newStackView)
         printex()
     }
     
