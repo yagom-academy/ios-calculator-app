@@ -70,7 +70,7 @@ Calculator
 <br>
 
 ### 클래스 다이어그램
-![](https://i.imgur.com/uWuGCpF.png)
+<img src="https://i.imgur.com/gp9bTiN.png">
 
 
 <br>
