@@ -124,6 +124,7 @@ final class CalculatorViewController: UIViewController {
     private func setScrollView() {
         let bottomOffset: CGPoint = CGPointMake(0, calculatorItemsScrollView.contentSize.height)
         calculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
+        calculatorItemsScrollView.layoutSubviews()
     }
     
     private func applyDecimalPoint(number: String) -> String {
