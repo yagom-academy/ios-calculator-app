@@ -28,4 +28,3 @@ enum ExpressionParser {
         return result
     }
 }
-
