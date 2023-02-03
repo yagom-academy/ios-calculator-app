@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var inputNumbers: String = ""
+    
     private var calcuateComponents: String = ""
     
     @IBOutlet weak var numberOnField: UILabel!
@@ -72,7 +72,6 @@ class ViewController: UIViewController {
     
     private func allClear() {
         self.numberOnField.text = "0"
-        self.inputNumbers = ""
         self.calcuateComponents = ""
         resetAllStackView()
     }
@@ -83,7 +82,7 @@ class ViewController: UIViewController {
         }
         if currentNumber != "0" {
             self.numberOnField.text = "0"
-            self.inputNumbers = "" //연산중인 숫자 삭제 구현 , 연산결과삭제구현필요
+            // 연산결과삭제구현필요
         }
     }
     
@@ -106,6 +105,7 @@ class ViewController: UIViewController {
     
     
     private func numberButtonTapped(sender: UIButton) {
+        var inputNumbers: String = ""
         
         switch sender.tag {
         case 1: inputNumbers += "1"
@@ -137,13 +137,13 @@ class ViewController: UIViewController {
         if currentNumber == "0" {
             return
         } else if calcuateComponents == "" {
-            calcuateComponents += inputNumbers
-            addNewStackView(number: inputNumbers, oper: currentOper)
+            calcuateComponents += currentNumber
+            addNewStackView(number: currentNumber, oper: currentOper)
         } else {
-            calcuateComponents += currentOper + inputNumbers
-            addNewStackView(number: inputNumbers, oper: currentOper)
+            calcuateComponents += currentOper + currentNumber
+            addNewStackView(number: currentNumber, oper: currentOper)
             self.numberOnField.text = ""
-            self.inputNumbers = ""
+            currentNumber = ""
         }
         
         numberOnField.text = "0"
