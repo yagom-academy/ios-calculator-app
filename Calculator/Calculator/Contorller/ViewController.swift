@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     
     private func setUpScrollViewToBottom(){
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
-        if(bottomOffset.y > 0) {
+        if(bottomOffset.y >= 0) {
             self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
@@ -77,15 +77,36 @@ class ViewController: UIViewController {
         resetAllStackView()
     }
     
-    private func clearEntryButtonTapped(){}
+    private func clearEntryButtonTapped(){
+        guard let currentNumber = self.numberOnField.text else {
+            return
+        }
+        if currentNumber != "0" {
+            self.numberOnField.text = "0"
+            self.inputNumbers = "" //연산중인 숫자 삭제 구현 , 연산결과삭제구현필요
+        }
+    }
+    
+    //음수 양수 chagne매서드
+    private func changeOperatorButtonTapped(){
+        guard let currentNumber = self.numberOnField.text,
+              currentNumber != "0" else {
+            return
+        }
+        if currentNumber.contains("−") == true {
+            numberOnField.text = currentNumber.trimmingCharacters(in: ["−"])
+        } else {
+            numberOnField.text = "−" + currentNumber
+        }
+    }
+    
+    private func calculateResult(){
         
-    private func changeOperatorButtonTapped(){}
-        
-    private func calculateResult(){}
-        
-   
+    }
+    
+    
     private func numberButtonTapped(sender: UIButton) {
-      
+        
         switch sender.tag {
         case 1: inputNumbers += "1"
         case 2: inputNumbers += "2"
@@ -105,24 +126,30 @@ class ViewController: UIViewController {
         numberOnField.text = inputNumbers
     }
     
-    
+    //숫자값이없을때 오퍼레이터만 스택추가되지않도록 구현필요
     private func operatorButtonTapped(sender: UIButton) {
         
+        guard let currentNumber = numberOnField.text else { return }
         guard let inputtedOperator = sender.titleLabel?.text else { return }
         guard let currentOper = operatorOnField.text else { return }
         
         operatorOnField.text = inputtedOperator
-        
-        if calcuateComponents == "" {
-                    calcuateComponents += inputNumbers
-                    addNewStackView(number: inputNumbers, oper: currentOper)
-                } else {
-                    calcuateComponents += currentOper + inputNumbers
-                    addNewStackView(number: inputNumbers, oper: currentOper)
+        if currentNumber == "0" {
+            return
+        } else if calcuateComponents == "" {
+            calcuateComponents += inputNumbers
+            addNewStackView(number: inputNumbers, oper: currentOper)
+        } else {
+            calcuateComponents += currentOper + inputNumbers
+            addNewStackView(number: inputNumbers, oper: currentOper)
             self.numberOnField.text = ""
             self.inputNumbers = ""
         }
+        
+        numberOnField.text = "0"
+        setUpScrollViewToBottom()
     }
+    
     
     private func addNewStackView(number: String, oper: String) {
         let stackView = UIStackView()
@@ -132,14 +159,14 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         
         let createdOperLabel = UILabel()
-            createdOperLabel.text = oper
-            createdOperLabel.textColor = .white
-            createdOperLabel.font = UIFont.systemFont(ofSize: 20)
-    
+        createdOperLabel.text = oper
+        createdOperLabel.textColor = .white
+        createdOperLabel.font = UIFont.systemFont(ofSize: 20)
+        
         let createdNumberLabel = UILabel()
-            createdNumberLabel.text = number
-            createdNumberLabel.textColor = .white
-            createdNumberLabel.font = UIFont.systemFont(ofSize: 20)
+        createdNumberLabel.text = number
+        createdNumberLabel.textColor = .white
+        createdNumberLabel.font = UIFont.systemFont(ofSize: 20)
         
         [createdOperLabel, createdNumberLabel].map {
             stackView.addArrangedSubview($0)
@@ -152,8 +179,4 @@ class ViewController: UIViewController {
         verticalStackViewInScroll.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    
-
 }
-    
-
