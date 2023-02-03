@@ -16,7 +16,6 @@ final class CalculateItemStackView: UIStackView {
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
-    
     private var currentOperand: String {
         return operandLabel.text ?? Sign.zero
     }
@@ -28,33 +27,28 @@ final class CalculateItemStackView: UIStackView {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func addCurrentItem() {
-        guard let subview = generateCurrentItemStackView() else { return }
+    func addCurrentItem(`operator`: String, operand: String) {
+        guard let subview = generateCurrentItemStackView(operatorText: `operator`, operandText: operand) else { return }
         
         add(subview, to: self)
         calculateItemScrollView.didAddSubview(subview)
     }
     
-    private func generateCurrentItemStackView() -> UIStackView? {
+    private func generateCurrentItemStackView(operatorText: String, operandText: String) -> UIStackView? {
         let operand = UILabel()
-        operand.text = numberFormatter.convertToDecimal(from: currentOperand)
+        operand.text = numberFormatter.convertToDecimal(from: operandText)
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let `operator` = UILabel()
-        `operator`.text = currentOperator
+        `operator`.text = operatorText
         `operator`.textColor = UIColor.white
         `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let result = UIStackView()
         result.addArrangedSubview(`operator`)
         result.addArrangedSubview(operand)
-        result.axis = .horizontal
         result.spacing = 8
-        result.alignment = .fill
-        result.distribution = .fill
-        
-        InputHandler.shared.addInput(about: `operator`, and: operand)
         
         return result
     }

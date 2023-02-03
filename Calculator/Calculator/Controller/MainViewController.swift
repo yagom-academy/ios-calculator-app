@@ -12,6 +12,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var calculateItemStackView: CalculateItemStackView!
     @IBOutlet private var calculateItemScrollView: CalculateItemScrollView!
     
+    private var inputHandler = InputHandler()
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
@@ -69,7 +70,7 @@ final class MainViewController: UIViewController {
     @IBAction private func allClear(_ sender: UIButton) {
         setInitialCalculateItemStackView()
         setInitialCurrentCalculateItem()
-        InputHandler.shared.setEmptyInput()
+        inputHandler.setEmptyInput()
     }
     
     @IBAction private func clearOperandLabel(_ sender: UIButton) {
@@ -90,7 +91,9 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            calculateItemStackView.addCurrentItem()
+            calculateItemStackView.addCurrentItem(operator: currentOperator,
+                                                  operand: currentOperand)
+            inputHandler.addInput(about: currentOperator, and: currentOperand)
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
@@ -99,12 +102,14 @@ final class MainViewController: UIViewController {
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard currentOperator != Sign.empty else { return }
         
-        calculateItemStackView.addCurrentItem()
+        calculateItemStackView.addCurrentItem(operator: currentOperator,
+                                              operand: currentOperand)
+        inputHandler.addInput(about: currentOperator, and: currentOperand)
         
-        var formula = ExpressionParser.parse(from: InputHandler.shared.currentInput)
+        var formula = ExpressionParser.parse(from: inputHandler.currentInput)
         let result = formula.result()
         
-        InputHandler.shared.setEmptyInput()
+        inputHandler.setEmptyInput()
         operatorLabel.text = Sign.empty
         
         if result.isNaN == true {
