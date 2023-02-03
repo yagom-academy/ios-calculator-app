@@ -99,7 +99,7 @@ class ViewController: UIViewController {
     }
     
     // 1. 숫자누르고 +- 눌렀을때 -숫자 나오게
-    // 2. 처음 숫자 누르고 스택뷰에 연산자없이 숫자만 입력
+    // 2. 처음 숫자 누르고 스택뷰에 연산자없이 숫자만 입력 o
     // 3. 아무것도 입력하지 않은 0일때 연산자누르면 연산자 한번만 입력
     // 4. ac시 스택뷰 리셋
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
                 let lastElement = currentInputFormula.last else { return }
         
         // 연산자 입력 시 동작?
-        // 1. inputOperandsLabel에 입력된 숫자가 currentFormula로 들어감 ㅇ
+        // 1. inputOperandsLabel에 입력된 숫자가 currentFormula로 들어감
         // 2. (처음 입력한 값이라면) stackView에 operator 비우고 operand자리에만 숫자 들어감 ㅇ
         // 3. 0을 입력하지 않았을때 inputOperator가 0이라면 연산자는 마지막에 누른 한개만 들어감
 
@@ -121,14 +121,13 @@ class ViewController: UIViewController {
                 newStackView = makeStackView(Sign.nothing, lastElement)
             }
             else if currentInputFormula.count != 0 && currentInputFormula.count > 1 {
-                let oldOperator = currentInputFormula[currentInputFormula.count-2]
+                let oldOperator = currentInputFormula[currentInputFormula.count-3]
                 newStackView = makeStackView(oldOperator, lastElement)
             }
             currentInputFormula.append(Sign.blank)
             currentInputFormula.append(currentSign)
             currentInputFormula.append(Sign.blank)
-            
-      
+        
             IsOperatortapped = true
         }
         /*
@@ -172,16 +171,29 @@ class ViewController: UIViewController {
     
     
     @IBAction func dotButtonDidTapped(_ sender: UIButton) {
-        if currentInputFormula.last == "." {
-            printex()
-        } else {
-            currentInputFormula[currentInputFormula.count-1] += Sign.dot
-            printex()
+        if let lastElement = currentInputFormula.last {
+            if lastElement.hasSuffix(".") {
+                print("lastElement: \(lastElement)")
+            } else {
+                currentInputFormula[currentInputFormula.count-1] += Sign.dot
+            }
+        } else if currentInputFormula.isEmpty {
+            currentInputFormula.append(Sign.zero + Sign.dot)
+            print(currentInputFormula)
         }
+            
+            
+//        if currentInputFormula.last == "." {
+//            printex()
+//        } else {
+//            currentInputFormula[currentInputFormula.count-1] += Sign.dot
+//            printex()
+//        }
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
-        let stringFormula = currentInputFormula.joined(separator: " ")
+        let stringFormula = currentInputFormula.joined(separator: "")
+        print("stringformula :\(stringFormula)")
         var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
         IsOperatortapped = false
