@@ -145,4 +145,17 @@ final class ViewController: UIViewController {
         OperandsLabel.text = "0"
     }
     
+    @IBAction func changeNumberSign(_ sender: UIButton) {
+        guard var operands = OperandsLabel.text,
+              operands != "0"  else { return }
+        
+        if operands.first == "-" {
+            operands.removeFirst()
+        } else {
+            operands = "-" + operands
+        }
+        currentLabelText = operands
+        OperandsLabel.text = operands
+    }
+    
 }
