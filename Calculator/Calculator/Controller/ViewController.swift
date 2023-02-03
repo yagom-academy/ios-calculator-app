@@ -30,27 +30,42 @@ final class CalculatorViewController: UIViewController {
         self.currentOperandLabel.text = "0"
     }
     
-    @IBAction private func didTapButton(sender: UIButton) {
-        guard let buttonTitle = sender.currentTitle else { return }
+    @IBAction private func didTapNumberButton(sender: UIButton) {
+        guard let numberButtonTitle = sender.currentTitle else { return }
         
-        switch buttonTitle {
-        case "=":
-            calculate()
-        case "AC":
-            clearAll()
-        case "CE":
-            clearCurrentOperand()
-        case "⁺⁄₋":
-            reverseOperand()
-        case "÷", "×", "−", "+":
-            clickedOperator(buttonTitle)
-        case "0", "00":
-            addZeroToOperandLabel(buttonTitle)
-        case ".":
-            addDotToOperandLabel()
-        default:
-            addNumberToOperandLabel(buttonTitle)
-        }
+        addNumberToOperandLabel(numberButtonTitle)
+    }
+    
+    @IBAction private func didTapZeroButton(sender: UIButton) {
+        guard let zeroButtonTitle = sender.currentTitle else { return }
+        
+        addZeroToOperandLabel(zeroButtonTitle)
+    }
+    
+    @IBAction private func didTapDotButton(sender: UIButton) {
+        addDotToOperandLabel()
+    }
+    
+    @IBAction private func didTapOperatorButton(sender: UIButton) {
+        guard let operatorButtonTitle = sender.currentTitle else { return }
+        
+        clickedOperator(operatorButtonTitle)
+    }
+    
+    @IBAction private func didTapReverseOperandButton(sender: UIButton) {
+        reverseOperand()
+    }
+    
+    @IBAction private func didTapClearButton(sender: UIButton) {
+        clearCurrentOperand()
+    }
+    
+    @IBAction private func didTapAllClearButton(sender: UIButton) {
+        clearAll()
+    }
+    
+    @IBAction private func didTapCalculateButton(sender: UIButton) {
+        calculate()
     }
     
     private func setNumberFormatter() {
