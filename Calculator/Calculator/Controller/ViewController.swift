@@ -187,7 +187,9 @@ final class ViewController: UIViewController {
     }
     
     private func setScrollViewFocus() {
-        let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height)
-        scrollView.setContentOffset(bottomOffset, animated: false)
+        if scrollView.contentSize.height < scrollView.bounds.size.height { return }
+        scrollView.layoutIfNeeded()
+        let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
