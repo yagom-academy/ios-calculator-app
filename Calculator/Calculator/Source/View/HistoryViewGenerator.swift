@@ -11,6 +11,7 @@ enum HistoryViewGenerator {
     private static func generateLabel(text: String) -> UILabel {
         let label: UILabel = UILabel()
         
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.text = text
