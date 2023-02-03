@@ -120,62 +120,83 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction func didTapNumberButton(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
-        if calculateNumber == "0" {
-            switch number {
-            case "0", "00":
-                isInOperand = true
-                return
-            default:
-                calculateNumber = number
-            }
-        } else {
-            calculateNumber += number
+        
+        if isCalculated {
+            calculateOperand = number
+            isCalculated = false
+            return
         }
         
-        operandLabel.text = calculateNumber
-        isInOperand = true
+        if calculateOperand == "0" {
+            calculateOperand = number
+        } else {
+            calculateOperand += number
+        }
     }
     
     @IBAction func didTapDotButton(_ sender: UIButton) {
-        guard !calculateNumber.contains(".") else { return }
+        guard let dot = sender.currentTitle else { return }
+        guard !calculateOperand.contains(".") else { return }
         
-        calculateNumber += "."
-        operandLabel.text = calculateNumber
+        calculateOperand += dot
     }
     
-    private func setDefault() {
-        operatorLabel.text = ""
-        operandLabel.text = "0"
-        calculateSign = ""
-        calculateNumber = "0"
-    }
-    
-    private func addToCalculateItem() {
-        let stackView = makeHorizontalStackView()
+    private func addToCalculateItem(left: String, right: String) {
+        let operatorUILabel = generateUILabel(title: left)
+        let operandUILabel = generateUILabel(title: right)
+        
+        let stackView = generateUIStackView(left: operatorUILabel, right: operandUILabel)
         
         calculateStackView.addArrangedSubview(stackView)
+        scrollToBottom()
     }
     
-    private func makeHorizontalStackView() -> UIStackView {
-        let operatorSign = UILabel()
-        operatorSign.text = operatorLabel.text
-        operatorSign.textColor = .white
-        operatorSign.font = UIFont.preferredFont(forTextStyle: .title3)
+    private func scrollToBottom() {
         
-        let operandNumber = UILabel()
-        operandNumber.text = operandLabel.text
-        operandNumber.textColor = .white
-        operandNumber.font = UIFont.preferredFont(forTextStyle: .title3)
+        let bottomOffset = CGPoint(x: 0,
+                                   y: calculateScrollView.contentSize.height
+                                    - calculateScrollView.bounds.height)
+        calculateScrollView.layoutIfNeeded()
+        calculateScrollView.setContentOffset(bottomOffset, animated: true)
+    }
+    
+    private func generateUILabel(title: String) -> UILabel {
+        let label = UILabel()
+        label.text = title
+        label.textColor = .white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         
+        return label
+    }
+    
+    private func generateUIStackView(left: UILabel, right: UILabel) -> UIStackView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.addArrangedSubview(operatorSign)
-        stackView.addArrangedSubview(operandNumber)
+        stackView.addArrangedSubview(left)
+        stackView.addArrangedSubview(right)
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 8
         
         return stackView
+    }
+    
+    private func appendExpression(sign: String, number: String) {
+        expression.append(sign)
+        expression.append(number)
+    }
+    
+    private func resetOperand() {
+        calculateOperand = "0"
+    }
+    
+    private func resetOperator() {
+        calculateOperator = ""
+    }
+    
+    private func resetLabel() {
+        resetOperand()
+        resetOperator()
     }
 }
 
