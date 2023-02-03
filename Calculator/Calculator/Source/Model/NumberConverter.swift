@@ -15,7 +15,7 @@ enum NumberConverter {
         numberFormatter.maximumFractionDigits = 20
         
         guard let formattedNumber = numberFormatter
-                    .string(for: Double(text)) else { return text }
-                return formattedNumber
+            .string(for: Double(text)) else { return text }
+        return formattedNumber
     }
 }
