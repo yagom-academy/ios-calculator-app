@@ -53,23 +53,23 @@
 
 #### 1️⃣일반적인 연산
 
-<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작1.gif" height="450px">
+<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작1.gif" height="450px" width="225px">
 
 #### 2️⃣"AC"버튼 시 이전의 연산들을 초기화
 
-<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작2.gif" height="450px">
+<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작2.gif" height="450px" width="225px">
 
 #### 3️⃣"CE"를 누를 시 현재 숫자를 지움
 
-<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작3.gif" height="450px">
+<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작3.gif" height="450px" width="225px">
 
 #### 4️⃣숫자입력이 없는 상태에서 연산자를 누를 경우 연산자만 바뀜
 
-<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작4.gif" height="450px">
+<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작4.gif" height="450px" width="225px">
 
 #### 5️⃣x / 0을 할 경우 NaN이 출력된다
 
-<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작5.gif" height="450px">
+<img src="https://raw.githubusercontent.com/fatherLeon/ios-calculator-app/step3/image/동작5.gif" height="450px" width="225px">
 
 ---
 
