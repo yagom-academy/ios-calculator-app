@@ -1,8 +1,7 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by 리지.
 //  Copyright © yagom. All rights reserved.
-// 
 
 import UIKit
 
@@ -26,19 +25,18 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let senderSign = sender.currentTitle else { return }
-    
-        if numberInput.text != "0"  {
+        if numberInput.text != Expression.zero  {
             addStackView()
             operatorInput.text = senderSign
-        }
-        if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == "0" {
+        } else if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
             operatorInput.text = senderSign
         }
-    
+        
         currentNumber = Expression.zero
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
+        restartCalculate()
         guard let number = sender.currentTitle,
               let operand = numberInput.text else { return }
         if numberInput.text == Expression.zero  {
@@ -76,17 +74,17 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
-        calculatorItemsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        currentNumber = Expression.zero
-        operatorInput.text = Expression.blank
-        isFinishedCalculating = false
+        resetCalculatorItemsView()
+        resetNubmerInput()
+        resetOperatorInput()
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
         if isFinishedCalculating == false {
-            let result = calculate()
-            currentNumber = result
+            currentNumber = calculate()
+            resetOperatorInput()
         }
+        isFinishedCalculating = true
     }
     
     private func addStackView() {
@@ -102,6 +100,26 @@ final class CalculatorViewController: UIViewController {
         calculatorItemsStackView.addArrangedSubview(stackLabel)
         setScrollView()
         
+    }
+    
+    private func restartCalculate() {
+        if isFinishedCalculating == true {
+            resetNubmerInput()
+            resetCalculatorItemsView()
+            isFinishedCalculating = false
+        }
+    }
+    
+    private func resetCalculatorItemsView() {
+        calculatorItemsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func resetNubmerInput() {
+        currentNumber = Expression.zero
+    }
+    
+    private func resetOperatorInput() {
+        operatorInput.text = Expression.blank
     }
     
     private func setScrollView() {
@@ -140,3 +158,4 @@ final class CalculatorViewController: UIViewController {
             .map { $0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
     }
 }
+
