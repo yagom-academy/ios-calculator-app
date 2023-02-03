@@ -15,11 +15,11 @@ final class CalculatorViewController: UIViewController {
         self.currentOperand.contains(".")
     }
     private var isFirstInput: Bool {
-        return self.stackViewInScrollView.subviews.isEmpty
+        return self.formulaStackView.subviews.isEmpty
     }
     
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var stackViewInScrollView: UIStackView!
+    @IBOutlet private weak var formulaScrollView: UIScrollView!
+    @IBOutlet private weak var formulaStackView: UIStackView!
     @IBOutlet private weak var currentOperandLabel: UILabel!
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     
@@ -49,7 +49,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTapOperatorButton(sender: UIButton) {
         guard let operatorButtonTitle = sender.currentTitle else { return }
         
-        clickedOperator(operatorButtonTitle)
+        touchUpOperator(operatorButtonTitle)
     }
     
     @IBAction private func didTapReverseOperandButton(sender: UIButton) {
@@ -131,7 +131,7 @@ final class CalculatorViewController: UIViewController {
         updateCurrentNumberLabel(self.currentOperand)
     }
     
-    private func clickedOperator(_ operatorValue: String) {
+    private func touchUpOperator(_ operatorValue: String) {
         if self.currentOperandLabel.text != "0" {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
@@ -193,46 +193,31 @@ extension CalculatorViewController {
     private func addStackView(number: String?, operatorType: String?) {
         guard let operandValue = number,
               let operatorValue = operatorType else { return }
-
-        let enteredStackView = UIStackView()
-        enteredStackView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        enteredStackView.axis = .horizontal
-        enteredStackView.translatesAutoresizingMaskIntoConstraints = false
-        enteredStackView.alignment = .fill
-        enteredStackView.distribution = .fill
-        enteredStackView.spacing = 8
-
-        let operatorLabel = UILabel()
-        operatorLabel.font = .preferredFont(forTextStyle: .title3)
-        operatorLabel.text = operatorValue
-        operatorLabel.textColor = .white
-
-        let operandLabel = UILabel()
-        operandLabel.font = .preferredFont(forTextStyle: .title3)
-        operandLabel.text = operandValue
-        operandLabel.textColor = .white
         
-        enteredStackView.addArrangedSubview(operatorLabel)
-        enteredStackView.addArrangedSubview(operandLabel)
+        let formulaLabel = UILabel()
+        formulaLabel.font = .preferredFont(forTextStyle: .title3)
+        formulaLabel.text = "\(operatorValue) \(operandValue)"
+        formulaLabel.textColor = .white
 
-        self.stackViewInScrollView.addArrangedSubview(enteredStackView)
+        self.formulaStackView.addArrangedSubview(formulaLabel)
         
         scrollToBottom()
     }
 
     private func removeAllStackView() {
-        let allSubViewsInStackVIew = self.stackViewInScrollView.arrangedSubviews
-        for stackView in allSubViewsInStackVIew {
-            self.stackViewInScrollView.removeArrangedSubview(stackView)
-            stackView.removeFromSuperview()
+        let allSubViewsInStackVIew = self.formulaStackView.arrangedSubviews
+        
+        allSubViewsInStackVIew.forEach { label in
+            self.formulaStackView.removeArrangedSubview(label)
+            label.removeFromSuperview()
         }
     }
 
     private func scrollToBottom() {
-        if self.scrollView.contentSize.height < self.scrollView.bounds.size.height { return }
-        self.scrollView.layoutIfNeeded()
-        self.stackViewInScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
-        self.scrollView.setContentOffset(bottomOffset, animated: true)
+        if self.formulaScrollView.contentSize.height < self.formulaScrollView.bounds.size.height { return }
+        self.formulaScrollView.layoutIfNeeded()
+        self.formulaStackView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: self.formulaScrollView.contentSize.height - self.formulaScrollView.bounds.size.height)
+        self.formulaScrollView.setContentOffset(bottomOffset, animated: true)
     }
 }

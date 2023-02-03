@@ -332,8 +332,8 @@
                     <connections>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="XDw-BZ-b8h"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="0QT-Oq-5Qb"/>
-                        <outlet property="scrollView" destination="BOT-7g-vxv" id="BGP-2o-U3L"/>
-                        <outlet property="stackViewInScrollView" destination="XRe-QE-UJf" id="GUH-c8-abG"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="TpZ-rR-eEE"/>
+                        <outlet property="formulaStackView" destination="XRe-QE-UJf" id="omV-Wa-kdg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
