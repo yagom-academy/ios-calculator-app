@@ -1,18 +1,18 @@
 # 계산기 ➕➖✖️➗
 
 # 목차
-[1. 프로젝트 소개](#1-프로젝트-소개)
-[2. 팀원](#2-팀원)
-[3. 타임라인](#3-타임라인)
-[4. 시각화된 프로젝트 구조](#4-시각화된-프로젝트-구조)
-[5. 실행 화면](#5-실행-화면)
-[6. 트러블 슈팅](#6-트러블-슈팅)
-[7. 참고 링크](#7-참고-링크)
+[1. 프로젝트 소개](#1-프로젝트-소개)<br>
+[2. 팀원](#2-팀원)<br>
+[3. 타임라인](#3-타임라인)<br>
+[4. 시각화된 프로젝트 구조](#4-시각화된-프로젝트-구조)<br>
+[5. 실행 화면](#5-실행-화면)<br>
+[6. 트러블 슈팅](#6-트러블-슈팅)<br>
+[7. 참고 링크](#7-참고-링크)<br>
+
 <br>
 
 ## 1. 프로젝트 소개
 LinkedList와 Queue를 활용해 사칙연산을 가능한 계산기 앱
-
 
 <br>
 
@@ -21,7 +21,7 @@ LinkedList와 Queue를 활용해 사칙연산을 가능한 계산기 앱
 | Harry |
 |:----:|
 | <img src="https://i.imgur.com/BYdaDjU.png" width="130" height="130"/> |
-| [<img src="https://i.imgur.com/IOAJpzu.png" width="22"/> Github](https://github.com/HarryHyeon) |
+| [<img src="https://i.imgur.com/ASJUne5.png" width="22"> Github](https://github.com/HarryHyeon) |
 
 <br>
 
@@ -80,12 +80,12 @@ Calculator
 
 - 초기화면에서는 연산자 버튼이 동작하지 않습니다.
 - 계산을 시작하고 숫자가 입력되지 않은상태에서는 연산자를 바꿀 수 있습니다.
-![](https://i.imgur.com/s6iFxX7.gif)
+<img src="https://i.imgur.com/s6iFxX7.gif">
 
 <br>
 
 - 원본 데이터는 숫자가 그대로 저장되지만 화면에 출력되는 숫자는 20자리로 제한하고 20자 이상이 되었을 경우 숫자가 추가될때마다 앞에 숫자가 하나씩 밀려납니다.
-![](https://i.imgur.com/yg9VKnj.gif)
+<img src="https://i.imgur.com/yg9VKnj.gif">
 
 <br>
 
@@ -95,7 +95,7 @@ Calculator
 <br>
 
 - `=` 을 누른 후에 결과값에 계산을 이어서 할 수 있도록 했습니다.
-![](https://i.imgur.com/A0fCJJP.gif)
+<img src="https://i.imgur.com/A0fCJJP.gif">
 
 
 <br>
