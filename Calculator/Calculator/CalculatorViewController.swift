@@ -14,8 +14,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak private var calculatorItemsScrollView: UIScrollView!
     
     private var isFinishedCalculating: Bool = false
-    private var isEnteredOperand: Bool = false
-    private var isChangeableOperator: Bool = false
     private var currentNumber: String = Expression.zero {
         didSet {
             numberInput.text = applyDecimalPoint(number: currentNumber)
@@ -28,17 +26,15 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let senderSign = sender.currentTitle else { return }
-        checkInitialCondition()
-        operandIsZero()
-        if isEnteredOperand == true  {
+    
+        if numberInput.text != "0"  {
             addStackView()
             operatorInput.text = senderSign
         }
-        
-        if isChangeableOperator == true {
+        if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == "0" {
             operatorInput.text = senderSign
         }
-        
+    
         currentNumber = Expression.zero
     }
     
@@ -90,22 +86,6 @@ final class CalculatorViewController: UIViewController {
         if isFinishedCalculating == false {
             let result = calculate()
             currentNumber = result
-        }
-    }
-    
-    private func operandIsZero() {
-        if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
-            isChangeableOperator = true
-        } else {
-            isChangeableOperator = false
-        }
-    }
-    
-    private func checkInitialCondition() {
-        if numberInput.text == Expression.zero {
-            isEnteredOperand = false
-        } else {
-            isEnteredOperand = true
         }
     }
     
