@@ -16,7 +16,6 @@ final class ViewController: UIViewController {
     private var currentLabelText: String = ""
     private var inputList: [String] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         OperandsLabel.text = "0"
@@ -36,12 +35,9 @@ final class ViewController: UIViewController {
             
         default: currentLabelText += inputNumber
         }
-        
-        //formatNumber(currentLabelText)
         OperandsLabel.text = formatNumber(currentLabelText)
     }
     
-
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
          guard let formattedOperands = OperandsLabel.text,
                let operatorSign = sender.currentTitle else { return }
@@ -57,7 +53,6 @@ final class ViewController: UIViewController {
                  return
              }
          }
-         
          let operands = restorationNumber(formattedOperands)
          updateScrollView()
          inputList.append(operands)
@@ -126,7 +121,7 @@ final class ViewController: UIViewController {
                OperandsLabel.text = formatNumber(intResult.description)
                isDotClicked = false
            } else {
-               OperandsLabel.text = formatNumber(result.description) 
+               OperandsLabel.text = formatNumber(result.description)
                isDotClicked = true
            }
        }
@@ -184,5 +179,4 @@ final class ViewController: UIViewController {
         let result = formattedNumber.split(with: ",").joined()
         return result
     }
-    
 }
