@@ -73,7 +73,7 @@ final class ViewController: UIViewController {
     }
     
     private func displayOperationResult() {
-        let input = expression + " \(currentOperator) " + currentOperand.split(with: ",").joined()
+        let input = expression + " \(currentOperator) " + currentOperand.removeComma()
         let result = ExpressionParser.parse(from: input).result()
         
         guard result.isNaN == false else {
@@ -120,7 +120,7 @@ final class ViewController: UIViewController {
         guard let operatorValue = sign else { return }
         
         if expression == Sign.empty {
-            expression += currentOperand.split(with: ",").joined()
+            expression += currentOperand.removeComma()
             setOperationStackView(operatorValue: Sign.empty,
                                   operandValue: currentOperand.applyFormatter())
         } else if operandLabel.text == Sign.zero {
@@ -129,7 +129,7 @@ final class ViewController: UIViewController {
         } else {
             setOperationStackView(operatorValue: currentOperator,
                                   operandValue: currentOperand.applyFormatter())
-            expression += " \(currentOperator) " + currentOperand.split(with: ",").joined()
+            expression += " \(currentOperator) " + currentOperand.removeComma()
         }
         
         isCalculatedStatus = false
