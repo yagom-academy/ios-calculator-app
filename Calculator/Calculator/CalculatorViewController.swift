@@ -38,46 +38,84 @@ final class CalculatorViewController: UIViewController {
         setDefault()
     }
     
+    private func setDefault() {
+        resetOperand()
+        resetOperator()
+    }
+    
     @IBAction func didTapACButton() {
-        
+        calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        resetOperand()
     }
     
     @IBAction func didTapCEButton() {
-        
+        if isCalculated {
+            return
+        }
+        calculateOperand = "0"
     }
     
     @IBAction func didTapChangeSignButton() {
-        guard calculateNumber != "0" else { return }
+        guard calculateOperand != "0" else { return }
         
-        guard let calculateNumberFirst = calculateNumber.first else { return }
+        guard let calculateNumberFirst = calculateOperand.first else { return }
         
         if calculateNumberFirst == "-" {
-            calculateNumber.removeFirst()
+            calculateOperand.removeFirst()
         } else {
-            calculateNumber.insert("-", at: calculateNumber.startIndex)
+            calculateOperand = "-" + calculateOperand
         }
-        
-        operandLabel.text = calculateNumber
     }
     
     @IBAction func didTapResultButton() {
-        var formula = ExpressionParser.parse(from: calculatorString)
+        guard calculateOperator != "" else { return }
+        appendExpression(sign: calculateOperator, number: calculateOperand)
+        addToCalculateItem(left: calculateOperator, right: calculateOperand)
+
+        var formula = ExpressionParser.parse(from: expression.joined(separator: ""))
         
         let result = formula.result()
-        operandLabel.text = numberFormatter.string(for: result)
+        
+        if result.isNaN {
+            calculateOperand = "NaN"
+            resetOperator()
+            isCalculated = true
+        } else {
+            calculateOperand = "\(result)"
+            resetOperator()
+            isCalculated = true
+        }
+        expression.removeAll()
     }
     
     @IBAction func didTapOperatorButton(_ sender: UIButton) {
-        guard isInOperand,
-              Double(calculateNumber) != nil else { return }
+        guard let operatorSign = sender.currentTitle else { return }
+        if calculateOperand == "0", calculateOperator == "" {
+            return
+        } else if calculateOperand == "0", calculateOperator != "" {
+            calculateOperator = operatorSign
+            return
+        }
         
-        addToCalculateItem()
+        if isCalculated {
+            guard let calculatedNumber = operandLabel.text?
+                                    .components(separatedBy: ",")
+                                    .joined() else { return }
+            
+            appendExpression(sign: calculateOperator, number: calculatedNumber)
+            addToCalculateItem(left: calculateOperator, right: calculatedNumber)
+            scrollToBottom()
+            
+        } else {
+            appendExpression(sign: calculateOperator, number: calculateOperand)
+            addToCalculateItem(left: calculateOperator, right: calculateOperand)
+            scrollToBottom()
+        }
         
-        operatorLabel.text = sender.currentTitle
-        calculateSign = sender.currentTitle ?? ""
         
-        operandLabel.text = "0"
-        calculateNumber = "0"
+        isCalculated = false
+        calculateOperator = operatorSign
+        calculateOperand = "0"
     }
     
     @IBAction func didTapNumberButton(_ sender: UIButton) {
