@@ -12,8 +12,7 @@ enum ExpressionParser {
         let result = componentsByOperators(from: input)
         
         result
-            .compactMap { Double($0) }
-            .forEach { formula.operands.enqueue($0) }
+            .compactMap { Double($0) }.forEach { formula.operands.enqueue($0) }
         
         result
             .filter { Double($0) == nil }
