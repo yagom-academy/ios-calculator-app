@@ -4,7 +4,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     private let numberFormatter = NumberFormatter()
     private var inputs: String = ""
@@ -50,14 +50,14 @@ class ViewController: UIViewController {
         }
     }
     
-    func setNumberFormatter() {
+    private func setNumberFormatter() {
         self.numberFormatter.numberStyle = .decimal
         self.numberFormatter.roundingMode = .halfUp
         self.numberFormatter.usesSignificantDigits = true
         self.numberFormatter.maximumSignificantDigits = 20
     }
     
-    func calculate() {
+    private func calculate() {
         if self.isCalculated == false {
             if self.currentOperand != "" {
                 addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
@@ -91,7 +91,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func clearAll() {
+    private func clearAll() {
         self.removeAllStackView()
         self.inputs = ""
         self.currentOperand = ""
@@ -101,12 +101,12 @@ class ViewController: UIViewController {
         self.currentOperatorLabel.text = self.currentOperator
     }
     
-    func clearCurrentOperand() {
+    private func clearCurrentOperand() {
         self.currentOperand = ""
         self.currentOperandLabel.text = "0"
     }
     
-    func reverseOperand() {
+    private func reverseOperand() {
         guard let firstValue = self.currentOperand.first else { return }
         
         if firstValue.isNumber {
@@ -118,7 +118,7 @@ class ViewController: UIViewController {
         updateCurrentNumberLabel(self.currentOperand)
     }
     
-    func clickedOperator(_ operatorValue: String) {
+    private func clickedOperator(_ operatorValue: String) {
         if self.currentOperandLabel.text != "0" {
             let currentOperandValue = self.currentOperand
             let currentOperatorValue = self.currentOperator
@@ -139,7 +139,7 @@ class ViewController: UIViewController {
         self.isCalculated = false
     }
     
-    func addZeroToOperandLabel(_ operand: String) {
+    private func addZeroToOperandLabel(_ operand: String) {
         self.currentOperand += operand
         
         if Double(self.currentOperand) != 0 {
@@ -149,7 +149,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addDotToOperandLabel() {
+    private func addDotToOperandLabel() {
         guard self.currentOperand.contains(".") == false else { return }
         
         if self.currentOperand == "" {
@@ -161,13 +161,13 @@ class ViewController: UIViewController {
         self.currentOperandLabel.text = self.currentOperand
     }
     
-    func addNumberToOperandLabel(_ operand: String) {
+    private func addNumberToOperandLabel(_ operand: String) {
         self.currentOperand += operand
         
         updateCurrentNumberLabel(self.currentOperand)
     }
     
-    func updateCurrentNumberLabel(_ value: String) {
+    private func updateCurrentNumberLabel(_ value: String) {
         guard let number = self.numberFormatter.number(from: value),
               let formattedOperand = self.numberFormatter.string(from: number) else { return }
         
@@ -176,8 +176,8 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
-    func addStackView(number: String?, operatorType: String?) {
+extension CalculatorViewController {
+    private func addStackView(number: String?, operatorType: String?) {
         guard let operandValue = number,
               let operatorValue = operatorType else { return }
 
@@ -215,7 +215,7 @@ extension ViewController {
         scrollToBottom()
     }
 
-    func removeAllStackView() {
+    private func removeAllStackView() {
         let allSubViewsInStackVIew = self.stackViewInScrollView.arrangedSubviews
         for stackView in allSubViewsInStackVIew {
             self.stackViewInScrollView.removeArrangedSubview(stackView)
@@ -223,7 +223,7 @@ extension ViewController {
         }
     }
 
-    func scrollToBottom() {
+    private func scrollToBottom() {
         if self.scrollView.contentSize.height < self.scrollView.bounds.size.height { return }
         self.scrollView.layoutIfNeeded()
         self.stackViewInScrollView.layoutIfNeeded()
