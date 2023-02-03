@@ -6,7 +6,7 @@ enum ExpressionParser {
         let operandValues = ExpressionParser.componentsByOperators(from: input)
         
         let operators: [Operator] = input.split(with: " ")
-            .filter { $0.count == 1}
+            .filter { $0.count == 1 }
             .compactMap { component in
             return Operator(rawValue: Character(component))
         }
