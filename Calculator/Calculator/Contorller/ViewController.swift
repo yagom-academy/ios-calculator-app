@@ -9,10 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    private var inputNumbers = "" // 숫자값을 담을 스트링
-    private var isFirstComponents: Bool {
-        return self.verticalStackViewInScroll.subviews.isEmpty
-    }
+    private var inputNumbers: String = ""
+    private var calcuateComponents: String = ""
     
     @IBOutlet weak var numberOnField: UILabel!
     
@@ -36,7 +34,6 @@ class ViewController: UIViewController {
         
     }
     
-
     //버튼탭
     @IBAction func buttonTapped(sender: UIButton) {
         guard let Inputtedtitle = sender.titleLabel?.text else { return }
@@ -57,7 +54,6 @@ class ViewController: UIViewController {
         default:
             return
         }
-        
         
     }
         func setUpView() {
@@ -110,16 +106,17 @@ class ViewController: UIViewController {
     
     func operatorButtonTapped(sender: UIButton) {
         
-        var currentOper = getInputtedOperator(sender)
+        guard let inputtedOperator = sender.titleLabel?.text else { return }
+        guard let currentOper = operatorOnField.text else { return }
         
-        if self.horizonStackViewVertical.subviews.isEmpty {
-            currentOper = ""
-        } else{
-            
-            self.operatorOnField.text = currentOper
-            
-            addNewStackView(number: inputNumbers, oper: currentOper)
-            setUpScrollViewToBottom()
+        operatorOnField.text = inputtedOperator
+        
+        if calcuateComponents == "" {
+                    calcuateComponents += inputNumbers
+                    addNewStackView(number: inputNumbers, oper: currentOper)
+                } else {
+                    calcuateComponents += currentOper + inputNumbers
+                    addNewStackView(number: inputNumbers, oper: currentOper)
             self.numberOnField.text = ""
             self.inputNumbers = ""
         }
@@ -145,9 +142,7 @@ class ViewController: UIViewController {
         [createdOperLabel, createdNumberLabel].map {
             stackView.addArrangedSubview($0)
         }
-
         self.verticalStackViewInScroll.addArrangedSubview(stackView)
-        
         
     }
     
@@ -155,29 +150,7 @@ class ViewController: UIViewController {
         numberOnField.text = ""
         operatorOnField.text = ""
     }
-    
 
-    //연산자 입력값가져오기
-    func getInputtedOperator(_ sender: UIButton) -> String {
-        
-        var currentOperator: String = ""
-        
-        guard numberOnField.text != "" else {    //숫자값이 없는 처음엔 오퍼레이터값이 들어가지않는다
-            return currentOperator
-        }
-        
-        switch sender.titleLabel?.text {
-        case "+": currentOperator += "+"
-        case "−": currentOperator += "−"
-        case "÷": currentOperator += "÷"
-        case "×": currentOperator += "×"
-        default:
-            break
-        }
-        
-        return currentOperator
-    }
-        
 }
     
 
