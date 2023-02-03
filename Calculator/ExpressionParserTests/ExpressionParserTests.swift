@@ -34,9 +34,11 @@ final class ExpressionParserTests: XCTestCase {
     func test_parse_inputOperandsAndOperators_returnNegative9() {
         // given
         let input = "1 + 2 * -3"
+        
         // when
         var formula = ExpressionParser.parse(from: input)
         let output = formula.result()
+        
         // then
         XCTAssertEqual(output, -9.0)
     }
@@ -44,9 +46,11 @@ final class ExpressionParserTests: XCTestCase {
     func test_parse_inputOperandsAndOperators_returnPositive9() {
         // given
         let input = "1 + 2 * 3"
+        
         // when
         var formula = ExpressionParser.parse(from: input)
         let output = formula.result()
+        
         // then
         XCTAssertEqual(output, 9.0)
     }
