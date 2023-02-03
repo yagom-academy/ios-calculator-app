@@ -26,12 +26,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var numberInStackView: UILabel!
     
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         setUpView()
-        setUpComponentsOnField()
-        
     }
     
     //버튼탭
@@ -42,7 +41,7 @@ class ViewController: UIViewController {
         case "=":
             calculateResult()
         case "AC":
-            allClearButtonTapped()
+            allClear()
         case "CE":
             clearEntryButtonTapped()
         case "⁺⁄₋":
@@ -56,33 +55,36 @@ class ViewController: UIViewController {
         }
         
     }
-        func setUpView() {
-            
-            view.addSubview(scrollView)
-            scrollView.addSubview(verticalStackViewInScroll)
-            self.numberOnField.text = "0"
-            self.numberInStackView.text = ""
-            self.operatorInStackView.text = ""
-            
-        }
     
-        func setUpScrollViewToBottom(){
-            let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
-            if(bottomOffset.y > 0) {
-                self.scrollView.setContentOffset(bottomOffset, animated: true)
-            }
+    private func setUpView() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(verticalStackViewInScroll)
+        allClear()
+        
+    }
+    
+    private func setUpScrollViewToBottom(){
+        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+        if(bottomOffset.y > 0) {
+            self.scrollView.setContentOffset(bottomOffset, animated: true)
         }
+    }
+    
+    private func allClear() {
+        self.numberOnField.text = "0"
+        self.inputNumbers = ""
+        self.calcuateComponents = ""
+        resetAllStackView()
+    }
+    
+    private func clearEntryButtonTapped(){}
         
-        func allClearButtonTapped() {}
+    private func changeOperatorButtonTapped(){}
         
-        func clearEntryButtonTapped(){}
-        
-        func changeOperatorButtonTapped(){}
-        
-        func calculateResult(){}
+    private func calculateResult(){}
         
    
-    func numberButtonTapped(sender: UIButton) {
+    private func numberButtonTapped(sender: UIButton) {
       
         switch sender.tag {
         case 1: inputNumbers += "1"
@@ -104,7 +106,7 @@ class ViewController: UIViewController {
     }
     
     
-    func operatorButtonTapped(sender: UIButton) {
+    private func operatorButtonTapped(sender: UIButton) {
         
         guard let inputtedOperator = sender.titleLabel?.text else { return }
         guard let currentOper = operatorOnField.text else { return }
@@ -122,7 +124,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func addNewStackView(number: String, oper: String) {
+    private func addNewStackView(number: String, oper: String) {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .fill
@@ -146,10 +148,11 @@ class ViewController: UIViewController {
         
     }
     
-    func setUpComponentsOnField() {
-        numberOnField.text = ""
-        operatorOnField.text = ""
+    private func resetAllStackView() {
+        verticalStackViewInScroll.subviews.forEach { $0.removeFromSuperview() }
     }
+    
+    
 
 }
     
