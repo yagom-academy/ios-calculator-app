@@ -111,9 +111,7 @@ Calculator
 
 | ÷0 | 음수 연산 | 소수 연산 |
 | -------- | -------- | -------- |
-| ![](https://i.imgur.com/Hud395U.gif)
- | ![](https://i.imgur.com/b1InoWJ.gif)
-  | ![](https://i.imgur.com/X6ZP5GI.gif)|
+| ![](https://i.imgur.com/Hud395U.gif) | ![](https://i.imgur.com/b1InoWJ.gif) | ![](https://i.imgur.com/X6ZP5GI.gif)|
 
 
 </br>
