@@ -73,6 +73,16 @@ class ViewController: UIViewController {
         return view
     }
     
+    func formatNumber(_ result: Int) -> String {
+        // 얘는 왜 써야할까? - 소숫점 표시, 숫자 반올림
+        // 얘는 어디다 써야할까? - currentOperand에 나타나는 숫자
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return ""
+    }
+    
+    //MARK: - IBAciton
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
         
@@ -104,9 +114,9 @@ class ViewController: UIViewController {
             inputOperatorsLabel.text = currentSign
             inputOperandsLabel.text = Sign.zero
         }
-        
-        print("스택뷰 연산자: \(currentSign)")
-        print("스택뷰 피연산자: \(currentInputFormula)")
+        print("스택뷰 연산자: \(currentOperator)")
+        print("스택뷰 피연산자: \(currentOperand)")
+        print("포뮬러: \(currentInputFormula)")
     }
     
     @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
@@ -132,8 +142,10 @@ class ViewController: UIViewController {
         var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
 
+        inputOperatorsLabel.text = ""
         inputOperandsLabel.text = String(result)
         oldInputFormula.append(String(result))
+        currentInputFormula = []
     }
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
@@ -144,7 +156,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
-        guard currentOperand != "0" else { return }
+        guard currentOperand != Sign.zero else { return }
         
         if currentOperand.hasPrefix("-") {
             inputOperandsLabel.text = currentOperand.trimmingCharacters(in: ["-"])
