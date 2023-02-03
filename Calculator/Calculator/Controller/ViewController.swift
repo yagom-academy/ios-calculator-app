@@ -91,4 +91,44 @@ final class ViewController: UIViewController {
 
     }
  
+    @IBAction func calculateButtonDidTap(_ sender: UIButton) {
+           guard currentLabelText.isEmpty == false,
+                 let operatorSign = OperatorLabel.text  else { return }
+           inputList.removeLast()
+           inputList.append(operatorSign)
+           
+           updateScrollView()
+           inputList.append(currentLabelText)
+           
+           let calculate = inputList.reduce("") { current, next in current + " " + next}
+           
+           var formula = ExpressionParser.parse(from: calculate)
+           guard let result = formula.result(),
+                 result.isNaN == false  else {
+               OperandsLabel.text = Double.nan.description
+               isDotClicked = false
+               
+               inputList.removeAll()
+               currentLabelText.removeAll()
+               OperatorLabel.text = ""
+               
+               return
+               
+           }
+         
+           let intResult = Int(result)
+           
+           
+           inputList.removeAll()
+           currentLabelText.removeAll()
+           OperatorLabel.text = ""
+           
+           if result == Double(intResult) {
+               OperandsLabel.text = intResult.description
+               isDotClicked = false
+           } else {
+               OperandsLabel.text = result.description
+               isDotClicked = true
+           }
+       }
 }
