@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         case "CE":
             clearEntryButtonTapped()
         case "⁺⁄₋":
-            changeOperatorButtonTapped()
+            convertToNegativeNumberButton()
         case "÷", "×", "−", "+":
             operatorButtonTapped(sender: sender)
         case "0","1","2","3","4","5","7","8","9","00",".":
@@ -87,7 +87,7 @@ class ViewController: UIViewController {
     }
     
     //음수 양수 chagne매서드
-    private func changeOperatorButtonTapped(){
+    private func convertToNegativeNumberButton(){
         guard let currentNumber = self.numberOnField.text,
               currentNumber != "0" else {
             return
