@@ -12,9 +12,6 @@ extension String: CalculateItem {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
         return numberFormatter
     }
     
@@ -29,6 +26,10 @@ extension String: CalculateItem {
     
     func removeComma() -> String {
         return self.replacingOccurrences(of: ",", with: "")
+    }
+    
+    func removeDotAndNegative() -> String {
+        return self.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: "-", with: "")
     }
 }
 
