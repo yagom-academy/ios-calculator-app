@@ -6,11 +6,10 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     var calculateExpression: String = ""
     var operandExpression: String = ""
     let numberFormatter = NumberFormatter()
-    
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -21,83 +20,45 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         numberLabel.text = "0"
         setNumberFormatter()
-        
     }
     
-    @IBAction func numberButton(sender: UIButton) {
-    
+    @IBAction private func numberButton(sender: UIButton) {
         guard let buttonNumberValue = sender.titleLabel?.text  else { return }
         makeZeroDot(pushedNumber: buttonNumberValue)
         
         if checkOverlappedDot(pushedNumber: buttonNumberValue) == true { return }
-        operandExpression += buttonNumberValue // 123.
-        
         if checkZeroValidate(pushedNumber: buttonNumberValue) == false { return }
         
-        //numberLabel.text = operandExpression
+        operandExpression += buttonNumberValue
         divideIntoThreeDigit()
     }
     
-    func checkOverlappedDot(pushedNumber: String) -> Bool {
-        
-        if let lastNumber = numberLabel?.text?.last, lastNumber == ".", pushedNumber == "." {
-            return true
-        } else { return false }
-    }
-    
-    func removeDot() {
-        
-        //if let lastNumber = numberLabel?.text?.last, lastNumber == "." {
-        if operandExpression.last == "." {
-            operandExpression.removeLast()
-            numberLabel?.text?.removeLast()
-        }
-    }
-    
-    func makeZeroDot(pushedNumber: String) {
-        if numberLabel.text == "0" && pushedNumber == "." {
-            operandExpression = "0"
-        }
-    }
-    
-    func checkZeroValidate(pushedNumber: String) -> Bool {
-        
-        guard let inputtedNumberLabel = numberLabel.text else { return true }
-        if inputtedNumberLabel == "0" && (pushedNumber == "00" || pushedNumber == "0") {
-            numberLabel.text = "0"
-            operandExpression = "0"
-            return false
-        } else { return true }
-    }
-    
-    @IBAction func operatorButton(sender: UIButton) {
-        
+    @IBAction private func operatorButton(sender: UIButton) {
         guard let `operator` = sender.titleLabel?.text else { return }
         guard let operatorExpression = operatorLabel.text else { return }
         
-        operatorLabel.text = `operator`
         removeDot()
+        operatorLabel.text = `operator`
         if operandExpression == "" { return }
         
         if calculateExpression == "" {
             calculateExpression += operandExpression
-            
             updateExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
         } else {
             calculateExpression += operatorExpression + operandExpression
-            
             updateExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
         }
+        
         numberLabel.text = "0"
         operandExpression = ""
     }
     
-    @IBAction func ceButton(_ sender: Any) {
+    @IBAction private func ceButton(_ sender: Any) {
         operandExpression = ""
         numberLabel.text = "0"
     }
     
-    @IBAction func acButton(_ sender: Any) {
+    @IBAction private func acButton(_ sender: Any) {
         calculateExpression = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -105,7 +66,7 @@ class ViewController: UIViewController {
         expressionStackView.subviews.map( { $0.removeFromSuperview() })
     }
     
-    @IBAction func changeNegativeButton(_ sender: Any) {
+    @IBAction private func changeNegativeButton(_ sender: Any) {
         if numberLabel.text == "0" { return }
         
         guard let numberLabelText = numberLabel.text else { return }
@@ -119,7 +80,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func resultButton(_ sender: Any) {
+    @IBAction private func resultButton(_ sender: Any) {
         
         if operandExpression == "" { return }
         guard let operatorLabelText = operatorLabel.text else { return }
@@ -131,26 +92,45 @@ class ViewController: UIViewController {
         updateExpressionStackView(operatorType: operatorLabelText, operand: operandExpression)
         operandExpression = ""
         operatorLabel.text = ""
-        print(formula.operands)
-        print(formula.operators)
         numberLabel.text = String(formula.result())
-        print(calculateExpression)
-        print(String(formula.result()))
     }
     
-    func updateExpressionStackView(operatorType: String, operand: String) {
-        let operatorExpressionLabel: UILabel = {
-            let operatorExpressionLabel = UILabel()
-            operatorExpressionLabel.textColor = .white
-            return operatorExpressionLabel
-        }()
-        
-        let operandExpressionLabel: UILabel = {
-            let operandExpressionLabel = UILabel()
-            operandExpressionLabel.textColor = .white
-            return operandExpressionLabel
-        }()
-        
+    private func checkOverlappedDot(pushedNumber: String) -> Bool {
+        if let lastNumber = numberLabel?.text?.last, lastNumber == ".", pushedNumber == "." {
+            return true
+        } else { return false }
+    }
+    
+    private func removeDot() {
+        if operandExpression.last == "." {
+            operandExpression.removeLast()
+            numberLabel?.text?.removeLast()
+        }
+    }
+    
+    private func makeZeroDot(pushedNumber: String) {
+        if numberLabel.text == "0" && pushedNumber == "." {
+            operandExpression = "0"
+        }
+    }
+    
+    private func checkZeroValidate(pushedNumber: String) -> Bool {
+        guard let inputtedNumberLabel = numberLabel.text else { return true }
+        if inputtedNumberLabel == "0" && (pushedNumber == "00" || pushedNumber == "0") {
+            numberLabel.text = "0"
+            operandExpression = "0"
+            return false
+        } else { return true }
+    }
+    
+    private func updateExpressionStackView(operatorType: String, operand: String) {
+    
+        let operatorExpressionLabel = UILabel()
+        operatorExpressionLabel.textColor = .white
+            
+        let operandExpressionLabel = UILabel()
+        operandExpressionLabel.textColor = .white
+            
         operatorExpressionLabel.text = operatorType
         operandExpressionLabel.text = operand
         
@@ -161,6 +141,7 @@ class ViewController: UIViewController {
             operatorExpressionLabel.text = operatorType
             operandExpressionLabel.text = operand
         }
+        
         let partOfExpressionStackView = UIStackView()
         partOfExpressionStackView.axis = .horizontal
         partOfExpressionStackView.distribution = .fillProportionally
@@ -173,23 +154,22 @@ class ViewController: UIViewController {
     
     }
     
-    func maintainScrollViewBottom() {
+    private func maintainScrollViewBottom() {
         expressionScrollView.layoutIfNeeded()
         expressionScrollView.setContentOffset(
             CGPoint(x: 0, y: expressionScrollView.contentSize.height - expressionScrollView.bounds.height),
             animated: true)
     }
     
-    func setNumberFormatter() {
+    private func setNumberFormatter() {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.roundingMode = .halfUp
     }
     
-    func divideIntoThreeDigit() {
-        if let numberLabelText = numberLabel.text {
-            numberLabel.text = numberFormatter.string(for: Double(operandExpression)) //numberFormatter.convertToString (for: Double(numberLabelText))
+    private func divideIntoThreeDigit() {
+        if numberLabel.text != nil {
+            numberLabel.text = numberFormatter.string(for: Double(operandExpression))
         }
     }
-    
 }
