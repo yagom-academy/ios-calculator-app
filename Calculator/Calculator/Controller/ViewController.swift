@@ -87,12 +87,12 @@ final class CalculatorViewController: UIViewController {
                 return
             }
             
-            let (resultValue, formattedOperand) = formattingNumber(String(result))
+            let formattedOperand = formattingNumber("\(result)")
             
             self.inputs = ""
             self.currentOperator = ""
             self.currentOperatorLabel.text = self.currentOperator
-            self.currentOperand = "\(resultValue)"
+            self.currentOperand = "\(result)"
             self.currentOperandLabel.text = formattedOperand
             self.isCalculated = true
         }
@@ -127,12 +127,12 @@ final class CalculatorViewController: UIViewController {
     
     private func touchUpOperator(_ operatorValue: String) {
         if self.currentOperandLabel.text != "0" {
-            let currentOperandValue = self.currentOperand
+            let currentOperandValue = formattingNumber(self.currentOperand)
             let currentOperatorValue = self.currentOperator
             
-            addStackView(number: currentOperandLabel.text, operatorType: currentOperatorValue)
+            addStackView(number: currentOperandValue, operatorType: currentOperatorValue)
             
-            self.inputs += "\(currentOperatorValue) \(currentOperandValue) "
+            self.inputs += "\(self.currentOperator) \(self.currentOperand) "
             
             self.currentOperand = ""
             self.currentOperandLabel.text = "0"
@@ -175,20 +175,21 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentNumberLabel(_ value: String) {
-        let (number, formattedOperand) = formattingNumber(value)
+        let formattedOperand = formattingNumber(value)
         
-        self.currentOperand = "\(number)"
         self.currentOperandLabel.text = formattedOperand
     }
     
-    private func formattingNumber(_ value: String) -> (NSNumber, String) {
+    private func formattingNumber(_ value: String) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
+        formatter.usesSignificantDigits = true
+        formatter.minimumSignificantDigits = 1
         
         guard let formattedNumber = formatter.number(from: value),
-              let formattedOperand = formatter.string(from: formattedNumber) else { return (0, "0") }
+              let formattedOperand = formatter.string(from: formattedNumber) else { return "0" }
         
-        return (formattedNumber, formattedOperand)
+        return formattedOperand
     }
 }
 
