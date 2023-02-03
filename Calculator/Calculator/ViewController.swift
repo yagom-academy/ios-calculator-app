@@ -13,6 +13,8 @@ final class ViewController: UIViewController {
     
     @IBOutlet weak var verticalStackView: UIStackView!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     var stringToBeCalculated = NameSpace.emptyString
     var currentNumber = NameSpace.emptyString
     var isCalculated: Bool = false
@@ -73,8 +75,8 @@ final class ViewController: UIViewController {
     }
     
     func displayPreviousOperands() {
-        let abc = OperateStackView(operatorText: currentOperatorLabel.text, operandsText: currentNumberLabel.text?.floorIfZero)
-        verticalStackView.addArrangedSubview(abc)
+        let operateStackView = OperateStackView(operatorText: currentOperatorLabel.text, operandsText: currentNumberLabel.text?.floorIfZero)
+        verticalStackView.addArrangedSubview(operateStackView)
     }
     
     @IBAction func tapCalculateButton(_ sender: UIButton) {
@@ -108,10 +110,10 @@ final class ViewController: UIViewController {
     }
     
     func removePreviousOperands() {
-        guard let bcd = verticalStackView.subviews.last else {
+        guard let stackViewWillBeRemoved = verticalStackView.subviews.last else {
             return
         }
-        bcd.removeFromSuperview()
+        stackViewWillBeRemoved.removeFromSuperview()
     }
     
     func setCurrentNumber(titleName: String?) {

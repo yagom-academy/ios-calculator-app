@@ -366,6 +366,7 @@
                     <connections>
                         <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="kOT-Bs-sZN"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="VMA-k2-RNF"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="Cpj-1U-5w6"/>
                         <outlet property="verticalStackView" destination="XRe-QE-UJf" id="C49-Lt-jgn"/>
                     </connections>
                 </viewController>
