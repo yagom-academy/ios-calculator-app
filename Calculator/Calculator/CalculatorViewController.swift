@@ -32,7 +32,6 @@ final class CalculatorViewController: UIViewController {
         } else if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
             operatorInput.text = senderSign
         }
-        
         currentNumber = Expression.zero
     }
     
@@ -100,7 +99,6 @@ final class CalculatorViewController: UIViewController {
         stackLabel.textColor = .white
         calculatorItemsStackView.addArrangedSubview(stackLabel)
         setScrollView()
-        
     }
     
     private func restartCalculate() {
@@ -155,6 +153,7 @@ final class CalculatorViewController: UIViewController {
                 calculateItems.append(value)
             }
         }
+        
         return calculateItems.map { $0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
     }
 }
