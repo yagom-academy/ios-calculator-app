@@ -6,7 +6,6 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    private let numberFormatter = NumberFormatter()
     private var inputs: String = ""
     private var currentOperand: String = ""
     private var currentOperator: String = ""
@@ -25,7 +24,6 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNumberFormatter()
         self.currentOperatorLabel.text = ""
         self.currentOperandLabel.text = "0"
     }
@@ -68,10 +66,6 @@ final class CalculatorViewController: UIViewController {
         calculate()
     }
     
-    private func setNumberFormatter() {
-        self.numberFormatter.numberStyle = .decimal
-    }
-    
     private func calculate() {
         if self.isCalculated == false && self.currentOperand.isEmpty == false {
             addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
@@ -81,25 +75,25 @@ final class CalculatorViewController: UIViewController {
             var formula = ExpressionParser.parse(from: inputs)
             let result = formula.result()
             
-            guard let resultValue = self.numberFormatter.string(from: NSNumber(floatLiteral: result)),
-                  let number = self.numberFormatter.number(from: resultValue) else {
-                if result.isNaN {
-                    self.inputs = ""
-                    self.currentOperator = ""
-                    self.currentOperatorLabel.text = self.currentOperator
-                    self.currentOperand = ""
-                    self.currentOperandLabel.text = "NaN"
-                    self.isCalculated = false
-                    self.isCalculated = true
-                }
+            if result.isNaN {
+                self.inputs = ""
+                self.currentOperator = ""
+                self.currentOperatorLabel.text = self.currentOperator
+                self.currentOperand = ""
+                self.currentOperandLabel.text = "NaN"
+                self.isCalculated = false
+                self.isCalculated = true
+                
                 return
             }
+            
+            let (resultValue, formattedOperand) = formattingNumber(String(result))
             
             self.inputs = ""
             self.currentOperator = ""
             self.currentOperatorLabel.text = self.currentOperator
-            self.currentOperand = "\(number)"
-            self.currentOperandLabel.text = resultValue
+            self.currentOperand = "\(resultValue)"
+            self.currentOperandLabel.text = formattedOperand
             self.isCalculated = true
         }
     }
@@ -181,11 +175,20 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func updateCurrentNumberLabel(_ value: String) {
-        guard let number = self.numberFormatter.number(from: value),
-              let formattedOperand = self.numberFormatter.string(from: number) else { return }
+        let (number, formattedOperand) = formattingNumber(value)
         
         self.currentOperand = "\(number)"
         self.currentOperandLabel.text = formattedOperand
+    }
+    
+    private func formattingNumber(_ value: String) -> (NSNumber, String) {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        
+        guard let formattedNumber = formatter.number(from: value),
+              let formattedOperand = formatter.string(from: formattedNumber) else { return (0, "0") }
+        
+        return (formattedNumber, formattedOperand)
     }
 }
 
