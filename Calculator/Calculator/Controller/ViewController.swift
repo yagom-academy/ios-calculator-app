@@ -56,9 +56,6 @@ final class ViewController: UIViewController {
          let operands = restorationNumber(formattedOperands)
          updateScrollView()
          inputList.append(operands)
-             
-         guard let lastInput = inputList.last,
-               let _ = Double(lastInput) else { return }
          
          inputList.append(operatorSign)
          OperatorLabel.text = operatorSign
