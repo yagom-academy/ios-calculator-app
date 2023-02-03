@@ -24,17 +24,16 @@ class ViewController: UIViewController {
     
     enum Sign {
         static let dot = "."
-        static let doubleZero = "00"
         static let blank = " "
         static let nothing = ""
         static let minus = "-"
         static let zero = "0"
     }
     
-    let operrands = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    let operrands = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "00"]
     let operators = ["+", "−", "÷", "×"]
-    var currentInputFormula: String = Sign.zero
-    var oldInputFormula: String = Sign.nothing
+    var currentInputFormula: [String] = []
+    var oldInputFormula: [String] = []
     var currentTappedNumber: String = Sign.nothing
     var IsOperatortapped: Bool = false
 
@@ -86,15 +85,14 @@ class ViewController: UIViewController {
     
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
-        currentTappedNumber = "\(number)"
         
-        if currentInputFormula == Sign.zero {
-            currentInputFormula = "\(number)"
+        if currentInputFormula.isEmpty {
+            currentInputFormula.append(number)
         } else {
-            currentInputFormula = currentInputFormula + "\(number)"
+            currentInputFormula.append(number)
         }
-        let splitedFormula = currentInputFormula.split(with: " ")
-        let currentOperand = splitedFormula.last
+        
+        let currentOperand = currentInputFormula.last
         IsOperatortapped = false
         inputOperandsLabel.text = currentOperand
         printex()
@@ -106,28 +104,31 @@ class ViewController: UIViewController {
     // 4. ac시 스택뷰 리셋
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
         var newStackView: UIStackView = UIStackView()
-        let splitedFormula = currentInputFormula.split(with: " ")
+        
         inputOperatorsLabel.text = operators[sender.tag]
         
         
         guard let currentSign = inputOperatorsLabel.text,
-                let splitedOperand = splitedFormula.last else { return }
+                let lastElement = currentInputFormula.last else { return }
         
         // 연산자 입력 시 동작?
         // 1. inputOperandsLabel에 입력된 숫자가 currentFormula로 들어감 ㅇ
         // 2. (처음 입력한 값이라면) stackView에 operator 비우고 operand자리에만 숫자 들어감 ㅇ
         // 3. 0을 입력하지 않았을때 inputOperator가 0이라면 연산자는 마지막에 누른 한개만 들어감
-        print(splitedFormula)
+
         if IsOperatortapped == false {
-            if splitedFormula.count == 1 {
-                newStackView = makeStackView(Sign.nothing, splitedOperand)
+            if currentInputFormula.count == 1 {
+                newStackView = makeStackView(Sign.nothing, lastElement)
             }
-            else if splitedFormula.count != 0 && splitedFormula.count > 1 {
-                let oldOperator = splitedFormula[splitedFormula.count-2]
-                newStackView = makeStackView(oldOperator, splitedOperand)
+            else if currentInputFormula.count != 0 && currentInputFormula.count > 1 {
+                let oldOperator = currentInputFormula[currentInputFormula.count-2]
+                newStackView = makeStackView(oldOperator, lastElement)
             }
-        
-            currentInputFormula = currentInputFormula + Sign.blank + currentSign + Sign.blank
+            currentInputFormula.append(Sign.blank)
+            currentInputFormula.append(currentSign)
+            currentInputFormula.append(Sign.blank)
+            
+      
             IsOperatortapped = true
         }
         /*
@@ -174,24 +175,25 @@ class ViewController: UIViewController {
         if currentInputFormula.last == "." {
             printex()
         } else {
-            currentInputFormula += Sign.dot
+            currentInputFormula[currentInputFormula.count-1] += Sign.dot
             printex()
         }
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
-        var parsedFormula = ExpressionParser.parse(from: currentInputFormula)
+        let stringFormula = currentInputFormula.joined(separator: " ")
+        var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
         IsOperatortapped = false
         inputOperandsLabel.text = String(result)
-        oldInputFormula = String(result)
+        oldInputFormula.append(String(result))
         
         printex()
     }
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
-        currentInputFormula = Sign.zero
-        oldInputFormula = Sign.nothing
+        currentInputFormula = []
+        oldInputFormula = []
         //stackView.removeArrangedSubview(newStackView)
         printex()
     }
