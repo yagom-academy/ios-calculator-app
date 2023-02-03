@@ -16,7 +16,6 @@ final class CalculatorViewController: UIViewController {
     private var isFinishedCalculating: Bool = false
     private var isEnteredOperand: Bool = false
     private var isChangeableOperator: Bool = false
-    private var numberFormatter = NumberFormatter()
     private var currentNumber: String = Expression.zero {
         didSet {
             numberInput.text = applyDecimalPoint(number: currentNumber)
@@ -44,7 +43,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        
         guard let number = sender.currentTitle else { return }
         if currentNumber == Expression.zero  {
             currentNumber = number
@@ -54,18 +52,24 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
-        
         guard let dot = sender.currentTitle else { return }
-        guard !currentNumber.contains(Expression.dot) else { return }
+        guard !currentNumber.contains(dot) else { return }
         currentNumber += dot
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
-        checkSign()
+        guard var currentNumber = numberInput.text,
+              currentNumber != Expression.zero else { return }
+        
+        if let minus = currentNumber.firstIndex(of: Character(Expression.minus)) {
+            currentNumber.remove(at: minus)
+            numberInput.text = currentNumber
+        } else {
+            numberInput.text = Expression.minus + currentNumber
+        }
     }
     
     @IBAction private func CEButtonTapped(_ sender: UIButton) {
-        
         if isFinishedCalculating {
             numberInput.text = Expression.zero
         } else {
@@ -74,21 +78,20 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func ACButtonTapped(_ sender: UIButton) {
-        
-        resetStackView()
-        resetNumberInput()
-        resetOperatorInput()
+        calculatorItemsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        currentNumber = Expression.zero
+        operatorInput.text = Expression.blank
         isFinishedCalculating = false
     }
     
     @IBAction private func equalButtonTapped(_ sender: UIButton) {
         if isFinishedCalculating == false {
-            handleDivideError()
+            let result = calculate()
+            currentNumber = result
         }
     }
     
     private func operandIsZero() {
-        
         if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
             isChangeableOperator = true
         } else {
@@ -97,7 +100,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func checkInitialCondition() {
-        
         if numberInput.text == Expression.zero {
             isEnteredOperand = false
         } else {
@@ -106,7 +108,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addStackView() {
-        
         guard let operandStackLabel = numberInput.text,
               let operatorStackLabel = operatorInput.text else {  return  }
         
@@ -127,77 +128,24 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func applyDecimalPoint(number: String) -> String {
+        let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
-        guard let operand = Double(number) else { return Expression.empty }
-        guard let result = numberFormatter.string(from: NSNumber(value: operand)) else { return "" }
+        guard let operand = Double(number),
+              let result = numberFormatter.string(from: NSNumber(value: operand)) else { return Expression.empty }
         
         return result
     }
     
-    private func checkSign() {
-        
-        guard var currentNumber = numberInput.text,
-              currentNumber != Expression.zero else { return }
-        
-        if let minus = currentNumber.firstIndex(of: Character(Expression.minus)) {
-            currentNumber.remove(at: minus)
-            numberInput.text = currentNumber
-        } else {
-            numberInput.text = Expression.minus + currentNumber
-        }
-    }
-    
-    private func resetStackView() {
-        calculatorItemsStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
-    }
-    
-    private func resetNumberInput() {
-        currentNumber = Expression.zero
-    }
-    
-    private func resetOperatorInput() {
-        operatorInput.text = Expression.blank
-    }
-    
-    private func handleDivideError() {
-        
-        do {
-            let resultLabel = try checkDecimalPoint()
-            numberInput.text = resultLabel
-            isFinishedCalculating = true
-        } catch CalculatorError.divideByZero {
-            numberInput.text = Expression.nan
-        } catch {
-            print("계산오류")
-        }
-    }
-    
-    private func checkDecimalPoint() throws -> String {
-        
-        let resultLabel: String = calculate()
-        let dividedValue = resultLabel.components(separatedBy: Expression.dot)
-        guard !dividedValue[0].isEmpty || dividedValue[1] == Expression.zero else {
-            throw CalculatorError.calcuate
-        }
-        numberFormatter.minimumFractionDigits = 0
-        guard let number = Double(resultLabel) else { return Expression.empty }
-        guard let formatterNumber = numberFormatter.string(from: NSNumber(value: number)) else { return Expression.empty }
-        return formatterNumber
-    }
-    
     private func calculate() -> String {
-        
         let calculateItem = arrangeCalculateItems()
         var formula = ExpressionParser.parse(from: calculateItem)
-        let result = formula.result()
-        guard let resultValue = result else { return Expression.empty }
-        let resultLabel = String(resultValue)
-        return resultLabel
+        guard let resultValue = formula.result() else { return Expression.empty }
+     
+        return String(resultValue)
     }
     
     private func arrangeCalculateItems() -> String {
-        
         addStackView()
         var calculateItems: [String] = []
         calculatorItemsStackView.arrangedSubviews.forEach { view in
@@ -207,7 +155,6 @@ final class CalculatorViewController: UIViewController {
             }
         }
         return calculateItems.map { $0.components(separatedBy: Expression.comma).joined() }
-            .map {$0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
+            .map { $0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
     }
-    
 }

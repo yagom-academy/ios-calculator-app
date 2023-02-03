@@ -11,6 +11,6 @@ enum Expression {
     static let minus = "-"
     static let empty = ""
     static let blank = " "
-    static let nan = "NaN"
     static let comma = ","
+    static let error = "error"
 }
