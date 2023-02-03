@@ -42,17 +42,11 @@ final class ViewController: UIViewController {
          guard let formattedOperands = OperandsLabel.text,
                let operatorSign = sender.currentTitle else { return }
          
-         if currentLabelText.isEmpty && formattedOperands.isEmpty {
+         if currentLabelText.isEmpty && formattedOperands == "0" {
              OperatorLabel.text = sender.currentTitle
              return
          }
    
-         if let element = inputList.last {
-             guard Operator(rawValue: Character(element)) == nil else {
-                 OperatorLabel.text = operatorSign
-                 return
-             }
-         }
          let operands = restorationNumber(formattedOperands)
          updateScrollView()
          inputList.append(operands)
@@ -83,6 +77,7 @@ final class ViewController: UIViewController {
         
         containerStackView.addArrangedSubview(stack)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+        scrollView.layoutIfNeeded()
     }
  
     @IBAction func calculateButtonDidTap(_ sender: UIButton) {
