@@ -59,7 +59,7 @@ final class CalculatorViewController: UIViewController {
     
     private func calculate() {
         if self.isCalculated == false {
-            if self.currentOperand != "" {
+            if self.currentOperand.isEmpty == false {
                 addStackView(number: self.currentOperandLabel.text, operatorType: self.currentOperator)
             }
             
