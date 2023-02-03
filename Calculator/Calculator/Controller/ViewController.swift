@@ -29,6 +29,14 @@ class ViewController: UIViewController {
     var formula: [String] = []
     var currentTappedNumber: String = ""
     
+    enum Sign {
+        static let dot = "."
+        static let doubleZero = "00"
+        static let black = " "
+        static let nothing = ""
+        static let minus = "-"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         allocateOperrandsTag()
@@ -104,6 +112,7 @@ class ViewController: UIViewController {
         } else {
             currentInputFormula = currentInputFormula + " " + currentSign + " "
             printex()
+            let newStackView = makeStackView(currentSign, currentTappedNumber)
         }
         
         let newStackView = makeStackView(currentSign, currentTappedNumber)
