@@ -11,7 +11,7 @@
 ## 목차 📋
 1. [팀원 소개](#1-팀원-소개)
 2. [타임 라인](#2-타임라인-230124--230203)
-3. [프로젝트 순서도](#3-프로젝트-순서도)
+3. [프로젝트 순서도](#3-uml)
 4. [실행화면](#4-실행화면)
 5. [트러블 슈팅](#5-트러블-슈팅)
 6. [참고 링크](#6-참고-링크)
@@ -21,7 +21,7 @@
 ## 1. 팀원 소개
 |[혜모리](https://github.com/hyemory)|
 |---|
-|<img src="https://github.com/Andrew-0411/ios-juice-maker/blob/step1/images/hyemory.png" width="200">|
+|<img src="https://github.com/hyemory/ios-calculator-app/blob/step3/images/hyemory.png?raw=true" width="200">|
 
 ## 2. 타임라인 (23.01.24. ~ 23.02.03.)
 |날짜|진행 내용|
@@ -36,7 +36,7 @@
 |2023-02-02|bug 수정 및 코드 보완하여 STEP3 PR완료|
 |2023-02-03|코드 보완|
 
-## 3. 프로젝트 순서도
+## 3. UML
 
 <details>
 <summary> Class Diagram 보기 </summary> <br/>
