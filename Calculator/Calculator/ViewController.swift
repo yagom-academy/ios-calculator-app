@@ -8,16 +8,16 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var currentNumberLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var currentNumberLabel: UILabel!
     
-    @IBOutlet weak var verticalStackView: UIStackView!
+    @IBOutlet private weak var verticalStackView: UIStackView!
     
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
-    var stringToBeCalculated = NameSpace.emptyString
-    var currentNumber = NameSpace.emptyString
-    var isCalculated: Bool = false
+    private var stringToBeCalculated = NameSpace.emptyString
+    private var currentNumber = NameSpace.emptyString
+    private var isCalculated: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,11 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func tapACButton(_ sender: UIButton) {
+    @IBAction private func tapACButton(_ sender: UIButton) {
         allClear()
     }
     
-    @IBAction func tapCEButton(_ sender: UIButton) {
+    @IBAction private func tapCEButton(_ sender: UIButton) {
         if isCalculated {
             allClear()
             isCalculated = false
@@ -40,11 +40,11 @@ final class ViewController: UIViewController {
         clearEntry()
     }
     
-    @IBAction func tapConvertSignButton(_ sender: UIButton) {
+    @IBAction private func tapConvertSignButton(_ sender: UIButton) {
         convertSign()
     }
     
-    @IBAction func tapNumberButton(_ sender: UIButton) {
+    @IBAction private func tapNumberButton(_ sender: UIButton) {
         if isCalculated {
             allClear()
             isCalculated = false
@@ -56,7 +56,7 @@ final class ViewController: UIViewController {
         setCurrentNumber(titleName: sender.titleLabel?.text)
     }
     
-    @IBAction func tapDotButton(_ sender: UIButton) {
+    @IBAction private func tapDotButton(_ sender: UIButton) {
         if currentNumber.contains(".") == false {
             if currentNumber == NameSpace.emptyString {
                 currentNumber += NameSpace.stringZero
@@ -67,19 +67,19 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
         resetCurrentNumber()
     }
     
-    func displayPreviousOperands() {
+    private func displayPreviousOperands() {
         let operateStackView = OperateStackView(operatorText: currentOperatorLabel.text, operandsText: currentNumberLabel.text?.floorIfZero)
         verticalStackView.addArrangedSubview(operateStackView)
     }
     
-    @IBAction func tapCalculateButton(_ sender: UIButton) {
+    @IBAction private func tapCalculateButton(_ sender: UIButton) {
         guard isCalculated == false else {
             return
         }
@@ -91,11 +91,11 @@ final class ViewController: UIViewController {
         displayResult(result: result)
     }
     
-    func insertString(titleName: String?) {
+    private func insertString(titleName: String?) {
         stringToBeCalculated += titleName ?? NameSpace.emptyString
     }
     
-    func insertOperatorSign(titleName: String?) {
+    private func insertOperatorSign(titleName: String?) {
         if stringToBeCalculated == NameSpace.emptyString {
             stringToBeCalculated += NameSpace.stringZero
         } else {
@@ -109,38 +109,38 @@ final class ViewController: UIViewController {
         insertString(titleName: titleName)
     }
     
-    func removePreviousOperands() {
+    private func removePreviousOperands() {
         guard let stackViewWillBeRemoved = verticalStackView.subviews.last else {
             return
         }
         stackViewWillBeRemoved.removeFromSuperview()
     }
     
-    func setCurrentNumber(titleName: String?) {
+    private func setCurrentNumber(titleName: String?) {
         currentNumber = currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString)
         currentNumber += titleName ?? NameSpace.emptyString
         currentNumber = currentNumber.insertComma
         displayCurrentNumber()
     }
 
-    func displayCurrentNumber() {
+    private func displayCurrentNumber() {
         currentNumberLabel.text = currentNumber
     }
     
-    func displayCurrentOperator(titleName: String?) {
+    private func displayCurrentOperator(titleName: String?) {
         currentOperatorLabel.text = titleName
     }
     
-    func resetCurrentNumber() {
+    private func resetCurrentNumber() {
         currentNumber = NameSpace.stringZero
         currentNumberLabel.text = currentNumber
     }
     
-    func initializeCurrentOperator() {
+    private func initializeCurrentOperator() {
         currentOperatorLabel.text = NameSpace.emptyString
     }
     
-    func allClear() {
+    private func allClear() {
         stringToBeCalculated = NameSpace.emptyString
         currentNumber = NameSpace.emptyString
         currentNumberLabel.text = NameSpace.stringZero
@@ -150,7 +150,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    func clearEntry() {
+    private func clearEntry() {
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
                 stringToBeCalculated = String(stringToBeCalculated.dropLast())
@@ -161,7 +161,7 @@ final class ViewController: UIViewController {
         resetCurrentNumber()
     }
     
-    func calculate() -> Double {
+    private func calculate() -> Double {
         let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
         let lastString = stringToBeCalculated[lastIndex]
         if Operator(rawValue: lastString) != nil {
@@ -172,11 +172,11 @@ final class ViewController: UIViewController {
         return calculateFormula.result()
     }
     
-    func displayResult(result: Double) {
+    private func displayResult(result: Double) {
         currentNumberLabel.text = String(result).floorIfZero.insertComma
     }
     
-    func convertSign() {
+    private func convertSign() {
         var count = 0
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
