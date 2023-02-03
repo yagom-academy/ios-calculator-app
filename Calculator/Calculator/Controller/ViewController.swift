@@ -158,4 +158,17 @@ final class ViewController: UIViewController {
         OperandsLabel.text = operands
     }
     
+    @IBAction func dotButtonDidTap(_ sender: UIButton) {
+        if currentLabelText.isEmpty {
+            currentLabelText = "0."
+            OperandsLabel.text = currentLabelText
+        } else if isDotClicked == false {
+            currentLabelText += "."
+            OperandsLabel.text = currentLabelText
+            isDotClicked = true
+        } else if isDotClicked == true {
+            return
+        }
+    }
+    
 }
