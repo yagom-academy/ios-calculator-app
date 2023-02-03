@@ -8,19 +8,19 @@
 import UIKit
 
 final class CalculateItemStackView: UIStackView {
-    let numberFormatter = NumberFormatter(numberStyle: .decimal,
-                                          roundingMode: .halfUp,
-                                          usesSignificantDigits: true,
-                                          maximumSignificantDigits: 20)
-    
     @IBOutlet weak var calculateItemScrollView: UIScrollView!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     
-    var currentOperand: String {
+    private let numberFormatter = NumberFormatter(numberStyle: .decimal,
+                                          roundingMode: .halfUp,
+                                          usesSignificantDigits: true,
+                                          maximumSignificantDigits: 20)
+    
+    private var currentOperand: String {
         return operandLabel.text ?? Sign.zero
     }
-    var currentOperator: String {
+    private var currentOperator: String {
         return operatorLabel.text ?? Sign.empty
     }
     

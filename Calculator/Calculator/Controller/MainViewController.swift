@@ -16,10 +16,10 @@ final class MainViewController: UIViewController {
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
-    var currentOperand: String {
+    private var currentOperand: String {
         return operandLabel.text ?? Sign.zero
     }
-    var currentOperator: String {
+    private var currentOperator: String {
         return operatorLabel.text ?? Sign.empty
     }
     
