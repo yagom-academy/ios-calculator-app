@@ -211,17 +211,9 @@ extension CalculatorViewController {
         operandLabel.font = .preferredFont(forTextStyle: .title3)
         operandLabel.text = operandValue
         operandLabel.textColor = .white
-
+        
         enteredStackView.addArrangedSubview(operatorLabel)
         enteredStackView.addArrangedSubview(operandLabel)
-
-        operandLabel.trailingAnchor.constraint(equalTo: enteredStackView.trailingAnchor, constant: 0).isActive = true
-        operandLabel.topAnchor.constraint(equalTo: enteredStackView.topAnchor, constant: 0).isActive = true
-        operandLabel.bottomAnchor.constraint(equalTo: enteredStackView.bottomAnchor, constant: 0).isActive = true
-
-        operatorLabel.leadingAnchor.constraint(equalTo: enteredStackView.leadingAnchor, constant: 0).isActive = true
-        operatorLabel.topAnchor.constraint(equalTo: enteredStackView.topAnchor, constant: 0).isActive = true
-        operatorLabel.bottomAnchor.constraint(equalTo: enteredStackView.bottomAnchor, constant: 0).isActive = true
 
         self.stackViewInScrollView.addArrangedSubview(enteredStackView)
         
