@@ -43,18 +43,20 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        guard let number = sender.currentTitle else { return }
-        if currentNumber == Expression.zero  {
-            currentNumber = number
+        guard let number = sender.currentTitle,
+              let operand = numberInput.text else { return }
+        if numberInput.text == Expression.zero  {
+            numberInput.text = number
         } else {
-            currentNumber += number
+            numberInput.text = operand + number
         }
     }
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
-        guard !currentNumber.contains(dot) else { return }
-        currentNumber += dot
+        guard let dot = sender.currentTitle,
+              let operand = numberInput.text else { return }
+        guard !operand.contains(dot) else { return }
+        numberInput.text = operand + dot
     }
     
     @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
