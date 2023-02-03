@@ -1,6 +1,6 @@
 enum Operator: Character, CaseIterable {
     case add = "+"
-    case subtract = "-"
+    case subtract = "−"
     case divide = "/"
     case multiply = "*"
     
@@ -26,7 +26,7 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        guard rhs == Double.zero else {
+        guard rhs != 0 else {
             return Double.nan
         }
         return lhs / rhs
