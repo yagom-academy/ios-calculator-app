@@ -140,7 +140,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addZeroToOperandLabel(_ operand: String) {
-        if isFractional == false {
+        if self.isFractional == false {
             self.currentOperand += operand
             updateCurrentNumberLabel(self.currentOperand)
         } else {
