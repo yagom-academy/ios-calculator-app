@@ -36,15 +36,17 @@ final class ViewController: UIViewController {
             
         default: currentLabelText += inputNumber
         }
-        OperandsLabel.text = currentLabelText
+        
+        //formatNumber(currentLabelText)
+        OperandsLabel.text = formatNumber(currentLabelText)
     }
     
 
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
-         guard let operands = OperandsLabel.text,
+         guard let formattedOperands = OperandsLabel.text,
                let operatorSign = sender.currentTitle else { return }
          
-         if currentLabelText.isEmpty && operands.isEmpty {
+         if currentLabelText.isEmpty && formattedOperands.isEmpty {
              OperatorLabel.text = sender.currentTitle
              return
          }
@@ -56,6 +58,7 @@ final class ViewController: UIViewController {
              }
          }
          
+         let operands = restorationNumber(formattedOperands)
          updateScrollView()
          inputList.append(operands)
              
@@ -88,7 +91,6 @@ final class ViewController: UIViewController {
         
         containerStackView.addArrangedSubview(stack)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
-
     }
  
     @IBAction func calculateButtonDidTap(_ sender: UIButton) {
@@ -111,23 +113,20 @@ final class ViewController: UIViewController {
                inputList.removeAll()
                currentLabelText.removeAll()
                OperatorLabel.text = ""
-               
                return
-               
            }
          
            let intResult = Int(result)
-           
-           
+                
            inputList.removeAll()
            currentLabelText.removeAll()
            OperatorLabel.text = ""
            
            if result == Double(intResult) {
-               OperandsLabel.text = intResult.description
+               OperandsLabel.text = formatNumber(intResult.description)
                isDotClicked = false
            } else {
-               OperandsLabel.text = result.description
+               OperandsLabel.text = formatNumber(result.description) 
                isDotClicked = true
            }
        }
@@ -169,6 +168,21 @@ final class ViewController: UIViewController {
         } else if isDotClicked == true {
             return
         }
+    }
+    
+    private func formatNumber(_ stringNumber: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 6
+        guard let number = Double(stringNumber) else { return ""}
+ 
+        let result = formatter.string(from: NSNumber(value: number)) ?? ""
+        return result
+    }
+    
+    private func restorationNumber(_ formattedNumber: String) -> String {
+        let result = formattedNumber.split(with: ",").joined()
+        return result
     }
     
 }
