@@ -8,9 +8,9 @@
 import UIKit
 
 final class CalculateItemStackView: UIStackView {
-    @IBOutlet weak var calculateItemScrollView: UIScrollView!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet private weak var calculateItemScrollView: UIScrollView!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
     
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,

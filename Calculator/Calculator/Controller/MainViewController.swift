@@ -7,10 +7,10 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var calculateItemStackView: CalculateItemStackView!
-    @IBOutlet weak var calculateItemScrollView: UIScrollView!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var calculateItemStackView: CalculateItemStackView!
+    @IBOutlet private var calculateItemScrollView: UIScrollView!
     
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                           roundingMode: .halfUp,
@@ -38,7 +38,7 @@ final class MainViewController: UIViewController {
         calculateItemStackView.removeAllSubviews()
     }
     
-    @IBAction func touchOperandButton(_ sender: UIButton) {
+    @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         
         if currentOperand != Sign.zero {
@@ -49,13 +49,13 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func touchDotButton(_ sender: UIButton) {
+    @IBAction private func touchDotButton(_ sender: UIButton) {
         guard currentOperand.contains(Sign.dot) == false else { return }
         
         operandLabel.text = currentOperand + Sign.dot
     }
     
-    @IBAction func touchZeroButton(_ sender: UIButton) {
+    @IBAction private func touchZeroButton(_ sender: UIButton) {
         guard let senderTitle = sender.currentTitle else { return }
         
         if currentOperand != Sign.zero,
@@ -66,17 +66,17 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func allClear(_ sender: UIButton) {
+    @IBAction private func allClear(_ sender: UIButton) {
         setInitialCalculateItemStackView()
         setInitialCurrentCalculateItem()
         InputHandler.shared.setEmptyInput()
     }
     
-    @IBAction func clearOperandLabel(_ sender: UIButton) {
+    @IBAction private func clearOperandLabel(_ sender: UIButton) {
         operandLabel.text = Sign.zero
     }
     
-    @IBAction func toggleSign(_ sender: UIButton) {
+    @IBAction private func toggleSign(_ sender: UIButton) {
         guard currentOperand != Sign.zero,
               let convertedOperand = numberFormatter.convertToDouble(from: currentOperand),
               let toggledOperand = numberFormatter.convertToString(from: -convertedOperand) else { return }
@@ -84,7 +84,7 @@ final class MainViewController: UIViewController {
         operandLabel.text = toggledOperand
     }
     
-    @IBAction func touchOperatorButton(_ sender: UIButton) {
+    @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle else { return }
             
         if operandLabel.text == Sign.zero {
@@ -96,7 +96,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func calculateCurrentFormula(_ sender: UIButton) {
+    @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard currentOperator != Sign.empty else { return }
         
         calculateItemStackView.addCurrentItem()
