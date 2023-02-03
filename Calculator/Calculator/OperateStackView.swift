@@ -18,12 +18,12 @@ class OperateStackView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func loadView(operatorLabelText: String?, operandsLabelText: String?) {
+    private func loadView(operatorLabelText: String?, operandsLabelText: String?) {
         addArrangedSubview(makeLabel(labelText: operatorLabelText))
         addArrangedSubview(makeLabel(labelText: operandsLabelText))
     }
     
-    func configure() {
+    private func configure() {
         axis = .horizontal
         alignment = .fill
         distribution = .fill
