@@ -149,8 +149,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addHistoryEntry(left: String, right: String) {
-        let historyEntryStackView = HistoryViewGenerator
-            .generateStackView(operator: left, operand: right)
+        let historyEntryStackView = HistoryEntryStackView(operatorText: left, operandText: right)
+        
         historyEntryStackView.isHidden = true
         
         historyStackView.addArrangedSubview(historyEntryStackView)
