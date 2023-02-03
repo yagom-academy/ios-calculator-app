@@ -7,9 +7,9 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    var calculateExpression: String = ""
-    var operandExpression: String = ""
-    let numberFormatter = NumberFormatter()
+    private var calculateExpression: String = ""
+    private var operandExpression: String = ""
+    private let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
