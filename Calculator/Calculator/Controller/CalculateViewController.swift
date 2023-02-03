@@ -12,6 +12,7 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var enteringOperatorLabel: UILabel!
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
+    private var formulaStackView = FormulaStackView()
     
     private var enteringNumber: String = Sign.empty {
         didSet {
