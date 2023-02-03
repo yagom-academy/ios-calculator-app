@@ -1,13 +1,25 @@
-struct CalculatorItemQueue<dataType: CalculateItem> {
+struct CalculatorItemQueue< Element: CalculateItem > {
 
-    private(set) var enqueueStack: [dataType] = []
-    private(set) var dequeueStack: [dataType] = []
+    private(set) var enqueueStack: [Element] = []
+    private(set) var dequeueStack: [Element] = []
     
-    mutating func enqueue(element: dataType) {
+    var isEmpty: Bool {
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    
+    var peek: Element? {
+        if dequeueStack.isEmpty {
+            return enqueueStack.first
+        } else {
+            return dequeueStack.last
+        }
+    }
+    
+    mutating func enqueue(element: Element) {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue() -> dataType? {
+    mutating func dequeue() -> Element? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
@@ -18,18 +30,6 @@ struct CalculatorItemQueue<dataType: CalculateItem> {
     mutating func clearQueue() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
-    }
-    
-    func isEmpty() -> Bool {
-        return enqueueStack.isEmpty && dequeueStack.isEmpty
-    }
-    
-    func peek() -> dataType? {
-        if dequeueStack.isEmpty {
-            return enqueueStack.first
-        } else {
-            return dequeueStack.last
-        }
     }
     
 }
