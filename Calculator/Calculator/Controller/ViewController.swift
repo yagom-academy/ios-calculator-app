@@ -85,16 +85,38 @@ class ViewController: UIViewController {
     
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         let number = operrands[sender.tag]
-        
-        if currentInputFormula.isEmpty {
+        guard var lastOperand = currentInputFormula.last else {
+            return currentInputFormula.append(number)
+        }
+        if lastOperand.hasSuffix(".") {
+            lastOperand += number
+            currentInputFormula[currentInputFormula.count-1] = lastOperand
+        } else if operators.contains(lastOperand) == false {
+            //마지막이 연산자 아님 = 한 인덱스에 여러숫자붙이고싶음.. "456"처럼..
+            currentInputFormula[currentInputFormula.count-1] = lastOperand + number
+        } else if operators.contains(lastOperand) {
+            //마지막이 연산자임
             currentInputFormula.append(number)
+        }
+            
+        /*
+        if currentInputFormula.isEmpty {
+            
+            currentInputFormula.append(number)
+            
         } else {
             currentInputFormula.append(number)
         }
         
-        let currentOperand = currentInputFormula.last
+        guard var currentOperand = currentInputFormula.last else { return }
+        if currentOperand.hasSuffix(".") {
+            currentOperand += number
+        }
+        */
+        
+        
         IsOperatortapped = false
-        inputOperandsLabel.text = currentOperand
+        inputOperandsLabel.text = lastOperand
         printex()
     }
     
@@ -109,26 +131,35 @@ class ViewController: UIViewController {
         
         
         guard let currentSign = inputOperatorsLabel.text,
-                let lastElement = currentInputFormula.last else { return }
+              let lastElement = currentInputFormula.last else { return }
         
         // 연산자 입력 시 동작?
         // 1. inputOperandsLabel에 입력된 숫자가 currentFormula로 들어감
         // 2. (처음 입력한 값이라면) stackView에 operator 비우고 operand자리에만 숫자 들어감 ㅇ
         // 3. 0을 입력하지 않았을때 inputOperator가 0이라면 연산자는 마지막에 누른 한개만 들어감
-
+        
+        // 연산자입력이 안됐었음
         if IsOperatortapped == false {
+            //입력된 포뮬라의 요소가 한개라면 = 피연산자만 입력
             if currentInputFormula.count == 1 {
+                //스택뷰에 아무것도 안붙이고 숫자만 올리기
                 newStackView = makeStackView(Sign.nothing, lastElement)
             }
+            // 포뮬라가 0개가 아니고 1개보다 많을때
             else if currentInputFormula.count != 0 && currentInputFormula.count > 1 {
+                //연산자는 포뮬라의 카운트-3에 위치
                 let oldOperator = currentInputFormula[currentInputFormula.count-3]
                 newStackView = makeStackView(oldOperator, lastElement)
             }
-            currentInputFormula.append(Sign.blank)
+            
+            //currentInputFormula.append(Sign.blank)
             currentInputFormula.append(currentSign)
-            currentInputFormula.append(Sign.blank)
-        
+            //currentInputFormula.append(Sign.blank)
+            
             IsOperatortapped = true
+        } else {
+            currentInputFormula[currentInputFormula.count-1] = currentSign
+            print("else: \(currentInputFormula.count)")
         }
         /*
         else if oldInputFormula != Sign.nothing {
@@ -192,7 +223,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
-        let stringFormula = currentInputFormula.joined(separator: "")
+        let stringFormula = currentInputFormula.joined(separator: " ")
         print("stringformula :\(stringFormula)")
         var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
