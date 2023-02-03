@@ -14,14 +14,20 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        guard var sum = operands.dequeue() else { return .zero }
         
+        guard var sum = operands.dequeue() else { return .zero }
+
+        if operands.dequeueStack.isEmpty {
+            guard let initialOperator = operators.dequeue() else { return .zero }
+            return initialOperator.calculate(lhs: 0, rhs: sum)
+        }
+
         while !operands.isEmpty {
             if let nextValue = operands.dequeue(), let `operator` = operators.dequeue() {
                 sum = `operator`.calculate(lhs: sum, rhs: nextValue)
             }
         }
-        
+
         return sum
     }
 }
