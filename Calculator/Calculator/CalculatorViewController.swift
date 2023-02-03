@@ -6,28 +6,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak private var operatorInput: UILabel!
     @IBOutlet weak private var numberInput: UILabel!
-    @IBOutlet weak private var stackView: UIStackView!
-    @IBOutlet weak private var scrollView: UIScrollView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    @IBOutlet weak private var calculatorItemsStackView: UIStackView!
+    @IBOutlet weak private var calculatorItemsScrollView: UIScrollView!
     
     private var isFinishedCalculating: Bool = false
     private var isEnteredOperand: Bool = false
     private var isChangeableOperator: Bool = false
     private var numberFormatter = NumberFormatter()
-    
     private var currentNumber: String = Expression.zero {
         didSet {
             numberInput.text = applyDecimalPoint(number: currentNumber)
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let senderSign = sender.currentTitle else { return }
         checkInitialCondition()
@@ -90,7 +89,7 @@ class ViewController: UIViewController {
     
     private func operandIsZero() {
         
-        if !stackView.subviews.isEmpty && numberInput.text == Expression.zero {
+        if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
             isChangeableOperator = true
         } else {
             isChangeableOperator = false
@@ -117,14 +116,14 @@ class ViewController: UIViewController {
         stackLabel.adjustsFontForContentSizeCategory = true
         stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackLabel.textColor = .white
-        stackView.addArrangedSubview(stackLabel)
+        calculatorItemsStackView.addArrangedSubview(stackLabel)
         setScrollView()
         
     }
     
     private func setScrollView() {
-        let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height)
-        scrollView.setContentOffset(bottomOffset, animated: false)
+        let bottomOffset: CGPoint = CGPointMake(0, calculatorItemsScrollView.contentSize.height)
+        calculatorItemsScrollView.setContentOffset(bottomOffset, animated: false)
     }
     
     private func applyDecimalPoint(number: String) -> String {
@@ -150,7 +149,7 @@ class ViewController: UIViewController {
     }
     
     private func resetStackView() {
-        stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        calculatorItemsStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
     private func resetNumberInput() {
@@ -201,7 +200,7 @@ class ViewController: UIViewController {
         
         addStackView()
         var calculateItems: [String] = []
-        stackView.arrangedSubviews.forEach { view in
+        calculatorItemsStackView.arrangedSubviews.forEach { view in
             if let label = view as? UILabel {
                 guard let value = label.text else { return }
                 calculateItems.append(value)
