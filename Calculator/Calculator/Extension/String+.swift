@@ -31,10 +31,22 @@ extension String {
     
     var floorIfZero: String {
         let splittedNumber = self.components(separatedBy: ".")
-        if splittedNumber.count == 2, Int(splittedNumber[1]) == 0 {
-            return splittedNumber[0]
+        guard splittedNumber.count == 2 else {
+            return self
         }
-        return self
+        var numberAfterDecimalPoint = splittedNumber[1]
+        while let last = numberAfterDecimalPoint.last {
+            if last == "0" {
+                numberAfterDecimalPoint.removeLast()
+            } else {
+                break
+            }
+        }
+        if numberAfterDecimalPoint.isEmpty {
+            return splittedNumber[0]
+        } else {
+            return splittedNumber[0] + "." + numberAfterDecimalPoint
+        }
     }
     
     func split(with target: Character) -> [String] {

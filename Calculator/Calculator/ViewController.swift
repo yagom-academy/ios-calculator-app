@@ -27,7 +27,6 @@ final class ViewController: UIViewController {
     
     @IBAction func tapACButton(_ sender: UIButton) {
         allClear()
-        print(stringToBeCalculated)
     }
     
     @IBAction func tapCEButton(_ sender: UIButton) {
@@ -37,12 +36,10 @@ final class ViewController: UIViewController {
             return
         }
         clearEntry()
-        print(stringToBeCalculated)
     }
     
     @IBAction func tapConvertSignButton(_ sender: UIButton) {
         convertSign()
-        print(stringToBeCalculated)
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
@@ -50,9 +47,11 @@ final class ViewController: UIViewController {
             allClear()
             isCalculated = false
         }
+        guard currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString).count < 20 else {
+            return
+        }
         insertString(titleName: sender.titleLabel?.text)
         setCurrentNumber(titleName: sender.titleLabel?.text)
-        print(stringToBeCalculated)
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
@@ -64,7 +63,6 @@ final class ViewController: UIViewController {
             insertString(titleName: sender.titleLabel?.text)
             setCurrentNumber(titleName: sender.titleLabel?.text)
         }
-        print(stringToBeCalculated)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
@@ -72,11 +70,10 @@ final class ViewController: UIViewController {
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
         resetCurrentNumber()
-        print(stringToBeCalculated)
     }
     
     func displayPreviousOperands() {
-        let abc = OperateStackView(operatorText: currentOperatorLabel.text, operandsText: currentNumberLabel.text)
+        let abc = OperateStackView(operatorText: currentOperatorLabel.text, operandsText: currentNumberLabel.text?.floorIfZero)
         verticalStackView.addArrangedSubview(abc)
     }
     
@@ -90,7 +87,6 @@ final class ViewController: UIViewController {
         initializeCurrentOperator()
         let result = calculate()
         displayResult(result: result)
-        print(result)
     }
     
     func insertString(titleName: String?) {
