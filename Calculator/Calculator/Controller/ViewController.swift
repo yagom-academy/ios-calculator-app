@@ -37,15 +37,12 @@ class ViewController: UIViewController {
     var currentOperator: String {
         return inputOperatorsLabel.text ?? Sign.nothing
     }
-    
     var currentInputFormula: [String] = []
     var oldInputFormula: [String] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allocateOperrandsTag()
-        allocateOperatorsTag()
         reset()
     }
     
@@ -76,23 +73,6 @@ class ViewController: UIViewController {
         return view
     }
     
-    func printex(){
-        print("current: \(currentInputFormula)")
-        print("old: \(oldInputFormula)")
-    }
-    
-    func allocateOperrandsTag() {
-        for index in 0..<operandsButton.count {
-            operandsButton[index].tag = index
-        }
-    }
-    
-    func allocateOperatorsTag() {
-        for index in 0..<operatorsButton.count {
-            operatorsButton[index].tag = index
-        }
-    }
-    
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
         
@@ -101,8 +81,6 @@ class ViewController: UIViewController {
         } else {
             inputOperandsLabel.text = currentOperand + number
         }
-        
-        printex()
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
@@ -157,8 +135,6 @@ class ViewController: UIViewController {
 
         inputOperandsLabel.text = String(result)
         oldInputFormula.append(String(result))
-        
-        printex()
     }
     
     @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
@@ -180,6 +156,5 @@ class ViewController: UIViewController {
     
     @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
         inputOperandsLabel.text = Sign.zero
-        printex()
     }
 }
