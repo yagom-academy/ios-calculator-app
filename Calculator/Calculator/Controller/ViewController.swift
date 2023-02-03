@@ -218,6 +218,7 @@ extension ViewController {
     func removeAllStackView() {
         let allSubViewsInStackVIew = self.stackViewInScrollView.arrangedSubviews
         for stackView in allSubViewsInStackVIew {
+            self.stackViewInScrollView.removeArrangedSubview(stackView)
             stackView.removeFromSuperview()
         }
     }
