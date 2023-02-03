@@ -109,17 +109,16 @@ class ViewController: UIViewController {
         print("스택뷰 피연산자: \(currentInputFormula)")
     }
     
+    @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
+        guard let zero = sender.currentTitle,
+              currentOperand != Sign.zero else { return }
+        inputOperandsLabel.text = currentOperand + zero
+    }
+    
     @IBAction func dotButtonDidTapped(_ sender: UIButton) {
-        if let lastElement = currentInputFormula.last {
-            if lastElement.hasSuffix(".") {
-                print("lastElement: \(lastElement)")
-            } else {
-                currentInputFormula[currentInputFormula.count-1] += Sign.dot
-            }
-        } else if currentInputFormula.isEmpty {
-            currentInputFormula.append(Sign.zero + Sign.dot)
-            print(currentInputFormula)
-        }
+        guard let dot = sender.currentTitle,
+              currentOperand.contains(Sign.dot) == false else { return }
+        inputOperandsLabel.text = currentOperand + dot
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
