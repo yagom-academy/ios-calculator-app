@@ -6,12 +6,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
 
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
-    @IBOutlet weak var contentStack: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet private weak var contentStack: UIStackView!
+    @IBOutlet private weak var scrollView: UIScrollView!
     
     private var workingSpace: String = ""
     private var operand = ""
@@ -19,8 +19,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUp()
+        labelSetUp()
         clearAllContentStack()
+    }
+    
+    private func labelSetUp() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
@@ -28,11 +33,11 @@ class ViewController: UIViewController {
             operand += number
         }
         
-        operandLabel.text = operand
+        operandLabel.text = convertNumberToString(Double(operand)!)
     }
     
     @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
-        if operandLabel.text == "0" && !(sender.currentTitle == ".") {
+        if operandLabel.text == "0" && sender.currentTitle != "." {
             return
         } else if operandLabel.text == "0" && sender.currentTitle == "." {
             operand += "0."
@@ -75,7 +80,7 @@ class ViewController: UIViewController {
             }
             
             guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(useNumberFormatter(operandDouble), "")
+            let stackView = generateStackView(convertNumberToString(operandDouble), "")
             addContentStack(stackView)
             
             workingSpace += operandLabelText
@@ -92,7 +97,7 @@ class ViewController: UIViewController {
             return
         } else {
             guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(useNumberFormatter(operandDouble), operatorLabel.text)
+            let stackView = generateStackView(convertNumberToString(operandDouble), operatorLabel.text)
             addContentStack(stackView)
             
             guard let operatorLabelText = operatorLabel.text else { return }
@@ -124,7 +129,7 @@ class ViewController: UIViewController {
             operand = ""
             workingSpace = ""
         } else {
-            operandLabel.text = useNumberFormatter(result)
+            operandLabel.text = convertNumberToString(result)
             operatorLabel.text = ""
             operand = ""
             workingSpace = ""
@@ -136,7 +141,7 @@ class ViewController: UIViewController {
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
         workingSpace = ""
         operand = ""
-        setUp()
+        labelSetUp()
         clearAllContentStack()
     }
     
@@ -144,12 +149,7 @@ class ViewController: UIViewController {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func setUp() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
-    private func useNumberFormatter(_ input: Double) -> String {
+    private func convertNumberToString(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
