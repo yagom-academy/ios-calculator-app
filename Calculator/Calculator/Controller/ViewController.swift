@@ -91,7 +91,7 @@ final class ViewController: UIViewController {
     
     private func updateOperand(with number: String?) {
         guard let inputNumber = number else { return }
-        guard currentOperand.removeComma().removeDotAndNegative().count <= 20 else { return }
+        guard currentOperand.removeDotAndNegative().count < 20 else { return }
         
         guard isCalculatedStatus != true else {
             isCalculatedStatus = false
@@ -111,18 +111,6 @@ final class ViewController: UIViewController {
             
             operandLabel.text = (currentOperand + inputNumber).applyFormatter()
         }
-        
-//        if currentOperand.removeComma().removeDotAndNegative().count == 21 {
-//            var operand = currentOperand
-//            
-//            guard Int(inputNumber) ?? 0 >= 5 else {
-//                operandLabel.text = String(operand.dropLast(1))
-//                return
-//            }
-//            
-//            operand = String(operand.dropLast(1))
-//            operandLabel.text = "\(55 + Int(operand.popLast()))"
-//        }
     }
     
     private func updateDot() {
