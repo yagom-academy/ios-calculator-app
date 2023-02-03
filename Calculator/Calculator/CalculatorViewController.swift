@@ -155,8 +155,7 @@ final class CalculatorViewController: UIViewController {
                 calculateItems.append(value)
             }
         }
-        return calculateItems.map { $0.components(separatedBy: Expression.comma).joined() }
-            .map { $0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
+        return calculateItems.map { $0.components(separatedBy: Expression.blank).joined() }.joined(separator: Expression.empty)
     }
 }
 
