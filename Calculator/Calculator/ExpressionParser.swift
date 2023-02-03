@@ -1,9 +1,10 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operands: CalculatorItemQueue<Double>
-        var operators: CalculatorItemQueue<Operator> = input.compactMap { Operator(rawValue: $0) }.forEach { operators.enqueue(element: $0) }
-    
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
+        input.compactMap { Operator(rawValue: $0) }.forEach { operators.enqueue(element: $0) }
+        print(componentsByOperators(from: input))
         componentsByOperators(from: input).compactMap { Double($0) }.forEach { operands.enqueue(element: $0) }
         
         return Formula(operands: operands , operators: operators )
