@@ -122,11 +122,17 @@ final class ViewController: UIViewController {
     private func updateOperator(with sign: String?) {
         guard let operatorValue = sign else { return }
         
-        if expression == Sign.empty {
+        guard expression != Sign.empty else {
             expression += currentOperand.removeComma()
             setOperationContentStackView(operatorValue: Sign.empty,
-                                  operandValue: currentOperand.applyFormatter())
-        } else if operandLabel.text == Sign.zero {
+                                         operandValue: currentOperand.applyFormatter())
+            isCalculatedStatus = false
+            operatorLabel.text = operatorValue
+            operandLabel.text = Sign.zero
+            return
+        }
+        
+        if operandLabel.text == Sign.zero {
             expression += " \(currentOperator) "
             expression = String(expression.dropLast(3))
         } else {
