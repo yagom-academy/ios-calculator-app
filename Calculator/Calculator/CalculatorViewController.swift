@@ -27,7 +27,7 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         guard let senderSign = sender.currentTitle else { return }
         checkInitialCondition()
         operandIsZero()
@@ -43,7 +43,7 @@ final class CalculatorViewController: UIViewController {
         currentNumber = Expression.zero
     }
     
-    @IBAction func numberButtonTapped(_ sender: UIButton) {
+    @IBAction private func numberButtonTapped(_ sender: UIButton) {
         
         guard let number = sender.currentTitle else { return }
         if currentNumber == Expression.zero  {
@@ -53,18 +53,18 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    @IBAction private func dotButtonTapped(_ sender: UIButton) {
         
         guard let dot = sender.currentTitle else { return }
         guard !currentNumber.contains(Expression.dot) else { return }
         currentNumber += dot
     }
     
-    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+    @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
         checkSign()
     }
     
-    @IBAction func CEButtonTapped(_ sender: UIButton) {
+    @IBAction private func CEButtonTapped(_ sender: UIButton) {
         
         if isFinishedCalculating {
             numberInput.text = Expression.zero
@@ -73,7 +73,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func ACButtonTapped(_ sender: UIButton) {
+    @IBAction private func ACButtonTapped(_ sender: UIButton) {
         
         resetStackView()
         resetNumberInput()
@@ -81,7 +81,7 @@ final class CalculatorViewController: UIViewController {
         isFinishedCalculating = false
     }
     
-    @IBAction func equalButtonTapped(_ sender: UIButton) {
+    @IBAction private func equalButtonTapped(_ sender: UIButton) {
         if isFinishedCalculating == false {
             handleDivideError()
         }
