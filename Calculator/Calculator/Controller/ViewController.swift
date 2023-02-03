@@ -11,6 +11,9 @@ final class CalculatorViewController: UIViewController {
     private var currentOperand: String = ""
     private var currentOperator: String = ""
     private var isCalculated: Bool = false
+    private var isFractional: Bool {
+        self.currentOperand.contains(".")
+    }
     private var isFirstInput: Bool {
         return self.stackViewInScrollView.subviews.isEmpty
     }
@@ -140,11 +143,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addZeroToOperandLabel(_ operand: String) {
-        self.currentOperand += operand
-        
-        if Double(self.currentOperand) != 0 {
+        if isFractional == false {
+            self.currentOperand += operand
             updateCurrentNumberLabel(self.currentOperand)
         } else {
+            self.currentOperand += operand
             self.currentOperandLabel.text = self.currentOperand
         }
     }
