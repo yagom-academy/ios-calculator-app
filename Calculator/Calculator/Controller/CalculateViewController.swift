@@ -44,7 +44,7 @@ class CalculateViewController: UIViewController {
         enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
     }
     
-    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+    @IBAction func operatorPadTapped(_ sender: UIButton) {
         guard let inputOperatorText = sender.currentTitle,
               let currentOperatorText = enteringOperatorLabel.text else { return }
         
@@ -58,6 +58,15 @@ class CalculateViewController: UIViewController {
         addFormulaStackView(to: calculatorStackView, with: currentOperatorText)
         enteringNumber = Sign.empty
     }
+    
+    @IBAction func zeroPadTapped(_ sender: UIButton) {
+        guard let zeroPad = sender.currentTitle else { return }
+        guard calculatorChecker.hasCurrentInput(enteringNumber) else { return }
+        
+        let addedEnteringNumber = enteringNumber.convertToDouble(appending: zeroPad)
+        enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
+    }
+    
     
     func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
         let formulaStackView = FormulaStackView()
