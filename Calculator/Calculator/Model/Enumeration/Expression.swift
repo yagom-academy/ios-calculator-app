@@ -7,6 +7,7 @@
 
 enum Expression {
     static let zero = "0"
+    static let doubleZero = "00"
     static let dot = "."
     static let minus = "-"
     static let empty = ""

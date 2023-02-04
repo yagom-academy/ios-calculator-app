@@ -25,11 +25,16 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
         restartCalculate()
-        guard let senderSign = sender.currentTitle else { return }
-        if numberInput.text != Expression.zero  {
+        guard let senderSign = sender.currentTitle,
+              let operand = numberInput.text else { return }
+        let isNotZeroOperand = ![Expression.zero, Expression.doubleZero].contains(operand)
+        let isFinishedDot = !operand.hasSuffix(Expression.dot)
+        let hasStackViewOrOperad = !calculatorItemsStackView.subviews.isEmpty && isNotZeroOperand
+      
+        if isNotZeroOperand && isFinishedDot {
             addStackView()
             operatorInput.text = senderSign
-        } else if !calculatorItemsStackView.subviews.isEmpty && numberInput.text == Expression.zero {
+        } else if hasStackViewOrOperad {
             operatorInput.text = senderSign
         }
         currentNumber = Expression.zero
@@ -39,7 +44,7 @@ final class CalculatorViewController: UIViewController {
         restartCalculate()
         guard let number = sender.currentTitle,
               let operand = numberInput.text else { return }
-        if numberInput.text == Expression.zero  {
+        if numberInput.text == Expression.zero || numberInput.text == Expression.doubleZero  {
             numberInput.text = number
         } else {
             numberInput.text = operand + number
@@ -88,9 +93,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addStackView() {
-        guard let operandStackLabel = numberInput.text,
+        guard var operandStackLabel = numberInput.text,
               let operatorStackLabel = operatorInput.text else {  return  }
-        
+        if let checkDecimalPoint = Double(operandStackLabel) {
+            operandStackLabel = String(checkDecimalPoint)
+        }
         let stackLabel = UILabel()
         stackLabel.text = operatorStackLabel + Expression.blank + operandStackLabel
         stackLabel.adjustsFontForContentSizeCategory = true
