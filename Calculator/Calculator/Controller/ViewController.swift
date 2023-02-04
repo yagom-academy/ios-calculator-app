@@ -73,13 +73,16 @@ class ViewController: UIViewController {
         return view
     }
     
-    func formatNumber(_ result: Int) -> String {
+    func formatNumber(_ result: Double) -> String {
         // 얘는 왜 써야할까? - 소숫점 표시, 숫자 반올림
         // 얘는 어디다 써야할까? - currentOperand에 나타나는 숫자
+        // inputOperandLabel.text 에 적용하면... 3.0 -> 3으로 인식
+        // 넘버포매터 적용한애 자릿수..? 문제...? 으윽...
+        
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        
-        return ""
+
+        return numberFormatter.string(from: NSNumber(value: result)) ?? ""
     }
     
     //MARK: - IBAciton
@@ -132,18 +135,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
+        // 마지막 스택뷰 위로 올려주기
         let newStackView = makeStackView(currentOperator, currentOperand)
-        
         stackView.addArrangedSubview(newStackView)
+        
+        // 포뮬라에 연산자, 피연산자 올리기
         currentInputFormula.append(currentOperator)
         currentInputFormula.append(currentOperand)
         
+        // Formula parse
         let stringFormula = currentInputFormula.joined(separator: " ")
         var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
+        print(result)
 
+        // 초기화
         inputOperatorsLabel.text = ""
-        inputOperandsLabel.text = String(result)
+        inputOperandsLabel.text = formatNumber(result)
         oldInputFormula.append(String(result))
         currentInputFormula = []
     }
