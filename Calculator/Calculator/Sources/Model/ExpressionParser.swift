@@ -1,8 +1,7 @@
 //
-//  ExpressionParser.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/01/27.
+//  Calculator - ExpressionParser.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 enum ExpressionParser {

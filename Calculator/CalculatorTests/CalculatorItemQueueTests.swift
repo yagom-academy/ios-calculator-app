@@ -1,9 +1,8 @@
 //
-//  CalculatorItemQueueTests.swift
-//  CalculatorTests
-//
-//  Created by Jinah Park on 2023/01/24.
-//
+//  CalculatorTests - CalculatorItemQueueTests.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
+// 
 
 import XCTest
 @testable import Calculator

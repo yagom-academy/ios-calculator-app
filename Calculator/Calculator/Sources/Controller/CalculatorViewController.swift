@@ -1,19 +1,19 @@
 //
-//  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Calculator - CalculatorViewController.swift
+//  Created by Rhode.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentNumberLabel: UILabel!
     
     @IBOutlet private weak var verticalStackView: UIStackView!
     
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var operatingScrollView: UIScrollView!
     
     private var stringToBeCalculated: String = NameSpace.emptyString
     private var currentNumber: String = NameSpace.emptyString
@@ -63,7 +63,7 @@ final class ViewController: UIViewController {
     private func setCurrentNumber(titleName: String?) {
         currentNumber = currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString)
         currentNumber += titleName ?? NameSpace.emptyString
-        currentNumber = currentNumber.insertComma
+        currentNumber = currentNumber.stringWithComma
         displayCurrentNumber()
     }
     
@@ -128,7 +128,7 @@ final class ViewController: UIViewController {
     }
     
     private func displayResult(result: Double) {
-        currentNumberLabel.text = String(result).floorIfZero.insertComma
+        currentNumberLabel.text = String(result).floorIfZero.stringWithComma
     }
     
     //MARK: Methods clearing numbers

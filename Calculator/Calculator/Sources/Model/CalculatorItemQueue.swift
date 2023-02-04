@@ -1,8 +1,7 @@
 //
-//  Calculator.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/01/24.
+//  Calculator - CalculatorItemQueue.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {

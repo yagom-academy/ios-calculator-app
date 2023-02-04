@@ -1,14 +1,13 @@
 //
-//  String+.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/01/30.
+//  Calculator - String+.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 import Foundation
 
 extension String {
-    var insertComma: String {
+    var stringWithComma: String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         

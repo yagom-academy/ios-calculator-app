@@ -1,8 +1,7 @@
 //
-//  Double+.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/01/27.
+//  Calculator - Double+.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 extension Double: CalculateItem {}

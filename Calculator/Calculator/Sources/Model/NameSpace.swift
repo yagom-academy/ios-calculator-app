@@ -1,8 +1,7 @@
 //
-//  NameSpace.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/02/01.
+//  Calculator - NameSpace.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 enum NameSpace {

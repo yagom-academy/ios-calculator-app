@@ -1,13 +1,28 @@
 //
-//  OperateStackView.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/02/02.
-//
+//  Calculator - OperateStackView.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
+// 
 
 import UIKit
 
 class OperateStackView: UIStackView {
+    private let operandsLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .right
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
+        return label
+    }()
+    
+    private let operatorLabel: UILabel = {
+        var label = UILabel()
+        label.textAlignment = .right
+        label.textColor = .white
+        label.font = .preferredFont(forTextStyle: .title3)
+        return label
+    }()
+    
     init(operatorText: String?, operandsText: String?) {
         super.init(frame: .zero)
         configure()
@@ -19,8 +34,10 @@ class OperateStackView: UIStackView {
     }
     
     private func loadView(operatorLabelText: String?, operandsLabelText: String?) {
-        addArrangedSubview(makeLabel(labelText: operatorLabelText))
-        addArrangedSubview(makeLabel(labelText: operandsLabelText))
+        operandsLabel.text = operandsLabelText
+        operatorLabel.text = operatorLabelText
+        addArrangedSubview(operatorLabel)
+        addArrangedSubview(operandsLabel)
     }
     
     private func configure() {
@@ -28,18 +45,5 @@ class OperateStackView: UIStackView {
         alignment = .fill
         distribution = .fill
         spacing = 8
-    }
-    
-    private let label: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .right
-        label.textColor = .white
-        label.font = .preferredFont(forTextStyle: .title3)
-        return label
-    }()
-    
-    private func makeLabel(labelText: String?) -> UILabel {
-        label.text = labelText
-        return label
     }
 }
