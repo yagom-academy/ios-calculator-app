@@ -83,11 +83,9 @@ class ViewController: UIViewController {
         }
         if currentNumber != "0" {
             self.numberOnField.text = "0"
-            // 연산결과삭제구현필요
         }
     }
     
-    //음수 양수 chagne매서드
     private func convertToNegativeNumberButton(){
         guard let currentNumber = self.numberOnField.text,
               currentNumber != "0" else { return }
@@ -108,9 +106,11 @@ class ViewController: UIViewController {
         
         var resultByParse = ExpressionParser.parse(from: calculateComponents)
 
-        numberOnField.text = String(resultByParse.result())
-
-        resetAllStackView()
+        allClear()
+        let calculateResult = String(resultByParse.result())
+        
+        numberOnField.text = addCommaToThreeDigit(number: calculateResult)
+        
     }
     
     private func numberButtonTapped(sender: UIButton) {
@@ -184,6 +184,16 @@ class ViewController: UIViewController {
     
     private func resetAllStackView() {
         verticalStackViewInScroll.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func addCommaToThreeDigit(number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        guard let mappedToDouble = Double(number) else { return "" }
+        guard let result = numberFormatter.string(from: NSNumber(value:mappedToDouble)) else { return "" }
+        
+        return result
     }
     
 }
