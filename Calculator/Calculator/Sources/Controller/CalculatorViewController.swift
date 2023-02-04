@@ -23,9 +23,7 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initializeCurrentOperator()
-        verticalStackView.subviews.forEach { subView in
-            subView.removeFromSuperview()
-        }
+        allClearViews()
     }
     
     private func initializeCurrentOperator() {
@@ -161,9 +159,7 @@ final class CalculatorViewController: UIViewController {
         currentNumber = NameSpace.emptyString
         currentNumberLabel.text = NameSpace.stringZero
         currentOperatorLabel.text = NameSpace.emptyString
-        verticalStackView.subviews.forEach { subView in
-            subView.removeFromSuperview()
-        }
+        allClearViews()
     }
     
     //MARK: Methods converting sign
@@ -198,5 +194,11 @@ final class CalculatorViewController: UIViewController {
     private func resetCurrentNumber() {
         currentNumber = NameSpace.stringZero
         currentNumberLabel.text = currentNumber
+    }
+    
+    private func allClearViews() {
+        verticalStackView.subviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
     }
 }
