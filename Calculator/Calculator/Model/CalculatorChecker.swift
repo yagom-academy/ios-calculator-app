@@ -31,6 +31,13 @@ struct CalculatorChecker {
         return input == Sign.zero ? true : false
     }
     
+    func changedSign(_ input: String) -> String {
+        if input.contains(Sign.minus) {
+            return input.replacingOccurrences(of: Sign.minus, with: Sign.empty)
+        }
+        return (Sign.minus + input)
+    }
+    
     func calculate(with expression: String) -> Double {
         var formula = ExpressionParser.parse(from: expression.split(separator: ",").joined())
         return formula.result()

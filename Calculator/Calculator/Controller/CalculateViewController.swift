@@ -83,7 +83,10 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func calculatePadTapped(_ sender: UIButton) {
-        guard enteringNumber != Sign.space else { return }
+        guard let enteringOperatorText = enteringOperatorLabel.text,
+              enteringOperatorText != Sign.empty,
+              enteringNumber != Sign.space else { return }
+        
         guard let operatorText = enteringOperatorLabel.text else { return }
         calculationExpression += (operatorText + enteringNumber)
         addFormulaStackView(to: calculatorStackView, with: operatorText)
@@ -101,6 +104,12 @@ class CalculateViewController: UIViewController {
     @IBAction private func CEPadTapped(_ sender: UIButton) {
         enteringOperatorLabel.text = Sign.empty
         enteringNumber = Sign.empty
+    }
+    
+    @IBAction private func changeSignPadTapped(_ sender: UIButton) {
+        guard let enteringNumberText = enteringNumberLabel.text,
+              !calculatorChecker.isZero(enteringNumberText) else { return }
+        enteringNumber = calculatorChecker.changedSign(enteringNumber)
     }
     
     private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
@@ -129,4 +138,3 @@ class CalculateViewController: UIViewController {
         }
     }
 }
-
