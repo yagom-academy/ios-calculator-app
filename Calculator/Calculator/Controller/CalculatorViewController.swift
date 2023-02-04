@@ -19,11 +19,11 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelSetUp()
+        clearLabel()
         clearAllContentStack()
     }
     
-    private func labelSetUp() {
+    private func clearLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
@@ -114,7 +114,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
-        if workingSpace == "" { return }
+        guard workingSpace != "" else { return }
         
         let stackView = generateStackView(operandLabel.text, operatorLabel.text)
         addContentStack(stackView)
@@ -143,7 +143,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
         workingSpace = ""
         operand = ""
-        labelSetUp()
+        clearLabel()
         clearAllContentStack()
     }
     
