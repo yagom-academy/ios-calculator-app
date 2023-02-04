@@ -29,13 +29,17 @@ class OperateStackView: UIStackView {
         distribution = .fill
         spacing = 8
     }
-
-    private func makeLabel(labelText: String?) -> UILabel {
+    
+    private let label: UILabel = {
         let label = UILabel()
-        label.text = labelText
         label.textAlignment = .right
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
+        return label
+    }()
+    
+    private func makeLabel(labelText: String?) -> UILabel {
+        label.text = labelText
         return label
     }
 }
