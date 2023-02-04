@@ -98,6 +98,11 @@ class CalculateViewController: UIViewController {
         removeAllFormulaStackView()
     }
     
+    @IBAction private func CEPadTapped(_ sender: UIButton) {
+        enteringOperatorLabel.text = Sign.empty
+        enteringNumber = Sign.empty
+    }
+    
     private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
         guard let enteringNumberText = enteringNumberLabel.text else { return }
         let formulaStackView = FormulaStackView()
