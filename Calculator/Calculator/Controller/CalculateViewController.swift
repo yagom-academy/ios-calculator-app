@@ -56,6 +56,8 @@ class CalculateViewController: UIViewController {
         
         calculationExpression += (currentOperatorText + enteringNumber)
         addFormulaStackView(to: calculatorStackView, with: currentOperatorText)
+        calculatorScrollView.layoutIfNeeded()
+        calculatorScrollView.scrollToBottom()
         enteringNumber = Sign.empty
     }
     
@@ -64,7 +66,5 @@ class CalculateViewController: UIViewController {
         formulaStackView.addLabels([currentOperatorText, enteringNumber])
         calculatorStackView.addArrangedSubview(formulaStackView)
     }
-    
-    
 }
 
