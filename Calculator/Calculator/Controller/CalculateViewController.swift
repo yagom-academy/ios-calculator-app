@@ -12,7 +12,6 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var enteringOperatorLabel: UILabel!
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
-    private var formulaStackView = FormulaStackView()
     
     private var enteringNumber: String = Sign.empty {
         didSet {
@@ -35,7 +34,6 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
-        
         guard let numberPad = sender.currentTitle else { return }
         guard calculatorChecker.hasCurrentInput(enteringNumber) else {
             enteringNumber = numberPad
@@ -45,5 +43,28 @@ class CalculateViewController: UIViewController {
         let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
         enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
     }
+    
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let inputOperatorText = sender.currentTitle,
+              let currentOperatorText = enteringOperatorLabel.text else { return }
+        
+        enteringOperatorLabel.text = inputOperatorText
+        
+        guard calculatorChecker.hasCurrentInput(enteringNumber) else {
+            return
+        }
+        
+        calculationExpression += (currentOperatorText + enteringNumber)
+        addFormulaStackView(to: calculatorStackView, with: currentOperatorText)
+        enteringNumber = Sign.empty
+    }
+    
+    func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
+        let formulaStackView = FormulaStackView()
+        formulaStackView.addLabels([currentOperatorText, enteringNumber])
+        calculatorStackView.addArrangedSubview(formulaStackView)
+    }
+    
+    
 }
 
