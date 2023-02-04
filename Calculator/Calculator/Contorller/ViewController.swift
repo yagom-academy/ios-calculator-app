@@ -9,8 +9,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    private var calculateComponents: String = ""
     
-    private var calcuateComponents: String = ""
     private var inputNumbers: String = ""
     
     @IBOutlet weak var numberOnField: UILabel!
@@ -49,12 +49,11 @@ class ViewController: UIViewController {
             convertToNegativeNumberButton()
         case "÷", "×", "−", "+":
             operatorButtonTapped(sender: sender)
-        case "0","1","2","3","4","5","7","8","9","00",".":
+        case "0","1","2","3","4","5","6","7","8","9","00",".":
             numberButtonTapped(sender: sender)
         default:
             return
         }
-        
     }
     
     private func setUpView() {
@@ -73,7 +72,8 @@ class ViewController: UIViewController {
     
     private func allClear() {
         self.numberOnField.text = "0"
-        self.calcuateComponents = ""
+        self.calculateComponents = ""
+        self.inputNumbers = ""
         resetAllStackView()
     }
     
@@ -90,9 +90,7 @@ class ViewController: UIViewController {
     //음수 양수 chagne매서드
     private func convertToNegativeNumberButton(){
         guard let currentNumber = self.numberOnField.text,
-              currentNumber != "0" else {
-            return
-        }
+              currentNumber != "0" else { return }
         if currentNumber.contains("−") == true {
             numberOnField.text = currentNumber.trimmingCharacters(in: ["−"])
         } else {
@@ -101,7 +99,18 @@ class ViewController: UIViewController {
     }
     
     private func calculateResult(){
+        if inputNumbers == "" { return }
+  
+        guard let currentOperOnField = operatorOnField.text else { return }
+        guard let currentNumberOnField = numberOnField.text else { return }
         
+        calculateComponents += currentOperOnField + currentNumberOnField
+        
+        var resultByParse = ExpressionParser.parse(from: calculateComponents)
+
+        numberOnField.text = String(resultByParse.result())
+
+        resetAllStackView()
     }
     
     private func numberButtonTapped(sender: UIButton) {
@@ -121,13 +130,11 @@ class ViewController: UIViewController {
         case 101: inputNumbers += "."
         default:
             return
-
         }
         numberOnField.text = inputNumbers
         
     }
     
-    //숫자값이없을때 오퍼레이터만 스택추가되지않도록 구현필요
     private func operatorButtonTapped(sender: UIButton) {
         
         guard let currentNumber = numberOnField.text else { return }
@@ -135,22 +142,21 @@ class ViewController: UIViewController {
         guard let currentOper = operatorOnField.text else { return }
         
         operatorOnField.text = inputtedOperator
-        if currentNumber == "0" {
+        if currentNumber == "0", currentNumber.last == "." {
             return
-        } else if calcuateComponents == "" {
-            calcuateComponents += currentNumber
-            addNewStackView(number: currentNumber, oper: currentOper)
+        } else if calculateComponents == "" {
+            calculateComponents += currentNumber
+            addNewStackView(number: currentNumber, oper: "")
         } else {
-            calcuateComponents += currentOper + currentNumber
+            calculateComponents += currentOper + currentNumber
             addNewStackView(number: currentNumber, oper: currentOper)
             self.numberOnField.text = ""
-//            currentNumber = ""
+
         }
         inputNumbers = ""
         numberOnField.text = "0"
         setUpScrollViewToBottom()
     }
-    
     
     private func addNewStackView(number: String, oper: String) {
         let stackView = UIStackView()

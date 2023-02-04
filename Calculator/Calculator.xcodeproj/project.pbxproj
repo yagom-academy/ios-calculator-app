@@ -128,12 +128,12 @@
 		58BF1B5D2989553E0029D030 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				584146E22982702400817FFB /* Formula.swift */,
 				58BF1B5429893D3E0029D030 /* Enumeration.swift */,
 				584146E62982705E00817FFB /* CalculatorItem.swift */,
 				584146E82982708100817FFB /* Operator.swift */,
-				583D1132298048060097CC18 /* CalculatorItemQueue.swift */,
-				584146E22982702400817FFB /* Formula.swift */,
 				584146E42982703800817FFB /* ExpressionParser.swift */,
+				583D1132298048060097CC18 /* CalculatorItemQueue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
