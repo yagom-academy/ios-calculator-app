@@ -9,4 +9,7 @@ import Foundation
 
 struct CalculatorChecker {
     
+    func hasCurrentInput(_ currentText: String) -> Bool {
+        return currentText == Sign.empty ? false : true
+    }
 }

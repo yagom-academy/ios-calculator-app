@@ -33,5 +33,17 @@ class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    @IBAction func numberPadTapped(_ sender: UIButton) {
+        
+        guard let numberPad = sender.currentTitle else { return }
+        guard calculatorChecker.hasCurrentInput(enteringNumber) else {
+            enteringNumber = numberPad
+            return
+        }
+        
+        let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
+        enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
+    }
 }
 
