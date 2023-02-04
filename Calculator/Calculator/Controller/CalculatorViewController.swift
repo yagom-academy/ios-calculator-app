@@ -92,15 +92,11 @@ final class CalculatorViewController: UIViewController {
             addContentStack(stackView)
             
             workingSpace += operandLabelText
-            operatorLabel.text = `operator`
-            operand = ""
-            operandLabel.text = "0"
+            setOperatorLabel(`operator`)
         } else if operatorLabel.text == "" && operandLabelText == "0" {
             return
         } else if operatorLabel.text != "" && operandLabel.text == "0" {
-            operatorLabel.text = `operator`
-            operand = ""
-            operandLabel.text = "0"
+            setOperatorLabel(`operator`)
             
             return
         } else {
@@ -111,9 +107,7 @@ final class CalculatorViewController: UIViewController {
             guard let operatorLabelText = operatorLabel.text else { return }
             workingSpace += operatorLabelText + operandLabelText
             
-            operatorLabel.text = `operator`
-            operand = ""
-            operandLabel.text = "0"
+            setOperatorLabel(`operator`)
         }
         
         setScrollViewFocus()
@@ -151,6 +145,12 @@ final class CalculatorViewController: UIViewController {
         operand = ""
         labelSetUp()
         clearAllContentStack()
+    }
+    
+    private func setOperatorLabel(_ `operator`: String) {
+        operatorLabel.text = `operator`
+        operand = ""
+        operandLabel.text = "0"
     }
     
     private func clearAllContentStack() {
