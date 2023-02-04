@@ -93,7 +93,6 @@ final class CalculatorViewController: UIViewController {
         
         let stackLabel = UILabel()
         stackLabel.text = operatorStackLabel + Expression.blank + operandStackLabel
-        stackLabel.numberOfLines = 0
         stackLabel.adjustsFontForContentSizeCategory = true
         stackLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         stackLabel.textColor = .white
