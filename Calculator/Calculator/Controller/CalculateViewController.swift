@@ -85,7 +85,7 @@ class CalculateViewController: UIViewController {
         guard enteringNumber != Sign.space else{ return }
         guard let operatorText = enteringOperatorLabel.text else { return }
         calculationExpression += (operatorText + enteringNumber)
-        addFormulaStackView(to: calculatorStackView, with: Sign.empty)
+        addFormulaStackView(to: calculatorStackView, with: operatorText)
         
         let result = calculatorChecker.calculate(with: calculationExpression)
         enteringNumber = Sign.space
