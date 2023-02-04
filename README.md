@@ -100,7 +100,7 @@ LinkedList와 Queue를 활용한 사칙연산 계산기 앱
 ## 4. 프로젝트 구조
 #### UML
 
-![](https://i.imgur.com/4yv1ybJ.jpg)
+/Users/kimkyeongjun/Desktop/StarterCamp/WEEK6/ios-calculator-app/Image/calculator_UML.jpeg
 
 #### 파일 구조
 ```
