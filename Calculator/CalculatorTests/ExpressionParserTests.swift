@@ -35,7 +35,4 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operands.itemCount, expectedOperandsCount)
         XCTAssertEqual(result.operators.itemCount, expectedOperatorCount)
     }
-    
 }
-
-
