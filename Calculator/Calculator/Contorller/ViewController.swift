@@ -127,7 +127,10 @@ class ViewController: UIViewController {
         case 9: inputNumbers += "9"
         case 0: inputNumbers += "0"
         case 100: inputNumbers += "00"
-        case 101: inputNumbers += "."
+        case 101:
+            if inputNumbers.contains(".") == false {
+                inputNumbers += "."
+            }
         default:
             return
         }
@@ -196,4 +199,10 @@ class ViewController: UIViewController {
         return result
     }
     
+    private func RemoveCommaExceptOne() {
+        guard let currentNumber = self.numberOnField.text else { return }
+        if currentNumber.contains(".") == true {
+            return
+        }
+    }
 }
