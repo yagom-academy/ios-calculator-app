@@ -15,7 +15,11 @@ class CalculateViewController: UIViewController {
     
     private var enteringNumber: String = Sign.empty {
         didSet {
-            enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+            if enteringNumber == Sign.empty || enteringNumber == Sign.space {
+                enteringNumberLabel.text = Sign.zero
+            } else {
+                enteringNumberLabel.text = enteringNumber
+            }
         }
     }
     private var calculationExpression: String = Sign.empty
@@ -47,11 +51,9 @@ class CalculateViewController: UIViewController {
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
         guard let inputOperatorText = sender.currentTitle,
               let currentOperatorText = enteringOperatorLabel.text else { return }
-        
         enteringOperatorLabel.text = inputOperatorText
         
         guard let enteringNumberText = enteringNumberLabel.text else { return }
-        
         guard !enteringNumber.isEmpty else { return }
         
         calculationExpression += (currentOperatorText + enteringNumberText)
@@ -60,7 +62,6 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func zeroPadTapped(_ sender: UIButton) {
-        // Label이 0인데 0을 누르면 0이 나와야 함. 그외는 다 입력가능
         guard let zeroPad = sender.currentTitle,
               let enteringNumberText = enteringNumberLabel.text,
                   !calculatorChecker.isZero(enteringNumberText) else {
@@ -82,16 +83,19 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func calculatePadTapped(_ sender: UIButton) {
-        guard enteringNumber != Sign.space else{ return }
+        guard enteringNumber != Sign.space else { return }
         guard let operatorText = enteringOperatorLabel.text else { return }
         calculationExpression += (operatorText + enteringNumber)
         addFormulaStackView(to: calculatorStackView, with: operatorText)
         
         let result = calculatorChecker.calculate(with: calculationExpression)
-        enteringNumber = Sign.space
+        initialState()
         enteringNumberLabel.text = numberFormatter.string(for: result)
-        calculationExpression = Sign.empty
-        enteringOperatorLabel.text = Sign.empty
+    }
+    
+    @IBAction private func ACPadTapped(_ sender: UIButton) {
+        initialState()
+        removeAllFormulaStackView()
     }
     
     private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
@@ -106,6 +110,18 @@ class CalculateViewController: UIViewController {
         calculatorStackView.addArrangedSubview(formulaStackView)
         calculatorScrollView.layoutIfNeeded()
         calculatorScrollView.scrollToBottom()
+    }
+    
+    private func initialState() {
+        enteringNumber = Sign.space
+        calculationExpression = Sign.empty
+        enteringOperatorLabel.text = Sign.empty
+    }
+    
+    private func removeAllFormulaStackView() {
+        calculatorStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 }
 
