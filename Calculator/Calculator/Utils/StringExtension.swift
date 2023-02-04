@@ -10,7 +10,7 @@ extension String {
         return self.split(separator: target).map { String($0) }
     }
     
-    func convertToDouble(appending number: String) -> Double {
+    func convertToDouble(appending number: String = "") -> Double {
         let addedNumber = (self + number).split(separator: ",").joined()
         guard let doubleNumber = Double(addedNumber) else { return .zero }
         return doubleNumber

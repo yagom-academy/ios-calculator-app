@@ -60,17 +60,46 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction func zeroPadTapped(_ sender: UIButton) {
-        guard let zeroPad = sender.currentTitle else { return }
-        guard calculatorChecker.hasCurrentInput(enteringNumber) else { return }
+        // Label이 0인데 0을 누르면 0이 나와야 함. 그외는 다 입력가능
+        guard let zeroPad = sender.currentTitle,
+              let enteringNumberText = enteringNumberLabel.text,
+                  !calculatorChecker.isZero(enteringNumberText) else {
+            enteringNumber = Sign.zero
+            return
+        }
+        guard !calculatorChecker.hasDot(enteringNumber) else {
+            enteringNumber.append(zeroPad)
+            return
+        }
         
         let addedEnteringNumber = enteringNumber.convertToDouble(appending: zeroPad)
         enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
     }
     
+    @IBAction func dotPadTapped(_ sender: UIButton) {
+        guard !calculatorChecker.hasDot(enteringNumber) else { return }
+        enteringNumber = calculatorChecker.appendingDot(enteringNumber)
+    }
+    
+    @IBAction func calculatePadTapped(_ sender: UIButton) {
+        // 계산의 경우 현재 들고있는 값과 연산자를 끝에 붙여서 함.
+        guard let operatorText = enteringOperatorLabel.text else { return }
+        calculationExpression += (operatorText + enteringNumber)
+        
+        calculatorChecker.calculate(with: calculationExpression)
+        
+    }
+    
+    
     
     func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
         let formulaStackView = FormulaStackView()
-        formulaStackView.addLabels([currentOperatorText, enteringNumber])
+        formulaStackView.addLabels(
+            [
+                currentOperatorText,
+                numberFormatter.string(for: enteringNumber.convertToDouble()) ?? Sign.zero
+            ]
+        )
         calculatorStackView.addArrangedSubview(formulaStackView)
         calculatorScrollView.layoutIfNeeded()
         calculatorScrollView.scrollToBottom()
