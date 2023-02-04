@@ -4,28 +4,21 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandValues = ExpressionParser.componentsByOperators(from: input)
-        let operatorCases = Operator.allCases.map { String($0.rawValue) }
         
-        let operators: [Operator] = input.split(with: " ").compactMap { component in
-            if operatorCases.contains(component) {
-                return Operator(rawValue: Character(component))
-            }
-            
-            return nil
+        let operators: [Operator] = input.split(with: " ")
+            .filter { $0.count == 1 }
+            .compactMap { component in
+            return Operator(rawValue: Character(component))
         }
         
-        let operands: [Double] = operandValues.compactMap { component in
-            return Double(component)
-        }
+        let operands: [Double] = operandValues.compactMap { Double($0) }
         
         return Formula(operands: CalculatorItemQueue(elements: operands), operators: CalculatorItemQueue(elements: operators))
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
         let operatorValues = Operator.allCases.map { $0.rawValue }
-        let components = input.split(with: " ").filter { value in
-            return operatorValues.contains(value) == false
-        }
+        let components: [String] = input.split(with: " ").filter { operatorValues.contains($0) == false }
         
         return components
     }
