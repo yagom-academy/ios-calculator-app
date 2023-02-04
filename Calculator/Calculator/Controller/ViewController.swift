@@ -33,7 +33,8 @@ final class ViewController: UIViewController {
             operand += number
         }
         
-        operandLabel.text = convertNumberToString(Double(operand)!)
+        guard let operandDouble = Double(operand) else { return }
+        operandLabel.text = convertNumberToString(operandDouble)
     }
     
     @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
@@ -41,15 +42,22 @@ final class ViewController: UIViewController {
             return
         } else if operandLabel.text == "0" && sender.currentTitle == "." {
             operand += "0."
+            operandLabel.text = operand
         } else if operand.contains(".") && sender.currentTitle == "." {
             return
+        } else if operandLabel.text != "0" && sender.currentTitle == "." {
+            if let operandLabelText = operandLabel.text {
+                operandLabel.text = operandLabelText + "."
+                operand += "."
+            }
         } else {
             if let input = sender.currentTitle {
                 operand += input
             }
+            
+            guard let operandDouble = Double(operand) else { return }
+            operandLabel.text = convertNumberToString(operandDouble)
         }
-        
-        operandLabel.text = operand
     }
     
     
@@ -117,8 +125,8 @@ final class ViewController: UIViewController {
         let stackView = generateStackView(operandLabel.text, operatorLabel.text)
         addContentStack(stackView)
         
-        guard let operatorLabelText = operatorLabel.text, let operandLabelText = operandLabel.text else { return }
-        workingSpace += operatorLabelText + operandLabelText
+        guard let operatorLabelText = operatorLabel.text else { return }
+        workingSpace += operatorLabelText + operand
         
         var formula = ExpressionParser.parse(from: workingSpace)
         let result = formula.result()
