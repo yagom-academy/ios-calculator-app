@@ -72,6 +72,8 @@ final class CalculatorViewController: UIViewController {
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
+        operatingScrollView.layoutIfNeeded()
+        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
         resetCurrentNumber()
     }
     
@@ -102,6 +104,8 @@ final class CalculatorViewController: UIViewController {
         displayPreviousOperands()
         resetCurrentNumber()
         initializeCurrentOperator()
+        operatingScrollView.layoutIfNeeded()
+        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
         let result = calculate()
         displayResult(result: result)
     }
