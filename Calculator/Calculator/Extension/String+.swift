@@ -16,12 +16,12 @@ extension String {
             guard let intValue = Int(splittedNumber[0]) else {
                 return self
             }
-            return numberFormatter.string(from: NSNumber(value: intValue)) ?? self
+            return numberFormatter.string(from: Decimal(intValue) as NSNumber) ?? self
         } else if splittedNumber.count == 2 {
             guard let intNumberBeforeDecimalPoint = Int(splittedNumber[0]) else {
                 return self
             }
-            let numberBeforeDecimalPoint = numberFormatter.string(from: NSNumber(value: intNumberBeforeDecimalPoint)) ?? self
+            let numberBeforeDecimalPoint = numberFormatter.string(from: Decimal(intNumberBeforeDecimalPoint) as NSNumber) ?? self
             let wholeNumber = numberBeforeDecimalPoint + "." + splittedNumber[1]
             return wholeNumber
         }
