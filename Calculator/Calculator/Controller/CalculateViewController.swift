@@ -33,7 +33,7 @@ class CalculateViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func numberPadTapped(_ sender: UIButton) {
+    @IBAction private func numberPadTapped(_ sender: UIButton) {
         guard let numberPad = sender.currentTitle else { return }
         guard calculatorChecker.hasCurrentInput(enteringNumber) else {
             enteringNumber = numberPad
@@ -44,7 +44,7 @@ class CalculateViewController: UIViewController {
         enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
     }
     
-    @IBAction func operatorPadTapped(_ sender: UIButton) {
+    @IBAction private func operatorPadTapped(_ sender: UIButton) {
         guard let inputOperatorText = sender.currentTitle,
               let currentOperatorText = enteringOperatorLabel.text else { return }
         
@@ -59,7 +59,7 @@ class CalculateViewController: UIViewController {
         enteringNumber = Sign.empty
     }
     
-    @IBAction func zeroPadTapped(_ sender: UIButton) {
+    @IBAction private func zeroPadTapped(_ sender: UIButton) {
         // Label이 0인데 0을 누르면 0이 나와야 함. 그외는 다 입력가능
         guard let zeroPad = sender.currentTitle,
               let enteringNumberText = enteringNumberLabel.text,
@@ -76,12 +76,12 @@ class CalculateViewController: UIViewController {
         enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
     }
     
-    @IBAction func dotPadTapped(_ sender: UIButton) {
+    @IBAction private func dotPadTapped(_ sender: UIButton) {
         guard !calculatorChecker.hasDot(enteringNumber) else { return }
         enteringNumber = calculatorChecker.appendingDot(enteringNumber)
     }
     
-    @IBAction func calculatePadTapped(_ sender: UIButton) {
+    @IBAction private func calculatePadTapped(_ sender: UIButton) {
         guard enteringNumber != Sign.space else{ return }
         guard let operatorText = enteringOperatorLabel.text else { return }
         calculationExpression += (operatorText + enteringNumber)
@@ -94,7 +94,7 @@ class CalculateViewController: UIViewController {
         enteringOperatorLabel.text = Sign.empty
     }
     
-    func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
+    private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
         guard let enteringNumberText = enteringNumberLabel.text else { return }
         let formulaStackView = FormulaStackView()
         formulaStackView.addLabels(
