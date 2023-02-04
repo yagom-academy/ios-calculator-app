@@ -8,6 +8,8 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
+    let calculatorFormatter = CalculatorFormatter.shared
+    
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentNumberLabel: UILabel!
     
@@ -126,7 +128,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func displayResult(result: Double) {
-        currentNumberLabel.text = String(result).floorIfZero.stringWithComma
+        currentNumberLabel.text = calculatorFormatter.roundingNumber(from: result).floorIfZero.stringWithComma
     }
     
     //MARK: Methods clearing numbers
