@@ -173,15 +173,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func generateStackView(_ operandText: String?, _ operatorText: String?) -> UIStackView {
-        let operandLabel = UILabel()
-        operandLabel.text = operandText
-        operandLabel.textColor = UIColor.white
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        let operatorLabel = UILabel()
-        operatorLabel.text = operatorText
-        operatorLabel.textColor = UIColor.white
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        let operandLabel = generateUILabel(operandText)
+        let operatorLabel = generateUILabel(operatorText)
         
         let stackView = UIStackView()
         stackView.addArrangedSubview(operatorLabel)
@@ -192,6 +185,15 @@ final class CalculatorViewController: UIViewController {
         stackView.distribution = .fill
         
         return stackView
+    }
+    
+    private func generateUILabel(_ text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = UIColor.white
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        return label
     }
     
     private func setScrollViewFocus() {
