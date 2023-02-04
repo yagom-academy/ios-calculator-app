@@ -50,11 +50,11 @@ class CalculateViewController: UIViewController {
         
         enteringOperatorLabel.text = inputOperatorText
         
-        guard calculatorChecker.hasCurrentInput(enteringNumber) else {
-            return
-        }
+        guard let enteringNumberText = enteringNumberLabel.text else { return }
         
-        calculationExpression += (currentOperatorText + enteringNumber)
+        guard !enteringNumber.isEmpty else { return }
+        
+        calculationExpression += (currentOperatorText + enteringNumberText)
         addFormulaStackView(to: calculatorStackView, with: currentOperatorText)
         enteringNumber = Sign.empty
     }
@@ -82,22 +82,25 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction func calculatePadTapped(_ sender: UIButton) {
-        // 계산의 경우 현재 들고있는 값과 연산자를 끝에 붙여서 함.
+        guard enteringNumber != Sign.space else{ return }
         guard let operatorText = enteringOperatorLabel.text else { return }
         calculationExpression += (operatorText + enteringNumber)
+        addFormulaStackView(to: calculatorStackView, with: Sign.empty)
         
-        calculatorChecker.calculate(with: calculationExpression)
-        
+        let result = calculatorChecker.calculate(with: calculationExpression)
+        enteringNumber = Sign.space
+        enteringNumberLabel.text = numberFormatter.string(for: result)
+        calculationExpression = Sign.empty
+        enteringOperatorLabel.text = Sign.empty
     }
     
-    
-    
     func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
+        guard let enteringNumberText = enteringNumberLabel.text else { return }
         let formulaStackView = FormulaStackView()
         formulaStackView.addLabels(
             [
                 currentOperatorText,
-                numberFormatter.string(for: enteringNumber.convertToDouble()) ?? Sign.zero
+                numberFormatter.string(for: enteringNumberText.convertToDouble()) ?? Sign.zero
             ]
         )
         calculatorStackView.addArrangedSubview(formulaStackView)

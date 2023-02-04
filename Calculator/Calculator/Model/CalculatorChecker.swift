@@ -10,14 +10,16 @@ import Foundation
 struct CalculatorChecker {
     
     func hasCurrentInput(_ currentText: String) -> Bool {
-        return currentText == Sign.empty ? false : true
+        if currentText == Sign.empty || currentText == Sign.space {
+            return false
+        }
+        return true
     }
     
     func hasDot(_ currentText: String) -> Bool {
         return currentText.contains(Sign.dot) ? true : false
     }
     
-    // 현재 텍스트를 받아서 empty라면 0.을 리턴하고 empty가아니면 .을리턴한다.
     func appendingDot(_ currentText: String) -> String {
         if currentText == Sign.empty {
             return Sign.zero + Sign.dot
@@ -30,6 +32,7 @@ struct CalculatorChecker {
     }
     
     func calculate(with expression: String) -> Double {
-        return 0.0
+        var formula = ExpressionParser.parse(from: expression.split(separator: ",").joined())
+        return formula.result()
     }
 }
