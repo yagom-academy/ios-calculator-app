@@ -95,7 +95,7 @@ final class CalculatorViewController: UIViewController {
             setOperatorLabel(`operator`)
         } else if operatorLabel.text == "" && operandLabelText == "0" {
             return
-        } else if operatorLabel.text != "" && operandLabel.text == "0" {
+        } else if operatorLabel.text != "" && operandLabelText == "0" {
             setOperatorLabel(`operator`)
             
             return
