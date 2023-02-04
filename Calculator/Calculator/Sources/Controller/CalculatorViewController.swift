@@ -46,14 +46,15 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapDotButton(_ sender: UIButton) {
-        if currentNumber.contains(".") == false {
-            if currentNumber == NameSpace.emptyString {
-                currentNumber += NameSpace.stringZero
-                stringToBeCalculated += NameSpace.stringZero
-            }
-            insertString(titleName: sender.titleLabel?.text)
-            setCurrentNumber(titleName: sender.titleLabel?.text)
+        guard currentNumber.contains(".") == false else {
+            return
         }
+        if currentNumber == NameSpace.emptyString {
+            currentNumber += NameSpace.stringZero
+            stringToBeCalculated += NameSpace.stringZero
+        }
+        insertString(titleName: sender.titleLabel?.text)
+        setCurrentNumber(titleName: sender.titleLabel?.text)
     }
     
     private func insertString(titleName: String?) {
