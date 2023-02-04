@@ -98,6 +98,7 @@ final class CalculatorViewController: UIViewController {
         if let checkDecimalPoint = Double(operandStackLabel) {
             operandStackLabel = String(checkDecimalPoint)
         }
+
         let stackLabel = UILabel()
         stackLabel.text = operatorStackLabel + Expression.blank + operandStackLabel
         stackLabel.adjustsFontForContentSizeCategory = true
@@ -136,7 +137,7 @@ final class CalculatorViewController: UIViewController {
     private func applyDecimalPoint(number: String) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumSignificantDigits = 10
         guard let operand = Double(number),
               let result = numberFormatter.string(from: NSNumber(value: operand)) else { return Expression.empty }
         
