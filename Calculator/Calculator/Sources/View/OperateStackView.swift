@@ -26,14 +26,14 @@ class OperateStackView: UIStackView {
     init(operatorText: String?, operandsText: String?) {
         super.init(frame: .zero)
         configure()
-        loadView(operatorLabelText: operatorText, operandsLabelText: operandsText)
+        setupView(operatorLabelText: operatorText, operandsLabelText: operandsText)
     }
     
     required init(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadView(operatorLabelText: String?, operandsLabelText: String?) {
+    private func setupView(operatorLabelText: String?, operandsLabelText: String?) {
         operandsLabel.text = operandsLabelText
         operatorLabel.text = operatorLabelText
         addArrangedSubview(operatorLabel)
