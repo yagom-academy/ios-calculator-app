@@ -90,8 +90,9 @@ class CalculateViewController: UIViewController {
               enteringOperatorText != Sign.empty,
               enteringNumber != Sign.space else { return }
         
-        guard let operatorText = enteringOperatorLabel.text else { return }
-        calculationExpression += (operatorText + enteringNumber)
+        guard let operatorText = enteringOperatorLabel.text,
+              let enteringNumberText = enteringNumberLabel.text  else { return }
+        calculationExpression += (operatorText + enteringNumberText)
         addFormulaStackView(to: calculatorStackView, with: operatorText)
         
         let result = calculatorChecker.calculate(with: calculationExpression)
@@ -116,7 +117,8 @@ class CalculateViewController: UIViewController {
     }
     
     private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
-        guard let enteringNumberText = enteringNumberLabel.text else { return }
+        guard let enteringNumberText = enteringNumberLabel.text,
+                  calculatorChecker.hasCurrentInput(enteringNumber) else { return }
         let formulaStackView = FormulaStackView()
         formulaStackView.addLabels(
             [
