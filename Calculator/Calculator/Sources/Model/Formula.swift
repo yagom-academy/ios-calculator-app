@@ -1,8 +1,7 @@
 //
-//  Formula.swift
-//  Calculator
-//
-//  Created by Jinah Park on 2023/01/27.
+//  Calculator - Formula.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 struct Formula {

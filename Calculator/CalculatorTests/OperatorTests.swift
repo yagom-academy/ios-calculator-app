@@ -1,8 +1,7 @@
 //
-//  OperatorTests.swift
-//  OperatorTests
-//
-//  Created by Jinah Park on 2023/01/27.
+//  CalculatorTests - OperatorTests.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 import XCTest

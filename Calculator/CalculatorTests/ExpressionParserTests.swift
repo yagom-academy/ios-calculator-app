@@ -1,8 +1,7 @@
 //
-//  ExpressionParserTests.swift
-//  ExpressionParserTests
-//
-//  Created by Jinah Park on 2023/01/29.
+//  CalculatorTests - ExpressionParserTests.swift
+//  Created by Rhode.
+//  Copyright © yagom. All rights reserved.
 //
 
 import XCTest
