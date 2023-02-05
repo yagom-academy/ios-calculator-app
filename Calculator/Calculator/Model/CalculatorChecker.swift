@@ -27,15 +27,15 @@ struct CalculatorChecker {
         return currentText + Sign.dot
     }
     
-    func isZero(_ input: String) -> Bool {
-        return input == Sign.zero ? true : false
+    func isZero(_ currentText: String) -> Bool {
+        return currentText == Sign.zero ? true : false
     }
     
-    func changedSign(_ input: String) -> String {
-        if input.contains(Sign.minus) {
-            return input.replacingOccurrences(of: Sign.minus, with: Sign.empty)
+    func changedSign(_ currentText: String) -> String {
+        if currentText.contains(Sign.minus) {
+            return currentText.replacingOccurrences(of: Sign.minus, with: Sign.empty)
         }
-        return (Sign.minus + input)
+        return (Sign.minus + currentText)
     }
     
     func calculate(with expression: String) -> Double {
