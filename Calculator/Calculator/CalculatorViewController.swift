@@ -7,7 +7,7 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-
+    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var calculateStackView: UIStackView!
@@ -63,7 +63,7 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated, calculateOperator != "" else { return }
         appendExpression(sign: calculateOperator, number: calculateOperand)
         addToCalculateItem(left: calculateOperator, right: calculateOperand)
-
+        
         var formula = ExpressionParser.parse(from: expression.joined(separator: ""))
         
         let result = formula.result()
@@ -72,7 +72,7 @@ final class CalculatorViewController: UIViewController {
             calculateOperand = "NaN"
         } else {
             let resultString = "\(result)"
-            calculateOperand = resultString.numberFormatting()
+            calculateOperand = resultString
         }
         
         resetOperator()
@@ -82,16 +82,14 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorSign = sender.currentTitle else { return }
-        guard calculateOperand != "0", calculateOperator != "" else { return }
-        guard calculateOperand != "0", calculateOperator == "" else {
+        guard calculateOperand != "0" || calculateOperator != "" else { return }
+        guard calculateOperand != "0" || calculateOperator == "" else {
             calculateOperator = operatorSign
             return
         }
         
         if isCalculated {
-            guard let calculatedNumber = operandLabel.text?
-                                    .components(separatedBy: ",")
-                                    .joined() else { return }
+            guard let calculatedNumber = operandLabel.text?.filter({ $0 != "," }) else { return }
             
             appendExpression(sign: calculateOperator, number: calculatedNumber)
             addToCalculateItem(left: calculateOperator, right: calculatedNumber)
@@ -137,7 +135,6 @@ final class CalculatorViewController: UIViewController {
     private func addToCalculateItem(left: String, right: String) {
         let operatorUILabel = generateUILabel(title: left)
         let operandUILabel = generateUILabel(title: right)
-        
         let stackView = generateUIStackView(left: operatorUILabel, right: operandUILabel)
         
         calculateStackView.addArrangedSubview(stackView)
@@ -145,10 +142,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func scrollToBottom() {
+        let bottomOffset = CGPoint(
+            x: 0,
+            y: calculateScrollView.contentSize.height - calculateScrollView.bounds.height
+        )
         
-        let bottomOffset = CGPoint(x: 0,
-                                   y: calculateScrollView.contentSize.height
-                                    - calculateScrollView.bounds.height)
         calculateScrollView.layoutIfNeeded()
         calculateScrollView.setContentOffset(bottomOffset, animated: true)
     }
