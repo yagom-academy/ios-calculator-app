@@ -8,7 +8,7 @@ enum Symbol {
     static let comma = ","
     static let blank = ""
     static let dot = "."
-    static let nan = "Nan"
+    static let nan = "NaN"
     static let minus = "-"
     
     // MARK: Int
