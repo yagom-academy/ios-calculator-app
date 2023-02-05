@@ -80,8 +80,8 @@ final class ViewController: UIViewController {
         stack.addArrangedSubview(operandsLabel)
         
         containerStackView.addArrangedSubview(stack)
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
         scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
     @IBAction func calculateButtonDidTap(_ sender: UIButton) {
@@ -171,14 +171,14 @@ final class ViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 6
-        guard let number = Double(stringNumber) else { return ""}
+        guard let number = Double(stringNumber) else { return "" }
         
         let formattedNumber = formatter.string(from: NSNumber(value: number))  ?? ""
         return formattedNumber
     }
     
     private func restorationNumber(_ formattedNumber: String) -> String {
-        let result = formattedNumber.split(with: ",").joined()
+        let result = formattedNumber.replacingOccurrences(of: ",", with: "")
         return result
     }
     
