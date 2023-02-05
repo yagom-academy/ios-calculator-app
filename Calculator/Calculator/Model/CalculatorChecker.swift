@@ -8,7 +8,6 @@
 import Foundation
 
 struct CalculatorChecker {
-    
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
             return false
