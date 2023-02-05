@@ -11,10 +11,10 @@ final class CalculatorViewController: UIViewController {
     private var operandExpression: String = ""
     private let numberFormatter = NumberFormatter()
     
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var expressionStackView: UIStackView!
-    @IBOutlet weak var expressionScrollView: UIScrollView!
+    @IBOutlet private weak var numberLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var expressionStackView: UIStackView!
+    @IBOutlet private weak var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

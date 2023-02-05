@@ -32,6 +32,6 @@ enum ExpressionParser {
             numbers = numbers.map { $0.split(with: `operator`.rawValue) }.flatMap { $0 }
         }
         return numbers
-    }
+    } 
 }
 
