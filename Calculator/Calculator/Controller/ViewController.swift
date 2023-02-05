@@ -68,16 +68,16 @@ final class ViewController: UIViewController {
         stack.distribution = .fill
         stack.spacing = 8
         
-        let `operator` = UILabel()
-        `operator`.text = OperatorLabel.text
-        `operator`.textColor = .white
+        let operatorLabel = UILabel()
+        operatorLabel.text = OperatorLabel.text
+        operatorLabel.textColor = .white
         
-        let operands = UILabel()
-        operands.text = OperandsLabel.text
-        operands.textColor = .white
+        let operandsLabel = UILabel()
+        operandsLabel.text = OperandsLabel.text
+        operandsLabel.textColor = .white
         
-        stack.addArrangedSubview(`operator`)
-        stack.addArrangedSubview(operands)
+        stack.addArrangedSubview(operatorLabel)
+        stack.addArrangedSubview(operandsLabel)
         
         containerStackView.addArrangedSubview(stack)
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
