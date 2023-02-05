@@ -79,6 +79,7 @@ class CalculateViewController: UIViewController {
     
     @IBAction private func dotPadTapped(_ sender: UIButton) {
         guard !calculatorChecker.hasDot(enteringNumber) else { return }
+        
         enteringNumber = calculatorChecker.appendingDot(enteringNumber)
     }
     
@@ -109,7 +110,7 @@ class CalculateViewController: UIViewController {
     @IBAction private func changeSignPadTapped(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
               !calculatorChecker.isZero(enteringNumberText) else { return }
-        enteringNumber = calculatorChecker.changedSign(enteringNumber)
+        enteringNumber = calculatorChecker.changedSign(enteringNumberText)
     }
     
     private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
