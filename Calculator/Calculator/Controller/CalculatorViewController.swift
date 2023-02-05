@@ -12,15 +12,15 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var calculateStackView: UIStackView!
     @IBOutlet weak var calculateScrollView: UIScrollView!
+    private var isCalculated: Bool = false
     private var expression: [String] = []
     private let numberFormatter = NumberFormatter()
-    private var isCalculated: Bool = false
-    private var calculateOperand: String = "0" {
+    private var calculateOperand: String = Symbol.zero {
         didSet {
             operandLabel.text = calculateOperand
         }
     }
-    private var calculateOperator: String = "" {
+    private var calculateOperator: String = Symbol.blank {
         didSet {
             operatorLabel.text = calculateOperator
         }
@@ -43,53 +43,53 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapCEButton() {
         if isCalculated == false {
-            calculateOperand = "0"
+            calculateOperand = Symbol.zero
         }
     }
     
     @IBAction private func didTapChangeSignButton() {
-        guard calculateOperand != "0" else { return }
+        guard calculateOperand != Symbol.zero else { return }
         
         guard let calculateNumberFirst = calculateOperand.first else { return }
         
-        if calculateNumberFirst == "-" {
+        if calculateNumberFirst == Character(Symbol.minus) {
             calculateOperand.removeFirst()
         } else {
-            calculateOperand = "-" + calculateOperand
+            calculateOperand = Symbol.minus + calculateOperand
         }
     }
     
     @IBAction private func didTapResultButton() {
-        guard !isCalculated, calculateOperator != "" else { return }
+        guard !isCalculated, calculateOperator != Symbol.blank else { return }
         
         addExpressionAndCalculateItem(sign: calculateOperator, number: calculateOperand)
         
-        var formula = ExpressionParser.parse(from: expression.joined(separator: ""))
+        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
         
         let result = formula.result()
         
         if result.isNaN {
-            calculateOperand = "NaN"
+            calculateOperand = Symbol.nan
         } else {
             let resultString = "\(result)"
             calculateOperand = resultString
         }
         
-        resetOperator()
         isCalculated = true
+        resetOperator()
         expression.removeAll()
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorSign = sender.currentTitle else { return }
-        guard calculateOperand != "0" || calculateOperator != "" else { return }
-        guard calculateOperand != "0" || calculateOperator == "" else {
+        guard calculateOperand != Symbol.zero || calculateOperator != Symbol.blank else { return }
+        guard calculateOperand != Symbol.zero || calculateOperator == Symbol.blank else {
             calculateOperator = operatorSign
             return
         }
         
         if isCalculated {
-            guard let calculatedNumber = operandLabel.text?.filter({ $0 != "," }) else { return }
+            guard let calculatedNumber = operandLabel.text?.filter({ $0 != Character(Symbol.comma) }) else { return }
             
             addExpressionAndCalculateItem(sign: calculateOperator, number: calculatedNumber)
         } else {
@@ -100,11 +100,11 @@ final class CalculatorViewController: UIViewController {
         
         isCalculated = false
         calculateOperator = operatorSign
-        calculateOperand = "0"
+        calculateOperand = Symbol.zero
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        guard calculateOperand.count <= 20 else { return }
+        guard calculateOperand.count <= Symbol.maxSignificantDigits else { return }
         guard let number = sender.currentTitle else { return }
         
         if isCalculated {
@@ -113,8 +113,8 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if calculateOperand == "0" {
-            if number == "0" || number == "00" {
+        if calculateOperand == Symbol.zero {
+            if number == Symbol.zero || number == Symbol.doubleZero {
                 return
             }
             calculateOperand = number
@@ -125,7 +125,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapDotButton(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
-        guard !calculateOperand.contains(".") else { return }
+        guard !calculateOperand.contains(Symbol.dot) else { return }
         
         calculateOperand += dot
     }
@@ -181,11 +181,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func resetOperand() {
-        calculateOperand = "0"
+        calculateOperand = Symbol.zero
     }
     
     private func resetOperator() {
-        calculateOperator = ""
+        calculateOperator = Symbol.blank
     }
     
     private func resetLabel() {
