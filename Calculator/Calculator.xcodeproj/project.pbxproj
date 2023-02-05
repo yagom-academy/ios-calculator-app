@@ -85,11 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				98B18847297FE9C7008D8AC2 /* Node.swift */,
-				98B1884D29810CF4008D8AC2 /* CalculatorItemQueue.swift */,
-				98B1884F29810F72008D8AC2 /* CalculateItemProtocol.swift */,
 				98B1DF3F29839774001C9AEF /* LinkedList.swift */,
-				98B1DF432983A18A001C9AEF /* StringExtension.swift */,
 				98B1DF452983A39D001C9AEF /* Operator.swift */,
+				98B1884D29810CF4008D8AC2 /* CalculatorItemQueue.swift */,
 				98B1DF472983A803001C9AEF /* ExpressionParser.swift */,
 				98B1DF492983A94B001C9AEF /* Formula.swift */,
 			);
@@ -106,6 +104,39 @@
 				98CAF4C929854B8B00AEAD43 /* ExpressionParserTest.swift */,
 			);
 			path = CalculatorTests;
+			sourceTree = "<group>";
+		};
+		98DE0B9A298F845E00082EC2 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		98DE0B9B298F848600082EC2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		98DE0B9C298F84DB00082EC2 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				98B1884F29810F72008D8AC2 /* CalculateItemProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		98DE0B9D298F851E00082EC2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				98B1DF432983A18A001C9AEF /* StringExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		C713D9352570E5EB001C3AFC = {
@@ -129,10 +160,11 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				98DE0B9B298F848600082EC2 /* Controller */,
+				98DE0B9A298F845E00082EC2 /* Application */,
 				98B18833297FCE38008D8AC2 /* Model */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+				98DE0B9C298F84DB00082EC2 /* Protocol */,
+				98DE0B9D298F851E00082EC2 /* Extension */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
