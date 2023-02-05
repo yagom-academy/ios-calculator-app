@@ -90,24 +90,15 @@ final class ViewController: UIViewController {
             current + " " + next
         }
         
-        var formula = ExpressionParser.parse(from: formulaBeforeParse)
-        guard let result = formula.result(),
-              result.isNaN == false  else {
+        guard let result = calculateFormula(formulaBeforeParse) else {
             OperandsLabel.text = Double.nan.description
             isDotClicked = false
-            
-            inputList.removeAll()
-            currentLabelText.removeAll()
-            OperatorLabel.text = ""
+            settingAfterCalculate()
             return
         }
-        
+    
         let intResult = Int(result)
-        
-        inputList.removeAll()
-        currentLabelText.removeAll()
-        OperatorLabel.text = ""
-        
+        settingAfterCalculate()
         
         if result == Double(intResult) {
             OperandsLabel.text = formatNumber(intResult.description)
@@ -184,13 +175,26 @@ final class ViewController: UIViewController {
     }
     
     private func checkIsItDecimal(number: Double) -> Bool {
-        let intNumber = Int(number)
         
-        if number == Double(intNumber) {
-            return false
-        } else {
+        if isDotClicked == true {
             return true
+        } else {
+            return false
         }
+        
+    }
+    
+    private func settingAfterCalculate() {
+        inputList.removeAll()
+        currentLabelText.removeAll()
+        OperatorLabel.text = ""
+    }
+    
+    private func calculateFormula(_ formulaBeforeParse: String) -> Double? {
+        var formula = ExpressionParser.parse(from: formulaBeforeParse)
+        guard let result = formula.result(),
+              result.isNaN == false  else { return nil }
+        return result
     }
     
     private func makeUILabel(text: String?) -> UILabel {
