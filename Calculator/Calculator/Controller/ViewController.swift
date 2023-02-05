@@ -62,24 +62,15 @@ final class ViewController: UIViewController {
     }
     
     private func updateScrollView() {
-        let stack = UIStackView()
-        stack.axis = .horizontal
-        stack.alignment = .trailing
-        stack.distribution = .fill
-        stack.spacing = 8
+        let stackView = makeUIStackView()
         
-        let operatorLabel = UILabel()
-        operatorLabel.text = OperatorLabel.text
-        operatorLabel.textColor = .white
+        let operatorLabel = makeUILabel(text: OperatorLabel.text)
+        let operandsLabel = makeUILabel(text: OperandsLabel.text)
         
-        let operandsLabel = UILabel()
-        operandsLabel.text = OperandsLabel.text
-        operandsLabel.textColor = .white
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandsLabel)
         
-        stack.addArrangedSubview(operatorLabel)
-        stack.addArrangedSubview(operandsLabel)
-        
-        containerStackView.addArrangedSubview(stack)
+        containerStackView.addArrangedSubview(stackView)
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
@@ -192,6 +183,21 @@ final class ViewController: UIViewController {
         } else {
             return true
         }
-        
+    }
+    
+    private func makeUILabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = .white
+        return label
+    }
+    
+    private func makeUIStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .trailing
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        return stackView
     }
 }
