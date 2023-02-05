@@ -21,7 +21,7 @@ final class ViewController: UIViewController {
         setupInitialValue()
     }
     
-    @IBAction func operandsButtonDidTap(_ sender: UIButton) {
+    @IBAction func operandsButtonTapped(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
         switch inputNumber {
@@ -42,7 +42,7 @@ final class ViewController: UIViewController {
         OperandsLabel.text = formatNumber(currentLabelText)
     }
     
-    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
+    @IBAction func operatorButtonTapped(_ sender: UIButton) {
         guard let formattedOperands = OperandsLabel.text,
               let operatorSign = sender.currentTitle else { return }
         
@@ -75,7 +75,7 @@ final class ViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
-    @IBAction func calculateButtonDidTap(_ sender: UIButton) {
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
         guard currentLabelText.isEmpty == false,
               let operatorSign = OperatorLabel.text  else { return }
         
@@ -118,7 +118,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func allClearButtonDidTap(_ sender: UIButton) {
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
         inputList.removeAll()
         currentLabelText.removeAll()
         OperatorLabel.text?.removeAll()
@@ -126,12 +126,12 @@ final class ViewController: UIViewController {
         containerStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction func clearCurrentOperands(_ sender: UIButton) {
+    @IBAction func clearCurrentButtonTapped(_ sender: UIButton) {
         currentLabelText.removeAll()
         OperandsLabel.text = "0"
     }
     
-    @IBAction func changeNumberSign(_ sender: UIButton) {
+    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
         guard var operands = OperandsLabel.text,
               operands != "0"  else { return }
         
@@ -144,7 +144,7 @@ final class ViewController: UIViewController {
         OperandsLabel.text = operands
     }
     
-    @IBAction func dotButtonDidTap(_ sender: UIButton) {
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard currentLabelText.isEmpty == false else {
             currentLabelText = "0."
             OperandsLabel.text = currentLabelText
@@ -164,11 +164,19 @@ final class ViewController: UIViewController {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 6
-        guard let number = Double(stringNumber) else { return "" }
         
+        guard let number = Double(stringNumber) else { return "" }
         let formattedNumber = formatter.string(from: NSNumber(value: number))  ?? ""
+        
+        if isDotClicked == true {
+            let numbers = stringNumber.split(with: ".")
+            let result = formattedNumber + "." + numbers[1]
+            return result
+        }
+    
         return formattedNumber
     }
+    
     
     private func restorationNumber(_ formattedNumber: String) -> String {
         let result = formattedNumber.replacingOccurrences(of: ",", with: "")
