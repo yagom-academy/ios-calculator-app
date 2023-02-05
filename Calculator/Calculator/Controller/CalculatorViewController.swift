@@ -61,8 +61,8 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapResultButton() {
         guard !isCalculated, calculateOperator != "" else { return }
-        appendExpression(sign: calculateOperator, number: calculateOperand)
-        addToCalculateItem(left: calculateOperator, right: calculateOperand)
+        
+        addExpressionAndCalculateItem(sign: calculateOperator, number: calculateOperand)
         
         var formula = ExpressionParser.parse(from: expression.joined(separator: ""))
         
@@ -91,11 +91,9 @@ final class CalculatorViewController: UIViewController {
         if isCalculated {
             guard let calculatedNumber = operandLabel.text?.filter({ $0 != "," }) else { return }
             
-            appendExpression(sign: calculateOperator, number: calculatedNumber)
-            addToCalculateItem(left: calculateOperator, right: calculatedNumber)
+            addExpressionAndCalculateItem(sign: calculateOperator, number: calculatedNumber)
         } else {
-            appendExpression(sign: calculateOperator, number: calculateOperand)
-            addToCalculateItem(left: calculateOperator, right: calculateOperand)
+            addExpressionAndCalculateItem(sign: calculateOperator, number: calculateOperand)
         }
         
         scrollToBottom()
@@ -130,6 +128,16 @@ final class CalculatorViewController: UIViewController {
         guard !calculateOperand.contains(".") else { return }
         
         calculateOperand += dot
+    }
+    
+    private func addExpressionAndCalculateItem(sign: String, number: String) {
+        appendExpression(sign: sign, number: number)
+        addToCalculateItem(left: sign, right: number)
+    }
+    
+    private func appendExpression(sign: String, number: String) {
+        expression.append(sign)
+        expression.append(number)
     }
     
     private func addToCalculateItem(left: String, right: String) {
@@ -170,11 +178,6 @@ final class CalculatorViewController: UIViewController {
         stackView.spacing = 8
         
         return stackView
-    }
-    
-    private func appendExpression(sign: String, number: String) {
-        expression.append(sign)
-        expression.append(number)
     }
     
     private func resetOperand() {
