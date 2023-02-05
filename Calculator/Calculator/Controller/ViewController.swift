@@ -71,17 +71,11 @@ class ViewController: UIViewController {
         
         view.addArrangedSubview(operatorLabel)
         view.addArrangedSubview(operandLabel)
-        //[operatorLabel, operandLabel].forEach(view.addArrangedSubview(_:))
         
         return view
     }
     
     func formatNumber(_ result: Double) -> String {
-        // 얘는 왜 써야할까? - 소숫점 표시, 숫자 반올림
-        // 얘는 어디다 써야할까? - currentOperand에 나타나는 숫자
-        // inputOperandLabel.text 에 적용하면... 3.0 -> 3으로 인식
-        // 넘버포매터 적용한애 자릿수..? 문제...? 으윽...
-        // 411.2346 + 12.335 = 423.5805999999996 ????? 이게 무슨 오류람
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
@@ -131,9 +125,6 @@ class ViewController: UIViewController {
             inputOperatorsLabel.text = currentSign
             inputOperandsLabel.text = Sign.zero
         }
-        print("스택뷰 연산자: \(currentOperator)")
-        print("스택뷰 피연산자: \(currentOperand)")
-        print("포뮬러: \(currentInputFormula)")
     }
     
     @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
@@ -149,22 +140,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
-        // 마지막 스택뷰 위로 올려주기
         let newStackView = makeStackView(currentOperator, currentOperand)
         stackView.addArrangedSubview(newStackView)
         settingScrollView()
         
-        // 포뮬라에 연산자, 피연산자 올리기
         currentInputFormula.append(currentOperator)
         currentInputFormula.append(currentOperand)
         
-        // Formula parse
         let stringFormula = currentInputFormula.joined(separator: " ")
         var parsedFormula = ExpressionParser.parse(from: stringFormula)
         let result = parsedFormula.result()
         print(result)
 
-        // 초기화
         inputOperatorsLabel.text = ""
         inputOperandsLabel.text = formatNumber(result)
         oldInputFormula.append(String(result))
