@@ -4,13 +4,22 @@
 import Foundation
 
 extension NumberFormatter {
-    static func convertToDecimal(input: Double) -> String {
+    static func convertToString(fromDouble: Double) -> String {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
         
-        return ""
+        guard let number = numberFormatter.string(for: fromDouble) else { return "" }
+        
+        return number
+    }
+    
+    static func convertToString(fromString: String) -> String {
+        let number = fromString.filter({ $0 != Character(Symbol.comma) })
+        guard let doubleInput = Double(number) else { return "" }
+        
+        return convertToString(fromDouble: doubleInput)
     }
 }

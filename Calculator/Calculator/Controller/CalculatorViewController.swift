@@ -14,7 +14,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var calculateScrollView: UIScrollView!
     private var isCalculated: Bool = false
     private var expression: [String] = []
-    private let numberFormatter = NumberFormatter()
     private var calculateOperand: String = Symbol.zero {
         didSet {
             operandLabel.text = calculateOperand
@@ -61,8 +60,12 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapResultButton() {
         guard !isCalculated, calculateOperator != Symbol.blank else { return }
+        guard let calculatedNumber = operandLabel.text?.removeComma() else { return }
+        guard let number = Double(calculatedNumber) else { return }
         
-        addExpressionAndCalculateItem(sign: calculateOperator, number: calculateOperand)
+        addExpressionAndCalculateItem(sign: calculateOperator,
+                                      number: "\(number)",
+                                      operand: calculateOperand)
         
         var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
         
@@ -71,8 +74,7 @@ final class CalculatorViewController: UIViewController {
         if result.isNaN {
             calculateOperand = Symbol.nan
         } else {
-            let resultString = "\(result)"
-            calculateOperand = resultString
+            calculateOperand = NumberFormatter.convertToString(fromDouble: result)
         }
         
         isCalculated = true
@@ -88,14 +90,12 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if isCalculated {
-            guard let calculatedNumber = operandLabel.text?.filter({ $0 != Character(Symbol.comma) }) else { return }
+        guard let calculatedNumber = operandLabel.text?.removeComma() else { return }
+        let calculatedOperand = NumberFormatter.convertToString(fromString: calculatedNumber)
             
-            addExpressionAndCalculateItem(sign: calculateOperator, number: calculatedNumber)
-        } else {
-            addExpressionAndCalculateItem(sign: calculateOperator, number: calculateOperand)
-        }
-        
+        addExpressionAndCalculateItem(sign: calculateOperator,
+                                      number: calculatedNumber,
+                                      operand: calculatedOperand)
         scrollToBottom()
         
         isCalculated = false
@@ -108,18 +108,23 @@ final class CalculatorViewController: UIViewController {
         guard let number = sender.currentTitle else { return }
         
         if isCalculated {
+            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
+            
             calculateOperand = number
             isCalculated = false
             return
         }
         
         if calculateOperand == Symbol.zero {
-            if number == Symbol.zero || number == Symbol.doubleZero {
-                return
-            }
+            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
+            
             calculateOperand = number
         } else {
-            calculateOperand += number
+            if calculateOperand.contains(Symbol.dot) {
+                calculateOperand += number
+            } else {
+                calculateOperand = NumberFormatter.convertToString(fromString: calculateOperand + number)
+            }
         }
     }
     
@@ -127,12 +132,13 @@ final class CalculatorViewController: UIViewController {
         guard let dot = sender.currentTitle else { return }
         guard !calculateOperand.contains(Symbol.dot) else { return }
         
+        guard !isCalculated else { return }
         calculateOperand += dot
     }
     
-    private func addExpressionAndCalculateItem(sign: String, number: String) {
+    private func addExpressionAndCalculateItem(sign: String, number: String, operand: String) {
         appendExpression(sign: sign, number: number)
-        addToCalculateItem(left: sign, right: number)
+        addToCalculateItem(left: sign, right: operand)
     }
     
     private func appendExpression(sign: String, number: String) {
