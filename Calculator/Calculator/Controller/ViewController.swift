@@ -86,6 +86,7 @@ class ViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
 
         return numberFormatter.string(from: NSNumber(value: result)) ?? ""
     }
