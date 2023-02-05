@@ -77,12 +77,20 @@ class ViewController: UIViewController {
     
     func formatNumber(_ result: Double) -> String {
         let numberFormatter = NumberFormatter()
+        numberFormatter.maximumIntegerDigits = 20
         numberFormatter.numberStyle = .decimal
+        
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumSignificantDigits = 20
 
         return numberFormatter.string(from: NSNumber(value: result)) ?? ""
+    }
+    
+    func removeComma(_ inputString: String) -> String {
+        let removedCommaString = inputString.replacingOccurrences(of: ",", with: "")
+        
+        return removedCommaString
     }
     
     func settingScrollView() {
@@ -99,8 +107,18 @@ class ViewController: UIViewController {
         if currentOperand == Sign.zero {
             inputOperandsLabel.text = number
         } else {
-            inputOperandsLabel.text = currentOperand + number
+            let currentNumber = currentOperand + number
+            let removedNumber = removeComma(currentNumber)
+            let formattedString = formatNumber(Double(removedNumber) ?? 0 )
+            
+            inputOperandsLabel.text = formattedString
         }
+    }
+    
+    @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
+        guard let zero = sender.currentTitle,
+              currentOperand != Sign.zero else { return }
+        inputOperandsLabel.text = currentOperand + zero
     }
     
     @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
@@ -127,12 +145,6 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
-        guard let zero = sender.currentTitle,
-              currentOperand != Sign.zero else { return }
-        inputOperandsLabel.text = currentOperand + zero
-    }
-    
     @IBAction func dotButtonDidTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle,
               currentOperand.contains(Sign.dot) == false else { return }
@@ -148,12 +160,14 @@ class ViewController: UIViewController {
         currentInputFormula.append(currentOperand)
         
         let stringFormula = currentInputFormula.joined(separator: " ")
-        var parsedFormula = ExpressionParser.parse(from: stringFormula)
+        let removedCommaFormula = removeComma(stringFormula)
+        var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
         print(result)
 
         inputOperatorsLabel.text = ""
         inputOperandsLabel.text = formatNumber(result)
+        print(formatNumber(result))
         oldInputFormula.append(String(result))
         currentInputFormula = []
     }
