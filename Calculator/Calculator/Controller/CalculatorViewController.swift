@@ -22,21 +22,18 @@ final class CalculatorViewController: UIViewController {
         setNumberFormatter()
     }
     
-    @IBAction private func numberButton(sender: UIButton) {
+    @IBAction private func tapNumberButton(sender: UIButton) {
         guard let buttonNumberValue = sender.titleLabel?.text  else { return }
         makeZeroDot(pushedNumber: buttonNumberValue)
-        
         if checkOverlappedDot(pushedNumber: buttonNumberValue) == true { return }
         if checkZeroValidate(pushedNumber: buttonNumberValue) == false { return }
-        
         operandExpression += buttonNumberValue
         divideIntoThreeDigit()
     }
     
-    @IBAction private func operatorButton(sender: UIButton) {
+    @IBAction private func tapOperatorButton(sender: UIButton) {
         guard let `operator` = sender.titleLabel?.text else { return }
         guard let operatorExpression = operatorLabel.text else { return }
-        
         removeDot()
         operatorLabel.text = `operator`
         if operandExpression == "" { return }
@@ -48,17 +45,16 @@ final class CalculatorViewController: UIViewController {
             calculateExpression += operatorExpression + operandExpression
             updateExpressionStackView(operatorType: operatorExpression, operand: operandExpression)
         }
-        
         numberLabel.text = "0"
         operandExpression = ""
     }
     
-    @IBAction private func ceButton(_ sender: Any) {
+    @IBAction private func tapCeButton(_ sender: Any) {
         operandExpression = ""
         numberLabel.text = "0"
     }
     
-    @IBAction private func acButton(_ sender: Any) {
+    @IBAction private func tapAcButton(_ sender: Any) {
         calculateExpression = ""
         numberLabel.text = "0"
         operatorLabel.text = ""
@@ -66,11 +62,9 @@ final class CalculatorViewController: UIViewController {
         expressionStackView.subviews.map( { $0.removeFromSuperview() })
     }
     
-    @IBAction private func changeNegativeButton(_ sender: Any) {
+    @IBAction private func tapChangeNegativeButton(_ sender: Any) {
         if numberLabel.text == "0" { return }
-        
         guard let numberLabelText = numberLabel.text else { return }
-        
         if numberLabelText.first == "-" && operandExpression.first == "-" {
             numberLabel.text = numberLabelText.trimmingCharacters(in: ["-"])
             operandExpression = numberLabelText.trimmingCharacters(in: ["-"])
@@ -80,8 +74,7 @@ final class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func resultButton(_ sender: Any) {
-        
+    @IBAction private func tapResultButton(_ sender: Any) {
         if operandExpression == "" { return }
         guard let operatorLabelText = operatorLabel.text else { return }
         calculateExpression += operatorLabelText + operandExpression
