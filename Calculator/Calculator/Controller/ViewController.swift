@@ -95,9 +95,11 @@ final class ViewController: UIViewController {
         updateScrollView()
         inputList.append(currentLabelText)
         
-        let calculate = inputList.reduce("") { current, next in current + " " + next}
+        let formulaBeforeParse = inputList.reduce("") { current, next in
+            current + " " + next
+        }
         
-        var formula = ExpressionParser.parse(from: calculate)
+        var formula = ExpressionParser.parse(from: formulaBeforeParse)
         guard let result = formula.result(),
               result.isNaN == false  else {
             OperandsLabel.text = Double.nan.description
