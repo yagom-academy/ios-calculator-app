@@ -21,7 +21,10 @@ class ViewController: UIViewController {
     //MARK: - UILabel Outlet
     @IBOutlet weak var inputOperandsLabel: UILabel!
     @IBOutlet weak var inputOperatorsLabel: UILabel!
+    
+    //MARK: - UIView Outlet
     @IBOutlet var stackView: UIStackView!
+    @IBOutlet var scrollView: UIScrollView!
     
     enum Sign {
         static let dot = "."
@@ -86,6 +89,13 @@ class ViewController: UIViewController {
         return numberFormatter.string(from: NSNumber(value: result)) ?? ""
     }
     
+    func settingScrollView() {
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0,
+                                            y: scrollView.contentSize.height - scrollView.bounds.height),
+                                    animated: false)
+    }
+    
     //MARK: - IBAciton
     @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
@@ -107,6 +117,7 @@ class ViewController: UIViewController {
         } else {
             newStackView = makeStackView(currentOperator, currentOperand)
             stackView.addArrangedSubview(newStackView)
+            settingScrollView()
             
             if currentOperator == "" {
                 currentInputFormula.append(currentOperand)
@@ -139,6 +150,7 @@ class ViewController: UIViewController {
         // 마지막 스택뷰 위로 올려주기
         let newStackView = makeStackView(currentOperator, currentOperand)
         stackView.addArrangedSubview(newStackView)
+        settingScrollView()
         
         // 포뮬라에 연산자, 피연산자 올리기
         currentInputFormula.append(currentOperator)

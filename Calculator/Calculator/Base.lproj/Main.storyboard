@@ -334,6 +334,7 @@
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="jBK-ro-ka8"/>
                         <outlet property="inputOperandsLabel" destination="Lwz-OF-XHD" id="aXS-9e-oDW"/>
                         <outlet property="inputOperatorsLabel" destination="HPC-iy-qdm" id="9hG-qq-9tV"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="frb-tw-nW7"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="gtR-FF-5FC"/>
                         <outletCollection property="operandsButton" destination="nCE-qB-NiN" collectionClass="NSMutableArray" id="pmH-jH-xq6"/>
                         <outletCollection property="operandsButton" destination="Rif-2S-UU2" collectionClass="NSMutableArray" id="mQo-DH-7DV"/>
