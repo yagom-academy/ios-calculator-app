@@ -26,14 +26,6 @@ class ViewController: UIViewController {
     @IBOutlet var stackView: UIStackView!
     @IBOutlet var scrollView: UIScrollView!
     
-    enum Sign {
-        static let dot = "."
-        static let blank = " "
-        static let nothing = ""
-        static let minus = "-"
-        static let zero = "0"
-    }
-    
     var currentOperand: String {
         return inputOperandsLabel.text ?? Sign.zero
     }
@@ -43,7 +35,6 @@ class ViewController: UIViewController {
     var currentInputFormula: [String] = []
     var oldInputFormula: [String] = []
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         reset()
@@ -83,7 +74,7 @@ class ViewController: UIViewController {
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
 
-        return numberFormatter.string(from: NSNumber(value: result)) ?? ""
+        return numberFormatter.string(from: NSNumber(value: result)) ?? Sign.nothing
     }
     
     func removeComma(_ inputString: String) -> String {
@@ -132,7 +123,7 @@ class ViewController: UIViewController {
             stackView.addArrangedSubview(newStackView)
             settingScrollView()
             
-            if currentOperator == "" {
+            if currentOperator == Sign.nothing {
                 currentInputFormula.append(currentOperand)
             } else {
                 currentInputFormula.append(currentOperator)
@@ -163,7 +154,7 @@ class ViewController: UIViewController {
         var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
 
-        inputOperatorsLabel.text = ""
+        inputOperatorsLabel.text = Sign.nothing
         inputOperandsLabel.text = formatNumber(result)
         oldInputFormula.append(String(result))
         currentInputFormula = []
@@ -179,7 +170,7 @@ class ViewController: UIViewController {
     @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
         guard currentOperand != Sign.zero else { return }
         
-        if currentOperand.hasPrefix("-") {
+        if currentOperand.hasPrefix(Sign.minus) {
             inputOperandsLabel.text = currentOperand.trimmingCharacters(in: ["-"])
         } else {
             inputOperandsLabel.text = Sign.minus + currentOperand
