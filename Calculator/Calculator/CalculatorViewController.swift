@@ -66,7 +66,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func didTapResultButton() {
-        guard !isCalculated else { return }
+        guard !isCalculated, calculateOperator != "" else { return }
         appendExpression(sign: calculateOperator, number: calculateOperand)
         addToCalculateItem(left: calculateOperator, right: calculateOperand)
 
@@ -125,6 +125,9 @@ final class CalculatorViewController: UIViewController {
         }
         
         if calculateOperand == "0" {
+            if number == "0" || number == "00" {
+                return
+            }
             calculateOperand = number
         } else {
             calculateOperand += number
