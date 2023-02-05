@@ -29,7 +29,7 @@ class CalculateViewController: UIViewController {
     private lazy var numberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 20
         return numberFormatter
     }()
     
@@ -78,9 +78,10 @@ class CalculateViewController: UIViewController {
     }
     
     @IBAction private func dotPadTapped(_ sender: UIButton) {
-        guard !calculatorChecker.hasDot(enteringNumber) else { return }
+        guard let enteringNumberText = enteringNumberLabel.text,
+            !calculatorChecker.hasDot(enteringNumberText) else { return }
         
-        enteringNumber = calculatorChecker.appendingDot(enteringNumber)
+        enteringNumber = calculatorChecker.appendingDot(enteringNumberText)
     }
     
     @IBAction private func calculatePadTapped(_ sender: UIButton) {
