@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var zeroButton: [UIButton]!
     @IBOutlet weak var allClearButton: UIButton!
     @IBOutlet weak var clearEntryButton: UIButton!
-    @IBOutlet weak var changSignButton: UIButton!
+    @IBOutlet weak var changeSignButton: UIButton!
     @IBOutlet weak var calculationButton: UIButton!
     @IBOutlet weak var dotButton: UIButton!
     

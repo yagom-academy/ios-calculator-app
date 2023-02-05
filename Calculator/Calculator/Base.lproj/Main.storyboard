@@ -329,7 +329,7 @@
                     <connections>
                         <outlet property="allClearButton" destination="ped-N8-JbY" id="9xc-Cz-CBU"/>
                         <outlet property="calculationButton" destination="Daw-iX-Owl" id="g7R-Fe-iwd"/>
-                        <outlet property="changSignButton" destination="ows-U7-mNc" id="IdK-3P-KhT"/>
+                        <outlet property="changeSignButton" destination="ows-U7-mNc" id="IdK-3P-KhT"/>
                         <outlet property="clearEntryButton" destination="RLD-dY-LOA" id="iYk-3N-Nfq"/>
                         <outlet property="dotButton" destination="h8q-5h-bnb" id="jBK-ro-ka8"/>
                         <outlet property="inputOperandsLabel" destination="Lwz-OF-XHD" id="aXS-9e-oDW"/>
