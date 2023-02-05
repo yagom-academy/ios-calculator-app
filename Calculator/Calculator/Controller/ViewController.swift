@@ -77,9 +77,8 @@ class ViewController: UIViewController {
     
     func formatNumber(_ result: Double) -> String {
         let numberFormatter = NumberFormatter()
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.numberStyle = .decimal
         
+        numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
@@ -163,11 +162,9 @@ class ViewController: UIViewController {
         let removedCommaFormula = removeComma(stringFormula)
         var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
-        print(result)
 
         inputOperatorsLabel.text = ""
         inputOperandsLabel.text = formatNumber(result)
-        print(formatNumber(result))
         oldInputFormula.append(String(result))
         currentInputFormula = []
     }
