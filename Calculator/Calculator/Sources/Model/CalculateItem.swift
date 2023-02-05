@@ -1,7 +1,7 @@
 //
-//  Calculator - Double+.swift
+//  Calculator - CalculateItem.swift
 //  Created by Rhode.
 //  Copyright © yagom. All rights reserved.
 //
 
-extension Double: CalculateItem {}
+protocol CalculateItem {}
