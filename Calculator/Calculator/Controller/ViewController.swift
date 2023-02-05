@@ -78,9 +78,10 @@ class ViewController: UIViewController {
         // 얘는 어디다 써야할까? - currentOperand에 나타나는 숫자
         // inputOperandLabel.text 에 적용하면... 3.0 -> 3으로 인식
         // 넘버포매터 적용한애 자릿수..? 문제...? 으윽...
-        
+        //
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
 
         return numberFormatter.string(from: NSNumber(value: result)) ?? ""
     }
