@@ -11,7 +11,6 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        
         guard var result = operands.dequeue() else { return 0 }
         
         while !operands.isEmpty && !operators.isEmpty {
