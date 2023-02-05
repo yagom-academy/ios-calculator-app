@@ -170,8 +170,8 @@ final class ViewController: UIViewController {
         
         if isDotClicked == true {
             let numbers = stringNumber.split(with: ".")
-            let result = formattedNumber + "." + numbers[1]
-            return result
+            let formattedNumberWithDecimal = formattedNumber + "." + numbers[1]
+            return formattedNumberWithDecimal
         }
     
         return formattedNumber
