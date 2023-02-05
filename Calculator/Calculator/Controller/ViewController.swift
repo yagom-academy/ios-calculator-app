@@ -18,7 +18,7 @@ final class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        OperandsLabel.text = "0"
+        setupInitialValue()
     }
     
     @IBAction func operandsButtonDidTap(_ sender: UIButton) {
@@ -34,7 +34,7 @@ final class ViewController: UIViewController {
             } else if currentLabelText == "0" {
                 return
             }
-
+            
             currentLabelText += inputNumber
             
         default: currentLabelText += inputNumber
@@ -199,5 +199,9 @@ final class ViewController: UIViewController {
         stackView.distribution = .fill
         stackView.spacing = 8
         return stackView
+    }
+
+    private func setupInitialValue() {
+        OperandsLabel.text = "0"
     }
 }
