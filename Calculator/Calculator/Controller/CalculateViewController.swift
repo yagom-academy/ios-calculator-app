@@ -29,6 +29,7 @@ class CalculateViewController: UIViewController {
     private lazy var numberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumFractionDigits = 20
         return numberFormatter
     }()
