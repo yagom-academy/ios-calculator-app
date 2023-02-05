@@ -5,7 +5,7 @@
 //
 import Foundation
 
-class CalculatorFormatter {
+final class CalculatorFormatter {
     static let shared = CalculatorFormatter()
     private init() {}
     
