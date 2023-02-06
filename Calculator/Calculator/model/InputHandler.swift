@@ -12,8 +12,8 @@ final class InputHandler {
         return input
     }
     
-    func addInput(about operatorText: String, and operandText: String) {
-        guard let input = makeInput(from: operatorText, and: operandText)
+    func addInput(about currentItem: CurrentItem) {
+        guard let input = makeInput(from: currentItem)
         else { return }
         
         self.input += input
@@ -23,11 +23,11 @@ final class InputHandler {
         input = Sign.empty
     }
     
-    private func makeInput(from operatorText: String, and operandText: String) -> String? {
-        guard let convertedOperandText = convertToNone(from: operandText)
+    private func makeInput(from currentItem: CurrentItem) -> String? {
+        guard let convertedOperandText = convertToNone(from: currentItem.operand)
         else { return nil }
         
-        let result = operatorText + Sign.space + convertedOperandText + Sign.space
+        let result = currentItem.operator + Sign.space + convertedOperandText + Sign.space
         
         return result
     }

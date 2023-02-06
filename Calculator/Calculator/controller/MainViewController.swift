@@ -90,9 +90,8 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            calculateItemStackView.addCurrentItem(operator: currentOperator,
-                                                  operand: currentOperand)
-            inputHandler.addInput(about: currentOperator, and: currentOperand)
+            calculateItemStackView.add(currentItem: (currentOperator, currentOperand))
+            inputHandler.addInput(about: (currentOperator, currentOperand))
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
@@ -101,9 +100,8 @@ final class MainViewController: UIViewController {
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard currentOperator != Sign.empty else { return }
         
-        calculateItemStackView.addCurrentItem(operator: currentOperator,
-                                              operand: currentOperand)
-        inputHandler.addInput(about: currentOperator, and: currentOperand)
+        calculateItemStackView.add(currentItem: (currentOperator, currentOperand))
+        inputHandler.addInput(about: (currentOperator, currentOperand))
         
         var formula = ExpressionParser.parse(from: inputHandler.currentInput)
         let result = formula.result()

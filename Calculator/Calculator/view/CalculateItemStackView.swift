@@ -27,21 +27,21 @@ final class CalculateItemStackView: UIStackView {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func addCurrentItem(`operator`: String, operand: String) {
-        guard let subview = generateCurrentItemStackView(operatorText: `operator`, operandText: operand) else { return }
+    func add(currentItem: CurrentItem) {
+        guard let subview = generateStackView(about: currentItem) else { return }
         
         add(subview, to: self)
         calculateItemScrollView.didAddSubview(subview)
     }
     
-    private func generateCurrentItemStackView(operatorText: String, operandText: String) -> UIStackView? {
+    private func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
         let operand = UILabel()
-        operand.text = numberFormatter.convertToDecimal(from: operandText)
+        operand.text = numberFormatter.convertToDecimal(from: currentItem.operand)
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let `operator` = UILabel()
-        `operator`.text = operatorText
+        `operator`.text = currentItem.operator
         `operator`.textColor = UIColor.white
         `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
         

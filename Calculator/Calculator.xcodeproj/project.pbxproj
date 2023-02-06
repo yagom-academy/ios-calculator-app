@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3690983D29911FC7000F4CF4 /* Typealias.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3690983C29911FC7000F4CF4 /* Typealias.swift */; };
 		36CA533729826CC100622D91 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA533629826CC100622D91 /* Protocol.swift */; };
 		36CA533929826D2500622D91 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA533829826D2500622D91 /* CalculatorItemQueue.swift */; };
 		36CA533A29826D2500622D91 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA533829826D2500622D91 /* CalculatorItemQueue.swift */; };
@@ -65,6 +66,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3690983C29911FC7000F4CF4 /* Typealias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealias.swift; sourceTree = "<group>"; };
 		36CA531A2982208000622D91 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CA531C2982208000622D91 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		36CA533629826CC100622D91 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				ADE78AA3299105F600AC109C /* NameSpace.swift */,
 				ADE78AA52991066C00AC109C /* Extension.swift */,
 				36CA533629826CC100622D91 /* Protocol.swift */,
+				3690983C29911FC7000F4CF4 /* Typealias.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				ADE78A9E2991057800AC109C /* CalculateItemScrollView.swift in Sources */,
 				ADE78AA2299105DB00AC109C /* InputHandler.swift in Sources */,
 				36CA533929826D2500622D91 /* CalculatorItemQueue.swift in Sources */,
+				3690983D29911FC7000F4CF4 /* Typealias.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				ADE78AA02991059300AC109C /* CalculateItemStackView.swift in Sources */,
 				ADE78AA62991066C00AC109C /* Extension.swift in Sources */,
