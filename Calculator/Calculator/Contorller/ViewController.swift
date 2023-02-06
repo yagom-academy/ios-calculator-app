@@ -110,7 +110,6 @@ class ViewController: UIViewController {
         let calculateResult = String(resultByParse.result())
         
         numberOnField.text = addCommaToThreeDigit(number: calculateResult)
-        
     }
     
     private func numberButtonTapped(sender: UIButton) {
