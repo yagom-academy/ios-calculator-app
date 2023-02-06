@@ -1,39 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by kokkilE on 2023/01/25.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-extension ViewController {
-    enum DefaultValue {
-        static let empty = ""
-        static let zero = "0"
-    }
-    
-    enum SpecialCharacter {
-        static let comma = ","
-        static let dot = "."
-        static let negativeNumber = "-"
-    }
-    
-    enum ButtonID {
-        static let AC = "AC"
-        static let CE = "CE"
-        static let SC = "⁺⁄₋"
-        static let add = String(Operator.add.rawValue)
-        static let subtract = String(Operator.subtract.rawValue)
-        static let divide = String(Operator.divide.rawValue)
-        static let multiply = String(Operator.multiply.rawValue)
-        static let equal = "="
-        static let dot = "."
-        static let zero = "0"
-        static let twoZeros = "00"
-    }
-}
-
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
     var expression: String = DefaultValue.zero
     var isOperateComplited = false
@@ -58,18 +31,18 @@ class ViewController: UIViewController {
     
     func processInput(from inputFromButton: String) {
         switch inputFromButton {
-        case ButtonID.AC:
+        case ButtonValue.AC:
             allClear()
-        case ButtonID.CE:
+        case ButtonValue.CE:
             clearEntry()
-        case ButtonID.SC:
+        case ButtonValue.SC:
             signChanger()
-        case ButtonID.add, ButtonID.subtract, ButtonID.divide, ButtonID.multiply:
+        case ButtonValue.add, ButtonValue.subtract, ButtonValue.divide, ButtonValue.multiply:
             processOperatorInput(inputFromButton)
-        case ButtonID.equal:
+        case ButtonValue.equal:
             processEqualSignInput()
             isOperateComplited = true
-        case ButtonID.dot:
+        case ButtonValue.dot:
             processDotInput(inputFromButton)
         default:
             if isOperateComplited {
@@ -92,7 +65,7 @@ class ViewController: UIViewController {
         guard let prevOperandUILabel = operandUILabel.text else { return }
         
         if prevOperandUILabel == DefaultValue.zero {
-            if inputFromButton == ButtonID.zero || inputFromButton == ButtonID.twoZeros {
+            if inputFromButton == ButtonValue.zero || inputFromButton == ButtonValue.twoZeros {
                 operandUILabel.text = DefaultValue.zero
             } else {
                 operandUILabel.text = inputFromButton
@@ -236,5 +209,32 @@ class ViewController: UIViewController {
         guard let formattingResult = formatter.string(for: inputToNSNumber) else { return input }
         
         return formattingResult
+    }
+}
+
+extension CalculatorViewController {
+    enum DefaultValue {
+        static let empty = ""
+        static let zero = "0"
+    }
+    
+    enum SpecialCharacter {
+        static let comma = ","
+        static let dot = "."
+        static let negativeNumber = "-"
+    }
+    
+    enum ButtonValue {
+        static let AC = "AC"
+        static let CE = "CE"
+        static let SC = "⁺⁄₋"
+        static let add = String(Operator.add.rawValue)
+        static let subtract = String(Operator.subtract.rawValue)
+        static let divide = String(Operator.divide.rawValue)
+        static let multiply = String(Operator.multiply.rawValue)
+        static let equal = "="
+        static let dot = "."
+        static let zero = "0"
+        static let twoZeros = "00"
     }
 }
