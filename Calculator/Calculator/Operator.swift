@@ -37,7 +37,7 @@ enum Operator: Character, CaseIterable {
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         if rhs == 0 {
-            throw CalculateError.divideError
+            return Double.nan
         }
        return lhs / rhs
     }
