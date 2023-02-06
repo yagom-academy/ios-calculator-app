@@ -91,7 +91,8 @@ final class ViewController: UIViewController {
     
     //MARK: - IBAciton
     @IBAction private func operandsButtonTapped(_ sender: UIButton) {
-        guard let number = sender.currentTitle else { return }
+        guard let number = sender.currentTitle,
+              currentOperand.count < 19 else { return }
         
         if currentOperand == Sign.zero {
             inputOperandsLabel.text = number
