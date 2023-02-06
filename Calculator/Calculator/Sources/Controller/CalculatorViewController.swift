@@ -8,8 +8,6 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    //let calculatorFormatter = CalculatorFormatter.shared
-    
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentNumberLabel: UILabel!
     
@@ -113,8 +111,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func calculate() -> Double? {
-        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)// 맨 마지막 인덱스 구함
-        let lastString = stringToBeCalculated[lastIndex] // 맨 마지막 글자 뽑아내기
+        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
+        let lastString = stringToBeCalculated[lastIndex]
         if Operator(rawValue: lastString) != nil {
             return nil
         }
