@@ -101,21 +101,24 @@ final class CalculatorViewController: UIViewController {
         guard isCalculated == false else {
             return
         }
-        isCalculated = true
-        displayPreviousOperands()
-        resetCurrentNumber()
-        initializeCurrentOperator()
+        
+        if let result = calculate() {
+            isCalculated = true
+            displayPreviousOperands()
+            resetCurrentNumber()
+            initializeCurrentOperator()
+            displayResult(result: result)
+        } else { return }
+        
         operatingScrollView.layoutIfNeeded()
         operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
-        let result = calculate()
-        displayResult(result: result)
     }
     
-    private func calculate() -> Double {
-        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
-        let lastString = stringToBeCalculated[lastIndex]
+    private func calculate() -> Double? {
+        let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)// 맨 마지막 인덱스 구함
+        let lastString = stringToBeCalculated[lastIndex] // 맨 마지막 글자 뽑아내기
         if Operator(rawValue: lastString) != nil {
-            stringToBeCalculated = stringToBeCalculated + NameSpace.stringZero
+            return nil
         }
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
         stringToBeCalculated = NameSpace.emptyString
