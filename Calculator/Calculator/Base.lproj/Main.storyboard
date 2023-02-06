@@ -58,6 +58,11 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
+                                        <connections>
+                                            <outlet property="calculateItemScrollView" destination="BOT-7g-vxv" id="5tc-ac-4wR"/>
+                                            <outlet property="operandLabel" destination="Lwz-OF-XHD" id="6aL-Pq-99l"/>
+                                            <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Bo0-SR-K7p"/>
+                                        </connections>
                                     </stackView>
                                 </subviews>
                                 <constraints>

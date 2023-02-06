@@ -8,6 +8,3 @@
 //MARK: CalculateItem 프로토콜 생성
 protocol CalculateItem {}
 
-extension Int: CalculateItem {}
-
-extension Double: CalculateItem {}

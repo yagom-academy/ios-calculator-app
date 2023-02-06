@@ -7,6 +7,10 @@
 
 import UIKit
 
+extension Int: CalculateItem {}
+
+extension Double: CalculateItem {}
+
 extension NumberFormatter {
     func convertToDecimal(from string: String) -> String? {
         guard let double = convertToDouble(from: string) else { return nil }
