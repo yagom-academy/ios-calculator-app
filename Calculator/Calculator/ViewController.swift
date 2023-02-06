@@ -49,4 +49,73 @@ final class MainViewController: UIViewController {
             operandLabel.text = inputOperand
         }
     }
+    
+    @IBAction private func touchDotButton(_ sender: UIButton) {
+            guard currentOperand.contains(Sign.dot) == false else { return }
+            
+            operandLabel.text = currentOperand + Sign.dot
+        }
+        
+        @IBAction private func touchZeroButton(_ sender: UIButton) {
+            guard let senderTitle = sender.currentTitle else { return }
+            
+            if currentOperand != Sign.zero, currentOperand.contains(Sign.dot) {
+                operandLabel.text = currentOperand + senderTitle
+            } else {
+                operandLabel.text = numberFormatter.convertToDecimal(from: currentOperand + senderTitle)
+            }
+        }
+        
+        @IBAction private func allClear(_ sender: UIButton) {
+            setInitialCalculateItemStackView()
+            setInitialCurrentCalculateItem()
+            inputHandler.setEmptyInput()
+        }
+        
+        @IBAction private func clearOperandLabel(_ sender: UIButton) {
+            operandLabel.text = Sign.zero
+        }
+        
+        @IBAction private func toggleSign(_ sender: UIButton) {
+            guard currentOperand != Sign.zero,
+                  let convertedOperand = numberFormatter.convertToDouble(from: currentOperand),
+                  let toggledOperand = numberFormatter.convertToString(from: -convertedOperand) else { return }
+            
+            operandLabel.text = toggledOperand
+        }
+        
+        @IBAction private func touchOperatorButton(_ sender: UIButton) {
+            guard let inputOperator = sender.currentTitle else { return }
+                
+            if operandLabel.text == Sign.zero {
+                operatorLabel.text = inputOperator
+            } else {
+                calculateItemStackView.addCurrentItem(operator: currentOperator,
+                                                      operand: currentOperand)
+                inputHandler.addInput(about: currentOperator, and: currentOperand)
+                setInitialCurrentCalculateItem()
+                operatorLabel.text = sender.currentTitle
+            }
+        }
+        
+        @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
+            guard currentOperator != Sign.empty else { return }
+            
+            calculateItemStackView.addCurrentItem(operator: currentOperator,
+                                                  operand: currentOperand)
+            inputHandler.addInput(about: currentOperator, and: currentOperand)
+            
+            var formula = ExpressionParser.parse(from: inputHandler.currentInput)
+            let result = formula.result()
+            
+            inputHandler.setEmptyInput()
+            operatorLabel.text = Sign.empty
+            
+            if result.isNaN == true {
+                operandLabel.text = Sign.nan
+            } else {
+                operandLabel.text = numberFormatter.convertToString(from: result)
+            }
+        }
+    }
 }
