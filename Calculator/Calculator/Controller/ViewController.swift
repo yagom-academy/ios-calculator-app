@@ -12,40 +12,40 @@ final class ViewController: UIViewController {
     @IBOutlet var operandsButton: [UIButton]!
     @IBOutlet var operatorsButton: [UIButton]!
     @IBOutlet var zeroButton: [UIButton]!
-    @IBOutlet weak var allClearButton: UIButton!
-    @IBOutlet weak var clearEntryButton: UIButton!
-    @IBOutlet weak var changeSignButton: UIButton!
-    @IBOutlet weak var calculationButton: UIButton!
-    @IBOutlet weak var dotButton: UIButton!
+    @IBOutlet private weak var allClearButton: UIButton!
+    @IBOutlet private weak var clearEntryButton: UIButton!
+    @IBOutlet private weak var changeSignButton: UIButton!
+    @IBOutlet private weak var calculationButton: UIButton!
+    @IBOutlet private weak var dotButton: UIButton!
     
     //MARK: - UILabel Outlet
-    @IBOutlet weak var inputOperandsLabel: UILabel!
-    @IBOutlet weak var inputOperatorsLabel: UILabel!
+    @IBOutlet private weak var inputOperandsLabel: UILabel!
+    @IBOutlet private weak var inputOperatorsLabel: UILabel!
     
     //MARK: - UIView Outlet
-    @IBOutlet var stackView: UIStackView!
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet private var stackView: UIStackView!
+    @IBOutlet private var scrollView: UIScrollView!
     
-    var currentOperand: String {
+    private var currentOperand: String {
         return inputOperandsLabel.text ?? Sign.zero
     }
-    var currentOperator: String {
+    private var currentOperator: String {
         return inputOperatorsLabel.text ?? Sign.nothing
     }
-    var currentInputFormula: [String] = []
-    var oldInputFormula: [String] = []
+    private var currentInputFormula: [String] = []
+    private var oldInputFormula: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         resetLabelsText()
     }
     
-    func resetLabelsText() {
+    private func resetLabelsText() {
         inputOperandsLabel.text = Sign.zero
         inputOperatorsLabel.text = Sign.nothing
     }
     
-    func makeStackView(_ operatorSign: String, _ operand: String) -> UIStackView {
+    private func makeStackView(_ operatorSign: String, _ operand: String) -> UIStackView {
         let view = UIStackView()
         let operandLabel = UILabel()
         let operatorLabel = UILabel()
@@ -66,7 +66,7 @@ final class ViewController: UIViewController {
         return view
     }
     
-    func formatNumber(_ result: Double) -> String {
+    private func formatNumber(_ result: Double) -> String {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
@@ -77,13 +77,13 @@ final class ViewController: UIViewController {
         return numberFormatter.string(from: NSNumber(value: result)) ?? Sign.nothing
     }
     
-    func removeComma(_ inputString: String) -> String {
+    private func removeComma(_ inputString: String) -> String {
         let removedCommaString = inputString.replacingOccurrences(of: ",", with: "")
         
         return removedCommaString
     }
     
-    func settingScrollView() {
+    private func settingScrollView() {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
@@ -91,7 +91,7 @@ final class ViewController: UIViewController {
     }
     
     //MARK: - IBAciton
-    @IBAction func operandsButtonTapped(_ sender: UIButton) {
+    @IBAction private func operandsButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
         
         if currentOperand == Sign.zero {
@@ -105,13 +105,13 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func zeroButtonTapped(_ sender: UIButton) {
+    @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let zero = sender.currentTitle,
               currentOperand != Sign.zero else { return }
         inputOperandsLabel.text = currentOperand + zero
     }
     
-    @IBAction func operatorsButtonTapped(_ sender: UIButton) {
+    @IBAction private func operatorsButtonTapped(_ sender: UIButton) {
         var newStackView: UIStackView = UIStackView()
         
         guard let currentSign = sender.currentTitle else { return }
@@ -135,13 +135,13 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonTapped(_ sender: UIButton) {
+    @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle,
               currentOperand.contains(Sign.dot) == false else { return }
         inputOperandsLabel.text = currentOperand + dot
     }
     
-    @IBAction func calculationButtonTapped(_ sender: UIButton) {
+    @IBAction private func calculationButtonTapped(_ sender: UIButton) {
         guard currentInputFormula.isEmpty == false else { return }
         let newStackView = makeStackView(currentOperator, currentOperand)
         stackView.addArrangedSubview(newStackView)
@@ -161,14 +161,14 @@ final class ViewController: UIViewController {
         currentInputFormula = []
     }
     
-    @IBAction func allClearButtonTapped(_ sender: UIButton) {
+    @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         resetLabelsText()
         currentInputFormula = []
         oldInputFormula = []
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
+    @IBAction private func changeSignButtonTapped(_ sender: UIButton) {
         guard currentOperand != Sign.zero else { return }
         
         if currentOperand.hasPrefix(Sign.minus) {
@@ -178,7 +178,7 @@ final class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
         inputOperandsLabel.text = Sign.zero
     }
 }
