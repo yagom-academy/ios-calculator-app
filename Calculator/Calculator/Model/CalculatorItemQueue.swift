@@ -9,22 +9,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var head: Node<Element>?
     private var tail: Node<Element>?
     
-    var isEmpty: Bool {
-        return head == nil
-    }
-    
-    var size: Int {
-        var count = 0
-        var current = head
-        while (current != nil) {
-            current = current?.next
-            count += 1
-        }
-        return count
-    }
-    
     mutating func enqueue(_ data: Element) {
-        if head == nil || tail == nil {
+        if head == nil {
             head = Node.init(data)
             tail = head
             return
@@ -32,7 +18,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         
         let newNode = Node.init(data)
         tail?.next = newNode
-        newNode.prev = tail
         tail = newNode
     }
     
@@ -44,23 +29,5 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         dequeue?.next = nil
         
         return dequeue?.data
-    }
-    
-    mutating func removeLast() {
-        if head == nil || tail == nil { return }
-        
-        if head?.next == nil {
-            head = nil
-            tail = nil
-            return
-        }
-        
-        tail?.prev?.next = tail?.next
-        tail = tail?.prev
-    }
-    
-    mutating func clear() {
-        head = nil
-        tail = nil
     }
 }
