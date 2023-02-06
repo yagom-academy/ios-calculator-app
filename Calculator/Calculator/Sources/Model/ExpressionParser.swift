@@ -1,6 +1,6 @@
 //
 //  Calculator - ExpressionParser.swift
-//  Created by Rhode.
+//  Created by Rhode, Songjun.
 //  Copyright © yagom. All rights reserved.
 //
 
