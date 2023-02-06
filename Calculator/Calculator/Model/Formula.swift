@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operaters: CalculatorItemQueue<Operator>
+    var operands = CalculatorItemQueue<Double>()
+    var operaters = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
         guard var result = operands.dequeue() else { return .zero }
