@@ -37,10 +37,10 @@ final class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reset()
+        resetLabelsText()
     }
     
-    func reset() {
+    func resetLabelsText() {
         inputOperandsLabel.text = Sign.zero
         inputOperatorsLabel.text = Sign.nothing
     }
@@ -162,7 +162,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        reset()
+        resetLabelsText()
         currentInputFormula = []
         oldInputFormula = []
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
