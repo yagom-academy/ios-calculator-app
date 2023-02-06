@@ -28,22 +28,17 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    private func setupOperandAndOperator() {
-        resetOperand()
-        resetOperator()
-    }
+    
     
     @IBAction private func didTapACButton() {
-        calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        resetCalculatorItemView()
         resetOperand()
         resetOperator()
         expression.removeAll()
     }
     
     @IBAction private func didTapCEButton() {
-        if isCalculated == false {
-            calculateOperand = Symbol.zero
-        }
+        resetOperand()
     }
     
     @IBAction private func didTapChangeSignButton() {
@@ -98,7 +93,7 @@ final class CalculatorViewController: UIViewController {
         
         isCalculated = false
         calculateOperator = operatorSign
-        calculateOperand = Symbol.zero
+        resetOperand()
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
@@ -183,17 +178,16 @@ final class CalculatorViewController: UIViewController {
         return stackView
     }
     
+    private func resetCalculatorItemView() {
+        calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
     private func resetOperand() {
         calculateOperand = Symbol.zero
     }
     
     private func resetOperator() {
         calculateOperator = Symbol.blank
-    }
-    
-    private func resetLabel() {
-        resetOperand()
-        resetOperator()
     }
 }
 
