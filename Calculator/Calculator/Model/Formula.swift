@@ -10,14 +10,20 @@ struct Formula {
         self.operators = operators
     }
     
-    mutating func result() -> Double {
+    mutating func result() -> Double? {
         guard var result = operands.dequeue() else { return 0 }
         
         while !operands.isEmpty && !operators.isEmpty {
             guard let operand = operands.dequeue(),
                   let `operator` = operators.dequeue() else { return result }
             
-            result = `operator`.calculate(lhs: result, rhs: operand)
+            do {
+                result = try `operator`.calculate(lhs: result, rhs: operand)
+            } catch CalculatorError.divideByZero {
+                return .nan
+            } catch {
+                return nil
+            }
         }
         
         return result
