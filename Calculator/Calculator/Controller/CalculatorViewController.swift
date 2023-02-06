@@ -26,8 +26,6 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
     
     private func setupOperandAndOperator() {
@@ -39,6 +37,7 @@ final class CalculatorViewController: UIViewController {
         calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         resetOperand()
         resetOperator()
+        expression.removeAll()
     }
     
     @IBAction private func didTapCEButton() {

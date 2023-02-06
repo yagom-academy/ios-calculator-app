@@ -19,8 +19,4 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     mutating func dequeue() -> Element? {
         return calculatorList.removeFirst()
     }
-    
-    mutating func clear() {
-        calculatorList.removeAll()
-    }
 }
