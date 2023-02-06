@@ -118,6 +118,7 @@ final class CalculatorViewController: UIViewController {
         
         stackInputToExpression()
         stackInputToScrollView()
+        scrollToBottomOfScrollView()
         operandUILabel.text = DefaultValue.zero
         operatorUILabel.text = inputFromButton
     }
@@ -127,6 +128,7 @@ final class CalculatorViewController: UIViewController {
     
         stackInputToExpression()
         stackInputToScrollView()
+        scrollToBottomOfScrollView()
         calculateExpression()
     }
     
@@ -149,13 +151,12 @@ final class CalculatorViewController: UIViewController {
         stackView.addArrangedSubview(operandLabel)
         
         let spaceBetweenLabels = CGFloat(8)
-        stackView.spacing = stackView.spacing + spaceBetweenLabels
+        stackView.spacing = spaceBetweenLabels
         
         stackView.alignment = .fill
         stackView.axis = .horizontal
         
         scrollView.addArrangedSubview(stackView)
-        scrollToBottomOfScrollView()
     }
     
     private func scrollToBottomOfScrollView() {
