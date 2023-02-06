@@ -2,8 +2,8 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Harry on 2023/02/06.
-//
+//  Created by Harry,Gaot on 2023/02/06.
+
 
 import Foundation
 
@@ -13,7 +13,9 @@ enum Operator: Character, CaseIterable {
     case divide = "÷"
     case multiply = "×"
     
+
     func calculate(lhs: Double, rhs: Double) -> Double {
+
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
@@ -25,8 +27,7 @@ enum Operator: Character, CaseIterable {
             return multiply(lhs: lhs, rhs: rhs)
         }
     }
-    
-    private func add(lhs: Double, rhs: Double) -> Double {
+
         return lhs + rhs
     }
     
@@ -47,4 +48,4 @@ enum Operator: Character, CaseIterable {
     }
 }
 
-extension Operator: CalculateItem {}
+
