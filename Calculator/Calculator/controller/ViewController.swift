@@ -30,6 +30,15 @@ final class MainViewController: UIViewController {
         setInitialCalculateItemStackView()
     }
     
+    private func setInitialCurrentCalculateItem() {
+        operandLabel.text = Sign.zero
+        operatorLabel.text = Sign.empty
+    }
+    
+    private func setInitialCalculateItemStackView() {
+        calculateItemStackView.removeAllSubviews()
+    }
+    
     @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         
