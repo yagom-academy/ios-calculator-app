@@ -85,7 +85,7 @@ final class CalculatorViewController: UIViewController {
             let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
             let lastString = stringToBeCalculated[lastIndex]
             if Operator(rawValue: lastString) != nil {
-                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+                stringToBeCalculated.removeLast()
                 removePreviousOperands()
             }
         }
@@ -153,7 +153,7 @@ final class CalculatorViewController: UIViewController {
     private func clearEntry() {
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
-                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+                stringToBeCalculated.removeLast()
             } else {
                 break
             }
