@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
     
     //MARK: - UIButton Outlet
     @IBOutlet var operandsButton: [UIButton]!
