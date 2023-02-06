@@ -11,7 +11,7 @@ extension String {
     }
     
     func convertToDouble(appending number: String = "") -> Double {
-        let addedNumber = (self + number).split(separator: ",").joined()
+        let addedNumber = (self + number).filter { $0 != "," }
         guard let doubleNumber = Double(addedNumber) else { return .zero }
         return doubleNumber
     }
