@@ -7,7 +7,6 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var calculateStackView: UIStackView!
@@ -60,12 +59,14 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapResultButton() {
         guard !isCalculated, calculateOperator != Symbol.blank else { return }
-        guard let calculatedNumber = operandLabel.text?.removeComma() else { return }
+        guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         guard let number = Double(calculatedNumber) else { return }
+        
+        let formatNumber = NumberFormatter.convertToString(fromDouble: number)
         
         addExpressionAndCalculateItem(sign: calculateOperator,
                                       number: "\(number)",
-                                      operand: calculateOperand)
+                                      operand: formatNumber)
         
         var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
         
@@ -84,13 +85,14 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorSign = sender.currentTitle else { return }
-        guard calculateOperand != Symbol.zero || calculateOperator != Symbol.blank else { return }
-        guard calculateOperand != Symbol.zero || calculateOperator == Symbol.blank else {
-            calculateOperator = operatorSign
+        guard calculateOperand != Symbol.zero else {
+            if  calculateOperator != Symbol.blank {
+                calculateOperator = operatorSign
+            }
             return
         }
         
-        guard let calculatedNumber = operandLabel.text?.removeComma() else { return }
+        guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         let calculatedOperand = NumberFormatter.convertToString(fromString: calculatedNumber)
             
         addExpressionAndCalculateItem(sign: calculateOperator,

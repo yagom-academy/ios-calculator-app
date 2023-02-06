@@ -8,7 +8,7 @@ extension String {
         return self.split(separator: target).map { String($0) }
     }
     
-    func removeComma() -> String {
+    var withoutComma: String {
         return self.filter({ $0 != Character(Symbol.comma) })
     }
 }
