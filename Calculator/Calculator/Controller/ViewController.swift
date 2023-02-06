@@ -86,7 +86,7 @@ final class ViewController: UIViewController {
         scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0,
                                             y: scrollView.contentSize.height - scrollView.bounds.height),
-                                    animated: false)
+                                    animated: true)
     }
     
     //MARK: - IBAciton
