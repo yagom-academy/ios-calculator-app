@@ -142,6 +142,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculationButtonTapped(_ sender: UIButton) {
+        guard currentInputFormula.isEmpty == false else { return }
         let newStackView = makeStackView(currentOperator, currentOperand)
         stackView.addArrangedSubview(newStackView)
         settingScrollView()
