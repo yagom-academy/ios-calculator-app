@@ -16,12 +16,6 @@ final class CalculateItemStackView: UIStackView {
                                           roundingMode: .halfUp,
                                           usesSignificantDigits: true,
                                           maximumSignificantDigits: 20)
-    private var currentOperand: String {
-        return operandLabel.text ?? Sign.zero
-    }
-    private var currentOperator: String {
-        return operatorLabel.text ?? Sign.empty
-    }
     
     func removeAllSubviews() {
         self.subviews.forEach { $0.removeFromSuperview() }
