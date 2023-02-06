@@ -6,10 +6,11 @@ enum Symbol {
     static let zero = "0"
     static let doubleZero = "00"
     static let comma = ","
-    static let blank = ""
+    static let empty = ""
     static let dot = "."
     static let nan = "NaN"
     static let minus = "-"
+    static let blank = " "
     
     // MARK: Int
     static let maxSignificantDigits = 20
