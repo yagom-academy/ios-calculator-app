@@ -11,6 +11,12 @@ extension Int: CalculateItem {}
 
 extension Double: CalculateItem {}
 
+extension String {
+    func split(with target: Character) -> [String] {
+        return components(separatedBy: String(target))
+    }
+}
+
 extension NumberFormatter {
     func convertToDecimal(from string: String) -> String? {
         guard let double = convertToDouble(from: string) else { return nil }
