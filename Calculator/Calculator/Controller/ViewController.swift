@@ -8,16 +8,6 @@ import UIKit
 
 final class ViewController: UIViewController {
     
-    //MARK: - UIButton Outlet
-    @IBOutlet var operandsButton: [UIButton]!
-    @IBOutlet var operatorsButton: [UIButton]!
-    @IBOutlet var zeroButton: [UIButton]!
-    @IBOutlet private weak var allClearButton: UIButton!
-    @IBOutlet private weak var clearEntryButton: UIButton!
-    @IBOutlet private weak var changeSignButton: UIButton!
-    @IBOutlet private weak var calculationButton: UIButton!
-    @IBOutlet private weak var dotButton: UIButton!
-    
     //MARK: - UILabel Outlet
     @IBOutlet private weak var inputOperandsLabel: UILabel!
     @IBOutlet private weak var inputOperatorsLabel: UILabel!
