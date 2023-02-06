@@ -70,15 +70,9 @@ final class CalculatorViewController: UIViewController {
                                       operand: formatNumber)
         
         var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
+        guard let result = formula.result() else { return }
         
-        let result = formula.result()
-        
-        if result.isNaN {
-            calculateOperand = Symbol.nan
-        } else {
-            calculateOperand = NumberFormatter.convertToString(fromDouble: result)
-        }
-        
+        calculateOperand = NumberFormatter.convertToString(fromDouble: result)
         isCalculated = true
         resetOperator()
         expression.removeAll()
@@ -133,9 +127,8 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapDotButton(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
-        guard !calculateOperand.contains(Symbol.dot) else { return }
+        guard !calculateOperand.contains(dot) else { return }
         
-        guard !isCalculated else { return }
         calculateOperand += dot
     }
     
