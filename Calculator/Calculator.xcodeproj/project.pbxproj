@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A8BC6C929912AAC004D5442 /* HistoryEntryStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8BC6C829912AAC004D5442 /* HistoryEntryStackView.swift */; };
 		4ACD23892990F57A00728FF4 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD23882990F57A00728FF4 /* DoubleExtension.swift */; };
 		4ACD238B2990F5A400728FF4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD238A2990F5A400728FF4 /* StringExtension.swift */; };
 		4ACD238D2990F5CA00728FF4 /* OperatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD238C2990F5CA00728FF4 /* OperatorExtension.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A8BC6C829912AAC004D5442 /* HistoryEntryStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryStackView.swift; sourceTree = "<group>"; };
 		4ACD23882990F57A00728FF4 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		4ACD238A2990F5A400728FF4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		4ACD238C2990F5CA00728FF4 /* OperatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorExtension.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
+				4A8BC6C829912AAC004D5442 /* HistoryEntryStackView.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				5864CD5B2990F3BC00236528 /* CalculateItemQueue.swift in Sources */,
 				4ACD238B2990F5A400728FF4 /* StringExtension.swift in Sources */,
 				5864CD592990F2A600236528 /* Formula.swift in Sources */,
+				4A8BC6C929912AAC004D5442 /* HistoryEntryStackView.swift in Sources */,
 				4ACD238D2990F5CA00728FF4 /* OperatorExtension.swift in Sources */,
 				5864CD5D2990F3EF00236528 /* CalculateItem.swift in Sources */,
 				5864CD5F2990F92300236528 /* ExpressionParser.swift in Sources */,
