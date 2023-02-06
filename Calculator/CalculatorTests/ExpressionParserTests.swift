@@ -21,7 +21,7 @@ final class ExpressionParserTests: XCTestCase {
     func test_parse메서드에_1더하기12빼기8곱하기2를_넣었을때_1과12와8과2의배열과더하기와빼기와곱하기의배열이_나온다() {
         
         //given
-        let input = "1+12-8*2"
+        let input = "1+12−8×2"
         let expectedValueOfOperators: [Operator] = [.add, .subtract, .multiply]
         let expectedValueOfOerands: [Double] = [1, 12, 8, 2]
         

@@ -16,9 +16,7 @@ enum ExpressionParser {
             operatorsQueue.enqueue(item: $0)
         }
         
-       componentsByOperators(from: input).map{
-            $0.contains("⎼") ? $0.replacingOccurrences(of: "⎼", with: "-") : $0
-        }.compactMap { Double($0) }.forEach { operand in
+       componentsByOperators(from: input).compactMap { Double($0) }.forEach { operand in
             operandsQueue.enqueue(item: operand)
         }
         
@@ -34,6 +32,6 @@ enum ExpressionParser {
             numbers = numbers.map { $0.split(with: `operator`.rawValue) }.flatMap { $0 }
         }
         return numbers
-    }
+    } 
 }
 
