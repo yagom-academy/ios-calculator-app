@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FormulaStackView: UIStackView {
+final class FormulaStackView: UIStackView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.axis = .horizontal
