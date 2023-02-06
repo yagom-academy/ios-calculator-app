@@ -6,10 +6,9 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
-
-    var expression: String = DefaultValue.zero
-    var isOperateComplited = false
+final class CalculatorViewController: UIViewController {
+    private var expression: String = DefaultValue.zero
+    private var isOperateComplited = false
     
     @IBOutlet weak var scrollView: UIStackView!
     @IBOutlet weak var operatorUILabel: UILabel!
@@ -20,6 +19,14 @@ class CalculatorViewController: UIViewController {
 
         allClear()
     }
+    
+    private func allClear() {
+        scrollView.subviews.forEach { $0.removeFromSuperview() }
+        
+        operatorUILabel.text = DefaultValue.empty
+        operandUILabel.text = DefaultValue.zero
+        expression = DefaultValue.empty
+    }
 
     @IBAction func touchUpCalculatorButton(sender: UIButton) {
         guard let inputFromButton = sender.titleLabel?.text else {
@@ -29,7 +36,7 @@ class CalculatorViewController: UIViewController {
         processInput(from: inputFromButton)
     }
     
-    func processInput(from inputFromButton: String) {
+    private func processInput(from inputFromButton: String) {
         switch inputFromButton {
         case ButtonValue.AC:
             allClear()
@@ -54,14 +61,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func processDotInput(_ inputFromButton: String) {
+    private func processDotInput(_ inputFromButton: String) {
         guard operandUILabel.text?.contains(SpecialCharacter.dot) == false,
               let prevOperandUILabel = operandUILabel.text else { return }
         
         operandUILabel.text = prevOperandUILabel + inputFromButton
     }
     
-    func processNumberInput(_ inputFromButton: String){
+    private func processNumberInput(_ inputFromButton: String){
         guard let prevOperandUILabel = operandUILabel.text else { return }
         
         if prevOperandUILabel == DefaultValue.zero {
@@ -81,19 +88,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func allClear() {
-        scrollView.subviews.forEach { $0.removeFromSuperview() }
-        
-        operatorUILabel.text = DefaultValue.empty
-        operandUILabel.text = DefaultValue.zero
-        expression = DefaultValue.empty
-    }
-    
-    func clearEntry() {
+    private func clearEntry() {
         operandUILabel.text = DefaultValue.zero
     }
     
-    func signChanger() {
+    private func signChanger() {
         guard operandUILabel.text != DefaultValue.zero else {
             return
         }
@@ -108,7 +107,7 @@ class CalculatorViewController: UIViewController {
         operandUILabel.text = SpecialCharacter.negativeNumber + prevOperandUILabel
     }
     
-    func processOperatorInput(_ inputFromButton: String) {
+    private func processOperatorInput(_ inputFromButton: String) {
         guard operandUILabel.text != DefaultValue.zero  else {
             if !scrollView.subviews.isEmpty {
                 operatorUILabel.text = inputFromButton
@@ -123,7 +122,7 @@ class CalculatorViewController: UIViewController {
         operatorUILabel.text = inputFromButton
     }
     
-    func processEqualSignInput() {
+    private func processEqualSignInput() {
         guard operatorUILabel.text != DefaultValue.empty else { return }
     
         stackInputToExpression()
@@ -131,7 +130,7 @@ class CalculatorViewController: UIViewController {
         calculateExpression()
     }
     
-    func stackInputToScrollView() {
+    private func stackInputToScrollView() {
         let stackView = UIStackView()
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
@@ -159,7 +158,7 @@ class CalculatorViewController: UIViewController {
         scrollToBottomOfScrollView()
     }
     
-    func scrollToBottomOfScrollView() {
+    private func scrollToBottomOfScrollView() {
         guard let parentScrollView = scrollView.superview as? UIScrollView,
               let subviewHeight = scrollView.subviews.first?.bounds.size.height else { return }
         
@@ -170,14 +169,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    func stackInputToExpression() {
+    private func stackInputToExpression() {
         guard let operatorText = operatorUILabel.text,
               let operandText = operandUILabel.text else { return }
         
         expression += operatorText + formattingNumber(for: operandText)
     }
     
-    func calculateExpression() {
+    private func calculateExpression() {
         let removedComma = expression.components(separatedBy: SpecialCharacter.comma).joined()
         
         var formula = ExpressionParser.parse(from: removedComma)
@@ -194,7 +193,7 @@ class CalculatorViewController: UIViewController {
         expression = DefaultValue.empty
     }
     
-    func formattingNumber(for input: String) -> String {
+    private func formattingNumber(for input: String) -> String {
         let formatter = NumberFormatter()
         let removedComma = input.components(separatedBy: SpecialCharacter.comma).joined()
         
@@ -213,18 +212,18 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
-    enum DefaultValue {
+    private enum DefaultValue {
         static let empty = ""
         static let zero = "0"
     }
     
-    enum SpecialCharacter {
+    private enum SpecialCharacter {
         static let comma = ","
         static let dot = "."
         static let negativeNumber = "-"
     }
     
-    enum ButtonValue {
+    private enum ButtonValue {
         static let AC = "AC"
         static let CE = "CE"
         static let SC = "⁺⁄₋"
