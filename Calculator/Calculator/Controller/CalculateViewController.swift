@@ -14,11 +14,7 @@ final class CalculateViewController: UIViewController {
     
     private var enteringNumber: String = Sign.empty {
         didSet {
-            if enteringNumber == Sign.empty || enteringNumber == Sign.space {
-                enteringNumberLabel.text = Sign.zero
-            } else {
-                enteringNumberLabel.text = enteringNumber
-            }
+            enteringNumberLabel.text = calculatorChecker.hasCurrentInput(enteringNumber) ? enteringNumber : Sign.zero
         }
     }
     private var calculationExpression: String = Sign.empty
