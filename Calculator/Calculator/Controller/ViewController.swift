@@ -91,7 +91,7 @@ class ViewController: UIViewController {
     }
     
     //MARK: - IBAciton
-    @IBAction func operandsButtonDidTapped(_ sender: UIButton) {
+    @IBAction func operandsButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
         
         if currentOperand == Sign.zero {
@@ -105,13 +105,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func zeroButtonDidTapped(_ sender: UIButton) {
+    @IBAction func zeroButtonTapped(_ sender: UIButton) {
         guard let zero = sender.currentTitle,
               currentOperand != Sign.zero else { return }
         inputOperandsLabel.text = currentOperand + zero
     }
     
-    @IBAction func operatorsButtonDidTapped(_ sender: UIButton) {
+    @IBAction func operatorsButtonTapped(_ sender: UIButton) {
         var newStackView: UIStackView = UIStackView()
         
         guard let currentSign = sender.currentTitle else { return }
@@ -135,13 +135,13 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonDidTapped(_ sender: UIButton) {
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle,
               currentOperand.contains(Sign.dot) == false else { return }
         inputOperandsLabel.text = currentOperand + dot
     }
     
-    @IBAction func calculationButtonDidTapped(_ sender: UIButton) {
+    @IBAction func calculationButtonTapped(_ sender: UIButton) {
         let newStackView = makeStackView(currentOperator, currentOperand)
         stackView.addArrangedSubview(newStackView)
         settingScrollView()
@@ -160,14 +160,14 @@ class ViewController: UIViewController {
         currentInputFormula = []
     }
     
-    @IBAction func allClearButtonDidTapped(_ sender: UIButton) {
+    @IBAction func allClearButtonTapped(_ sender: UIButton) {
         reset()
         currentInputFormula = []
         oldInputFormula = []
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction func changeSignButtonDidTapped(_ sender: UIButton) {
+    @IBAction func changeSignButtonTapped(_ sender: UIButton) {
         guard currentOperand != Sign.zero else { return }
         
         if currentOperand.hasPrefix(Sign.minus) {
@@ -177,7 +177,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func clearEntryButtonDidTapped(_ sender: UIButton) {
+    @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
         inputOperandsLabel.text = Sign.zero
     }
 }
