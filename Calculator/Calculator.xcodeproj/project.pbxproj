@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4ACD23892990F57A00728FF4 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD23882990F57A00728FF4 /* DoubleExtension.swift */; };
+		4ACD238B2990F5A400728FF4 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD238A2990F5A400728FF4 /* StringExtension.swift */; };
+		4ACD238D2990F5CA00728FF4 /* OperatorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ACD238C2990F5CA00728FF4 /* OperatorExtension.swift */; };
 		5864CD542990E59E00236528 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5864CD532990E59E00236528 /* Operator.swift */; };
 		5864CD592990F2A600236528 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5864CD582990F2A600236528 /* Formula.swift */; };
 		5864CD5B2990F3BC00236528 /* CalculateItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5864CD5A2990F3BC00236528 /* CalculateItemQueue.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4ACD23882990F57A00728FF4 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
+		4ACD238A2990F5A400728FF4 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		4ACD238C2990F5CA00728FF4 /* OperatorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorExtension.swift; sourceTree = "<group>"; };
 		5864CD532990E59E00236528 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		5864CD582990F2A600236528 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		5864CD5A2990F3BC00236528 /* CalculateItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemQueue.swift; sourceTree = "<group>"; };
@@ -70,6 +76,9 @@
 				5864CD532990E59E00236528 /* Operator.swift */,
 				5864CD5A2990F3BC00236528 /* CalculateItemQueue.swift */,
 				5864CD5C2990F3EE00236528 /* CalculateItem.swift */,
+				4ACD238A2990F5A400728FF4 /* StringExtension.swift */,
+				4ACD238C2990F5CA00728FF4 /* OperatorExtension.swift */,
+				4ACD23882990F57A00728FF4 /* DoubleExtension.swift */,
 				5864CD582990F2A600236528 /* Formula.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
@@ -149,11 +158,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4ACD23892990F57A00728FF4 /* DoubleExtension.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				5864CD542990E59E00236528 /* Operator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				5864CD5B2990F3BC00236528 /* CalculateItemQueue.swift in Sources */,
+				4ACD238B2990F5A400728FF4 /* StringExtension.swift in Sources */,
 				5864CD592990F2A600236528 /* Formula.swift in Sources */,
+				4ACD238D2990F5CA00728FF4 /* OperatorExtension.swift in Sources */,
 				5864CD5D2990F3EF00236528 /* CalculateItem.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
