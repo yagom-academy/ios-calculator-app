@@ -21,14 +21,6 @@ final class CalculateViewController: UIViewController {
     
     private let calculatorChecker = CalculatorChecker()
     
-    private lazy var numberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
-        return numberFormatter
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -41,7 +33,7 @@ final class CalculateViewController: UIViewController {
         }
         
         let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
-        enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
+        enteringNumber = convertToDecimal(for: addedEnteringNumber)
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
@@ -70,7 +62,7 @@ final class CalculateViewController: UIViewController {
         }
         
         let addedEnteringNumber = enteringNumber.convertToDouble(appending: zeroPad)
-        enteringNumber = numberFormatter.string(for: addedEnteringNumber) ?? Sign.zero
+        enteringNumber = convertToDecimal(for: addedEnteringNumber)
     }
     
     @IBAction private func dotPadTapped(_ sender: UIButton) {
@@ -92,7 +84,7 @@ final class CalculateViewController: UIViewController {
         
         let result = calculatorChecker.calculate(with: calculationExpression)
         initialState()
-        enteringNumberLabel.text = numberFormatter.string(for: result)
+        enteringNumberLabel.text = convertToDecimal(for: result)
     }
     
     @IBAction private func ACPadTapped(_ sender: UIButton) {
@@ -118,7 +110,7 @@ final class CalculateViewController: UIViewController {
         formulaStackView.addLabels(
             [
                 currentOperatorText,
-                numberFormatter.string(for: enteringNumberText.convertToDouble()) ?? Sign.zero
+                convertToDecimal(for: enteringNumberText.convertToDouble()) 
             ]
         )
         calculatorStackView.addArrangedSubview(formulaStackView)
@@ -136,5 +128,13 @@ final class CalculateViewController: UIViewController {
         calculatorStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
+    }
+
+    private func convertToDecimal(for number: Double) -> String {
+        let numberFormatter =  NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter.string(for: number) ?? Sign.zero
     }
 }
