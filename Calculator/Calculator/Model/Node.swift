@@ -6,11 +6,11 @@
 //
 
 final class Node<T> {
-    weak var prev: Node?
-    var data: T?
-    var next: Node?
+    private(set) var data: T
+    var next: Node<T>?
     
-    init(_ data: T?) {
+    init(_ data: T, next: Node<T>? = nil) {
         self.data = data
+        self.next = next
     }
 }
