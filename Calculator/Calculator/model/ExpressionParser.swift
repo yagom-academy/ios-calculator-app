@@ -11,15 +11,15 @@ enum ExpressionParser {
         var formula = Formula()
         let result = componentsByOperators(from: input)
         
-        result
-            .forEach {
-                if let num = Double($0) {
-                    formula.operands.enqueue(num)
-                } else if !$0.isEmpty {
-                    let char = Character($0)
-                    Operator(rawValue: char).map { formula.operators.enqueue($0) }
-                }
+        result.forEach {
+            if let num = Double($0) {
+                formula.operands.enqueue(num)
+            } else if $0.isEmpty == false {
+                let char = Character($0)
+                Operator(rawValue: char).map { formula.operators.enqueue($0) }
             }
+        }
+        
         return formula
     }
     
