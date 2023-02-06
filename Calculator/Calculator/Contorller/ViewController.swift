@@ -60,7 +60,7 @@ class ViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(verticalStackViewInScroll)
         allClear()
-        
+        setNumberFormatter()
     }
     
     private func setUpScrollViewToBottom(){
@@ -193,16 +193,17 @@ class ViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         
-        guard let mappedToDouble = Double(number) else { return "" }
-        guard let result = numberFormatter.string(from: NSNumber(value:mappedToDouble)) else { return "" }
+        guard let numberMappedToDouble = Double(number) else { return "" }
+        guard let result = numberFormatter.string(from: NSNumber( value:numberMappedToDouble )) else { return "" }
         
         return result
     }
     
-    private func RemoveCommaExceptOne() {
-        guard let currentNumber = self.numberOnField.text else { return }
-        if currentNumber.contains(".") == true {
-            return
-        }
+    private func setNumberFormatter() {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.roundingMode = .halfUp
     }
+        
 }
