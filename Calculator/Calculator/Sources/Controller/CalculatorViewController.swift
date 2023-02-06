@@ -176,6 +176,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func convertSign() {
+        guard currentNumber != NameSpace.emptyString else {
+            return
+        }
         var count = 0
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
