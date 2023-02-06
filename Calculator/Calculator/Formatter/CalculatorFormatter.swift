@@ -1,6 +1,6 @@
 //
 //  Calculator - CalculatorFormatter.swift
-//  Created by Rhode.
+//  Created by Rhode, Songjun.
 //  Copyright © yagom. All rights reserved.
 //
 import Foundation
