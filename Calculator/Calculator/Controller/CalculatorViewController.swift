@@ -47,7 +47,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapChangeSignButton() {
-        guard calculateOperand != Symbol.zero else { return }
+        guard calculateOperand != Symbol.zero,
+              calculateOperand != Symbol.nan else { return }
         
         guard let calculateNumberFirst = calculateOperand.first else { return }
         
