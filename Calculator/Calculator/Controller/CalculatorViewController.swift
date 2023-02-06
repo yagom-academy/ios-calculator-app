@@ -137,15 +137,9 @@ final class CalculatorViewController: UIViewController {
         expression.append(number)
     }
     
-//    private func addToCalculateItem(left: String, right: String) {
-//        let calculatorLabel = generateUILabel()
-//        calculateStackView.addArrangedSubview(calculatorLabel)
-//        scrollToBottom()
-//    }
-    
     private func scrollToBottom() {
         let bottomOffset = CGPoint(
-            x: 0,
+            x: Symbol.origin,
             y: calculateScrollView.contentSize.height - calculateScrollView.bounds.height
         )
         

@@ -14,4 +14,5 @@ enum Symbol {
     
     // MARK: Int
     static let maxSignificantDigits = 20
+    static let origin: Double = 0
 }
