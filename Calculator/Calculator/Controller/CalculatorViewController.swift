@@ -70,6 +70,7 @@ final class CalculatorViewController: UIViewController {
         isCalculated = true
         resetOperator()
         expression.removeAll()
+        scrollToBottom()
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
@@ -128,7 +129,7 @@ final class CalculatorViewController: UIViewController {
     
     private func addExpressionAndCalculateItem(sign: String, number: String, operand: String) {
         appendExpression(sign: sign, number: number)
-        addToCalculateItem(left: sign, right: operand)
+        addStackView()
     }
     
     private func appendExpression(sign: String, number: String) {
@@ -136,11 +137,11 @@ final class CalculatorViewController: UIViewController {
         expression.append(number)
     }
     
-    private func addToCalculateItem(left: String, right: String) {
-        let calculatorLabel = generateUILabel()
-        calculateStackView.addArrangedSubview(calculatorLabel)
-        scrollToBottom()
-    }
+//    private func addToCalculateItem(left: String, right: String) {
+//        let calculatorLabel = generateUILabel()
+//        calculateStackView.addArrangedSubview(calculatorLabel)
+//        scrollToBottom()
+//    }
     
     private func scrollToBottom() {
         let bottomOffset = CGPoint(
@@ -148,8 +149,8 @@ final class CalculatorViewController: UIViewController {
             y: calculateScrollView.contentSize.height - calculateScrollView.bounds.height
         )
         
-        calculateScrollView.layoutIfNeeded()
         calculateScrollView.setContentOffset(bottomOffset, animated: true)
+        calculateScrollView.layoutIfNeeded()
     }
     
     private func generateUILabel() -> UILabel {
