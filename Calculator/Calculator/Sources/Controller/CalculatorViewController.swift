@@ -73,8 +73,7 @@ final class CalculatorViewController: UIViewController {
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
-        operatingScrollView.layoutIfNeeded()
-        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
+        fixateScrollViewBottom()
         resetCurrentNumber()
     }
     
@@ -110,8 +109,7 @@ final class CalculatorViewController: UIViewController {
             displayResult(result: result)
         } else { return }
         
-        operatingScrollView.layoutIfNeeded()
-        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
+        fixateScrollViewBottom()
     }
     
     private func calculate() -> Double? {
@@ -193,7 +191,7 @@ final class CalculatorViewController: UIViewController {
         displayCurrentNumber()
     }
     
-    //MARK: Methods removing operands or resetting number
+    //MARK: Methods about settings
     private func removePreviousOperands() {
         guard let stackViewWillBeRemoved = verticalStackView.subviews.last else {
             return
@@ -210,5 +208,10 @@ final class CalculatorViewController: UIViewController {
         verticalStackView.subviews.forEach { subView in
             subView.removeFromSuperview()
         }
+    }
+    
+    private func fixateScrollViewBottom() {
+        operatingScrollView.layoutIfNeeded()
+        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
     }
 }
