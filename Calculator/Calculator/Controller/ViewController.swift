@@ -34,7 +34,8 @@ final class ViewController: UIViewController {
     }
     private var currentInputFormula: [String] = []
     private var oldInputFormula: [String] = []
-
+    private let numberFormatter = NumberFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resetLabelsText()
@@ -67,8 +68,6 @@ final class ViewController: UIViewController {
     }
     
     private func formatNumber(_ result: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.roundingMode = .halfUp
