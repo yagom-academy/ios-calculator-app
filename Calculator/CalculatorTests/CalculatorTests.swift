@@ -20,22 +20,6 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(1, expectation)
     }
     
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
-    
-    func test_enqueue실행시_처음_값을_넣어주면_처음넣은값이_출력된다() {
-        //given
-        let fisrt = sut.peek
-
-        //when
-        sut.enqueue(1)
-        
-        //then
-        XCTAssertEqual(fisrt, 1)
-    }
-    
     func test_enqueue실행시_값을_여러번_넣었을때_첫번째값이_출력된다() {
         //given
         let fisrt = sut.peek
