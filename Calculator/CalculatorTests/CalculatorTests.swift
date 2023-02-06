@@ -91,5 +91,3 @@ final class CalculatorTests: XCTestCase {
     }
     
 }
-
-extension Int: CalculateItem {}
