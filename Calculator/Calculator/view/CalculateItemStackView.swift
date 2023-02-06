@@ -27,7 +27,7 @@ final class CalculateItemStackView: UIStackView {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    func add(currentItem: CurrentItem) {
+    func add(_ currentItem: CurrentItem) {
         guard let subview = generateStackView(about: currentItem) else { return }
         
         add(subview, to: self)

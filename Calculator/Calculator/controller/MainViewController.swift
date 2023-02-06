@@ -17,11 +17,8 @@ final class MainViewController: UIViewController {
                                                   roundingMode: .halfUp,
                                                   usesSignificantDigits: true,
                                                   maximumSignificantDigits: 20)
-    private var currentOperand: String {
-        return operandLabel.text ?? Sign.zero
-    }
-    private var currentOperator: String {
-        return operatorLabel.text ?? Sign.empty
+    private var currentItem: CurrentItem {
+        return (operatorLabel.text ?? Sign.empty, operandLabel.text ?? Sign.zero)
     }
     
     override func viewDidLoad() {
@@ -42,8 +39,8 @@ final class MainViewController: UIViewController {
     @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         
-        if currentOperand != Sign.zero {
-            let nextOperand = currentOperand + inputOperand
+        if currentItem.operand != Sign.zero {
+            let nextOperand = currentItem.operand + inputOperand
             operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
         } else {
             operandLabel.text = inputOperand
@@ -51,18 +48,18 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func touchDotButton(_ sender: UIButton) {
-        guard currentOperand.contains(Sign.dot) == false else { return }
+        guard currentItem.operand.contains(Sign.dot) == false else { return }
         
-        operandLabel.text = currentOperand + Sign.dot
+        operandLabel.text = currentItem.operand + Sign.dot
     }
     
     @IBAction private func touchZeroButton(_ sender: UIButton) {
         guard let senderTitle = sender.currentTitle else { return }
         
-        if currentOperand != Sign.zero, currentOperand.contains(Sign.dot) {
-            operandLabel.text = currentOperand + senderTitle
+        if currentItem.operand != Sign.zero, currentItem.operand.contains(Sign.dot) {
+            operandLabel.text = currentItem.operand + senderTitle
         } else {
-            operandLabel.text = numberFormatter.convertToDecimal(from: currentOperand + senderTitle)
+            operandLabel.text = numberFormatter.convertToDecimal(from: currentItem.operand + senderTitle)
         }
     }
     
@@ -77,9 +74,10 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func toggleSign(_ sender: UIButton) {
-        guard currentOperand != Sign.zero,
-              let convertedOperand = numberFormatter.convertToDouble(from: currentOperand),
-              let toggledOperand = numberFormatter.convertToString(from: -convertedOperand) else { return }
+        guard currentItem.operand != Sign.zero,
+              let convertedOperand = numberFormatter.convertToDouble(from: currentItem.operand),
+              let toggledOperand = numberFormatter.convertToString(from: -convertedOperand)
+        else { return }
         
         operandLabel.text = toggledOperand
     }
@@ -90,18 +88,18 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            calculateItemStackView.add(currentItem: (currentOperator, currentOperand))
-            inputHandler.addInput(about: (currentOperator, currentOperand))
+            calculateItemStackView.add(currentItem)
+            inputHandler.addInput(about: currentItem)
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard currentOperator != Sign.empty else { return }
+        guard currentItem.operator != Sign.empty else { return }
         
-        calculateItemStackView.add(currentItem: (currentOperator, currentOperand))
-        inputHandler.addInput(about: (currentOperator, currentOperand))
+        calculateItemStackView.add(currentItem)
+        inputHandler.addInput(about: currentItem)
         
         var formula = ExpressionParser.parse(from: inputHandler.currentInput)
         let result = formula.result()
