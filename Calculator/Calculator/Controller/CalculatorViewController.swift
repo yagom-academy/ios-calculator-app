@@ -34,8 +34,10 @@ final class CalculateViewController: UIViewController {
               let currentOperatorText = enteringOperatorLabel.text else { return }
         enteringOperatorLabel.text = inputOperatorText
         
-        guard enteringNumberLabel.text != Sign.zero else { return }
-        calculatorStackView.addLabels(operandText: enteringNumberLabel.text, operatorText: currentOperatorText)
+        guard enteringNumberLabel.text != Sign.zero,
+              let formattingLabelText = enteringNumberLabel.text?.convertToDouble(),
+              let decimalText = calculatorChecker?.convertToDecimal(for: formattingLabelText) else { return }
+        calculatorStackView.addLabels(operandText: decimalText, operatorText: currentOperatorText)
         calculatorChecker?.appendingExpression(currentOperatorText)
     }
     
@@ -46,13 +48,10 @@ final class CalculateViewController: UIViewController {
         
         calculatorChecker?.appendingZero(zeroPad)
     }
-//
-//    @IBAction private func didTapDotPad(_ sender: UIButton) {
-//        guard let enteringNumberText = enteringNumberLabel.text,
-//            !calculatorChecker.hasDot(enteringNumberText) else { return }
-//
-//        enteringNumber = calculatorChecker.appendingDot(enteringNumberText)
-//    }
+
+    @IBAction private func didTapDotPad(_ sender: UIButton) {
+        calculatorChecker?.appendingDot()
+    }
 //
 //    @IBAction private func didTapCalculationPad(_ sender: UIButton) {
 //        guard let enteringOperatorText = enteringOperatorLabel.text,

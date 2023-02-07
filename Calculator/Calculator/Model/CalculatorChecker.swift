@@ -22,13 +22,12 @@ struct CalculatorChecker {
     }
     
     mutating func appendingExpression(_ operatorText: String) {
-        calculationExpression += (operatorText + convertToDecimal(for: enteringNumber.convertToDouble()))
+        let convertedNumber = convertToDecimal(for: enteringNumber.convertToDouble())
+        calculationExpression += (operatorText + convertedNumber)
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
     
-    
-    // 0이 들어왔을때 넘버라벨
     mutating func appendingZero(_ zeroPad: String) {
         if isZero(enteringNumber) || hasCurrentInput(enteringNumber) == false {
             enteringNumber = Sign.zero
@@ -42,6 +41,13 @@ struct CalculatorChecker {
         }
         
         appendingNumber(zeroPad)
+    }
+    
+    mutating func appendingDot() {
+        guard hasDot(enteringNumber) == false else { return }
+        
+        enteringNumber = hasCurrentInput(enteringNumber) ? (enteringNumber + Sign.dot) : "0."
+        labelUpdateClosure(enteringNumber)
     }
     
     func hasCurrentInput(_ currentText: String) -> Bool {
@@ -78,7 +84,7 @@ struct CalculatorChecker {
         return formula.result()
     }
     
-    private func convertToDecimal(for number: Double) -> String {
+    func convertToDecimal(for number: Double) -> String {
         let numberFormatter =  NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
