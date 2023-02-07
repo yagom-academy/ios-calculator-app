@@ -9,31 +9,17 @@ import UIKit
 class ViewController: UIViewController {
     
     private var calculateComponents: String = ""
-    
     private var inputNumbers: String = ""
-    
     @IBOutlet weak var numberOnField: UILabel!
-    
     @IBOutlet weak var operatorOnField: UILabel!
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    
-    @IBOutlet weak var verticalStackViewInScroll: UIStackView!
-    
-    @IBOutlet weak var horizonStackViewVertical: UIStackView!
-    
-    @IBOutlet weak var operatorInStackView: UILabel!
-    
-    @IBOutlet weak var numberInStackView: UILabel!
-    
+    @IBOutlet weak var historyStackView: UIStackView!
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        setUpView()
+        allClear()
     }
     
-    //버튼탭
     @IBAction func buttonTapped(sender: UIButton) {
         guard let Inputtedtitle = sender.titleLabel?.text else { return }
         
@@ -53,13 +39,6 @@ class ViewController: UIViewController {
         default:
             return
         }
-    }
-    
-    private func setUpView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(verticalStackViewInScroll)
-        allClear()
-        setNumberFormatter()
     }
     
     private func setUpScrollViewToBottom(){
@@ -147,10 +126,10 @@ class ViewController: UIViewController {
             return
         } else if calculateComponents == "" {
             calculateComponents += currentNumber
-            addNewStackView(number: currentNumber, oper: "")
+            addHistoryEntry(left: "", right: currentNumber)
         } else {
             calculateComponents += currentOper + currentNumber
-            addNewStackView(number: currentNumber, oper: currentOper)
+            addHistoryEntry(left: currentOper, right: currentNumber)
             self.numberOnField.text = ""
 
         }
@@ -159,32 +138,21 @@ class ViewController: UIViewController {
         setUpScrollViewToBottom()
     }
     
-    private func addNewStackView(number: String, oper: String) {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 8
+    private func addHistoryEntry(left: String, right: String) {
+        let historyEntryStackView = HistoryEntryStackView(operatorText: left, operandText: right)
         
-        let createdOperLabel = UILabel()
-        createdOperLabel.text = oper
-        createdOperLabel.textColor = .white
-        createdOperLabel.font = UIFont.systemFont(ofSize: 20)
+        historyEntryStackView.isHidden = true
         
-        let createdNumberLabel = UILabel()
-        createdNumberLabel.text = number
-        createdNumberLabel.textColor = .white
-        createdNumberLabel.font = UIFont.systemFont(ofSize: 20)
+        historyStackView.addArrangedSubview(historyEntryStackView)
         
-        [createdOperLabel, createdNumberLabel].map {
-            stackView.addArrangedSubview($0)
+        UIView.animate(withDuration: 0.3) {
+            historyEntryStackView.isHidden = false
         }
-        self.verticalStackViewInScroll.addArrangedSubview(stackView)
-        
+        setUpScrollViewToBottom()
     }
     
     private func resetAllStackView() {
-        verticalStackViewInScroll.subviews.forEach { $0.removeFromSuperview() }
+        historyStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func addCommaToThreeDigit(number: String) -> String {
@@ -196,13 +164,5 @@ class ViewController: UIViewController {
         
         return result
     }
-    
-    private func setNumberFormatter() {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.roundingMode = .halfUp
-    }
-        
 }
 
