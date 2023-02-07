@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by 혜모리.
+//  Created by 혜모리, 릴라.
 //  Copyright © yagom. All rights reserved.
 //
 

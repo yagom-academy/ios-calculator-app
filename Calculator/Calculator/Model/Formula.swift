@@ -2,8 +2,8 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 혜모리 on 2023/01/28.
-// test
+//  Created by 혜모리, 릴라 on 2023/01/28.
+//
 
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
