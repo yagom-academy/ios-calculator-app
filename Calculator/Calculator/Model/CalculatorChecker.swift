@@ -1,6 +1,21 @@
 import Foundation
 
 struct CalculatorChecker {
+    private var enteringNumber = Sign.empty
+    private var calculationExpression: String = Sign.empty
+    
+    mutating func appendingNumber(_ numberPad: String) -> String {
+        if !hasCurrentInput(enteringNumber) {
+            enteringNumber = numberPad
+            return enteringNumber
+        }
+        
+        let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
+        enteringNumber = convertToDecimal(for: addedEnteringNumber)
+        return enteringNumber
+    }
+    
+    
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
             return false

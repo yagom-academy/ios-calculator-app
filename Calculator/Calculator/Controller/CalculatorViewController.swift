@@ -12,28 +12,15 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     
-    private var enteringNumber: String = Sign.empty {
-        didSet {
-            enteringNumberLabel.text = calculatorChecker.hasCurrentInput(enteringNumber) ? enteringNumber : Sign.zero
-        }
-    }
-    private var calculationExpression: String = Sign.empty
-    
     private let calculatorChecker = CalculatorChecker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction private func numberPadTapped(_ sender: UIButton) {
+    @IBAction func didTapNumber(_ sender: UIButton) {
         guard let numberPad = sender.currentTitle else { return }
-        guard calculatorChecker.hasCurrentInput(enteringNumber) else {
-            enteringNumber = numberPad
-            return
-        }
-        
-        let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
-        enteringNumber = convertToDecimal(for: addedEnteringNumber)
+        enteringNumberLabel.text = calculatorChecker.appendingNumber(numberPad)
     }
     
     @IBAction private func operatorPadTapped(_ sender: UIButton) {
