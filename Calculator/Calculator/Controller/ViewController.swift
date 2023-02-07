@@ -18,14 +18,14 @@ final class ViewController: UIViewController {
         static let empty = ""
         static let zero = "0"
         static let zeroZero = "00"
-        static let negative = "-"
+        static let negative: Character = "-"
         static let nan = "NaN"
     }
     
     private var expression: String = Sign.empty
     private var isCalculatedStatus: Bool = false
-    private var currentOperator: String { (operatorLabel.text ?? Sign.zero) }
-    private var currentOperand: String { (operandLabel.text ?? Sign.empty) }
+    private var currentOperator: String { operatorLabel.text ?? Sign.zero }
+    private var currentOperand: String { operandLabel.text ?? Sign.empty }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,14 +147,15 @@ final class ViewController: UIViewController {
     }
     
     private func convertPositiveAndNegativeNumber() -> String {
-        guard currentOperand != Sign.zero else { return Sign.zero }
+        guard var operands = operandLabel.text,
+              operands != Sign.zero  else { return Sign.zero }
         
-        let operandValue = currentOperand
-        
-        guard operandValue.prefix(1) != Sign.negative else {
-            return String(operandValue.dropFirst(1))
+        if operands.first == Sign.negative {
+            operands.removeFirst()
+        } else {
+            operands = "\(Sign.negative)" + operands
         }
-        return Sign.negative + operandValue
+        return operands
     }
     
     private func createLabel(input: String) -> UILabel {
