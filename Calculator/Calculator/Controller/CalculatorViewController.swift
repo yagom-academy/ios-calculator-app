@@ -88,7 +88,7 @@ final class CalculatorViewController: UIViewController {
         
         expression += operatorText + convertNumberToString(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operandText)
+        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         
@@ -104,7 +104,7 @@ final class CalculatorViewController: UIViewController {
         
         expression += operatorText + convertNumberToString(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operandText)
+        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         calculateExpression()
@@ -114,7 +114,7 @@ final class CalculatorViewController: UIViewController {
         let removedComma = expression.components(separatedBy: ",").joined()
         
         var formula = ExpressionParser.parse(from: removedComma)
-        var result = formula.result()
+        let result = formula.result()
         
         if result.isNaN {
             operandLabel.text = "NaN"
@@ -127,8 +127,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
-        workingSpace = ""
-        operand = ""
+        expression = ""
         clearLabel()
         clearAllContentStack()
     }
