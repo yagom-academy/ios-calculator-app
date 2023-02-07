@@ -62,11 +62,8 @@ final class CalculatorViewController: UIViewController {
         addExpressionAndCalculateItem(sign: calculateOperator,
                                       number: "\(number)",
                                       operand: formatNumber)
-        
-        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.empty))
-        guard let result = formula.result() else { return }
-        
-        calculateOperand = NumberFormatter.convertToString(fromDouble: result)
+ 
+        calculateOperand = calculate()
         isCalculated = true
         resetOperator()
         expression.removeAll()
@@ -133,6 +130,13 @@ final class CalculatorViewController: UIViewController {
         if isCalculated {
             isCalculated = false
         }
+    }
+    
+    private func calculate() -> String {
+        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.empty))
+        guard let result = formula.result() else { return Symbol.empty }
+        
+        return NumberFormatter.convertToString(fromDouble: result)
     }
     
     private func scrollToBottom() {
