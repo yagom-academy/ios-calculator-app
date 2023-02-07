@@ -16,6 +16,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
         leftStack.isEmpty && rightStack.isEmpty
     }
     
+    var itemCount: Int {
+        return rightStack.count
+    }
+    
     var peek: T? {
         !leftStack.isEmpty ? leftStack.last : rightStack.first
     }
