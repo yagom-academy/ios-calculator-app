@@ -57,6 +57,59 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A9AA125299207630060BEF1 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		4A9AA126299207690060BEF1 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				4A9AA1292992077C0060BEF1 /* Controller */,
+				4A9AA128299207770060BEF1 /* View */,
+				4A9AA127299207700060BEF1 /* Model */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		4A9AA127299207700060BEF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5864CD622992013C00236528 /* Formula.swift */,
+				4A729EC42992032E00FA53FB /* Operator.swift */,
+				5864CD642992027500236528 /* ExpressionParser.swift */,
+				5864CD66299203C400236528 /* CalculatorItemQueue.swift */,
+				5864CD682992046400236528 /* StringExtension.swift */,
+				5864CD6E2992050C00236528 /* CalculateItem.swift */,
+				5864CD6A299204A400236528 /* OperatorExtension.swift */,
+				5864CD6C299204C800236528 /* DoubleExtension.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A9AA128299207770060BEF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				4A729EC2299201A700FA53FB /* HistoryEntryStackView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4A9AA1292992077C0060BEF1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4A69A70F299205B0001C0DDF /* CalculatorViewController.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -76,23 +129,10 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				5864CD622992013C00236528 /* Formula.swift */,
-				5864CD642992027500236528 /* ExpressionParser.swift */,
-				5864CD66299203C400236528 /* CalculatorItemQueue.swift */,
-				5864CD682992046400236528 /* StringExtension.swift */,
-				5864CD6E2992050C00236528 /* CalculateItem.swift */,
-				5864CD6A299204A400236528 /* OperatorExtension.swift */,
-				5864CD6C299204C800236528 /* DoubleExtension.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				4A9AA126299207690060BEF1 /* Source */,
+				4A9AA125299207630060BEF1 /* App */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
-				4A729EC2299201A700FA53FB /* HistoryEntryStackView.swift */,
-				4A729EC42992032E00FA53FB /* Operator.swift */,
-				4A69A70F299205B0001C0DDF /* CalculatorViewController.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
