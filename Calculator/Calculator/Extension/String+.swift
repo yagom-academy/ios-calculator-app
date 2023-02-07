@@ -13,15 +13,15 @@ extension String {
         
         let splittedNumber = self.components(separatedBy: ".")
         if splittedNumber.count == 1 {
-            guard let intValue = Int(splittedNumber[0]) else {
+            guard let decimalValue = Decimal(string: splittedNumber[0]) else {
                 return self
             }
-            return numberFormatter.string(from: Decimal(intValue) as NSNumber) ?? self
+            return numberFormatter.string(from: decimalValue as NSNumber) ?? self
         } else if splittedNumber.count == 2 {
-            guard let intNumberBeforeDecimalPoint = Int(splittedNumber[0]) else {
+            guard let decimalNumberBeforeDecimalPoint = Decimal(string: splittedNumber[0]) else {
                 return self
             }
-            let numberBeforeDecimalPoint = numberFormatter.string(from: Decimal(intNumberBeforeDecimalPoint) as NSNumber) ?? self
+            let numberBeforeDecimalPoint = numberFormatter.string(from: decimalNumberBeforeDecimalPoint as NSNumber) ?? self
             let wholeNumber = numberBeforeDecimalPoint + "." + splittedNumber[1]
             return wholeNumber
         }
