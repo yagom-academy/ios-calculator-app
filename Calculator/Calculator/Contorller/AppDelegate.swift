@@ -1,6 +1,6 @@
 //
 //  Calculator - AppDelegate.swift
-//  Created by yagom. 
+//  Created by Harry, Goat. 
 //  Copyright © yagom. All rights reserved.
 // 
 

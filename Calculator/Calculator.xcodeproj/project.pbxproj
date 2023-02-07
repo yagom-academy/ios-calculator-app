@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A26399D2992351000004C73 /* HistoryEntryStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26399C2992351000004C73 /* HistoryEntryStackView.swift */; };
 		583D1130298047280097CC18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		583D1133298048060097CC18 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D1132298048060097CC18 /* CalculatorItemQueue.swift */; };
 		584146D0298246FC00817FFB /* CalculatorQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A26399C2992351000004C73 /* HistoryEntryStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryStackView.swift; sourceTree = "<group>"; };
 		583D1132298048060097CC18 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		583D113829804ECB0097CC18 /* CalculatorQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorQueueTests.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 		58BF1B5B298952C50029D030 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4A26399C2992351000004C73 /* HistoryEntryStackView.swift */,
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
@@ -291,6 +294,7 @@
 				584146E32982702400817FFB /* Formula.swift in Sources */,
 				58BF1B52298932D50029D030 /* OperatorExtension.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				4A26399D2992351000004C73 /* HistoryEntryStackView.swift in Sources */,
 				584146EB298270A200817FFB /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -347,13 +347,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="horizonStackViewVertical" destination="2Pu-Ld-ZGi" id="XnR-T9-Z8v"/>
-                        <outlet property="numberInStackView" destination="oGo-LN-bKL" id="zCV-A1-48y"/>
+                        <outlet property="historyStackView" destination="XRe-QE-UJf" id="Fik-1a-gW2"/>
                         <outlet property="numberOnField" destination="Lwz-OF-XHD" id="MHM-ab-ztn"/>
-                        <outlet property="operatorInStackView" destination="c7v-6K-W40" id="v09-tl-ga8"/>
                         <outlet property="operatorOnField" destination="HPC-iy-qdm" id="mow-go-R1X"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="mHn-m6-ewA"/>
-                        <outlet property="verticalStackViewInScroll" destination="XRe-QE-UJf" id="9RQ-0S-FYl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
