@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by christy, muri.
+//  Created by christy, Muri.
 //  Copyright © yagom. All rights reserved.
 // 
 
