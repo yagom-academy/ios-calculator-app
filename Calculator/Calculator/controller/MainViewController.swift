@@ -20,7 +20,8 @@ final class MainViewController: UIViewController {
     private var currentItem: CurrentItem {
         return (operatorLabel.text ?? Sign.empty, operandLabel.text ?? Sign.zero)
     }
-    private var isFirst: Bool = true
+    private var isFirstItem: Bool = true
+    private var isFinishedCalculation: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,19 +40,22 @@ final class MainViewController: UIViewController {
     
     @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
-        
-        if currentItem.operand != Sign.zero, currentItem.operator == Sign.empty {
+        guard isFinishedCalculation == false else {
             setInitialCurrentCalculateItem()
             setInitialCalculateItemStackView()
             operandLabel.text = inputOperand
-        } else if currentItem.operand == Sign.zero, currentItem.operator == Sign.empty {
-            operandLabel.text = inputOperand
-        } else {
-            let nextOperand = currentItem.operand + inputOperand
-            operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
+            isFinishedCalculation = false
+            return
         }
         
-        isFirst = false
+        if currentItem.operand != Sign.zero {
+            let nextOperand = currentItem.operand + inputOperand
+            operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
+        } else {
+            operandLabel.text = inputOperand
+        }
+        
+        isFirstItem = false
     }
     
     @IBAction private func touchDotButton(_ sender: UIButton) {
@@ -74,7 +78,7 @@ final class MainViewController: UIViewController {
         setInitialCalculateItemStackView()
         setInitialCurrentCalculateItem()
         inputHandler.setEmptyInput()
-        isFirst = true
+        isFirstItem = true
     }
     
     @IBAction private func clearOperandLabel(_ sender: UIButton) {
@@ -92,7 +96,7 @@ final class MainViewController: UIViewController {
     
     @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle,
-              isFirst == false else { return }
+              isFirstItem == false else { return }
         
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
@@ -102,6 +106,8 @@ final class MainViewController: UIViewController {
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
+        
+        isFinishedCalculation = false
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
@@ -113,6 +119,7 @@ final class MainViewController: UIViewController {
         var formula = ExpressionParser.parse(from: inputHandler.currentInput)
         let result = formula.result()
         
+        isFinishedCalculation = true
         inputHandler.setEmptyInput()
         operatorLabel.text = Sign.empty
         
