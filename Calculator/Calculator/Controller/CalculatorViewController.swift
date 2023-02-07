@@ -74,7 +74,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
-        guard let operatorSign = sender.currentTitle else { return }
+        restartCalculate()
+        guard let operatorSign = sender.currentTitle,
+              !calculateOperand.hasSuffix(Symbol.dot) else { return }
         guard calculateOperand != Symbol.zero else {
             if  calculateOperator != Symbol.empty {
                 calculateOperator = operatorSign
@@ -89,8 +91,6 @@ final class CalculatorViewController: UIViewController {
                                       number: calculatedNumber,
                                       operand: calculatedOperand)
         scrollToBottom()
-        
-        isCalculated = false
         calculateOperator = operatorSign
         resetOperand()
     }
