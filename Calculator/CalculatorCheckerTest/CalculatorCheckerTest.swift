@@ -91,4 +91,32 @@ final class CalculatorCheckerTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    private func test_appendingZero호출시_enteringNumber가_0이라면_enteringNumber에_0이추가되지않는다() {
+        // given
+        let input = "0"
+        let expectation = "0"
+        
+        // when
+        sut.appendingNumber("0")
+        sut.appendingZero(input)
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    private func test_appendingZero호출시_enteringNumber가_유효숫자일때_zeroPad를추가한다() {
+        // given
+        let input = "0"
+        let expectation = "10"
+        
+        // when
+        sut.appendingNumber("1")
+        sut.appendingZero(input)
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
