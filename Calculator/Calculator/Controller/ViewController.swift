@@ -140,7 +140,7 @@ final class ViewController: UIViewController {
         currentInputFormula.append(currentOperator)
         currentInputFormula.append(currentOperand)
         
-        let stringFormula = currentInputFormula.joined(separator: " ")
+        let stringFormula = currentInputFormula.joined(separator: Sign.blank)
         let removedCommaFormula = removeComma(stringFormula)
         var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
