@@ -49,4 +49,12 @@ struct CalculatorChecker {
         var formula = ExpressionParser.parse(from: expression.split(separator: ",").joined())
         return formula.result()
     }
+    
+    private func convertToDecimal(for number: Double) -> String {
+        let numberFormatter =  NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 20
+        return numberFormatter.string(for: number) ?? Sign.zero
+    }
 }

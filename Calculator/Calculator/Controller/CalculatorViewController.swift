@@ -12,7 +12,7 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: UIStackView!
     
-    private let calculatorChecker = CalculatorChecker()
+    private var calculatorChecker = CalculatorChecker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,13 +115,5 @@ final class CalculateViewController: UIViewController {
         calculatorStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
-    }
-
-    private func convertToDecimal(for number: Double) -> String {
-        let numberFormatter =  NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
-        return numberFormatter.string(for: number) ?? Sign.zero
     }
 }
