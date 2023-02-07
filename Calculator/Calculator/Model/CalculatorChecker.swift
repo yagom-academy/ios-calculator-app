@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 struct CalculatorChecker {
     private(set) var enteringNumber = Sign.empty
