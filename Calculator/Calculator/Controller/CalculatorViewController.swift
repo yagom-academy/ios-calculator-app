@@ -97,30 +97,33 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
-        guard workingSpace != "" else { return }
+        guard operatorLabel.text != "" else { return }
         
-        let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+        guard let operatorText = operatorLabel.text,
+              let operandText = operandLabel.text else { return }
+        
+        expression += operatorText + convertNumberToString(operandText)
+        
+        let stackView = generateStackView(convertNumberToString(operandText), operandText)
         addContentStack(stackView)
+        setScrollViewFocus()
+        calculateExpression()
+    }
+    
+    private func calculateExpression() {
+        let removedComma = expression.components(separatedBy: ",").joined()
         
-        guard let operatorLabelText = operatorLabel.text else { return }
-        workingSpace += operatorLabelText + operand
-        
-        var formula = ExpressionParser.parse(from: workingSpace)
-        let result = formula.result()
+        var formula = ExpressionParser.parse(from: removedComma)
+        var result = formula.result()
         
         if result.isNaN {
             operandLabel.text = "NaN"
-            operatorLabel.text = ""
-            operand = ""
-            workingSpace = ""
         } else {
-            operandLabel.text = convertNumberToString(result)
-            operatorLabel.text = ""
-            operand = ""
-            workingSpace = ""
+            operandLabel.text = convertNumberToString(String(result))
         }
         
-        setScrollViewFocus()
+        operatorLabel.text = ""
+        expression = ""
     }
     
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
