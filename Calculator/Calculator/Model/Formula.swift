@@ -17,6 +17,7 @@ struct Formula {
         guard let firstOperand = operands.dequeue() else {
             return .zero
         }
+        
         result = firstOperand
         
         while operands.count > 0 {
