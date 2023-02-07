@@ -98,18 +98,10 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
         guard calculateOperand.count <= Symbol.maxSignificantDigits else { return }
         guard let number = sender.currentTitle else { return }
-        
-        if isCalculated {
-            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
-            calculateOperand = number
-            isCalculated = false
-            return
-        }
+        restartCalculate()
         
         if calculateOperand == Symbol.zero {
             guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
             calculateOperand = number
         } else {
             if calculateOperand.contains(Symbol.dot) {
@@ -135,6 +127,12 @@ final class CalculatorViewController: UIViewController {
     private func appendExpression(sign: String, number: String) {
         expression.append(sign)
         expression.append(number)
+    }
+    
+    private func restartCalculate() {
+        if isCalculated {
+            isCalculated = false
+        }
     }
     
     private func scrollToBottom() {
