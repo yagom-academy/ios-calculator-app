@@ -46,7 +46,7 @@ struct CalculatorChecker {
     mutating func appendingDot() {
         guard hasDot(enteringNumber) == false else { return }
         
-        enteringNumber = hasCurrentInput(enteringNumber) ? (enteringNumber + Sign.dot) : "0."
+        enteringNumber = hasCurrentInput(enteringNumber) ? (enteringNumber + Sign.dot) : Sign.zeroDot
         labelUpdateClosure(enteringNumber)
     }
     
