@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by Harry, Goat.
 //  Copyright © yagom. All rights reserved.
 // 
 
@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var numberOnField: UILabel!
     @IBOutlet weak var operatorOnField: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var verticalStackViewInScroll: UIStackView!
+    @IBOutlet weak var historyStackView: UIStackView!
     
     
     
@@ -130,10 +130,10 @@ class ViewController: UIViewController {
             return
         } else if calculateComponents == "" {
             calculateComponents += currentNumber
-            addNewStackView(number: currentNumber, oper: "")
+            addHistoryEntry(left: "", right: currentNumber)
         } else {
             calculateComponents += currentOper + currentNumber
-            addNewStackView(number: currentNumber, oper: currentOper)
+            addHistoryEntry(left: currentOper, right: currentNumber)
             self.numberOnField.text = ""
 
         }
@@ -152,19 +152,12 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.3) {
             historyEntryStackView.isHidden = false
         }
-        scrollToBottom()
-
-        [createdOperLabel, createdNumberLabel].forEach {
-            stackView.addArrangedSubview($0)
-        }
         
-        self.verticalStackViewInScroll.addArrangedSubview(stackView)
-        
-
+        setUpScrollViewToBottom()
     }
     
     private func resetAllStackView() {
-        verticalStackViewInScroll.subviews.forEach { $0.removeFromSuperview() }
+        historyStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
     private func addCommaToThreeDigit(number: String) -> String {
