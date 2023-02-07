@@ -18,12 +18,12 @@ final class CalculateViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    @IBAction func didTapNumber(_ sender: UIButton) {
+    @IBAction func didTapNumberPad(_ sender: UIButton) {
         guard let numberPad = sender.currentTitle else { return }
         enteringNumberLabel.text = calculatorChecker.appendingNumber(numberPad)
     }
     
-    @IBAction private func operatorPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapOperatorPad(_ sender: UIButton) {
         guard let inputOperatorText = sender.currentTitle,
               let currentOperatorText = enteringOperatorLabel.text else { return }
         enteringOperatorLabel.text = inputOperatorText
@@ -36,7 +36,7 @@ final class CalculateViewController: UIViewController {
         enteringNumber = Sign.empty
     }
     
-    @IBAction private func zeroPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapZeroPad(_ sender: UIButton) {
         guard let zeroPad = sender.currentTitle,
               let enteringNumberText = enteringNumberLabel.text,
                   !calculatorChecker.isZero(enteringNumberText) else {
@@ -52,14 +52,14 @@ final class CalculateViewController: UIViewController {
         enteringNumber = convertToDecimal(for: addedEnteringNumber)
     }
     
-    @IBAction private func dotPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapDotPad(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
             !calculatorChecker.hasDot(enteringNumberText) else { return }
         
         enteringNumber = calculatorChecker.appendingDot(enteringNumberText)
     }
     
-    @IBAction private func calculatePadTapped(_ sender: UIButton) {
+    @IBAction private func didTapCalculationPad(_ sender: UIButton) {
         guard let enteringOperatorText = enteringOperatorLabel.text,
               enteringOperatorText != Sign.empty,
               enteringNumber != Sign.space else { return }
@@ -74,17 +74,17 @@ final class CalculateViewController: UIViewController {
         enteringNumberLabel.text = convertToDecimal(for: result)
     }
     
-    @IBAction private func ACPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapACPad(_ sender: UIButton) {
         initialState()
         removeAllFormulaStackView()
     }
     
-    @IBAction private func CEPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapCEPad(_ sender: UIButton) {
         enteringOperatorLabel.text = Sign.empty
         enteringNumber = Sign.empty
     }
     
-    @IBAction private func changeSignPadTapped(_ sender: UIButton) {
+    @IBAction private func didTapChangedSighPad(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
               !calculatorChecker.isZero(enteringNumberText) else { return }
         enteringNumber = calculatorChecker.changedSign(enteringNumberText)
