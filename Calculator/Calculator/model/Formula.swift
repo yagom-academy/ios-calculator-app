@@ -9,13 +9,22 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = .init()
     var operators: CalculatorItemQueue<Operator> = .init()
     
+    @discardableResult
     mutating func result() -> Double {
-        guard var result = operands.dequeue() else { return .zero }
+        var result: Double = 0
+        let minCountForCalculate = 1
+        
+        if operands.itemCount > minCountForCalculate,
+           operands.itemCount != operators.itemCount,
+            let firstOperand = operands.dequeue() {
+            result = firstOperand
+        }
         
         while let rhs = operands.dequeue(),
-               let operators = operators.dequeue() {
-                result = operators.calculate(lhs: result, rhs: rhs)
-            }
+              let `operator` = self.operators.dequeue() {
+            let operatedResult = `operator`.calculate(lhs: result, rhs: rhs)
+            result = operatedResult
+        }
         
         return result
     }
