@@ -20,7 +20,7 @@ final class ViewController: UIViewController {
         return inputOperandsLabel.text ?? Sign.zero
     }
     private var currentOperator: String {
-        return inputOperatorsLabel.text ?? Sign.nothing
+        return inputOperatorsLabel.text ?? Sign.blank
     }
     private var currentInputFormula: [String] = []
     private var oldInputFormula: [String] = []
@@ -31,17 +31,9 @@ final class ViewController: UIViewController {
         resetLabelsText()
     }
     
-    enum Sign {
-        static let zero = "0"
-        static let nothing = ""
-        static let blank = " "
-        static let dot = "."
-        static let minus = "-"
-    }
-    
     private func resetLabelsText() {
         inputOperandsLabel.text = Sign.zero
-        inputOperatorsLabel.text = Sign.nothing
+        inputOperatorsLabel.text = Sign.blank
     }
     
     private func makeStackView(_ operatorSign: String, _ operand: String) -> UIStackView {
@@ -71,11 +63,11 @@ final class ViewController: UIViewController {
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
 
-        return numberFormatter.string(from: NSNumber(value: result)) ?? Sign.nothing
+        return numberFormatter.string(from: NSNumber(value: result)) ?? Sign.blank
     }
     
     private func removeComma(_ inputString: String) -> String {
-        let removedCommaString = inputString.replacingOccurrences(of: ",", with: "")
+        let removedCommaString = inputString.replacingOccurrences(of: Sign.comma, with: Sign.blank)
         
         return removedCommaString
     }
@@ -121,7 +113,7 @@ final class ViewController: UIViewController {
             stackView.addArrangedSubview(newStackView)
             settingScrollView()
             
-            if currentOperator == Sign.nothing {
+            if currentOperator == Sign.blank {
                 currentInputFormula.append(currentOperand)
             } else {
                 currentInputFormula.append(currentOperator)
@@ -153,16 +145,16 @@ final class ViewController: UIViewController {
         var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
 
-        inputOperatorsLabel.text = Sign.nothing
+        inputOperatorsLabel.text = Sign.blank
         inputOperandsLabel.text = formatNumber(result)
         oldInputFormula.append(String(result))
-        currentInputFormula = []
+        currentInputFormula.removeAll()
     }
     
     @IBAction private func allClearButtonTapped(_ sender: UIButton) {
         resetLabelsText()
-        currentInputFormula = []
-        oldInputFormula = []
+        currentInputFormula.removeAll()
+        oldInputFormula.removeAll()
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
