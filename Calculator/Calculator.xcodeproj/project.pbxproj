@@ -28,6 +28,7 @@
 		36CA5398298A5E8700622D91 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA53652988B13400622D91 /* Operator.swift */; };
 		36CA5399298A5E8B00622D91 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA533829826D2500622D91 /* CalculatorItemQueue.swift */; };
 		36CA539B298A7D2400622D91 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA536B2988B9CB00622D91 /* ExpressionParser.swift */; };
+		ADC67B3E299259D8007BEB5A /* ViewGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC67B3D299259D8007BEB5A /* ViewGenerator.swift */; };
 		ADE78A9E2991057800AC109C /* CalculateItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */; };
 		ADE78AA02991059300AC109C /* CalculateItemStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78A9F2991059300AC109C /* CalculateItemStackView.swift */; };
 		ADE78AA2299105DB00AC109C /* InputHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78AA1299105DB00AC109C /* InputHandler.swift */; };
@@ -78,6 +79,7 @@
 		36CA53752988EB4500622D91 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		36CA538B298A3FAD00622D91 /* ExpressionParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CA538D298A3FAD00622D91 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		ADC67B3D299259D8007BEB5A /* ViewGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewGenerator.swift; sourceTree = "<group>"; };
 		ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemScrollView.swift; sourceTree = "<group>"; };
 		ADE78A9F2991059300AC109C /* CalculateItemStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemStackView.swift; sourceTree = "<group>"; };
 		ADE78AA1299105DB00AC109C /* InputHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputHandler.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */,
 				ADE78A9F2991059300AC109C /* CalculateItemStackView.swift */,
+				ADC67B3D299259D8007BEB5A /* ViewGenerator.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			files = (
 				ADE78AA4299105F600AC109C /* NameSpace.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* MainViewController.swift in Sources */,
+				ADC67B3E299259D8007BEB5A /* ViewGenerator.swift in Sources */,
 				36CA536C2988B9CB00622D91 /* ExpressionParser.swift in Sources */,
 				ADE78A9E2991057800AC109C /* CalculateItemScrollView.swift in Sources */,
 				ADE78AA2299105DB00AC109C /* InputHandler.swift in Sources */,
