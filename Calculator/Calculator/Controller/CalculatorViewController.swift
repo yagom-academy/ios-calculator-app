@@ -13,8 +13,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var contentStack: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private var workingSpace: String = ""
-    private var operand = ""
+    private var expression: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,43 +71,29 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
-        operand = ""
         operandLabel.text = "0"
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard var operandLabelText = operandLabel.text else { return }
-        guard let `operator` = sender.currentTitle else { return }
-        
-        if operandLabelText.contains(",") {
-            operandLabelText = operandLabelText.split(with: ",").joined()
-        }
-        
-        if operatorLabel.text == "" && operandLabelText != "0" {
-            guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(convertNumberToString(operandDouble), "")
-            addContentStack(stackView)
-            
-            workingSpace += operandLabelText
-            setOperatorLabel(`operator`)
-        } else if operatorLabel.text == "" && operandLabelText == "0" {
-            return
-        } else if operatorLabel.text != "" && operandLabelText == "0" {
-            setOperatorLabel(`operator`)
+        guard operandLabel.text != "0"  else {
+            if !contentStack.subviews.isEmpty {
+                operatorLabel.text = sender.currentTitle
+            }
             
             return
-        } else {
-            guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(convertNumberToString(operandDouble), operatorLabel.text)
-            addContentStack(stackView)
-            
-            guard let operatorLabelText = operatorLabel.text else { return }
-            workingSpace += operatorLabelText + operandLabelText
-            
-            setOperatorLabel(`operator`)
         }
         
+        guard let operatorText = operatorLabel.text,
+              let operandText = operandLabel.text else { return }
+        
+        expression += operatorText + convertNumberToString(operandText)
+        
+        let stackView = generateStackView(convertNumberToString(operandText), operandText)
+        addContentStack(stackView)
         setScrollViewFocus()
+        
+        operandLabel.text = "0"
+        operatorLabel.text = sender.currentTitle
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
@@ -143,12 +128,6 @@ final class CalculatorViewController: UIViewController {
         operand = ""
         clearLabel()
         clearAllContentStack()
-    }
-    
-    private func setOperatorLabel(_ `operator`: String) {
-        operatorLabel.text = `operator`
-        operand = ""
-        operandLabel.text = "0"
     }
     
     private func clearAllContentStack() {
