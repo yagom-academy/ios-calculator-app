@@ -160,28 +160,17 @@ class ViewController: UIViewController {
         setUpScrollViewToBottom()
     }
     
-    private func addNewStackView(number: String, oper: String) {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.alignment = .fill
-        stackView.distribution = .equalSpacing
-        stackView.spacing = 8
+    private func addHistoryEntry(left: String, right: String) {
+        let historyEntryStackView = HistoryEntryStackView(operatorText: left, operandText: right)
         
-        let createdOperLabel = UILabel()
-        createdOperLabel.text = oper
-        createdOperLabel.textColor = .white
-        createdOperLabel.font = UIFont.systemFont(ofSize: 20)
+        historyEntryStackView.isHidden = true
         
-        let createdNumberLabel = UILabel()
-        createdNumberLabel.text = number
-        createdNumberLabel.textColor = .white
-        createdNumberLabel.font = UIFont.systemFont(ofSize: 20)
+        historyStackView.addArrangedSubview(historyEntryStackView)
         
-        [createdOperLabel, createdNumberLabel].map {
-            stackView.addArrangedSubview($0)
+        UIView.animate(withDuration: 0.3) {
+            historyEntryStackView.isHidden = false
         }
-        self.verticalStackViewInScroll.addArrangedSubview(stackView)
-        
+        scrollToBottom()
     }
     
     private func resetAllStackView() {
