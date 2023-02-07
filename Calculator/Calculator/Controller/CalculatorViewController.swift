@@ -29,37 +29,32 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        if let number = sender.currentTitle {
-            operand += number
-        }
+        guard let prevOperandLabel = operandLabel.text else { return }
+        guard let inputNumber = sender.currentTitle else { return }
         
-        guard let operandDouble = Double(operand) else { return }
-        operandLabel.text = convertNumberToString(operandDouble)
-    }
-    
-    @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
-        if operandLabel.text == "0" && sender.currentTitle != "." {
-            return
-        } else if operandLabel.text == "0" && sender.currentTitle == "." {
-            operand += "0."
-            operandLabel.text = operand
-        } else if operand.contains(".") && sender.currentTitle == "." {
-            return
-        } else if operandLabel.text != "0" && sender.currentTitle == "." {
-            if let operandLabelText = operandLabel.text {
-                operandLabel.text = operandLabelText + "."
-                operand += "."
-            }
-        } else {
-            if let input = sender.currentTitle {
-                operand += input
+        if prevOperandLabel == "0" {
+            if inputNumber == "0" || inputNumber == "00" {
+                operandLabel.text = "0"
+            } else {
+                operandLabel.text = inputNumber
             }
             
-            guard let operandDouble = Double(operand) else { return }
-            operandLabel.text = convertNumberToString(operandDouble)
+            return
+        }
+        
+        if prevOperandLabel.contains(".") {
+            operandLabel.text = prevOperandLabel + inputNumber
+        } else {
+            operandLabel.text = convertNumberToString(prevOperandLabel + inputNumber)
         }
     }
     
+    @IBAction private func commaButtonTapped(_ sender: UIButton) {
+        guard operandLabel.text?.contains(".") == false,
+              let prevOperandLabel = operandLabel.text else { return }
+        
+        operandLabel.text = prevOperandLabel + "."
+    }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
          if var operand = Int(operand) {
@@ -155,13 +150,20 @@ final class CalculatorViewController: UIViewController {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func convertNumberToString(_ input: Double) -> String {
+    private func convertNumberToString(_ input: String) -> String {
         let numberFormatter = NumberFormatter()
+        let removedComma = input.components(separatedBy: ",").joined()
+        
+        guard let inputToNSNumber = numberFormatter.number(from: removedComma) else {
+            return input
+        }
+        
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .ceiling
         
-        let result = numberFormatter.string(for: input) ?? "0"
+        guard let result = numberFormatter.string(for: inputToNSNumber) else { return input }
         
         return result
     }
