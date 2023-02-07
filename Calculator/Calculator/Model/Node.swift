@@ -2,7 +2,7 @@
 //  Node.swift
 //  Calculator
 //
-//  Created by 혜모리 on 2023/01/25.
+//  Created by 혜모리, 릴라 on 2023/01/25.
 //
 
 final class Node<T: CalculateItem> {
