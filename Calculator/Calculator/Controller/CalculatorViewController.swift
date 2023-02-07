@@ -39,21 +39,13 @@ final class CalculateViewController: UIViewController {
         calculatorChecker?.appendingExpression(currentOperatorText)
     }
     
-//    @IBAction private func didTapZeroPad(_ sender: UIButton) {
-//        guard let zeroPad = sender.currentTitle,
-//              let enteringNumberText = enteringNumberLabel.text,
-//                  !calculatorChecker.isZero(enteringNumberText) else {
-//            enteringNumber = Sign.zero
-//            return
-//        }
-//        guard !calculatorChecker.hasDot(enteringNumber) else {
-//            enteringNumber.append(zeroPad)
-//            return
-//        }
-//
-//        let addedEnteringNumber = enteringNumber.convertToDouble(appending: zeroPad)
-//        enteringNumber = convertToDecimal(for: addedEnteringNumber)
-//    }
+    @IBAction private func didTapZeroPad(_ sender: UIButton) {
+        guard let zeroPad = sender.currentTitle else {
+            return
+        }
+        
+        calculatorChecker?.appendingZero(zeroPad)
+    }
 //
 //    @IBAction private func didTapDotPad(_ sender: UIButton) {
 //        guard let enteringNumberText = enteringNumberLabel.text,

@@ -22,9 +22,26 @@ struct CalculatorChecker {
     }
     
     mutating func appendingExpression(_ operatorText: String) {
-        calculationExpression += (operatorText + enteringNumber)
+        calculationExpression += (operatorText + convertToDecimal(for: enteringNumber.convertToDouble()))
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
+    }
+    
+    
+    // 0이 들어왔을때 넘버라벨
+    mutating func appendingZero(_ zeroPad: String) {
+        if isZero(enteringNumber) || hasCurrentInput(enteringNumber) == false {
+            enteringNumber = Sign.zero
+            return
+        }
+        
+        if hasDot(enteringNumber) {
+            enteringNumber += zeroPad
+            labelUpdateClosure(enteringNumber)
+            return
+        }
+        
+        appendingNumber(zeroPad)
     }
     
     func hasCurrentInput(_ currentText: String) -> Bool {
