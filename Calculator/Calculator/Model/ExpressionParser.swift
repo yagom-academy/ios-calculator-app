@@ -12,8 +12,6 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>()
         
         components.forEach { component in
-            guard component.isEmpty == false else { return }
-            
             if let operand = Double(component) {
                 operands.enqueue(operand)
             } else if let operatorSign = Operator(rawValue: Character(component)) {

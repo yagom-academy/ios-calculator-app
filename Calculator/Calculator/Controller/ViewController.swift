@@ -77,10 +77,8 @@ final class ViewController: UIViewController {
         expressions.append(currentOperator)
         expressions.append(currentOperand.removeComma())
         
-        let input = expressions.reduce("") { previousValue, nextValue in
-            previousValue + Sign.blank + nextValue
-        }
-
+        let input = expressions.joined(separator: Sign.blank)
+        
         let result = ExpressionParser.parse(from: input).result()
         
         guard result.isNaN == false else {
