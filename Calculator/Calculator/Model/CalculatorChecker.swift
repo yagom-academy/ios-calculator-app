@@ -1,8 +1,8 @@
 import UIKit
 
 struct CalculatorChecker {
-    private var enteringNumber = Sign.empty
-    private var calculationExpression: String = Sign.empty
+    private(set) var enteringNumber = Sign.empty
+    private(set) var calculationExpression: String = Sign.empty
     private var labelUpdateClosure: (String) -> Void
     
     init(updateClosure closure: @escaping (String) -> Void) {
