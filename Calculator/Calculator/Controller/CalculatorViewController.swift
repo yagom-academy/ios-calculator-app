@@ -10,7 +10,7 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var enteringNumberLabel: UILabel!
     @IBOutlet weak var enteringOperatorLabel: UILabel!
     @IBOutlet weak var calculatorScrollView: UIScrollView!
-    @IBOutlet weak var calculatorStackView: UIStackView!
+    @IBOutlet weak var calculatorStackView: CalculatorStackView!
     
     private var calculatorChecker: CalculatorChecker?
     
@@ -18,6 +18,7 @@ final class CalculateViewController: UIViewController {
         super.viewDidLoad()
         calculatorChecker = CalculatorChecker(updateClosure: { text in
             self.enteringNumberLabel.text = text == Sign.empty ? Sign.zero : text
+            
         })
         enteringNumberLabel.text = Sign.zero
         enteringOperatorLabel.text = Sign.empty
@@ -33,8 +34,9 @@ final class CalculateViewController: UIViewController {
               let currentOperatorText = enteringOperatorLabel.text else { return }
         enteringOperatorLabel.text = inputOperatorText
         
+        guard enteringNumberLabel.text != Sign.zero else { return }
+        calculatorStackView.addLabels(operandText: enteringNumberLabel.text, operatorText: currentOperatorText)
         calculatorChecker?.appendingExpression(currentOperatorText)
-        
     }
     
 //    @IBAction private func didTapZeroPad(_ sender: UIButton) {

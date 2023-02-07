@@ -22,13 +22,10 @@ struct CalculatorChecker {
     }
     
     mutating func appendingExpression(_ operatorText: String) {
-        guard enteringNumber.isEmpty == false else { return }
         calculationExpression += (operatorText + enteringNumber)
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
-    
-    
     
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
