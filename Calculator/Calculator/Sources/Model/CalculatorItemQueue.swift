@@ -1,38 +1,32 @@
 //
 //  Calculator - CalculatorItemQueue.swift
-//  Created by Rhode.
+//  Created by Rhode, Songjun.
 //  Copyright © yagom. All rights reserved.
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var data: [T]
+    private(set) var dequeueStack: [T] = []
+    private(set) var enqueueStack: [T] = []
+
     var isEmpty: Bool {
-        return data.isEmpty
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
-    var count: Int {
-        return data.count
-    }
-    
+
     init(_ data: [T] = []) {
-        self.data = data
+        self.enqueueStack = data
     }
     
+    mutating func enqueue(item: T) {
+        enqueueStack.append(item)
+    }
+
+    @discardableResult
     mutating func dequeue() -> T? {
-        guard data.count > 0 else {
-            return nil
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return data.removeFirst()
-    }
-    
-    func peek() -> T? {
-        return data.first
-    }
-    
-    mutating func enqueue(_ element: T) {
-        data.append(element)
-    }
-    
-    mutating func clear() {
-        data.removeAll()
+        return dequeueStack.popLast()
     }
 }
+

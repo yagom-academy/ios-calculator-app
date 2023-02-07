@@ -1,14 +1,12 @@
 //
 //  Calculator - CalculatorViewController.swift
-//  Created by Rhode.
+//  Created by Rhode, Songjun.
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    
-    let calculatorFormatter = CalculatorFormatter.shared
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentNumberLabel: UILabel!
@@ -73,8 +71,7 @@ final class CalculatorViewController: UIViewController {
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
-        operatingScrollView.layoutIfNeeded()
-        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
+        fixateScrollViewBottom()
         resetCurrentNumber()
     }
     
@@ -85,7 +82,7 @@ final class CalculatorViewController: UIViewController {
             let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
             let lastString = stringToBeCalculated[lastIndex]
             if Operator(rawValue: lastString) != nil {
-                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+                stringToBeCalculated.removeLast()
                 removePreviousOperands()
             }
         }
@@ -101,21 +98,23 @@ final class CalculatorViewController: UIViewController {
         guard isCalculated == false else {
             return
         }
-        isCalculated = true
-        displayPreviousOperands()
-        resetCurrentNumber()
-        initializeCurrentOperator()
-        operatingScrollView.layoutIfNeeded()
-        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
-        let result = calculate()
-        displayResult(result: result)
+        
+        if let result = calculate() {
+            isCalculated = true
+            displayPreviousOperands()
+            resetCurrentNumber()
+            initializeCurrentOperator()
+            displayResult(result: result)
+        } else { return }
+        
+        fixateScrollViewBottom()
     }
     
-    private func calculate() -> Double {
+    private func calculate() -> Double? {
         let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
         let lastString = stringToBeCalculated[lastIndex]
         if Operator(rawValue: lastString) != nil {
-            stringToBeCalculated = stringToBeCalculated + NameSpace.stringZero
+            return nil
         }
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
         stringToBeCalculated = NameSpace.emptyString
@@ -133,7 +132,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func displayResult(result: Double) {
-        currentNumberLabel.text = calculatorFormatter.roundingNumber(from: result).floorIfZero.stringWithComma
+        currentNumberLabel.text = result.roundingNumber().floorIfZero.stringWithComma
     }
     
     //MARK: Methods clearing numbers
@@ -153,7 +152,7 @@ final class CalculatorViewController: UIViewController {
     private func clearEntry() {
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
-                stringToBeCalculated = String(stringToBeCalculated.dropLast())
+                stringToBeCalculated.removeLast()
             } else {
                 break
             }
@@ -175,6 +174,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func convertSign() {
+        guard currentNumber != NameSpace.emptyString else {
+            return
+        }
         var count = 0
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
@@ -190,7 +192,7 @@ final class CalculatorViewController: UIViewController {
         displayCurrentNumber()
     }
     
-    //MARK: Methods removing operands or resetting number
+    //MARK: Methods about settings
     private func removePreviousOperands() {
         guard let stackViewWillBeRemoved = verticalStackView.subviews.last else {
             return
@@ -207,5 +209,10 @@ final class CalculatorViewController: UIViewController {
         verticalStackView.subviews.forEach { subView in
             subView.removeFromSuperview()
         }
+    }
+    
+    private func fixateScrollViewBottom() {
+        operatingScrollView.layoutIfNeeded()
+        operatingScrollView.setContentOffset(CGPoint(x: 0, y: operatingScrollView.contentSize.height - operatingScrollView.bounds.height), animated: true)
     }
 }
