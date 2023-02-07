@@ -25,8 +25,15 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setInitialCurrentCalculateItem()
+        resetAll()
+    }
+    
+    private func resetAll() {
         setInitialCalculateItemStackView()
+        setInitialCurrentCalculateItem()
+        inputHandler.setEmptyInput()
+        isFirstItem = true
+        isFinishedCalculation = false
     }
     
     private func setInitialCurrentCalculateItem() {
@@ -41,10 +48,9 @@ final class MainViewController: UIViewController {
     @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         guard isFinishedCalculation == false else {
-            setInitialCurrentCalculateItem()
-            setInitialCalculateItemStackView()
+            resetAll()
             operandLabel.text = inputOperand
-            isFinishedCalculation = false
+            isFirstItem = false
             return
         }
         
@@ -60,12 +66,22 @@ final class MainViewController: UIViewController {
     
     @IBAction private func touchDotButton(_ sender: UIButton) {
         guard currentItem.operand.contains(Sign.dot) == false else { return }
+        guard isFinishedCalculation == false else {
+            resetAll()
+            operandLabel.text = Sign.zero + Sign.dot
+            return
+        }
         
         operandLabel.text = currentItem.operand + Sign.dot
     }
     
     @IBAction private func touchZeroButton(_ sender: UIButton) {
         guard let senderTitle = sender.currentTitle else { return }
+        guard isFinishedCalculation == false else {
+            resetAll()
+            operandLabel.text = Sign.zero
+            return
+        }
         
         if currentItem.operand != Sign.zero, currentItem.operand.contains(Sign.dot) {
             operandLabel.text = currentItem.operand + senderTitle
@@ -75,10 +91,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func allClear(_ sender: UIButton) {
-        setInitialCalculateItemStackView()
-        setInitialCurrentCalculateItem()
-        inputHandler.setEmptyInput()
-        isFirstItem = true
+        resetAll()
     }
     
     @IBAction private func clearOperandLabel(_ sender: UIButton) {
