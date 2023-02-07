@@ -7,7 +7,6 @@
 
 //MARK: Queue 타입 구현
 struct CalculatorItemQueue<T: CalculateItem> {
-    
     private var leftStack: [T] = []
     private var rightStack: [T] = []
     
@@ -33,6 +32,5 @@ struct CalculatorItemQueue<T: CalculateItem> {
         }
         return leftStack.popLast()
     }
-    
 }
 
