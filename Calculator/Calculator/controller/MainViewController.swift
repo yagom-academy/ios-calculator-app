@@ -39,11 +39,15 @@ final class MainViewController: UIViewController {
     @IBAction private func touchOperandButton(_ sender: UIButton) {
         guard let inputOperand = sender.currentTitle else { return }
         
-        if currentItem.operand != Sign.zero {
+        if currentItem.operand != Sign.zero, currentItem.operator == Sign.empty {
+            setInitialCurrentCalculateItem()
+            setInitialCalculateItemStackView()
+            operandLabel.text = inputOperand
+        } else if currentItem.operand == Sign.zero, currentItem.operator == Sign.empty {
+            operandLabel.text = inputOperand
+        } else {
             let nextOperand = currentItem.operand + inputOperand
             operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
-        } else {
-            operandLabel.text = inputOperand
         }
     }
     
