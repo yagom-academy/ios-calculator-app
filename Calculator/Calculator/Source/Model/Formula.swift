@@ -26,14 +26,12 @@ struct Formula {
             guard let rhsOperand = operands.dequeueItem(), let extractedOperator = operators.dequeueItem() else {
                 continue
             }
-                do {
-                    result = try extractedOperator.calculate(lhs: lhsOperand, rhs: rhsOperand)
-                } catch {
-                    result = Double.nan
-                    //0으로 나누기에 대해서는 결과값을 Nan으로 표시
-                }
-            }
+            
+            result = extractedOperator.calculate(lhs: lhsOperand, rhs: rhsOperand)
+            guard result.isNaN == false  else { return Double.nan }
+        }
+        
         return result
     }
-        
+    
 }
