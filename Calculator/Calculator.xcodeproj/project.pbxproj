@@ -80,6 +80,7 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				4A8BC6C829912AAC004D5442 /* HistoryEntryStackView.swift */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -128,7 +129,6 @@
 			children = (
 				4A74DAD92991ED7B00D5BDB9 /* Source */,
 				4A74DAD82991ED6600D5BDB9 /* App */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
