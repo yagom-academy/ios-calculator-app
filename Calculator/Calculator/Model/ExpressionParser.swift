@@ -1,10 +1,3 @@
-//
-//  ExpressionParser.swift
-//  Calculator
-//
-//  Created by 천승현 on 2023/02/06.
-//
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operatorQueue = CalculatorItemQueue(
