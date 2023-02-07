@@ -57,13 +57,18 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
-         if var operand = Int(operand) {
-            operand = -operand
-            operandLabel.text = convertNumberToString(Double(operand))
-        } else if var operand = Double(operand) {
-            operand = -operand
-            operandLabel.text = convertNumberToString(operand)
+        guard operandLabel.text != "0" else {
+            return
         }
+        
+        if operandLabel.text?.contains("-") == true {
+            operandLabel.text?.removeFirst()
+            return
+        }
+        
+        guard let prevOperandLabel = operandLabel.text else { return }
+
+        operandLabel.text = "-" + prevOperandLabel
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
