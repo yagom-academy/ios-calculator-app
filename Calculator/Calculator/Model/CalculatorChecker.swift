@@ -1,19 +1,33 @@
-import Foundation
+import UIKit
 
 struct CalculatorChecker {
     private var enteringNumber = Sign.empty
     private var calculationExpression: String = Sign.empty
+    private var labelUpdateClosure: (String) -> Void
     
-    mutating func appendingNumber(_ numberPad: String) -> String {
-        if !hasCurrentInput(enteringNumber) {
+    init(updateClosure closure: @escaping (String) -> Void) {
+        self.labelUpdateClosure = closure
+    }
+    
+    mutating func appendingNumber(_ numberPad: String) {
+        guard hasCurrentInput(enteringNumber) else {
             enteringNumber = numberPad
-            return enteringNumber
+            labelUpdateClosure(enteringNumber)
+            return
         }
         
         let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
         enteringNumber = convertToDecimal(for: addedEnteringNumber)
-        return enteringNumber
+        labelUpdateClosure(enteringNumber)
     }
+    
+    mutating func appendingExpression(_ operatorText: String) {
+        guard enteringNumber.isEmpty == false else { return }
+        calculationExpression += (operatorText + enteringNumber)
+        enteringNumber = Sign.empty
+        labelUpdateClosure(enteringNumber)
+    }
+    
     
     
     func hasCurrentInput(_ currentText: String) -> Bool {
