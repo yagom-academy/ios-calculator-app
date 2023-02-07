@@ -15,17 +15,17 @@ struct Formula {
         var result: Double = 0
         
         guard let firstOperand = operands.dequeue() else {
-            return .zero
+            return Double.zero
         }
         
         result = firstOperand
         
         while operands.count > 0 {
             guard let nextOperand = operands.dequeue() else {
-                return .zero
+                return Double.zero
             }
             guard let operatorSign = operators.dequeue() else {
-                return .nan
+                return Double.nan
             }
             
             result = operatorSign.calculate(lhs: result, rhs: nextOperand)
