@@ -10,31 +10,20 @@ import UIKit
 class ViewController: UIViewController {
     
     private var calculateComponents: String = ""
-    
     private var inputNumbers: String = ""
     
     @IBOutlet weak var numberOnField: UILabel!
-    
     @IBOutlet weak var operatorOnField: UILabel!
-    
     @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var verticalStackViewInScroll: UIStackView!
     
-    @IBOutlet weak var horizonStackViewVertical: UIStackView!
-    
-    @IBOutlet weak var operatorInStackView: UILabel!
-    
-    @IBOutlet weak var numberInStackView: UILabel!
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        setUpView()
+        allClear()
     }
     
-    //버튼탭
     @IBAction func buttonTapped(sender: UIButton) {
         guard let Inputtedtitle = sender.titleLabel?.text else { return }
         
@@ -54,13 +43,6 @@ class ViewController: UIViewController {
         default:
             return
         }
-    }
-    
-    private func setUpView() {
-        view.addSubview(scrollView)
-        scrollView.addSubview(verticalStackViewInScroll)
-        allClear()
-        setNumberFormatter()
     }
     
     private func setUpScrollViewToBottom(){
@@ -171,6 +153,14 @@ class ViewController: UIViewController {
             historyEntryStackView.isHidden = false
         }
         scrollToBottom()
+
+        [createdOperLabel, createdNumberLabel].forEach {
+            stackView.addArrangedSubview($0)
+        }
+        
+        self.verticalStackViewInScroll.addArrangedSubview(stackView)
+        
+
     }
     
     private func resetAllStackView() {
@@ -187,11 +177,4 @@ class ViewController: UIViewController {
         return result
     }
     
-    private func setNumberFormatter() {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.roundingMode = .halfUp
-    }
-        
 }
