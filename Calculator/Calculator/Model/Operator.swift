@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Christy Lee on 2023/01/30.
+//  Created by Christy, Muri on 2023/01/30.
 //
 
 import Foundation
@@ -14,15 +14,20 @@ enum Operator: Character, CaseIterable {
     case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
+        var result: Double
         switch self {
         case .add:
-            return add(lhs: lhs, rhs: rhs)
+            result = add(lhs: lhs, rhs: rhs)
+            return result
         case .subtract:
-            return subtract(lhs: lhs, rhs: rhs)
+            result = subtract(lhs: lhs, rhs: rhs)
+            return result
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            result = divide(lhs: lhs, rhs: rhs)
+            return result
         case .multiply:
-            return multiply(lhs: lhs, rhs: rhs)
+            result = multiply(lhs: lhs, rhs: rhs)
+            return result
         }
     }
     
@@ -38,6 +43,7 @@ enum Operator: Character, CaseIterable {
         if rhs == 0 {
             return Double.nan
         }
+        
         return lhs / rhs
     }
 

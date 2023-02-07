@@ -2,7 +2,7 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by Christy Lee on 2023/01/30.
+//  Created by Christy, Muri on 2023/01/30.
 //
 
 import Foundation
@@ -12,14 +12,18 @@ enum ExpressionParser {
         let components = componentsByOperators(from: input)
         var operandQueue = CalculatorItemQueue<Double>()
         var operatorQueue = CalculatorItemQueue<Operator>()
+        let operators = input.compactMap{ Operator(rawValue: $0) }
+        
+        for `operator` in operators {
+            operatorQueue.enqueue(`operator`)
+        }
         
         for component in components {
             if let componentAsDouble = Double(component) {
                 operandQueue.enqueue(componentAsDouble)
-            } else if let componentAsOperator = Operator(rawValue: Character(component)) {
-                operatorQueue.enqueue(componentAsOperator)
             }
         }
+        
         return Formula(operands: operandQueue, operators: operatorQueue)
     }
     
@@ -29,6 +33,7 @@ enum ExpressionParser {
                 result = result.flatMap { $0.split(with: operateSymbol.rawValue) }
             }
         }
+        
         return inputComponents
     }
 }
