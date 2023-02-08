@@ -9,7 +9,6 @@ extension NumberFormatter {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumSignificantDigits = Symbol.maxSignificantDigits
         
         guard let number = numberFormatter.string(for: fromDouble) else { return Symbol.empty }
         
