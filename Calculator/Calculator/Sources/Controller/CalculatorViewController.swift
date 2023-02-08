@@ -116,6 +116,16 @@ final class CalculatorViewController: UIViewController {
         if Operator(rawValue: lastString) != nil {
             return nil
         }
+        var isNumberOnly: Bool = true
+        for `operator` in Operator.allCases {
+            if stringToBeCalculated.contains(`operator`.rawValue) {
+                isNumberOnly = false
+            }
+        }
+        if isNumberOnly {
+            return nil
+        }
+
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
         stringToBeCalculated = NameSpace.emptyString
         return calculateFormula.result()
