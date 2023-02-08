@@ -32,8 +32,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        guard let prevOperandLabel = operandLabel.text else { return }
-        guard let inputNumber = sender.currentTitle else { return }
+        guard let prevOperandLabel = operandLabel.text,
+              let inputNumber = sender.currentTitle else { return }
         
         if prevOperandLabel == "0" {
             if inputNumber == "0" || inputNumber == "00" {
@@ -181,6 +181,7 @@ final class CalculatorViewController: UIViewController {
     
     private func setScrollViewFocus() {
         if scrollView.contentSize.height < scrollView.bounds.size.height { return }
+        
         scrollView.layoutIfNeeded()
         let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height)
         scrollView.setContentOffset(bottomOffset, animated: true)
