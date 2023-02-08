@@ -69,7 +69,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
-        let operandValue = convertPositiveAndNegativeNumber()
+        let operandValue = calculateManager.convertPositiveAndNegativeNumber()
         
         operandLabel.text = operandValue.applyFormatter()
     }

@@ -79,4 +79,15 @@ final class CalculateManager {
         isCalculatedStatus = false
         return true
     }
+    
+    func convertPositiveAndNegativeNumber() -> String {
+        guard currentOperand != Sign.zero else { return Sign.zero }
+        
+        if currentOperand.first == Sign.negative {
+            currentOperand.removeFirst()
+        } else {
+            currentOperand = "\(Sign.negative)" + currentOperand
+        }
+        return currentOperand
+    }
 }
