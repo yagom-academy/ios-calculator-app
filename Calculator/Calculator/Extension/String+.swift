@@ -48,6 +48,30 @@ extension String {
         }
     }
     
+    func convertToExponent() -> String {
+        guard self.count > 20 else {
+            return self
+        }
+        let splittedNumber = self.components(separatedBy: NameSpace.dot)
+        let eCount = splittedNumber[0].count - 1
+        let stringToBeRounded: String
+        if splittedNumber.count == 1 {
+            stringToBeRounded = splittedNumber[0]
+        } else {
+            stringToBeRounded = splittedNumber[0] + splittedNumber[1]
+        }
+        var newString = NameSpace.emptyString
+        for number in stringToBeRounded {
+            newString += String(number)
+            if newString.count == 17 {
+                break
+            }
+        }
+        newString.insert(Character(NameSpace.dot), at: newString.index(newString.startIndex, offsetBy: 1))
+        newString += "e" + String(eCount)
+        return newString
+    }
+    
     func split(with target: Character) -> [String] {
         return components(separatedBy: String(target))
     }

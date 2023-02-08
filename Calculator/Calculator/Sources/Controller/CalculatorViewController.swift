@@ -146,7 +146,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func displayResult(result: Double) {
-        currentNumberLabel.text = result.roundingNumber().floorIfZero.stringWithComma
+        currentNumberLabel.text = result.roundingNumber().floorIfZero.convertToExponent().stringWithComma
     }
     
     //MARK: Methods clearing numbers
