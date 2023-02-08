@@ -131,11 +131,9 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapDotButton(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
         guard !calculateOperand.contains(Symbol.dot) else { return }
         
-        guard !isCalculated else { return }
-        calculateOperand += dot
+        calculateOperand += Symbol.dot
     }
     
     private func addExpressionAndCalculateItem(sign: String, number: String, operand: String) {
