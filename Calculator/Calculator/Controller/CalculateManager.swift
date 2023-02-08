@@ -14,13 +14,20 @@ final class CalculateManager {
     private var expressions: [String] = []
     private var isCalculatedStatus: Bool = false
     
+    func clearExpressions() {
+        expressions.removeAll()
+    }
+    
     func setCurrentOperand(to operand: String?) {
         currentOperand = operand ?? ""
     }
     
-    func calculateExpressions(operatorSign: String, operand: String) -> Double {
+    func calculateExpressions(operatorSign: String) -> Double {
+        isCalculatedStatus = true
+        
+        expressions.removeLast()
         expressions.append(operatorSign)
-        expressions.append(operand)
+        expressions.append(currentOperand)
         
         let input = expressions.joined(separator: Sign.blank)
         return ExpressionParser.parse(from: input).result()
@@ -46,32 +53,30 @@ final class CalculateManager {
         }
     }
     
-    func updateDot(at currentOperand: String) -> String? {
+    func updateDot() -> String? {
         guard currentOperand.contains(Sign.dot) == false else { return nil }
         return currentOperand.applyFormatter() + String(Sign.dot)
     }
     
-    func updateOperator(with currentOperator: String?, at currentOperand: String) {
+    func updateOperator(with currentOperator: String?) -> Bool {
         let operand = currentOperand.removeComma()
-    
-        
         
         guard expressions.isEmpty == false else {
             let operand = currentOperand.removeComma()
             expressions.append(operand)
+            expressions.append(currentOperator!)
             isCalculatedStatus = false
-            return
+            return true
         }
         
         guard currentOperand != Sign.zero else {
-            operatorLabel.text = sign
-            return
+            return false
         }
-             
-        expressions.append(currentOperator!)
+        
         expressions.append(operand)
+        expressions.append(currentOperator!)
         
         isCalculatedStatus = false
- 
+        return true
     }
 }

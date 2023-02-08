@@ -98,6 +98,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qWe-9W-KEY"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="LQg-T2-FW2"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
@@ -109,6 +110,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapConvertPositiveAndNegativeNumber:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6xn-wT-jet"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="hDP-cZ-0Yh"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tfz-eM-jll">
@@ -120,6 +122,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QeF-9g-LGu"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="gAJ-JX-qsy"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -136,6 +139,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wc7-cp-74q"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="OtI-mL-130"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -147,6 +151,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wxg-cX-MhT"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="8VV-cm-xdN"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -158,6 +163,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v3a-SD-P5P"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="Eil-60-oQJ"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -169,6 +175,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Brg-Mn-taa"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="nBs-9x-rfS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -185,6 +192,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m3G-5y-Txh"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="b5w-ok-vo8"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -196,6 +204,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="h4h-Pf-o9x"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="T9a-73-g2p"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -207,6 +216,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QXx-f2-KIt"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="MQ6-8l-YlO"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -218,6 +228,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EIA-qa-XsJ"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="9uk-kC-VB3"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -234,6 +245,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H9C-aA-NmF"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="Vtf-m8-CCr"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -245,6 +257,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hu0-TV-Ewf"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="fDv-5w-rwi"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -256,6 +269,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BCt-0N-JaV"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="olG-c0-EVv"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -267,6 +281,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapOperatorButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="miP-Zt-YyO"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="qBf-B9-ncS"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -283,6 +298,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WXi-dO-04e"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="gXW-ha-BGe"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
@@ -294,6 +310,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1pP-13-R8s"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="FY3-Fg-h8H"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -305,6 +322,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapDot:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dce-rb-Bd5"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="PuX-J0-GJl"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -319,6 +337,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="didTapEqualButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tjU-3P-wlW"/>
+                                                    <action selector="setCurrentOperand:" destination="BYZ-38-t0r" eventType="touchDown" id="MiK-AW-CmK"/>
                                                 </connections>
                                             </button>
                                         </subviews>
