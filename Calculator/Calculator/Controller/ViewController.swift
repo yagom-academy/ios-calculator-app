@@ -12,8 +12,6 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var operationContentStackView: UIStackView!
     @IBOutlet private weak var operationScrollView: UIScrollView!
     
-    //private var expressions: [String] = []
-    //private var isCalculatedStatus: Bool = false
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
     private var currentOperand: String { operandLabel.text ?? Sign.empty }
     private let calculateManager = CalculateManager.shared
@@ -69,7 +67,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
-        let operandValue = calculateManager.convertPositiveAndNegativeNumber()
+        let operandValue = calculateManager.convertPositiveNegative()
         
         operandLabel.text = operandValue.applyFormatter()
     }
@@ -93,18 +91,6 @@ final class ViewController: UIViewController {
         operatorLabel.text = Sign.blank
         operandLabel.text = String(result).applyFormatter()
         calculateManager.clearExpressions()
-    }
-    
-    private func convertPositiveAndNegativeNumber() -> String {
-        guard var operands = operandLabel.text,
-              operands != Sign.zero  else { return Sign.zero }
-        
-        if operands.first == Sign.negative {
-            operands.removeFirst()
-        } else {
-            operands = "\(Sign.negative)" + operands
-        }
-        return operands
     }
     
     private func createLabel(input: String) -> UILabel {

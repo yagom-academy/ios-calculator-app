@@ -27,7 +27,7 @@ final class CalculateManager {
         
         expressions.removeLast()
         expressions.append(operatorSign)
-        expressions.append(currentOperand)
+        expressions.append(currentOperand.removeComma())
         
         let input = expressions.joined(separator: Sign.blank)
         return ExpressionParser.parse(from: input).result()
@@ -80,7 +80,7 @@ final class CalculateManager {
         return true
     }
     
-    func convertPositiveAndNegativeNumber() -> String {
+    func convertPositiveNegative() -> String {
         guard currentOperand != Sign.zero else { return Sign.zero }
         
         if currentOperand.first == Sign.negative {
