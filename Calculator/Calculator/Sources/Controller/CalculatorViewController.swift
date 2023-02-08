@@ -44,7 +44,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapDotButton(_ sender: UIButton) {
-        guard currentNumber.contains(".") == false else {
+        guard currentNumber.contains(NameSpace.dot) == false else {
             return
         }
         if currentNumber == NameSpace.emptyString {
@@ -199,10 +199,10 @@ final class CalculatorViewController: UIViewController {
                 break
             }
         }
-        stringToBeCalculated.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.endIndex, offsetBy: count))
-        currentNumber.insert("-", at: stringToBeCalculated.index(stringToBeCalculated.startIndex, offsetBy: 0))
-        stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: "--", with: NameSpace.emptyString)
-        currentNumber = currentNumber.replacingOccurrences(of: "--", with: NameSpace.emptyString)
+        stringToBeCalculated.insert(Character(NameSpace.minusSign), at: stringToBeCalculated.index(stringToBeCalculated.endIndex, offsetBy: count))
+        currentNumber.insert(Character(NameSpace.minusSign), at: stringToBeCalculated.index(stringToBeCalculated.startIndex, offsetBy: 0))
+        stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: NameSpace.doubleMinusSign, with: NameSpace.emptyString)
+        currentNumber = currentNumber.replacingOccurrences(of: NameSpace.doubleMinusSign, with: NameSpace.emptyString)
         displayCurrentNumber()
     }
     

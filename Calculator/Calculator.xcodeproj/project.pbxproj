@@ -7,18 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C5B1C8D2993690A0018B7BB /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E7A6E298A170D00893E3B /* NameSpace.swift */; };
-		1C5B1C8E299369270018B7BB /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802CA298376740008F03B /* CalculateItem.swift */; };
-		1C5B1C8F299369290018B7BB /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068028B297FF8350008F03B /* CalculatorItemQueue.swift */; };
-		1C5B1C902993692B0018B7BB /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802D229837AE30008F03B /* Formula.swift */; };
-		1C5B1C912993692D0018B7BB /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802CE298377B00008F03B /* Operator.swift */; };
-		1C5B1C92299369310018B7BB /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802D0298379DC0008F03B /* ExpressionParser.swift */; };
-		1C5B1C932993693F0018B7BB /* OperateStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E7A70298BA62B00893E3B /* OperateStackView.swift */; };
-		1C5B1C94299369420018B7BB /* CircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E7A6C2989517500893E3B /* CircleButton.swift */; };
-		1C5B1C95299369480018B7BB /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802CC298376F80008F03B /* Double+.swift */; };
-		1C5B1C962993694B0018B7BB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068033D2987CBDD0008F03B /* String+.swift */; };
-		1C5B1C972993694F0018B7BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
-		1C5B1C98299369510018B7BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
@@ -29,7 +17,6 @@
 		D00E7A6F298A170D00893E3B /* NameSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E7A6E298A170D00893E3B /* NameSpace.swift */; };
 		D00E7A71298BA62B00893E3B /* OperateStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00E7A70298BA62B00893E3B /* OperateStackView.swift */; };
 		D0680283297FF6FA0008F03B /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0680282297FF6FA0008F03B /* CalculatorItemQueueTests.swift */; };
-		D068028A297FF7110008F03B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
 		D068028E298108530008F03B /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D068028B297FF8350008F03B /* CalculatorItemQueue.swift */; };
 		D06802CB298376740008F03B /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802CA298376740008F03B /* CalculateItem.swift */; };
 		D06802CD298376F80008F03B /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06802CC298376F80008F03B /* Double+.swift */; };
@@ -320,23 +307,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D068028A297FF7110008F03B /* CalculatorViewController.swift in Sources */,
 				D068033A2987C97E0008F03B /* StringTests.swift in Sources */,
 				D068033B2987C9820008F03B /* ExpressionParserTests.swift in Sources */,
-				1C5B1C8E299369270018B7BB /* CalculateItem.swift in Sources */,
-				1C5B1C95299369480018B7BB /* Double+.swift in Sources */,
 				D06803382987C93A0008F03B /* OperatorTests.swift in Sources */,
-				1C5B1C912993692D0018B7BB /* Operator.swift in Sources */,
-				1C5B1C8D2993690A0018B7BB /* NameSpace.swift in Sources */,
-				1C5B1C94299369420018B7BB /* CircleButton.swift in Sources */,
-				1C5B1C932993693F0018B7BB /* OperateStackView.swift in Sources */,
-				1C5B1C962993694B0018B7BB /* String+.swift in Sources */,
-				1C5B1C98299369510018B7BB /* SceneDelegate.swift in Sources */,
-				1C5B1C8F299369290018B7BB /* CalculatorItemQueue.swift in Sources */,
 				D06803392987C97C0008F03B /* FormulaTests.swift in Sources */,
-				1C5B1C902993692B0018B7BB /* Formula.swift in Sources */,
-				1C5B1C92299369310018B7BB /* ExpressionParser.swift in Sources */,
-				1C5B1C972993694F0018B7BB /* AppDelegate.swift in Sources */,
 				D0680283297FF6FA0008F03B /* CalculatorItemQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

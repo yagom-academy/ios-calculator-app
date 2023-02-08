@@ -7,4 +7,7 @@
 enum NameSpace {
     static let emptyString = ""
     static let stringZero = "0"
+    static let dot = "."
+    static let minusSign = "-"
+    static let doubleMinusSign = "--"
 }
