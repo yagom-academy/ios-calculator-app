@@ -62,10 +62,11 @@ final class CalculateViewController: UIViewController {
 //        enteringNumberLabel.text = convertToDecimal(for: result)
 //    }
 //
-//    @IBAction private func didTapACPad(_ sender: UIButton) {
-//        initialState()
-//        removeAllFormulaStackView()
-//    }
+    @IBAction private func didTapACPad(_ sender: UIButton) {
+        enteringOperatorLabel.text = Sign.empty
+        calculatorChecker?.initialState()
+        calculatorStackView.removeAllFormulaStackView()
+    }
 //
 //    @IBAction private func didTapCEPad(_ sender: UIButton) {
 //        enteringOperatorLabel.text = Sign.empty
@@ -77,16 +78,4 @@ final class CalculateViewController: UIViewController {
               calculatorChecker?.isZero(enteringNumberText) == false else { return }
         calculatorChecker?.changeSign()
     }
-//
-//    private func initialState() {
-//        enteringNumber = Sign.space
-//        calculationExpression = Sign.empty
-//        enteringOperatorLabel.text = Sign.empty
-//    }
-//
-//    private func removeAllFormulaStackView() {
-//        calculatorStackView.subviews.forEach {
-//            $0.removeFromSuperview()
-//        }
-//    }
 }

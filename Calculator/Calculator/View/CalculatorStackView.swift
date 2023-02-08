@@ -12,4 +12,10 @@ final class CalculatorStackView: UIStackView {
         
         self.addArrangedSubview(formulaLabel)
     }
+    
+    func removeAllFormulaStackView() {
+        self.subviews.forEach {
+            $0.removeFromSuperview()
+        }
+    }
 }

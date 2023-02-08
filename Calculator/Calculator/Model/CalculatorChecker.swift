@@ -61,6 +61,11 @@ struct CalculatorChecker {
         labelUpdateClosure(enteringNumber)
     }
     
+    mutating func initialState() {
+        calculationExpression = Sign.empty
+        enteringNumber = Sign.empty
+    }
+    
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
             return false

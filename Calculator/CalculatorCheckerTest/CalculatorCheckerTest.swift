@@ -180,4 +180,20 @@ final class CalculatorCheckerTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_initialState호출시_입력한연산식들이_초기화된다() {
+        // given
+        let operandInput = "3"
+        let operatorInput = "+"
+        let expectation = Sign.empty
+        
+        // when
+        sut.appendingNumber(operandInput)
+        sut.appendingExpression(operatorInput)
+        sut.initialState()
+        let result = sut.calculationExpression
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
