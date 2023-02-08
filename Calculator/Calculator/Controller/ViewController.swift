@@ -16,6 +16,7 @@ final class ViewController: UIViewController {
     private var isCalculatedStatus: Bool = false
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
     private var currentOperand: String { operandLabel.text ?? Sign.empty }
+    private let calculateManager = CalculateManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,8 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        updateOperand(with: sender.titleLabel?.text)
+        let result = calculateManager.updateOperand(input: sender.currentTitle, at: currentOperand)
+        operandLabel.text = result
     }
 
     @IBAction private func didTapDot(_ sender: UIButton) {
@@ -81,30 +83,6 @@ final class ViewController: UIViewController {
         operatorLabel.text = Sign.blank
         operandLabel.text = String(result).applyFormatter()
         expressions.removeAll()
-    }
-    
-    private func updateOperand(with number: String?) {
-        guard let inputNumber = number else { return }
-        guard currentOperand.removeDotAndNegative().count < 20 else { return }
-        
-        guard isCalculatedStatus != true else {
-            isCalculatedStatus = false
-            operandLabel.text = inputNumber.applyFormatter()
-            return
-        }
-        
-        if currentOperand == Sign.zero {
-            guard currentOperand != Sign.zeroZero else { return }
-            
-            operandLabel.text = inputNumber.applyFormatter()
-        } else {
-            guard currentOperand.contains(Sign.dot) == false else {
-                operandLabel.text = currentOperand + inputNumber
-                return
-            }
-            
-            operandLabel.text = (currentOperand + inputNumber).applyFormatter()
-        }
     }
     
     private func updateDot() {

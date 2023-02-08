@@ -5,7 +5,6 @@
 //  Created by 혜모리, 릴라 on 2023/02/08.
 //
 
-
 enum Sign {
     static let dot: Character = "."
     static let blank = " "
