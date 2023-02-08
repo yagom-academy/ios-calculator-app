@@ -69,15 +69,8 @@ final class CalculatorViewController: UIViewController {
                                       operand: formatNumber)
         
         var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
-        
-        let result = formula.result()
-        
-        if result.isNaN {
-            calculateOperand = Symbol.nan
-        } else {
-            calculateOperand = NumberFormatter.convertToString(fromDouble: result)
-        }
-        
+        guard let result = formula.result() else { return }
+        calculateOperand = NumberFormatter.convertToString(fromDouble: result)
         isCalculated = true
         resetOperator()
         expression.removeAll()
