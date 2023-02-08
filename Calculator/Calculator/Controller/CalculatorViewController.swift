@@ -55,11 +55,8 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated, calculateOperator != Symbol.empty else { return }
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         guard let number = Double(calculatedNumber) else { return }
-        let formatNumber = NumberFormatter.convertToString(fromDouble: number)
-        
-        addExpressionAndCalculateItem(sign: calculateOperator,
-                                      number: "\(number)",
-                                      operand: formatNumber)
+       
+        addExpressionAndCalculateItem(initialNumber: "\(number)")
         calculateOperand = calculate()
         isCalculated = true
         resetOperator()
@@ -77,11 +74,8 @@ final class CalculatorViewController: UIViewController {
         }
         
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
-        let calculatedOperand = NumberFormatter.convertToString(fromString: calculatedNumber)
-        
-        addExpressionAndCalculateItem(sign: calculateOperator,
-                                      number: calculatedNumber,
-                                      operand: calculatedOperand)
+       
+        addExpressionAndCalculateItem(initialNumber: calculatedNumber)
         scrollToBottom()
         isCalculated = false
         calculateOperator = operatorSign
@@ -91,8 +85,13 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
         guard calculateOperand.count <= Number.maxSignificantDigits else { return }
         guard let number = sender.currentTitle else { return }
-        
-        isCalculated = false
+        if isCalculated {
+            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
+            calculateOperand = number
+            resetCalculatorItemView()
+            isCalculated = false
+            return
+        }
         
         if calculateOperand == Symbol.zero {
             guard number != Symbol.zero, number != Symbol.doubleZero else { return }
@@ -111,13 +110,13 @@ final class CalculatorViewController: UIViewController {
         calculateOperand += Symbol.dot
     }
     
-    private func addExpressionAndCalculateItem(sign: String, number: String, operand: String) {
-        appendExpression(sign: sign, number: number)
+    private func addExpressionAndCalculateItem(initialNumber: String) {
+        appendExpression(initialNumber)
         addStackView()
     }
     
-    private func appendExpression(sign: String, number: String) {
-        expression.append(sign)
+    private func appendExpression(_ number: String) {
+        expression.append(calculateOperator)
         expression.append(number)
     }
     
@@ -139,7 +138,11 @@ final class CalculatorViewController: UIViewController {
     
     private func generateUILabel() -> UILabel {
         let label = UILabel()
-        label.text = calculateOperator + Symbol.blank + NumberFormatter.convertToString(fromString: calculateOperand)
+        if calculateOperator.isEmpty {
+            label.text = NumberFormatter.convertToString(fromString: calculateOperand)
+        } else {
+            label.text = calculateOperator + Symbol.blank + NumberFormatter.convertToString(fromString: calculateOperand)
+        }
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
