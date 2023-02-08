@@ -13,4 +13,5 @@ enum Sign {
     static let zeroZero = "00"
     static let negative: Character = "-"
     static let nan = "NaN"
+    static let comma = ","
 }

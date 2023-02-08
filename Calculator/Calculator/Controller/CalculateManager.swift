@@ -6,11 +6,10 @@
 //
 
 final class CalculateManager {
-    
     static let shared = CalculateManager()
     private init() { }
     
-    private var currentOperand: String = ""
+    private var currentOperand: String = Sign.empty
     private var expressions: [String] = []
     private var isCalculatedStatus: Bool = false
     
@@ -19,12 +18,11 @@ final class CalculateManager {
     }
     
     func setCurrentOperand(to operand: String?) {
-        currentOperand = operand ?? ""
+        currentOperand = operand ?? Sign.empty
     }
     
     func calculateExpressions(operatorSign: String) -> Double {
         isCalculatedStatus = true
-        
         expressions.removeLast()
         expressions.append(operatorSign)
         expressions.append(currentOperand.removeComma())
@@ -75,7 +73,6 @@ final class CalculateManager {
         
         expressions.append(operand)
         expressions.append(currentOperator!)
-        
         isCalculatedStatus = false
         return true
     }

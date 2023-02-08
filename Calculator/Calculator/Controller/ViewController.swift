@@ -12,9 +12,9 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var operationContentStackView: UIStackView!
     @IBOutlet private weak var operationScrollView: UIScrollView!
     
+    private let calculateManager = CalculateManager.shared
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
     private var currentOperand: String { operandLabel.text ?? Sign.empty }
-    private let calculateManager = CalculateManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,9 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        guard let result = calculateManager.updateOperand(input: sender.currentTitle) else { return }
+        guard let result = calculateManager.updateOperand(input: sender.currentTitle) else {
+            return
+        }
         operandLabel.text = result
     }
 
@@ -50,10 +52,8 @@ final class ViewController: UIViewController {
             operatorLabel.text = sign
             return
         }
-
         setOperationContentStackView(operatorValue: currentOperator,
                                      operandValue: operand.applyFormatter())
-        
         operatorLabel.text = sign
         operandLabel.text = Sign.zero
     }
@@ -87,7 +87,6 @@ final class ViewController: UIViewController {
             calculateManager.clearExpressions()
             return
         }
-        
         operatorLabel.text = Sign.blank
         operandLabel.text = String(result).applyFormatter()
         calculateManager.clearExpressions()
