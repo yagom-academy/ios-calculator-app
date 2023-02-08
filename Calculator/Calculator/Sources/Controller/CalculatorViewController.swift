@@ -68,6 +68,11 @@ final class CalculatorViewController: UIViewController {
     
     //MARK: Methods inserting operators to calculate
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
+        if isCalculated {
+            allClearViews()
+            stringToBeCalculated += currentNumber
+            isCalculated = false
+        }
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
@@ -105,6 +110,7 @@ final class CalculatorViewController: UIViewController {
             resetCurrentNumber()
             initializeCurrentOperator()
             displayResult(result: result)
+            currentNumber = String(result) //1+2+3=6 1 61
         } else { return }
         
         fixateScrollViewBottom()
