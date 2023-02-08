@@ -27,6 +27,7 @@ struct CalculatorChecker {
             enteringNumber = numberPad
             return
         }
+        
         enteringNumber += numberPad
         enteringNumber = enteringNumber.convertToDecimal()
     }
@@ -41,6 +42,7 @@ struct CalculatorChecker {
             enteringNumber = Sign.zero
             return
         }
+        
         guard hasDot else {
             appendingNumber(zeroPad)
             return
@@ -60,6 +62,7 @@ struct CalculatorChecker {
             enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
             return
         }
+        
         enteringNumber = (Sign.minus + enteringNumber)
     }
     
