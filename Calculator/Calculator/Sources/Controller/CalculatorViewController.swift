@@ -36,7 +36,7 @@ final class CalculatorViewController: UIViewController {
             allClear()
             isCalculated = false
         }
-        guard currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString).count < 20 else {
+        guard currentNumber.count < 20 else {
             return
         }
         insertString(titleName: sender.titleLabel?.text)
@@ -60,9 +60,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func setCurrentNumber(titleName: String?) {
-        currentNumber = currentNumber.replacingOccurrences(of: ",", with: NameSpace.emptyString)
         currentNumber += titleName ?? NameSpace.emptyString
-        currentNumber = currentNumber.stringWithComma
         displayCurrentNumber()
     }
     
@@ -110,7 +108,7 @@ final class CalculatorViewController: UIViewController {
             resetCurrentNumber()
             initializeCurrentOperator()
             displayResult(result: result)
-            currentNumber = String(result) //1+2+3=6 1 61
+            currentNumber = String(result)
         } else { return }
         
         fixateScrollViewBottom()
@@ -144,7 +142,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func displayCurrentNumber() {
-        currentNumberLabel.text = currentNumber
+        currentNumberLabel.text = currentNumber.stringWithComma
     }
     
     private func displayResult(result: Double) {
