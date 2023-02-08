@@ -28,7 +28,7 @@ final class CalculateViewController: UIViewController {
               let currentOperatorText = enteringOperatorLabel.text else { return }
         enteringOperatorLabel.text = inputOperatorText
         
-        guard enteringNumberLabel.text != Sign.zero,
+        guard calculatorChecker?.enteringNumber != Sign.empty,
               let formattingLabelText = enteringNumberLabel.text?.convertToDouble(),
               let decimalText = calculatorChecker?.convertToDecimal(for: formattingLabelText) else { return }
         calculatorStackView.addLabels(operandText: decimalText, operatorText: currentOperatorText)

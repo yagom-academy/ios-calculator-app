@@ -22,6 +22,7 @@ struct CalculatorChecker {
     }
     
     mutating func appendingExpression(_ operatorText: String) {
+        
         let convertedNumber = convertToDecimal(for: enteringNumber.convertToDouble())
         calculationExpression += (operatorText + convertedNumber)
         enteringNumber = Sign.empty
@@ -29,18 +30,18 @@ struct CalculatorChecker {
     }
     
     mutating func appendingZero(_ zeroPad: String) {
-        if isZero(enteringNumber) || hasCurrentInput(enteringNumber) == false {
+        guard isZero(enteringNumber) == false && hasCurrentInput(enteringNumber) else {
             enteringNumber = Sign.zero
             return
         }
         
-        if hasDot(enteringNumber) {
-            enteringNumber += zeroPad
-            labelUpdateClosure(enteringNumber)
+        guard hasDot(enteringNumber) else {
+            appendingNumber(zeroPad)
             return
         }
-        
-        appendingNumber(zeroPad)
+
+        enteringNumber += zeroPad
+        labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingDot() {
