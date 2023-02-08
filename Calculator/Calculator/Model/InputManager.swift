@@ -30,4 +30,29 @@ final class InputManager {
         
         return currentInput
     }
+    
+    func handleHundredNumber(input: String) -> String {
+        if currentInput == "0" {
+            return currentInput
+        } else {
+            currentInput += input
+        }
+        
+        return currentInput
+    }
+    
+    func handleConvertSign() -> String {
+        guard currentInput != "0" else {
+            return currentInput
+        }
+        
+        if currentInput.first == "−" {
+            currentInput.removeFirst()
+        } else {
+            currentInput = "−" + currentInput
+        }
+        
+        return currentInput
+    }
+    
 }

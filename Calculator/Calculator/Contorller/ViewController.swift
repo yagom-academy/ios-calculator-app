@@ -49,13 +49,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func converToNegativeButtonTapped(_ sender: UIButton) {
-        guard let currentNumber = self.numberOnField.text,
-              currentNumber != "0" else { return }
-        if currentNumber.contains("−") == true {
-            numberOnField.text = currentNumber.trimmingCharacters(in: ["−"])
-        } else {
-            numberOnField.text = "−" + currentNumber
-        }
+        numberOnField.text = inputManager.handleConvertSign()
     }
     
     @IBAction func calculateResultButtonTapped(_ sender: UIButton) {
@@ -80,7 +74,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onehundredButtonTapped(_ sender: UIButton) {
-        print("")
+        guard let currentTitle = sender.currentTitle else { return }
+        
+        numberOnField.text = inputManager.handleHundredNumber(input: currentTitle)
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
