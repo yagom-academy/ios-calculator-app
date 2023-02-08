@@ -18,7 +18,7 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text = calculateOperand
         }
     }
-    private var calculateOperator: String = Symbol.blank {
+    private var calculateOperator: String = Symbol.empty {
         didSet {
             operatorLabel.text = calculateOperator
         }
@@ -28,26 +28,20 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    private func setupOperandAndOperator() {
-        resetOperand()
-        resetOperator()
-    }
-    
     @IBAction private func didTapACButton() {
-        calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        resetCalculatorItemView()
         resetOperand()
         resetOperator()
+        expression.removeAll()
     }
     
     @IBAction private func didTapCEButton() {
-        if isCalculated == false {
-            calculateOperand = Symbol.zero
-        }
+        resetOperand()
     }
     
     @IBAction private func didTapChangeSignButton() {
-        guard calculateOperand != Symbol.zero else { return }
-        
+        guard calculateOperand != Symbol.zero,
+              calculateOperand != Symbol.nan else { return }
         guard let calculateNumberFirst = calculateOperand.first else { return }
         
         if calculateNumberFirst == Character(Symbol.minus) {
@@ -58,35 +52,25 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapResultButton() {
-        guard !isCalculated, calculateOperator != Symbol.blank else { return }
+        guard !isCalculated, calculateOperator != Symbol.empty else { return }
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         guard let number = Double(calculatedNumber) else { return }
-        
         let formatNumber = NumberFormatter.convertToString(fromDouble: number)
         
         addExpressionAndCalculateItem(sign: calculateOperator,
                                       number: "\(number)",
                                       operand: formatNumber)
-        
-        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
-        
-        let result = formula.result()
-        
-        if result.isNaN {
-            calculateOperand = Symbol.nan
-        } else {
-            calculateOperand = NumberFormatter.convertToString(fromDouble: result)
-        }
-        
+        calculateOperand = calculate()
         isCalculated = true
         resetOperator()
         expression.removeAll()
+        scrollToBottom()
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorSign = sender.currentTitle else { return }
         guard calculateOperand != Symbol.zero else {
-            if  calculateOperator != Symbol.blank {
+            if  calculateOperator != Symbol.empty {
                 calculateOperator = operatorSign
             }
             return
@@ -94,32 +78,24 @@ final class CalculatorViewController: UIViewController {
         
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         let calculatedOperand = NumberFormatter.convertToString(fromString: calculatedNumber)
-            
+        
         addExpressionAndCalculateItem(sign: calculateOperator,
                                       number: calculatedNumber,
                                       operand: calculatedOperand)
         scrollToBottom()
-        
         isCalculated = false
         calculateOperator = operatorSign
-        calculateOperand = Symbol.zero
+        resetOperand()
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        guard calculateOperand.count <= Symbol.maxSignificantDigits else { return }
+        guard calculateOperand.count <= Number.maxSignificantDigits else { return }
         guard let number = sender.currentTitle else { return }
         
-        if isCalculated {
-            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
-            calculateOperand = number
-            isCalculated = false
-            return
-        }
+        isCalculated = false
         
         if calculateOperand == Symbol.zero {
             guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
             calculateOperand = number
         } else {
             if calculateOperand.contains(Symbol.dot) {
@@ -131,16 +107,13 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapDotButton(_ sender: UIButton) {
-        guard let dot = sender.currentTitle else { return }
         guard !calculateOperand.contains(Symbol.dot) else { return }
-        
-        guard !isCalculated else { return }
-        calculateOperand += dot
+        calculateOperand += Symbol.dot
     }
     
     private func addExpressionAndCalculateItem(sign: String, number: String, operand: String) {
         appendExpression(sign: sign, number: number)
-        addToCalculateItem(left: sign, right: operand)
+        addStackView()
     }
     
     private func appendExpression(sign: String, number: String) {
@@ -148,44 +121,39 @@ final class CalculatorViewController: UIViewController {
         expression.append(number)
     }
     
-    private func addToCalculateItem(left: String, right: String) {
-        let operatorUILabel = generateUILabel(title: left)
-        let operandUILabel = generateUILabel(title: right)
-        let stackView = generateUIStackView(left: operatorUILabel, right: operandUILabel)
+    private func calculate() -> String {
+        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.empty))
+        guard let result = formula.result() else { return Symbol.empty }
         
-        calculateStackView.addArrangedSubview(stackView)
-        scrollToBottom()
+        return NumberFormatter.convertToString(fromDouble: result)
     }
     
     private func scrollToBottom() {
         let bottomOffset = CGPoint(
-            x: 0,
+            x: Number.origin,
             y: calculateScrollView.contentSize.height - calculateScrollView.bounds.height
         )
-        
         calculateScrollView.layoutIfNeeded()
         calculateScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func generateUILabel(title: String) -> UILabel {
+    private func generateUILabel() -> UILabel {
         let label = UILabel()
-        label.text = title
+        label.text = calculateOperator + Symbol.blank + NumberFormatter.convertToString(fromString: calculateOperand)
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-        
+        label.adjustsFontForContentSizeCategory = true
         return label
     }
     
-    private func generateUIStackView(left: UILabel, right: UILabel) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.addArrangedSubview(left)
-        stackView.addArrangedSubview(right)
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 8
-        
-        return stackView
+    private func addStackView() {
+        let stackLabel = generateUILabel()
+        calculateStackView.addArrangedSubview(stackLabel)
+        scrollToBottom()
+    }
+    
+    private func resetCalculatorItemView() {
+        calculateStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func resetOperand() {
@@ -193,12 +161,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func resetOperator() {
-        calculateOperator = Symbol.blank
-    }
-    
-    private func resetLabel() {
-        resetOperand()
-        resetOperator()
+        calculateOperator = Symbol.empty
     }
 }
-
