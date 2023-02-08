@@ -30,13 +30,20 @@ final class ViewController: UIViewController {
         operationContentStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
+    @IBAction private func setCurrentOperand(_ sender: UIButton){
+        calculateManager.setCurrentOperand(to: operandLabel.text)
+    }
+    
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        let result = calculateManager.updateOperand(input: sender.currentTitle, at: currentOperand)
+        calculateManager.setCurrentOperand(to: operandLabel.text)
+        let result = calculateManager.updateOperand(input: sender.currentTitle)
         operandLabel.text = result
     }
 
     @IBAction private func didTapDot(_ sender: UIButton) {
-        updateDot()
+        calculateManager.setCurrentOperand(to: operandLabel.text)
+        let operandContainedDot = calculateManager.updateDot(at: currentOperand)
+        operandLabel.text = operandContainedDot
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
@@ -84,13 +91,7 @@ final class ViewController: UIViewController {
         operandLabel.text = String(result).applyFormatter()
         expressions.removeAll()
     }
-    
-    private func updateDot() {
-        guard currentOperand.contains(Sign.dot) == false else { return }
-        
-        operandLabel.text = currentOperand.applyFormatter() + String(Sign.dot)
-    }
-    
+
     private func updateOperator(with sign: String?) {
         let operand = currentOperand.removeComma()
         
