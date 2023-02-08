@@ -1,5 +1,3 @@
-import Foundation
-
 struct CalculatorChecker {
     private(set) var enteringNumber = Sign.empty
     private(set) var calculationExpression: String = Sign.empty
@@ -11,6 +9,7 @@ struct CalculatorChecker {
         }
         return true
     }
+    
     private var hasDot: Bool {
         return enteringNumber.contains(Sign.dot) ? true : false
     }
@@ -41,7 +40,6 @@ struct CalculatorChecker {
             enteringNumber = Sign.zero
             return
         }
-        
         guard hasDot else {
             appendingNumber(zeroPad)
             return
@@ -57,14 +55,7 @@ struct CalculatorChecker {
         enteringNumber = hasCurrentInput ? (enteringNumber + Sign.dot) : Sign.zeroDot
         labelUpdateClosure(enteringNumber)
     }
-    
-    func appendingDot(_ currentText: String) -> String {
-        if currentText == Sign.empty {
-            return Sign.zero + Sign.dot
-        }
-        return currentText + Sign.dot
-    }
-    
+
     mutating func changeSign() {
         guard enteringNumber.contains(Sign.minus) == false else {
             enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
@@ -72,16 +63,6 @@ struct CalculatorChecker {
             return
         }
         enteringNumber = (Sign.minus + enteringNumber)
-        labelUpdateClosure(enteringNumber)
-    }
-    
-    mutating func initialState() {
-        calculationExpression = Sign.empty
-        initialEnteringNumber()
-    }
-    
-    mutating func initialEnteringNumber() {
-        enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
     
@@ -99,5 +80,15 @@ struct CalculatorChecker {
     
     func isZero(_ currentText: String) -> Bool {
         return currentText == Sign.zero ? true : false
+    }
+    
+    mutating private func initialState() {
+        calculationExpression = Sign.empty
+        initialEnteringNumber()
+    }
+    
+    mutating private func initialEnteringNumber() {
+        enteringNumber = Sign.empty
+        labelUpdateClosure(enteringNumber)
     }
 }

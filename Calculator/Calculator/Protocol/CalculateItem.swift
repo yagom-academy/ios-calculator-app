@@ -1,3 +1,1 @@
-protocol CalculateItem {
-    
-}
+protocol CalculateItem { }
