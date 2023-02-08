@@ -82,12 +82,12 @@ struct CalculatorChecker {
         return currentText == Sign.zero ? true : false
     }
     
-    mutating private func initialState() {
+    mutating func initialState() {
         calculationExpression = Sign.empty
         initialEnteringNumber()
     }
     
-    mutating private func initialEnteringNumber() {
+    mutating func initialEnteringNumber() {
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
