@@ -28,6 +28,7 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
+		FBB0AC6F29936AF5009F7334 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB0AC6E29936AF5009F7334 /* CalculatorError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBB0AC6E29936AF5009F7334 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				FBB0AC6D29936ADD009F7334 /* CalculatorError */,
 				98DE0B9A298F845E00082EC2 /* Application */,
 				98B18833297FCE38008D8AC2 /* Model */,
 				98DE0B9B298F848600082EC2 /* Controller */,
@@ -177,6 +180,14 @@
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
+			sourceTree = "<group>";
+		};
+		FBB0AC6D29936ADD009F7334 /* CalculatorError */ = {
+			isa = PBXGroup;
+			children = (
+				FBB0AC6E29936AF5009F7334 /* CalculatorError.swift */,
+			);
+			path = CalculatorError;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +308,7 @@
 				98B1885029810F72008D8AC2 /* CalculateItemProtocol.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				98DE0BA1298F93B600082EC2 /* Symbol.swift in Sources */,
+				FBB0AC6F29936AF5009F7334 /* CalculatorError.swift in Sources */,
 				98B1DF442983A18A001C9AEF /* String+Extension.swift in Sources */,
 				98B18848297FE9C7008D8AC2 /* Node.swift in Sources */,
 				98B1DF4A2983A94B001C9AEF /* Formula.swift in Sources */,
