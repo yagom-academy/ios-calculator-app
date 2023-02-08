@@ -1,5 +1,9 @@
 struct CalculatorChecker {
-    private(set) var enteringNumber = Sign.empty
+    private(set) var enteringNumber = Sign.empty {
+        didSet {
+            labelUpdateClosure(enteringNumber)
+        }
+    }
     private(set) var calculationExpression: String = Sign.empty
     private var labelUpdateClosure: (String) -> Void
     
@@ -21,18 +25,15 @@ struct CalculatorChecker {
     mutating func appendingNumber(_ numberPad: String) {
         guard hasCurrentInput else {
             enteringNumber = numberPad
-            labelUpdateClosure(enteringNumber)
             return
         }
         enteringNumber += numberPad
         enteringNumber = enteringNumber.convertToDecimal()
-        labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingExpression(_ operatorText: String, _ operandText: String) {
         calculationExpression += (operatorText + operandText)
         enteringNumber = Sign.empty
-        labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingZero(_ zeroPad: String) {
@@ -46,24 +47,20 @@ struct CalculatorChecker {
         }
 
         enteringNumber += zeroPad
-        labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingDot() {
         guard hasDot == false else { return }
         
         enteringNumber = hasCurrentInput ? (enteringNumber + Sign.dot) : Sign.zeroDot
-        labelUpdateClosure(enteringNumber)
     }
 
     mutating func changeSign() {
         guard enteringNumber.contains(Sign.minus) == false else {
             enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
-            labelUpdateClosure(enteringNumber)
             return
         }
         enteringNumber = (Sign.minus + enteringNumber)
-        labelUpdateClosure(enteringNumber)
     }
     
     mutating func calculate(_ operatorText: String) {
@@ -89,6 +86,5 @@ struct CalculatorChecker {
     
     mutating func initialEnteringNumber() {
         enteringNumber = Sign.empty
-        labelUpdateClosure(enteringNumber)
     }
 }
