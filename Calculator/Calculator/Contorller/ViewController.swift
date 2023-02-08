@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        allClear()
     }
     
     
@@ -30,9 +31,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
+        allClear()
+    }
+    
+    private func allClear() {
         self.numberOnField.text = "0"
         self.calculateComponents = ""
         self.inputNumbers = ""
+        resetAllStackView()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
