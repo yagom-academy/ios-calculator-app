@@ -5,39 +5,44 @@ struct CalculatorChecker {
     private(set) var calculationExpression: String = Sign.empty
     private var labelUpdateClosure: (String) -> Void
     
+    private var hasCurrentInput: Bool {
+        if enteringNumber == Sign.empty || enteringNumber == Sign.space {
+            return false
+        }
+        return true
+    }
+    private var hasDot: Bool {
+        return enteringNumber.contains(Sign.dot) ? true : false
+    }
+    
     init(updateClosure closure: @escaping (String) -> Void) {
         self.labelUpdateClosure = closure
     }
     
-    // =하면 현재 enteringNumber가 8인 상태. 근데 space이고
-    
     mutating func appendingNumber(_ numberPad: String) {
-        guard hasCurrentInput(enteringNumber) else {
+        guard hasCurrentInput else {
             enteringNumber = numberPad
             labelUpdateClosure(enteringNumber)
             return
         }
-        
-        let addedEnteringNumber = enteringNumber.convertToDouble(appending: numberPad)
-        enteringNumber = convertToDecimal(for: addedEnteringNumber)
+        enteringNumber += numberPad
+        enteringNumber = enteringNumber.convertToDecimal()
         labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingExpression(_ operatorText: String, _ operandText: String) {
-        
-//        let convertedNumber = convertToDecimal(for: enteringNumber.convertToDouble())
         calculationExpression += (operatorText + operandText)
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
     
     mutating func appendingZero(_ zeroPad: String) {
-        guard isZero(enteringNumber) == false && hasCurrentInput(enteringNumber) else {
+        guard isZero(enteringNumber) == false && hasCurrentInput else {
             enteringNumber = Sign.zero
             return
         }
         
-        guard hasDot(enteringNumber) else {
+        guard hasDot else {
             appendingNumber(zeroPad)
             return
         }
@@ -47,9 +52,9 @@ struct CalculatorChecker {
     }
     
     mutating func appendingDot() {
-        guard hasDot(enteringNumber) == false else { return }
+        guard hasDot == false else { return }
         
-        enteringNumber = hasCurrentInput(enteringNumber) ? (enteringNumber + Sign.dot) : Sign.zeroDot
+        enteringNumber = hasCurrentInput ? (enteringNumber + Sign.dot) : Sign.zeroDot
         labelUpdateClosure(enteringNumber)
     }
     
@@ -81,33 +86,18 @@ struct CalculatorChecker {
     }
     
     mutating func calculate(_ operatorText: String) {
-        calculationExpression += (operatorText + enteringNumber)
+        let formattedNumber = enteringNumber.convertToDecimal()
+        
+        calculationExpression += (operatorText + formattedNumber)
+        
         var formula = ExpressionParser.parse(from: calculationExpression.split(separator: ",").joined())
+        
         initialState()
         enteringNumber = Sign.space
-        labelUpdateClosure(convertToDecimal(for: formula.result()))
-    }
-    
-    func hasCurrentInput(_ currentText: String) -> Bool {
-        if currentText == Sign.empty || currentText == Sign.space {
-            return false
-        }
-        return true
-    }
-    
-    private func hasDot(_ currentText: String) -> Bool {
-        return currentText.contains(Sign.dot) ? true : false
+        labelUpdateClosure(String(formula.result()).convertToDecimal())
     }
     
     func isZero(_ currentText: String) -> Bool {
         return currentText == Sign.zero ? true : false
-    }
-    
-    func convertToDecimal(for number: Double) -> String {
-        let numberFormatter =  NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
-        return numberFormatter.string(for: number) ?? Sign.zero
     }
 }
