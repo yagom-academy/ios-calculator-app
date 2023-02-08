@@ -27,9 +27,4 @@ struct LinkedList<Element: CalculateItem> {
         self.head = head?.next
         return node.data
     }
-    
-    mutating func removeAll() {
-        self.head = nil
-        self.tail = nil
-    }
 }
