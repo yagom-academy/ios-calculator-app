@@ -7,7 +7,7 @@ final class CalculatorStackView: UIStackView {
         
         let formulaLabel = UILabel()
         formulaLabel.font = .preferredFont(forTextStyle: .title3)
-        formulaLabel.text = "\(operatorValue) \(operandValue)"
+        formulaLabel.text = "\(operatorValue)  \(operandValue)"
         formulaLabel.textColor = .white
         
         self.addArrangedSubview(formulaLabel)

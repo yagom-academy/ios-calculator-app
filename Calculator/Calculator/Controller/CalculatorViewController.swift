@@ -72,26 +72,11 @@ final class CalculateViewController: UIViewController {
 //        enteringNumber = Sign.empty
 //    }
 //
-//    @IBAction private func didTapChangedSighPad(_ sender: UIButton) {
-//        guard let enteringNumberText = enteringNumberLabel.text,
-//              !calculatorChecker.isZero(enteringNumberText) else { return }
-//        enteringNumber = calculatorChecker.changedSign(enteringNumberText)
-//    }
-//
-//    private func addFormulaStackView(to: UIStackView, with currentOperatorText: String) {
-//        guard let enteringNumberText = enteringNumberLabel.text,
-//                  calculatorChecker.hasCurrentInput(enteringNumber) else { return }
-//        let formulaStackView = FormulaStackView()
-//        formulaStackView.addLabels(
-//            [
-//                currentOperatorText,
-//                convertToDecimal(for: enteringNumberText.convertToDouble())
-//            ]
-//        )
-//        calculatorStackView.addArrangedSubview(formulaStackView)
-//        calculatorScrollView.layoutIfNeeded()
-//        calculatorScrollView.scrollToBottom()
-//    }
+    @IBAction private func didTapChangedSignPad(_ sender: UIButton) {
+        guard let enteringNumberText = enteringNumberLabel.text,
+              calculatorChecker?.isZero(enteringNumberText) == false else { return }
+        calculatorChecker?.changeSign()
+    }
 //
 //    private func initialState() {
 //        enteringNumber = Sign.space

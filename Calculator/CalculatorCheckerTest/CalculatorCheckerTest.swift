@@ -151,4 +151,33 @@ final class CalculatorCheckerTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_changedSign호출시_현재_값이_양수라면_음수가_된다() {
+        // given
+        let input = "3"
+        let expectation = "-3"
+        
+        // when
+        sut.appendingNumber(input)
+        sut.changeSign()
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_changedSign호출시_현재_값이_음수라면_양수가_된다() {
+        // given
+        let input = "3"
+        let expectation = "3"
+        
+        // when
+        sut.appendingNumber(input)
+        sut.changeSign()
+        sut.changeSign()
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }

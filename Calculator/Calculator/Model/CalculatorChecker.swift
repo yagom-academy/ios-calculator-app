@@ -51,6 +51,16 @@ struct CalculatorChecker {
         labelUpdateClosure(enteringNumber)
     }
     
+    mutating func changeSign() {
+        guard enteringNumber.contains(Sign.minus) == false else {
+            enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
+            labelUpdateClosure(enteringNumber)
+            return
+        }
+        enteringNumber = (Sign.minus + enteringNumber)
+        labelUpdateClosure(enteringNumber)
+    }
+    
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
             return false
@@ -71,13 +81,6 @@ struct CalculatorChecker {
     
     func isZero(_ currentText: String) -> Bool {
         return currentText == Sign.zero ? true : false
-    }
-    
-    func changedSign(_ currentText: String) -> String {
-        if currentText.contains(Sign.minus) {
-            return currentText.replacingOccurrences(of: Sign.minus, with: Sign.empty)
-        }
-        return (Sign.minus + currentText)
     }
     
     func calculate(with expression: String) -> Double {
