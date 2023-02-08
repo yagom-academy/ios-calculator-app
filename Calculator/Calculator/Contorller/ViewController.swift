@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         self.numberOnField.text = "0"
         self.operatorOnField.text = ""
         self.calculateComponents = ""
-        inputManager.currentInput = "0"
+        inputManager.currentNumber = "0"
         resetAllStackView()
     }
     
@@ -86,26 +86,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
+        guard let newOperator = sender.currentTitle else { return }
         
-        guard let currentNumber = numberOnField.text else { return }
-        guard let inputtedOperator = sender.titleLabel?.text else { return }
-        guard let currentOper = operatorOnField.text else { return }
-        
-        operatorOnField.text = inputtedOperator
-        if currentNumber == "0", currentNumber.last == "." {
+        guard inputManager.currentNumber != "0"  else {
+            inputManager.currentOperator = newOperator
+            operatorOnField.text = newOperator
             return
-        } else if calculateComponents == "" {
-            calculateComponents += currentNumber
-            addHistoryEntry(left: "", right: currentNumber)
-        } else {
-            calculateComponents += currentOper + currentNumber
-            addHistoryEntry(left: currentOper, right: currentNumber)
-            self.numberOnField.text = ""
-            
         }
-        inputNumbers = "0"
+        
+        guard inputManager.currentNumber != "0",
+              inputManager.currentNumber.last != "." else { return }
+                
+        operatorOnField.text = newOperator
+        
+        let result = inputManager.handleOperator()
+        addHistoryEntry(left: result.operatorText, right: result.operandText)
+        
+        inputManager.currentNumber = "0"
         numberOnField.text = "0"
-        setUpScrollViewToBottom()
+        inputManager.currentOperator = newOperator
     }
     
     private func addHistoryEntry(left: String, right: String) {

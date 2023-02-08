@@ -9,50 +9,61 @@ import Foundation
 
 final class InputManager {
     var expression = ""
-    var currentInput = "0"
+    var currentNumber = "0"
+    var currentOperator = ""
     
     func handleNumbers(input: String) -> String {
-        if currentInput == "0" {
-            currentInput = input
+        if currentNumber == "0" {
+            currentNumber = input
         } else {
-            currentInput += input
+            currentNumber += input
         }
         
-        return currentInput
+        return currentNumber
     }
     
     func handleDotSign(input: String) -> String {
-        if currentInput.contains(".") {
-            return currentInput
+        if currentNumber.contains(".") {
+            return currentNumber
         } else {
-            currentInput += input
+            currentNumber += input
         }
         
-        return currentInput
+        return currentNumber
     }
     
     func handleHundredNumber(input: String) -> String {
-        if currentInput == "0" {
-            return currentInput
+        if currentNumber == "0" {
+            return currentNumber
         } else {
-            currentInput += input
+            currentNumber += input
         }
         
-        return currentInput
+        return currentNumber
     }
     
     func handleConvertSign() -> String {
-        guard currentInput != "0" else {
-            return currentInput
+        guard currentNumber != "0" else {
+            return currentNumber
         }
         
-        if currentInput.first == "−" {
-            currentInput.removeFirst()
+        if currentNumber.first == "−" {
+            currentNumber.removeFirst()
         } else {
-            currentInput = "−" + currentInput
+            currentNumber = "−" + currentNumber
         }
         
-        return currentInput
+        return currentNumber
+    }
+    
+    func handleOperator() -> (operatorText: String, operandText: String) {
+        if expression == "" {
+            expression += currentNumber
+        } else {
+            expression += currentOperator + currentNumber
+        }
+        
+        return (currentOperator, currentNumber)
     }
     
 }
