@@ -12,16 +12,6 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var operationContentStackView: UIStackView!
     @IBOutlet private weak var operationScrollView: UIScrollView!
     
-    private enum Sign {
-        static let dot: Character = "."
-        static let blank = " "
-        static let empty = ""
-        static let zero = "0"
-        static let zeroZero = "00"
-        static let negative: Character = "-"
-        static let nan = "NaN"
-    }
-    
     private var expressions: [String] = []
     private var isCalculatedStatus: Bool = false
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
