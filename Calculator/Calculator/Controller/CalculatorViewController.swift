@@ -44,11 +44,11 @@ final class CalculatorViewController: UIViewController {
         if prevOperandLabel.contains(".") {
             operandLabel.text = prevOperandLabel + inputNumber
         } else {
-            operandLabel.text = convertNumberToString(prevOperandLabel + inputNumber)
+            operandLabel.text = convertNumberFormat(prevOperandLabel + inputNumber)
         }
     }
     
-    @IBAction private func commaButtonTapped(_ sender: UIButton) {
+    @IBAction private func pointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false,
               let prevOperandLabel = operandLabel.text else { return }
         
@@ -85,9 +85,9 @@ final class CalculatorViewController: UIViewController {
         guard let operatorText = operatorLabel.text,
               let operandText = operandLabel.text else { return }
         
-        expression += operatorText + convertNumberToString(operandText)
+        expression += operatorText + convertNumberFormat(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
+        let stackView = generateStackView(convertNumberFormat(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         
@@ -101,9 +101,9 @@ final class CalculatorViewController: UIViewController {
         guard let operatorText = operatorLabel.text,
               let operandText = operandLabel.text else { return }
         
-        expression += operatorText + convertNumberToString(operandText)
+        expression += operatorText + convertNumberFormat(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
+        let stackView = generateStackView(convertNumberFormat(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         calculateExpression()
@@ -118,7 +118,7 @@ final class CalculatorViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = convertNumberToString(String(result))
+            operandLabel.text = convertNumberFormat(String(result))
         }
         
         operatorLabel.text = ""
@@ -135,7 +135,7 @@ final class CalculatorViewController: UIViewController {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func convertNumberToString(_ input: String) -> String {
+    private func convertNumberFormat(_ input: String) -> String {
         let numberFormatter = NumberFormatter()
         let removedComma = input.components(separatedBy: ",").joined()
         
