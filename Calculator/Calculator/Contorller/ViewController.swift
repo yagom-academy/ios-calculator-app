@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     
     private var calculateComponents: String = ""
     private var inputNumbers: String = "0"
+    private let inputManager: InputManager = InputManager()
     
     @IBOutlet weak var numberOnField: UILabel!
     @IBOutlet weak var operatorOnField: UILabel!
@@ -38,7 +39,7 @@ class ViewController: UIViewController {
         self.numberOnField.text = "0"
         self.operatorOnField.text = ""
         self.calculateComponents = ""
-        self.inputNumbers = "0"
+        inputManager.currentInput = "0"
         resetAllStackView()
     }
     
@@ -74,14 +75,8 @@ class ViewController: UIViewController {
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
         guard let currentTitle = sender.currentTitle else { return }
-        
-        if inputNumbers != "0" {
-            inputNumbers += currentTitle
-            numberOnField.text = inputNumbers
-        } else {
-            inputNumbers = currentTitle
-            numberOnField.text = currentTitle
-        }
+
+        numberOnField.text = inputManager.handleNumbers(input: currentTitle)
     }
     
     @IBAction func onehundredButtonTapped(_ sender: UIButton) {
@@ -90,10 +85,8 @@ class ViewController: UIViewController {
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle else { return }
-        guard inputNumbers.contains(".") == false else { return }
-        
-        inputNumbers += dot
-        numberOnField.text = inputNumbers
+
+        numberOnField.text = inputManager.handleDotSign(input: dot)
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {

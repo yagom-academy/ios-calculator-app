@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A26399D2992351000004C73 /* HistoryEntryStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26399C2992351000004C73 /* HistoryEntryStackView.swift */; };
+		4A26399F2993416C00004C73 /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A26399E2993416C00004C73 /* InputManager.swift */; };
 		583D1130298047280097CC18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		583D1133298048060097CC18 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D1132298048060097CC18 /* CalculatorItemQueue.swift */; };
 		584146D0298246FC00817FFB /* CalculatorQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		4A26399C2992351000004C73 /* HistoryEntryStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryEntryStackView.swift; sourceTree = "<group>"; };
+		4A26399E2993416C00004C73 /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
 		583D1132298048060097CC18 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		583D113829804ECB0097CC18 /* CalculatorQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		583D113A29804ECB0097CC18 /* CalculatorQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorQueueTests.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				584146E82982708100817FFB /* Operator.swift */,
 				584146E42982703800817FFB /* ExpressionParser.swift */,
 				583D1132298048060097CC18 /* CalculatorItemQueue.swift */,
+				4A26399E2993416C00004C73 /* InputManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				58BF1B52298932D50029D030 /* OperatorExtension.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4A26399D2992351000004C73 /* HistoryEntryStackView.swift in Sources */,
+				4A26399F2993416C00004C73 /* InputManager.swift in Sources */,
 				584146EB298270A200817FFB /* StringExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
