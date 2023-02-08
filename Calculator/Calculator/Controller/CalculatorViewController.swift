@@ -13,8 +13,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var contentStack: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private var workingSpace: String = ""
-    private var operand = ""
+    private var expression: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,139 +28,125 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        if let number = sender.currentTitle {
-            operand += number
-        }
+        guard let prevOperandLabel = operandLabel.text else { return }
+        guard let inputNumber = sender.currentTitle else { return }
         
-        guard let operandDouble = Double(operand) else { return }
-        operandLabel.text = convertNumberToString(operandDouble)
-    }
-    
-    @IBAction private func zeroAndCommaButtonTapped(_ sender: UIButton) {
-        if operandLabel.text == "0" && sender.currentTitle != "." {
-            return
-        } else if operandLabel.text == "0" && sender.currentTitle == "." {
-            operand += "0."
-            operandLabel.text = operand
-        } else if operand.contains(".") && sender.currentTitle == "." {
-            return
-        } else if operandLabel.text != "0" && sender.currentTitle == "." {
-            if let operandLabelText = operandLabel.text {
-                operandLabel.text = operandLabelText + "."
-                operand += "."
-            }
-        } else {
-            if let input = sender.currentTitle {
-                operand += input
+        if prevOperandLabel == "0" {
+            if inputNumber == "0" || inputNumber == "00" {
+                operandLabel.text = "0"
+            } else {
+                operandLabel.text = inputNumber
             }
             
-            guard let operandDouble = Double(operand) else { return }
-            operandLabel.text = convertNumberToString(operandDouble)
+            return
+        }
+        
+        if prevOperandLabel.contains(".") {
+            operandLabel.text = prevOperandLabel + inputNumber
+        } else {
+            operandLabel.text = convertNumberToString(prevOperandLabel + inputNumber)
         }
     }
     
+    @IBAction private func commaButtonTapped(_ sender: UIButton) {
+        guard operandLabel.text?.contains(".") == false,
+              let prevOperandLabel = operandLabel.text else { return }
+        
+        operandLabel.text = prevOperandLabel + "."
+    }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
-         if var operand = Int(operand) {
-            operand = -operand
-            operandLabel.text = convertNumberToString(Double(operand))
-        } else if var operand = Double(operand) {
-            operand = -operand
-            operandLabel.text = convertNumberToString(operand)
+        guard operandLabel.text != "0" else { return }
+        
+        if operandLabel.text?.contains("-") == true {
+            operandLabel.text?.removeFirst()
+            
+            return
         }
+        
+        guard let prevOperandLabel = operandLabel.text else { return }
+
+        operandLabel.text = "-" + prevOperandLabel
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
-        operand = ""
         operandLabel.text = "0"
     }
     
     @IBAction private func operatorButtonTapped(_ sender: UIButton) {
-        guard var operandLabelText = operandLabel.text else { return }
-        guard let `operator` = sender.currentTitle else { return }
-        
-        if operandLabelText.contains(",") {
-            operandLabelText = operandLabelText.split(with: ",").joined()
-        }
-        
-        if operatorLabel.text == "" && operandLabelText != "0" {
-            guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(convertNumberToString(operandDouble), "")
-            addContentStack(stackView)
-            
-            workingSpace += operandLabelText
-            setOperatorLabel(`operator`)
-        } else if operatorLabel.text == "" && operandLabelText == "0" {
-            return
-        } else if operatorLabel.text != "" && operandLabelText == "0" {
-            setOperatorLabel(`operator`)
+        guard operandLabel.text != "0"  else {
+            if !contentStack.subviews.isEmpty {
+                operatorLabel.text = sender.currentTitle
+            }
             
             return
-        } else {
-            guard let operandDouble = Double(operandLabelText) else { return }
-            let stackView = generateStackView(convertNumberToString(operandDouble), operatorLabel.text)
-            addContentStack(stackView)
-            
-            guard let operatorLabelText = operatorLabel.text else { return }
-            workingSpace += operatorLabelText + operandLabelText
-            
-            setOperatorLabel(`operator`)
         }
         
+        guard let operatorText = operatorLabel.text,
+              let operandText = operandLabel.text else { return }
+        
+        expression += operatorText + convertNumberToString(operandText)
+        
+        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
+        addContentStack(stackView)
         setScrollViewFocus()
+        
+        operandLabel.text = "0"
+        operatorLabel.text = sender.currentTitle
     }
     
     @IBAction private func calculateButtonTapped(_ sender: UIButton) {
-        guard workingSpace != "" else { return }
+        guard operatorLabel.text != "" else { return }
         
-        let stackView = generateStackView(operandLabel.text, operatorLabel.text)
+        guard let operatorText = operatorLabel.text,
+              let operandText = operandLabel.text else { return }
+        
+        expression += operatorText + convertNumberToString(operandText)
+        
+        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
         addContentStack(stackView)
+        setScrollViewFocus()
+        calculateExpression()
+    }
+    
+    private func calculateExpression() {
+        let removedComma = expression.components(separatedBy: ",").joined()
         
-        guard let operatorLabelText = operatorLabel.text else { return }
-        workingSpace += operatorLabelText + operand
-        
-        var formula = ExpressionParser.parse(from: workingSpace)
+        var formula = ExpressionParser.parse(from: removedComma)
         let result = formula.result()
         
         if result.isNaN {
             operandLabel.text = "NaN"
-            operatorLabel.text = ""
-            operand = ""
-            workingSpace = ""
         } else {
-            operandLabel.text = convertNumberToString(result)
-            operatorLabel.text = ""
-            operand = ""
-            workingSpace = ""
+            operandLabel.text = convertNumberToString(String(result))
         }
         
-        setScrollViewFocus()
+        operatorLabel.text = ""
+        expression = ""
     }
     
     @IBAction private func clearAllButtonTapped(_ sender: UIButton) {
-        workingSpace = ""
-        operand = ""
+        expression = ""
         clearLabel()
         clearAllContentStack()
-    }
-    
-    private func setOperatorLabel(_ `operator`: String) {
-        operatorLabel.text = `operator`
-        operand = ""
-        operandLabel.text = "0"
     }
     
     private func clearAllContentStack() {
         contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func convertNumberToString(_ input: Double) -> String {
+    private func convertNumberToString(_ input: String) -> String {
         let numberFormatter = NumberFormatter()
+        let removedComma = input.components(separatedBy: ",").joined()
+        
+        guard let inputToNSNumber = numberFormatter.number(from: removedComma) else { return input }
+        
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .ceiling
         
-        let result = numberFormatter.string(for: input) ?? "0"
+        guard let result = numberFormatter.string(for: inputToNSNumber) else { return input }
         
         return result
     }

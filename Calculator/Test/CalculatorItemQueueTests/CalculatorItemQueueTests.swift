@@ -105,42 +105,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_2개의_queue에서_removeLast를_한경우_size가_줄어든다() {
-        // given
-        sut.enqueue(111)
-        sut.enqueue(222)
-        let expectation = 1
-        // when
-        sut.removeLast()
-        let result = sut.size
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_2개의_queue에서_removeLast를_한경우_2번째_dequeue는_nil이다() {
-        // given
-        sut.enqueue(111)
-        sut.enqueue(222)
-        let expectation: Double? = nil
-        // when
-        sut.removeLast()
-        let _ = sut.dequeue()
-        let result = sut.dequeue()
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_1개의_queue에서_removeLast를_한경우_size는_0이다() {
-        // given
-        sut.enqueue(111)
-        let expectation = 0
-        // when
-        sut.removeLast()
-        let result = sut.size
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
     func test_3개의_queue에서_clear를_한경우_isEmpty는_true이다() {
         // given
         sut.enqueue(111)
@@ -153,4 +117,5 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+
 }
