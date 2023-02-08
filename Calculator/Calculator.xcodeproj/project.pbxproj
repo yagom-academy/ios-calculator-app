@@ -131,14 +131,14 @@
 			path = DataStructure;
 			sourceTree = "<group>";
 		};
-		62F7229A2991017A00FC6DE5 /* Utils */ = {
+		62F7229A2991017A00FC6DE5 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				62F722932990FD9700FC6DE5 /* StringExtension.swift */,
 				62F7229B2991019E00FC6DE5 /* ScrollViewExtension.swift */,
 				26BF3E23299102E500A9A6E4 /* DoubleExtension.swift */,
 			);
-			path = Utils;
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		62F722B329923E2C00FC6DE5 /* CalculatorCheckerTest */ = {
@@ -171,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				26BF3E202991026300A9A6E4 /* Protocol */,
-				62F7229A2991017A00FC6DE5 /* Utils */,
+				62F7229A2991017A00FC6DE5 /* Extension */,
 				62F722972991009A00FC6DE5 /* Model */,
 				62F722962991009300FC6DE5 /* Controller */,
 				62F722952991008B00FC6DE5 /* View */,

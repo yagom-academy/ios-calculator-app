@@ -1,10 +1,3 @@
-//
-//  CalculatorCheckerTest.swift
-//  CalculatorCheckerTest
-//
-//  Created by 천승현 on 2023/02/07.
-//
-
 import XCTest
 @testable import Calculator
 
