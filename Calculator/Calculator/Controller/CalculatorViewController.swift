@@ -32,10 +32,10 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        guard let prevOperandLabel = operandLabel.text,
+        guard let prevOperandText = operandLabel.text,
               let inputNumber = sender.currentTitle else { return }
         
-        if prevOperandLabel == "0" {
+        if prevOperandText == "0" {
             if inputNumber == "0" || inputNumber == "00" {
                 operandLabel.text = "0"
             } else {
@@ -45,18 +45,18 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if prevOperandLabel.contains(".") {
-            operandLabel.text = prevOperandLabel + inputNumber
+        if prevOperandText.contains(".") {
+            operandLabel.text = prevOperandText + inputNumber
         } else {
-            operandLabel.text = convertNumberFormat(prevOperandLabel + inputNumber)
+            operandLabel.text = convertNumberFormat(prevOperandText + inputNumber)
         }
     }
     
     @IBAction private func pointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false,
-              let prevOperandLabel = operandLabel.text else { return }
+              let prevOperandText = operandLabel.text else { return }
         
-        operandLabel.text = prevOperandLabel + "."
+        operandLabel.text = prevOperandText + "."
     }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
@@ -68,9 +68,9 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let prevOperandLabel = operandLabel.text else { return }
+        guard let prevOperandText = operandLabel.text else { return }
 
-        operandLabel.text = "-" + prevOperandLabel
+        operandLabel.text = "-" + prevOperandText
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
