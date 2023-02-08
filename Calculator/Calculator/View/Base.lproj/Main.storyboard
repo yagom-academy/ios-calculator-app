@@ -69,7 +69,6 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="allClear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="01W-7v-xYg"/>
                                                     <action selector="allClearButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xaM-gJ-t7D"/>
                                                 </connections>
                                             </button>

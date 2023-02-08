@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     private var calculateComponents: String = ""
-    private var inputNumbers: String = ""
+    private var inputNumbers: String = "0"
     
     @IBOutlet weak var numberOnField: UILabel!
     @IBOutlet weak var operatorOnField: UILabel!
@@ -36,18 +36,15 @@ class ViewController: UIViewController {
     
     private func allClear() {
         self.numberOnField.text = "0"
+        self.operatorOnField.text = ""
         self.calculateComponents = ""
-        self.inputNumbers = ""
+        self.inputNumbers = "0"
         resetAllStackView()
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        guard let currentNumber = self.numberOnField.text else {
-            return
-        }
-        if currentNumber != "0" {
-            self.numberOnField.text = "0"
-        }
+        self.numberOnField.text = "0"
+        self.inputNumbers = "0"
     }
     
     @IBAction func converToNegativeButtonTapped(_ sender: UIButton) {
@@ -117,7 +114,7 @@ class ViewController: UIViewController {
             self.numberOnField.text = ""
             
         }
-        inputNumbers = ""
+        inputNumbers = "0"
         numberOnField.text = "0"
         setUpScrollViewToBottom()
     }
