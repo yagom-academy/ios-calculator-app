@@ -29,6 +29,7 @@
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		FBB0AC6F29936AF5009F7334 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB0AC6E29936AF5009F7334 /* CalculatorError.swift */; };
+		FBF131C429938E0F00C725CC /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBF131C329938E0F00C725CC /* Number.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FBB0AC6E29936AF5009F7334 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
+		FBF131C329938E0F00C725CC /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				98B1DF472983A803001C9AEF /* ExpressionParser.swift */,
 				98B1DF492983A94B001C9AEF /* Formula.swift */,
 				98DE0BA0298F93B600082EC2 /* Symbol.swift */,
+				FBF131C329938E0F00C725CC /* Number.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
 				98B1885029810F72008D8AC2 /* CalculateItemProtocol.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				FBF131C429938E0F00C725CC /* Number.swift in Sources */,
 				98DE0BA1298F93B600082EC2 /* Symbol.swift in Sources */,
 				FBB0AC6F29936AF5009F7334 /* CalculatorError.swift in Sources */,
 				98B1DF442983A18A001C9AEF /* String+Extension.swift in Sources */,
