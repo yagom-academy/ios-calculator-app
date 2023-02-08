@@ -56,12 +56,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
-        guard operandLabel.text != "0" else {
-            return
-        }
+        guard operandLabel.text != "0" else { return }
         
         if operandLabel.text?.contains("-") == true {
             operandLabel.text?.removeFirst()
+            
             return
         }
         
@@ -140,9 +139,7 @@ final class CalculatorViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         let removedComma = input.components(separatedBy: ",").joined()
         
-        guard let inputToNSNumber = numberFormatter.number(from: removedComma) else {
-            return input
-        }
+        guard let inputToNSNumber = numberFormatter.number(from: removedComma) else { return input }
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
