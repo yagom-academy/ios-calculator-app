@@ -18,7 +18,7 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text = calculateOperand
         }
     }
-    private var calculateOperator: String = Symbol.blank {
+    private var calculateOperator: String = Symbol.empty {
         didSet {
             operatorLabel.text = calculateOperator
         }
@@ -53,7 +53,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapResultButton() {
-        guard !isCalculated, calculateOperator != Symbol.blank else { return }
+        guard !isCalculated, calculateOperator != Symbol.empty else { return }
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         guard let number = Double(calculatedNumber) else { return }
         
@@ -63,7 +63,7 @@ final class CalculatorViewController: UIViewController {
                                       number: "\(number)",
                                       operand: formatNumber)
         
-        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.blank))
+        var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.empty))
         guard let result = formula.result() else { return }
         calculateOperand = NumberFormatter.convertToString(fromDouble: result)
         isCalculated = true
@@ -74,7 +74,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
         guard let operatorSign = sender.currentTitle else { return }
         guard calculateOperand != Symbol.zero else {
-            if  calculateOperator != Symbol.blank {
+            if  calculateOperator != Symbol.empty {
                 calculateOperator = operatorSign
             }
             return
@@ -135,11 +135,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addToCalculateItem(left: String, right: String) {
-        let operatorUILabel = generateUILabel(title: left)
-        let operandUILabel = generateUILabel(title: right)
-        let stackView = generateUIStackView(left: operatorUILabel, right: operandUILabel)
-        
-        calculateStackView.addArrangedSubview(stackView)
+        let calculateLabel = generateUILabel()
+        calculateStackView.addArrangedSubview(calculateLabel)
         scrollToBottom()
     }
     
@@ -153,25 +150,20 @@ final class CalculatorViewController: UIViewController {
         calculateScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func generateUILabel(title: String) -> UILabel {
+    private func generateUILabel() -> UILabel {
         let label = UILabel()
-        label.text = title
+        label.text = calculateOperator + Symbol.blank + NumberFormatter.convertToString(fromString: calculateOperand)
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.adjustsFontForContentSizeCategory = true
         
         return label
     }
-    
-    private func generateUIStackView(left: UILabel, right: UILabel) -> UIStackView {
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.addArrangedSubview(left)
-        stackView.addArrangedSubview(right)
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-        stackView.spacing = 8
-        
-        return stackView
+
+    private func addStackView() {
+        let stackLabel = generateUILabel()
+        calculateStackView.addArrangedSubview(stackLabel)
+        scrollToBottom()
     }
     
     private func resetCalculatorItemView() {
@@ -183,7 +175,6 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func resetOperator() {
-        calculateOperator = Symbol.blank
+        calculateOperator = Symbol.empty
     }
 }
-
