@@ -1,12 +1,6 @@
-//
-//  Formula.swift
-//  Calculator
-//
-//  Created by 천승현 on 2023/01/27.
-//
 struct Formula {
-    private(set) var operands = CalculatorItemQueue<Double>()
-    private(set) var operators = CalculatorItemQueue<Operator>()
+    private var operands: CalculatorItemQueue<Double>
+    private var operators: CalculatorItemQueue<Operator>
     
     init(operands: CalculatorItemQueue<Double>, operators: CalculatorItemQueue<Operator>) {
         self.operands = operands
@@ -14,20 +8,11 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        
-        guard var sum = operands.dequeue() else { return .zero }
-
-        if operands.dequeueStack.isEmpty {
-            guard let initialOperator = operators.dequeue() else { return .zero }
-            return initialOperator.calculate(lhs: 0, rhs: sum)
+        guard var resultValue: Double = operands.dequeue() else { return 0.0 }
+        while let rhs = operands.dequeue(),
+              let operatorSymbol = operators.dequeue() {
+            resultValue = operatorSymbol.calculate(lhs: resultValue, rhs: rhs)
         }
-
-        while !operands.isEmpty {
-            if let nextValue = operands.dequeue(), let `operator` = operators.dequeue() {
-                sum = `operator`.calculate(lhs: sum, rhs: nextValue)
-            }
-        }
-
-        return sum
+        return resultValue
     }
 }

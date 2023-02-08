@@ -1,9 +1,3 @@
-//
-//  Calculator - CalculateViewController.swift
-//  Created by yagom. 
-//  Copyright © yagom. All rights reserved.
-// 
-
 import UIKit
 
 final class CalculateViewController: UIViewController {
@@ -110,7 +104,7 @@ final class CalculateViewController: UIViewController {
         formulaStackView.addLabels(
             [
                 currentOperatorText,
-                convertToDecimal(for: enteringNumberText.convertToDouble()) 
+                convertToDecimal(for: enteringNumberText.convertToDouble())
             ]
         )
         calculatorStackView.addArrangedSubview(formulaStackView)

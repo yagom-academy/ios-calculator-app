@@ -1,11 +1,4 @@
-//
-//  Operator.swift
-//  Calculator
-//
-//  Created by 천승현 on 2023/01/27.
-//
-
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
     case divide = "÷"
@@ -33,8 +26,9 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        if rhs == .zero { return .nan }
-        return lhs / rhs
+        let calculatedValue = lhs / rhs
+        
+        return calculatedValue.isInfinite ? Double.nan : calculatedValue
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
