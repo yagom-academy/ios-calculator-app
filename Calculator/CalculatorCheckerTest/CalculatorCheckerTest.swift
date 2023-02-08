@@ -196,4 +196,34 @@ final class CalculatorCheckerTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_initialEnteringNumber호출시_EnteringNumber는_값이_비워진다() {
+        // given
+        let input = "324"
+        let expectation = Sign.empty
+        
+        // when
+        sut.appendingNumber(input)
+        sut.initialEnteringNumber()
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_initialEnteringNumber호출시_calculationExpression은_남아있다() {
+        // given
+        let operandInput = "324"
+        let operatorInput = "+"
+        let expectation = operatorInput + operandInput
+        
+        // when
+        sut.appendingNumber(operandInput)
+        sut.appendingExpression(operatorInput)
+        sut.initialEnteringNumber()
+        let result = sut.calculationExpression
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }

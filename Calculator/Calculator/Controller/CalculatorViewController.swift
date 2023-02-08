@@ -12,7 +12,6 @@ final class CalculateViewController: UIViewController {
         super.viewDidLoad()
         calculatorChecker = CalculatorChecker(updateClosure: { text in
             self.enteringNumberLabel.text = text == Sign.empty ? Sign.zero : text
-            
         })
         enteringNumberLabel.text = Sign.zero
         enteringOperatorLabel.text = Sign.empty
@@ -67,12 +66,11 @@ final class CalculateViewController: UIViewController {
         calculatorChecker?.initialState()
         calculatorStackView.removeAllFormulaStackView()
     }
-//
-//    @IBAction private func didTapCEPad(_ sender: UIButton) {
-//        enteringOperatorLabel.text = Sign.empty
-//        enteringNumber = Sign.empty
-//    }
-//
+
+    @IBAction private func didTapCEPad(_ sender: UIButton) {
+        calculatorChecker?.initialEnteringNumber()
+    }
+
     @IBAction private func didTapChangedSignPad(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
               calculatorChecker?.isZero(enteringNumberText) == false else { return }

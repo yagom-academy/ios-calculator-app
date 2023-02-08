@@ -51,6 +51,13 @@ struct CalculatorChecker {
         labelUpdateClosure(enteringNumber)
     }
     
+    func appendingDot(_ currentText: String) -> String {
+        if currentText == Sign.empty {
+            return Sign.zero + Sign.dot
+        }
+        return currentText + Sign.dot
+    }
+    
     mutating func changeSign() {
         guard enteringNumber.contains(Sign.minus) == false else {
             enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
@@ -63,7 +70,12 @@ struct CalculatorChecker {
     
     mutating func initialState() {
         calculationExpression = Sign.empty
+        initialEnteringNumber()
+    }
+    
+    mutating func initialEnteringNumber() {
         enteringNumber = Sign.empty
+        labelUpdateClosure(enteringNumber)
     }
     
     func hasCurrentInput(_ currentText: String) -> Bool {
@@ -73,15 +85,8 @@ struct CalculatorChecker {
         return true
     }
     
-    func hasDot(_ currentText: String) -> Bool {
+    private func hasDot(_ currentText: String) -> Bool {
         return currentText.contains(Sign.dot) ? true : false
-    }
-    
-    func appendingDot(_ currentText: String) -> String {
-        if currentText == Sign.empty {
-            return Sign.zero + Sign.dot
-        }
-        return currentText + Sign.dot
     }
     
     func isZero(_ currentText: String) -> Bool {
