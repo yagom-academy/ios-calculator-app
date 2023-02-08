@@ -226,4 +226,21 @@ final class CalculatorCheckerTest: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_calculate호출시_enteringNumber값이_비워진다() {
+        // given
+        let operandInputs = ["123", "456"]
+        let operatorInput = "+"
+        let expectation = Sign.empty
+        
+        // when
+        sut.appendingNumber(operandInputs[0])
+        sut.appendingExpression(operatorInput)
+        sut.appendingNumber(operandInputs[1])
+        sut.calculate()
+        let result = sut.enteringNumber
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }

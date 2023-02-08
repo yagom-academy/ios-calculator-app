@@ -18,6 +18,9 @@ final class CalculateViewController: UIViewController {
     }
     
     @IBAction func didTapNumberPad(_ sender: UIButton) {
+        guard calculatorChecker?.enteringNumber != Sign.space else {
+            return
+        }
         guard let numberPad = sender.currentTitle else { return }
         calculatorChecker?.appendingNumber(numberPad)
     }
@@ -30,11 +33,14 @@ final class CalculateViewController: UIViewController {
         guard calculatorChecker?.enteringNumber != Sign.empty,
               let formattingLabelText = enteringNumberLabel.text?.convertToDouble(),
               let decimalText = calculatorChecker?.convertToDecimal(for: formattingLabelText) else { return }
-        calculatorStackView.addLabels(operandText: decimalText, operatorText: currentOperatorText)
-        calculatorChecker?.appendingExpression(currentOperatorText)
+        addFormulaView(decimalText, currentOperatorText)
+        calculatorChecker?.appendingExpression(currentOperatorText, decimalText)
     }
     
     @IBAction private func didTapZeroPad(_ sender: UIButton) {
+        guard calculatorChecker?.enteringNumber != Sign.space else {
+            return
+        }
         guard let zeroPad = sender.currentTitle else {
             return
         }
@@ -43,24 +49,22 @@ final class CalculateViewController: UIViewController {
     }
 
     @IBAction private func didTapDotPad(_ sender: UIButton) {
+        guard calculatorChecker?.enteringNumber != Sign.space else {
+            return
+        }
         calculatorChecker?.appendingDot()
     }
-//
-//    @IBAction private func didTapCalculationPad(_ sender: UIButton) {
-//        guard let enteringOperatorText = enteringOperatorLabel.text,
-//              enteringOperatorText != Sign.empty,
-//              enteringNumber != Sign.space else { return }
-//
-//        guard let operatorText = enteringOperatorLabel.text,
-//              let enteringNumberText = enteringNumberLabel.text  else { return }
-//        calculationExpression += (operatorText + enteringNumberText)
-//        addFormulaStackView(to: calculatorStackView, with: operatorText)
-//
-//        let result = calculatorChecker.calculate(with: calculationExpression)
-//        initialState()
-//        enteringNumberLabel.text = convertToDecimal(for: result)
-//    }
-//
+
+    @IBAction private func didTapCalculationPad(_ sender: UIButton) {
+        
+        guard let operatorText = enteringOperatorLabel.text,
+        operatorText.isEmpty == false else { return }
+        
+        addFormulaView(enteringNumberLabel.text, enteringOperatorLabel.text)
+        calculatorChecker?.calculate(operatorText)
+        enteringOperatorLabel.text =  Sign.empty
+    }
+
     @IBAction private func didTapACPad(_ sender: UIButton) {
         enteringOperatorLabel.text = Sign.empty
         calculatorChecker?.initialState()
@@ -75,5 +79,10 @@ final class CalculateViewController: UIViewController {
         guard let enteringNumberText = enteringNumberLabel.text,
               calculatorChecker?.isZero(enteringNumberText) == false else { return }
         calculatorChecker?.changeSign()
+    }
+    
+    private func addFormulaView(_ operandText: String?, _ operatorText: String?) {
+        calculatorStackView.addLabels(operandText: operandText, operatorText: operatorText)
+        self.calculatorScrollView.scrollToBottom()
     }
 }

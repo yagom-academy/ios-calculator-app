@@ -9,6 +9,8 @@ struct CalculatorChecker {
         self.labelUpdateClosure = closure
     }
     
+    // =하면 현재 enteringNumber가 8인 상태. 근데 space이고
+    
     mutating func appendingNumber(_ numberPad: String) {
         guard hasCurrentInput(enteringNumber) else {
             enteringNumber = numberPad
@@ -21,10 +23,10 @@ struct CalculatorChecker {
         labelUpdateClosure(enteringNumber)
     }
     
-    mutating func appendingExpression(_ operatorText: String) {
+    mutating func appendingExpression(_ operatorText: String, _ operandText: String) {
         
-        let convertedNumber = convertToDecimal(for: enteringNumber.convertToDouble())
-        calculationExpression += (operatorText + convertedNumber)
+//        let convertedNumber = convertToDecimal(for: enteringNumber.convertToDouble())
+        calculationExpression += (operatorText + operandText)
         enteringNumber = Sign.empty
         labelUpdateClosure(enteringNumber)
     }
@@ -78,6 +80,14 @@ struct CalculatorChecker {
         labelUpdateClosure(enteringNumber)
     }
     
+    mutating func calculate(_ operatorText: String) {
+        calculationExpression += (operatorText + enteringNumber)
+        var formula = ExpressionParser.parse(from: calculationExpression.split(separator: ",").joined())
+        initialState()
+        enteringNumber = Sign.space
+        labelUpdateClosure(convertToDecimal(for: formula.result()))
+    }
+    
     func hasCurrentInput(_ currentText: String) -> Bool {
         if currentText == Sign.empty || currentText == Sign.space {
             return false
@@ -91,11 +101,6 @@ struct CalculatorChecker {
     
     func isZero(_ currentText: String) -> Bool {
         return currentText == Sign.zero ? true : false
-    }
-    
-    func calculate(with expression: String) -> Double {
-        var formula = ExpressionParser.parse(from: expression.split(separator: ",").joined())
-        return formula.result()
     }
     
     func convertToDecimal(for number: Double) -> String {
