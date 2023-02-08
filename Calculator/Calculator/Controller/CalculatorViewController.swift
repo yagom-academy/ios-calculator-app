@@ -42,7 +42,6 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func didTapChangeSignButton() {
         guard calculateOperand != Symbol.zero,
               calculateOperand != Symbol.nan else { return }
-        
         guard let calculateNumberFirst = calculateOperand.first else { return }
         
         if calculateNumberFirst == Character(Symbol.minus) {
@@ -56,7 +55,6 @@ final class CalculatorViewController: UIViewController {
         guard !isCalculated, calculateOperator != Symbol.empty else { return }
         guard let calculatedNumber = operandLabel.text?.withoutComma else { return }
         guard let number = Double(calculatedNumber) else { return }
-        
         let formatNumber = NumberFormatter.convertToString(fromDouble: number)
         
         addExpressionAndCalculateItem(sign: calculateOperator,
@@ -88,7 +86,6 @@ final class CalculatorViewController: UIViewController {
                                       number: calculatedNumber,
                                       operand: calculatedOperand)
         scrollToBottom()
-        
         isCalculated = false
         calculateOperator = operatorSign
         resetOperand()
@@ -98,17 +95,10 @@ final class CalculatorViewController: UIViewController {
         guard calculateOperand.count <= Symbol.maxSignificantDigits else { return }
         guard let number = sender.currentTitle else { return }
         
-        if isCalculated {
-            guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
-            calculateOperand = number
-            isCalculated = false
-            return
-        }
+        isCalculated = false
         
         if calculateOperand == Symbol.zero {
             guard number != Symbol.zero, number != Symbol.doubleZero else { return }
-            
             calculateOperand = number
         } else {
             if calculateOperand.contains(Symbol.dot) {
@@ -121,7 +111,6 @@ final class CalculatorViewController: UIViewController {
     
     @IBAction private func didTapDotButton(_ sender: UIButton) {
         guard !calculateOperand.contains(Symbol.dot) else { return }
-        
         calculateOperand += Symbol.dot
     }
     
@@ -150,7 +139,6 @@ final class CalculatorViewController: UIViewController {
         label.textColor = .white
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.adjustsFontForContentSizeCategory = true
-        
         return label
     }
 
