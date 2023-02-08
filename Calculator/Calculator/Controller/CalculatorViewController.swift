@@ -27,6 +27,10 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
     }
     
+    private func clearAllContentStack() {
+        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
         guard let prevOperandLabel = operandLabel.text else { return }
         guard let inputNumber = sender.currentTitle else { return }
@@ -129,10 +133,6 @@ final class CalculatorViewController: UIViewController {
         expression = ""
         clearLabel()
         clearAllContentStack()
-    }
-    
-    private func clearAllContentStack() {
-        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func convertNumberFormat(_ input: String) -> String {
