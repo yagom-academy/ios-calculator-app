@@ -11,13 +11,14 @@ enum ExpressionParser {
         var formula = Formula()
         let result = componentsByOperators(from: input)
         
-        result
-            .compactMap { Double($0) }.forEach { formula.operands.enqueue($0) }
-        
-        result
-            .filter { Double($0) == nil }
-            .compactMap { Operator(rawValue: Character($0)) }
-            .forEach { formula.operators.enqueue($0) }
+        result.forEach {
+            if let num = Double($0) {
+                formula.operands.enqueue(num)
+            } else if $0.isEmpty == false {
+                let char = Character($0)
+                Operator(rawValue: char).map { formula.operators.enqueue($0) }
+            }
+        }
         
         return formula
     }
@@ -25,11 +26,4 @@ enum ExpressionParser {
     private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
     }
-}
-
-extension String {
-    func split(with target: Character) -> [String] {
-        return components(separatedBy: String(target))
-    }
-    
 }
