@@ -18,7 +18,7 @@
 <br/>
 
 ## 2. 팀원
-[팀 회고]()
+- [팀 회고](https://github.com/Rhode-park/ios-calculator-app/blob/calculator02_step01_songjun/%ED%8C%80%ED%9A%8C%EA%B3%A0.md)
 
 |⭐️Rhode| ⭐️송준 |
 | :--------: | :-------: |
