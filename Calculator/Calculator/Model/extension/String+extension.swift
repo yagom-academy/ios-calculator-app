@@ -1,8 +1,8 @@
 //
-//  extensions.swift
+//  String+extension.swift
 //  Calculator
 //
-//  Created by 혜모리, 릴라 on 2023/01/27.
+//  Created by 김성준 on 2023/02/09.
 //
 
 import Foundation
@@ -12,6 +12,7 @@ extension String: CalculateItem {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
         return numberFormatter
     }
     
@@ -20,19 +21,19 @@ extension String: CalculateItem {
     }
     
     func applyFormatter() -> String {
-        guard let value = numberFormatter.string(for: Double(self.removeComma())) else { return "" }
+        guard let value = numberFormatter.string(for: Double(self.removeComma())) else {
+            return Sign.empty
+        }
         return value
     }
     
     func removeComma() -> String {
-        return self.replacingOccurrences(of: ",", with: "")
+        return self.replacingOccurrences(of: Sign.comma, with: Sign.empty)
     }
     
     func removeDotAndNegative() -> String {
-        return self.replacingOccurrences(of: ".", with: "").replacingOccurrences(of: "-", with: "")
+        return self
+            .replacingOccurrences(of: String(Sign.dot), with: Sign.empty)
+            .replacingOccurrences(of: String(Sign.negative), with: Sign.empty)
     }
-}
-
-extension Double: CalculateItem {
-    
 }

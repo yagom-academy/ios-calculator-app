@@ -12,18 +12,7 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var operationContentStackView: UIStackView!
     @IBOutlet private weak var operationScrollView: UIScrollView!
     
-    private enum Sign {
-        static let dot: Character = "."
-        static let blank = " "
-        static let empty = ""
-        static let zero = "0"
-        static let zeroZero = "00"
-        static let negative: Character = "-"
-        static let nan = "NaN"
-    }
-    
-    private var expressions: [String] = []
-    private var isCalculatedStatus: Bool = false
+    private let calculateManager = CalculateManager()
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
     private var currentOperand: String { operandLabel.text ?? Sign.empty }
     
@@ -35,20 +24,38 @@ final class ViewController: UIViewController {
     private func resetCalculator() {
         operandLabel.text = Sign.zero
         operatorLabel.text = Sign.empty
-        expressions.removeAll()
+        calculateManager.clearExpressions()
         operationContentStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
+    @IBAction private func setCurrentOperand(_ sender: UIButton){
+        calculateManager.setCurrentOperand(to: operandLabel.text)
+    }
+    
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        updateOperand(with: sender.titleLabel?.text)
+        guard let result = calculateManager.updateOperand(input: sender.currentTitle) else {
+            return
+        }
+        operandLabel.text = result
     }
 
     @IBAction private func didTapDot(_ sender: UIButton) {
-        updateDot()
+        let operandContainedDot = calculateManager.updateDot()
+        operandLabel.text = operandContainedDot
     }
     
     @IBAction private func didTapOperatorButton(_ sender: UIButton) {
-        updateOperator(with: sender.currentTitle)
+        let sign = sender.currentTitle
+        let operand = currentOperand.removeComma()
+        
+        guard calculateManager.updateOperator(with: sign) == true else {
+            operatorLabel.text = sign
+            return
+        }
+        setOperationContentStackView(operatorValue: currentOperator,
+                                     operandValue: operand.applyFormatter())
+        operatorLabel.text = sign
+        operandLabel.text = Sign.zero
     }
     
     @IBAction private func didTapACButton(_ sender: UIButton) {
@@ -60,110 +67,29 @@ final class ViewController: UIViewController {
     }
     
     @IBAction private func didTapConvertPositiveAndNegativeNumber(_ sender: UIButton) {
-        let operandValue = convertPositiveAndNegativeNumber()
+        let operandValue = calculateManager.convertPositiveNegative()
         
         operandLabel.text = operandValue.applyFormatter()
     }
     
     @IBAction private func didTapEqualButton(_ sender: UIButton) {
         guard operatorLabel.text != Sign.blank else { return }
-        
         setOperationContentStackView(operatorValue: currentOperator, operandValue: currentOperand)
-        isCalculatedStatus = true
         displayOperationResult()
     }
     
     private func displayOperationResult() {
-        expressions.append(currentOperator)
-        expressions.append(currentOperand.removeComma())
-        
-        let input = expressions.joined(separator: Sign.blank)
-        
-        let result = ExpressionParser.parse(from: input).result()
+        let result = calculateManager.calculateExpressions(operatorSign: currentOperator)
         
         guard result.isNaN == false else {
             operatorLabel.text = Sign.blank
             operandLabel.text = Sign.nan
-            expressions.removeAll()
+            calculateManager.clearExpressions()
             return
         }
-        
         operatorLabel.text = Sign.blank
         operandLabel.text = String(result).applyFormatter()
-        expressions.removeAll()
-    }
-    
-    private func updateOperand(with number: String?) {
-        guard let inputNumber = number else { return }
-        guard currentOperand.removeDotAndNegative().count < 20 else { return }
-        
-        guard isCalculatedStatus != true else {
-            isCalculatedStatus = false
-            operandLabel.text = inputNumber.applyFormatter()
-            return
-        }
-        
-        if currentOperand == Sign.zero {
-            guard currentOperand != Sign.zeroZero else { return }
-            
-            operandLabel.text = inputNumber.applyFormatter()
-        } else {
-            guard currentOperand.contains(Sign.dot) == false else {
-                operandLabel.text = currentOperand + inputNumber
-                return
-            }
-            
-            operandLabel.text = (currentOperand + inputNumber).applyFormatter()
-        }
-    }
-    
-    private func updateDot() {
-        guard currentOperand.contains(Sign.dot) == false else { return }
-        
-        operandLabel.text = currentOperand.applyFormatter() + String(Sign.dot)
-    }
-    
-    private func updateOperator(with sign: String?) {
-        let operand = currentOperand.removeComma()
-        
-        guard expressions.isEmpty == false else {
-            let operand = currentOperand.removeComma()
-            expressions.append(operand)
-            
-            setOperationContentStackView(operatorValue: Sign.empty,
-                                         operandValue: operand.applyFormatter())
-            isCalculatedStatus = false
-            operatorLabel.text = sign
-            operandLabel.text = Sign.zero
-            return
-        }
-        
-        guard operandLabel.text != Sign.zero else {
-            operatorLabel.text = sign
-            return
-        }
-        
-        setOperationContentStackView(operatorValue: currentOperator,
-                                     operandValue: operand.applyFormatter())
-        
-        expressions.append(currentOperator)
-        expressions.append(operand)
-        
-        isCalculatedStatus = false
-        operatorLabel.text = sign
-        operandLabel.text = Sign.zero
-    }
-    
-    private func convertPositiveAndNegativeNumber() -> String {
-        guard var operands = operandLabel.text,
-              operands != Sign.zero  else { return Sign.zero }
-        
-        if operands.first == Sign.negative {
-            operands.removeFirst()
-        } else {
-            operands = "\(Sign.negative)" + operands
-        }
-        return operands
+        calculateManager.clearExpressions()
     }
     
     private func createLabel(input: String) -> UILabel {
