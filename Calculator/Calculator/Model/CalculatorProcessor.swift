@@ -1,5 +1,6 @@
 struct CalculatorProcessor {
     var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
+    private(set) var calculationExpression: String = Sign.empty
     
     var enteringNumber: String {
         get {
@@ -9,8 +10,6 @@ struct CalculatorProcessor {
             enteringNumberObservable.value = newValue
         }
     }
-    
-    private(set) var calculationExpression: String = Sign.empty
     
     var isEmpty: Bool {
         return enteringNumber.isEmpty ? true : false
