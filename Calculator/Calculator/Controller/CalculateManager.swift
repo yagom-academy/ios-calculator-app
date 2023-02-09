@@ -36,15 +36,18 @@ final class CalculateManager {
             isCalculatedStatus = false
             return inputNumber.applyFormatter()
         }
-        
+        return inspectOperand(input: inputNumber)
+    }
+    
+    func inspectOperand(input: String) -> String? {
         if currentOperand == Sign.zero {
             guard currentOperand != Sign.zeroZero else { return nil }
-            return inputNumber.applyFormatter()
+            return input.applyFormatter()
         } else {
             guard currentOperand.contains(Sign.dot) == false else {
-                return currentOperand + inputNumber
+                return currentOperand + input
             }
-            return (currentOperand + inputNumber).applyFormatter()
+            return (currentOperand + input).applyFormatter()
         }
     }
     
