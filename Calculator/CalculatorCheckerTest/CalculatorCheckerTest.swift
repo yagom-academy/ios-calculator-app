@@ -7,7 +7,7 @@ final class CalculatorCheckerTest: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorProcessor(updateClosure: { _ in })
+        sut = CalculatorProcessor()
     }
 
     override func tearDownWithError() throws {
@@ -15,7 +15,7 @@ final class CalculatorCheckerTest: XCTestCase {
         sut = nil
     }
 
-    func test_appendingNumber호출시_값이존재하지않을때_1을넣는다면_enteringNumber가_1이다() {
+    func test_appendingNumber호출시_값이존재하지않을때_1을넣는다면_입력중인_값은_1이다() {
         // given
         let input = "1"
         let expectation = "1"
@@ -28,7 +28,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingNumber호출시_값이존재할때_1을넣는다면_enteringNumber에_1이추가된다() {
+    func test_appendingNumber호출시_값이존재할때_1을넣는다면_입력중인_값에_1이추가된다() {
         // given
         let input = "1"
         let expectation = "21"
@@ -42,37 +42,21 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingExpression호출시_enteringNumber가_3이고_빈값을_넣는다면_calculationExpression은_3이다() {
+    func test_appendingExpression호출시_입력중인_값이_3이고_빈값을_넣는다면_연산식은_3이다() {
         // given
-        let input = ""
+        let operatorInput = ""
+        let operandInput = "3"
         let expectation = "3"
         
         // when
-        sut.appendingNumber("3")
-        sut.appendingExpression(input)
+        sut.appendingExpression(operatorInput, operandInput)
         let result = sut.calculationExpression
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingExpression호출시_enteringNumber와_calculationExpression이_존재한다면_calculationExpression에_인자값과_enteringNumber가_추가된다() {
-        // given
-        let input = "+"
-        let expectation = "1+2"
-        
-        // when
-        sut.appendingNumber("1")
-        sut.appendingExpression("")
-        sut.appendingNumber("2")
-        sut.appendingExpression(input)
-        let result = sut.calculationExpression
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_appendingExpression호출시_enteringNumber는_빈값이다() {
+    func test_appendingExpression호출시_입력중인_값은_빈값이다() {
         // given
         let input = ""
         let expectation = ""
@@ -85,7 +69,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingZero호출시_enteringNumber가_0이라면_enteringNumber에_0이추가되지않는다() {
+    func test_appendingZero호출시_입력중인_숫자가_0이라면_입력중인_숫자에_0이추가되지않는다() {
         // given
         let input = "0"
         let expectation = "0"
@@ -99,7 +83,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingZero호출시_enteringNumber가_유효숫자일때_zeroPad를추가한다() {
+    func test_appendingZero호출시_입력중인_값이_유효숫자일때_zeroPad를추가한다() {
         // given
         let input = "0"
         let expectation = "10"
@@ -113,7 +97,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingDot호출시_enteringNumber에_값이_있다면_닷이_추가된다() {
+    func test_appendingDot호출시_입력중인_값이_있다면_닷이_추가된다() {
         // given
         let expectation = "2."
         
@@ -126,7 +110,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingDot호출시_enteringNumber값이_없다면_0과_닷이_추가된다() {
+    func test_appendingDot호출시_입력중인_값이_없다면_0과_닷이_추가된다() {
         // given
         let expectation = "0."
         
@@ -138,7 +122,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_appendingDot호출시_enteringNumber값에_dot이_포함된다면_값이_변하지않는다() {
+    func test_appendingDot호출시_입력중인_값에_dot이_포함된다면_값이_변하지않는다() {
         // given
         let expectation = "0.1"
         
@@ -152,7 +136,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_changedSign호출시_현재_값이_양수라면_음수가_된다() {
+    func test_changedSign호출시_입력중인_값이_양수라면_음수가_된다() {
         // given
         let input = "3"
         let expectation = "-3"
@@ -166,7 +150,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_changedSign호출시_현재_값이_음수라면_양수가_된다() {
+    func test_changedSign호출시_현재_입력중인_값이_음수라면_양수가_된다() {
         // given
         let input = "3"
         let expectation = "3"
@@ -197,7 +181,7 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_initialEnteringNumber호출시_EnteringNumber는_값이_비워진다() {
+    func test_initialEnteringNumber호출시_입력중인_값이_비워진다() {
         // given
         let input = "324"
         let expectation = Sign.empty
@@ -211,15 +195,14 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_initialEnteringNumber호출시_calculationExpression은_남아있다() {
+    func test_initialEnteringNumber호출시_입력연산식은_남아있다() {
         // given
         let operandInput = "324"
         let operatorInput = "+"
         let expectation = operatorInput + operandInput
         
         // when
-        sut.appendingNumber(operandInput)
-        sut.appendingExpression(operatorInput)
+        sut.appendingExpression(operatorInput, operandInput)
         sut.initialEnteringNumber()
         let result = sut.calculationExpression
         
@@ -227,17 +210,16 @@ final class CalculatorCheckerTest: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_calculate호출시_enteringNumber값이_비워진다() {
+    func test_calculate호출시_입력_중인_값이_비워진다() {
         // given
         let operandInputs = ["123", "456"]
         let operatorInput = "+"
-        let expectation = Sign.empty
+        let expectation = Sign.space
         
         // when
-        sut.appendingNumber(operandInputs[0])
-        sut.appendingExpression(operatorInput)
+        sut.appendingExpression(operatorInput, operandInputs[0])
         sut.appendingNumber(operandInputs[1])
-        sut.calculate()
+        sut.calculate("")
         let result = sut.enteringNumber
         
         // then

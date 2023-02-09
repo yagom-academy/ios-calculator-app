@@ -40,7 +40,7 @@ class CalculatorProcessor {
         enteringNumber = enteringNumber.convertToDecimal()
     }
     
-    func appendingExpression(_ operatorText: String, _ operandText: String) {
+    func appendingExpression(_ operatorText: String, _ operandText: String = "") {
         calculationExpression += (operatorText + operandText)
         enteringNumber = Sign.empty
     }
