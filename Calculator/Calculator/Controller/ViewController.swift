@@ -57,13 +57,13 @@ final class ViewController: UIViewController {
         return view
     }
     
-    private func formatNumber(_ result: Double) -> String {
+    private func formatNumber(_ result: Decimal) -> String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
-
-        return numberFormatter.string(from: NSNumber(value: result)) ?? Sign.blank
+        
+        return numberFormatter.string(from: result as NSNumber) ?? Sign.blank
     }
     
     private func removeComma(_ inputString: String) -> String {
@@ -82,14 +82,15 @@ final class ViewController: UIViewController {
     //MARK: - IBAciton
     @IBAction private func operandsButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle,
-              currentOperand.count < 19 else { return }
+              currentOperand.filter({ Int(String($0)) != nil }).count < 20 else { return }
         
+        // 조건문으로 마지막 입력이 . 이면 26개로 만들기
         if currentOperand == Sign.zero {
             inputOperandsLabel.text = number
         } else {
             let currentNumber = currentOperand + number
             let removedNumber = removeComma(currentNumber)
-            let formattedString = formatNumber(Double(removedNumber) ?? 0 )
+            let formattedString = formatNumber(Decimal(string: removedNumber) ?? 0 )
             
             inputOperandsLabel.text = formattedString
         }
@@ -98,18 +99,32 @@ final class ViewController: UIViewController {
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let zero = sender.currentTitle,
               currentOperand != Sign.zero else { return }
-        inputOperandsLabel.text = currentOperand + zero
+        
+        let currentNumber = currentOperand + zero
+        
+        guard currentNumber.filter({ $0 == Character(Sign.dot) }).isEmpty else {
+            inputOperandsLabel.text = currentNumber
+            
+            return
+        }
+        
+        let removedNumber = removeComma(currentNumber)
+        let formattedString = formatNumber(Decimal(string: removedNumber) ?? 0 )
+        
+        inputOperandsLabel.text = formattedString
     }
     
     @IBAction private func operatorsButtonTapped(_ sender: UIButton) {
         var newStackView: UIStackView = UIStackView()
         
         guard let currentSign = sender.currentTitle else { return }
-
+        
         if inputOperandsLabel.text == Sign.zero {
             inputOperatorsLabel.text = currentSign
         } else {
-            newStackView = makeStackView(currentOperator, currentOperand)
+            newStackView = makeStackView(
+                currentOperator,
+                formatNumber(Decimal(string: currentOperand) ?? 0))
             stackView.addArrangedSubview(newStackView)
             settingScrollView()
             
@@ -144,9 +159,9 @@ final class ViewController: UIViewController {
         let removedCommaFormula = removeComma(stringFormula)
         var parsedFormula = ExpressionParser.parse(from: removedCommaFormula)
         let result = parsedFormula.result()
-
+        
         inputOperatorsLabel.text = Sign.blank
-        inputOperandsLabel.text = formatNumber(result)
+        inputOperandsLabel.text = formatNumber(Decimal(result))
         oldInputFormula.append(String(result))
         currentInputFormula.removeAll()
     }
