@@ -39,7 +39,7 @@ final class CalculateManager {
         return inspectOperand(input: inputNumber)
     }
     
-    func inspectOperand(input: String) -> String? {
+    private func inspectOperand(input: String) -> String? {
         if currentOperand == Sign.zero {
             guard currentOperand != Sign.zeroZero else { return nil }
             return input.applyFormatter()
@@ -71,7 +71,7 @@ final class CalculateManager {
         return true
     }
     
-    func updateExpressions(operand: String, operatorSign: String?) {
+    private func updateExpressions(operand: String, operatorSign: String?) {
         guard let currentOperator = operatorSign else { return }
         
         expressions.append(operand)
