@@ -12,7 +12,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_inputOperandsandOperator_returnEachValue() {
         //given
-        let input = "1 + 2.0 - 3 / -4 * 5.5"
+        let input = "1 + 2.0 − 3 ÷ -4 × 5.5"
         
         //when
         let formula = ExpressionParser.parse(from: input)
@@ -34,7 +34,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_inputOperandsAndOperators_returnNegative9() {
         // given
-        let input = "1 + 2 * -3"
+        let input = "1 + 2 × -3"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -46,7 +46,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_inputOperandsAndOperators_returnPositive9() {
         // given
-        let input = "1 + 2 * 3"
+        let input = "1 + 2 × 3"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -59,7 +59,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_inputOperandsAnddeivideWithZero_returnIsNan() {
         // given
-        let input = "1 / 0"
+        let input = "1 ÷ 0"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -69,4 +69,14 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(result.isNaN)
     }
     
+    func test_BlankValue() {
+        let input = " 1 + 2 × 3 "
+        
+        // when
+        var formula = ExpressionParser.parse(from: input)
+        let output = formula.result()
+        
+        // then
+        XCTAssertEqual(output, 9.0)
+    }
 }
