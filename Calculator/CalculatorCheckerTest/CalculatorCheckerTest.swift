@@ -3,11 +3,11 @@ import XCTest
 
 final class CalculatorCheckerTest: XCTestCase {
 
-    private var sut: CalculatorChecker!
+    private var sut: CalculatorProcessor!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorChecker(updateClosure: { _ in })
+        sut = CalculatorProcessor(updateClosure: { _ in })
     }
 
     override func tearDownWithError() throws {

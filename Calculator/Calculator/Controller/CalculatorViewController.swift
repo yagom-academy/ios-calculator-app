@@ -6,7 +6,7 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: CalculatorStackView!
     
-    private var calculatorChecker = CalculatorChecker()
+    private var calculatorChecker = CalculatorProcessor()
     
     override func viewDidLoad() {
         super.viewDidLoad()

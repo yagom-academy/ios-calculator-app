@@ -1,4 +1,4 @@
-struct CalculatorChecker {
+struct CalculatorProcessor {
     var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
     
     var enteringNumber: String {
