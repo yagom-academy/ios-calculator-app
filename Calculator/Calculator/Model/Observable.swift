@@ -12,7 +12,6 @@ final class Observable<T> {
     }
     
     func subscribe(labelUpdateClosure: @escaping (T) -> Void) {
-//        labelUpdateClosure(value)
         self.labelUpdateClosure = labelUpdateClosure
     }
 }
