@@ -61,7 +61,6 @@ final class CalculatorQueueTests: XCTestCase {
         
         if dequeueEmpty == true {
              sut.dequeueItem()
-            enqueueEmpty == true
             XCTAssertEqual(result, enqueueEmpty)
         }
     }
