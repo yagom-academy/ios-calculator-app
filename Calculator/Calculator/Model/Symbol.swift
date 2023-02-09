@@ -10,4 +10,5 @@ enum Symbol {
     static let nan = "NaN"
     static let minus = "-"
     static let empty = ""
+    static let error = "error"
 }

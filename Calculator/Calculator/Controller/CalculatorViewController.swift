@@ -120,9 +120,12 @@ final class CalculatorViewController: UIViewController {
     
     private func calculate() -> String {
         var formula = ExpressionParser.parse(from: expression.joined(separator: Symbol.empty))
-        guard let result = formula.result() else { return Symbol.empty }
-        
-        return NumberFormatter.convertToString(fromDouble: result)
+        do {
+            let result = try formula.result()
+            return NumberFormatter.convertToString(fromDouble: result)
+        } catch {
+            return Symbol.error
+        }
     }
     
     private func scrollToBottom() {
