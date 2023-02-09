@@ -6,22 +6,22 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var calculatorScrollView: UIScrollView!
     @IBOutlet weak var calculatorStackView: CalculatorStackView!
     
-    private var calculatorChecker: CalculatorChecker?
+    private var calculatorChecker = CalculatorChecker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculatorChecker = CalculatorChecker(updateClosure: { enteringNumber in
-            self.enteringNumberLabel.text = enteringNumber == Sign.empty ? Sign.zero : enteringNumber
-        })
+        calculatorChecker.enteringNumberObservable.subscribe { enteringNumber in
+            self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+        }
         enteringNumberLabel.text = Sign.zero
         enteringOperatorLabel.text = Sign.empty
     }
     
     @IBAction func didTapNumberPad(_ sender: UIButton) {
         guard let numberPad = sender.currentTitle,
-              calculatorChecker?.enteringNumber != Sign.space else { return }
+              calculatorChecker.enteringNumber != Sign.space else { return }
         
-        calculatorChecker?.appendingNumber(numberPad)
+        calculatorChecker.appendingNumber(numberPad)
     }
     
     @IBAction private func didTapOperatorPad(_ sender: UIButton) {
@@ -30,24 +30,24 @@ final class CalculateViewController: UIViewController {
         
         enteringOperatorLabel.text = inputOperatorText
         
-        guard calculatorChecker?.enteringNumber != Sign.empty,
+        guard calculatorChecker.enteringNumber != Sign.empty,
               let decimalText = enteringNumberLabel.text?.convertToDecimal() else { return }
         
         addFormulaView(decimalText, currentOperatorText)
-        calculatorChecker?.appendingExpression(currentOperatorText, decimalText)
+        calculatorChecker.appendingExpression(currentOperatorText, decimalText)
     }
     
     @IBAction private func didTapZeroPad(_ sender: UIButton) {
         guard let zeroPad = sender.currentTitle,
-              calculatorChecker?.enteringNumber != Sign.space else { return }
+              calculatorChecker.enteringNumber != Sign.space else { return }
         
-        calculatorChecker?.appendingZero(zeroPad)
+        calculatorChecker.appendingZero(zeroPad)
     }
 
     @IBAction private func didTapDotPad(_ sender: UIButton) {
-        guard calculatorChecker?.enteringNumber != Sign.space else { return }
+        guard calculatorChecker.enteringNumber != Sign.space else { return }
         
-        calculatorChecker?.appendingDot()
+        calculatorChecker.appendingDot()
     }
 
     @IBAction private func didTapCalculationPad(_ sender: UIButton) {
@@ -55,26 +55,26 @@ final class CalculateViewController: UIViewController {
               operatorText.isEmpty == false else { return }
         
         addFormulaView(enteringNumberLabel.text?.convertToDecimal(), enteringOperatorLabel.text)
-        calculatorChecker?.calculate(operatorText)
+        calculatorChecker.calculate(operatorText)
         enteringOperatorLabel.text =  Sign.empty
     }
 
     @IBAction private func didTapACPad(_ sender: UIButton) {
         enteringOperatorLabel.text = Sign.empty
-        calculatorChecker?.initialState()
+        calculatorChecker.initialState()
         calculatorStackView.removeAllFormulaStackView()
     }
 
     @IBAction private func didTapCEPad(_ sender: UIButton) {
-        calculatorChecker?.initialEnteringNumber()
+        calculatorChecker.initialEnteringNumber()
     }
 
     @IBAction private func didTapChangedSignPad(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
-              calculatorChecker?.isZero(enteringNumberText) == false,
-              calculatorChecker?.enteringNumber != Sign.space else { return }
+              calculatorChecker.isZero(enteringNumberText) == false,
+              calculatorChecker.enteringNumber != Sign.space else { return }
         
-        calculatorChecker?.changeSign()
+        calculatorChecker.changeSign()
     }
     
     private func addFormulaView(_ operandText: String?, _ operatorText: String?) {

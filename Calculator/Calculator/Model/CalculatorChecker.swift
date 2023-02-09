@@ -1,11 +1,16 @@
 struct CalculatorChecker {
-    private(set) var enteringNumber = Sign.empty {
-        didSet {
-            labelUpdateClosure(enteringNumber)
+    var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
+    
+    var enteringNumber: String {
+        get {
+            return enteringNumberObservable.value
+        }
+        set {
+            enteringNumberObservable.value = newValue
         }
     }
+    
     private(set) var calculationExpression: String = Sign.empty
-    private var labelUpdateClosure: (String) -> Void
     
     private var hasCurrentInput: Bool {
         if enteringNumber == Sign.empty || enteringNumber == Sign.space {
@@ -16,10 +21,6 @@ struct CalculatorChecker {
     
     private var hasDot: Bool {
         return enteringNumber.contains(Sign.dot) ? true : false
-    }
-    
-    init(updateClosure closure: @escaping (String) -> Void) {
-        self.labelUpdateClosure = closure
     }
     
     mutating func appendingNumber(_ numberPad: String) {
@@ -75,7 +76,7 @@ struct CalculatorChecker {
         
         initialState()
         enteringNumber = Sign.space
-        labelUpdateClosure(String(formula.result()).convertToDecimal())
+        enteringNumberObservable.labelUpdateClosure?(String(formula.result()).convertToDecimal())
     }
     
     func isZero(_ currentText: String) -> Bool {
