@@ -83,8 +83,7 @@ final class ViewController: UIViewController {
     @IBAction private func operandsButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               currentOperand.filter({ Int(String($0)) != nil }).count < 20 else { return }
-        
-        // 조건문으로 마지막 입력이 . 이면 26개로 만들기
+
         if currentOperand == Sign.zero {
             inputOperandsLabel.text = number
         } else {
@@ -98,7 +97,8 @@ final class ViewController: UIViewController {
     
     @IBAction private func zeroButtonTapped(_ sender: UIButton) {
         guard let zero = sender.currentTitle,
-              currentOperand != Sign.zero else { return }
+              currentOperand != Sign.zero,
+              currentOperand.count < 26 else { return }
         
         let currentNumber = currentOperand + zero
         
@@ -142,7 +142,9 @@ final class ViewController: UIViewController {
     
     @IBAction private func dotButtonTapped(_ sender: UIButton) {
         guard let dot = sender.currentTitle,
-              currentOperand.contains(Sign.dot) == false else { return }
+              currentOperand.contains(Sign.dot) == false,
+              currentOperand.count < 26 else { return }
+        
         inputOperandsLabel.text = currentOperand + dot
     }
     
