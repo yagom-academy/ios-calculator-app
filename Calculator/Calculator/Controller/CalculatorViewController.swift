@@ -13,8 +13,7 @@ final class CalculateViewController: UIViewController {
         calculatorChecker.enteringNumberObservable.subscribe { enteringNumber in
             self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
         }
-        enteringNumberLabel.text = Sign.zero
-        enteringOperatorLabel.text = Sign.empty
+        initializeLabel()
     }
     
     @IBAction func didTapNumberPad(_ sender: UIButton) {
@@ -75,6 +74,11 @@ final class CalculateViewController: UIViewController {
               calculatorChecker.enteringNumber != Sign.space else { return }
         
         calculatorChecker.changeSign()
+    }
+    
+    private func initializeLabel() {
+        enteringNumberLabel.text = Sign.zero
+        enteringOperatorLabel.text = Sign.empty
     }
     
     private func addFormulaView(_ operandText: String?, _ operatorText: String?) {
