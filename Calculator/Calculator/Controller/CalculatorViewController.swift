@@ -18,7 +18,7 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func didTapNumberPad(_ sender: UIButton) {
         guard let numberPad = sender.currentTitle,
-              calculatorChecker.enteringNumber != Sign.space else { return }
+              calculatorChecker.hasSpace == false else { return }
         
         calculatorChecker.appendingNumber(numberPad)
     }
@@ -29,7 +29,7 @@ final class CalculateViewController: UIViewController {
         
         enteringOperatorLabel.text = inputOperatorText
         
-        guard calculatorChecker.enteringNumber != Sign.empty,
+        guard calculatorChecker.isEmpty == false,
               let decimalText = enteringNumberLabel.text?.convertToDecimal() else { return }
         
         addFormulaView(decimalText, currentOperatorText)
@@ -38,13 +38,13 @@ final class CalculateViewController: UIViewController {
     
     @IBAction private func didTapZeroPad(_ sender: UIButton) {
         guard let zeroPad = sender.currentTitle,
-              calculatorChecker.enteringNumber != Sign.space else { return }
+              calculatorChecker.hasSpace == false else { return }
         
         calculatorChecker.appendingZero(zeroPad)
     }
 
     @IBAction private func didTapDotPad(_ sender: UIButton) {
-        guard calculatorChecker.enteringNumber != Sign.space else { return }
+        guard calculatorChecker.hasSpace == false else { return }
         
         calculatorChecker.appendingDot()
     }
@@ -71,7 +71,7 @@ final class CalculateViewController: UIViewController {
     @IBAction private func didTapChangedSignPad(_ sender: UIButton) {
         guard let enteringNumberText = enteringNumberLabel.text,
               calculatorChecker.isZero(enteringNumberText) == false,
-              calculatorChecker.enteringNumber != Sign.space else { return }
+              calculatorChecker.hasSpace == false else { return }
         
         calculatorChecker.changeSign()
     }

@@ -12,8 +12,16 @@ struct CalculatorChecker {
     
     private(set) var calculationExpression: String = Sign.empty
     
+    var isEmpty: Bool {
+        return enteringNumber.isEmpty ? true : false
+    }
+    
+    var hasSpace: Bool {
+        return enteringNumber == Sign.space ? true : false
+    }
+    
     private var hasCurrentInput: Bool {
-        if enteringNumber == Sign.empty || enteringNumber == Sign.space {
+        if isEmpty || hasSpace {
             return false
         }
         return true
