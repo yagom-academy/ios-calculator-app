@@ -60,7 +60,6 @@ final class ViewController: UIViewController {
     private func formatNumber(_ result: Decimal) -> String {
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.roundingMode = .halfUp
         numberFormatter.maximumSignificantDigits = 20
         
         return numberFormatter.string(from: result as NSNumber) ?? Sign.blank
@@ -122,9 +121,10 @@ final class ViewController: UIViewController {
         if inputOperandsLabel.text == Sign.zero {
             inputOperatorsLabel.text = currentSign
         } else {
-            newStackView = makeStackView(
-                currentOperator,
-                formatNumber(Decimal(string: currentOperand) ?? 0))
+            let removedComma = removeComma(currentOperand)
+            newStackView = makeStackView(currentOperator,
+                                         formatNumber(Decimal(string: removedComma) ?? 0))
+            
             stackView.addArrangedSubview(newStackView)
             settingScrollView()
             
@@ -150,7 +150,10 @@ final class ViewController: UIViewController {
     
     @IBAction private func calculationButtonTapped(_ sender: UIButton) {
         guard currentInputFormula.isEmpty == false else { return }
-        let newStackView = makeStackView(currentOperator, currentOperand)
+        let removedComma = removeComma(currentOperand)
+        let newStackView = makeStackView(currentOperator,
+                                         formatNumber(Decimal(string: removedComma) ?? 0))
+        
         stackView.addArrangedSubview(newStackView)
         settingScrollView()
         
