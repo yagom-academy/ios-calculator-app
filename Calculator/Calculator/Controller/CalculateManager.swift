@@ -6,9 +6,6 @@
 //
 
 final class CalculateManager {
-    static let shared = CalculateManager()
-    private init() { }
-    
     private var currentOperand: String = Sign.empty
     private var expressions: [String] = []
     private var isCalculatedStatus: Bool = false

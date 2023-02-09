@@ -12,7 +12,7 @@ final class ViewController: UIViewController {
     @IBOutlet private weak var operationContentStackView: UIStackView!
     @IBOutlet private weak var operationScrollView: UIScrollView!
     
-    private let calculateManager = CalculateManager.shared
+    private let calculateManager = CalculateManager()
     private var currentOperator: String { operatorLabel.text ?? Sign.zero }
     private var currentOperand: String { operandLabel.text ?? Sign.empty }
     
