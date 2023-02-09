@@ -23,7 +23,6 @@ class CalculatorViewController: UIViewController {
         allClear()
     }
     
-    
     private func setUpScrollViewToBottom(){
         let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
         if(bottomOffset.y >= 0) {
@@ -122,16 +121,5 @@ class CalculatorViewController: UIViewController {
     private func resetAllStackView() {
         historyStackView.subviews.forEach { $0.removeFromSuperview() }
     }
-    
-//    private func addCommaToThreeDigit(number: String) -> String {
-//        let numberFormatter = NumberFormatter()
-//        numberFormatter.numberStyle = .decimal
-//
-//        guard let numberMappedToDouble = Double(number) else { return "" }
-//        guard let result = numberFormatter.string(from: NSNumber( value:numberMappedToDouble )) else { return "" }
-//
-//        return result
-//    }
-    
 }
 

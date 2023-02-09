@@ -11,10 +11,12 @@ final class InputManager {
     var expression = ""
     var currentNumber = "0"
     var currentOperator = ""
+    var isCalculated: Bool = false
     
     func handleNumbers(input: String) -> String {
-        if currentNumber == "0" {
+        if currentNumber == "0" || isCalculated {
             currentNumber = input
+            isCalculated = false
         } else {
             currentNumber += input
         }
@@ -73,6 +75,7 @@ final class InputManager {
         let calculateResult = String(resultByParse.result())
         clearInputManager()
         currentNumber = convertToFormattedString(number: calculateResult)
+        isCalculated = true
         
         return calculateResult
     }
