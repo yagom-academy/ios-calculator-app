@@ -7,7 +7,7 @@
 import UIKit
 
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     
     private var calculateComponents: String = ""
     private var inputNumbers: String = "0"
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         self.numberOnField.text = "0"
         self.operatorOnField.text = ""
         self.calculateComponents = ""
-        inputManager.currentNumber = "0"
+        inputManager.clearInputManager()
         resetAllStackView()
     }
     
@@ -53,18 +53,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculateResultButtonTapped(_ sender: UIButton) {
-        if inputNumbers == "" { return }
+        guard inputManager.currentNumber != "" else { return }
         
-        guard let currentOperOnField = operatorOnField.text else { return }
-        guard let currentNumberOnField = numberOnField.text else { return }
+        addHistoryEntry(left: inputManager.currentOperator, right: inputManager.currentNumber)
         
-        calculateComponents += currentOperOnField + currentNumberOnField
+        let result = inputManager.handleResultExpression()
         
-        var resultByParse = ExpressionParser.parse(from: calculateComponents)
+        operatorOnField.text = inputManager.currentOperator
+        numberOnField.text = inputManager.convertToFormattedString(number: result)
         
-        let calculateResult = String(resultByParse.result())
-        
-        numberOnField.text = addCommaToThreeDigit(number: calculateResult)
     }
     
     @IBAction func numberButtonTapped(_ sender: UIButton) {
@@ -108,7 +105,8 @@ class ViewController: UIViewController {
     }
     
     private func addHistoryEntry(left: String, right: String) {
-        let historyEntryStackView = HistoryEntryStackView(operatorText: left, operandText: right)
+        let formattedText = inputManager.convertToFormattedString(number: right)
+        let historyEntryStackView = HistoryEntryStackView(operatorText: left, operandText: formattedText)
         
         historyEntryStackView.isHidden = true
         
@@ -125,15 +123,15 @@ class ViewController: UIViewController {
         historyStackView.subviews.forEach { $0.removeFromSuperview() }
     }
     
-    private func addCommaToThreeDigit(number: String) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        guard let numberMappedToDouble = Double(number) else { return "" }
-        guard let result = numberFormatter.string(from: NSNumber( value:numberMappedToDouble )) else { return "" }
-        
-        return result
-    }
+//    private func addCommaToThreeDigit(number: String) -> String {
+//        let numberFormatter = NumberFormatter()
+//        numberFormatter.numberStyle = .decimal
+//
+//        guard let numberMappedToDouble = Double(number) else { return "" }
+//        guard let result = numberFormatter.string(from: NSNumber( value:numberMappedToDouble )) else { return "" }
+//
+//        return result
+//    }
     
 }
 

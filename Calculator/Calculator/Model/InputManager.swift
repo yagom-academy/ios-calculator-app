@@ -66,4 +66,30 @@ final class InputManager {
         return (currentOperator, currentNumber)
     }
     
+    func handleResultExpression() -> String {
+        expression += currentOperator + currentNumber
+        
+        var resultByParse = ExpressionParser.parse(from: expression)
+        let calculateResult = String(resultByParse.result())
+        clearInputManager()
+        currentNumber = convertToFormattedString(number: calculateResult)
+        
+        return calculateResult
+    }
+    
+    func clearInputManager() {
+        expression = ""
+        currentNumber = "0"
+        currentOperator = ""
+    }
+    
+    func convertToFormattedString(number: String) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        guard let numberMappedToDouble = Double(number) else { return "" }
+        guard let result = numberFormatter.string(from: NSNumber( value:numberMappedToDouble )) else { return "" }
+        
+        return result
+    }
 }
