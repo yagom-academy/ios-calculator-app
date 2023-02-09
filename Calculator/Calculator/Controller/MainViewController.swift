@@ -55,8 +55,8 @@ final class MainViewController: UIViewController {
             return
         }
         
-        if currentItem.operand != Sign.zero {
-            let nextOperand = currentItem.operand + inputOperand
+        if currentItem.operandText != Sign.zero {
+            let nextOperand = currentItem.operandText + inputOperand
             operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
         } else {
             operandLabel.text = inputOperand
@@ -66,14 +66,14 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func touchDotButton(_ sender: UIButton) {
-        guard currentItem.operand.contains(Sign.dot) == false else { return }
+        guard currentItem.operandText.contains(Sign.dot) == false else { return }
         guard isFinishedCalculation == false else {
             resetAll()
             operandLabel.text = Sign.zero + Sign.dot
             return
         }
         
-        operandLabel.text = currentItem.operand + Sign.dot
+        operandLabel.text = currentItem.operandText + Sign.dot
     }
     
     @IBAction private func touchZeroButton(_ sender: UIButton) {
@@ -84,10 +84,10 @@ final class MainViewController: UIViewController {
             return
         }
         
-        if currentItem.operand != Sign.zero, currentItem.operand.contains(Sign.dot) {
-            operandLabel.text = currentItem.operand + senderTitle
+        if currentItem.operandText != Sign.zero, currentItem.operandText.contains(Sign.dot) {
+            operandLabel.text = currentItem.operandText + senderTitle
         } else {
-            operandLabel.text = numberFormatter.convertToDecimal(from: currentItem.operand + senderTitle)
+            operandLabel.text = numberFormatter.convertToDecimal(from: currentItem.operandText + senderTitle)
         }
     }
     
@@ -100,8 +100,8 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func toggleSign(_ sender: UIButton) {
-        guard currentItem.operand != Sign.zero,
-              let convertedOperand = numberFormatter.convertToDouble(from: currentItem.operand),
+        guard currentItem.operandText != Sign.zero,
+              let convertedOperand = numberFormatter.convertToDouble(from: currentItem.operandText),
               let toggledOperand = numberFormatter.convertToString(from: -convertedOperand)
         else { return }
         
@@ -129,7 +129,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard currentItem.operator != Sign.empty else { return }
+        guard currentItem.operatorText != Sign.empty else { return }
         guard let currentItemStackView = viewGenerator.generateStackView(about: currentItem)
         else { return }
         

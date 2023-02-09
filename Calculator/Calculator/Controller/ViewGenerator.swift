@@ -9,19 +9,19 @@ import UIKit
 
 struct ViewGenerator {
     func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
-        let operand = UILabel()
-        operand.text = currentItem.operand
-        operand.textColor = UIColor.white
-        operand.font = UIFont.preferredFont(forTextStyle: .title3)
+        let operandLabel = UILabel()
+        operandLabel.text = currentItem.operandText
+        operandLabel.textColor = UIColor.white
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        let `operator` = UILabel()
-        `operator`.text = currentItem.operator
-        `operator`.textColor = UIColor.white
-        `operator`.font = UIFont.preferredFont(forTextStyle: .title3)
+        let operatorLabel = UILabel()
+        operatorLabel.text = currentItem.operatorText
+        operatorLabel.textColor = UIColor.white
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let result = UIStackView()
-        result.addArrangedSubview(`operator`)
-        result.addArrangedSubview(operand)
+        result.addArrangedSubview(operatorLabel)
+        result.addArrangedSubview(operandLabel)
         result.spacing = 8
         
         return result
