@@ -81,7 +81,7 @@ final class ViewController: UIViewController {
     //MARK: - IBAciton
     @IBAction private func operandsButtonTapped(_ sender: UIButton) {
         guard let number = sender.currentTitle,
-              currentOperand.filter({ Int(String($0)) != nil }).count < 20 else { return }
+              currentOperand.filter { Int(String($0)) != nil }.count < 20 else { return }
 
         if currentOperand == Sign.zero {
             inputOperandsLabel.text = number
@@ -101,14 +101,14 @@ final class ViewController: UIViewController {
         
         let currentNumber = currentOperand + zero
         
-        guard currentNumber.filter({ $0 == Character(Sign.dot) }).isEmpty else {
+        guard currentNumber.filter { $0 == Character(Sign.dot) }.isEmpty else {
             inputOperandsLabel.text = currentNumber
             
             return
         }
         
-        let removedNumber = removeComma(currentNumber)
-        let formattedString = formatNumber(Decimal(string: removedNumber) ?? 0 )
+        let numberWithoutComma = removeComma(currentNumber)
+        let formattedString = formatNumber(Decimal(string: numberWithoutComma) ?? 0 )
         
         inputOperandsLabel.text = formattedString
     }
@@ -122,8 +122,10 @@ final class ViewController: UIViewController {
             inputOperatorsLabel.text = currentSign
         } else {
             let removedComma = removeComma(currentOperand)
-            newStackView = makeStackView(currentOperator,
-                                         formatNumber(Decimal(string: removedComma) ?? 0))
+            newStackView = makeStackView(
+                currentOperator,
+                formatNumber(Decimal(string: removedComma) ?? 0)
+            )
             
             stackView.addArrangedSubview(newStackView)
             settingScrollView()
@@ -151,8 +153,10 @@ final class ViewController: UIViewController {
     @IBAction private func calculationButtonTapped(_ sender: UIButton) {
         guard currentInputFormula.isEmpty == false else { return }
         let removedComma = removeComma(currentOperand)
-        let newStackView = makeStackView(currentOperator,
-                                         formatNumber(Decimal(string: removedComma) ?? 0))
+        let newStackView = makeStackView(
+            currentOperator,
+            formatNumber(Decimal(string: removedComma) ?? 0)
+        )
         
         stackView.addArrangedSubview(newStackView)
         settingScrollView()
