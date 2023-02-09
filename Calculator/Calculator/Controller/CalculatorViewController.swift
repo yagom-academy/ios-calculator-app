@@ -7,13 +7,13 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var contentStack: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
     private var expression: String = ""
+    private var isCalculated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
+        if isCalculated {
+            operandLabel.text = "0"
+            isCalculated = false
+        }
+        
         guard let prevOperandText = operandLabel.text,
               let inputNumber = sender.currentTitle else { return }
         
@@ -111,6 +116,7 @@ final class CalculatorViewController: UIViewController {
         addContentStack(stackView)
         setScrollViewFocus()
         calculateExpression()
+        isCalculated = true
     }
     
     private func calculateExpression() {
