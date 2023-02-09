@@ -1,5 +1,5 @@
 //  Calculator - Formula.swift
-//  created by vetto on 2023/01/27
+//  created by 리지, vetto, Andrew on 2023/01/27
 
 struct Formula {
     private(set) var operands: CalculatorItemQueue<Double>

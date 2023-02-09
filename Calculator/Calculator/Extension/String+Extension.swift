@@ -1,5 +1,5 @@
-//  Calculator - StringExtension.swift
-//  created by vetto on 2023/01/27
+//  Calculator - String+Extension.swift
+//  created by 리지, vetto, Andrew on 2023/01/27
 
 import Foundation
 

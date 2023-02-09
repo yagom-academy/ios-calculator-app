@@ -1,5 +1,5 @@
 //  Calculator - Symbol.swift
-//  created by vetto on 2023/02/05
+//  created by 리지, vetto, Andrew on 2023/02/05
 
 enum Symbol {
     static let zero = "0"

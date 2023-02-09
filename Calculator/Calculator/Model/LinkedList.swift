@@ -1,5 +1,5 @@
 //  Calculator - LinkedList.swift
-//  created by vetto on 2023/01/27
+//  created by 리지, vetto, Andrew on 2023/01/27
 
 struct LinkedList<Element: CalculateItem> {
     private(set) var head: Node<Element>?

@@ -1,5 +1,5 @@
 //  Calculator - CalculatorItemQueue.swift
-//  created by vetto on 2023/01/25
+//  created by 리지, vetto, Andrew on 2023/01/25
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var calculatorList = LinkedList<Element>()
