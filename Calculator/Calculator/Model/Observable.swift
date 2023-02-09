@@ -1,11 +1,11 @@
 final class Observable<T> {
+    var labelUpdateClosure: ((T) -> Void)?
+    
     var value: T {
         didSet {
             self.labelUpdateClosure?(value)
         }
     }
-    
-    var labelUpdateClosure: ((T) -> Void)?
     
     init(_ value: T) {
         self.value = value

@@ -1,4 +1,4 @@
-struct CalculatorProcessor {
+class CalculatorProcessor {
     var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
     private(set) var calculationExpression: String = Sign.empty
     
@@ -30,7 +30,7 @@ struct CalculatorProcessor {
         return enteringNumber.contains(Sign.dot) ? true : false
     }
     
-    mutating func appendingNumber(_ numberPad: String) {
+    func appendingNumber(_ numberPad: String) {
         guard hasCurrentInput else {
             enteringNumber = numberPad
             return
@@ -40,12 +40,12 @@ struct CalculatorProcessor {
         enteringNumber = enteringNumber.convertToDecimal()
     }
     
-    mutating func appendingExpression(_ operatorText: String, _ operandText: String) {
+    func appendingExpression(_ operatorText: String, _ operandText: String) {
         calculationExpression += (operatorText + operandText)
         enteringNumber = Sign.empty
     }
     
-    mutating func appendingZero(_ zeroPad: String) {
+    func appendingZero(_ zeroPad: String) {
         guard isZero(enteringNumber) == false && hasCurrentInput else {
             enteringNumber = Sign.zero
             return
@@ -59,13 +59,13 @@ struct CalculatorProcessor {
         enteringNumber += zeroPad
     }
     
-    mutating func appendingDot() {
+    func appendingDot() {
         guard hasDot == false else { return }
         
         enteringNumber = hasCurrentInput ? (enteringNumber + Sign.dot) : Sign.zeroDot
     }
 
-    mutating func changeSign() {
+    func changeSign() {
         guard enteringNumber.contains(Sign.minus) == false else {
             enteringNumber = enteringNumber.replacingOccurrences(of: Sign.minus, with: Sign.empty)
             return
@@ -74,7 +74,7 @@ struct CalculatorProcessor {
         enteringNumber = (Sign.minus + enteringNumber)
     }
     
-    mutating func calculate(_ operatorText: String) {
+    func calculate(_ operatorText: String) {
         let formattedNumber = enteringNumber.convertToDecimal()
         
         calculationExpression += (operatorText + formattedNumber)
@@ -90,12 +90,12 @@ struct CalculatorProcessor {
         return currentText == Sign.zero ? true : false
     }
     
-    mutating func initialState() {
+    func initialState() {
         calculationExpression = Sign.empty
         initialEnteringNumber()
     }
     
-    mutating func initialEnteringNumber() {
+    func initialEnteringNumber() {
         enteringNumber = Sign.empty
     }
 }
