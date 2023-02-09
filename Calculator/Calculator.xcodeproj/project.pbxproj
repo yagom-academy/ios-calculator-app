@@ -108,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* MainViewController.swift */,
+				ADC67B3D299259D8007BEB5A /* ViewGenerator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -117,7 +118,6 @@
 			children = (
 				ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */,
 				ADE78A9F2991059300AC109C /* CalculateItemStackView.swift */,
-				ADC67B3D299259D8007BEB5A /* ViewGenerator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

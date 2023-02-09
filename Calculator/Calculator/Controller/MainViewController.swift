@@ -12,6 +12,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var calculateItemStackView: CalculateItemStackView!
     @IBOutlet private weak var calculateItemScrollView: CalculateItemScrollView!
     
+    private let viewGenerator = ViewGenerator()
     private var inputHandler = InputHandler()
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                                   roundingMode: .halfUp,
@@ -114,7 +115,11 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            calculateItemStackView.add(currentItem)
+            guard let currentItemStackView = viewGenerator.generateStackView(about: currentItem)
+            else { return }
+            
+            calculateItemStackView.add(currentItemStackView)
+            calculateItemScrollView.didAddSubview(currentItemStackView)
             inputHandler.addInput(about: currentItem)
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
@@ -125,8 +130,11 @@ final class MainViewController: UIViewController {
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard currentItem.operator != Sign.empty else { return }
+        guard let currentItemStackView = viewGenerator.generateStackView(about: currentItem)
+        else { return }
         
-        calculateItemStackView.add(currentItem)
+        calculateItemStackView.add(currentItemStackView)
+        calculateItemScrollView.didAddSubview(currentItemStackView)
         inputHandler.addInput(about: currentItem)
         
         var formula = ExpressionParser.parse(from: inputHandler.currentInput)

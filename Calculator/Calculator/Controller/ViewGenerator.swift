@@ -8,14 +8,9 @@
 import UIKit
 
 struct ViewGenerator {
-    private let numberFormatter = NumberFormatter(numberStyle: .decimal,
-                                          roundingMode: .halfUp,
-                                          usesSignificantDigits: true,
-                                          maximumSignificantDigits: 20)
-    
     func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
         let operand = UILabel()
-        operand.text = numberFormatter.convertToDecimal(from: currentItem.operand)
+        operand.text = currentItem.operand
         operand.textColor = UIColor.white
         operand.font = UIFont.preferredFont(forTextStyle: .title3)
         
