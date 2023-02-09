@@ -58,23 +58,25 @@ final class CalculateManager {
     
     func updateOperator(with currentOperator: String?) -> Bool {
         let operand = currentOperand.removeComma()
-        
+            
         guard expressions.isEmpty == false else {
             let operand = currentOperand.removeComma()
-            expressions.append(operand)
-            expressions.append(currentOperator!)
-            isCalculatedStatus = false
+            updateExpressions(operand: operand, operatorSign: currentOperator)
             return true
         }
         
-        guard currentOperand != Sign.zero else {
-            return false
-        }
+        guard currentOperand != Sign.zero else { return false }
+        
+        updateExpressions(operand: operand, operatorSign: currentOperator)
+        return true
+    }
+    
+    func updateExpressions(operand: String, operatorSign: String?) {
+        guard let currentOperator = operatorSign else { return }
         
         expressions.append(operand)
-        expressions.append(currentOperator!)
+        expressions.append(currentOperator)
         isCalculatedStatus = false
-        return true
     }
     
     func convertPositiveNegative() -> String {
