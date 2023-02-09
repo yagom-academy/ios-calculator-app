@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0894D3D82993AF25008B4E2B /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0894D3D72993AF25008B4E2B /* Sign.swift */; };
-		BF5E81BB29837F10009A839B /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5E81BA29837F10009A839B /* extensions.swift */; };
+		08B151262994F13D00BEDEDD /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B151252994F13D00BEDEDD /* String+extension.swift */; };
+		BF5E81BB29837F10009A839B /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5E81BA29837F10009A839B /* Double+extension.swift */; };
 		BF7D1F572993B51A0095A274 /* CalculateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D1F562993B51A0095A274 /* CalculateManager.swift */; };
 		BF994A372983DC98000FAD1A /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF994A362983DC98000FAD1A /* Operator.swift */; };
 		BF994A392983F221000FAD1A /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF994A382983F221000FAD1A /* ExpressionParser.swift */; };
@@ -62,7 +63,8 @@
 
 /* Begin PBXFileReference section */
 		0894D3D72993AF25008B4E2B /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
-		BF5E81BA29837F10009A839B /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		08B151252994F13D00BEDEDD /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
+		BF5E81BA29837F10009A839B /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
 		BF7D1F562993B51A0095A274 /* CalculateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateManager.swift; sourceTree = "<group>"; };
 		BF994A362983DC98000FAD1A /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		BF994A382983F221000FAD1A /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
@@ -128,6 +130,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08B151272994F16900BEDEDD /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				BF5E81BA29837F10009A839B /* Double+extension.swift */,
+				08B151252994F13D00BEDEDD /* String+extension.swift */,
+			);
+			path = extension;
+			sourceTree = "<group>";
+		};
 		BFABE1EA298569930089F381 /* ExpressionParserTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,11 +181,11 @@
 				BFC6FF9D2980DFF400629399 /* CalculateItem.swift */,
 				BFC6FF9F2980E03000629399 /* LinkedList.swift */,
 				BFC6FFA12980E04800629399 /* Node.swift */,
-				BF5E81BA29837F10009A839B /* extensions.swift */,
 				BF994A362983DC98000FAD1A /* Operator.swift */,
 				BF994A382983F221000FAD1A /* ExpressionParser.swift */,
 				BF994A3A29842C9B000FAD1A /* Formula.swift */,
 				0894D3D72993AF25008B4E2B /* Sign.swift */,
+				08B151272994F16900BEDEDD /* extension */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -457,7 +468,7 @@
 				BF994A392983F221000FAD1A /* ExpressionParser.swift in Sources */,
 				BFC6FFA02980E03000629399 /* LinkedList.swift in Sources */,
 				0894D3D82993AF25008B4E2B /* Sign.swift in Sources */,
-				BF5E81BB29837F10009A839B /* extensions.swift in Sources */,
+				BF5E81BB29837F10009A839B /* Double+extension.swift in Sources */,
 				BF7D1F572993B51A0095A274 /* CalculateManager.swift in Sources */,
 				BFC6FF9E2980DFF400629399 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
@@ -466,6 +477,7 @@
 				BF994A3B29842C9B000FAD1A /* Formula.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				BF994A372983DC98000FAD1A /* Operator.swift in Sources */,
+				08B151262994F13D00BEDEDD /* String+extension.swift in Sources */,
 				BFC6FFA22980E04800629399 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,8 +1,8 @@
 //
-//  extensions.swift
+//  String+extension.swift
 //  Calculator
 //
-//  Created by 혜모리, 릴라 on 2023/01/27.
+//  Created by 김성준 on 2023/02/09.
 //
 
 import Foundation
@@ -36,8 +36,4 @@ extension String: CalculateItem {
             .replacingOccurrences(of: String(Sign.dot), with: Sign.empty)
             .replacingOccurrences(of: String(Sign.negative), with: Sign.empty)
     }
-}
-
-extension Double: CalculateItem {
-    
 }
