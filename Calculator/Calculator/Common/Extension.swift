@@ -72,3 +72,11 @@ extension UIStackView {
         self.subviews.forEach { $0.removeFromSuperview() }
     }
 }
+
+extension UIScrollView {
+    override open func didAddSubview(_ subview: UIView) {
+        self.layoutIfNeeded()
+        self.setContentOffset(CGPoint(x: 0, y: self.contentSize.height - self.bounds.height),
+                              animated: true)
+    }
+}

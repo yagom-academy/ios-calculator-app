@@ -16,7 +16,6 @@
 		36CA536C2988B9CB00622D91 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA536B2988B9CB00622D91 /* ExpressionParser.swift */; };
 		36CA536E2988BC0F00622D91 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA536D2988BC0F00622D91 /* Formula.swift */; };
 		36CA53822989074900622D91 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CA531C2982208000622D91 /* CalculatorTests.swift */; };
-		ADE78A9E2991057800AC109C /* CalculateItemScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */; };
 		ADE78AA2299105DB00AC109C /* InputManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78AA1299105DB00AC109C /* InputManager.swift */; };
 		ADE78AA4299105F600AC109C /* Sign.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78AA3299105F600AC109C /* Sign.swift */; };
 		ADE78AA62991066C00AC109C /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE78AA52991066C00AC109C /* Extension.swift */; };
@@ -49,7 +48,6 @@
 		36CA536D2988BC0F00622D91 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		36CA53752988EB4500622D91 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		36CA538D298A3FAD00622D91 /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
-		ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItemScrollView.swift; sourceTree = "<group>"; };
 		ADE78AA1299105DB00AC109C /* InputManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputManager.swift; sourceTree = "<group>"; };
 		ADE78AA3299105F600AC109C /* Sign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sign.swift; sourceTree = "<group>"; };
 		ADE78AA52991066C00AC109C /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -108,14 +106,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		36CA53632988B09400622D91 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				ADE78A9D2991057800AC109C /* CalculateItemScrollView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		36CA53642988B09E00622D91 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +154,6 @@
 				36CA53622988AF9B00622D91 /* Controller */,
 				ADE78AA729910E6900AC109C /* Common */,
 				36CA53642988B09E00622D91 /* Models */,
-				36CA53632988B09400622D91 /* Views */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
@@ -286,7 +275,6 @@
 				ADE78AA4299105F600AC109C /* Sign.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* MainViewController.swift in Sources */,
 				36CA536C2988B9CB00622D91 /* ExpressionParser.swift in Sources */,
-				ADE78A9E2991057800AC109C /* CalculateItemScrollView.swift in Sources */,
 				ADE78AA2299105DB00AC109C /* InputManager.swift in Sources */,
 				36CA533929826D2500622D91 /* CalculatorItemQueue.swift in Sources */,
 				3690983D29911FC7000F4CF4 /* Typealias.swift in Sources */,
