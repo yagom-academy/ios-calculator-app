@@ -10,8 +10,8 @@ final class CalculateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        calculatorChecker.enteringNumberObservable.subscribe { [weak self] enteringNumber in
-            self?.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+        calculatorChecker.enteringNumberObservable.subscribe { enteringNumber in
+            self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
         }
         initializeLabel()
     }
