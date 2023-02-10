@@ -98,9 +98,9 @@ final class CalculatorViewController: UIViewController {
             if calculateOperand.contains(Symbol.dot) {
                 calculateOperand += number
             } else {
-                calculateOperand = NumberFormatter.convertToString(
-                    fromString: calculateOperand + number
-                )
+                calculateOperand = NumberFormatter
+                    .convertToString(fromString: calculateOperand + number
+                    )
             }
         }
     }
@@ -136,9 +136,9 @@ final class CalculatorViewController: UIViewController {
         if calculateOperator.isEmpty {
             text = NumberFormatter.convertToString(fromString: calculateOperand)
         } else {
-            text = calculateOperator +
-              Symbol.blank +
-                NumberFormatter.convertToString(fromString: calculateOperand)
+            text = calculateOperator
+            + Symbol.blank
+            + NumberFormatter.convertToString(fromString: calculateOperand)
         }
         calculateStackView.addArrangedSubview(ViewManager.generateUILabel(text))
     }
