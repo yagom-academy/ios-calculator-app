@@ -1,171 +1,189 @@
 # 계산기 프로젝트
 ## 프로젝트 개요
-* 피연산자와 연산자를 입력해 계산을 진행하는 프로젝트
-* 프로젝트 인원: [Brody]()
-* 프로젝트 기간: 2023.01.24 ~ 2023.02.03
+> 아이폰 기본 계산기에 스크롤 뷰를 더한 계산기 앱
+> 사칙연산 미적용.
+> 
+> 프로젝트 인원: [Brody](https://github.com/seunghyunCheon), [레옹아범](https://github.com/fatherLeon)
+> 프로젝트 기간: 2023.02.06 ~ 2023.02.09
+
+<br/><br/>
 
 ## 목차
-- [타임라인](#타임라인)
-- [UML](#UML)
-- [기능 설명](#기능-설명)
-- [트러블 슈팅](#트러블-슈팅)
-- [키워드](#프로젝트를-통해-학습한-키워드)
-- [참고 자료](#참고-자료)
-
-
-## 폴더 구조
-
+- [프로젝트구조](#✍🏻-프로젝트-구조)
+- [타임라인](#⏰-타임라인)
+- [기능 설명](#✨-기능-설명)
+- [트러블 슈팅](#⚒️-트러블-슈팅)
+- [참고 자료](#📑-참고-자료)
+<br/><br/>
+## ✍🏻 프로젝트 구조
+<details><summary><big>폴더 구조</big></summary>
+    
 ```
-├── Controller
-|   ├── ViewController
+├── Protocol
+|   └── CalculatorItem
+├── Extension
+|   ├── StringExtension
+|   ├── ScrollViewExtension
+|   └── DoubleExtension
 ├── Model
-|   ├── CalculatorItem
+|   ├── DataStructure
+|   |   ├── CalculatorItemQueue
+|   |   ├── LinkedList
+|   |   └── Node
 |   ├── Operator
-|   └── Formula
-|   └── ExpressionParser
-|   └── CalculatorItemQueue
+|   ├── CalculatorProcessor
+|   ├── Formula
+|   ├── Sign
+|   └── Obervable
+├── ViewController
+|   └── CalculatorViewController
 └── View
     ├── Main
-    └── Assets
+    └── CalculatorStackView
 
 ```
 
-----
-    
-## 타임라인
+</details>
+
+</br>
+
+<details><summary><big>UML</big></summary>
+
+<img src="https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/UML.png?raw=true"/>
+   
+</details>
+
+<br/><br/> 
+
+## ⏰ 타임라인
+#### 진행기간: 23.02.06(월) ~ 23.02.9.(목)
+
 > 시간 순으로 프로젝트의 주요 진행 척도를 표시
-> - 23.01.24(화): Queue자료구조 학습 
-> - 23.01.25(수): UML작성 및 STEP1 TDD 진행, PR요청
-> - 23.01.26(목): STEP1 머지 후 STEP2 진행
-> - 23.01.27(금): STEP2 PR 요청목표
-
-## UML
-<img src="https://i.imgur.com/0iCVmIX.png"/>
-
-<br/>
+> - 23.02.06(월): 코드 병합
+> - 23.02.07(화): 테스트코드 작성
+> - 23.02.08(수): 병합 코드 리팩토링
+> - 23.02.09(목): 코드 리팩토링
 
 
-## 기능 설명
+<br/><br/>
 
-## 트러블 슈팅
-### STEP1
-### 테스트 케이스끼리의 의존성
 
-실제 코드에서 프로퍼티를 private으로 접근제어를 설정함으로써 테스트케이스에서 직접 접근해 요소를 추가하거나 제거할 수 없었습니다. 이 떄문에 이미 작성한 테스트케이스메서드를 통해서 작성을 했는데요, 완전히 검증되었다고 할 수 없는 테스트케이스함수를 사용한다는 것이 조금 불완전한 코드를 작성하고 있는 것이 아닌가 생각이 들었습니다.
+## ✨ 기능 설명
 
-```swift 
-func test_isEmpty호출시_dequeueStack과enqueueStack모두비어있다면_true를반환한다() {
-    // given
-    let input = ["1", "2", "3"]
-    let inputAfterEnqueue = ["4", "5", "6"]
-    let expectation = true
+|연산 실행(=)|다항 연산(=)|나누기0을 할 경우 처리|
+|---|---|---|
+|![normal](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/기본연산.gif?raw=true)|![다항연산](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/다항연산.gif?raw=true)|![나누기0](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/나누기0.gif?raw=true)|
 
-    // when
-    input.forEach { sut.enqueueCurrentItem($0) }
-    sut.dequeueCurrentItem()
-    inputAfterEnqueue.forEach { sut.enqueueCurrentItem($0) }
+|계산 이후 수정불가|불필요한 숫자 표시 제거|AC&CE버튼 구현|
+|---|---|---|
+|![수정불가](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/계산이후수정불가.gif?raw=true)|![불필요숫자제거](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/불필요한숫자표시제거.gif?raw=true)|![AC&CE](https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/기능사진/AC&CE.gif?raw=true)|
 
-    sut.removeAllElement()
-    let result = sut.isEmpty
+<br/><br/><br/>
 
-    // then
-    XCTAssertEqual(result, expectation)
-}
-```
-위 코드는 isEmpty를 검증하는 테스트케이스인데 내부에서 enqueueCurrentItem과 dequeueCurrentItem, resetAllElement라는 함수들을 실행하고 있습니다. 테스트케이스에서 여러 함수들의 의존을 피하기 위한 방법으로는 테스트할 때는 프로퍼티를 public으로 선언한 후 직접 접근해서 값을 조작하고, 테스트가 완료가 되면 private으로 변환하는 방법이 있겠다고 생각했습니다. 하지만 이 방법또한 추후 다시 테스트를 진행할 때는 접근제어를 풀고 해야하기 때문에 불편할 것 같다고 생각이 들었습니다. 그래서 의존성 주입을 생각했습니다.
+## ⚒️ 트러블 슈팅
+### 코드 병합 방식
+#### 1️⃣ 코드 병합 방식
+* 코드의 병합방식으로 기존의 완성된 코드가 있는 브랜치에서 병합을 하는 방식, 비어있는 브랜치에서 병합을 하는 방식 둘 중 하나를 고민했습니다
+* 다만, 메소드마다 변수마다 병합을 하는게 아닌 파일 단위로 병합을 하는게 구조상으로 더 좋을것 같다는 합의가 있어서 비어있는 브랜치에서 병합을 하는 방식으로 선택했습니다
+
+
+<img src="https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/코드병합방식.png?raw=true"/>
+
+* 기존 비어있는 Main브랜치에서 개발을 진행할 브랜치 `Calculator2-step1`을 만들고 해당 브랜치를 통해 각각의 기능 브랜치를 만들어 Pull Request를 보내 Merge하고 다시 브랜치를 생성하는 방향으로 코드 병합을 진행하였습니다
+
+</br>
+
+### 2️⃣ Observable 사용
+
+#### Obervable 사용 전
+기존에는 `ViewController`내의 객체에 의해 라벨을 업데이트 시키기 위해 클로저를 전달해서 객체의 프로퍼티가 변경되었을 때 클로저에 값을 전달해 라벨을 업데이트 했습니다.
 ```swift
-func test_isEmpty호출시_dequeueStack과enqueueStack모두비어있다면_true를반환한다() {
-    // given
-    let input = ["1", "2", "3"]
-    let expectation = true
-
-    // when
-    sut = CalculatrItemQueue<String>(inputs: input)
-    sut.dequeueCurrentItem() 
-
-    sut.removeAllElement()
-    let result = sut.isEmpty
-
-    // then
-    XCTAssertEqual(result, expectation)
-}
-```
-- 이처럼 enqueue테스트메서드를 사용하지 않아도 input값들을 외부에서 주입함으로써 사용할 수 있었습니다. 이 경우에도 `removeAllElement`함수나, `isEmpty`에 대한 의존은 피할 수 없지만 의존도를 최대한으로 줄이면서 테스트코드를 작성하는 것이 테스트코드 작성의 지향점이라고 느꼈습니다.
-
-### 자료구조의 사용
-큐 타입 구현을 위한 자료구조 몇가지를 살펴봤습니다.
-기본적으로는 내장되어있는 Array가 있고 연결리스트, Array두 개를 이용한 더블스택이 존재한다는 것을 알게되었습니다.
-
-전 이번 프로젝트에서 다음의 이유로 더블스택을 사용했습니다.
-
-- **요소를 추가하거나 제거할 때 O(1)의 시간복잡도를 가진다.**
-array로 큐를 구현할 경우 앞에서부터 지워진다면 nil이 존재하게 되고 이를 제거하는 O(n)의 시간복잡도를 필요로 하게 됩니다. 연결리스트의 경우에는 뒤 요소를 지울때 tail이 앞 요소의 주소값을 갖고있는 것이 아니라면 다시 tail을 할당하기위해 O(n)작업을 해야 하기 때문에 이중연결리스트로 구현하는 것이 아니라면 비효율적일 수 있겠다고 생각했습니다.
-- **공간복잡도가 O(N)이다.**
-배열로 큐를 구현했을 경우 하나의 Array에 모든 요소를 담게 됩니다. 더블 스택은 배열을 두개를 사용하지만 하나의 큐에 있는 요소들을 나누어서 담고 있기 때문에 동일하게 O(N)의 시간복잡도를 가지게 됩니다.
-
-###### 다만 이 자료구조는 dequeue가 비어있을 때 enqueue의 요소들을 전부 옮긴뒤 삭제하는 작업이 있는데 이는 O(N)의 시간복잡도를 가지게 됩니다. 즉 항상 O(1)은 아니고 O(N)이 섞여있습니다. 그래도 이 작업은 기본 Array를 이용한 방법(dequeue시 항상 O(N)연산)보다는 개선되어있다고 생각해서 채택했습니다.
-
-### STEP2
-### 고차함수의 사용
-외부에서 계산표현식들을 받아 연산자들을 분리해서 숫자배열들만 반환해주는 `componentsByOperators`함수를 작성했습니다. 
-```swift
-// let input = "1+2*32-42"
-func componentsByOperators(input: String) -> [String] {
-    for oper in Operator.allCases {
-        switch oper {
-        case .add:
-            numbers = input.split(with: "+")
-        case .subtract:
-            separateNumbers(sep: "-", numbers: &numbers)
-        case .divide:
-            separateNumbers(sep: "/", numbers: &numbers)
-        case .multiply:
-            separateNumbers(sep: "*", numbers: &numbers)
-        }
-    }    
+class CalculatorViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        calculatorProcessor = CalculatorProcessor(updateClosure: { text in
+            self.enteringNumberLabel.text = text == Sign.empty ? Sign.zero : text
+        })
 }
 
-func separateNumbers(sep: Character, numbers: inout [String]) {
-    var idx = 0
-    // [1,2,3]
-    while idx < numbers.count {
-        if let _ = Int(numbers[idx]) {
-            idx += 1
-            continue
-        }
-
-        var move = 0
-        let target = numbers.remove(at: idx)
-        for x in target.split(with: sep).reversed() {
-            numbers.insert(x, at: idx)
-            move += 1
-        }
-        idx += move
+class CalculatorProcessor {
+    private var labelUpdateClosure: (String) -> Void
+    
+    init(updateClosure closure: @escaping (String) -> Void) {
+        self.labelUpdateClosure = closure
     }
 }
 ```
-- 하지만 위 코드는 componentsByOperator가 다른 함수인 separateNumbers를 사용하고 있다는 점과 조금 복잡해보이는 while문을 사용하고 있는 단점이 있었습니다. 이를 개선하기 위해 고차함수를 사용했습니다.
-```swift
-func componentsByOperators(from input: String) -> [String] {
-    var numbers: [String] = [input]
 
-    Operator.allCases.forEach { oper in
-        numbers = numbers.map{ $0.split(with: oper.rawValue) }.flatMap { $0 }
+하지만 `CalculatorChecker`내부에서 클로저 변수를 가지고 있는 것이 계산기의 핵심로직에 대한 책임 뿐만 아니라 `view`를 직접 업데이트하는 책임까지 가지고 있다고 생각해 이를 위임할 수 있는 객체를 만들어 책임을 분리해야겠다고 생각했습니다.
+
+#### Observable 사용 후
+라벨을 업데이트하는 클로저를 `Obervable`이라는 클래스에 위임해서 책임을 분리했습니다. `Observable`은 제네릭타입으로 설정해 여러 타입을 받을 수 있도록 만들었습니다.
+```swift
+final class Observable<T> {
+    var closure: ((T) -> Void)?
+    
+    var value: T {
+        didSet {
+            self.closure?(value)
+        }
     }
-    return numbers
+    
+    init(_ value: T) {
+        self.value = value
+    }
+    
+    func subscribe(closure: @escaping (T) -> Void) {
+        self.closure = closure
+    }
+}
+
+
+class CalculatorProcessor {
+    var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
+    var enteringNumber: String {
+        get {
+            return enteringNumberObservable.value
+        }
+        set {
+            enteringNumberObservable.value = newValue
+        }
+    }
+}
+
+class CalculatorViewController: UIViewController {
+    calculatorChecker.enteringNumberObservable
+        .subscribe { enteringNumber in
+        self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+    }
+    initializeLabel()
 }
 ```
-- map을 사용해서 각 요소들이 연산에 맞는 split할 수 있게 만들고 생성된 2차원배열을 flatMap을 통해 1차원배열로 만들었습니다. 
-### 프로젝트를 통해 학습한 키워드
-- `TDD`, `Unit test`
-- `접근제어`
-- `UML`
-- `고차함수`, `map`, `flatMap`
 
+</br>
 
+### 3️⃣ 클로저의 강한 순환참조 문제
+#### 기존 코드(CalculatorViewController)
+```swift
+calculatorChecker.enteringNumberObservable.subscribe { enteringNumber in
+    self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+}
+```
 
-## 참고 자료
-- [kodecocodes git - queue](https://github.com/kodecocodes/swift-algorithm-club/tree/master/Queue)
-- [kodeco - queue](https://www.kodeco.com/848-swift-algorithm-club-swift-queue-data-structure)
-- [Apple git - RangeRelaceableCollection](https://github.com/apple/swift/blob/main/stdlib/public/core/RangeReplaceableCollection.swift)
-- [개발자 아라찌 - Swift로 구현한 Queue와 더블스택](https://apple-apeach.tistory.com/8)
+* 기존 코드의 경우 `ViewController`에서 `subscribe`메소드를 실행 할 때 클로저 인스턴스를 전달하면서 해당 `ViewController`가 클로저를 참조하게 되고 클로저는 `ViewController`를 참조하고 있으므로 강한순환참조 문제가 발생할 수 있었습니다
+
+<img src="https://github.com/seunghyunCheon/ios-calculator-app/blob/calculator2-step2/Image/강한순환참조문제.png?raw=true" height=500px>
+
+#### 현재 코드(CalculatorViewController)
+```swift
+calculatorChecker.enteringNumberObservable.subscribe { [weak self] enteringNumber in
+    self.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
+}
+```
+
+* 강한 순환참조 문제를 해결하기 위하여 `[weak self]`를 사용하여 순환참조 문제를 해결하였습니다
+<br/><br/>
+## 📑 참고 자료
+- [didSet과 closure를 통한 데이터 바인딩](https://sujinnaljin.medium.com/swift-didset%EA%B3%BC-closure%EB%A5%BC-%ED%86%B5%ED%95%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B0%94%EC%9D%B8%EB%94%A9-5a610d28c220)
+- [Swift Closure](https://docs.swift.org/swift-book/LanguageGuide/Closures.html)
+- [Swift ARC](https://docs.swift.org/swift-book/LanguageGuide/AutomaticReferenceCounting.html)
