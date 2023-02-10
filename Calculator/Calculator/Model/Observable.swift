@@ -1,4 +1,5 @@
 import UIKit
+
 final class Observable<T: StringProtocol> {
     var closure: ((T) -> Void)?
     

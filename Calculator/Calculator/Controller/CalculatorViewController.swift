@@ -10,10 +10,6 @@ final class CalculateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        calculatorProcessor.enteringNumberObservable
-//            .subscribe { [weak self] enteringNumber in
-//            self?.enteringNumberLabel.text = (enteringNumber == Sign.empty) ? Sign.zero : enteringNumber
-//        }
         calculatorProcessor.enteringNumberObservable
             .bind(enteringNumberLabel)
         initializeLabel()
