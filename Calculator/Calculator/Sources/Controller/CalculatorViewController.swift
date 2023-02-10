@@ -10,9 +10,7 @@ final class CalculatorViewController: UIViewController {
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
     @IBOutlet private weak var currentNumberLabel: UILabel!
-    
     @IBOutlet private weak var verticalStackView: UIStackView!
-    
     @IBOutlet private weak var operatingScrollView: UIScrollView!
     
     private var stringToBeCalculated: String = NameSpace.emptyString
@@ -36,9 +34,11 @@ final class CalculatorViewController: UIViewController {
             allClear()
             isCalculated = false
         }
+        
         guard currentNumber.count < 20 else {
             return
         }
+        
         insertString(titleName: sender.titleLabel?.text)
         setCurrentNumber(titleName: sender.titleLabel?.text)
     }
@@ -47,10 +47,12 @@ final class CalculatorViewController: UIViewController {
         guard currentNumber.contains(NameSpace.dot) == false else {
             return
         }
+        
         if currentNumber == NameSpace.emptyString {
             currentNumber += NameSpace.stringZero
             stringToBeCalculated += NameSpace.stringZero
         }
+        
         insertString(titleName: sender.titleLabel?.text)
         setCurrentNumber(titleName: sender.titleLabel?.text)
     }
@@ -71,6 +73,7 @@ final class CalculatorViewController: UIViewController {
             stringToBeCalculated += currentNumber
             isCalculated = false
         }
+        
         displayPreviousOperands()
         insertOperatorSign(titleName: sender.titleLabel?.text)
         displayCurrentOperator(titleName: sender.titleLabel?.text)
@@ -84,11 +87,13 @@ final class CalculatorViewController: UIViewController {
         } else {
             let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
             let lastString = stringToBeCalculated[lastIndex]
+            
             if Operator(rawValue: lastString) != nil {
                 stringToBeCalculated.removeLast()
                 removePreviousOperands()
             }
         }
+        
         insertString(titleName: titleName)
     }
     
@@ -98,9 +103,7 @@ final class CalculatorViewController: UIViewController {
     
     //MARK: Methods calculating numbers
     @IBAction private func tapCalculateButton(_ sender: UIButton) {
-        guard isCalculated == false else {
-            return
-        }
+        guard isCalculated == false else { return }
         
         if let result = calculate() {
             isCalculated = true
@@ -117,21 +120,26 @@ final class CalculatorViewController: UIViewController {
     private func calculate() -> Double? {
         let lastIndex = stringToBeCalculated.index(before: stringToBeCalculated.endIndex)
         let lastString = stringToBeCalculated[lastIndex]
+        
         if Operator(rawValue: lastString) != nil {
             return nil
         }
+        
         var isNumberOnly: Bool = true
-        for `operator` in Operator.allCases {
-            if stringToBeCalculated.contains(`operator`.rawValue) {
+        
+        for operatorSymbol in Operator.allCases {
+            if stringToBeCalculated.contains(operatorSymbol.rawValue) {
                 isNumberOnly = false
             }
         }
+        
         if isNumberOnly {
             return nil
         }
 
         var calculateFormula = ExpressionParser.parse(from: stringToBeCalculated)
         stringToBeCalculated = NameSpace.emptyString
+        
         return calculateFormula.result()
     }
     
@@ -154,8 +162,10 @@ final class CalculatorViewController: UIViewController {
         if isCalculated {
             allClear()
             isCalculated = false
+            
             return
         }
+        
         clearEntry()
     }
     
@@ -167,10 +177,9 @@ final class CalculatorViewController: UIViewController {
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
                 stringToBeCalculated.removeLast()
-            } else {
-                break
-            }
+            } else { break }
         }
+        
         resetCurrentNumber()
     }
     
@@ -188,17 +197,16 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func convertSign() {
-        guard currentNumber != NameSpace.emptyString else {
-            return
-        }
+        guard currentNumber != NameSpace.emptyString else { return }
+        
         var count = 0
+        
         for input in stringToBeCalculated.reversed() {
             if Operator(rawValue: input) == nil {
                 count -= 1
-            } else {
-                break
-            }
+            } else { break }
         }
+        
         stringToBeCalculated.insert(Character(NameSpace.minusSign), at: stringToBeCalculated.index(stringToBeCalculated.endIndex, offsetBy: count))
         currentNumber.insert(Character(NameSpace.minusSign), at: stringToBeCalculated.index(stringToBeCalculated.startIndex, offsetBy: 0))
         stringToBeCalculated = stringToBeCalculated.replacingOccurrences(of: NameSpace.doubleMinusSign, with: NameSpace.emptyString)
@@ -208,9 +216,8 @@ final class CalculatorViewController: UIViewController {
     
     //MARK: Methods about settings
     private func removePreviousOperands() {
-        guard let stackViewWillBeRemoved = verticalStackView.subviews.last else {
-            return
-        }
+        guard let stackViewWillBeRemoved = verticalStackView.subviews.last else { return }
+        
         stackViewWillBeRemoved.removeFromSuperview()
     }
     
