@@ -7,10 +7,10 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var calculateStackView: UIStackView!
-    @IBOutlet weak var calculateScrollView: UIScrollView!
+    @IBOutlet weak private var operatorLabel: UILabel!
+    @IBOutlet weak private var operandLabel: UILabel!
+    @IBOutlet weak private var calculateStackView: UIStackView!
+    @IBOutlet weak private var calculateScrollView: UIScrollView!
     private var isCalculated: Bool = false
     private var expression: [String] = []
     private var calculateOperand: String = Symbol.zero {
