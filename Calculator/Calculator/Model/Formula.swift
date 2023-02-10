@@ -1,5 +1,5 @@
 //  Calculator - Formula.swift
-//  created by vetto on 2023/01/27
+//  created by 리지, vetto, Andrew on 2023/01/27
 
 struct Formula {
     private(set) var operands: CalculatorItemQueue<Double>
@@ -10,7 +10,7 @@ struct Formula {
         self.operators = operators
     }
     
-    mutating func result() -> Double? {
+    mutating func result() throws -> Double {
         guard var result = operands.dequeue() else { return Double.zero }
         
         while !operands.isEmpty && !operators.isEmpty {
@@ -22,7 +22,7 @@ struct Formula {
             } catch CalculatorError.divideByZero {
                 return .nan
             } catch {
-                return nil
+                throw CalculatorError.unknown
             }
         }
         

@@ -329,7 +329,7 @@
                     </view>
                     <connections>
                         <outlet property="calculateScrollView" destination="BOT-7g-vxv" id="sZw-6k-rQB"/>
-                        <outlet property="calculateStackView" destination="XRe-QE-UJf" id="XaN-gj-Afu"/>
+                        <outlet property="calculateStackView" destination="XRe-QE-UJf" id="gCu-lv-KpN"/>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="rtv-VY-nnE"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="yWw-pz-zpj"/>
                     </connections>

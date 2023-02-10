@@ -1,5 +1,5 @@
 //  Calculator - Node.swift
-//  created by vetto on 2023/01/24
+//  created by 리지, vetto, Andrew on 2023/01/24
 
 final class Node<Element: CalculateItem> {
     let data: Element?
