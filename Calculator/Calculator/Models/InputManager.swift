@@ -5,7 +5,7 @@
 //  Created by Rowan on 2023/02/02.
 //
 
-final class InputHandler {
+final class InputManager {
     private var input: String = Sign.empty
     
     var currentInput: String {

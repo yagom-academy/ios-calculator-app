@@ -13,7 +13,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private weak var calculateItemScrollView: CalculateItemScrollView!
     
     private let viewGenerator = ViewGenerator()
-    private var inputHandler = InputHandler()
+    private var inputManager = InputManager()
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                                   roundingMode: .halfUp,
                                                   usesSignificantDigits: true,
@@ -32,7 +32,7 @@ final class MainViewController: UIViewController {
     private func resetAll() {
         setInitialCalculateItemStackView()
         setInitialCurrentCalculateItem()
-        inputHandler.setEmptyInput()
+        inputManager.setEmptyInput()
         isFirstItem = true
         isFinishedCalculation = false
     }
@@ -54,7 +54,7 @@ final class MainViewController: UIViewController {
             isFirstItem = false
             return
         }
-        
+        // TODO: 리팩토링 가능~~
         if currentItem.operandText != Sign.zero {
             let nextOperand = currentItem.operandText + inputOperand
             operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
@@ -120,7 +120,7 @@ final class MainViewController: UIViewController {
             
             calculateItemStackView.add(currentItemStackView)
             calculateItemScrollView.didAddSubview(currentItemStackView)
-            inputHandler.addInput(about: currentItem)
+            inputManager.addInput(about: currentItem)
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
@@ -135,13 +135,13 @@ final class MainViewController: UIViewController {
         
         calculateItemStackView.add(currentItemStackView)
         calculateItemScrollView.didAddSubview(currentItemStackView)
-        inputHandler.addInput(about: currentItem)
+        inputManager.addInput(about: currentItem)
         
-        var formula = ExpressionParser.parse(from: inputHandler.currentInput)
+        var formula = ExpressionParser.parse(from: inputManager.currentInput)
         let result = formula.result()
         
         isFinishedCalculation = true
-        inputHandler.setEmptyInput()
+        inputManager.setEmptyInput()
         operatorLabel.text = Sign.empty
         
         if result.isNaN == true {
