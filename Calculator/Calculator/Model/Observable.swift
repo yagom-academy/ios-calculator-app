@@ -1,4 +1,5 @@
-final class Observable<T> {
+import UIKit
+final class Observable<T: StringProtocol> {
     var closure: ((T) -> Void)?
     
     var value: T {
@@ -13,5 +14,11 @@ final class Observable<T> {
     
     func subscribe(closure: @escaping (T) -> Void) {
         self.closure = closure
+    }
+    
+    func bind(_ label: UILabel) {
+        self.subscribe { enteringNumber in
+            label.text = (String(enteringNumber) == Sign.empty) ? Sign.zero : String(enteringNumber)
+        }
     }
 }
