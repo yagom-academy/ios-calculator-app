@@ -9,10 +9,9 @@ import UIKit
 final class MainViewController: UIViewController {
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
-    @IBOutlet private weak var calculateItemStackView: CalculateItemStackView!
+    @IBOutlet private weak var calculateItemStackView: UIStackView!
     @IBOutlet private weak var calculateItemScrollView: CalculateItemScrollView!
     
-    private let viewGenerator = ViewGenerator()
     private var inputManager = InputManager()
     private let numberFormatter = NumberFormatter(numberStyle: .decimal,
                                                   roundingMode: .halfUp,
@@ -115,7 +114,7 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            guard let currentView = viewGenerator.generateStackView(about: currentItem)
+            guard let currentView = generateStackView(about: currentItem)
             else { return }
             
             startAddProcess(of: currentView)
@@ -126,15 +125,25 @@ final class MainViewController: UIViewController {
         isFinishedCalculation = false
     }
     
+    func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
+        let operandLabel = UILabel(text: currentItem.operandText)
+        
+        let operatorLabel = UILabel(text: currentItem.operatorText)
+        
+        let result = UIStackView(subviews: operatorLabel, operandLabel)
+
+        return result
+    }
+    
     private func startAddProcess(of subview: UIView) {
-        calculateItemStackView.add(subview)
+        calculateItemStackView.addArrangedSubview(subview)
         calculateItemScrollView.didAddSubview(subview)
         inputManager.addInput(about: currentItem)
     }
     
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
         guard currentItem.operatorText != Sign.empty,
-              let currentView = viewGenerator.generateStackView(about: currentItem)
+              let currentView = generateStackView(about: currentItem)
         else { return }
         
         startAddProcess(of: currentView)
