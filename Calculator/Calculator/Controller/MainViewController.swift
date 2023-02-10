@@ -54,7 +54,7 @@ final class MainViewController: UIViewController {
             isFirstItem = false
             return
         }
-        // TODO: 리팩토링 가능~~
+
         if currentItem.operandText != Sign.zero {
             let nextOperand = currentItem.operandText + inputOperand
             operandLabel.text = numberFormatter.convertToDecimal(from: nextOperand)
