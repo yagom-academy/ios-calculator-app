@@ -4,4 +4,4 @@
 //  Copyright © yagom. All rights reserved.
 //
 
-protocol CalculateItem {}
+protocol CalculateItem { }
