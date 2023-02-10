@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 enum ViewManager {
     static func generateUILabel(_ name: String) -> UILabel {
         let label = UILabel()
@@ -25,7 +24,7 @@ enum ViewManager {
     
     static func scrollToBottom(_ scrollView: UIScrollView) {
         let bottomOffset = CGPoint(
-            x: Number.origin,
+            x: Indicator.origin,
             y: scrollView.contentSize.height - scrollView.bounds.height
         )
         scrollView.layoutIfNeeded()

@@ -81,7 +81,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func didTapNumberButton(_ sender: UIButton) {
-        guard calculateOperand.count <= Number.maxSignificantDigits,
+        guard calculateOperand.count <= Indicator.maxSignificantDigits,
               let number = sender.currentTitle else { return }
         if isCalculated {
             guard number != Symbol.zero, number != Symbol.doubleZero else { return }

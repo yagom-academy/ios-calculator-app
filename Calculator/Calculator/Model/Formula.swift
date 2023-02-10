@@ -22,7 +22,7 @@ struct Formula {
             } catch CalculatorError.divideByZero {
                 return .nan
             } catch {
-                throw CalculatorError.calculate
+                throw CalculatorError.unknown
             }
         }
         
