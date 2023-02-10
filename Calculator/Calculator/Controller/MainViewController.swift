@@ -21,8 +21,8 @@ final class MainViewController: UIViewController {
     private var currentItem: CurrentItem {
         return (operatorLabel.text ?? Sign.empty, operandLabel.text ?? Sign.zero)
     }
-    private var isFirstItem: Bool = true
-    private var isFinishedCalculation: Bool = false
+    private var isFirstItem = true
+    private var isFinishedCalculation = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,12 +115,10 @@ final class MainViewController: UIViewController {
         if operandLabel.text == Sign.zero {
             operatorLabel.text = inputOperator
         } else {
-            guard let currentItemStackView = viewGenerator.generateStackView(about: currentItem)
+            guard let currentView = viewGenerator.generateStackView(about: currentItem)
             else { return }
             
-            calculateItemStackView.add(currentItemStackView)
-            calculateItemScrollView.didAddSubview(currentItemStackView)
-            inputManager.addInput(about: currentItem)
+            startAddProcess(of: currentView)
             setInitialCurrentCalculateItem()
             operatorLabel.text = sender.currentTitle
         }
@@ -128,14 +126,18 @@ final class MainViewController: UIViewController {
         isFinishedCalculation = false
     }
     
+    private func startAddProcess(of subview: UIView) {
+        calculateItemStackView.add(subview)
+        calculateItemScrollView.didAddSubview(subview)
+        inputManager.addInput(about: currentItem)
+    }
+    
     @IBAction private func calculateCurrentFormula(_ sender: UIButton) {
-        guard currentItem.operatorText != Sign.empty else { return }
-        guard let currentItemStackView = viewGenerator.generateStackView(about: currentItem)
+        guard currentItem.operatorText != Sign.empty,
+              let currentView = viewGenerator.generateStackView(about: currentItem)
         else { return }
         
-        calculateItemStackView.add(currentItemStackView)
-        calculateItemScrollView.didAddSubview(currentItemStackView)
-        inputManager.addInput(about: currentItem)
+        startAddProcess(of: currentView)
         
         var formula = ExpressionParser.parse(from: inputManager.currentInput)
         let result = formula.result()
