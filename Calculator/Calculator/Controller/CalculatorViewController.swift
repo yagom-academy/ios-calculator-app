@@ -12,7 +12,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet private weak var contentStack: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private var expression: String = ""
+    private var expression = ""
     private var isCalculated = false
     
     override func viewDidLoad() {
