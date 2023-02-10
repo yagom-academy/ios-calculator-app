@@ -88,7 +88,7 @@
 
 ## 4. 프로젝트 구조
 #### UML
-![](https://i.imgur.com/lfQpFdC.jpg)
+![calculator_UML최종](https://user-images.githubusercontent.com/114981173/218041561-c0dca7b3-a41d-4581-a667-6954ecbaf55b.jpeg)
 
 #### 파일 구조
 ```
