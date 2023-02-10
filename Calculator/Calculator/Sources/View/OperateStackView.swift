@@ -12,6 +12,7 @@ class OperateStackView: UIStackView {
         label.textAlignment = .right
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
+        
         return label
     }()
     
@@ -20,6 +21,7 @@ class OperateStackView: UIStackView {
         label.textAlignment = .right
         label.textColor = .white
         label.font = .preferredFont(forTextStyle: .title3)
+        
         return label
     }()
     

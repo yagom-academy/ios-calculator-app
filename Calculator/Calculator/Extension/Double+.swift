@@ -11,6 +11,7 @@ extension Double: CalculateItem {
         numberFormatter.maximumFractionDigits = 19
         numberFormatter.roundingMode = .halfUp
         let result = numberFormatter.string(for: self) ?? String(self)
+        
         return result
     }
 }
