@@ -1,9 +1,9 @@
 final class Observable<T> {
-    var labelUpdateClosure: ((T) -> Void)?
+    var closure: ((T) -> Void)?
     
     var value: T {
         didSet {
-            self.labelUpdateClosure?(value)
+            self.closure?(value)
         }
     }
     
@@ -11,7 +11,7 @@ final class Observable<T> {
         self.value = value
     }
     
-    func subscribe(labelUpdateClosure: @escaping (T) -> Void) {
-        self.labelUpdateClosure = labelUpdateClosure
+    func subscribe(closure: @escaping (T) -> Void) {
+        self.closure = closure
     }
 }

@@ -1,4 +1,4 @@
-class CalculatorProcessor {
+final class CalculatorProcessor {
     var enteringNumberObservable: Observable<String> = Observable(Sign.empty)
     private(set) var calculationExpression: String = Sign.empty
     
@@ -83,7 +83,7 @@ class CalculatorProcessor {
         
         initialState()
         enteringNumber = Sign.space
-        enteringNumberObservable.labelUpdateClosure?(String(formula.result()).convertToDecimal())
+        enteringNumberObservable.closure?(String(formula.result()).convertToDecimal())
     }
     
     func isZero(_ currentText: String) -> Bool {
