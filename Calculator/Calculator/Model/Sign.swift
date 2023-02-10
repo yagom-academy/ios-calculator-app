@@ -4,4 +4,5 @@ enum Sign {
     static let zero = "0"
     static let dot = "."
     static let minus = "-"
+    static let zeroDot = "0."
 }

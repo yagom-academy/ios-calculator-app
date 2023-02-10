@@ -8,11 +8,17 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        guard var resultValue: Double = operands.dequeue() else { return 0.0 }
-        while let rhs = operands.dequeue(),
-              let operatorSymbol = operators.dequeue() {
-            resultValue = operatorSymbol.calculate(lhs: resultValue, rhs: rhs)
+        guard var sum = operands.dequeue() else { return .zero }
+        if operands.isEmpty {
+            guard let initialOperator = operators.dequeue() else { return .zero }
+            return initialOperator.calculate(lhs: 0, rhs: sum)
         }
-        return resultValue
+        
+        while let nextValue = operands.dequeue(),
+              let `operator` = operators.dequeue() {
+            sum = `operator`.calculate(lhs: sum, rhs: nextValue)
+        }
+        return sum
     }
 }
+
