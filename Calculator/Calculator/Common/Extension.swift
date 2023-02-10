@@ -69,7 +69,6 @@ extension UIStackView {
     }
     
     func removeAllSubviews() {
-        self.subviews.forEach { $0.removeFromSuperview()
-        }
+        self.subviews.forEach { $0.removeFromSuperview() }
     }
 }

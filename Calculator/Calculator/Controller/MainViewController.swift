@@ -125,11 +125,9 @@ final class MainViewController: UIViewController {
         isFinishedCalculation = false
     }
     
-    func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
+    private func generateStackView(about currentItem: CurrentItem) -> UIStackView? {
         let operandLabel = UILabel(text: currentItem.operandText)
-        
         let operatorLabel = UILabel(text: currentItem.operatorText)
-        
         let result = UIStackView(subviews: operatorLabel, operandLabel)
 
         return result
