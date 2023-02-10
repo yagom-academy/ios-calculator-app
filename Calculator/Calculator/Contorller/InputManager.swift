@@ -25,19 +25,14 @@ final class InputManager {
     }
     
     func handleDotSign(input: String) -> String {
-        if currentNumber.contains(".") {
-            return currentNumber
-        } else {
+        if !currentNumber.contains(".") {
             currentNumber += input
         }
-        
         return currentNumber
     }
     
     func handleHundredNumber(input: String) -> String {
-        if currentNumber == "0" {
-            return currentNumber
-        } else {
+        if currentNumber != "0" {
             currentNumber += input
         }
         

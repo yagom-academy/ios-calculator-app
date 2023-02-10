@@ -347,10 +347,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="historyScrollView" destination="BOT-7g-vxv" id="aZm-t9-TRn"/>
                         <outlet property="historyStackView" destination="XRe-QE-UJf" id="2LD-XX-r8g"/>
                         <outlet property="numberOnField" destination="Lwz-OF-XHD" id="8MQ-6b-24o"/>
                         <outlet property="operatorOnField" destination="HPC-iy-qdm" id="jZi-fV-k1q"/>
-                        <outlet property="scrollView" destination="BOT-7g-vxv" id="2uy-s1-r1s"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -15,7 +15,7 @@ class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var numberOnField: UILabel!
     @IBOutlet weak var operatorOnField: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var historyScrollView: UIScrollView!
     @IBOutlet weak var historyStackView: UIStackView!
     
     override func viewDidLoad() {
@@ -23,10 +23,10 @@ class CalculatorViewController: UIViewController {
         allClear()
     }
     
-    private func setUpScrollViewToBottom(){
-        let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+    private func setUpScrollViewToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: self.historyScrollView.contentSize.height - self.historyScrollView.bounds.size.height)
         if(bottomOffset.y >= 0) {
-            self.scrollView.setContentOffset(bottomOffset, animated: true)
+            self.historyScrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
     

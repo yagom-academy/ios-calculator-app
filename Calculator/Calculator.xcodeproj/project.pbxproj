@@ -126,6 +126,7 @@
 		58BF1B5C298952D60029D030 /* Contorller */ = {
 			isa = PBXGroup;
 			children = (
+				4A26399E2993416C00004C73 /* InputManager.swift */,
 				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
@@ -142,7 +143,6 @@
 				584146E82982708100817FFB /* Operator.swift */,
 				584146E42982703800817FFB /* ExpressionParser.swift */,
 				583D1132298048060097CC18 /* CalculatorItemQueue.swift */,
-				4A26399E2993416C00004C73 /* InputManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
