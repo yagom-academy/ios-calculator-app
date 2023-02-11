@@ -42,7 +42,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_rhs에_0이_주어졌을때_subtract_case일_경우_nan을_리턴해준다() {
+    func test_rhs에_0이_주어졌을때_divide_case일_경우_nan을_리턴해준다() {
         // given
         let lhs = 3.0
         let rhs = 0.0

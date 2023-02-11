@@ -7,13 +7,13 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-
     @IBOutlet private weak var operandLabel: UILabel!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var contentStack: UIStackView!
     @IBOutlet private weak var scrollView: UIScrollView!
     
-    private var expression: String = ""
+    private var expression = ""
+    private var isCalculated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +27,20 @@ final class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
     }
     
+    private func clearAllContentStack() {
+        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
     @IBAction private func numberButtonTapped(_ sender: UIButton) {
-        guard let prevOperandLabel = operandLabel.text else { return }
-        guard let inputNumber = sender.currentTitle else { return }
+        if isCalculated {
+            operandLabel.text = "0"
+            isCalculated = false
+        }
         
-        if prevOperandLabel == "0" {
+        guard let prevOperandText = operandLabel.text,
+              let inputNumber = sender.currentTitle else { return }
+        
+        if prevOperandText == "0" {
             if inputNumber == "0" || inputNumber == "00" {
                 operandLabel.text = "0"
             } else {
@@ -41,18 +50,18 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if prevOperandLabel.contains(".") {
-            operandLabel.text = prevOperandLabel + inputNumber
+        if prevOperandText.contains(".") {
+            operandLabel.text = prevOperandText + inputNumber
         } else {
-            operandLabel.text = convertNumberToString(prevOperandLabel + inputNumber)
+            operandLabel.text = convertNumberFormat(prevOperandText + inputNumber)
         }
     }
     
-    @IBAction private func commaButtonTapped(_ sender: UIButton) {
+    @IBAction private func pointButtonTapped(_ sender: UIButton) {
         guard operandLabel.text?.contains(".") == false,
-              let prevOperandLabel = operandLabel.text else { return }
+              let prevOperandText = operandLabel.text else { return }
         
-        operandLabel.text = prevOperandLabel + "."
+        operandLabel.text = prevOperandText + "."
     }
     
     @IBAction private func chageSignButtonTapped(_ sender: UIButton) {
@@ -64,9 +73,9 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        guard let prevOperandLabel = operandLabel.text else { return }
+        guard let prevOperandText = operandLabel.text else { return }
 
-        operandLabel.text = "-" + prevOperandLabel
+        operandLabel.text = "-" + prevOperandText
     }
     
     @IBAction private func clearEntryButtonTapped(_ sender: UIButton) {
@@ -85,9 +94,9 @@ final class CalculatorViewController: UIViewController {
         guard let operatorText = operatorLabel.text,
               let operandText = operandLabel.text else { return }
         
-        expression += operatorText + convertNumberToString(operandText)
+        expression += operatorText + convertNumberFormat(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
+        let stackView = generateStackView(convertNumberFormat(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         
@@ -101,12 +110,13 @@ final class CalculatorViewController: UIViewController {
         guard let operatorText = operatorLabel.text,
               let operandText = operandLabel.text else { return }
         
-        expression += operatorText + convertNumberToString(operandText)
+        expression += operatorText + convertNumberFormat(operandText)
         
-        let stackView = generateStackView(convertNumberToString(operandText), operatorText)
+        let stackView = generateStackView(convertNumberFormat(operandText), operatorText)
         addContentStack(stackView)
         setScrollViewFocus()
         calculateExpression()
+        isCalculated = true
     }
     
     private func calculateExpression() {
@@ -118,7 +128,7 @@ final class CalculatorViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else {
-            operandLabel.text = convertNumberToString(String(result))
+            operandLabel.text = convertNumberFormat(String(result))
         }
         
         operatorLabel.text = ""
@@ -131,11 +141,7 @@ final class CalculatorViewController: UIViewController {
         clearAllContentStack()
     }
     
-    private func clearAllContentStack() {
-        contentStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    private func convertNumberToString(_ input: String) -> String {
+    private func convertNumberFormat(_ input: String) -> String {
         let numberFormatter = NumberFormatter()
         let removedComma = input.components(separatedBy: ",").joined()
         
@@ -181,6 +187,7 @@ final class CalculatorViewController: UIViewController {
     
     private func setScrollViewFocus() {
         if scrollView.contentSize.height < scrollView.bounds.size.height { return }
+        
         scrollView.layoutIfNeeded()
         let bottomOffset: CGPoint = CGPointMake(0, scrollView.contentSize.height - scrollView.bounds.size.height)
         scrollView.setContentOffset(bottomOffset, animated: true)
