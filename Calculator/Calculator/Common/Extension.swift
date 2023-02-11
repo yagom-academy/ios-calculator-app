@@ -49,3 +49,34 @@ extension NumberFormatter {
         self.maximumSignificantDigits = maximumSignificantDigits
     }
 }
+
+extension UILabel {
+    convenience init(text: String) {
+        self.init()
+        self.text = text
+        self.textColor = UIColor.white
+        self.font = UIFont.preferredFont(forTextStyle: .title3)
+    }
+}
+
+extension UIStackView {
+    convenience init(subviews: UIView...) {
+        self.init()
+        for subview in subviews {
+            self.addArrangedSubview(subview)
+        }
+        self.spacing = 8
+    }
+    
+    func removeAllSubviews() {
+        self.subviews.forEach { $0.removeFromSuperview() }
+    }
+}
+
+extension UIScrollView {
+    override open func didAddSubview(_ subview: UIView) {
+        self.layoutIfNeeded()
+        self.setContentOffset(CGPoint(x: 0, y: self.contentSize.height - self.bounds.height),
+                              animated: true)
+    }
+}

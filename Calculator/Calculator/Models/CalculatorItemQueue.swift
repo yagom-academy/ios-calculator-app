@@ -7,7 +7,6 @@
 
 //MARK: Queue 타입 구현
 struct CalculatorItemQueue<T: CalculateItem> {
-    
     private var leftStack: [T] = []
     private var rightStack: [T] = []
     
@@ -15,6 +14,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     var isEmpty: Bool {
         leftStack.isEmpty && rightStack.isEmpty
+    }
+    
+    var itemCount: Int {
+        return rightStack.count
     }
     
     var peek: T? {
@@ -33,6 +36,5 @@ struct CalculatorItemQueue<T: CalculateItem> {
         }
         return leftStack.popLast()
     }
-    
 }
 

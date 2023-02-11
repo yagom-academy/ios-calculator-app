@@ -5,7 +5,7 @@
 //  Created by Rowan on 2023/02/02.
 //
 
-final class InputHandler {
+final class InputManager {
     private var input: String = Sign.empty
     
     var currentInput: String {
@@ -24,10 +24,10 @@ final class InputHandler {
     }
     
     private func makeInput(from currentItem: CurrentItem) -> String? {
-        guard let convertedOperandText = convertToNone(from: currentItem.operand)
+        guard let convertedOperandText = convertToNone(from: currentItem.operandText)
         else { return nil }
         
-        let result = currentItem.operator + Sign.space + convertedOperandText + Sign.space
+        let result = currentItem.operatorText + Sign.space + convertedOperandText + Sign.space
         
         return result
     }

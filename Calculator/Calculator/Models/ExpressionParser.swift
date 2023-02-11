@@ -6,7 +6,6 @@
 //
 
 enum ExpressionParser {
-    
     static func parse(from input: String) -> Formula {
         var formula = Formula()
         let result = componentsByOperators(from: input)
