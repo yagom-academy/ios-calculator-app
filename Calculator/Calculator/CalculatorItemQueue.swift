@@ -63,5 +63,7 @@ class CalculatorItemNode {
         next = nil
     }
     
-    func removePrevious() {}
+    func removePrevious() {
+        previous = nil
+    }
 }
