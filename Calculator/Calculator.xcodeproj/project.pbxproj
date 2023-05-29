@@ -98,6 +98,37 @@
 			path = CalculatorItemNodeTests;
 			sourceTree = "<group>";
 		};
+		BA8FF6DB2A24DA1D00BC2C5B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BA41E64D2A24901200570FB1 /* CalculatorItemQueue.swift */,
+				BA41E6512A249F8300570FB1 /* CalculateItem.swift */,
+				BA41E6532A24C48B00570FB1 /* CalculatorError.swift */,
+				BA8FF6D92A24D1AE00BC2C5B /* CalculatorItemNode.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BA8FF6DC2A24DA2500BC2C5B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BA8FF6DD2A24DA2B00BC2C5B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -121,17 +152,10 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				BA41E64D2A24901200570FB1 /* CalculatorItemQueue.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				BA8FF6DD2A24DA2B00BC2C5B /* View */,
+				BA8FF6DC2A24DA2500BC2C5B /* Controller */,
+				BA8FF6DB2A24DA1D00BC2C5B /* Model */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
-				BA41E6512A249F8300570FB1 /* CalculateItem.swift */,
-				BA41E6532A24C48B00570FB1 /* CalculatorError.swift */,
-				BA8FF6D92A24D1AE00BC2C5B /* CalculatorItemNode.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";

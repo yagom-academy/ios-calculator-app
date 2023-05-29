@@ -6,19 +6,19 @@
 //
 
 class CalculatorItemNode {
-    var value: CalculateItem
-    var next: CalculatorItemNode?
-    var previous: CalculatorItemNode?
+    private(set) var value: CalculateItem
+    private(set) var next: CalculatorItemNode?
+    private(set) var previous: CalculatorItemNode?
     
     init(_ value: CalculateItem) {
         self.value = value
     }
     
-    func changeNext(_ next: CalculatorItemNode) {
+    func changeNext(_ next: CalculatorItemNode?) {
         self.next = next
     }
     
-    func changePrevious(_ previous: CalculatorItemNode) {
+    func changePrevious(_ previous: CalculatorItemNode?) {
         self.previous = previous
     }
 }

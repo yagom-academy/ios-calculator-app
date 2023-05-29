@@ -6,8 +6,8 @@
 //
 
 class CalculatorItemQueue {
-    var head: CalculatorItemNode?
-    var tail: CalculatorItemNode?
+    private(set) var head: CalculatorItemNode?
+    private(set) var tail: CalculatorItemNode?
     
     func appendQueue(_ newNode: CalculatorItemNode) {
         guard head != nil, let lastNode = tail else {
@@ -25,7 +25,7 @@ class CalculatorItemQueue {
             throw CalculatorError.itemNotFound
         }
         tail = tail?.previous
-        tail?.next = nil
+        tail?.changeNext(nil)
     }
     
     func popQueue() throws -> CalculatorItemNode {
@@ -33,8 +33,8 @@ class CalculatorItemQueue {
             throw CalculatorError.itemNotFound
         }
         head = pop.next
-        head?.previous = nil
-        pop.next = nil
+        head?.changePrevious(nil)
+        pop.changeNext(nil)
         return pop
     }
 }
