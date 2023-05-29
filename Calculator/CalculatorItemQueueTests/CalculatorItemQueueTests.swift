@@ -47,8 +47,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_denqueue_호출하면_값이_없으니_오류가_발생합니다() {
-        let result = sut.dequeue()
         
-        XCTAssertThrowsError(result)
+        XCTAssertThrowsError(try sut.dequeue()) { error in
+            XCTAssertEqual(error as? CalculatorItemQueueError, CalculatorItemQueueError.emptyQueue)
+        }
     }
 }

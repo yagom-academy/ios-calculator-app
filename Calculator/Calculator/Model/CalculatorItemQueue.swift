@@ -22,7 +22,7 @@ struct CalculatorItemQueue {
         return calculateItem
     }
     
-    mutating func dequeue() {
-        
+    mutating func dequeue() throws {
+        guard !queue.isEmpty else { throw CalculatorItemQueueError.emptyQueue }
     }
 }
