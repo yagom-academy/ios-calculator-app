@@ -20,7 +20,8 @@ class CalculatorItemQueue {
         tail = newNode
     }
     func removeLast() {
-        
+        tail = tail?.previous
+        tail?.next = nil
     }
     func pop() {}
 }

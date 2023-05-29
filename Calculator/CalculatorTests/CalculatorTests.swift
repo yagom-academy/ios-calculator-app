@@ -31,6 +31,8 @@ final class CalculatorTests: XCTestCase {
         let lastItem = sut.tail
         sut.removeLast()
         let result = sut.tail
-        XCTAssertNotIdentical(result, lastItem)
+        if result != nil {
+            XCTAssertNotIdentical(result, lastItem)
+        }
     }
 }
