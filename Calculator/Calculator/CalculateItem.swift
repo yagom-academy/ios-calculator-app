@@ -6,5 +6,3 @@
 //
 
 protocol CalculateItem {}
-
-struct CalculateNumberItem: CalculateItem {}
