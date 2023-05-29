@@ -52,6 +52,11 @@ class CalculatorItemNode {
         self.next = next
     }
     
-    func addPrevious(_ previous: CalculateItem) {}
+    func addPrevious(_ previous: CalculatorItemNode) throws {
+        guard self.previous == nil else {
+            throw CalculatorError.itemAlreadyExist
+        }
+        self.previous = previous
+    }
     func removeNext() {}
 }
