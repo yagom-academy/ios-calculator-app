@@ -35,8 +35,19 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BA41E6432A248F6900570FB1"
-               BuildableName = "CalculatorTests.xctest"
-               BlueprintName = "CalculatorTests"
+               BuildableName = "CalculatorItemQueueTests.xctest"
+               BlueprintName = "CalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BA8FF6CD2A24CA3800BC2C5B"
+               BuildableName = "CalculatorItemNodeTests.xctest"
+               BlueprintName = "CalculatorItemNodeTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>

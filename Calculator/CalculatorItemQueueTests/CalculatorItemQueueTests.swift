@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
+final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue!
 
     override func setUpWithError() throws {
@@ -47,7 +47,6 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_popQueue() {
-        //given
         var headBeforePop = sut.head
         if headBeforePop == nil {
             let item: Int = 3
@@ -55,9 +54,17 @@ final class CalculatorTests: XCTestCase {
             sut.appendQueue(newNode)
             headBeforePop = sut.head
         }
-        let result = sut.popQueue()
+        let result = try? sut.popQueue()
         let headAfterPop = sut.head
         XCTAssertIdentical(headBeforePop, result)
         XCTAssertNotIdentical(headBeforePop, headAfterPop)
     }
+    
+    func test_popQueue_error() {
+        XCTAssertThrowsError(try sut.popQueue()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
+        }
+    }
+    
+    
 }
