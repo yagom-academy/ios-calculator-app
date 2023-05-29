@@ -46,10 +46,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result as? Double, input)
     }
     
-    func test_denqueue_호출하면_값이_없으니_오류가_발생합니다() {
+    func test_denqueue_호출하면_값이_없으니_nil을_반환합니다() {
+        let result = sut.dequeue()
         
-        XCTAssertThrowsError(try sut.dequeue()) { error in
-            XCTAssertEqual(error as? CalculatorItemQueueError, CalculatorItemQueueError.emptyQueue)
-        }
+        XCTAssertEqual(result, nil)
     }
 }
