@@ -8,4 +8,11 @@
 struct CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
+    func count() {
+        
+    }
+    
+    func isEmpty() {
+        
+    }
 }
