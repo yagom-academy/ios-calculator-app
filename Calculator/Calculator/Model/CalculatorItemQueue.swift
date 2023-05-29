@@ -15,4 +15,8 @@ struct CalculatorItemQueue {
     func isEmpty() -> Bool {
         return queue.isEmpty
     }
+    
+    func enqueue(_ calculateItem: CalculateItem) {
+        
+    }
 }
