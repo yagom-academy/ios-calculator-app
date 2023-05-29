@@ -16,7 +16,13 @@ struct CalculatorItemQueue {
         return queue.isEmpty
     }
     
-    mutating func enqueue(_ calculateItem: CalculateItem) {
+    mutating func enqueue(_ calculateItem: CalculateItem) -> CalculateItem {
         queue.append(calculateItem)
+        
+        return calculateItem
+    }
+    
+    mutating func dequeue() {
+        
     }
 }
