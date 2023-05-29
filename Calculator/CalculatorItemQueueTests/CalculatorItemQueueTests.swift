@@ -37,4 +37,12 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertFalse(sut.isEmpty())
     }
+    
+    func test_enqueue_값을_넣으면_넣은_값을_반환합니다() {
+        let input = Double(10)
+        
+        let result = sut.enqueue(input)
+        
+        XCTAssertEqual(result, input)
+    }
 }
