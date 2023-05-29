@@ -21,8 +21,9 @@ final class CalculatorTests: XCTestCase {
     
     func test_append() {
         let item: Int = 3
-        sut.append(item)
-        let result = sut.last
-        
+        let newNode = CalculatorItemNode(item)
+        sut.append(newNode)
+        let result = sut.tail
+        XCTAssertNotIdentical(result, newNode)
     }
 }
