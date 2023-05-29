@@ -8,6 +8,6 @@
 enum Operator: String, CalculateItem {
     case plus = "+"
     case minus = "-"
-    case multiply = "x"
-    case divide = "/"
+    case multiply = "×"
+    case divide = "÷"
 }
