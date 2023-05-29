@@ -25,7 +25,14 @@ class CalculatorItemQueue {
         tail?.next = nil
     }
     
-    func popQueue() {}
+    func popQueue() -> CalculatorItemNode? {
+        guard head != nil else { return nil }
+        let pop = head
+        head = pop?.next
+        head?.previous = nil
+        pop?.next = nil
+        return pop
+    }
 }
 
 class CalculatorItemNode {

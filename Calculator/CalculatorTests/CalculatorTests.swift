@@ -48,10 +48,16 @@ final class CalculatorTests: XCTestCase {
     
     func test_popQueue() {
         //given
-        let headBeforePop = sut.head
+        var headBeforePop = sut.head
+        if headBeforePop == nil {
+            let item: Int = 3
+            let newNode = CalculatorItemNode(item)
+            sut.appendQueue(newNode)
+            headBeforePop = sut.head
+        }
         let result = sut.popQueue()
         let headAfterPop = sut.head
         XCTAssertIdentical(headBeforePop, result)
-        XCTAssertNotIdentical(result, headAfterPop)
+        XCTAssertNotIdentical(headBeforePop, headAfterPop)
     }
 }
