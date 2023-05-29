@@ -15,12 +15,15 @@ class CalculatorItemQueue {
             tail = newNode
             return
         }
-        newNode.previous = lastNode
-        lastNode.next = newNode
+        newNode.changePrevious(lastNode)
+        lastNode.changeNext(newNode)
         tail = newNode
     }
     
-    func removeLastQueue() {
+    func removeLastQueue() throws {
+        guard tail != nil else {
+            throw CalculatorError.itemNotFound
+        }
         tail = tail?.previous
         tail?.next = nil
     }
@@ -33,37 +36,5 @@ class CalculatorItemQueue {
         head?.previous = nil
         pop.next = nil
         return pop
-    }
-}
-
-class CalculatorItemNode {
-    var value: CalculateItem
-    var next: CalculatorItemNode?
-    var previous: CalculatorItemNode?
-    
-    init(_ value: CalculateItem) {
-        self.value = value
-    }
-    
-    func addNext(_ next: CalculatorItemNode) throws {
-        guard self.next == nil else {
-            throw CalculatorError.itemAlreadyExist
-        }
-        self.next = next
-    }
-    
-    func addPrevious(_ previous: CalculatorItemNode) throws {
-        guard self.previous == nil else {
-            throw CalculatorError.itemAlreadyExist
-        }
-        self.previous = previous
-    }
-    
-    func removeNext() {
-        next = nil
-    }
-    
-    func removePrevious() {
-        previous = nil
     }
 }

@@ -20,45 +20,18 @@ final class CalculatorItemNodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_addNext_with_no_error() {
+    func test_changeNext_with_no_error() {
         let value: Int = 5
         let newNode = CalculatorItemNode(value)
-        try? sut.addNext(newNode)
+        sut.changeNext(newNode)
         XCTAssertIdentical(newNode, sut.next)
     }
     
-    func test_addNext_with_error() {
+    func test_changePrevious_with_no_error() {
         let value: Int = 5
         let newNode = CalculatorItemNode(value)
-        sut.next = newNode
-        XCTAssertThrowsError(try sut.addNext(newNode)) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemAlreadyExist)
-        }
-    }
-    
-    func test_addPrevious_with_no_error() {
-        let value: Int = 5
-        let newNode = CalculatorItemNode(value)
-        try? sut.addPrevious(newNode)
+        sut.changePrevious(newNode)
         XCTAssertIdentical(newNode, sut.previous)
     }
     
-    func test_addPrevious_with_error() {
-        let value: Int = 5
-        let newNode = CalculatorItemNode(value)
-        sut.previous = newNode
-        XCTAssertThrowsError(try sut.addPrevious(newNode)) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemAlreadyExist)
-        }
-    }
-    
-    func test_removeNext() {
-        sut.removeNext()
-        XCTAssertNil(sut.next)
-    }
-    
-    func test_removePrevious() {
-        sut.removePrevious()
-        XCTAssertNil(sut.previous)
-    }
 }

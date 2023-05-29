@@ -32,21 +32,31 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertIdentical(result, newNode)
     }
     
-    func test_removeLastQueue() {
+    func test_removeLastQueue_without_error() {
         // given
-        let lastItem = sut.tail
+        var lastItem = sut.tail
+        
+        if lastItem == nil {
+            sut.appendQueue(CalculatorItemNode(3))
+            sut.appendQueue(CalculatorItemNode(5))
+            lastItem = sut.tail
+        }
         
         // when
-        sut.removeLastQueue()
+        try? sut.removeLastQueue()
         let result = sut.tail
-        
-        guard result != nil else { return }
         
         // then
         XCTAssertNotIdentical(result, lastItem)
     }
     
-    func test_popQueue_with_no_error() {
+    func test_removeLastQueue_with_error() {
+        XCTAssertThrowsError(try sut.removeLastQueue()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
+        }
+    }
+    
+    func test_popQueue() {
         var headBeforePop = sut.head
         if headBeforePop == nil {
             let item: Int = 3
@@ -65,6 +75,5 @@ final class CalculatorItemQueueTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
         }
     }
-    
-    
 }
+
