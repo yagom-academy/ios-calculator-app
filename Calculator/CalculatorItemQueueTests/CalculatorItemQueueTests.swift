@@ -2,7 +2,7 @@
 //  CalculatorItemQueueTests.swift
 //  CalculatorItemQueueTests
 //
-//  Created by 표현수 on 2023/05/29.
+//  Created by Erick on 2023/05/29.
 //
 
 import XCTest
@@ -32,23 +32,28 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue_값을_넣으면_isEmpty에서_false를_반환합니다() {
-        let input = Double(10)
+        let input: CalculateItem = Double(10)
         sut.enqueue(input)
         
         XCTAssertFalse(sut.isEmpty())
-    }
-    
-    func test_enqueue_값을_넣으면_넣은_값을_반환합니다() {
-        let input = Double(10)
-        
-        let result = sut.enqueue(input)
-        
-        XCTAssertEqual(result as? Double, input)
     }
     
     func test_denqueue_호출하면_값이_없으니_nil을_반환합니다() {
         let result = sut.dequeue()
         
         XCTAssertEqual(result, nil)
+    }
+    
+    func test_denqueue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
+        var input: CalculateItem = 1.0
+        sut.enqueue(input)
+        input = Operator.plus
+        sut.enqueue(input)
+        input = 3.0
+        sut.enqueue(input)
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, 1.0)
     }
 }
