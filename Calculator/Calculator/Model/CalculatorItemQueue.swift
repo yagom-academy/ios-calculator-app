@@ -20,7 +20,7 @@ struct CalculatorItemQueue {
         queue.append(calculateItem)
     }
     
-    mutating func dequeue() throws {
-        guard !queue.isEmpty else { throw CalculatorItemQueueError.emptyQueue }
+    mutating func dequeue() -> CalculateItem? {
+        return queue.isEmpty ? nil : queue.removeFirst()
     }
 }

@@ -21,8 +21,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_count_호출하면_queue의_개수_0을_반환합니다() {
         let result = sut.count()
+        let expectation = 0
         
-        XCTAssertEqual(result, 0)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_isEmpty_호출하면_queue가_비었으니_true를_반환합니다() {
@@ -41,19 +42,19 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_denqueue_호출하면_값이_없으니_nil을_반환합니다() {
         let result = sut.dequeue()
         
-        XCTAssertEqual(result, nil)
+        XCTAssertNil(result)
     }
     
     func test_denqueue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
-        var input: CalculateItem = 1.0
-        sut.enqueue(input)
-        input = Operator.plus
+        var input = 1.0
         sut.enqueue(input)
         input = 3.0
         sut.enqueue(input)
         
+        let expectation = 1.0
+        
         let result = sut.dequeue()
         
-        XCTAssertEqual(result, 1.0)
+        XCTAssertEqual(result as? Double, expectation)
     }
 }
