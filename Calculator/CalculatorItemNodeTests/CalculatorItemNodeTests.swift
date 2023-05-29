@@ -51,4 +51,10 @@ final class CalculatorItemNodeTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, CalculatorError.itemAlreadyExist)
         }
     }
+    
+    func test_removeNext() {
+        let next = sut.next
+        sut.removeNext()
+        XCTAssertNil(sut.next)
+    }
 }
