@@ -8,11 +8,11 @@
 struct CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
-    func count() {
-        
+    func count() -> Int {
+        return queue.count
     }
     
-    func isEmpty() {
-        
+    func isEmpty() -> Bool {
+        return queue.isEmpty
     }
 }
