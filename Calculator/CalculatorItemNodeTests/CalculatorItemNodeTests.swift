@@ -20,11 +20,20 @@ final class CalculatorItemNodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_addNext() {
+    func test_addNext_with_no_error() {
         let value: Int = 5
         let newNode = CalculatorItemNode(value)
-        sut.addNext(newNode)
+        try? sut.addNext(newNode)
         XCTAssertIdentical(newNode, sut.next)
+    }
+    
+    func test_addNext_with_error() {
+        let value: Int = 5
+        let newNode = CalculatorItemNode(value)
+        sut.next = newNode
+        XCTAssertThrowsError(try sut.addNext(newNode)) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemAlreadyExist)
+        }
     }
 
 }

@@ -46,7 +46,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotIdentical(result, lastItem)
     }
     
-    func test_popQueue() {
+    func test_popQueue_with_no_error() {
         var headBeforePop = sut.head
         if headBeforePop == nil {
             let item: Int = 3
@@ -60,7 +60,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNotIdentical(headBeforePop, headAfterPop)
     }
     
-    func test_popQueue_error() {
+    func test_popQueue_with_error() {
         XCTAssertThrowsError(try sut.popQueue()) { error in
             XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
         }
