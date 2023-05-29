@@ -26,4 +26,11 @@ final class CalculatorTests: XCTestCase {
         let result = sut.tail
         XCTAssertIdentical(result, newNode)
     }
+    
+    func test_removeLast() {
+        let lastItem = sut.tail
+        sut.removeLast()
+        let result = sut.tail
+        XCTAssertNotIdentical(result, lastItem)
+    }
 }
