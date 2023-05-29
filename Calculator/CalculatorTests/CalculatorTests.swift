@@ -19,20 +19,30 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_append() {
+    func test_appendQueue() {
+        // given
         let item: Int = 3
         let newNode = CalculatorItemNode(item)
-        sut.append(newNode)
+        
+        // when
+        sut.appendQueue(newNode)
         let result = sut.tail
+        
+        // then
         XCTAssertIdentical(result, newNode)
     }
     
-    func test_removeLast() {
+    func test_removeLastQueue() {
+        // given
         let lastItem = sut.tail
-        sut.removeLast()
+        
+        // when
+        sut.removeLastQueue()
         let result = sut.tail
-        if result != nil {
-            XCTAssertNotIdentical(result, lastItem)
-        }
+        
+        guard result != nil else { return }
+        
+        // then
+        XCTAssertNotIdentical(result, lastItem)
     }
 }
