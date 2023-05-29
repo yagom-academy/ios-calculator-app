@@ -16,6 +16,7 @@
 		DCEC5A032A24ABEE00A517C1 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A022A24ABEE00A517C1 /* CalculatorItemQueue.swift */; };
 		DCEC5A052A24AC6900A517C1 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A042A24AC6900A517C1 /* CalculateItem.swift */; };
 		DCEC5A0D2A24AD0100A517C1 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */; };
+		DCEC5A142A24CFF500A517C1 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A132A24CFF500A517C1 /* Node.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		DCEC5A042A24AC6900A517C1 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		DCEC5A0A2A24AD0100A517C1 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		DCEC5A132A24CFF500A517C1 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 				DCEC5A022A24ABEE00A517C1 /* CalculatorItemQueue.swift */,
 				DCEC5A042A24AC6900A517C1 /* CalculateItem.swift */,
+				DCEC5A132A24CFF500A517C1 /* Node.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				DCEC5A052A24AC6900A517C1 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				DCEC5A142A24CFF500A517C1 /* Node.swift in Sources */,
 				DCEC5A032A24ABEE00A517C1 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
