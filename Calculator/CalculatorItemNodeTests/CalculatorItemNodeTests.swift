@@ -53,8 +53,12 @@ final class CalculatorItemNodeTests: XCTestCase {
     }
     
     func test_removeNext() {
-        let next = sut.next
         sut.removeNext()
         XCTAssertNil(sut.next)
+    }
+    
+    func test_removePrevious() {
+        sut.removePrevious()
+        XCTAssertNil(sut.previous)
     }
 }
