@@ -18,4 +18,11 @@ final class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_append() {
+        let item: Int = 3
+        sut.append(item)
+        let result = sut.last
+        
+    }
 }
