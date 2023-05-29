@@ -5,7 +5,7 @@
 //  Created by Erick on 2023/05/29.
 //
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue {
     var queue: [CalculateItem] = []
     
 }
