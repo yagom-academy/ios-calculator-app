@@ -45,4 +45,13 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertNotIdentical(result, lastItem)
     }
+    
+    func test_popQueue() {
+        //given
+        let headBeforePop = sut.head
+        let result = sut.popQueue()
+        let headAfterPop = sut.head
+        XCTAssertIdentical(headBeforePop, result)
+        XCTAssertNotIdentical(result, headAfterPop)
+    }
 }
