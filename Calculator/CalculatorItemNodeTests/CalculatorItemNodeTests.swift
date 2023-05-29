@@ -35,5 +35,11 @@ final class CalculatorItemNodeTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, CalculatorError.itemAlreadyExist)
         }
     }
-
+    
+    func test_addPrevious() {
+        let value: Int = 5
+        let newNode = CalculatorItemNode(value)
+        sut.addPrevious(newNode)
+        XCTAssertIdentical(newNode, sut.previous)
+    }
 }
