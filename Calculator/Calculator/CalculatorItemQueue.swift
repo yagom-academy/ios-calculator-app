@@ -15,21 +15,26 @@ class CalculatorItemQueue {
             tail = newNode
             return
         }
+        newNode.previous = lastNode
         lastNode.next = newNode
         tail = newNode
     }
-    func removeLast() {}
+    func removeLast() {
+        
+    }
     func pop() {}
 }
 
 class CalculatorItemNode {
     var value: CalculateItem
     var next: CalculatorItemNode?
+    var previous: CalculatorItemNode?
     
     init(_ value: CalculateItem) {
         self.value = value
     }
     
     func addNext(_ next: CalculateItem) {}
+    func addPrevious(_ previous: CalculateItem) {}
     func removeNext() {}
 }

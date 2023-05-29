@@ -24,6 +24,6 @@ final class CalculatorTests: XCTestCase {
         let newNode = CalculatorItemNode(item)
         sut.append(newNode)
         let result = sut.tail
-        XCTAssertNotIdentical(result, newNode)
+        XCTAssertIdentical(result, newNode)
     }
 }
