@@ -25,4 +25,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         
         return dequeueStack.removeLast()
     }
+    
+    var count: Int {
+        return enqueueStack.count + dequeueStack.count
+    }
 }
