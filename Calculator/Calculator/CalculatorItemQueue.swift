@@ -8,7 +8,7 @@
 import UIKit
 
 struct CalculatorItemQueue<CalculatorItem> {
-    private var calculatorItemQueue: [CalculatorItem] = []
+    var calculatorItemQueue: [CalculatorItem] = []
     
     var count: Int {
         return calculatorItemQueue.count

@@ -28,4 +28,16 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.count, expectation)
     }
+    
+    func test_enqueue함수호출시_배열의원소가_늘어나는지() {
+        // given
+        sut.calculatorItemQueue = [2]
+        let input = 3
+        let expectation = [2, 3]
+        // when
+        sut.enqueue(input)
+        // then
+        XCTAssertEqual(sut.calculatorItemQueue, expectation)
+    }
+    
 }
