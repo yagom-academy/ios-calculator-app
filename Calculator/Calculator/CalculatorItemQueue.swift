@@ -18,4 +18,7 @@ struct CalculatorItemQueue<CalculatorItem> {
         return calculatorItemQueue.isEmpty
     }
     
+    mutating func enqueue(_ element: CalculatorItem) {
+        calculatorItemQueue.append(element)
+    }
 }
