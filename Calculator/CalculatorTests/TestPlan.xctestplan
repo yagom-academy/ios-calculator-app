@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "07A4BC67-CE3D-4F66-BF45-80DD8EC60E65",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "63C0FA8A2A24F2FA00CA3B0C",
+        "name" : "CalculatorTests"
+      }
+    }
+  ],
+  "version" : 1
+}
