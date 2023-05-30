@@ -5,7 +5,7 @@
 //  Created by redmango1446 on 2023/05/30.
 //
 
-struct CalculatorItemQueue {
+struct CalculatorItemQueue: CalculateItem {
     var enqueueStack: [String] = []
     var dequeueStack: [String] = []
     var isEmpty: Bool {
