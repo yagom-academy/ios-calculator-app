@@ -12,7 +12,7 @@ class CalculatorItemQueue {
     
     func enqueue(_ newNode: CalculatorItemNode) {
         count += 1
-        guard head != nil, let lastNode = tail else {
+        guard let lastNode = tail else {
             head = newNode
             tail = newNode
             return

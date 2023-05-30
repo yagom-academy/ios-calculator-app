@@ -88,5 +88,23 @@ final class CalculatorItemQueueTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, CalculatorError.indexOutOfRange)
         }
     }
+    
+    func test_removeAll_비어있지_않은_queue의_모든_값이_지워진다() {
+        // given
+        let value1: String = "테스트1"
+        let value2: String = "테스트2"
+        let newNode1 = CalculatorItemNode(value1)
+        let newNode2 = CalculatorItemNode(value2)
+        sut.enqueue(newNode1)
+        sut.enqueue(newNode2)
+        let oldCount = sut.count
+        
+        // when
+        sut.removeAll()
+        let newCount = sut.count
+        
+        XCTAssertNotEqual(oldCount, newCount)
+        XCTAssertEqual(newCount, 0)
+    }
 }
 
