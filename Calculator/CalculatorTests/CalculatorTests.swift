@@ -24,7 +24,7 @@ final class CalculatorTests: XCTestCase {
         let input = 3
         let expectation = 1
         // when
-        let result = sut.enqueue(input)
+        sut.enqueue(input)
         // then
         XCTAssertEqual(sut.count, expectation)
     }
