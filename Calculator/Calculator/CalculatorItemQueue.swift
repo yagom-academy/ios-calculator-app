@@ -8,7 +8,7 @@
 import UIKit
 
 struct CalculatorItemQueue<CalculatorItem> {
-    var calculatorItemQueue: [CalculatorItem] = []
+    private var calculatorItemQueue: [CalculatorItem] = []
     
     var count: Int {
         return calculatorItemQueue.count
@@ -28,5 +28,9 @@ struct CalculatorItemQueue<CalculatorItem> {
     
     mutating func clearQueue() {
         calculatorItemQueue.removeAll()
+    }
+    
+    func readCalculatorItemQueue() -> [CalculatorItem] {
+        return calculatorItemQueue
     }
 }
