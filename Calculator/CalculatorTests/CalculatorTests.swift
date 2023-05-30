@@ -19,11 +19,12 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test() {
+    func test_Queue에_값이_추가된다() {
         // given
-        
+        sut.enqueue("1")
         // when
-        
+        let expectedValue = "1"
         // then
+        XCTAssertEqual(sut.calculatorQueue.first, expectedValue)
     }
 }
