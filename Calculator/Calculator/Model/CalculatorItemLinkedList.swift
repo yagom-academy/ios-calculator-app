@@ -39,7 +39,7 @@ struct CalculatorItemLinkedList {
         return removeNode
     }
     
-    private mutating func clear() {
+    mutating func clear() {
         head = nil
         tail = nil
     }
