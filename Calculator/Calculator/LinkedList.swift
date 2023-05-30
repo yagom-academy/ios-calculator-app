@@ -9,13 +9,6 @@ struct LinkedList<T> {
     private(set) var head: Node<T>?
     private(set) var tail: Node<T>?
     
-    var headData: T? {
-        return head?.data
-    }
-    var tailData: T? {
-        return tail?.data
-    }
-    
     var isEmpty: Bool {
         return head == nil
     }
@@ -50,6 +43,4 @@ struct LinkedList<T> {
         head = nil
         tail = nil
     }
-    
-    
 }

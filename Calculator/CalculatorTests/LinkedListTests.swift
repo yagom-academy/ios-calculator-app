@@ -32,8 +32,8 @@ final class LinkedListTests: XCTestCase {
         let input = 1
         
         sut.append(data: input)
-        let headData = sut.headData
-        let tailData = sut.tailData
+        let headData = sut.head?.data
+        let tailData = sut.tail?.data
         
 
         XCTAssertEqual(headData, 1)
@@ -47,8 +47,8 @@ final class LinkedListTests: XCTestCase {
         
         sut.append(data: firstInput)
         sut.append(data: secondInput)
-        let headData = sut.headData
-        let tailData = sut.tailData
+        let headData = sut.head?.data
+        let tailData = sut.tail?.data
         
         XCTAssertEqual(headData, 1)
         XCTAssertEqual(tailData, 2)
@@ -102,6 +102,6 @@ final class LinkedListTests: XCTestCase {
         
         XCTAssertNil(head)
         XCTAssertNil(tail)
-        
     }
+    
 }

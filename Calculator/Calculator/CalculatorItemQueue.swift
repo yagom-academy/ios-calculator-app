@@ -6,7 +6,19 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var queue: LinkedList<T>
+    private(set) var queue: LinkedList<T> = LinkedList()
+    
+    mutating func enqueue() {
+        
+    }
+    
+    mutating func dequeue() {
+        
+    }
+    
+    mutating func removeAll() {
+        
+    }
     
     
 }
