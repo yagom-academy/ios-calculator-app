@@ -21,4 +21,8 @@ struct CalculatorItemQueue<CalculatorItem> {
     mutating func enqueue(_ element: CalculatorItem) {
         calculatorItemQueue.append(element)
     }
+    
+    mutating func dequeue() {
+        calculatorItemQueue.removeFirst()
+    }
 }
