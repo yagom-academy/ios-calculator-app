@@ -103,5 +103,4 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(head)
         XCTAssertNil(tail)
     }
-    
 }

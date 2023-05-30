@@ -67,13 +67,4 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(head)
         XCTAssertNil(tail)
     }
-    
-    
-    /// given
-    
-    /// when
-    
-    /// then
-
-
 }
