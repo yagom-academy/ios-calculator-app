@@ -30,16 +30,8 @@ struct CalculatorItemQueue<T> {
         return output
     }
     
-    mutating func popLastStack(_ stack: [T]) -> [T] {
-        var input = stack
-        input.removeLast()
-        
-        return input
-    }
-    
     mutating func deQueue() -> [T] {
         backwardStack = popAndBackwardPushStack(firstStack)
-        //backwardStack = popLastStack(backwardStack)
         backwardStack.removeLast()
         firstStack = popAndBackwardPushStack(backwardStack)
         

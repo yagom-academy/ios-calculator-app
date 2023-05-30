@@ -45,17 +45,6 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, [3, 2, 1])
     }
     
-    func test_popLastStack에서_스택맨위의값이_제거되는지() {
-        //given
-        let input = [3, 2, 1]
-        
-        //when
-        let result = sut.popLastStack(input)
-        
-        //then
-        XCTAssertEqual(result, [3, 2])
-    }
-    
     func test_deQueue_하면선입선출결과나오는지() {
         //given
         sut.firstStack = [1, 2, 3]
