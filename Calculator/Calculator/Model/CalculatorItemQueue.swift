@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue {
-    var queue = CalculaterItemLinkedList()
+    private var queue = CalculatorItemLinkedList()
     
     var count: Int {
         return queue.count
@@ -17,7 +17,7 @@ struct CalculatorItemQueue {
     }
     
     mutating func enqueue(_ calculateItem: CalculateItem) {
-        queue.apend(CalculateItemNode(item: calculateItem))
+        queue.append(CalculatorItemNode(item: calculateItem))
     }
     
     mutating func dequeue() -> CalculateItem? {

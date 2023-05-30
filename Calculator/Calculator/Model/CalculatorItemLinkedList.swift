@@ -6,23 +6,23 @@
 //
 
 struct CalculatorItemLinkedList {
-    var head: CalculateItemNode?
-    var tail: CalculateItemNode?
+    var head: CalculatorItemNode?
+    var tail: CalculatorItemNode?
     var count = 0
     
-    mutating func apend(_ calculateItemNode: CalculateItemNode) {
+    mutating func append(_ calculatorItemNode: CalculatorItemNode) {
         if head == nil {
-            head = calculateItemNode
-            tail = calculateItemNode
+            head = calculatorItemNode
+            tail = calculatorItemNode
         } else {
-            tail?.next = calculateItemNode
-            tail = calculateItemNode
+            tail?.next = calculatorItemNode
+            tail = calculatorItemNode
         }
         
         count += 1
     }
     
-    mutating func removeFirst() -> CalculateItemNode? {
+    mutating func removeFirst() -> CalculatorItemNode? {
         guard head != nil else {
             clear()
             return nil
@@ -39,7 +39,7 @@ struct CalculatorItemLinkedList {
         return removeNode
     }
     
-    mutating func clear() {
+    private mutating func clear() {
         head = nil
         tail = nil
     }
