@@ -9,29 +9,85 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: Calculator!
+    var sut: CalculatorItemQueue<Any>!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        //stringSut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_큐의크기를_올바르게반환한다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.enqueue("+")
+        
+        // when
+        let intResult = sut.count
+        
+        // then
+        XCTAssertEqual(intResult, 4)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_큐가비어있지않을때_false를반환한다() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        let intResult = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(intResult)
     }
+    
+    func test_큐에_요소가_올바르게들어갔다() {
+        // given
+        let intInput = [1, 3, 5]
 
+        // when
+        sut.enqueue(1)
+        sut.enqueue(3)
+        sut.enqueue(5)
+        let result = sut.queue as? [Int]
+                
+        // then
+        XCTAssertEqual(result, intInput)
+    }
+    
+    func test_큐에서_요소가_올바르게삭제되었다() {
+        // given
+        let intInput = [2, 3, 5, 7]
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.enqueue(5)
+        sut.enqueue(7)
+        
+        // when
+        sut.dequeue()
+        let result = sut.queue as? [Int]
+        
+        // then
+        XCTAssertEqual(result, intInput)
+    }
+    
+    func test_큐에서_가장먼저들어온요소가_삭제되었다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        sut.enqueue(5)
+        sut.enqueue(7)
+        
+        // when
+        let result = sut.dequeue() as? Int
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
 }

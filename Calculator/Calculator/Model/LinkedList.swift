@@ -19,10 +19,24 @@ class Node<T> {
 
 class LinkedList<T> {
     private var head: Node<T>?
+    var count: Int = Int()
+    var isEmpty: Bool = Bool()
     
     init(head: Node<T>) {
         self.head = head
     }
+    
+    func enqueue(_ element: T) {
+        
+    }
+    
+//    func dequeue() -> T? {
+//
+//
+//    }
+    
+    
+    
     
     func printAllList() {
         var node = head
