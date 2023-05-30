@@ -5,7 +5,7 @@
 //  Created by myungsun on 2023/05/30.
 //
 
-class CalculatorItemQueue {
+final class CalculatorItemQueue {
     private var items: [CalculateItem] = []
     
     func enqueue(item: CalculateItem) {
