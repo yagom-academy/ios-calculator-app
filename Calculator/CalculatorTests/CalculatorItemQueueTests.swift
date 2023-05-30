@@ -70,4 +70,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedResult)
     }
+    
+    func test_peek호출시_다음_dequeue_될_값을_리턴한다() {
+        // given
+        sut.enqueue(0.3)
+        sut.enqueue(20.2)
+        sut.enqueue(-10.7)
+        
+        for _ in 0..<sut.count {
+            // when
+            let result = sut.peek()
+            let expectedResult = sut.dequeue()
+            
+            // then
+            XCTAssertEqual(result, expectedResult)
+        }
+    }
 }
