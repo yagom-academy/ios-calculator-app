@@ -6,15 +6,33 @@
 //
 
 import XCTest
+@testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-
+    var sut: CalculatorItemQueue!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
+    }
+    
+    func test_1번stack에_순서대로요소가추가되는지() {
+        //given
+        let input = 10
+        let nextInput = 20
+        let answer = [10, 20]
+        
+        //when
+        var result = sut.pushStack(input)
+        result = sut.pushStack(nextInput)
+        
+        //then
+        XCTAssertEqual(result, answer)
     }
 
 }
