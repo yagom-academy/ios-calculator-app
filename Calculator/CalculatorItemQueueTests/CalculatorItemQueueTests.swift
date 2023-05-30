@@ -33,7 +33,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue_값을_넣으면_isEmpty에서_false를_반환합니다() {
-        let input: CalculateItem = Double(10)
+        let input: CalculateItem = Operator.plus
         sut.enqueue(input)
         
         XCTAssertFalse(sut.isEmpty())
@@ -46,15 +46,27 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_denqueue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
-        var input = 1.0
-        sut.enqueue(input)
-        input = 3.0
-        sut.enqueue(input)
+        for input in 1...10 {
+            sut.enqueue(Double(input))
+        }
         
         let expectation = 1.0
         
         let result = sut.dequeue()
         
         XCTAssertEqual(result as? Double, expectation)
+    }
+    
+    func test_denqueue_호출하면_큐의_맨앞의_데이터가_없어지니_길이가_줄어듭니다() {
+        for input in 1...10 {
+            sut.enqueue(Double(input))
+        }
+        sut.dequeue()
+        
+        let expectation = 9
+        
+        let result = sut.count()
+        
+        XCTAssertEqual(result, expectation)
     }
 }
