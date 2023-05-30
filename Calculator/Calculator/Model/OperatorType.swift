@@ -9,7 +9,7 @@ enum OperatorType: String {
     case add = "+"
     case subtract = "-"
     case multiply = "*"
-    case devide = "/"
+    case divide = "/"
     
     var formula: (Double, Double) -> Double {
         switch self {
@@ -19,7 +19,7 @@ enum OperatorType: String {
             return { $0 - $1 }
         case .multiply:
             return { $0 * $1 }
-        case .devide:
+        case .divide:
             return { $0 / $1 }
         }
     }
