@@ -8,8 +8,7 @@
 protocol CalculateItem { }
 
 final class CalculatorItemQueue: CalculateItem {
-    var itemQueue: [String?] = []
-    private var head = 0
+    var itemQueue: [String] = []
     private var size: Int {
         return itemQueue.count
     }
@@ -19,10 +18,12 @@ final class CalculatorItemQueue: CalculateItem {
     }
     
     func dequeue() -> String? {
-        guard head <= size,
-              let element = itemQueue[head] else { return nil }
-        itemQueue[head] = nil
-        head += 1
+        guard !itemQueue.isEmpty else { return nil }
+        
+        var newItemQueue: [String] = itemQueue.reversed()
+        let element = newItemQueue.removeLast()
+        itemQueue = newItemQueue.reversed()
+        
         return element
     }
     
