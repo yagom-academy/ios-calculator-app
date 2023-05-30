@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
-    func pushStack<T>(_ input: T) -> [T] {
-        let firstStack: [T] = []
+struct CalculatorItemQueue<T> {
+    var firstStack: [T] = []
+    
+    mutating func pushStack(_ input: T) -> [T] {
+        firstStack.append(input)
         
         return firstStack
     }
