@@ -30,4 +30,15 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_string을_queue에_넣으면_queue에_string이_있는지_확인() {
+        let input: String = "+"
+        let expectedResult = ["+"]
+        
+        sut.enqueue(element: input)
+        let result = sut.queue
+        
+        XCTAssertEqual(expectedResult, result)
+    }
+
 }
