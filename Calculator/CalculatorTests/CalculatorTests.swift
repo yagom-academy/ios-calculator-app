@@ -14,7 +14,7 @@ final class CalculatorTests: XCTestCase {
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
     }
-
+    
     override func tearDownWithError() throws {
         sut = nil
     }
@@ -29,13 +29,12 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_enqueue함수호출시_배열의원소가_늘어나는지() {
+    func test_dequeue함수호출시_배열의첫번째원소가_사라지는지() {
         // given
-        sut.calculatorItemQueue = [2]
-        let input = 3
-        let expectation = [2, 3]
+        sut.calculatorItemQueue = [2, 3, 4]
+        let expectation = [3, 4]
         // when
-        sut.enqueue(input)
+        sut.dequeue()
         // then
         XCTAssertEqual(sut.calculatorItemQueue, expectation)
     }
