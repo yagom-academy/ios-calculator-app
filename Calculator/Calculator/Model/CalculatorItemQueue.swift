@@ -12,4 +12,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
+    
+    mutating func enqueue(_ element: Element) {
+        enqueueStack.append(element)
+    }
 }
