@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class NodeTests: XCTestCase {
-    var sut: Node!
+    var sut: Node<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Node(data: 0)
+        sut = Node<Int>(data: 0)
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +26,7 @@ final class NodeTests: XCTestCase {
         let expectedData = 0
         
         // when
-        let testNode = Node(data: expectedData)
+        let testNode = Node<Int>(data: expectedData)
         
         // then
         XCTAssertEqual(testNode.data, expectedData)
@@ -37,9 +37,21 @@ final class NodeTests: XCTestCase {
         let expectedData = "+"
         
         // when
-        let testNode = Node(data: expectedData)
+        let testNode = Node<String>(data: expectedData)
         
         // then
         XCTAssertEqual(testNode.data, expectedData)
+    }
+    
+    func test_init_next를nil로초기화한다() {
+        // given
+        let expectedData = 0
+        let expectedNext = nil
+        
+        // when
+        let testNode = Node<Int>(data: expectedData, next: expectedNext)
+        
+        // then
+        XCTAssertEqual(testNode.next, expectedNext)
     }
 }
