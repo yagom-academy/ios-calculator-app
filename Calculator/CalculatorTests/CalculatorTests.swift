@@ -39,4 +39,12 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.calculatorItemQueue, expectation)
     }
     
+    func test_clearQueue함수호출시_배열의원소가_다삭제되면_true를_반환한다() {
+        // given
+        sut.calculatorItemQueue = [2, 3, 4]
+        // when
+        sut.clearQueue()
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
