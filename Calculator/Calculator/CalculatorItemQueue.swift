@@ -47,4 +47,9 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         
         return backwardStack.removeLast()
     }
+    
+    mutating func clear() {
+        firstStack = []
+        backwardStack = []
+    }
 }
