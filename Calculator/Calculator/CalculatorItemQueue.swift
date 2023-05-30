@@ -7,18 +7,18 @@
 
 protocol CalculateItem { }
 
-struct CalculatorItemQueue: CalculateItem {
+final class CalculatorItemQueue: CalculateItem {
     var itemQueue: [String] = []
     
-    mutating func enqueue(_ element: String) {
+    func enqueue(_ element: String) {
         itemQueue.append(element)
     }
     
-    mutating func dequeue() -> String? {
+    func dequeue() -> String? {
         return itemQueue.isEmpty ? nil : itemQueue.removeFirst()
     }
     
-    mutating func resetQueue() {
+    func resetQueue() {
         itemQueue = []
     }
 }
