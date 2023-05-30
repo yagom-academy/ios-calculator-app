@@ -36,4 +36,40 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(input, result)
     }
+    
+    func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_1이반환된다() {
+        sut = CalculatorItemQueue(["1"])
+        let expectation = "1"
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_enqueuedCalculatorItems가비어있다() {
+        sut = CalculatorItemQueue(["1"])
+        
+        sut.dequeue()
+        let result = sut.enqueuedCalculatorItems.isEmpty
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_dequeueCalculatorItems가비어있으면_dequeue를했을때_nil을반환한다() {
+        let expectation: String? = nil
+        
+        sut.dequeue()
+        let result = sut.dequeueCalculatorItems.first
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeueCalculatorItems가비어있으면_dequeue했을때_enqueuedCalculatorItems가비어있다() {
+        let expectation: String? = nil
+        
+        sut.dequeue()
+        let result = sut.enqueuedCalculatorItems.first
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
