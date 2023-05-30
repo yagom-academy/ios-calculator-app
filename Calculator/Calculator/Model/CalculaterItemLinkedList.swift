@@ -10,14 +10,6 @@ struct CalculaterItemLinkedList {
     var tail: CalculateItemNode?
     var count = 0
     
-    var front: CalculateItemNode? {
-        return head
-    }
-    
-    var back: CalculateItemNode? {
-        return head
-    }
-    
     mutating func apend(_ calculateItemNode: CalculateItemNode) {
         if head == nil {
             head = calculateItemNode
