@@ -27,4 +27,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(input, result)
     }
+    
+    func test_enqueue에1을넣으면_enqueuedCalculatorItems에1이있다() {
+        let input = "1"
+        
+        sut.enqueue(input)
+        let result = sut.enqueuedCalculatorItems.first
+        
+        XCTAssertEqual(input, result)
+    }
 }

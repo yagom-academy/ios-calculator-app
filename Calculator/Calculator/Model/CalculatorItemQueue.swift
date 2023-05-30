@@ -13,4 +13,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     init(_ enqueuedCalculatorItems: [Element]) {
         self.enqueuedCalculatorItems = enqueuedCalculatorItems
     }
+    
+    mutating func enqueue(_ element: Element) {
+        enqueuedCalculatorItems.append(element)
+    }
 }
