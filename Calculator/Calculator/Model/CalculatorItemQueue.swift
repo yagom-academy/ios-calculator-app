@@ -9,7 +9,7 @@ class CalculatorItemQueue {
     private(set) var head: CalculatorItemNode?
     private(set) var tail: CalculatorItemNode?
     
-    func appendQueue(_ newNode: CalculatorItemNode) {
+    func enqueue(_ newNode: CalculatorItemNode) {
         guard head != nil, let lastNode = tail else {
             head = newNode
             tail = newNode
@@ -20,7 +20,7 @@ class CalculatorItemQueue {
         tail = newNode
     }
     
-    func removeLastQueue() throws {
+    func removeLast() throws {
         guard tail != nil else {
             throw CalculatorError.itemNotFound
         }
@@ -28,7 +28,7 @@ class CalculatorItemQueue {
         tail?.changeNext(nil)
     }
     
-    func popQueue() throws -> CalculatorItemNode {
+    func dequeue() throws -> CalculatorItemNode {
         guard head != nil, let pop = head else {
             throw CalculatorError.itemNotFound
         }

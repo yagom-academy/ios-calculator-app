@@ -20,17 +20,27 @@ final class CalculatorItemNodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_changeNext_with_no_error() {
+    func test_changeNext_Node의_next_값이_바뀐다() {
+        // given
         let value: Int = 5
         let newNode = CalculatorItemNode(value)
+        
+        // when
         sut.changeNext(newNode)
+        
+        // then
         XCTAssertIdentical(newNode, sut.next)
     }
     
-    func test_changePrevious_with_no_error() {
+    func test_changePrevious_Node의_previous_값이_바뀐다() {
+        // given
         let value: Int = 5
         let newNode = CalculatorItemNode(value)
+        
+        // when
         sut.changePrevious(newNode)
+        
+        // then
         XCTAssertIdentical(newNode, sut.previous)
     }
     
