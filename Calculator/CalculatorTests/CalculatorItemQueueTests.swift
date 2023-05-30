@@ -55,4 +55,19 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedResult)
     }
+    
+    func test_count호출시_현재_큐에_쌓인_수를_리턴한다() {
+        // given
+        sut.enqueue(Double.random(in: -10...10))
+        sut.enqueue(Double.random(in: -10...10))
+        sut.enqueue(Double.random(in: -10...10))
+        sut.enqueue(Double.random(in: -10...10))
+        let expectedResult = 4
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
 }
