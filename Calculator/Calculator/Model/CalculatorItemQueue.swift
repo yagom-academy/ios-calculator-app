@@ -29,4 +29,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     var count: Int {
         return enqueueStack.count + dequeueStack.count
     }
+    
+    func peek() -> Element? {
+        !enqueueStack.isEmpty ? enqueueStack.first : dequeueStack.last
+    }
 }
