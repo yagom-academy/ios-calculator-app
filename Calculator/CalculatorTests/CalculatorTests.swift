@@ -42,8 +42,18 @@ final class CalculatorTests: XCTestCase {
         let result = sut.popAndBackwardPushStack(sut.firstStack)
         
         //then
-        print("\(result)")
         XCTAssertEqual(result, [3, 2, 1])
+    }
+    
+    func test_popLastStack에서_스택맨위의값이_제거되는지() {
+        //given
+        sut.backwardStack = [3, 2, 1]
+        
+        //when
+        let result = sut.popLastStack(sut.backwardStack)
+        
+        //then
+        XCTAssertEqual(result, [3, 2])
     }
 
 }

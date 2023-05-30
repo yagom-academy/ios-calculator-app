@@ -29,4 +29,9 @@ struct CalculatorItemQueue<T> {
         
         return output
     }
+    
+    func popLastStack(_ stack: [T]) -> [T] {
+        //var input = stack.removeLast()
+        return stack
+    }
 }
