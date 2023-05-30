@@ -5,7 +5,9 @@
 //  Created by MARY on 2023/05/30.
 //
 
-struct CalculatorItemQueue {
+protocol CalculateItem { }
+
+struct CalculatorItemQueue: CalculateItem {
     var itemQueue: [String] = []
     
     mutating func enqueue(_ element: String) {
