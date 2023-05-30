@@ -21,7 +21,7 @@ final class NodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_init_data초기화한다() {
+    func test_init_data를0으로초기화한다() {
         // given
         let expectedData = 0
         
