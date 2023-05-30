@@ -11,29 +11,40 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     private var firstStack: [T] = []
     private var backwardStack: [T] = []
     var count: Int {
-        return firstStack.count
+        return firstStack.count + backwardStack.count
+    }
+    var isEmpty: Bool {
+        return firstStack.isEmpty && backwardStack.isEmpty
+    }
+    var first: T? {
+        if !backwardStack.isEmpty {
+            return backwardStack.last
+        } else {
+            return firstStack.first
+        }
+    }
+    var last: T? {
+        if !firstStack.isEmpty {
+            return firstStack.last
+        } else {
+            return backwardStack.first
+        }
     }
     
-    mutating func enqueue(_ input: T){
+    mutating func enqueue(_ input: T) {
         firstStack.append(input)
     }
     
-    private mutating func reversedStack(_ stack: [T]) -> [T] {
-        let output: [T]
-        output = stack.reversed()
-        
-        return output
-    }
-    
     mutating func dequeue() -> T? {
-        guard !firstStack.isEmpty else {
+        guard isEmpty == false else {
             return nil
         }
         
-        backwardStack = reversedStack(firstStack)
-        let output = backwardStack.popLast()
-        firstStack = reversedStack(backwardStack)
+        if backwardStack.isEmpty {
+            backwardStack = firstStack.reversed()
+            firstStack.removeAll()
+        }
         
-        return output
+        return backwardStack.removeLast()
     }
 }
