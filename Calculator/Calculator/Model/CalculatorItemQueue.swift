@@ -10,43 +10,37 @@ struct CalculatorItemQueue {
     private(set) var tail: CalculatorItemNode?
     private(set) var count: Int = 0
     
-    mutating func enqueue(_ newNode: CalculatorItemNode) {
+    mutating func enqueue(_ value: CalculateItem) {
+        let newNode = CalculatorItemNode(value)
         count += 1
         guard let lastNode = tail else {
             head = newNode
             tail = newNode
             return
         }
-        newNode.changePrevious(lastNode)
         lastNode.changeNext(newNode)
         tail = newNode
     }
     
-    mutating func dequeue() throws -> CalculatorItemNode {
+    mutating func dequeue() throws -> CalculateItem {
         guard let firstNode = head else {
             throw CalculatorError.indexOutOfRange
         }
         count -= 1
         head = firstNode.next
-        head?.changePrevious(nil)
         firstNode.changeNext(nil)
-        return firstNode
-    }
-    
-    mutating func removeLast() {
-        guard let lastNode = tail else { return }
-        count -= 1
-        tail = lastNode.previous
-        tail?.changeNext(nil)
-        lastNode.changePrevious(nil)
+        return firstNode.value
     }
     
     mutating func removeAll() {
-        guard tail != nil else { return }
         for _ in (0...count) {
-            self.removeLast()
+            guard let firstNode = head else {
+                tail = nil
+                return
+            }
+            head = firstNode.next
+            firstNode.changeNext(nil)
+            count -= 1
         }
-        head = nil
-        tail = nil
     }
 }

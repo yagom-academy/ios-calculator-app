@@ -31,17 +31,4 @@ final class CalculatorItemNodeTests: XCTestCase {
         // then
         XCTAssertIdentical(newNode, sut.next)
     }
-    
-    func test_changePrevious_Node의_previous_값이_바뀐다() {
-        // given
-        let value: Int = 5
-        let newNode = CalculatorItemNode(value)
-        
-        // when
-        sut.changePrevious(newNode)
-        
-        // then
-        XCTAssertIdentical(newNode, sut.previous)
-    }
-    
 }
