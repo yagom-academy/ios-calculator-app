@@ -8,11 +8,11 @@
 struct CalculatorItemQueue {
     var queue = CalculaterItemLinkedList()
     
-    func count() -> Int {
+    var count: Int {
         return queue.count
     }
     
-    func isEmpty() -> Bool {
+    var isEmpty: Bool {
         return queue.head == nil
     }
     
