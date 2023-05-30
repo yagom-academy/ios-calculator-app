@@ -360,6 +360,14 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="displayCalculationLabel" destination="HPC-iy-qdm" id="DkH-n9-bTB"/>
+                        <outlet property="displayLabel" destination="Lwz-OF-XHD" id="9AA-kn-CGG"/>
+                        <outlet property="firstCalculationLabel" destination="alw-Zd-2pT" id="dbN-P2-2qM"/>
+                        <outlet property="firstProcessLabel" destination="Hcb-r0-27f" id="ffP-5p-CMF"/>
+                        <outlet property="secondCalculationLabel" destination="c7v-6K-W40" id="WfQ-dp-teF"/>
+                        <outlet property="secondProcessLabel" destination="oGo-LN-bKL" id="acQ-WJ-shH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
