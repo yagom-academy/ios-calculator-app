@@ -2,7 +2,7 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by minsong kim on 2023/05/29.
+//  Created by mint on 2023/05/29.
 //
 
 import XCTest
@@ -27,8 +27,8 @@ final class CalculatorTests: XCTestCase {
         let nextInput = 20
         
         //when
-        var result = sut.pushStack(input)
-        result = sut.pushStack(nextInput)
+        var result = sut.enQueue(input)
+        result = sut.enQueue(nextInput)
         
         //then
         XCTAssertEqual(result, [10, 20])
@@ -47,13 +47,24 @@ final class CalculatorTests: XCTestCase {
     
     func test_popLastStack에서_스택맨위의값이_제거되는지() {
         //given
-        sut.backwardStack = [3, 2, 1]
+        let input = [3, 2, 1]
         
         //when
-        let result = sut.popLastStack(sut.backwardStack)
+        let result = sut.popLastStack(input)
         
         //then
         XCTAssertEqual(result, [3, 2])
+    }
+    
+    func test_deQueue_하면선입선출결과나오는지() {
+        //given
+        sut.firstStack = [1, 2, 3]
+        
+        //when
+        let result = sut.deQueue()
+        
+        //then
+        XCTAssertEqual(result, [2, 3])
     }
 
 }

@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by minsong kim on 2023/05/30.
+//  Created by mint on 2023/05/30.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ struct CalculatorItemQueue<T> {
     var firstStack: [T] = []
     var backwardStack: [T] = []
     
-    mutating func pushStack(_ input: T) -> [T] {
+    mutating func enQueue(_ input: T) -> [T] {
         firstStack.append(input)
         
         return firstStack
@@ -35,5 +35,9 @@ struct CalculatorItemQueue<T> {
         input.removeLast()
         
         return input
+    }
+    
+    func deQueue() -> [T] {
+        return firstStack
     }
 }
