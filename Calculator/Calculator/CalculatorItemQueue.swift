@@ -15,4 +15,8 @@ struct CalculatorItemQueue {
     mutating func dequeue() -> String? {
         return itemQueue.isEmpty ? nil : itemQueue.removeFirst()
     }
+    
+    mutating func resetQueue() {
+        itemQueue = []
+    }
 }

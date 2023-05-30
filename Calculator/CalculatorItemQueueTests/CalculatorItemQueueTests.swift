@@ -58,5 +58,12 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(afterQueue, afterQueueExpectation)
     }
     
+    func test_resetQueue_itemQueue를_빈배열로만든다() {
+        sut.itemQueue = ["5", "+", "3"]
+        
+        sut.resetQueue()
+        
+        XCTAssertTrue(sut.itemQueue.isEmpty)
+    }
     
 }
