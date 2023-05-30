@@ -80,4 +80,17 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_claer_호출하면_큐의_모든_데이터가_지워져_count가_0을_반환합니다() {
+        for input in 1...10 {
+            sut.enqueue(Double(input))
+        }
+        sut.clear()
+        
+        let expectation = 0
+        
+        let result = sut.count
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
