@@ -20,4 +20,14 @@ final class CalculatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_1을_queue에_넣으면_queue에_1이_있는지_확인() {
+        let input: Int = 1
+        let expectedResult = [1]
+        
+        sut.enqueue(input)
+        let result = sut.queue
+        
+        XCTAssertEqual(expectedResult, result)
+    }
 }
