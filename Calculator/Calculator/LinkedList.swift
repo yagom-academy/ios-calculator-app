@@ -6,8 +6,8 @@
 //
 
 struct LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     
     var headData: T? {
         return head?.data
@@ -31,6 +31,25 @@ struct LinkedList<T> {
         }
     }
     
+    mutating func remove() -> T? {
+        guard !isEmpty else {
+            return nil
+        }
+        
+        let headData = head?.data
+        head = head?.next
+        
+        guard head != nil else {
+            tail = nil
+            return headData
+        }
+        return headData
+    }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+    }
     
     
 }

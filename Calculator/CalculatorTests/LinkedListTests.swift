@@ -30,10 +30,11 @@ final class LinkedListTests: XCTestCase {
     func test_최초list에노드가없는경우_head에노드를추가하고_tail을head로설정하는지() {
 
         let input = 1
-
+        
         sut.append(data: input)
         let headData = sut.headData
         let tailData = sut.tailData
+        
 
         XCTAssertEqual(headData, 1)
         XCTAssertEqual(tailData, 1)
@@ -41,15 +42,53 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_list에노드가있는경우_head는유지하고_tail이_추가되었는지() {
-        let firstinput = 1
-        let secondinput = 2
+        let firstInput = 1
+        let secondInput = 2
         
-        sut.append(data: firstinput)
-        sut.append(data: secondinput)
+        sut.append(data: firstInput)
+        sut.append(data: secondInput)
         let headData = sut.headData
         let tailData = sut.tailData
         
         XCTAssertEqual(headData, 1)
         XCTAssertEqual(tailData, 2)
+    }
+    
+    func test_isEmpty가true인경우_remove메서드가nil을반환하는지() {
+        let removedData = sut.remove()
+        
+        XCTAssertEqual(removedData, nil)
+    }
+    
+    func test_head가한개만존재할떄_head와tail이nil로설정되고_제거한값을리턴하는지() {
+        let input = 1
+        sut.append(data: input)
+        
+        let removedData = sut.remove()
+        let head = sut.head
+        let tail = sut.tail
+        
+        XCTAssertNil(head)
+        XCTAssertNil(tail)
+        XCTAssertEqual(removedData, input)
+    }
+    
+    func test_head가복수개일때_head와tail이nil이아니고_제거한값을차례로리턴하는지() {
+        let firstInput = 1
+        let secondInput = 2
+        let thirdInput = 3
+        sut.append(data: firstInput)
+        sut.append(data: secondInput)
+        sut.append(data: thirdInput)
+        
+        let removedFirstData = sut.remove()
+        let removedSecondData = sut.remove()
+        let head = sut.head
+        let tail = sut.tail
+        
+        XCTAssertNotNil(head)
+        XCTAssertNotNil(tail)
+        XCTAssertEqual(removedFirstData, firstInput)
+        XCTAssertEqual(removedSecondData, secondInput)
     }
 }
