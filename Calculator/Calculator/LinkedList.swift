@@ -15,13 +15,14 @@ struct LinkedList<T> {
     
     mutating func append(data: T?) {
         let node: Node = Node(data: data)
-        if isEmpty {
-            head = node
-            tail = head
-        } else {
+        
+        guard isEmpty else {
             tail?.next = node
             tail = node
+            return
         }
+        head = node
+        tail = head
     }
     
     mutating func remove() -> T? {

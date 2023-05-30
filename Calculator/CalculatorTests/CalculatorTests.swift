@@ -13,13 +13,24 @@ final class CalculatorTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>(queue: LinkedList())
+        sut = CalculatorItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_값을enqueue하면_정상적으로추가되는지() {
+        let input = 1
+        
+        sut.enqueue(input)
+        
+        
+        //XCTAssertEqual(enqueueData, input)
+        
+    }
+    
     
     /// given
     

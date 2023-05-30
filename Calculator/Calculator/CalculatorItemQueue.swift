@@ -6,10 +6,10 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var queue: LinkedList<T> = LinkedList()
+    private(set) var list: LinkedList<T> = LinkedList()
     
-    mutating func enqueue() {
-        
+    mutating func enqueue(_ value: T) {
+        list.append(data: value)
     }
     
     mutating func dequeue() {
