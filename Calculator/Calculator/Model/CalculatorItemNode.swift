@@ -7,13 +7,13 @@
 
 class CalculatorItemNode {
     private(set) var value: CalculateItem
-    private(set) var next: CalculatorItemNode?
-    private(set) var previous: CalculatorItemNode?
+    private(set) weak var next: CalculatorItemNode?
+    private(set) weak var previous: CalculatorItemNode?
     
     init(_ value: CalculateItem) {
         self.value = value
     }
-    
+
     func changeNext(_ next: CalculatorItemNode?) {
         self.next = next
     }

@@ -43,27 +43,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertIdentical(resultString, newNodeString)
     }
     
-    func test_removeLast_비어있지_않은_queue에서_마지막_값이_지워진다() {
-        // given
-        let value: Int = 0
-        sut.enqueue(CalculatorItemNode(value))
-        sut.enqueue(CalculatorItemNode(value))
-        var lastItem = sut.tail
-        
-        // when
-        try? sut.removeLast()
-        let result = sut.tail
-        
-        // then
-        XCTAssertNotIdentical(result, lastItem)
-    }
-    
-    func test_removeLast_비어있는_queue에서_마지막_값을_지우려_하면_오류가_난다() {
-        XCTAssertThrowsError(try sut.removeLast()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.indexOutOfRange)
-        }
-    }
-    
     func test_dequeue_비어있지_않은_queue에서_첫번째_값을_빼내면_남아있는_queue의_첫번째_값은_전과_달라진다() {
         // given
         let value1: String = "테스트1"
@@ -89,6 +68,22 @@ final class CalculatorItemQueueTests: XCTestCase {
         }
     }
     
+    func test_removeLast_비어있지_않은_queue에서_마지막_값이_지워진다() {
+        // given
+        let value1: Int = 0
+        let value2: Int = 1
+        sut.enqueue(CalculatorItemNode(value1))
+        sut.enqueue(CalculatorItemNode(value2))
+        let lastItem = sut.tail
+
+        // when
+        sut.removeLast()
+        let result = sut.tail
+        
+        // then
+        XCTAssertNotIdentical(result, lastItem)
+    }
+
     func test_removeAll_비어있지_않은_queue의_모든_값이_지워진다() {
         // given
         let value1: String = "테스트1"
@@ -103,8 +98,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.removeAll()
         let newCount = sut.count
         
+        // then
         XCTAssertNotEqual(oldCount, newCount)
         XCTAssertEqual(newCount, 0)
     }
+
 }
 

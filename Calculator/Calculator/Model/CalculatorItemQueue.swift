@@ -5,12 +5,12 @@
 //  Created by Min Hyun on 2023/05/29.
 //
 
-class CalculatorItemQueue {
+struct CalculatorItemQueue {
     private(set) var head: CalculatorItemNode?
     private(set) var tail: CalculatorItemNode?
     private(set) var count: Int = 0
     
-    func enqueue(_ newNode: CalculatorItemNode) {
+    mutating func enqueue(_ newNode: CalculatorItemNode) {
         count += 1
         guard let lastNode = tail else {
             head = newNode
@@ -22,17 +22,7 @@ class CalculatorItemQueue {
         tail = newNode
     }
     
-    func removeLast() throws {
-        guard let oldTail = tail else {
-            throw CalculatorError.indexOutOfRange
-        }
-        count -= 1
-        tail = oldTail.previous
-        tail?.changeNext(nil)
-        oldTail.changePrevious(nil)
-    }
-    
-    func dequeue() throws -> CalculatorItemNode {
+    mutating func dequeue() throws -> CalculatorItemNode {
         guard let firstNode = head else {
             throw CalculatorError.indexOutOfRange
         }
@@ -41,5 +31,22 @@ class CalculatorItemQueue {
         head?.changePrevious(nil)
         firstNode.changeNext(nil)
         return firstNode
+    }
+    
+    mutating func removeLast() {
+        guard let lastNode = tail else { return }
+        count -= 1
+        tail = lastNode.previous
+        tail?.changeNext(nil)
+        lastNode.changePrevious(nil)
+    }
+    
+    mutating func removeAll() {
+        guard tail != nil else { return }
+        for _ in (0...count) {
+            self.removeLast()
+        }
+        head = nil
+        tail = nil
     }
 }
