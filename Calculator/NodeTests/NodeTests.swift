@@ -43,18 +43,6 @@ final class NodeTests: XCTestCase {
         XCTAssertEqual(testNode.data, expectedData)
     }
     
-    func test_init_next를nil로초기화한다() {
-        // given
-        let expectedData: Int = 0
-        let expectedNext: Int? = nil
-        
-        // when
-        let testNode: Node = Node<Int>(data: expectedData, next: expectedNext)
-        
-        // then
-        XCTAssertEqual(testNode.next, expectedNext)
-    }
-    
     func test_init_next를다음Node로초기화한다() {
         // given
         let expectedData: Int = 0
@@ -65,5 +53,16 @@ final class NodeTests: XCTestCase {
         
         // then
         XCTAssertTrue(testNode.next === expectedNext)
+    }
+    
+    func test_init_next의전달인자없이초기화한다() {
+        // given
+        let expectedData: Int = 0
+        
+        // when
+        let testNode: Node = Node<Int>(data: expectedData)
+        
+        // then
+        XCTAssertEqual(testNode.next, nil)
     }
 }
