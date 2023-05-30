@@ -17,7 +17,16 @@ struct CalculatorItemQueue<T> {
         return firstStack
     }
     
-    func popAndBackwardPushStack(_ input: [T]) -> [T] {
-        return backwardStack
+    mutating func popAndBackwardPushStack(_ stack: [T]) -> [T] {
+        var input = stack
+        var output: [T] = []
+        
+        while input.isEmpty == false {
+            guard let element = input.popLast() else { break }
+            
+            output.append(element)
+        }
+        
+        return output
     }
 }

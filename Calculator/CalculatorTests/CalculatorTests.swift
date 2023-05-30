@@ -42,6 +42,7 @@ final class CalculatorTests: XCTestCase {
         let result = sut.popAndBackwardPushStack(sut.firstStack)
         
         //then
+        print("\(result)")
         XCTAssertEqual(result, [3, 2, 1])
     }
 
