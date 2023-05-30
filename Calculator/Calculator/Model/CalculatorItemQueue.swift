@@ -6,5 +6,6 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var queue: [Element] = []
+    private var enqueueStack: [Element] = []
+    private var dequeueStack: [Element] = []
 }
