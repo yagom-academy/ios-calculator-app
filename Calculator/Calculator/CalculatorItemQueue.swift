@@ -8,14 +8,17 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    var firstStack: [T] = []
-    var backwardStack: [T] = []
+    private var firstStack: [T] = []
+    private var backwardStack: [T] = []
+    var count: Int {
+        return firstStack.count
+    }
     
     mutating func enqueue(_ input: T){
         firstStack.append(input)
     }
     
-    mutating func reversedStack(_ stack: [T]) -> [T] {
+    private mutating func reversedStack(_ stack: [T]) -> [T] {
         let output: [T]
         output = stack.reversed()
         

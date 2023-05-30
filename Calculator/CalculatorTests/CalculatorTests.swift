@@ -21,6 +21,18 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
+    func test_count가_작동하는지() {
+        //given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
+    
     func test_firstStack에_순서대로요소가추가되는지() {
         //given
         let input = 10
@@ -67,6 +79,6 @@ final class CalculatorTests: XCTestCase {
         let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(sut.dequeue(), nil)
+        XCTAssertEqual(result, nil)
     }
 }
