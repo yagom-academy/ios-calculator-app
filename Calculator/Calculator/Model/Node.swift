@@ -7,9 +7,9 @@
 
 final class Node<T> {
     let data: T
-    let next: Optional<T>
+    let next: Node?
     
-    init(data: T, next: Optional<T>) {
+    init(data: T, next: Node?) {
         self.data = data
         self.next = next
     }
