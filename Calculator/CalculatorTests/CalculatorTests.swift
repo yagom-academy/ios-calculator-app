@@ -48,4 +48,11 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.dequeue(), expectedValue)
     }
+    
+    func test_Queue의_값이_없을때_dequeue를_하면_nil이_반환된다() {
+        //when
+        let expectedValue: String? = nil
+        // then
+        XCTAssertEqual(sut.dequeue(), expectedValue)
+    }
 }
