@@ -13,7 +13,7 @@ final class NodeTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Node<Int>(data: 0, next: 0)
+        sut = Node<Int>(data: 0, next: nil)
     }
 
     override func tearDownWithError() throws {
@@ -26,7 +26,7 @@ final class NodeTests: XCTestCase {
         let expectedData: Int = 0
         
         // when
-        let testNode: Node = Node<Int>(data: expectedData, next: 0)
+        let testNode: Node = Node<Int>(data: expectedData, next: nil)
         
         // then
         XCTAssertEqual(testNode.data, expectedData)
@@ -34,10 +34,10 @@ final class NodeTests: XCTestCase {
     
     func test_init_data를더하기연산자로초기화한다() {
         // given
-        let expectedData: Int = "+"
+        let expectedData: String = "+"
         
         // when
-        let testNode: Node = Node<String>(data: expectedData, next: "test")
+        let testNode: Node = Node<String>(data: expectedData, next: nil)
         
         // then
         XCTAssertEqual(testNode.data, expectedData)
@@ -64,6 +64,6 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<Int>(data: expectedData, next: expectedNext)
         
         // then
-        XCTAssertEqual(testNode.next, expectedNext)
+        XCTAssertTrue(testNode.next === expectedNext)
     }
 }
