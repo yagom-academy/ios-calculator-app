@@ -39,13 +39,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_denqueue_호출하면_값이_없으니_nil을_반환합니다() {
+    func test_dequeue_호출하면_값이_없으니_nil을_반환합니다() {
         let result = sut.dequeue()
         
         XCTAssertNil(result)
     }
     
-    func test_denqueue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
+    func test_dequeue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -57,7 +57,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result as? Double, expectation)
     }
     
-    func test_denqueue_호출하면_큐의_맨앞의_데이터가_없어지니_길이가_줄어듭니다() {
+    func test_dequeue_호출하면_큐의_맨앞의_데이터가_없어지니_길이가_줄어듭니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -70,7 +70,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_claer_호출하면_큐의_모든_데이터가_지워져_isEmpty가_true를_반환합니다() {
+    func test_clear_호출하면_큐의_모든_데이터가_지워져_isEmpty가_true를_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -81,7 +81,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_claer_호출하면_큐의_모든_데이터가_지워져_count가_0을_반환합니다() {
+    func test_clear_호출하면_큐의_모든_데이터가_지워져_count가_0을_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -92,5 +92,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.count
         
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_clear_마지막_남은_데이터를_삭제하면_clear도_작동합니다() {
+        sut.enqueue(Operator.minus)
+        sut.dequeue()
+        
+        let expectation = 0
+        
+        let isEmptyResult = sut.isEmpty
+        let countResult = sut.count
+        
+        XCTAssertTrue(isEmptyResult)
+        XCTAssertEqual(countResult, expectation)
     }
 }

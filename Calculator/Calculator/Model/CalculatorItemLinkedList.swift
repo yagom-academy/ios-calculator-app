@@ -42,5 +42,6 @@ struct CalculatorItemLinkedList {
     mutating func clear() {
         head = nil
         tail = nil
+        count = 0
     }
 }
