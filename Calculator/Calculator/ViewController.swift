@@ -8,33 +8,21 @@ import UIKit
 
 class ViewController: UIViewController {
     var myQueue = CalculatorItemQueue<String>()
-
-    @IBOutlet weak var displayLabel: UILabel!
-    @IBOutlet weak var displayCalculationLabel: UILabel!
-    @IBOutlet weak var firstProcessLabel: UILabel!
-    @IBOutlet weak var secondProcessLabel: UILabel!
-    @IBOutlet weak var firstCalculationLabel: UILabel!
-    @IBOutlet weak var secondCalculationLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        setText()
     }
-    
     
     @IBAction func touchDigit(_ sender: UIButton) {
         let digit = sender.currentTitle!
-        guard let currentText = displayLabel.text else { return }
         
-        displayLabel.text = currentText + digit
         myQueue.enqueue(digit)
         print(myQueue)
     }
     
     @IBAction func allClear(_ sender: UIButton) {
         myQueue.clear()
-        setText()
         print(myQueue)
     }
     
@@ -77,15 +65,5 @@ class ViewController: UIViewController {
         myQueue.enqueue(calculation)
         print(myQueue)
     }
-    
-    func setText() {
-        displayLabel.text = ""
-        displayCalculationLabel.text = ""
-        firstProcessLabel.text = ""
-        secondProcessLabel.text = ""
-        firstCalculationLabel.text = ""
-        secondCalculationLabel.text = ""
-    }
-    
 }
 

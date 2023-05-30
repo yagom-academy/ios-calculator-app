@@ -4,11 +4,8 @@
 //
 //  Created by 박종화 on 2023/05/30.
 //
-
-import Foundation
-
-struct CalculatorItemQueue<T>: CalculatorItem {
-    private var queue: [T] = []
+struct CalculatorItemQueue<Element>: CalculatorItem {
+    private var queue: [Element] = []
     
     public var count: Int {
         return queue.count
@@ -18,11 +15,11 @@ struct CalculatorItemQueue<T>: CalculatorItem {
         return queue.isEmpty
     }
     
-    public mutating func enqueue(_ element: T) {
+    public mutating func enqueue(_ element: Element) {
         queue.append(element)
     }
     
-    public mutating func dequeue() -> T? {
+    public mutating func dequeue() -> Element? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
