@@ -10,11 +10,11 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     
-    var sut: NumberQueue<Any>!
+    var sut: NumberItemLinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = NumberQueue<Any>()
+        sut = NumberItemLinkedList<Int>()
     }
     
     override func tearDownWithError() throws {
@@ -37,44 +37,44 @@ final class CalculatorTests: XCTestCase {
         }
     }
     
-    func test_checkNumber_숫자가있는지() {
-      
-        let result = sut.checkItemEmpty()
+    func test_EnqueueItem_숫자확인() {
+        sut.enqueueItem(item: 1)
+        sut.enqueueItem(item: 2)
+        sut.enqueueItem(item: 3)
         
-        XCTAssertTrue(result)
+        XCTAssertEqual(sut.checkFirstItem(), 1)
     }
     
-    func test_checkNumber_숫자가없는지() {
-        let input = 39
-        sut.enqueueItem(item: input)
+    func test_DequeueItem_지운숫자() {
+        sut.enqueueItem(item: 1)
+        sut.enqueueItem(item: 2)
+        sut.enqueueItem(item: 3)
         
-        let result = sut.checkItemEmpty()
-        
-        XCTAssertFalse(result)
-    }
-    
-    func test_itemIsvalid() {
-        let input = 40
-        
-        sut.enqueueItem(item: input)
         let dequeuedItem = sut.dequeueItem()
+        XCTAssertEqual(dequeuedItem, 1)
         
-        XCTAssertEqual(input, dequeuedItem as! Int)
+        let newFirstItem = sut.checkFirstItem()
+        XCTAssertEqual(newFirstItem, 2)
     }
     
-    func test_dequeueItem() {
-        let firstInput = [1, 2, 3]
-        let secondInput = [1, 2, 3]
+    func test_ContainsItem_숫자확인() {
+        sut.enqueueItem(item: 1)
+        sut.enqueueItem(item: 2)
+        sut.enqueueItem(item: 3)
         
-        sut.enqueueItem(item: firstInput)
-        sut.enqueueItem(item: secondInput)
-        
-        let dequeuedFirst = sut.dequeueItem()
-        let dequeuedSecond = sut.dequeueItem()
-        
-        XCTAssertEqual(dequeuedFirst as! [Int], firstInput)
-        XCTAssertEqual(dequeuedSecond as! [Int], secondInput)
-        XCTAssertTrue(sut.checkItemEmpty())
+        XCTAssertTrue(sut.checkContainsItem(2))
+        XCTAssertFalse(sut.checkContainsItem(4))
     }
+    
+    func testContainsItem_배열테스트() {
+        let items = [1, 2, 3]
+        
+        for item in items {
+            sut.enqueueItem(item: item)
+        }
+        
+        XCTAssertTrue(sut.checkContainsItem(2))
+        XCTAssertFalse(sut.checkContainsItem(4))
+    }
+    
 }
-
