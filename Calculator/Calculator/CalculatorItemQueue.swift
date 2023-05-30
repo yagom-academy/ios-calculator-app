@@ -24,4 +24,8 @@ struct CalculatorItemQueue {
         return dequeueStack.popLast()
     }
     
+    mutating func clear() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
+    }
 }

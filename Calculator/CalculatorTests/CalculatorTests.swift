@@ -64,4 +64,31 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.dequeue(), expectedValue)
     }
+    
+    func test_dequeueStack의_값이_추가되면_enqueueStock의_값을_제거한다() {
+        // given
+        sut.enqueue("1")
+        _ = sut.dequeue()
+        
+        //when
+        let expectedValue = true
+        
+        // then
+        XCTAssertEqual(sut.enqueueStack.isEmpty, expectedValue)
+    }
+    
+    func test_모든_stack의_값을_제거한다() {
+        // given
+        sut.enqueue("1")
+        _ = sut.dequeue()
+        sut.enqueue("1")
+        
+        sut.clear()
+        
+        //when
+        let expectedValue = true
+        
+        // then
+        XCTAssertEqual(sut.isEmpty, expectedValue)
+    }
 }
