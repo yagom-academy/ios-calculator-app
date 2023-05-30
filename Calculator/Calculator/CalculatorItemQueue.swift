@@ -37,7 +37,12 @@ struct CalculatorItemQueue<T> {
         return input
     }
     
-    func deQueue() -> [T] {
+    mutating func deQueue() -> [T] {
+        backwardStack = popAndBackwardPushStack(firstStack)
+        //backwardStack = popLastStack(backwardStack)
+        backwardStack.removeLast()
+        firstStack = popAndBackwardPushStack(backwardStack)
+        
         return firstStack
     }
 }
