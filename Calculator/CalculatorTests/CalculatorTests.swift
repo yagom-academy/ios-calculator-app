@@ -21,18 +21,28 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_1번stack에_순서대로요소가추가되는지() {
+    func test_firstStack에_순서대로요소가추가되는지() {
         //given
         let input = 10
         let nextInput = 20
-        let answer = [10, 20]
         
         //when
         var result = sut.pushStack(input)
         result = sut.pushStack(nextInput)
         
         //then
-        XCTAssertEqual(result, answer)
+        XCTAssertEqual(result, [10, 20])
+    }
+    
+    func test_firstStack에서_pop한요소가_backwardStack에_push되는지() {
+        //given
+        sut.firstStack = [1, 2, 3]
+        
+        //when
+        let result = sut.popAndBackwardPushStack(sut.firstStack)
+        
+        //then
+        XCTAssertEqual(result, [3, 2, 1])
     }
 
 }
