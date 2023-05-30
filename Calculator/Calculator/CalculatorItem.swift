@@ -10,3 +10,7 @@ import UIKit
 protocol CalculatorItem {
     
 }
+
+extension Int: CalculatorItem {
+    
+}
