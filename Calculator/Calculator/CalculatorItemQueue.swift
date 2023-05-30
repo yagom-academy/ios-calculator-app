@@ -7,6 +7,9 @@
 
 struct CalculatorItemQueue {
     var calculatorQueue: [String] = []
+    var isEmpty: Bool {
+        return calculatorQueue.isEmpty
+    }
     
     mutating func enqueue(_ element: String) {
         calculatorQueue.append(element)

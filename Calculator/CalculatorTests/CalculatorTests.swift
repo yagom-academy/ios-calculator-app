@@ -27,4 +27,13 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.calculatorQueue.first, expectedValue)
     }
+    
+    func test_Queue에_값이_없으면_true를_반환한다() {
+        // given
+        
+        // when
+        let result = sut.isEmpty
+        // then
+        XCTAssertTrue(result)
+    }
 }
