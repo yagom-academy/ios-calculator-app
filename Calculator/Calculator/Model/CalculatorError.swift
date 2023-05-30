@@ -6,8 +6,7 @@
 //
 
 enum CalculatorError: Error {
-    case itemNotFound
-    case itemAlreadyExist
+    case indexOutOfRange
     case unknown
 }
 

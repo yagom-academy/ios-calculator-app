@@ -60,7 +60,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_removeLast_비어있는_queue에서_마지막_값을_지우려_하면_오류가_난다() {
         XCTAssertThrowsError(try sut.removeLast()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.indexOutOfRange)
         }
     }
     
@@ -85,7 +85,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue_비어있는_queue에서_첫번째_값을_빼려_하면_오류가_난다() {
         XCTAssertThrowsError(try sut.dequeue()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.itemNotFound)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.indexOutOfRange)
         }
     }
 }

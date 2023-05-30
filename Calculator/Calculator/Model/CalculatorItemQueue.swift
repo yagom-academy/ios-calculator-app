@@ -8,8 +8,10 @@
 class CalculatorItemQueue {
     private(set) var head: CalculatorItemNode?
     private(set) var tail: CalculatorItemNode?
+    private(set) var count: Int = 0
     
     func enqueue(_ newNode: CalculatorItemNode) {
+        count += 1
         guard head != nil, let lastNode = tail else {
             head = newNode
             tail = newNode
@@ -21,20 +23,23 @@ class CalculatorItemQueue {
     }
     
     func removeLast() throws {
-        guard tail != nil else {
-            throw CalculatorError.itemNotFound
+        guard let oldTail = tail else {
+            throw CalculatorError.indexOutOfRange
         }
-        tail = tail?.previous
+        count -= 1
+        tail = oldTail.previous
         tail?.changeNext(nil)
+        oldTail.changePrevious(nil)
     }
     
     func dequeue() throws -> CalculatorItemNode {
-        guard head != nil, let pop = head else {
-            throw CalculatorError.itemNotFound
+        guard let firstNode = head else {
+            throw CalculatorError.indexOutOfRange
         }
-        head = pop.next
+        count -= 1
+        head = firstNode.next
         head?.changePrevious(nil)
-        pop.changeNext(nil)
-        return pop
+        firstNode.changeNext(nil)
+        return firstNode
     }
 }
