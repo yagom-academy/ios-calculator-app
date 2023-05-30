@@ -6,5 +6,9 @@
 //
 
 final class Node {
+    let data: Int
     
+    init(data: Int) {
+        self.data = data
+    }
 }
