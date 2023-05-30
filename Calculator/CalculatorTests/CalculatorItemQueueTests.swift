@@ -18,4 +18,15 @@ final class CalculatorItemQueueTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_isEmpty호출시_큐가_비어있으면_true를_리턴한다() {
+        // given
+        let expectedResult = true
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
 }
