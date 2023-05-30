@@ -18,13 +18,6 @@
         "identifier" : "BAFFB9B42A25D552000FBBFA",
         "name" : "CalculatorItemQueueTests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "BAFFB9A72A25D538000FBBFA",
-        "name" : "CalculatorNodeTests"
-      }
     }
   ],
   "version" : 1
