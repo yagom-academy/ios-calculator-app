@@ -36,4 +36,16 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertTrue(result)
     }
+    
+    func test_Queue의_첫번째로_들어간_값을_반환한다() {
+        // given
+        let input = ["1", "2", "3"]
+        for item in input {
+            sut.enqueue(item)
+        }
+        //when
+        let expectedValue = "1"
+        // then
+        XCTAssertEqual(sut.dequeue(), expectedValue)
+    }
 }

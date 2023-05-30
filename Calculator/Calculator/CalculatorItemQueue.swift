@@ -15,4 +15,8 @@ struct CalculatorItemQueue {
         calculatorQueue.append(element)
     }
     
+    mutating func dequeue() -> String {
+        return calculatorQueue.removeFirst()
+    }
+    
 }
