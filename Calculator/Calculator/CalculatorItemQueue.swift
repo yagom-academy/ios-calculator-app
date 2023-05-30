@@ -6,20 +6,22 @@
 //
 
 struct CalculatorItemQueue {
-    var calculatorQueue: [String] = []
+    var enqueueStack: [String] = []
+    var dequeueStack: [String] = []
     var isEmpty: Bool {
-        return calculatorQueue.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
     mutating func enqueue(_ element: String) {
-        calculatorQueue.append(element)
+        enqueueStack.append(element)
     }
     
     mutating func dequeue() -> String? {
-        if isEmpty {
-            return nil
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return calculatorQueue.removeFirst()
+        return dequeueStack.popLast()
     }
     
 }

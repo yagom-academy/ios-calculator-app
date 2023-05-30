@@ -19,16 +19,16 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_Queue에_값이_추가된다() {
+    func test_enqueueStack에_값이_추가된다() {
         // given
         sut.enqueue("1")
         // when
         let expectedValue = "1"
         // then
-        XCTAssertEqual(sut.calculatorQueue.first, expectedValue)
+        XCTAssertEqual(sut.enqueueStack.first, expectedValue)
     }
     
-    func test_Queue에_값이_없으면_true를_반환한다() {
+    func test_stack에_값이_없으면_true를_반환한다() {
         // given
         
         // when
@@ -37,7 +37,16 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_Queue의_첫번째로_들어간_값을_반환한다() {
+    func test_stack에_값이_있으면_false를_반환한다() {
+        // given
+        sut.enqueue("1")
+        // when
+        let result = sut.isEmpty
+        // then
+        XCTAssertFalse(result)
+    }
+    
+    func test_enqueueStack의_첫번째로_들어간_값을_반환한다() {
         // given
         let input = ["1", "2", "3"]
         for item in input {
@@ -49,7 +58,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.dequeue(), expectedValue)
     }
     
-    func test_Queue의_값이_없을때_dequeue를_하면_nil이_반환된다() {
+    func test_stack의_값이_없을때_dequeue를_하면_nil이_반환된다() {
         //when
         let expectedValue: String? = nil
         // then
