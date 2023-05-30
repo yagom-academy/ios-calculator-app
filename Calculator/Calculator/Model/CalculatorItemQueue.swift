@@ -13,13 +13,17 @@ class CalculatorItemQueue {
     }
     
     func dequeue() -> CalculateItem? {
-        guard !items.isEmpty else { return nil }
+        guard !isEmpty() else { return nil }
         
         return items.removeFirst()
     }
     
     func clear() {
         items.removeAll()
+    }
+    
+    func isEmpty() -> Bool {
+        return items.isEmpty ? true : false
     }
     
     func calculate() -> String? {
