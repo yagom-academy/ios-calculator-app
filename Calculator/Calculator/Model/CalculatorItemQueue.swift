@@ -5,22 +5,22 @@
 //  Created by EtialMoon on 2023/05/30.
 //
 
-struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var enqueuedCalculatorItems: [Element] = []
-    private(set) var dequeueCalculatorItems: [Element] = []
+struct CalculatorItemQueue {
+    private(set) var enqueuedCalculatorItems: [any CalculateItem] = []
+    private(set) var dequeueCalculatorItems: [any CalculateItem] = []
     
     init() {}
     
-    init(_ enqueuedCalculatorItems: [Element]) {
+    init(_ enqueuedCalculatorItems: [any CalculateItem]) {
         self.enqueuedCalculatorItems = enqueuedCalculatorItems
     }
     
-    mutating func enqueue(_ element: Element) {
+    mutating func enqueue(_ element: any CalculateItem) {
         enqueuedCalculatorItems.append(element)
     }
     
     @discardableResult
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() -> (any CalculateItem)? {
         if dequeueCalculatorItems.isEmpty {
             dequeueCalculatorItems = enqueuedCalculatorItems.reversed()
             enqueuedCalculatorItems.removeAll()
