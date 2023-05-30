@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue: CalculateItem {
-    var enqueueStack: [String] = []
-    var dequeueStack: [String] = []
+    private var enqueueStack: [String] = []
+    private var dequeueStack: [String] = []
     
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty

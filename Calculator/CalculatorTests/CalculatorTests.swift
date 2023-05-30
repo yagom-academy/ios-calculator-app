@@ -19,22 +19,7 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueueStack에_값이_추가된다() {
-        // given
-        sut.enqueue("1")
-        
-        // when
-        let expectedValue = "1"
-        
-        // then
-        XCTAssertEqual(sut.enqueueStack.first, expectedValue)
-    }
-    
-    func test_stack에_값이_없으면_true를_반환한다() {
-        // given
-        sut.enqueueStack.removeAll()
-        sut.dequeueStack.removeAll()
-        
+    func test_isEmpty_stack에_값이_없으면_true를_반환한다() {
         // when
         let result = sut.isEmpty
         
@@ -42,7 +27,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_stack에_값이_있으면_false를_반환한다() {
+    func test_isEmpty_stack에_값이_있으면_false를_반환한다() {
         // given
         sut.enqueue("1")
         
@@ -53,7 +38,18 @@ final class CalculatorTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_enqueueStack의_첫번째로_들어간_값을_반환한다() {
+    func test_enqueue_enqueueStack에_값이_추가되면_isEmpty는_false를_반환한다() {
+        // given
+        sut.enqueue("1")
+        
+        // when
+        let expectedValue = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(expectedValue)
+    }
+
+    func test_dequeue_enqueueStack의_첫번째로_들어간_값을_반환한다() {
         // given
         let input = ["1", "2", "3"]
         for item in input {
@@ -67,11 +63,9 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.dequeue(), expectedValue)
     }
     
-    func test_stack의_값이_없을때_dequeue를_하면_nil이_반환된다() {
+    func test_dequeue_stack의_값이_없을때_dequeue를_하면_nil이_반환된다() {
         // given
-        sut.enqueueStack.removeAll()
-        sut.dequeueStack.removeAll()
-        
+
         //when
         let expectedValue: String? = nil
         
@@ -79,19 +73,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.dequeue(), expectedValue)
     }
     
-    func test_dequeueStack의_값이_추가되면_enqueueStock의_값을_제거한다() {
-        // given
-        sut.enqueue("1")
-        _ = sut.dequeue()
-        
-        //when
-        let expectedValue = true
-        
-        // then
-        XCTAssertEqual(sut.enqueueStack.isEmpty, expectedValue)
-    }
-    
-    func test_모든_stack의_값을_제거한다() {
+    func test_clear_모든_stack의_값을_제거한다() {
         // given
         sut.enqueue("1")
         _ = sut.dequeue()
