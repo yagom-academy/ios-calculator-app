@@ -25,6 +25,6 @@ struct CalculatorItemQueue {
     }
     
     mutating func clear() {
-        
+        queue.clear()
     }
 }
