@@ -18,6 +18,7 @@
 		DCEC5A0D2A24AD0100A517C1 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */; };
 		DCEC5A142A24CFF500A517C1 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A132A24CFF500A517C1 /* Node.swift */; };
 		DCEC5A162A24D08200A517C1 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A152A24D08200A517C1 /* LinkedList.swift */; };
+		DCEC5A1A2A24E50500A517C1 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A192A24E50500A517C1 /* LinkedListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		DCEC5A132A24CFF500A517C1 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		DCEC5A152A24D08200A517C1 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		DCEC5A192A24E50500A517C1 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		DCEC5A0B2A24AD0100A517C1 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
+				DCEC5A192A24E50500A517C1 /* LinkedListTests.swift */,
 				DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */,
 			);
 			path = CalculatorTests;
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCEC5A1A2A24E50500A517C1 /* LinkedListTests.swift in Sources */,
 				DCEC5A0D2A24AD0100A517C1 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
