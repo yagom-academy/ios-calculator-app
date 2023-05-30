@@ -36,10 +36,12 @@ final class CalculatorTests: XCTestCase {
     
     func test_firstStack에서_pop한요소가_backwardStack에_push되는지() {
         //given
-        sut.firstStack = [1, 2, 3]
+        sut.enQueue(1)
+        sut.enQueue(2)
+        sut.enQueue(3)
         
         //when
-        let result = sut.popAndBackwardPushStack(sut.firstStack)
+        let result = sut.reversedStack(sut.firstStack)
         
         //then
         XCTAssertEqual(result, [3, 2, 1])
@@ -47,7 +49,9 @@ final class CalculatorTests: XCTestCase {
     
     func test_deQueue_하면선입선출결과나오는지() {
         //given
-        sut.firstStack = [1, 2, 3]
+        sut.enQueue(1)
+        sut.enQueue(2)
+        sut.enQueue(3)
         
         //when
         let result = sut.deQueue()

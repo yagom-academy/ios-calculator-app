@@ -8,30 +8,24 @@
 import Foundation
 
 struct CalculatorItemQueue<T> {
-    private var firstStack: [T] = []
-    private var backwardStack: [T] = []
+    var firstStack: [T] = []
+    var backwardStack: [T] = []
     
     mutating func enQueue(_ input: T){
         firstStack.append(input)
     }
     
-    private mutating func popAndBackwardPushStack(_ stack: [T]) -> [T] {
-        var input = stack
-        var output: [T] = []
-        
-        while input.isEmpty == false {
-            guard let element = input.popLast() else { break }
-            
-            output.append(element)
-        }
+    mutating func reversedStack(_ stack: [T]) -> [T] {
+        let output: [T]
+        output = stack.reversed()
         
         return output
     }
     
     mutating func deQueue() -> [T] {
-        backwardStack = popAndBackwardPushStack(firstStack)
+        backwardStack = reversedStack(firstStack)
         backwardStack.removeLast()
-        firstStack = popAndBackwardPushStack(backwardStack)
+        firstStack = reversedStack(backwardStack)
         
         return firstStack
     }
