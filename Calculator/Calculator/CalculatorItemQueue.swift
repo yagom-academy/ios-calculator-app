@@ -8,6 +8,7 @@
 struct CalculatorItemQueue: CalculateItem {
     var enqueueStack: [String] = []
     var dequeueStack: [String] = []
+    
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
@@ -21,6 +22,7 @@ struct CalculatorItemQueue: CalculateItem {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
+        
         return dequeueStack.popLast()
     }
     
