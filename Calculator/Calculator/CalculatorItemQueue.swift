@@ -6,5 +6,9 @@
 //
 
 struct CalculatorItemQueue {
+    var itemQueue: [String] = []
     
+    mutating func enqueue(_ element: String) {
+        itemQueue.append(element)
+    }
 }
