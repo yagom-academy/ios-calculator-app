@@ -20,4 +20,15 @@ final class CalculatorNodeTests: XCTestCase {
         try super.tearDownWithError()
 		sut = nil
     }
+	
+	func tests_Node클래스의_value프로퍼티에_T타입이_들어감() {
+		// given
+		let testValue = Node(value: 1)
+		
+		// when
+		let result = Node(value: 1)
+		
+		// then
+		XCTAssertEqual(testValue, result)
+	}
 }
