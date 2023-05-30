@@ -12,13 +12,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
         list.append(data: value)
     }
     
-    mutating func dequeue() {
-        
+    mutating func dequeue() -> T? {
+        let removedData = list.remove()
+        return removedData
     }
     
     mutating func removeAll() {
-        
+        list.removeAll()
     }
-    
-    
 }
