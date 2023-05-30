@@ -27,11 +27,11 @@ final class CalculatorTests: XCTestCase {
         let nextInput = 20
         
         //when
-        var result = sut.enQueue(input)
-        result = sut.enQueue(nextInput)
+        sut.enQueue(input)
+        sut.enQueue(nextInput)
         
         //then
-        XCTAssertEqual(result, [10, 20])
+        XCTAssertEqual(sut.firstStack, [10, 20])
     }
     
     func test_firstStack에서_pop한요소가_backwardStack에_push되는지() {

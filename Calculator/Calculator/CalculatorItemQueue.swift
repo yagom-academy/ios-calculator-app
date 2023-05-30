@@ -11,10 +11,8 @@ struct CalculatorItemQueue<T> {
     var firstStack: [T] = []
     var backwardStack: [T] = []
     
-    mutating func enQueue(_ input: T) -> [T] {
+    mutating func enQueue(_ input: T){
         firstStack.append(input)
-        
-        return firstStack
     }
     
     mutating func popAndBackwardPushStack(_ stack: [T]) -> [T] {
