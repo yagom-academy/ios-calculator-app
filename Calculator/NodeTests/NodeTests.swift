@@ -63,6 +63,6 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<Int>(data: expectedData)
         
         // then
-        XCTAssertEqual(testNode.next, nil)
+        XCTAssertTrue(testNode.next == nil)
     }
 }
