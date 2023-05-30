@@ -5,9 +5,7 @@
 //  Created by MARY on 2023/05/30.
 //
 
-protocol CalculateItem { }
-
-class Item {
+final class Item {
     var data: String
     var next: Item?
     var prev: Item?
@@ -19,18 +17,20 @@ class Item {
     }
 }
 
-struct CalculatorItemQueue: CalculateItem {
-    var head: Item?
-    var tail: Item?
-    var size: Int = 0
+protocol CalculateItem { }
+
+final class CalculatorItemQueue: CalculateItem {
+    private var front: Item?
+    private var tail: Item?
+    private(set) var size: Int = 0
     var isEmpty: Bool { size == 0 }
     
-    mutating func enqueue(_ element: String) {
+    func enqueue(_ element: String) {
         let newItem = Item(data: element)
         
         if isEmpty {
-            head = newItem
-            tail = head
+            front = newItem
+            tail = front
         } else {
             tail?.next = newItem
             newItem.prev = tail
@@ -39,24 +39,39 @@ struct CalculatorItemQueue: CalculateItem {
         size += 1
     }
     
-    mutating func dequeue() -> String? {
-        guard let result = head?.data else { return nil }
+    func dequeue() -> String? {
+        guard let result = front?.data else { return nil }
         
-        head = head?.next
-        head?.prev = nil
+        front = front?.next
+        front?.prev = nil
         size -= 1
         
         if isEmpty {
-            head = nil
+            front = nil
             tail = nil
         }
         
         return result
     }
     
-    mutating func resetQueue() {
-        head = nil
+    func resetQueue() {
+        front = nil
         tail = nil
         size = 0
+    }
+    
+    func takeQueueAsArray() -> [String]? {
+        guard var _ = front else { return nil }
+        var result: [String] = []
+        var pointer = front
+        
+        while pointer != nil {
+            if let data = pointer?.data {
+                result.append(data)
+            }
+            pointer = pointer?.next
+        }
+        
+        return result
     }
 }
