@@ -27,8 +27,8 @@ final class CalculatorTests: XCTestCase {
         let nextInput = 20
         
         //when
-        sut.enQueue(input)
-        sut.enQueue(nextInput)
+        sut.enqueue(input)
+        sut.enqueue(nextInput)
         
         //then
         XCTAssertEqual(sut.firstStack, [10, 20])
@@ -36,9 +36,9 @@ final class CalculatorTests: XCTestCase {
     
     func test_firstStack에서_pop한요소가_backwardStack에_push되는지() {
         //given
-        sut.enQueue(1)
-        sut.enQueue(2)
-        sut.enQueue(3)
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         
         //when
         let result = sut.reversedStack(sut.firstStack)
@@ -49,15 +49,24 @@ final class CalculatorTests: XCTestCase {
     
     func test_deQueue_하면선입선출결과나오는지() {
         //given
-        sut.enQueue(1)
-        sut.enQueue(2)
-        sut.enQueue(3)
+        sut.enqueue(1)
+        sut.enqueue(2)
         
         //when
-        let result = sut.deQueue()
+        let result = sut.dequeue()
         
         //then
-        XCTAssertEqual(result, [2, 3])
+        XCTAssertEqual(result, 1)
+        XCTAssertEqual(sut.firstStack, [2])
     }
-
+    
+    func test_deQueue_에서할게없을때_nil반환하는지() {
+        //given
+        
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(sut.dequeue(), nil)
+    }
 }
