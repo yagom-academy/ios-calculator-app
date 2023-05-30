@@ -79,20 +79,51 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(newCount, 0)
         XCTAssertNil(sut.head)
     }
-    
+
     func test_calculateAll_전체목록을_연산하고_결과를_반환한다() {
         // given
         let expected: Double = 2.5
-        sut.enqueue(9)
+        sut.enqueue(10.0)
+        sut.enqueue("-")
+        sut.enqueue(1.0)
         sut.enqueue("+")
-        sut.enqueue(-8)
+        sut.enqueue((-8))
         sut.enqueue("*")
         sut.enqueue(5)
         sut.enqueue("/")
         sut.enqueue(2)
+
         let result = try? sut.calculateAll()
         
         XCTAssertEqual(expected, result)
+    }
+    
+    func test_calculateAll_잘못된_연산자가_들어가면_계산시_오류를_반환한다() {
+        // given
+        sut.enqueue(10)
+        sut.enqueue("?")
+        
+        // when & then
+        XCTAssertThrowsError(try sut.calculateAll()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidOperator)
+        }
+    }
+    
+    func test_calculateAll_잘못된_항목이_들어가면_계산시_오류를_반환한다() {
+        // given
+        class TestType: CalculateItem {}
+        
+        sut.enqueue(TestType())
+        
+        // when & then
+        XCTAssertThrowsError(try sut.calculateAll()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidInput)
+        }
+    }
+    
+    func test_calculateAll_queue가_비어있으면_0_0을_반환한다() {
+        let result = try? sut.calculateAll()
+        XCTAssertEqual(0.0, result)
     }
 }
 

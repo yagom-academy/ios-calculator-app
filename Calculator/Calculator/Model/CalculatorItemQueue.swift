@@ -43,4 +43,28 @@ struct CalculatorItemQueue {
             count -= 1
         }
     }
+    
+    func calculateAll() throws -> Double {
+        var result: Double = 0.0
+        guard let headNode = head else {
+            return result
+        }
+        var cursor: CalculatorItemNode = headNode
+        var currentOperator: OperatorType = .add
+        
+        for _ in (0..<count) {
+            if cursor.value is String {
+                currentOperator = try cursor.castValueIntoOperator()
+
+            } else {
+                let newValue = try cursor.castValueIntoDouble()
+                result = currentOperator.formula(result, newValue)
+            }
+            guard let nextNode = cursor.next else {
+                break
+            }
+            cursor = nextNode
+        }
+        return result
+    }
 }
