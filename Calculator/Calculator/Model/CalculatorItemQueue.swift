@@ -6,21 +6,21 @@
 //
 
 struct CalculatorItemQueue {
-    var queue: [CalculateItem] = []
+    var queue = CalculaterItemLinkedList()
     
     func count() -> Int {
         return queue.count
     }
     
     func isEmpty() -> Bool {
-        return queue.isEmpty
+        return queue.head == nil
     }
     
     mutating func enqueue(_ calculateItem: CalculateItem) {
-        queue.append(calculateItem)
+        queue.apend(CalculateItemNode(item: calculateItem))
     }
     
     mutating func dequeue() -> CalculateItem? {
-        return queue.isEmpty ? nil : queue.removeFirst()
+        return queue.removeFirst()?.item
     }
 }
