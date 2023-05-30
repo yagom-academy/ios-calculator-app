@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "CD244B72-ABFC-441D-A88B-5A9ABB71DFFA",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BAFFB9B42A25D552000FBBFA",
+        "name" : "CalculatorItemQueueTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BAFFB9A72A25D538000FBBFA",
+        "name" : "CalculatorNodeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
