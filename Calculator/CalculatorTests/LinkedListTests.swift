@@ -91,4 +91,17 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(removedFirstData, firstInput)
         XCTAssertEqual(removedSecondData, secondInput)
     }
+    
+    func test_removeAll메서드가실행되면_head와tail이nil로설정되는지() {
+        let input = 1
+        sut.append(data: input)
+        
+        sut.removeAll()
+        let head = sut.head
+        let tail = sut.tail
+        
+        XCTAssertNil(head)
+        XCTAssertNil(tail)
+        
+    }
 }

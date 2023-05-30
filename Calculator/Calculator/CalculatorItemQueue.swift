@@ -7,4 +7,6 @@
 
 struct CalculatorItemQueue<T: CalculateItem> {
     var queue: LinkedList<T>
+    
+    
 }
