@@ -8,14 +8,14 @@
 import Foundation
 
 struct CalculatorItemQueue<T> {
-    var firstStack: [T] = []
-    var backwardStack: [T] = []
+    private var firstStack: [T] = []
+    private var backwardStack: [T] = []
     
     mutating func enQueue(_ input: T){
         firstStack.append(input)
     }
     
-    mutating func popAndBackwardPushStack(_ stack: [T]) -> [T] {
+    private mutating func popAndBackwardPushStack(_ stack: [T]) -> [T] {
         var input = stack
         var output: [T] = []
         
