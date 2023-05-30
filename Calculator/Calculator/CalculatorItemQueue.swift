@@ -11,4 +11,8 @@ struct CalculatorItemQueue {
     mutating func enqueue(_ element: String) {
         itemQueue.append(element)
     }
+    
+    mutating func dequeue() -> String? {
+        return itemQueue.isEmpty ? nil : itemQueue.removeFirst()
+    }
 }
