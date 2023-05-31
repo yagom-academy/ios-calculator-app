@@ -123,7 +123,13 @@ final class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
         
         // then
-        XCTAssertThrowsError(try sut.result())
+        XCTAssertThrowsError(try sut.result()) { error in
+            if let error = error as? CalculationError {
+                XCTAssertEqual(error, .divisionByZero)
+            } else {
+                XCTFail("예상하지 않은 에러 출력 \(error)")
+            }
+        }
     }
     
     func test_lhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {
@@ -133,7 +139,13 @@ final class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
         
         // then
-        XCTAssertThrowsError(try sut.result())
+        XCTAssertThrowsError(try sut.result()) { error in
+            if let error = error as? CalculationError {
+                XCTAssertEqual(error, .notFoundOperand)
+            } else {
+                XCTFail("예상하지 않은 에러 출력 \(error)")
+            }
+        }
     }
     
     func test_rhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {
@@ -143,7 +155,13 @@ final class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
         
         // then
-        XCTAssertThrowsError(try sut.result())
+        XCTAssertThrowsError(try sut.result()) { error in
+            if let error = error as? CalculationError {
+                XCTAssertEqual(error, .notFoundOperand)
+            } else {
+                XCTFail("예상하지 않은 에러 출력 \(error)")
+            }
+        }
     }
     
     func test_operator의_옵셔널_바인딩을_실패했을_때_NotFoundOperator_에러가_발생한다() {
@@ -153,7 +171,13 @@ final class FormulaTests: XCTestCase {
         sut = Formula(operands: operands, operators: operators)
         
         // then
-        XCTAssertThrowsError(try sut.result())
+        XCTAssertThrowsError(try sut.result()) { error in
+            if let error = error as? CalculationError {
+                XCTAssertEqual(error, .notFoundOperator)
+            } else {
+                XCTFail("예상하지 않은 에러 출력 \(error)")
+            }
+        }
     }
     
 
