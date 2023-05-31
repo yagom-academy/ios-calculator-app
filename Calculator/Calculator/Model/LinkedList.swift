@@ -22,7 +22,17 @@ struct LinkedList<T> {
     private var tail: Node<T>?
     
     var count: Int = 0
-    var isEmpty: Bool { head == nil }
+    var isEmpty: Bool {
+        return head == nil
+    }
+    
+    var first: Node<T>? {
+        return head
+    }
+    
+    var last: Node<T>? {
+        return tail
+    }
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
@@ -59,5 +69,13 @@ struct LinkedList<T> {
         }
     
         return removedData
+    }
+    
+    mutating func printAllList() {
+        var node = head
+        while node != nil {
+            print("\(String(describing: node?.data))", terminator: " -> ")
+            node = node?.next
+        }
     }
 }
