@@ -67,6 +67,22 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.head?.fetchNext()?.fetchData(), secondNodeData)
     }
     
+    func test_append_입력을받으면이전Node의next에다음Node를저장한다() {
+        // given
+        let firstNodeData: Int = 0
+        let secondNodeData: Int = 1
+        let thirdNodeData: Int = 2
+        
+        // when
+        sut.append(firstNodeData)
+        sut.append(secondNodeData)
+        sut.append(thirdNodeData)
+        
+        // then
+        XCTAssertEqual(sut.head?.fetchNext()?.fetchData(), secondNodeData)
+        XCTAssertIdentical(sut.head?.fetchNext()?.fetchNext(), sut.tail)
+    }
+    
     func test_removeFirst_제거한Node의data를반환한다() {
         // given
         let firstNodeData: Int = 0
