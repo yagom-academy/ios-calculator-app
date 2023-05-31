@@ -83,9 +83,11 @@ extension CalculatorItemQueueTests {
         //when
         systemUnderTest.enqueue(element: input)
         let result = systemUnderTest.dequeue()
+        let remainListArray = systemUnderTest.returnListValue()
         
         //then
         XCTAssertEqual(result, input)
+        XCTAssertEqual(remainListArray, nil)
     }
     
     func test_빈List를_dequeue했을때_queue의Element를_확인한다() {

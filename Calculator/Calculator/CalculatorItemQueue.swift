@@ -34,7 +34,16 @@ class CalculatorItemQueue<Element: CalculateItem> {
     }
     
     func dequeue() -> Element? {
-        return nil
+        guard headItem != nil else { return nil }
+        
+        var prevHeadItem = headItem
+        let element = headItem?.element
+        
+        headItem = headItem?.nextItem
+        prevHeadItem?.nextItem = nil
+        prevHeadItem = nil
+        
+        return element
     }
     
     func returnListValue() -> [Element]? {
