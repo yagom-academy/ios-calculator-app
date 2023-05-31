@@ -36,4 +36,14 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_append_최초로_append_호출시_head와_tail은_같은_노드를_가진다() {
+        // given
+        sut.append(1)
+        // when
+        var headValue = sut.checkHead()
+        var tailValue = sut.checkHead()
+        // then
+        XCTAssertEqual(hashValue, tailValue)
+    }
 }
