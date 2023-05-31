@@ -25,31 +25,4 @@ final class CalculatorItemQueue {
     func isEmpty() -> Bool {
         return items.isEmpty ? true : false
     }
-    
-    func calculate() -> String? {
-        guard let firstItem = dequeue() as? NumberItem else { return nil }
-        var currentOperation: OperatorItem?
-        var result = firstItem.number
-        
-        while let item = dequeue() {
-            if let numberItem = item as? NumberItem {
-                guard let operation = currentOperation else { continue }
-                switch operation {
-                case .add:
-                    result += numberItem.number
-                case .subtract:
-                    result -= numberItem.number
-                case .multiply:
-                    result *= numberItem.number
-                case .divide:
-                    guard numberItem.number != 0 else { return "NaN" }
-                    result /= numberItem.number
-                }
-            } else if let operatorItem = item as? OperatorItem {
-                currentOperation = operatorItem
-            }
-        }
-        
-        return NumberItem(number: result).numberDescription
-    }
 }
