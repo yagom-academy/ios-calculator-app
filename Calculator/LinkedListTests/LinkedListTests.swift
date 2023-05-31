@@ -43,16 +43,15 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(testLinkedList.head === expectedHead)
     }
     
-    func test_append_head가새로입력받은Node를반환한다() {
+    func test_append_head가새로입력받은data를반환한다() {
         // given
-        let testNodeData: Int = 0
-        let expectedHead: Node = Node(data: testNodeData)
+        let expectedData: Int = 0
         
         // when
-        sut.append(testNodeData)
+        sut.append(expectedData)
         
         // then
-        XCTAssertTrue(sut.head === expectedHead)
+        XCTAssertTrue(sut.head?.data == expectedData)
     }
     
     func test_append_다음입력을받으면이전Node의next에다음Node를저장한다() {
