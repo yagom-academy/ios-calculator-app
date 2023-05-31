@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue?
+    var sut: CalculatorItemQueue<Any>?
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Any>()
         
     }
 
@@ -22,21 +22,23 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_CalculatorItemQueue타입이_있는지_확인() {
-        //given
-        let queue:CalculatorItemQueue?
-        //when
-        queue = CalculatorItemQueue()
-        //then
-        XCTAssertNotNil(queue)
+    func test_CalculatorItemQueue에_enqueue메서드를_실행할때_linkedList인스턴스의_enqueue메서드를_실행해주는지_확인() {
+        //given, when, then
+        sut?.enqueue(1)
+        sut?.enqueue(2)
+        sut?.enqueue(3)
+        sut?.enqueue(4)
     }
     
-    func test_CalculatorItemQueue타입이_CalculateItem프로토콜을_준수하고_있는지_확인() {
+    func test_CalculatorItemQueue에_dequeue메서드를_실행할때_linkedList인스턴스의_dequeue메서드를_실행해주는지_확인() {
         //given
-        let queue = CalculatorItemQueue()
-        //when,then
-        var queueProtocol = try? queue as? CalculateItem
-        //then
-        XCTAssertNotNil(queueProtocol)
+        sut?.enqueue(1)
+        sut?.enqueue(2)
+        sut?.enqueue(3)
+        //when, then
+        XCTAssertNotNil(sut?.dequeue())
+        XCTAssertNotNil(sut?.dequeue())
+        XCTAssertNotNil(sut?.dequeue())
+        XCTAssertNil(sut?.dequeue())
     }
 }
