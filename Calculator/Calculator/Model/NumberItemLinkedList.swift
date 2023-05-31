@@ -5,7 +5,7 @@
 //  Created by Hemg on 2023/05/31.
 //
 final class NumberItemNode<T> {
-    let value: T?
+    var value: T?
     var next: NumberItemNode?
     
     init(value: T?) {
@@ -13,7 +13,7 @@ final class NumberItemNode<T> {
     }
 }
 
-struct NumberItemLinkedList<T: Equatable>: CalculateItem {
+struct NumberItemLinkedList<T>: CalculateItem {
     private var head: NumberItemNode<T>?
     private var tail: NumberItemNode<T>?
     
@@ -30,34 +30,19 @@ struct NumberItemLinkedList<T: Equatable>: CalculateItem {
         tail = newNode
     }
     
-    mutating func dequeue() {
-        guard head != nil else { return }
+    mutating func dequeue() -> T? {
+        guard let currentHead = head else { return nil }
         
-        guard head?.next != nil else {
+        guard currentHead.next != nil else {
             head = nil
             tail = nil
-            return
+            return currentHead.value
         }
+        head = currentHead.next
         
-        var node = head
-        
-        while node?.next?.next != nil {
-            node = node?.next
-        }
-        node?.next = nil
-        tail = node
+        return currentHead.value
     }
     
-    func checkContainsItem(_ item: T) -> (contains: Bool, value: T?) {
-        var currentNode = head
-        
-        while let node = currentNode {
-            guard node.value == item else {
-                currentNode = node.next
-                continue
-            }
-            return (true, node.value)
-        }
-        return (false, nil)
-    }
 }
+
+

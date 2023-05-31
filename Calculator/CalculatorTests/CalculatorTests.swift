@@ -37,37 +37,23 @@ final class CalculatorTests: XCTestCase {
         }
     }
     
-    func testAppendItem() {
-        // Given
-        let item = 5
+    func test_enqueue숫자() {
+        let firstInput = 1
+        let secondInput = 2
+        let thirdInput = 3
         
-        // When
-        sut.enqueueItem(item: item)
-        let contains = sut.checkContainsItem(item)
+        sut.enqueueItem(item: firstInput)
+        sut.enqueueItem(item: secondInput)
+        sut.enqueueItem(item: thirdInput)
         
-        // Then
-        XCTAssertTrue(contains.contains)
-        XCTAssertEqual(contains.value, item)
+        let result = sut.dequeue()
+        let result1 = sut.dequeue()
+        let result2 = sut.dequeue()
+        
+        XCTAssertEqual(result, firstInput)
+        XCTAssertEqual(result1, secondInput)
+        XCTAssertEqual(result2, thirdInput)
+  
     }
-    
-    func test_removeItem() {
-        let firstItem = 5
-        let secondItem = 6
         
-        sut.enqueueItem(item: firstItem)
-        sut.enqueueItem(item: secondItem)
-        
-        sut.dequeue()
-        
-        let contains = sut.checkContainsItem(firstItem)
-       
-        XCTAssertEqual(contains.value, firstItem)
-        
-        XCTAssertEqual(contains.contains, true)
-        XCTAssertTrue(contains.contains)
-        
-        let contain = sut.checkContainsItem(secondItem)
-        XCTAssertFalse(contain.contains)
-    }
-    
 }
