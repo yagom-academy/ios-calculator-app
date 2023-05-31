@@ -45,14 +45,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(value1)
         sut.enqueue(value2)
         let headBefore = sut.head
-        let valuefromHeadBefore = headBefore?.value as? String
+        let valueFromHeadBefore = headBefore?.value as? String
         
         // when
         let result = try? sut.dequeue() as? String
         let headAfter = sut.head
         
         // then
-        XCTAssertEqual(valuefromHeadBefore, result)
+        XCTAssertEqual(valueFromHeadBefore, result)
         XCTAssertNotIdentical(headBefore, headAfter)
     }
     

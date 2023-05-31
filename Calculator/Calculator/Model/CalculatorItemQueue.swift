@@ -5,13 +5,13 @@
 //  Created by Min Hyun on 2023/05/29.
 //
 
-protocol LinkedListQueue {
+protocol QueueType {
     mutating func enqueue(_ value: CalculateItem)
     mutating func dequeue() throws -> CalculateItem
     mutating func removeAll()
 }
 
-struct CalculatorItemQueue: LinkedListQueue {
+struct CalculatorItemQueue: QueueType {
     private var head: CalculatorItemNode? = nil
     private var tail: CalculatorItemNode? = nil
     private var count: Int = 0

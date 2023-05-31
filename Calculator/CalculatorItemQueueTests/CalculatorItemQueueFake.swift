@@ -4,11 +4,12 @@
 //
 //  Created by Min Hyun on 2023/05/31.
 //
+@testable import Calculator
 
-struct CalculatorItemQueueFake: LinkedListQueue {
-    private(set) var head: CalculatorItemNode? = nil
-    private(set) var tail: CalculatorItemNode? = nil
-    private(set) var count: Int = 0
+struct CalculatorItemQueueFake: QueueType {
+    var head: CalculatorItemNode? = nil
+    var tail: CalculatorItemNode? = nil
+    var count: Int = 0
     
     mutating func enqueue(_ value: CalculateItem) {
         let newNode = CalculatorItemNode(value)
