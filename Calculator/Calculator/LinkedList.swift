@@ -10,6 +10,10 @@ class LinkedList<T> {
     private var tail: Node<T>?
     
     func checkHeadNil() -> Node<T>? {
-        return nil
+        return head
+    }
+    
+    func checkTailNil() -> Node<T>? {
+        return tail
     }
 }
