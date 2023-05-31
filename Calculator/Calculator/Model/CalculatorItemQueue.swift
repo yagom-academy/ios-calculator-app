@@ -6,14 +6,13 @@
 //
 
 struct CalculatorItemQueue {
-    private(set) var queueForInt: [Int] = []
-    private(set) var queueForString: [String] = []
+    private(set) var queue: [any CalculateItem]
     
-    mutating func enqueueForInt(element: Int) {
-        queueForInt.append(element)
+    init(queue: [any CalculateItem] = []) {
+        self.queue = queue
     }
     
-    mutating func enqueueForString(element: String) {
-        queueForString.append(element)
+    mutating func enqueue(element: any CalculateItem) {
+        queue.append(element)
     }
 }
