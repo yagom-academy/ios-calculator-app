@@ -20,6 +20,32 @@ final class LinkedListTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_노드의갯수를_올바르게_출력한다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        sut.append(4)
+        let expectation = 4
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_head가_nil이면_isEmpty는_true를반환한다() {
+        // given
+        let input = sut.head
+        
+        // when
+        if input == nil {
+            // then
+            XCTAssertTrue(sut.isEmpty)
+        }
+    }
 
     func test_노드가없을때_apped를하면_head와tail이같다() {
         // given
