@@ -7,7 +7,7 @@
 
 protocol CalculateItem { }
 
-class CalculatorItemQueue: CalculateItem {
+class CalculatorItemQueue<Element: CalculateItem> {
     
     func push() {
         
