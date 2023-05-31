@@ -27,6 +27,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //when
         systemUnderTest.enqueue(element: input)
         let result = systemUnderTest.returnListValue()
+        
         //then
         XCTAssertEqual(result, [3.0])
     }

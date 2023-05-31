@@ -35,7 +35,7 @@ class CalculatorItemQueue<Element: CalculateItem> {
     }
     
     func returnListValue() -> [Element]? {
-        guard headItem == nil else { return nil }
+        guard headItem != nil else { return nil }
         
         var item: Item? = headItem
         var listArray = [Element]()
