@@ -21,7 +21,7 @@ final class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_removeFirst_1을_append한뒤_popFirst를_호출하면_1을_반환한다() {
+    func test_popFirst_1을_append한뒤_popFirst를_호출하면_1을_반환한다() {
         // given
         sut.append(1)
         
@@ -33,7 +33,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test_removeFirst_1과_2를_append한뒤_popFirst를_2번_호출하면_2를_반환한다() {
+    func test_popFirst_1과_2를_append한뒤_popFirst를_2번_호출하면_2를_반환한다() {
         // given
         sut.append(1)
         sut.append(2)
@@ -45,5 +45,17 @@ final class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_popFirst_1을_append한뒤_popFirst를_2번_호출하면_nil을_반환한다() {
+        // given
+        sut.append(1)
+        
+        // when
+        var result = sut.popFirst()
+        result = sut.popFirst()
+        
+        // then
+        XCTAssertNil(result)
     }
 }
