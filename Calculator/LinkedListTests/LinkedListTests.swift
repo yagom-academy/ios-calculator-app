@@ -66,4 +66,24 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.head?.next?.data, secondNodeData)
     }
+    
+    func test_removeFirst_제거한Node의data를반환한다() {
+        // given
+        let firstNodeData: Int = 0
+        let secondNodeData: Int = 1
+        let thirdNodeData: Int = 2
+        
+        // when
+        sut.append(firstNodeData)
+        sut.append(secondNodeData)
+        sut.append(thirdNodeData)
+        let firstData: Int = sut.removeFirst()
+        let secondData: Int = sut.removeFirst()
+        let thirdData: Int = sut.removeFirst()
+        
+        // then
+        XCTAssertEqual(firstData, firstNodeData)
+        XCTAssertEqual(secondData, secondNodeData)
+        XCTAssertEqual(thirdData, thirdNodeData)
+    }
 }
