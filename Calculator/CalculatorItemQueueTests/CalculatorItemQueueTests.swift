@@ -64,48 +64,5 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
-    
-    func test_calculate_메서드를_사용해서_2_와_3을_더하면_5가_반환된다() {
-        sut.enqueue(item: NumberItem(number: 2))
-        sut.enqueue(item: OperatorItem.add)
-        sut.enqueue(item: NumberItem(number: 3))
-        let expectation = "5"
-        
-        let result = sut.calculate()
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_calculate_메서드를_사용해서_5_와_6을_뺴면_마이너스_1이_반환된다() {
-        sut.enqueue(item: NumberItem(number: 5))
-        sut.enqueue(item: OperatorItem.subtract)
-        sut.enqueue(item: NumberItem(number: 6))
-        let expectation = "-1"
-        
-        let result = sut.calculate()
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_calculate_메서드를_사용해서_2_점_3와_3_점_2을_곱하면_7_점_3_6_이_반환된다() {
-        sut.enqueue(item: NumberItem(number: 2.3))
-        sut.enqueue(item: OperatorItem.multiply)
-        sut.enqueue(item: NumberItem(number: 3.2))
-        let expectation = "7.36"
-        
-        let result = sut.calculate()
-        
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_calculate_메서드를_사용해서_2를_0으로_나누면_NaN을_반환한다() {
-        sut.enqueue(item: NumberItem(number: 5))
-        sut.enqueue(item: OperatorItem.divide)
-        sut.enqueue(item: NumberItem(number: 0))
-        let expectation = "NaN"
-        
-        let result = sut.calculate()
-        XCTAssertEqual(result, expectation)
-    }
 }
 
