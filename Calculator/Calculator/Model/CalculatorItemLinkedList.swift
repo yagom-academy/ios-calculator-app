@@ -1,24 +1,24 @@
 //
-//  NumberItemLinkedList.swift
+//  CalculatorItemLinkedList.swift
 //  Calculator
 //
 //  Created by Hemg on 2023/05/31.
 //
-final class NumberItemNode<T> {
-    var value: T?
-    var next: NumberItemNode?
+final class CalculatorItemNode<T> {
+    var value: T
+    var next: CalculatorItemNode?
     
-    init(value: T?) {
+    init(value: T) {
         self.value = value
     }
 }
 
-struct NumberItemLinkedList<T>: CalculateItem {
-    private var head: NumberItemNode<T>?
-    private var tail: NumberItemNode<T>?
+final class CalculatorItemLinkedList<T>: CalculateItem {
+    private var head: CalculatorItemNode<T>?
+    private var tail: CalculatorItemNode<T>?
     
-    mutating func enqueueItem(item: T?) {
-        let newNode = NumberItemNode(value: item)
+    func enqueueItem(item: T) {
+        let newNode = CalculatorItemNode(value: item)
         
         guard head != nil else {
             head = newNode
@@ -30,7 +30,7 @@ struct NumberItemLinkedList<T>: CalculateItem {
         tail = newNode
     }
     
-    mutating func dequeue() -> T? {
+    func dequeue() -> T? {
         guard let currentHead = head else { return nil }
         
         guard currentHead.next != nil else {
@@ -42,7 +42,6 @@ struct NumberItemLinkedList<T>: CalculateItem {
         
         return currentHead.value
     }
-    
 }
 
 

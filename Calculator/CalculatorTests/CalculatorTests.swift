@@ -10,11 +10,11 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     
-    var sut: NumberItemLinkedList<Int>!
+    var sut: CalculatorItemLinkedList<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = NumberItemLinkedList<Int>()
+        sut = CalculatorItemLinkedList<Int>()
     }
     
     override func tearDownWithError() throws {
@@ -37,7 +37,7 @@ final class CalculatorTests: XCTestCase {
         }
     }
     
-    func test_enqueue숫자() {
+    func test_enqueue숫자값확인() {
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
