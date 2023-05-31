@@ -6,5 +6,5 @@
 //
 
 struct LinkedList {
-    var head: Node<Int>
+    var head: Node<Int>?
 }
