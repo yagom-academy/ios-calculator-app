@@ -7,6 +7,7 @@
 
 struct LinkedList<T> {
     var head: Node<T>?
+    var tail: Node<T>?
     
     init(head: Node<T>?) {
         self.head = head
@@ -15,16 +16,12 @@ struct LinkedList<T> {
     mutating func append(_ data: T) {
         if head == nil {
             head = Node(data: data)
+            tail = head
             return
         }
         
-        var node = head
-        
-        while node?.fetchNext() != nil {
-            node = node?.fetchNext()
-        }
-        
-        node?.updateNext(Node(data: data))
+        tail?.updateNext(Node(data: data))
+        tail = tail?.fetchNext()
     }
     
     mutating func removeFirst() -> T? {
