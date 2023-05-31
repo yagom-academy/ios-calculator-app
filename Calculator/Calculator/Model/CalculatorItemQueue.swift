@@ -6,6 +6,7 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
+    
     private var elements: [Element]
     
     init(_ elements:[Element] = []) {
@@ -26,14 +27,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     
     mutating func clear() {
         self.elements.removeAll()
-    }
-    
-    var getElements: [Element] {
-        return self.elements
-    }
-    
-    var peek: Element? {
-        return self.elements.first
     }
     
     var isEmpty: Bool {
