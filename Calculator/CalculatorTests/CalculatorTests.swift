@@ -50,4 +50,12 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_queue배열이_비어있을때_true를_반환하는지_확인() {
+        var input = CalculatorItemQueue(queue: [])
+        
+        let result =  input.isEmpty
+        
+        XCTAssertTrue(result)
+    }
 }
