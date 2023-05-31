@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LinkedListTest<T: CalculateItem> {
+struct LinkedListTest<T> {
     var head: Node<T>?
     var tail: Node<T>?
     
@@ -20,32 +20,31 @@ struct LinkedListTest<T: CalculateItem> {
     }
         
     mutating func append(_ data: T) {
-        let node = Node(data: data)
-        
         if isEmpty {
-            head = node
+            head = Node(data: data)
             tail = head
         } else {
+            let node = Node(data: data)
             tail?.next = node
             tail = node
         }
+        
         count += 1
     }
     
     mutating func removeFirst() -> T? {
-        let node = head
         var removedData: T?
         
         if isEmpty {
             removedData = nil
-        } else if node?.next == nil {
+        } else if head?.next == nil {
+            removedData = head?.data
             head = nil
             tail = nil
-            removedData = node?.data
             count -= 1
         } else {
-            head = node?.next
-            removedData = node?.data
+            removedData = head?.data
+            head = head?.next
             count -= 1
         }
     
