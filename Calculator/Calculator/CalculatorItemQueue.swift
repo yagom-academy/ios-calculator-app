@@ -8,16 +8,12 @@
 final class Item {
     var data: String
     var next: Item?
-    var prev: Item?
     
-    init(data: String, next: Item? = nil, prev: Item? = nil) {
+    init(data: String, next: Item? = nil) {
         self.data = data
         self.next = next
-        self.prev = prev
     }
 }
-
-protocol CalculateItem { }
 
 final class CalculatorItemQueue: CalculateItem {
     private var front: Item?
@@ -33,7 +29,6 @@ final class CalculatorItemQueue: CalculateItem {
             tail = front
         } else {
             tail?.next = newItem
-            newItem.prev = tail
             tail = newItem
         }
         size += 1
@@ -43,7 +38,6 @@ final class CalculatorItemQueue: CalculateItem {
         guard let result = front?.data else { return nil }
         
         front = front?.next
-        front?.prev = nil
         size -= 1
         
         if isEmpty {
