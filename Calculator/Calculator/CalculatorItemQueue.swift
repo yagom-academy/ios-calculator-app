@@ -8,31 +8,31 @@
 import Foundation
 
 struct CalculatorItemQueue<T>: CalculatorItem {
-    private var firstStack: [T] = []
-    private var backwardStack: [T] = []
+    private var enqueueStack: [T] = []
+    private var dequeueStack: [T] = []
     var count: Int {
-        return firstStack.count + backwardStack.count
+        return enqueueStack.count + dequeueStack.count
     }
     var isEmpty: Bool {
-        return firstStack.isEmpty && backwardStack.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     var first: T? {
-        if !backwardStack.isEmpty {
-            return backwardStack.last
+        if !dequeueStack.isEmpty {
+            return dequeueStack.last
         } else {
-            return firstStack.first
+            return enqueueStack.first
         }
     }
     var last: T? {
-        if !firstStack.isEmpty {
-            return firstStack.last
+        if !enqueueStack.isEmpty {
+            return enqueueStack.last
         } else {
-            return backwardStack.first
+            return dequeueStack.first
         }
     }
     
     mutating func enqueue(_ input: T) {
-        firstStack.append(input)
+        enqueueStack.append(input)
     }
     
     mutating func dequeue() -> T? {
@@ -40,16 +40,16 @@ struct CalculatorItemQueue<T>: CalculatorItem {
             return nil
         }
         
-        if backwardStack.isEmpty {
-            backwardStack = firstStack.reversed()
-            firstStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
         
-        return backwardStack.removeLast()
+        return dequeueStack.removeLast()
     }
     
     mutating func clear() {
-        firstStack = []
-        backwardStack = []
+        enqueueStack = []
+        dequeueStack = []
     }
 }
