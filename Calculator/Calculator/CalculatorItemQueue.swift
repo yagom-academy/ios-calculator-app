@@ -9,11 +9,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
     private(set) var list: LinkedList<T> = LinkedList()
     
     mutating func enqueue(_ value: T) {
-        list.append(data: value)
+        list.appendLast(data: value)
     }
     
     mutating func dequeue() -> T? {
-        let removedData = list.remove()
+        let removedData = list.removeFirst()
         return removedData
     }
     

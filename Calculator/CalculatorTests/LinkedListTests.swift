@@ -31,7 +31,7 @@ final class LinkedListTests: XCTestCase {
 
         let input = 1
         
-        sut.append(data: input)
+        sut.appendLast(data: input)
         let headData = sut.head?.data
         let tailData = sut.tail?.data
         
@@ -45,8 +45,8 @@ final class LinkedListTests: XCTestCase {
         let firstInput = 1
         let secondInput = 2
         
-        sut.append(data: firstInput)
-        sut.append(data: secondInput)
+        sut.appendLast(data: firstInput)
+        sut.appendLast(data: secondInput)
         let headData = sut.head?.data
         let tailData = sut.tail?.data
         
@@ -55,16 +55,16 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_isEmpty가true인경우_remove메서드가nil을반환하는지() {
-        let removedData = sut.remove()
+        let removedData = sut.removeFirst()
         
         XCTAssertEqual(removedData, nil)
     }
     
     func test_head가한개만존재할떄_head와tail이nil로설정되고_제거한값을리턴하는지() {
         let input = 1
-        sut.append(data: input)
+        sut.appendLast(data: input)
         
-        let removedData = sut.remove()
+        let removedData = sut.removeFirst()
         let head = sut.head
         let tail = sut.tail
         
@@ -77,12 +77,12 @@ final class LinkedListTests: XCTestCase {
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
-        sut.append(data: firstInput)
-        sut.append(data: secondInput)
-        sut.append(data: thirdInput)
+        sut.appendLast(data: firstInput)
+        sut.appendLast(data: secondInput)
+        sut.appendLast(data: thirdInput)
         
-        let removedFirstData = sut.remove()
-        let removedSecondData = sut.remove()
+        let removedFirstData = sut.removeFirst()
+        let removedSecondData = sut.removeFirst()
         let head = sut.head
         let tail = sut.tail
         
@@ -94,7 +94,7 @@ final class LinkedListTests: XCTestCase {
     
     func test_removeAll메서드가실행되면_head와tail이_nil로설정되는지() {
         let input = 1
-        sut.append(data: input)
+        sut.appendLast(data: input)
         
         sut.removeAll()
         let head = sut.head
