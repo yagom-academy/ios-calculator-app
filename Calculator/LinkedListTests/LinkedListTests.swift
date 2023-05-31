@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList!
+    var sut: LinkedList<Any>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -51,6 +51,19 @@ final class LinkedListTests: XCTestCase {
         let testLinkedList: LinkedList = LinkedList(head: expectedHead)
         
         // then
-        XCTAssertTrue(testLinkedList.head == expectedHead)
+        XCTAssertTrue(testLinkedList.head === expectedHead)
+    }
+    
+    func test_append_head가새로입력받은Node를반환한다() {
+        // given
+        let testNode: Node = Node(data: 0)
+        let expectedHead: Node = testNode
+        
+        // when
+        let testLinkedList: LinkedList = LinkedList<Int>()
+        testLinkedList.append(testNode)
+        
+        // then
+        XCTAssertTrue(testLinkedList.head === expectedHead)
     }
 }
