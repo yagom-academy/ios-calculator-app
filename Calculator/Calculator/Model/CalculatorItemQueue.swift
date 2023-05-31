@@ -26,10 +26,11 @@ struct CalculatorItemQueue {
         return queue.isEmpty ? nil : queue.first
     }
     
-    mutating func dequeue() -> [any CalculateItem] {
+    mutating func dequeue() -> (any CalculateItem)? {
         if reversedQueue.isEmpty {
             reversedQueue = queue.reversed()
+            queue.removeAll()
         }
-        return reversedQueue
+        return reversedQueue.popLast()
     }
 }
