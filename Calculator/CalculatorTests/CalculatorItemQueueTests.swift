@@ -25,10 +25,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         // given
         sut = CalculatorItemQueue<Double>()
         
-        //when
+        // when
         let result = sut.isEmpty
        
-        //then
+        // then
         XCTAssertTrue(result)
     }
     
