@@ -69,11 +69,18 @@ extension CalculatorItemQueueTests {
 extension CalculatorItemQueueTests {
     func test_3_4를_dequeue했을때_queue의Element를_확인한다() {
         //given
+        let input1 = 3.0
+        let input2 = 4.0
         
         //when
+        systemUnderTest.enqueue(element: input1)
+        systemUnderTest.enqueue(element: input2)
+        let result = systemUnderTest.dequeue()
+        let remainListArray = systemUnderTest.returnListValue()
         
         //then
-        
+        XCTAssertEqual(result, 3.0)
+        XCTAssertEqual(remainListArray, [4.0])
     }
     
     func test_3를_dequeue했을때_queue의Element를_확인한다() {
