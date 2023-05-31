@@ -14,25 +14,32 @@ final class LinkedListTests: XCTestCase {
     var sut: LinkedList<Int>!
 
     override func setUpWithError() throws {
-        sut = LinkedList(head: Node(data: 1))
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_append를하면_맨마지막에_들어가는지() {
+    func test_노드가없을때_apped를하면_head와tail이같다() {
         // given
-        let input = Node(data: 3)
+        sut.append(1)
         
         // when
-        sut.append(data: 5)
-        guard let result = sut.getLastNodeData()?.data else {
-            return
+        if sut.isEmpty {
+            // then
+            XCTAssertTrue(sut.head === sut.tail)
         }
+    }
+    
+    func test_노드가있을때_append를하면_추가된node가_tail이된다() {
+        // given
+        sut.append(1)
+        
+        // when
+        sut.append(2)
         
         // then
-        XCTAssertEqual(input.data, result)
+        XCTAssertEqual(sut.tail?.data, 2)
     }
-
 }
