@@ -49,7 +49,7 @@ struct CalculatorItemQueue<T>: CalculatorItem {
     }
     
     mutating func clear() {
-        enqueueStack = []
-        dequeueStack = []
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
