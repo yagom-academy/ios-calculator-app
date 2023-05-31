@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		AC2DCC912A2591D800F35632 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2DCC902A2591D800F35632 /* CalculatorTests.swift */; };
-		AC2DCC9B2A25958400F35632 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2DCC9A2A25958400F35632 /* Calculator.swift */; };
 		AC2DCC9D2A259DA500F35632 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2DCC9C2A259DA500F35632 /* CalculatorItemQueue.swift */; };
 		AC2DCCA12A25BDBC00F35632 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2DCCA02A25BDBC00F35632 /* LinkedList.swift */; };
 		AC2DCCA92A25D63D00F35632 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC2DCCA82A25D63D00F35632 /* LinkedListTests.swift */; };
@@ -40,7 +39,6 @@
 /* Begin PBXFileReference section */
 		AC2DCC8E2A2591D800F35632 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC2DCC902A2591D800F35632 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
-		AC2DCC9A2A25958400F35632 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		AC2DCC9C2A259DA500F35632 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		AC2DCCA02A25BDBC00F35632 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		AC2DCCA62A25D63D00F35632 /* LinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,7 +89,6 @@
 		AC2DCC972A25929C00F35632 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AC2DCC9A2A25958400F35632 /* Calculator.swift */,
 				AC2DCC9C2A259DA500F35632 /* CalculatorItemQueue.swift */,
 				AC2DCCA02A25BDBC00F35632 /* LinkedList.swift */,
 			);
@@ -305,7 +302,6 @@
 			files = (
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				AC2DCC9D2A259DA500F35632 /* CalculatorItemQueue.swift in Sources */,
-				AC2DCC9B2A25958400F35632 /* Calculator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				AC2DCCA12A25BDBC00F35632 /* LinkedList.swift in Sources */,

@@ -8,8 +8,10 @@
 import XCTest
 @testable import Calculator
 
+
 final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Any>!
+    var sut: CalculatorItemQueue<Int>!
+    //var sut: CalculatorItemQueue<Any>!
 
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -25,7 +27,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        sut.enqueue("+")
+        //sut.enqueue("+")
         
         // when
         let intResult = sut.count

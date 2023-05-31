@@ -11,8 +11,21 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T>: CalculateItem {
-    var queue: [T] = [T]()
+extension Int:CalculateItem {
+    
+}
+
+extension String:CalculateItem {
+    
+}
+
+extension Double:CalculateItem {
+    
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
+    //var queue: [T] = [T]()
+    var queue: LinkedList = LinkedList<T>()
     
     var count: Int {
         return queue.count
