@@ -5,10 +5,10 @@
 //  Created by idinaloq on 2023/05/29.
 //
 
-protocol CalculateItem { }
+protocol CalculateItem {}
 
-extension Int: CalculateItem { }
+extension Int: CalculateItem {}
 
-extension String: CalculateItem { }
+extension String: CalculateItem {}
 
-extension Double: CalculateItem { }
+extension Double: CalculateItem {}

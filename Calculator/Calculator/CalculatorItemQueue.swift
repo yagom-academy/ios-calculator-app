@@ -5,14 +5,14 @@
 //  Created by idinaloq on 2023/05/29.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var list: LinkedList<T> = LinkedList()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var list: LinkedList<Element> = LinkedList()
     
-    mutating func enqueue(_ value: T) {
+    mutating func enqueue(_ value: Element) {
         list.appendLast(data: value)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         let removedData = list.removeFirst()
         return removedData
     }

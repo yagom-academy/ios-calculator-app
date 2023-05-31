@@ -18,7 +18,6 @@ final class CalculatorTests: XCTestCase {
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
     }
     
     func test_값을한번enqueue하면_정상적으로head와tail에_추가되는지() {
