@@ -46,8 +46,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(input, result)
     }
     
-    func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_1이반환된다() {
-        sut = CalculatorItemQueue([1])
+    func test_enqueuedCalculatorItems에1_2가있으면_dequeue를했을때_1이반환된다() {
+        sut = CalculatorItemQueue([1, 2])
         let expectation = 1
         
         let result = sut.dequeue() as? Int
