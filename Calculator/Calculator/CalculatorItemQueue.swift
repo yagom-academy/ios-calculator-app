@@ -28,6 +28,8 @@ class CalculatorItemQueue<Element: CalculateItem> {
             tailItem = item
             return
         }
+        
+        tailItem?.nextItem = item
     }
     
     func dequeue() {
