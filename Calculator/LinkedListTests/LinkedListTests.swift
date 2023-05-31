@@ -9,28 +9,17 @@ import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Any>!
+    var sut: LinkedList<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList(head: Node(data: 0))
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
-
-//    func test_init_head를기본값0을사용해초기화하고0을반환한다() {
-//        // given
-//        let expectedHead: Int = 0
-//
-//        // when
-//        let testLinkedList: LinkedList = LinkedList()
-//
-//        // then
-//        XCTAssertEqual(testLinkedList.head, expectedHead)
-//    }
     
     func test_init_head를Node로초기화한다() {
         // given
@@ -60,10 +49,22 @@ final class LinkedListTests: XCTestCase {
         let expectedHead: Node = testNode
         
         // when
-        let testLinkedList: LinkedList = LinkedList<Int>()
-        testLinkedList.append(testNode)
+        sut.append(testNode)
         
         // then
-        XCTAssertTrue(testLinkedList.head === expectedHead)
+        XCTAssertTrue(sut.head === expectedHead)
+    }
+    
+    func test_append_다음입력을받으면이전Node의next에다음Node를저장한다() {
+        // given
+        let firstNode: Node = Node(data: 0)
+        let secondNode: Node = Node(data: 1)
+        
+        // when
+        sut.append(firstNode)
+        sut.append(secondNode)
+        
+        // then
+        XCTAssertTrue(firstNode.next === secondNode)
     }
 }
