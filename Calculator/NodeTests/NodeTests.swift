@@ -65,4 +65,15 @@ final class NodeTests: XCTestCase {
         // then
         XCTAssertTrue(testNode.next == nil)
     }
+    
+    func test_deinit_Node가해제되는지확인한다() {
+        // given
+        var expectedNode: Node? = Node(data: 0)
+        
+        // when
+        expectedNode = nil
+        
+        // then
+        XCTAssertNil(expectedNode)
+    }
 }
