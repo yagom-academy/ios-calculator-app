@@ -4,10 +4,16 @@
 //
 //  Created by Yetti on 2023/05/30.
 //
-
+protocol Queue {
+    mutating func enQueue(_ data: String)
+    mutating func deQueue() -> String?
+    func peek() -> String?
+    func isEmpty() -> Bool
+    mutating func clear()
+}
 protocol CalculateItem { }
 
-struct CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue: Queue, CalculateItem {
     var queue: [String] = []
     
     mutating func enQueue(_ data: String) {
@@ -26,5 +32,9 @@ struct CalculatorItemQueue: CalculateItem {
     
     mutating func clear() {
         queue.removeAll()
+    }
+    
+    func isEmpty() -> Bool {
+        <#code#>
     }
 }
