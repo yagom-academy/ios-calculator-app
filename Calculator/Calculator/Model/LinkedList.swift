@@ -8,6 +8,7 @@
 import Foundation
 
 class Node<T> {
+class Node<T: CalculateItem> {
     var data: T
     var next: Node?
     
@@ -48,7 +49,17 @@ class LinkedList<T: CalculateItem> {
         while node != nil {
             print("\(String(describing: node?.data)) -> ", terminator: "")
             node = node?.next
+    func append(_ data: T) {
+        let node = Node(data: data)
+        
+        if isEmpty {
+            head = node
+            tail = head
+        } else {
+            tail?.next = node
+            tail = node
         }
+        count += 1
     }
     
     func getLastNodeData() -> Node<T>? {
