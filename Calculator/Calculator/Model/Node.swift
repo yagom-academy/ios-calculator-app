@@ -5,7 +5,7 @@
 //  Created by Daehoon Lee on 2023/05/30.
 //
 
-final class Node<T> {
+final class Node<T>: NodeType {
     private let data: T
     private var next: Node<T>?
     
@@ -16,5 +16,17 @@ final class Node<T> {
     
     deinit {
         print("Node deinit")
+    }
+    
+    func fetchData() -> T {
+        return data
+    }
+    
+    func fetchNext() -> Node<T>? {
+        return next
+    }
+    
+    func updateNext(_ next: Node<T>) {
+        self.next = next
     }
 }

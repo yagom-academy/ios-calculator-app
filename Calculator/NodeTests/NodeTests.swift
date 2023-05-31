@@ -29,7 +29,7 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<Int>(data: expectedData, next: nil)
         
         // then
-        XCTAssertEqual(testNode.data, expectedData)
+        XCTAssertEqual(testNode.fetchData(), expectedData)
     }
     
     func test_init_data를더하기연산자로초기화한다() {
@@ -40,7 +40,7 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<String>(data: expectedData, next: nil)
         
         // then
-        XCTAssertEqual(testNode.data, expectedData)
+        XCTAssertEqual(testNode.fetchData(), expectedData)
     }
     
     func test_init_next를다음Node로초기화한다() {
@@ -52,7 +52,7 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<Int>(data: expectedData, next: expectedNext)
         
         // then
-        XCTAssertTrue(testNode.next === expectedNext)
+        XCTAssertIdentical(testNode.fetchNext(), expectedNext)
     }
     
     func test_init_next의전달인자없이초기화한다() {
@@ -63,7 +63,7 @@ final class NodeTests: XCTestCase {
         let testNode: Node = Node<Int>(data: expectedData)
         
         // then
-        XCTAssertTrue(testNode.next == nil)
+        XCTAssertTrue(testNode.fetchNext() == nil)
     }
     
     func test_deinit_Node가해제되는지확인한다() {

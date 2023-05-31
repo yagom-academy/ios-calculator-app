@@ -7,7 +7,7 @@
 
 protocol NodeType {
     associatedtype T
-    func fetchData()
-    mutating func fetchNext()
-    mutating func updateNext(_ next: Node<T>?)
+    func fetchData() -> T
+    mutating func fetchNext() -> Node<T>?
+    mutating func updateNext(_ next: Node<T>)
 }

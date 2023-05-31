@@ -16,18 +16,18 @@ struct LinkedList<T> {
         
         var node = head
         
-        while node?.next != nil {
-            node = node?.next
+        while node?.fetchNext() != nil {
+            node = node?.fetchNext()
         }
         
-        node?.next = Node(data: data)
+        node?.updateNext(Node(data: data))
     }
     
     mutating func removeFirst() -> T? {
         if head == nil { return nil }
         
-        let data = head?.data
-        head = head?.next
+        let data = head?.fetchData()
+        head = head?.fetchNext()
         
         return data
     }
