@@ -9,6 +9,7 @@ enum CalculatorError: Error {
     case indexOutOfRange
     case invalidOperator
     case invalidInput
+    case divideByZero
     case unknown
 }
 
