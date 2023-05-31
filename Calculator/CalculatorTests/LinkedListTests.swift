@@ -47,6 +47,19 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(headValue, tailValue)
     }
     
+    func test_append_호출시_기존_data가_존재할_경우_head는_최초로_입력된_data를_그대로_가진다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        sut.append(4)
+        // when
+        let headValue = sut.checkHeadValue()?.data
+        let expectedValue = 1
+        // then
+        XCTAssertEqual(headValue, expectedValue)
+    }
+    
     func test_append_호출시_기존_data가_존재할_경우_tail은_새로_입력된_data를_가진다() {
         // given
         sut.append(1)
