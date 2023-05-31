@@ -68,7 +68,7 @@ final class CalculatorItemQueueTests: XCTestCase {
             sut.enqueue(input)
         }
 
-        sut.resetQueue()
+        sut.removeAll()
 
         XCTAssertTrue(sut.isEmpty)
     }

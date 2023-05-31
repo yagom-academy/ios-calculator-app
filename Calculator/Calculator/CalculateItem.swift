@@ -5,4 +5,4 @@
 //  Created by MARY on 2023/05/31.
 //
 
-protocol CalculateItem { }
+protocol CalculateItem {}

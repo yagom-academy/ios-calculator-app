@@ -15,13 +15,13 @@ final class Item {
     }
 }
 
-final class CalculatorItemQueue: CalculateItem {
+struct CalculatorItemQueue: CalculateItem {
     private var front: Item?
     private var tail: Item?
     private(set) var size: Int = 0
     var isEmpty: Bool { size == 0 }
     
-    func enqueue(_ element: String) {
+    mutating func enqueue(_ element: String) {
         let newItem = Item(data: element)
         
         if isEmpty {
@@ -34,7 +34,7 @@ final class CalculatorItemQueue: CalculateItem {
         size += 1
     }
     
-    func dequeue() -> String? {
+    mutating func dequeue() -> String? {
         guard let result = front?.data else { return nil }
         
         front = front?.next
@@ -48,7 +48,7 @@ final class CalculatorItemQueue: CalculateItem {
         return result
     }
     
-    func resetQueue() {
+    mutating func removeAll() {
         front = nil
         tail = nil
         size = 0
