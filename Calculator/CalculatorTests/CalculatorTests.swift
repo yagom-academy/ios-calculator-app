@@ -58,4 +58,13 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_queue배열에서_삭제시키고자하는_값을_peek에_반환하는지_확인() {
+        let input = CalculatorItemQueue(queue: [1, 2, 3])
+        let expectedPeek = input.queue.first as! Int
+        
+        let result = input.peek as! Int
+        
+        XCTAssertEqual(expectedPeek, result)
+    }
 }
