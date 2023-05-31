@@ -71,8 +71,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(4)
         // when
         sut.removeFirst()
-        let headValue = sut.checkHeadValue()
-        let headExpectedValue = 2
+        sut.removeFirst()
+        
+        let headValue = sut.checkHeadValue()?.data
+        let headExpectedValue = 3
         // then
         XCTAssertEqual(headValue, headExpectedValue)
     }

@@ -5,7 +5,7 @@
 //  Created by redmango1446 on 2023/06/01.
 //
 
-class LinkedList<T> {
+final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
@@ -28,5 +28,9 @@ class LinkedList<T> {
         
         tail?.next = newData
         tail = newData
+    }
+    
+    func removeFirst() {
+        head = head?.next
     }
 }
