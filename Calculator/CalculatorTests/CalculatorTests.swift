@@ -28,4 +28,12 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_LinkedList의_tail은_nil이다() {
+        // given
+        // when
+        var result = sut.checkTailNil()
+        // then
+        XCTAssertNil(result)
+    }
 }
