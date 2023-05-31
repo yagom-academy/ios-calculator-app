@@ -9,13 +9,23 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: LinkedList<Any>!
 
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue()
+        try super.setUpWithError()
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
         sut = nil
+        try super.tearDownWithError()
+    }
+    
+    func test_LinkedList의_head는_nil이다() {
+        // given
+        // when
+        var result = sut.checkHeadNil
+        // then
+        XCTAssertNil(result)
     }
 }
