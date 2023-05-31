@@ -76,4 +76,13 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_queue배열이_뒤집히면_해당_배열_삭제_후_reversedQueue의_마지막요소를_반환하는지_확인() {
+        var input = CalculatorItemQueue(queue: [3.0, 2.0, 1.0], reversedQueue: [])
+        let expectedResult = [3.0]
+        
+        let result = input.dequeue() as! [Double]
+        
+        XCTAssertEqual(expectedResult, result)
+    }
 }
