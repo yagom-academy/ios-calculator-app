@@ -67,4 +67,13 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(expectedPeek, result)
     }
+    
+    func test_reversedQueue배열이_비어있을_때_queue배열을_뒤집어서_넣는지_확인(){
+        let input = CalculatorItemQueue(queue: ["다", "나", "가"], reversedQueue: [])
+        let expectedResult = ["가", "나", "다"]
+        
+        let result = input.dequeue as! [String]
+        
+        XCTAssertEqual(expectedResult, result)
+    }
 }
