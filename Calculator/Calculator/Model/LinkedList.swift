@@ -14,7 +14,8 @@ struct LinkedList<T> {
     }
     
     mutating func append(_ data: T) {
-        if head == nil {
+        guard head != nil
+        else {
             head = Node(data: data)
             tail = head
             return
@@ -25,7 +26,9 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() -> T? {
-        if head == nil { return nil }
+        guard head != nil else { return nil }
+        
+        if head === tail { tail = nil }
         
         let data = head?.fetchData()
         head = head?.fetchNext()
