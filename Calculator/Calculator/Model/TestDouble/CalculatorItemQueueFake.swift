@@ -1,20 +1,14 @@
 //
-//  CalculatorItemQueue.swift
-//  Calculator
+//  CalculatorItemQueueFake.swift
+//  CalculatorItemQueueTests
 //
-//  Created by Min Hyun on 2023/05/29.
+//  Created by Min Hyun on 2023/05/31.
 //
 
-protocol LinkedListQueue {
-    mutating func enqueue(_ value: CalculateItem)
-    mutating func dequeue() throws -> CalculateItem
-    mutating func removeAll()
-}
-
-struct CalculatorItemQueue: LinkedListQueue {
-    private var head: CalculatorItemNode? = nil
-    private var tail: CalculatorItemNode? = nil
-    private var count: Int = 0
+struct CalculatorItemQueueFake: LinkedListQueue {
+    private(set) var head: CalculatorItemNode? = nil
+    private(set) var tail: CalculatorItemNode? = nil
+    private(set) var count: Int = 0
     
     mutating func enqueue(_ value: CalculateItem) {
         let newNode = CalculatorItemNode(value)
