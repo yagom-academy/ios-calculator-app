@@ -13,7 +13,7 @@ final class LinkedListTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList()
+        sut = LinkedList(head: Node(data: 0))
     }
 
     override func tearDownWithError() throws {
@@ -21,16 +21,16 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
 
-    func test_init_head를기본값0을사용해초기화하고0을반환한다() {
-        // given
-        let expectedHead: Int = 0
-        
-        // when
-        let testLinkedList: LinkedList = LinkedList()
-        
-        // then
-        XCTAssertEqual(testLinkedList.head, expectedHead)
-    }
+//    func test_init_head를기본값0을사용해초기화하고0을반환한다() {
+//        // given
+//        let expectedHead: Int = 0
+//
+//        // when
+//        let testLinkedList: LinkedList = LinkedList()
+//
+//        // then
+//        XCTAssertEqual(testLinkedList.head, expectedHead)
+//    }
     
     func test_init_head를Node로초기화한다() {
         // given
@@ -41,5 +41,16 @@ final class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertTrue(testLinkedList.head === expectedHead)
+    }
+    
+    func test_init_head를nil로초기화한다() {
+        // given
+        let expectedHead: Node<Int>? = nil
+        
+        // when
+        let testLinkedList: LinkedList = LinkedList(head: expectedHead)
+        
+        // then
+        XCTAssertTrue(testLinkedList.head == expectedHead)
     }
 }
