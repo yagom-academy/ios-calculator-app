@@ -6,15 +6,13 @@
 //
 
 import XCTest
-import Foundation
-
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>!
+    var sut: LinkedListTest<Int>!
 
     override func setUpWithError() throws {
-        sut = LinkedList()
+        sut = LinkedListTest()
     }
 
     override func tearDownWithError() throws {
