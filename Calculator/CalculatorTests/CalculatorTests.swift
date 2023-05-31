@@ -42,7 +42,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.list.tail?.data, secondInput)
     }
     
-    func test_head가없을때_값을remove하면_nil을반환하는지() {
+    func test_head가없을때_값을dequeue하면_nil을반환하는지() {
         //given
         //when
         let removedData = sut.dequeue()
@@ -50,7 +50,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertNil(removedData)
     }
     
-    func test_head가있을떄_값을remove하면_값을반환하는지() {
+    func test_head가있을떄_값을dequeue하면_값을반환하는지() {
         //given
         let input = 1
         //when
