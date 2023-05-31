@@ -32,4 +32,18 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedValue)
     }
+    
+    func test_removeFirst_1과_2를_append한뒤_removeFirst를_2번_호출하면_2를_반환한다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        
+        // when
+        var result = sut.removeFirst()
+        result = sut.removeFirst()
+        let expectedValue = 2
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
 }
