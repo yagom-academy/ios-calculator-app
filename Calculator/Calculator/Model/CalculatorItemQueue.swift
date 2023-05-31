@@ -25,4 +25,8 @@ struct CalculatorItemQueue: CalculateItem {
 	func peek() -> Int? {
 		return elements.first
 	}
+	
+	mutating func clear() -> Bool {
+		return false
+	}
 }

@@ -78,4 +78,14 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertNil(result)
 	}
+	
+	func tests_clear함수를_호출시_배열의_요소가_비워졌을때_true를_반환한다() {
+		// given
+		let input = sut.enqueue(1)
+		let expection = true
+		// when
+		let result = sut.clear()
+		// then
+		XCTAssertEqual(result, expection)
+	}
 }
