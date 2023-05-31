@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T>: CalculatorItem {
+struct CalculatorItemQueue<T: CalculateItem> {
     private var enqueueStack: [T] = []
     private var dequeueStack: [T] = []
     var count: Int {
