@@ -6,11 +6,15 @@
 //
 
 struct LinkedList<T> {
-    var firstNode: Node<T>?
-    var lastNode: Node<T>?
+    private var firstNode: Node<T>?
+    private var lastNode: Node<T>?
     
-    var isEmpty: Bool { firstNode == nil }
+    var first: Node<T>? { return firstNode }
     
+    var last: Node<T>? { return lastNode }
+
+    private var isEmpty: Bool { firstNode == nil }
+
     mutating func enqueue(_ element: T) {
         let node = Node(value: element)
         
@@ -23,11 +27,12 @@ struct LinkedList<T> {
         }
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         guard let popNode = firstNode else {
             return nil
         }
-        
+
         guard let previousNode = popNode.previousNode else {
             firstNode = nil
             lastNode = nil
