@@ -58,7 +58,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(removedData, nil)
     }
     
-    func test_head가한개만존재할떄_head와tail이nil로설정되고_제거한값을리턴하는지() {
+    func test_node가한개만존재할떄_removeFirst메서드로_head와tail이nil로설정되고_제거한값을리턴하는지() {
         //given
         let input = 1
         sut.appendLast(data: input)
