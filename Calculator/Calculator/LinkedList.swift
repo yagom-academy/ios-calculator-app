@@ -30,7 +30,13 @@ final class LinkedList<T> {
         tail = newData
     }
     
-    func removeFirst() {
+    func removeFirst() -> T? {
+        guard let data: T = head?.data else {
+            return nil
+        }
+        
         head = head?.next
+        
+        return data
     }
 }
