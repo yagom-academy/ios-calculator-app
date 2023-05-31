@@ -6,7 +6,11 @@
 //
 
 struct LinkedList<T> {
-    private var head: Node<T>?
+    var head: Node<T>?
+    
+    init(head: Node<T>?) {
+        self.head = head
+    }
     
     mutating func append(_ data: T) {
         if head == nil {

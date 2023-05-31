@@ -13,7 +13,7 @@ final class LinkedListTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList()
+        sut = LinkedList(head: nil)
     }
 
     override func tearDownWithError() throws {
@@ -51,7 +51,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(expectedData)
         
         // then
-        XCTAssertTrue(sut.head?.data == expectedData)
+        XCTAssertTrue(sut.head?.fetchData() == expectedData)
     }
     
     func test_append_다음입력을받으면이전Node의next에다음Node를저장한다() {
@@ -64,7 +64,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(secondNodeData)
         
         // then
-        XCTAssertEqual(sut.head?.next?.data, secondNodeData)
+        XCTAssertEqual(sut.head?.fetchNext()?.fetchData(), secondNodeData)
     }
     
     func test_removeFirst_제거한Node의data를반환한다() {

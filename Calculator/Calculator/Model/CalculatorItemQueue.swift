@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var linkedList: LinkedList<T> = LinkedList()
+    var linkedList: LinkedList<T> = LinkedList(head: nil)
     
     mutating func enqueue(_ element: T) {
         linkedList.append(element)
