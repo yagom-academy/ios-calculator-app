@@ -21,19 +21,15 @@ final class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_removeFirst_호출시_head는_다음_data를_가진다() {
+    func test_removeFirst_1을_append한뒤_removeFirst를_호출하면_1을_반환한다() {
         // given
         sut.append(1)
-        sut.append(2)
-        sut.append(3)
-        sut.append(4)
-        // when
-        sut.removeFirst()
-        sut.removeFirst()
         
-        let headValue = sut.checkHeadValue()?.data
-        let headExpectedValue = 3
+        // when
+        let result = sut.removeFirst()
+        let expectedValue = 1
+        
         // then
-        XCTAssertEqual(headValue, headExpectedValue)
+        XCTAssertEqual(result, expectedValue)
     }
 }
