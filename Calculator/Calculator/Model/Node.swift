@@ -13,4 +13,8 @@ final class Node<T> {
         self.data = data
         self.next = next
     }
+    
+    deinit {
+        print("Node deinit")
+    }
 }
