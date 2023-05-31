@@ -22,6 +22,7 @@ struct CalculatorItemQueue {
         queue.append(node)
     }
     
+    @discardableResult
     mutating func dequeue() -> CalculateItem? {
         return queue.removeFirst()?.item
     }
