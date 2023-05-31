@@ -13,4 +13,8 @@ struct CalculatorItemQueue<T> {
     mutating func enqueue(_ element: T) {
         linkedList.append(element)
     }
+    
+    mutating func dequeue() -> T? {
+        return linkedList.removeFirst()
+    }
 }
