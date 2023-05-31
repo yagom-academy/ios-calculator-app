@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -26,9 +26,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectedData: Int = 0
         
         // when
-        sut.enqueue(data: expectedData)
+        sut.enqueue(expectedData)
         
         // then
-        XCTAssertEqual(sut.linkedList.head.data, expectedData)
+        XCTAssertEqual(sut.linkedList.head?.data, expectedData)
     }
 }
