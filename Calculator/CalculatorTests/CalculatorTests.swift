@@ -29,13 +29,12 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_enqueue함수호출시_배열의원소가_늘어나는지() {
+    func test_enqueue함수호출시_배열의원소가_순서대로_늘어나는지() {
         // given
-        sut.enqueue(2)
-        let input = 3
         let expectation = [2, 3]
         // when
-        sut.enqueue(input)
+        sut.enqueue(2)
+        sut.enqueue(3)
         // then
         XCTAssertEqual(sut.readCalculatorItemQueue(), expectation)
     }
@@ -52,7 +51,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.readCalculatorItemQueue(), expectation)
     }
     
-    func test_clearQueue함수호출시_배열의원소가_다삭제되면_true를_반환한다() {
+    func test_clearQueue함수호출시_배열의원소가_다삭제되면_true를_반환하는지() {
         // given
         sut.enqueue(2)
         sut.enqueue(3)
