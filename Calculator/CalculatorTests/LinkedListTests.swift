@@ -72,7 +72,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(removedData, input)
     }
     
-    func test_head가복수개일때_head와tail이nil이아니고_제거한값을_차례로리턴하는지() {
+    func test_node가복수개이고_removeFirst메서드를사용했을때_head와tail이nil이아니고_제거한값을_차례로리턴하는지() {
         //given
         let firstInput = 1
         let secondInput = 2
