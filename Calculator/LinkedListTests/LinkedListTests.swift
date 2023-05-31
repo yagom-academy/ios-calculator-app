@@ -26,9 +26,20 @@ final class LinkedListTests: XCTestCase {
         let expectedHead: Int = 0
         
         // when
-        let testLinkedLisk: LinkedList = LinkedList()
+        let testLinkedList: LinkedList = LinkedList()
         
         // then
-        XCTAssertEqual(testLinkedLisk.head, expectedHead)
+        XCTAssertEqual(testLinkedList.head, expectedHead)
+    }
+    
+    func test_init_head를Node로초기화한다() {
+        // given
+        let expectedHead: Node = Node(data: 0)
+        
+        // when
+        let testLinkedList: LinkedList = LinkedList(head: expectedHead)
+        
+        // then
+        XCTAssertTrue(testLinkedList.head === expectedHead)
     }
 }
