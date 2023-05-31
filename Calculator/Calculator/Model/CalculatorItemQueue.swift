@@ -7,9 +7,11 @@
 
 struct CalculatorItemQueue {
     private(set) var queue: [any CalculateItem]
+    private(set) var reversedQueue: [any CalculateItem]
     
-    init(queue: [any CalculateItem] = []) {
+    init(queue: [any CalculateItem] = [], reversedQueue: [any CalculateItem] = []) {
         self.queue = queue
+        self.reversedQueue = reversedQueue
     }
     
     mutating func enqueue(element: any CalculateItem) {
@@ -22,5 +24,12 @@ struct CalculatorItemQueue {
     
     var peek: (any CalculateItem)? {
         return queue.isEmpty ? nil : queue.first
+    }
+    
+    mutating func dequeue() -> [any CalculateItem] {
+        if reversedQueue.isEmpty {
+            reversedQueue = queue.reversed()
+        }
+        return reversedQueue
     }
 }
