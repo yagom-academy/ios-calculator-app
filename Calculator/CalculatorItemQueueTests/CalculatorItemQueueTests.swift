@@ -36,6 +36,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         let input1 = 3.0
         let input2 = 4.0
+        
         //when
         systemUnderTest.enqueue(element: input1)
         systemUnderTest.enqueue(element: input2)
@@ -50,6 +51,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let input1 = 3.0
         let input2 = 4.0
         let input3 = 5.0
+        
         //when
         systemUnderTest.enqueue(element: input1)
         systemUnderTest.enqueue(element: input2)
