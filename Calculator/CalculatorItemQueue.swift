@@ -6,15 +6,15 @@
 //
 protocol DoubleStackQueue {
     var isEmpty: Bool { get }
+    
     mutating func enQueue(_ data: String)
     mutating func deQueue() -> String?
-    func peek() -> String?
     mutating func clear()
+    func peek() -> String?
 }
 protocol CalculateItem { }
 
 struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
-    
     var enQueueStack: [String] = []
     var deQueueStack: [String] = []
     
@@ -23,20 +23,17 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
     
     mutating func enQueue(_ element: String) {
-        enQueueStack.append(element)
+        
     }
     
     mutating func deQueue() -> String? {
-        let frontElement = (enQueueStack == []) ? nil : enQueueStack.removeFirst()
-        return frontElement
+        return "a"
     }
 
     func peek() -> String? {
-        let frontData = (enQueueStack == []) ? nil : enQueueStack[0]
-        return frontData
+        return "b"
     }
     
     mutating func clear() {
-        enQueueStack.removeAll()
     }
 }
