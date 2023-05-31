@@ -8,9 +8,11 @@
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var enqueueStack: [Element] = []
     private var dequeueStack: [Element] = []
-    
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
+    }
+    var count: Int {
+        return enqueueStack.count + dequeueStack.count
     }
     
     mutating func enqueue(_ element: Element) {
@@ -24,10 +26,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         }
         
         return dequeueStack.popLast()
-    }
-    
-    var count: Int {
-        return enqueueStack.count + dequeueStack.count
     }
     
     func peek() -> Element? {
