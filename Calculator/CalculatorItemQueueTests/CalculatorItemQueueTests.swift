@@ -22,13 +22,13 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue_string을_넣으면_itemQueue에_저장한다() {
         let input = "string"
         sut.enqueue(input)
-        
+
         let result = sut.takeQueueAsArray()
         let expectation = ["string"]
         
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_enqueue_2번호출시_넣어준_순서대로_itemQueue에_추가한다() {
         let inputs = ["문자열", "string"]
         for input in inputs {
