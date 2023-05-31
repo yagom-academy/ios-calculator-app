@@ -43,7 +43,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(result, 1)
 	}
 	
-	func tests_배열의_첫번째_인덱스값을_반환한다() {
+	func tests_peek함수를_호출시_배열의_첫번째_인덱스값을_반환한다() {
 		// given
 		_ = sut.enqueue(1)
 		let expection = 1
@@ -55,7 +55,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(result, expection)
 	}
 	
-	func tests_배열의_요소가_여러개여도_첫번째_인덱스를_반환한다() {
+	func tests_peek함수를_호출시_배열의_요소가_여러개여도_첫번째_인덱스를_반환한다() {
 		// given
 		var input = sut.enqueue(1)
 		input = sut.enqueue(2)
@@ -69,7 +69,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(result, expection)
 	}
 	
-	func tests_배열의_요소가_없을때_nil을_반환한다() {
+	func tests_peek함수를_호출시_배열의_요소가_없을때_nil을_반환한다() {
 		// given
 		
 		// when

@@ -23,6 +23,6 @@ struct CalculatorItemQueue: CalculateItem {
 	}
 	
 	func peek() -> Int? {
-		return elements[0]
+		return elements.first
 	}
 }
