@@ -33,7 +33,16 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_3_4를_enqueue했을때_queue의Element를_확인한다() {
+        //given
+        let input1 = 3.0
+        let input2 = 4.0
+        //when
+        systemUnderTest.enqueue(element: input1)
+        systemUnderTest.enqueue(element: input2)
+        let result = systemUnderTest.returnListValue()
         
+        //then
+        XCTAssertEqual(result, [3.0, 4.0])
     }
     
     func test_3_4_5_를_enqueue했을때_queue의Element를_확인한다() {
