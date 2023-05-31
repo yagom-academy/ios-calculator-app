@@ -8,4 +8,8 @@
 class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
+    
+    func checkHeadNil() -> Node<T>? {
+        return nil
+    }
 }

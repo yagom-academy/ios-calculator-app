@@ -24,7 +24,7 @@ final class CalculatorTests: XCTestCase {
     func test_LinkedList의_head는_nil이다() {
         // given
         // when
-        var result = sut.checkHeadNil
+        var result = sut.checkHeadNil()
         // then
         XCTAssertNil(result)
     }
