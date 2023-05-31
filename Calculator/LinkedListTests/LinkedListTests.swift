@@ -77,9 +77,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(firstNodeData)
         sut.append(secondNodeData)
         sut.append(thirdNodeData)
-        let firstData: Int = sut.removeFirst()!
-        let secondData: Int = sut.removeFirst()!
-        let thirdData: Int = sut.removeFirst()!
+        
+        guard let firstData: Int = sut.removeFirst() else { return }
+        guard let secondData: Int = sut.removeFirst() else { return }
+        guard let thirdData: Int = sut.removeFirst() else { return }
         
         // then
         XCTAssertEqual(firstData, firstNodeData)

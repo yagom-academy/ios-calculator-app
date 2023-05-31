@@ -38,7 +38,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(expectedData)
-        let poppedData: Int = sut.dequeue()
+        
+        guard let poppedData = sut.dequeue() else { return }
         
         // then
         XCTAssertEqual(poppedData, expectedData)
