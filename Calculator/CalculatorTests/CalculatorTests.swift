@@ -25,8 +25,8 @@ final class CalculatorTests: XCTestCase {
         let input: Int = 1
         let expectedResult = [1]
         
-        sut.enqueue(element: input)
-        let result = sut.queue
+        sut.enqueueForInt(element: input)
+        let result = sut.queueForInt
         
         XCTAssertEqual(expectedResult, result)
     }
@@ -35,8 +35,8 @@ final class CalculatorTests: XCTestCase {
         let input: String = "+"
         let expectedResult = ["+"]
         
-        sut.enqueue(element: input)
-        let result = sut.queue
+        sut.enqueueForString(element: input)
+        let result = sut.queueForString
         
         XCTAssertEqual(expectedResult, result)
     }
