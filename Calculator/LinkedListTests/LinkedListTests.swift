@@ -2,14 +2,14 @@
 //  LinkedListTests.swift
 //  LinkedListTests
 //
-//  Created by Yena on 2023/05/30.
+//  Created by Dasan on 2023/05/30.
 //
 
 import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedListTest<Int>!
+    var sut: LinkedListTest<CalculateItem>!
 
     override func setUpWithError() throws {
         sut = LinkedListTest()
@@ -25,7 +25,9 @@ final class LinkedListTests: XCTestCase {
         sut.append(2)
         sut.append(3)
         sut.append(4)
-        let expectation = 4
+        sut.append("+")
+        sut.append("-")
+        let expectation = 6
         
         // when
         let result = sut.count
@@ -62,9 +64,10 @@ final class LinkedListTests: XCTestCase {
         
         // when
         sut.append(2)
+        let result = sut.tail?.data as? Int
         
         // then
-        XCTAssertEqual(sut.tail?.data, 2)
+        XCTAssertEqual(result, 2)
     }
     
     func test_노드가없을때_removeFirst를하면_return값은nil이다() {
@@ -98,7 +101,7 @@ final class LinkedListTests: XCTestCase {
         let expectaiton = 1
         
         // when
-        let result = sut.removeFirst()
+        let result = sut.removeFirst() as? Int
         
         // then
         XCTAssertEqual(result, expectaiton)

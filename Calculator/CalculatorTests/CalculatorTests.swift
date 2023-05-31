@@ -2,12 +2,11 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by Yena on 2023/05/30.
+//  Created by Dasan on 2023/05/30.
 //
 
 import XCTest
 @testable import Calculator
-
 
 final class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
@@ -33,7 +32,7 @@ final class CalculatorTests: XCTestCase {
         let intResult = sut.count
         
         // then
-        XCTAssertEqual(intResult, 4)
+        XCTAssertEqual(intResult, 3)
     }
     
     func test_큐가비어있지않을때_false를반환한다() {
@@ -55,7 +54,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(3)
         sut.enqueue(5)
-        let result = sut.queue as? [Int]
+        let result = sut.queue
                 
         // then
         XCTAssertEqual(result, intInput)

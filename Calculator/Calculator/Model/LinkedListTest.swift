@@ -12,7 +12,9 @@ struct LinkedListTest<T> {
     var tail: Node<T>?
     
     var count: Int = 0
-    var isEmpty: Bool { head == nil }
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
