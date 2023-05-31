@@ -68,14 +68,30 @@ extension CalculatorItemQueueTests {
 // MARK: - Dequeue Tests
 extension CalculatorItemQueueTests {
     func test_3_4를_dequeue했을때_queue의Element를_확인한다() {
+        //given
+        
+        //when
+        
+        //then
         
     }
     
     func test_3를_dequeue했을때_queue의Element를_확인한다() {
+        //given
+        
+        //when
+        
+        //then
         
     }
     
     func test_빈List를_dequeue했을때_queue의Element를_확인한다() {
+        //given
         
+        //when
+        let result = systemUnderTest.dequeue()
+        
+        //then
+        XCTAssertNil(result)
     }
 }
