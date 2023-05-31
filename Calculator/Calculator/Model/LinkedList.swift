@@ -22,4 +22,13 @@ struct LinkedList<T> {
         
         node?.next = Node(data: data)
     }
+    
+    mutating func removeFirst() -> T? {
+        if head == nil { return nil }
+        
+        var data = head?.data
+        head = head?.next
+        
+        return data
+    }
 }
