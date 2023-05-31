@@ -6,10 +6,10 @@
 //
 
 final class Node<T> {
-    let data: T?
+    let data: T
     var next: Node<T>?
     
-    init(data: T?, next: Node? = nil) {
+    init(data: T, next: Node? = nil) {
         self.data = data
     }
 }
