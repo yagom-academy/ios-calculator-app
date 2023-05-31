@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-
     var systemUnderTest: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
@@ -19,7 +18,10 @@ final class CalculatorItemQueueTests: XCTestCase {
     override func tearDownWithError() throws {
         systemUnderTest = nil
     }
+}
 
+// MARK: - Enqueue Tests
+extension CalculatorItemQueueTests {
     func test_3을_enqueue했을때_queue의Element를_확인한다() {
         //given
         let input = 3.0
@@ -60,5 +62,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         //then
         XCTAssertEqual(result, [3.0, 4.0, 5.0])
+    }
+}
+
+// MARK: - Dequeue Tests
+extension CalculatorItemQueueTests {
+    func test_3_4_5_를_dequeue했을때_queue의Element를_확인한다() {
+        
+    }
+    
+    func test_3_4를_dequeue했을때_queue의Element를_확인한다() {
+        
+    }
+    
+    func test_3를_dequeue했을때_queue의Element를_확인한다() {
+        
     }
 }
