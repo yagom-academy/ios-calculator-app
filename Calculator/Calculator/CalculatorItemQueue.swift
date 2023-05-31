@@ -33,8 +33,8 @@ class CalculatorItemQueue<Element: CalculateItem> {
         tailItem = item
     }
     
-    func dequeue() {
-        
+    func dequeue() -> Element? {
+        return nil
     }
     
     func returnListValue() -> [Element]? {
