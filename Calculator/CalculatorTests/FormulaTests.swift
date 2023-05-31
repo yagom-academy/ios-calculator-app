@@ -105,27 +105,56 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_lhs_rhs_operator가_하나이면서_0으로_나누면_DivisionByZero_에러가_발생한다() throws {
-        //given
+    func test_lhs_rhs_operator가_하나이면서_0으로_나누면_DivisionByZero_에러가_발생한다() {
+        // given
         let random: Double = Double.random(in: -100...100)
         let operands = CalculatorItemQueue<Double>([random, 0])
         let operators = CalculatorItemQueue<Operator>([.divide])
         sut = Formula(operands: operands, operators: operators)
         
-        //then
+        // then
         XCTAssertThrowsError(try sut.result())
     }
     
-    func test_lhs_rhs_operator가_여러_개이면서_중간에_0으로_나누면_DivisionByZero_에러가_발생한다() throws {
-        //given
+    func test_lhs_rhs_operator가_여러_개이면서_중간에_0으로_나누면_DivisionByZero_에러가_발생한다() {
+        // given
         let operands = CalculatorItemQueue<Double>([1, 2, 5, 0, 2, 20, 5])
         let operators = CalculatorItemQueue<Operator>([.add, .add, .divide, .multiply, .add, .subtract])
         sut = Formula(operands: operands, operators: operators)
         
-        //then
+        // then
         XCTAssertThrowsError(try sut.result())
     }
     
+    func test_lhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {
+        // given
+        let operands = CalculatorItemQueue<Double>([])
+        let operators = CalculatorItemQueue<Operator>([.add])
+        sut = Formula(operands: operands, operators: operators)
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
+    }
+    
+    func test_rhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {
+        // given
+        let operands = CalculatorItemQueue<Double>([1.0])
+        let operators = CalculatorItemQueue<Operator>([.add])
+        sut = Formula(operands: operands, operators: operators)
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
+    }
+    
+    func test_operator의_옵셔널_바인딩을_실패했을_때_NotFoundOperator_에러가_발생한다() {
+        // given
+        let operands = CalculatorItemQueue<Double>([1.0, 2.0])
+        let operators = CalculatorItemQueue<Operator>([])
+        sut = Formula(operands: operands, operators: operators)
+        
+        // then
+        XCTAssertThrowsError(try sut.result())
+    }
     
 
 }
