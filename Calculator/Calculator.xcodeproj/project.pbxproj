@@ -13,12 +13,12 @@
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
-		DCEC5A032A24ABEE00A517C1 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A022A24ABEE00A517C1 /* CalculatorItemQueue.swift */; };
+		DC5BF5672A2721EF0020EAC1 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A192A24E50500A517C1 /* LinkedListTests.swift */; };
+		DC5BF5702A27226B0020EAC1 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A022A24ABEE00A517C1 /* CalculatorItemQueue.swift */; };
 		DCEC5A052A24AC6900A517C1 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A042A24AC6900A517C1 /* CalculateItem.swift */; };
 		DCEC5A0D2A24AD0100A517C1 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A0C2A24AD0100A517C1 /* CalculatorTests.swift */; };
 		DCEC5A142A24CFF500A517C1 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A132A24CFF500A517C1 /* Node.swift */; };
 		DCEC5A162A24D08200A517C1 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A152A24D08200A517C1 /* LinkedList.swift */; };
-		DCEC5A1A2A24E50500A517C1 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC5A192A24E50500A517C1 /* LinkedListTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,8 +216,8 @@
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				DCEC5A142A24CFF500A517C1 /* Node.swift in Sources */,
-				DCEC5A032A24ABEE00A517C1 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				DC5BF5702A27226B0020EAC1 /* CalculatorItemQueue.swift in Sources */,
 				DCEC5A162A24D08200A517C1 /* LinkedList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,7 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DCEC5A1A2A24E50500A517C1 /* LinkedListTests.swift in Sources */,
+				DC5BF5672A2721EF0020EAC1 /* LinkedListTests.swift in Sources */,
 				DCEC5A0D2A24AD0100A517C1 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,6 +427,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
@@ -450,6 +451,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MACOSX_DEPLOYMENT_TARGET = 13.1;

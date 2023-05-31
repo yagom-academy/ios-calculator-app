@@ -6,12 +6,21 @@
 //
 
 struct LinkedList<T> {
-    private(set) var head: Node<T>?
+    private(set) var head: Node<T>? {
+        didSet {
+            guard head == nil else {
+                return
+            }
+            tail = nil
+        }
+    }
+    
     private(set) var tail: Node<T>?
     
     var isEmpty: Bool {
         return head == nil
     }
+    
     
     mutating func appendLast(data: T) {
         let node: Node = Node(data: data)
@@ -34,10 +43,6 @@ struct LinkedList<T> {
         let headData = head?.data
         head = head?.next
         
-        guard head != nil else {
-            tail = nil
-            return headData
-        }
         return headData
     }
     
