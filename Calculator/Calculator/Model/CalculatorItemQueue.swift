@@ -27,7 +27,7 @@ struct CalculatorItemQueue: CalculateItem {
 	}
 	
 	mutating func clear() -> Bool {
-		elements = []
+		elements.removeAll()
 		if elements == [] {
 			return true
 		}
