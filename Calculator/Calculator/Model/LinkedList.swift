@@ -26,7 +26,7 @@ struct LinkedList<T> {
     mutating func removeFirst() -> T? {
         if head == nil { return nil }
         
-        var data = head?.data
+        let data = head?.data
         head = head?.next
         
         return data
