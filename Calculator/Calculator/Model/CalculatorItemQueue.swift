@@ -16,4 +16,8 @@ struct CalculatorItemQueue: CalculateItem {
 	mutating func enqueue(_ value: Int) {
 		elements.append(value)
 	}
+	
+	mutating func dequeue(_ value: Int) {
+		
+	}
 }

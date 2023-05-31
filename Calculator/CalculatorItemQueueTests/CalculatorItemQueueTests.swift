@@ -23,12 +23,23 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_배열에_값이_들어간다() {
 		// given
-		let input: () = sut.addElement(1)
+		let input: () = sut.enqueue(1)
 		
 		// when
 		let result: () = input
 		
 		// then
 		XCTAssertNotNil(result)
+	}
+	
+	func tests_배열에서_값이_빠진다() {
+		// given
+		let input: () = sut.enqueue(1)
+		
+		// when
+		let result: () = sut.dequeue(1)
+		
+		// then
+		XCTAssertNil(result)
 	}
 }
