@@ -20,8 +20,8 @@ class Node<T> {
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
     var count: Int = 0
+    
     var isEmpty: Bool {
         return head == nil
     }
