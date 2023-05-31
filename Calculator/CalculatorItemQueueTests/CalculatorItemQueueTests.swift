@@ -20,4 +20,15 @@ final class CalculatorItemQueueTests: XCTestCase {
         systemUnderTest = nil
     }
 
+    func test_3을_enqueue했을때_queue의Element를_확인한다() {
+        
+    }
+    
+    func test_3_4를_enqueue했을때_queue의Element를_확인한다() {
+        
+    }
+    
+    func test_3_4_5_를_enqueue했을때_queue의Element를_확인한다() {
+        
+    }
 }
