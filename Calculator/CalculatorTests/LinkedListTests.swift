@@ -21,26 +21,26 @@ final class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
     }
     
-    func test_removeFirst_1을_append한뒤_removeFirst를_호출하면_1을_반환한다() {
+    func test_removeFirst_1을_append한뒤_popFirst를_호출하면_1을_반환한다() {
         // given
         sut.append(1)
         
         // when
-        let result = sut.removeFirst()
+        let result = sut.popFirst()
         let expectedValue = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test_removeFirst_1과_2를_append한뒤_removeFirst를_2번_호출하면_2를_반환한다() {
+    func test_removeFirst_1과_2를_append한뒤_popFirst를_2번_호출하면_2를_반환한다() {
         // given
         sut.append(1)
         sut.append(2)
         
         // when
-        var result = sut.removeFirst()
-        result = sut.removeFirst()
+        var result = sut.popFirst()
+        result = sut.popFirst()
         let expectedValue = 2
         
         // then

@@ -8,15 +8,7 @@
 final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
-    func checkHeadValue() -> Node<T>? {
-        return head
-    }
-    
-    func checkTailValue() -> Node<T>? {
-        return tail
-    }
-    
+
     func append(_ NewElement: T) {
         let newData = Node(data: NewElement)
         
@@ -30,7 +22,7 @@ final class LinkedList<T> {
         tail = newData
     }
     
-    func removeFirst() -> T? {
+    func popFirst() -> T? {
         guard let data: T = head?.data else {
             return nil
         }
