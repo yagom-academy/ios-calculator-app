@@ -21,7 +21,6 @@ struct LinkedList<T> {
         return head == nil
     }
     
-    
     mutating func appendLast(data: T) {
         let node: Node = Node(data: data)
         

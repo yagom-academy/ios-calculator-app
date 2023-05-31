@@ -22,70 +22,72 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_노드가없는경우_isEmpty가true인지() {
+        //given
+        //when
         let isEmpty = sut.isEmpty
-        
+        //then
         XCTAssertEqual(isEmpty, true)
     }
     
     func test_최초list에노드가없는경우_head에노드를추가하고_tail을head로설정하는지() {
-
+        //given
         let input = 1
-        
+        //when
         sut.appendLast(data: input)
-        let headData = sut.head?.data
-        let tailData = sut.tail?.data
-        
-
-        XCTAssertEqual(headData, input)
-        XCTAssertEqual(tailData, input)
-        
+        //then
+        XCTAssert(sut.head === sut.tail)
     }
     
     func test_list에노드가있는경우_head는유지하고_tail이_추가되었는지() {
+        //given
         let firstInput = 1
         let secondInput = 2
-        
+        //when
         sut.appendLast(data: firstInput)
         sut.appendLast(data: secondInput)
         let headData = sut.head?.data
         let tailData = sut.tail?.data
-        
+        //then
         XCTAssertEqual(headData, firstInput)
         XCTAssertEqual(tailData, secondInput)
     }
     
     func test_isEmpty가true인경우_remove메서드가nil을반환하는지() {
+        //given
+        //when
         let removedData = sut.removeFirst()
-        
+        //then
         XCTAssertEqual(removedData, nil)
     }
     
     func test_head가한개만존재할떄_head와tail이nil로설정되고_제거한값을리턴하는지() {
+        //given
         let input = 1
         sut.appendLast(data: input)
-        
+        //when
         let removedData = sut.removeFirst()
         let head = sut.head
         let tail = sut.tail
-        
+        //then
         XCTAssertNil(head)
         XCTAssertNil(tail)
         XCTAssertEqual(removedData, input)
     }
     
     func test_head가복수개일때_head와tail이nil이아니고_제거한값을_차례로리턴하는지() {
+        //given
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
         sut.appendLast(data: firstInput)
         sut.appendLast(data: secondInput)
         sut.appendLast(data: thirdInput)
-        
+        //when
         let removedFirstData = sut.removeFirst()
         let removedSecondData = sut.removeFirst()
         let head = sut.head
         let tail = sut.tail
-        
+        //then
         XCTAssertNotNil(head)
         XCTAssertNotNil(tail)
         XCTAssertEqual(removedFirstData, firstInput)
@@ -93,13 +95,14 @@ final class LinkedListTests: XCTestCase {
     }
     
     func test_removeAll메서드가실행되면_head와tail이_nil로설정되는지() {
+        //given
         let input = 1
         sut.appendLast(data: input)
-        
+        //when
         sut.removeAll()
         let head = sut.head
         let tail = sut.tail
-        
+        //then
         XCTAssertNil(head)
         XCTAssertNil(tail)
     }
