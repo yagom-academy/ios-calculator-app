@@ -8,8 +8,8 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
-    var sut: LinkedList<Any>!
+final class LinkedListTests: XCTestCase {
+    var sut: LinkedList<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -24,7 +24,7 @@ final class CalculatorTests: XCTestCase {
     func test_LinkedList의_head는_nil이다() {
         // given
         // when
-        var result = sut.checkHeadNil()
+        let result = sut.checkHeadValue()
         // then
         XCTAssertNil(result)
     }
@@ -32,18 +32,18 @@ final class CalculatorTests: XCTestCase {
     func test_LinkedList의_tail은_nil이다() {
         // given
         // when
-        var result = sut.checkTailNil()
+        let result = sut.checkTailValue()
         // then
         XCTAssertNil(result)
     }
     
-    func test_append_최초로_append_호출시_head와_tail은_같은_노드를_가진다() {
+    func test_append_최초로_append_호출시_head와_tail은_같은_노드_data를_가진다() {
         // given
         sut.append(1)
         // when
-        var headValue = sut.checkHead()
-        var tailValue = sut.checkHead()
+        let headValue = sut.checkHeadValue()?.data
+        let tailValue = sut.checkHeadValue()?.data
         // then
-        XCTAssertEqual(hashValue, tailValue)
+        XCTAssertEqual(headValue, tailValue)
     }
 }

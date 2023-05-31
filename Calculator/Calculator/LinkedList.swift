@@ -9,11 +9,18 @@ class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    func checkHeadNil() -> Node<T>? {
+    func checkHeadValue() -> Node<T>? {
         return head
     }
     
-    func checkTailNil() -> Node<T>? {
+    func checkTailValue() -> Node<T>? {
         return tail
+    }
+    
+    func append(_ NewElement: T) {
+        if head == nil {
+            head = Node(data: NewElement)
+            tail = Node(data: NewElement)
+        }
     }
 }
