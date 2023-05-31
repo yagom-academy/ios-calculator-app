@@ -7,4 +7,8 @@
 
 struct LinkedList<T> {
     var head: Node<T>?
+    
+    mutating func append(_ element: Node<T>) {
+        head = element
+    }
 }
