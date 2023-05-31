@@ -78,11 +78,14 @@ extension CalculatorItemQueueTests {
     
     func test_3를_dequeue했을때_queue의Element를_확인한다() {
         //given
+        let input = 3.0
         
         //when
+        systemUnderTest.enqueue(element: input)
+        let result = systemUnderTest.dequeue()
         
         //then
-        
+        XCTAssertEqual(result, input)
     }
     
     func test_빈List를_dequeue했을때_queue의Element를_확인한다() {
