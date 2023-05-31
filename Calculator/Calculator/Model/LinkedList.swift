@@ -26,12 +26,12 @@ struct LinkedList<T> {
         return head == nil
     }
     
-    var first: Node<T>? {
-        return head
+    var first: T? {
+        return head?.data
     }
     
-    var last: Node<T>? {
-        return tail
+    var last: T? {
+        return tail?.data
     }
     
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {

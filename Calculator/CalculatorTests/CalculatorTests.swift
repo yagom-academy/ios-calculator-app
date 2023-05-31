@@ -51,7 +51,7 @@ final class CalculatorTests: XCTestCase {
         let expectation = 5
         
         // when
-        let result = sut.queue.last?.data
+        let result = sut.queue.last
                 
         // then
         XCTAssertEqual(result, expectation)

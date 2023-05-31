@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Foundation
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
@@ -47,14 +48,16 @@ final class LinkedListTests: XCTestCase {
         }
     }
 
-    func test_노드가없을때_apped를하면_처음과끝노드가_같다() {
+    func test_노드가없을때_apped를하면_처음과끝노드의값이_같다() {
         // given
         sut.append(1)
         
         // when
         if sut.isEmpty {
             // then
-            XCTAssertTrue(sut.first === sut.last)
+            let first = sut.first as? Int
+            let last = sut.last as? Int
+            XCTAssertEqual(first, last)
         }
     }
     
@@ -64,7 +67,7 @@ final class LinkedListTests: XCTestCase {
         
         // when
         sut.append(2)
-        let result = sut.last?.data as? Int
+        let result = sut.last as? Int
         
         // then
         XCTAssertEqual(result, 2)
