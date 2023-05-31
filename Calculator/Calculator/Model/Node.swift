@@ -6,8 +6,8 @@
 //
 
 final class Node<T> {
-    let data: T
-    var next: Node?
+    private let data: T
+    private var next: Node<T>?
     
     init(data: T, next: Node? = nil) {
         self.data = data
