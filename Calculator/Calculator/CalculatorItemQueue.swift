@@ -20,13 +20,17 @@ class CalculatorItemQueue<Element: CalculateItem> {
     var headItem: Item<Element>?
     var tailItem: Item<Element>?
     
-    func push(element: Element) {
+    func enqueue(element: Element) {
         let item = Item(element)
         
-        
+        if headItem == nil {
+            headItem = item
+            tailItem = item
+            return
+        }
     }
     
-    func pop() {
+    func dequeue() {
         
     }
     
