@@ -6,9 +6,9 @@
 //
 
 struct CalculatorItemLinkedList {
-    var head: CalculatorItemNode?
-    var tail: CalculatorItemNode?
-    var count = 0
+    private(set) var head: CalculatorItemNode?
+    private var tail: CalculatorItemNode?
+    private(set) var count = 0
     
     mutating func append(_ calculatorItemNode: CalculatorItemNode) {
         if head == nil {
