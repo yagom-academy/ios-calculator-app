@@ -10,7 +10,6 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
-    //var sut: CalculatorItemQueue<Any>!
 
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -18,7 +17,6 @@ final class CalculatorTests: XCTestCase {
 
     override func tearDownWithError() throws {
         sut = nil
-        //stringSut = nil
     }
     
     func test_큐의크기를_올바르게반환한다() {
@@ -26,13 +24,12 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        //sut.enqueue("+")
         
         // when
-        let intResult = sut.count
+        let result = sut.count
         
         // then
-        XCTAssertEqual(intResult, 3)
+        XCTAssertEqual(result, 3)
     }
     
     func test_큐가비어있지않을때_false를반환한다() {
@@ -40,41 +37,40 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(1)
         
         // when
-        let intResult = sut.isEmpty
+        let result = sut.isEmpty
         
         // then
-        XCTAssertFalse(intResult)
+        XCTAssertFalse(result)
     }
     
-    func test_큐에_요소가_올바르게들어갔다() {
+    func test_큐에_append한_요소가_맨끝으로_올바르게들어갔다() {
         // given
-        let intInput = [1, 3, 5]
-
-        // when
         sut.enqueue(1)
         sut.enqueue(3)
         sut.enqueue(5)
-        let result = sut.queue
+        let expectation = 5
+        
+        // when
+        let result = sut.queue.last?.data
                 
         // then
-        XCTAssertEqual(result, intInput)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_큐에서_요소가_올바르게삭제되었다() {
         // given
-        let intInput = [2, 3, 5, 7]
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         sut.enqueue(5)
         sut.enqueue(7)
+        let expectation = 1
         
         // when
-        sut.dequeue()
-        let result = sut.queue as? [Int]
+        let result = sut.dequeue()
         
         // then
-        XCTAssertEqual(result, intInput)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_큐에서_가장먼저들어온요소가_삭제되었다() {
@@ -86,7 +82,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(7)
         
         // when
-        let result = sut.dequeue() as? Int
+        let result = sut.dequeue()
         
         // then
         XCTAssertEqual(result, 1)

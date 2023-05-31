@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedListTest<CalculateItem>!
+    var sut: LinkedList<CalculateItem>!
 
     override func setUpWithError() throws {
-        sut = LinkedListTest()
+        sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
@@ -38,7 +38,7 @@ final class LinkedListTests: XCTestCase {
     
     func test_head가_nil이면_isEmpty는_true를반환한다() {
         // given
-        let input = sut.head
+        let input = sut.first
         
         // when
         if input == nil {
@@ -47,24 +47,24 @@ final class LinkedListTests: XCTestCase {
         }
     }
 
-    func test_노드가없을때_apped를하면_head와tail이같다() {
+    func test_노드가없을때_apped를하면_처음과끝노드가_같다() {
         // given
         sut.append(1)
         
         // when
         if sut.isEmpty {
             // then
-            XCTAssertTrue(sut.head === sut.tail)
+            XCTAssertTrue(sut.first === sut.last)
         }
     }
     
-    func test_노드가있을때_append를하면_추가된node가_tail이된다() {
+    func test_노드가있을때_append를하면_추가된node가_마지막노드가된다() {
         // given
         sut.append(1)
         
         // when
         sut.append(2)
-        let result = sut.tail?.data as? Int
+        let result = sut.last?.data as? Int
         
         // then
         XCTAssertEqual(result, 2)
@@ -81,16 +81,16 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_노드가하나만있을때_removeFirst를하면_head와tail은_nil이된다() {
+    func test_노드가하나만있을때_removeFirst를하면_처음과끝노드는_nil이된다() {
         // given
         sut.append(1)
         
         // when
-        let result = sut.removeFirst()
+        let _ = sut.removeFirst()
         
         // then
-        XCTAssertNil(sut.head)
-        XCTAssertNil(sut.tail)
+        XCTAssertNil(sut.first)
+        XCTAssertNil(sut.last)
     }
     
     func test_removeFirst를하면_처음노드의data를_반환한다() {
@@ -98,12 +98,12 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         sut.append(2)
         sut.append(3)
-        let expectaiton = 1
+        let expectation = 1
         
         // when
         let result = sut.removeFirst() as? Int
         
         // then
-        XCTAssertEqual(result, expectaiton)
+        XCTAssertEqual(result, expectation)
     }
 }
