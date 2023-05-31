@@ -21,4 +21,8 @@ struct CalculatorItemQueue: CalculateItem {
 	mutating func dequeue() -> Int? {
 		return elements.removeFirst()
 	}
+	
+	func peek() -> Int? {
+		return elements[0]
+	}
 }
