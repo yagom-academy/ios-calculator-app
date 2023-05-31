@@ -30,6 +30,7 @@ class CalculatorItemQueue<Element: CalculateItem> {
         }
         
         tailItem?.nextItem = item
+        tailItem = item
     }
     
     func dequeue() {
