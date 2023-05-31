@@ -10,10 +10,10 @@ import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
 
-    var systemUnderTest: CalculateItem!
+    var systemUnderTest: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
-        systemUnderTest = CalculatorItemQueue()
+        systemUnderTest = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
