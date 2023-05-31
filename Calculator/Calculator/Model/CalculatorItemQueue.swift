@@ -5,10 +5,12 @@
 //  Created by Minsup on 2023/05/30.
 //
 
-extension Int: CalculateItem { }
-
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private var elements: [Element] = []
+    private var elements: [Element]
+    
+    init(_ elements:[Element] = []) {
+        self.elements = elements
+    }
     
     mutating func enqueue(_ element: Element) {
         self.elements.append(element)

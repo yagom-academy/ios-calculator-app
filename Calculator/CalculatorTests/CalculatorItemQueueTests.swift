@@ -2,18 +2,18 @@
 //  CalculatorTests.swift
 //  CalculatorTests
 //
-//  Created by 김민성 on 2023/05/30.
+//  Created by Minsup on 2023/05/30.
 //
 
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+final class CalculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -23,7 +23,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_CalculatorItemQueue를_초기화하면_빈_queue가_생성된다() {
         // given
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
         
         //when
         let result = sut.isEmpty
@@ -73,7 +73,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(2)
         sut.enqueue(3)
         
-        let expectation = 1
+        let expectation = 1.0
         
         // when
         let result = sut.dequeue()
@@ -95,7 +95,7 @@ final class CalculatorTests: XCTestCase {
         let n = Int.random(in: 5...15)
         
         for number in 0...n {
-            sut.enqueue(number)
+            sut.enqueue(Double(number))
         }
         
         // when
