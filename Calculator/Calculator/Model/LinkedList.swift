@@ -8,9 +8,9 @@
 struct LinkedList<T> {
     var head: Node<T>?
     
-    mutating func append(_ element: Node<T>) {
+    mutating func append(_ data: T) {
         if head == nil {
-            head = element
+            head = Node(data: data)
             return
         }
         
@@ -20,6 +20,6 @@ struct LinkedList<T> {
             node = node?.next
         }
         
-        node?.next = element
+        node?.next = Node(data: data)
     }
 }
