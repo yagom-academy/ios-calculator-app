@@ -19,4 +19,8 @@ struct CalculatorItemQueue {
     var isEmpty: Bool {
         queue.isEmpty
     }
+    
+    var peek: (any CalculateItem)? {
+        return queue.isEmpty ? nil : queue.first
+    }
 }
