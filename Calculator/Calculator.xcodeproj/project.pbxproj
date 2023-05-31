@@ -51,6 +51,7 @@
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C713D94F2570E5ED001C3AFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F0771A742A276A9900B9478C /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		F0886CFB2A25D48A000C005B /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		F0886D012A25D788000C005B /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		F0886D212A25EBCC000C005B /* NumberItemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NumberItemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +128,7 @@
 		F0886D3C2A25F0BA000C005B /* CalculatorItemQueueTests */ = {
 			isa = PBXGroup;
 			children = (
+				F0771A742A276A9900B9478C /* TestPlan.xctestplan */,
 				F0886D3D2A25F0BA000C005B /* CalculatorItemQueueTests.swift */,
 			);
 			path = CalculatorItemQueueTests;

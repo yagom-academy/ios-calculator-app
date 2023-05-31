@@ -8,7 +8,6 @@
 struct CalculatorItemQueue<T>: CalculateItem {
     private var inStack: [T] = []
     private var outStack: [T] = []
-    
     var peek: T? {
         return !outStack.isEmpty ? outStack.last : inStack.first
     }
