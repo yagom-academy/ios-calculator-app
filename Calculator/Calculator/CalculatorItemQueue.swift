@@ -5,26 +5,73 @@
 //  Created by MARY on 2023/05/30.
 //
 
+final class Item {
+    var data: String
+    var next: Item?
+    var prev: Item?
+    
+    init(data: String, next: Item? = nil, prev: Item? = nil) {
+        self.data = data
+        self.next = next
+        self.prev = prev
+    }
+}
+
 protocol CalculateItem { }
 
 final class CalculatorItemQueue: CalculateItem {
-    private(set) var itemQueue: [String] = []
+    private var front: Item?
+    private var tail: Item?
+    private(set) var size: Int = 0
+    var isEmpty: Bool { size == 0 }
     
     func enqueue(_ element: String) {
-        itemQueue.append(element)
+        let newItem = Item(data: element)
+        
+        if isEmpty {
+            front = newItem
+            tail = front
+        } else {
+            tail?.next = newItem
+            newItem.prev = tail
+            tail = newItem
+        }
+        size += 1
     }
     
     func dequeue() -> String? {
-        guard !itemQueue.isEmpty else { return nil }
+        guard let result = front?.data else { return nil }
         
-        var newItemQueue = Array(itemQueue.reversed())
-        let element = newItemQueue.removeLast()
-        itemQueue = newItemQueue.reversed()
+        front = front?.next
+        front?.prev = nil
+        size -= 1
         
-        return element
+        if isEmpty {
+            front = nil
+            tail = nil
+        }
+        
+        return result
     }
     
     func resetQueue() {
-        itemQueue = []
+        front = nil
+        tail = nil
+        size = 0
+    }
+    
+    func takeQueueAsArray() -> [String]? {
+        guard var _ = front else { return nil }
+        var result: [String] = []
+        var pointer = front
+        
+        while pointer != nil {
+            if let data = pointer?.data {
+                result.append(data)
+            }
+            pointer = pointer?.next
+        }
+        
+        return result
     }
 }
