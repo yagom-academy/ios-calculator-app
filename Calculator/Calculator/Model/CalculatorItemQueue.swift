@@ -9,12 +9,13 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue<T> {
-    var linkedList = LinkedList<T>()
-    
+    private var linkedList = LinkedList<T>()
+
     mutating func enqueue(_ element: T) {
         linkedList.enqueue(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         return linkedList.dequeue()
     }
