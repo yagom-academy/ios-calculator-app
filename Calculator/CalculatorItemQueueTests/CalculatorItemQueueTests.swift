@@ -20,4 +20,15 @@ final class CalculatorItemQueueTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_enqueue_LinkedList에새로운Node추가() {
+        // given
+        let expectedData: Int = 0
+        
+        // when
+        sut.enqueue(data: expectedData)
+        
+        // then
+        XCTAssertEqual(sut.linkedList.head.data, expectedData)
+    }
 }
