@@ -21,12 +21,17 @@ class LinkedList<T> {
     private var head: Node<T>?
     var count: Int = Int()
     var isEmpty: Bool = Bool()
+class LinkedList<T: CalculateItem> {
+    private(set) var head: Node<T>?
+    private(set) var tail: Node<T>?
     
     init(head: Node<T>) {
         self.head = head
     }
     
     func enqueue(_ element: T) {
+    var count: Int = 0
+    var isEmpty: Bool { (head == nil) }
         
     }
     
