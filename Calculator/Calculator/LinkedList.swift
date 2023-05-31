@@ -18,11 +18,15 @@ class LinkedList<T> {
     }
     
     func append(_ NewElement: T) {
-        var newData = Node(data: NewElement)
+        let newData = Node(data: NewElement)
         
         if head == nil {
             head = newData
             tail = newData
+            return
         }
+        
+        tail?.next = newData
+        tail = newData
     }
 }

@@ -42,7 +42,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         // when
         let headValue = sut.checkHeadValue()?.data
-        let tailValue = sut.checkHeadValue()?.data
+        let tailValue = sut.checkTailValue()?.data
         // then
         XCTAssertEqual(headValue, tailValue)
     }
@@ -51,9 +51,11 @@ final class LinkedListTests: XCTestCase {
         // given
         sut.append(1)
         sut.append(2)
+        sut.append(3)
+        sut.append(4)
         // when
-        let tailValue = sut.checkHeadValue()?.data
-        let expectedValue = 2
+        let tailValue = sut.checkTailValue()?.data
+        let expectedValue = 4
         // then
         XCTAssertEqual(tailValue, expectedValue)
     }
