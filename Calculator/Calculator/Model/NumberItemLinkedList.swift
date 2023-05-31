@@ -4,11 +4,11 @@
 //
 //  Created by Hemg on 2023/05/31.
 //
-class NumberItemNode<T>: CalculateItem {
-    let value: T
+final class NumberItemNode<T> {
+    let value: T?
     var next: NumberItemNode?
     
-    init(value: T) {
+    init(value: T?) {
         self.value = value
     }
 }
@@ -17,7 +17,7 @@ struct NumberItemLinkedList<T: Equatable>: CalculateItem {
     private var head: NumberItemNode<T>?
     private var tail: NumberItemNode<T>?
     
-    mutating func enqueueItem(item: T) {
+    mutating func enqueueItem(item: T?) {
         let newNode = NumberItemNode(value: item)
         
         guard head != nil else {
@@ -25,31 +25,30 @@ struct NumberItemLinkedList<T: Equatable>: CalculateItem {
             tail = newNode
             return
         }
+        
         tail?.next = newNode
         tail = newNode
     }
     
-    func checkItemEmpty() -> Bool {
-        return head == nil
-    }
-    
-    mutating func dequeueItem() -> T? {
-        let dequeuedItem = head?.value
-        head = head?.next
+    mutating func dequeue() {
+        guard head != nil else { return }
         
-        guard head != nil else {
-            return dequeuedItem
+        guard head?.next != nil else {
+            head = nil
+            tail = nil
+            return
         }
         
-        tail = nil
-        return dequeuedItem
+        var node = head
+        
+        while node?.next?.next != nil {
+            node = node?.next
+        }
+        node?.next = nil
+        tail = node
     }
     
-    func checkFirstItem() -> T? {
-        return head?.value
-    }
-    
-    func checkContainsItem(_ item: T) -> Bool {
+    func checkContainsItem(_ item: T) -> (contains: Bool, value: T?) {
         var currentNode = head
         
         while let node = currentNode {
@@ -57,8 +56,8 @@ struct NumberItemLinkedList<T: Equatable>: CalculateItem {
                 currentNode = node.next
                 continue
             }
-            return true
+            return (true, node.value)
         }
-        return false
+        return (false, nil)
     }
 }

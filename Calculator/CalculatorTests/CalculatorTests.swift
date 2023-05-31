@@ -37,44 +37,37 @@ final class CalculatorTests: XCTestCase {
         }
     }
     
-    func test_EnqueueItem_숫자확인() {
-        sut.enqueueItem(item: 1)
-        sut.enqueueItem(item: 2)
-        sut.enqueueItem(item: 3)
+    func testAppendItem() {
+        // Given
+        let item = 5
         
-        XCTAssertEqual(sut.checkFirstItem(), 1)
+        // When
+        sut.enqueueItem(item: item)
+        let contains = sut.checkContainsItem(item)
+        
+        // Then
+        XCTAssertTrue(contains.contains)
+        XCTAssertEqual(contains.value, item)
     }
     
-    func test_DequeueItem_지운숫자() {
-        sut.enqueueItem(item: 1)
-        sut.enqueueItem(item: 2)
-        sut.enqueueItem(item: 3)
+    func test_removeItem() {
+        let firstItem = 5
+        let secondItem = 6
         
-        let dequeuedItem = sut.dequeueItem()
-        XCTAssertEqual(dequeuedItem, 1)
+        sut.enqueueItem(item: firstItem)
+        sut.enqueueItem(item: secondItem)
         
-        let newFirstItem = sut.checkFirstItem()
-        XCTAssertEqual(newFirstItem, 2)
-    }
-    
-    func test_ContainsItem_숫자확인() {
-        sut.enqueueItem(item: 1)
-        sut.enqueueItem(item: 2)
-        sut.enqueueItem(item: 3)
+        sut.dequeue()
         
-        XCTAssertTrue(sut.checkContainsItem(2))
-        XCTAssertFalse(sut.checkContainsItem(4))
-    }
-    
-    func testContainsItem_배열테스트() {
-        let items = [1, 2, 3]
+        let contains = sut.checkContainsItem(firstItem)
+       
+        XCTAssertEqual(contains.value, firstItem)
         
-        for item in items {
-            sut.enqueueItem(item: item)
-        }
+        XCTAssertEqual(contains.contains, true)
+        XCTAssertTrue(contains.contains)
         
-        XCTAssertTrue(sut.checkContainsItem(2))
-        XCTAssertFalse(sut.checkContainsItem(4))
+        let contain = sut.checkContainsItem(secondItem)
+        XCTAssertFalse(contain.contains)
     }
     
 }
