@@ -6,7 +6,7 @@
 //
 
 extension String {
-    func split(with target: Character) -> [String] {        
+    func split(with target: Character) -> [String] {
         var wordsBeforeTarget: String = ""
         var listToReturn: [String] = []
         
@@ -18,6 +18,7 @@ extension String {
                 listToReturn.append(String(element))
             }
         }
+        
         listToReturn.append(wordsBeforeTarget)
         return listToReturn
     }
