@@ -31,4 +31,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(sut.linkedList.head?.data, expectedData)
     }
+    
+    func test_dequeue_LinkedList에서첫Node를반환한다() {
+        // given
+        let expectedData: Int = 0
+        
+        // when
+        sut.enqueue(expectedData)
+        let poppedData: Int = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(poppedData, expectedData)
+    }
 }
