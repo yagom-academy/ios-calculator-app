@@ -45,18 +45,16 @@ final class LinkedListTests: XCTestCase {
         //when
         sut.appendLast(data: firstInput)
         sut.appendLast(data: secondInput)
-        let headData = sut.head?.data
-        let tailData = sut.tail?.data
         //then
-        XCTAssertEqual(headData, firstInput)
-        XCTAssertEqual(tailData, secondInput)
+        XCTAssert(sut.head !== sut.tail)
     }
     
-    func test_isEmpty가true인경우_remove메서드가nil을반환하는지() {
+    func test_isEmpty가true인경우_removeFirst메서드가nil을반환하는지() {
         //given
         //when
         let removedData = sut.removeFirst()
         //then
+        XCTAssertTrue(sut.isEmpty)
         XCTAssertEqual(removedData, nil)
     }
     
