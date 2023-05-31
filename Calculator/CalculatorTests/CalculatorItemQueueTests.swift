@@ -97,4 +97,19 @@ final class CalculatorItemQueueTests: XCTestCase {
             XCTAssertEqual(result, expectedResult)
         }
     }
+    
+    func test_removeAll호출_후_isEmpty가_true를_리턴한다() {
+        // given
+        sut.enqueue(Double.random(in: -10...10))
+        sut.enqueue(Double.random(in: -10...10))
+        sut.enqueue(Double.random(in: -10...10))
+        sut.removeAll()
+        let expectedResult = true
+        
+        // then
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
 }
