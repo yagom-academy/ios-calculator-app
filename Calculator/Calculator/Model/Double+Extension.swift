@@ -1,5 +1,5 @@
 //
-//  BasicType+Extension.swift
+//  Double+Extension.swift
 //  Calculator
 //
 //  Created by Erick on 2023/05/29.

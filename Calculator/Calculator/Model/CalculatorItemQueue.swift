@@ -17,7 +17,9 @@ struct CalculatorItemQueue {
     }
     
     mutating func enqueue(_ calculateItem: CalculateItem) {
-        queue.append(CalculatorItemNode(item: calculateItem))
+        let node = CalculatorItemNode(item: calculateItem)
+        
+        queue.append(node)
     }
     
     mutating func dequeue() -> CalculateItem? {

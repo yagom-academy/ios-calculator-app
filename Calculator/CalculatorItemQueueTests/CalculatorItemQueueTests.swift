@@ -19,33 +19,33 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_count_호출하면_queue의_개수_0을_반환합니다() {
+    func test_queue가_비었을때_count를_호출하면_0을_반환합니다() {
         let result = sut.count
         let expectation = 0
         
         XCTAssertEqual(result, expectation)
     }
     
-    func test_isEmpty_호출하면_queue가_비었으니_true를_반환합니다() {
+    func test_queue가_비었을때_isEmpty를_호출하면_true를_반환합니다() {
         let result = sut.isEmpty
         
         XCTAssertTrue(result)
     }
     
-    func test_enqueue_값을_넣으면_isEmpty에서_false를_반환합니다() {
+    func test_enqueue를_사용하여_값을_넣으면_isEmpty에서_false를_반환합니다() {
         let input: CalculateItem = Operator.plus
         sut.enqueue(input)
         
         XCTAssertFalse(sut.isEmpty)
     }
     
-    func test_dequeue_호출하면_값이_없으니_nil을_반환합니다() {
+    func test_queue가_비었을때_dequeue를_호출하면_nil을_반환합니다() {
         let result = sut.dequeue()
         
         XCTAssertNil(result)
     }
     
-    func test_dequeue_호출하면_값이_있을때_가장_앞의_값을_반환합니다() {
+    func test_값이_있을때_dequeue_호출하면_가장_앞의_값을_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -57,7 +57,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result as? Double, expectation)
     }
     
-    func test_dequeue_호출하면_큐의_맨앞의_데이터가_없어지니_길이가_줄어듭니다() {
+    func test_dequeue_호출하면_큐의_맨앞의_데이터가_없어지니_count가_감소합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -70,7 +70,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_clear_호출하면_큐의_모든_데이터가_지워져_isEmpty가_true를_반환합니다() {
+    func test_clear를_호출하면_큐의_모든_데이터가_지워져_isEmpty가_true를_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -81,7 +81,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_clear_호출하면_큐의_모든_데이터가_지워져_count가_0을_반환합니다() {
+    func test_clear를_호출하면_큐의_모든_데이터가_지워져_count가_0을_반환합니다() {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
@@ -94,7 +94,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_dequeue_clear_마지막_남은_데이터를_삭제하면_clear도_작동합니다() {
+    func test_dequeue를_호출하여_마지막_남은_데이터를_삭제하면_clear도_작동합니다() {
         sut.enqueue(Operator.minus)
         let _ = sut.dequeue()
         

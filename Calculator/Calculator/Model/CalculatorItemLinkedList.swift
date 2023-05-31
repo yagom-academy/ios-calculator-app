@@ -1,5 +1,5 @@
 //
-//  LinkedList.swift
+//  CalculatorItemLinkedList.swift
 //  Calculator
 //
 //  Created by Erick on 2023/05/30.
@@ -28,7 +28,7 @@ struct CalculatorItemLinkedList {
             return nil
         }
         
-        let removeNode = head
+        let removedNode = head
         head = head?.next
         count -= 1
         
@@ -36,7 +36,7 @@ struct CalculatorItemLinkedList {
             clear()
         }
         
-        return removeNode
+        return removedNode
     }
     
     mutating func clear() {
