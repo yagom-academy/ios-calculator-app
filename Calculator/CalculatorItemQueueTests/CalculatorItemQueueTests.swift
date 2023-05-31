@@ -37,11 +37,29 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(input, result)
     }
     
+    func test_enqueue에더하기기호를넣으면_enqueuedCalculatorItems에더하기기호가있다() {
+        let input = "+"
+        
+        sut.enqueue(input)
+        let result = sut.enqueuedCalculatorItems.first as? String
+        
+        XCTAssertEqual(input, result)
+    }
+    
     func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_1이반환된다() {
         sut = CalculatorItemQueue([1])
         let expectation = 1
         
         let result = sut.dequeue() as? Int
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueuedCalculatorItems에더하기기호가있으면_dequeue를했을때_더하기기호가반환된다() {
+        sut = CalculatorItemQueue(["+"])
+        let expectation = "+"
+        
+        let result = sut.dequeue() as? String
         
         XCTAssertEqual(result, expectation)
     }
