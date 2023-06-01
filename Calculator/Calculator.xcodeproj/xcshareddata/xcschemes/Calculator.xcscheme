@@ -29,7 +29,8 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:TestPlan.xctestplan">
+            reference = "container:TestPlan.xctestplan"
+            default = "YES">
          </TestPlanReference>
       </TestPlans>
       <Testables>
@@ -41,6 +42,28 @@
                BlueprintIdentifier = "44AA604F2A25CA0A00E2BB86"
                BuildableName = "CalculatorItemQueueTests.xctest"
                BlueprintName = "CalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "44B725CF2A28D92F00173495"
+               BuildableName = "NodeTests.xctest"
+               BlueprintName = "NodeTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "44B725DC2A28D96000173495"
+               BuildableName = "LinkedListTests.xctest"
+               BlueprintName = "LinkedListTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
