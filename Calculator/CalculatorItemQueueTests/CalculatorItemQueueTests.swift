@@ -83,4 +83,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, nil)
     }
+    
+    func test_clear호출시_enQueueStack과deQueueStack을_빈배열로만든다() {
+        sut.enQueueStack = ["2", "4", "6", "9"]
+        sut.deQueueStack = ["9", "6", "4", "2"]
+        
+        sut.clear()
+        
+        XCTAssertEqual(sut.enQueueStack, [])
+        XCTAssertEqual(sut.deQueueStack, [])
+    }
 }

@@ -38,5 +38,7 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
     
     mutating func clear() {
+        enQueueStack.removeAll()
+        deQueueStack.removeAll()
     }
 }
