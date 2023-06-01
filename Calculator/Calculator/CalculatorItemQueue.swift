@@ -7,6 +7,7 @@
 
 struct CalculatorItemQueue<T>: CalculateItem {
     private var list: LinkedList<T> = LinkedList()
+    var first: T? { return list.first?.data }
     var count: Int { return list.count }
     var isEmpty: Bool { return list.isEmpty }
     
