@@ -41,4 +41,31 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedValue)
     }
+    
+    func test_dequeue_1과_2를_enqueue하고_dequeue를_하면_1이_반환된다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        // when
+        let result = sut.dequeue()
+        let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_dequeue_1과_2를_enqueue하고_dequeue를_2번_하면_2가_반환된다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        // when
+        var result = sut.dequeue()
+        result = sut.dequeue()
+        let expectedValue = 2
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
 }
