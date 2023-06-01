@@ -30,6 +30,42 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
+    func test_count_enqueue를_하지_않으면_count는_0을_가진다() {
+        // given
+        // when
+        let result = sut.count
+        let expectedValue = 0
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_count_1을_2번_enqueue하면_count는_2를_가진다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.count
+        let expectedValue = 2
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_count_5를_2번_enqueue하고_dequeue를_1번하면_count는_1을_가진다() {
+        // given
+        sut.enqueue(5)
+        sut.enqueue(5)
+        _ = sut.dequeue()
+        // when
+        let result = sut.count
+        let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
     func test_dequeue_1을_enqueue하고_dequeue를_하면_1이_반환된다() {
         // given
         sut.enqueue(1)
