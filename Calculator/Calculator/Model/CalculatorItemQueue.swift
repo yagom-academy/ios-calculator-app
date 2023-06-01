@@ -11,7 +11,7 @@ extension String: CalculateItem { }
 
 protocol CalculateItem { }
 
-struct CalculatorItemQueue<Element: CalculateItem> {
+struct CalculatorItemQueue<Element: CalculateItem> where Element: Equatable {
 	private var elements: [Element] = []
 	
 	func getElementsForTest() -> [Element] {
@@ -23,7 +23,11 @@ struct CalculatorItemQueue<Element: CalculateItem> {
 	}
 	
 	mutating func dequeue() -> Element? {
-		return elements.removeFirst()
+		if elements != [] {
+			return elements.removeFirst()
+		} else {
+			return nil
+		}
 	}
 	
 	func peek() -> Element? {
