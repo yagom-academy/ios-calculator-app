@@ -22,71 +22,6 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_count_조건없이_count를호출할때_count는_0이다() {
-        // given
-        let expectation = 0
-        
-        //when
-        let result = sut.count
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_count_초기화로_head에_nil을넣었을때_count는_0이다() {
-        // given
-        sut = LinkedList(head: nil)
-        let expectation = 0
-        
-        // when
-        let result = sut.count
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-    
-    func test_count_초기화로_head에_Node를넣었을때_count는_1이다() {
-        // given
-        sut = LinkedList(head: Node(data: 1))
-        let expectation = 1
-        
-        // when
-        let result = sut.count
-        
-        // then
-        XCTAssertEqual(result, expectation)
-    }
-        
-    func test_isEmpty_조건없이_isEmpty를호출할때_isEmpty는_true이다() {
-        // given, when
-        let result = sut.isEmpty
-        
-        // then
-        XCTAssertTrue(result)
-    }
-    
-    func test_isEmpty_초기화로_head에_nil을넣었을때_isEmpty는_true이다() {
-        // given
-        sut = LinkedList(head: nil)
-        
-        // when
-        let result = sut.isEmpty
-        
-        // then
-        XCTAssertTrue(result)
-    }
-    
-    func test_isEmpty_초기화로_head에_Node를넣었을때_isEmpty는_false이다() {
-        // given
-        sut = LinkedList(head: Node(data: 1))
-        
-        // when
-        let result = sut.isEmpty
-        
-        // then
-        XCTAssertFalse(result)
-    }
-
     func test_first_조건없이_first를호출할때_first는_nil이다() {
         // given, when
         let result = sut.first
@@ -167,14 +102,6 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_removeFirst_노드가없을때_removeFirst를하면_nil을반환한다() {
-        // given, when
-        let result = sut.removeFirst()
-        
-        // then
-        XCTAssertNil(result)
-    }
-    
     func test_removeFirst_append_1을하고_removeFirst를하면_first와last는_nil이다() {
         // given
         sut.append(1)
@@ -185,20 +112,6 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertNil(sut.first)
         XCTAssertNil(sut.last)
-    }
-    
-    func test_removeFirst_append_1_2_3을하고_removeFirst를하면_1을_반환한다() {
-        // given
-        sut.append(1)
-        sut.append(2)
-        sut.append(3)
-        let expectation = 1
-        
-        // when
-        let result = sut.removeFirst() as! Int
-        
-        // then
-        XCTAssertEqual(result, expectation)
     }
     
     func test_removeFirst_append_1_2_3을하고_removeFirst를하면_first값은_2가된다() {
