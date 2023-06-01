@@ -19,6 +19,10 @@ final class LinkedList<T> {
     var first: Node<T>? {
         return head
     }
+    
+    var last: Node<T>? {
+        return tail
+    }
 
     func append(_ NewElement: T) {
         let newData = Node(data: NewElement)
