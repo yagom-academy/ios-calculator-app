@@ -5,8 +5,6 @@
 //  Created by Dasan on 2023/05/30.
 //
 
-import Foundation
-
 class Node<T> {
     var data: T
     var next: Node?

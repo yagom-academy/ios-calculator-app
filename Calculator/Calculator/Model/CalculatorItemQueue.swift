@@ -5,8 +5,6 @@
 //  Created by Dasan on 2023/05/30.
 //
 
-import Foundation
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private(set) var queue: LinkedList<T>
     
