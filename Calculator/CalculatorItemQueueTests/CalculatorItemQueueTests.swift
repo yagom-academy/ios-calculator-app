@@ -12,27 +12,173 @@ final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
-    func test_큐의크기를_올바르게반환한다() {
+    func test_count_조건없이_queue의_count를호출할때_count는_0이다() {
         // given
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
+        let expectation = 0
+        
+        //when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_count_queue_초기화시_head에_nil이들어갔을때_count는_0이다() {
+        // given
+        sut = CalculatorItemQueue(queue: LinkedList(head: nil))
+        let expectation = 0
         
         // when
         let result = sut.count
         
         // then
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_큐가비어있지않을때_false를반환한다() {
+    func test_count_queue_초기화시_head에_Node를넣었을때_count는_1이다() {
+        // given
+        sut = CalculatorItemQueue(queue: LinkedList(head: Node(data: 1)))
+        let expectation = 1
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+        
+    func test_isEmpty_조건없이_queue의_isEmpty를호출할때_isEmpty는_true이다() {
+        // given, when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty_queue_초기화시_head에_nil이들어갔을때_isEmpty는_true이다() {
+        // given
+        sut = CalculatorItemQueue(queue: LinkedList(head: nil))
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty_queue초기화시_head에_Node를넣었을때_isEmpty는_false이다() {
+        // given
+        sut = CalculatorItemQueue(queue: LinkedList(head: Node(data: 1)))
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+    
+    func test_enqueue_enqueue_1을했을때_queue의_첫번째값은_1이다() {
+        // given
+        sut.enqueue(1)
+        let expectation = 1
+        
+        // when
+        let result = sut.queue.first
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueue_enqueue_1_2_3을했을때_queue의_첫번째값은_1이다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 1
+        
+        // when
+        let result = sut.queue.first
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueue_enqueue_1을했을때_queue의_마지막값은_1이다() {
+        // given
+        sut.enqueue(1)
+        let expectation = 1
+        
+        // when
+        let result = sut.queue.last
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enqueue_enqueue_1_2_3을했을때_queue의_마지막값은_3이다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 3
+        
+        // when
+        let result = sut.queue.last
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_queue가_비어있을때_dequeue를하면_nil을_반환한다() {
+        // given
+        let expectation: Int? = nil
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_enqueue_1_2_3을하고_dequeue를하면_dequeue는_1을반환한다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 1
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_dequeue_enqueue_1_2_3을하고_dequeue를하면_queue의_첫번째값은_2이다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 2
+        
+        // when
+        let _ = sut.dequeue()
+        let result = sut.queue.first
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_isEmpty_enqueue_1을했을때_isEmpty는_false이다() {
         // given
         sut.enqueue(1)
         
@@ -43,59 +189,44 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_큐에_append한_요소가_맨끝으로_올바르게들어갔다() {
+    func test_isEmpty_enqueue_1을하고_dequeue를했을때_isEmpty는_true이다() {
         // given
         sut.enqueue(1)
-        sut.enqueue(3)
-        sut.enqueue(5)
-        let expectation = 5
+        let _ = sut.dequeue()
         
         // when
-        let result = sut.queue.last
-                
+        let result = sut.isEmpty
+        
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertTrue(result)
     }
     
-    func test_큐에서_요소가_올바르게삭제되었다() {
+    func test_count_enqueue_1_2_3을했을때_count는_3이다() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        sut.enqueue(5)
-        sut.enqueue(7)
-        let expectation = 1
+        let expectation = 3
         
         // when
-        let result = sut.dequeue()
+        let result = sut.count
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_큐에서_가장먼저들어온요소가_삭제되었다() {
+    func test_count_enqueue_1_2_3을하고_dequeue를했을때_count는_2이다() {
         // given
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        sut.enqueue(5)
-        sut.enqueue(7)
+        let _ = sut.dequeue()
+        let expectation = 2
         
         // when
-        let result = sut.dequeue()
+        let result = sut.count
         
         // then
-        XCTAssertEqual(result, 1)
-    }
-    
-    func test_dequeue시_큐가비어있으면_nil반환() {
-        // given
-        // 주어지지 않음
-        
-        // when
-        let result = sut.dequeue()
-        
-        // then
-        XCTAssertNil(result)
+        XCTAssertEqual(result, expectation)
     }
 }
