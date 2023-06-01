@@ -14,6 +14,10 @@ protocol CalculateItem { }
 struct CalculatorItemQueue<Element: CalculateItem> {
 	private var elements: [Element] = []
 	
+	func getElementsForTest() -> [Element] {
+		return elements
+	}
+	
 	mutating func enqueue(_ value: Element) {
 		elements.append(value)
 	}
