@@ -67,4 +67,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(sut.enQueueStack[0], "4")
     }
+    
+    func test_peek호출시_enQueueStack의_0번째인덱스값을반환한다() {
+        sut.enQueueStack = ["2", "4", "6", "9"]
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, "2")
+    }
+    
+    func test_peek호출시_enQueueStack이빈배열이면_nil을반환한다() {
+        sut.enQueueStack = []
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, nil)
+    }
 }
