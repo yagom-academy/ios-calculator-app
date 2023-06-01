@@ -37,6 +37,10 @@ struct LinkedList<T> {
     init(head: Node<T>? = nil, tail: Node<T>? = nil) {
         self.head = head
         self.tail = tail
+        
+        if head != nil {
+            count += 1
+        }
     }
         
     mutating func append(_ data: T) {
@@ -69,13 +73,5 @@ struct LinkedList<T> {
         }
     
         return removedData
-    }
-    
-    mutating func printAllList() {
-        var node = head
-        while node != nil {
-            print("\(String(describing: node?.data))", terminator: " -> ")
-            node = node?.next
-        }
     }
 }
