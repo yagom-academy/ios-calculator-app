@@ -32,4 +32,18 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	func test_enqueue함수를_여러번_호출시_elements배열안에_여러개의_요소가_들어간다() {
+		// given
+		sut.enqueue(1)
+		sut.enqueue(2)
+		sut.enqueue(3)
+		var input = sut.getElementsForTest()
+		
+		// when
+		let result = [1,2,3]
+		
+		// then
+		XCTAssertEqual(input, result)
+	}
 }
