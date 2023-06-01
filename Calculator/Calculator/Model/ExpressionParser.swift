@@ -25,9 +25,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) throws -> [String] {
-        
-        var currentNumber: String = ""
-        
+        var currentNumber: String = ""        
         var tokens: [String] = []
         
         try input.forEach { char in
