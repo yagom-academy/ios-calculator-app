@@ -62,9 +62,52 @@ final class LinkedListTests: XCTestCase {
     func test_isEmpty_head가_nil이면_isEmpty는_true값을_가진다() {
         // given
         // when
-        var result = sut.isEmpty
+        let result = sut.isEmpty
         
         // then
         XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty_1을_append하면_isEmpty는_false값을_가진다() {
+        // given
+        sut.append(1)
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+    
+    func test_first_head가_nil이면_first는_nil을_반환한다() {
+        // given
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_first_1을_append하면_first는_1을_반환한다() {
+        // given
+        sut.append(1)
+        
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_first_1과_2를_append하면_first는_1을_반환한다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
     }
 }
