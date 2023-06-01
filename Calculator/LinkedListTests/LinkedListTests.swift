@@ -6,29 +6,37 @@
 //
 
 import XCTest
-import Foundation
+//import Foundation
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
     var sut: LinkedList<CalculateItem>!
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = LinkedList()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
-    func test_노드의갯수를_올바르게_출력한다() {
+    func test_count_조건없이_count를호출할때_count는_0이다() {
         // given
-        sut.append(1)
-        sut.append(2)
-        sut.append(3)
-        sut.append(4)
-        sut.append("+")
-        sut.append("-")
-        let expectation = 6
+        let expectation = 0
+        
+        //when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_count_초기화로_head에_nil을넣었을때_count는_0이다() {
+        // given
+        sut = LinkedList(head: nil)
+        let expectation = 0
         
         // when
         let result = sut.count
@@ -37,54 +45,137 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_head가_nil이면_isEmpty는_true를반환한다() {
+    func test_count_초기화로_head에_Node를넣었을때_count는_1이다() {
         // given
-        let input = sut.first
+        sut = LinkedList(head: Node(data: 1))
+        let expectation = 1
         
         // when
-        if input == nil {
-            // then
-            XCTAssertTrue(sut.isEmpty)
-        }
-    }
-
-    func test_노드가없을때_apped를하면_처음과끝노드의값이_같다() {
-        // given
-        sut.append(1)
-        
-        // when
-        if sut.isEmpty {
-            // then
-            let first = sut.first as? Int
-            let last = sut.last as? Int
-            XCTAssertEqual(first, last)
-        }
-    }
-    
-    func test_노드가있을때_append를하면_추가된node가_마지막노드가된다() {
-        // given
-        sut.append(1)
-        
-        // when
-        sut.append(2)
-        let result = sut.last as? Int
+        let result = sut.count
         
         // then
-        XCTAssertEqual(result, 2)
+        XCTAssertEqual(result, expectation)
+    }
+        
+    func test_isEmpty_조건없이_isEmpty를호출할때_isEmpty는_true이다() {
+        // given, when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
     }
     
-    func test_노드가없을때_removeFirst를하면_return값은nil이다() {
+    func test_isEmpty_초기화로_head에_nil을넣었을때_isEmpty는_true이다() {
         // given
-        // 아무것도 안들어감
+        sut = LinkedList(head: nil)
         
         // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertTrue(result)
+    }
+    
+    func test_isEmpty_초기화로_head에_Node를넣었을때_isEmpty는_false이다() {
+        // given
+        sut = LinkedList(head: Node(data: 1))
+        
+        // when
+        let result = sut.isEmpty
+        
+        // then
+        XCTAssertFalse(result)
+    }
+
+    func test_first_조건없이_first를호출할때_first는_nil이다() {
+        // given, when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_first_초기화로_head에_data_1를넣고_first를호출하면_first는_1이다() {
+        // given
+        sut = LinkedList(head: Node(data: 1))
+        let expectation = 1
+        
+        //when
+        let result = sut.first as! Int
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_last_조건없이_last를호출할때_last는_nil이다() {
+        // given, when
+        let result = sut.last
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_last_초기화로_head에_data_1를넣고_last를호출하면_last는_1이다() {
+        // given
+        sut = LinkedList(head: Node(data: 1))
+        let expectation = 1
+        
+        //when
+        let result = sut.last as! Int
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_append_노드가없을때_append_1을하면_first와last값이_1로_같다() {
+        // given
+        sut.append(1)
+        
+        //when
+        let firstResult = sut.first as! Int
+        let lastResult = sut.last as! Int
+        
+        // then
+        XCTAssertEqual(firstResult, lastResult)
+    }
+    
+    func test_append_append_1_2_3을하면_first값은_1이다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        let expectation = 1
+        
+        //when
+        let result = sut.first as! Int
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+
+    func test_append_append_1_2_3을하면_last값은_3이다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        let expectation = 3
+        
+        //when
+        let result = sut.last as! Int
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeFirst_노드가없을때_removeFirst를하면_nil을반환한다() {
+        // given, when
         let result = sut.removeFirst()
         
         // then
         XCTAssertNil(result)
     }
     
-    func test_노드가하나만있을때_removeFirst를하면_처음과끝노드는_nil이된다() {
+    func test_removeFirst_append_1을하고_removeFirst를하면_first와last는_nil이다() {
         // given
         sut.append(1)
         
@@ -96,7 +187,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(sut.last)
     }
     
-    func test_removeFirst를하면_처음노드의data를_반환한다() {
+    func test_removeFirst_append_1_2_3을하고_removeFirst를하면_1을_반환한다() {
         // given
         sut.append(1)
         sut.append(2)
@@ -104,7 +195,22 @@ final class LinkedListTests: XCTestCase {
         let expectation = 1
         
         // when
-        let result = sut.removeFirst() as? Int
+        let result = sut.removeFirst() as! Int
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_removeFirst_append_1_2_3을하고_removeFirst를하면_first값은_2가된다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        sut.append(3)
+        let _ = sut.removeFirst()
+        let expectation = 2
+        
+        // when
+        let result = sut.first as! Int
         
         // then
         XCTAssertEqual(result, expectation)
