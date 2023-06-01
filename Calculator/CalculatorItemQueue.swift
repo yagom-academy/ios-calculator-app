@@ -5,33 +5,35 @@
 //  Created by Yetti on 2023/05/30.
 //
 protocol DoubleStackQueue {
-    associatedtype T
     var isEmpty: Bool { get }
     
-    mutating func enQueue(_ element: T)
-    mutating func deQueue() -> T?
+    mutating func enQueue(_ element: String)
+    mutating func deQueue() -> String?
     mutating func clear()
-    func peek() -> T?
+    func peek() -> String?
 }
 protocol CalculateItem { }
 
-struct CalculatorItemQueue<T>: DoubleStackQueue, CalculateItem {
-    var enQueueStack: [T] = []
-    var deQueueStack: [T] = []
+struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
+    var enQueueStack: [String] = []
+    var deQueueStack: [String] = []
     
     var isEmpty: Bool {
         return enQueueStack.isEmpty && deQueueStack.isEmpty
     }
     
-    mutating func enQueue(_ element: T) {
+    mutating func enQueue(_ element: String) {
         enQueueStack.append(element)
     }
     
-    mutating func deQueue() -> T? {
-        return nil
+    mutating func deQueue() -> String? {
+        deQueueStack = enQueueStack.reversed()
+        let deQueueElement = deQueueStack.popLast()
+        enQueueStack = deQueueStack.reversed()
+        return deQueueElement
     }
 
-    func peek() -> T? {
+    func peek() -> String? {
         return nil
     }
     
