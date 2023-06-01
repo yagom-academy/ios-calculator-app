@@ -20,7 +20,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_isEmpty호출시_큐가_비어있으면_true를_리턴한다() {
+    func test_isEmpty_큐가_비어있으면_true를_리턴한다() {
         // given
         let expectedResult = true
         
@@ -31,7 +31,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_isEmpty호출시_큐가_비어있지않으면_false를_리턴한다() {
+    func test_isEmpty_큐가_비어있지않으면_false를_리턴한다() {
         // given
         let expectedResult = false
         sut.enqueue(1.0)
@@ -43,7 +43,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_dequeue호출시_queue가_비어있으면_nil을_리턴한다() {
+    func test_dequeue_queue가_비어있으면_nil을_리턴한다() {
         // given
         let expectedResult: Double? = nil
         
@@ -54,7 +54,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_dequeue호출시_첫_enqueue_값을_리턴한다() {
+    func test_dequeue_순서대로_enqueue_후_dequeue시_첫_enqueue_값을_리턴한다() {
         // given
         sut.enqueue(1.0)
         sut.enqueue(2.0)
@@ -68,7 +68,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_count호출시_현재_큐에_쌓인_수를_리턴한다() {
+    func test_count_현재_큐에_쌓인_수를_리턴한다() {
         // given
         sut.enqueue(Double.random(in: -10...10))
         sut.enqueue(Double.random(in: -10...10))
@@ -83,7 +83,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedResult)
     }
     
-    func test_peek호출시_다음_dequeue_될_값을_리턴한다() {
+    func test_peek_다음_dequeue_될_값을_리턴한다() {
         // given
         sut.enqueue(0.3)
         sut.enqueue(20.2)
@@ -99,7 +99,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         }
     }
     
-    func test_removeAll호출_후_isEmpty가_true를_리턴한다() {
+    func test_removeAll_호출_후_isEmpty가_true를_리턴한다() {
         // given
         sut.enqueue(Double.random(in: -10...10))
         sut.enqueue(Double.random(in: -10...10))
