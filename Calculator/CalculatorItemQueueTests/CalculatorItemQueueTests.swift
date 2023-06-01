@@ -67,4 +67,13 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	func tests_peek함수를_호출시_elements가_빈배열일경우_nil을_반환한다() {
+		// given
+		let input = sut.peek()
+		// when
+		
+		// then
+		XCTAssertNil(input)
+	}
 }
