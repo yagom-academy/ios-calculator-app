@@ -20,16 +20,15 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "AC2DCC8D2A2591D800F35632",
-        "name" : "CalculatorTests"
+        "identifier" : "AC2DCCA52A25D63D00F35632",
+        "name" : "LinkedListTests"
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "AC2DCCA52A25D63D00F35632",
-        "name" : "LinkedListTests"
+        "identifier" : "AC7636452A282524009C18C1",
+        "name" : "CalculatorItemQueueTests"
       }
     }
   ],
