@@ -4,26 +4,26 @@
 //
 //  Created by 박종화 on 2023/05/30.
 //
-struct CalculatorItemQueue<Element>: CalculatorItem {
-    private var queue: [Element] = []
+struct CalculatorItemQueue<CalculatorItem> {
+    private var queue: [CalculatorItem] = []
     
-    public var count: Int {
+    internal var count: Int {
         return queue.count
     }
     
-    public var isEmpty: Bool {
+    internal var isEmpty: Bool {
         return queue.isEmpty
     }
     
-    public mutating func enqueue(_ element: Element) {
+    internal mutating func enqueue(_ element: CalculatorItem) {
         queue.append(element)
     }
     
-    public mutating func dequeue() -> Element? {
+    internal mutating func dequeue() -> CalculatorItem? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
-    public mutating func clear() {
+    internal mutating func clear() {
         queue.removeAll()
     }
 }

@@ -21,25 +21,27 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue를_호출하여_1과2와3을_넣었을때_개수가_3이_나오는지() {
-        sut.enqueue("1")
-        sut.enqueue("-")
-        sut.enqueue("2")
+    func test_enqueue를_호출하여_1과2와3을_넣고_개수가3개면_True를_반환하는지() {
+        let expectation = 3
         
-        XCTAssertEqual(sut.count, 3)
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        
+        XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_dequeue를_호출하여_1과2와3에서_3을_제거할때_개수가_2개인지() {
+    func test_dequeue를_호출하여_3과4와5에서_3을_제거할때_개수가_2개인지() {
         sut.enqueue("3")
-        sut.enqueue("+")
         sut.enqueue("4")
+        sut.enqueue("5")
         
         XCTAssertEqual(sut.dequeue(), "3")
         
         XCTAssertEqual(sut.count, 2)
     }
     
-    func test_clear이_호출되면_빈배열이_반환되는지() {
+    func test_clear를_호출하어_빈배열이되면_True를_반환하는지() {
         sut.enqueue("8")
         sut.enqueue("x")
         sut.enqueue("9")

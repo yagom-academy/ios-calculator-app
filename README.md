@@ -21,7 +21,7 @@
 
 <details>
 <summary>펼쳐보기</summary>
-<img src="https://i.ibb.co/mCWL1zx/calculator.png" alt="calculator" border="0"></a>
+<a href="https://ibb.co/gy5VrCW"><img src="https://i.ibb.co/Nx8SFzN/Calculator.png" alt="Calculator" border="0"></a>
     
 </details>
 
