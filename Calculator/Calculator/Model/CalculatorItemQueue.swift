@@ -6,8 +6,6 @@
 //
 
 extension Int: CalculateItem { }
-extension Double: CalculateItem { }
-extension String: CalculateItem { }
 
 protocol CalculateItem { }
 
