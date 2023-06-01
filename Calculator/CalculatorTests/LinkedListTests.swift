@@ -15,11 +15,6 @@ final class LinkedListTests: XCTestCase {
         try super.setUpWithError()
         sut = LinkedList<Int>()
     }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        sut = nil
-    }
     
     func test_노드가없는경우_isEmpty가true인지() {
         //given
