@@ -29,7 +29,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     func peek() -> Element? {
-        !enqueueStack.isEmpty ? enqueueStack.first : dequeueStack.last
+        enqueueStack.isEmpty ? dequeueStack.last : enqueueStack.first
     }
     
     mutating func removeAll() {
