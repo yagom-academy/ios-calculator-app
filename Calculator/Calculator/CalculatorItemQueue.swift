@@ -40,7 +40,10 @@ struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
         
         return element
     }
-    
+}
+
+// MARK: - Test Func
+extension CalculatorItemQueue {
     func returnListValue() -> [Element]? {
         guard headItem != nil else { return nil }
         
@@ -56,5 +59,4 @@ struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
         
         return listArray
     }
-
 }
