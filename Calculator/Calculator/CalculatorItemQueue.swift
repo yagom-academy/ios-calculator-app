@@ -9,7 +9,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var list: LinkedList<Element> = LinkedList()
     
     mutating func enqueue(_ value: Element) {
-        list.appendLast(data: value)
+        list.append(data: value)
     }
     
     mutating func dequeue() -> Element? {

@@ -33,7 +33,7 @@ final class LinkedListTests: XCTestCase {
         //given
         let input = 1
         //when
-        sut.appendLast(data: input)
+        sut.append(data: input)
         //then
         XCTAssert(sut.head === sut.tail)
     }
@@ -43,8 +43,8 @@ final class LinkedListTests: XCTestCase {
         let firstInput = 1
         let secondInput = 2
         //when
-        sut.appendLast(data: firstInput)
-        sut.appendLast(data: secondInput)
+        sut.append(data: firstInput)
+        sut.append(data: secondInput)
         //then
         XCTAssert(sut.head !== sut.tail)
     }
@@ -61,7 +61,7 @@ final class LinkedListTests: XCTestCase {
     func test_node가한개만존재할떄_removeFirst메서드로_head와tail이nil로설정되고_제거한값을리턴하는지() {
         //given
         let input = 1
-        sut.appendLast(data: input)
+        sut.append(data: input)
         //when
         let removedData = sut.removeFirst()
         let head = sut.head
@@ -77,9 +77,9 @@ final class LinkedListTests: XCTestCase {
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
-        sut.appendLast(data: firstInput)
-        sut.appendLast(data: secondInput)
-        sut.appendLast(data: thirdInput)
+        sut.append(data: firstInput)
+        sut.append(data: secondInput)
+        sut.append(data: thirdInput)
         //when
         let removedFirstData = sut.removeFirst()
         let removedSecondData = sut.removeFirst()
@@ -95,7 +95,7 @@ final class LinkedListTests: XCTestCase {
     func test_removeAll메서드가실행되면_head와tail이_nil로설정되는지() {
         //given
         let input = 1
-        sut.appendLast(data: input)
+        sut.append(data: input)
         //when
         sut.removeAll()
         let head = sut.head
