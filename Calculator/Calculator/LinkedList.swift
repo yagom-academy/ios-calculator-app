@@ -8,6 +8,13 @@
 final class LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
+    
+    var isEmpty: Bool {
+        if head == nil {
+            return true
+        }
+        return false
+    }
 
     func append(_ NewElement: T) {
         let newData = Node(data: NewElement)
