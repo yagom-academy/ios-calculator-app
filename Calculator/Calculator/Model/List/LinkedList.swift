@@ -49,12 +49,3 @@ struct LinkedList<T> {
         return popNode.value
     }
 }
-
-class Node<T> {
-    var value: T
-    var previousNode: Node<T>?
-    
-    init(value: T) {
-        self.value = value
-    }
-}
