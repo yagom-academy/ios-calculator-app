@@ -12,14 +12,14 @@ struct LinkedList<Element> {
     var isEmpty: Bool { size == 0 }
     
     mutating func append(_ element: Element) {
-        let newItem = Node(element: element)
+        let newNode = Node(element: element)
         
         if isEmpty {
-            front = newItem
+            front = newNode
             tail = front
         } else {
-            tail?.next = newItem
-            tail = newItem
+            tail?.next = newNode
+            tail = newNode
         }
         size += 1
     }
