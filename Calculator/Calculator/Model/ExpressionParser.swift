@@ -7,33 +7,38 @@
 
 enum ExpressionParser {
     
-    static func parse(from input: String) -> Formula {
+    static func parse(from input: String) throws -> Formula {
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
-        var formula: Formula = Formula(
-            operands: CalculatorItemQueue<Double>(),
-            operators: CalculatorItemQueue<Operator>()
-        )
-        
-        let items = componentsByOperators(from: input)
+        let items = try componentsByOperators(from: input)
         
         items.forEach { item in
-            if let `operator` = Operator(rawValue: Character(item)) {
-                formula.operators.enqueue(`operator`)
-            } else if let operand = Double(item) {
-                formula.operands.enqueue(operand)
-            } 
+            if let operand = Double(item) {
+                operands.enqueue(operand)
+            } else if let `operator` = Operator(rawValue: Character(item)) {
+                operators.enqueue(`operator`)
+            }
         }
         
-        return formula
+        return Formula(operands: operands, operators: operators)
     }
     
-    private static func componentsByOperators(from input: String) -> [String] {
+    private static func componentsByOperators(from input: String) throws -> [String] {
         
         var currentNumber: String = ""
+        
         var tokens: [String] = []
         
-        input.forEach { char in
+        try input.forEach { char in
             switch char {
+            case "0"..."9":
+                currentNumber.append(char)
+            case ".":
+                currentNumber.append(char)
+                if currentNumber.filter({ $0 == "." }).count > 1 {
+                    throw CalculationError.invalidInputPoint
+                }
             case "+", "-", "÷", "×":
                 if !currentNumber.isEmpty {
                     tokens.append(currentNumber)
@@ -42,9 +47,15 @@ enum ExpressionParser {
                 tokens.append(String(char))
                 
             default:
-                currentNumber.append(char)
+                throw CalculationError.invalidInputNumber
             }
         }
+        
+        guard currentNumber.filter({ $0 == "." }).count < 2 else { throw CalculationError.invalidInputPoint }
+        
+        if !currentNumber.isEmpty {
+            tokens.append(currentNumber)
+        } 
         
         return tokens
     }
