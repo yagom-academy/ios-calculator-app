@@ -74,6 +74,40 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
+    func test_first_enqueue를_안하면_first는_nil을_가진다() {
+        // given
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_first_1을_enqueue하면_first는_1을_가진다() {
+        // given
+        sut.enqueue(1)
+        
+        // when
+        let result = sut.first
+        let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_first_1과_2를_enqueue하면_first는_1을_가진다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        // when
+        let result = sut.first
+        let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
     func test_dequeue_1을_enqueue하고_dequeue를_하면_1이_반환된다() {
         // given
         sut.enqueue(1)
