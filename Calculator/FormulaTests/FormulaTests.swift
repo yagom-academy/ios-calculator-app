@@ -78,4 +78,51 @@ final class FormulaTests: XCTestCase {
             XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidOperator)
         }
     }
+    
+    func test_parse_넘겨받은_숫자를_제대로_연산한다() {
+        // given
+        let input = "12+3-5/5*2"
+        let expected = 4.0
+        
+        // when
+        var formula = try? ExpressionParser.parse(from: input)
+        let result = try? formula?.result()
+
+        // then
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_parse_마이너스_부호가_포함한_숫자를_제대로_연산된다() {
+        // given
+        let input = "12+1--2/5*2"
+        let expected = 6.0
+        
+        // when
+        var formula = try? ExpressionParser.parse(from: input)
+        let result = try? formula?.result()
+
+        // then
+        XCTAssertEqual(result, expected)
+    }
+    
+    func test_parse_소수로_표현할_수_없는_문자가_있으면_예외를_반화한다() {
+        // given
+        let input = "12+a"
+        
+        // when
+        XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidInput)
+        }
+    }
+    
+    func test_parse_리턴타입이_Formula이다() {
+        // given
+        let input = "1+2"
+        
+        // when
+        let formula = try? ExpressionParser.parse(from: input)
+        
+        // then
+        XCTAssertTrue(type(of:formula) == type(of:sut))
+    }
 }
