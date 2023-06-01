@@ -5,32 +5,28 @@
 //  Created by Minseong Kang on 2023/05/30.
 //
 
+extension Int: CalculateItem { }
+extension Double: CalculateItem { }
+extension String: CalculateItem { }
 
-protocol CalculateItem {
-	
-}
+protocol CalculateItem { }
 
-struct CalculatorItemQueue: CalculateItem {
-	private var elements: [Int] = []
+struct CalculatorItemQueue<Element: CalculateItem> {
+	private var elements: [Element] = []
 	
-	mutating func enqueue(_ value: Int) -> [Int] {
+	mutating func enqueue(_ value: Element) {
 		elements.append(value)
-		return elements
 	}
 	
-	mutating func dequeue() -> Int? {
+	mutating func dequeue() -> Element? {
 		return elements.removeFirst()
 	}
 	
-	func peek() -> Int? {
+	func peek() -> Element? {
 		return elements.first
 	}
 	
-	mutating func clear() -> Bool {
+	mutating func clear() {
 		elements.removeAll()
-		if elements == [] {
-			return true
-		}
-		return false
 	}
 }
