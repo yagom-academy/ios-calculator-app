@@ -89,4 +89,18 @@ final class CalculatorItemQueueTests: XCTestCase {
 		
 		XCTAssertEqual(input, result)
 	}
+	
+	func tests_removeAll함수를_호출시_모든요소가_지워진다() {
+		// given
+		sut.enqueue(1)
+		sut.enqueue(2)
+		sut.enqueue(3)
+		sut.clear()
+		let expection: [Int] = []
+		
+		// when
+		let result = sut.getElementsForTest()
+		
+		XCTAssertEqual(result, expection)
+	}
 }
