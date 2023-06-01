@@ -5,8 +5,7 @@
 //  Created by Minsup on 2023/05/30.
 //
 
-struct CalculatorItemQueue<Element: CalculateItem> {
-    
+struct CalculatorItemQueue<Element: CalculateItem> {    
     private(set) var elements: [Element]
     
     init(_ elements:[Element] = []) {

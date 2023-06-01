@@ -5,8 +5,7 @@
 //  Created by Minsup on 2023/05/31.
 //
 
-enum ExpressionParser {
-    
+enum ExpressionParser {    
     static func parse(from input: String) throws -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
@@ -36,11 +35,12 @@ enum ExpressionParser {
                 throw CalculationError.invalidInputNumber
             }
             
-            guard currentSegment.count(of: ".") < 2 else {
-                throw CalculationError.invalidInputPoint
-            }
-            
             if operators.contains(char) {
+                
+                if currentSegment.first == "." || currentSegment.last == "." || currentSegment.count(of: ".") >= 2 {
+                    throw CalculationError.invalidInputPoint
+                }
+                
                 result.append(contentsOf: currentSegment.split(with: char))
                 currentSegment = ""
             }
