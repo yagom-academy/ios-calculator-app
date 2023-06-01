@@ -9,11 +9,17 @@ struct LinkedList<T> {
     private var firstNode: Node<T>?
     private var lastNode: Node<T>?
     
-    var first: Node<T>? { return firstNode }
+    var first: Node<T>? {
+        return firstNode
+    }
     
-    var last: Node<T>? { return lastNode }
+    var last: Node<T>? {
+        return lastNode
+    }
 
-    private var isEmpty: Bool { firstNode == nil }
+    private var isEmpty: Bool {
+        return firstNode == nil
+    }
 
     mutating func enqueue(_ element: T) {
         let node = Node(value: element)
