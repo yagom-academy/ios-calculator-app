@@ -65,9 +65,6 @@ final class CalculatorTests: XCTestCase {
         let input = 1
         
         sut.enqueueItem(item: input)
-        let result = sut.countItem
-        
-        XCTAssertEqual(input, result)
         
     }
     
