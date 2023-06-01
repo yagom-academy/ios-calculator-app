@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F811A902A290E41007624F0 /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F811A8F2A290E41007624F0 /* IntegrationTests.swift */; };
 		1FE442AC2A257CC100A07902 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE442AB2A257CC100A07902 /* CalculatorItemQueueTests.swift */; };
 		1FE442B82A257ED400A07902 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE442B72A257ED400A07902 /* CalculatorItemQueue.swift */; };
 		1FE442BB2A257F9700A07902 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE442BA2A257F9700A07902 /* CalculateItem.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1F811A8F2A290E41007624F0 /* IntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		1FE442A92A257CC100A07902 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE442AB2A257CC100A07902 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		1FE442B72A257ED400A07902 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				1FE442AB2A257CC100A07902 /* CalculatorItemQueueTests.swift */,
 				1FE442CA2A27A1DD00A07902 /* FormulaTests.swift */,
 				1FE442CE2A28302500A07902 /* ExpressionParserTests.swift */,
+				1F811A8F2A290E41007624F0 /* IntegrationTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -291,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F811A902A290E41007624F0 /* IntegrationTests.swift in Sources */,
 				1FE442CB2A27A1DD00A07902 /* FormulaTests.swift in Sources */,
 				1FE442AC2A257CC100A07902 /* CalculatorItemQueueTests.swift in Sources */,
 				1FE442CF2A28302500A07902 /* ExpressionParserTests.swift in Sources */,

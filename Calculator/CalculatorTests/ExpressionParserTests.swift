@@ -12,10 +12,7 @@ final class ExpressionParserTests: XCTestCase {
     func test_간단하고_정상적인_문자열_수식을_parse_하면_Formula_객체안에_연산자와_피연산자가_분리되어_순서대로_queue에_쌓인다() throws {
         // given
         let input = "5+3"
-        let expectation = Formula(
-            operands: CalculatorItemQueue<Double>([5, 3]),
-            operators: CalculatorItemQueue<Operator>([.add])
-        )
+        let expectation = Formula(operands: [5, 3], operators: [.add])
         
         // when
         let result = try ExpressionParser.parse(from: input)
@@ -29,8 +26,8 @@ final class ExpressionParserTests: XCTestCase {
         // given
         let input = "5+3×2.5÷10-30.14"
         let expectation = Formula(
-            operands: CalculatorItemQueue<Double>([5, 3, 2.5, 10, 30.14]),
-            operators: CalculatorItemQueue<Operator>([.add, .multiply, .divide, .subtract])
+            operands: [5, 3, 2.5, 10, 30.14],
+            operators: [.add, .multiply, .divide, .subtract]
         )
         
         // when
@@ -40,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result.operands.elements, expectation.operands.elements)
         XCTAssertEqual(result.operators.elements, expectation.operators.elements)
     }
-    
+     
     func test_숫자_연산자_소수점이_아닌_피연산자가_포함되어있는_문자열_수식을_parse하면_invalidInput_에러가_발생한다() throws {
         // given
         let input1 = "5+ㄱ"
