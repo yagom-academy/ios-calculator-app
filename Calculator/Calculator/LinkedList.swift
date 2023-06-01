@@ -5,8 +5,18 @@
 //  Created by idinaloq on 2023/05/29.
 //
 
+extension LinkedList {
+    func currentHead() -> Node<Element>? {
+        return head
+    }
+    
+    func currentTail() -> Node<Element>? {
+        return tail
+    }
+}
+
 struct LinkedList<Element> {
-    private(set) var head: Node<Element>? {
+    private var head: Node<Element>? {
         didSet {
             guard head == nil else {
                 return
@@ -15,7 +25,7 @@ struct LinkedList<Element> {
         }
     }
     
-    private(set) var tail: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil

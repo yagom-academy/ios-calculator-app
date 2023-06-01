@@ -7,7 +7,9 @@
 
 import XCTest
 @testable import Calculator
+
 extension Int: CalculateItem {}
+
 final class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
     
@@ -16,14 +18,17 @@ final class CalculatorTests: XCTestCase {
         sut = CalculatorItemQueue<Int>()
     }
 
-    func test_값을한번enqueue하면_정상적으로head와tail에_추가되는지() {
+    func test_값을_한번enqueue하면_head와tail에추가되는지() {
         //given
         let input = 1
         //when
         sut.enqueue(input)
+        let list = sut.currentList()
+        let head = list.currentHead()
+        let tail = list.currentTail()
         //then
-        XCTAssertEqual(sut.list.head?.data, input)
-        XCTAssertEqual(sut.list.tail?.data, input)
+        XCTAssertEqual(list.currentHead()?.data, input)
+        XCTAssertEqual(list.currentTail()?.data, input)
     }
     
     func test_값을두번enqueue하면_정상적으로head와tail에_추가되는지() {
@@ -33,9 +38,12 @@ final class CalculatorTests: XCTestCase {
         //when
         sut.enqueue(firstInput)
         sut.enqueue(secondInput)
+        let list = sut.currentList()
+        let head = list.currentHead()
+        let tail = list.currentTail()
         //then
-        XCTAssertEqual(sut.list.head?.data, firstInput)
-        XCTAssertEqual(sut.list.tail?.data, secondInput)
+        XCTAssertEqual(list.currentHead()?.data, firstInput)
+        XCTAssertEqual(list.currentTail()?.data, secondInput)
     }
     
     func test_head가없을때_값을dequeue하면_nil을반환하는지() {
@@ -62,8 +70,9 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(input)
         //when
         sut.removeAll()
-        let head = sut.list.head
-        let tail = sut.list.tail
+        let list = sut.currentList()
+        let head = list.currentHead()
+        let tail = list.currentTail()
         //then
         XCTAssertNil(head)
         XCTAssertNil(tail)
