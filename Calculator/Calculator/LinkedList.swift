@@ -23,6 +23,19 @@ final class LinkedList<T> {
     var last: Node<T>? {
         return tail
     }
+    
+    var count: Int {
+        if head == nil {
+            return 0
+        }
+        
+        var count = 1
+        while let next = head?.next {
+            head = next
+            count += 1
+        }
+        return count
+    }
 
     func append(_ NewElement: T) {
         let newData = Node(data: NewElement)
