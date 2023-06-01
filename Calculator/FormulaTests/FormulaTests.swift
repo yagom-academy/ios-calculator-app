@@ -15,17 +15,17 @@ final class FormulaTests: XCTestCase {
         var operands = CalculatorItemQueue()
         var operators = CalculatorItemQueue()
         
-        operators.enqueue("5")
-        operands.enqueue("+")
-        operators.enqueue("-1")
-        operands.enqueue("-")
-        operators.enqueue("2")
-        operands.enqueue("*")
-        operators.enqueue("6")
-        operands.enqueue("/")
-        operators.enqueue("3")
+        operands.enqueue(5.0)
+        operators.enqueue("+")
+        operands.enqueue(-1.0)
+        operators.enqueue("-")
+        operands.enqueue(2.0)
+        operators.enqueue("*")
+        operands.enqueue(6.0)
+        operators.enqueue("/")
+        operands.enqueue(3.0)
         
-        sut = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+        sut = Formula(operands: operands, operators: operators)
     }
 
     override func tearDownWithError() throws {
@@ -37,7 +37,7 @@ final class FormulaTests: XCTestCase {
         let expected = 4.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expected)
