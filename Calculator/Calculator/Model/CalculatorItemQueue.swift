@@ -4,9 +4,6 @@
 //
 //  Created by kangkyungmin on 2023/05/30.
 //
-protocol CalculateItem {
-    
-}
 
 struct CalculatorItemQueue<T> {
     private var linkedList = LinkedList<T>()
