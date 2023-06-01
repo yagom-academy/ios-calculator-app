@@ -15,8 +15,8 @@ protocol Calculatorable {
 }
 
 struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
-    var headItem: Item<Element>?
-    var tailItem: Item<Element>?
+    private var headItem: Item<Element>?
+    private var tailItem: Item<Element>?
     
     mutating func enqueue(element: Element) {
         let item = Item(element)
