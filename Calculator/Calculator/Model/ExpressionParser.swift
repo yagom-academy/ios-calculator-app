@@ -7,47 +7,38 @@
 
 enum ExpressionParser {    
     static func parse(from input: String) throws -> Formula {
-        var operands = CalculatorItemQueue<Double>()
-        var operators = CalculatorItemQueue<Operator>()
+        let validOperators: Set<Character> = ["+", "-", "÷", "×"]
+        let items = componentsByOperators(from: input)
         
-        let items = try componentsByOperators(from: input)
+        let operands = items.compactMap { Double($0) }
+        let operators = items.filter { validOperators.contains($0) }.compactMap { Operator(rawValue: Character($0)) }
         
-        items.forEach { item in
-            if let operand = Double(item) {
-                operands.enqueue(operand)
-            } else if let `operator` = Operator(rawValue: Character(item)) {
-                operators.enqueue(`operator`)
-            }
+        if items.count != operands.count + operators.count {
+            throw CalculationError.invalidInput
         }
         
-        return Formula(operands: operands, operators: operators)
+        return Formula(
+            operands: CalculatorItemQueue<Double>(operands),
+            operators: CalculatorItemQueue<Operator>(operators)
+        )
     }
     
-    private static func componentsByOperators(from input: String) throws -> [String] {
+    private static func componentsByOperators(from input: String) -> [String] {
         let operators: Set<Character> = ["+", "-", "÷", "×"]
         var result: [String] = []
         var currentSegment: String = ""
 
-        try input.forEach { char in
+        input.forEach { char in
             currentSegment.append(char)
             
-            guard char.isNumber || operators.contains(char) || char == "." else {
-                throw CalculationError.invalidInputNumber
-            }
-            
             if operators.contains(char) {
-                
-                if currentSegment.first == "." || currentSegment.last == "." || currentSegment.count(of: ".") >= 2 {
-                    throw CalculationError.invalidInputPoint
-                }
-                
                 result.append(contentsOf: currentSegment.split(with: char))
                 currentSegment = ""
             }
-            
-            if char == input.last {
-                result.append(currentSegment)
-            }
+        }
+        
+        if !currentSegment.isEmpty {
+            result.append(currentSegment)
         }
         
         return result

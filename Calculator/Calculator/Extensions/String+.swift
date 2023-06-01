@@ -22,13 +22,3 @@ extension String {
         return listToReturn
     }
 }
-
-extension String {
-    func count(of character: Character) -> Int {
-        var count = 0
-        for char in self where char == character {
-            count += 1
-        }
-        return count
-    }
-}
