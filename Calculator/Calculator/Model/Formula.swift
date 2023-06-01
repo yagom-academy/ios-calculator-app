@@ -17,7 +17,8 @@ struct Formula {
         
         var result = try `operator`.calculate(lhs: lhs, rhs: rhs)
         
-        while let next = operands.dequeue() {
+        while !operators.isEmpty {
+            guard let next = operands.dequeue() else { throw CalculationError.notFoundOperand }
             guard let `operator` = operators.dequeue() else { throw CalculationError.notFoundOperator }
             result = try `operator`.calculate(lhs: result, rhs: next)
         }
