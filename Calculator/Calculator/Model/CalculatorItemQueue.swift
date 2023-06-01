@@ -5,7 +5,7 @@
 //  Created by MARY on 2023/05/30.
 //
 
-struct CalculatorItemQueue<Item> {
+struct CalculatorItemQueue<Item: CalculateItem> {
     private var queue = LinkedList<Item>()
     var peek: Item? { queue.peek() }
     var size: Int { queue.size }
