@@ -1,6 +1,6 @@
 //
-//  CalculatorTests.swift
-//  CalculatorTests
+//  LinkedListTests.swift
+//  LinkedListTests
 //
 //  Created by redmango1446 on 2023/05/30.
 //
