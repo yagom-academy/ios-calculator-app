@@ -65,7 +65,20 @@ final class CalculatorTests: XCTestCase {
         let input = 1
         
         sut.enqueueItem(item: input)
+        let result = sut.countItem
         
+        XCTAssertEqual(input, result)
+    }
+    
+    func test_enqueueCount_2개확인() {
+        let input = 1
+        let secondInput = 2
+        
+        sut.enqueueItem(item: input)
+        sut.enqueueItem(item: secondInput)
+        let result = sut.countItem
+        
+        XCTAssertEqual(secondInput, result)
     }
     
     func test_enqueue숫자값다중확인() {

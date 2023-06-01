@@ -22,6 +22,17 @@ final class CalculatorItemLinkedList<T>: CalculateItem {
         return tailItem?.value
     }
     
+    var countItem: Int {
+        var count = 0
+        var head = headItem
+        
+        while head != nil {
+            count += 1
+            head = head?.next
+        }
+        return count
+    }
+    
     func enqueueItem(item: T) {
         let newNode = CalculatorItemNode(value: item)
         
