@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63812B942A284D0800089AD0 /* UML Diagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63812B932A284D0800089AD0 /* UML Diagram.jpg */; };
 		63C0FA8E2A24F2FA00CA3B0C /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0FA8D2A24F2FA00CA3B0C /* CalculatorTests.swift */; };
 		63C0FA972A264C5000CA3B0C /* CalculatorItemLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0FA962A264C5000CA3B0C /* CalculatorItemLinkedList.swift */; };
 		63C0FA9B2A264D0200CA3B0C /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0FA9A2A264D0200CA3B0C /* CalculateItem.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63812B932A284D0800089AD0 /* UML Diagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UML Diagram.jpg"; sourceTree = "<group>"; };
 		63C0FA8B2A24F2FA00CA3B0C /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C0FA8D2A24F2FA00CA3B0C /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		63C0FA942A24F98F00CA3B0C /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			children = (
 				63C0FA942A24F98F00CA3B0C /* TestPlan.xctestplan */,
 				63C0FA8D2A24F2FA00CA3B0C /* CalculatorTests.swift */,
+				63812B932A284D0800089AD0 /* UML Diagram.jpg */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63812B942A284D0800089AD0 /* UML Diagram.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

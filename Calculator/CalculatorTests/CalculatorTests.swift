@@ -38,6 +38,19 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_enqueue숫자값확인() {
+        //given
+        let firstInput = 1
+        
+        //when
+        sut.enqueueItem(item: firstInput)
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, firstInput)
+    
+    }
+    
+    func test_enqueue숫자값다중확인() {
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
@@ -46,14 +59,13 @@ final class CalculatorTests: XCTestCase {
         sut.enqueueItem(item: secondInput)
         sut.enqueueItem(item: thirdInput)
         
-        let result = sut.dequeue()
-        let result1 = sut.dequeue()
-        let result2 = sut.dequeue()
+        let firsResult = sut.dequeue()
+        let secondResult = sut.dequeue()
+        let thirdResult = sut.dequeue()
         
-        XCTAssertEqual(result, firstInput)
-        XCTAssertEqual(result1, secondInput)
-        XCTAssertEqual(result2, thirdInput)
-  
+        XCTAssertEqual(firsResult, firstInput)
+        XCTAssertEqual(secondResult, secondInput)
+        XCTAssertEqual(thirdResult, thirdInput)
     }
         
 }
