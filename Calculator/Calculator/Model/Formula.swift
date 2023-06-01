@@ -16,13 +16,13 @@ struct Formula {
         while true {
             do {
                 guard let rhs = try operands.dequeue() as? Double else {
-                    break
+                    throw CalculatorError.invalidInput
                 }
                 let lhs = result
                 result = try operatorType.calculate(lhs: lhs, rhs: rhs)
                 guard let newOperator = try operators.dequeue() as? String,
                       let operatorEnum = Operator(rawValue: Character(newOperator)) else {
-                    break
+                    throw CalculatorError.invalidOperator
                 }
                 operatorType = operatorEnum
             } catch CalculatorError.indexOutOfRange {
