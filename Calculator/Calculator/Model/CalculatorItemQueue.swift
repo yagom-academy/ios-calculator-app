@@ -7,7 +7,7 @@
 
 struct CalculatorItemQueue<Element: CalculateItem> {
     
-    private var elements: [Element]
+    private(set) var elements: [Element]
     
     init(_ elements:[Element] = []) {
         self.elements = elements
