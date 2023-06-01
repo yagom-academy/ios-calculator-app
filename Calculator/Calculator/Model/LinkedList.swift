@@ -40,6 +40,7 @@ struct LinkedList<T> {
         
         if head != nil {
             count += 1
+            self.tail = head
         }
     }
         
