@@ -4,8 +4,8 @@
 //
 //  Created by 박종화 on 2023/05/30.
 //
-struct CalculatorItemQueue<CalculatorItem> {
-    private var queue: [CalculatorItem] = []
+struct CalculatorItemQueue<Element: CalculatorItem> {
+    private var queue: [Element] = []
     
     internal var count: Int {
         return queue.count
@@ -15,15 +15,15 @@ struct CalculatorItemQueue<CalculatorItem> {
         return queue.isEmpty
     }
     
-    internal mutating func enqueue(_ element: CalculatorItem) {
+    internal mutating func enqueue(_ element: Element) {
         queue.append(element)
     }
     
-    internal mutating func dequeue() -> CalculatorItem? {
+    internal mutating func dequeue() -> Element? {
         return isEmpty ? nil : queue.removeFirst()
     }
     
-    internal mutating func clear() {
+    public mutating func clear() {
         queue.removeAll()
     }
 }
