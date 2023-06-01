@@ -3,7 +3,6 @@
 //  CalculatorItemQueueTests
 //
 //  Created by Yetti on 2023/05/30.
-//
 
 import XCTest
 @testable import Calculator
