@@ -5,12 +5,12 @@
 //  Created by MARY on 2023/05/30.
 //
 
-struct CalculatorItemQueue {
-    private var queue = CalculatorItemLinkedList()
-    var isEmpty: Bool { queue.size == 0 }
+struct CalculatorItemQueue: Queueable {
+    private var queue = LinkedList<CalculateItem>()
+    var peek: CalculateItem? { queue.peek() }
     
-    mutating func enqueue(_ element: CalculateItem) {
-        queue.append(element)
+    mutating func enqueue(_ item: CalculateItem) {
+        queue.append(item)
     }
     
     mutating func dequeue() -> CalculateItem? {

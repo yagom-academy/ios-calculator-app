@@ -1,19 +1,20 @@
 //
-//  CalculatorItemLinkedList.swift
+//  LinkedList.swift
 //  Calculator
 //
 //  Created by MARY on 2023/05/31.
 //
 
-struct CalculatorItemLinkedList {
-    private var front: CalculatorItemNode?
-    private var tail: CalculatorItemNode?
+struct LinkedList<Element> {
+    private var front: Node<Element>?
+    private var tail: Node<Element>?
     private(set) var size: Int = 0
+    var isEmpty: Bool { size == 0 }
     
-    mutating func append(_ element: CalculateItem) {
-        let newItem = CalculatorItemNode(item: element)
+    mutating func append(_ element: Element) {
+        let newItem = Node(element: element)
         
-        if front == nil {
+        if isEmpty {
             front = newItem
             tail = front
         } else {
@@ -23,23 +24,27 @@ struct CalculatorItemLinkedList {
         size += 1
     }
     
-    mutating func removeFirst() -> CalculateItem? {
-        guard let result = front?.item else { return nil }
+    mutating func removeFirst() -> Element? {
+        guard let firstElement = front?.element else { return nil }
         
         front = front?.next
         size -= 1
         
-        if size == 0 {
+        if isEmpty {
             front = nil
             tail = nil
         }
         
-        return result
+        return firstElement
     }
     
     mutating func removeAll() {
         front = nil
         tail = nil
         size = 0
+    }
+    
+    func peek() -> Element? {
+        return front?.element
     }
 }
