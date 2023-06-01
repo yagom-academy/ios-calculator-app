@@ -6,28 +6,32 @@
 //
 
 struct CalculatorItemQueue {
-    private var queue = CalculatorItemLinkedList()
+    private var inStack: [CalculateItem] = []
+    private var outStack: [CalculateItem] = []
     
     var count: Int {
-        return queue.count
+        return inStack.count + outStack.count
     }
     
     var isEmpty: Bool {
-        return queue.head == nil
+        return inStack.isEmpty && outStack.isEmpty
     }
     
     mutating func enqueue(_ calculateItem: CalculateItem) {
-        let node = CalculatorItemNode(item: calculateItem)
-        
-        queue.append(node)
+        inStack.append(calculateItem)
     }
     
     @discardableResult
     mutating func dequeue() -> CalculateItem? {
-        return queue.removeFirst()?.item
+        if outStack.isEmpty {
+            outStack = inStack.reversed()
+            inStack.removeAll()
+        }
+        return outStack.popLast()
     }
     
     mutating func clear() {
-        queue.clear()
+        inStack.removeAll()
+        outStack.removeAll()
     }
 }
