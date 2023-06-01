@@ -6,9 +6,13 @@
 //
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var CalculatorQueue: LinkedList<T> = LinkedList()
+    var list: LinkedList<T> = LinkedList()
+    
+    func enqueue(_ NewElement: T) {
+        list.append(NewElement)
+    }
     
     func dequeue() -> T? {
-        return CalculatorQueue.popFirst()
+        return list.popFirst()
     }
 }

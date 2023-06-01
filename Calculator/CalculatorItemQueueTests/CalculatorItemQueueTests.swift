@@ -32,7 +32,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue_1을_enqueue하고_dequeue를_하면_1이_반환된다() {
         // given
-        let input = sut.enqueue(1)
+        sut.enqueue(1)
         
         // when
         let result = sut.dequeue()
