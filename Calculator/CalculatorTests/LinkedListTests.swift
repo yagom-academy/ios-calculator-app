@@ -21,6 +21,25 @@ final class LinkedListTests: XCTestCase {
         try super.tearDownWithError()
     }
     
+    func test_first_append를_안하면_first는_nil을_반환한다() {
+        // given
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
+    func test_last_append를_안하면_last는_nil을_반환한다() {
+        // given
+        
+        // when
+        let result = sut.last
+        
+        // then
+        XCTAssertNil(result)
+    }
+    
     func test_popFirst_1을_append한뒤_popFirst를_호출하면_1을_반환한다() {
         // given
         sut.append(1)
@@ -79,15 +98,6 @@ final class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_first_append를_안하면_first는_nil을_반환한다() {
-        // given
-        // when
-        let result = sut.first
-        
-        // then
-        XCTAssertNil(result)
-    }
-    
     func test_first_1을_append하면_first는_1을_반환한다() {
         // given
         sut.append(1)
@@ -108,6 +118,31 @@ final class LinkedListTests: XCTestCase {
         // when
         let result = sut.first?.data
         let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_last_1을_append하면_last는_1을_반환한다() {
+        // given
+        sut.append(1)
+        
+        // when
+        let result = sut.last?.data
+        let expectedValue = 1
+        
+        // then
+        XCTAssertEqual(result, expectedValue)
+    }
+    
+    func test_last_1과_2를_append하면_last는_2를_반환한다() {
+        // given
+        sut.append(1)
+        sut.append(2)
+        
+        // when
+        let result = sut.last?.data
+        let expectedValue = 2
         
         // then
         XCTAssertEqual(result, expectedValue)
