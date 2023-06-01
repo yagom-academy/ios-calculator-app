@@ -19,9 +19,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_빈_queue에_Int와_String_값을_가진_Node둘이_삽입한_순서대로_배치된다() {
+    func test_enqueue_빈_queue에_Double과_String_값을_가진_Node둘이_삽입한_순서대로_배치된다() {
         // given
-        let value1: Int = 3
+        let value1: Double = 3.0
         let value2: String = "테스트"
 
         // when

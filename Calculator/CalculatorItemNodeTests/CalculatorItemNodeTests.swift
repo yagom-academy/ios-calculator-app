@@ -12,7 +12,7 @@ final class CalculatorItemNodeTests: XCTestCase {
     var sut: CalculatorItemNode!
 
     override func setUpWithError() throws {
-        let value: Int = 7
+        let value: Double = 7.0
         sut = CalculatorItemNode(value)
     }
 
@@ -22,7 +22,7 @@ final class CalculatorItemNodeTests: XCTestCase {
     
     func test_changeNext_Node의_next_값이_바뀐다() {
         // given
-        let value: Int = 5
+        let value: Double = 5.0
         let newNode = CalculatorItemNode(value)
         
         // when
