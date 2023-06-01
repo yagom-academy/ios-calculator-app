@@ -34,7 +34,6 @@ struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
     mutating func dequeue() -> Element? {
         guard headItem != nil else { return nil }
         
-        var prevHeadItem = headItem
         let element = headItem?.element
         
         headItem = headItem?.nextItem
