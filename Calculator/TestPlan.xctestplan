@@ -18,20 +18,6 @@
         "identifier" : "44AA604F2A25CA0A00E2BB86",
         "name" : "CalculatorItemQueueTests"
       }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "44B725DC2A28D96000173495",
-        "name" : "LinkedListTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "44B725CF2A28D92F00173495",
-        "name" : "NodeTests"
-      }
     }
   ],
   "version" : 1

@@ -12,7 +12,20 @@ final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
     
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Int>()
+    }
+
+    func test_0을enqueue의인수로넣고호출하면_큐의첫번째값은_0이다() {
+        // given
+        let input = 0
+        sut.enqueue(input)
+
+        // when
+        let result = sut.peek
+        let expectation = 0
+
+        // then
+        XCTAssertEqual(result, expectation)
     }
     
     func test_enqueue를3번호출하면_큐의사이즈는_3이다() {
