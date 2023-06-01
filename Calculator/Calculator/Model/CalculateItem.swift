@@ -10,6 +10,7 @@ protocol CalculateItem {}
 extension Double: CalculateItem {}
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        return []
+        let result = self.components(separatedBy: String(target))
+        return result
     }
 }

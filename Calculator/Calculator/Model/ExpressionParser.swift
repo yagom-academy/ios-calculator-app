@@ -6,10 +6,18 @@
 //
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
-        return Formula(operands:CalculatorItemQueue(), operators: CalculatorItemQueue())
+    static func parse(from input: String) -> Formula {
+        let allOperators = Operator.allCases.map { $0.rawValue }
+        var operatorsQueue = CalculatorItemQueue()
+        var operandsQueue = CalculatorItemQueue()
+        let _ = input.filter { allOperators.contains($0) }.map { operatorsQueue.enqueue(String($0)) }
+        let _ = self.componentsByOperators(from: input).map { operandsQueue.enqueue($0) }
+        return Formula(operands:operandsQueue, operators: operatorsQueue)
     }
-    private func componentsByOperators(from input: String) -> [String] {
-        return []
+    
+    static private func componentsByOperators(from input: String) -> [String] {
+        let allOperators = Operator.allCases.map { $0.rawValue }
+        let result = allOperators.map { input.split(with: $0).joined() }
+        return result
     }
 }
