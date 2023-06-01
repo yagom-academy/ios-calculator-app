@@ -33,7 +33,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue를_사용하여_값을_넣으면_isEmpty에서_false를_반환합니다() {
-        let input: CalculateItem = Operator.plus
+        let input: CalculateItem = Operator.add
         sut.enqueue(input)
         
         XCTAssertFalse(sut.isEmpty)
@@ -95,7 +95,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue를_호출하여_마지막_남은_데이터를_삭제하면_clear도_작동합니다() {
-        sut.enqueue(Operator.minus)
+        sut.enqueue(Operator.subtract)
         sut.dequeue()
         
         let expectation = 0
