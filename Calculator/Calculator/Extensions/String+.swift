@@ -12,14 +12,23 @@ extension String {
         
         self.forEach { element in
             if element != target {
-                wordsBeforeTarget += String(element)
+                wordsBeforeTarget.append(element)
             } else {
                 listToReturn.append(wordsBeforeTarget)
                 listToReturn.append(String(element))
             }
         }
         
-        listToReturn.append(wordsBeforeTarget)
         return listToReturn
+    }
+}
+
+extension String {
+    func count(of character: Character) -> Int {
+        var count = 0
+        for char in self where char == character {
+            count += 1
+        }
+        return count
     }
 }

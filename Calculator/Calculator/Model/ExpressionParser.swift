@@ -25,36 +25,31 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) throws -> [String] {
-        var currentNumber: String = ""        
-        var tokens: [String] = []
-        
+        let operators: Set<Character> = ["+", "-", "÷", "×"]
+        var result: [String] = []
+        var currentSegment: String = ""
+
         try input.forEach { char in
-            switch char {
-            case "0"..."9":
-                currentNumber.append(char)
-            case ".":
-                currentNumber.append(char)
-                if currentNumber.filter({ $0 == "." }).count > 1 {
-                    throw CalculationError.invalidInputPoint
-                }
-            case "+", "-", "÷", "×":
-                if !currentNumber.isEmpty {
-                    tokens.append(currentNumber)
-                    currentNumber = ""
-                }
-                tokens.append(String(char))
-                
-            default:
+            currentSegment.append(char)
+            
+            guard char.isNumber || operators.contains(char) || char == "." else {
                 throw CalculationError.invalidInputNumber
+            }
+            
+            guard currentSegment.count(of: ".") < 2 else {
+                throw CalculationError.invalidInputPoint
+            }
+            
+            if operators.contains(char) {
+                result.append(contentsOf: currentSegment.split(with: char))
+                currentSegment = ""
+            }
+            
+            if char == input.last {
+                result.append(currentSegment)
             }
         }
         
-        guard currentNumber.filter({ $0 == "." }).count < 2 else { throw CalculationError.invalidInputPoint }
-        
-        if !currentNumber.isEmpty {
-            tokens.append(currentNumber)
-        } 
-        
-        return tokens
+        return result
     }
 }
