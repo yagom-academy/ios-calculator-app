@@ -10,15 +10,15 @@ protocol CalculateItem { }
 protocol Calculatorable {
     associatedtype Element
     
-    func enqueue(element: Element)
-    func dequeue() -> Element?
+    mutating func enqueue(element: Element)
+    mutating func dequeue() -> Element?
 }
 
-class CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
+struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
     var headItem: Item<Element>?
     var tailItem: Item<Element>?
     
-    func enqueue(element: Element) {
+    mutating func enqueue(element: Element) {
         let item = Item(element)
         
         if headItem == nil {
@@ -31,7 +31,7 @@ class CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
         tailItem = item
     }
     
-    func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         guard headItem != nil else { return nil }
         
         var prevHeadItem = headItem
