@@ -6,8 +6,9 @@
 //
 
 struct CalculatorItemQueue<T>: CalculateItem {
-    var list: LinkedList<T> = LinkedList()
+    private var list: LinkedList<T> = LinkedList()
     var count: Int { return list.count }
+    var isEmpty: Bool { return list.isEmpty }
     
     func enqueue(_ NewElement: T) {
         list.append(NewElement)
