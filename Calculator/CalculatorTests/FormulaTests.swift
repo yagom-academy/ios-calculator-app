@@ -180,5 +180,19 @@ final class FormulaTests: XCTestCase {
         }
     }
     
-
+    func test_여러_개의_operands가_존재하고_마지막_rhs가_옵셔널_바인딩을_실패했을_때_NotFoundOperator_에러가_발생한다() {
+        // given
+        let operands = CalculatorItemQueue<Double>([1.0, 2.0, 3.0, 4.0])
+        let operators = CalculatorItemQueue<Operator>([.add, .add, .add, .add])
+        sut = Formula(operands: operands, operators: operators)
+        
+        // then
+        XCTAssertThrowsError(try sut.result()) { error in
+            if let error = error as? CalculationError {
+                XCTAssertEqual(error, .notFoundOperand)
+            } else {
+                XCTFail("예상하지 않은 에러 출력 \(error)")
+            }
+        }
+    }
 }
