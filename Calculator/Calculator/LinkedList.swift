@@ -5,8 +5,8 @@
 //  Created by idinaloq on 2023/05/29.
 //
 
-struct LinkedList<T> {
-    private(set) var head: Node<T>? {
+struct LinkedList<Element> {
+    private(set) var head: Node<Element>? {
         didSet {
             guard head == nil else {
                 return
@@ -15,13 +15,13 @@ struct LinkedList<T> {
         }
     }
     
-    private(set) var tail: Node<T>?
+    private(set) var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
     }
     
-    mutating func append(data: T) {
+    mutating func append(data: Element) {
         let node: Node = Node(data: data)
         
         guard !isEmpty else {
@@ -34,7 +34,7 @@ struct LinkedList<T> {
 
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Element? {
         guard !isEmpty else {
             return nil
         }
