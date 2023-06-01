@@ -76,4 +76,17 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertNil(input)
 	}
+	
+	func tests_peek함수를_호출시_elements의_첫번쨰_요소를_뽑아낸다() {
+		// given
+		sut.enqueue(1)
+		sut.enqueue(2)
+		sut.enqueue(3)
+		guard let input = sut.peek() else { return }
+		
+		// when
+		let result = 1
+		
+		XCTAssertEqual(input, result)
+	}
 }
