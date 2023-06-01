@@ -7,13 +7,7 @@
 
 import Foundation
 
-protocol CalculateItem { }
 
-extension Int:CalculateItem { }
-
-extension String:CalculateItem { }
-
-extension Double:CalculateItem { }
 
 struct CalculatorItemQueue<T: CalculateItem> {
     //var queue: [T] = [T]()

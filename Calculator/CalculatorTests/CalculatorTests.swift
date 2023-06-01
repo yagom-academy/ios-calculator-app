@@ -87,4 +87,15 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_dequeue시_큐가비어있으면_nil반환() {
+        // given
+        // 주어지지 않음
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
