@@ -17,17 +17,21 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     var first: T? {
-        if !dequeueStack.isEmpty {
+        if enqueueStack.isEmpty {
             return dequeueStack.last
-        } else {
+        } else if dequeueStack.isEmpty {
             return enqueueStack.first
+        } else {
+            return dequeueStack.last
         }
     }
     var last: T? {
-        if !enqueueStack.isEmpty {
+        if dequeueStack.isEmpty {
             return enqueueStack.last
-        } else {
+        } else if enqueueStack.isEmpty {
             return dequeueStack.first
+        } else {
+            return enqueueStack.last
         }
     }
     
