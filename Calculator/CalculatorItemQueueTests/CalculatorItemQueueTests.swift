@@ -66,6 +66,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
+    func test_isEmpty_enqueue하지_않으면_isEmpty는_true를_가진다() {
+        // given
+        // when
+        let result = sut.isEmpty
+        // then
+        XCTAssertTrue(result)
+    }
+    
     func test_dequeue_1을_enqueue하고_dequeue를_하면_1이_반환된다() {
         // given
         sut.enqueue(1)
