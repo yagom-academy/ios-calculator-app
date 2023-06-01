@@ -2,13 +2,13 @@
 //  CalculateItem.swift
 //  Calculator
 //
-//  Created by Yena on 2023/06/01.
+//  Created by Dasan on 2023/06/01.
 //
 
-protocol CalculateItem { }
+protocol CalculateItem {}
 
-extension Int:CalculateItem { }
+extension Int:CalculateItem {}
 
-extension String:CalculateItem { }
+extension String:CalculateItem {}
 
-extension Double:CalculateItem { }
+extension Double:CalculateItem {}
