@@ -24,7 +24,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 	func tests_enqueue함수호출시_elements배열안에_요소가_들어간다() {
 		// given
 		sut.enqueue(1)
-		var input = sut.getElementsForTest()
+		let input = sut.getElementsForTest()
 		
 		// when
 		let result = [1]
@@ -38,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		sut.enqueue(1)
 		sut.enqueue(2)
 		sut.enqueue(3)
-		var input = sut.getElementsForTest()
+		let input = sut.getElementsForTest()
 		
 		// when
 		let result = [1,2,3]
@@ -50,11 +50,21 @@ final class CalculatorItemQueueTests: XCTestCase {
 	func tests_dequeue함수를_호출시_elements가_빈배열일경우_nil을_반환한다() {
 		// given
 		let input = sut.dequeue()
-		
-		// when
-		
-		
 		// then
 		XCTAssertNil(input)
+	}
+	
+	func tests_dequeue함수를_호출시_elements내부의_요소가_하나씩_빠진다() {
+		//given
+		sut.enqueue(1)
+		sut.enqueue(2)
+		sut.enqueue(3)
+		guard let input = sut.dequeue() else { return }
+		
+		// when
+		let result = 1
+		
+		// then
+		XCTAssertEqual(input, result)
 	}
 }
