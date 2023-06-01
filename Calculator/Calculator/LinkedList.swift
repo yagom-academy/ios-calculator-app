@@ -15,6 +15,10 @@ final class LinkedList<T> {
         }
         return false
     }
+    
+    var first: Node<T>? {
+        return head
+    }
 
     func append(_ NewElement: T) {
         let newData = Node(data: NewElement)

@@ -79,7 +79,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_first_head가_nil이면_first는_nil을_반환한다() {
+    func test_first_append를_안하면_first는_nil을_반환한다() {
         // given
         // when
         let result = sut.first
@@ -93,10 +93,11 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         
         // when
-        let result = sut.first
+        let result = sut.first?.data
+        let expectedValue = 1
         
         // then
-        XCTAssertNil(result)
+        XCTAssertEqual(result, expectedValue)
     }
     
     func test_first_1과_2를_append하면_first는_1을_반환한다() {
@@ -105,9 +106,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(2)
         
         // when
-        let result = sut.first
+        let result = sut.first?.data
+        let expectedValue = 1
         
         // then
-        XCTAssertNil(result)
+        XCTAssertEqual(result, expectedValue)
     }
 }
