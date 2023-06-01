@@ -7,16 +7,14 @@
 
 protocol CalculateItem { }
 
-final class Item<Element> {
-    var nextItem: Item?
-    var element: Element
+protocol Calculatorable {
+    associatedtype Element
     
-    init(_ element: Element) {
-        self.element = element
-    }
+    func enqueue(element: Element)
+    func dequeue() -> Element?
 }
 
-class CalculatorItemQueue<Element: CalculateItem> {
+class CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
     var headItem: Item<Element>?
     var tailItem: Item<Element>?
     
@@ -40,8 +38,6 @@ class CalculatorItemQueue<Element: CalculateItem> {
         let element = headItem?.element
         
         headItem = headItem?.nextItem
-        prevHeadItem?.nextItem = nil
-        prevHeadItem = nil
         
         return element
     }
