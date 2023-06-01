@@ -5,7 +5,7 @@
 //  Created by Dasan on 2023/05/30.
 //
 
-class Node<T> {
+final class Node<T> {
     var data: T
     var next: Node?
     
