@@ -4,6 +4,7 @@
 //
 //  Created by Hemg on 2023/05/31.
 //
+
 final class CalculatorItemNode<T> {
     var value: T
     var next: CalculatorItemNode?
@@ -16,6 +17,10 @@ final class CalculatorItemNode<T> {
 final class CalculatorItemLinkedList<T>: CalculateItem {
     private var headItem: CalculatorItemNode<T>?
     private var tailItem: CalculatorItemNode<T>?
+    
+    var lastItem: T? {
+        return tailItem?.value
+    }
     
     func enqueueItem(item: T) {
         let newNode = CalculatorItemNode(value: item)
@@ -43,5 +48,3 @@ final class CalculatorItemLinkedList<T>: CalculateItem {
         return currentHead.value
     }
 }
-
-
