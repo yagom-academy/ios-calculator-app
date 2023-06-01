@@ -14,31 +14,31 @@ final class CalculatorItemNode<T> {
 }
 
 final class CalculatorItemLinkedList<T>: CalculateItem {
-    private var head: CalculatorItemNode<T>?
-    private var tail: CalculatorItemNode<T>?
+    private var headItem: CalculatorItemNode<T>?
+    private var tailItem: CalculatorItemNode<T>?
     
     func enqueueItem(item: T) {
         let newNode = CalculatorItemNode(value: item)
         
-        guard head != nil else {
-            head = newNode
-            tail = newNode
+        guard headItem != nil else {
+            headItem = newNode
+            tailItem = newNode
             return
         }
         
-        tail?.next = newNode
-        tail = newNode
+        tailItem?.next = newNode
+        tailItem = newNode
     }
     
-    func dequeue() -> T? {
-        guard let currentHead = head else { return nil }
+    func dequeueItem() -> T? {
+        guard let currentHead = headItem else { return nil }
         
         guard currentHead.next != nil else {
-            head = nil
-            tail = nil
+            headItem = nil
+            tailItem = nil
             return currentHead.value
         }
-        head = currentHead.next
+        headItem = currentHead.next
         
         return currentHead.value
     }

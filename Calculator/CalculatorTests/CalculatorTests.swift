@@ -43,7 +43,7 @@ final class CalculatorTests: XCTestCase {
         
         //when
         sut.enqueueItem(item: firstInput)
-        let result = sut.dequeue()
+        let result = sut.dequeueItem()
         
         //then
         XCTAssertEqual(result, firstInput)
@@ -59,9 +59,9 @@ final class CalculatorTests: XCTestCase {
         sut.enqueueItem(item: secondInput)
         sut.enqueueItem(item: thirdInput)
         
-        let firsResult = sut.dequeue()
-        let secondResult = sut.dequeue()
-        let thirdResult = sut.dequeue()
+        let firsResult = sut.dequeueItem()
+        let secondResult = sut.dequeueItem()
+        let thirdResult = sut.dequeueItem()
         
         XCTAssertEqual(firsResult, firstInput)
         XCTAssertEqual(secondResult, secondInput)
