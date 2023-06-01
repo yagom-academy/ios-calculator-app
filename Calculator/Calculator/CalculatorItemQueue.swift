@@ -7,6 +7,7 @@
 
 struct CalculatorItemQueue<T>: CalculateItem {
     var list: LinkedList<T> = LinkedList()
+    lazy var count: Int? = list.count
     
     func enqueue(_ NewElement: T) {
         list.append(NewElement)
