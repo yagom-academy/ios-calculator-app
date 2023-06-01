@@ -7,11 +7,12 @@
 
 import Foundation
 
-
-
 struct CalculatorItemQueue<T: CalculateItem> {
-    //var queue: [T] = [T]()
-    var queue: LinkedList = LinkedList<T>()
+    private(set) var queue: LinkedList<T>
+    
+    init(queue: LinkedList<T> = LinkedList()) {
+        self.queue = queue
+    }
     
     var count: Int {
         return queue.count
