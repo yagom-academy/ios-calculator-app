@@ -20,4 +20,16 @@ final class CalculatorItemQueueTests: XCTestCase {
 		try super.tearDownWithError()
 		sut = nil
 	}
+	
+	func tests_enqueue함수호출시_elements배열안에_요소가_들어간다() {
+		// given
+		sut.enqueue(1)
+		var input = sut.getElementsForTest()
+		
+		// when
+		let result = [1]
+		
+		// then
+		XCTAssertEqual(input, result)
+	}
 }
