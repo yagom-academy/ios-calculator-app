@@ -8,8 +8,8 @@
 protocol LinkedListProtocol {
 	associatedtype T: Any
 	var isEmpty: Bool { get }
-	func enqueue(value: T)
-	func dequeue()
+	func append(value: T)
+	func removeFirst()
 }
 
 class LinkedList<T>: LinkedListProtocol {
@@ -20,7 +20,7 @@ class LinkedList<T>: LinkedListProtocol {
 		return head == nil
 	}
 	
-	func enqueue(value: T) {
+	func append(value: T) {
 		let newNode = Node(value: value)
 		if let tailNode = tail {
 			tailNode.next = newNode
@@ -30,7 +30,7 @@ class LinkedList<T>: LinkedListProtocol {
 		tail = newNode
 	}
 	
-	func dequeue() {
+	func removeFirst() {
 		if let nextNode = head?.next {
 			head = nextNode
 		} else {
