@@ -9,7 +9,7 @@ protocol LinkedListProtocol {
 	associatedtype T: Any
 	var isEmpty: Bool { get }
 	func append(value: T)
-	func removeFirst()
+	func removeFirst() -> T?
 }
 
 class LinkedList<T>: LinkedListProtocol {
@@ -30,12 +30,12 @@ class LinkedList<T>: LinkedListProtocol {
 		tail = newNode
 	}
 	
-	func removeFirst() {
-		if let nextNode = head?.next {
-			head = nextNode
-		} else {
-			head = nil
+	func removeFirst() -> T? {
+		guard let firstNode = head else { return nil }
+		head = firstNode.next
+		if head == nil {
 			tail = nil
 		}
+		return firstNode.value
 	}
 }
