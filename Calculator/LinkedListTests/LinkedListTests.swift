@@ -32,7 +32,6 @@ final class LinkedListTests: XCTestCase {
     
     func test_last_append를_안하면_last는_nil을_가진다() {
         // given
-        
         // when
         let result = sut.last
         
@@ -190,6 +189,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(5)
         sut.append(5)
         _ = sut.popFirst()
+        
         // when
         let result = sut.count
         let expectedValue = 1

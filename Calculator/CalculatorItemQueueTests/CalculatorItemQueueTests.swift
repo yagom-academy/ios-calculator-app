@@ -58,6 +58,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(5)
         sut.enqueue(5)
         _ = sut.dequeue()
+        
         // when
         let result = sut.count
         let expectedValue = 1
@@ -70,6 +71,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         // given
         // when
         let result = sut.isEmpty
+        
         // then
         XCTAssertTrue(result)
     }
@@ -110,7 +112,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_last_enqueue를_안하면_last는_nil을_가진다() {
         // given
-        
         // when
         let result = sut.last
         
