@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Double>!
+    var sut: LinkedList<Int>!
     
     override func setUpWithError() throws {
         sut = LinkedList()
@@ -28,5 +28,13 @@ final class LinkedListTests: XCTestCase {
         sut.append(data: 3)
         // then
         XCTAssertEqual(sut.count, expectation)
+    }
+    func test_append함수호출시_list가isEmpty상태이면_data값이_head와tail의data에_들어가는지() {
+        // given
+        let expectation: Int = 1
+        // when
+        sut.append(data: 1)
+        // then
+        XCTAssertEqual(sut.readHeadData(), sut.readTailData(), expectation)
     }
 }

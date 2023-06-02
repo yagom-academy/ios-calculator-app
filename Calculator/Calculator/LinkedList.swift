@@ -24,6 +24,14 @@ class LinkedList<T> {
         head == nil
     }
     
+    func readHeadData() -> T? {
+        return head?.data
+    }
+    
+    func readTailData() -> T? {
+        return tail?.data
+    }
+    
     func append(data: T?) {
         let newNode = Node(data: data)
         tail?.next = newNode
