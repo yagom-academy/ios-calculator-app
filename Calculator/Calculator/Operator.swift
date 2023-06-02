@@ -12,22 +12,35 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case multiply = "x"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+        let result: Double
+        
+        switch self {
+        case .add:
+            result = add(lhs, rhs)
+        case .subtract:
+            result = subtract(lhs, rhs)
+        case .divide:
+            result = divide(lhs, rhs)
+        case .multiply:
+            result = multiply(lhs, rhs)
+        }
+        
+        return result
     }
     
-    private func add(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+    private func add(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs + rhs
     }
     
-    private func subtract(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+    private func subtract(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+    private func divide(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs / rhs
     }
     
-    private func multiply(lhs: Double, rhs: Double) -> Double {
-        return 0.0
+    private func multiply(_ lhs: Double,_ rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
