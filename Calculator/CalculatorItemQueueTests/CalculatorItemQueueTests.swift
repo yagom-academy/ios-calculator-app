@@ -20,12 +20,14 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_init에1_2_3을넣으면_enqueuedCalculatorItems에1_2_3이있다() {
-        let input = ["1", "2", "3"]
+        for input in 1...3 {
+            sut.enqueue("\(input)")
+        }
+        let expectation = ["1", "2", "3"]
         
-        sut = CalculatorItemQueue(input)
         let result = sut.enqueuedCalculatorItems
         
-        XCTAssertEqual(input, result)
+        XCTAssertEqual(expectation, result)
     }
     
     func test_enqueue에1을넣으면_enqueuedCalculatorItems에1이있다() {
@@ -47,7 +49,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueuedCalculatorItems에1_2가있으면_dequeue를했을때_1이반환된다() {
-        sut = CalculatorItemQueue(["1", "2"])
+        for item in 1...2 {
+            sut.enqueue("\(item)")
+        }
         let expectation = "1"
         
         let result = sut.dequeue()
@@ -56,7 +60,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueuedCalculatorItems에더하기기호가있으면_dequeue를했을때_더하기기호가반환된다() {
-        sut = CalculatorItemQueue(["+"])
+        sut.enqueue("+")
         let expectation = "+"
         
         let result = sut.dequeue()
@@ -65,7 +69,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_enqueuedCalculatorItems가비어있다() {
-        sut = CalculatorItemQueue(["1"])
+        sut.enqueue("1")
         
         sut.dequeue()
         let result = sut.enqueuedCalculatorItems.isEmpty
@@ -75,13 +79,6 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeueCalculatorItems가비어있으면_dequeue를했을때_nil을반환한다() {
         let result = sut.dequeue()
-        
-        XCTAssertNil(result)
-    }
-    
-    func test_dequeueCalculatorItems가비어있으면_dequeue했을때_enqueuedCalculatorItems가비어있다() {
-        sut.dequeue()
-        let result = sut.enqueuedCalculatorItems.first
         
         XCTAssertNil(result)
     }

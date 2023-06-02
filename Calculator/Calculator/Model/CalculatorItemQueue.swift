@@ -9,12 +9,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var enqueuedCalculatorItems: [Element] = []
     private(set) var dequeueCalculatorItems: [Element] = []
     
-    init() {}
-    
-    init(_ enqueuedCalculatorItems: [Element]) {
-        self.enqueuedCalculatorItems = enqueuedCalculatorItems
-    }
-    
     mutating func enqueue(_ element: Element) {
         enqueuedCalculatorItems.append(element)
     }
