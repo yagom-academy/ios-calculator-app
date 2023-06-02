@@ -6,11 +6,7 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var queue: LinkedList<T>
-    
-    init(queue: LinkedList<T> = LinkedList()) {
-        self.queue = queue
-    }
+    private var queue: LinkedList<T>
     
     var count: Int {
         return queue.count
