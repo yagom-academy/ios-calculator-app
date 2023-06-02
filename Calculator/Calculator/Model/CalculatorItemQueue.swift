@@ -6,34 +6,30 @@
 //
 
 extension Int: CalculateItem { }
-extension Node: CalculateItem { }
 
 protocol CalculateItem { }
 
-struct CalculatorItemQueue<Element: CalculateItem> where Element: Equatable {
-	private var elements: [Element] = []
+struct CalculatorItemQueue<T: CalculateItem> {
+	private var list: LinkedList<T>?
 	
-	func getElementsForTest() -> [Element] {
-		return elements
+	var isEmpty: Bool? {
+		guard let isQueueEmpty = list?.isEmpty else { return nil }
+		return isQueueEmpty
 	}
 	
-	mutating func enqueue(_ value: Element) {
-		elements.append(value)
+	var front: T? {
+		return list?.head?.value
 	}
 	
-	mutating func dequeue() -> Element? {
-		if elements != [] {
-			return elements.removeFirst()
-		} else {
-			return nil
-		}
+	func enqueue(_ value: T) {
+		list?.append(value: value)
 	}
 	
-	func peek() -> Element? {
-		return elements.first
+	func dequeue() -> T? {
+		return list?.removeFirst()
 	}
 	
-	mutating func clear() {
-		elements.removeAll()
+	init(list: LinkedList<T>) {
+		self.list = list
 	}
 }
