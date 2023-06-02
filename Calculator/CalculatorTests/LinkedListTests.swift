@@ -39,4 +39,15 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.readHeadData(), expectation)
         XCTAssertEqual(sut.readTailData(), expectation)
     }
+    
+    func test_append함수호출시_전달인자가_tail의data로_들어가는지() {
+        // given
+        let expectation: Int = 3
+        // when
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // then
+        XCTAssertEqual(sut.readTailData(), expectation)
+    }
 }
