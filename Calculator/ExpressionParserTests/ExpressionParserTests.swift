@@ -32,4 +32,14 @@ final class ExpressionParserTests: XCTestCase {
         
         XCTAssertTrue(result)
     }
+    
+    func test_부호가_다른_숫자를_포함한_공식을_parse에_넣으면_result도_그에_맞는_답을_반환됩니다() {
+        let input = "1 + 3 - -3"
+        var formula = ExpressionParser.parse(from: input)
+        let expectation: Double = 7
+        
+        let result = formula.result()
+        
+        XCTAssertEqual(result, expectation)
+    }
 }
