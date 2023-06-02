@@ -32,7 +32,7 @@
 ## 🔍 시각화 구조
 **UML 클래스 다이어그램**
 
-<img width="612" alt="스크린샷 2023-06-02 오후 2 47 43" src="https://github.com/MaryJo-github/temp/assets/42026766/cea03a12-25fe-4507-9b04-71e10c338b2f">
+<img width="612" alt="스크린샷 2023-06-02 오후 2 47 43" src="https://github.com/MaryJo-github/ios-calculator-app/assets/42026766/b0b41931-f1a2-473e-b2aa-7e332f495bfb">
 
 ## 🔨 트러블 슈팅 
 
