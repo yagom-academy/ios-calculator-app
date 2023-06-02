@@ -153,8 +153,8 @@
 			children = (
 				45841ED02A24957A00B959AE /* CalculateItem.swift */,
 				45841ECE2A24956D00B959AE /* CalculatorItemQueue.swift */,
-				45CC29652A289C2900E28FFD /* ExpressionParser.swift */,
 				45CC29672A289C5000E28FFD /* Formula.swift */,
+				45CC29652A289C2900E28FFD /* ExpressionParser.swift */,
 				45841ED22A24996000B959AE /* Operator.swift */,
 				45841ED42A24999D00B959AE /* Double+Extension.swift */,
 				45CC29632A289A8A00E28FFD /* String+Extension.swift */,
