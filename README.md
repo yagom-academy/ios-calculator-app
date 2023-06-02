@@ -28,10 +28,7 @@
 
 
 ### Diagram
-<p align="center">
-<img width="800" src= "https://hackmd.io/_uploads/B1meTWD8h.png" >
-</p>
-
+![UML](UML.png)
 </br>
 
 ## 💻 실행 화면 
@@ -84,6 +81,16 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
 
 <br>
 
+2️⃣ 노드 메모리 해제 <br>
+-
+🔒 **문제점** <br>
+swift와 같은 ARC환경에서의 각각의 노드들에 대한 메모리해제가 어떻게 진행될 수 있는지 고민했습니다.
+
+🔑 **해결방법** <br>
+특정 인스턴스에 대한 Reference Count가 아무도 참조하고 있지 않음을 나타내는 순간 ARC를 통해 해당 객체나 인스턴스는 해제되게 됩니다. 따라서 구현한 링크드 링크드리스트의 head 및 tail을 지칭하고 있는 포인터를 가지고 있기 때문에 Queue가 해제될 때 해당 포인터들을 해제하면서 연결된 모든 노드들을 순차적으로 해제하게 됨을 알 수 있었습니다.
+
+또한, dequeue 시 head에 대한 포인터를 변경할 때 이전의 head 포인터를 가지고 있지 않더라도 reference count가 줄었을 때 이전 head를 알아서 메모리 해제하기 때문에 추가적인 메모리 해제로직을 작성할 필요가 없다는 것을 알게되었습니다.
+<br>
 
 </br>
 
