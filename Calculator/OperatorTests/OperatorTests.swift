@@ -20,11 +20,11 @@ final class OperatorTests: XCTestCase {
     }
 
     func test_모든_연산자가_정상적으로_값을_반환합니다() {
-        sut.forEach { oper in
+        sut.forEach { 
             let expectation: Double
-            let result = oper.calculate(lhs: 2, rhs: 1)
+            let result = $0.calculate(lhs: 2, rhs: 1)
             
-            switch oper {
+            switch $0 {
             case .add:
                 expectation = 3
                 XCTAssertEqual(result, expectation)
@@ -42,10 +42,10 @@ final class OperatorTests: XCTestCase {
     }
     
     func test_0으로_divide하면_nan을_반환합니다() {
-        sut.filter { oper in
-            oper == .divide
-        }.forEach { oper in
-            let result = oper.calculate(lhs: 2, rhs: 0)
+        sut.filter {
+            $0 == .divide
+        }.forEach {
+            let result = $0.calculate(lhs: 2, rhs: 0)
             
             XCTAssertTrue(result.isNaN)
         }
