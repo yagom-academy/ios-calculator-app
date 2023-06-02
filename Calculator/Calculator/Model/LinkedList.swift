@@ -7,6 +7,7 @@
 
 protocol LinkedListProtocol {
 	associatedtype T: Any
+	var isEmpty: Bool { get }
 	func enqueue(value: T)
 	func dequeue()
 }
