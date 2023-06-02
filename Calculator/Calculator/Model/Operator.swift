@@ -5,11 +5,11 @@
 //  Created by Min Hyun on 2023/05/31.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self {
@@ -30,7 +30,7 @@ enum Operator: Character, CaseIterable {
         return lhs - rhs
     }
     private func divide(lhs: Double, rhs: Double) throws -> Double {
-        guard rhs != 0.0 else {
+        guard rhs != Double.zero else {
             throw CalculatorError.divideByZero
         }
         return lhs / rhs

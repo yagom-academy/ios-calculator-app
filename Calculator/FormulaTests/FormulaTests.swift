@@ -27,13 +27,13 @@ final class FormulaTests: XCTestCase {
         let expected = 4.0
     
         sut.operands.enqueue(5.0)
-        sut.operators.enqueue("+")
+        sut.operators.enqueue(Operator.add)
         sut.operands.enqueue(-1.0)
-        sut.operators.enqueue("-")
+        sut.operators.enqueue(Operator.subtract)
         sut.operands.enqueue(2.0)
-        sut.operators.enqueue("*")
+        sut.operators.enqueue(Operator.multiply)
         sut.operands.enqueue(6.0)
-        sut.operators.enqueue("/")
+        sut.operators.enqueue(Operator.divide)
         sut.operands.enqueue(3.0)
         
         // when
@@ -46,7 +46,7 @@ final class FormulaTests: XCTestCase {
     func test_result_연산에_0이_포함되어_예외를_반환한다() {
         // given
         sut.operands.enqueue(3.0)
-        sut.operators.enqueue("/")
+        sut.operators.enqueue(Operator.divide)
         sut.operands.enqueue(0.0)
         
         // when, then
@@ -55,22 +55,10 @@ final class FormulaTests: XCTestCase {
         }
     }
     
-    func test_result_연산에_잘못된_숫자가_포함되어_예외를_반환한다() {
-        // given
-        sut.operands.enqueue(3.0)
-        sut.operators.enqueue("/")
-        sut.operands.enqueue("1")
-        
-        // when, then
-        XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidInput)
-        }
-    }
-    
     func test_result_연산에_잘못된_연산자가_포함되어_예외를_반환한다() {
         // given
         sut.operands.enqueue(3.0)
-        sut.operators.enqueue("(")
+        sut.operators.enqueue(1)
         sut.operands.enqueue(1.0)
         
         // when, then
@@ -81,7 +69,7 @@ final class FormulaTests: XCTestCase {
     
     func test_parse_넘겨받은_숫자를_제대로_연산한다() {
         // given
-        let input = "12+3-5/5*2"
+        let input = "12+3−5÷5×2"
         let expected = 4.0
         
         // when
@@ -94,7 +82,7 @@ final class FormulaTests: XCTestCase {
     
     func test_parse_마이너스_부호가_포함한_숫자를_제대로_연산된다() {
         // given
-        let input = "12+1--2/5*2"
+        let input = "12+1−-2÷5×2"
         let expected = 6.0
         
         // when
@@ -105,7 +93,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expected)
     }
     
-    func test_parse_소수로_표현할_수_없는_문자가_있으면_예외를_반화한다() {
+    func test_parse_소수로_표현할_수_없는_문자가_있으면_예외를_반환한다() {
         // given
         let input = "12+a"
         

@@ -7,37 +7,25 @@
 
 enum ExpressionParser {
     static func parse(from input: String) throws -> Formula {
-        let allOperators = Operator.allCases.map { $0.rawValue }
         var operatorsQueue = CalculatorItemQueue()
         var operandsQueue = CalculatorItemQueue()
-        let operatorWithMinus = [(before: "+-", after: "+!"),
-                                 (before: "--", after: "-!"),
-                                 (before: "/-", after: "/!"),
-                                 (before: "*-", after: "*!")]
-        let inputValue = operatorWithMinus.reduce(input) { inputString, operatorType in
-            inputString.replacingOccurrences(of: operatorType.before, with: operatorType.after)
-        }
-        let inputOperators = inputValue.filter { allOperators.contains($0) }
-        inputOperators.forEach { operatorsQueue.enqueue(String($0)) }
-        let inputSplited = self.componentsByOperators(from: inputValue)
+
+        let operandComponents = self.componentsByOperators(from: input).compactMap { Double($0) }
+        let operatorComponents = input.compactMap { Operator(rawValue: $0) }
         
-        for value in inputSplited {
-            guard let valueDouble = Double(value) else {
-                throw CalculatorError.invalidInput
-            }
-            operandsQueue.enqueue(valueDouble)
-        }
-        return Formula(operands:operandsQueue, operators: operatorsQueue)
+        operandComponents.forEach { operandsQueue.enqueue($0) }
+        operatorComponents.forEach { operatorsQueue.enqueue($0) }
+
+        let result = Formula(operands:operandsQueue, operators: operatorsQueue)
+
+        return result
     }
         
     static private func componentsByOperators(from input: String) -> [String] {
-        let allOperators = Operator.allCases.map { $0.rawValue }
-        
-        var inputValues = allOperators.reduce(input) { inputString, operatorType in
-            inputString.split(with: operatorType).joined(separator: "|")
+        let result = Operator.allCases.reduce([input]) { resultArray, operatorItem in
+            resultArray.map { $0.split(with:operatorItem.rawValue) }.flatMap { $0 }
         }
-        inputValues = inputValues.replacingOccurrences(of: "!", with: "-")
-        let result = inputValues.split(with: "|")
+        
         return result
     }
 }
