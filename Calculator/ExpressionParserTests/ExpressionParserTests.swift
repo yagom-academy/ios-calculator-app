@@ -16,10 +16,8 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_공식을_parse에_넣으면_Formula가_반환되어_result를_호출하면_답이_반환됩니다() {
         let input = "1 + 3"
-        
-        let expectation: Double = 4
-        
         var formula = ExpressionParser.parse(from: input)
+        let expectation: Double = 4
         
         let result = formula.result()
         
@@ -28,7 +26,6 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_nan이_반환되는_공식을_parse에_넣으면_result도_nan이_반환됩니다() {
         let input = "1 + 3 / 0 * 10"
-                
         var formula = ExpressionParser.parse(from: input)
         
         let result = formula.result().isNaN

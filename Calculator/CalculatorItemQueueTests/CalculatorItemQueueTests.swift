@@ -20,8 +20,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_queue가_비었을때_count를_호출하면_0을_반환합니다() {
-        let result = sut.count
         let expectation = 0
+        
+        let result = sut.count
         
         XCTAssertEqual(result, expectation)
     }
@@ -49,7 +50,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
-        
         let expectation = 1.0
         
         let result = sut.dequeue()
@@ -62,7 +62,6 @@ final class CalculatorItemQueueTests: XCTestCase {
             sut.enqueue(Double(input))
         }
         sut.dequeue()
-        
         let expectation = 9
         
         let result = sut.count
@@ -86,7 +85,6 @@ final class CalculatorItemQueueTests: XCTestCase {
             sut.enqueue(Double(input))
         }
         sut.clear()
-        
         let expectation = 0
         
         let result = sut.count
@@ -98,7 +96,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         let input: Double = 1
         sut.enqueue(input)
         sut.dequeue()
-        
         let expectation = 0
         
         let isEmptyResult = sut.isEmpty
