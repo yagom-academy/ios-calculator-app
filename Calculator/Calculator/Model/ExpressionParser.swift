@@ -7,31 +7,34 @@
 
 enum ExpressionParser {    
     static func parse(from input: String) throws -> Formula {
-        let validOperators: Set<Character> = ["+", "-", "÷", "×"]
+        let validOperators = Operator.allCases.map { $0.rawValue }
         let items = componentsByOperators(from: input)
         
         let operands = items.compactMap { Double($0) }
-        let operators = items.filter { validOperators.contains($0) }.compactMap { Operator(rawValue: Character($0)) }
+        let operators = items
+            .filter { validOperators.contains($0) && !$0.isEmpty }
+            .compactMap { Operator(rawValue: Character($0)) }
         
-        if items.count != operands.count + operators.count {
+        guard items.count == operands.count + operators.count else {
             throw CalculationError.invalidInput
         }
         
-        return Formula(
-            operands: CalculatorItemQueue<Double>(operands),
-            operators: CalculatorItemQueue<Operator>(operators)
-        )
+        guard operands.count == operators.count + 1 else {
+            throw CalculationError.invalidInput
+        }
+        
+        return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators: Set<Character> = ["+", "-", "÷", "×"]
+        let operators = Operator.allCases.map { $0.rawValue }
         var result: [String] = []
         var currentSegment: String = ""
-
+        
         input.forEach { char in
             currentSegment.append(char)
             
-            if operators.contains(char) {
+            if operators.contains(char) && currentSegment.filter({ !operators.contains($0)}).count > 0 {
                 result.append(contentsOf: currentSegment.split(with: char))
                 currentSegment = ""
             }
