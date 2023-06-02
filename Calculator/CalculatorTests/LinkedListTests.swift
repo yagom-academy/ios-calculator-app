@@ -50,4 +50,16 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.readTailData(), expectation)
     }
+    
+    func test_insert함수호출시_list의node개수가_늘어나는지() {
+        // given
+        let expectation: Int = 3
+        sut.append(data: 1)
+        sut.append(data: 2)
+        // when
+        sut.insert(data: 3, at: 1)
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
+    
 }

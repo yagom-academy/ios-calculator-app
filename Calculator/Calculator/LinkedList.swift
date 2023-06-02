@@ -45,4 +45,7 @@ class LinkedList<T> {
         tail = newNode
         count += 1
     }
+    
+    func insert(data: T?, at index: UInt) {
+    }
 }
