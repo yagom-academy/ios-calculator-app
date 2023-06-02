@@ -18,100 +18,76 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_isEmpty는_enQueueStack과deQueueStack이비어있을때_true를반환한다() {
-        sut.enQueueStack = []
-        sut.deQueueStack = []
+    func test_isEmpty는_큐가비어있을때_true를반환한다() {
+        let expectation = true
         
         let result = sut.isEmpty
-        XCTAssertTrue(result)
-    }
-    
-    func test_isEmpty는_enQueueStack에값이있고deQueueStack이비어있을때_False를반환한다() {
-        sut.enQueueStack = ["1"]
-        sut.deQueueStack = []
         
-        let result = sut.isEmpty
-        XCTAssertFalse(result)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_enQueue에_문자열3을전달했을때_enQueueStack에문자열3을저장한다() {
+    func test_isEmpty는_큐에값이있을때_False를반환한다() {
+        let input = "1"
+        let expectation = false
+        
+        sut.enQueue(input)
+        let result = sut.isEmpty
+        
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_enQueue에_3을전달했을때_큐에3을저장한다() {
         let input = "3"
+        let expectation = "3"
         
         sut.enQueue(input)
         
-        XCTAssertEqual(sut.enQueueStack[0], input)
+        XCTAssertEqual(sut.enQueueStack[0], expectation)
     }
     
-    func test_deQueue호출시_deQueueStack이빈배열이라면_enQueueStack의0번째인덱스값을반환한다() {
-        sut.enQueueStack = ["1", "2"]
-        sut.deQueueStack = []
-        
+    func test_deQueue호출시_큐가비어있다면_nil을반환한다() {
         let result = sut.deQueue()
         
-        XCTAssertEqual(result, "1")
+        XCTAssertEqual(result, nil)
     }
     
-    func test_deQueue호출시_deQueueStack에요소가있다면_마지막값을제거하고반환한다() {
-        sut.deQueueStack = ["1", "2", "3"]
+    func test_deQueue호출시_큐에값이있다면_첫번째값을제거하고반환한다() {
+        let input = "3"
+        let input2 = "4"
+        let expectation = "3"
         
+        sut.enQueue(input)
+        sut.enQueue(input2)
         let result = sut.deQueue()
         
-        XCTAssertEqual(result, "3")
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_deQueue호출시_deQueueStack이빈배열이라면_enQueueStack을뒤집어서가져오고마지막값을반환한다() {
-        sut.enQueueStack = ["1", "2"]
-        sut.deQueueStack = []
-        
-        let result = sut.deQueue()
-        
-        XCTAssertEqual(result, "1")
-    }
-    
-    func test_peek호출시_enQueueStack과deQueueStack이빈배열이면_nil을반환한다() {
-        sut.enQueueStack = []
-        sut.deQueueStack = []
-        
+    func test_peek호출시_큐가비어있다면_nil을반환한다() {
         let result = sut.peek()
         
         XCTAssertEqual(result, nil)
     }
     
-    func test_peek호출시_deQueueStack에요소가있고enQueueStack이빈배열이면_deQueueStack의마지막요소를반환한다() {
-        sut.enQueueStack = []
-        sut.deQueueStack = ["1", "2", "3"]
+    func test_peek호출시_큐에값이있다면_첫번째값을제거하지않고반환한다() {
+        let input = "3"
+        let input2 = "4"
+        let expectation = "3"
         
+        sut.enQueue(input)
+        sut.enQueue(input2)
         let result = sut.peek()
         
-        XCTAssertEqual(result, "3")
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_peek호출시_enQueueStack에요소가있고deQueueStack이빈배열이면_enQueueStack의첫번째요소를반환한다() {
-        sut.enQueueStack = ["1", "2", "3"]
-        sut.deQueueStack = []
+    func test_clear호출시_큐에값이있다면_빈배열로만든다() {
+        let expectation: [String] = []
         
-        let result = sut.peek()
-        
-        XCTAssertEqual(result, "1")
-    }
-    
-    func test_peek호출시_enQueueStack과deQueueStack모두요소가있으면_deQueueStack의마지막요소를반환한다() {
-        sut.enQueueStack = ["1", "2", "3"]
-        sut.deQueueStack = ["4", "5", "6"]
-        
-        let result = sut.peek()
-        
-        XCTAssertEqual(result, "6")
-    }
-    
-    
-    func test_clear호출시_enQueueStack과deQueueStack을_빈배열로만든다() {
-        sut.enQueueStack = ["2", "4", "6", "9"]
-        sut.deQueueStack = ["9", "6", "4", "2"]
-        
+        sut.enQueue("1")
         sut.clear()
         
-        XCTAssertEqual(sut.enQueueStack, [])
-        XCTAssertEqual(sut.deQueueStack, [])
+        XCTAssertEqual(sut.enQueueStack, expectation)
+        XCTAssertEqual(sut.deQueueStack, expectation)
     }
 }
