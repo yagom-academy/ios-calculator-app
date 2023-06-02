@@ -37,7 +37,7 @@
 <summary>STEP 1 UML</summary>
 <div markdown="1">
 
-<img src="./step1-UML.jpg"/>
+<img src="./step1_UML.jpg"/>
 
 </div>
 </details>
