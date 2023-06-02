@@ -4,11 +4,9 @@
 //
 //  Created by Yetti on 2023/05/30.
 
-struct CalculatorItemQueue: DoubleStackQueue {
+struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     private(set) var enQueueStack: [String] = []
     private(set) var deQueueStack: [String] = []
-    
-    
     
     var isEmpty: Bool {
         return enQueueStack.isEmpty && deQueueStack.isEmpty
