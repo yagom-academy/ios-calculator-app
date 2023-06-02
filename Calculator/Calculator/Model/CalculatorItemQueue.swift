@@ -17,10 +17,11 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
     
     mutating func deQueue() -> String? {
-        deQueueStack = enQueueStack.reversed()
-        let deQueueElement = deQueueStack.popLast()
-        enQueueStack = deQueueStack.reversed()
-        return deQueueElement
+        if deQueueStack.isEmpty {
+            deQueueStack = enQueueStack.reversed()
+            enQueueStack.removeAll()
+        }
+        return deQueueStack.popLast()
     }
 
     func peek() -> String? {

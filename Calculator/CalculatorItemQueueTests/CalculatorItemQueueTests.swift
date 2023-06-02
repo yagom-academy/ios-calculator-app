@@ -42,29 +42,30 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.enQueueStack[0], input)
     }
     
-    func test_deQueue호출시_deQueueStack의마지막값을_삭제하고반환한다() {
-        sut.enQueueStack = ["1", "2", "+", "-"]
-        
+    func test_deQueue호출시_deQueueStack이빈배열이라면_enQueueStack의0번째인덱스값을반환한다() {
+        sut.enQueueStack = ["1", "2"]
+        sut.deQueueStack = []
         
         let result = sut.deQueue()
         
         XCTAssertEqual(result, "1")
     }
     
-    func test_deQueue호출시_enQueueStack이빈배열이라면_nil을반환한다() {
-        sut.enQueueStack = []
+    func test_deQueue호출시_deQueueStack에요소가있다면_마지막값을제거하고반환한다() {
+        sut.deQueueStack = ["1", "2", "3"]
         
         let result = sut.deQueue()
         
-        XCTAssertNil(result)
+        XCTAssertEqual(result, "3")
     }
     
-    func test_deQueue호출시_enQueueStack의1번째인덱스는_0번째인덱스가된다() {
-        sut.enQueueStack = ["2", "4", "6", "9"]
+    func test_deQueue호출시_deQueueStack이빈배열이라면_enQueueStack을뒤집어서가져오고마지막값을반환한다() {
+        sut.enQueueStack = ["1", "2"]
+        sut.deQueueStack = []
         
         let result = sut.deQueue()
         
-        XCTAssertEqual(sut.enQueueStack[0], "4")
+        XCTAssertEqual(result, "1")
     }
     
     func test_peek호출시_enQueueStack의_0번째인덱스값을반환한다() {
