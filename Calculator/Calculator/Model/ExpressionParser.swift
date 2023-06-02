@@ -8,14 +8,16 @@
 enum ExpressionParser {    
     static func parse(from input: String) throws -> Formula {
         let validOperators = Operator.allCases.map { $0.rawValue }
-        let items = componentsByOperators(from: input)
+        let components = componentsByOperators(from: input)
         
-        let operands = items.compactMap { Double($0) }
-        let operators = items
+        let operands = components
+            .compactMap { Double($0) }
+        
+        let operators = components
             .filter { validOperators.contains($0) && !$0.isEmpty }
             .compactMap { Operator(rawValue: Character($0)) }
         
-        guard items.count == operands.count + operators.count else {
+        guard components.count == operands.count + operators.count else {
             throw CalculationError.invalidInput
         }
         
