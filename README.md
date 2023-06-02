@@ -31,7 +31,8 @@
 
 
 ## 👀 시각화된 프로젝트 구조
-<Img src="https://hackmd.io/_uploads/H1p2cZDUn.jpg" height="400" width="400">
+
+ <Img src="https://github.com/hemg2/ios-calculator-app/assets/101572902/93acdfb4-5f47-4f98-8541-ea01a462deb5" height="300">
 
 ## 💻 실행 화면
 - 추후 추가 진행하도록하겠습니다.
