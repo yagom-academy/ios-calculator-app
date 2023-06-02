@@ -13,8 +13,8 @@ protocol LinkedListProtocol {
 }
 
 class LinkedList<T>: LinkedListProtocol {
-	private var head: Node<T>?
-	private var tail: Node<T>?
+	var head: Node<T>?
+	var tail: Node<T>?
 	
 	var isEmpty: Bool {
 		return head == nil
