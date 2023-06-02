@@ -29,12 +29,14 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.count, expectation)
     }
+    
     func test_append함수호출시_list가isEmpty상태이면_data값이_head와tail의data에_들어가는지() {
         // given
         let expectation: Int = 1
         // when
         sut.append(data: 1)
         // then
-        XCTAssertEqual(sut.readHeadData(), sut.readTailData(), expectation)
+        XCTAssertEqual(sut.readHeadData(), expectation)
+        XCTAssertEqual(sut.readTailData(), expectation)
     }
 }

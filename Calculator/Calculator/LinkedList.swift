@@ -33,6 +33,13 @@ class LinkedList<T> {
     }
     
     func append(data: T?) {
+        if isEmpty {
+            head = Node(data: data)
+            tail = head
+            count += 1
+            return
+        }
+        
         let newNode = Node(data: data)
         tail?.next = newNode
         tail = newNode
