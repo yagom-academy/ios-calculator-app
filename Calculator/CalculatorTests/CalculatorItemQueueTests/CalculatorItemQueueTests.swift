@@ -92,7 +92,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 1
         
         // when
-        let result = sut.queue.first
+        let result = sut.first
         
         // then
         XCTAssertEqual(result, expectation)
@@ -106,7 +106,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 1
         
         // when
-        let result = sut.queue.first
+        let result = sut.first
         
         // then
         XCTAssertEqual(result, expectation)
@@ -118,7 +118,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 1
         
         // when
-        let result = sut.queue.last
+        let result = sut.last
         
         // then
         XCTAssertEqual(result, expectation)
@@ -132,7 +132,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = 3
         
         // when
-        let result = sut.queue.last
+        let result = sut.last
         
         // then
         XCTAssertEqual(result, expectation)
@@ -172,7 +172,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let _ = sut.dequeue()
-        let result = sut.queue.first
+        let result = sut.first
         
         // then
         XCTAssertEqual(result, expectation)
