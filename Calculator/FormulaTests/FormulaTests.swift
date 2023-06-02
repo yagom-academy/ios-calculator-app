@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  FormulaTests
 //
-//  Created by 표현수 on 2023/06/02.
+//  Created by Erick on 2023/06/02.
 //
 
 import XCTest
