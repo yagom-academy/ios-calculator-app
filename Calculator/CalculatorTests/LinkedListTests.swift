@@ -18,4 +18,15 @@ final class LinkedListTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_append함수호출시_list의node개수가_늘어나는지() {
+        // given
+        let expectation: Int = 3
+        // when
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
 }

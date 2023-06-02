@@ -23,4 +23,7 @@ class LinkedList<T> {
     var isEmpty: Bool {
         head == nil
     }
+    
+    func append(data: T?) {
+    }
 }
