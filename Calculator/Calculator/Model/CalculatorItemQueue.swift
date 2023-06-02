@@ -25,7 +25,7 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
 
     func peek() -> String? {
-        return enQueueStack == [] ? nil : enQueueStack[0]
+        return enQueueStack.isEmpty ? nil : enQueueStack[0]
     }
     
     mutating func clear() {
