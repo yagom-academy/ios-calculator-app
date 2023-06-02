@@ -62,4 +62,14 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
+    func test_insert함수호출시_at전달인자가0이면_head의data로_들어가는지() {
+        // given
+        let expectation: Double = 3
+        sut.append(data: 1)
+        sut.append(data: 2)
+        // when
+        sut.insert(data: 3, at: 0)
+        // then
+        XCTAssertEqual(sut.readHeadData(), expectation)
+    }
 }
