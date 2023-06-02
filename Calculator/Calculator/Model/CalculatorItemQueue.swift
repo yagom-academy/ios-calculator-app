@@ -5,19 +5,13 @@
 //  Created by Min Hyun on 2023/05/29.
 //
 
-protocol QueueType {
-    mutating func enqueue(_ value: CalculateItem)
-    mutating func dequeue() throws -> CalculateItem
-    mutating func removeAll()
-}
-
-struct CalculatorItemQueue: QueueType {
-    private var head: CalculatorItemNode? = nil
-    private var tail: CalculatorItemNode? = nil
-    private var count: Int = 0
+struct CalculatorItemQueue<T: CalculateItem>: QueueType {
+    private var head: CalculatorItemNode<T>? = nil
+    private var tail: CalculatorItemNode<T>? = nil
+    private(set) var count: Int = 0
     
-    mutating func enqueue(_ value: CalculateItem) {
-        let newNode = CalculatorItemNode(value)
+    mutating func enqueue(_ value: T) {
+        let newNode = CalculatorItemNode<T>(value)
         count += 1
         guard let lastNode = tail else {
             head = newNode
@@ -28,7 +22,7 @@ struct CalculatorItemQueue: QueueType {
         tail = newNode
     }
     
-    mutating func dequeue() throws -> CalculateItem {
+    mutating func dequeue() throws -> T {
         guard let firstNode = head else {
             throw CalculatorError.indexOutOfRange
         }

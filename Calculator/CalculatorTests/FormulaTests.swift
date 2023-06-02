@@ -12,8 +12,8 @@ final class FormulaTests: XCTestCase {
     var sut: Formula!
 
     override func setUpWithError() throws {
-        let operands = CalculatorItemQueue()
-        let operators = CalculatorItemQueue()
+        let operands = CalculatorItemQueue<Double>()
+        let operators = CalculatorItemQueue<Operator>()
         
         sut = Formula(operands: operands, operators: operators)
     }
@@ -52,18 +52,6 @@ final class FormulaTests: XCTestCase {
         // when, then
         XCTAssertThrowsError(try sut.result()) { error in
             XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
-        }
-    }
-    
-    func test_result_연산에_잘못된_연산자가_포함되어_예외를_반환한다() {
-        // given
-        sut.operands.enqueue(3.0)
-        sut.operators.enqueue(1)
-        sut.operands.enqueue(1.0)
-        
-        // when, then
-        XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.invalidOperator)
         }
     }
 }

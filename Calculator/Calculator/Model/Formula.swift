@@ -6,27 +6,15 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue
-    var operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        var result = Double.zero
-        var operatorType: Operator = .add
-
-        while true {
-            do {
-                guard let rhs = try operands.dequeue() as? Double else {
-                    throw CalculatorError.invalidInput
-                }
-                let lhs = result
-                result = try operatorType.calculate(lhs: lhs, rhs: rhs)
-                guard let newOperator = try operators.dequeue() as? Operator else {
-                    throw CalculatorError.invalidOperator
-                }
-                operatorType = newOperator
-            } catch CalculatorError.indexOutOfRange {
-                break
-            }
+        var result = try operands.dequeue()
+        while operands.count > 0 {
+            let operatorItem = try operators.dequeue()
+            let rhs = try operands.dequeue()
+            result = try operatorItem.calculate(lhs: result, rhs: rhs)
         }
         return result
     }

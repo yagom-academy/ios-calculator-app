@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemNodeTests: XCTestCase {
-    var sut: CalculatorItemNode!
+    var sut: CalculatorItemNode<Double>!
 
     override func setUpWithError() throws {
         let value: Double = 7.0
