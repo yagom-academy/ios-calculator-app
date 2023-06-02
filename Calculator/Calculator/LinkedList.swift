@@ -111,5 +111,25 @@ class LinkedList<T> {
     }
     
     func delete(at index: UInt) {
+        if isEmpty || index >= count {
+            return
+        }
+        
+        if index == 0 {
+            head = head?.next
+            count -= 1
+            return
+        }
+        
+        var node = head
+        for _ in 0..<(index - 1) {
+            if node?.next == nil {
+                return
+            }
+            node = node?.next
+        }
+        
+        node?.next = node?.next?.next
+        count -= 1
     }
 }
