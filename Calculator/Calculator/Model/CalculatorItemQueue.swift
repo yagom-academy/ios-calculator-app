@@ -23,9 +23,14 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
         }
         return deQueueStack.popLast()
     }
-
+    
     func peek() -> String? {
-        return enQueueStack.isEmpty ? nil : enQueueStack[0]
+        if deQueueStack.count >= 1 {
+            return deQueueStack[deQueueStack.count - 1]
+        } else if enQueueStack.count >= 1 {
+            return enQueueStack[0]
+        }
+        return nil
     }
     
     mutating func clear() {

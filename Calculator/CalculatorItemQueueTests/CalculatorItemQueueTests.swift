@@ -68,21 +68,42 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, "1")
     }
     
-    func test_peek호출시_enQueueStack의_0번째인덱스값을반환한다() {
-        sut.enQueueStack = ["2", "4", "6", "9"]
-        
-        let result = sut.peek()
-        
-        XCTAssertEqual(result, "2")
-    }
-    
-    func test_peek호출시_enQueueStack이빈배열이면_nil을반환한다() {
+    func test_peek호출시_enQueueStack과deQueueStack이빈배열이면_nil을반환한다() {
         sut.enQueueStack = []
+        sut.deQueueStack = []
         
         let result = sut.peek()
         
         XCTAssertEqual(result, nil)
     }
+    
+    func test_peek호출시_deQueueStack에요소가있고enQueueStack이빈배열이면_deQueueStack의마지막요소를반환한다() {
+        sut.enQueueStack = []
+        sut.deQueueStack = ["1", "2", "3"]
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, "3")
+    }
+    
+    func test_peek호출시_enQueueStack에요소가있고deQueueStack이빈배열이면_enQueueStack의첫번째요소를반환한다() {
+        sut.enQueueStack = ["1", "2", "3"]
+        sut.deQueueStack = []
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, "1")
+    }
+    
+    func test_peek호출시_enQueueStack과deQueueStack모두요소가있으면_deQueueStack의마지막요소를반환한다() {
+        sut.enQueueStack = ["1", "2", "3"]
+        sut.deQueueStack = ["4", "5", "6"]
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, "6")
+    }
+    
     
     func test_clear호출시_enQueueStack과deQueueStack을_빈배열로만든다() {
         sut.enQueueStack = ["2", "4", "6", "9"]
