@@ -8,7 +8,7 @@
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
-        var calculateItemList = componentsByOperators(from: input)
+        let calculateItemList = componentsByOperators(from: input)
         
         calculateItemList.forEach { item in
             if let oper: Double = Double(item) {

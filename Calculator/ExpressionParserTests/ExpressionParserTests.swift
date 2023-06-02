@@ -25,7 +25,7 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_nan이_반환되는_공식을_parse에_넣으면_result도_nan이_반환됩니다() {
-        let input = "1 + 3 / 0 * 10"
+        let input = "1 + 3 ÷ 0 × 10"
         var formula = ExpressionParser.parse(from: input)
         
         let result = formula.result().isNaN

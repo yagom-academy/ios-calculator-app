@@ -138,6 +138,15 @@
 			path = ExpressionParserTests;
 			sourceTree = "<group>";
 		};
+		4547A2C12A29C094003EB63C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				45841ED42A24999D00B959AE /* Double+Extension.swift */,
+				45CC29632A289A8A00E28FFD /* String+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		45841ECB2A24952E00B959AE /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,13 +160,12 @@
 		45841ECC2A24953F00B959AE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				45841ED02A24957A00B959AE /* CalculateItem.swift */,
-				45841ECE2A24956D00B959AE /* CalculatorItemQueue.swift */,
-				45CC29672A289C5000E28FFD /* Formula.swift */,
 				45CC29652A289C2900E28FFD /* ExpressionParser.swift */,
+				45CC29672A289C5000E28FFD /* Formula.swift */,
+				45841ECE2A24956D00B959AE /* CalculatorItemQueue.swift */,
+				45841ED02A24957A00B959AE /* CalculateItem.swift */,
 				45841ED22A24996000B959AE /* Operator.swift */,
-				45841ED42A24999D00B959AE /* Double+Extension.swift */,
-				45CC29632A289A8A00E28FFD /* String+Extension.swift */,
+				4547A2C12A29C094003EB63C /* Extension */,
 			);
 			path = Model;
 			sourceTree = "<group>";
