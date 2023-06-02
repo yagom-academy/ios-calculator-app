@@ -7,30 +7,34 @@
 
 import UIKit
 
-struct CalculatorItemQueue<CalculatorItem> {
-    private var calculatorItemQueue: [CalculatorItem] = []
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var queue: LinkedList = LinkedList<Element>()
     
     var count: Int {
-        return calculatorItemQueue.count
+        return queue.count
     }
     
     var isEmpty: Bool {
-        return calculatorItemQueue.isEmpty
+        return queue.isEmpty
     }
     
-    mutating func enqueue(_ element: CalculatorItem) {
-        calculatorItemQueue.append(element)
+    mutating func enqueue(_ element: Element) {
+        queue.append(data: element)
     }
     
     mutating func dequeue() {
-        calculatorItemQueue.removeFirst()
+        return queue.removeFirst()
     }
     
     mutating func clearQueue() {
-        calculatorItemQueue.removeAll()
+        queue.removeAll()
     }
     
-    func readCalculatorItemQueue() -> [CalculatorItem] {
-        return calculatorItemQueue
+    func readFirstData() -> Element? {
+        return queue.readHeadData()
+    }
+    
+    func readLastData() -> Element? {
+        return queue.readTailData()
     }
 }
