@@ -37,7 +37,6 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         let element = head?.element
         
         head = head?.nextItem
-        
         return element
     }
 }
