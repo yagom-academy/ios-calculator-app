@@ -47,6 +47,14 @@ class LinkedList<T> {
     }
     
     func insert(data: T?, at index: UInt) {
+        if index == 0 {
+            var newNode = Node(data: data)
+            newNode.next = head
+            head = newNode
+            count += 1
+            return
+        }
+        
         var node = head
         for _ in 0..<(index - 1) {
             if node?.next == nil {
