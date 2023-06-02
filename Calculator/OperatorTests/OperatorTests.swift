@@ -40,4 +40,13 @@ final class OperatorTests: XCTestCase {
             }
         }
     }
+    
+    func test_0으로_divide하면_nan을_반환합니다() {
+        sut.filter { oper in
+            oper == .divide
+        }.forEach { oper in
+            let result = oper.calculate(lhs: 2, rhs: 0)
+            XCTAssertTrue(result.isNaN)
+        }
+    }
 }
