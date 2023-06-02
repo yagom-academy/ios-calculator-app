@@ -50,7 +50,7 @@ class LinkedList<T> {
         if index >= count {
             return
         } else if index == 0 {
-            var newNode = Node(data: data)
+            let newNode = Node(data: data)
             newNode.next = head
             head = newNode
             count += 1
