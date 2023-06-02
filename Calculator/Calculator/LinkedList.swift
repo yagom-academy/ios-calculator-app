@@ -89,5 +89,24 @@ class LinkedList<T> {
     }
     
     func removeLast() {
+        if isEmpty {
+            return
+        }
+        
+        if count == 1 {
+            head = nil
+            tail = nil
+            count = 0
+            return
+        }
+        
+        var node = head
+        while node?.next?.next !== nil {
+            node = node?.next
+        }
+        
+        tail = nil
+        tail = node
+        count -= 1
     }
 }
