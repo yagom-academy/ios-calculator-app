@@ -170,4 +170,25 @@ final class IntegrationTests: XCTestCase {
             }
         }
     }
+    
+    func test_1자리수_100000개의_피연산자_계산_속도_측정() {
+        // given
+        var input: String = ""
+        for time in 0...99999 {
+            input += time != 99 ? "1+" : "1"
+        }
+
+        measure {
+            do {
+                var formula = try ExpressionParser.parse(from: input)
+                _ = try formula.result()
+            } catch {
+                if let error = error as? CalculationError {
+                    print(error)
+                } else {
+                    print("알 수 없는 에러: \(error)")
+                }
+            }
+        }
+    }    
 }
