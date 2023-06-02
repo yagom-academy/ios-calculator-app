@@ -25,5 +25,9 @@ class LinkedList<T> {
     }
     
     func append(data: T?) {
+        let newNode = Node(data: data)
+        tail?.next = newNode
+        tail = newNode
+        count += 1
     }
 }
