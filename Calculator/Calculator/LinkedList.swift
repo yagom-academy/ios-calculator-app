@@ -134,5 +134,13 @@ class LinkedList<T> {
     }
     
     func removeAll() {
+        if isEmpty {
+            return
+        }
+        
+        while !isEmpty {
+            removeFirst()
+        }
+        count = 0
     }
 }
