@@ -113,7 +113,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         
         // when
-        let result = sut.first?.data
+        let result = sut.first
         let expectedValue = 1
         
         // then
@@ -126,7 +126,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(2)
         
         // when
-        let result = sut.first?.data
+        let result = sut.first
         let expectedValue = 1
         
         // then
@@ -138,7 +138,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         
         // when
-        let result = sut.last?.data
+        let result = sut.last
         let expectedValue = 1
         
         // then
@@ -151,7 +151,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(2)
         
         // when
-        let result = sut.last?.data
+        let result = sut.last
         let expectedValue = 2
         
         // then
@@ -165,7 +165,7 @@ final class LinkedListTests: XCTestCase {
         _ = sut.popFirst()
         
         // when
-        let result = sut.first?.data
+        let result = sut.first
         let expectedValue = 2
         
         // then

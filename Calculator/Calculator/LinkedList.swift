@@ -5,7 +5,7 @@
 //  Created by redmango1446 on 2023/06/01.
 //
 
-final class LinkedList<T> {
+struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     
@@ -16,17 +16,17 @@ final class LinkedList<T> {
         return false
     }
     
-    var first: Node<T>? {
-        return head
+    var first: T? {
+        return head?.data
     }
     
-    var last: Node<T>? {
-        return tail
+    var last: T? {
+        return tail?.data
     }
     
     private(set) var count: Int = 0
 
-    func append(_ NewElement: T) {
+    mutating func append(_ NewElement: T) {
         let newData = Node(data: NewElement)
         
         if head == nil {
@@ -41,7 +41,7 @@ final class LinkedList<T> {
         count += 1
     }
     
-    func popFirst() -> T? {
+    mutating func popFirst() -> T? {
         guard let data = head?.data else {
             return nil
         }

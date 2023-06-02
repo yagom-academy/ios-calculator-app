@@ -9,11 +9,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
     private var list: LinkedList<T> = LinkedList()
     
     var first: T? {
-        return list.first?.data
+        return list.first
     }
     
     var last: T? {
-        return list.last?.data
+        return list.last
     }
     
     var count: Int {
@@ -24,11 +24,11 @@ struct CalculatorItemQueue<T>: CalculateItem {
         return list.isEmpty
     }
     
-    func enqueue(_ NewElement: T) {
+    mutating func enqueue(_ NewElement: T) {
         list.append(NewElement)
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return list.popFirst()
     }
 }
