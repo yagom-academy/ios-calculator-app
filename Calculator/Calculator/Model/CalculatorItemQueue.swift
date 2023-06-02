@@ -16,11 +16,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return queue.isEmpty
     }
     
-    var front: T? {
+    var first: T? {
         return queue.first
     }
     
-    var rear: T? {
+    var last: T? {
         return queue.last
     }
     
