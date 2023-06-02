@@ -8,14 +8,14 @@
 extension Int: CalculateItemProtocol { }
 
 class DummyLinkedList<T> {
-	var head: Node<T>?
-	var tail: Node<T>?
+	fileprivate var head: Node<T>?
+	fileprivate var tail: Node<T>?
 	
-	var isEmpty: Bool {
+	fileprivate var isEmpty: Bool {
 		return head == nil
 	}
 	
-	func append(value: T) {
+	fileprivate func append(value: T) {
 		let newNode = Node(value: value)
 		if let tailNode = tail {
 			tailNode.next = newNode
@@ -25,7 +25,7 @@ class DummyLinkedList<T> {
 		tail = newNode
 	}
 	
-	func removeFirst() -> T? {
+	fileprivate func removeFirst() -> T? {
 		guard let firstNode = head else { return nil }
 		head = firstNode.next
 		if head == nil {
@@ -36,22 +36,22 @@ class DummyLinkedList<T> {
 }
 
 struct MockCalculatorItemQueue<T: CalculateItemProtocol> {
-	var dummyList: DummyLinkedList<T>?
+	public var dummyList: DummyLinkedList<T>?
 	
-	var isEmpty: Bool? {
+	public var isEmpty: Bool? {
 		guard let isEmptyDummyList = dummyList?.isEmpty else { return nil }
 		return isEmptyDummyList
 	}
 	
-	var front: T? {
+	public var front: T? {
 		return dummyList?.head?.value
 	}
 	
-	func enqueue(_ value: T) {
+	public func enqueue(_ value: T) {
 		dummyList?.append(value: value)
 	}
 	
-	func dequeue() -> T? {
+	public func dequeue() -> T? {
 		return dummyList?.removeFirst()
 	}
 	
