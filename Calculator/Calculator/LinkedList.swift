@@ -71,4 +71,7 @@ class LinkedList<T> {
         node?.next?.next = nextNode
         count += 1
     }
+    
+    func removeFirst() {
+    }
 }

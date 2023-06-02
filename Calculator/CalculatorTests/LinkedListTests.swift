@@ -94,4 +94,16 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.readTailData(), expectation)
     }
+    
+    func test_removeFirst함수호출시_head가_두번째node로_옮겨가는지() {
+        // given
+        let expectation: Int = 2
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        sut.removeFirst()
+        // then
+        XCTAssertEqual(sut.readHeadData(), expectation)
+    }
 }
