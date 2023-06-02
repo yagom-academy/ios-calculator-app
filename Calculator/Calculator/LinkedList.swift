@@ -15,7 +15,7 @@ class Node<T> {
     }
 }
 
-class LinkedList<T> {
+struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
     var count: Int = 0
@@ -32,7 +32,7 @@ class LinkedList<T> {
         return tail?.data
     }
     
-    func append(data: T?) {
+    mutating func append(data: T?) {
         if isEmpty {
             head = Node(data: data)
             tail = head
@@ -46,7 +46,7 @@ class LinkedList<T> {
         count += 1
     }
     
-    func insert(data: T?, at index: UInt) {
+    mutating func insert(data: T?, at index: UInt) {
         if index >= count {
             return
         } else if index == 0 {
@@ -72,7 +72,7 @@ class LinkedList<T> {
         count += 1
     }
     
-    func removeFirst() {
+    mutating func removeFirst() {
         if isEmpty {
             return
         }
@@ -88,7 +88,7 @@ class LinkedList<T> {
         count -= 1
     }
     
-    func removeLast() {
+    mutating func removeLast() {
         if isEmpty {
             return
         }
@@ -110,7 +110,7 @@ class LinkedList<T> {
         count -= 1
     }
     
-    func delete(at index: UInt) {
+    mutating func delete(at index: UInt) {
         if isEmpty || index >= count {
             return
         }
@@ -133,7 +133,7 @@ class LinkedList<T> {
         count -= 1
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         if isEmpty {
             return
         }
