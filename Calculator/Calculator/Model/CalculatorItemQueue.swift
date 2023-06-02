@@ -6,6 +6,7 @@
 //
 
 extension Int: CalculateItem { }
+extension Node: CalculateItem { }
 
 protocol CalculateItem { }
 
