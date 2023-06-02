@@ -87,4 +87,7 @@ class LinkedList<T> {
         head = head?.next
         count -= 1
     }
+    
+    func removeLast() {
+    }
 }
