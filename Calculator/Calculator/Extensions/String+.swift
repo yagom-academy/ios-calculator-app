@@ -7,18 +7,9 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        var wordsBeforeTarget: String = ""
-        var listToReturn: [String] = []
+        let targetIndex: Index = self.lastIndex(of: target) ?? self.endIndex
+        let targetBeforeWord = String(self.prefix(upTo: targetIndex))
         
-        self.forEach { element in
-            if element != target {
-                wordsBeforeTarget.append(element)
-            } else {
-                listToReturn.append(wordsBeforeTarget)
-                listToReturn.append(String(element))
-            }
-        }
-        
-        return listToReturn
+        return [targetBeforeWord, String(target)]
     }
 }
