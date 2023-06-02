@@ -22,7 +22,7 @@ final class OperatorTests: XCTestCase {
     func test_모든_연산자가_정상적으로_값을_반환합니다() {
         sut.forEach { oper in
             let expectation: Double
-            let result = oper.calculate(Ihs: 2, rhs: 1)
+            let result = oper.calculate(lhs: 2, rhs: 1)
             
             switch oper {
             case .add:
