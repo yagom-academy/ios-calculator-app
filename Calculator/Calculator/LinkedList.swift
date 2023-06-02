@@ -73,5 +73,18 @@ class LinkedList<T> {
     }
     
     func removeFirst() {
+        if isEmpty {
+            return
+        }
+        
+        if count == 1 {
+            head = nil
+            tail = nil
+            count = 0
+            return
+        }
+        
+        head = head?.next
+        count -= 1
     }
 }
