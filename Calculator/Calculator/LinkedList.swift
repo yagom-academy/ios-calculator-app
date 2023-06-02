@@ -47,7 +47,9 @@ class LinkedList<T> {
     }
     
     func insert(data: T?, at index: UInt) {
-        if index == 0 {
+        if index >= count {
+            return
+        } else if index == 0 {
             var newNode = Node(data: data)
             newNode.next = head
             head = newNode
