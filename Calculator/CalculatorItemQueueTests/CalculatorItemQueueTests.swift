@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -20,19 +20,19 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_init에1_2_3을넣으면_enqueuedCalculatorItems에1_2_3이있다() {
-        let input = [1, 2, 3]
+        let input = ["1", "2", "3"]
         
         sut = CalculatorItemQueue(input)
-        let result = sut.enqueuedCalculatorItems as? [Int]
+        let result = sut.enqueuedCalculatorItems
         
         XCTAssertEqual(input, result)
     }
     
     func test_enqueue에1을넣으면_enqueuedCalculatorItems에1이있다() {
-        let input = 1
+        let input = "1"
         
         sut.enqueue(input)
-        let result = sut.enqueuedCalculatorItems.first as? Int
+        let result = sut.enqueuedCalculatorItems.first
         
         XCTAssertEqual(input, result)
     }
@@ -41,16 +41,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         let input = "+"
         
         sut.enqueue(input)
-        let result = sut.enqueuedCalculatorItems.first as? String
+        let result = sut.enqueuedCalculatorItems.first
         
         XCTAssertEqual(input, result)
     }
     
     func test_enqueuedCalculatorItems에1_2가있으면_dequeue를했을때_1이반환된다() {
-        sut = CalculatorItemQueue([1, 2])
-        let expectation = 1
+        sut = CalculatorItemQueue(["1", "2"])
+        let expectation = "1"
         
-        let result = sut.dequeue() as? Int
+        let result = sut.dequeue()
         
         XCTAssertEqual(result, expectation)
     }
@@ -59,13 +59,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = CalculatorItemQueue(["+"])
         let expectation = "+"
         
-        let result = sut.dequeue() as? String
+        let result = sut.dequeue()
         
         XCTAssertEqual(result, expectation)
     }
     
     func test_enqueuedCalculatorItems에1이있으면_dequeue를했을때_enqueuedCalculatorItems가비어있다() {
-        sut = CalculatorItemQueue([1])
+        sut = CalculatorItemQueue(["1"])
         
         sut.dequeue()
         let result = sut.enqueuedCalculatorItems.isEmpty
