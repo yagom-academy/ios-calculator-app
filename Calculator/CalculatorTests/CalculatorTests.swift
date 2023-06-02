@@ -22,27 +22,12 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-    
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
     func test_enqueue숫자값확인() {
         //given
         let firstInput = 1
         
         //when
-        sut.enqueueItem(item: firstInput)
+        sut.enqueue(item: firstInput)
         let result = sut.dequeueItem()
         
         //then
@@ -54,7 +39,7 @@ final class CalculatorTests: XCTestCase {
         let input = 1
         
         //when
-        sut.enqueueItem(item: input)
+        sut.enqueue(item: input)
         let result = sut.lastItem
         
         //then
@@ -62,38 +47,46 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_enqueueCount_확인() {
+        //given
         let input = 1
         
-        sut.enqueueItem(item: input)
+        //when
+        sut.enqueue(item: input)
         let result = sut.countItem
         
+        //then
         XCTAssertEqual(input, result)
     }
     
     func test_enqueueCount_2개확인() {
+        //given
         let input = 1
         let secondInput = 2
         
-        sut.enqueueItem(item: input)
-        sut.enqueueItem(item: secondInput)
+        //when
+        sut.enqueue(item: input)
+        sut.enqueue(item: secondInput)
         let result = sut.countItem
         
         XCTAssertEqual(secondInput, result)
     }
     
     func test_enqueue숫자값다중확인() {
+        //given
         let firstInput = 1
         let secondInput = 2
         let thirdInput = 3
         
-        sut.enqueueItem(item: firstInput)
-        sut.enqueueItem(item: secondInput)
-        sut.enqueueItem(item: thirdInput)
+        //when
+        sut.enqueue(item: firstInput)
+        sut.enqueue(item: secondInput)
+        sut.enqueue(item: thirdInput)
         
         let firsResult = sut.dequeueItem()
         let secondResult = sut.dequeueItem()
         let thirdResult = sut.dequeueItem()
         
+        //then
         XCTAssertEqual(firsResult, firstInput)
         XCTAssertEqual(secondResult, secondInput)
         XCTAssertEqual(thirdResult, thirdInput)

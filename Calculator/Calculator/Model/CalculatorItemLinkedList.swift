@@ -33,7 +33,7 @@ final class CalculatorItemLinkedList<T>: CalculateItem {
         return count
     }
     
-    func enqueueItem(item: T) {
+    func enqueue(item: T) {
         let newNode = CalculatorItemNode(value: item)
         
         guard headItem != nil else {
@@ -54,6 +54,7 @@ final class CalculatorItemLinkedList<T>: CalculateItem {
             tailItem = nil
             return currentHead.value
         }
+        
         headItem = currentHead.next
         
         return currentHead.value
