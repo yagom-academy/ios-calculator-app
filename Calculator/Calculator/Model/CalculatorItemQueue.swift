@@ -20,6 +20,18 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return queue.isEmpty
     }
     
+    var front: T? {
+        return queue.first
+    }
+    
+    var rear: T? {
+        return queue.last
+    }
+    
+    init(queue: LinkedList<T> = LinkedList()) {
+        self.queue = queue
+    }
+    
     mutating func enqueue(_ data: T) {
         queue.append(data)
     }
