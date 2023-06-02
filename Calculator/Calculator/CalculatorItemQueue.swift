@@ -27,7 +27,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
             return
         }
         
-        tail?.nextItem = item
+        tail?.next = item
         tail = item
     }
     
@@ -36,7 +36,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         
         let element = head?.element
         
-        head = head?.nextItem
+        head = head?.next
         return element
     }
 }
@@ -53,7 +53,7 @@ extension CalculatorItemQueue {
             guard let element = item?.element else { break }
             
             listArray.append(element)
-            item = item?.nextItem
+            item = item?.next
         }
         
         return listArray

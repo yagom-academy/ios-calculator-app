@@ -6,7 +6,7 @@
 //
 
 final class Item<Element> {
-    var nextItem: Item?
+    var next: Item?
     var element: Element
     
     init(_ element: Element) {
