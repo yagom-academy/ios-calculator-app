@@ -14,3 +14,13 @@ class Node<T> {
         self.next = next
     }
 }
+
+class LinkedList<T> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    var count: Int = 0
+    
+    var isEmpty: Bool {
+        head == nil
+    }
+}
