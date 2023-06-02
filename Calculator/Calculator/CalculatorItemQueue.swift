@@ -7,36 +7,36 @@
 
 protocol CalculateItem { }
 
-protocol Calculatorable {
+protocol Queueable {
     associatedtype Element
     
     mutating func enqueue(element: Element)
     mutating func dequeue() -> Element?
 }
 
-struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
-    private var headItem: Item<Element>?
-    private var tailItem: Item<Element>?
+struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
+    private var head: Item<Element>?
+    private var tail: Item<Element>?
     
     mutating func enqueue(element: Element) {
         let item = Item(element)
         
-        if headItem == nil {
-            headItem = item
-            tailItem = item
+        if head == nil {
+            head = item
+            tail = item
             return
         }
         
-        tailItem?.nextItem = item
-        tailItem = item
+        tail?.nextItem = item
+        tail = item
     }
     
     mutating func dequeue() -> Element? {
-        guard headItem != nil else { return nil }
+        guard head != nil else { return nil }
         
-        let element = headItem?.element
+        let element = head?.element
         
-        headItem = headItem?.nextItem
+        head = head?.nextItem
         
         return element
     }
@@ -45,9 +45,9 @@ struct CalculatorItemQueue<Element: CalculateItem>: Calculatorable {
 // MARK: - Test Func
 extension CalculatorItemQueue {
     func returnListValue() -> [Element]? {
-        guard headItem != nil else { return nil }
+        guard head != nil else { return nil }
         
-        var item: Item? = headItem
+        var item: Item? = head
         var listArray = [Element]()
         
         while item != nil {
