@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    private(set) var operands: CalculatorItemQueue<Double>
-    private(set) var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     init(operands: [Double] = [], operators: [Operator] = []) {
         self.operands = CalculatorItemQueue<Double>(operands)
