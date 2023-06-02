@@ -118,4 +118,16 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.readTailData(), expectation)
     }
+    
+    func test_delete함수호출시_list의node개수가_줄어드는지() {
+        // given
+        let expectation: Int = 2
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        sut.delete(at: 1)
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
 }

@@ -109,4 +109,7 @@ class LinkedList<T> {
         tail = node
         count -= 1
     }
+    
+    func delete(at index: UInt) {
+    }
 }
