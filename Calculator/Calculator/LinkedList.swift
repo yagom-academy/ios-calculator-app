@@ -132,4 +132,7 @@ class LinkedList<T> {
         node?.next = node?.next?.next
         count -= 1
     }
+    
+    func removeAll() {
+    }
 }

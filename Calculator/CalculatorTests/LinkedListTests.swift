@@ -130,4 +130,15 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(sut.count, expectation)
     }
+    
+    func test_removeAll함수호출시_list의isEmpty가_true가되는지() {
+        // given
+        sut.append(data: 1)
+        sut.append(data: 2)
+        sut.append(data: 3)
+        // when
+        sut.removeAll()
+        // then
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
