@@ -79,4 +79,16 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertFalse(input)
 	}
+	
+	func tests_Mock_front_호출시_dummyList_head에_데이터가_있을경우_그_데이터를_가져온다() {
+		// given
+		sut.enqueue(3)
+		guard let input = sut.front else { return }
+		
+		// when
+		let result = 3
+		
+		// then
+		XCTAssertEqual(input, result)
+	}
 }
