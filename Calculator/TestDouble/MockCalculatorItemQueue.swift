@@ -15,8 +15,8 @@ protocol MockLinkedListProtocol {
 }
 
 class DummyLinkedList<T: CalculateItemProtocol>: MockLinkedListProtocol {
-	fileprivate var head: MockNode<T>?
-	fileprivate var tail: MockNode<T>?
+	var head: MockNode<T>?
+	var tail: MockNode<T>?
 	
 	internal var isEmpty: Bool {
 		return head == nil
