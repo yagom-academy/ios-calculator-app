@@ -24,7 +24,6 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_Mock_enqueue_호출시_dummyList에_데이터가_쌓인다() {
 		// given
-		let input = sut
 		sut.enqueue(1)
 		sut.enqueue(2)
 		sut.enqueue(3)
