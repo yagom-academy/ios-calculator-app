@@ -7,8 +7,8 @@
 
 import UIKit
 
-struct CalculatorItemQueue<Element: CalculateItem> {
-    private var queue: LinkedList = LinkedList<Element>()
+struct CalculatorItemQueue<Element: CalculateItem>: QueueConfigurable {
+    var queue: LinkedList = LinkedList<Element>()
     
     var count: Int {
         return queue.count
