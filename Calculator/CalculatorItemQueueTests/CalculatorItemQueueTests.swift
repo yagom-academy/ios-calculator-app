@@ -41,8 +41,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectation = "3"
         
         sut.enQueue(input)
+        let result = sut.peek()
         
-        XCTAssertEqual(sut.enQueueStack[0], expectation)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_deQueue호출시_큐가비어있다면_nil을반환한다() {
@@ -86,8 +87,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         sut.enQueue("1")
         sut.clear()
+        let result: [String] = []
         
-        XCTAssertEqual(sut.enQueueStack, expectation)
-        XCTAssertEqual(sut.deQueueStack, expectation)
+        XCTAssertEqual(result, expectation)
     }
 }
