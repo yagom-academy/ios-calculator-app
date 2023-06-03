@@ -7,16 +7,16 @@
 
 extension Int: CalculateItemProtocol { }
 
-class DummyLinkedList<T> {
-	fileprivate var head: Node<T>?
-	fileprivate var tail: Node<T>?
+class DummyLinkedList<T: CalculateItemProtocol> {
+	fileprivate var head: MockNode<T>?
+	fileprivate var tail: MockNode<T>?
 	
 	fileprivate var isEmpty: Bool {
 		return head == nil
 	}
 	
 	fileprivate func append(value: T) {
-		let newNode = Node(value: value)
+		let newNode = MockNode(value: value)
 		if let tailNode = tail {
 			tailNode.next = newNode
 		} else {
