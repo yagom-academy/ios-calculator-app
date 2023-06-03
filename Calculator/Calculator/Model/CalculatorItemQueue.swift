@@ -5,38 +5,38 @@
 //  Created by Yetti on 2023/05/30.
 
 struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
-    private var enQueueStack: [String] = []
-    private var deQueueStack: [String] = []
+    private var enqueueStack: [String] = []
+    private var dequeueStack: [String] = []
     
     var isEmpty: Bool {
-        return enQueueStack.isEmpty && deQueueStack.isEmpty
+        return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
     mutating func enQueue(_ element: String) {
-        enQueueStack.append(element)
+        enqueueStack.append(element)
     }
     
     mutating func deQueue() -> String? {
         guard isEmpty == false else { return nil }
-        if deQueueStack.isEmpty {
-            deQueueStack = enQueueStack.reversed()
-            enQueueStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return deQueueStack.popLast()
+        return dequeueStack.popLast()
     }
     
     func peek() -> String? {
         guard isEmpty == false else { return nil }
-        if deQueueStack.count > 0 {
-            return deQueueStack.last
-        } else if enQueueStack.count > 0 {
-            return enQueueStack.first
+        if dequeueStack.count > 0 {
+            return dequeueStack.last
+        } else if enqueueStack.count > 0 {
+            return enqueueStack.first
         }
         return nil
     }
     
     mutating func clear() {
-        enQueueStack.removeAll()
-        deQueueStack.removeAll()
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
