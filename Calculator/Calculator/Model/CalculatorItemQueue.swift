@@ -7,7 +7,7 @@
 
 struct CalculatorItemQueue<Item: CalculateItem> {
     private var queue = LinkedList<Item>()
-    var peek: Item? { queue.peek() }
+    var peek: Item? { queue.peek }
     var size: Int { queue.size }
     var isEmpty: Bool { queue.isEmpty }
     
@@ -16,7 +16,7 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     }
     
     mutating func dequeue() -> Item? {
-        return queue.removeFirst()
+        queue.removeFirst()
     }
     
     mutating func removeAll() {

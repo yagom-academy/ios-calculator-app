@@ -7,19 +7,20 @@
 
 struct LinkedList<Element> {
     private var front: Node<Element>?
-    private var tail: Node<Element>?
+    private var rear: Node<Element>?
     private(set) var size: Int = 0
     var isEmpty: Bool { size == 0 }
+    var peek: Element? { front?.element }
     
     mutating func append(_ element: Element) {
         let newNode = Node(element: element)
         
         if isEmpty {
             front = newNode
-            tail = front
+            rear = newNode
         } else {
-            tail?.next = newNode
-            tail = newNode
+            rear?.next = newNode
+            rear = newNode
         }
         size += 1
     }
@@ -32,7 +33,7 @@ struct LinkedList<Element> {
         
         if isEmpty {
             front = nil
-            tail = nil
+            rear = nil
         }
         
         return firstElement
@@ -40,11 +41,7 @@ struct LinkedList<Element> {
     
     mutating func removeAll() {
         front = nil
-        tail = nil
+        rear = nil
         size = 0
-    }
-    
-    func peek() -> Element? {
-        return front?.element
     }
 }
