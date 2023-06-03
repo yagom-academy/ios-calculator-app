@@ -27,12 +27,12 @@ final class CalculatorItemQueueTests: XCTestCase {
 		sut.enqueue(1)
 		sut.enqueue(2)
 		sut.enqueue(3)
-		
+		guard let input = sut.dummyList?.tail?.value else { return }
 		// when
-		let result = sut.dummyList
+		let result = 3
 		
 		// then
-		XCTAssertNotNil(result)
+		XCTAssertEqual(input, result)
 	}
 	
 	func tests_MockNode의_value값이_비교가_가능하다() {
