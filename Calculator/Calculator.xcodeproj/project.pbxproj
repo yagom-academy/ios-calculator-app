@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4406F6B52A2B22C200A3F02D /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6B42A2B22C200A3F02D /* Formula.swift */; };
+		4406F6B72A2B23C000A3F02D /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6B62A2B23C000A3F02D /* ExpressionParser.swift */; };
+		4406F6B92A2B248E00A3F02D /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6B82A2B248E00A3F02D /* Double+.swift */; };
+		4406F6BB2A2B24CC00A3F02D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6BA2A2B24CC00A3F02D /* String+.swift */; };
+		4406F6BD2A2B253400A3F02D /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6BC2A2B253400A3F02D /* Operator.swift */; };
 		44AA604A2A25C88800E2BB86 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */; };
 		44AA60532A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA60522A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift */; };
 		44B725BE2A27768200173495 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B725BD2A27768200173495 /* CalculateItem.swift */; };
@@ -31,6 +36,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4406F6B42A2B22C200A3F02D /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		4406F6B62A2B23C000A3F02D /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		4406F6B82A2B248E00A3F02D /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		4406F6BA2A2B24CC00A3F02D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		4406F6BC2A2B253400A3F02D /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		44AA604B2A25C9E900E2BB86 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		44AA60502A25CA0A00E2BB86 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +91,11 @@
 				44B725BF2A27845C00173495 /* LinkedList.swift */,
 				44B725BD2A27768200173495 /* CalculateItem.swift */,
 				44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */,
+				4406F6B42A2B22C200A3F02D /* Formula.swift */,
+				4406F6B62A2B23C000A3F02D /* ExpressionParser.swift */,
+				4406F6B82A2B248E00A3F02D /* Double+.swift */,
+				4406F6BA2A2B24CC00A3F02D /* String+.swift */,
+				4406F6BC2A2B253400A3F02D /* Operator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,11 +259,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				44B725BE2A27768200173495 /* CalculateItem.swift in Sources */,
+				4406F6BD2A2B253400A3F02D /* Operator.swift in Sources */,
+				4406F6B72A2B23C000A3F02D /* ExpressionParser.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				4406F6B92A2B248E00A3F02D /* Double+.swift in Sources */,
 				44AA604A2A25C88800E2BB86 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				4406F6BB2A2B24CC00A3F02D /* String+.swift in Sources */,
 				44B725C02A27845C00173495 /* LinkedList.swift in Sources */,
+				4406F6B52A2B22C200A3F02D /* Formula.swift in Sources */,
 				44B725C22A27847B00173495 /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
