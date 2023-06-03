@@ -12,11 +12,11 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    mutating func enQueue(_ element: String) {
+    mutating func enqueue(_ element: String) {
         enqueueStack.append(element)
     }
     
-    mutating func deQueue() -> String? {
+    mutating func dequeue() -> String? {
         guard isEmpty == false else { return nil }
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
