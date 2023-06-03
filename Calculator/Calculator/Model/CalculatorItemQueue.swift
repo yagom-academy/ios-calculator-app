@@ -27,10 +27,10 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     
     func peek() -> String? {
         guard isEmpty == false else { return nil }
-        if deQueueStack.count >= 1 {
-            return deQueueStack[deQueueStack.count - 1]
-        } else if enQueueStack.count >= 1 {
-            return enQueueStack[0]
+        if deQueueStack.count > 0 {
+            return deQueueStack.last
+        } else if enQueueStack.count > 0 {
+            return enQueueStack.first
         }
         return nil
     }
