@@ -12,7 +12,7 @@ protocol LinkedListProtocol {
 	func removeFirst() -> T?
 }
 
-class LinkedList<T>: LinkedListProtocol {
+class LinkedList<T: CalculateItem>: LinkedListProtocol {
 	var head: Node<T>?
 	var tail: Node<T>?
 	
