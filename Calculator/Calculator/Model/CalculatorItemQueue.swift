@@ -17,6 +17,7 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
     
     mutating func deQueue() -> String? {
+        guard isEmpty == false else { return nil }
         if deQueueStack.isEmpty {
             deQueueStack = enQueueStack.reversed()
             enQueueStack.removeAll()
@@ -25,6 +26,7 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
     }
     
     func peek() -> String? {
+        guard isEmpty == false else { return nil }
         if deQueueStack.count >= 1 {
             return deQueueStack[deQueueStack.count - 1]
         } else if enQueueStack.count >= 1 {
