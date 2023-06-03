@@ -7,16 +7,7 @@
 
 extension Int: CalculateItemProtocol { }
 
-class DummyLinkedList<T>: Equatable where T: Equatable {
-	static func == (lhs: DummyLinkedList<T>, rhs: DummyLinkedList<T>) -> Bool {
-		guard let lhsHead = lhs.head as? T else { return false }
-		guard let rhsHead = rhs.head as? T else { return false }
-		return lhsHead == rhsHead
-	}
-	
-	
-	
-	
+class DummyLinkedList<T> {
 	fileprivate var head: Node<T>?
 	fileprivate var tail: Node<T>?
 	
@@ -44,11 +35,7 @@ class DummyLinkedList<T>: Equatable where T: Equatable {
 	}
 }
 
-struct MockCalculatorItemQueue<T: CalculateItemProtocol>: Equatable where T: Equatable {
-	static func == (lhs: MockCalculatorItemQueue, rhs: MockCalculatorItemQueue) -> Bool {
-		return lhs.dummyList == rhs.dummyList
-	}
-	
+struct MockCalculatorItemQueue<T: CalculateItemProtocol> {
 	public var dummyList: DummyLinkedList<T>?
 	
 	public var isEmpty: Bool? {

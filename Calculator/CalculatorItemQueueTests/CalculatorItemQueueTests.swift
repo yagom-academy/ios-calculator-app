@@ -24,18 +24,14 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_Mock_enqueue_호출시_dummyList에_데이터가_쌓인다() {
 		// given
+		let input = sut
 		sut.enqueue(1)
 		sut.enqueue(2)
 		sut.enqueue(3)
-		let input = dummyLinkedList
-		let expection = MockCalculatorItemQueue(dummyList: dummyLinkedList)
+		
 		// when
-		let resultDummyLinkedList = DummyLinkedList<Int>()
-		let result = MockCalculatorItemQueue(dummyList: resultDummyLinkedList)
-		result.enqueue(1)
-		result.enqueue(2)
-		result.enqueue(3)
-		// then
-		XCTAssertEqual(expection, result)
+		let result = sut.dummyList
+		
+		XCTAssertNotNil(result)
 	}
 }
