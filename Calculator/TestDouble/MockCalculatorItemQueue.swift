@@ -7,15 +7,22 @@
 
 extension Int: CalculateItemProtocol { }
 
-class DummyLinkedList<T: CalculateItemProtocol> {
+protocol MockLinkedListProtocol {
+	associatedtype T: Any
+	var isEmpty: Bool { get }
+	func append(value: T)
+	func removeFirst() -> T?
+}
+
+class DummyLinkedList<T: CalculateItemProtocol>: MockLinkedListProtocol {
 	fileprivate var head: MockNode<T>?
 	fileprivate var tail: MockNode<T>?
 	
-	fileprivate var isEmpty: Bool {
+	internal var isEmpty: Bool {
 		return head == nil
 	}
 	
-	fileprivate func append(value: T) {
+	internal func append(value: T) {
 		let newNode = MockNode(value: value)
 		if let tailNode = tail {
 			tailNode.next = newNode
@@ -25,7 +32,7 @@ class DummyLinkedList<T: CalculateItemProtocol> {
 		tail = newNode
 	}
 	
-	fileprivate func removeFirst() -> T? {
+	internal func removeFirst() -> T? {
 		guard let firstNode = head else { return nil }
 		head = firstNode.next
 		if head == nil {
