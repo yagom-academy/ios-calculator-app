@@ -91,4 +91,12 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	func tests_Mock_front_호출시_dummyList_head에_데이터가_없을경우_nil을_반환한다() {
+		// given
+		let input = sut.front
+		
+		// then
+		XCTAssertNil(input)
+	}
 }
