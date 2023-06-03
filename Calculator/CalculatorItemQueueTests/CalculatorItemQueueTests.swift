@@ -19,7 +19,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_init에1_2_3을넣으면_enqueuedCalculatorItems에1_2_3이있다() {
+    func test_enqueuedCalculatorItems에1_2_3을넣으면_enqueuedCalculatorItems에1_2_3이있다() {
         for input in 1...3 {
             sut.enqueue(Double(input))
         }
