@@ -70,4 +70,13 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertTrue(input)
 	}
+	
+	func tests_Mock_isEmpty_호출시_데이터가_있는_dummyList일경우_false가_반환된다() {
+		// given
+		sut.enqueue(1)
+		guard let input = sut.isEmpty else { return }
+		
+		// then
+		XCTAssertFalse(input)
+	}
 }
