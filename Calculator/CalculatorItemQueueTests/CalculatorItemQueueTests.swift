@@ -45,4 +45,19 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertNotEqual(input, result)
 	}
+	
+	func tests_Mock_dequeue_호출시_dummyList에서_데이터가_삭제된다() {
+		// given
+		sut.enqueue(1)
+		sut.enqueue(2)
+		sut.enqueue(3)
+		
+		// when
+		_ = sut.dequeue()
+		_ = sut.dequeue()
+		_ = sut.dequeue()
+		guard let result = sut.dummyList?.head?.value else { return }
+		
+		XCTAssertEqual(result, 0)
+	}
 }
