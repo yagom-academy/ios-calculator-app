@@ -32,6 +32,18 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// when
 		let result = sut.dummyList
 		
+		// then
 		XCTAssertNotNil(result)
+	}
+	
+	func tests_MockNode의_value값이_비교가_가능하다() {
+		// given
+		let input = MockNode(value: 1)
+		
+		// when
+		let result = MockNode(value: 2)
+		
+		// then
+		XCTAssertNotEqual(input, result)
 	}
 }
