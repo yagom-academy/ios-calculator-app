@@ -60,4 +60,14 @@ final class CalculatorItemQueueTests: XCTestCase {
 		
 		XCTAssertEqual(result, 0)
 	}
+	
+	func tests_Mock_isEmpty_호출시_빈dummyList일경우_true가_반환된다() {
+		// given
+		guard let input = sut.isEmpty else { return }
+		
+		// when
+		
+		// then
+		XCTAssertTrue(input)
+	}
 }
