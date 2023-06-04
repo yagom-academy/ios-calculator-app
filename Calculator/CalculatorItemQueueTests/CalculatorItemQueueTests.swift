@@ -37,10 +37,10 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_MockNode의_value값이_비교가_가능하다() {
 		// given
-		let input = MockNode(value: 1)
+		let input = DummyNode(value: 1)
 		
 		// when
-		let result = MockNode(value: 2)
+		let result = DummyNode(value: 2)
 		
 		// then
 		XCTAssertNotEqual(input, result)

@@ -6,15 +6,15 @@
 //
 
 class MockLinkedList<T: CalculateItemProtocol>: MockLinkedListProtocol {
-	var head: MockNode<T>?
-	var tail: MockNode<T>?
+	var head: DummyNode<T>?
+	var tail: DummyNode<T>?
 	
 	internal var isEmpty: Bool {
 		return head == nil
 	}
 	
 	internal func append(value: T) {
-		let newNode = MockNode(value: value)
+		let newNode = DummyNode(value: value)
 		if let tailNode = tail {
 			tailNode.next = newNode
 		} else {

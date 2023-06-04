@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BAA363A82A2AF496009286EF /* MockNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA363A72A2AF496009286EF /* MockNode.swift */; };
+		BAA363A82A2AF496009286EF /* DummyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA363A72A2AF496009286EF /* DummyNode.swift */; };
 		BADC08062A2D1B17000B5757 /* MockLinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BADC08052A2D1B17000B5757 /* MockLinkedList.swift */; };
 		BAED15002A29E3D600FBE18E /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED14FF2A29E3D600FBE18E /* Node.swift */; };
 		BAED15022A29E44D00FBE18E /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAED15012A29E44D00FBE18E /* LinkedList.swift */; };
@@ -34,7 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BAA363A72A2AF496009286EF /* MockNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNode.swift; sourceTree = "<group>"; };
+		BAA363A72A2AF496009286EF /* DummyNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyNode.swift; sourceTree = "<group>"; };
 		BADC08052A2D1B17000B5757 /* MockLinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLinkedList.swift; sourceTree = "<group>"; };
 		BAED14FF2A29E3D600FBE18E /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		BAED15012A29E44D00FBE18E /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			children = (
 				BAED153C2A2A844000FBE18E /* CalculateItemProtocol.swift */,
 				BAED153E2A2A84BE00FBE18E /* MockCalculatorItemQueue.swift */,
-				BAA363A72A2AF496009286EF /* MockNode.swift */,
+				BAA363A72A2AF496009286EF /* DummyNode.swift */,
 				BADC08052A2D1B17000B5757 /* MockLinkedList.swift */,
 			);
 			path = TestDouble;
@@ -280,7 +280,7 @@
 				BAED153D2A2A844000FBE18E /* CalculateItemProtocol.swift in Sources */,
 				BAED15022A29E44D00FBE18E /* LinkedList.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
-				BAA363A82A2AF496009286EF /* MockNode.swift in Sources */,
+				BAA363A82A2AF496009286EF /* DummyNode.swift in Sources */,
 				BAED15002A29E3D600FBE18E /* Node.swift in Sources */,
 				BAFFB9952A25D243000FBBFA /* CalculatorItemQueue.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
