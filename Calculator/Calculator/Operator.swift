@@ -7,30 +7,44 @@
 
 import Foundation
 
-enum Operator: CaseIterable {
+enum Operator: Character, CaseIterable {
     case add
     case subtract
     case divide
     case multifly
-}
-
-func calculation() {
     
+    func calculate() {
+        switch self {
+        case .add:
+            return add(lhs: lhs, rhs: rhs)
+        case .subtract:
+            return subtract(lhs: lhs, rhs: rhs)
+        case .divide:
+            return divide(lhs: lhs, rhs: rhs)
+        case .multifly:
+            return multifly(lhs: lhs, rhs: rhs)
+        }
+    }
+
+    func add(lhs: Double, rhs: Double) -> Double {
+        result = lhs + rhs
+        return result
+    }
+
+    func subtract(lhs: Double, rhs: Double) -> Double {
+        result = lhs - rhs
+        return result
+    }
+
+    func divide(lhs: Double, rhs: Double) -> Double {
+        result = lhs / rhs
+        return result
+    }
+
+    func multifly(lhs: Double, rhs: Double) -> Double {
+        result = lhs * rhs
+        return result
+    }
 }
 
-func addition(lhs: Double, rhs: Double) -> Double {
-    
-}
-
-func subtraction(lhs: Double, rhs: Double) -> Double {
-    
-}
-
-func division(lhs: Double, rhs: Double) -> Double {
-
-}
-
-func multiflication(lhs: Double, rhs: Double) -> Double {
-
-}
 

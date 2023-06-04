@@ -32,6 +32,10 @@ struct CalculatorItemQueue<Element> {
         }
         return leftStack.popLast()
     }
+    
+    internal mutating func clear() {
+        rightStack.removeAll()
+    }
 }
 
 extension CalculatorItemQueue: CustomStringConvertible {
