@@ -1,13 +1,15 @@
 //
-//  LinkedList.swift
-//  Calculator
+//  MockedLinkedList.swift
+//  LinkedListTests
 //
-//  Created by Daehoon Lee on 2023/05/31.
+//  Created by Daehoon Lee on 2023/06/04.
 //
 
-struct LinkedList<T>: Listable {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+@testable import Calculator
+
+struct MockedLinkedList<T>: Listable {
+    var head: Node<T>?
+    var tail: Node<T>?
     
     init(head: Node<T>?) {
         self.head = head
