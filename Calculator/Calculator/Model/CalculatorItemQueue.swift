@@ -14,7 +14,7 @@ final class CalculatorItemNode<T> {
     }
 }
 
-final class CalculatorItemLinkedList<T>: CalculateItem {
+final class CalculatorItemQueue<T>: CalculateItem {
     private var headItem: CalculatorItemNode<T>?
     private var tailItem: CalculatorItemNode<T>?
     
