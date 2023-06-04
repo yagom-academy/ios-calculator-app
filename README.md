@@ -50,7 +50,7 @@
 <a id="4."></a>
 ## 4. 📊 다이어그램
 
-<Img src = "https://postfiles.pstatic.net/MjAyMzA2MDRfMTQw/MDAxNjg1ODUwNzMxMjk1.9UxzykcmrJ2n3tk4u9I5fOVwdHFHjBcOSf1kASOO0UEg.oUQoh2XsBUpgR5YnnY_HUF3ZGuguDoN_hMXCia3bFjAg.PNG.sha0720/Calculator_ClassDiagram.png?type=w773" width="350"/>
+<Img src = "https://postfiles.pstatic.net/MjAyMzA2MDRfMTEy/MDAxNjg1ODYxMjY0NzE2.J0siLtISEQk0dNBQR2cL5JiwjTRW_hW4bQVPUVAWr4Eg.HsbsAw0-ZNFkIAHvzvRJmw0VGfdLjYbxCTtSHM-ixZcg.PNG.sha0720/Calculator.drawio.png?type=w773" width="350"/>
 
 <br>
 
