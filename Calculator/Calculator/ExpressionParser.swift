@@ -20,31 +20,44 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-//        return input.components(separatedBy: ["+", "−", "*", "/"])
-        var remainString: String = input
-        var operands = [String]()
+        var remainFormula: String = input
+        var operandComponents = [String]()
         
         while true {
-            var splitList: [String] = []
+            let splitFormulaByFirstOperator: [String] = splitRemainStringByFirstOperator(remainFormula)
             
-            for character in remainString {
-                if let `operator` = Operator(rawValue: character) {
-                    splitList = remainString.split(with: `operator`.rawValue)
-                    break
-                }
-            }
-            
-            guard splitList.count != 0,
-                  let operand = splitList.first,
-                  let splitString = splitList.last else {
-                operands.append(remainString)
+            if isSplitByFirstOperator(splitFormulaByFirstOperator) == false {
+                operandComponents.append(remainFormula)
                 break
             }
             
-            operands.append(operand)
-            remainString = splitString
+            guard let operand = splitFormulaByFirstOperator.first,
+                  let remainString = splitFormulaByFirstOperator.last else { break }
+            
+            operandComponents.append(operand)
+            remainFormula = remainString
         }
         
-        return operands
+        return operandComponents
+//      return input.components(separatedBy: ["+", "−", "*", "/"])
+    }
+}
+
+extension ExpressionParser {
+    static func splitRemainStringByFirstOperator(_ remainString: String) -> [String] {
+        var splitListByFirstOperator: [String] = []
+        
+        for character in remainString {
+            if let `operator` = Operator(rawValue: character) {
+                splitListByFirstOperator = remainString.split(with: `operator`.rawValue)
+                break
+            }
+        }
+        
+        return splitListByFirstOperator
+    }
+    
+    static func isSplitByFirstOperator(_ splitListByFirstOperator: [String]) -> Bool {
+        return splitListByFirstOperator.count != 0
     }
 }
