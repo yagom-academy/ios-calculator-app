@@ -5,28 +5,27 @@
 //  Created by Serena on 2023/05/29.
 //
 
-struct CalculatorItemQueue {
-    private(set) var queue: [any CalculateItem]
-    private(set) var reversedQueue: [any CalculateItem]
-    
-    init(queue: [any CalculateItem] = [], reversedQueue: [any CalculateItem] = []) {
-        self.queue = queue
-        self.reversedQueue = reversedQueue
-    }
-    
-    mutating func enqueue(element: any CalculateItem) {
-        queue.append(element)
-    }
+struct CalculatorItemQueue<Element> {
+    private(set) var queue: [Element]
+    private(set) var reversedQueue: [Element] = []
     
     var isEmpty: Bool {
         queue.isEmpty
     }
-    
-    var peek: (any CalculateItem)? {
+     
+    var peek: (Element)? {
         return queue.isEmpty ? nil : queue.first
     }
     
-    mutating func dequeue() -> (any CalculateItem)? {
+    init(queue: [Element] = []) {
+        self.queue = queue
+    }
+    
+    mutating func enqueue(element: Element) {
+        queue.append(element)
+    }
+    
+    mutating func dequeue() -> (Element)? {
         if reversedQueue.isEmpty {
             reversedQueue = queue.reversed()
             queue.removeAll()
