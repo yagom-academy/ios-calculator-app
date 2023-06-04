@@ -28,4 +28,13 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_빈_queue에_1을_넣으면_peek는_1을_return한다() {
+        let expectedResult = 1
+        
+        sut = CalculatorItemQueue(queue: [1])
+        let result = sut.peek
+        
+        XCTAssertEqual(expectedResult, result)
+    }
 }
