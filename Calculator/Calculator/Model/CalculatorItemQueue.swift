@@ -22,4 +22,8 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         
         return dequeueCalculatorItems.popLast()
     }
+    
+    func count() -> Int {
+        return enqueuedCalculatorItems.count + dequeueCalculatorItems.count
+    }
 }
