@@ -39,4 +39,16 @@ final class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(expectation, result)
     }
+    
+    func test_count가_node의_수와_같다() {
+        //given
+        let expectation = 3
+        //when
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        let result = sut.count
+        //then
+        XCTAssertEqual(expectation, result)
+    }
 }

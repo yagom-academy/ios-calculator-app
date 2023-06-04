@@ -21,6 +21,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
     var isEmpty: Bool {
         return head == nil
     }
+    
+    var count: Int {
+        let count = 0
+        
+        return count
+    }
    
     mutating func enqueue(_ element: T) {
         let newNode = CalculatorItemNode(value: element)
@@ -31,6 +37,15 @@ struct CalculatorItemQueue<T: CalculateItem> {
         } else {
             tail?.next = newNode
             tail = newNode
+        }
+    }
+    
+    func printValues() {
+        var currentNode: CalculatorItemNode? = head
+        
+        while let node = currentNode {
+            print(node.value)
+            currentNode = node.next
         }
     }
 }
