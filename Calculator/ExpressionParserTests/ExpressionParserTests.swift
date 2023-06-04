@@ -36,4 +36,41 @@ final class ExpressionParserTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_parse에_testFormula1을넣으면_Formula의operands와operators로나뉜다() throws {
+        var expectedFormula = Formula()
+        for operand in 1...5 {
+            expectedFormula.operands.enqueue(Double(operand))
+        }
+        expectedFormula.operators.enqueue(Operator.add)
+        expectedFormula.operators.enqueue(Operator.subtract)
+        expectedFormula.operators.enqueue(Operator.multiply)
+        expectedFormula.operators.enqueue(Operator.divide)
+        let expectedOperands = expectedFormula.operands.enqueuedCalculatorItems
+        let expectedOperators = expectedFormula.operators.enqueuedCalculatorItems
+        let formula = try sut.parse(from: testFormula1)
+        
+        let resultOperands = formula.operands.enqueuedCalculatorItems
+        let resultOperators = formula.operators.enqueuedCalculatorItems
+        
+        XCTAssertEqual(resultOperands, expectedOperands)
+        XCTAssertEqual(resultOperators, expectedOperators)
+    }
+    
+    func test_parse에_testFormula2을넣으면_Formula의operands와operators로나뉜다() throws {
+        var expectedFormula = Formula()
+        for operand in 1...2 {
+            expectedFormula.operands.enqueue(Double(operand))
+        }
+        expectedFormula.operators.enqueue(Operator.add)
+        let expectedOperands = expectedFormula.operands.enqueuedCalculatorItems
+        let expectedOperators = expectedFormula.operators.enqueuedCalculatorItems
+        let formula = try sut.parse(from: testFormula2)
+        
+        let resultOperands = formula.operands.enqueuedCalculatorItems
+        let resultOperators = formula.operators.enqueuedCalculatorItems
+        
+        XCTAssertEqual(resultOperands, expectedOperands)
+        XCTAssertEqual(resultOperators, expectedOperators)
+    }
 }
