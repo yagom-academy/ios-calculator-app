@@ -52,7 +52,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_실행시_node의_수가_하나_줄어든다() {
+    func test_dequeue_실행시_Node의_수가_하나_줄어든다() {
         //given
         let expectation = 2
         //when
@@ -61,6 +61,16 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue("3")
         sut.dequeue()
         let result = sut.count
+        //then
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_dequeue_호출시_해당_Node의_value를_반환한다() {
+        //given
+        let expectation = "1"
+        //when
+        sut.enqueue("1")
+        let result = sut.dequeue()
         //then
         XCTAssertEqual(expectation, result)
     }
