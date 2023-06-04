@@ -46,7 +46,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func dequeue(){
-
+        guard let firstNode = head else { return }
+        head = firstNode.next
+        
+        if head == nil {
+            tail = nil
+        }
     }
     
     func printValues() {
