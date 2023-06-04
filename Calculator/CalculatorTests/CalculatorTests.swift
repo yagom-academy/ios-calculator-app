@@ -24,7 +24,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_dnqueue숫자확인() {
         //given
-        let input = 1
+        let input = 11
         sut.enqueue(item: input)
         
         //when
@@ -36,7 +36,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_enqueuelast숫자확인() {
         //given
-        let input = 1
+        let input = 11
         sut.enqueue(item: input)
         
         //when
@@ -46,37 +46,74 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(input, result)
     }
     
-    func test_enqueueCount_확인() {
+    func test_queueCount_확인() {
         //given
         let input = 1
         sut.enqueue(item: input)
         
         //when
-        let result = sut.countItem
+        let result = sut.count
         
         //then
-        XCTAssertEqual(input, result)
+        XCTAssertEqual(result, 1)
     }
     
-    func test_enqueueCount_2개확인() {
+    func test_queueCount초기값() {
+        //given
+        
+        //when
+        
+        //then
+        XCTAssertEqual(sut.count, 0)
+    }
+    
+    func test_queueCount_0개() {
         //given
         let input = 1
-        let secondInput = 2
+        
+        //when
+        sut.enqueue(item: input)
+        _ = sut.dequeueItem()
+        
+        //then
+        XCTAssertEqual(sut.count, 0)
+    }
+    
+    func test_queueCount_2개확인() {
+        //given
+        let input = 1
+        let secondInput = 22
         sut.enqueue(item: input)
         sut.enqueue(item: secondInput)
         
         //when
-        let result = sut.countItem
+        let result = sut.count
         
         //then
-        XCTAssertEqual(secondInput, result)
+        XCTAssertEqual(2, result)
+    }
+    
+    func test_enqueueCount_3개확인() {
+        //given
+        let input = 1
+        let secondInput = 2
+        let thirdInput = 5
+        sut.enqueue(item: input)
+        sut.enqueue(item: secondInput)
+        sut.enqueue(item: thirdInput)
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(3, result)
     }
     
     func test_dequeue지워진숫자값확인() {
         //given
-        let firstInput = 1
-        let secondInput = 2
-        let thirdInput = 3
+        let firstInput = 11
+        let secondInput = 21
+        let thirdInput = 31
         sut.enqueue(item: firstInput)
         sut.enqueue(item: secondInput)
         sut.enqueue(item: thirdInput)

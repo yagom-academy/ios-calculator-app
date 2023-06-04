@@ -17,20 +17,14 @@ final class CalculatorItemNode<T> {
 final class CalculatorItemQueue<T>: CalculateItem {
     private var headItem: CalculatorItemNode<T>?
     private var tailItem: CalculatorItemNode<T>?
+    private var countItem: Int = 0
     
     var lastItem: T? {
         return tailItem?.value
     }
     
-    var countItem: Int {
-        var count = 0
-        var head = headItem
-        
-        while head != nil {
-            count += 1
-            head = head?.next
-        }
-        return count
+    var count: Int {
+        return countItem
     }
     
     func enqueue(item: T) {
@@ -39,11 +33,13 @@ final class CalculatorItemQueue<T>: CalculateItem {
         guard headItem != nil else {
             headItem = newNode
             tailItem = newNode
+            countItem += 1
             return
         }
         
         tailItem?.next = newNode
         tailItem = newNode
+        countItem += 1
     }
     
     func dequeueItem() -> T? {
@@ -52,10 +48,12 @@ final class CalculatorItemQueue<T>: CalculateItem {
         guard currentHead.next != nil else {
             headItem = nil
             tailItem = nil
+            countItem -= 1
             return currentHead.value
         }
         
         headItem = currentHead.next
+        countItem -= 1
         
         return currentHead.value
     }
