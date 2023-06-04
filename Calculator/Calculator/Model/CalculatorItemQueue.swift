@@ -22,6 +22,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return head == nil
     }
    
+    mutating func enqueue(_ element: T) {
+        let newNode = CalculatorItemNode(value: element)
+    }
+    
 }
 
 extension String: CalculateItem {}

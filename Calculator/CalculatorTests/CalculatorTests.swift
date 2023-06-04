@@ -29,6 +29,16 @@ final class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(expectation, result)
     }
+    
+    func test_enqueue_실행시_isEmpty가_false이다() {
+        //given
+        let expectation = false
+        //when
+        sut.enqueue("3")
+        let result = sut.isEmpty
+        //then
+        XCTAssertEqual(expectation, result)
+    }
 
 
 
