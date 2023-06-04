@@ -33,7 +33,7 @@ struct Formula {
             guard let operand = operands.dequeue() else { break }
             guard let `operator` = operators.dequeue() else { break }
             
-            if isDivideZere(operand, `operator`) { throw CaculateError.notANumber }
+            if isDivideZero(operand, `operator`) { throw CaculateError.notANumber }
             
             result = `operator`.calculate(lhs: result, rhs: operand)
         }
@@ -41,7 +41,7 @@ struct Formula {
         return result
     }
     
-    func isDivideZere(_ operand: Double,_ operator: Operator) -> Bool {
+    func isDivideZero(_ operand: Double,_ operator: Operator) -> Bool {
         return operand == 0.0 && `operator` == .divide
     }
 }
