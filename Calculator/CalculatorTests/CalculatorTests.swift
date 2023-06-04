@@ -39,7 +39,4 @@ final class CalculatorTests: XCTestCase {
         //then
         XCTAssertEqual(expectation, result)
     }
-
-
-
 }
