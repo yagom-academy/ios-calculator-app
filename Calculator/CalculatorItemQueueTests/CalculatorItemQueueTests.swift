@@ -9,18 +9,23 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    // given
     var sut: CalculatorItemQueue<Int>!
 
-    // when
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue<Int>()
     }
 
-    // then
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+    }
+    
+    func test_모든_queue가_비어있으면_isAllQueueEmpty는_true를_반환한다() {
+        let expectedResult = true
+        
+        let result = sut.isAllQueueEmpty
+        
+        XCTAssertEqual(expectedResult, result)
     }
 }
