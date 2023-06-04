@@ -55,6 +55,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return firstNode.value
     }
     
+    mutating func clear() {
+        
+    }
+    
     func printValues() {
         var currentNode: CalculatorItemNode? = head
         
