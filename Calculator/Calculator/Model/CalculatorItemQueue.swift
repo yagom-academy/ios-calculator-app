@@ -53,15 +53,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
         tail = nil
         count = 0
     }
-    
-    func printValues() {
-        var currentNode: CalculatorItemNode? = head
-        
-        while let node = currentNode {
-            print(node.value)
-            currentNode = node.next
-        }
-    }
 }
 
 extension String: CalculateItem {}
