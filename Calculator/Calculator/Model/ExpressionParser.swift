@@ -44,10 +44,11 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         var result = [input]
-        var splitResult: [String] = []
         let operators =  Operator.allCases
         
         for `operator` in operators {
+            var splitResult: [String] = []
+            
             result.forEach { element in
                 let separatedElement = element.split(with: `operator`.rawValue)
                 
@@ -55,7 +56,6 @@ enum ExpressionParser {
             }
             
             result = splitResult
-            splitResult = []
         }
         
         return result
