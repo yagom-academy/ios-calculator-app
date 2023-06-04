@@ -20,6 +20,31 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+", "−","*","/"])
+//        return input.components(separatedBy: ["+", "−", "*", "/"])
+        var remainString: String = input
+        var operands = [String]()
+        
+        while true {
+            var splitList: [String] = []
+            
+            for character in remainString {
+                if let `operator` = Operator(rawValue: character) {
+                    splitList = remainString.split(with: `operator`.rawValue)
+                    break
+                }
+            }
+            
+            guard splitList.count != 0,
+                  let operand = splitList.first,
+                  let splitString = splitList.last else {
+                operands.append(remainString)
+                break
+            }
+            
+            operands.append(operand)
+            remainString = splitString
+        }
+        
+        return operands
     }
 }

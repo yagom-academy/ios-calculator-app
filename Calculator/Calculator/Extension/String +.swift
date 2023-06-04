@@ -6,6 +6,6 @@
 //
 extension String {
     func split(with target: Character) -> [String] {
-        return [""]
+        return split(separator: target, maxSplits: 1).compactMap { String($0) }
     }
 }

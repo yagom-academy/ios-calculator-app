@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         // 음수 : -
         
         
-        var formula = ExpressionParser.parse(from: "-6*3−-2")
+        var formula = ExpressionParser.parse(from: "-16+7*99/4")
         print(formula.result())
     }
 }
