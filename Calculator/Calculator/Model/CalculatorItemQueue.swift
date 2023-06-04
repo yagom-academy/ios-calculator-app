@@ -5,16 +5,16 @@
 //  Created by Serena on 2023/05/29.
 //
 
-struct CalculatorItemQueue<Element> {
+struct CalculatorItemQueue<Element: CalculateItem> {
     private(set) var queue: [Element]
     private(set) var reversedQueue: [Element] = []
     
-    var isEmpty: Bool {
-        queue.isEmpty
+    var isAllQueueEmpty: Bool {
+        return queue.isEmpty && reversedQueue.isEmpty
     }
      
     var peek: (Element)? {
-        return queue.isEmpty ? nil : queue.first
+        return reversedQueue.isEmpty ? queue.first : reversedQueue.last
     }
     
     init(queue: [Element] = []) {
