@@ -19,7 +19,7 @@ enum ExpressionParser {
         return formula
     }
     
-    static func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         var remainFormula: String = input
         var operandComponents = [String]()
         
@@ -44,7 +44,7 @@ enum ExpressionParser {
 }
 
 extension ExpressionParser {
-    static func splitRemainStringByFirstOperator(_ remainString: String) -> [String] {
+    static private func splitRemainStringByFirstOperator(_ remainString: String) -> [String] {
         var splitListByFirstOperator: [String] = []
         
         for character in remainString {
@@ -57,7 +57,7 @@ extension ExpressionParser {
         return splitListByFirstOperator
     }
     
-    static func isSplitByFirstOperator(_ splitListByFirstOperator: [String]) -> Bool {
+    static private func isSplitByFirstOperator(_ splitListByFirstOperator: [String]) -> Bool {
         return splitListByFirstOperator.count != 0
     }
 }

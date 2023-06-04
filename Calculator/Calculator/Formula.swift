@@ -26,7 +26,7 @@ struct Formula {
         return result
     }
     
-    mutating func calculateOperands() throws -> Double {
+    mutating private func calculateOperands() throws -> Double {
         guard var result = operands.dequeue() else { throw CaculateError.notHaveOperands }
         
         while operators.isEmpty() == false {
@@ -41,7 +41,7 @@ struct Formula {
         return result
     }
     
-    func isDivideZero(_ operand: Double,_ operator: Operator) -> Bool {
+    private func isDivideZero(_ operand: Double,_ operator: Operator) -> Bool {
         return operand == 0.0 && `operator` == .divide
     }
 }
