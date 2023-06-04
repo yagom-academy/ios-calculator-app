@@ -13,7 +13,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return queue.isEmpty && reversedQueue.isEmpty
     }
      
-    var peek: (Element)? {
+    var peek: Element? {
         return reversedQueue.isEmpty ? queue.first : reversedQueue.last
     }
     
@@ -26,7 +26,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     @discardableResult
-    mutating func dequeue() -> (Element)? {
+    mutating func dequeue() -> Element? {
         if reversedQueue.isEmpty {
             reversedQueue = queue.reversed()
             queue.removeAll()
