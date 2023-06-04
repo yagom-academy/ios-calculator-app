@@ -30,6 +30,13 @@
         "identifier" : "289CD2102A2B4AAB00701E3E",
         "name" : "FormulaTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "28A5486E2A2C6DD300B2B4C2",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1
