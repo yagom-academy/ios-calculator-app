@@ -21,25 +21,25 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_LinkedList에새로운Node추가() {
+    func test_enqueue_0을추가하고_LinkedList에서첫data를반환하면_0을반환한다() {
         // given
         let expectedData: Int = 0
         
         // when
         sut.enqueue(expectedData)
+        let result: Int? = sut.linkedList.removeFirst()
         
         // then
-//        XCTAssertEqual(sut.linkedList.head?.fetchData(), expectedData)
+        XCTAssertEqual(result, expectedData)
     }
     
-    func test_dequeue_LinkedList에서첫Node를반환한다() {
+    func test_dequeue_0을추가하고_dequeue를하면_0을반환한다() {
         // given
         let expectedData: Int = 0
         
         // when
         sut.enqueue(expectedData)
-        
-        guard let poppedData = sut.dequeue() else { return }
+        let poppedData = sut.dequeue()
         
         // then
         XCTAssertEqual(poppedData, expectedData)

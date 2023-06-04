@@ -21,18 +21,19 @@ final class NodeTests: XCTestCase {
         sut = nil
     }
     
-    func test_init_data를0으로초기화한다() {
+    func test_init_0으로초기화한노드의_fetchData를호출하면_0을반환한다() {
         // given
         let expectedData: Int = 0
+        sut = Node(data: expectedData)
         
         // when
-        let testNode: Node = Node<Int>(data: expectedData, next: nil)
+        let result: Int = sut.fetchData()
         
         // then
-        XCTAssertEqual(testNode.fetchData(), expectedData)
+        XCTAssertEqual(result, expectedData)
     }
     
-    func test_init_data를더하기연산자로초기화한다() {
+    func test_init_더하기연산자로초기화한노드의_fetchData를호출하면_더하기연산자를반환한다() {
         // given
         let expectedData: String = "+"
         
@@ -43,10 +44,10 @@ final class NodeTests: XCTestCase {
         XCTAssertEqual(testNode.fetchData(), expectedData)
     }
     
-    func test_init_next를다음Node로초기화한다() {
+    func test_init_1로초기화한nextNode를_다음Node로초기화한다() {
         // given
         let expectedData: Int = 0
-        let expectedNext: Node = Node(data: 1, next: nil)
+        let expectedNext: Node = Node(data: 1)
         
         // when
         let testNode: Node = Node<Int>(data: expectedData, next: expectedNext)
@@ -55,7 +56,7 @@ final class NodeTests: XCTestCase {
         XCTAssertIdentical(testNode.fetchNext(), expectedNext)
     }
     
-    func test_init_next의전달인자없이초기화한다() {
+    func test_init_nextNode의전달인자없이초기화한다() {
         // given
         let expectedData: Int = 0
         
@@ -66,14 +67,11 @@ final class NodeTests: XCTestCase {
         XCTAssertTrue(testNode.fetchNext() == nil)
     }
     
-    func test_deinit_Node가해제되는지확인한다() {
-        // given
-        var expectedNode: Node? = Node(data: 0)
-        
+    func test_deinit_이전Node대신nil을입력시_Node가해제되는지확인한다() {
         // when
-        expectedNode = nil
+        sut = nil
         
         // then
-        XCTAssertNil(expectedNode)
+        XCTAssertNil(sut)
     }
 }
