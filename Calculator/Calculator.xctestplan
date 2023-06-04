@@ -23,6 +23,13 @@
         "identifier" : "284217182A25799C00D649C8",
         "name" : "CalculatorItemQueueTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "289CD2102A2B4AAB00701E3E",
+        "name" : "FormulaTests"
+      }
     }
   ],
   "version" : 1
