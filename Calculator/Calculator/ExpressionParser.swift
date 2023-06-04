@@ -4,7 +4,7 @@
 //
 //  Created by Hyungmin Lee on 2023/06/02.
 //
-let input = "3/3+2-1"
+let input = "-3/3*0-1"
 
 enum ExpressionParser {
     static func parse(from input2: String) -> Formula {
