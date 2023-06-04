@@ -30,7 +30,7 @@
 
 | [Serena 🐷](https://github.com/serena0720) |
 | :--------: |
-| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="450"/>|
+| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="350"/>|
 
 <br>
 
@@ -50,7 +50,7 @@
 <a id="4."></a>
 ## 4. 📊 다이어그램
 
-(추후 업로드 예정)
+<Img src = "https://postfiles.pstatic.net/MjAyMzA2MDRfMTQw/MDAxNjg1ODUwNzMxMjk1.9UxzykcmrJ2n3tk4u9I5fOVwdHFHjBcOSf1kASOO0UEg.oUQoh2XsBUpgR5YnnY_HUF3ZGuguDoN_hMXCia3bFjAg.PNG.sha0720/Calculator_ClassDiagram.png?type=w773" width="350"/>
 
 <br>
 
