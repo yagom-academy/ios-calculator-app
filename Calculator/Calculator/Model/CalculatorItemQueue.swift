@@ -19,7 +19,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     private var tail: CalculatorItemNode<T>?
     
     var isEmpty: Bool {
-        return false
+        return head == nil
     }
    
 }
