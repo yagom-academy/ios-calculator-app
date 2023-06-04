@@ -23,8 +23,13 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     var count: Int {
-        let count = 0
+        var current = head
+        var count = 0
         
+        while current != nil {
+            count += 1
+            current = current?.next
+        }
         return count
     }
    
