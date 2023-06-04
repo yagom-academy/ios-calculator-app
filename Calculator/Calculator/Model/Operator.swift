@@ -5,7 +5,7 @@
 //  Created by MARY on 2023/06/03.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "/"
@@ -24,11 +24,11 @@ enum Operator: Character, CaseIterable {
         }
     }
     
-    private func add(lhs: Double, rhs: Double) -> Double { lhs + rhs }
+    private func add(lhs: Double, rhs: Double) -> Double { return lhs + rhs }
     
-    private func subtract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
+    private func subtract(lhs: Double, rhs: Double) -> Double { return lhs - rhs }
     
-    private func divide(lhs: Double, rhs: Double) -> Double { lhs / rhs }
+    private func divide(lhs: Double, rhs: Double) -> Double { return lhs / rhs }
     
-    private func multiply(lhs: Double, rhs: Double) -> Double { lhs * rhs }
+    private func multiply(lhs: Double, rhs: Double) -> Double { return lhs * rhs }
 }

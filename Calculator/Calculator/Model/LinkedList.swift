@@ -9,8 +9,8 @@ struct LinkedList<Element> {
     private var front: Node<Element>?
     private var rear: Node<Element>?
     private(set) var size: Int = 0
-    var isEmpty: Bool { size == 0 }
-    var peek: Element? { front?.element }
+    var isEmpty: Bool { return size == 0 }
+    var peek: Element? { return front?.element }
     
     mutating func append(_ element: Element) {
         let newNode = Node(element: element)

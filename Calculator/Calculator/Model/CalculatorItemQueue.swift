@@ -16,7 +16,7 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     }
     
     mutating func dequeue() -> Item? {
-        queue.removeFirst()
+        return queue.removeFirst()
     }
     
     mutating func removeAll() {
