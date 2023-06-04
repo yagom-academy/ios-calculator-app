@@ -8,6 +8,10 @@
 import XCTest
 @testable import Calculator
 
+extension Int: CalculateItem { }
+extension String: CalculateItem { }
+extension Double: CalculateItem { }
+
 final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
 
@@ -24,7 +28,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_모든_queue가_비어있으면_isAllQueueEmpty는_true를_반환한다() {
         let expectedResult = true
         
-        let result = sut.isAllQueueEmpty
+        let result = sut.isEmpty
         
         XCTAssertEqual(expectedResult, result)
     }

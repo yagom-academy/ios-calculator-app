@@ -9,7 +9,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     private var queue: [Element]
     private var reversedQueue: [Element] = []
     
-    var isAllQueueEmpty: Bool {
+    var isEmpty: Bool {
         return queue.isEmpty && reversedQueue.isEmpty
     }
      
