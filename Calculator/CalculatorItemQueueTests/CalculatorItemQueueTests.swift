@@ -10,11 +10,11 @@ import XCTest
 
 final class CalculatorItemQueueTests: XCTestCase {
 	var sut: MockCalculatorItemQueue<Int>!
-	let dummyLinkedList = DummyLinkedList<Int>()
+	let mockLinkedList = MockLinkedList<Int>()
 	
 	override func setUpWithError() throws {
 		try super.setUpWithError()
-		sut = MockCalculatorItemQueue(dummyList: dummyLinkedList)
+		sut = MockCalculatorItemQueue(dummyList: mockLinkedList)
 	}
 	
 	override func tearDownWithError() throws {
@@ -27,7 +27,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		sut.enqueue(1)
 		sut.enqueue(2)
 		sut.enqueue(3)
-		guard let input = sut.dummyList?.tail?.value else { return }
+		guard let input = sut.mockList?.tail?.value else { return }
 		// when
 		let result = 3
 		
@@ -56,7 +56,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		_ = sut.dequeue()
 		_ = sut.dequeue()
 		_ = sut.dequeue()
-		guard let result = sut.dummyList?.head?.value else { return }
+		guard let result = sut.mockList?.head?.value else { return }
 		
 		XCTAssertEqual(result, 0)
 	}
