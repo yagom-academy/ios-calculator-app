@@ -22,16 +22,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return head == nil
     }
     
-    var count: Int {
-        var current = head
-        var count = 0
-        
-        while current != nil {
-            count += 1
-            current = current?.next
-        }
-        return count
-    }
+    var count: Int = 0
    
     mutating func enqueue(_ element: T) {
         let newNode = CalculatorItemNode(value: element)
@@ -43,6 +34,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
             tail?.next = newNode
             tail = newNode
         }
+        count += 1
     }
     
     mutating func dequeue() -> T? {
@@ -52,12 +44,14 @@ struct CalculatorItemQueue<T: CalculateItem> {
         if head == nil {
             tail = nil
         }
+        count -= 1
         return firstNode.value
     }
     
     mutating func clear() {
         head = nil
         tail = nil
+        count = 0
     }
     
     func printValues() {
