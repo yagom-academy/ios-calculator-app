@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let formula = ExpressionParser.parse(from: "")
-        formula.result()
+        var formula = ExpressionParser.parse(from: "")
+        print(formula.result())
     }
 }
 

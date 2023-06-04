@@ -12,6 +12,7 @@ protocol Queueable {
     
     mutating func enqueue(element: Element)
     mutating func dequeue() -> Element?
+    func isEmpty() -> Bool
 }
 
 struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
@@ -38,6 +39,10 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         
         head = head?.next
         return element
+    }
+    
+    func isEmpty() -> Bool {
+        return head == nil
     }
 }
 

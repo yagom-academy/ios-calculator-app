@@ -4,10 +4,11 @@
 //
 //  Created by Hyungmin Lee on 2023/06/02.
 //
+let input = "3/3+2-1"
 
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula {
-        let input = "-2.03+3*6+2"
+    static func parse(from input2: String) -> Formula {
+        
         var operandComponents = componentsByOperators(from: input).compactMap { return Double($0) }
         var operatorComponents = input.compactMap { Operator(rawValue: $0) }
         
