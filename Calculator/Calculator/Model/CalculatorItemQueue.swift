@@ -56,7 +56,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func clear() {
-        
+        head = nil
+        tail = nil
     }
     
     func printValues() {
