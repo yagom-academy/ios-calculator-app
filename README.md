@@ -30,7 +30,7 @@
 
 | [Serena 🐷](https://github.com/serena0720) |
 | :--------: |
-| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="450"/>|
+| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="350"/>|
 
 <br>
 
@@ -40,8 +40,8 @@
 |날짜|내용|
 |:---:|---|
 | **2023.05.29** |▫️  UnitTest 타겟설정<br>▫️ CalculatorItemQueue 큐타입 정의<br>▫️ CalculateItem 프로토콜 정의|
-| **2023.05.30** |**TDD 테스트 진행** <br>▫️ 1을 queue에 넣으면 queue에 1이 있는지 확인하기 위한 테스트 생성<br>▫️ enqueue함수 정의<br>▫️ string을 queue에 넣으면 queue에 string이 있는지 확인하기 위한 테스트 생성|
-| **2023.05.31** |**TDD 테스트 진행** <br>▫️ enqueueForString 함수 생성<br>▫️ Int와 String 배열을 any 타입의 배열로 통합<br>▫️ Double을 queue에 넣으면 queue에 Double이 있는지 확인하기 위한 테스트 생성<br>▫️ Double Extension 생성<br>▫️ queue배열이 비어있을때 true를 반환하는지 확인하기 위한 테스트 생성<br>▫️ isEmpty 생성<br>▫️ queue배열에서 삭제시키고자하는 값을 peek에 반환하는지 확인하기 위한 테스트 생성<br>▫️ peek 생성<br>▫️  reversedQueue배열이 비어있을 때 queue배열을 뒤집어서 넣는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 생성<br>▫️ queue배열이 뒤집히면 해당 배열 삭제 후 reversedQueue의 마지막요소를 반환하는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 조건 및 리턴타입 변경|
+| **2023.05.30** |**TDD** <br>▫️ 1을 queue에 넣으면 queue에 1이 있는지 확인하기 위한 테스트 생성<br>▫️ enqueue함수 정의<br>▫️ string을 queue에 넣으면 queue에 string이 있는지 확인하기 위한 테스트 생성|
+| **2023.05.31** |**TDD** <br>▫️ enqueueForString 함수 생성<br>▫️ Int와 String 배열을 any 타입의 배열로 통합<br>▫️ Double을 queue에 넣으면 queue에 Double이 있는지 확인하기 위한 테스트 생성<br>▫️ Double Extension 생성<br>▫️ queue배열이 비어있을때 true를 반환하는지 확인하기 위한 테스트 생성<br>▫️ isEmpty 생성<br>▫️ queue배열에서 삭제시키고자하는 값을 peek에 반환하는지 확인하기 위한 테스트 생성<br>▫️ peek 생성<br>▫️  reversedQueue배열이 비어있을 때 queue배열을 뒤집어서 넣는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 생성<br>▫️ queue배열이 뒤집히면 해당 배열 삭제 후 reversedQueue의 마지막요소를 반환하는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 조건 및 리턴타입 변경|
 | **2023.06.01** |▫️ Calculator Class Diagram|
 
 
@@ -50,7 +50,7 @@
 <a id="4."></a>
 ## 4. 📊 다이어그램
 
-(추후 업로드 예정)
+<Img src = "https://postfiles.pstatic.net/MjAyMzA2MDRfMTQw/MDAxNjg1ODUwNzMxMjk1.9UxzykcmrJ2n3tk4u9I5fOVwdHFHjBcOSf1kASOO0UEg.oUQoh2XsBUpgR5YnnY_HUF3ZGuguDoN_hMXCia3bFjAg.PNG.sha0720/Calculator_ClassDiagram.png?type=w773" width="350"/>
 
 <br>
 
