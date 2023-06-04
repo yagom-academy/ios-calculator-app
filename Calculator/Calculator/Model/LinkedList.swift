@@ -5,7 +5,7 @@
 //  Created by Daehoon Lee on 2023/05/31.
 //
 
-struct LinkedList<T> {
+struct LinkedList<T>: Listable {
     var head: Node<T>?
     var tail: Node<T>?
     
