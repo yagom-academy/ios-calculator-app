@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var queue: [Element]
-    private(set) var reversedQueue: [Element] = []
+    private var queue: [Element]
+    private var reversedQueue: [Element] = []
     
     var isAllQueueEmpty: Bool {
         return queue.isEmpty && reversedQueue.isEmpty
