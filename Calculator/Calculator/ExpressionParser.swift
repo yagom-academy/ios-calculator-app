@@ -20,8 +20,6 @@ enum ExpressionParser {
         }
         
         operandComponents.forEach { operandQueue.enqueue(element: $0) }
-        
-        
         let formula = Formula(operands: operandQueue, operators: operatorQueue)
         
         return formula

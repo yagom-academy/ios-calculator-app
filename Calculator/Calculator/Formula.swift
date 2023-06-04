@@ -20,7 +20,7 @@ struct Formula {
         do {
             result = try calculateOperands()
         } catch {
-            print("fdafdsfa")
+            print(error)
         }
         
         return result
