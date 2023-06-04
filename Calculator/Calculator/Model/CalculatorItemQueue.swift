@@ -15,7 +15,13 @@ final class CalculatorItemNode<T: CalculateItem> {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
+    private var head: CalculatorItemNode<T>?
+    private var tail: CalculatorItemNode<T>?
+    
+    var isEmpty: Bool {
+        return false
+    }
    
 }
 
-extension Double: CalculateItem {}
+extension String: CalculateItem {}
