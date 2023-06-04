@@ -13,7 +13,7 @@ enum Operator: Character, CaseIterable {
     case divide
     case multifly
     
-    func calculate() {
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
