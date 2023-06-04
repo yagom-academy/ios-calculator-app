@@ -45,6 +45,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
         }
     }
     
+    mutating func dequeue(){
+
+    }
+    
     func printValues() {
         var currentNode: CalculatorItemNode? = head
         
