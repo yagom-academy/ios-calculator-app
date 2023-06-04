@@ -5,11 +5,11 @@
 //  Created by Daehoon Lee on 2023/05/31.
 //
 
-struct LinkedList<T>: Listable {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+struct LinkedList<Data>: Listable {
+    private var head: Node<Data>?
+    private var tail: Node<Data>?
     
-    mutating func append(_ data: T) {
+    mutating func append(_ data: Data) {
         guard head != nil
         else {
             head = Node(data: data)
@@ -21,7 +21,7 @@ struct LinkedList<T>: Listable {
         tail = tail?.fetchNext()
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Data? {
         guard head != nil else { return nil }
         
         if head === tail { tail = nil }

@@ -7,11 +7,11 @@
 
 @testable import Calculator
 
-struct MockedLinkedList<T>: Listable {
-    var head: Node<T>?
-    var tail: Node<T>?
+struct MockedLinkedList<Data>: Listable {
+    var head: Node<Data>?
+    var tail: Node<Data>?
     
-    mutating func append(_ data: T) {
+    mutating func append(_ data: Data) {
         guard head != nil
         else {
             head = Node(data: data)
@@ -23,7 +23,7 @@ struct MockedLinkedList<T>: Listable {
         tail = tail?.fetchNext()
     }
     
-    mutating func removeFirst() -> T? {
+    mutating func removeFirst() -> Data? {
         guard head != nil else { return nil }
         
         if head === tail { tail = nil }

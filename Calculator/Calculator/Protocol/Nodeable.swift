@@ -6,8 +6,8 @@
 //
 
 protocol Nodeable {
-    associatedtype T
-    func fetchData() -> T
-    mutating func fetchNext() -> Node<T>?
-    mutating func updateNext(_ next: Node<T>)
+    associatedtype Data
+    func fetchData() -> Data
+    mutating func fetchNext() -> Node<Data>?
+    mutating func updateNext(_ next: Node<Data>)
 }

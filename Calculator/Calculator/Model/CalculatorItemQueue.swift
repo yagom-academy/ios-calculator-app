@@ -5,14 +5,14 @@
 //  Created by Daehoon Lee on 2023/05/31.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    var linkedList: LinkedList<T> = LinkedList()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    var linkedList: LinkedList<Element> = LinkedList()
     
-    mutating func enqueue(_ element: T) {
+    mutating func enqueue(_ element: Element) {
         linkedList.append(element)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return linkedList.removeFirst()
     }
 }
