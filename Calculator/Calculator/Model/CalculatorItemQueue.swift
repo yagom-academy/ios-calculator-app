@@ -25,6 +25,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         queue.append(element)
     }
     
+    @discardableResult
     mutating func dequeue() -> (Element)? {
         if reversedQueue.isEmpty {
             reversedQueue = queue.reversed()
