@@ -46,4 +46,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(expectedResult, result)
     }
+    
+    func test_123을_queue에_넣고_dequeue를_두번하면_2를_반환한다() {
+        let expectedResult = 2
+        
+        sut = CalculatorItemQueue(queue: [1, 2, 3])
+        _ = sut.dequeue()!
+        let result = sut.dequeue()!
+        
+        XCTAssertEqual(expectedResult, result)
+    }
 }
