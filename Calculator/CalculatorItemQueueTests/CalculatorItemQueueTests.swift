@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 extension Int: CalculateItem { }
-extension String: CalculateItem { }
 extension Double: CalculateItem { }
 
 final class CalculatorItemQueueTests: XCTestCase {
@@ -55,7 +54,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectedResult = 2
         
         sut = CalculatorItemQueue(queue: [1, 2, 3])
-        _ = sut.dequeue()!
+        sut.dequeue()
         let result = sut.dequeue()!
         
         XCTAssertEqual(expectedResult, result)
@@ -65,8 +64,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectedResult = 3
         
         sut = CalculatorItemQueue(queue: [1, 2, 3])
-        _ = sut.dequeue()!
-        _ = sut.dequeue()!
+        sut.dequeue()
+        sut.dequeue()
         let result = sut.dequeue()!
         
         XCTAssertEqual(expectedResult, result)
@@ -76,7 +75,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let expectedResult: Int? = nil
         
         sut = CalculatorItemQueue(queue: [1])
-        _ = sut.dequeue()!
+        sut.dequeue()
         let result = sut.dequeue()
         
         XCTAssertEqual(expectedResult, result)
