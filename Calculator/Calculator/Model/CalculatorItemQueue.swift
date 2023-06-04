@@ -1,5 +1,5 @@
 //
-//  CalculatorItemLinkedList.swift
+//  CalculatorItemQueue.swift
 //  Calculator
 //
 //  Created by Hemg on 2023/05/31.

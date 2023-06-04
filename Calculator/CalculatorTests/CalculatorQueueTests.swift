@@ -1,6 +1,6 @@
 //
-//  CalculatorTests.swift
-//  CalculatorTests
+//  CalculatorQueueTests.swift
+//  CalculatorQueueTests
 //
 //  Created by Hemg on 2023/05/29.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorTests: XCTestCase {
+final class CalculatorQueueTests: XCTestCase {
     
     var sut: CalculatorItemQueue<Int>!
     
