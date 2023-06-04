@@ -14,10 +14,6 @@ final class Node<T>: Nodeable {
         self.next = next
     }
     
-    deinit {
-        print("Node deinit")
-    }
-    
     func fetchData() -> T {
         return data
     }
