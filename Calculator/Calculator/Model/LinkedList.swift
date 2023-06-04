@@ -9,10 +9,6 @@ struct LinkedList<T>: Listable {
     private var head: Node<T>?
     private var tail: Node<T>?
     
-    init(head: Node<T>?) {
-        self.head = head
-    }
-    
     mutating func append(_ data: T) {
         guard head != nil
         else {
