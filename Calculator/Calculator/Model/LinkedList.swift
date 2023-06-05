@@ -21,8 +21,7 @@ struct LinkedList<DataType>: Listable {
     }
     
     mutating func append(_ data: DataType) {
-        guard head != nil
-        else {
+        guard head != nil else {
             head = Node(data: data)
             tail = head
             return
@@ -33,9 +32,13 @@ struct LinkedList<DataType>: Listable {
     }
     
     mutating func removeFirst() -> DataType? {
-        guard head != nil else { return nil }
+        guard head != nil else {
+            return nil
+        }
         
-        if head === tail { tail = nil }
+        if head === tail {
+            tail = nil
+        }
         
         let data = head?.fetchData()
         head = head?.fetchNext()
