@@ -92,4 +92,15 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(secondData, secondNodeData)
         XCTAssertEqual(thirdData, thirdNodeData)
     }
+    
+    func test_removeFirst_LinkedList가비었을때_data를빼려고하면_nil을반환한다() {
+        // given
+        sut = LinkedList(head: nil, tail: nil)
+        
+        // when
+        let result: Int? = sut.removeFirst()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
