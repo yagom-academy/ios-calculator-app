@@ -20,28 +20,14 @@ final class FormulaTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
     }
-    
-//    func test_first_초기화로_head에_data_1를넣고_first를호출하면_first는_1이다() {
-//        // given
-//        sut = LinkedList(head: Node(data: 1))
-//        let expectation = 1.0
-//
-//        //when
-//        let result = sut.first as! Double
-//
-//        // then
-//        XCTAssertEqual(result, expectation)
-//    }
 
-    func test_result_operands에_값이없으면_result는0이다() {
+    func test_result_operands에_값이없으면_NoValue_error이다() {
         // given
-        let expectation = 0.0
         
-        // when
-        let result = sut.result()
-        
-        // then
-        XCTAssertEqual(result, expectation)
+        // when, then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.NoValue)
+        }
     }
     
     func test_result_operands에_1_enqueue하면_result는1이다() {
@@ -50,7 +36,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 1.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -63,7 +49,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 1.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -77,7 +63,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 3.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -92,7 +78,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 3.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -106,7 +92,7 @@ final class FormulaTests: XCTestCase {
         let expectation = -1.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -120,7 +106,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 2.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -135,7 +121,7 @@ final class FormulaTests: XCTestCase {
         let expectation = -1.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -149,7 +135,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 2.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -164,10 +150,22 @@ final class FormulaTests: XCTestCase {
         let expectation = 6.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_operands에_1_0_enqueue하고_operators에_나누기_enqueue하면_NotDivisibleByZero_error이다() {
+        // given
+        sut.operands.enqueue(1.0)
+        sut.operands.enqueue(0.0)
+        sut.operators.enqueue(.divide)
+        
+        // when, then
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.NotDivisibleByZero)
+        }
     }
     
     func test_result_operands에_4_2_enqueue하고_operators에_나누기_enqueue하면_result는2이다() {
@@ -178,7 +176,7 @@ final class FormulaTests: XCTestCase {
         let expectation = 2.0
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -193,8 +191,69 @@ final class FormulaTests: XCTestCase {
         let expectation = 2.5
         
         // when
-        let result = sut.result()
+        let result = try? sut.result()
         
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_2_더하기_3_곱하기_3_빼기_1은_14이다() {
+        // given
+        sut.operands.enqueue(2.0)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(1.0)
+        
+        let expectation = 14.0
+        
+        // when
+        let result = try? sut.result()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_3_나누기_3_더하기_2_빼기_1은_2이다() {
+        // given
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.divide)
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(2.0)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(1.0)
+        
+        let expectation = 2.0
+        
+        // when
+        let result = try? sut.result()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_result_1_더하기_2_빼기_3_곱하기_2_빼기_3_나누기_6은_음수쩜오이다() {
+        // given
+        sut.operands.enqueue(1.0)
+        sut.operators.enqueue(.add)
+        sut.operands.enqueue(2.0)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.multiply)
+        sut.operands.enqueue(2.0)
+        sut.operators.enqueue(.subtract)
+        sut.operands.enqueue(3.0)
+        sut.operators.enqueue(.divide)
+        sut.operands.enqueue(6.0)
+
+        let expectation = -0.5
+
+        // when
+        let result = try? sut.result()
+
         // then
         XCTAssertEqual(result, expectation)
     }
