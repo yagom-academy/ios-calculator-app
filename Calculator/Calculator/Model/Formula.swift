@@ -8,23 +8,20 @@
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
-    
-    mutating func result() -> Double {
-        var result: Double = 0.0
+
+    mutating func result() throws -> Double {
+        guard var resultValue = operands.dequeue() else {
+            throw CalculatorError.NoValue
+        }
         
-        if operands.count >= 2 && operators.count >= 1 {
-            if let leftValue = operands.dequeue(),
-               let rightValue = operands.dequeue(),
-               let currentOperator = operators.dequeue() {
-                result = currentOperator.calculate(lhs: leftValue, rhs: rightValue)
-                operands.enqueue(result)
+        while operators.isEmpty == false {
+            guard let rightValue = operands.dequeue(),
+                  let currentOperator = operators.dequeue() else {
+                throw CalculatorError.NoValue
             }
-        } else {
-            if let currentOperand = operands.first {
-                result = currentOperand
-            }
+            resultValue = try currentOperator.calculate(lhs: resultValue, rhs: rightValue)
         }
     
-        return result
+        return resultValue
     }
 }
