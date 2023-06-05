@@ -8,8 +8,8 @@
 
 
 struct Formula {
-    let operands: CalculatorItemQueue<Double>
-    let operators: CalculatorItemQueue<Operator>
+    var operands = CalculatorItemQueue<Double>()
+    var operators = CalculatorItemQueue<Operator>()
     
     func result() -> Double {
         

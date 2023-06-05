@@ -9,27 +9,34 @@ import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        
         return split(separator: target).map { String($0) }
     }
 }
 
 enum Expressionparser {
-//    static func parse(from input: String) -> Formula {
+    static func parse(from input: String) -> Formula {
+        let components: [String] = componentsByOperators(from: input)
+//        let operands: [Double] = components.compactMap { Double($0) }
+//        let operators: [Operator] = components.compactMap { Operator(rawValue: Character($0)) }
 //
-        //1. operand 반환 ( split 사용)
-        //2. operator반환 ( component 사용)
-//    }
+        var formula: Formula = Formula()
+        for i in 1...components.count {
+            if let component = Double(components[i]) {
+                formula.operands.enqueue(Double(components[i]) ?? <#default value#>)
+            } else {
+                formula.operators.enqueue(components[Operator(rawValue: i)])
+            }
+        }
+        return
+    }
     
     private static func componentsByOperators(from input: String) -> [String] {
         var result: [String] = [input]
-
-        //1. 얘는 숫자와 계산식을 각각 나눠서 배열에 저장해서 리턴해야됨
         
         Operator.allCases.forEach { operatorCase in
             result = result.flatMap { $0.components(separatedBy: String(operatorCase.rawValue)) }
         }
-        return result
         
+        return result
     }
 }
