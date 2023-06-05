@@ -8,8 +8,8 @@
 import Foundation
 
 struct Formula {
-    var operators: CalculatorItemQueue<Operator> //연산자
-    var operands: CalculatorItemQueue<Double> //피연산자
+    var operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double>
     
     init(operators: CalculatorItemQueue<Operator>, operands: CalculatorItemQueue<Double>) {
         self.operators = operators
@@ -17,8 +17,6 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        // operators + operands
-        
         var calculateByOperators = operators.dequeue()
         var intermediateResult = operands.dequeue()
         

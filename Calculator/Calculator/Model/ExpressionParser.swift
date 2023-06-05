@@ -8,7 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula { // oper
+    static func parse(from input: String) -> Formula {
         let elements = componentsByOperators(from: input)
         var operands = CalculatorItemQueue<Double>()
         
@@ -26,7 +26,7 @@ enum ExpressionParser {
         }
         
         return Formula(operators: operators, operands: operands)
-    } //여기서 formula 만들어서 반환
+    }
     
     private static func componentsByOperators(from input: String) -> [String] {
 //        var options = Operator.allCases
@@ -34,5 +34,5 @@ enum ExpressionParser {
 //            .filter { input.contains($0) }
         
         return input.split(with: " ").filter { Double($0) != nil }
-    }//private가 붙어서 이 enum 안에서만 사용할 수 있음. 즉 parse에서 호출해 사용.
+    }
 }
