@@ -52,7 +52,7 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_dequeue_실행시_Node의_수가_하나_줄어든다() {
+    func test_dequeue_실행시_Node의_수가_하나_줄어들고_value를_반환한다() {
         //given
         let expectation1 = 2
         let expectation2 = "1"
