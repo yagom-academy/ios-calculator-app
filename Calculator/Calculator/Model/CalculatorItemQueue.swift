@@ -14,7 +14,7 @@ final class CalculatorItemNode<T> {
     }
 }
 
-final class CalculatorItemQueue<T>: CalculateItem {
+final class CalculatorItemQueue<T: CalculateItem> {
     private var headItem: CalculatorItemNode<T>?
     private var tailItem: CalculatorItemNode<T>?
     private var countItem: Int = 0
