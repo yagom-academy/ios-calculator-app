@@ -8,5 +8,6 @@
 import Foundation
 
 enum CalculatorError: Error {
-    case NotDivisibleByZero
+    case NotDivisibleByZero // 결과값 NaN
+    case NoValue
 }
