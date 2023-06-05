@@ -33,7 +33,6 @@ struct LinkedList<T> {
         }
     }
     
-    @discardableResult
     mutating func dequeue() -> T? {
         guard let popNode = firstNode else {
             return nil
