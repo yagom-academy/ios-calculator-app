@@ -8,10 +8,10 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<String>!
 
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<String>()
     }
 
     override func tearDownWithError() throws {

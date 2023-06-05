@@ -4,19 +4,19 @@
 //
 //  Created by Yetti on 2023/05/30.
 
-struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
-    private var enqueueStack: [String] = []
-    private var dequeueStack: [String] = []
+struct CalculatorItemQueue<T: CalculateItem>: DoubleStackQueue {
+    private var enqueueStack: [T] = []
+    private var dequeueStack: [T] = []
     
     var isEmpty: Bool {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     
-    mutating func enqueue(_ element: String) {
+    mutating func enqueue(_ element: T) {
         enqueueStack.append(element)
     }
     
-    mutating func dequeue() -> String? {
+    mutating func dequeue() -> T? {
         guard isEmpty == false else { return nil }
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
@@ -25,7 +25,7 @@ struct CalculatorItemQueue: DoubleStackQueue, CalculateItem {
         return dequeueStack.popLast()
     }
     
-    func peek() -> String? {
+    func peek() -> T? {
         guard isEmpty == false else { return nil }
         if dequeueStack.count > 0 {
             return dequeueStack.last

@@ -6,13 +6,17 @@
 //
 
 protocol DoubleStackQueue {
+    associatedtype T
     var isEmpty: Bool { get }
     
-    mutating func enqueue(_ element: String)
-    mutating func dequeue() -> String?
+    mutating func enqueue(_ element: T)
+    mutating func dequeue() -> T?
     mutating func clear()
-    func peek() -> String?
+    func peek() -> T?
 }
 
 protocol CalculateItem { }
 
+extension Int: CalculateItem {}
+extension Double: CalculateItem {}
+extension String: CalculateItem {}
