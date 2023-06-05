@@ -6,7 +6,7 @@
 //
 
 protocol QueueType {
-    associatedtype Item
+    associatedtype Item where Item: CalculateItem
     
     mutating func enqueue(_ value: Item)
     mutating func dequeue() throws -> Item

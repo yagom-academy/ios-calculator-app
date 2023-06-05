@@ -16,16 +16,12 @@ enum ExpressionParser {
         operandComponents.forEach { operandsQueue.enqueue($0) }
         operatorComponents.forEach { operatorsQueue.enqueue($0) }
 
-        let result = Formula(operands:operandsQueue, operators: operatorsQueue)
-
-        return result
+        return Formula(operands:operandsQueue, operators: operatorsQueue)
     }
         
     static private func componentsByOperators(from input: String) -> [String] {
-        let result = Operator.allCases.reduce([input]) { resultArray, operatorItem in
+        return Operator.allCases.reduce([input]) { resultArray, operatorItem in
             resultArray.map { $0.split(with:operatorItem.rawValue) }.flatMap { $0 }
         }
-        
-        return result
     }
 }
