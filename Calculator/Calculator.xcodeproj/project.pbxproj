@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A62B8902A2E3381001956AB /* CalculatorItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */; };
+		0A62B8912A2E3381001956AB /* CalculatorItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */; };
+		0A62B8932A2E35D3001956AB /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B8922A2E35D3001956AB /* String +.swift */; };
+		0A62B8942A2E35D3001956AB /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B8922A2E35D3001956AB /* String +.swift */; };
 		0AABAADF2A2A535E006B7EE4 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABAADE2A2A535E006B7EE4 /* CalculatorTests.swift */; };
 		0AABAAE62A2A537F006B7EE4 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABAAE52A2A537F006B7EE4 /* CalculatorItemQueue.swift */; };
 		0AABAAE72A2A537F006B7EE4 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AABAAE52A2A537F006B7EE4 /* CalculatorItemQueue.swift */; };
@@ -32,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		0A62B88E2A2C93B0001956AB /* CalculatorTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CalculatorTestPlan.xctestplan; sourceTree = "<group>"; };
+		0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemNode.swift; sourceTree = "<group>"; };
+		0A62B8922A2E35D3001956AB /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
 		0AABAADC2A2A535E006B7EE4 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AABAADE2A2A535E006B7EE4 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		0AABAAE52A2A537F006B7EE4 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorItemQueue.swift; path = Calculator/Model/CalculatorItemQueue.swift; sourceTree = SOURCE_ROOT; };
@@ -64,6 +70,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A62B8952A2E35E8001956AB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0A62B8922A2E35D3001956AB /* String +.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0AABAADD2A2A535E006B7EE4 /* CalculatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -76,8 +90,10 @@
 		0AED33192A2C6AE8002E8C99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A62B8952A2E35E8001956AB /* Extension */,
 				0AABAAE82A2A541B006B7EE4 /* CalculateItem.swift */,
 				0AABAAE52A2A537F006B7EE4 /* CalculatorItemQueue.swift */,
+				0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,7 +248,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0AABAAE72A2A537F006B7EE4 /* CalculatorItemQueue.swift in Sources */,
+				0A62B8942A2E35D3001956AB /* String +.swift in Sources */,
 				0AABAAEA2A2A541B006B7EE4 /* CalculateItem.swift in Sources */,
+				0A62B8912A2E3381001956AB /* CalculatorItemNode.swift in Sources */,
 				0AABAADF2A2A535E006B7EE4 /* CalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,6 +261,8 @@
 			files = (
 				0AABAAE92A2A541B006B7EE4 /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				0A62B8902A2E3381001956AB /* CalculatorItemNode.swift in Sources */,
+				0A62B8932A2E35D3001956AB /* String +.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				0AABAAE62A2A537F006B7EE4 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,

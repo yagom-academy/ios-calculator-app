@@ -5,15 +5,6 @@
 //  Created by yyss99 on 2023/06/03.
 //
 
-final class CalculatorItemNode<T: CalculateItem> {
-    var value: T
-    var next: CalculatorItemNode?
-    
-    init(value: T) {
-        self.value = value
-    }
-}
-
 struct CalculatorItemQueue<T: CalculateItem> {
     private var head: CalculatorItemNode<T>?
     private var tail: CalculatorItemNode<T>?
@@ -54,5 +45,3 @@ struct CalculatorItemQueue<T: CalculateItem> {
         count = 0
     }
 }
-
-extension String: CalculateItem {}
