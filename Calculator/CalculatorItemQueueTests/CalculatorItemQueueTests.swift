@@ -45,3 +45,6 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(poppedData, expectedData)
     }
 }
+
+//MARK: - Extension
+extension Int: CalculateItem {}
