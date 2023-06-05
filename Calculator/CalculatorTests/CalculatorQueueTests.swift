@@ -22,7 +22,7 @@ final class CalculatorQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_dnqueue숫자확인() {
+    func test_enqueue_추가후dequeue_값이같은지확인() {
         //given
         let input = 11
         
@@ -30,11 +30,10 @@ final class CalculatorQueueTests: XCTestCase {
         sut.enqueue(item: input)
         
         //then
-        let result = sut.dequeueItem()
-        XCTAssertEqual(result, input)
+        XCTAssertEqual(sut.dequeueItem(), input)
     }
     
-    func test_enqueuelast숫자확인() {
+    func test_enqueue마지막값확인() {
         //given
         let input = 11
         
@@ -45,7 +44,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(input, sut.lastItem)
     }
     
-    func test_queueCount_확인() {
+    func test_enqueue값추가enqueue의갯수확인() {
         //given
         let input = 1
         
@@ -55,19 +54,8 @@ final class CalculatorQueueTests: XCTestCase {
         //then
         XCTAssertEqual(sut.count, 1)
     }
-    
-    func test_queueCount초기값() {
-        //given
-        let input = 1
         
-        //when
-        sut.enqueue(item: input)
-        
-        //then
-        XCTAssertEqual(sut.count, 1)
-    }
-    
-    func test_queueCount_0개() {
+    func test_enqueue이후_dequeue하여_비어있는지확인() {
         //given
         let input = 1
         
@@ -79,7 +67,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 0)
     }
     
-    func test_queueCount_2개확인() {
+    func test_enqueue2번진행시갯수2개인지확인() {
         //given
         let input = 1
         let secondInput = 22
@@ -92,7 +80,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(2, sut.count)
     }
     
-    func test_enqueueCount_3개확인() {
+    func test_enqueue3번진행시갯수3개인지확인() {
         //given
         let input = 1
         let secondInput = 2
@@ -107,7 +95,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(3, sut.count)
     }
     
-    func test_dequeue지워진숫자값확인() {
+    func test_enqueue값과dequeue에서지워진숫자가같은지확인() {
         //given
         let firstInput = 11
         let secondInput = 21

@@ -10,5 +10,3 @@ extension Double: CalculateItem {}
 extension Int: CalculateItem {}
 
 extension String: CalculateItem {}
-
-extension Character: CalculateItem {}
