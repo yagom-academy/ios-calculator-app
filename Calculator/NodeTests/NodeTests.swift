@@ -9,25 +9,27 @@ import XCTest
 @testable import Calculator
 
 final class NodeTests: XCTestCase {
-    var sut: Node<Int>!
+    var sutForInt: Node<Int>!
+    var sutForString: Node<String>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = Node<Int>(data: 0, next: nil)
+        sutForInt = Node(data: 0, next: nil)
+        sutForString = Node(data: "")
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
+        sutForInt = nil
     }
     
     func test_init_0으로초기화한노드의_fetchData를호출하면_0을반환한다() {
         // given
         let expectedData: Int = 0
-        sut = Node(data: expectedData)
+        sutForInt = Node(data: expectedData)
         
         // when
-        let result: Int = sut.fetchData()
+        let result: Int = sutForInt.fetchData()
         
         // then
         XCTAssertEqual(result, expectedData)
@@ -38,10 +40,10 @@ final class NodeTests: XCTestCase {
         let expectedData: String = "+"
         
         // when
-        let testNode: Node = Node<String>(data: expectedData, next: nil)
+        sutForString = Node(data: expectedData, next: nil)
         
         // then
-        XCTAssertEqual(testNode.fetchData(), expectedData)
+        XCTAssertEqual(sutForString.fetchData(), expectedData)
     }
     
     func test_init_1로초기화한nextNode를_다음Node로초기화한다() {
@@ -65,13 +67,5 @@ final class NodeTests: XCTestCase {
         
         // then
         XCTAssertTrue(testNode.fetchNext() == nil)
-    }
-    
-    func test_deinit_이전Node대신nil을입력시_Node가해제되는지확인한다() {
-        // when
-        sut = nil
-        
-        // then
-        XCTAssertNil(sut)
     }
 }

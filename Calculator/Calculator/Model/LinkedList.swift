@@ -8,6 +8,17 @@
 struct LinkedList<DataType>: Listable {
     private var head: Node<DataType>?
     private var tail: Node<DataType>?
+    var first: DataType? {
+        return head?.fetchData()
+    }
+    var last: DataType? {
+        return tail?.fetchData()
+    }
+    
+    init(head: Node<DataType>? = nil, tail: Node<DataType>? = nil) {
+        self.head = head
+        self.tail = tail
+    }
     
     mutating func append(_ data: DataType) {
         guard head != nil
