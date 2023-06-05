@@ -6,11 +6,17 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<String>
+    var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    func result() -> Double {
-        //string을 받아서 double로 계산을 돌리기
-        return 0.0
+    mutating func result() -> Double {
+        var lhs = operands.dequeue()!
+        var rhs = operands.dequeue()!
+        var result: Double = 0.0
+        
+        if operators.peek == String(Operator.add.rawValue) {
+            result = Operator.add.calculate(lhs: lhs, rhs: rhs)
+        }
+        return result
     }
 }
