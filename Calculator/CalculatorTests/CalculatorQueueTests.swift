@@ -22,18 +22,18 @@ final class CalculatorQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue_추가후dequeue_값이같은지확인() {
+    func test_enqueue_55_enqueue시_count가_1인지_확인() {
         //given
-        let input = 11
+        let expectationCount = 1
         
         //when
-        sut.enqueue(item: input)
+        sut.enqueue(item: 55)
         
         //then
-        XCTAssertEqual(sut.dequeueItem(), input)
+        XCTAssertEqual(sut.count, expectationCount)
     }
     
-    func test_enqueue마지막값확인() {
+    func test_enqueue_11_enqueue의_마지막값이11인지_확인() {
         //given
         let input = 11
         
@@ -44,7 +44,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(input, sut.lastItem)
     }
     
-    func test_enqueue값추가enqueue의갯수확인() {
+    func test_enqueue_1_입력후count갯수가_1인지확인() {
         //given
         let input = 1
         
@@ -55,7 +55,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 1)
     }
         
-    func test_enqueue이후_dequeue하여_비어있는지확인() {
+    func test_enqueue이후_dequeue하여_값이비어있는지확인() {
         //given
         let input = 1
         
@@ -67,7 +67,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 0)
     }
     
-    func test_enqueue2번진행시갯수2개인지확인() {
+    func test_enqueue_2번_이후_2개의값_입력되었는지확인() {
         //given
         let input = 1
         let secondInput = 22
@@ -80,7 +80,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(2, sut.count)
     }
     
-    func test_enqueue3번진행시갯수3개인지확인() {
+    func test_enqueue_3번_이후_3개의값_입력되었는지확인() {
         //given
         let input = 1
         let secondInput = 2
@@ -95,7 +95,7 @@ final class CalculatorQueueTests: XCTestCase {
         XCTAssertEqual(3, sut.count)
     }
     
-    func test_enqueue값과dequeue에서지워진숫자가같은지확인() {
+    func test_enqueue값_dequeue에서지워지는_숫자가같은지확인() {
         //given
         let firstInput = 11
         let secondInput = 21
