@@ -32,10 +32,10 @@ final class LinkedListTests: XCTestCase {
     func test_first_초기화로_head에_data_1를넣고_first를호출하면_first는_1이다() {
         // given
         sut = LinkedList(head: Node(data: 1))
-        let expectation = 1
+        let expectation = 1.0
         
         //when
-        let result = sut.first as! Int
+        let result = sut.first as! Double
         
         // then
         XCTAssertEqual(result, expectation)
@@ -52,10 +52,10 @@ final class LinkedListTests: XCTestCase {
     func test_last_초기화로_head에_data_1를넣고_last를호출하면_last는_1이다() {
         // given
         sut = LinkedList(head: Node(data: 1))
-        let expectation = 1
+        let expectation = 1.0
         
         //when
-        let result = sut.last as! Int
+        let result = sut.last as! Double
         
         // then
         XCTAssertEqual(result, expectation)
@@ -66,8 +66,8 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         
         //when
-        let firstResult = sut.first as! Int
-        let lastResult = sut.last as! Int
+        let firstResult = sut.first as! Double
+        let lastResult = sut.last as! Double
         
         // then
         XCTAssertEqual(firstResult, lastResult)
@@ -78,10 +78,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         sut.append(2)
         sut.append(3)
-        let expectation = 1
+        let expectation = 1.0
         
         //when
-        let result = sut.first as! Int
+        let result = sut.first as! Double
         
         // then
         XCTAssertEqual(result, expectation)
@@ -92,10 +92,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(1)
         sut.append(2)
         sut.append(3)
-        let expectation = 3
+        let expectation = 3.0
         
         //when
-        let result = sut.last as! Int
+        let result = sut.last as! Double
         
         // then
         XCTAssertEqual(result, expectation)
@@ -119,10 +119,10 @@ final class LinkedListTests: XCTestCase {
         sut.append(2)
         sut.append(3)
         let _ = sut.removeFirst()
-        let expectation = 2
+        let expectation = 2.0
         
         // when
-        let result = sut.first as! Int
+        let result = sut.first as! Double
         
         // then
         XCTAssertEqual(result, expectation)
