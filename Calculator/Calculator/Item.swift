@@ -13,12 +13,3 @@ final class Item<Element: CalculateItem> {
         self.element = element
     }
 }
-
-final class Item2<Element> {
-    var next: CalculateItem?
-    var element: Element
-    
-    init(_ element: Element) {
-        self.element = element
-    }
-}

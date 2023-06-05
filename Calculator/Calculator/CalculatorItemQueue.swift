@@ -10,6 +10,7 @@ protocol CalculateItem { }
 protocol Queueable {
     associatedtype Element
     
+    init()
     mutating func enqueue(element: Element)
     mutating func dequeue() -> Element?
     func isEmpty() -> Bool

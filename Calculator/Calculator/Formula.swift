@@ -10,9 +10,9 @@ enum CaculateError: Swift.Error {
     case notANumber
 }
 
-struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
+    var operands: OperandQueue
+    var operators: OperatorQueue
     
     mutating func result() -> Double {
         var result = 0.0

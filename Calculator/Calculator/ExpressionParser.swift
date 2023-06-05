@@ -5,12 +5,12 @@
 //  Created by Hyungmin Lee on 2023/06/02.
 //
 
-enum ExpressionParser {
-    static func parse(from input: String) -> Formula {
+enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
+    static func parse (from input: String) -> Formula<OperandQueue, OperatorQueue> {
         let operatorComponents = input.compactMap { Operator(rawValue: $0) }
         let operandComponents = componentsByOperators(from: input).compactMap { return Double($0) }
-        var operatorQueue = CalculatorItemQueue<Operator>()
-        var operandQueue = CalculatorItemQueue<Double>()
+        var operatorQueue = OperatorQueue()
+        var operandQueue = OperandQueue()
         
         operatorComponents.forEach{ operatorQueue.enqueue(element: $0) }
         operandComponents.forEach { operandQueue.enqueue(element: $0) }
