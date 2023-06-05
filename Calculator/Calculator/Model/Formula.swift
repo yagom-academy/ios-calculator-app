@@ -12,6 +12,10 @@ protocol FormulaProtocol {
 	func result() -> Double
 }
 
-struct Formula {
-	
+struct Formula<T: CalculateItem>: FormulaProtocol {
+	var operands: CalculatorItemQueue<T>
+	var operators: CalculatorItemQueue<T>
+	func result() -> Double {
+		return 0.0
+	}
 }
