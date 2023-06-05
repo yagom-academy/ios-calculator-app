@@ -11,7 +11,7 @@
 		63C0FA972A264C5000CA3B0C /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0FA962A264C5000CA3B0C /* CalculatorItemQueue.swift */; };
 		63C0FA9B2A264D0200CA3B0C /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C0FA9A2A264D0200CA3B0C /* CalculateItem.swift */; };
 		63ECBB282A2CD6E20058F500 /* extension+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63ECBB272A2CD6E20058F500 /* extension+Type.swift */; };
-		63ECBB2C2A2D71110058F500 /* UML Diagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63ECBB2B2A2D71110058F500 /* UML Diagram.jpg */; };
+		63ECBB2E2A2D72860058F500 /* UML Diagram.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63ECBB2D2A2D72860058F500 /* UML Diagram.jpg */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -37,7 +37,7 @@
 		63C0FA962A264C5000CA3B0C /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		63C0FA9A2A264D0200CA3B0C /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		63ECBB272A2CD6E20058F500 /* extension+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension+Type.swift"; sourceTree = "<group>"; };
-		63ECBB2B2A2D71110058F500 /* UML Diagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UML Diagram.jpg"; sourceTree = "<group>"; };
+		63ECBB2D2A2D72860058F500 /* UML Diagram.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "UML Diagram.jpg"; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 			children = (
 				63C0FA942A24F98F00CA3B0C /* TestPlan.xctestplan */,
 				63C0FA8D2A24F2FA00CA3B0C /* CalculatorQueueTests.swift */,
-				63ECBB2B2A2D71110058F500 /* UML Diagram.jpg */,
+				63ECBB2D2A2D72860058F500 /* UML Diagram.jpg */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -215,7 +215,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63ECBB2C2A2D71110058F500 /* UML Diagram.jpg in Resources */,
+				63ECBB2E2A2D72860058F500 /* UML Diagram.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
