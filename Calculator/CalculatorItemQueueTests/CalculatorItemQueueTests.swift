@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 extension Int: CalculateItem { }
-extension Double: CalculateItem { }
 
 final class CalculatorItemQueueTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
