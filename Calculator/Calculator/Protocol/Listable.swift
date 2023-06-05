@@ -6,7 +6,7 @@
 //
 
 protocol Listable {
-    associatedtype Data
-    mutating func append(_ data: Data)
-    mutating func removeFirst() -> Data?
+    associatedtype DataType
+    mutating func append(_ data: DataType)
+    mutating func removeFirst() -> DataType?
 }

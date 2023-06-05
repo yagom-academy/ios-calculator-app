@@ -5,24 +5,24 @@
 //  Created by Daehoon Lee on 2023/05/30.
 //
 
-final class Node<Data>: Nodeable {
-    private let data: Data
-    private var next: Node<Data>?
+final class Node<DataType>: Nodeable {
+    private let data: DataType
+    private var next: Node<DataType>?
     
-    init(data: Data, next: Node? = nil) {
+    init(data: DataType, next: Node? = nil) {
         self.data = data
         self.next = next
     }
     
-    func fetchData() -> Data {
+    func fetchData() -> DataType {
         return data
     }
     
-    func fetchNext() -> Node<Data>? {
+    func fetchNext() -> Node<DataType>? {
         return next
     }
     
-    func updateNext(_ next: Node<Data>) {
+    func updateNext(_ next: Node<DataType>) {
         self.next = next
     }
 }
