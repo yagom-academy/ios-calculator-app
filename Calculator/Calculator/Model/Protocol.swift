@@ -20,3 +20,6 @@ protocol CalculateItem { }
 extension Int: CalculateItem {}
 extension Double: CalculateItem {}
 extension String: CalculateItem {}
+extension String {
+    func split(with target: Character) -> [String] { }
+}

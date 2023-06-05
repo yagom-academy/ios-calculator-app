@@ -40,3 +40,29 @@ struct CalculatorItemQueue<T: CalculateItem>: DoubleStackQueue {
         dequeueStack.removeAll()
     }
 }
+
+enum Operator: Character, CaseIterable {
+    case add
+    case subtract
+    case divide
+    case multiply
+    
+    func calculate(lhs: Double, rhs: Double) -> Double { }
+    private func add(lhs: Double, rhs: Double) -> Double { }
+    private func subtract(lhs: Double, rhs: Double) -> Double { }
+    private func divide(lhs: Double, rhs: Double) -> Double { }
+    private func multiply(lhs: Double, rhs: Double) -> Double { }
+}
+
+
+enum ExpressionParser {
+    static func parse(from input: String) -> Formula {}
+    private static func componentsByOpeators(from input: String) -> [String] { }
+}
+
+struct Formula {
+    let operands: CalculatorItemQueue<Int>
+    let operators: CalculatorItemQueue<String>
+    
+    func result() -> Double { }
+}
