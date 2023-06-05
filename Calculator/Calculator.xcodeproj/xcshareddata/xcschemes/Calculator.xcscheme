@@ -56,6 +56,37 @@
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3DE0FC122A2DE106007854E6"
+               BuildableName = "MockCalculatorItemQueueTests.xctest"
+               BlueprintName = "MockCalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3DE0FC122A2DE106007854E6"
+               BuildableName = "MockCalculatorItemQueueTests.xctest"
+               BlueprintName = "MockCalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "3DE0FC122A2DE106007854E6"
+               BuildableName = "MockCalculatorItemQueueTests.xctest"
+               BlueprintName = "MockCalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

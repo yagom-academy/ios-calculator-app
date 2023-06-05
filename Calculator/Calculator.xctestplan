@@ -17,19 +17,10 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "3DE0C8342A25D23E0017ECB5",
-        "name" : "CalculatorItemQueueTests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "3D7225C32A27069B005E5C8A",
-        "name" : "LinkedListTests"
+        "identifier" : "3DE0FC122A2DE106007854E6",
+        "name" : "MockCalculatorItemQueueTests"
       }
     }
   ],
