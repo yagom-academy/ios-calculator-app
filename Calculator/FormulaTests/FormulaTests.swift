@@ -24,8 +24,8 @@ final class FormulaTests: XCTestCase {
         let input2: Double = 3
         sut.operands.enqueue(input)
         sut.operands.enqueue(input2)
-        let inputOper: Operator = .add
-        sut.operators.enqueue(inputOper)
+        let inputOperator: Operator = .add
+        sut.operators.enqueue(inputOperator)
         let expectation: Double = 5
         
         let result = sut.result()
@@ -54,8 +54,8 @@ final class FormulaTests: XCTestCase {
     func test_두번째_피연산자가_없을때_result가_첫번째_피연산자를_반환합니다() {
         let input: Double = 5
         sut.operands.enqueue(input)
-        let inputOper: Operator = .add
-        sut.operators.enqueue(inputOper)
+        let inputOperator: Operator = .add
+        sut.operators.enqueue(inputOperator)
         let expectation: Double = 5
         
         let result = sut.result()
@@ -68,8 +68,8 @@ final class FormulaTests: XCTestCase {
         let input2: Double = 0
         sut.operands.enqueue(input)
         sut.operands.enqueue(input2)
-        let inputOper: Operator = .divide
-        sut.operators.enqueue(inputOper)
+        let inputOperator: Operator = .divide
+        sut.operators.enqueue(inputOperator)
                 
         let result = sut.result().isNaN
         

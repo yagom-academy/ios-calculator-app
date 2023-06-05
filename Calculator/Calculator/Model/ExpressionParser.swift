@@ -17,8 +17,8 @@ enum ExpressionParser {
         
         components
             .filter { $0.count == 1 }
-            .compactMap { Operator(rawValue: Character($0))}
-            .forEach { operators.enqueue($0)}
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { operators.enqueue($0) }
         
         return Formula(operands: operands, operators: operators)
     }

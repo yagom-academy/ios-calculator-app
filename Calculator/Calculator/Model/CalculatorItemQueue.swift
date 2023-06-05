@@ -5,9 +5,9 @@
 //  Created by Erick on 2023/05/29.
 //
 
-struct CalculatorItemQueue<element: CalculateItem> {
-    private var inStack: [element] = []
-    private var outStack: [element] = []
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var inStack: [Element] = []
+    private var outStack: [Element] = []
     
     var count: Int {
         return inStack.count + outStack.count
@@ -17,12 +17,12 @@ struct CalculatorItemQueue<element: CalculateItem> {
         return inStack.isEmpty && outStack.isEmpty
     }
     
-    mutating func enqueue(_ calculateItem: element) {
+    mutating func enqueue(_ calculateItem: Element) {
         inStack.append(calculateItem)
     }
     
     @discardableResult
-    mutating func dequeue() -> element? {
+    mutating func dequeue() -> Element? {
         if outStack.isEmpty {
             outStack = inStack.reversed()
             inStack.removeAll()
