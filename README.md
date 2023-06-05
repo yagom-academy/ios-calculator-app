@@ -21,7 +21,7 @@
 
 <details>
 <summary>펼쳐보기</summary>
-<a href="https://ibb.co/xLTrSBR"><img src="https://i.ibb.co/sRYXvNM/Calculator.png" alt="Calculator" border="0"></a><br /><a target='_blank' href='https://statewideinventory.org/ford-0-60-times'></a><br />
+<a href="https://ibb.co/FbctNKb"><img src="https://i.ibb.co/ccRdM1c/Calculator-UML.png" alt="Calculator-UML" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a><br />
     
 </details>
 
