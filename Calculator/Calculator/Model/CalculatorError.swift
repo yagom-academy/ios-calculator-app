@@ -7,7 +7,16 @@
 
 import Foundation
 
-enum CalculatorError: Error {
-    case NotDivisibleByZero // 결과값 NaN
-    case NoValue
+enum CalculatorError: LocalizedError {
+    case NotANumber
+    case OperationFailed
+    
+    var errorDescription: String? {
+        switch self {
+        case .NotANumber:
+            return "NaN"
+        case .OperationFailed:
+            return "Operation Failed"
+        }
+    }
 }
