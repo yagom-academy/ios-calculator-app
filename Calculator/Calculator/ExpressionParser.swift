@@ -16,21 +16,18 @@ extension String {
 enum Expressionparser {
     static func parse(from input: String) -> Formula {
         let components: [String] = componentsByOperators(from: input)
-//        let operands: [Double] = components.compactMap { Double($0) }
-//        let operators: [Operator] = components.compactMap { Operator(rawValue: Character($0)) }
-        //0.components만큼 반복
-        //1. Double로 변환될 때 operands 할당 후 enqueue
-        //2. Character로 변환될 때 (Operator타입일 때) operators 할당 후 enqueue
         var formula: Formula = Formula()
         
         components.forEach { component in
             if let operandElement = Double(component) {
                 formula.operands.enqueue(operandElement)
             }
+            
             if let operatorElement = Operator(rawValue: Character(component)) {
                 formula.operators.enqueue(operatorElement)
             }
         }
+        
         return formula
     }
     
