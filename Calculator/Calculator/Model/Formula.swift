@@ -13,7 +13,7 @@ struct Formula {
         guard !operands.isEmpty else {
             return Double.nan
         }
-        guard let firstOperand = operands.dequeue() else {
+        guard let firstOperand = operands.dequeue(), !firstOperand.isNaN else {
             return Double.nan
         }
         
@@ -21,7 +21,7 @@ struct Formula {
         
         while let operatorCase = operators.dequeue() {
             guard let nextOperand = operands.dequeue() else {
-                return Double.nan
+                return result
             }
             
             result = operatorCase.calculate(lhs: result, rhs: nextOperand)
