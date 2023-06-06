@@ -114,4 +114,19 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	func tests_Mock_calculate의_subtract호출시_두값이_빼기_연산이되어_그결과값을_반환한다() {
+		//given
+		sut.enqueue(3.0)
+		sut.enqueue(1.0)
+		guard let lhsInput = sut.dequeue() else { return }
+		guard let rhsInput = sut.dequeue() else { return }
+		let input = MockOperator.subtract.calculate(lhs: lhsInput, rhs: rhsInput)
+		
+		// when
+		let result = 2.0
+		
+		// then
+		XCTAssertEqual(input, result)
+	}
 }
