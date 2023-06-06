@@ -131,4 +131,23 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertTrue(result.isNaN)
     }
+    
+    func test_result_3입력을_사칙연산으로계산하면_3을반환한다() {
+        // given
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(3)
+        sut.operators.enqueue(.add)
+        sut.operators.enqueue(.subtract)
+        sut.operators.enqueue(.divide)
+        sut.operators.enqueue(.multiply)
+        
+        // when
+        let result: Double = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 3)
+    }
 }
