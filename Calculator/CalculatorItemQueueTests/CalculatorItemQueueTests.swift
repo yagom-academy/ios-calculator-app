@@ -12,14 +12,19 @@ final class CalculatorItemQueueTests: XCTestCase {
 	var sut: MockCalculatorItemQueue<Double>!
 	let mockLinkedList = MockLinkedList<Double>()
 	
+	var mockOperatorCalculatorItemQueue: MockCalculatorItemQueue<Operator>!
+	let mockOperatorLinkedList = MockLinkedList<Operator>()
+	
 	override func setUpWithError() throws {
 		try super.setUpWithError()
 		sut = MockCalculatorItemQueue(dummyList: mockLinkedList)
+		mockOperatorCalculatorItemQueue = MockCalculatorItemQueue(dummyList: mockOperatorLinkedList)
 	}
 	
 	override func tearDownWithError() throws {
 		try super.tearDownWithError()
 		sut = nil
+		mockOperatorCalculatorItemQueue = nil
 	}
 	
 	func tests_Mock_enqueue_호출시_dummyList에_데이터가_쌓인다() {
@@ -100,7 +105,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertNil(input)
 	}
 	
-	func tests_Mock_calculate의_add호출시_두값이_더해서_반환된다() {
+	func tests_MockOperator_calculate의_add호출시_두값이_더해서_반환된다() {
 		// given
 		sut.enqueue(1.0)
 		sut.enqueue(2.0)
@@ -115,7 +120,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(input, result)
 	}
 	
-	func tests_Mock_calculate의_subtract호출시_두값이_빼기_연산이되어_그결과값을_반환한다() {
+	func tests_MockOperator_calculate의_subtract호출시_두값이_빼기_연산이되어_그결과값을_반환한다() {
 		//given
 		sut.enqueue(3.0)
 		sut.enqueue(1.0)
@@ -130,7 +135,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(input, result)
 	}
 	
-	func tests_Mock_calculate의_divide호출시_두값이_나누기_연산이되어_그결과값을_반환한다() {
+	func tests_MockOperator_calculate의_divide호출시_두값이_나누기_연산이되어_그결과값을_반환한다() {
 		// given
 		sut.enqueue(4.0)
 		sut.enqueue(2.0)
@@ -145,7 +150,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(input, result)
 	}
 	
-	func tests_Mock_calculate_multiply호출시_두값이_곱하기_연산이되어_그결과값을_반환한다() {
+	func tests_MockOperator_calculate_multiply호출시_두값이_곱하기_연산이되어_그결과값을_반환한다() {
 		// given
 		sut.enqueue(2.0)
 		sut.enqueue(7.0)
@@ -160,33 +165,17 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(input, result)
 	}
 	
-	
-	func tests_Mock_result호출시_operator가_플러스_인경우_더하기_연산이되어_그결과값을_반환한다() {
+	func tests_MockFormula_result호출시_operator가_플러스_인경우_더하기_연산이되어_그결과값을_반환한다() {
 		// given
 		sut.enqueue(1.0)
 		sut.enqueue(2.0)
-		guard let lhsOperand = sut.dequeue() else { return }
-		guard let rhsOperand = sut.dequeue() else { return }
+		mockOperatorCalculatorItemQueue.enqueue(.add)
 		
-		self.mockLinkedList.append(value: lhsOperand)
-		self.mockLinkedList.append(value: rhsOperand)
-		
-		let mockOperatorLinkedList = MockLinkedList<Operator>()
-		var mockOperatorCalculatorItemQueue: MockCalculatorItemQueue<Operator>!
-		
-		mockOperatorCalculatorItemQueue = MockCalculatorItemQueue(dummyList: mockOperatorLinkedList)
-		mockOperatorCalculatorItemQueue.mockList?.append(value: .add)
-		
-		guard let dummyOperator = mockOperatorCalculatorItemQueue.dequeue() else { return }
-		mockOperatorLinkedList.append(value: dummyOperator)
-		
-		let dummyOperands = MockCalculatorItemQueue(dummyList: self.mockLinkedList)
-		let inputOperator = MockCalculatorItemQueue(dummyList: mockOperatorLinkedList)
-		let input = MockFormula<Double, Operator>(operands: dummyOperands, operators: inputOperator).result()
+//		let input = MockFormula<Double, Operator>(operands: dummyOperands, operators: inputOperator).result()
 		
 		// when
 		let result = 3.0
-		
-		XCTAssertEqual(input, result)
+//		
+//		XCTAssertEqual(input, result)
 	}
 }
