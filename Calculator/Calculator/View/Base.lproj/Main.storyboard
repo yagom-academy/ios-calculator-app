@@ -303,6 +303,32 @@
                             <constraint firstItem="DC3-Ia-6L7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vTI-88-p1o"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="acButton" destination="ped-N8-JbY" id="WHq-Kg-dFg"/>
+                        <outlet property="addButton" destination="sbh-wC-koF" id="u6e-Sb-dY9"/>
+                        <outlet property="ceButton" destination="RLD-dY-LOA" id="v3s-sv-7gk"/>
+                        <outlet property="currentNumberLabel" destination="Lwz-OF-XHD" id="QSf-We-Hx1"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="C0g-Xm-5xr"/>
+                        <outlet property="divideButton" destination="Tfz-eM-jll" id="Sl2-LO-ysc"/>
+                        <outlet property="doubleZeroButton" destination="sH6-8l-kje" id="1cQ-hY-mcJ"/>
+                        <outlet property="eightButton" destination="xgT-2D-A49" id="3OR-CJ-6aA"/>
+                        <outlet property="equalButton" destination="Daw-iX-Owl" id="7iA-Fn-juf"/>
+                        <outlet property="fiveButton" destination="vpW-df-OLm" id="d35-k6-DLF"/>
+                        <outlet property="formulaListScrollView" destination="BOT-7g-vxv" id="e3w-ti-amp"/>
+                        <outlet property="formulaListStackView" destination="XRe-QE-UJf" id="Y4V-7t-yho"/>
+                        <outlet property="fourButton" destination="hQm-yz-XvG" id="b1C-GE-ID1"/>
+                        <outlet property="multiplyButton" destination="811-Pz-An6" id="eVN-1i-PO2"/>
+                        <outlet property="negativeButton" destination="ows-U7-mNc" id="YGB-Dj-0Pj"/>
+                        <outlet property="nineButton" destination="zcj-xJ-ruw" id="43F-aX-tL8"/>
+                        <outlet property="oneButton" destination="nCE-qB-NiN" id="Dfi-sf-kEh"/>
+                        <outlet property="pointButton" destination="h8q-5h-bnb" id="V1k-h9-Yvj"/>
+                        <outlet property="sevenButton" destination="L6z-2G-Gar" id="HKK-46-4L1"/>
+                        <outlet property="sixButton" destination="OaY-Mw-CPv" id="RPG-v0-Xnp"/>
+                        <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="vZp-2O-1Lh"/>
+                        <outlet property="threeButton" destination="X8H-iH-tSd" id="A1P-74-DsJ"/>
+                        <outlet property="twoButton" destination="Rif-2S-UU2" id="R7y-wn-zng"/>
+                        <outlet property="zeroButton" destination="mSz-Y3-r5Z" id="Lv4-Go-9eo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
