@@ -46,6 +46,13 @@
         "identifier" : "7851D0E72A2ED93F00AEAFDB",
         "name" : "FormulaTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "7851D0F92A2F611500AEAFDB",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1
