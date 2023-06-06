@@ -55,4 +55,15 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedResult)
     }
+    
+    func test_result_operands에1이들어가면_result값으로_1이반환된다() {
+        // given
+        sut.operands.enqueue(1)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
 }
