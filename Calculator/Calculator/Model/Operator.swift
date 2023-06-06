@@ -5,13 +5,11 @@
 //  Created by 박종화 on 2023/06/02.
 //
 
-import Foundation
-
-enum Operator: CaseIterable {
-    case add
-    case subtract
-    case divide
-    case multifly
+enum Operator: Character, CaseIterable, CalculatorItem {
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multifly = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
