@@ -5,9 +5,9 @@
 //  Created by redmango1446 on 2023/06/06.
 //
 
-enum ExpressionParser<T> {
-//    static func parse(from input: String) -> Formula<T> {
-//
+enum ExpressionParser {
+//    static func parse(from input: String) -> Formula {
+//        
 //    }
     
     static func componentsByOperators(from input: String) -> [String] {
