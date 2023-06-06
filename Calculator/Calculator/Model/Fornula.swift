@@ -15,11 +15,12 @@ struct Formula {
         var `operator` = operators.dequeue()
         guard var result = operands.dequeue() else { return 0 }
         
-        while `operator` == nil {
+        while `operator` != nil {
             guard let identifiedOperator = `operator` else { break }
             guard let newOperand = operands.dequeue() else { break }
             
             result = identifiedOperator.calculate(lhs: result, rhs: newOperand)
+            `operator` = operators.dequeue()
         }
         
         return result
