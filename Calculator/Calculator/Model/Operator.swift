@@ -37,5 +37,3 @@ enum Operator: Character, CaseIterable {
         return lhs * rhs
     }
 }
-
-Operator.calculate(.add)

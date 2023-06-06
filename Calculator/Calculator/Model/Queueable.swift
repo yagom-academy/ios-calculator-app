@@ -5,7 +5,7 @@
 //  Created by Whales on 2023/06/04.
 //
 
-protocol QueueConfigurable {
+protocol Queueable {
     associatedtype CalculateItem
     
     var queue: LinkedList<CalculateItem> { get }

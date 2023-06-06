@@ -12,7 +12,7 @@
 		3CCAAFB82A267F050050B1D5 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFB72A267F050050B1D5 /* CalculatorItemQueue.swift */; };
 		3CCAAFD72A2A412D0050B1D5 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFD62A2A412D0050B1D5 /* LinkedList.swift */; };
 		3CCAAFD92A2A42020050B1D5 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFD82A2A42020050B1D5 /* LinkedListTests.swift */; };
-		3CCAAFE12A2BB0DA0050B1D5 /* QueueConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFE02A2BB0DA0050B1D5 /* QueueConfigurable.swift */; };
+		3CCAAFE12A2BB0DA0050B1D5 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFE02A2BB0DA0050B1D5 /* Queueable.swift */; };
 		3CCAAFE32A2F42C30050B1D5 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCAAFE22A2F42C30050B1D5 /* Operator.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
@@ -39,7 +39,7 @@
 		3CCAAFB72A267F050050B1D5 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		3CCAAFD62A2A412D0050B1D5 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3CCAAFD82A2A42020050B1D5 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
-		3CCAAFE02A2BB0DA0050B1D5 /* QueueConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueConfigurable.swift; sourceTree = "<group>"; };
+		3CCAAFE02A2BB0DA0050B1D5 /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		3CCAAFE22A2F42C30050B1D5 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +78,38 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		3CCAAFE62A2F94D90050B1D5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3CCAAFE72A2F94F60050B1D5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		3CCAAFE82A2F95100050B1D5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3CCAAFD62A2A412D0050B1D5 /* LinkedList.swift */,
+				3CCAAFE02A2BB0DA0050B1D5 /* Queueable.swift */,
+				3CCAAFB72A267F050050B1D5 /* CalculatorItemQueue.swift */,
+				3CCAAFB52A267E570050B1D5 /* CalculateItem.swift */,
+				3CCAAFE22A2F42C30050B1D5 /* Operator.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -99,17 +131,9 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				3CCAAFB52A267E570050B1D5 /* CalculateItem.swift */,
-				3CCAAFE22A2F42C30050B1D5 /* Operator.swift */,
-				3CCAAFD62A2A412D0050B1D5 /* LinkedList.swift */,
-				3CCAAFE02A2BB0DA0050B1D5 /* QueueConfigurable.swift */,
-				3CCAAFB72A267F050050B1D5 /* CalculatorItemQueue.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				3CCAAFE72A2F94F60050B1D5 /* Controller */,
+				3CCAAFE82A2F95100050B1D5 /* Model */,
+				3CCAAFE62A2F94D90050B1D5 /* View */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
@@ -227,7 +251,7 @@
 				3CCAAFD72A2A412D0050B1D5 /* LinkedList.swift in Sources */,
 				3CCAAFB62A267E570050B1D5 /* CalculateItem.swift in Sources */,
 				3CCAAFB82A267F050050B1D5 /* CalculatorItemQueue.swift in Sources */,
-				3CCAAFE12A2BB0DA0050B1D5 /* QueueConfigurable.swift in Sources */,
+				3CCAAFE12A2BB0DA0050B1D5 /* Queueable.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				3CCAAFE32A2F42C30050B1D5 /* Operator.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
