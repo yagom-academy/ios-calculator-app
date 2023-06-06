@@ -32,4 +32,15 @@ final class ExpressionParserTests: XCTestCase {
         // then
         XCTAssertEqual(formula.result(), 5)
     }
+    
+    func test_parse_수식에처음으로마이너스기호가주어지면_subtract연산자와구분하여_연산결과5를반환한다() {
+        // given
+        let expectedString: String = "-1*-3+6/-3"
+        
+        // when
+        var formula: Formula = ExpressionParser.parse(from: expectedString)
+        
+        // then
+        XCTAssertEqual(formula.result(), -3)
+    }
 }
