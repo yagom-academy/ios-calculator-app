@@ -32,4 +32,16 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_init_Operator타입Queue로_operators가초기화되면빈상태로원소를꺼내면_nil을반환한다() {
+        // given
+        let expectedOperatorsQueue: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+        
+        // when
+        sutForOperand.operators = expectedOperatorsQueue
+        let result: Operator? = sutForOperand.operators.dequeue()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
