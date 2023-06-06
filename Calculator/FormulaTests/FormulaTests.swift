@@ -50,7 +50,7 @@ final class FormulaTests: XCTestCase {
         let expectedResult: Double = 0
         
         // when
-        var result: Double = sut.result()
+        let result: Double = sut.result()
         
         // then
         XCTAssertEqual(result, expectedResult)
@@ -67,7 +67,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_result_operators에더하기가들어가면_result는두수를더해_3을반환한다() {
+    func test_result_operators에add가들어가면_result는두수를더해_3을반환한다() {
         // given
         sut.operands.enqueue(1)
         sut.operands.enqueue(2)
@@ -78,5 +78,44 @@ final class FormulaTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, 3)
+    }
+    
+    func test_result_operators에subtract가들어가면_result는두수를빼서_1을반환한다() {
+        // given
+        sut.operands.enqueue(2)
+        sut.operands.enqueue(1)
+        sut.operators.enqueue(.subtract)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_result_operators에multiply가들어가면_result는두수를곱하여_8을반환한다() {
+        // given
+        sut.operands.enqueue(2)
+        sut.operands.enqueue(4)
+        sut.operators.enqueue(.multiply)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 8)
+    }
+    
+    func test_result_operators에divide가들어가면_result는두수를나누어_4를반환한다() {
+        // given
+        sut.operands.enqueue(8)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.divide)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 4)
     }
 }
