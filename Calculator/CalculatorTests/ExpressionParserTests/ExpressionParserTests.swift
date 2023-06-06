@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class ExpressionParserTests: XCTestCase {
-    //var sut: ExpressionParser!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -43,7 +42,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_parser_문자열이_1_더하기_2_빼기_3일때_반환값의operators의_first값은_빼기이다() {
+    func test_parser_문자열이_1_더하기_2_빼기_3일때_반환값의operators의_first값은_더하기이다() {
         // given
         let formula = ExpressionParser.parser(from: "1+2-3")
         let expectation = Operator.add
@@ -97,35 +96,34 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = 1.0
         
         // when
-        let result = try? formula.result()
+        let result = try! formula.result()
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_parser_문자열을_2_더하기_4와_빼기_3으로_나눠서입력했을때_반환값의operators의_count값은_3이다() {
+    func test_parser_문자열이_더하기_3일때_반환값의result값은_3이다() {
         // given
-        var formula = ExpressionParser.parser(from: "2+4")
-        formula = ExpressionParser.parser(from: "-3")
-        let expectation = 1.0
+        var formula = ExpressionParser.parser(from: "+3")
+        let expectation = 3.0
         
         // when
-        let result = try? formula.result()
+        let result = try! formula.result()
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_parser_문자열에_operator만_있을경우_이다() {
+    func test_parser_문자열이_3_더하기일때_반환값의result값은_3이다() {
         // given
-        var formula = ExpressionParser.parser(from: "++×÷-")
-        let expectation = 1.0
+        var formula = ExpressionParser.parser(from: "3+")
+        let expectation = 3.0
         
         // when
-        let result = try? formula.result()
+        let result = try! formula.result()
         
         // then
         XCTAssertEqual(result, expectation)
     }
-
+    
 }
