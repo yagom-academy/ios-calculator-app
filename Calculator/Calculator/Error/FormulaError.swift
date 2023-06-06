@@ -7,4 +7,5 @@
 
 enum FormulaError: Error {
     case operationError
+    case divideByZeroError
 }

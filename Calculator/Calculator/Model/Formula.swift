@@ -19,6 +19,10 @@ struct Formula {
                 throw FormulaError.operationError
             }
             
+            if operationResult.isInfinite {
+                throw FormulaError.divideByZeroError
+            }
+            
             result = operationResult
             operationCount -= 1
         }

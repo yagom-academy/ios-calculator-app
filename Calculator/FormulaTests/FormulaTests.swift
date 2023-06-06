@@ -121,14 +121,12 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operands에1_0이있고_operators에나누기가있을때_result는infinite다() throws {
+    func test_operands에1_0이있고operators에나누기가있을때_result를수행하면_에러를던진다() throws {
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(0.0)
         sut.operators.enqueue(Operator.divide)
         
-        let result = try sut.result()
-        
-        XCTAssertTrue(result.isInfinite)
+        XCTAssertThrowsError(try sut.result())
     }
     
     func test_operands에값이없을때_result를수행하면_에러를던진다() {
