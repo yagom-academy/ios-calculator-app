@@ -66,4 +66,17 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, 1)
     }
+    
+    func test_result_operators에더하기가들어가면_result는두수를더해_3을반환한다() {
+        // given
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        sut.operators.enqueue(.add)
+        
+        // when
+        let result = sut.result()
+        
+        // then
+        XCTAssertEqual(result, 3)
+    }
 }
