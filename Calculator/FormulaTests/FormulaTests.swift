@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-    var sut: Formula<Double, Operator>!
+    var sut: Formula!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
