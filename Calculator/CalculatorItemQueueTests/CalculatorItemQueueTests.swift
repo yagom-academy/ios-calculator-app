@@ -159,4 +159,34 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	
+	func tests_Mock_result호출시_operator가_플러스_인경우_더하기_연산이되어_그결과값을_반환한다() {
+		// given
+		sut.enqueue(1.0)
+		sut.enqueue(2.0)
+		guard let lhsOperand = sut.dequeue() else { return }
+		guard let rhsOperand = sut.dequeue() else { return }
+		
+		self.mockLinkedList.append(value: lhsOperand)
+		self.mockLinkedList.append(value: rhsOperand)
+		
+		let mockOperatorLinkedList = MockLinkedList<Operator>()
+		var mockOperatorCalculatorItemQueue: MockCalculatorItemQueue<Operator>!
+		
+		mockOperatorCalculatorItemQueue = MockCalculatorItemQueue(dummyList: mockOperatorLinkedList)
+		mockOperatorCalculatorItemQueue.mockList?.append(value: .add)
+		
+		guard let dummyOperator = mockOperatorCalculatorItemQueue.dequeue() else { return }
+		mockOperatorLinkedList.append(value: dummyOperator)
+		
+		let dummyOperands = MockCalculatorItemQueue(dummyList: self.mockLinkedList)
+		let inputOperator = MockCalculatorItemQueue(dummyList: mockOperatorLinkedList)
+		let input = MockFormula<Double, Operator>(operands: dummyOperands, operators: inputOperator).result()
+		
+		// when
+		let result = 3.0
+		
+		XCTAssertEqual(input, result)
+	}
 }
