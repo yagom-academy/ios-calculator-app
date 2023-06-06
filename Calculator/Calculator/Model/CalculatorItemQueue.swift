@@ -6,7 +6,10 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    var linkedList: LinkedList<Element> = LinkedList()
+    private var linkedList: LinkedList<Element> = LinkedList()
+    var isEmpty: Bool {
+        return linkedList.count == 0 ? false : true
+    }
     
     mutating func enqueue(_ element: Element) {
         linkedList.append(element)
