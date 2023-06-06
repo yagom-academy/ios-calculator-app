@@ -4,17 +4,7 @@
 //
 //  Created by Minseong Kang on 2023/06/03.
 //
-
-extension Int: CalculateItemProtocol { }
-
-protocol MockLinkedListProtocol {
-	associatedtype T: Any
-	var isEmpty: Bool { get }
-	func append(value: T)
-	func removeFirst() -> T?
-}
-
-struct MockCalculatorItemQueue<T: CalculateItemProtocol> {
+struct MockCalculatorItemQueue<T: CalculateItem> {
 	public var mockList: MockLinkedList<T>?
 	
 	public var isEmpty: Bool? {
