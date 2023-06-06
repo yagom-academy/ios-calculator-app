@@ -6,9 +6,7 @@
 //
 
 enum ExpressionParser {    
-    static func parse(from input: String) throws -> Formula {
-        let validOperators = Operator.allCases.map { $0.rawValue }
-        
+    static func parse(from input: String) -> Formula {        
         let operands = componentsByOperators(from: input)
             .compactMap { Double($0)}
         let operators = input
@@ -19,7 +17,22 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { $0.rawValue }
+        var result: [String] = []
+        var currentSegment: String = ""
         
-        return [input.filter {!operators.contains($0)}]
+        for char in input {
+            currentSegment.append(char)
+            
+            if operators.contains(char) {
+                result.append(contentsOf: currentSegment.split(with: char))
+                currentSegment = ""
+            }
+        }
+        
+        if !currentSegment.isEmpty {
+            result.append(currentSegment)
+        }
+        
+        return result
     }
 }

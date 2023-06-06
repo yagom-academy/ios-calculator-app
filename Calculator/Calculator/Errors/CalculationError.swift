@@ -9,5 +9,4 @@ enum CalculationError: Error {
     case divisionByZero
     case notFoundOperand
     case notFoundOperator
-    case invalidInput
 }

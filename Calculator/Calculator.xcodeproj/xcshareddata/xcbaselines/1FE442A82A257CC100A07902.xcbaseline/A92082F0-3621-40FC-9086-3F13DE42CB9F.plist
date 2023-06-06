@@ -6,6 +6,16 @@
 	<dict>
 		<key>IntegrationTests</key>
 		<dict>
+			<key>test_1자리수_100000개의_피연산자_계산_속도_측정()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.743000</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+				</dict>
+			</dict>
 			<key>test_랜덤한_피연산자_1000개_계산_속도_측정()</key>
 			<dict>
 				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>

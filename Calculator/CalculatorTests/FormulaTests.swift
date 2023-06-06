@@ -154,20 +154,15 @@ final class FormulaTests: XCTestCase {
         }
     }
     
-    func test_여러_개의_operands가_존재하고_마지막_rhs가_옵셔널_바인딩을_실패했을_때_notFoundOperand_에러가_발생한다() {
+    func test_마지막_rhs가_옵셔널_바인딩을_실패했을_때_에러가_발생하지_않고_마지막_연산자를_무시한_채_결과를_리턴한다() throws {
         // given
         sut = Formula(
             operands: [1.0, 2.0, 3.0, 4.0],
             operators: [.add, .add, .add, .add]
         )
-        
+        let result = try sut.result()
+        let expectation = 10.0
         // then
-        XCTAssertThrowsError(try sut.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
+        XCTAssertEqual(result, expectation)
     }
 }

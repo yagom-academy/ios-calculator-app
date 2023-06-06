@@ -15,7 +15,7 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = Formula(operands: [5, 3], operators: [.add])
         
         // when
-        let result = try ExpressionParser.parse(from: input)
+        let result = ExpressionParser.parse(from: input)
         
         // then
         XCTAssertEqual(result.operands.elements, expectation.operands.elements)
@@ -31,100 +31,10 @@ final class ExpressionParserTests: XCTestCase {
         )
         
         // when
-        let result = try ExpressionParser.parse(from: input)
+        let result = ExpressionParser.parse(from: input)
         
         // then
         XCTAssertEqual(result.operands.elements, expectation.operands.elements)
         XCTAssertEqual(result.operators.elements, expectation.operators.elements)
-    }
-    
-    func test_피연산자가_음수일_때_마이너스_연산자로_인식하지않고_음수로_인식한다() throws {
-        // given
-        let input1 = "-5+3"
-        let input2 = "5+-3"
-        let input3 = "5--3"
-        let input4 = "-5--3"
-        
-        let expectation1 = Formula(operands: [-5, 3], operators: [.add])
-        let expectation2 = Formula(operands: [5, -3], operators: [.add])
-        let expectation3 = Formula(operands: [5, -3], operators: [.subtract])
-        let expectation4 = Formula(operands: [-5, -3], operators: [.subtract])
-        
-        // when
-        let result1 = try ExpressionParser.parse(from: input1)
-        let result2 = try ExpressionParser.parse(from: input2)
-        let result3 = try ExpressionParser.parse(from: input3)
-        let result4 = try ExpressionParser.parse(from: input4)
-        
-        // then
-        XCTAssertEqual(result1.operands.elements, expectation1.operands.elements)
-        XCTAssertEqual(result1.operators.elements, expectation1.operators.elements)
-        
-        XCTAssertEqual(result2.operands.elements, expectation2.operands.elements)
-        XCTAssertEqual(result2.operators.elements, expectation2.operators.elements)
-        
-        XCTAssertEqual(result3.operands.elements, expectation3.operands.elements)
-        XCTAssertEqual(result3.operators.elements, expectation3.operators.elements)
-        
-        XCTAssertEqual(result4.operands.elements, expectation4.operands.elements)
-        XCTAssertEqual(result4.operators.elements, expectation4.operators.elements)
-    }
-    
-    func test_연산자가_연속으로_나오면_invalidInput_에러가_발생한다() throws {
-        // given
-        let input1 = "++5-10"
-        let input2 = "-10+÷5"
-        let input3 = "--5--3"
-        let input4 = "5+++333"
-        let input5 = "1+2+3+4+"
-        
-        // then
-        try [input1, input2, input3, input4, input5].forEach { input in
-            XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
-                if let error = error as? CalculationError {
-                    XCTAssertEqual(error, .invalidInput)
-                } else {
-                    XCTFail("예상하지 않은 에러 출력 \(error)")
-                }
-            }
-        }
-    }
-     
-    func test_숫자_연산자_소수점이_아닌_피연산자가_포함되어있는_문자열_수식을_parse하면_invalidInput_에러가_발생한다() throws {
-        // given
-        let input1 = "5+ㄱ"
-        let input2 = "13-2a"
-        let input3 = "20.13+13,34"
-        let input4 = "5+1-10.43/13"
-        let input5 = "5 + 1 - 10.43 ÷ 13"
-        // then
-        try [input1, input2, input3, input4, input5].forEach { input in
-            XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
-                if let error = error as? CalculationError {
-                    XCTAssertEqual(error, .invalidInput)
-                } else {
-                    XCTFail("예상하지 않은 에러 출력 \(error)")
-                }
-            }
-        }
-    }
-    
-    func test_소수점이_여러_개인_피연산자를_parse하면_invalidInput_에러가_발생한다() throws {
-        // given
-        let input1 = "5.13.4+10"
-        let input2 = "1.0.10.0"
-        let input3 = "1..3+1.0"
-        let input4 = "10.0.0-10"
-        
-        // then
-        try [input1, input2, input3, input4].forEach { input in
-            XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
-                if let error = error as? CalculationError {
-                    XCTAssertEqual(error, .invalidInput)
-                } else {
-                    XCTFail("예상하지 않은 에러 출력 \(error)")
-                }
-            }
-        }
     }
 }

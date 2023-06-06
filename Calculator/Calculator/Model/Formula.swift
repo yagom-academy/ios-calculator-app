@@ -17,13 +17,11 @@ struct Formula {
     mutating func result() throws -> Double {
         
         guard let lhs = operands.dequeue() else { throw CalculationError.notFoundOperand }
-        guard let rhs = operands.dequeue() else { throw CalculationError.notFoundOperand }
         guard let `operator` = operators.dequeue() else { throw CalculationError.notFoundOperator }
-        
+        guard let rhs = operands.dequeue() else { throw CalculationError.notFoundOperand }        
         var result = try `operator`.calculate(lhs: lhs, rhs: rhs)
         
-        while !operators.isEmpty {
-            guard let next = operands.dequeue() else { throw CalculationError.notFoundOperand }
+        while let next = operands.dequeue() {
             guard let `operator` = operators.dequeue() else { throw CalculationError.notFoundOperator }
             result = try `operator`.calculate(lhs: result, rhs: next)
         }
