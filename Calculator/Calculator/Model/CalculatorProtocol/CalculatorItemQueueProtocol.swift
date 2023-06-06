@@ -8,9 +8,6 @@
 protocol CalculatorItemQueueProtocol {
     associatedtype T
     
-    var first: Node<T>? { get }
-    var last: Node<T>? { get }
-    
     mutating func enqueue(_ element: T)
     mutating func dequeue() -> T?
 }
