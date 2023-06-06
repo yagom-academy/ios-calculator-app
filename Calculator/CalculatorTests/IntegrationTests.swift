@@ -72,9 +72,9 @@ final class IntegrationTests: XCTestCase {
         }
     }
     
-    func test_피연산자의_개수가_부족하면_notFoundOperand_에러가_발생한다() throws {
+    func test_피연산자의_개수가_부족하면_존재하는_피연산자까지만_계산해서_리턴한다() throws {
         let input1 = "1+"
-        let input2 = "+"
+        let input2 = "5+3-"
         let input3 = "1++"
         
         var formula1 = ExpressionParser.parse(from: input1)
@@ -82,47 +82,10 @@ final class IntegrationTests: XCTestCase {
         var formula3 = ExpressionParser.parse(from: input3)
         
         // then
+        XCTAssertEqual(try formula1.result(), 1.0)
+        XCTAssertEqual(try formula2.result(), 8.0)
+        XCTAssertEqual(try formula3.result(), 1.0)
         
-        XCTAssertThrowsError(try formula1.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
-        
-        XCTAssertThrowsError(try formula2.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
-        
-        XCTAssertThrowsError(try formula3.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
-        
-        
-    }
-    
-    func test_연산자의_개수가_부족하면_notFoundOperator_에러가_발생한다() throws {
-        // given
-        let input = "53"
-        var formula = ExpressionParser.parse(from: input)
-        
-        // then
-        XCTAssertThrowsError(try formula.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperator)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
     }
     
     func test_10개의_피연산자_계산_속도_측정() {
