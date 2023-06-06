@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -20,8 +20,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_queue가_비었을때_count를_호출하면_0을_반환합니다() {
-        let result = sut.count
         let expectation = 0
+        
+        let result = sut.count
         
         XCTAssertEqual(result, expectation)
     }
@@ -33,7 +34,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_enqueue를_사용하여_값을_넣으면_isEmpty에서_false를_반환합니다() {
-        let input: CalculateItem = Operator.plus
+        let input: Double = 1
         sut.enqueue(input)
         
         XCTAssertFalse(sut.isEmpty)
@@ -49,12 +50,11 @@ final class CalculatorItemQueueTests: XCTestCase {
         for input in 1...10 {
             sut.enqueue(Double(input))
         }
-        
         let expectation = 1.0
         
         let result = sut.dequeue()
         
-        XCTAssertEqual(result as? Double, expectation)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_dequeue_호출하면_큐의_맨앞의_데이터가_없어지니_count가_감소합니다() {
@@ -62,7 +62,6 @@ final class CalculatorItemQueueTests: XCTestCase {
             sut.enqueue(Double(input))
         }
         sut.dequeue()
-        
         let expectation = 9
         
         let result = sut.count
@@ -86,7 +85,6 @@ final class CalculatorItemQueueTests: XCTestCase {
             sut.enqueue(Double(input))
         }
         sut.clear()
-        
         let expectation = 0
         
         let result = sut.count
@@ -95,9 +93,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_dequeue를_호출하여_마지막_남은_데이터를_삭제하면_clear도_작동합니다() {
-        sut.enqueue(Operator.minus)
+        let input: Double = 1
+        sut.enqueue(input)
         sut.dequeue()
-        
         let expectation = 0
         
         let isEmptyResult = sut.isEmpty

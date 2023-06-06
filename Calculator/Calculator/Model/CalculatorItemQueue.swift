@@ -5,29 +5,33 @@
 //  Created by Erick on 2023/05/29.
 //
 
-struct CalculatorItemQueue {
-    private var queue = CalculatorItemLinkedList()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var inStack: [Element] = []
+    private var outStack: [Element] = []
     
     var count: Int {
-        return queue.count
+        return inStack.count + outStack.count
     }
     
     var isEmpty: Bool {
-        return queue.head == nil
+        return inStack.isEmpty && outStack.isEmpty
     }
     
-    mutating func enqueue(_ calculateItem: CalculateItem) {
-        let node = CalculatorItemNode(item: calculateItem)
-        
-        queue.append(node)
+    mutating func enqueue(_ calculateItem: Element) {
+        inStack.append(calculateItem)
     }
     
     @discardableResult
-    mutating func dequeue() -> CalculateItem? {
-        return queue.removeFirst()?.item
+    mutating func dequeue() -> Element? {
+        if outStack.isEmpty {
+            outStack = inStack.reversed()
+            inStack.removeAll()
+        }
+        return outStack.popLast()
     }
     
     mutating func clear() {
-        queue.clear()
+        inStack.removeAll()
+        outStack.removeAll()
     }
 }
