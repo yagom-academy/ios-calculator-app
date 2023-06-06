@@ -12,7 +12,7 @@ enum ExpressionParser {
         var operators = [input]
         var formula = Formula()
         
-        for operand in operands {
+        operands.forEach { operand in
             var splitOperators: [String] = []
             
             operators.forEach { element in
@@ -23,7 +23,7 @@ enum ExpressionParser {
             operators = splitOperators
         }
         
-        for operand in operands {
+        try operands.forEach { operand in
             guard let operand = Double(operand) else {
                 throw ExpressionParserError.operandConvertError
             }
@@ -31,7 +31,7 @@ enum ExpressionParser {
             formula.operands.enqueue(operand)
         }
         
-        for `operator` in operators {
+        try operators.forEach { `operator` in
             guard let `operator` = Operator(rawValue: Character(`operator`)) else {
                 throw ExpressionParserError.operatorConvertError
             }
