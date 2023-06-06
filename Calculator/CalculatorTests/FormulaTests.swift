@@ -194,6 +194,19 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(error, errorMessage)
     }
 
+    func test_아무것도입력되지않았을때_unfinishedFormula_error에_걸리는지() {
+        //given
+        let errorMessage = CalculatorErrors.unfinishedFormula
+        var error: CalculatorErrors?
+        
+        //when
+        XCTAssertThrowsError(try sut.result()){ result in
+            error = result as? CalculatorErrors
+        }
+        
+        //then
+        XCTAssertEqual(error, errorMessage)
+    }
     
     func test_1더하기2더하기3빼기3일때_결과값이_3인지() {
         //given
