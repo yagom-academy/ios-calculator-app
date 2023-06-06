@@ -6,30 +6,30 @@
 //
 
 import XCTest
+@testable import Calculator
 
 final class FormulaTests: XCTestCase {
+    var sut: Formula!
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = Formula()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_init_Double타입Queue로_operands가초기화되면빈상태로원소를꺼내면_nil을반환한다() {
+        // given
+        let expectedOperandsQueue: CalculatorItemQueue<Double> = CalculatorItemQueue()
+        
+        // when
+        sut.operands = expectedOperandsItem
+        let result: Double? = sut.operands.removeFirst()
+        
+        // then
+        XCTAssertNil(result)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
