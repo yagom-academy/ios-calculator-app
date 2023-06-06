@@ -9,15 +9,24 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    mutating func result() throws -> Double? {
-        guard let lhs = operands.dequeue(), let rhs = operands.dequeue() else {
-            throw CalculateError.invalid
-        }
+    mutating func result() throws -> Double {
         var result: Double = 0.0
+        var lhs: Double?
         
-        if operators.peek == String(Operator.add.rawValue) {
-            result = Operator.add.calculate(lhs: lhs, rhs: rhs)
+        while !operators.isEmpty {
+            (result == 0.0) ? (lhs = operands.dequeue()) : (lhs = result)
+            
+            guard let lhs,
+                  let rhs = operands.dequeue(),
+                  let modifier = operators.dequeue() else {
+                throw CalculateError.invalid
+            }
+            
+            if let compute = Operator(rawValue: Character(modifier)) {
+                result = compute.calculate(lhs: lhs, rhs: rhs)
+            }
         }
+        
         return result
     }
 }
