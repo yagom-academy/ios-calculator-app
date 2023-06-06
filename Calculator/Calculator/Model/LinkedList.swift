@@ -44,4 +44,19 @@ struct LinkedList<Element> {
         rear = nil
         size = 0
     }
+    
+    func takeAllElements() -> [Element] {
+        var head = front
+        var result: [Element] = []
+        
+        guard size != 0 else { return result }
+        for _ in 1...size {
+            if let element = head?.element {
+                result.append(element)
+            }
+            head = head?.next
+        }
+        
+        return result
+    }
 }

@@ -22,4 +22,8 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     mutating func removeAll() {
         queue.removeAll()
     }
+    
+    func takeQueueAsList() -> [Item] {
+        return queue.takeAllElements()
+    }
 }
