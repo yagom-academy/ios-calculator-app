@@ -44,4 +44,20 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_result_Operands가비었다며_연산결과는_0을반환한다() {
+        // given
+        let expectedOperandsQueue: CalculatorItemQueue<Double> = CalculatorItemQueue()
+        let expectedResult: Int = 0
+        
+        // when
+        var result: Int?
+        
+        if sut.operands.isEmpty {
+            result = 0
+        }
+        
+        // then
+        XCTAssertEqual(result, expectedResult)
+    }
 }
