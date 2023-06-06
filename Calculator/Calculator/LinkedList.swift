@@ -5,11 +5,11 @@
 //  Created by Whales on 2023/06/03.
 //
 
-class Node<T> {
-    var data: T?
+final class Node<T> {
+    var data: T
     var next: Node?
     
-    init(data: T? = nil, next: Node? = nil) {
+    init(data: T, next: Node? = nil) {
         self.data = data
         self.next = next
     }
@@ -32,24 +32,26 @@ struct LinkedList<T> {
         return tail?.data
     }
     
-    mutating func append(data: T?) {
+    mutating func append(data: T) {
+        let newNode = Node(data: data)
+        
         if isEmpty {
-            head = Node(data: data)
+            head = newNode
             tail = head
-            count += 1
-            return
+        } else {
+            tail?.next = newNode
+            tail = newNode
         }
         
-        let newNode = Node(data: data)
-        tail?.next = newNode
-        tail = newNode
         count += 1
     }
     
-    mutating func insert(data: T?, at index: UInt) {
-        if index >= count {
+    mutating func insert(data: T, at index: UInt) {
+        guard index < count else {
             return
-        } else if index == 0 {
+        }
+        
+        if index == 0 {
             let newNode = Node(data: data)
             newNode.next = head
             head = newNode
@@ -73,7 +75,7 @@ struct LinkedList<T> {
     }
     
     mutating func removeFirst() {
-        if isEmpty {
+        guard !isEmpty else {
             return
         }
         
@@ -91,9 +93,7 @@ struct LinkedList<T> {
     mutating func removeLast() {
         if isEmpty {
             return
-        }
-        
-        if count == 1 {
+        } else if count == 1 {
             head = nil
             tail = nil
             count = 0
@@ -113,9 +113,7 @@ struct LinkedList<T> {
     mutating func delete(at index: UInt) {
         if isEmpty || index >= count {
             return
-        }
-        
-        if index == 0 {
+        } else if index == 0 {
             head = head?.next
             count -= 1
             return
@@ -136,11 +134,10 @@ struct LinkedList<T> {
     mutating func removeAll() {
         if isEmpty {
             return
+        } else {
+            head = nil
+            tail = nil
+            count = 0
         }
-        
-        while !isEmpty {
-            removeFirst()
-        }
-        count = 0
     }
 }
