@@ -9,8 +9,8 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-	var sut: MockCalculatorItemQueue<Int>!
-	let mockLinkedList = MockLinkedList<Int>()
+	var sut: MockCalculatorItemQueue<Double>!
+	let mockLinkedList = MockLinkedList<Double>()
 	
 	override func setUpWithError() throws {
 		try super.setUpWithError()
@@ -24,12 +24,12 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_Mock_enqueue_호출시_dummyList에_데이터가_쌓인다() {
 		// given
-		sut.enqueue(1)
-		sut.enqueue(2)
-		sut.enqueue(3)
+		sut.enqueue(1.0)
+		sut.enqueue(2.0)
+		sut.enqueue(3.0)
 		guard let input = sut.mockList?.tail?.value else { return }
 		// when
-		let result = 3
+		let result = 3.0
 		
 		// then
 		XCTAssertEqual(input, result)
@@ -82,11 +82,11 @@ final class CalculatorItemQueueTests: XCTestCase {
 	
 	func tests_Mock_front_호출시_dummyList_head에_데이터가_있을경우_그_데이터를_가져온다() {
 		// given
-		sut.enqueue(3)
+		sut.enqueue(3.0)
 		guard let input = sut.front else { return }
 		
 		// when
-		let result = 3
+		let result = 3.0
 		
 		// then
 		XCTAssertEqual(input, result)
@@ -98,5 +98,20 @@ final class CalculatorItemQueueTests: XCTestCase {
 		
 		// then
 		XCTAssertNil(input)
+	}
+	
+	func tests_Mock_calculate의_add호출시_두값이_더해서_반환된다() {
+		// given
+		sut.enqueue(1.0)
+		sut.enqueue(2.0)
+		guard let lhsInput = sut.dequeue() else { return }
+		guard let rhsInput = sut.dequeue() else { return }
+		let input = MockOperator.add.calculate(lhs: lhsInput, rhs: rhsInput)
+		
+		// when
+		let result = 3.0
+		
+		// then
+		XCTAssertEqual(input, result)
 	}
 }
