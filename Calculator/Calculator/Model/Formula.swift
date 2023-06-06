@@ -6,5 +6,5 @@
 //
 
 struct Formula<DataType: CalculateItem> {
-    var operands: CalculatorItemQueue<DataType>?
+    var operands: CalculatorItemQueue<DataType>
 }

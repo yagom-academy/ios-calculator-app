@@ -13,7 +13,7 @@ final class FormulaTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sutForOperand = Formula()
+        sutForOperand = Formula(operands: CalculatorItemQueue())
     }
 
     override func tearDownWithError() throws {
@@ -27,7 +27,7 @@ final class FormulaTests: XCTestCase {
         
         // when
         sutForOperand.operands = expectedOperandsQueue
-        let result: Double? = sutForOperand.operands?.dequeue()
+        let result: Double? = sutForOperand.operands.dequeue()
         
         // then
         XCTAssertNil(result)
