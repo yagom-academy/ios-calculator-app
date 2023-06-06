@@ -6,8 +6,8 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operatos: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    var operatos: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     func result() -> Double {
         return 0.1 //임시값
