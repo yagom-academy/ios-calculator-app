@@ -29,7 +29,7 @@ struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQ
     mutating private func calculateOperands() throws -> Double {
         guard var result = operands.dequeue() else { throw CaculateError.notHaveOperands }
         
-        while operators.isEmpty() == false {
+        while operators.isEmpty == false {
             guard let operand = operands.dequeue() else { break }
             guard let `operator` = operators.dequeue() else { break }
             
