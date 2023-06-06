@@ -9,8 +9,8 @@ import Foundation
 
 enum FormulaErrors {
     case invalidFormula
-    case invalidOperators
-    case invalidOperands
+    case noValueInQueue
+    case notDivisibleByZero
 }
 
 extension FormulaErrors: LocalizedError {
@@ -18,10 +18,10 @@ extension FormulaErrors: LocalizedError {
         switch self {
         case .invalidFormula:
             return "유효하지 않은 수식입니다."
-        case .invalidOperators:
-            return "유효하지 않은 연산자입니다."
-        case .invalidOperands:
-            return "유효하지 않은 숫자입니다."
+        case .noValueInQueue:
+            return "큐에 값이 없습니다."
+        case .notDivisibleByZero:
+            return "0으로 나눌 수 없습니다."
         }
     }
 }
