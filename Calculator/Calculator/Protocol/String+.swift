@@ -5,8 +5,10 @@
 //  Created by redmango1446 on 2023/06/06.
 //
 
+import Foundation
+
 extension String {
     func split(with target: Character) -> [String] {
-        return ["1"] // 임시값
+        return self.components(separatedBy: String(target))
     }
 }
