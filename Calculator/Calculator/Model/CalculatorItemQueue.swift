@@ -8,14 +8,6 @@
 struct CalculatorItemQueue<T: CalculateItem>: CalculatorItemQueueProtocol {
     private var linkedList = LinkedList<T>()
     
-    var first: Node<T>? {
-        return linkedList.first
-    }
-    
-    var last: Node<T>? {
-        return linkedList.last
-    }
-    
     mutating func enqueue(_ element: T) {
         linkedList.enqueue(element)
     }
