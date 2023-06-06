@@ -19,7 +19,8 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        let componentStandard = CharacterSet(charactersIn: String(Operator.allCases.map({$0.rawValue})))
+        let allOperatorRawValues = Operator.allCases.map{ $0.rawValue }
+        let componentStandard = CharacterSet(charactersIn: String(allOperatorRawValues))
         let componentParts: [String] = input.components(separatedBy: componentStandard)
 
         return componentParts
