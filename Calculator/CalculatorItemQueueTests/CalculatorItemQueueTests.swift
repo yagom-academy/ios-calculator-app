@@ -129,4 +129,19 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(input, result)
 	}
+	
+	func tests_Mock_calculte의_divide호출시_두값이_나누기_연산이되어_그결과값을_반환한다() {
+		// given
+		sut.enqueue(4.0)
+		sut.enqueue(2.0)
+		guard let lhsInput = sut.dequeue() else { return }
+		guard let rhsInput = sut.dequeue() else { return }
+		let input = MockOperator.divide.calculate(lhs: lhsInput, rhs: rhsInput)
+		
+		// when
+		let result = 2.0
+		
+		// then
+		XCTAssertEqual(input, result)
+	}
 }
