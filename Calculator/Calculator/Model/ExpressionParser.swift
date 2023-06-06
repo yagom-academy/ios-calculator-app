@@ -11,18 +11,14 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula = Formula()
         let components = componentsByOperators(from: input)
-        let operands = components.filter { Double($0) != nil }
-        let operators = components.filter { Double($0) == nil }
         
-        for index in operands {
-            guard let operand = Double(index) else { continue }
-            formula.operands.enqueue(operand)
-        }
+        components.filter { Double($0) != nil }
+            .compactMap { Double($0) }
+            .forEach { formula.operands.enqueue($0) }
         
-        for index in operators {
-            guard let `operator` = Operator(rawValue: Character(index)) else { continue }
-            formula.operators.enqueue(`operator`)
-        }
+        components.filter { Double($0) == nil }
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { formula.operators.enqueue($0) }
         
         return formula
     }
