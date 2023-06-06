@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Errors: Error {
+enum CalculatorErrors: Error {
     case divideByZero
     case moreOperator
     case emptyQueue
