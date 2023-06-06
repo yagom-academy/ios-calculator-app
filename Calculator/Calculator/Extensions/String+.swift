@@ -7,9 +7,6 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let targetIndex: Index = self.lastIndex(of: target) ?? self.endIndex
-        let targetBeforeWord = String(self.prefix(upTo: targetIndex))
-        
-        return [targetBeforeWord, String(target)]
+        self.components(separatedBy: String(target))
     }
 }
