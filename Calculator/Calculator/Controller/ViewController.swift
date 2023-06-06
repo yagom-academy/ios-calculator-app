@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     @IBOutlet private weak var formulaListScrollView: UIScrollView!
     @IBOutlet private weak var formulaListStackView: UIStackView!
     
+    private var isResultOut: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCurrentStatus()
@@ -51,6 +53,7 @@ class ViewController: UIViewController {
                   let senderTitle = sender.title(for:.normal) else {
                 return
             }
+            guard !isResultOut else { return }
             guard currentOperand != "0" else {
                 currentOperatorLabel.text = senderTitle
                 return
@@ -63,12 +66,31 @@ class ViewController: UIViewController {
                   currentOperator != "" else {
                 return
             }
-            return
+            addNewFormulaStackView()
+            let allFormula = addAllFormulaList()
+            isResultOut = true
+            var formula = ExpressionParser.parse(from: allFormula)
+            do {
+                let result = try formatNumber(formula.result())
+                currentOperandLabel.text = result
+                currentOperatorLabel.text = ""
+            } catch CalculatorError.divideByZero {
+                currentOperatorLabel.text = ""
+                currentOperandLabel.text = "NaN"
+            } catch {
+                print("unknown")
+            }
         default:
             guard let currentOperand = currentOperandLabel.text,
                   let senderTitle = sender.title(for:.normal) else { return }
             guard currentOperand != "0" else {
                 currentOperandLabel.text = senderTitle
+                return
+            }
+            guard !isResultOut else {
+                deleteAllFormulaListStackView()
+                currentOperandLabel.text = senderTitle
+                isResultOut = false
                 return
             }
             currentOperandLabel.text = currentOperand + senderTitle
@@ -85,6 +107,8 @@ class ViewController: UIViewController {
         let operandLabel = UILabel()
         operatorLabel.text = currentOperator
         operandLabel.text = currentOperand
+        operandLabel.textColor = .white
+        operatorLabel.textColor = .white
         newFormulaStackView.addArrangedSubview(operatorLabel)
         newFormulaStackView.addArrangedSubview(operandLabel)
         formulaListStackView.addArrangedSubview(newFormulaStackView)
@@ -100,8 +124,23 @@ class ViewController: UIViewController {
             formulaListStackView.removeArrangedSubview(stack)
         }
     }
+    
+    private func addAllFormulaList() -> String {
+        var result: String = ""
+        let formulaList = formulaListStackView.arrangedSubviews.reduce([]) { mergedResult, subView in
+            mergedResult + subView.subviews
+        }
+        for item in formulaList {
+            guard let singleLabel = item as? UILabel,
+                  let labelText = singleLabel.text else {
+                break
+            }
+            result += labelText
+        }
+        return result
+    }
 
-    func formatNumber(_ number: Int) -> String {
+    func formatNumber(_ number: Double) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
