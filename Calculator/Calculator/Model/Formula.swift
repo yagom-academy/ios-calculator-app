@@ -9,9 +9,10 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    mutating func result() -> Double {
-        var lhs = operands.dequeue()!
-        var rhs = operands.dequeue()!
+    mutating func result() throws -> Double? {
+        guard let lhs = operands.dequeue(), let rhs = operands.dequeue() else {
+            throw CalculateError.invalid
+        }
         var result: Double = 0.0
         
         if operators.peek == String(Operator.add.rawValue) {
