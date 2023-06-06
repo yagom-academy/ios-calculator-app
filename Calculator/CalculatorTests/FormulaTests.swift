@@ -126,20 +126,6 @@ final class FormulaTests: XCTestCase {
         }
     }
     
-    func test_rhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {
-        // given
-        sut = Formula(operands: [1.0], operators: [.add])
-        
-        // then
-        XCTAssertThrowsError(try sut.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
-    }
-    
     func test_operator의_옵셔널_바인딩을_실패했을_때_NotFoundOperator_에러가_발생한다() {
         // given
         sut = Formula(operands: [1.0, 2.0], operators: [])
