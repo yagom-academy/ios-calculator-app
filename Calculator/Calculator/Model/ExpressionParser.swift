@@ -9,7 +9,13 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        return Formula(operands: CalculatorItemQueue(queue: [0.0]), operators: CalculatorItemQueue(queue: [""]))
+        let componentParts = self.componentsByOperators(from: input)
+        let numberPartsStandard = CharacterSet(charactersIn: componentParts.joined())
+        let numberPartsAsString: [String] = input.components(separatedBy: numberPartsStandard)
+        let numberParts: [Double] = numberPartsAsString.compactMap(Double.init)
+        
+        return Formula(operands: CalculatorItemQueue(queue: numberParts),
+                       operators: CalculatorItemQueue(queue: componentParts))
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
