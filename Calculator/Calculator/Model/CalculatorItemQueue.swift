@@ -6,10 +6,12 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {    
-    private(set) var elements: [Element]
+    var elements: [Element]
+    var outStack: [Element]
     
     init(_ elements:[Element] = []) {
         self.elements = elements
+        self.outStack = []
     }
     
     mutating func enqueue(_ element: Element) {
@@ -17,22 +19,23 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element? {
-        if self.elements.isEmpty {
-            return nil
-        } else {
-            return self.elements.removeFirst()
+        if outStack.isEmpty {
+            outStack = elements.reversed()
+            elements.removeAll()
         }
+        return outStack.popLast()
     }
     
     mutating func clear() {
         self.elements.removeAll()
+        self.outStack.removeAll()
     }
     
     var isEmpty: Bool {
-        return self.elements.isEmpty
+        return self.elements.isEmpty && self.outStack.isEmpty
     }
     
     var count: Int {
-        return self.elements.count
+        return self.elements.count + self.outStack.count
     }
 }
