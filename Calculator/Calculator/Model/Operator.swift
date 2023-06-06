@@ -9,7 +9,7 @@ enum Operator: Character, CaseIterable, CalculatorItem {
     case add = "+"
     case subtract = "-"
     case divide = "/"
-    case multifly = "*"
+    case multiply = "*"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -20,28 +20,25 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         case .divide:
             return divide(lhs: lhs, rhs: rhs)
         case .multifly:
-            return multifly(lhs: lhs, rhs: rhs)
+            return multiply(lhs: lhs, rhs: rhs)
         }
     }
 
     func add(lhs: Double, rhs: Double) -> Double {
-        result = lhs + rhs
-        return result
+        return lhs + rhs
     }
 
     func subtract(lhs: Double, rhs: Double) -> Double {
-        result = lhs - rhs
-        return result
+        return lhs - rhs
     }
 
-    func divide(lhs: Double, rhs: Double) -> Double {
-        result = lhs / rhs
-        return result
+    func divide(lhs: Double, rhs: Double) throws -> Double {
+        guard rhs != 0 else { throw CalculationErrors.divisionError }
+        return lhs / rhs
     }
 
-    func multifly(lhs: Double, rhs: Double) -> Double {
-        result = lhs * rhs
-        return result
+    func multiply(lhs: Double, rhs: Double) -> Double {
+        return lhs * rhs
     }
 }
 

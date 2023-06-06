@@ -5,19 +5,17 @@
 //  Created by 박종화 on 2023/06/02.
 //
 
-import Foundation
-
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
 
-    mutating func result() -> Double {
-        guard var result: Double = operands.dequeue() else { return 0 }
+    mutating func result() throws -> Double {
+        guard var result: Double = operands.dequeue() else { throw CalculationErrors.emptyError }
         
         while operators.isEmpty == false {
             var lhs = result
-            guard let rhs: Double = operands.dequeue() else { return 0 }
-            guard let operation: Operator = operators.dequeue() else { return 0 }
+            guard let rhs: Double = operands.dequeue(),
+                  let operation: Operator = operators.dequeue() else { throw CalculationErrors.emptyError }
             
             result = operation.calculate(lhs: lhs, rhs: rhs)
         }

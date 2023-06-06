@@ -18,6 +18,7 @@
 		D06295852A29C244007B97FA /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06295842A29C244007B97FA /* Double.swift */; };
 		D06295872A29C275007B97FA /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06295862A29C275007B97FA /* ExpressionParser.swift */; };
 		D06295892A29C297007B97FA /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06295882A29C297007B97FA /* Formula.swift */; };
+		D06295952A2F3322007B97FA /* CalculationErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06295942A2F3322007B97FA /* CalculationErrors.swift */; };
 		D0CE567A2A25BB4E00D510E9 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE56792A25BB4E00D510E9 /* CalculatorTests.swift */; };
 		D0CE56812A25BBE900D510E9 /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE56802A25BBE900D510E9 /* CalculatorItem.swift */; };
 		D0CE56832A25BC0100D510E9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0CE56822A25BC0100D510E9 /* CalculatorItemQueue.swift */; };
@@ -47,6 +48,7 @@
 		D06295842A29C244007B97FA /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		D06295862A29C275007B97FA /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		D06295882A29C297007B97FA /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
+		D06295942A2F3322007B97FA /* CalculationErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationErrors.swift; sourceTree = "<group>"; };
 		D0CE56772A25BB4E00D510E9 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0CE56792A25BB4E00D510E9 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		D0CE56802A25BBE900D510E9 /* CalculatorItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItem.swift; sourceTree = "<group>"; };
@@ -93,10 +95,9 @@
 			isa = PBXGroup;
 			children = (
 				D06295922A2DA2EB007B97FA /* View */,
-				D06295902A2D9927007B97FA /* Controller */,
+				D06295902A2D9927007B97FA /* ViewController */,
 				D062958F2A2D9895007B97FA /* Model */,
-				D06295822A29C227007B97FA /* String.swift */,
-				D06295842A29C244007B97FA /* Double.swift */,
+				D06295932A2EFC67007B97FA /* +Extension */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -109,18 +110,19 @@
 				D06295802A29BEA7007B97FA /* Operator.swift */,
 				D06295882A29C297007B97FA /* Formula.swift */,
 				D06295862A29C275007B97FA /* ExpressionParser.swift */,
+				D06295942A2F3322007B97FA /* CalculationErrors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		D06295902A2D9927007B97FA /* Controller */ = {
+		D06295902A2D9927007B97FA /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 			);
-			path = Controller;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		D06295922A2DA2EB007B97FA /* View */ = {
@@ -132,6 +134,15 @@
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		D06295932A2EFC67007B97FA /* +Extension */ = {
+			isa = PBXGroup;
+			children = (
+				D06295822A29C227007B97FA /* String.swift */,
+				D06295842A29C244007B97FA /* Double.swift */,
+			);
+			path = "+Extension";
 			sourceTree = "<group>";
 		};
 		D0CE56782A25BB4E00D510E9 /* CalculatorTests */ = {
@@ -243,6 +254,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D0CE56812A25BBE900D510E9 /* CalculatorItem.swift in Sources */,
+				D06295952A2F3322007B97FA /* CalculationErrors.swift in Sources */,
 				D06295872A29C275007B97FA /* ExpressionParser.swift in Sources */,
 				D06295812A29BEA7007B97FA /* Operator.swift in Sources */,
 				D06295852A29C244007B97FA /* Double.swift in Sources */,

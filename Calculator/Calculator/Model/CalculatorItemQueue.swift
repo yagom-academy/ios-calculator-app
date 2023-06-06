@@ -4,43 +4,45 @@
 //
 //  Created by 박종화 on 2023/05/30.
 //
+
 struct CalculatorItemQueue<Element> {
-    private var leftStack: [Element] = []
-    private var rightStack: [Element] = []
+    private var outStack: [Element] = []
+    private var inStack: [Element] = []
     
     internal var count: Int {
-        let stackCount = leftStack + rightStack
+        let stackCount = outStack + inStack
         return stackCount.count
     }
     
     internal var isEmpty: Bool {
-        return rightStack.isEmpty
+        return outStack.isEmpty
     }
     
     internal var peek: Element? {
-        return !leftStack.isEmpty ? leftStack.last : rightStack.first
+        return !outStack.isEmpty ? outStack.last : inStack.first
     }
     
     internal mutating func enqueue(_ element: Element) {
-        rightStack.append(element)
+        inStack.append(element)
     }
     
     internal mutating func dequeue() -> Element? {
-        if leftStack.isEmpty {
-            leftStack = rightStack.reversed()
-            rightStack.removeAll()
+        if outStack.isEmpty {
+            outStack = inStack.reversed()
+            inStack.removeAll()
         }
-        return leftStack.popLast()
+        return outStack.popLast()
     }
     
     internal mutating func clear() {
-        rightStack.removeAll()
+        inStack.removeAll()
+        outStack.removeAll()
     }
 }
 
 extension CalculatorItemQueue: CustomStringConvertible {
     public var description: String {
-        let printList = leftStack.reversed() + rightStack
+        let printList = outStack.reversed() + inStack
         
         return String(describing: printList)
     }
