@@ -9,16 +9,16 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-    var sutForOperand: Formula<Double>!
+    var sut: Formula<Double, Operator>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sutForOperand = Formula(operands: CalculatorItemQueue())
+        sut = Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sutForOperand = nil
+        sut = nil
     }
     
     func test_init_Double타입Queue로_operands가초기화되면빈상태로원소를꺼내면_nil을반환한다() {
@@ -26,8 +26,8 @@ final class FormulaTests: XCTestCase {
         let expectedOperandsQueue: CalculatorItemQueue<Double> = CalculatorItemQueue()
         
         // when
-        sutForOperand.operands = expectedOperandsQueue
-        let result: Double? = sutForOperand.operands.dequeue()
+        sut.operands = expectedOperandsQueue
+        let result: Double? = sut.operands.dequeue()
         
         // then
         XCTAssertNil(result)
@@ -38,8 +38,8 @@ final class FormulaTests: XCTestCase {
         let expectedOperatorsQueue: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
         // when
-        sutForOperand.operators = expectedOperatorsQueue
-        let result: Operator? = sutForOperand.operators.dequeue()
+        sut.operators = expectedOperatorsQueue
+        let result: Operator? = sut.operators.dequeue()
         
         // then
         XCTAssertNil(result)
