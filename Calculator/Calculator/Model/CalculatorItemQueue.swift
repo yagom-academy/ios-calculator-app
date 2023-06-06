@@ -6,6 +6,7 @@
 //
 
 extension Double: CalculateItem { }
+extension Operator: CalculateItem { }
 
 protocol CalculateItem: Equatable { }
 
