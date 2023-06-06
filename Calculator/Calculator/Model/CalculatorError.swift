@@ -9,14 +9,14 @@ import Foundation
 
 enum CalculatorError: LocalizedError {
     case NotANumber
-    case OperationFailed
+    case FailedOperation
     
     var errorDescription: String? {
         switch self {
         case .NotANumber:
             return "NaN"
-        case .OperationFailed:
-            return "Operation Failed"
+        case .FailedOperation:
+            return "Failed Operation"
         }
     }
 }
