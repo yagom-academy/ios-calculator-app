@@ -127,4 +127,5 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
 }

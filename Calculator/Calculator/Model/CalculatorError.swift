@@ -2,7 +2,7 @@
 //  CalculatorError.swift
 //  Calculator
 //
-//  Created by Yena on 2023/06/05.
+//  Created by Dasan on 2023/06/05.
 //
 
 import Foundation

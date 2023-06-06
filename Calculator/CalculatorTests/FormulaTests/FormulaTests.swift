@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  FormulaTests
 //
-//  Created by Yena on 2023/06/03.
+//  Created by Dasan on 2023/06/03.
 //
 
 import XCTest
@@ -22,9 +22,7 @@ final class FormulaTests: XCTestCase {
     }
 
     func test_result_operands에_값이없으면_FailedOperation_error이다() {
-        // given
-        
-        // when, then
+        // given, when, then
         XCTAssertThrowsError(try sut.result()) { error in
             XCTAssertEqual(error as! CalculatorError, CalculatorError.FailedOperation)
         }
@@ -257,5 +255,5 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
-
+    
 }
