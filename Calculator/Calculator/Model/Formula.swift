@@ -5,6 +5,6 @@
 //  Created by Daehoon Lee on 2023/06/06.
 //
 
-struct Formula {
-    
+struct Formula<DataType: CalculateItem> {
+    var operands: CalculatorItemQueue<DataType>?
 }
