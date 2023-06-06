@@ -94,4 +94,15 @@ final class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, 15)
     }
+    
+    func test_마지막에_0으로_나누는_문자열을_넣었을때_결과값이_nan인지() {
+        //given
+        sut = ExpressionParser.parse(from: "10 % 0")
+        
+        //when
+        let result = sut.result()
+        
+        //then
+        XCTAssertEqual(result, Double.nan)
+    }
 }
