@@ -22,6 +22,20 @@
         "identifier" : "3DE0FC122A2DE106007854E6",
         "name" : "MockCalculatorItemQueueTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "3DE0FC4E2A2FEC79007854E6",
+        "name" : "FormulaTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "3DE0FC5B2A2FECA3007854E6",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1
