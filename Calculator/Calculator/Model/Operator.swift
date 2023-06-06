@@ -33,6 +33,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
+        guard rhs != 0 else { return .nan }
+        
         return lhs / rhs
     }
     
