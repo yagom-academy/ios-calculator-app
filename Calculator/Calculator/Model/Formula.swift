@@ -17,7 +17,7 @@ struct Formula {
         while operators.isEmpty == false {
             guard let rightValue = operands.dequeue(),
                   let currentOperator = operators.dequeue() else {
-                throw CalculatorError.FailedOperation
+                return resultValue
             }
             resultValue = try currentOperator.calculate(lhs: resultValue, rhs: rightValue)
         }
