@@ -11,7 +11,7 @@ import XCTest
 final class ExpressionParserTests: XCTestCase {
     var sut: StubExpressionParser!
     let testFormula1 = "1+2−3*4/5"
-    let testFormula2 = "1+2"
+    let testFormula2 = "1−-2"
 
     override func setUpWithError() throws {
         sut = StubExpressionParser()
@@ -30,7 +30,7 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_componentsByOperators에_testFormula2을넣으면_숫자만남은배열이반환된다() {
-        let expectation = ["1", "2"]
+        let expectation = ["1", "-2"]
         
         let result = sut.componentsByOperators(from: testFormula2)
         
@@ -59,10 +59,9 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse에_testFormula2을넣으면_Formula의operands와operators로나뉜다() throws {
         var expectedFormula = Formula()
-        for operand in 1...2 {
-            expectedFormula.operands.enqueue(Double(operand))
-        }
-        expectedFormula.operators.enqueue(Operator.add)
+        expectedFormula.operands.enqueue(1.0)
+        expectedFormula.operands.enqueue(-2.0)
+        expectedFormula.operators.enqueue(Operator.subtract)
         let expectedOperands = expectedFormula.operands.enqueuedCalculatorItems
         let expectedOperators = expectedFormula.operators.enqueuedCalculatorItems
         let formula = try sut.parse(from: testFormula2)
