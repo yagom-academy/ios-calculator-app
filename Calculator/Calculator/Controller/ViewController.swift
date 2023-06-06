@@ -7,38 +7,73 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var acButton: UIButton!
-    @IBOutlet weak var ceButton: UIButton!
-    @IBOutlet weak var negativeButton: UIButton!
-    @IBOutlet weak var divideButton: UIButton!
-    @IBOutlet weak var multiplyButton: UIButton!
-    @IBOutlet weak var subtractButton: UIButton!
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var equalButton: UIButton!
-    @IBOutlet weak var pointButton: UIButton!
-    @IBOutlet weak var doubleZeroButton: UIButton!
-    @IBOutlet weak var zeroButton: UIButton!
-    @IBOutlet weak var oneButton: UIButton!
-    @IBOutlet weak var twoButton: UIButton!
-    @IBOutlet weak var threeButton: UIButton!
-    @IBOutlet weak var fourButton: UIButton!
-    @IBOutlet weak var fiveButton: UIButton!
-    @IBOutlet weak var sixButton: UIButton!
-    @IBOutlet weak var sevenButton: UIButton!
-    @IBOutlet weak var eightButton: UIButton!
-    @IBOutlet weak var nineButton: UIButton!
+    @IBOutlet private weak var acButton: UIButton!
+    @IBOutlet private weak var ceButton: UIButton!
+    @IBOutlet private weak var negativeButton: UIButton!
+    @IBOutlet private weak var divideButton: UIButton!
+    @IBOutlet private weak var multiplyButton: UIButton!
+    @IBOutlet private weak var subtractButton: UIButton!
+    @IBOutlet private weak var addButton: UIButton!
+    @IBOutlet private weak var equalButton: UIButton!
     
-    @IBOutlet weak var currentOperatorLabel: UILabel!
-    @IBOutlet weak var currentNumberLabel: UILabel!
+    @IBOutlet private weak var currentOperatorLabel: UILabel!
+    @IBOutlet private weak var currentNumberLabel: UILabel!
     
-    @IBOutlet weak var formulaListScrollView: UIScrollView!
-    @IBOutlet weak var formulaListStackView: UIStackView!
+    @IBOutlet private weak var formulaListScrollView: UIScrollView!
+    @IBOutlet private weak var formulaListStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setUpCurrentStatus()
+    }
+    
+    @IBAction private func touchUpButton(_ sender: UIButton) {
+        switch sender {
+        case acButton:
+            deleteAllFormulaListStackView()
+            setUpCurrentStatus()
+        case ceButton:
+            currentNumberLabel.text = "0"
+        case negativeButton:
+            return
+        case divideButton:
+            return
+        case multiplyButton:
+            return
+        case subtractButton:
+            return
+        case addButton:
+            return
+        case equalButton:
+            return
+        default:
+            guard let currentNumber = currentNumberLabel.text,
+                  let senderTitle = sender.title(for:.normal) else { return }
+            
+            currentNumberLabel.text = currentNumber + senderTitle
+        }
+    }
+    
+    private func setUpCurrentStatus() {
+        currentNumberLabel.text = "0"
+        currentOperatorLabel.text = ""
+    }
+    
+    private func deleteAllFormulaListStackView() {
+        formulaListStackView.arrangedSubviews.forEach { stack in
+            formulaListStackView.removeArrangedSubview(stack)
+        }
     }
 
-
+    func formatNumber(_ number: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        
+        guard let numberFormatted = numberFormatter.string(for: number) else { return "" }
+        
+        return numberFormatted
+    }
 }
 
