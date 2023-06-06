@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var equalButton: UIButton!
     
     @IBOutlet private weak var currentOperatorLabel: UILabel!
-    @IBOutlet private weak var currentNumberLabel: UILabel!
+    @IBOutlet private weak var currentOperandLabel: UILabel!
     
     @IBOutlet private weak var formulaListScrollView: UIScrollView!
     @IBOutlet private weak var formulaListStackView: UIStackView!
@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCurrentStatus()
+        deleteAllFormulaListStackView()
     }
     
     @IBAction private func touchUpButton(_ sender: UIButton) {
@@ -33,29 +34,64 @@ class ViewController: UIViewController {
             deleteAllFormulaListStackView()
             setUpCurrentStatus()
         case ceButton:
-            currentNumberLabel.text = "0"
+            currentOperandLabel.text = "0"
         case negativeButton:
-            return
-        case divideButton:
-            return
-        case multiplyButton:
-            return
-        case subtractButton:
-            return
-        case addButton:
-            return
+            guard let currentOperand = currentOperandLabel.text,
+                  let firstString = currentOperand.first,
+                  currentOperand != "0" else {
+                return
+            }
+            guard firstString != "-" else {
+                currentOperandLabel.text = String(currentOperand.dropFirst(1))
+                return
+            }
+            currentOperandLabel.text = "-" + currentOperand
+        case divideButton, multiplyButton, subtractButton, addButton:
+            guard let currentOperand = currentOperandLabel.text,
+                  let senderTitle = sender.title(for:.normal) else {
+                return
+            }
+            guard currentOperand != "0" else {
+                currentOperatorLabel.text = senderTitle
+                return
+            }
+            addNewFormulaStackView()
+            currentOperandLabel.text = "0"
+            currentOperatorLabel.text = senderTitle
         case equalButton:
+            guard let currentOperator = currentOperatorLabel.text,
+                  currentOperator != "" else {
+                return
+            }
             return
         default:
-            guard let currentNumber = currentNumberLabel.text,
+            guard let currentOperand = currentOperandLabel.text,
                   let senderTitle = sender.title(for:.normal) else { return }
-            
-            currentNumberLabel.text = currentNumber + senderTitle
+            guard currentOperand != "0" else {
+                currentOperandLabel.text = senderTitle
+                return
+            }
+            currentOperandLabel.text = currentOperand + senderTitle
         }
     }
     
+    private func addNewFormulaStackView() {
+        guard let currentOperand = currentOperandLabel.text,
+              let currentOperator = currentOperatorLabel.text else {
+            return
+        }
+        let newFormulaStackView = UIStackView()
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        operatorLabel.text = currentOperator
+        operandLabel.text = currentOperand
+        newFormulaStackView.addArrangedSubview(operatorLabel)
+        newFormulaStackView.addArrangedSubview(operandLabel)
+        formulaListStackView.addArrangedSubview(newFormulaStackView)
+    }
+    
     private func setUpCurrentStatus() {
-        currentNumberLabel.text = "0"
+        currentOperandLabel.text = "0"
         currentOperatorLabel.text = ""
     }
     
