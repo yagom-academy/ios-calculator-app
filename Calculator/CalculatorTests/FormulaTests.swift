@@ -28,7 +28,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 3)
@@ -43,7 +43,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 6)
@@ -56,7 +56,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, -1)
@@ -71,7 +71,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, -4)
@@ -84,7 +84,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(-5)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 15)
@@ -97,7 +97,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 2)
@@ -112,7 +112,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 6)
@@ -125,7 +125,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 0.5)
@@ -140,7 +140,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(4)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 0.125)
@@ -170,11 +170,30 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(0)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, nil)
     }
+    
+    func test_operators와_operands개수가_같게_입력되었을때_unfinishedFormula_error에_걸리는지() {
+        //given
+        sut.operators.enqueue(Operator.divide)
+        sut.operators.enqueue(Operator.divide)
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
+        let errorMessage = CalculatorErrors.unfinishedFormula
+        var error: CalculatorErrors?
+        
+        //when
+        XCTAssertThrowsError(try sut.result()){ result in
+            error = result as? CalculatorErrors
+        }
+        
+        //then
+        XCTAssertEqual(error, errorMessage)
+    }
+
     
     func test_1더하기2더하기3빼기3일때_결과값이_3인지() {
         //given
@@ -187,7 +206,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try? sut.result()
+        let result = try! sut.result()
         
         //then
         XCTAssertEqual(result, 3)
