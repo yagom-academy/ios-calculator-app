@@ -14,11 +14,22 @@ final class ExpressionParserTests: XCTestCase {
         let expectedString: String = "1+2"
         
         // when
-        var result: Formula = ExpressionParser.parse(from: expectedString)
+        var formula: Formula = ExpressionParser.parse(from: expectedString)
         
         // then
-        XCTAssertEqual(result.operands.dequeue(), 1)
-        XCTAssertEqual(result.operands.dequeue(), 2)
-        XCTAssertEqual(result.operators.dequeue(), .add)
+        XCTAssertEqual(formula.operands.dequeue(), 1)
+        XCTAssertEqual(formula.operands.dequeue(), 2)
+        XCTAssertEqual(formula.operators.dequeue(), .add)
+    }
+    
+    func test_parse_수식이주어지면_음수인피연산자를찾아_subtract연산자와구분하여_연산결과5를반환한다() {
+        // given
+        let expectedString: String = "1+2/-3--6"
+        
+        // when
+        var formula: Formula = ExpressionParser.parse(from: expectedString)
+        
+        // then
+        XCTAssertEqual(formula.result(), 5)
     }
 }
