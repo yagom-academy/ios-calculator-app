@@ -5,7 +5,7 @@
 //  Created by Minseong Kang on 2023/06/05.
 //
 
-class MockLinkedList<T: CalculateItemProtocol>: MockLinkedListProtocol {
+class MockLinkedList<T: CalculateItem>: LinkedListProtocol {
 	var head: DummyNode<T>?
 	var tail: DummyNode<T>?
 	
