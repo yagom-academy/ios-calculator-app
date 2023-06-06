@@ -15,8 +15,8 @@ enum ExpressionParser {
         for component in components {
             if let number = Double(component) {
                 operandQueue.enqueue(item: number)
-            } else if let op = Operator(rawValue: Character(component)) {
-                operatorQueue.enqueue(item: op)
+            } else if let currentOperator = Operator(rawValue: Character(component)) {
+                operatorQueue.enqueue(item: currentOperator)
             }
         }
         
@@ -25,6 +25,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+", "-", "/", "*"])
+        let operators: [Character] = ["+", "-", "/", "*"]
+        return operators.flatMap {input.split(with: $0)}
     }
 }
