@@ -10,7 +10,7 @@ import XCTest
 
 final class ExpressionParserTests: XCTestCase {
     var sut: StubExpressionParser!
-    let testFormula1 = "1+2-3*4/5"
+    let testFormula1 = "1+2−3*4/5"
     let testFormula2 = "1+2"
 
     override func setUpWithError() throws {
