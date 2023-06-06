@@ -57,6 +57,18 @@ final class FormulaTests: XCTestCase {
         XCTAssertTrue(result.isNaN)
     }
     
+    func test_result_Operands가NaN하나만있다면_연산결과는_NaN을반환한다() {
+        // given
+        let expectedOperand: Double = .nan
+        
+        // when
+        sut.operands.enqueue(expectedOperand)
+        let result: Double = sut.result()
+        
+        // then
+        XCTAssertTrue(result.isNaN)
+    }
+    
     func test_result_Operands가1하나만있다면_연산결과는_1을반환한다() {
         // given
         let expectedOperand: Double = 1
