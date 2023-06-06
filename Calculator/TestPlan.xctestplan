@@ -18,6 +18,20 @@
         "identifier" : "44AA604F2A25CA0A00E2BB86",
         "name" : "CalculatorItemQueueTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "4406F6C12A2B300400A3F02D",
+        "name" : "ExpressionParserTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "4406F6FE2A2EC4EF00A3F02D",
+        "name" : "FormulaTests"
+      }
     }
   ],
   "version" : 1
