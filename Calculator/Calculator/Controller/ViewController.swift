@@ -76,12 +76,12 @@ class ViewController: UIViewController {
         guard let currentOperand = currentOperandLabel.text,
               let senderTitle = sender.title(for:.normal) else { return }
         guard currentOperand != DefaultLabelText.zero.name else {
-            currentOperandLabel.text = senderTitle
+            currentOperandLabel.text = senderTitle == "00" ? "0" : senderTitle
             return
         }
         guard !isResultOut else {
             deleteAllFormulaListStackView()
-            currentOperandLabel.text = senderTitle
+            currentOperandLabel.text = senderTitle == "00" ? "0" : senderTitle
             isResultOut = false
             return
         }
@@ -139,6 +139,13 @@ class ViewController: UIViewController {
         newFormulaStackView.addArrangedSubview(operatorLabel)
         newFormulaStackView.addArrangedSubview(operandLabel)
         formulaListStackView.addArrangedSubview(newFormulaStackView)
+        setUpScrollViewOffset()
+    }
+    
+    private func setUpScrollViewOffset() {
+        let offset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height)
+        formulaListScrollView.setContentOffset(offset, animated: false)
+        formulaListScrollView.layoutSubviews()
     }
     
     private func mergeAllFormulaList() -> String {
