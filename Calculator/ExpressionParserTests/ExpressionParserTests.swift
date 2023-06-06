@@ -51,7 +51,8 @@ final class ExpressionParserTests: XCTestCase {
         
         // when, then
         XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
-            XCTAssertEqual(error as? ExpressionParserErrors, ExpressionParserErrors.invalidOperands)
+            XCTAssertEqual(error as? ExpressionParserErrors,
+                           ExpressionParserErrors.invalidOperands)
         }
     }
     
@@ -61,7 +62,8 @@ final class ExpressionParserTests: XCTestCase {
         
         // when, then
         XCTAssertThrowsError(try ExpressionParser.parse(from: input)) { error in
-            XCTAssertEqual(error as? ExpressionParserErrors, ExpressionParserErrors.invalidOperands)
+            XCTAssertEqual(error as? ExpressionParserErrors,
+                           ExpressionParserErrors.invalidOperands)
         }
     }
 }

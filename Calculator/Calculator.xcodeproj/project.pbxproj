@@ -16,6 +16,7 @@
 		4406F6D22A2CED5400A3F02D /* ExpressionParserErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6D12A2CED5400A3F02D /* ExpressionParserErrors.swift */; };
 		4406F6D42A2CF29B00A3F02D /* FormulaErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F6D32A2CF29B00A3F02D /* FormulaErrors.swift */; };
 		4406F7022A2EC4EF00A3F02D /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4406F7012A2EC4EF00A3F02D /* FormulaTests.swift */; };
+		4445FADF2A2F34BD00DCD464 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4445FADE2A2F34BD00DCD464 /* Int+.swift */; };
 		44AA604A2A25C88800E2BB86 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */; };
 		44AA60532A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AA60522A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift */; };
 		44B725BE2A27768200173495 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B725BD2A27768200173495 /* CalculateItem.swift */; };
@@ -65,6 +66,7 @@
 		4406F6D32A2CF29B00A3F02D /* FormulaErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaErrors.swift; sourceTree = "<group>"; };
 		4406F6FF2A2EC4EF00A3F02D /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4406F7012A2EC4EF00A3F02D /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
+		4445FADE2A2F34BD00DCD464 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		44AA604B2A25C9E900E2BB86 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		44AA60502A25CA0A00E2BB86 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				44AA60522A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift */,
+				4445FADE2A2F34BD00DCD464 /* Int+.swift */,
 			);
 			path = CalculatorItemQueueTests;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44AA60532A25CA0A00E2BB86 /* CalculatorItemQueueTests.swift in Sources */,
+				4445FADF2A2F34BD00DCD464 /* Int+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
