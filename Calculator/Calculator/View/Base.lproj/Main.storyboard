@@ -372,7 +372,7 @@
                         <outlet property="divideButton" destination="Tfz-eM-jll" id="Sl2-LO-ysc"/>
                         <outlet property="equalButton" destination="Daw-iX-Owl" id="7iA-Fn-juf"/>
                         <outlet property="formulaListScrollView" destination="BOT-7g-vxv" id="e3w-ti-amp"/>
-                        <outlet property="formulaListStackView" destination="XRe-QE-UJf" id="Y4V-7t-yho"/>
+                        <outlet property="formulaListStackView" destination="XRe-QE-UJf" id="fDu-2M-STa"/>
                         <outlet property="multiplyButton" destination="811-Pz-An6" id="eVN-1i-PO2"/>
                         <outlet property="negativeButton" destination="ows-U7-mNc" id="YGB-Dj-0Pj"/>
                         <outlet property="subtractButton" destination="nTe-Sn-Pvd" id="vZp-2O-1Lh"/>

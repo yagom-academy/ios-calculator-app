@@ -20,19 +20,19 @@ class ViewController: UIViewController {
     @IBOutlet private weak var currentOperandLabel: UILabel!
     
     @IBOutlet private weak var formulaListScrollView: UIScrollView!
-    @IBOutlet private weak var formulaListStackView: UIStackView!
+    @IBOutlet private var formulaListStackView: UIStackView!
     
     private var isResultOut: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCurrentStatus()
-        deleteAllFormulaListStackView()
     }
     
     @IBAction private func touchUpButton(_ sender: UIButton) {
         switch sender {
         case acButton:
+            isResultOut = false
             setUpCurrentStatus()
             deleteAllFormulaListStackView()
         case ceButton:
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     
     private func deleteAllFormulaListStackView() {
         formulaListStackView.arrangedSubviews.forEach { stack in
-            formulaListStackView.removeArrangedSubview(stack)
+            stack.removeFromSuperview()
         }
     }
     
