@@ -22,7 +22,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element? {
-        if isEmpty {
+        if dequeueStack.isEmpty && !enqueueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
