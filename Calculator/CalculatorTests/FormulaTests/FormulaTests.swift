@@ -26,7 +26,7 @@ final class FormulaTests: XCTestCase {
         
         // when, then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as! CalculatorError, CalculatorError.NoValue)
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.OperationFailed)
         }
     }
     
@@ -164,7 +164,7 @@ final class FormulaTests: XCTestCase {
         
         // when, then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as! CalculatorError, CalculatorError.NotDivisibleByZero)
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.NotANumber)
         }
     }
     

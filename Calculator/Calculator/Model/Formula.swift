@@ -11,13 +11,13 @@ struct Formula {
 
     mutating func result() throws -> Double {
         guard var resultValue = operands.dequeue() else {
-            throw CalculatorError.NoValue
+            throw CalculatorError.OperationFailed
         }
         
         while operators.isEmpty == false {
             guard let rightValue = operands.dequeue(),
                   let currentOperator = operators.dequeue() else {
-                throw CalculatorError.NoValue
+                throw CalculatorError.OperationFailed
             }
             resultValue = try currentOperator.calculate(lhs: resultValue, rhs: rightValue)
         }
