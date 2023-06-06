@@ -8,4 +8,9 @@
 protocol CalculateItem { }
 
 extension Double: CalculateItem { }
-extension String: CalculateItem { }
+
+extension String: CalculateItem {
+    func split(with target: Character) -> [String] {
+        self.components(separatedBy: String(target))
+    }
+}
