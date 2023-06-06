@@ -9,16 +9,8 @@ enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula(operands: CalculatorItemQueue<Double>(),
                                        operators: CalculatorItemQueue<Operator>())
-        var operandCandidates = componentsByOperators(from: input)
-        
-        for index in 0..<operandCandidates.count - 1 {
-            if operandCandidates[index].isEmpty {
-                operandCandidates[index + 1] = "-\(operandCandidates[index + 1])"
-            }
-        }
-            
-        var operands = operandCandidates.compactMap { Double($0) }
-        let operatorCandidates: String = input.hasPrefix("-") ? String(input.suffix(from: input.index(input.startIndex, offsetBy: 1))) : input
+        let operands = componentsByOperators(from: input).compactMap { Double($0) }
+        let operatorCandidates: String = input.hasPrefix("-") ? String(input.suffix(input.count - 1)) : input
         let operators = operatorCandidates
             .replacingOccurrences(of: "+-", with: "+")
             .replacingOccurrences(of: "--", with: "-")
@@ -33,8 +25,16 @@ enum ExpressionParser {
     }
         
     static private func componentsByOperators(from input: String) -> [String] {
-        return Operator.allCases.reduce([input]) { splitedInput, `operator` in
-            splitedInput.map { $0.split(with: `operator`.rawValue) }.flatMap { $0 }
+        var operands: [String] = Operator.allCases.reduce([input]) { splitInput, operatorCase in
+            splitInput.map { $0.split(with: operatorCase.rawValue) }.flatMap { $0 }
         }
+        
+        for index in 0..<operands.count - 1 {
+            if operands[index].isEmpty {
+                operands[index + 1] = "-\(operands[index + 1])"
+            }
+        }
+        
+        return operands
     }
 }
