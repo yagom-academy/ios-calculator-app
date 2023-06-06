@@ -5,11 +5,11 @@
 //  Created by Min Hyun on 2023/05/29.
 //
 
-class CalculatorItemNode {
-    private(set) var value: CalculateItem
+class CalculatorItemNode<Element: CalculateItem> {
+    private(set) var value: Element
     private(set) var next: CalculatorItemNode?
     
-    init(_ value: CalculateItem) {
+    init(_ value: Element) {
         self.value = value
     }
     

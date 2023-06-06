@@ -6,12 +6,12 @@
 //
 @testable import Calculator
 
-struct CalculatorItemQueueFake: QueueType {
-    var head: CalculatorItemNode? = nil
-    var tail: CalculatorItemNode? = nil
+struct CalculatorItemQueueFake<Element: CalculateItem>: QueueType {
+    var head: CalculatorItemNode<Element>? = nil
+    var tail: CalculatorItemNode<Element>? = nil
     var count: Int = 0
     
-    mutating func enqueue(_ value: CalculateItem) {
+    mutating func enqueue(_ value: Element) {
         let newNode = CalculatorItemNode(value)
         count += 1
         guard let lastNode = tail else {
@@ -23,7 +23,7 @@ struct CalculatorItemQueueFake: QueueType {
         tail = newNode
     }
     
-    mutating func dequeue() throws -> CalculateItem {
+    mutating func dequeue() throws -> Element {
         guard let firstNode = head else {
             throw CalculatorError.indexOutOfRange
         }
