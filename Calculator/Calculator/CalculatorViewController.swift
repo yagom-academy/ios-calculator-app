@@ -6,13 +6,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
-    var isPrevResult = false
-    var inputFormula = ""
+    private var isPrevResult = false
+    private var inputFormula = ""
     private let initialNumber = 0
     
     // MARK: - View LifeCycle
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - Button Action
-extension ViewController {
+extension CalculatorViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
         guard currentOperandLabel.text != "\(initialNumber)", isPrevResult == false else {
             currentOperatorLabel.text = isFirstArithmeticFormula() ? "" : sender.currentTitle
@@ -82,7 +82,7 @@ extension ViewController {
 }
 
 // MARK: - Calculate Method
-extension ViewController {
+extension CalculatorViewController {
     private func changeOperandSign() {
         guard let currentOperandString = currentOperandLabel.text,
               Int(currentOperandString) != initialNumber else { return }
