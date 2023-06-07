@@ -13,7 +13,11 @@ class CalculatorViewController: UIViewController {
     
     private var currentOperand: String = ""
     private var currentOperator: String = ""
-    private var formula: String = ""
+    private var formula: String = "" {
+        didSet {
+            print(formula)
+        }
+    }
     
     override func viewDidLoad() {
         self.updateOperandWithDisplay(by: Symbol.empty)
@@ -114,7 +118,7 @@ class CalculatorViewController: UIViewController {
             self.updateOperandWithDisplay(by: Symbol.empty)
         case .tapEqualButton:
             guard self.formula.isNotEmpty else { return }
-            self.formula += self.currentOperator + self.displayLabel.unwrappedText
+            self.formula += self.currentOperator + self.currentOperand
         }
     }
     
