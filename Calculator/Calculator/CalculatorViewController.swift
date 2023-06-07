@@ -92,6 +92,26 @@ extension CalculatorViewController {
         currentOperandLabel.text = "\(currentOperand)"
     }
     
+    private func calculateResult() -> String? {
+        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return nil }
+        
+        return result
+    }
+    
+    private func addInputFormula() {
+        inputFormula += currentOperatorLabel.text ?? ""
+        inputFormula += currentOperandLabel.text ?? ""
+    }
+}
+
+// MARK: - UI Method
+extension CalculatorViewController {
     private func addArithmeticStackView(){
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -120,22 +140,5 @@ extension CalculatorViewController {
     
     private func isFirstArithmeticFormula() -> Bool {
         return calculationFormulaStackView.subviews.count == 0
-    }
-    
-    private func addInputFormula() {
-        inputFormula += currentOperatorLabel.text ?? ""
-        inputFormula += currentOperandLabel.text ?? ""
-    }
-    
-    private func calculateResult() -> String? {
-        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
-        guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return nil }
-        
-        return result
     }
 }
