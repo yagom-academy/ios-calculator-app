@@ -18,7 +18,8 @@ enum ExpressionParser {
             formula.operands.enqueue($0)
         }
     
-        let operators = input.filter({ $0.isNumber == false }).compactMap({ Operator(rawValue: $0) })
+        let operators = input.filter { $0.isNumber == false }
+                             .compactMap { Operator(rawValue: $0) }
         
         operators.forEach {
             formula.operators.enqueue($0)
@@ -28,11 +29,13 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators = String(Operator.allCases.map{ $0.rawValue })
+        var operands: [String]
         
-        let OperatorCharacterSet = CharacterSet(charactersIn: operators)
-        let operands = input.components(separatedBy: OperatorCharacterSet)
-        
+        operands = Operator.allCases.reduce([input]) { accumulatedArray, operatorItem in
+            accumulatedArray.map { $0.split(with: operatorItem.rawValue) }
+                            .flatMap { $0 }
+        }
+
         return operands
     }
 }
