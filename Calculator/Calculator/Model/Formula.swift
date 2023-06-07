@@ -13,20 +13,18 @@ struct Formula {
         guard !operands.isEmpty else {
             return Double.nan
         }
-        guard let firstOperand = operands.dequeue(), !firstOperand.isNaN else {
+        guard var partialResult = operands.dequeue(), !partialResult.isNaN else {
             return Double.nan
         }
         
-        var result: Double = firstOperand
-        
         while let operatorCase = operators.dequeue() {
             guard let nextOperand = operands.dequeue() else {
-                return result
+                return partialResult
             }
             
-            result = operatorCase.calculate(lhs: result, rhs: nextOperand)
+            partialResult = operatorCase.calculate(lhs: partialResult, rhs: nextOperand)
         }
         
-        return result
+        return partialResult
     }
 }
