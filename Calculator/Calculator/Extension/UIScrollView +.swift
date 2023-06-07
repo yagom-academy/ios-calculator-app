@@ -8,7 +8,6 @@ import UIKit
 
 extension UIScrollView {
     func scrollToBottom(animated: Bool) {
-        self.layoutIfNeeded()
         self.setContentOffset(CGPoint(x: 0, y: self.contentSize.height - self.bounds.height), animated: animated)
     }
 }

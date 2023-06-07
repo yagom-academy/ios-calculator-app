@@ -136,6 +136,7 @@ extension CalculatorViewController {
         [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
         
         calculationFormulaStackView.addArrangedSubview(stackView)
+        scrollView.layoutIfNeeded()
     }
     
     private func clearCalculationFormulaStackView() {
