@@ -7,13 +7,21 @@
 
 enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
     static func parse(from input: String) -> Formula<OperandQueue, OperatorQueue> {
-        let operatorComponents = input.compactMap { Operator(rawValue: $0) }
-        let operandComponents = componentsByOperators(from: input).compactMap { return Double($0) }
         var operatorQueue = OperatorQueue()
         var operandQueue = OperandQueue()
         
-        operatorComponents.forEach{ operatorQueue.enqueue(element: $0) }
-        operandComponents.forEach { operandQueue.enqueue(element: $0) }
+        input
+            .compactMap { Operator(rawValue: $0) }
+            .forEach {
+            operatorQueue.enqueue(element: $0)
+        }
+        
+        componentsByOperators(from: input)
+            .compactMap { return Double($0) }
+            .forEach {
+            operandQueue.enqueue(element: $0)
+        }
+        
         let formula = Formula(operands: operandQueue, operators: operatorQueue)
         
         return formula
