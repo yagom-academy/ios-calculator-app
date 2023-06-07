@@ -12,8 +12,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
     var isPrevResult = false
-    private let initialNumber = 0
     var inputFormula = ""
+    private let initialNumber = 0
+    
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +24,7 @@ class ViewController: UIViewController {
 // MARK: - Button Action
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
-        if currentOperandLabel.text == "\(initialNumber)" {
+        if currentOperandLabel.text == "\(initialNumber)" || isPrevResult == true {
             currentOperatorLabel.text = isFirstArithmeticFormula() ? "" : sender.currentTitle
             return
         }
@@ -55,6 +56,12 @@ extension ViewController {
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {
         guard let insertedNumber = sender.currentTitle else { return }
+        
+        if isPrevResult {
+            currentOperandLabel.text = "\(initialNumber)"
+            isPrevResult = false
+        }
+        
         let currentOperand = currentOperandLabel.text ?? "\(initialNumber)"
         
         currentOperandLabel.text = Int(currentOperand) == initialNumber ? insertedNumber : currentOperand + insertedNumber
