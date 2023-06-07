@@ -12,15 +12,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
     private let initialNumber = 0
-    
+    var inputFormula = ""
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 빼기 : −
-        // 음수 : -
-        
-        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: "-16*7+99+4")
     }
 }
 
@@ -35,12 +30,17 @@ extension ViewController {
         let arithmeticView = makeArithmeticView()
         
         calculationFormulaStackView.addArrangedSubview(arithmeticView)
+        addInputFormula()
+        
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
     }
     
     @IBAction func didTappedCalculate(_ sender: UIButton) {
+        addInputFormula()
         
+        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
+        currentOperandLabel.text = "\(formula.result())"
     }
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {
@@ -57,10 +57,13 @@ extension ViewController {
         switch menu {
         case .allCelar:
             clearCalculationFormulaStackView()
+            inputFormula = ""
             currentOperatorLabel.text = ""
             fallthrough
+            
         case .clearElement:
             currentOperandLabel.text = "\(initialNumber)"
+            
         case .changeSign:
             changeOperandSign()
         }
@@ -106,5 +109,10 @@ extension ViewController {
     
     private func isFirstArithmeticFormula() -> Bool {
         return calculationFormulaStackView.subviews.count == 0
+    }
+    
+    private func addInputFormula() {
+        inputFormula += currentOperatorLabel.text ?? ""
+        inputFormula += currentOperandLabel.text ?? ""
     }
 }
