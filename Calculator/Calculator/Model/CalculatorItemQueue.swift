@@ -15,11 +15,11 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     }
     
     internal var isEmpty: Bool {
-        return outputStack.isEmpty
+        return outputStack.isEmpty && inputStack.isEmpty
     }
     
     internal var peek: Element? {
-        return !outputStack.isEmpty ? outputStack.last : inputStack.first
+        return outputStack.isEmpty ? outputStack.last : inputStack.first
     }
     
     internal mutating func enqueue(_ element: Element) {
