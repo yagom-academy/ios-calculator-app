@@ -367,10 +367,10 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(expection, 8.0)
 	}
 	
-	func tests_MockExpressionParser_componentsByOperators호출시_String으로들어간_연산표현이_하나씩_나뉘어_배열에들어가_반환된다() {
+	func tests_MockExpressionParser_componentsByOperators호출시_String연산표현이_연산자빼고_배열로들어가_반환된다() {
 		// given
 		let expression = "1+2"
-		let expection = ["1","+","2"]
+		let expection = ["1","2"]
 		
 		// when
 		let result = MockExpressionParser<Double>.componentsByOperators(from: expression)
