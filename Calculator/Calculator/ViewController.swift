@@ -57,7 +57,8 @@ extension ViewController {
         switch menu {
         case .allCelar:
             clearCalculationFormulaStackView()
-            currentOperandLabel.text = ""
+            currentOperatorLabel.text = ""
+            fallthrough
         case .clearElement:
             currentOperandLabel.text = "\(initialNumber)"
         case .changeSign:
