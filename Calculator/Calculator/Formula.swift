@@ -9,24 +9,24 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operatos: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         var result: Double = 0
         
         guard !operatos.isEmpty else {
-            return 0.1 // 추후 에러처리
+            return operands.dequeue() ?? 0
         }
         
         guard var lhs = operands.dequeue() else {
-            return 0.2 // 추후 에러처리
+            return 0
         }
         
-        while !operatos.isEmpty {
+        while let currentOperator = operatos.dequeue() {
             
-            guard let rhs = operands.dequeue(), let currentOperator = operatos.dequeue() else {
-                return 0.3 // 추후 에러처리
+            guard let rhs = operands.dequeue() else {
+                throw CalculatorError.incompleteFormula
             }
             
-            result = currentOperator.calculate(lhs: lhs, rhs: rhs)
+            result = try currentOperator.calculate(lhs: lhs, rhs: rhs)
             lhs = result
         }
         
