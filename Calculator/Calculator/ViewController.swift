@@ -28,7 +28,7 @@ class ViewController: UIViewController {
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
         if currentOperandLabel.text == "\(initialNumber)" {
-            currentOperatorLabel.text = sender.currentTitle
+            currentOperatorLabel.text = isFirstArithmeticFormula() ? "" : sender.currentTitle
             return
         }
         
@@ -102,5 +102,9 @@ extension ViewController {
     
     private func clearCalculationFormulaStackView() {
         calculationFormulaStackView.subviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func isFirstArithmeticFormula() -> Bool {
+        return calculationFormulaStackView.subviews.count == 0
     }
 }
