@@ -14,16 +14,10 @@ struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQ
         while operators.isEmpty == false {
             guard let operand = operands.dequeue(),
                   let `operator` = operators.dequeue() else { return 0.0 }
-            
-            if isDivideZero(operand, `operator`) { return Double.nan }
-            
+
             result = `operator`.calculate(lhs: result, rhs: operand)
         }
 
         return result
-    }
-    
-    private func isDivideZero(_ operand: Double,_ operator: Operator) -> Bool {
-        return operand == 0.0 && `operator` == .divide
     }
 }
