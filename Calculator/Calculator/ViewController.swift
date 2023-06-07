@@ -27,9 +27,7 @@ extension ViewController {
             return
         }
         
-        let arithmeticView = makeArithmeticView()
-        
-        calculationFormulaStackView.addArrangedSubview(arithmeticView)
+        addArithmeticStackView()
         addInputFormula()
         
         currentOperatorLabel.text = sender.currentTitle
@@ -37,10 +35,17 @@ extension ViewController {
     }
     
     @IBAction func didTappedCalculate(_ sender: UIButton) {
+        addArithmeticStackView()
         addInputFormula()
         
         var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
-        currentOperandLabel.text = "\(formula.result())"
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return }
+        currentOperandLabel.text = "\(result)"
     }
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {
@@ -81,7 +86,7 @@ extension ViewController {
         currentOperandLabel.text = "\(currentOperand)"
     }
     
-    private func makeArithmeticView() -> UIStackView {
+    private func addArithmeticStackView(){
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -100,7 +105,7 @@ extension ViewController {
         
         [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
         
-        return stackView
+        calculationFormulaStackView.addArrangedSubview(stackView)
     }
     
     private func clearCalculationFormulaStackView() {
