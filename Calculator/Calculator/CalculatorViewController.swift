@@ -30,10 +30,7 @@ extension CalculatorViewController {
             return
         }
         
-        addArithmeticStackView()
-        addInputFormula()
-        scrollView.scrollToBottom(animated: true)
-        
+        addArithmetic()
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
     }
@@ -41,9 +38,7 @@ extension CalculatorViewController {
     @IBAction func didTappedCalculate(_ sender: UIButton) {
         guard isPrevResult == false else { return }
         
-        addArithmeticStackView()
-        addInputFormula()
-        scrollView.scrollToBottom(animated: true)
+        addArithmetic()
         
         guard let result = calculateResult() else { return }
         
@@ -115,7 +110,13 @@ extension CalculatorViewController {
 
 // MARK: - UI Method
 extension CalculatorViewController {
-    private func addArithmeticStackView(){
+    private func addArithmetic() {
+        addFormulaStackView()
+        addInputFormula()
+        scrollView.scrollToBottom(animated: true)
+    }
+    
+    private func addFormulaStackView(){
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
