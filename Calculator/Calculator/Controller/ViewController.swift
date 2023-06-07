@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var formula: String = ""
-    var numberFormatter = NumberFormatter()
+    let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandsLabel: UILabel!
@@ -18,28 +18,64 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         clearLabel()
-        setNumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.usesSignificantDigits = true
     }
     
-    @IBAction func TapOptionButton(_ sender: UIButton) {
+    @IBAction func TapOperatorButton(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
         
-        switch title {
-        case "AC":
-            clearLabel()
-            clearFormula()
-        case "CE":
-            clearLabel()
-        case "⁺⁄₋":
-            break
-        default:
-            break
-        }
+        addFormula()
+        
+        operatorLabel.text = title
     }
     
-    @IBAction func TapOperatroButton(_ sender: UIButton) {
-        guard let title = sender.currentTitle else { return }
+    @IBAction func TapEqualButton(_ sender: UIButton) {
+        addFormula()
         
+        var formula = ExpressionParser.parse(from: self.formula)
+        let result = numberFormatter.string(for: formula.result())
+        
+        operandsLabel.text = result
+        clearFormula()
+    }
+    
+    @IBAction func TapNumberButton(_ sender: UIButton) {
+        guard let inputNumber = sender.currentTitle,
+              let operands = operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
+              let num = Double(operands + inputNumber),
+              let result = numberFormatter.string(for: num) else { return }
+        
+        operandsLabel.text = result
+    }
+    
+    @IBAction func TapDecimalPointButton(_ sender: UIButton) {
+        guard let inputNumber = sender.currentTitle,
+              let operands = operandsLabel.text else { return }
+        
+        let result = operands + inputNumber
+        
+        operandsLabel.text = result
+    }
+    
+    @IBAction func TapACButton(_ sender: UIButton) {
+        clearLabel()
+        clearFormula()
+    }
+    
+    @IBAction func TapCEButton(_ sender: UIButton) {
+        clearLabel()
+    }
+    
+    @IBAction func TapChangeSignButton(_ sender: UIButton) {
+        
+    }
+    
+    func addFormula() {
         if self.formula == "" && operandsLabel.text != "0"  {
             self.formula += "\(operandsLabel.text!) "
             clearLabel()
@@ -47,25 +83,6 @@ class ViewController: UIViewController {
             self.formula += "\(operatorLabel.text!) \(operandsLabel.text!) "
             clearLabel()
         }
-                
-        if title == "=" {
-            var formula = ExpressionParser.parse(from: self.formula)
-            clearFormula()
-            operandsLabel.text = numberFormatter.string(for: formula.result())
-            return
-        }
-        
-        operatorLabel.text = title
-    }
-    
-    @IBAction func TapNumberButton(_ sender: UIButton) {
-        guard let inputNumber = sender.currentTitle else { return }
-        guard var operands = operandsLabel.text else { return }
-        
-        operands += inputNumber
-        guard let Number = Double(operands) else { return }
-        
-        operandsLabel.text = numberFormatter.string(for: Number)
     }
     
     func clearLabel() {
@@ -78,9 +95,11 @@ class ViewController: UIViewController {
     }
     
     func setNumberFormatter() {
-        numberFormatter.maximumFractionDigits = 19
-        numberFormatter.maximumSignificantDigits = 20
         numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 2
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.usesSignificantDigits = true
     }
     
 }
