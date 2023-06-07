@@ -12,7 +12,7 @@ enum ExpressionParser {
         
         let components = componentsByOperators(from: input)
         
-        for component in components {
+        components.forEach { component in
             if let number = Double(component) {
                 operandQueue.enqueue(item: number)
             } else if let currentOperator = Operator(rawValue: Character(component)) {
@@ -21,6 +21,7 @@ enum ExpressionParser {
         }
         
         let formula = Formula(operands: operandQueue, operators: operatorQueue)
+        
         return formula
     }
     
