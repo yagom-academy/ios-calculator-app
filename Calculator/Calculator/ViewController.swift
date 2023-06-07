@@ -28,25 +28,9 @@ class ViewController: UIViewController {
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
         guard currentOperandLabel.text != "\(initialNumber)" else { return }
-        // TODO: Insert StackView
-        
-        calculationFormulaStackView.backgroundColor = .blue
-        let stackView = UIStackView()
-        stackView.backgroundColor = .red
-        stackView.axis = .horizontal
-        stackView.spacing = 8
-        
-        let operandLabel = UILabel()
-        let operatorLabel = UILabel()
-        
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        operandLabel.text = currentOperandLabel.text
-        operatorLabel.text = currentOperatorLabel.text
-        
-        [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
-        calculationFormulaStackView.addArrangedSubview(stackView)
+
+        let arithmeticView = makeArithmeticView()
+        calculationFormulaStackView.addArrangedSubview(arithmeticView)
         
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
@@ -88,5 +72,27 @@ extension ViewController {
 
         currentOperand = -currentOperand
         currentOperandLabel.text = "\(currentOperand)"
+    }
+    
+    private func makeArithmeticView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        
+        let operandLabel = UILabel()
+        let operatorLabel = UILabel()
+        
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        operandLabel.textColor = .white
+        operatorLabel.textColor = .white
+        
+        operandLabel.text = currentOperandLabel.text
+        operatorLabel.text = currentOperatorLabel.text
+        
+        [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
     }
 }
