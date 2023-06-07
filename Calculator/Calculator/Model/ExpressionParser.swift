@@ -28,14 +28,14 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        var numbers: [String] = [input]
+        var components: [String] = [input]
         
         Operator.allCases.forEach { `operator` in
-            numbers = numbers.flatMap {
+            components = components.flatMap {
                 $0.split(with: `operator`.rawValue)
             }
         }
         
-        return numbers
+        return components
     }
 }
