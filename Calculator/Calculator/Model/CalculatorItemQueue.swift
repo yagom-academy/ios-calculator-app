@@ -39,11 +39,3 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         outputStack.removeAll()
     }
 }
-
-extension CalculatorItemQueue: CustomStringConvertible {
-    public var description: String {
-        let printList = outputStack.reversed() + inputStack
-        
-        return String(describing: printList)
-    }
-}
