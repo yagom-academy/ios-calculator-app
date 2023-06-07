@@ -8,15 +8,15 @@
 import Foundation
 
 enum CalculatorError: LocalizedError {
-    case NotANumber
-    case FailedOperation
+    case notANumber
+    case invalidOperation
     
     var errorDescription: String? {
         switch self {
-        case .NotANumber:
+        case .notANumber:
             return "NaN"
-        case .FailedOperation:
-            return "Failed Operation"
+        case .invalidOperation:
+            return "invalid Operation"
         }
     }
 }

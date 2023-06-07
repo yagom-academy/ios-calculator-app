@@ -24,7 +24,7 @@ final class FormulaTests: XCTestCase {
     func test_result_operands에_값이없으면_FailedOperation_error이다() {
         // given, when, then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as! CalculatorError, CalculatorError.FailedOperation)
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.invalidOperation)
         }
     }
     
@@ -162,7 +162,7 @@ final class FormulaTests: XCTestCase {
         
         // when, then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as! CalculatorError, CalculatorError.NotANumber)
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.notANumber)
         }
     }
     
