@@ -11,12 +11,9 @@ enum ExpressionParser {
                                        operators: CalculatorItemQueue<Operator>())
         let operands = componentsByOperators(from: input).compactMap { Double($0) }
         let operatorCandidates: String = String(input.suffix(input.count - 1))
-        let operators = operatorCandidates
-            .replacingOccurrences(of: "+-", with: "+")
-            .replacingOccurrences(of: "--", with: "-")
-            .replacingOccurrences(of: "/-", with: "/")
-            .replacingOccurrences(of: "*-", with: "*")
-            .compactMap { Operator(rawValue: $0) }
+        let operators = Operator.allCases.reduce(operatorCandidates) {
+            return $0.replacingOccurrences(of: "\($1.rawValue)-", with: "\($1.rawValue)")
+        }.compactMap { Operator(rawValue: $0) }
         
         operands.forEach { formula.operands.enqueue($0) }
         operators.forEach { formula.operators.enqueue($0) }
