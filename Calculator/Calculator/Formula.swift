@@ -5,8 +5,6 @@
 //  Created by idinaloq on 2023/06/02.
 //
 
-
-
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
