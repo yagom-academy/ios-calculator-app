@@ -5,7 +5,7 @@
 //  Created by Hyungmin Lee on 2023/06/02.
 //
 
-enum CaculateError: Swift.Error {
+enum CaculateError: Error {
     case notHaveOperands
     case notANumber
 }
