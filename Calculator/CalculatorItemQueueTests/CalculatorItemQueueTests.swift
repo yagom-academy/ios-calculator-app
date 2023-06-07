@@ -332,4 +332,21 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(expection, 2.0)
 	}
+	
+	func tests_MockFormula_results호출시_연산자가_divide일경우_피연산자를_나누기한_연산결과를_반환한다() {
+		// given
+		let operands = sut!
+		sut.enqueue(4.0)
+		sut.enqueue(2.0)
+		
+		let `operator` = mockOperatorCalculatorItemQueue!
+		`operator`.enqueue(.divide)
+		
+		// when
+		let result = MockFormula(operands: operands, operators: `operator`)
+		let expection = result.result()
+		
+		// then
+		XCTAssertEqual(expection, 2.0)
+	}
 }
