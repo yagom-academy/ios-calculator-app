@@ -23,7 +23,11 @@ struct Formula {
             }
             
             if let compute = Operator(rawValue: Character(modifier)) {
-                result = compute.calculate(lhs: lhs, rhs: rhs)
+                do {
+                    result = try compute.calculate(lhs: lhs, rhs: rhs)
+                } catch CalculateError.voidNumber {
+                    result = 0.0
+                }
             }
         }
         
