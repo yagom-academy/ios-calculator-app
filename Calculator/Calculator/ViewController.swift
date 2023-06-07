@@ -11,6 +11,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
+    var isPrevResult = false
     private let initialNumber = 0
     var inputFormula = ""
     // MARK: - View LifeCycle
@@ -35,6 +36,8 @@ extension ViewController {
     }
     
     @IBAction func didTappedCalculate(_ sender: UIButton) {
+        guard isPrevResult == false else { return }
+        
         addArithmeticStackView()
         addInputFormula()
         
@@ -45,7 +48,9 @@ extension ViewController {
         numberFormatter.maximumFractionDigits = 20
         
         guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return }
+        
         currentOperandLabel.text = "\(result)"
+        isPrevResult = true
     }
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {

@@ -12,8 +12,8 @@ struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQ
         guard var result = operands.dequeue() else { return 0.0 }
         
         while operators.isEmpty == false {
-            guard let operand = operands.dequeue() else { break }
-            guard let `operator` = operators.dequeue() else { break }
+            guard let operand = operands.dequeue(),
+                  let `operator` = operators.dequeue() else { return 0.0 }
             
             if isDivideZero(operand, `operator`) { return Double.nan }
             
