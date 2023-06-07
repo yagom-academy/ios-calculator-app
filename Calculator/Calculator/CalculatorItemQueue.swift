@@ -10,6 +10,9 @@ protocol CalculateItem { }
 protocol Queueable {
     associatedtype Element
     
+    var isEmpty: Bool { get }
+    
+    init()
     mutating func enqueue(element: Element)
     mutating func dequeue() -> Element?
 }
@@ -17,6 +20,10 @@ protocol Queueable {
 struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
     private var head: Item<Element>?
     private var tail: Item<Element>?
+    
+    var isEmpty: Bool {
+        return head == nil
+    }
     
     mutating func enqueue(element: Element) {
         let item = Item(element)
