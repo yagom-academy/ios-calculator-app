@@ -315,4 +315,21 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(expection, 3.0)
 	}
+	
+	func tests_MockFormula_results호출시_연산자가_subtract일경우_빼기_연산결과를_반환한다() {
+		// given
+		let operands = sut!
+		sut.enqueue(3.0)
+		sut.enqueue(1.0)
+		
+		let `operator` = mockOperatorCalculatorItemQueue!
+		`operator`.enqueue(.subtract)
+		
+		// when
+		let result = MockFormula(operands: operands, operators: `operator`)
+		let expection = result.result()
+		
+		// then
+		XCTAssertEqual(expection, 2.0)
+	}
 }
