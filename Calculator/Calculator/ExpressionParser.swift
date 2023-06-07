@@ -5,8 +5,6 @@
 //  Created by idinaloq on 2023/06/02.
 //
 
-import Foundation
-
 enum Expressionparser {
     static func parse(from input: String) -> Formula {
         let components: [String] = componentsByOperators(from: input)
@@ -29,9 +27,10 @@ enum Expressionparser {
         var result: [String] = [input]
         
         Operator.allCases.forEach { operatorCase in
-            result = result.flatMap { $0.components(separatedBy: String(operatorCase.rawValue)) }
+            result = result.flatMap { $0.split(with: operatorCase.rawValue) }
         }
         
         return result
     }
 }
+
