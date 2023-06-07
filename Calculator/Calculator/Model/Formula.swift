@@ -6,11 +6,11 @@
 //
 
 struct Formula {
-    var operands = CalculatorItemQueue<Double>()
-    var operators = CalculatorItemQueue<Operator>()
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() else {
+        guard var accumulateValue = operands.dequeue() else {
             throw OperationError.operandNotEnoughError
         }
 
@@ -19,9 +19,9 @@ struct Formula {
                 throw OperationError.operatorNotEnoughError
             }
             
-            result = try operatorsElement.calculate(lhs: result, rhs: nextOperand)
+            accumulateValue = try operatorsElement.calculate(lhs: accumulateValue, rhs: nextOperand)
         }
         
-        return result
+        return accumulateValue
     }
 }
