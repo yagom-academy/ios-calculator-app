@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 // MARK: - Button Action
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
-        if currentOperandLabel.text == "\(initialNumber)" || isPrevResult == true {
+        guard currentOperandLabel.text != "\(initialNumber)", isPrevResult == false else {
             currentOperatorLabel.text = isFirstArithmeticFormula() ? "" : sender.currentTitle
             return
         }
