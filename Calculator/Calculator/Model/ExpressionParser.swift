@@ -26,7 +26,7 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        let operators: [Character] = ["+", "-", "/", "*"]
+        let operators = Operator.allCases.map { String($0.rawValue)}.joined()
         return operators.flatMap {input.split(with: $0)}
     }
 }
