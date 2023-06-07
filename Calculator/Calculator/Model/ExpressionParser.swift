@@ -5,6 +5,8 @@
 //  Created by Daehoon Lee on 2023/06/06.
 //
 
+import Foundation
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var formula: Formula = Formula(operands: CalculatorItemQueue<Double>(),
