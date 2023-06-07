@@ -1,5 +1,5 @@
 //
-//  QueueConfigurable.swift
+//  Queueable.swift
 //  Calculator
 //
 //  Created by Whales on 2023/06/04.
