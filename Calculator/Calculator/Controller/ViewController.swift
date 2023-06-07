@@ -49,6 +49,12 @@ class ViewController: UIViewController {
               let num = Double(operands + inputNumber),
               let result = numberFormatter.string(for: num) else { return }
         
+        if operands.contains(".") && inputNumber == "0" || inputNumber == "00" {
+            let result = operands + inputNumber
+            setOperandsLabel(result)
+            return
+        }
+        
         setOperandsLabel(result)
     }
     
@@ -115,6 +121,7 @@ class ViewController: UIViewController {
     private func setNumberFormatter() {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = -2
+        numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.usesSignificantDigits = true
     }
