@@ -27,11 +27,14 @@ class ViewController: UIViewController {
 // MARK: - Button Action
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
-        guard currentOperandLabel.text != "\(initialNumber)" else { return }
-
-        let arithmeticView = makeArithmeticView()
-        calculationFormulaStackView.addArrangedSubview(arithmeticView)
+        if currentOperandLabel.text == "\(initialNumber)" {
+            currentOperatorLabel.text = sender.currentTitle
+            return
+        }
         
+        let arithmeticView = makeArithmeticView()
+        
+        calculationFormulaStackView.addArrangedSubview(arithmeticView)
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
     }
@@ -53,7 +56,7 @@ extension ViewController {
         
         switch menu {
         case .allCelar:
-            // TODO : All Clear
+            clearCalculationFormulaStackView()
             currentOperandLabel.text = ""
         case .clearElement:
             currentOperandLabel.text = "\(initialNumber)"
@@ -94,5 +97,9 @@ extension ViewController {
         [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
         
         return stackView
+    }
+    
+    private func clearCalculationFormulaStackView() {
+        calculationFormulaStackView.subviews.forEach { $0.removeFromSuperview() }
     }
 }
