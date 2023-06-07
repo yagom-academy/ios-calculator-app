@@ -281,47 +281,22 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(expection, 1.0)
 	}
 	
-	func tests_MockFormula_results호출시_lhs_값이_반환된다() {
+	
+	func tests_MockFormula_results호출시_operands값이_반환된다() {
 		// given
-		sut.enqueue(3.0)
-		guard let inputOperand = sut.dequeue() else { return }
+		let operands = sut!
+		operands.enqueue(3.0)
+		operands.enqueue(2.0)
 		
-		mockOperatorCalculatorItemQueue.enqueue(.add)
-		guard let inputOperator = mockOperatorCalculatorItemQueue.dequeue() else { return }
-		
-		let dummyOperands: MockLinkedList<Double> = MockLinkedList<Double>()
-		let operands = MockCalculatorItemQueue<Double>(dummyList: dummyOperands)
-		operands.enqueue(inputOperand)
-		
-		let dummyOperator: MockLinkedList<Operator> = MockLinkedList<Operator>()
-		let `operator` = MockCalculatorItemQueue<Operator>(dummyList: dummyOperator)
-		`operator`.enqueue(inputOperator)
+		let `operator` = mockOperatorCalculatorItemQueue!
+		`operator`.enqueue(.add)
 		
 		// when
 		let result = MockFormula(operands: operands, operators: `operator`)
 		let expection = result.result()
 		
 		// then
-		XCTAssertEqual(expection, 3.0)
-	}
-	
-	func tests_MockFormula_results호출시_operands값이_반환된다() {
-		// given
-		let dummyOperands: MockLinkedList<Double> = MockLinkedList<Double>()
-		let operands = MockCalculatorItemQueue<Double>(dummyList: dummyOperands)
-		operands.enqueue(3.0)
-		operands.enqueue(2.0)
-		
-		let dummyOperator: MockLinkedList<Operator> = MockLinkedList<Operator>()
-		let `operator` = MockCalculatorItemQueue<Operator>(dummyList: dummyOperator)
-		`operator`.enqueue(.add)
-		
-		// whem
-		let result = MockFormula(operands: operands, operators: `operator`)
-		let expection = result.result()
-		
-		// then
-		XCTAssertEqual(expection, 2.0)
+		XCTAssertEqual(expection, 5.0)
 	}
 	
 	func tests_MockFormuls_results호출시_연산자가_add일경우_피연산자를_더한값을_반환한다() {
