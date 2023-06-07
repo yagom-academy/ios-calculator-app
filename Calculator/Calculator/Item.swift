@@ -5,7 +5,7 @@
 //  Created by Hyungmin Lee on 2023/06/01.
 //
 
-final class Item<Element> {
+final class Item<Element: CalculateItem> {
     var next: Item?
     var element: Element
     
