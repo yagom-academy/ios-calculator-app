@@ -7,8 +7,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,3 +20,21 @@ class ViewController: UIViewController {
     }
 }
 
+// MARK: - Button Action
+extension ViewController {
+    @IBAction func didTappedOperators(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTappedCalculate(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTappedNumbers(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func didTappedMenus(_ sender: UIButton) {
+        
+    }
+}
