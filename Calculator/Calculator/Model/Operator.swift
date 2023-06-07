@@ -4,6 +4,7 @@
 //
 //  Created by kangkyungmin on 2023/06/07.
 //
+import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
@@ -29,18 +30,18 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        return NSDecimalNumber(decimal: (Decimal(lhs) + Decimal(rhs))).doubleValue
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        return NSDecimalNumber(decimal: (Decimal(lhs) - Decimal(rhs))).doubleValue
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        return lhs / rhs
+        return NSDecimalNumber(decimal: (Decimal(lhs) / Decimal(rhs))).doubleValue
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        return NSDecimalNumber(decimal: (Decimal(lhs) * Decimal(rhs))).doubleValue
     }
 }
