@@ -20,7 +20,7 @@ enum MockExpressionParser<T: CalculateItem> {
 		// 1+2
 		var expressions: [String] = []
 		input.forEach {
-			expressions = input.split(with: $0)
+			expressions.append(String($0))
 		}
 		
 		return expressions
