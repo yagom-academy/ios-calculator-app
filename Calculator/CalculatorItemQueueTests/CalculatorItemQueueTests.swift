@@ -366,4 +366,16 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(expection, 8.0)
 	}
+	
+	func tests_MockExpressionParser_componentsByOperators호출시_String으로들어간_연산표현이_연산자를기준으로_잘라져_반환된다() {
+		// given
+		let expression = "1+2"
+		let expection = ["1","+","2"]
+		
+		// when
+		let result = MockExpressionParser<Double>.componentsByOperators(from: expression)
+		
+		// then
+		XCTAssertEqual(result, expection)
+	}
 }
