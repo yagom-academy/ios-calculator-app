@@ -42,13 +42,7 @@ extension ViewController {
         addArithmeticStackView()
         addInputFormula()
         
-        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
-        
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
-        guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return }
+        guard let result = calculateResult() else { return }
         
         currentOperandLabel.text = "\(result)"
         isPrevResult = true
@@ -131,5 +125,17 @@ extension ViewController {
     private func addInputFormula() {
         inputFormula += currentOperatorLabel.text ?? ""
         inputFormula += currentOperandLabel.text ?? ""
+    }
+    
+    private func calculateResult() -> String? {
+        var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
+        
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return nil }
+        
+        return result
     }
 }
