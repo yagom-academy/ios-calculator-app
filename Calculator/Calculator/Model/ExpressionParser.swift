@@ -13,10 +13,8 @@ enum ExpressionParser {
         var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
         let components = componentsByOperators(from: input)
-        
-        let operatorsArray = components.filter { (element) -> Bool in
-            return ["+", "-", "/", "*"].contains(element)
-        }
+        let operatorsArray = components.filter { ["+", "-", "/", "*"].contains($0) }
+        let operandsArray = components.filter { !["+", "-", "/", "*"].contains($0) }
         
         for element in operatorsArray {
             let changeToCharacter = Character(element)
@@ -26,6 +24,14 @@ enum ExpressionParser {
             }
             
             operators.enqueue(changeToOperator)
+        }
+        
+        for element in operandsArray {
+            guard let element = Double(element) else {
+                throw CalculatorError.invalidNumber
+            }
+            
+            operands.enqueue(element)
         }
         
         return Formula(operands: operands, operators: operators)
