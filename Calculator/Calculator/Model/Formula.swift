@@ -15,9 +15,9 @@ struct Formula {
         while operators.isEmpty == false {
             let lhs = result
             guard let rhs: Double = operands.dequeue(),
-                  let operation: Operator = operators.dequeue() else { throw CalculationErrors.emptyStack }
+                  let oper: Operator = operators.dequeue() else { throw CalculationErrors.emptyStack }
             
-            result = operation.calculate(lhs: lhs, rhs: rhs)
+            result = oper.calculate(lhs: lhs, rhs: rhs)
         }
         
         return result
