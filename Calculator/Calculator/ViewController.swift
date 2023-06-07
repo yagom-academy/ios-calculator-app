@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
+    @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
     private let initialNumber = 0
     
@@ -26,9 +27,29 @@ class ViewController: UIViewController {
 // MARK: - Button Action
 extension ViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
+        guard currentOperandLabel.text != "\(initialNumber)" else { return }
         // TODO: Insert StackView
         
+        calculationFormulaStackView.backgroundColor = .blue
+        let stackView = UIStackView()
+        stackView.backgroundColor = .red
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        
+        let operandLabel = UILabel()
+        let operatorLabel = UILabel()
+        
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        operandLabel.text = currentOperandLabel.text
+        operatorLabel.text = currentOperatorLabel.text
+        
+        [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
+        calculationFormulaStackView.addArrangedSubview(stackView)
+        
         currentOperatorLabel.text = sender.currentTitle
+        currentOperandLabel.text = "\(initialNumber)"
     }
     
     @IBAction func didTappedCalculate(_ sender: UIButton) {
