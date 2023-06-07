@@ -26,16 +26,17 @@ struct Formula {
         
         result = lhs
         
-        while operands.peek() != nil {
-            guard let rhs = operands.dequeue() else {
-                return result
+        while let `operator` = operators.dequeue(), let rhs = operands.dequeue() {
+            do {
+                result = try `operator`.calculate(lhs: result, rhs: rhs)
+            } catch let error as CalculatorError {
+                switch error {
+                case .divisionError:
+                    print(error.message)
+                }
+            } catch {
+                print("알 수 없는 에러 발생")
             }
-            
-            guard let `operator` = operators.dequeue() else {
-                return result
-            }
-            
-            result = `operator`.calculate(lhs: result, rhs: rhs)
         }
         
         return result
