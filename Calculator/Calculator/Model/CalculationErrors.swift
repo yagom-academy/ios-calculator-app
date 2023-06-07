@@ -9,5 +9,5 @@ import Foundation
 
 enum CalculationErrors: Error {
     case emptyStack
-    case dividedbyZero
+    case dividedByZero
 }
