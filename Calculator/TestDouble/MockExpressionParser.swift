@@ -17,10 +17,23 @@ enum MockExpressionParser<T: CalculateItem> {
 	}
 	
 	static func componentsByOperators(from input: String) -> [String] {
-		// 1+2
 		var expressions: [String] = []
+		var operatorList: [String] = []
+		
+		let operators = Operator.allCases.compactMap { String($0.rawValue) }
+		for `operator` in operators {
+			operatorList.append(`operator`)
+		}
+		
 		input.forEach {
 			expressions.append(String($0))
+		}
+		
+		operatorList.forEach {
+			let isContainOperator = expressions.contains($0)
+			guard isContainOperator else { return }
+			guard let operatorIndex = expressions.firstIndex(of: $0) else { return }
+			expressions.remove(at: operatorIndex)
 		}
 		
 		return expressions
