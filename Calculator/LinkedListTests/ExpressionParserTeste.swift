@@ -17,7 +17,7 @@ final class ExpressionParserTeste: XCTestCase {
     override func tearDownWithError() throws {
     }
 
-    func test1_parse_1_더하기_10을_넣으면_1을_반환한다() {
+    func test1_parse_1_더하기_10을_넣고_operands를_dequeue를_하면_1을_반환한다() {
         // given
         let input = "1 + 10"
         
@@ -30,7 +30,7 @@ final class ExpressionParserTeste: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test2_parse_1_더하기_10을_넣으면_10을_반환한다() {
+    func test2_parse_1_더하기_10을_넣고_operands를_dequeue를_2번_하면_10을_반환한다() {
         // given
         let input = "1 + 10"
         
@@ -44,7 +44,7 @@ final class ExpressionParserTeste: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test3_parse_1_더하기_10을_넣으면_더하기를_반환한다() {
+    func test3_parse_1_더하기_10을_넣고_operatos를_dequeue하면_더하기를_반환한다() {
         // given
         let input = "1 + 10"
         
@@ -57,7 +57,7 @@ final class ExpressionParserTeste: XCTestCase {
         XCTAssertEqual(result, expectedValue)
     }
     
-    func test4_parse_1_더하기_10_빼기_1을_넣으면_빼기를_반환한다() {
+    func test4_parse_1_더하기_10_빼기_1을_넣고_operatos를_2번_dequeue하면_빼기를_반환한다() {
         // given
         let input = "1 + 10 - 1"
         
