@@ -14,6 +14,10 @@ extension CalculatorItemQueue {
 struct CalculatorItemQueue<Element: CalculateItem> {
     private var list: LinkedList<Element> = LinkedList()
     
+    var isEmpty: Bool {
+        return list.isEmpty
+    }
+    
     mutating func enqueue(_ value: Element) {
         list.append(data: value)
     }

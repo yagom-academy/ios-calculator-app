@@ -7,12 +7,6 @@
 
 import Foundation
 
-extension String {
-    func split(with target: Character) -> [String] {
-        return split(separator: target).map { String($0) }
-    }
-}
-
 enum Expressionparser {
     static func parse(from input: String) -> Formula {
         let components: [String] = componentsByOperators(from: input)

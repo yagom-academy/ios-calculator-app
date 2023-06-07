@@ -6,7 +6,7 @@
 //
 
 enum CalculateError: Error {
-    case divideToZero
+    case divideByZero
     case calculateItemQueueIsNil
     
 }
