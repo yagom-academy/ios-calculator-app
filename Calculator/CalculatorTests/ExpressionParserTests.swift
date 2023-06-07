@@ -9,14 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class ExpressionParserTests: XCTestCase {
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        
-    }
-
     func test_componentsByOperators_숫자와_연산자가_섞인_문자열을_연산자로_나누고_숫자배열을_반환한다() {
         // given
         let numberWithOperators = "1+2−3÷4×5"
