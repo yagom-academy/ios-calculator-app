@@ -18,7 +18,13 @@ struct MockFormula<T: CalculateItem, U: CalculateItem>: MockFormulaProtocol {
 	var operators: MockCalculatorItemQueue<U>?
 	
 	func result() -> Double {
-		return 0.0
+		let lhs = operands.flatMap { $0.mockList?.head?.value }
+		guard let lhsOperand = lhs as? Double else { return -1.0 }
+		
+		let rhs = operands.flatMap { $0.mockList?.tail?.value }
+		guard let rhsOperand = rhs as? Double else { return -1.0 }
+		
+		return lhsOperand
 	}
 	
 	init(operands: MockCalculatorItemQueue<T>, operators: MockCalculatorItemQueue<U>) {
