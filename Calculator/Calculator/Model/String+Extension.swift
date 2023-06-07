@@ -9,9 +9,8 @@ import Foundation
 
 extension String {
 	func split(with target: Character) -> [String] {
-		let splitByTarget = self.split(separator: target)
-		let result = splitByTarget.map { String($0) }
+		let splitByTarget = self.split(separator: target).map { String($0)}
 
-		return result
+		return splitByTarget
 	}
 }
