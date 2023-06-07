@@ -14,11 +14,12 @@ final class ExpressionParserTests: XCTestCase {
         let input = "1+2"
         
         // when
-        let result = try! ExpressionParser.parse(from: input)
+        var result = try! ExpressionParser.parse(from: input)
 
         // then
-        XCTAssertEqual(result.operands.takeQueueAsList(), [1.0, 2.0])
-        XCTAssertEqual(result.operators.takeQueueAsList(), [.add])
+        XCTAssertEqual(result.operands.dequeue(), 1.0)
+        XCTAssertEqual(result.operands.dequeue(), 2.0)
+        XCTAssertEqual(result.operators.dequeue(), .add)
     }
     
     func test_1더하기2빼기3을인수로넣고_parse호출시_결과의숫자큐에는1과2와3이연산큐에는더하기빼기가들어간다() {
@@ -26,11 +27,14 @@ final class ExpressionParserTests: XCTestCase {
         let input = "1+2-3"
         
         // when
-        let result = try! ExpressionParser.parse(from: input)
+        var result = try! ExpressionParser.parse(from: input)
 
         // then
-        XCTAssertEqual(result.operands.takeQueueAsList(), [1.0, 2.0, 3.0])
-        XCTAssertEqual(result.operators.takeQueueAsList(), [.add, .subtract])
+        XCTAssertEqual(result.operands.dequeue(), 1.0)
+        XCTAssertEqual(result.operands.dequeue(), 2.0)
+        XCTAssertEqual(result.operands.dequeue(), 3.0)
+        XCTAssertEqual(result.operators.dequeue(), .add)
+        XCTAssertEqual(result.operators.dequeue(), .subtract)
     }
     
     func test_3을인수로넣고_parse호출시_결과의숫자큐에는3이들어가고연산큐는비어있다() {
@@ -38,11 +42,11 @@ final class ExpressionParserTests: XCTestCase {
         let input = "3"
         
         // when
-        let result = try! ExpressionParser.parse(from: input)
+        var result = try! ExpressionParser.parse(from: input)
 
         // then
-        XCTAssertEqual(result.operands.takeQueueAsList(), [3.0])
-        XCTAssertEqual(result.operators.takeQueueAsList(), [])
+        XCTAssertEqual(result.operands.dequeue(), 3.0)
+        XCTAssertEqual(result.operators.dequeue(), nil)
     }
     
     func test_2더하기a를인수로넣고_parse호출시_invalidOperands오류를반환한다() {
