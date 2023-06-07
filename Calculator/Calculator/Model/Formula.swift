@@ -14,9 +14,9 @@ struct Formula {
             return 0.0
         }
         
-        while let `operator` = operators.dequeue(), let rhs = operands.dequeue() {
+        while let `operator` = operators.dequeue(), let nextOperand = operands.dequeue() {
             do {
-                result = try `operator`.calculate(lhs: result, rhs: rhs)
+                result = try `operator`.calculate(lhs: result, rhs: nextOperand)
             } catch let error as CalculatorError {
                 switch error {
                 case .divisionError:
