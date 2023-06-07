@@ -6,7 +6,7 @@
 //
 
 enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
-    static func parse (from input: String) -> Formula<OperandQueue, OperatorQueue> {
+    static func parse(from input: String) -> Formula<OperandQueue, OperatorQueue> {
         let operatorComponents = input.compactMap { Operator(rawValue: $0) }
         let operandComponents = componentsByOperators(from: input).compactMap { return Double($0) }
         var operatorQueue = OperatorQueue()
