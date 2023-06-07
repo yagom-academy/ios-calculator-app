@@ -10,9 +10,6 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() -> Double {
-        guard !operands.isEmpty else {
-            return Double.nan
-        }
         guard var partialResult = operands.dequeue(), !partialResult.isNaN else {
             return Double.nan
         }
