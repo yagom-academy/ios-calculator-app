@@ -40,18 +40,17 @@ class ViewController: UIViewController {
     @IBAction func TapOperatroButton(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
         
-        if self.formula == "" {
+        if self.formula == "" && operandsLabel.text != "0"  {
             self.formula += "\(operandsLabel.text!) "
             clearLabel()
-        } else {
+        } else if operandsLabel.text != "0" {
             self.formula += "\(operatorLabel.text!) \(operandsLabel.text!) "
             clearLabel()
         }
-        
+                
         if title == "=" {
             var formula = ExpressionParser.parse(from: self.formula)
             clearFormula()
-            clearLabel()
             operandsLabel.text = numberFormatter.string(for: formula.result())
             return
         }
