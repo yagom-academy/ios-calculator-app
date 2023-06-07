@@ -18,12 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         clearLabel()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.usesSignificantDigits = true
+        setNumberFormatter()
     }
     
     @IBAction func TapOperatorButton(_ sender: UIButton) {
@@ -38,9 +33,9 @@ class ViewController: UIViewController {
         addFormula()
         
         var formula = ExpressionParser.parse(from: self.formula)
-        let result = numberFormatter.string(for: formula.result())
+        guard let result = numberFormatter.string(for: formula.result()) else { return }
         
-        operandsLabel.text = result
+        updateOperandsLabel(result)
         clearFormula()
     }
     
@@ -50,7 +45,7 @@ class ViewController: UIViewController {
               let num = Double(operands + inputNumber),
               let result = numberFormatter.string(for: num) else { return }
         
-        operandsLabel.text = result
+        updateOperandsLabel(result)
     }
     
     @IBAction func TapDecimalPointButton(_ sender: UIButton) {
@@ -59,7 +54,7 @@ class ViewController: UIViewController {
         
         let result = operands + inputNumber
         
-        operandsLabel.text = result
+        updateOperandsLabel(result)
     }
     
     @IBAction func TapACButton(_ sender: UIButton) {
@@ -72,7 +67,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func TapChangeSignButton(_ sender: UIButton) {
+        guard var operands = operandsLabel.text else { return }
         
+        if operands.contains("-") {
+            operands.removeFirst()
+        } else {
+            operands.insert("-", at: operands.startIndex)
+        }
+        
+        updateOperandsLabel(operands)
     }
     
     func addFormula() {
@@ -83,6 +86,10 @@ class ViewController: UIViewController {
             self.formula += "\(operatorLabel.text!) \(operandsLabel.text!) "
             clearLabel()
         }
+    }
+    
+    func updateOperandsLabel(_ data: String) {
+        operandsLabel.text = data
     }
     
     func clearLabel() {
@@ -96,8 +103,7 @@ class ViewController: UIViewController {
     
     func setNumberFormatter() {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 2
-        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = -2
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.usesSignificantDigits = true
     }
