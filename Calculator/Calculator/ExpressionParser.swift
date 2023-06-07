@@ -28,44 +28,6 @@ enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where O
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        var remainFormula: String = input
-        var operandComponents = [String]()
-        
-        while true {
-            let splitFormulaByFirstOperator: [String] = splitRemainStringByFirstOperator(remainFormula)
-            
-            if isSplitByFirstOperator(splitFormulaByFirstOperator) == false {
-                operandComponents.append(remainFormula)
-                break
-            }
-            
-            guard let operand = splitFormulaByFirstOperator.first,
-                  let remainString = splitFormulaByFirstOperator.last else { break }
-            
-            operandComponents.append(operand)
-            remainFormula = remainString
-        }
-        
-        return operandComponents
-//      return input.components(separatedBy: ["+", "−", "*", "/"])
-    }
-}
-
-extension ExpressionParser {
-    static private func splitRemainStringByFirstOperator(_ remainString: String) -> [String] {
-        var splitListByFirstOperator: [String] = []
-        
-        for character in remainString {
-            if let `operator` = Operator(rawValue: character) {
-                splitListByFirstOperator = remainString.split(with: `operator`.rawValue)
-                break
-            }
-        }
-        
-        return splitListByFirstOperator
-    }
-    
-    static private func isSplitByFirstOperator(_ splitListByFirstOperator: [String]) -> Bool {
-        return splitListByFirstOperator.count != 0
+      return input.components(separatedBy: ["+", "−", "*", "/"])
     }
 }
