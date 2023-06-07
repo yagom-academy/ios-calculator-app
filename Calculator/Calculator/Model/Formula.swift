@@ -10,8 +10,9 @@ struct Formula {
     let operators: CalculatorItemQueue<Operator>
     
     func result() -> Double {
+        let defaultValue: Double = 0.0
         guard let firstOperand = operands.dequeueItem() else {
-            return 0.0
+            return defaultValue
         }
         
         var result = firstOperand
