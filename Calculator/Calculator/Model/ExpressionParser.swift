@@ -10,7 +10,7 @@ enum ExpressionParser {
         var formula: Formula = Formula(operands: CalculatorItemQueue<Double>(),
                                        operators: CalculatorItemQueue<Operator>())
         let operands = componentsByOperators(from: input).compactMap { Double($0) }
-        let operatorCandidates: String = input.hasPrefix("-") ? String(input.suffix(input.count - 1)) : input
+        let operatorCandidates: String = String(input.suffix(input.count - 1))
         let operators = operatorCandidates
             .replacingOccurrences(of: "+-", with: "+")
             .replacingOccurrences(of: "--", with: "-")
