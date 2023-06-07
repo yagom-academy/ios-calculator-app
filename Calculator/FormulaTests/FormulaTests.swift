@@ -63,12 +63,12 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.add)
         sut.operators.enqueue(Operator.subtract)
         let expectation = 3.0
-        
+
         let result = try sut.result()
-        
+
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_operands에2_4_2가있고_operators에더하기나누기가있을때_result는3이반환된다() throws {
         sut.operands.enqueue(2.0)
         sut.operands.enqueue(4.0)
@@ -76,12 +76,12 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.add)
         sut.operators.enqueue(Operator.divide)
         let expectation = 3.0
-        
+
         let result = try sut.result()
-        
+
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_operands에10_4_2가있고_operators에빼기곱하기가있을때_result는12가반환된다() throws {
         sut.operands.enqueue(10.0)
         sut.operands.enqueue(4.0)
@@ -89,12 +89,12 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.subtract)
         sut.operators.enqueue(Operator.multiply)
         let expectation = 12.0
-        
+
         let result = try sut.result()
-        
+
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_operands에10_4_2가있고_operators에빼기나누기가있을때_result는3이반환된다() throws {
         sut.operands.enqueue(10.0)
         sut.operands.enqueue(4.0)
@@ -102,12 +102,12 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.subtract)
         sut.operators.enqueue(Operator.divide)
         let expectation = 3.0
-        
+
         let result = try sut.result()
-        
+
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_operands에1_4_2가있고_operators에곱하기나누기가있을때_result는2가반환된다() throws {
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(4.0)
@@ -115,20 +115,20 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.multiply)
         sut.operators.enqueue(Operator.divide)
         let expectation = 2.0
-        
+
         let result = try sut.result()
-        
+
         XCTAssertEqual(result, expectation)
     }
-    
+
     func test_operands에1_0이있고operators에나누기가있을때_result를수행하면_에러를던진다() throws {
         sut.operands.enqueue(1.0)
         sut.operands.enqueue(0.0)
         sut.operators.enqueue(Operator.divide)
-        
+
         XCTAssertThrowsError(try sut.result())
     }
-    
+
     func test_operands에값이없을때_result를수행하면_에러를던진다() {
         XCTAssertThrowsError(try sut.result())
     }

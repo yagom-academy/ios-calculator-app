@@ -55,16 +55,4 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNil(result)
     }
-    
-    func test_1_2_3을enqueue하고_한번dequeue하면_count는2를반환한다() {
-        for input in 1...3 {
-            sut.enqueue(Double(input))
-        }
-        sut.dequeue()
-        let expectation = 2
-        
-        let result = sut.count()
-        
-        XCTAssertEqual(expectation, result)
-    }
 }

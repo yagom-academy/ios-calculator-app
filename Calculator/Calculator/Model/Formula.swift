@@ -7,15 +7,18 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
-    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>(enqueuedCalculatorItems: [Operator.add])
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
     
     mutating func result() throws -> Double {
-        var operationCount = operators.count()
-        var result = 0.0
+        var result: Double?
+        var lhs: Double?
         
-        while operationCount > 0 {
-            guard let operand = operands.dequeue(),
-                  let operationResult = operators.dequeue()?.calculate(lhs: result, rhs: operand) else {
+        while !operators.isEmpty {
+            (lhs == nil) ? (lhs = operands.dequeue()) : (lhs = result)
+            
+            guard let lhs,
+                  let rhs = operands.dequeue(),
+                  let operationResult = operators.dequeue()?.calculate(lhs: lhs, rhs: rhs) else {
                 throw FormulaError.operationError
             }
             
@@ -24,7 +27,10 @@ struct Formula {
             }
             
             result = operationResult
-            operationCount -= 1
+        }
+        
+        guard let result else {
+            throw FormulaError.operationError
         }
         
         return result
