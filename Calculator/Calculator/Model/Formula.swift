@@ -12,12 +12,12 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     
     mutating func result() throws -> Double {
-        guard var firstOperand = operands.dequeue() else { throw CalculatorErrors.unfinishedFormula }
+        guard var firstOperand = operands.dequeue() else {
+            throw CalculatorError.invalidFormula
+        }
         
-        while let newOperator = operators.dequeue() {
-            guard let SecondOperand = operands.dequeue() else { throw CalculatorErrors.unfinishedFormula }
-            
-            firstOperand = try newOperator.calculate(lhs: firstOperand, rhs: SecondOperand)
+        while let newOperator = operators.dequeue(), let secondOperand = operands.dequeue() {
+            firstOperand = try newOperator.calculate(lhs: firstOperand, rhs: secondOperand)
         }
         
         return firstOperand

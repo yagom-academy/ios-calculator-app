@@ -1,5 +1,5 @@
 //
-//  Errors.swift
+//  CalculatorError.swift
 //  Calculator
 //
 //  Created by mint on 2023/06/06.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CalculatorErrors: Error {
+enum CalculatorError: Error {
     case divideByZero
-    case unfinishedFormula
+    case invalidFormula
 }

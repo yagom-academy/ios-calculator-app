@@ -120,30 +120,15 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, 0.1)
     }
     
-    func test_operators로_끝나는_문자열이_입력되었을때_unfinishedFormula_error에_걸리는지() {
-        //given
-        sut = ExpressionParser.parse(from: "1 % 2 % ")
-        let errorMessage = CalculatorErrors.unfinishedFormula
-        var error: CalculatorErrors?
-        
-        //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
-        }
-        
-        //then
-        XCTAssertEqual(error, errorMessage)
-    }
-    
     func test_operators_문자열만_입력되었을때_unfinishedFormula_error에_걸리는지() {
         //given
         sut = ExpressionParser.parse(from: "% ")
-        let errorMessage = CalculatorErrors.unfinishedFormula
-        var error: CalculatorErrors?
+        let errorMessage = CalculatorError.invalidFormula
+        var error: CalculatorError?
         
         //when
         XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
+            error = result as? CalculatorError
         }
         
         //then
@@ -153,12 +138,12 @@ final class ExpressionParserTests: XCTestCase {
     func test_빈문자열이_입력되었을때_unfinishedFormula_error에_걸리는지() {
         //given
         sut = ExpressionParser.parse(from: " ")
-        let errorMessage = CalculatorErrors.unfinishedFormula
-        var error: CalculatorErrors?
+        let errorMessage = CalculatorError.invalidFormula
+        var error: CalculatorError?
         
         //when
         XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
+            error = result as? CalculatorError
         }
         
         //then

@@ -151,43 +151,12 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(Operator.divide)
         sut.operands.enqueue(10)
         sut.operands.enqueue(0)
-        let errorMessage = CalculatorErrors.divideByZero
-        var error: CalculatorErrors?
+        let errorMessage = CalculatorError.divideByZero
+        var error: CalculatorError?
         
         //when
         XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
-        }
-        
-        //then
-        XCTAssertEqual(error, errorMessage)
-    }
-    
-    func test_10나누기0일때_결과값이_nil인지() {
-        //given
-        sut.operators.enqueue(Operator.divide)
-        sut.operands.enqueue(10)
-        sut.operands.enqueue(0)
-        
-        //when
-        let result = try! sut.result()
-        
-        //then
-        XCTAssertEqual(result, nil)
-    }
-    
-    func test_operators와_operands개수가_같게_입력되었을때_unfinishedFormula_error에_걸리는지() {
-        //given
-        sut.operators.enqueue(Operator.divide)
-        sut.operators.enqueue(Operator.divide)
-        sut.operands.enqueue(1)
-        sut.operands.enqueue(2)
-        let errorMessage = CalculatorErrors.unfinishedFormula
-        var error: CalculatorErrors?
-        
-        //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
+            error = result as? CalculatorError
         }
         
         //then
@@ -196,12 +165,12 @@ final class FormulaTests: XCTestCase {
 
     func test_아무것도입력되지않았을때_unfinishedFormula_error에_걸리는지() {
         //given
-        let errorMessage = CalculatorErrors.unfinishedFormula
-        var error: CalculatorErrors?
+        let errorMessage = CalculatorError.invalidFormula
+        var error: CalculatorError?
         
         //when
         XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorErrors
+            error = result as? CalculatorError
         }
         
         //then
