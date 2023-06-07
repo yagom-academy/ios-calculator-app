@@ -6,44 +6,20 @@
 //
 
 enum ExpressionParser {
-    static func parse(from input: String) throws -> Formula {
-        var formula = Formula()
-        let operatorSet = Operator.allCases
-            .map{ $0.rawValue }
-            .reduce("", { String($0) + String($1) })
+    static func parse(from input: String) -> Formula {
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
-        for element in componentsByOperators(from: input) {
-            guard let doubleElement = Double(element) else {
-                throw ConvertTypeError.invaildStringToDouble
-            }
-            
-            formula.operands.enqueue(doubleElement)
-        }
-        
-        for element in input.filter({ operatorSet.contains($0) }) {
-            guard let operatorsElement = Operator(rawValue: element) else {
-                throw ConvertTypeError.invaildRawValueToCase
-            }
-            
-            formula.operators.enqueue(operatorsElement)
-        }
-        
-        return formula
+        componentsByOperators(from: input).compactMap { Double($0) }.forEach { element in operands.enqueue(element) }
+
+        input.compactMap { Operator(rawValue: $0) }.forEach { element in operators.enqueue(element) }
+                    
+        return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        var components = [input]
-        
-        for operatorsElement in Operator.allCases {
-            var newComponents = [String]()
-            
-            components.forEach{ element in
-                newComponents.append(contentsOf: element.split(with: operatorsElement.rawValue))
-            }
-            
-            components = newComponents
-        }
-        
-        return components
+        return Operator.allCases.reduce([input], { resultArray, operators in
+            resultArray.map { $0.split(with: operators.rawValue) }.flatMap { $0 }
+        })
     }
 }
