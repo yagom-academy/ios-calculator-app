@@ -8,7 +8,6 @@
 import Foundation
 
 enum FormulaErrors {
-    case invalidFormula
     case noValueInQueue
     case notDivisibleByZero
 }
@@ -16,8 +15,6 @@ enum FormulaErrors {
 extension FormulaErrors: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .invalidFormula:
-            return "유효하지 않은 수식입니다."
         case .noValueInQueue:
             return "큐에 값이 없습니다."
         case .notDivisibleByZero:

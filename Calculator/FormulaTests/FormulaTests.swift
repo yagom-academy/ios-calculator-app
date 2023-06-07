@@ -57,9 +57,32 @@ final class FormulaTests: XCTestCase {
         // given
         sut.operands.enqueue(3.0)
 
+        // when
+        let result = try! sut.result()
+
+        // then
+        XCTAssertEqual(result, 3.0)
+    }
+
+    func test_나누기와2를연산큐와숫자큐에넣고_result를호출하면_2를반환한다() {
+        // given
+        sut.operands.enqueue(2.0)
+        sut.operators.enqueue(.divide)
+        
+        // when
+        let result = try! sut.result()
+
+        // then
+        XCTAssertEqual(result, 2.0)
+    }
+    
+    func test_더하기를연산큐에넣고_result를호출하면_noValueInQueue오류를반환한다() {
+        // given
+        sut.operators.enqueue(.add)
+        
         // when, then
         XCTAssertThrowsError(try sut.result()) { error in
-            XCTAssertEqual(error as? FormulaErrors, FormulaErrors.invalidFormula)
+            XCTAssertEqual(error as? FormulaErrors, FormulaErrors.noValueInQueue)
         }
     }
     
