@@ -334,6 +334,7 @@
                         <outlet property="calculationFormulaStackView" destination="XRe-QE-UJf" id="93C-1j-BIq"/>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="Bhg-rY-XYK"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="Kh3-MW-fUK"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="o3h-Jh-P0I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

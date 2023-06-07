@@ -7,6 +7,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
@@ -31,6 +32,7 @@ extension CalculatorViewController {
         
         addArithmeticStackView()
         addInputFormula()
+        scrollView.scrollToBottom(animated: true)
         
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
@@ -41,6 +43,7 @@ extension CalculatorViewController {
         
         addArithmeticStackView()
         addInputFormula()
+        scrollView.scrollToBottom(animated: true)
         
         guard let result = calculateResult() else { return }
         
