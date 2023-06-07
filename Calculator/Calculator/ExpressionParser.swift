@@ -10,8 +10,15 @@ enum ExpressionParser {
         var formula = Formula()
         let inputStrings = componentsByOperators(from: input)
         
+        let operatorCharacter = inputStrings.compactMap{
+            if $0.count == 1 {
+                return Operator(rawValue: Character($0))
+            }
+            return nil
+        }
+        
         inputStrings.compactMap{ Double($0) }.forEach{ formula.operands.enqueue($0) }
-        input.compactMap{ Operator(rawValue: $0) }.forEach{ formula.operatos.enqueue($0) }
+        operatorCharacter.forEach{ formula.operatos.enqueue($0) }
         
         return formula
     }
