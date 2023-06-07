@@ -11,6 +11,7 @@ struct Formula {
     
     func result() -> Double {
         let defaultValue: Double = 0.0
+        
         guard let firstOperand = operands.dequeueItem() else {
             return defaultValue
         }
