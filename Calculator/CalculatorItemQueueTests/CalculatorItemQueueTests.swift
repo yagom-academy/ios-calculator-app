@@ -323,4 +323,21 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(expection, 2.0)
 	}
+	
+	func tests_MockFormuls_results호출시_연산자가_add일경우_피연산자를_더한값을_반환한다() {
+		// given
+		let operands = sut!
+		sut.enqueue(1.0)
+		sut.enqueue(2.0)
+
+		let `operator` = mockOperatorCalculatorItemQueue!
+		`operator`.enqueue(.add)
+		
+		// when
+		let result = MockFormula(operands: operands, operators: `operator`)
+		let expection = result.result()
+		
+		// then
+		XCTAssertEqual(expection, 3.0)
+	}
 }
