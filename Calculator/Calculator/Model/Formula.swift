@@ -13,7 +13,7 @@ struct Formula {
         guard var result: Double = operands.dequeue() else { throw CalculationErrors.emptyError }
         
         while operators.isEmpty == false {
-            var lhs = result
+            let lhs = result
             guard let rhs: Double = operands.dequeue(),
                   let operation: Operator = operators.dequeue() else { throw CalculationErrors.emptyError }
             

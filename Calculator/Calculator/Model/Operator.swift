@@ -18,8 +18,8 @@ enum Operator: Character, CaseIterable, CalculatorItem {
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
-        case .multifly:
+            return try! divide(lhs: lhs, rhs: rhs)
+        case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
     }

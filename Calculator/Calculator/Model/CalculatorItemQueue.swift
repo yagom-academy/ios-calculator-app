@@ -5,7 +5,7 @@
 //  Created by 박종화 on 2023/05/30.
 //
 
-struct CalculatorItemQueue<Element: CalculatorItem> {
+struct CalculatorItemQueue<Element> {
     private var outputStack: [Element] = []
     private var inputStack: [Element] = []
     
