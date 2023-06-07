@@ -7,9 +7,7 @@
 
 extension String: CalculateItem {
     func split(with target: Character) -> [String] {
-        let targetArray = self.split(separator: target).map {(value) -> String in
-            return String(value)
-        }
+        let targetArray = self.split(separator: target).map { String($0) }
         
         return targetArray
     }
