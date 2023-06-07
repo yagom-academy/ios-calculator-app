@@ -138,6 +138,43 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		44991F772A3075AA002E4B3C /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				44B725BD2A27768200173495 /* CalculateItem.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		44991F782A30765D002E4B3C /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				4406F6D32A2CF29B00A3F02D /* FormulaErrors.swift */,
+				4406F6D12A2CED5400A3F02D /* ExpressionParserErrors.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		44991F792A3076A0002E4B3C /* CalculatorItemQueue */ = {
+			isa = PBXGroup;
+			children = (
+				44B725C12A27847B00173495 /* Node.swift */,
+				44B725BF2A27845C00173495 /* LinkedList.swift */,
+				44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */,
+			);
+			path = CalculatorItemQueue;
+			sourceTree = "<group>";
+		};
+		44991F7A2A3077B6002E4B3C /* CalculatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				44AA60512A25CA0A00E2BB86 /* CalculatorItemQueueTests */,
+				4406F7002A2EC4EF00A3F02D /* FormulaTests */,
+				4406F6C32A2B300400A3F02D /* ExpressionParserTests */,
+			);
+			path = CalculatorTests;
+			sourceTree = "<group>";
+		};
 		44AA60512A25CA0A00E2BB86 /* CalculatorItemQueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,14 +187,10 @@
 		44B725C92A28867A00173495 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				44B725C12A27847B00173495 /* Node.swift */,
-				44B725BF2A27845C00173495 /* LinkedList.swift */,
-				44B725BD2A27768200173495 /* CalculateItem.swift */,
-				44AA60492A25C88800E2BB86 /* CalculatorItemQueue.swift */,
+				44991F772A3075AA002E4B3C /* Protocol */,
+				44991F792A3076A0002E4B3C /* CalculatorItemQueue */,
 				4406F6B42A2B22C200A3F02D /* Formula.swift */,
-				4406F6D32A2CF29B00A3F02D /* FormulaErrors.swift */,
 				4406F6B62A2B23C000A3F02D /* ExpressionParser.swift */,
-				4406F6D12A2CED5400A3F02D /* ExpressionParserErrors.swift */,
 				4406F6BC2A2B253400A3F02D /* Operator.swift */,
 			);
 			path = Model;
@@ -188,9 +221,7 @@
 			children = (
 				44AA604B2A25C9E900E2BB86 /* TestPlan.xctestplan */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
-				44AA60512A25CA0A00E2BB86 /* CalculatorItemQueueTests */,
-				4406F7002A2EC4EF00A3F02D /* FormulaTests */,
-				4406F6C32A2B300400A3F02D /* ExpressionParserTests */,
+				44991F7A2A3077B6002E4B3C /* CalculatorTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -209,9 +240,10 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				44B725CB2A2886A600173495 /* Controller */,
-				44B725CA2A28869C00173495 /* View */,
 				44B725C92A28867A00173495 /* Model */,
+				44B725CA2A28869C00173495 /* View */,
+				44B725CB2A2886A600173495 /* Controller */,
+				44991F782A30765D002E4B3C /* Error */,
 				44991F762A3042EC002E4B3C /* Extension */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);

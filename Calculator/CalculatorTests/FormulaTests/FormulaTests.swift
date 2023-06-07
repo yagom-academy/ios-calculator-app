@@ -34,7 +34,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 14)
     }
     
-    func test_3빼기3곱하기2빼기3나누기6을연산큐와숫자큐에넣고_result를호출하면_14를반환한다() {
+    func test_3빼기3곱하기2빼기3나누기6을연산큐와숫자큐에넣고_result를호출하면_음수영쩜오를반환한다() {
         // given
         sut.operands.enqueue(3.0)
         sut.operators.enqueue(.subtract)

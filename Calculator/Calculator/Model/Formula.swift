@@ -10,15 +10,15 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var resultValue = operands.dequeue() else {
+        guard var accumulatedValue = operands.dequeue() else {
             throw FormulaErrors.noValueInQueue
         }
         
         while let `operator` = operators.dequeue(),
               let rhs = operands.dequeue() {
-            resultValue = try `operator`.calculate(lhs: resultValue, rhs: rhs)
+            accumulatedValue = try `operator`.calculate(lhs: accumulatedValue, rhs: rhs)
         }
         
-        return resultValue
+        return accumulatedValue
     }
 }
