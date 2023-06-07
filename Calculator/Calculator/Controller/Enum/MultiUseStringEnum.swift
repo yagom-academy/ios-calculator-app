@@ -5,13 +5,15 @@
 //  Created by Min Hyun on 2023/06/07.
 //
 
-enum DefaultLabelText {
+enum MultiUseString {
     case empty
     case zero
     case nan
     case negative
+    case doubleZero
+    case dot
     
-    var name: String {
+    var value: String {
         switch self {
         case .empty:
             return ""
@@ -21,6 +23,10 @@ enum DefaultLabelText {
             return "NaN"
         case .negative:
             return "-"
+        case .doubleZero:
+            return "00"
+        case .dot:
+            return "."
         }
     }
 }
