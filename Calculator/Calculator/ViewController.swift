@@ -16,7 +16,6 @@ class ViewController: UIViewController {
         // 음수 : -
         
         var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: "-16*7+99+4")
-        print(formula.result())
     }
 }
 
