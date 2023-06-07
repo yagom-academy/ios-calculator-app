@@ -18,12 +18,27 @@ struct MockFormula<T: CalculateItem, U: CalculateItem>: MockFormulaProtocol {
 	var operators: MockCalculatorItemQueue<U>?
 	
 	func result() -> Double {
-		while let operands = operands.flatMap({ $0.mockList?.head?.value }) {
-			guard let operands = operands as? Double else { return -1.0 }
-			return operands
+		var operandsList: [Double] = []
+		while let operands = operands?.dequeue() {
+			guard let operand = operands as? Double else { return -1.0 }
+			operandsList.append(operand)
 		}
 		
-		return -1.0
+		let lhsOperand = operandsList[operandsList.startIndex]
+		let rhsOperand = operandsList[operandsList.endIndex-1]
+
+		guard let operators = operators?.dequeue() as? Operator else { return -3.0 }
+		
+		switch operators {
+		case .add:
+			return lhsOperand + rhsOperand
+		case .subtract:
+			return lhsOperand - rhsOperand
+		case .divide:
+			return lhsOperand / rhsOperand
+		case .multiply:
+			return lhsOperand * rhsOperand
+		}
 	}
 	
 	init(operands: MockCalculatorItemQueue<T>, operators: MockCalculatorItemQueue<U>) {
