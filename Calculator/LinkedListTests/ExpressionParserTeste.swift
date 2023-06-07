@@ -11,10 +11,11 @@ import XCTest
 final class ExpressionParserTeste: XCTestCase {
 
     override func setUpWithError() throws {
-
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
     }
 
     func test1_parse_1_더하기_10을_넣고_operands를_dequeue를_하면_1을_반환한다() {
