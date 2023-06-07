@@ -363,8 +363,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="resultLabel" destination="Lwz-OF-XHD" id="wMf-Nu-xWY"/>
-                        <outlet property="signLabel" destination="HPC-iy-qdm" id="tSM-wH-WiS"/>
+                        <outlet property="displayLabel" destination="Lwz-OF-XHD" id="7EF-go-Q9e"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="PEc-Bx-mf6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
