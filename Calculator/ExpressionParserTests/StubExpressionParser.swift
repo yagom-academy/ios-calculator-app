@@ -6,41 +6,42 @@
 //
 
 @testable import Calculator
+import Foundation
 
 struct StubExpressionParser {
-    func parse(from input: String) throws -> Formula {
-        let operands = componentsByOperators(from: input)
-        var operators = [input]
-        var formula = Formula()
+    var operandsQueue = CalculatorItemQueue<Double>()
+    var operatorsQueue = CalculatorItemQueue<Operator>()
+    
+    @discardableResult
+    mutating func parse(from input: String) throws -> Formula {
+        var inputSplitedByOperands = [input]
         
-        operands.forEach { operand in
-            var splitOperators: [String] = []
-            
-            operators.forEach { element in
-                let separatedElement = element.split(separator: operand).map{ String($0) }
-                splitOperators.append(contentsOf: separatedElement)
-            }
-            
-            operators = splitOperators
-        }
-        
-        try operands.forEach { operand in
-            guard let operand = Double(operand) else {
+        try componentsByOperators(from: input).forEach { operand in
+            guard let doubleOperand = Double(operand) else {
                 throw ExpressionParserError.operandConvertError
             }
             
-            formula.operands.enqueue(operand)
+            operandsQueue.enqueue(doubleOperand)
+            
+            var splitedOperators: [String] = []
+            
+            inputSplitedByOperands.forEach { element in
+                let separatedElement = element.split(separator: operand).map{ String($0) }
+                splitedOperators.append(contentsOf: separatedElement)
+            }
+            
+            inputSplitedByOperands = splitedOperators
         }
         
-        try operators.forEach { `operator` in
+        try inputSplitedByOperands.forEach { `operator` in
             guard let `operator` = Operator(rawValue: Character(`operator`)) else {
                 throw ExpressionParserError.operatorConvertError
             }
             
-            formula.operators.enqueue(`operator`)
+            operatorsQueue.enqueue(`operator`)
         }
         
-        return formula
+        return Formula(operands: operandsQueue, operators: operatorsQueue)
     }
     
     func componentsByOperators(from input: String) -> [String] {
