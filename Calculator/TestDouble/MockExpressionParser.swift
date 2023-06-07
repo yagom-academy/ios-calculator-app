@@ -16,7 +16,13 @@ enum MockExpressionParser<T: CalculateItem> {
 		return result
 	}
 	
-	static private func componentsByOperators(from input: String) -> [String] {
-		return [""]
+	static func componentsByOperators(from input: String) -> [String] {
+		// 1+2
+		var expressions: [String] = []
+		input.forEach {
+			expressions = input.split(with: $0)
+		}
+		
+		return expressions
 	}
 }
