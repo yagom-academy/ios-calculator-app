@@ -256,4 +256,28 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertNotNil(result)
 	}
+	
+	func tests_MockFormula_operands에_값을_넣으면_초기값으로_할당된다() {
+		// given
+		sut.enqueue(1.0)
+		guard let inputOperand = sut.dequeue() else { return }
+		
+		mockOperatorCalculatorItemQueue.enqueue(.add)
+		guard let inputOperator = mockOperatorCalculatorItemQueue.dequeue() else { return }
+		
+		let dummyOperands: MockLinkedList<Double> = MockLinkedList<Double>()
+		let operands = MockCalculatorItemQueue<Double>(dummyList: dummyOperands)
+		operands.enqueue(inputOperand)
+		
+		let dummyOperator: MockLinkedList<Operator> = MockLinkedList<Operator>()
+		let `operator` = MockCalculatorItemQueue<Operator>(dummyList: dummyOperator)
+		`operator`.enqueue(inputOperator)
+		
+		// when
+		let result = MockFormula(operands: operands, operators: `operator`)
+		guard let expection = result.operands?.dequeue() else { return }
+		
+		// then
+		XCTAssertEqual(expection, 1.0)
+	}
 }
