@@ -16,10 +16,10 @@ struct Formula {
         while operators.isEmpty == false {
             let lhs = result
             guard let rhs: Double = operands.dequeue(),
-                  let oper: Operator = operators.dequeue() else {
+                  let operatorSign: Operator = operators.dequeue() else {
                 throw CalculationErrors.emptyStack }
             
-            result = oper.calculate(lhs: lhs, rhs: rhs)
+            result = operatorSign.calculate(lhs: lhs, rhs: rhs)
         }
         
         return result
