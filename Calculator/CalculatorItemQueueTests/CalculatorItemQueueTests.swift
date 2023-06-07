@@ -304,4 +304,23 @@ final class CalculatorItemQueueTests: XCTestCase {
 		// then
 		XCTAssertEqual(expection, 3.0)
 	}
+	
+	func tests_MockFormula_results호출시_operands값이_반환된다() {
+		// given
+		let dummyOperands: MockLinkedList<Double> = MockLinkedList<Double>()
+		let operands = MockCalculatorItemQueue<Double>(dummyList: dummyOperands)
+		operands.enqueue(3.0)
+		operands.enqueue(2.0)
+		
+		let dummyOperator: MockLinkedList<Operator> = MockLinkedList<Operator>()
+		let `operator` = MockCalculatorItemQueue<Operator>(dummyList: dummyOperator)
+		`operator`.enqueue(.add)
+		
+		// whem
+		let result = MockFormula(operands: operands, operators: `operator`)
+		let expection = result.result()
+		
+		// then
+		XCTAssertEqual(expection, 2.0)
+	}
 }
