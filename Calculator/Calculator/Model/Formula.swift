@@ -7,5 +7,5 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<String>
+    var operators: CalculatorItemQueue<Operator>
 }
