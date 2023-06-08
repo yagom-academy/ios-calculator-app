@@ -15,18 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        operands.text = "0"
-        operators.text = ""
-    }
-    
-    func formattingNumbers(_ input: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.alwaysShowsDecimalSeparator = false
-        
-        return numberFormatter.string(from: input as NSNumber) ?? "NaN"
+        clearEntryText(isOperandClear: true, isOperatorClear: true)
     }
     
     func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
@@ -88,38 +77,26 @@ class ViewController: UIViewController {
         }
         
         if operands.text != "0" {
-            guard let operatorString = operators.text else { return }
-            guard let operandString = operands.text else { return }
-            
-            saveFormula.append("\(operatorString) ")
-            saveFormula.append("\(operandString) ")
-            addView(operatorString, operandString)
+            settingFormula()
         }
         operators.text = `operator`
-        operands.text = "0"
+        clearEntryText(isOperandClear: true, isOperatorClear: false)
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
-        guard let operatorString = operators.text else { return }
-        guard let operandString = operands.text else { return }
-        
-        saveFormula.append("\(operatorString) ")
-        saveFormula.append("\(operandString) ")
-        addView(operatorString, operandString)
+        settingFormula()
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
-        
         let result = formula.result()
+        
         operands.text = formattingNumbers(result)
         saveFormula = []
-        operators.text = ""
+        clearEntryText(isOperandClear: false, isOperatorClear: true)
         
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
-        guard let operand = operands.text else { return
-        }
-        guard let operandsNumber = Double(operand) else {
+        guard let operand = operands.text, let operandsNumber = Double(operand) else {
             return
         }
         
@@ -127,13 +104,41 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedCEButton(_ sender: Any) {
-        operands.text = "0"
+        clearEntryText(isOperandClear: true, isOperatorClear: false)
     }
     
     @IBAction func tappedACButton(_ sender: Any) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        operands.text = "0"
-        operators.text = ""
+        clearEntryText(isOperandClear: true, isOperatorClear: true)
+    }
+}
+
+extension ViewController {
+    private func settingFormula() {
+        guard let operatorString = operators.text, let operandString = operands.text else { return }
+        
+        saveFormula.append("\(operatorString) ")
+        saveFormula.append("\(operandString) ")
+        addView(operatorString, operandString)
+    }
+    
+    private func formattingNumbers(_ input: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.alwaysShowsDecimalSeparator = false
+        
+        return numberFormatter.string(from: input as NSNumber) ?? "NaN"
+    }
+    
+    private func clearEntryText(isOperandClear: Bool, isOperatorClear: Bool) {
+        if isOperandClear {
+            operands.text = "0"
+        }
+        if isOperatorClear {
+            operators.text = ""
+        }
     }
 }
 
