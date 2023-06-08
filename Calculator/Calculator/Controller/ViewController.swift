@@ -25,18 +25,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func TapOperatorButton(_ sender: UIButton) {
-        guard let title = sender.currentTitle else { return }
+        guard let inputOperator = sender.currentTitle else { return }
         
         addFormula()
-        
-        operatorLabel.text = title
+        setOperatorLabel(inputOperator)
     }
     
     @IBAction private func TapEqualButton(_ sender: UIButton) {
         addFormula()
         
-        var formula = ExpressionParser.parse(from: self.formula)
-        guard let result = numberFormatter.string(for: formula.result()) else { return }
+        guard let result = calculateFormula() else { return }
         
         setOperandsLabel(result)
         clearFormula()
@@ -44,27 +42,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func TapNumberButton(_ sender: UIButton) {
-        guard let inputNumber = sender.currentTitle,
-              let operands = operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
-              let num = Double(operands + inputNumber),
-              let result = numberFormatter.string(for: num) else { return }
+        guard let inputNumber = sender.currentTitle else { return }
         
-        if operands.contains(".") && inputNumber == "0" || inputNumber == "00" {
-            let result = operands + inputNumber
-            setOperandsLabel(result)
-            return
-        }
-        
-        setOperandsLabel(result)
+        addOperandsLabel(inputNumber)
     }
     
     @IBAction private func TapDecimalPointButton(_ sender: UIButton) {
-        guard let inputNumber = sender.currentTitle,
-              let operands = operandsLabel.text else { return }
+        guard let inputDecimalPoint = sender.currentTitle else { return }
         
-        let result = operands + inputNumber
-        
-        setOperandsLabel(result)
+        addOperandsLabel(inputDecimalPoint)
     }
     
     @IBAction private func TapACButton(_ sender: UIButton) {
@@ -78,6 +64,63 @@ class ViewController: UIViewController {
     }
     
     @IBAction private func TapChangeSignButton(_ sender: UIButton) {
+        changeSign()
+    }
+    
+    private func calculateFormula() -> String? {
+        var parsedFormula = ExpressionParser.parse(from: formula)
+        return numberFormatter.string(for: parsedFormula.result())
+    }
+    
+    private func addFormula() {
+        guard let operands = operandsLabel.text,
+              let `operator` = operatorLabel.text else { return }
+        
+        if formula.isEmpty && operands != "0"  {
+            formula += "\(operands) "
+            addDetailStackView("", operands)
+        } else if operands != "0" {
+            formula += "\(`operator`) \(operands) "
+            addDetailStackView(`operator`, operands)
+        }
+        
+        if `operator` == "÷" && operands == "0" {
+            formula += "\(`operator`) \(operands) "
+        }
+        
+        clearLabel()
+    }
+    
+    private func addOperandsLabel(_ input: String) {
+        guard let operands = operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
+              let num = Double(operands + input),
+              let result = numberFormatter.string(for: num) else { return }
+        
+        if operands.contains(".") && (input == "0" || input == "00") {
+            let result = operands + input
+            setOperandsLabel(result)
+            return
+        } else if !operands.contains(".") && input == "." {
+            let result = operands + input
+            setOperandsLabel(result)
+            return
+        }
+        
+        setOperandsLabel(result)
+    }
+    
+    private func addDetailStackView(_ `operator`: String, _ operands: String) {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.text = "\(`operator`) \(operands)"
+        label.textAlignment = .right
+        
+        stackView.addArrangedSubview(label)
+        scrollView.scrollToBottom(animated: false)
+    }
+    
+    private func changeSign() {
         guard var operands = operandsLabel.text else { return }
         
         if operands.contains("-") {
@@ -89,29 +132,8 @@ class ViewController: UIViewController {
         setOperandsLabel(operands)
     }
     
-    private func addFormula() {
-        guard let operands = operandsLabel.text,
-              let `operator` = operatorLabel.text else { return }
-        
-        if self.formula == "" && operands != "0"  {
-            self.formula += "\(operands) "
-            addDetailStackView("", operands)
-            clearLabel()
-        } else if operands != "0" {
-            self.formula += "\(`operator`) \(operands) "
-            addDetailStackView(`operator`, operands)
-            clearLabel()
-        }
-    }
-    
-    private func addDetailStackView(_ `operator`: String, _ operands: String) {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.text = "\(`operator`) \(operands)"
-        label.textAlignment = .right
-        stackView.addArrangedSubview(label)
-        scrollView.scrollToBottom(animated: false)
+    private func setOperatorLabel(_ data: String) {
+        operatorLabel.text = data
     }
     
     private func setOperandsLabel(_ data: String) {
@@ -128,7 +150,7 @@ class ViewController: UIViewController {
     
     private func clearLabel() {
         operandsLabel.text = "0"
-        operatorLabel.text = ""
+        operatorLabel.text?.removeAll()
     }
     
     private func clearStackView() {
@@ -136,7 +158,7 @@ class ViewController: UIViewController {
     }
     
     private func clearFormula() {
-        self.formula = ""
+        formula.removeAll()
     }
 }
 
