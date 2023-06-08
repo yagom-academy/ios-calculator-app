@@ -5,33 +5,33 @@
 //  Created by karen on 2023/06/07.
 //
 
-final class Node<T> {
-    var data: T
+final class Node<Element> {
+    var data: Element
     var prev: Node?
     var next: Node?
     
-    init(data: T) {
+    init(data: Element) {
         self.data = data
     }
 }
 
-struct CalculatorItemQueueLinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+struct LinkedList<Element> {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         return head == nil
     }
     
-    var first: T? {
+    var first: Element? {
         return head?.data
     }
     
-    var last: T? {
+    var last: Element? {
         return tail?.data
     }
     
-    mutating func append(data: T) {
+    mutating func append(data: Element) {
         let newNode = Node(data: data)
         
         guard let tailNode = head else {
