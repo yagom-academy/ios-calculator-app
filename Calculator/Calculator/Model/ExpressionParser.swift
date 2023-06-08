@@ -15,15 +15,14 @@ enum ExpressionParser {
         return Formula(operands: operands, operators: operators)
     }
     
-    private static func componentsByOperators(from input: String) -> [String] {
-        let operators = Operator.allCases.map { $0.rawValue }
+    private static func componentsByOperators(from input: String) -> [String] {        
         var result: [String] = []
         var currentSegment: String = ""
         
         for char in input {
             currentSegment.append(char)
             
-            if operators.contains(char) {
+            if Operator.all.contains(char) {
                 result.append(contentsOf: currentSegment.split(with: char))
                 currentSegment = ""
             }
