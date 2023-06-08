@@ -108,18 +108,11 @@ class ViewController: UIViewController {
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         
-        do {
-            let result = try formula.result()
-            operands.text = formattingNumbers(result)
-            saveFormula = []
-            operators.text = ""
-        } catch CalculatorError.divideByZero {
-            operands.text = "NaN"
-        } catch CalculatorError.invalidFormula {
-            operands.text = ""
-        } catch {
-            operands.text = ""
-        }
+        let result = formula.result()
+        operands.text = formattingNumbers(result)
+        saveFormula = []
+        operators.text = ""
+        
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
