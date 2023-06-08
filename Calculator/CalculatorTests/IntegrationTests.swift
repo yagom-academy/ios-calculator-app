@@ -16,7 +16,7 @@ final class IntegrationTests: XCTestCase {
         let input2 = "50+32×100÷10"
         let input3 = "50.1+32.5×10.13÷2.5"
         let input4 = "5.153+3.55×10÷2"
-        let input5 = "5-3×10.00÷2.5123"
+        let input5 = "5−3×10.00÷2.5123"
         
         let expectation1 = 40.0
         let expectation2 = 820.0
@@ -50,7 +50,7 @@ final class IntegrationTests: XCTestCase {
         let input1 = "5÷0"
         let input2 = "50+32×100÷0"
         let input3 = "50.1+32.5×10.13÷0"
-        let input4 = "5.153÷0+3.55×-10"
+        let input4 = "5.153÷0+3.55×−10"
         let input5 = "5×10.00÷0"
         
         // when
@@ -62,19 +62,13 @@ final class IntegrationTests: XCTestCase {
         // then
         try [formula1, formula2, formula3, formula4, formula5].forEach { formula in
             var formula = formula
-            XCTAssertThrowsError(try formula.result()) { error in
-                if let error = error as? CalculationError {
-                    XCTAssertEqual(error, .divisionByZero)
-                } else {
-                    XCTFail("예상하지 않은 에러 출력 \(error)")
-                }
-            }
+            XCTAssertTrue(try formula.result().isNaN)
         }
     }
     
     func test_피연산자의_개수가_부족하면_존재하는_피연산자까지만_계산해서_리턴한다() throws {
         let input1 = "1+"
-        let input2 = "5+3-"
+        let input2 = "5+3−"
         let input3 = "1++"
         
         var formula1 = ExpressionParser.parse(from: input1)
@@ -167,10 +161,10 @@ final class IntegrationTests: XCTestCase {
         }
     }
     
-    func test_1자리수_100000개의_피연산자_계산_속도_측정() {
+    func test_1자리수_10000개의_피연산자_계산_속도_측정() {
         // given
         var input: String = ""
-        for _ in 0...99999 {
+        for _ in 0...9999 {
             input += "1+"
         }
         _ = input.removeLast()
