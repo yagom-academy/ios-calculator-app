@@ -10,9 +10,9 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
-        componentsByOperators(from: input).compactMap { Double($0) }.forEach { element in operands.enqueue(element) }
+        componentsByOperators(from: input).compactMap { Double($0) }.forEach { operands.enqueue($0) }
 
-        input.compactMap { Operator(rawValue: $0) }.forEach { element in operators.enqueue(element) }
+        input.compactMap { Operator(rawValue: $0) }.forEach { operators.enqueue($0) }
                     
         return Formula(operands: operands, operators: operators)
     }
