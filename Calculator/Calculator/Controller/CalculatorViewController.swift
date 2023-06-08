@@ -66,23 +66,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func recordOnStack(operater: String, operand: String) {
-        let operatorLabel: UILabel = {
-            let label = UILabel()
-            label.text = operater
-            label.textColor = .white
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            return label
-        }()
-        
-        let operandLabel: UILabel = {
-            let label = UILabel()
-            label.text = operand
-            label.textColor = .white
-            label.font = UIFont.preferredFont(forTextStyle: .title3)
-            
-            return label
-        }()
+        let operatorLabel = UILabel.generate(text: operater)
+        let operandLabel = UILabel.generate(text: operand)
         
         let stackView: UIStackView = {
             let stackView = UIStackView()
