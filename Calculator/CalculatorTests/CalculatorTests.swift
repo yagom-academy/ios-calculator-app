@@ -12,7 +12,7 @@ extension Int: CalculateItem {}
 
 final class CalculatorTests: XCTestCase {
     var sut: CalculatorItemQueue<Int>!
-    
+
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue<Int>()
@@ -23,7 +23,7 @@ final class CalculatorTests: XCTestCase {
         let input = 1
         //when
         sut.enqueue(input)
-        let list = sut.currentList()
+        let list = sut.currentList
         let head = list.currentHead()
         let tail = list.currentTail()
         //then
@@ -38,7 +38,7 @@ final class CalculatorTests: XCTestCase {
         //when
         sut.enqueue(firstInput)
         sut.enqueue(secondInput)
-        let list = sut.currentList()
+        let list = sut.currentList
         let head = list.currentHead()
         let tail = list.currentTail()
         //then
@@ -70,7 +70,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(input)
         //when
         sut.removeAll()
-        let list = sut.currentList()
+        let list = sut.currentList
         let head = list.currentHead()
         let tail = list.currentTail()
         //then
