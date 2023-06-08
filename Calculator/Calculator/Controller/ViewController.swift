@@ -9,7 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operators: UILabel!
     @IBOutlet weak var operands: UILabel!
-    @IBOutlet weak var displayedScreen: UIScrollView!
+    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     private var saveFormula = [String]()
     
@@ -43,6 +43,7 @@ class ViewController: UIViewController {
             let label = UILabel()
             
             label.text = operand
+            label.font = .preferredFont(forTextStyle: .title2)
             label.textColor = .white
             
             return label
@@ -137,6 +138,8 @@ class ViewController: UIViewController {
     
     @IBAction func tappedACButton(_ sender: Any) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        operands.text = "0"
+        operators.text = ""
     }
 }
 
