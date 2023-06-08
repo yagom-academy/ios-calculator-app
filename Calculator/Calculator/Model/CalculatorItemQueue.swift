@@ -12,6 +12,14 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return list.isEmpty
     }
     
+    var first: Element? {
+        return list.first
+    }
+    
+    var last: Element? {
+        return list.last
+    }
+    
     mutating func enqueue(_ element: Element) {
         list.append(data: element)
     }
