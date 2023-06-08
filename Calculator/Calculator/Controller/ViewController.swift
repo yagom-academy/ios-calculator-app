@@ -19,6 +19,16 @@ class ViewController: UIViewController {
         operators.text = ""
     }
     
+    func formattingNumbers(_ input: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.alwaysShowsDecimalSeparator = false
+        
+        return numberFormatter.string(from: input as NSNumber) ?? "NaN"
+    }
+    
     func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
         let operatorLabel: UILabel = {
             let label = UILabel()
@@ -57,7 +67,8 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(addSubView(`operator`, operand))
     }
     
-    @IBAction func tappedOperands(_ sender: UIButton) {
+    //MARK: - Button Action
+    @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {
             return
         }
@@ -65,7 +76,7 @@ class ViewController: UIViewController {
         operands.text = operand
     }
     
-    @IBAction func tappedOperator(_ sender: UIButton) {
+    @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else {
             return
         }
@@ -91,14 +102,9 @@ class ViewController: UIViewController {
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = -2
-        numberFormatter.alwaysShowsDecimalSeparator = false
-        
         do {
             let result = try formula.result()
-            operands.text = numberFormatter.string(from: result as NSNumber)
+            operands.text = formattingNumbers(result)
             saveFormula = []
             operators.text = ""
         } catch CalculatorError.divideByZero {
@@ -110,7 +116,6 @@ class ViewController: UIViewController {
         }
     }
     
-    
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
         guard let operand = operands.text else { return
         }
@@ -118,7 +123,7 @@ class ViewController: UIViewController {
             return
         }
         
-        operands.text = String(operandsNumber * -1)
+        operands.text = formattingNumbers(operandsNumber * -1)
     }
     
     @IBAction func tappedCEButton(_ sender: Any) {
