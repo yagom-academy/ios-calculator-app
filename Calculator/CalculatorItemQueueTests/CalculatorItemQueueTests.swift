@@ -27,7 +27,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.isEmpty
         
         // then
-        XCTAssertTrue(result)
+        XCTAssertEqual(result, true)
     }
     
     func test_enqueue를_하지_않고_dequeue를_하면_Nil을_반환한다() {
@@ -36,10 +36,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.dequeue()
         
         // then
-        XCTAssertNil(result)
+        XCTAssertEqual(result, nil)
     }
     
-    func test_enqueue_1을했을때_isEmpty는_false이다() {
+    func test_enqueue_1을_했을때_isEmpty는_false이다() {
         // given
         sut.enqueue(1)
         
@@ -47,18 +47,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.isEmpty
         
         // then
-        XCTAssertFalse(result)
+        XCTAssertEqual(result, false)
     }
     
-    func test_enqueue_1을하고_dequeue를_했을때_isEmpty는_true이다() {
+    func test_enqueue_1을_하고_dequeue를_했을_때_isEmpty는_true이다() {
         // given
         sut.enqueue(1)
-        let dequeue = sut.dequeue()
+        _ = sut.dequeue()
         
         // when
         let result = sut.isEmpty
         
         // then
-        XCTAssertTrue(result)
+        XCTAssertEqual(result, true)
     }
 }
