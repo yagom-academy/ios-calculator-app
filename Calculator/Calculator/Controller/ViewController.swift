@@ -7,12 +7,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var stackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
-
-
 }
 
