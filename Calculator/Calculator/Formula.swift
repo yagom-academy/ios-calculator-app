@@ -15,11 +15,11 @@ struct Formula {
         }
         
         var result: Double = firstLhs
+        var lhs: Double = 0
         
         while let rhs: Double = operands.dequeue(),
               let operation: Operator = operators.dequeue() {
-            var lhs: Double = result
-            
+            lhs = result
             result = operation.calculate(lhs: lhs, rhs: rhs)
         }
         return result
