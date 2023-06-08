@@ -28,7 +28,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapDecimalPointButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.inputOperand(Symbol.dot)
+        self.displayLabel.text = self.inputProcessor.inputOperand(".")
     }
     
     
@@ -98,30 +98,5 @@ class CalculatorViewController: UIViewController {
             self.recordStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
-    }
-}
-
-extension CalculatorViewController {
-    enum Sign {
-        static let plus: String = "+"
-        static let minus: String = "-"
-    }
-    
-    enum Number {
-        static let all = "0"..."9"
-        static let zero = "0"
-    }
-    
-    enum Symbol {
-        static let dot: String = "."
-        static let empty: String = ""
-    }
-    
-    enum Error {
-        static let nan: String = "NaN"
-    }
-    
-    enum Mode {
-        case tapNumberButton, tapOperatorButton, tapEqualButton
     }
 }
