@@ -7,7 +7,7 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-    var operatos: CalculatorItemQueue<Operator> = CalculatorItemQueue()
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() throws -> Double {
         
@@ -15,7 +15,7 @@ struct Formula {
             return 0
         }
         
-        while let currentOperator = operatos.dequeue() {
+        while let currentOperator = operators.dequeue() {
             
             guard let secondOperand = operands.dequeue() else {
                 throw CalculatorError.incompleteFormula

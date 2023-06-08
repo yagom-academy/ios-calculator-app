@@ -51,7 +51,7 @@ final class ExpressionParserTeste: XCTestCase {
         
         // when
         var formula = ExpressionParser.parse(from: input)
-        let result = formula.operatos.dequeue()
+        let result = formula.operators.dequeue()
         let expectedValue = Operator.add
         
         // then
@@ -64,8 +64,8 @@ final class ExpressionParserTeste: XCTestCase {
         
         // when
         var formula = ExpressionParser.parse(from: input)
-        var result = formula.operatos.dequeue()
-            result = formula.operatos.dequeue()
+        var result = formula.operators.dequeue()
+            result = formula.operators.dequeue()
         let expectedValue = Operator.subtract
         
         // then
