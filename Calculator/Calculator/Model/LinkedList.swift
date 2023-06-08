@@ -7,7 +7,6 @@
 
 final class Node<Element> {
     var data: Element
-    var prev: Node?
     var next: Node?
     
     init(data: Element) {
@@ -39,19 +38,18 @@ struct LinkedList<Element> {
             tail = newNode
             return
         }
-        newNode.prev = tailNode
+        
         tailNode.next = newNode
         tail = newNode
     }
     
-    mutating func removeFirst() {
-        guard let firstNode = head else { return }
+    mutating func removeFirst() -> Element? {
+        guard let firstNode = head else { return nil }
         
         head = firstNode.next
         if head == nil {
             tail = nil
-        } else {
-            head?.prev = nil
         }
+        return firstNode.data
     }
 }
