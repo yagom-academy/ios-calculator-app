@@ -136,9 +136,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedACButton(_ sender: Any) {
-        for subview in stackView.arrangedSubviews {
-            subview.removeFromSuperview()
-        }
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
