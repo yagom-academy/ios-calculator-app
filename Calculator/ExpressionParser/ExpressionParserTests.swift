@@ -86,4 +86,27 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, 1.0)
     }
     
+    func test_2_빼기_음수1_했을때_1이나오는지확인() {
+        // Given
+        let input = "2-1"
+        
+        // When
+        formula = ExpressionParser.parse(from: input)
+        let result = try! formula.result()
+        
+        // Then
+        XCTAssertEqual(result, 1.0)
+    }
+    
+    func test_2_빼기_음수1_더하기_1_했을때_1이나오는지확인() {
+        // Given
+        let input = "2-1+1+1"
+        
+        // When
+        formula = ExpressionParser.parse(from: input)
+        let result = try! formula.result()
+        
+        // Then
+        XCTAssertEqual(result, 3.0)
+    }
 }

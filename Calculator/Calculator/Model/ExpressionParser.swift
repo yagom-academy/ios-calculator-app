@@ -25,18 +25,24 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { String($0.rawValue) }
-        var components = [input]
+        var components: [String] = []
+        var currentNumber = ""
         
-        operators.forEach { operatorString in
-            components = components.flatMap { component in
-                let splitComponents = component.split(with: Character(operatorString))
-                return splitComponents.map { String($0) }
+        input.forEach { character in
+            let stringCharacter = String(character)
+            if operators.filter({ $0 == stringCharacter }).isEmpty {
+                currentNumber += stringCharacter
+            } else {
+                if !currentNumber.isEmpty {
+                    components.append(currentNumber)
+                    currentNumber = ""
+                }
+                components.append(stringCharacter)
             }
-            
-            
-            (0..<components.count-1).forEach { _ in
-                components.append(operatorString)
-            }
+        }
+        
+        if !currentNumber.isEmpty {
+            components.append(currentNumber)
         }
         
         return components
