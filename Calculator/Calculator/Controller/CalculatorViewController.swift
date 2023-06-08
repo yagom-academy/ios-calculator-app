@@ -7,7 +7,6 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    
     private var formula: String = ""
     private let numberFormatter = NumberFormatter()
     
@@ -69,6 +68,7 @@ class CalculatorViewController: UIViewController {
     
     private func calculateFormula() -> String? {
         var parsedFormula = ExpressionParser.parse(from: formula)
+        
         return numberFormatter.string(for: parsedFormula.result())
     }
     
@@ -113,8 +113,8 @@ class CalculatorViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
-        label.text = "\(`operator`) \(operands)"
         label.textAlignment = .right
+        label.text = "\(`operator`) \(operands)"
         
         stackView.addArrangedSubview(label)
         scrollView.scrollToBottom(animated: false)
@@ -142,10 +142,10 @@ class CalculatorViewController: UIViewController {
     
     private func setNumberFormatter() {
         numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumFractionDigits = -2
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.usesSignificantDigits = true
     }
     
     private func clearLabel() {
