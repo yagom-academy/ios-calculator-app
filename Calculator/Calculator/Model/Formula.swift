@@ -7,30 +7,28 @@
 
 struct Formula {
     var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<String>
-    
+    var operators: CalculatorItemQueue<Operator>
+
     mutating func result() throws -> Double {
         var result: Double = 0.0
         var lhs: Double?
-        
+
         while !operators.isEmpty {
-            (result == 0.0) ? (lhs = operands.dequeue()) : (lhs = result)
-            
+            (lhs == nil) ? (lhs = operands.dequeue()) : (lhs = result)
+
             guard let lhs,
                   let rhs = operands.dequeue(),
-                  let modifier = operators.dequeue() else {
-                throw CalculateError.invalid
+                  let calculationOperator = operators.dequeue() else {
+                throw CalculateError.invalidDequeue
             }
-            
-            if let compute = Operator(rawValue: Character(modifier)) {
-                do {
-                    result = try compute.calculate(lhs: lhs, rhs: rhs)
-                } catch CalculateError.voidNumber {
-                    result = 0.0
-                }
+
+            result = calculationOperator.calculate(lhs: lhs, rhs: rhs)
+
+            guard result != Double.nan || result != Double.infinity else {
+                throw CalculateError.dividedByZero
             }
         }
-        
+
         return result
     }
 }
