@@ -35,11 +35,10 @@ struct LinkedList<Element> {
         
         if head == nil {
             head = newNode
-            tail = newNode
         } else {
             tail?.next = newNode
-            tail = newNode
         }
+        tail = newNode
     }
     
     mutating func removeFirst() -> Element? {
