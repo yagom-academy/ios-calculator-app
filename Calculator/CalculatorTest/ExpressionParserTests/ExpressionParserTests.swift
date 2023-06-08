@@ -17,9 +17,9 @@ final class ExpressionParserTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }
-    // +−÷×
+
     func test_ExpressionPaser의_parse메서드_매개변수로_짧은수식_String값을_넣어줄때_올바른_Formula인스턴스를_반환하는지_확인() {
-        //given+−÷×
+        //given
         var folmulaInstance = ExpressionParser.parse(from: "2+3")
         var inputOperands = [Double]()
         var inputOperators = [Operator]()
@@ -42,7 +42,7 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_ExpressionPaser의_parse메서드_매개변수로_긴수식_String값을_넣어줄때_올바른_Formula인스턴스를_반환하는지_확인() {
-        //given+−÷×
+        //given
         var folmulaInstance = ExpressionParser.parse(from: "2+3−4−6÷3×8")
         var inputOperands = [Double]()
         var inputOperators = [Operator]()
@@ -65,7 +65,7 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_ExpressionPaser의_parse메서드_매개변수로_오류수식_String값을_넣어줄때_올바른_Formula인스턴스를_반환하는지_확인() {
-        //given+−÷×
+        //given
         var folmulaInstance = ExpressionParser.parse(from: "2++−−÷×8")
         var inputOperands = [Double]()
         var inputOperators = [Operator]()
