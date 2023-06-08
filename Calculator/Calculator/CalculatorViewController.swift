@@ -55,8 +55,9 @@ extension CalculatorViewController {
         }
         
         let currentOperand = currentOperandLabel.text ?? "\(initialNumber)"
+        let isAppendOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
         
-        currentOperandLabel.text = Int(currentOperand) == initialNumber ? insertedNumber : currentOperand + insertedNumber
+        currentOperandLabel.text = isAppendOperand ? insertedNumber : currentOperand + insertedNumber
     }
     
     @IBAction func didTappedMenus(_ sender: UIButton) {
