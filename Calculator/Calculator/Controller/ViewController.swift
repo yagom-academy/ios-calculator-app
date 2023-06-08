@@ -24,5 +24,9 @@ class ViewController: UIViewController {
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
         operandLabel.text = "0"
     }
+    
+    @IBAction func touchUpOperandButton(_ sender: UIButton) {
+        operandLabel.text = sender.titleLabel?.text
+    }
 }
 
