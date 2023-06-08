@@ -61,4 +61,19 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, true)
     }
+    
+    func test_enqueue_1_2_3을_했을_때_queue의_첫번째값은_1이다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 1
+        
+        // when
+        let result = sut.first
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
 }
