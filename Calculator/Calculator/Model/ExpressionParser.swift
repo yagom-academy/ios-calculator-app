@@ -34,6 +34,6 @@ enum ExpressionParser {
             }
         }
         
-        return operands
+        return operands.filter { $0 != "" }
     }
 }
