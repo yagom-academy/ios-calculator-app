@@ -111,13 +111,13 @@
 			children = (
 				3CCAAFD62A2A412D0050B1D5 /* LinkedList.swift */,
 				3CCAAFE02A2BB0DA0050B1D5 /* Queueable.swift */,
+				3C48EB0F2A31429100832DC6 /* CalculatorError.swift */,
 				3CCAAFB72A267F050050B1D5 /* CalculatorItemQueue.swift */,
 				3CCAAFB52A267E570050B1D5 /* CalculateItem.swift */,
 				3C48EB0D2A31392400832DC6 /* String_extension.swift */,
 				3CCAAFE22A2F42C30050B1D5 /* Operator.swift */,
 				3CCAAFE92A2F97A90050B1D5 /* Formula.swift */,
 				3C48EB0B2A2FA59A00832DC6 /* ExpressionParser.swift */,
-				3C48EB0F2A31429100832DC6 /* CalculatorError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
