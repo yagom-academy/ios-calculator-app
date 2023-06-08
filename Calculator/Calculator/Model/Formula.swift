@@ -22,7 +22,7 @@ struct Formula {
                 throw FormulaError.operationError
             }
             
-            if operationResult.isInfinite {
+            if operationResult.isInfinite || operationResult.isNaN {
                 throw FormulaError.divideByZeroError
             }
             
