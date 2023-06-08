@@ -57,7 +57,6 @@ class ViewController: UIViewController {
         stackView.addArrangedSubview(addSubView(`operator`, operand))
     }
     
-
     @IBAction func tappedOperands(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {
             return
@@ -88,6 +87,7 @@ class ViewController: UIViewController {
         
         saveFormula.append("\(operatorString) ")
         saveFormula.append("\(operandString) ")
+        addView(operatorString, operandString)
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         
