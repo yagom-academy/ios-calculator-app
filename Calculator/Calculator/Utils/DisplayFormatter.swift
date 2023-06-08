@@ -39,7 +39,7 @@ class DisplayFormatter {
     }
     
     static func stringToResult(from input: String) -> String {
-        let double = Double(input) ?? .nan
+        guard let double = Double(input) else { return "0" }
         return self.numberFormatter.string(from: NSNumber(value: double)) ?? "error"
     }
     
