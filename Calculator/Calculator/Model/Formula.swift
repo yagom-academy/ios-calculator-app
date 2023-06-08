@@ -9,18 +9,14 @@ struct Formula {
     let operands: CalculatorItemQueue<Double>
     let operators: CalculatorItemQueue<Operator>
     
-    func result() -> Double {
-        let defaultValue: Double = 0.0
-        
+    func result() throws -> Double {
         guard let firstOperand = operands.dequeueItem() else {
-            return defaultValue
+            throw CalculatorError.missingOperand
         }
         
         var result = firstOperand
         
-        while !operators.isEmpty() {
-            guard let operatorValue = operators.dequeueItem() else { continue }
-            guard let nextOperand = operands.dequeueItem() else { continue }
+        while let operatorValue = operators.dequeueItem(), let nextOperand = operands.dequeueItem() {
 
             result = operatorValue.calculate(result, nextOperand)
         }
