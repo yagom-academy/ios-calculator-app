@@ -100,7 +100,4 @@ class InputProcessor {
         }
         return self.expression
     }
-    
 }
-
-
