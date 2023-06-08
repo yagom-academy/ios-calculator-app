@@ -40,7 +40,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        operandLabel.text = sender.titleLabel?.text
+        guard let currentOperand = sender.currentTitle else {
+            return
+        }
+        guard let operand = operandLabel.text, operand != "0" else {
+            operandLabel.text = currentOperand
+            return
+        }
+
+        operandLabel.text = operand + currentOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
