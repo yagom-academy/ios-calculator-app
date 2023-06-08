@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operators: UILabel!
     @IBOutlet weak var operands: UILabel!
+    private var saveFormula = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +30,36 @@ class ViewController: UIViewController {
             return
         }
         
+        if operands.text != "0" {
+            guard let operatorString = operators.text else { return }
+            guard let operandString = operands.text else { return }
+            
+            saveFormula.append("\(operatorString) ")
+            saveFormula.append("\(operandString) ")
+        }
         operators.text = `operator`
-        
-        
     }
     
+    @IBAction func tappedResultButton(_ sender: Any) {
+        guard let operatorString = operators.text else { return }
+        guard let operandString = operands.text else { return }
+        
+        saveFormula.append("\(operatorString) ")
+        saveFormula.append("\(operandString) ")
+        
+        var formula = ExpressionParser.parse(from: saveFormula.joined())
+        
+        do {
+            let result = try formula.result()
+            operands.text = String(result)
+        } catch CalculatorError.divideByZero {
+            operands.text = "NaN"
+        } catch CalculatorError.invalidFormula {
+            operands.text = ""
+        } catch {
+            operands.text = ""
+        }
+    }
     
 }
 
