@@ -25,8 +25,6 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     }
     
     mutating func dequeue() -> Element? {
-        guard let first = list.first else { return nil }
-        list.removeFirst()
-        return first
+        return list.removeFirst()
     }
 }
