@@ -14,25 +14,33 @@ class DisplayFormatter {
         numberFormatter.roundingMode = .halfUp
         numberFormatter.groupingSeparator = ","
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        
+        numberFormatter.maximumFractionDigits = 5
         return numberFormatter
     }()
     
-    static func string(from input: String) -> String {
+    static func stringToInput(from input: String) -> String {
         let components = input.split(with: ".")
         
         let integerPart = components[safe: 0] ?? ""
         let decimalPart = components[safe: 1] ?? ""
         
-        let integer = self.numberFormatter.string(from: NSNumber(value: Double(integerPart) ?? .nan)) ?? ""        
+        let integer = self.numberFormatter.string(from: NSNumber(value: Double(integerPart) ?? .zero)) ?? ""        
         let decimal = decimalPart.isEmpty ? "" : "." + components[1]
         
-        return integer + decimal
+        if input.contains(".") && decimalPart.isEmpty {
+            return integer + "."
+        } else {
+            return integer + decimal
+        }
     }
     
-    static func string(from input: Double) -> String {
+    static func stringToResult(from input: Double) -> String {
         return self.numberFormatter.string(from: NSNumber(value: input)) ?? "error"
+    }
+    
+    static func stringToResult(from input: String) -> String {
+        let double = Double(input) ?? .nan
+        return self.numberFormatter.string(from: NSNumber(value: double)) ?? "error"
     }
     
     private init() { }
