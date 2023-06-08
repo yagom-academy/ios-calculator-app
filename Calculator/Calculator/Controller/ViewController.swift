@@ -25,6 +25,18 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
     }
     
+    @IBAction func touchUpSignButton(_ sender: UIButton) {
+        guard let operand = operandLabel.text, operand != "0", operand != "." else {
+            return
+        }
+        guard operand.hasPrefix("-") else {
+            operandLabel.text = "-\(operand)"
+            return
+        }
+        
+        operandLabel.text = String(operand.suffix(operand.count - 1))
+    }
+    
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         operandLabel.text = sender.titleLabel?.text
     }
