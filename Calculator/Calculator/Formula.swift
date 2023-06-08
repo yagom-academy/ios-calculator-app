@@ -22,6 +22,7 @@ struct Formula {
             lhs = result
             result = operation.calculate(lhs: lhs, rhs: rhs)
         }
+        
         return result
     }
 }
