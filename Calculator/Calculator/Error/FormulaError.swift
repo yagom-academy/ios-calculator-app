@@ -6,6 +6,6 @@
 //
 
 enum FormulaError: Error {
-    case operationError
-    case divideByZeroError
+    case operationFailure
+    case divideByZero
 }

@@ -12,7 +12,7 @@ enum ExpressionParser {
         
         try componentsByOperators(from: input).forEach { operand in
             guard let doubleOperand = Double(operand) else {
-                throw ExpressionParserError.operandConvertError
+                throw ExpressionParserError.invalidOperand
             }
             
             operandsQueue.enqueue(doubleOperand)

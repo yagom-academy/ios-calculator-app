@@ -6,6 +6,5 @@
 //
 
 enum ExpressionParserError: Error {
-    case operandConvertError
-    case operatorConvertError
+    case invalidOperand
 }
