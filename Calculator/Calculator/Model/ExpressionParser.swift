@@ -15,8 +15,9 @@ enum ExpressionParser {
         components.forEach { component in
             if let number = Double(component) {
                 operandQueue.enqueue(item: number)
-            } else if let currentOperator = Operator(rawValue: Character(component)) {
-                operatorQueue.enqueue(item: currentOperator)
+            } else {
+                let operators = Operator.allCases.filter{ String($0.rawValue) == component }
+                operators.forEach{ operatorQueue.enqueue(item: $0) }
             }
         }
         
@@ -27,17 +28,12 @@ enum ExpressionParser {
     
     private static func componentsByOperators(from input: String) -> [String] {
         let operators = Operator.allCases.map { String($0.rawValue)}.joined()
-        var components = [input]
+        let components = [input]
         
-        operators.forEach { `operator` in
-            var newComponents: [String] = []
+        let reducedComponents = operators.reduce(components) { result, operatorString in
+            return result.flatMap {$0.split(with: operatorString)}
             
-            components.forEach { component in
-                newComponents += component.split(with: `operator`).map {String($0)}
-            }
-            
-            components = newComponents
         }
-        return components
+        return reducedComponents
     }
 }
