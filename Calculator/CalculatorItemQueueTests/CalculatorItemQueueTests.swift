@@ -76,4 +76,17 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_enqueue_1_2_3을_했을_때_queue의_마지막값은_3이다() {
+        // given
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        let expectation = 3
+        
+        // when
+        let result = sut.last
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
