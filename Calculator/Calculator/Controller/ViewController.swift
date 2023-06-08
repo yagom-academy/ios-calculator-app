@@ -54,6 +54,7 @@ class ViewController: UIViewController {
             
             stackView.axis = .horizontal
             stackView.spacing = 8
+            stackView.alignment = .bottom
             stackView.addArrangedSubview(operatorLabel)
             stackView.addArrangedSubview(operandLabel)
             
