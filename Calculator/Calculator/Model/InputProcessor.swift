@@ -5,11 +5,6 @@
 //  Created by Minsup on 2023/06/08.
 //
 
-enum Sign: Character {
-    case plus = "+"
-    case minus = "-"
-}
-
 class InputProcessor {
     private var expression: String = ""
     
@@ -47,10 +42,10 @@ class InputProcessor {
             self.expression.startIndex :
             self.expression.index(after: lastOperatorIndex)
         
-        if getRecentOperand().contains(Sign.minus.rawValue) {
+        if getRecentOperand().contains("-") {
             self.expression.remove(at: dotIndex)
         } else {
-            self.expression.insert(Sign.minus.rawValue, at: dotIndex)
+            self.expression.insert("-", at: dotIndex)
         }
         return self.operandOnInput
     }
