@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        operatorLabel.text = sender.titleLabel?.text
+        operatorLabel.text = sender.currentTitle
         
         guard operandLabel.text != "0", operandLabel.text != "." else {
             return
