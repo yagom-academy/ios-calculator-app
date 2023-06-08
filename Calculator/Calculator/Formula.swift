@@ -16,13 +16,9 @@ struct Formula {
         
         var result: Double = firstLhs
         
-        while !(operands.isEmpty || operators.isEmpty) {
+        while let rhs: Double = operands.dequeue(),
+              let operation: Operator = operators.dequeue() {
             var lhs: Double = result
-            
-            guard let rhs: Double = operands.dequeue(),
-                  let operation: Operator = operators.dequeue() else {
-                return 0
-            }
             
             result = operation.calculate(lhs: lhs, rhs: rhs)
         }
