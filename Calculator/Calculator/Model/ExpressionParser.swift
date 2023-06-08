@@ -6,11 +6,9 @@
 //
 
 enum ExpressionParser {
-    @available(iOS 16.0, *)
     static func parse(from input: String) throws -> Formula {
         var operandsQueue = CalculatorItemQueue<Double>()
         var operatorsQueue = CalculatorItemQueue<Operator>()
-        var inputSplitedByOperands = [input]
         
         try componentsByOperators(from: input).forEach { operand in
             guard let doubleOperand = Double(operand) else {
@@ -18,23 +16,12 @@ enum ExpressionParser {
             }
             
             operandsQueue.enqueue(doubleOperand)
-            
-            var splitedOperators: [String] = []
-            
-            inputSplitedByOperands.forEach { element in
-                let separatedElement = element.split(separator: operand).map{ String($0) }
-                splitedOperators.append(contentsOf: separatedElement)
-            }
-            
-            inputSplitedByOperands = splitedOperators
         }
         
-        try inputSplitedByOperands.forEach { `operator` in
-            guard let `operator` = Operator(rawValue: Character(`operator`)) else {
-                throw ExpressionParserError.operatorConvertError
+        input.map { $0 }.forEach {
+            if let `operator` = Operator(rawValue: $0) {
+                operatorsQueue.enqueue(`operator`)
             }
-            
-            operatorsQueue.enqueue(`operator`)
         }
         
         return Formula(operands: operandsQueue, operators: operatorsQueue)
