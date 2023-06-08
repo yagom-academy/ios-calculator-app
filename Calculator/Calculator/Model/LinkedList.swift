@@ -33,14 +33,13 @@ struct LinkedList<Element> {
     mutating func append(data: Element) {
         let newNode = Node(data: data)
         
-        guard let tailNode = head else {
+        if head == nil {
             head = newNode
             tail = newNode
-            return
+        } else {
+            tail?.next = newNode
+            tail = newNode
         }
-        
-        tailNode.next = newNode
-        tail = newNode
     }
     
     mutating func removeFirst() -> Element? {
