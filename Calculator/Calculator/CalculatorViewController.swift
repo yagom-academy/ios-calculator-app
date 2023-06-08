@@ -118,25 +118,9 @@ extension CalculatorViewController {
     }
     
     private func addFormulaStackView(){
-        let stackView = UIStackView()
-        stackView.axis = .horizontal
-        stackView.spacing = 8
+        let arithmeticStackView = ArithmeticStackView(currentOperatorLabel.text, currentOperandLabel.text)
         
-        let operandLabel = UILabel()
-        let operatorLabel = UILabel()
-        
-        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        
-        operandLabel.textColor = .white
-        operatorLabel.textColor = .white
-        
-        operandLabel.text = currentOperandLabel.text
-        operatorLabel.text = currentOperatorLabel.text
-        
-        [operatorLabel, operandLabel].forEach { stackView.addArrangedSubview($0) }
-        
-        calculationFormulaStackView.addArrangedSubview(stackView)
+        calculationFormulaStackView.addArrangedSubview(arithmeticStackView)
         scrollView.layoutIfNeeded()
     }
     
