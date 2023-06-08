@@ -1,0 +1,18 @@
+{
+  "configurations" : [
+    {
+      "id" : "6552A34F-289C-422E-AC90-06C51214F597",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}

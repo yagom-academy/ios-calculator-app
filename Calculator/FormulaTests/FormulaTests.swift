@@ -41,4 +41,71 @@ final class FormulaTests: XCTestCase {
         //then
         XCTAssertEqual(result, 7)
     }
+    
+    func test_5_2_빼기했을때_3인지_확인() {
+        //given
+        operands.enqueue(item: 5.0)
+        operands.enqueue(item: 2.0)
+        operators.enqueue(item: .subtract)
+        
+        //when
+        let result = try! sut.result()
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_4_2_나누기했을때_2인지_확인() {
+        //given
+        operands.enqueue(item: 4.0)
+        operands.enqueue(item: 2.0)
+        operators.enqueue(item: .divide)
+        
+        //when
+        let result = try! sut.result()
+        
+        //then
+        XCTAssertEqual(result, 2)
+    }
+    
+    func test_2_5_곱했을때_10인지_확인() {
+        //given
+        operands.enqueue(item: 2.0)
+        operands.enqueue(item: 5.0)
+        operators.enqueue(item: .multiply)
+        
+        //when
+        let result = try! sut.result()
+        
+        //then
+        XCTAssertEqual(result, 10)
+    }
+    
+    func test_2_5_3더했을때_10인지_확인() {
+        //given
+        operands.enqueue(item: 2.0)
+        operands.enqueue(item: 5.0)
+        operands.enqueue(item: 3.0)
+        operators.enqueue(item: .add)
+        operators.enqueue(item: .add)
+        
+        //when
+        let result = try! sut.result()
+        
+        //then
+        XCTAssertEqual(result, 10)
+    }
+    
+    func test_음수2_음수5_더했을때_음수7인지_확인() {
+        //given
+        operands.enqueue(item: -2.0)
+        operands.enqueue(item: -5.0)
+        operators.enqueue(item: .subtract)
+        
+        //when
+        let result = try! sut.result()
+        
+        //then
+        XCTAssertEqual(result, 3)
+    }
 }
