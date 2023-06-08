@@ -44,7 +44,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parser_문자열이_1_더하기_2_빼기_3일때_반환값의operators의_first값은_더하기이다() {
         // given
-        let formula = ExpressionParser.parser(from: "1+2-3")
+        let formula = ExpressionParser.parser(from: "1+2−3")
         let expectation = Operator.add
         
         // when
@@ -56,7 +56,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parser_문자열이_1_더하기_2_빼기_3일때_반환값의operators의_last값은_빼기이다() {
         // given
-        let formula = ExpressionParser.parser(from: "1+2-3")
+        let formula = ExpressionParser.parser(from: "1+2−3")
         let expectation = Operator.subtract
         
         // when
