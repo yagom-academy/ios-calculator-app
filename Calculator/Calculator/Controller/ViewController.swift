@@ -19,6 +19,8 @@ class ViewController: UIViewController {
 
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         stackView.subviews.forEach { $0.removeFromSuperview() }
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
