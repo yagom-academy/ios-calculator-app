@@ -48,7 +48,39 @@ class ViewController: UIViewController {
             return
         }
         
+        addStackView()
         operandLabel.text = "0"
+    }
+    
+    func addStackView() {
+        let recordedFormulaLabel: [UILabel] = configureItem()
+        let content: UIStackView = configureContent(item: recordedFormulaLabel)
+        stackView.addArrangedSubview(content)
+    }
+    
+    func configureContent(item formula: [UILabel]) -> UIStackView {
+        let content: UIStackView = UIStackView()
+        content.translatesAutoresizingMaskIntoConstraints = false
+        content.axis = .horizontal
+        content.alignment = .fill
+        content.distribution = .equalSpacing
+        content.spacing = 8
+        formula.forEach { content.addArrangedSubview($0) }
+        
+        return content
+    }
+
+    func configureItem() -> [UILabel] {
+        let recordedOperatorLabel: UILabel = UILabel()
+        recordedOperatorLabel.font = .preferredFont(forTextStyle: .title3)
+        recordedOperatorLabel.text = operatorLabel.text
+        recordedOperatorLabel.textColor = .white
+        let recordedOperandLabel: UILabel = UILabel()
+        recordedOperandLabel.font = .preferredFont(forTextStyle: .title3)
+        recordedOperandLabel.text = operandLabel.text
+        recordedOperandLabel.textColor = .white
+        
+        return [recordedOperatorLabel, recordedOperandLabel]
     }
 }
 
