@@ -4,6 +4,8 @@
 //
 //  Created by Yetti on 2023/05/30.
 
+import Foundation
+
 struct CalculatorItemQueue<T: CalculateItem>: DoubleStackQueue {
     private var enqueueStack: [T] = []
     private var dequeueStack: [T] = []
@@ -77,15 +79,37 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
 }
 
-
 enum ExpressionParser {
-    static func parse(from input: String) -> Formula {}
-    private static func componentsByOpeators(from input: String) -> [String] { }
+    static func parse(from input: String) -> Formula {
+        var formula = Formula()
+        let operands = componentsByOperators(from: input)
+        let operators = Array(input.filter { $0.isNumber == false })
+        
+        for operand in operands {
+            if let number = Double(operand) {
+                formula.operands.enqueue(number)
+            }
+        }
+        
+        for `operator` in operators {
+            if let oper = Operator(rawValue: `operator`) {
+                formula.operators.enqueue(oper)
+            }
+        }
+
+        return formula
+    }
+    
+    private static func componentsByOperators(from input: String) -> [String] {
+        return input.components(separatedBy: ["+", "-", "/", "*"])
+    }
 }
 
 struct Formula {
-    let operands: CalculatorItemQueue<Double>
-    let operators: CalculatorItemQueue<Operator>
+    var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
+    var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    func result() -> Double { }
+    func result() -> Double {
+        return 0
+    }
 }
