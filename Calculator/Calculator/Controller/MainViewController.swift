@@ -34,24 +34,16 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLabelTexts(newOperand: MultiUseString.zero.value, newOperator: MultiUseString.empty.value)
-    }
-    
-    
-    private func setUpLabelTexts(newOperand: String, newOperator: String) {
-        operandLabel.text = newOperand
-        operatorLabel.text = newOperator
+        operandValue = MultiUseString.zero.value
+        operatorValue = MultiUseString.empty.value
     }
     
     @IBAction private func touchUpButton(_ sender: UIButton) {
         guard let senderTitle = sender.currentTitle else { return }
         let operators: [String] = Operator.allCases.map { String($0.rawValue) }
+        let menus: [String] = MenuType.allCases.map { $0.rawValue }
         
-        if let buttonType = MenuType(rawValue: senderTitle) {
-            guard buttonType == .equalSign else {
-                touchUpMenuButton(buttonType: buttonType)
-                return
-            }
+        if senderTitle == "=" {
             do {
                 try touchUpEqualButton()
             } catch CalculatorError.divideByZero {
@@ -60,6 +52,9 @@ class MainViewController: UIViewController {
             } catch {
                 print(CalculatorError.unknown.message)
             }
+        } else if menus.contains(senderTitle) {
+            guard let senderType = MenuType(rawValue: senderTitle) else { return }
+            touchUpMenuButton(senderType: senderType)
         } else if operators.contains(senderTitle) {
             touchUpOperatorButton(senderTitle: senderTitle)
         } else {
@@ -67,40 +62,24 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func touchUpMenuButton(buttonType: MenuType) {
-        switch buttonType {
-        case .allClear:
-            touchUpACButton()
-        case .clearEntry:
-            touchUpCEButton()
-        case .signToggle:
-            touchUpSignToggleButton()
-        default:
-            return
+    private func touchUpMenuButton(senderType: MenuType) {
+        if isReset {
+            isReset = false
         }
-    }
-    
-    private func touchUpACButton() {
-        operandValue = MultiUseString.zero.value
-        operatorValue = MultiUseString.empty.value
-        deleteAllFormulaListStackView()
+        let lableTexts: LableStatus = senderType.getLabelTexts(
+            when: (operandValue: operandValue, operatorValue: operatorValue)
+        )
+        if senderType == .allClear {
+            deleteAllFormulaListStackView()
+        }
+        operandValue = lableTexts.operandValue
+        operatorValue = lableTexts.operatorValue
     }
     
     private func deleteAllFormulaListStackView() {
         formulaListStackView.arrangedSubviews.forEach { stack in
             stack.removeFromSuperview()
         }
-    }
-    
-    private func touchUpCEButton() {
-        operandValue = MultiUseString.zero.value
-    }
-    
-    private func touchUpSignToggleButton() {
-        guard operandValue != MultiUseString.zero.value,
-              let operandNumber = Double(operandValue) else { return }
-        let toggledNumber = formatNumber(operandNumber * (-1))
-        operandValue = toggledNumber
     }
     
     private func touchUpEqualButton() throws {
@@ -111,7 +90,7 @@ class MainViewController: UIViewController {
         let allFormula = mergeAllFormulaList()
         var formula = ExpressionParser.parse(from: allFormula)
 
-        operandValue = formatNumber(try formula.result())
+        operandValue = OperandFormatter.formatDoubleToString(try formula.result())
         operatorValue = MultiUseString.empty.value
     }
     
@@ -121,7 +100,7 @@ class MainViewController: UIViewController {
         let newOperandLabel = UILabel()
         
         newOperatorLabel.text = operatorValue
-        newOperandLabel.text = operandValue.replacingOccurrences(of: ",", with: "")
+        newOperandLabel.text = OperandFormatter.formatStringToString(operandValue)
         newOperandLabel.textColor = .white
         newOperatorLabel.textColor = .white
         newFormulaStackView.addArrangedSubview(newOperatorLabel)
@@ -138,15 +117,22 @@ class MainViewController: UIViewController {
     
     private func mergeAllFormulaList() -> String {
         var mergedFormulaList: [String] = []
+        var result: String = ""
         let formulaList = flattenFormulaList()
         
-        formulaList.forEach { text in
-            let lastResult = mergedFormulaList.popLast() ?? ""
-            mergedFormulaList.append(lastResult + text)
+        for text in formulaList {
+            guard let lastResult = mergedFormulaList.popLast(),
+                  text != MultiUseString.empty.value
+            else {
+                mergedFormulaList.append(MultiUseString.empty.value)
+                continue
+            }
+            result = lastResult + text
+            mergedFormulaList.append(result)
         }
 
         isReset = true
-        return mergedFormulaList.popLast() ?? ""
+        return result
     }
     
     private func flattenFormulaList() -> [String] {
@@ -155,12 +141,15 @@ class MainViewController: UIViewController {
         for item in formulaList {
             guard let singleLabel = item as? UILabel,
                   let labelText = singleLabel.text else { continue }
-            result.append(labelText)
+            result.append(OperandFormatter.removeComma(labelText))
         }
         return result
     }
     
     private func touchUpOperatorButton(senderTitle: String) {
+        if isReset {
+            isReset = false
+        }
         if operandValue != MultiUseString.zero.value {
             addNewFormulaStackView()
             operandValue = MultiUseString.zero.value
@@ -183,19 +172,5 @@ class MainViewController: UIViewController {
             return
         }
         operandValue += senderTitle
-    }
-
-    private func formatNumber(_ number: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
-        
-        guard let numberFormatted = numberFormatter.string(for: number)
-        else {
-            return MultiUseString.empty.value
-        }
-        
-        return numberFormatted
     }
 }
