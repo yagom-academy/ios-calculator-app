@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -89,7 +89,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue_enqueue_1을했을때_queue의_첫번째값은_1이다() {
         // given
         sut.enqueue(1)
-        let expectation = 1
+        let expectation = 1.0
         
         // when
         let result = sut.first
@@ -103,7 +103,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        let expectation = 1
+        let expectation = 1.0
         
         // when
         let result = sut.first
@@ -115,7 +115,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_enqueue_enqueue_1을했을때_queue의_마지막값은_1이다() {
         // given
         sut.enqueue(1)
-        let expectation = 1
+        let expectation = 1.0
         
         // when
         let result = sut.last
@@ -129,7 +129,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        let expectation = 3
+        let expectation = 3.0
         
         // when
         let result = sut.last
@@ -140,7 +140,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_dequeue_queue가_비어있을때_dequeue를하면_nil을_반환한다() {
         // given
-        let expectation: Int? = nil
+        let expectation: Double? = nil
         
         // when
         let result = sut.dequeue()
@@ -154,7 +154,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        let expectation = 1
+        let expectation = 1.0
         
         // when
         let result = sut.dequeue()
@@ -168,7 +168,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
-        let expectation = 2
+        let expectation = 2.0
         
         // when
         let _ = sut.dequeue()
@@ -229,4 +229,5 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectation)
     }
+    
 }

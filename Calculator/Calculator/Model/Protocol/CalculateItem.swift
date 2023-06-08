@@ -6,9 +6,3 @@
 //
 
 protocol CalculateItem {}
-
-extension Int:CalculateItem {}
-
-extension String:CalculateItem {}
-
-extension Double:CalculateItem {}

@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Calculator.xctestplan"
+            reference = "container:CalculatorTests/Calculator.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -84,6 +84,28 @@
                BlueprintIdentifier = "AC7636452A282524009C18C1"
                BuildableName = "CalculatorItemQueueTests.xctest"
                BlueprintName = "CalculatorItemQueueTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC7EF3DD2A2B86ED00A883D2"
+               BuildableName = "FormulaTests.xctest"
+               BlueprintName = "FormulaTests"
+               ReferencedContainer = "container:Calculator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC2FF8F12A2EB64C0065BA77"
+               BuildableName = "ExpressionParserTests.xctest"
+               BlueprintName = "ExpressionParserTests"
                ReferencedContainer = "container:Calculator.xcodeproj">
             </BuildableReference>
          </TestableReference>

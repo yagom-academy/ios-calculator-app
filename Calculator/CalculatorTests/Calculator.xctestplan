@@ -30,6 +30,20 @@
         "identifier" : "AC7636452A282524009C18C1",
         "name" : "CalculatorItemQueueTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "AC7EF3DD2A2B86ED00A883D2",
+        "name" : "FormulaTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "AC2FF8F12A2EB64C0065BA77",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1
