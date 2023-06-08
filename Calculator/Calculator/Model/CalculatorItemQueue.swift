@@ -109,7 +109,16 @@ struct Formula {
     var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
-    func result() -> Double {
-        return 0
+    mutating func result() -> Double {
+        var result: Double = 0.0
+        
+        while operands.isEmpty == false {
+            let dequeueOperator = operators.dequeue()
+            
+            guard let lhs = operands.dequeue(), let rhs = operands.dequeue() else { return 0 }
+            guard let calculatedValue = dequeueOperator?.calculate(lhs: lhs, rhs: rhs) else { return 0 }
+            result = calculatedValue
+        }
+        return result
     }
 }
