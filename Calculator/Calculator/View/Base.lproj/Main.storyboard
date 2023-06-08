@@ -86,6 +86,9 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedACButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cY3-PT-0n5"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
                                                 <rect key="frame" x="97.5" y="0.0" width="89.5" height="89.5"/>
@@ -94,6 +97,9 @@
                                                 <state key="normal" title="CE">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="tappedCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rbw-j2-q1I"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
                                                 <rect key="frame" x="195" y="0.0" width="89.5" height="89.5"/>
@@ -362,7 +368,7 @@
                         <outlet property="displayedScreen" destination="BOT-7g-vxv" id="qWL-rZ-RSr"/>
                         <outlet property="operands" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
                         <outlet property="operators" destination="HPC-iy-qdm" id="pps-PP-efd"/>
-                        <outlet property="stackView" destination="XRe-QE-UJf" id="KhA-8N-zJf"/>
+                        <outlet property="stackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

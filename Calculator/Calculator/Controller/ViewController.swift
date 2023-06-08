@@ -116,5 +116,14 @@ class ViewController: UIViewController {
         operands.text = String(operandsNumber * -1)
     }
     
+    @IBAction func tappedCEButton(_ sender: Any) {
+        operands.text = "0"
+    }
+    
+    @IBAction func tappedACButton(_ sender: Any) {
+        for subview in stackView.arrangedSubviews {
+            subview.removeFromSuperview()
+        }
+    }
 }
 
