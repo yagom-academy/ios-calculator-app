@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    private var formula: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,18 @@ class ViewController: UIViewController {
         operandLabel.text = String(operand.suffix(operand.count - 1))
     }
     
+    @IBAction func touchUpResultButton(_ sender: UIButton) {
+        var result = ExpressionParser.parse(from: formula)
+        
+        let recordedOperatorLabel: UILabel = UILabel()
+        recordedOperatorLabel.font = .preferredFont(forTextStyle: .title3)
+        recordedOperatorLabel.text = String(result.result())
+        recordedOperatorLabel.textColor = .white
+        
+        let content: UIStackView = configureContent(item: [recordedOperatorLabel])
+        stackView.addArrangedSubview(content)
+    }
+    
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let currentOperand = sender.currentTitle else {
             return
@@ -59,7 +72,16 @@ class ViewController: UIViewController {
         }
         
         addStackView()
+        formula += configureCurrentFormula()
         operandLabel.text = "0"
+    }
+    
+    func configureCurrentFormula() -> String {
+        guard let operand = operandLabel.text else {
+            return ""
+        }
+        
+        return operatorLabel.text ?? "" + operand
     }
     
     func addStackView() {
