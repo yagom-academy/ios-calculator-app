@@ -91,9 +91,14 @@ class ViewController: UIViewController {
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = -2
+        numberFormatter.alwaysShowsDecimalSeparator = false
+        
         do {
             let result = try formula.result()
-            operands.text = String(result)
+            operands.text = numberFormatter.string(from: result as NSNumber)
             saveFormula = []
             operators.text = ""
         } catch CalculatorError.divideByZero {
