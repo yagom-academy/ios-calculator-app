@@ -22,8 +22,10 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         queue.append(data: element)
     }
     
-    mutating func dequeue() -> Element? {
-        let data = queue.readHeadData()
+    mutating func dequeue() throws -> Element {
+        guard let data = queue.readHeadData() else {
+            throw CalculatorError.invalidData
+        }
         queue.removeFirst()
         return data
     }

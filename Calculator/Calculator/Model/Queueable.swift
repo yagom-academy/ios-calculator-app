@@ -14,7 +14,7 @@ protocol Queueable {
     
     mutating func enqueue(_ element: CalculateItem)
     
-    mutating func dequeue() -> CalculateItem?
+    mutating func dequeue() throws -> CalculateItem
     
     mutating func clearQueue()
 }

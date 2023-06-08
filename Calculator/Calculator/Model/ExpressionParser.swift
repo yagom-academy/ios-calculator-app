@@ -19,19 +19,15 @@ enum ExpressionParser {
         for element in operatorsArray {
             let changeToCharacter = Character(element)
             
-            guard let changeToOperator = Operator(rawValue: changeToCharacter) else {
-                throw CalculatorError.invalidOperator
+            if let changeToOperator = Operator(rawValue: changeToCharacter) {
+                operators.enqueue(changeToOperator)
             }
-            
-            operators.enqueue(changeToOperator)
         }
         
         for element in operandsArray {
-            guard let element = Double(element) else {
-                throw CalculatorError.invalidNumber
+            if let element = Double(element) {
+                operands.enqueue(element)
             }
-            
-            operands.enqueue(element)
         }
         
         return Formula(operands: operands, operators: operators)

@@ -6,5 +6,5 @@
 //
 
 enum CalculatorError: Error {
-    case invalidNumber, invalidOperator
+    case invalidData
 }
