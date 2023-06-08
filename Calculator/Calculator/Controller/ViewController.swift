@@ -72,8 +72,12 @@ class ViewController: UIViewController {
         guard let operand = sender.currentTitle else {
             return
         }
+        guard let operandString = operands.text, operandString != "0" else {
+            operands.text = operand
+            return
+        }
         
-        operands.text = operand
+        operands.text = operandString + operand
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
@@ -90,6 +94,7 @@ class ViewController: UIViewController {
             addView(operatorString, operandString)
         }
         operators.text = `operator`
+        operands.text = "0"
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
