@@ -19,7 +19,7 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     }
     
     internal var peek: Element? {
-        return outputStack.isEmpty == false ? outputStack.last : inputStack.first
+        return outputStack.isEmpty ? inputStack.first : outputStack.last
     }
     
     internal mutating func enqueue(_ element: Element) {
