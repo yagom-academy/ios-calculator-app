@@ -8,27 +8,28 @@
 struct LinkedList<DataType>: Listable {
     private var head: Node<DataType>?
     private var tail: Node<DataType>?
+    private var numberOfNode: Int = 0
     var first: DataType? {
         return head?.fetchData()
     }
     var last: DataType? {
         return tail?.fetchData()
     }
-    
-    init(head: Node<DataType>? = nil, tail: Node<DataType>? = nil) {
-        self.head = head
-        self.tail = tail
+    var count: Int {
+        return numberOfNode
     }
     
     mutating func append(_ data: DataType) {
         guard head != nil else {
             head = Node(data: data)
             tail = head
+            numberOfNode += 1
             return
         }
         
         tail?.updateNext(Node(data: data))
         tail = tail?.fetchNext()
+        numberOfNode += 1
     }
     
     mutating func removeFirst() -> DataType? {
@@ -42,6 +43,7 @@ struct LinkedList<DataType>: Listable {
         
         let data = head?.fetchData()
         head = head?.fetchNext()
+        numberOfNode -= 1
         
         return data
     }

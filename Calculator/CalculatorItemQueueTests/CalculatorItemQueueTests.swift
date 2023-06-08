@@ -27,7 +27,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         sut.enqueue(expectedData)
-        let result: Int? = sut.linkedList.removeFirst()
+        let result: Int? = sut.dequeue()
         
         // then
         XCTAssertEqual(result, expectedData)
