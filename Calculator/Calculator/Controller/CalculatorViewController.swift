@@ -19,8 +19,6 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         self.displayLabel.text = "0"
         self.equalButton.isEnabled = false
-        self.recordScrollView.translatesAutoresizingMaskIntoConstraints = false
-        self.recordStackView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
@@ -86,9 +84,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func scrollToBottom() {
-        self.recordScrollView.layoutIfNeeded()
-        let scrollSize = self.recordScrollView.bounds.size.height
-        let contentSize = self.recordStackView.bounds.size.height
+        self.recordScrollView.layoutIfNeeded()        
+        let scrollSize = self.recordScrollView.frame.height
+        let contentSize = self.recordScrollView.contentSize.height
         let bottomOffset = CGPoint(x: 0, y: contentSize - scrollSize)
         self.recordScrollView.setContentOffset(bottomOffset, animated: true)
     }
