@@ -10,24 +10,21 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
     
     mutating func result() -> Double {
-        var isEmptyOperators: Bool = operators.isEmpty
-        var isEmptyOperands: Bool = operands.isEmpty
-        var result: Double = 0
+        guard let firstLhs: Double = operands.dequeue() else {
+            return 0
+        }
         
-        while !(isEmptyOperators || isEmptyOperands) {
+        var result: Double = firstLhs
+        
+        while !(operands.isEmpty || operators.isEmpty) {
             var lhs: Double = result
             
-            guard let rhs: Double = operands.dequeue() else {
-                return 0
-            }
-            
-            guard let operation: Operator = operators.dequeue() else {
+            guard let rhs: Double = operands.dequeue(),
+                  let operation: Operator = operators.dequeue() else {
                 return 0
             }
             
             result = operation.calculate(lhs: lhs, rhs: rhs)
-            isEmptyOperands = operands.isEmpty
-            isEmptyOperators = operators.isEmpty
         }
         return result
     }

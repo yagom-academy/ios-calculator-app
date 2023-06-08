@@ -16,6 +16,12 @@ enum Expressionparser {
             }
         }
         
+        input.forEach { inputElement in
+            if let operatorValue = Operator(rawValue: inputElement) {
+                formula.operators.enqueue(operatorValue)
+            }
+        }
+        
         return formula
     }
     
