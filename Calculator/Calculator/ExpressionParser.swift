@@ -15,7 +15,7 @@ enum ExpressionParser {
             .forEach { formula.operands.enqueue($0) }
         
         inputStrings
-            .filter { $0.count == 1 }
+            .filter { Double($0) == nil }
             .compactMap { Operator(rawValue: Character($0)) }
             .forEach { formula.operators.enqueue($0) }
         

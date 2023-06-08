@@ -20,7 +20,7 @@ final class ExpressionParserTeste: XCTestCase {
 
     func test1_parse_1_더하기_10을_넣고_operands를_dequeue를_하면_1을_반환한다() {
         // given
-        let input = "1 + 10"
+        let input = "1 + 1"
         
         // when
         var formula = ExpressionParser.parse(from: input)
