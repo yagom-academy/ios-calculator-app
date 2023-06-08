@@ -9,6 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operators: UILabel!
     @IBOutlet weak var operands: UILabel!
+    @IBOutlet weak var displayedScreen: UIScrollView!
+    @IBOutlet weak var stackView: UIStackView!
     private var saveFormula = [String]()
     
     override func viewDidLoad() {
@@ -16,6 +18,45 @@ class ViewController: UIViewController {
         operands.text = "0"
         operators.text = ""
     }
+    
+    func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
+        let operatorLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = `operator`
+            label.textColor = .white
+            
+            return label
+        }()
+        
+        let operandLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = operand
+            label.textColor = .white
+            
+            return label
+        }()
+        
+        let subStackView: UIStackView = {
+            let stackView = UIStackView()
+            
+            stackView.axis = .horizontal
+            stackView.spacing = 8
+            stackView.addArrangedSubview(operatorLabel)
+            stackView.addArrangedSubview(operandLabel)
+            
+            return stackView
+        }()
+        
+        return subStackView
+    }
+    
+    func addView(_ `operator`: String, _ operand: String) {
+        stackView.axis = .vertical
+        stackView.addArrangedSubview(addSubView(`operator`, operand))
+    }
+    
 
     @IBAction func tappedOperands(_ sender: UIButton) {
         guard let operand = sender.currentTitle else {
@@ -36,6 +77,7 @@ class ViewController: UIViewController {
             
             saveFormula.append("\(operatorString) ")
             saveFormula.append("\(operandString) ")
+            addView(operatorString, operandString)
         }
         operators.text = `operator`
     }
@@ -52,6 +94,8 @@ class ViewController: UIViewController {
         do {
             let result = try formula.result()
             operands.text = String(result)
+            saveFormula = []
+            operators.text = ""
         } catch CalculatorError.divideByZero {
             operands.text = "NaN"
         } catch CalculatorError.invalidFormula {
@@ -59,6 +103,17 @@ class ViewController: UIViewController {
         } catch {
             operands.text = ""
         }
+    }
+    
+    
+    @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
+        guard let operand = operands.text else { return
+        }
+        guard let operandsNumber = Double(operand) else {
+            return
+        }
+        
+        operands.text = String(operandsNumber * -1)
     }
     
 }
