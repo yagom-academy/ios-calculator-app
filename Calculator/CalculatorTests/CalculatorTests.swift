@@ -49,6 +49,5 @@ final class CalculatorTests: XCTestCase {
         sut.clear()
         
         XCTAssertTrue(sut.isEmpty)
-        
     }
 }

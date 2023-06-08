@@ -1,9 +1,10 @@
 # 계산기🤖
 
-> **Step1: Queue 타입 구현**
-- Unit Test 타깃 추가
-- 입력 받은 숫자와 연산자 연산큐에 넣기
-- CalculatorItemQueue 코드로 구현
+> **Step2: 연산 타입 구현**
+- 제시된 UML대로 연산 타입 구현
+- 변수보단 상수를, 반복문 조건문 보다는 고차함수를 더 활용하기
+- 본인 희망하면 TDD를 적극 수행하기
+- 참고사항 (연산큐에 쌓기, 0을 나눌 때 오류처리, 각종 예외처리)
 
 ## 1. 캠퍼
 
@@ -21,7 +22,7 @@
 
 <details>
 <summary>펼쳐보기</summary>
-<a href="https://ibb.co/xLTrSBR"><img src="https://i.ibb.co/sRYXvNM/Calculator.png" alt="Calculator" border="0"></a><br /><a target='_blank' href='https://statewideinventory.org/ford-0-60-times'></a><br />
+<a href="https://ibb.co/FbctNKb"><img src="https://i.ibb.co/ccRdM1c/Calculator-UML.png" alt="Calculator-UML" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'></a><br />
     
 </details>
 
