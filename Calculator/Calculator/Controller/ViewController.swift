@@ -67,6 +67,12 @@ class ViewController: UIViewController {
         resetInputNumberLabel()
     }
     
+    @IBAction func tapAllClear(_ sender: UIButton) {
+        resetInputNumberLabel()
+        resetInputOperatorLabel()
+        resetAllInputStackView()
+    }
+    
     private func resetInputNumberLabel() {
         inputNumberLabel.text = "0"
     }
