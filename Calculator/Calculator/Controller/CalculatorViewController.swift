@@ -51,9 +51,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapNumberButton(_ sender: UIButton) {
-        let operandLabelText = operandLabel.text?
-            .components(separatedBy: ",")
-            .joined()
+        let operandLabelText = removeComma(of: operandLabel.text)
         
         guard var operandLabelText, operandLabelText.count < 20 else {
             return
@@ -156,10 +154,7 @@ class CalculatorViewController: UIViewController {
     }
     
     func appendCalculateItem() {
-        guard let operandLabelText = operandLabel.text?
-            .components(separatedBy: ",")
-            .joined()
-        else {
+        guard let operandLabelText = removeComma(of: operandLabel.text) else {
             return
         }
         
@@ -186,6 +181,10 @@ class CalculatorViewController: UIViewController {
         
         components.append(operatorLabel.text ?? "")
         components.append(operandLabel.text ?? "")
+    }
+    
+    func removeComma(of text: String?) -> String? {
+        return text?.components(separatedBy: ",").joined()
     }
 }
 
