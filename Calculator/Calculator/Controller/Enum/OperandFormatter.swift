@@ -27,6 +27,7 @@ enum OperandFormatter {
         else {
             return operand
         }
+        
         return formatDoubleToString(doubleOperand)
     }
     

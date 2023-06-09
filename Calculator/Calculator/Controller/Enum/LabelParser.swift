@@ -46,6 +46,7 @@ enum LabelParser {
     
     static func parseLabelForEqual(result calculatorResult: Double) -> LabelValues {
         let operandResult = OperandFormatter.formatDoubleToString(calculatorResult)
+        
         return (operandValue: operandResult,
                 operatorValue: CalculatorNamespace.Empty)
     }
@@ -56,9 +57,11 @@ enum LabelParser {
             return (operandValue: CalculatorNamespace.Zero + CalculatorNamespace.Dot,
                     operatorValue: labelValues.operatorValue)
         }
+        
         guard !labelValues.operandValue.contains(CalculatorNamespace.Dot) else {
             return labelValues
         }
+        
         return (operandValue: labelValues.operandValue + CalculatorNamespace.Dot,
                 operatorValue: labelValues.operatorValue)
     }
@@ -83,6 +86,7 @@ enum LabelParser {
             return (operandValue: menu,
                     operatorValue: labelValues.operatorValue)
         }
+        
         return (operandValue: labelValues.operandValue + menu,
                 operatorValue: labelValues.operatorValue)
     }
@@ -94,7 +98,9 @@ enum LabelParser {
             return (operandValue: labelValues.operandValue,
                     operatorValue: labelValues.operatorValue)
         }
+        
         let newOperand = OperandFormatter.formatDoubleToString(operandNumber * (-1))
+        
         return (operandValue: newOperand,
                 operatorValue: labelValues.operatorValue)
     }

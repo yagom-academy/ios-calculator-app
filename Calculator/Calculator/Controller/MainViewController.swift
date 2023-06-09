@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var formulaListStackView: UIStackView!
     
     private var isReset: Bool = false
-    private var isZero: Bool = true
+    private var lastOperand: String = CalculatorNamespace.Zero
     
     private var operatorValue: String {
         get {
@@ -26,10 +26,10 @@ class MainViewController: UIViewController {
     
     private var operandValue: String {
         get {
-            return operandLabel.text ?? CalculatorNamespace.Zero
+            return OperandFormatter.removeComma(operandLabel.text ?? CalculatorNamespace.Zero)
         }
         set(newOperand) {
-            operandLabel.text = newOperand
+            operandLabel.text = OperandFormatter.formatStringToString(newOperand)
         }
     }
     
@@ -59,8 +59,6 @@ class MainViewController: UIViewController {
     @IBAction private func touchUpButton(_ sender: UIButton) {
         guard let senderTitle = sender.currentTitle else { return }
         let buttonType: ButtonType = ButtonType.getType(senderTitle)
-        
-        setIsZero(senderTitle: senderTitle)
 
         switch buttonType {
         case .equal:
@@ -72,11 +70,11 @@ class MainViewController: UIViewController {
         case .allClear:
             deleteAllFormulaListStackView()
         case .numbers, .doubleZero, .dot:
-            setIsZero(senderTitle: senderTitle)
             touchUpNumbersButton()
         default:
             break
         }
+        
         let labelValues: LabelValues = LabelParser
             .parseLabelValues(button: buttonType,
                               buttonTitle: senderTitle,
@@ -85,23 +83,11 @@ class MainViewController: UIViewController {
         setUpLabelValues(labelValues)
         isReset = buttonType == .signToggle ? isReset : false
     }
-
-    private func setIsZero(senderTitle: String) {
-        if senderTitle == CalculatorNamespace.Zero ||
-           operandValue == CalculatorNamespace.Zero {
-            isZero = true
-        }
-        if isZero && operandValue != CalculatorNamespace.Zero {
-            if operatorValue != CalculatorNamespace.Empty {
-                addNewFormulaStackView(LabelParser.getDefaultLabelValues())
-            }
-            isZero = false
-        }
-    }
     
     private func touchUpEqualButton() {
         guard operatorValue != CalculatorNamespace.Empty else { return }
         
+        setLastOperand()
         addNewFormulaStackView(currentLabelValues)
         
         let allFormula = mergeAllFormulaList()
@@ -120,7 +106,17 @@ class MainViewController: UIViewController {
         }
     }
     
+    private func setLastOperand() {
+        if lastOperand == CalculatorNamespace.Zero && lastOperand != operandValue {
+            addNewFormulaStackView(LabelParser.getDefaultLabelValues())
+        }
+        
+        lastOperand = operandValue
+    }
+    
     private func touchUpOperatorButton() {
+        setLastOperand()
+        
         if operandValue != CalculatorNamespace.Zero {
             addNewFormulaStackView(currentLabelValues)
         }
@@ -169,17 +165,20 @@ class MainViewController: UIViewController {
             mergedFormulaList.append(result)
         }
         isReset = true
+        
         return result
     }
     
     private func flattenFormulaList() -> [String] {
         var result: [String] = []
         let formulaList = formulaListStackView.arrangedSubviews.reduce([]) { $0 + $1.subviews }
+        
         for item in formulaList {
             guard let singleLabel = item as? UILabel,
                   let labelText = singleLabel.text else { continue }
             result.append(OperandFormatter.removeComma(labelText))
         }
+        
         return result
     }
 }
