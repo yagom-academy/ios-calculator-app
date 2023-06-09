@@ -19,9 +19,7 @@ class ViewController: UIViewController {
         
         resetInputNumberLabel()
         resetInputOperatorLabel()
-        allInputStackView.subviews.forEach {
-            $0.removeFromSuperview()
-        }
+        resetAllInputStackView()
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
@@ -75,6 +73,12 @@ class ViewController: UIViewController {
     
     private func resetInputOperatorLabel() {
         inputOperatorLabel.text = ""
+    }
+    
+    private func resetAllInputStackView() {
+        allInputStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
     
     private func makeUILabel(_ text: String?) -> UILabel {
