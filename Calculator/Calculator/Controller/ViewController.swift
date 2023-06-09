@@ -15,14 +15,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        clearLabel()
     }
 
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         stackView.subviews.forEach { $0.removeFromSuperview() }
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        clearLabel()
         expression = ""
         isResult = false
     }
@@ -87,7 +85,7 @@ class ViewController: UIViewController {
         isResult = false
     }
     
-    func configureCurrentFormula() -> String {
+    private func configureCurrentFormula() -> String {
         guard let operand = operandLabel.text else {
             return ""
         }
@@ -95,13 +93,13 @@ class ViewController: UIViewController {
         return "\(operatorLabel.text ?? "")\(operand)"
     }
     
-    func addStackView() {
+    private func addStackView() {
         let recordedFormulaLabel: [UILabel] = configureItem()
         let content: UIStackView = configureContent(item: recordedFormulaLabel)
         stackView.addArrangedSubview(content)
     }
     
-    func configureContent(item formula: [UILabel]) -> UIStackView {
+    private func configureContent(item formula: [UILabel]) -> UIStackView {
         let content: UIStackView = UIStackView()
         content.translatesAutoresizingMaskIntoConstraints = false
         content.axis = .horizontal
@@ -113,7 +111,7 @@ class ViewController: UIViewController {
         return content
     }
 
-    func configureItem() -> [UILabel] {
+    private func configureItem() -> [UILabel] {
         let recordedOperatorLabel: UILabel = UILabel()
         recordedOperatorLabel.font = .preferredFont(forTextStyle: .title3)
         recordedOperatorLabel.text = operatorLabel.text
@@ -124,6 +122,11 @@ class ViewController: UIViewController {
         recordedOperandLabel.textColor = .white
         
         return [recordedOperatorLabel, recordedOperandLabel]
+    }
+    
+    private func clearLabel() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
 }
 
