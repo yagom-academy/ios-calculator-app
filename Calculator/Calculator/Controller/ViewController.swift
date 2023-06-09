@@ -106,7 +106,8 @@ class ViewController: UIViewController {
     @IBAction func tapChangeSign(_ sender: UIButton) {
         let hyphenMinus = "-"
         
-        if let numberLabelText = inputNumberLabel.text {
+        if let numberLabelText = inputNumberLabel.text,
+           numberLabelText != "0" {
             if numberLabelText.hasPrefix(hyphenMinus) {
                 inputNumberLabel.text = String(numberLabelText.dropFirst())
             } else {
