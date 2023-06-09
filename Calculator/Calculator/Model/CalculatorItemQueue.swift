@@ -5,8 +5,6 @@
 //  Created by Minseong Kang on 2023/05/30.
 //
 
-extension Operator: CalculateItem { }
-
 struct CalculatorItemQueue<T: CalculateItem> {
 	private var list: LinkedList<T>?
 	
