@@ -102,6 +102,14 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		BA24C9C52A32AD740030E7BB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BA282E312A2EB8100041F75F /* String+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		BA3DF2192A29C79600987072 /* TestDouble */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +127,7 @@
 		BAFFB98E2A2599AA000FBBFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA24C9C52A32AD740030E7BB /* Extensions */,
 				BA24C9BE2A32ABBA0030E7BB /* Protocols */,
 				BAFFB9942A25D243000FBBFA /* CalculatorItemQueue.swift */,
 				BAED14FF2A29E3D600FBE18E /* Node.swift */,
@@ -126,7 +135,6 @@
 				BA282E272A2E9FD00041F75F /* ExpressionParser.swift */,
 				BA282E292A2EA1150041F75F /* Formula.swift */,
 				BA282E2F2A2EB5E90041F75F /* Operator.swift */,
-				BA282E312A2EB8100041F75F /* String+Extension.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
