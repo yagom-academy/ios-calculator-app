@@ -65,6 +65,10 @@ class ViewController: UIViewController {
         }
     }
     
+    private func resetInputNumberLabel() {
+        inputNumberLabel.text = "0"
+    }
+    
     private func makeUILabel(_ text: String?) -> UILabel {
         let label = UILabel()
         
