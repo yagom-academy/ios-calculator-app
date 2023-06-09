@@ -41,7 +41,18 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapNumberButton(_ sender: UIButton) {
-      
+        let operandLabelText = operandLabel.text?
+            .components(separatedBy: ",")
+            .joined()
+        
+        guard var operandLabelText, operandLabelText.count < 20 else {
+            return
+        }
+        
+        operandLabelText.append(sender.titleLabel?.text ?? "")
+        let number = Decimal(string: operandLabelText)
+        
+        operandLabel.text = formatNumber(of: number)
     }
 
     @IBAction func tapZeroButton(_ sender: UIButton) {
