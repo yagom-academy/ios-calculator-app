@@ -16,4 +16,5 @@ enum CalculatorNamespace {
     static let AllClear: String = "AC"
     static let ClearEntry: String = "CE"
     static let SignToggle: String = "⁺⁄₋"
+    static let Comma: String = ","
 }

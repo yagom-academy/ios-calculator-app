@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
             return OperandFormatter.removeComma(operandLabel.text ?? CalculatorNamespace.Zero)
         }
         set(newOperand) {
-            operandLabel.text = OperandFormatter.formatStringToString(newOperand)
+            operandLabel.text = OperandFormatter.formatInput(newOperand)
         }
     }
     
@@ -136,7 +136,7 @@ class MainViewController: UIViewController {
         let newOperandLabel = UILabel()
         
         newOperatorLabel.text = labelValues.operatorValue
-        newOperandLabel.text = OperandFormatter.formatStringToString(labelValues.operandValue)
+        newOperandLabel.text = OperandFormatter.formatStringOperand(labelValues.operandValue)
         newOperandLabel.textColor = .white
         newOperatorLabel.textColor = .white
         newFormulaStackView.addArrangedSubview(newOperatorLabel)

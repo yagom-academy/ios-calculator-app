@@ -4,6 +4,7 @@
 //
 //  Created by Min Hyun on 2023/06/09.
 //
+import Foundation
 
 enum LabelParser {
     static func getDefaultLabelValues() -> LabelValues {
@@ -45,9 +46,10 @@ enum LabelParser {
     }
     
     static func parseLabelForEqual(result calculatorResult: Double) -> LabelValues {
-        let operandResult = OperandFormatter.formatDoubleToString(calculatorResult)
+        var newOperand = String(calculatorResult)
+        newOperand = OperandFormatter.formatStringOperand(newOperand)
         
-        return (operandValue: operandResult,
+        return (operandValue: newOperand,
                 operatorValue: CalculatorNamespace.Empty)
     }
     
@@ -61,7 +63,6 @@ enum LabelParser {
         guard !labelValues.operandValue.contains(CalculatorNamespace.Dot) else {
             return labelValues
         }
-        
         return (operandValue: labelValues.operandValue + CalculatorNamespace.Dot,
                 operatorValue: labelValues.operatorValue)
     }
@@ -93,16 +94,20 @@ enum LabelParser {
     
     private static func parseLabelForSignToggle(labelValues: LabelValues) -> LabelValues {
         guard labelValues.operandValue != CalculatorNamespace.Zero,
-              let operandNumber = Double(labelValues.operandValue)
+              let firstDigit = labelValues.operandValue.first
         else {
             return (operandValue: labelValues.operandValue,
                     operatorValue: labelValues.operatorValue)
         }
+        var newOperand = labelValues.operandValue
         
-        let newOperand = OperandFormatter.formatDoubleToString(operandNumber * (-1))
+        if String(firstDigit) == CalculatorNamespace.Negative {
+            newOperand = String(newOperand.dropFirst(1))
+        } else {
+            newOperand = CalculatorNamespace.Negative + newOperand
+        }
         
         return (operandValue: newOperand,
                 operatorValue: labelValues.operatorValue)
     }
 }
-
