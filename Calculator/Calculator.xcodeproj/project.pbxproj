@@ -122,10 +122,10 @@
 				BAED153C2A2A844000FBE18E /* CalculateItemProtocol.swift */,
 				BAED153E2A2A84BE00FBE18E /* MockCalculatorItemQueue.swift */,
 				BAA363A72A2AF496009286EF /* DummyNode.swift */,
+				BA896C332A2FF28800AD8807 /* MockExpressionParser.swift */,
 				BADC08052A2D1B17000B5757 /* MockLinkedList.swift */,
 				BA282E2B2A2EA7330041F75F /* MockFormula.swift */,
 				BA282E332A2EC0790041F75F /* MockOperator.swift */,
-				BA896C332A2FF28800AD8807 /* MockExpressionParser.swift */,
 			);
 			path = TestDouble;
 			sourceTree = "<group>";

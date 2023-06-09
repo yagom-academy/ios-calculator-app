@@ -17,6 +17,12 @@ enum ExpressionParser<T: CalculateItem> {
 	}
 	
 	static private func componentsByOperators(from input: String) -> [String] {
-		return [""]
+		let operatorList = Operator.allCases.compactMap { $0.rawValue }
+		
+		let expression = operatorList.reduce([input]) { partialResult, `operator` in
+			return partialResult.map { $0.split(with: `operator`)}.flatMap { $0 }
+		}
+		
+		return expression
 	}
 }
