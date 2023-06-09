@@ -14,12 +14,12 @@ enum ExpressionParser {
         
         components
             .compactMap { Double($0) }
-            .forEach { operandQueue.enqueue(item: $0)}
+            .forEach { operandQueue.enqueue(item: $0) }
         
         input
             .filter { $0.isNumber == false }
-            .compactMap { Operator(rawValue: $0)}
-            .forEach{(operatorQueue.enqueue(item:$0))}
+            .compactMap { Operator(rawValue: $0) }
+            .forEach{ operatorQueue.enqueue(item:$0) }
         
         let formula = Formula(operands: operandQueue, operators: operatorQueue)
         
@@ -36,4 +36,3 @@ enum ExpressionParser {
         return components
     }
 }
-
