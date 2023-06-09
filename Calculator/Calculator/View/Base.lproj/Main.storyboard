@@ -330,6 +330,7 @@
                     <connections>
                         <outlet property="operandLabel" destination="Lwz-OF-XHD" id="zvA-EW-G4J"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="gs0-D7-eFL"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="0NF-Nr-RDl"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="mJV-E9-X2P"/>
                     </connections>
                 </viewController>

@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     private var expression: String = ""
     private var isResult: Bool = false
     private var isInputZero: Bool = true
@@ -99,6 +100,9 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         isResult = false
         isInputZero = false
+        scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func configureCurrentFormula() -> String {
