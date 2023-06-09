@@ -24,14 +24,19 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
         expression = ""
+        isResult = false
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
+        
         operandLabel.text = "0"
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, operand != "0", operand != "." else {
+        guard let operand = operandLabel.text, operand != "0", operand != ".", !isResult else {
             return
         }
         guard operand.hasPrefix("-") else {
@@ -43,20 +48,25 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
+        
+        isResult = true
         addStackView()
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
         let result: Double = formula.result()
-        operandLabel.text = String(result)
+        operandLabel.text = result.formatNumbers()
         operatorLabel.text = ""
         expression = ""
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let currentOperand = sender.currentTitle else {
+        guard let currentOperand = sender.currentTitle, !isResult else {
             return
         }
-        guard let operand = operandLabel.text, operand != "0" else {
+        guard let operand = operandLabel.text, operand != "0" || currentOperand == "." else {
             operandLabel.text = currentOperand
             return
         }
@@ -74,6 +84,7 @@ class ViewController: UIViewController {
         expression += configureCurrentFormula()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
+        isResult = false
     }
     
     func configureCurrentFormula() -> String {
