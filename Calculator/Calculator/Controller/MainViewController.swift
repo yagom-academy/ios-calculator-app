@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var formulaListStackView: UIStackView!
     
     private var isReset: Bool = false
-    private var lastOperand: String = CalculatorNamespace.Zero
+    private var lastOperand: String = CalculatorNamespace.Empty
     
     private var operatorValue: String {
         get {
@@ -108,7 +108,9 @@ class MainViewController: UIViewController {
     
     private func setLastOperand() {
         if lastOperand == CalculatorNamespace.Zero && lastOperand != operandValue {
-            addNewFormulaStackView(LabelParser.getDefaultLabelValues())
+            if lastOperand != CalculatorNamespace.Empty {
+                addNewFormulaStackView(LabelParser.getDefaultLabelValues())
+            }
         }
         
         lastOperand = operandValue
@@ -146,7 +148,7 @@ class MainViewController: UIViewController {
     private func setUpScrollViewOffset() {
         let offset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height)
         formulaListScrollView.setContentOffset(offset, animated: false)
-        formulaListScrollView.layoutSubviews()
+        formulaListScrollView.setNeedsLayout()
     }
     
     private func mergeAllFormulaList() -> String {
