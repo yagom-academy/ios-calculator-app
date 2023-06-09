@@ -44,6 +44,17 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func tapPoint(_ sender: UIButton) {
+        guard let labelText = sender.titleLabel?.text,
+              let inputNumberLabelText = inputNumberLabel.text else {
+            return
+        }
+        
+        if !inputNumberLabelText.contains(".") {
+            inputNumberLabel.text? += labelText
+        }
+    }
+    
     @IBAction func tapOperator(_ sender: UIButton) {
         if inputNumberLabel.text != "0" {
             let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
