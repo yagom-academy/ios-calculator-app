@@ -140,6 +140,10 @@ class ViewController: UIViewController {
         }
     }
     
+    private func resetFormulaString() {
+        formulaString = ""
+    }
+    
     private func makeUILabel(_ text: String?) -> UILabel {
         let label = UILabel()
         
