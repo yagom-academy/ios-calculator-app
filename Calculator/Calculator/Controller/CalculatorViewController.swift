@@ -12,8 +12,8 @@ final class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 8
-        numberFormatter.maximumIntegerDigits = 9
+        numberFormatter.maximumFractionDigits = 11
+        numberFormatter.maximumIntegerDigits = 12
         
         return numberFormatter
     }()
@@ -103,9 +103,13 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addOperandsLabel(_ input: String) {
-        guard let currentOperands = isCalculate ? "0" : operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
+        guard let currentOperands = isCalculate ? CalculatorTerms.zero.rawValue : operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
               let number = Double(currentOperands + input),
               let operands = numberFormatter.string(for: number) else { return }
+        
+        if operands.filter({ $0 == "," }).count == 4 || currentOperands.count >= 13 {
+            return
+        }
         
         if currentOperands.contains(CalculatorTerms.decimalPoint.rawValue) && (input == CalculatorTerms.zero.rawValue || input == CalculatorTerms.doubleZero.rawValue) {
             let result = currentOperands + input
@@ -129,11 +133,12 @@ final class CalculatorViewController: UIViewController {
         label.text = "\(`operator`) \(operands)"
         
         calculationDetailsStackView.addArrangedSubview(label)
+        calculationDetailsScrollView.layoutIfNeeded()
         calculationDetailsScrollView.scrollToBottom(animated: false)
     }
     
     private func changeSign() {
-        guard var operands = operandsLabel.text, operands != "0" else { return }
+        guard var operands = operandsLabel.text, operands != CalculatorTerms.zero.rawValue else { return }
         
         if operands.contains(CalculatorTerms.minusSign.rawValue) {
             operands.removeFirst()
