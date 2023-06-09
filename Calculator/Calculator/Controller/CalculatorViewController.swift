@@ -68,7 +68,8 @@ class CalculatorViewController: UIViewController {
     @IBAction func tapZeroButton(_ sender: UIButton) {
         guard
             let operandLabelText = operandLabel.text,
-            operandLabelText != "0" || operandLabelText.contains(".")
+            operandLabelText != "0" || operandLabelText.contains("."),
+            operandLabelText.count < 20
         else {
             return
         }
