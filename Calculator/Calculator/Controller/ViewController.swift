@@ -83,6 +83,12 @@ class ViewController: UIViewController {
             present(alert,animated: true,completion: nil)
         }
     }
+    @IBAction func allClearButton(_ sender: UIButton) {
+        inputOperatorLabel.text = ""
+        inputNumberLabel.text = "0"
+        allStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
     }
 
 
