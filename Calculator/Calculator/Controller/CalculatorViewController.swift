@@ -16,6 +16,8 @@ class CalculatorViewController: UIViewController {
     
     // MARK: - Property
     
+    var components: String = ""
+    
     // MARK: - View State Method
 
     override func viewDidLoad() {
