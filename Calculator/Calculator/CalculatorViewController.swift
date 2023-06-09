@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
