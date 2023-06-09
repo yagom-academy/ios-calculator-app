@@ -68,6 +68,21 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func equalMarkButton(_ sender: UIButton) {
+        var calculateResult = ExpressionParser.parse(from: resultString)
+        do {
+            let Formula = try calculateResult.result()
+            let formulaResult = numberFormatter(String(Formula))
+            inputNumberLabel.text = formulaResult
+        } catch {
+            let alert = UIAlertController(title:"계산 오류입니다.",
+                                          message: "취소버튼을 눌러주시기 바랍니다",
+                                          preferredStyle: UIAlertController.Style.alert)
+            let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
+            alert.addAction(cancle)
+            present(alert,animated: true,completion: nil)
+        }
+    }
     }
 
 
