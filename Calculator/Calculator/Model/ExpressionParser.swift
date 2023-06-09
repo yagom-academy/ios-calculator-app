@@ -22,7 +22,7 @@ enum ExpressionParser {
         for char in input {
             currentSegment.append(char)
             
-            if Operator.all.contains(char) {
+            if char.isOperator {
                 result.append(contentsOf: currentSegment.split(with: char))
                 currentSegment = ""
             }
