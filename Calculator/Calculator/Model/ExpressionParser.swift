@@ -5,15 +5,29 @@
 //  Created by Minseong Kang on 2023/06/06.
 //
 
-enum ExpressionParser<T: CalculateItem> {
-	static func parse(from input: String) -> Formula<T> {
-		let operandsLinkedList = LinkedList<T>()
-		let operatorsLinkedList = LinkedList<T>()
-		let operands = CalculatorItemQueue(list: operandsLinkedList)
-		let operators = CalculatorItemQueue(list: operatorsLinkedList)
-		let result = Formula(operands: operands, operators: operators)
+enum ExpressionParser<T: CalculateItem, U: CalculateItem> {
+	static func parse(from input: String) -> Formula<Double, Operator> {
+		let operandsLinkedList = LinkedList<Double>()
+		let operandQueue = CalculatorItemQueue(list: operandsLinkedList)
 		
-		return result
+		let operatorsLinkedList = LinkedList<Operator>()
+		let operatorQueue = CalculatorItemQueue(list: operatorsLinkedList)
+		
+		let operands = componentsByOperators(from: input).compactMap { Double($0) }
+		operands.forEach {
+			operandQueue.enqueue($0)
+		}
+		
+		let operatorList = Operator.allCases.compactMap { $0.rawValue }
+		operatorList.forEach {
+			guard input.contains($0) else { return }
+			guard let `operator` = Operator(rawValue: $0) else { return }
+			operatorQueue.enqueue(`operator`)
+		}
+		
+		let formulaResult = Formula(operands: operandQueue, operators: operatorQueue)
+		
+		return formulaResult
 	}
 	
 	static private func componentsByOperators(from input: String) -> [String] {
