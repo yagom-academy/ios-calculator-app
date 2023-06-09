@@ -89,10 +89,10 @@ extension CalculatorViewController {
     private func changeOperandSign() {
         guard let currentOperandString = currentOperandLabel.text,
               Int(currentOperandString) != initialNumber else { return }
-        guard var currentOperand = Double(currentOperandString) else { return }
-
-        currentOperand = -currentOperand
-        currentOperandLabel.text = "\(currentOperand)"
+        
+        let isNegativeNumber = currentOperandString.hasPrefix("-")
+        
+        currentOperandLabel.text = isNegativeNumber ? String(currentOperandString.dropFirst()) : "-\(currentOperandString)"
     }
     
     private func calculateResult() -> String? {
