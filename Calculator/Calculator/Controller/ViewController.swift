@@ -58,19 +58,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
-        if inputNumberLabel.text != "0" {
-            let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
-            let operandLabel: UILabel = makeUILabel(inputNumberLabel.text)
-            let inputLabelStackView = makeUIStackView()
-            
-            inputLabelStackView.addArrangedSubview(operatorLabel)
-            inputLabelStackView.addArrangedSubview(operandLabel)
-            allInputStackView.addArrangedSubview(inputLabelStackView)
-            
-            formulaString += (inputOperatorLabel.text ?? "") + (inputNumberLabel.text ?? "")
-            
-            resetInputNumberLabel()
-        }
+        let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
+        let operandLabel: UILabel = makeUILabel(inputNumberLabel.text)
+        let inputLabelStackView = makeUIStackView()
+        
+        inputLabelStackView.addArrangedSubview(operatorLabel)
+        inputLabelStackView.addArrangedSubview(operandLabel)
+        allInputStackView.addArrangedSubview(inputLabelStackView)
+        
+        formulaString += (inputOperatorLabel.text ?? "") + (inputNumberLabel.text ?? "")
+        
+        resetInputNumberLabel()
         
         guard let labelText = sender.titleLabel?.text else {
             return
@@ -97,6 +95,7 @@ class ViewController: UIViewController {
             case .operationFailure:
                 print("operation failure")
             case .divideByZero:
+                inputNumberLabel.text = "NaN"
                 print("divide by zero")
             }
         } catch {
