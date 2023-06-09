@@ -24,7 +24,7 @@ struct Formula {
 
             result = calculationOperator.calculate(lhs: lhs, rhs: rhs)
 
-            guard result != Double.nan || result != Double.infinity else {
+            guard result != Double.nan && result != Double.infinity else {
                 throw CalculateError.dividedByZero
             }
         }
