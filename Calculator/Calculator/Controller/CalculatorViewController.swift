@@ -70,7 +70,14 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapDotButton(_ sender: UIButton) {
-
+        guard
+            let operandLabelText = operandLabel.text,
+            !operandLabelText.contains(".")
+        else {
+            return
+        }
+        
+        operandLabel.text?.append(".")
     }
 
     @IBAction func tapEqualsButton(_ sender: Any) {
