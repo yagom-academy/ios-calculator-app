@@ -9,9 +9,11 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operators: UILabel!
     @IBOutlet weak var operands: UILabel!
-    @IBOutlet weak var ScrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     private var saveFormula = [String]()
+    private let numberFormatter = NumberFormatter()
+    private var isInputZero: Bool = false
+    private var isResultValue: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,13 +41,11 @@ class ViewController: UIViewController {
         }()
         
         let subStackView: UIStackView = {
-            let stackView = UIStackView()
+            let stackView = UIStackView(arrangedSubviews: [operatorLabel,operandLabel])
             
             stackView.axis = .horizontal
             stackView.spacing = 8
             stackView.alignment = .bottom
-            stackView.addArrangedSubview(operatorLabel)
-            stackView.addArrangedSubview(operandLabel)
             
             return stackView
         }()
@@ -59,8 +59,12 @@ class ViewController: UIViewController {
     
     //MARK: - Button Action
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
-        guard let operand = sender.currentTitle else {
+        guard let operand = sender.currentTitle, isResultValue == false else {
             return
+        }
+        
+        if operand == "0" {
+            isInputZero = true
         }
         
         if operand == "." && operands.text == "0" {
@@ -73,31 +77,34 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        guard let `operator` = sender.currentTitle else {
-            return
-        }
-        
-        if operands.text != "0" {
+        if operands.text != "0" || isInputZero {
             settingFormula()
         }
-        operators.text = `operator`
+        isResultValue = false
+        operators.text = sender.currentTitle
         clearEntryText(isOperandClear: true, isOperatorClear: false)
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
+        guard isResultValue == false else {
+            return
+        }
         settingFormula()
         
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         let result = formula.result()
+        isResultValue = true
         
         operands.text = formattingNumbers(result)
-        saveFormula = []
+        saveFormula.removeAll()
         clearEntryText(isOperandClear: false, isOperatorClear: true)
-        
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
-        guard let operand = operands.text, let operandsNumber = (Double(operand)) else {
+        guard let operand = operands.text,
+                operand != "0",
+                let operandsNumber = (Double(operand)),
+                isResultValue == false else {
             return
         }
         
@@ -106,17 +113,22 @@ class ViewController: UIViewController {
     
     @IBAction func tappedClearButton(_ sender: Any) {
         clearEntryText(isOperandClear: true, isOperatorClear: false)
+        isResultValue = false
     }
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         clearEntryText(isOperandClear: true, isOperatorClear: true)
+        isResultValue = false
     }
 }
 
 extension ViewController {
     private func settingFormula() {
-        guard let operatorString = operators.text, let operandString = operands.text else { return }
+        guard let operatorString = operators.text,
+              let operandString = operands.text else {
+            return
+        }
         
         saveFormula.append("\(operatorString) ")
         saveFormula.append("\(operandString) ")
@@ -124,19 +136,18 @@ extension ViewController {
     }
     
     private func formattingNumbers(_ input: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp
-        numberFormatter.alwaysShowsDecimalSeparator = false
+        numberFormatter.usesSignificantDigits = true
         
-        return numberFormatter.string(from: input as NSNumber) ?? "NaN"
+        return numberFormatter.string(from: Decimal(input) as NSNumber) ?? "NaN"
     }
     
     private func clearEntryText(isOperandClear: Bool, isOperatorClear: Bool) {
         if isOperandClear {
             operands.text = "0"
+            isInputZero = false
         }
         if isOperatorClear {
             operators.text = ""

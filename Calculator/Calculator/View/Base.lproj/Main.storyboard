@@ -329,7 +329,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ScrollView" destination="BOT-7g-vxv" id="qWL-rZ-RSr"/>
                         <outlet property="operands" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
                         <outlet property="operators" destination="HPC-iy-qdm" id="pps-PP-efd"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>

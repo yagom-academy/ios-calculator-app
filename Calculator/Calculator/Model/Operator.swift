@@ -5,8 +5,6 @@
 //  Created by mint on 2023/06/02.
 //
 
-import Foundation
-
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"

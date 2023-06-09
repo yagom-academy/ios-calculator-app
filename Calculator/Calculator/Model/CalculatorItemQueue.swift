@@ -17,18 +17,14 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return enqueueStack.isEmpty && dequeueStack.isEmpty
     }
     var first: T? {
-        if enqueueStack.isEmpty {
-            return dequeueStack.last
-        } else if dequeueStack.isEmpty {
+        if dequeueStack.isEmpty {
             return enqueueStack.first
         } else {
             return dequeueStack.last
         }
     }
     var last: T? {
-        if dequeueStack.isEmpty {
-            return enqueueStack.last
-        } else if enqueueStack.isEmpty {
+        if enqueueStack.isEmpty {
             return dequeueStack.first
         } else {
             return enqueueStack.last
@@ -40,16 +36,12 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func dequeue() -> T? {
-        guard isEmpty == false else {
-            return nil
-        }
-        
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
         }
         
-        return dequeueStack.removeLast()
+        return dequeueStack.popLast()
     }
     
     mutating func clear() {
