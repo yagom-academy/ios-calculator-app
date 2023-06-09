@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var allInputStackView: UIStackView!
     
     private var formulaString = ""
+    private var operationReady = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,13 +79,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapEqual(_ sender: UIButton) {
-        tapOperator(sender)
-        
         do {
-            var formula = try ExpressionParser.parse(from: formulaString)
-            let result = try formula.result()
-            resetInputOperatorLabel()
-            inputNumberLabel.text = String(result)
+            if operationReady {
+                tapOperator(sender)
+                resetInputOperatorLabel()
+                
+                var formula = try ExpressionParser.parse(from: formulaString)
+                let result = try formula.result()
+                
+                inputNumberLabel.text = String(result)
+                operationReady = false
+                
+                resetFormulaString()
+            }
         } catch let error as ExpressionParserError {
             switch error {
             case .invalidOperand:
@@ -124,6 +131,7 @@ class ViewController: UIViewController {
         resetInputNumberLabel()
         resetInputOperatorLabel()
         resetAllInputStackView()
+        operationReady = true
     }
     
     private func resetInputNumberLabel() {
