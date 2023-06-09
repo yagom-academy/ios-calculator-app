@@ -13,10 +13,11 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var formulaListStackView: UIStackView!
     
     private var isReset: Bool = false
+    private var isZero: Bool = true
     
     private var operatorValue: String {
         get {
-            return operatorLabel.text ?? MultiUseString.empty.value
+            return operatorLabel.text ?? CalculatorNamespace.Empty
         }
         set(newOperator) {
             operatorLabel.text = newOperator
@@ -25,55 +26,28 @@ class MainViewController: UIViewController {
     
     private var operandValue: String {
         get {
-            return operandLabel.text ?? MultiUseString.zero.value
+            return operandLabel.text ?? CalculatorNamespace.Zero
         }
         set(newOperand) {
             operandLabel.text = newOperand
         }
     }
     
+    private var currentLabelValues: LabelValues {
+        get {
+            return (operandValue: operandValue, operatorValue: operatorValue)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        operandValue = MultiUseString.zero.value
-        operatorValue = MultiUseString.empty.value
+        deleteAllFormulaListStackView()
+        setUpLabelValues(LabelParser.getDefaultLabelValues())
     }
     
-    @IBAction private func touchUpButton(_ sender: UIButton) {
-        guard let senderTitle = sender.currentTitle else { return }
-        let operators: [String] = Operator.allCases.map { String($0.rawValue) }
-        let menus: [String] = MenuType.allCases.map { $0.rawValue }
-        
-        if senderTitle == "=" {
-            do {
-                try touchUpEqualButton()
-            } catch CalculatorError.divideByZero {
-                operandValue = MultiUseString.nan.value
-                operatorValue = MultiUseString.empty.value
-            } catch {
-                print(CalculatorError.unknown.message)
-            }
-        } else if menus.contains(senderTitle) {
-            guard let senderType = MenuType(rawValue: senderTitle) else { return }
-            touchUpMenuButton(senderType: senderType)
-        } else if operators.contains(senderTitle) {
-            touchUpOperatorButton(senderTitle: senderTitle)
-        } else {
-            touchUpNumberButton(senderTitle: senderTitle)
-        }
-    }
-    
-    private func touchUpMenuButton(senderType: MenuType) {
-        if isReset {
-            isReset = false
-        }
-        let lableTexts: LableStatus = senderType.getLabelTexts(
-            when: (operandValue: operandValue, operatorValue: operatorValue)
-        )
-        if senderType == .allClear {
-            deleteAllFormulaListStackView()
-        }
-        operandValue = lableTexts.operandValue
-        operatorValue = lableTexts.operatorValue
+    private func setUpLabelValues(_ status: LabelValues) {
+        self.operandValue = status.operandValue
+        self.operatorValue = status.operatorValue
     }
     
     private func deleteAllFormulaListStackView() {
@@ -82,25 +56,89 @@ class MainViewController: UIViewController {
         }
     }
     
-    private func touchUpEqualButton() throws {
-        guard operatorValue != MultiUseString.empty.value else { return }
+    @IBAction private func touchUpButton(_ sender: UIButton) {
+        guard let senderTitle = sender.currentTitle else { return }
+        let buttonType: ButtonType = ButtonType.getType(senderTitle)
         
-        addNewFormulaStackView()
+        setIsZero(senderTitle: senderTitle)
+
+        switch buttonType {
+        case .equal:
+            touchUpEqualButton()
+            return
+        case .operators:
+            guard operandValue != CalculatorNamespace.NaN else { return }
+            touchUpOperatorButton()
+        case .allClear:
+            deleteAllFormulaListStackView()
+        case .numbers, .doubleZero, .dot:
+            setIsZero(senderTitle: senderTitle)
+            touchUpNumbersButton()
+        default:
+            break
+        }
+        let labelValues: LabelValues = LabelParser
+            .parseLabelValues(button: buttonType,
+                              buttonTitle: senderTitle,
+                              labelValues: currentLabelValues,
+                              isReset: isReset)
+        setUpLabelValues(labelValues)
+        isReset = buttonType == .signToggle ? isReset : false
+    }
+
+    private func setIsZero(senderTitle: String) {
+        if senderTitle == CalculatorNamespace.Zero ||
+           operandValue == CalculatorNamespace.Zero {
+            isZero = true
+        }
+        if isZero && operandValue != CalculatorNamespace.Zero {
+            if operatorValue != CalculatorNamespace.Empty {
+                addNewFormulaStackView(LabelParser.getDefaultLabelValues())
+            }
+            isZero = false
+        }
+    }
     
+    private func touchUpEqualButton() {
+        guard operatorValue != CalculatorNamespace.Empty else { return }
+        
+        addNewFormulaStackView(currentLabelValues)
+        
         let allFormula = mergeAllFormulaList()
         var formula = ExpressionParser.parse(from: allFormula)
 
-        operandValue = OperandFormatter.formatDoubleToString(try formula.result())
-        operatorValue = MultiUseString.empty.value
+        do {
+            let calculatorResult = try formula.result()
+            let labelValues: LabelValues = LabelParser
+                .parseLabelForEqual(result: calculatorResult)
+            setUpLabelValues(labelValues)
+        } catch CalculatorError.divideByZero {
+            setUpLabelValues(LabelParser.getNaNLabelValues())
+        } catch {
+            print(CalculatorError.unknown.message)
+            setUpLabelValues(LabelParser.getNaNLabelValues())
+        }
     }
     
-    private func addNewFormulaStackView() {
+    private func touchUpOperatorButton() {
+        if operandValue != CalculatorNamespace.Zero {
+            addNewFormulaStackView(currentLabelValues)
+        }
+    }
+    
+    private func touchUpNumbersButton() {
+        if isReset {
+            addNewFormulaStackView(currentLabelValues)
+        }
+    }
+
+    private func addNewFormulaStackView(_ labelValues: LabelValues) {
         let newFormulaStackView = UIStackView()
         let newOperatorLabel = UILabel()
         let newOperandLabel = UILabel()
         
-        newOperatorLabel.text = operatorValue
-        newOperandLabel.text = OperandFormatter.formatStringToString(operandValue)
+        newOperatorLabel.text = labelValues.operatorValue
+        newOperandLabel.text = OperandFormatter.formatStringToString(labelValues.operandValue)
         newOperandLabel.textColor = .white
         newOperatorLabel.textColor = .white
         newFormulaStackView.addArrangedSubview(newOperatorLabel)
@@ -117,20 +155,19 @@ class MainViewController: UIViewController {
     
     private func mergeAllFormulaList() -> String {
         var mergedFormulaList: [String] = []
-        var result: String = ""
+        var result: String = CalculatorNamespace.Empty
         let formulaList = flattenFormulaList()
         
         for text in formulaList {
             guard let lastResult = mergedFormulaList.popLast(),
-                  text != MultiUseString.empty.value
+                  text != CalculatorNamespace.Empty
             else {
-                mergedFormulaList.append(MultiUseString.empty.value)
+                mergedFormulaList.append(CalculatorNamespace.Empty)
                 continue
             }
             result = lastResult + text
             mergedFormulaList.append(result)
         }
-
         isReset = true
         return result
     }
@@ -144,33 +181,5 @@ class MainViewController: UIViewController {
             result.append(OperandFormatter.removeComma(labelText))
         }
         return result
-    }
-    
-    private func touchUpOperatorButton(senderTitle: String) {
-        if isReset {
-            isReset = false
-        }
-        if operandValue != MultiUseString.zero.value {
-            addNewFormulaStackView()
-            operandValue = MultiUseString.zero.value
-        }
-        operatorValue = senderTitle
-    }
-    
-    private func touchUpNumberButton(senderTitle: String) {
-        if senderTitle == MultiUseString.dot.value && operandValue.contains(senderTitle) {
-            return
-        }
-        guard operandValue != MultiUseString.zero.value else {
-            operandValue = senderTitle == MultiUseString.doubleZero.value ? MultiUseString.zero.value : senderTitle
-            return
-        }
-        guard !isReset else {
-            addNewFormulaStackView()
-            operandValue = senderTitle == MultiUseString.doubleZero.value ? MultiUseString.zero.value : senderTitle
-            isReset = false
-            return
-        }
-        operandValue += senderTitle
     }
 }

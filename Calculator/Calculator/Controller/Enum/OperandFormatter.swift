@@ -15,7 +15,7 @@ enum OperandFormatter {
         
         guard let numberFormatted = numberFormatter.string(for: operand)
         else {
-            return MultiUseString.empty.value
+            return CalculatorNamespace.Empty
         }
         
         return numberFormatted
