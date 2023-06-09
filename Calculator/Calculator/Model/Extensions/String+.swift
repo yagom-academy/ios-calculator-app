@@ -7,7 +7,7 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let targetArray = self.split(separator: target).map(String.init)
+        let targetArray = split(separator: target).map(String.init)
         
         return targetArray
     }
