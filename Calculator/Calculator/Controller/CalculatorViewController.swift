@@ -108,6 +108,7 @@ class CalculatorViewController: UIViewController {
         
         clearOperator()
         clearEntry()
+        components = ""
     }
     
     func clearOperator() {
