@@ -107,22 +107,32 @@ extension CalculatorViewController {
         return result
     }
     
-    private func addInputFormula() {
+    private func addInputFormula(_ currentOperandString: String?) {
         inputFormula += currentOperatorLabel.text ?? ""
-        inputFormula += currentOperandLabel.text ?? ""
+        inputFormula += currentOperandString ?? ""
+    }
+    
+    private func makeRefinementOperand() -> String? {
+        guard let currentOperandString = currentOperandLabel.text, let operand = Double(currentOperandString) else { return nil }
+        
+        let isDecimalPointNumber = operand != floor(operand)
+        
+        return isDecimalPointNumber ? "\(operand)" : "\(Int(operand))"
     }
 }
 
 // MARK: - UI Method
 extension CalculatorViewController {
     private func addArithmetic() {
-        addFormulaStackView()
-        addInputFormula()
+        let operand = makeRefinementOperand()
+        
+        addFormulaStackView(operand)
+        addInputFormula(operand)
         scrollView.scrollToBottom(animated: true)
     }
     
-    private func addFormulaStackView(){
-        let arithmeticStackView = ArithmeticStackView(currentOperatorLabel.text, currentOperandLabel.text)
+    private func addFormulaStackView(_ currentOperandString: String?){
+        let arithmeticStackView = ArithmeticStackView(currentOperatorLabel.text, currentOperandString)
         
         calculationFormulaStackView.addArrangedSubview(arithmeticStackView)
         scrollView.layoutIfNeeded()
