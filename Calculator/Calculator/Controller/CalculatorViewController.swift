@@ -8,11 +8,12 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     private var formula: String = ""
+    private var isCalculate: Bool = false
     private let numberFormatter: NumberFormatter = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 10
-        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumFractionDigits = 8
+        numberFormatter.maximumIntegerDigits = 9
         
         return numberFormatter
     }()
@@ -73,19 +74,23 @@ final class CalculatorViewController: UIViewController {
     
     private func calculateFormula() -> String? {
         var parsedFormula = ExpressionParser.parse(from: formula)
+        let result = numberFormatter.string(for: parsedFormula.result())
+        isCalculate = true
         
-        return numberFormatter.string(for: parsedFormula.result())
+        return result
     }
     
     private func addFormula() {
-        guard let operands = operandsLabel.text,
+        guard let currentOperands = operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
+              let number = Double(currentOperands),
+              let operands = numberFormatter.string(for: number),
               let `operator` = operatorLabel.text else { return }
         
         if formula.isEmpty && operands != CalculatorTerms.zero.rawValue  {
-            formula += "\(operands) "
+            formula += "\(number) "
             addCalculationDetailsStackView("", operands)
         } else if operands != CalculatorTerms.zero.rawValue {
-            formula += "\(`operator`) \(operands) "
+            formula += "\(`operator`) \(number) "
             addCalculationDetailsStackView(`operator`, operands)
         }
         
@@ -98,21 +103,22 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func addOperandsLabel(_ input: String) {
-        guard let operands = operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
-              let num = Double(operands + input),
-              let result = numberFormatter.string(for: num) else { return }
+        guard let currentOperands = isCalculate ? "0" : operandsLabel.text?.replacingOccurrences(of: ",", with: ""),
+              let number = Double(currentOperands + input),
+              let operands = numberFormatter.string(for: number) else { return }
         
-        if operands.contains(CalculatorTerms.decimalPoint.rawValue) && (input == CalculatorTerms.zero.rawValue || input == CalculatorTerms.doubleZero.rawValue) {
-            let result = operands + input
+        if currentOperands.contains(CalculatorTerms.decimalPoint.rawValue) && (input == CalculatorTerms.zero.rawValue || input == CalculatorTerms.doubleZero.rawValue) {
+            let result = currentOperands + input
             setOperandsLabel(result)
             return
-        } else if !operands.contains(CalculatorTerms.decimalPoint.rawValue) && input == CalculatorTerms.decimalPoint.rawValue {
+        } else if !currentOperands.contains(CalculatorTerms.decimalPoint.rawValue) && input == CalculatorTerms.decimalPoint.rawValue {
             let result = operands + input
             setOperandsLabel(result)
             return
         }
         
-        setOperandsLabel(result)
+        isCalculate = false
+        setOperandsLabel(operands)
     }
     
     private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
@@ -127,7 +133,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func changeSign() {
-        guard var operands = operandsLabel.text else { return }
+        guard var operands = operandsLabel.text, operands != "0" else { return }
         
         if operands.contains(CalculatorTerms.minusSign.rawValue) {
             operands.removeFirst()
