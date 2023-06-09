@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        inputNumberLabel.text = "0"
+        resetInputNumberLabel()
         inputOperatorLabel.text = ""
         allInputStackView.subviews.forEach {
             $0.removeFromSuperview()
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         inputLabelStackView.addArrangedSubview(operandLabel)
         allInputStackView.addArrangedSubview(inputLabelStackView)
         
-        inputNumberLabel.text = "0"
+        resetInputNumberLabel()
         
         guard let labelText = sender.titleLabel?.text else {
             return
@@ -63,6 +63,10 @@ class ViewController: UIViewController {
                 inputNumberLabel.text = hyphenMinus + numberLabelText
             }
         }
+    }
+    
+    @IBAction func tapClearEntry(_ sender: UIButton) {
+        resetInputNumberLabel()
     }
     
     private func resetInputNumberLabel() {
