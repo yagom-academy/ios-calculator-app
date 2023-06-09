@@ -106,6 +106,16 @@ class ViewController: UIViewController {
         return result
     }
     
+extension ViewController {
+    func makeStackView() -> UIStackView {
+        let view: UIStackView = UIStackView()
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.axis = .horizontal
+        view.spacing = 8
+        
+        return view
+    }
     }
 
 
