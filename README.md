@@ -200,12 +200,12 @@ mutating func append(data: Element) {
 
 ## 6. 🔗 참고 링크
 
-🍎 [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)
-<img src="https://hackmd.io/_uploads/Sy8AUS4Lh.png" width = 20 /> [BLOG - 시간 복잡도](https://velog.io/@reasonz/2022.06.24-자료구조-알고리즘-개념-시간복잡도-Big-O)
-<img src="https://hackmd.io/_uploads/Sy8AUS4Lh.png" width = 20 /> [BLOG - Queue, 시간 복잡도, 시간복잡도 test](https://jeong9216.tistory.com/350)
-<img src="https://hackmd.io/_uploads/Sy8AUS4Lh.png" width = 20 /> [BLOG - Queue, Stack, LinkedList](https://woongsios.tistory.com/222)
-<img src="https://hackmd.io/_uploads/Sy8AUS4Lh.png" width = 20 /> [BLOG - 제네릭](https://seons-dev.tistory.com/entry/Swift-기초문법-제네릭-Generic)
-<img src="https://hackmd.io/_uploads/Sy8AUS4Lh.png" width = 20 /> [BLOG - LinkedList](https://jeong9216.tistory.com/401)
+🍎 [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)<br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - 시간 복잡도](https://velog.io/@reasonz/2022.06.24-자료구조-알고리즘-개념-시간복잡도-Big-O) <br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 />[BLOG - Queue, 시간 복잡도, 시간복잡도 test](https://jeong9216.tistory.com/350)<br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - Queue, Stack, LinkedList](https://woongsios.tistory.com/222)<br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - 제네릭](https://seons-dev.tistory.com/entry/Swift-기초문법-제네릭-Generic)<br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - LinkedList](https://jeong9216.tistory.com/401)<br>
 
 ---
 
