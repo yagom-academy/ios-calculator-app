@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct CalculatorItemQueue<Element: CalculateItem>: QueueConfigurable {
+struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
     var queue: LinkedList = LinkedList<Element>()
     
     var count: Int {
@@ -22,8 +22,12 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueConfigurable {
         queue.append(data: element)
     }
     
-    mutating func dequeue() {
-        return queue.removeFirst()
+    mutating func dequeue() throws -> Element {
+        guard let data = queue.readHeadData() else {
+            throw CalculatorError.invalidData
+        }
+        queue.removeFirst()
+        return data
     }
     
     mutating func clearQueue() {

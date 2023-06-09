@@ -1,11 +1,11 @@
 //
-//  QueueConfigurable.swift
+//  Queueable.swift
 //  Calculator
 //
 //  Created by Whales on 2023/06/04.
 //
 
-protocol QueueConfigurable {
+protocol Queueable {
     associatedtype CalculateItem
     
     var queue: LinkedList<CalculateItem> { get }
@@ -14,7 +14,7 @@ protocol QueueConfigurable {
     
     mutating func enqueue(_ element: CalculateItem)
     
-    mutating func dequeue()
+    mutating func dequeue() throws -> CalculateItem
     
     mutating func clearQueue()
 }
