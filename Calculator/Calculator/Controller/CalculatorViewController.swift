@@ -29,7 +29,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapCEButton(_ sender: Any) {
-        
+        clearEntry()
     }
 
     @IBAction func tapNEGButton(_ sender: Any) {
@@ -75,6 +75,10 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 15
         
         return numberFormatter.string(for: number)
+    }
+    
+    func clearEntry() {
+        operandLabel.text = "0"
     }
 }
 
