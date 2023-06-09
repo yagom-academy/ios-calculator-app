@@ -7,10 +7,18 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    // MARK: - IBOutlet
+    
+    // MARK: - Property
+    
+    // MARK: - View State Method
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
+    
+    // MARK: - IBAction
+    
+    // MARK: - Method
 }
 
