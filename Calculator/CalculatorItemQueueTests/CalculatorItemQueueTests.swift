@@ -367,15 +367,21 @@ final class CalculatorItemQueueTests: XCTestCase {
 		XCTAssertEqual(expection, 8.0)
 	}
 	
-	func tests_MockExpressionParser_componentsByOperators호출시_String연산표현이_연산자빼고_배열로들어가_반환된다() {
+	func tests_MockExpressionParser_parse_호출시_MockFromula객체가반환된다() {
 		// given
-		let expression = "1+2"
-		let expection = ["1","2"]
+		let intput = "1+2"
+		
+		_ = sut!
+		sut.enqueue(1)
+		sut.enqueue(2)
+		
+		let operatorQueue = mockOperatorCalculatorItemQueue!
+		operatorQueue.enqueue(.add)
 		
 		// when
-		let result = MockExpressionParser<Double>.componentsByOperators(from: expression)
+		let result = MockExpressionParser<Double, Operator>.parse(from: intput)
 		
 		// then
-		XCTAssertEqual(result, expection)
+		XCTAssertNotNil(result)
 	}
 }
