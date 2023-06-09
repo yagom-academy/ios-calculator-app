@@ -24,7 +24,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_수식이주어지면_음수인피연산자를찾아_subtract연산자와구분하여_연산결과5를반환한다() {
         // given
-        let expectedString: String = "1+2/-3--6"
+        let expectedString: String = "1+2÷−3−−6"
         
         // when
         var formula: Formula = ExpressionParser.parse(from: expectedString)
@@ -35,7 +35,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse_수식에처음으로마이너스기호가주어지면_subtract연산자와구분하여_연산결과5를반환한다() {
         // given
-        let expectedString: String = "-1*-3+6/-3"
+        let expectedString: String = "−1×−3+6÷−3"
         
         // when
         var formula: Formula = ExpressionParser.parse(from: expectedString)

@@ -10,7 +10,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
-    private var formula: String = ""
+    private var expression: String = ""
+    private var isResult: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
         stackView.subviews.forEach { $0.removeFromSuperview() }
         operandLabel.text = "0"
         operatorLabel.text = ""
+        expression = ""
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
@@ -41,15 +43,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
-        var result = ExpressionParser.parse(from: formula)
-        
-        let recordedOperatorLabel: UILabel = UILabel()
-        recordedOperatorLabel.font = .preferredFont(forTextStyle: .title3)
-        recordedOperatorLabel.text = String(result.result())
-        recordedOperatorLabel.textColor = .white
-        
-        let content: UIStackView = configureContent(item: [recordedOperatorLabel])
-        stackView.addArrangedSubview(content)
+        addStackView()
+        expression += configureCurrentFormula()
+        var formula: Formula = ExpressionParser.parse(from: expression)
+        let result: Double = formula.result()
+        operandLabel.text = String(result)
+        operatorLabel.text = ""
+        expression = ""
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -65,14 +65,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        operatorLabel.text = sender.currentTitle
-        
         guard operandLabel.text != "0", operandLabel.text != "." else {
+            operatorLabel.text = sender.currentTitle
             return
         }
-        
+
         addStackView()
-        formula += configureCurrentFormula()
+        expression += configureCurrentFormula()
+        operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
     }
     
@@ -81,7 +81,7 @@ class ViewController: UIViewController {
             return ""
         }
         
-        return operatorLabel.text ?? "" + operand
+        return "\(operatorLabel.text ?? "")\(operand)"
     }
     
     func addStackView() {
