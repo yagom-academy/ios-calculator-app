@@ -44,6 +44,30 @@ class ViewController: UIViewController {
         inputNumberLabel.text? = (numberLabel.contains(".")) ? (numberLabel) : (numberLabel + ".")
     }
     
+    @IBAction func operatorsButton(_ sender: UIButton) {
+        guard let inputOperator = sender.titleLabel?.text,
+              let inputNumber = inputNumberLabel.text,
+              let inputOperatorText = inputOperatorLabel.text else { return }
+        
+        //현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다
+        if inputNumberLabel.text == "0" {
+            inputOperatorLabel.text = inputOperator
+        } else {
+            let makeStackView = makeStackView()
+            let operatorLabel = makeLabelInStackView(inputOperatorText)
+            let numberLabel = makeLabelInStackView(inputNumber)
+            
+            makeStackView.addArrangedSubview(operatorLabel)
+            makeStackView.addArrangedSubview(numberLabel)
+            allStackView.addArrangedSubview(makeStackView)
+            
+            inputOperatorLabel.text = inputOperator
+            inputNumberLabel.text = "0"
+            
+            setScrollView()
+        }
+    }
+    
     }
 
 
