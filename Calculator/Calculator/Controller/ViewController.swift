@@ -76,6 +76,8 @@ class ViewController: UIViewController {
         }
         
         inputOperatorLabel.text? = labelText
+        
+        allInputScrollView.scrollToBottom()
     }
     
     @IBAction func tapEqual(_ sender: UIButton) {
@@ -176,3 +178,11 @@ class ViewController: UIViewController {
     }
 }
 
+extension UIScrollView {
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
+        if(bottomOffset.y > 0) {
+            setContentOffset(bottomOffset, animated: true)
+        }
+    }
+}
