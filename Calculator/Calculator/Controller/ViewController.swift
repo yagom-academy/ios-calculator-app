@@ -11,11 +11,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet weak var inputLabelStackView: UIStackView!
     
+    @IBOutlet weak var allInputScrollView: UIScrollView!
+    @IBOutlet weak var allInputStackView: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
+        allInputStackView.subviews.forEach {
+            $0.removeFromSuperview()
+        }
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
@@ -27,6 +33,47 @@ class ViewController: UIViewController {
         } else {
             inputNumberLabel.text? += labelText
         }
+    }
+    
+    @IBAction func tapOperator(_ sender: UIButton) {
+        let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
+        let operandLabel: UILabel = makeUILabel(inputNumberLabel.text)
+        let inputLabelStackView = makeUIStackView()
+    
+        inputLabelStackView.addArrangedSubview(operatorLabel)
+        inputLabelStackView.addArrangedSubview(operandLabel)
+        allInputStackView.addArrangedSubview(inputLabelStackView)
+        
+        inputNumberLabel.text = "0"
+        
+        guard let labelText = sender.titleLabel?.text else {
+            return
+        }
+        
+        inputOperatorLabel.text? = labelText
+    }
+    
+    private func makeUILabel(_ text: String?) -> UILabel {
+        let label = UILabel()
+        
+        label.text = text
+        label.textColor = .white
+        label.font = label.font.withSize(20)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        return label
+    }
+    
+    private func makeUIStackView() -> UIStackView {
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        
+        return stackView
     }
 }
 
