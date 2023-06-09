@@ -27,7 +27,7 @@ struct Formula {
         default:
             break
         }
-        guard let selectedOperator = operator2 else { return 0.0 } //nil인 경우를 처리
+        guard let selectedOperator = operator2 else { return 0.0 }
         
         return selectedOperator.calculate(lhs: lhs, rhs: rhs)
     }
