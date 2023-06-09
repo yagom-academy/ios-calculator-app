@@ -6,64 +6,69 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     private var formula: String = ""
-    private let numberFormatter = NumberFormatter()
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 10
+        numberFormatter.maximumIntegerDigits = 20
+        
+        return numberFormatter
+    }()
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandsLabel: UILabel!
-    @IBOutlet private weak var stackView: UIStackView!
-    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var calculationDetailsStackView: UIStackView!
+    @IBOutlet private weak var calculationDetailsScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        clearLabel()
-        clearStackView()
-        setNumberFormatter()
+        clearOperatorLabel()
+        clearOperandsLabel()
+        clearCalculationDetailsStackView()
     }
     
-    @IBAction private func TapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle else { return }
         
         addFormula()
         setOperatorLabel(inputOperator)
     }
     
-    @IBAction private func TapEqualButton(_ sender: UIButton) {
+    @IBAction private func tapEqualButton(_ sender: UIButton) {
         addFormula()
         
         guard let result = calculateFormula() else { return }
         
         setOperandsLabel(result)
         clearFormula()
-        clearStackView()
+        clearCalculationDetailsStackView()
     }
     
-    @IBAction private func TapNumberButton(_ sender: UIButton) {
+    @IBAction private func tapNumberButton(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
         addOperandsLabel(inputNumber)
     }
     
-    @IBAction private func TapDecimalPointButton(_ sender: UIButton) {
-        guard let inputDecimalPoint = sender.currentTitle else { return }
+    @IBAction private func tapFunctionButton(_ sender: UIButton) {
+        guard let buttonTitle = sender.currentTitle else { return }
         
-        addOperandsLabel(inputDecimalPoint)
-    }
-    
-    @IBAction private func TapACButton(_ sender: UIButton) {
-        clearLabel()
-        clearFormula()
-        clearStackView()
-    }
-    
-    @IBAction private func TapCEButton(_ sender: UIButton) {
-        clearLabel()
-    }
-    
-    @IBAction private func TapChangeSignButton(_ sender: UIButton) {
-        changeSign()
+        switch buttonTitle {
+        case CalculatorTerms.allClear.rawValue:
+            clearOperatorLabel()
+            clearOperandsLabel()
+            clearFormula()
+            clearCalculationDetailsStackView()
+        case CalculatorTerms.clearEntry.rawValue:
+            clearOperandsLabel()
+        case CalculatorTerms.changeSign.rawValue:
+            changeSign()
+        default:
+            break
+        }
     }
     
     private func calculateFormula() -> String? {
@@ -78,17 +83,18 @@ class CalculatorViewController: UIViewController {
         
         if formula.isEmpty && operands != CalculatorTerms.zero.rawValue  {
             formula += "\(operands) "
-            addDetailStackView("", operands)
+            addCalculationDetailsStackView("", operands)
         } else if operands != CalculatorTerms.zero.rawValue {
             formula += "\(`operator`) \(operands) "
-            addDetailStackView(`operator`, operands)
+            addCalculationDetailsStackView(`operator`, operands)
         }
         
         if `operator` == String(Operator.divide.rawValue) && operands == CalculatorTerms.zero.rawValue {
             formula += "\(`operator`) \(operands) "
         }
         
-        clearLabel()
+        clearOperatorLabel()
+        clearOperandsLabel()
     }
     
     private func addOperandsLabel(_ input: String) {
@@ -109,15 +115,15 @@ class CalculatorViewController: UIViewController {
         setOperandsLabel(result)
     }
     
-    private func addDetailStackView(_ `operator`: String, _ operands: String) {
+    private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         label.textAlignment = .right
         label.text = "\(`operator`) \(operands)"
         
-        stackView.addArrangedSubview(label)
-        scrollView.scrollToBottom(animated: false)
+        calculationDetailsStackView.addArrangedSubview(label)
+        calculationDetailsScrollView.scrollToBottom(animated: false)
     }
     
     private func changeSign() {
@@ -140,21 +146,16 @@ class CalculatorViewController: UIViewController {
         operandsLabel.text = data
     }
     
-    private func setNumberFormatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumFractionDigits = -2
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumSignificantDigits = 20
-    }
-    
-    private func clearLabel() {
-        operandsLabel.text = CalculatorTerms.zero.rawValue
+    private func clearOperatorLabel() {
         operatorLabel.text?.removeAll()
     }
     
-    private func clearStackView() {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    private func clearOperandsLabel() {
+        operandsLabel.text = CalculatorTerms.zero.rawValue
+    }
+    
+    private func clearCalculationDetailsStackView() {
+        calculationDetailsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
     private func clearFormula() {

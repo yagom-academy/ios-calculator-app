@@ -10,4 +10,7 @@ enum CalculatorTerms: String {
     case doubleZero = "00"
     case minusSign = "-"
     case decimalPoint = "."
+    case allClear = "AC"
+    case clearEntry = "CE"
+    case changeSign = "⁺⁄₋"
 }
