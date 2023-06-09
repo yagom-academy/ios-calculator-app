@@ -45,6 +45,7 @@ extension CalculatorViewController {
         
         guard let result = calculateResult() else { return }
         
+        currentOperatorLabel.text = ""
         currentOperandLabel.text = "\(result)"
         isPrevResult = true
     }
