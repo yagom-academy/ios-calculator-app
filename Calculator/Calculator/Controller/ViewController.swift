@@ -12,12 +12,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     private var saveFormula = [String]()
     private let numberFormatter = NumberFormatter()
-    private var isInputZero: Bool = false
-    private var isResultValue: Bool = false
+    private var isInputZero = true
+    private var isResultValue = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearEntryText(isOperandClear: true, isOperatorClear: true)
+        clearLabels()
     }
     
     func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
@@ -59,30 +59,43 @@ class ViewController: UIViewController {
     
     //MARK: - Button Action
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
-        guard let operand = sender.currentTitle, isResultValue == false else {
+        guard let operand = sender.currentTitle,
+              let operandString = operands.text,
+              isResultValue == false else {
             return
         }
         
-        if operand == "0" {
+        guard operand != "0" else {
             isInputZero = true
+            return
         }
         
-        if operand == "." && operands.text == "0" {
-            operands.text = "0" + operand
-        } else if let operandString = operands.text, operands.text != "0" {
-            operands.text = operandString + operand
-        } else {
+        if operandString == "0", operand != "." {
             operands.text = operand
+        } else {
+            operands.text = operandString + operand
         }
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        if operands.text != "0" || isInputZero {
+        guard let operand = operands.text,
+              operand != "0" || isInputZero else {
+            return
+        }
+        
+        if operand.hasSuffix(".") {
+            settingFormula(isEndByPoint: true)
+        } else if isResultValue {
+            settingFormula(isResultComma: true)
+        } else {
             settingFormula()
         }
-        isResultValue = false
+
         operators.text = sender.currentTitle
-        clearEntryText(isOperandClear: true, isOperatorClear: false)
+
+        isResultValue = false
+        isInputZero = false
+        clearLabels(isOperatorClear: false)
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
@@ -94,17 +107,17 @@ class ViewController: UIViewController {
         var formula = ExpressionParser.parse(from: saveFormula.joined())
         let result = formula.result()
         isResultValue = true
+        isInputZero = true
         
         operands.text = formattingNumbers(result)
         saveFormula.removeAll()
-        clearEntryText(isOperandClear: false, isOperatorClear: true)
+        clearLabels(isOperandClear: false)
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
         guard let operand = operands.text,
                 operand != "0",
-                let operandsNumber = (Double(operand)),
-                isResultValue == false else {
+                let operandsNumber = (Double(operand)) else {
             return
         }
         
@@ -112,22 +125,30 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {
-        clearEntryText(isOperandClear: true, isOperatorClear: false)
+        clearLabels(isOperatorClear: false)
         isResultValue = false
+        isInputZero = false
     }
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        clearEntryText(isOperandClear: true, isOperatorClear: true)
+        clearLabels()
         isResultValue = false
+        isInputZero = true
     }
 }
 
 extension ViewController {
-    private func settingFormula() {
+    private func settingFormula(isEndByPoint: Bool = false, isResultComma: Bool = false) {
         guard let operatorString = operators.text,
-              let operandString = operands.text else {
+              var operandString = operands.text else {
             return
+        }
+
+        if isEndByPoint {
+            operandString = operandString.filter { $0 != "." }
+        } else if isResultComma {
+            operandString = operandString.filter { $0 != "," }
         }
         
         saveFormula.append("\(operatorString) ")
@@ -144,10 +165,9 @@ extension ViewController {
         return numberFormatter.string(from: Decimal(input) as NSNumber) ?? "NaN"
     }
     
-    private func clearEntryText(isOperandClear: Bool, isOperatorClear: Bool) {
+    private func clearLabels(isOperandClear: Bool = true, isOperatorClear: Bool = true) {
         if isOperandClear {
             operands.text = "0"
-            isInputZero = false
         }
         if isOperatorClear {
             operators.text = ""

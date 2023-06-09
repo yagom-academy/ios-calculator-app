@@ -258,7 +258,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedOperandsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HJP-rB-Mtd"/>
+                                                    <action selector="tappedOperandsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nva-VX-F4U"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
