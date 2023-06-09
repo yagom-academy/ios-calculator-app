@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchOperator(_ sender: UIButton) {
-        
+
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
@@ -40,7 +40,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchMenu(_ sender: UIButton) {
+        guard let title = sender.currentTitle else { return }
         
+        switch title {
+        case "AC":
+            clearOperandLabel()
+            clearOperatorLabel()
+            clearStackView()
+        case "CE":
+            print("clearEntry")
+        case "":
+            print("chageSign")
+        default:
+            break
+        }
     }
     
     private func clearOperandLabel() {
@@ -51,7 +64,15 @@ class ViewController: UIViewController {
 
     }
     
-    private func clearStack() {
+    private func clearStackView() {
 
+    }
+    
+    private func clearEntry() {
+        
+    }
+    
+    private func changeSign() {
+        
     }
 }
