@@ -71,6 +71,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
+        guard rhs.isZero == false else { return Double.nan }
         return lhs / rhs
     }
     
@@ -111,12 +112,15 @@ struct Formula {
     
     mutating func result() -> Double {
         var result: Double = 0.0
+        guard var lhs: Double = operands.dequeue() else { return 0 }
         
         while operands.isEmpty == false {
             let dequeueOperator = operators.dequeue()
             
-            guard let lhs = operands.dequeue(), let rhs = operands.dequeue() else { return 0 }
-            guard let calculatedValue = dequeueOperator?.calculate(lhs: lhs, rhs: rhs) else { return 0 }
+            guard let rhs = operands.dequeue(),
+                  let calculatedValue = dequeueOperator?.calculate(lhs: lhs, rhs: rhs) else { return 0 }
+            
+            lhs = calculatedValue
             result = calculatedValue
         }
         return result
