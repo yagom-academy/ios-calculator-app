@@ -54,7 +54,6 @@ class ViewController: UIViewController {
     }
     
     func addView(_ `operator`: String, _ operand: String) {
-        stackView.axis = .vertical
         stackView.addArrangedSubview(addSubView(`operator`, operand))
     }
     
@@ -63,12 +62,14 @@ class ViewController: UIViewController {
         guard let operand = sender.currentTitle else {
             return
         }
-        guard let operandString = operands.text, operandString != "0" else {
-            operands.text = operand
-            return
-        }
         
-        operands.text = operandString + operand
+        if operand == "." && operands.text == "0" {
+            operands.text = "0" + operand
+        } else if let operandString = operands.text, operands.text != "0" {
+            operands.text = operandString + operand
+        } else {
+            operands.text = operand
+        }
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
@@ -96,18 +97,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
-        guard let operand = operands.text, let operandsNumber = Double(operand) else {
+        guard let operand = operands.text, let operandsNumber = (Double(operand)) else {
             return
         }
         
         operands.text = formattingNumbers(operandsNumber * -1)
     }
     
-    @IBAction func tappedCEButton(_ sender: Any) {
+    @IBAction func tappedClearButton(_ sender: Any) {
         clearEntryText(isOperandClear: true, isOperatorClear: false)
     }
     
-    @IBAction func tappedACButton(_ sender: Any) {
+    @IBAction func tappedAllClearButton(_ sender: Any) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         clearEntryText(isOperandClear: true, isOperatorClear: true)
     }
@@ -124,6 +125,7 @@ extension ViewController {
     
     private func formattingNumbers(_ input: Double) -> String {
         let numberFormatter = NumberFormatter()
+        
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.roundingMode = .halfUp

@@ -51,7 +51,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedACButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cY3-PT-0n5"/>
+                                                    <action selector="tappedAllClearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cY3-PT-0n5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RLD-dY-LOA">
@@ -62,7 +62,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedCEButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rbw-j2-q1I"/>
+                                                    <action selector="tappedClearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rbw-j2-q1I"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ows-U7-mNc">
