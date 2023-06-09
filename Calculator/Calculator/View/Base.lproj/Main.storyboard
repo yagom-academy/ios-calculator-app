@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" translatesAutoresizingMaskIntoConstraints="NO" id="BOT-7g-vxv">
                                 <rect key="frame" x="16" y="68" width="382" height="213.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="XRe-QE-UJf">
@@ -331,6 +331,7 @@
                     <connections>
                         <outlet property="operands" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
                         <outlet property="operators" destination="HPC-iy-qdm" id="pps-PP-efd"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
                         <outlet property="stackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                     </connections>
                 </viewController>

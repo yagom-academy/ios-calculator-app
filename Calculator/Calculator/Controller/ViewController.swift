@@ -10,6 +10,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var operators: UILabel!
     @IBOutlet weak var operands: UILabel!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
     private var saveFormula = [String]()
     private let numberFormatter = NumberFormatter()
     private var isInputZero = true
@@ -20,44 +21,6 @@ class ViewController: UIViewController {
         clearLabels()
     }
     
-    func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
-        let operatorLabel: UILabel = {
-            let label = UILabel()
-            
-            label.text = `operator`
-            label.textColor = .white
-            
-            return label
-        }()
-        
-        let operandLabel: UILabel = {
-            let label = UILabel()
-            
-            label.text = operand
-            label.font = .preferredFont(forTextStyle: .title2)
-            label.textColor = .white
-            
-            return label
-        }()
-        
-        let subStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operatorLabel,operandLabel])
-            
-            stackView.axis = .horizontal
-            stackView.spacing = 8
-            stackView.alignment = .bottom
-            
-            return stackView
-        }()
-        
-        return subStackView
-    }
-    
-    func addView(_ `operator`: String, _ operand: String) {
-        stackView.addArrangedSubview(addSubView(`operator`, operand))
-    }
-    
-    //MARK: - Button Action
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let operand = sender.currentTitle,
               let operandString = operands.text,
@@ -156,15 +119,6 @@ extension ViewController {
         addView(operatorString, operandString)
     }
     
-    private func formattingNumbers(_ input: Double) -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.usesSignificantDigits = true
-        
-        return numberFormatter.string(from: Decimal(input) as NSNumber) ?? "NaN"
-    }
-    
     private func clearLabels(isOperandClear: Bool = true, isOperatorClear: Bool = true) {
         if isOperandClear {
             operands.text = "0"
@@ -173,5 +127,56 @@ extension ViewController {
             operators.text = ""
         }
     }
+    
+    private func formattingNumbers(_ input: Double) -> String {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.usesSignificantDigits = true
+        
+        return numberFormatter.string(from: Decimal(input) as NSNumber) ?? "NaN"
+    }
 }
 
+extension ViewController {
+    func addSubView(_ `operator`: String, _ operand: String) -> UIStackView {
+        let operatorLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = `operator`
+            label.textColor = .white
+            
+            return label
+        }()
+        
+        let operandLabel: UILabel = {
+            let label = UILabel()
+            
+            label.text = operand
+            label.font = .preferredFont(forTextStyle: .title2)
+            label.textColor = .white
+            
+            return label
+        }()
+        
+        let subStackView: UIStackView = {
+            let stackView = UIStackView(arrangedSubviews: [operatorLabel,operandLabel])
+            
+            stackView.axis = .horizontal
+            stackView.spacing = 8
+            stackView.alignment = .bottom
+            
+            return stackView
+        }()
+        
+        return subStackView
+    }
+    
+    func addView(_ `operator`: String, _ operand: String) {
+        stackView.addArrangedSubview(addSubView(`operator`, operand))
+        
+        scrollView.layoutIfNeeded()
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+    }
+
+}
