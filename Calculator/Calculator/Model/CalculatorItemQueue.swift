@@ -5,7 +5,6 @@
 //  Created by Minseong Kang on 2023/05/30.
 //
 
-extension Double: CalculateItem { }
 extension Operator: CalculateItem { }
 
 struct CalculatorItemQueue<T: CalculateItem> {
