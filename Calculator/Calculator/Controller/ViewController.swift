@@ -93,6 +93,19 @@ class ViewController: UIViewController {
         inputNumberLabel.text = "0"
     }
     
+    func numberFormatter(_ inputNumber: String) -> String {
+        let numberFormatter = NumberFormatter()
+        let doubleNumber = Double(inputNumber)
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+//        numberFormatter.roundingMode = .roundUp
+//        numberFormatter.maximumSignificantDigits = 2
+        let result = numberFormatter.string(for: doubleNumber) ?? "0.0"
+        
+        return result
+    }
+    
     }
 
 
