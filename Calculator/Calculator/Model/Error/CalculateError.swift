@@ -8,4 +8,5 @@
 enum CalculateError: Error {
     case invalidDequeue
     case dividedByZero
+    case notFoundNumber
 }
