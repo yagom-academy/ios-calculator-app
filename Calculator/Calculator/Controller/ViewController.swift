@@ -89,6 +89,10 @@ class ViewController: UIViewController {
         allStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
+    @IBAction func clearEntryButton(_ sender: UIButton) {
+        inputNumberLabel.text = "0"
+    }
+    
     }
 
 
