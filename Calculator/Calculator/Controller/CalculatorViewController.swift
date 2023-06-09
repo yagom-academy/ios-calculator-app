@@ -9,14 +9,14 @@ import UIKit
 class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var calculateItemsStack: UIStackView!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet private weak var scrollView: UIScrollView!
+    @IBOutlet private weak var calculateItemsStack: UIStackView!
+    @IBOutlet private weak var operatorLabel: UILabel!
+    @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
     
-    var components: String = ""
+    private var components: String = ""
     
     // MARK: - View State Method
 
@@ -27,19 +27,19 @@ class CalculatorViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction func tapACButton(_ sender: Any) {
+    @IBAction private func tapACButton(_ sender: Any) {
         clearAll()
     }
 
-    @IBAction func tapCEButton(_ sender: Any) {
+    @IBAction private func tapCEButton(_ sender: Any) {
         clearEntry()
     }
 
-    @IBAction func tapNEGButton(_ sender: Any) {
+    @IBAction private func tapNEGButton(_ sender: Any) {
         toggleNegativeNumber()
     }
 
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard !components.isEmpty || (operandLabel.text != "0") else {
             return
         }
@@ -55,7 +55,7 @@ class CalculatorViewController: UIViewController {
         clearEntry()
     }
 
-    @IBAction func tapNumberButton(_ sender: UIButton) {
+    @IBAction private func tapNumberButton(_ sender: UIButton) {
         let operandLabelText = removeComma(of: operandLabel.text)
         
         guard var operandLabelText, operandLabelText.count < 20 else {
@@ -68,7 +68,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = formatNumber(of: number)
     }
 
-    @IBAction func tapZeroButton(_ sender: UIButton) {
+    @IBAction private func tapZeroButton(_ sender: UIButton) {
         guard
             let operandLabelText = operandLabel.text,
             operandLabelText != "0" || operandLabelText.contains("."),
@@ -80,7 +80,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text?.append(sender.titleLabel?.text ?? "")
     }
 
-    @IBAction func tapDotButton(_ sender: UIButton) {
+    @IBAction private func tapDotButton(_ sender: UIButton) {
         guard
             let operandLabelText = operandLabel.text,
             !operandLabelText.contains(".")
@@ -91,7 +91,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text?.append(".")
     }
 
-    @IBAction func tapEqualsButton(_ sender: Any) {
+    @IBAction private func tapEqualsButton(_ sender: Any) {
         guard !components.isEmpty else {
             return
         }
@@ -118,7 +118,7 @@ class CalculatorViewController: UIViewController {
 
     // MARK: - Method
     
-    func formatNumber(of number: Any?) -> String? {
+    private func formatNumber(of number: Any?) -> String? {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 15
@@ -126,7 +126,7 @@ class CalculatorViewController: UIViewController {
         return numberFormatter.string(for: number)
     }
     
-    func clearAll() {
+    private func clearAll() {
         calculateItemsStack.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
@@ -136,15 +136,15 @@ class CalculatorViewController: UIViewController {
         components = ""
     }
     
-    func clearOperator() {
+    private func clearOperator() {
         operatorLabel.text = nil
     }
     
-    func clearEntry() {
+    private func clearEntry() {
         operandLabel.text = "0"
     }
     
-    func toggleNegativeNumber() {
+    private func toggleNegativeNumber() {
         guard var operandLabelText = operandLabel.text, operandLabelText != "0" else {
             return
         }
@@ -158,7 +158,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operandLabelText
     }
     
-    func appendCalculateItem() {
+    private func appendCalculateItem() {
         guard let operandLabelText = removeComma(of: operandLabel.text) else {
             return
         }
@@ -190,11 +190,11 @@ class CalculatorViewController: UIViewController {
         scrollToBottom()
     }
     
-    func removeComma(of text: String?) -> String? {
+    private func removeComma(of text: String?) -> String? {
         return text?.components(separatedBy: ",").joined()
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         let bottomOffset = CGPoint(
             x: 0,
             y: scrollView.contentSize.height
