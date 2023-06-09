@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var allInputScrollView: UIScrollView!
     @IBOutlet weak var allInputStackView: UIStackView!
     
+    private var formulaString = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,6 +67,8 @@ class ViewController: UIViewController {
             inputLabelStackView.addArrangedSubview(operandLabel)
             allInputStackView.addArrangedSubview(inputLabelStackView)
             
+            formulaString += (inputOperatorLabel.text ?? "") + (inputNumberLabel.text ?? "")
+            
             resetInputNumberLabel()
         }
         
@@ -73,6 +77,31 @@ class ViewController: UIViewController {
         }
         
         inputOperatorLabel.text? = labelText
+    }
+    
+    @IBAction func tapEqual(_ sender: UIButton) {
+        tapOperator(sender)
+        
+        do {
+            var formula = try ExpressionParser.parse(from: formulaString)
+            let result = try formula.result()
+            resetInputOperatorLabel()
+            inputNumberLabel.text = String(result)
+        } catch let error as ExpressionParserError {
+            switch error {
+            case .invalidOperand:
+                print("invalid operand")
+            }
+        } catch let error as FormulaError {
+            switch error {
+            case .operationFailure:
+                print("operation failure")
+            case .divideByZero:
+                print("divide by zero")
+            }
+        } catch {
+            print("somthing wrong")
+        }
     }
     
     @IBAction func tapChangeSign(_ sender: UIButton) {
