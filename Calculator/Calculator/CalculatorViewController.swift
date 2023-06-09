@@ -15,6 +15,9 @@ class CalculatorViewController: UIViewController {
     private var isPrevResult = false
     private var inputFormula = ""
     private let initialNumber = 0
+    private var isFirstArithmeticFormula: Bool {
+        return calculationFormulaStackView.subviews.count == 0
+    }
     
     // MARK: - View LifeCycle
     override func viewDidLoad() {
@@ -26,7 +29,7 @@ class CalculatorViewController: UIViewController {
 extension CalculatorViewController {
     @IBAction func didTappedOperators(_ sender: UIButton) {
         guard currentOperandLabel.text != "\(initialNumber)", isPrevResult == false else {
-            currentOperatorLabel.text = isFirstArithmeticFormula() ? "" : sender.currentTitle
+            currentOperatorLabel.text = isFirstArithmeticFormula ? "" : sender.currentTitle
             return
         }
         
@@ -55,9 +58,9 @@ extension CalculatorViewController {
         }
         
         let currentOperand = currentOperandLabel.text ?? "\(initialNumber)"
-        let isAppendOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
+        let isAppendedOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
         
-        currentOperandLabel.text = isAppendOperand ? insertedNumber : currentOperand + insertedNumber
+        currentOperandLabel.text = isAppendedOperand ? insertedNumber : currentOperand + insertedNumber
     }
     
     @IBAction func didTappedMenus(_ sender: UIButton) {
@@ -126,9 +129,5 @@ extension CalculatorViewController {
     
     private func clearCalculationFormulaStackView() {
         calculationFormulaStackView.subviews.forEach { $0.removeFromSuperview() }
-    }
-    
-    private func isFirstArithmeticFormula() -> Bool {
-        return calculationFormulaStackView.subviews.count == 0
     }
 }
