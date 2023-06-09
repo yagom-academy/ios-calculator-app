@@ -32,6 +32,12 @@ class ViewController: UIViewController {
         
         inputNumberLabel.text = (numberLabel == "0") ? ("0") : (numberLabel + inputNumber)
     }
+    @IBAction func positiveNegativeButton(_ sender: UIButton) {
+        let minusSign = "-"
+        guard let numberLabel = inputNumberLabel.text else { return }
+        
+        inputNumberLabel.text? = (numberLabel != "0" && numberLabel.first.map(String.init) != minusSign) ? (minusSign + numberLabel) : (numberLabel)
+    }
     }
 
 
