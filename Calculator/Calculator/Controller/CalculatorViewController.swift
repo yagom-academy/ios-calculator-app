@@ -36,7 +36,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapNEGButton(_ sender: Any) {
-        
+        toggleNegativeNumber()
     }
 
     @IBAction func tapOperatorButton(_ sender: UIButton) {
@@ -102,6 +102,20 @@ class CalculatorViewController: UIViewController {
     
     func clearEntry() {
         operandLabel.text = "0"
+    }
+    
+    func toggleNegativeNumber() {
+        guard var operandLabelText = operandLabel.text, operandLabelText != "0" else {
+            return
+        }
+        
+        if operandLabelText.contains("-") {
+            operandLabelText.removeFirst()
+        } else {
+            operandLabelText = "-\(operandLabelText)"
+        }
+        
+        operandLabel.text = operandLabelText
     }
     
     func appendCalculateItem() {
