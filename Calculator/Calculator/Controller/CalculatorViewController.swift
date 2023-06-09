@@ -186,10 +186,23 @@ class CalculatorViewController: UIViewController {
         
         components.append(operatorLabel.text ?? "")
         components.append(operandLabel.text ?? "")
+        
+        scrollToBottom()
     }
     
     func removeComma(of text: String?) -> String? {
         return text?.components(separatedBy: ",").joined()
+    }
+    
+    func scrollToBottom() {
+        let bottomOffset = CGPoint(
+            x: 0,
+            y: scrollView.contentSize.height
+            - scrollView.bounds.height
+            + scrollView.contentInset.bottom
+        )
+        
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
 
