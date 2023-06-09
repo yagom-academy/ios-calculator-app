@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var stackView: UIStackView!
     private var expression: String = ""
     private var isResult: Bool = false
+    private var isInputZero: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class ViewController: UIViewController {
         clearLabel()
         expression = ""
         isResult = false
+        isInputZero = true
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
@@ -31,10 +33,11 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = "0"
+        isInputZero = false
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, operand != "0", !operand.hasSuffix("."), !isResult else {
+        guard let operand = operandLabel.text, operand != "0", operand != "0." else {
             return
         }
         guard operand.hasPrefix("-") else {
@@ -50,7 +53,6 @@ class ViewController: UIViewController {
             return
         }
         
-        isResult = true
         addStackView()
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
@@ -58,13 +60,22 @@ class ViewController: UIViewController {
         operandLabel.text = result.formatNumbers()
         operatorLabel.text = ""
         expression = ""
+        isResult = true
+        isInputZero = true
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let currentOperand = sender.currentTitle, !isResult else {
             return
         }
-        guard let operand = operandLabel.text, operand != "0" || currentOperand == "." else {
+        guard currentOperand != "0" else {
+            isInputZero = true
+            return
+        }
+        guard let operand = operandLabel.text, !(operand.hasSuffix(".") && currentOperand == ".") else {
+            return
+        }
+        guard operand != "0" || currentOperand == "." else {
             operandLabel.text = currentOperand
             return
         }
@@ -73,9 +84,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard operandLabel.text != "0", operandLabel.text != "." else {
+        guard let operand = operandLabel.text, operand != "0" || isInputZero else {
             operatorLabel.text = sender.currentTitle
             return
+        }
+        
+        if operand.hasSuffix(".") {
+            operandLabel.text = String(operand.prefix(operand.count - 1))
         }
 
         addStackView()
@@ -83,6 +98,7 @@ class ViewController: UIViewController {
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isResult = false
+        isInputZero = false
     }
     
     private func configureCurrentFormula() -> String {
@@ -94,12 +110,13 @@ class ViewController: UIViewController {
     }
     
     private func addStackView() {
-        let recordedFormulaLabel: [UILabel] = configureItem()
-        let content: UIStackView = configureContent(item: recordedFormulaLabel)
+        let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel)
+        let recordedOperandLabel: UILabel = configureItem(with: operandLabel)
+        let content: UIStackView = configureContent(item: recordedOperatorLabel, recordedOperandLabel)
         stackView.addArrangedSubview(content)
     }
     
-    private func configureContent(item formula: [UILabel]) -> UIStackView {
+    private func configureContent(item formula: UILabel...) -> UIStackView {
         let content: UIStackView = UIStackView()
         content.translatesAutoresizingMaskIntoConstraints = false
         content.axis = .horizontal
@@ -111,17 +128,13 @@ class ViewController: UIViewController {
         return content
     }
 
-    private func configureItem() -> [UILabel] {
-        let recordedOperatorLabel: UILabel = UILabel()
-        recordedOperatorLabel.font = .preferredFont(forTextStyle: .title3)
-        recordedOperatorLabel.text = operatorLabel.text
-        recordedOperatorLabel.textColor = .white
-        let recordedOperandLabel: UILabel = UILabel()
-        recordedOperandLabel.font = .preferredFont(forTextStyle: .title3)
-        recordedOperandLabel.text = operandLabel.text
-        recordedOperandLabel.textColor = .white
+    private func configureItem(with label: UILabel) -> UILabel {
+        let recordedLabel: UILabel = UILabel()
+        recordedLabel.font = .preferredFont(forTextStyle: .title3)
+        recordedLabel.text = label.text
+        recordedLabel.textColor = .white
         
-        return [recordedOperatorLabel, recordedOperandLabel]
+        return recordedLabel
     }
     
     private func clearLabel() {
