@@ -20,12 +20,13 @@ class CalculatorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearAll()
     }
     
     // MARK: - IBAction
     
     @IBAction func tapACButton(_ sender: Any) {
-        
+        clearAll()
     }
 
     @IBAction func tapCEButton(_ sender: Any) {
@@ -75,6 +76,15 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 15
         
         return numberFormatter.string(for: number)
+    }
+    
+    func clearAll() {
+        calculateItemsStack.arrangedSubviews.forEach { view in
+            view.removeFromSuperview()
+        }
+        
+        clearOperator()
+        clearEntry()
     }
     
     func clearOperator() {
