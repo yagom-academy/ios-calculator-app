@@ -53,6 +53,18 @@ class ViewController: UIViewController {
         inputOperatorLabel.text? = labelText
     }
     
+    @IBAction func tapChangeSign(_ sender: UIButton) {
+        let hyphenMinus = "-"
+        
+        if let numberLabelText = inputNumberLabel.text {
+            if numberLabelText.hasPrefix(hyphenMinus) {
+                inputNumberLabel.text = String(numberLabelText.dropFirst())
+            } else {
+                inputNumberLabel.text = hyphenMinus + numberLabelText
+            }
+        }
+    }
+    
     private func makeUILabel(_ text: String?) -> UILabel {
         let label = UILabel()
         
