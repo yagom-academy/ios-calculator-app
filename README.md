@@ -20,7 +20,8 @@
 
 ## 1. 📢 소개
 
-    계산기 어플을 구현하고자 합니다.
+    사용자로부터 입력받은 숫자와 연산자를 활용하여 순차적으로 연산을 진헹합니다.
+   - 주요 개념: `UIKit`, `Queue`, `Double-stack`
 
 <br>
 
@@ -30,7 +31,7 @@
 
 | [Serena 🐷](https://github.com/serena0720) |
 | :--------: |
-| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="350"/>|
+| <Img src = "https://i.imgur.com/q0XdY1F.jpg" width="450"/>|
 
 <br>
 
@@ -40,17 +41,26 @@
 |날짜|내용|
 |:---:|---|
 | **2023.05.29** |▫️  UnitTest 타겟설정<br>▫️ CalculatorItemQueue 큐타입 정의<br>▫️ CalculateItem 프로토콜 정의|
-| **2023.05.30** |**TDD** <br>▫️ 1을 queue에 넣으면 queue에 1이 있는지 확인하기 위한 테스트 생성<br>▫️ enqueue함수 정의<br>▫️ string을 queue에 넣으면 queue에 string이 있는지 확인하기 위한 테스트 생성|
-| **2023.05.31** |**TDD** <br>▫️ enqueueForString 함수 생성<br>▫️ Int와 String 배열을 any 타입의 배열로 통합<br>▫️ Double을 queue에 넣으면 queue에 Double이 있는지 확인하기 위한 테스트 생성<br>▫️ Double Extension 생성<br>▫️ queue배열이 비어있을때 true를 반환하는지 확인하기 위한 테스트 생성<br>▫️ isEmpty 생성<br>▫️ queue배열에서 삭제시키고자하는 값을 peek에 반환하는지 확인하기 위한 테스트 생성<br>▫️ peek 생성<br>▫️  reversedQueue배열이 비어있을 때 queue배열을 뒤집어서 넣는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 생성<br>▫️ queue배열이 뒤집히면 해당 배열 삭제 후 reversedQueue의 마지막요소를 반환하는지 확인하기 위한 테스트 생성<br>▫️ dequeue 함수 조건 및 리턴타입 변경|
+| **2023.05.30** |**TDD** <br> ▫️ enqueue함수 테스트 및 생성 <br>▫️ enqueueForString 함수 테스트 및 생성
+| **2023.05.31** |**TDD** <br>▫️ Double Extension 생성<br> ▫️ isEmpty 테스트 및 생성<br>▫️ peek 테스트 및 생성<br>▫️ dequeue 함수 테스트 및 생성 및 리턴타입 변경|
 | **2023.06.01** |▫️ Calculator Class Diagram|
+| **2023.06.04** |▫️ Any타입배열에서Generic으로타입변경 <br> ▫️ Calculatorltem의Element에Calculateltem프로토콜상속 <br> ▫️ peek 프로퍼티 수정 |
+| **2023.06.05** |▫️ extension Double, String 생성 <br> ▫️ Formula 구조체 생성 <br> ▫️ Operator enum 생성 <br> ▫️ ExpressionParser enum 생성 <br> ▫️ split 함수 수정 |
+| **2023.06.06** |▫️ Formula의 result 함수 수정 <br> ▫️ Error enum case 생성  <br> ▫️ CalculatorItemQueue result함수 및 조건 수정 <br> ▫️ substract의 Hypen Minus를 Minus Sign으로 수정 <br> ▫️ componentsByOperators 함수 수정 <br> ▫️ parse 함수 수정 <br> ▫️ allOperatorRawValues 프로퍼티 생성|
+| **2023.06.07** |▫️ parse함수, componentsByOperators 함수 수정 <br> ▫️ targetArray의 map함수 수정 <br> ▫️ stringParts "" 값 출력 삭제 filter 함수 추가 <br> ▫️ 0으로 나눴을 때 오류 throw <br> ▫️ voidNumber 에러 추가 <br> ▫️ Formula에서 error 캐치 <br> ▫️ ExpressionParser, Formula Unit Test 구현|
+| **2023.06.08** |▫️ Operate의 divide 에러 처리 삭제 <br> ▫️ Formula의 operators의 타입 변경 및 에러처리 변경 <br> ▫️ componentsParts 타입 변경 <br> ▫️ CalculatorItemQueue의 타입 변경 <br> ▫️ ExpressionParserTests의 test 구현|
+| **2023.06.09** |▫️ dividedByZero 에러 조건 수정 |
+
 
 
 <br>
 
 <a id="4."></a>
 ## 4. 📊 다이어그램
+<Img src = "https://hackmd.io/_uploads/BkbdkLxw2.png" width="550"/>
 
-<Img src = "https://postfiles.pstatic.net/MjAyMzA2MDRfMTQw/MDAxNjg1ODUwNzMxMjk1.9UxzykcmrJ2n3tk4u9I5fOVwdHFHjBcOSf1kASOO0UEg.oUQoh2XsBUpgR5YnnY_HUF3ZGuguDoN_hMXCia3bFjAg.PNG.sha0720/Calculator_ClassDiagram.png?type=w773" width="350"/>
+
+
 
 <br>
 
@@ -90,7 +100,74 @@
     - 결론 : 저는 계산기에 입력되는 마지막 값에 접근을 할 경우가 존재할 것이라 생각했습니다. 이런 부분에서 LinkedList는 마지막 인덱스에 접근할 때 시간복잡도가 O(n)으로 높기 때문에 적합한 방법은 아니라 생각했습니다.
 -> 사실 시간 복잡도와 기능흐름 중 시간 복잡도에 대한 고민을 중점적으로 했습니다. Double Stack이 가장 시간 복잡도 측면에서 효율적일 수 있다는 확신이 들지 않아 고민을 하던 차에 아래 블로그를 참고하였습니다. 이 블로그에 따르면 Double Stack의 시간 복잡도가 가장 낮다는 것을 확인할 수 있었습니다. 하여 저는 Double Stack을 활용하여 코드를 진행하고자 했습니다.
 - [📘 Blog: Queue in Swift](https://woongsios.tistory.com/222)
-                            
+      
+      
+### 🔥 UML기반으로 역할 고민
+- 기존과 달리 UML 기반으로 코드를 짜다보니, 흐름을 이해하는 데 시간이 오래 걸렸습니다. 바로 코드로 정리하는 것이 어려워서 UML에 기재된 내용을 틀만 구현하고 그 안의 내용을 하나씩 생각해내는 방식으로 코드를 구현하였습니다.
+
+    <details>
+    <summary>코드 구현 전 고민 과정</summary>
+
+    ### Operator.swift
+    이 함수가 어떤 동작을 하는지?
+    input : string에서 숫자와 연산자를 나눈 것을 각각의 배열로 받아
+    처리 : 숫자의 배열에서 맨앞의 값, 두번째값을 각각 받아서 계산 함수에 넣기
+        : 연산자 배열의 맨앞의 값을 받아서 Operator의 case와 비교하여 Operater의 calculate에 넣기!
+
+    이 함수가 어떤 결과를 리턴하는지?
+    연산자의 종류별로 계산 결과값을 ExpressionPaser에 전달!
+
+    어떤 의도로 코드를 짤 것인지?
+    저 enum case를 활용해서 더이상 switch 구문을 만들고 싶지 않다!
+    그렇다고 if를 미친듯이 돌리고 싶지도 않다!
+    그럼 enum case안에 있는 rawvlue 값을 비교할 수 있는 방법에 뭐가 있을까?
+    filter로 하려고 하니까 enum case안에 있는 rawValue값을 배열로 만들어야할듯 싶은데,,,어떻게 할까?
+    enum명(rawValue: “rawValue값”) → enum case에서 rawValue를 기준으로 선택 가능!!!
+
+    ```swift
+    Operator(rawValue: Character(operators.deque!))
+    ```
+
+
+    ### Formula.swift
+
+    1+2-3 인 경우를 고려해봐라
+    숫자[1,2,3] 연산자[+,-]
+    숫자 첫요소 = lhs, 두번쨰 요소 = rhs 에 넣고
+    연산자에서 첫요소 = modifier
+    result에 결과값을 넣게 되면 3
+    이 3을 받아서
+    연산자에서 첫요소 - / 숫자에서 첫요소 3을 받아서
+    추가 연산 행동을 해야한다
+    이때의 문제점 1. 결과값을 다시 lhs로 받아야한다
+    이때의 문제점 2. 두 배열이 모두 빈 배열이 될 때까지 위 행동을 반복해야한다.
+
+    1-1+3
+    [1,1,3] [-,+]
+    1 = lhs 1= rhs
+    result = 0
+    rhs = 3
+
+    조건 반복시킬 때 어떤 것으로 할까?
+    for 구문 -> CalculatorItemQueue의 queue가 private이기 때문에 count를 만들어서 받음
+    while -> 조건에 따라서 돌리기때문에 배열의 요소의 갯수에 따라 해야하기때문에 부적절 -> isEmpty
+    foreach -> 횟수제한이 안된다 -> collction 타입에서 모든 요소를 다 꺼내서 계산
+
+    </details>
+
+### 🔥 `split` vs `component`
+- 두 메소드가 문자열을 쪼갠다는 부분에서 같은 기능을 수행한다고 볼 수 있기 때문에 어떤 것을 사용해야할지 고민을 했습니다. `components`의 경우 `seperator`기준으로 문자열을 분리하여 `[String]형태로 반환합니다. 하지만 숫자를 나누는 경우 처음과 끝부분에 ""와 같은 빈 값이 배열안에 추가 됩니다. 하여 `components`를 사용할 시 이 부분을 유의해야합니다.
+- 이와 달리 `split`은 파라미터가 총 3종류가 있으며, `String`으로 매개변수를 받는 `components`와 달리 `character` 타입으로 매개변수를 받는다. 또한 반환값도 `[Substring]`의 형태를 띈다는 차이가 있습니다. 하여 반환값을 String으로 다운캐스팅을 해야한다는 불편함이 있습니다. 이 두 메소드의 특징을 참고하여 코드 작성 시 상황별로 어떤 메소드를 사용할지 고민했습니다.
+
+### 🔥 `substring`
+- 위의 split을 공부하면서 `substring`이라는 개념을 처음 접하게 되었습니다. `substring`은 `string`을 쪼갠 점에서 `charactor`와 유사하지만 `string`의 주소값을 공유하기 때문에 작업이 빠르고 효율적이라는 장점이 있습니다.
+
+### 🔥 `map`
+- 이번 프로젝트를 진행하면서 고차함수들을 접할 일이 많았습니다. `map`을 그 중 가장 활용도가 높은 함수라서 적극적으로 활용해보고자 노력했습니다.
+
+### 🔥 `substract`의 Hyphen Minus를 Minus Sign으로 수정
+- 계산기 조건 중 음수에 대한 조건이 있어서 고민을 많이 했습니다. 이때 `Hypen Minus`(-)와 `Minus Sign`(−)은 동일한 모양을 띄지만 다른 값을 갖고 있습니다. 이 점을 사용하여 부호의 값을 `Minus Sign`으로 주어 `Hypen Minus`를 사용하는 음수를 음수 자체의 값으로 넘겨서 계산될 수 있도록 사용했습니다.
+
 
 <br>
 
@@ -99,11 +176,13 @@
 ## 7. 🔗 참고 링크
 - [🍎 Apple Docs: Generic Types](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/#Generic-Types)
 - [🍎 Apple Docs: Generics](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/)
+- [🍎 Apple Docs: Character](https://developer.apple.com/documentation/swift/character)
+- [🍎 Apple Docs: Auto Layout](https://developer.apple.com/library/archive/documentation/UserExperience/Conceptual/AutolayoutPG/ViewswithIntrinsicContentSize.html#//apple_ref/doc/uid/TP40010853-CH13-SW1)
 - [📘 Blog: 큐 구현하기](https://babbab2.tistory.com/84)
 - [📘 Blog: Swift로 구현한 Queue 와 더블스택](https://apple-apeach.tistory.com/8)
 - [📘 Blog: 단방향 연결 리스트(LinkedList) 구현 해보기](https://babbab2.tistory.com/86)
-- [📘 Blog: 지네릭 (Generics)](https://jusung.gitbook.io/the-swift-language-guide/language-guide/22-generics)
-
+- [📘 Blog: 제네릭 (Generics)](https://jusung.gitbook.io/the-swift-language-guide/language-guide/22-generics)
+- [📘 Blog: removeAllvs[]](https://limjs-dev.tistory.com/92)
 
 
 <br>
@@ -113,8 +192,8 @@
 ### 👏🏻 잘한 점
 - 프로젝트를 진행하기 전에 관련 공부를 성실하게 선행하였습니다.
 - 막히는 부분이 있을 때 주위에 도움을 구하였습니다.
+- 도움을 받은만큼 제 스스로 다른 사람을 도와줄 수 있는 부분을 찾아서 도움을 주고자 노력했습니다.
         
 ### 👊🏻 개선할 점
 - 단시간에 많은 내용을 학습하다보니 아직 개념을 완벽하게 이해하지 못한 거 같아서 아쉬웠습니다.
 - 프로젝트의 타임라인을 완벽히 충족시키지 못했습니다.
-
