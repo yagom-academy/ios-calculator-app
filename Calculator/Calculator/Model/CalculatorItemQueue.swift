@@ -27,6 +27,10 @@ final class CalculatorItemQueue<T: CalculateItem> {
         return countItem
     }
     
+    func isEmpty() -> Bool {
+        return headItem == nil
+    }
+    
     func enqueue(item: T) {
         let newNode = CalculatorItemNode(value: item)
         
