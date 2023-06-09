@@ -156,6 +156,13 @@ class CalculatorViewController: UIViewController {
     }
     
     func appendCalculateItem() {
+        guard let operandLabelText = operandLabel.text?
+            .components(separatedBy: ",")
+            .joined()
+        else {
+            return
+        }
+        
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
         
@@ -163,7 +170,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.textColor = .white
         
         operatorLabel.text = self.operatorLabel.text
-        operandLabel.text = formatNumber(of: Decimal(string: self.operandLabel.text ?? ""))
+        operandLabel.text = formatNumber(of: Decimal(string: operandLabelText))
         
         if operandLabel.text?.last == "." {
             operandLabel.text?.removeLast()
