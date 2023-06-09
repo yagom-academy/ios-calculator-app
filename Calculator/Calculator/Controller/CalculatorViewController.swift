@@ -6,9 +6,9 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
-    let inputProcessor = InputProcessor()
+    private let inputProcessor = InputProcessor()
     
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -33,15 +33,15 @@ class CalculatorViewController: UIViewController {
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         self.operatorLabel.text = self.inputProcessor.inputOperator(sender.unwrappedTitle) { `operator`, operand in
             self.displayLabel.text = "0"
-            return self.recordOnStack(operater: `operator`, operand: operand)
+            return self.recordOnStack(operator: `operator`, operand: operand)
         }
         self.equalButton.isEnabled = true
     }
 
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.getResult {`operator`, operand in
-            return self.recordOnStack(operater: `operator`, operand: operand)
+        self.displayLabel.text = self.inputProcessor.deliverResult {`operator`, operand in
+            return self.recordOnStack(operator: `operator`, operand: operand)
         }
         self.operatorLabel.text = ""
         self.equalButton.isEnabled = false
@@ -55,7 +55,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        self.inputProcessor.clearLastOperand()
+        self.inputProcessor.clearRecentOperand()
         self.displayLabel.text = "0"
     }
     
@@ -63,8 +63,8 @@ class CalculatorViewController: UIViewController {
         self.displayLabel.text = self.inputProcessor.toggleSign()
     }
     
-    private func recordOnStack(operater: String, operand: String) {
-        let operatorLabel = UILabel.generate(text: operater)
+    private func recordOnStack(operator: String, operand: String) {
+        let operatorLabel = UILabel.generate(text: `operator`)
         let operandLabel = UILabel.generate(text: operand)
         
         let stackView: UIStackView = {

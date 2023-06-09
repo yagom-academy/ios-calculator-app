@@ -5,94 +5,104 @@
 //  Created by Minsup on 2023/06/08.
 //
 
-class InputProcessor {
+final class InputProcessor {
     private var expression: String = ""
     
-    private var operandOnInput: String {
-        DisplayFormatter.stringToInput(from: getRecentOperand())
+    private var incomingRecentOperand: String {
+        return self.getRecentOperand()
     }
     
-    private var operandOnResult: String {
-        DisplayFormatter.stringToResult(from: getRecentOperand())
+    private var incomingRecentOperator: String {
+        return self.getRecentOperator()
     }
     
     func inputOperand(_ element: String) -> String {
-        if element == "." && operandOnInput.contains(".") { return self.operandOnInput }
+        let isMaxLengthReached = self.incomingRecentOperand.count >= 15
+        let isDuplicateDecimal = element == "." && incomingRecentOperand.contains(".")
+        
+        if isMaxLengthReached || isDuplicateDecimal {
+            return InputFormatter.format(from: self.incomingRecentOperand)
+        }
+        
         self.expression.append(element)
         
-        return self.operandOnInput
+        return InputFormatter.format(from: self.incomingRecentOperand)
     }
+
     
     func inputOperator(_ element: String, record: (String, String) -> Void) -> String {
-        guard let last = self.expression.last else { return "" }
-        
-        if Operator.all.contains(last) {
-            self.expression.removeLast()            
+        if let last = self.expression.last, last.isOperator {
+            self.expression.removeLast()
+        } else if self.expression.isNotEmpty {
+            record(self.incomingRecentOperator, ResultFormatter.format(from: self.incomingRecentOperand))
         } else {
-            let expression = self.generateExpression()
-            record(expression.`operator`, expression.operand)
+            return ""
         }
+        
         self.expression.append(element)
         return element
     }
     
     func toggleSign() -> String {
-        let lastOperatorIndex = self.expression.lastIndex(where: { Operator.all.contains(String($0))}) ?? self.expression.startIndex
-        let dotIndex = lastOperatorIndex == self.expression.startIndex ?
-            self.expression.startIndex :
-            self.expression.index(after: lastOperatorIndex)
+        let isNegative = self.incomingRecentOperand.first == "-"
+        let isZero = self.incomingRecentOperand.isEmpty
         
-        if getRecentOperand().contains("-") {
-            self.expression.remove(at: dotIndex)
-        } else {
-            self.expression.insert("-", at: dotIndex)
-        }
-        return self.operandOnInput
+        let signToggledOperand =  isNegative || isZero
+                                ? String(self.incomingRecentOperand.dropFirst())
+                                : "-" + self.incomingRecentOperand
+        
+        self.clearRecentOperand()
+        self.expression.append(signToggledOperand)
+        return InputFormatter.format(from: self.incomingRecentOperand)
     }
     
     func allClear() {
         self.expression = ""
     }
     
-    func clearLastOperand() {
-        if let lastOperatorIndex = self.expression.lastIndex(where: { Operator.all.contains(String($0))})  {
-            self.expression = String(self.expression[...lastOperatorIndex])
+    func clearRecentOperand() {
+        if let recentOperatorIndex = self.getRecentOperatorIndex()  {
+            self.expression = String(self.expression[...recentOperatorIndex])
         } else {
             self.expression = ""
         }
     }
     
-    func getResult(record: (String, String) -> Void) -> String {
-        let expression = self.generateExpression()
-        if expression.operator.isNotEmpty {
-            record(expression.`operator`, expression.operand)
+    func deliverResult(record: (String, String) -> Void) -> String {
+        if self.incomingRecentOperand.isEmpty {
+            self.expression.append("0")
         }
-
+        
         do {
+            record(self.incomingRecentOperator, ResultFormatter.format(from: self.incomingRecentOperand))
             var formula = ExpressionParser.parse(from: self.expression)
             let result = try formula.result()
-            self.expression = String(result)
-            return DisplayFormatter.stringToResult(from: result)
+            self.expression = ExpressionFormatter.format(from: result)
+            return ResultFormatter.format(from: self.incomingRecentOperand)
         } catch {
-            return self.operandOnInput
+            return ResultFormatter.format(from: self.incomingRecentOperand)
         }        
     }
     
-    private func generateExpression() -> (`operator`: String, operand: String) {
-        if let `operator` = self.expression.last(where: {Operator.all.contains(String($0))})  {
-            return (String(`operator`), self.operandOnResult)
-        } else {
-            return ("", self.operandOnResult)
-        }
-    }
-    
     private func getRecentOperand() -> String {
-        if let lastOperatorIndex = self.expression.lastIndex(where: { Operator.all.contains(String($0))}) {
-            let startIndex = self.expression.index(after: lastOperatorIndex)
+        if let recentOperatorIndex = self.getRecentOperatorIndex() {
+            let startIndex = self.expression.index(after: recentOperatorIndex)
             let substring = self.expression[startIndex...]
             let result = String(substring)
             return result
         }
         return self.expression
+    }
+    
+    private func getRecentOperatorIndex() -> String.Index? {
+        return self.expression.lastIndex { $0.isOperator }
+    }
+    
+    private func getRecentOperator() -> String {
+        if let recentOperator = self.expression.last(where: { $0.isOperator }) {
+            return String(recentOperator)
+        } else {
+            return ""
+        }
     }
 }
