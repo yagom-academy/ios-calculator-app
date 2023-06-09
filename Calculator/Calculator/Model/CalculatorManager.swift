@@ -5,7 +5,7 @@
 //  Created by Minsup on 2023/06/08.
 //
 
-final class InputProcessor {
+final class CalculatorManager {
     private var expression: String = ""
     
     private var incomingRecentOperand: String {

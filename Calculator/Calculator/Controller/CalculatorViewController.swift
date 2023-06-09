@@ -8,7 +8,7 @@ import UIKit
 
 final class CalculatorViewController: UIViewController {
     
-    private let inputProcessor = InputProcessor()
+    private let calculatorManager = CalculatorManager()
     
     @IBOutlet weak var displayLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
@@ -22,16 +22,16 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.inputOperand(sender.unwrappedTitle)
+        self.displayLabel.text = self.calculatorManager.inputOperand(sender.unwrappedTitle)
     }
     
     @IBAction private func tapDecimalPointButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.inputOperand(".")
+        self.displayLabel.text = self.calculatorManager.inputOperand(".")
     }
     
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
-        self.operatorLabel.text = self.inputProcessor.inputOperator(sender.unwrappedTitle) { `operator`, operand in
+        self.operatorLabel.text = self.calculatorManager.inputOperator(sender.unwrappedTitle) { `operator`, operand in
             self.displayLabel.text = "0"
             return self.recordOnStack(operator: `operator`, operand: operand)
         }
@@ -40,7 +40,7 @@ final class CalculatorViewController: UIViewController {
 
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.deliverResult {`operator`, operand in
+        self.displayLabel.text = self.calculatorManager.deliverResult {`operator`, operand in
             return self.recordOnStack(operator: `operator`, operand: operand)
         }
         self.operatorLabel.text = ""
@@ -48,19 +48,19 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        self.inputProcessor.allClear()
+        self.calculatorManager.allClear()
         self.displayLabel.text = "0"
         self.operatorLabel.text = ""
         self.clearRecords()
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
-        self.inputProcessor.clearRecentOperand()
+        self.calculatorManager.clearRecentOperand()
         self.displayLabel.text = "0"
     }
     
     @IBAction private func tapSignChangeButton(_ sender: UIButton) {
-        self.displayLabel.text = self.inputProcessor.toggleSign()
+        self.displayLabel.text = self.calculatorManager.toggleSign()
     }
     
     private func recordOnStack(operator: String, operand: String) {
