@@ -7,7 +7,6 @@
 
 enum MockExpressionParser<T: CalculateItem, U: CalculateItem> {	
 	static func parse(from input: String) -> MockFormula<Double, Operator> {
-		// 1+2
 		let operandsLinkedList = MockLinkedList<Double>()
 		let operatorsLinkedList = MockLinkedList<Operator>()
 		let operandQueue = MockCalculatorItemQueue(dummyList: operandsLinkedList)
