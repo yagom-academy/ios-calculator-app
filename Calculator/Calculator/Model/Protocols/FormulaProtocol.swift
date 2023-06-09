@@ -7,7 +7,8 @@
 
 protocol FormulaProtocol {
 	associatedtype T: CalculateItem
+	associatedtype U: CalculateItem
 	var operands: CalculatorItemQueue<T> { get }
-	var operators: CalculatorItemQueue<T> { get }
+	var operators: CalculatorItemQueue<U> { get }
 	func result() -> Double
 }
