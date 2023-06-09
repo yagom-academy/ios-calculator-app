@@ -65,7 +65,7 @@ extension CalculatorViewController {
                 let menu = Menus(rawValue: insertedMenu) else { return }
         
         switch menu {
-        case .allCelar:
+        case .allClear:
             clearCalculationFormulaStackView()
             inputFormula = ""
             currentOperatorLabel.text = ""
