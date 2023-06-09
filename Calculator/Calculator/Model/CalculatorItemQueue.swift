@@ -8,8 +8,6 @@
 extension Double: CalculateItem { }
 extension Operator: CalculateItem { }
 
-protocol CalculateItem: Equatable { }
-
 struct CalculatorItemQueue<T: CalculateItem> {
 	private var list: LinkedList<T>?
 	
