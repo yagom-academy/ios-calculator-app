@@ -106,11 +106,11 @@
 		D062958F2A2D9895007B97FA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0CE56822A25BC0100D510E9 /* CalculatorItemQueue.swift */,
 				D0CE56802A25BBE900D510E9 /* CalculatorItem.swift */,
+				D0CE56822A25BC0100D510E9 /* CalculatorItemQueue.swift */,
 				D06295802A29BEA7007B97FA /* Operator.swift */,
-				D06295862A29C275007B97FA /* ExpressionParser.swift */,
 				D06295882A29C297007B97FA /* Formula.swift */,
+				D06295862A29C275007B97FA /* ExpressionParser.swift */,
 				D06295942A2F3322007B97FA /* CalculationErrors.swift */,
 			);
 			path = Model;
