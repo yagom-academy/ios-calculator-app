@@ -2,22 +2,20 @@
 //  CalculatorItemQueueTests.swift
 //  CalculatorItemQueueTests
 //
-//  Created by Serena on 2023/05/29.
+//  Created by Serena on 2023/06/06.
 //
 
 import XCTest
 @testable import Calculator
 
 extension Int: CalculateItem { }
-extension String: CalculateItem { }
-extension Double: CalculateItem { }
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -34,49 +32,49 @@ final class CalculatorItemQueueTests: XCTestCase {
     }
     
     func test_빈_queue에_1을_넣으면_peek는_1을_return한다() {
-        let expectedResult = 1
+        let expectedResult = 1.0
         
-        sut = CalculatorItemQueue(queue: [1])
+        sut = CalculatorItemQueue(queue: [1.0])
         let result = sut.peek
         
         XCTAssertEqual(expectedResult, result)
     }
 
     func test_123을_queue에_넣고_dequeue를_한번하면_1을_반환한다() {
-        let expectedResult = 1
+        let expectedResult = 1.0
         
-        sut = CalculatorItemQueue(queue: [1, 2, 3])
+        sut = CalculatorItemQueue(queue: [1.0, 2.0, 3.0])
         let result = sut.dequeue()!
         
         XCTAssertEqual(expectedResult, result)
     }
     
     func test_123을_queue에_넣고_dequeue를_두번하면_2를_반환한다() {
-        let expectedResult = 2
+        let expectedResult = 2.0
         
-        sut = CalculatorItemQueue(queue: [1, 2, 3])
-        _ = sut.dequeue()!
+        sut = CalculatorItemQueue(queue: [1.0, 2.0, 3.0])
+        sut.dequeue()
         let result = sut.dequeue()!
         
         XCTAssertEqual(expectedResult, result)
     }
     
     func test_123을_queue에_넣고_dequeue를_세번하면_3을_반환한다() {
-        let expectedResult = 3
+        let expectedResult = 3.0
         
-        sut = CalculatorItemQueue(queue: [1, 2, 3])
-        _ = sut.dequeue()!
-        _ = sut.dequeue()!
+        sut = CalculatorItemQueue(queue: [1.0, 2.0, 3.0])
+        sut.dequeue()
+        sut.dequeue()
         let result = sut.dequeue()!
         
         XCTAssertEqual(expectedResult, result)
     }
     
     func test_1만_enqueue에_넣고_dequeue를_2번하면_nil이_반환한다() {
-        let expectedResult: Int? = nil
+        let expectedResult: Double? = nil
         
-        sut = CalculatorItemQueue(queue: [1])
-        _ = sut.dequeue()!
+        sut = CalculatorItemQueue(queue: [1.0])
+        sut.dequeue()
         let result = sut.dequeue()
         
         XCTAssertEqual(expectedResult, result)
