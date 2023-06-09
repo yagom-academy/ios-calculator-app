@@ -57,5 +57,13 @@ class CalculatorViewController: UIViewController {
     }
 
     // MARK: - Method
+    
+    func formatNumber(of number: Any?) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 15
+        
+        return numberFormatter.string(for: number)
+    }
 }
 
