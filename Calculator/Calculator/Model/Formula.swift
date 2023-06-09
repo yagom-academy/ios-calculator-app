@@ -19,8 +19,8 @@ struct Formula {
         guard var result = operands.dequeue() else { throw CalculationError.notFoundOperand }
         
         while !operands.isEmpty {
-            guard let next = operands.dequeue() else { throw CalculationError.notFoundOperand }
             guard let `operator` = operators.dequeue() else { throw CalculationError.notFoundOperator }
+            guard let next = operands.dequeue() else { throw CalculationError.notFoundOperand }            
             result = `operator`.calculate(lhs: result, rhs: next)
         }
         
