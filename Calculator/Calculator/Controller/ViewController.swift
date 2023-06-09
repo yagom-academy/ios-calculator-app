@@ -116,6 +116,17 @@ extension ViewController {
         
         return view
     }
+    
+    func makeLabelInStackView(_ input: String) -> UILabel {
+        let label = UILabel()
+        
+        label.text = input
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = UIColor(displayP3Red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        return label
+    }
+    
     }
 
 
