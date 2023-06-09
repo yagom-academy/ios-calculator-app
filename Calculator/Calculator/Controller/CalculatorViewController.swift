@@ -40,7 +40,36 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-    
+        guard formatNumber(of: Decimal(string: operandLabel.text ?? "")) != "0" else {
+            return
+        }
+        
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        
+        operatorLabel.textColor = .white
+        operandLabel.textColor = .white
+        
+        operatorLabel.text = self.operatorLabel.text
+        operandLabel.text = formatNumber(of: Decimal(string: self.operandLabel.text ?? ""))
+        
+        if operandLabel.text?.last == "." {
+            operandLabel.text?.removeLast()
+        }
+        
+        let calculateItemStack = UIStackView()
+        calculateItemStack.axis = .horizontal
+        calculateItemStack.spacing = 8.0
+        calculateItemStack.addArrangedSubview(operatorLabel)
+        calculateItemStack.addArrangedSubview(operandLabel)
+        
+        calculateItemsStack.addArrangedSubview(calculateItemStack)
+        
+        components.append(operatorLabel.text ?? "")
+        components.append(operandLabel.text ?? "")
+        
+        operatorLabel.text = sender.titleLabel?.text
+        clearEntry()
     }
 
     @IBAction func tapNumberButton(_ sender: UIButton) {
