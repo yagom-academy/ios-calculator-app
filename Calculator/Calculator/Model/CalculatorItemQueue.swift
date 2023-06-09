@@ -42,4 +42,3 @@ struct CalculatorItemQueue<T: CalculateItem>: DoubleStackQueue {
         dequeueStack.removeAll()
     }
 }
-
