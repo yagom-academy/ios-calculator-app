@@ -66,7 +66,14 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapZeroButton(_ sender: UIButton) {
-
+        guard
+            let operandLabelText = operandLabel.text,
+            operandLabelText != "0" || operandLabelText.contains(".")
+        else {
+            return
+        }
+        
+        operandLabel.text?.append(sender.titleLabel?.text ?? "")
     }
 
     @IBAction func tapDotButton(_ sender: UIButton) {
