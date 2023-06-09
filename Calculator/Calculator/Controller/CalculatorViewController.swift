@@ -88,7 +88,28 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapEqualsButton(_ sender: Any) {
-
+        guard !components.isEmpty else {
+            return
+        }
+        
+        do {
+            appendCalculateItem()
+            var formula = ExpressionParser.parse(from: components)
+            let result = try formula.result()
+            operandLabel.text = formatNumber(of: result)
+            clearOperator()
+            components = ""
+        } catch let error as CalculatorError {
+            switch error {
+            case .divisionError:
+                print(error.message)
+                clearOperator()
+                components = ""
+                operandLabel.text = "NaN"
+            }
+        } catch {
+            print("알 수 없는 에러 발생")
+        }
     }
 
     // MARK: - Method
