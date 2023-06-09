@@ -35,7 +35,7 @@
 ## 2. 시각화된 프로젝트 구조
 
 ### UML
-<img src="https://hackmd.io/_uploads/S1oXCelwn.png" width="800"/>
+<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/678ea3c9-84f9-487b-8341-89510d85c389" width="800"/>
 
 ### 폴더 구조
 
@@ -151,11 +151,11 @@ Test
 
 | **계산 수행** | **0으로 나누었을 때 NaN** |
 |:----:|:----:|
-|<img src="https://hackmd.io/_uploads/H1aHt-ewh.gif" width="300"/>|<img src="https://hackmd.io/_uploads/rJ6pFZxv3.gif" width="300"/>|
+|<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/27713959-1060-4abe-beaa-64919440373b" width="300"/>|<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/ba6f9ef9-67d8-44fe-a470-87524d2a9585" width="300"/>|
 
 | **CE & AC** | **소수점 & 부호 변경** |
 |:----:|:----:|
-|<img src="https://hackmd.io/_uploads/B19n5Wgv3.gif" width="300"/>|<img src="https://hackmd.io/_uploads/BJIbi-lP3.gif" width="300"/>|
+|<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/7ba36e98-093e-4e52-837c-93b7d61083a1" width="300"/>|<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/ba112176-a48a-40b7-ac6e-526fec84319d" width="300"/>|
 
 </br>
 
@@ -316,8 +316,8 @@ final class CalculatorViewController: UIViewController {
 <details>
 <summary>문제 실행 화면</summary>
     
-<img src="https://hackmd.io/_uploads/B1KSeweDh.gif" width="300"/>
-    
+<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/5ba2414f-ea61-49c6-afb0-0fed3e7d05b1" width="300"/>
+
 </details>
     
 </br>
