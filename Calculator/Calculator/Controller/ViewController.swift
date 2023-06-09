@@ -52,7 +52,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if !inputNumberLabelText.contains(".") {
+        if !inputNumberLabelText.contains(labelText) {
             inputNumberLabel.text? += labelText
         }
     }
