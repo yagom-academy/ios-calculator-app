@@ -18,7 +18,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         resetInputNumberLabel()
-        inputOperatorLabel.text = ""
+        resetInputOperatorLabel()
         allInputStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
@@ -71,6 +71,10 @@ class ViewController: UIViewController {
     
     private func resetInputNumberLabel() {
         inputNumberLabel.text = "0"
+    }
+    
+    private func resetInputOperatorLabel() {
+        inputOperatorLabel.text = ""
     }
     
     private func makeUILabel(_ text: String?) -> UILabel {
