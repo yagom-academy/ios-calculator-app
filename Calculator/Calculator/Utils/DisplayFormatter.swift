@@ -14,7 +14,7 @@ class DisplayFormatter {
         numberFormatter.roundingMode = .halfUp
         numberFormatter.groupingSeparator = ","
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.maximumSignificantDigits = 20
         return numberFormatter
     }()
     
