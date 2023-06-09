@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, operand != "0", operand != ".", !isResult else {
+        guard let operand = operandLabel.text, operand != "0", !operand.hasSuffix("."), !isResult else {
             return
         }
         guard operand.hasPrefix("-") else {
