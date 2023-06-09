@@ -17,6 +17,7 @@
 3. [다이어그램](#💎-다이어그램)
 4. [트러블 슈팅](#🚀-트러블-슈팅)
 5. [참고 링크](#📚-참고-링크)
+6. [회고](#🧭-회고)
 
 </br>
 
@@ -25,18 +26,17 @@
 |:-:|-|
 |2023-05-30|- CalculatorItemQueue 생성 및 단위 테스트 타깃 추가<br>- CalculatorItemQueue의 init 테스트 및 구현<br>- CalculatorItemQueue의 enqueue 테스트 및 구현<br>- CalculatorItemQueue의 dequeue 테스트 및 구현<br>- CalculatorItemQueue에서 제네릭 대신 any CalculateItem 사용|
 |2023-05-31|- enqueue, dequeue 테스트에 문자열 테스트 케이스 추가<br>- dequeue 테스트 조건을 명확하게 수정|
-
-
-</br>
-
-# 🖥️ 실행 화면
-![Simulator Screenshot - iPhone 14 Pro - 2023-06-02 at 14 51 27](https://github.com/hojun-jo/ios-calculator-app/assets/86751964/5843fe6b-6116-40a2-ab75-c9fb4649b13b)
-
+|2023-06-02|- CalculatorItemQueue에서 any CalculateItem 대신 제네릭 사용<br>- Operator enum 생성<br>- Double에서 CalculateItem 채택 및 String에서 CalculateItem 해제|
+|2023-06-03|- CalculatorItemQueue의 테스트 케이스 String에서 Double로 수정|
+|2023-06-04|- CalculatorItemQueue의 count 테스트 및 구현<br>- Formula의 result 테스트 및 구현<br>- ExpressionParser의 componentsByOperators 테스트 및 구현<br>- ExpressionParser의 parse 테스트 및 구현<br>- ExpressionParser의 componentsByOperators 수정|
+|2023-06-06|- String extension의 split에서 forEach를 map으로 변경<br>- 음수 계산을 위해 "-"연산자를 이모지(minus sign)로 변경<br>- ExpressionParser의 componentsByOperators내의 for문을 forEach로 변경<br>- ExpressionParser의 parse내의 for문을 forEach로 변경<br>- Formula의 result에 0으로 나눌 경우 에러를 던지도록 조건문 추가|
+|2023-06-07|- Formula의 result 수행 로직 수정|
+|2023-06-08|- ExpressionParser의 parse에서 operatorsQueue를 만드는 로직 수정<br>- Formula의 result에서 0으로 나눈 경우의 조건 수정|
 
 </br>
 
 # 💎 다이어그램
-![class diagram](https://github.com/yagom-academy/ios-calculator-app/assets/86751964/9078c62c-14d4-43c5-a1b1-4e7ea6913a6d)
+![classdiagram](https://github.com/hojun-jo/ios-calculator-app/assets/86751964/1017ef18-5d7b-49d3-8c02-c00ca445e74f)
 
 
 
@@ -139,10 +139,10 @@ final class CalculatorItemQueueTests: XCTestCase {
 ```
 
 ### ⚒️ 해결방안
-제네릭 대신 프로퍼티와 파라미터의 타입을 `any CalculateItem`로 바꾸는 것으로 수정하게 되었습니다.
+제네릭 대신 프로퍼티와 파라미터의 타입을 `any CalculateItem`로 바꾸는 것으로 수정하게 되었습니다. 하지만 `Any`는 모든 타입을 나타낼 수 있지만 타입 캐스팅이 필요하고 타입 캐스팅은 런타임에서 발생하기 때문에 오류를 찾기 힘들게 됩니다. 제네릭은 컴파일 타임에 타입이 지정되기 때문에 오류를 발견하기도 상대적으로 쉽습니다. 이러한 이유로 다시 제네릭을 사용하기로 결정했습니다.
 
 ```swift
-// 수정 후
+// Any를 사용한 경우
 struct CalculatorItemQueue {
     private(set) var enqueuedCalculatorItems: [any CalculateItem] = []
     ...
@@ -171,12 +171,111 @@ final class CalculatorItemQueueTests: XCTestCase {
 }
 ```
 
+```swift
+// 제네릭을 사용한 경우
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private(set) var enqueuedCalculatorItems: [Element] = []
+    ...
+}
+
+final class CalculatorItemQueueTests: XCTestCase {
+    var sut: CalculatorItemQueue<Double>!
+
+    override func setUpWithError() throws {
+        sut = CalculatorItemQueue()
+    }
+
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func test_enqueuedCalculatorItems에1_2_3을넣으면_enqueuedCalculatorItems에1_2_3이있다() {
+        for input in 1...3 {
+            sut.enqueue(Double(input))
+        }
+        let expectation = [1.0, 2.0, 3.0]
+        
+        let result = sut.enqueuedCalculatorItems
+        
+        XCTAssertEqual(expectation, result)
+    }
+    ...
+}
+```
+
+
+## 3️⃣ ExpressionParser의 parse내의 불필요한 변수들
+
+### 🔍 문제점
+불필요한 변수가 많아 코드의 가독성이 떨어지고 로직을 이해하기 힘들어지는 문제가 있었습니다.
+```swift
+static func parse(from input: String) throws -> Formula {
+    let operands = componentsByOperators(from: input)
+    var operators = [input]
+    var formula = Formula()
+
+    operands.forEach { operand in
+        var splitOperators: [String] = []
+
+        operators.forEach { element in
+            let separatedElement = element.split(separator: operand).map{ String($0) }
+            splitOperators.append(contentsOf: separatedElement)
+        }
+
+        operators = splitOperators
+    }
+
+    try operands.forEach { operand in
+        guard let operand = Double(operand) else {
+            throw ExpressionParserError.operandConvertError
+        }
+
+        formula.operands.enqueue(operand)
+    }
+
+    try operators.forEach { `operator` in
+        guard let `operator` = Operator(rawValue: Character(`operator`)) else {
+            throw ExpressionParserError.operatorConvertError
+        }
+
+        formula.operators.enqueue(`operator`)
+    }
+
+    return formula
+}
+```
+
+### ⚒️ 해결방안
+변수로 `operands`, `operator`의 큐를 만들어 두고 `return`에서 `Formula`를 초기화하며 `operands`, `operator`를 주입해 주는 등 수정을 거쳐 불필요한 변수를 지우고 가독성이 좋아지게 되었습니다.
+```swift
+static func parse(from input: String) throws -> Formula {
+    var operandsQueue = CalculatorItemQueue<Double>()
+    var operatorsQueue = CalculatorItemQueue<Operator>()
+
+    try componentsByOperators(from: input).forEach { operand in
+        guard let doubleOperand = Double(operand) else {
+            throw ExpressionParserError.invalidOperand
+        }
+
+        operandsQueue.enqueue(doubleOperand)
+    }
+
+    input.map { $0 }.forEach {
+        if let `operator` = Operator(rawValue: $0) {
+            operatorsQueue.enqueue(`operator`)
+        }
+    }
+
+    return Formula(operands: operandsQueue, operators: operatorsQueue)
+}
+```
+
 </br>
 
 # 📚 참고 링크
 
 * [🍎 Apple Docs - Any Type](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/types/#Any-Type)
+* [🍎 Apple Docs - Generics](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/)
 * [🌐 stackoverflow - Type any Protocol cannot conform to Protocol](https://stackoverflow.com/questions/75062360/type-any-protocol-cannot-conform-to-protocol)
 
 </br>
-
