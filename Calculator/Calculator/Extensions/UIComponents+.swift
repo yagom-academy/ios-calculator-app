@@ -28,7 +28,7 @@ extension UIButton {
     }
     
     var sign: String {
-        guard Operator.allCases.map({ String($0.rawValue) }).contains(self.titleLabel?.text) else { return "error" }
-        return self.titleLabel?.text ?? "error"
+        guard let text = self.titleLabel?.text, text.isOperator else { return "error"}
+        return text
     }
 }

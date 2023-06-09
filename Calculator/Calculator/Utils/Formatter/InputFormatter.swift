@@ -7,8 +7,7 @@
 
 import Foundation
 
-class DisplayFormatter {
-    
+final class DisplayFormatter {
     static private let numberFormatter: NumberFormatter = {
         var numberFormatter = NumberFormatter()
         numberFormatter.roundingMode = .halfUp

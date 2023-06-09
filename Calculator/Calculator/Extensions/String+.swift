@@ -13,4 +13,8 @@ extension String {
     var isNotEmpty: Bool {
         !self.isEmpty
     }
+    
+    var isOperator: Bool {
+        Operator.all.contains(self)
+    }
 }
