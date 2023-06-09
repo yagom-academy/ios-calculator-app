@@ -40,7 +40,12 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapOperatorButton(_ sender: UIButton) {
+        guard !components.isEmpty || (operandLabel.text != "0") else {
+            return
+        }
+        
         guard formatNumber(of: Decimal(string: operandLabel.text ?? "")) != "0" else {
+            operatorLabel.text = sender.titleLabel?.text
             return
         }
         
