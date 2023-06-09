@@ -77,6 +77,10 @@ class CalculatorViewController: UIViewController {
         return numberFormatter.string(for: number)
     }
     
+    func clearOperator() {
+        operatorLabel.text = nil
+    }
+    
     func clearEntry() {
         operandLabel.text = "0"
     }
