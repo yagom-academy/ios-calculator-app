@@ -26,6 +26,12 @@ class ViewController: UIViewController {
         inputNumberLabel.text = (numberLabel == "0") ? (inputNumber) : (numberLabel + inputNumber)
     }
     
+    @IBAction func tapSerialZeroButton(_ sender: UIButton) {
+        guard let inputNumber = sender.titleLabel?.text,
+              let numberLabel = inputNumberLabel.text else { return }
+        
+        inputNumberLabel.text = (numberLabel == "0") ? ("0") : (numberLabel + inputNumber)
+    }
     }
 
 
