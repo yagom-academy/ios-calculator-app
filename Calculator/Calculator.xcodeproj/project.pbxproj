@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA24C9C02A32ABDB0030E7BB /* LinkedListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */; };
 		BA282E282A2E9FD00041F75F /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA282E272A2E9FD00041F75F /* ExpressionParser.swift */; };
 		BA282E2A2A2EA1150041F75F /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA282E292A2EA1150041F75F /* Formula.swift */; };
 		BA282E2C2A2EA7330041F75F /* MockFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA282E2B2A2EA7330041F75F /* MockFormula.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListProtocol.swift; sourceTree = "<group>"; };
 		BA282E272A2E9FD00041F75F /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		BA282E292A2EA1150041F75F /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		BA282E2B2A2EA7330041F75F /* MockFormula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFormula.swift; sourceTree = "<group>"; };
@@ -86,6 +88,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA24C9BE2A32ABBA0030E7BB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		BA3DF2192A29C79600987072 /* TestDouble */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		BAFFB98E2A2599AA000FBBFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BA24C9BE2A32ABBA0030E7BB /* Protocols */,
 				BAFFB9942A25D243000FBBFA /* CalculatorItemQueue.swift */,
 				BAED14FF2A29E3D600FBE18E /* Node.swift */,
 				BAED15012A29E44D00FBE18E /* LinkedList.swift */,
@@ -301,6 +312,7 @@
 				BAED153D2A2A844000FBE18E /* CalculateItemProtocol.swift in Sources */,
 				BA282E2A2A2EA1150041F75F /* Formula.swift in Sources */,
 				BA282E342A2EC0790041F75F /* MockOperator.swift in Sources */,
+				BA24C9C02A32ABDB0030E7BB /* LinkedListProtocol.swift in Sources */,
 				BAED15022A29E44D00FBE18E /* LinkedList.swift in Sources */,
 				BA282E2C2A2EA7330041F75F /* MockFormula.swift in Sources */,
 				BA896C342A2FF28800AD8807 /* MockExpressionParser.swift in Sources */,

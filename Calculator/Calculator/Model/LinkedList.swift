@@ -4,14 +4,6 @@
 //
 //  Created by Minseong Kang on 2023/06/02.
 //
-
-protocol LinkedListProtocol {
-	associatedtype T: Any
-	var isEmpty: Bool { get }
-	func append(value: T)
-	func removeFirst() -> T?
-}
-
 class LinkedList<T: CalculateItem>: LinkedListProtocol {
 	var head: Node<T>?
 	var tail: Node<T>?
