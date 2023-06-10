@@ -11,11 +11,13 @@ extension Double: CalculateItem {
     func formatNumber() -> String {
         let formatter = NumberFormatter()
         //let number = Decimal(self)
-        let number = NSDecimalNumber(floatLiteral: self)
+        let number = NSDecimalNumber.init(floatLiteral: self)
+
         formatter.maximumSignificantDigits = 20
         formatter.numberStyle = .decimal
         formatter.roundingMode = .halfUp
+        formatter.usesSignificantDigits = true
         
-        return formatter.string(from: number as NSNumber) ?? "NaN"
+        return formatter.string(from: number) ?? "NaN"
     }
 }
