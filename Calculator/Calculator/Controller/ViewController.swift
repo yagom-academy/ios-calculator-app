@@ -59,8 +59,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
+        guard let inputNumberLabelText = inputNumberLabel.text else {
+            return
+        }
+        
         let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
-        let operandLabel: UILabel = makeUILabel(inputNumberLabel.text)
+        let operandLabel: UILabel = makeUILabel(makeNumberFormat(for: inputNumberLabelText))
         let inputLabelStackView = makeUIStackView()
         
         inputLabelStackView.addArrangedSubview(operatorLabel)
@@ -89,7 +93,7 @@ class ViewController: UIViewController {
                 var formula = try ExpressionParser.parse(from: formulaString)
                 let result = try formula.result()
                 
-                inputNumberLabel.text = String(result)
+                inputNumberLabel.text = makeNumberFormat(for: String(result))
                 operationReady = false
                 
                 resetFormulaString()
@@ -175,6 +179,15 @@ class ViewController: UIViewController {
         stackView.spacing = 8
         
         return stackView
+    }
+    
+    private func makeNumberFormat(for input: String) -> String {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+        
+        return numberFormatter.string(for: Double(input)) ?? "0"
     }
 }
 
