@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculateViewController: UIViewController {
+final class CalculateViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentFormulaStackView: UIStackView!
