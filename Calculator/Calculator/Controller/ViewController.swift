@@ -32,12 +32,16 @@ class ViewController: UIViewController {
         
         inputNumberLabel.text = (numberLabel == "0") ? ("0") : (numberLabel + inputNumber)
     }
+    
     @IBAction func positiveNegativeButton(_ sender: UIButton) {
         let minusSign = "-"
         guard let numberLabel = inputNumberLabel.text else { return }
-        
-        inputNumberLabel.text? = (numberLabel != "0" && numberLabel.first.map(String.init) != minusSign) ? (minusSign + numberLabel) : (numberLabel)
+
+        if numberLabel != "0" {
+            inputNumberLabel.text? = (numberLabel.first.map(String.init) != minusSign) ? (minusSign + numberLabel) : (String(numberLabel.dropFirst(1)))
+        }
     }
+
     @IBAction func periodButton(_ sender: UIButton) {
         guard let numberLabel = inputNumberLabel.text else { return }
         
