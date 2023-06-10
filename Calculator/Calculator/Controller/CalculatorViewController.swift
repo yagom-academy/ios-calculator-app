@@ -156,18 +156,15 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func appendCalculateItem() {
-        guard let operandLabelText = removeComma(of: operandLabel.text) else {
+        guard
+            let operandLabelText = removeComma(of: operandLabel.text),
+            let formattedNumber = formatNumber(of: Decimal(string: operandLabelText))
+        else {
             return
         }
         
-        let operatorLabel = UILabel()
-        let operandLabel = UILabel()
-        
-        operatorLabel.textColor = .white
-        operandLabel.textColor = .white
-        
-        operatorLabel.text = self.operatorLabel.text
-        operandLabel.text = formatNumber(of: Decimal(string: operandLabelText))
+        let operatorLabel = createUILabel(text: self.operatorLabel.text)
+        let operandLabel = createUILabel(text: formattedNumber)
         
         if operandLabel.text?.last == "." {
             operandLabel.text?.removeLast()
@@ -184,6 +181,14 @@ final class CalculatorViewController: UIViewController {
         operatorsAndOperandsInput.append(operandLabel.text ?? "")
         
         scrollToBottom()
+    }
+    
+    private func createUILabel(text: String?) -> UILabel {
+        let label = UILabel()
+        label.textColor = .white
+        label.text = text
+        
+        return label
     }
     
     private func removeComma(of text: String?) -> String? {
