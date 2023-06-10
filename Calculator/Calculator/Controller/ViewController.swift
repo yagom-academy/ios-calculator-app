@@ -19,10 +19,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
         
+        allStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
     @IBAction func tapNumbersButton(_ sender: UIButton) {
         guard let inputNumber = sender.titleLabel?.text,
               let numberLabel = inputNumberLabel.text else { return }
