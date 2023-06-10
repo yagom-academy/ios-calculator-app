@@ -98,7 +98,9 @@ class ViewController: UIViewController {
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operand = currentOperandLabel.text,
-              operand != "0" || isZeroButtonTappedBefore else {
+              operand != "0" || isZeroButtonTappedBefore,
+              let operandLabelText = currentOperandLabel.text,
+              checkFutureOperand(operandLabelText) != "error" else {
             return
         }
         
@@ -133,18 +135,19 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedChangeSignButton(_ sender: Any) {
-        guard var operand = currentOperandLabel.text,
-                operand != "0" else {
+        guard var operandLabelText = currentOperandLabel.text,
+                operandLabelText != "0",
+                checkFutureOperand(operandLabelText) != "error" else {
             return
         }
         
-        if operand.contains("-") {
-            operand = operand.filter{ $0 != "-" }
+        if operandLabelText.contains("-") {
+            operandLabelText = operandLabelText.filter{ $0 != "-" }
         } else {
-            operand = "-" + operand
+            operandLabelText = "-" + operandLabelText
         }
 
-        currentOperandLabel.text = operand
+        currentOperandLabel.text = operandLabelText
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {

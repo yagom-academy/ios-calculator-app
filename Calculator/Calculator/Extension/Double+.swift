@@ -10,7 +10,6 @@ import Foundation
 extension Double: CalculateItem {
     func formatNumber() -> String {
         let formatter = NumberFormatter()
-        //let number = Decimal(self)
         let number = NSDecimalNumber.init(floatLiteral: self)
 
         formatter.maximumSignificantDigits = 20
