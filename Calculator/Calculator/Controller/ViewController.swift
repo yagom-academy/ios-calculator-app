@@ -45,12 +45,12 @@ class ViewController: UIViewController {
     @IBAction func positiveNegativeButton(_ sender: UIButton) {
         let minusSign = "-"
         guard let numberLabel = inputNumberLabel.text else { return }
-
+        
         if numberLabel != "0" {
             inputNumberLabel.text? = (numberLabel.first.map(String.init) != minusSign) ? (minusSign + numberLabel) : (String(numberLabel.dropFirst(1)))
         }
     }
-
+    
     @IBAction func periodButton(_ sender: UIButton) {
         guard let numberLabel = inputNumberLabel.text else { return }
         
@@ -97,9 +97,9 @@ class ViewController: UIViewController {
                 calculateSetting = false
             } catch {
                 let alert = UIAlertController(title:"계산 오류입니다.",
-                                              message: "취소버튼을 눌러주시기 바랍니다",
+                                              message: "확인버튼을 눌러주시기 바랍니다",
                                               preferredStyle: UIAlertController.Style.alert)
-                let cancle = UIAlertAction(title: "취소", style: .default, handler: nil)
+                let cancle = UIAlertAction(title: "확인", style: .default, handler: nil)
                 alert.addAction(cancle)
                 present(alert,animated: true,completion: nil)
             }
@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
-
+        
         let result = numberFormatter.string(for: doubleNumber) ?? "0.0"
         
         return result
