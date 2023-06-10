@@ -112,31 +112,9 @@ class ViewController: UIViewController {
     }
     
     private func addStackView() {
-        let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel)
-        let recordedOperandLabel: UILabel = configureItem(with: operandLabel)
-        let content: UIStackView = configureContent(item: recordedOperatorLabel, recordedOperandLabel)
+        let subStackView: StackView = StackView()
+        let content: UIStackView = subStackView.configure(operator: operatorLabel, operand: operandLabel)
         stackView.addArrangedSubview(content)
-    }
-    
-    private func configureContent(item formula: UILabel...) -> UIStackView {
-        let content: UIStackView = UIStackView()
-        content.translatesAutoresizingMaskIntoConstraints = false
-        content.axis = .horizontal
-        content.alignment = .fill
-        content.distribution = .equalSpacing
-        content.spacing = 8
-        formula.forEach { content.addArrangedSubview($0) }
-        
-        return content
-    }
-
-    private func configureItem(with label: UILabel) -> UILabel {
-        let recordedLabel: UILabel = UILabel()
-        recordedLabel.font = .preferredFont(forTextStyle: .title3)
-        recordedLabel.text = label.text
-        recordedLabel.textColor = .white
-        
-        return recordedLabel
     }
     
     private func scrollDown() {
