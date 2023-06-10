@@ -115,7 +115,7 @@ class ViewController: UIViewController {
                 print("divide by zero")
             }
         } catch {
-            print("somthing wrong")
+            print("unexpected error")
         }
     }
     
