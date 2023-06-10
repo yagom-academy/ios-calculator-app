@@ -170,9 +170,9 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text?.removeLast()
         }
         
-        let calculateItemStack = createCalculateItemStackView(operatorLabel, operandLabel)
+        let calculateItemStackView = createCalculateItemStackView(operatorLabel, operandLabel)
         
-        calculateItemsStackView.addArrangedSubview(calculateItemStack)
+        calculateItemsStackView.addArrangedSubview(calculateItemStackView)
         
         operatorsAndOperandsInput.append(operatorLabel.text ?? "")
         operatorsAndOperandsInput.append(operandLabel.text ?? "")
