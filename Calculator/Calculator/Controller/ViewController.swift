@@ -77,8 +77,8 @@ class ViewController: UIViewController {
         allInputStackView.addArrangedSubview(inputLabelStackView)
         
         formulaString += inputOperatorLabelText + inputNumberLabelText
-        inputOperatorLabel.text? = labelText
         resetInputNumberLabel()
+        inputOperatorLabel.text? = labelText
         allInputScrollView.scrollToBottom()
     }
     
