@@ -64,7 +64,9 @@ class ViewController: UIViewController {
             makeStackView.addArrangedSubview(numberLabel)
             allStackView.addArrangedSubview(makeStackView)
             
-            inputOperatorLabel.text = inputOperator
+            resultString = resultString + inputOperatorLabelText + inputNumber
+            
+            inputOperatorLabel.text = inputButtonOperator
             inputNumberLabel.text = "0"
             
             setScrollView()
