@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
     
     @IBOutlet private weak var calculateItemsStackViewScrollView: UIScrollView!
