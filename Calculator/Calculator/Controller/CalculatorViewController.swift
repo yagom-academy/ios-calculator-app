@@ -16,6 +16,7 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Property
     
+    private let numberFormatter = NumberFormatter()
     private var operatorsAndOperandsInput: String = ""
     
     // MARK: - View State Method
@@ -23,6 +24,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearAll()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
     }
     
     // MARK: - IBAction
@@ -114,10 +117,6 @@ final class CalculatorViewController: UIViewController {
     // MARK: - Method
     
     private func formatNumber(of number: Any?) -> String? {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        
         return numberFormatter.string(for: number)
     }
     
