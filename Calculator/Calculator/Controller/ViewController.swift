@@ -24,8 +24,7 @@ class ViewController: UIViewController {
         stackView.subviews.forEach { $0.removeFromSuperview() }
         clearLabel()
         expression = ""
-        isResult = false
-        isInputZero = true
+        configureCondition(isResult: false, isInputZero: true)
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
@@ -34,7 +33,7 @@ class ViewController: UIViewController {
         }
         
         operandLabel.text = "0"
-        isInputZero = false
+        configureCondition(isResult: false, isInputZero: false)
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
@@ -55,14 +54,12 @@ class ViewController: UIViewController {
         }
         
         addStackView()
-        expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
         let result: Double = formula.result()
         operandLabel.text = result.formatNumbers()
         operatorLabel.text = ""
         expression = ""
-        isResult = true
-        isInputZero = true
+        configureCondition(isResult: true, isInputZero: true)
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -70,7 +67,7 @@ class ViewController: UIViewController {
             return
         }
         guard currentOperand != "0" else {
-            isInputZero = true
+            configureCondition(isResult: false, isInputZero: true)
             return
         }
         guard let operand = operandLabel.text, !(operand.hasSuffix(".") && currentOperand == ".") else {
@@ -95,12 +92,9 @@ class ViewController: UIViewController {
         }
 
         addStackView()
-        expression += configureCurrentFormula()
-        operatorLabel.text = sender.currentTitle
+        configureCondition(isResult: false, isInputZero: false)
         operandLabel.text = "0"
-        isResult = false
-        isInputZero = false
-        scrollDown()
+        operatorLabel.text = sender.currentTitle
     }
     
     private func configureCurrentFormula() -> String {
@@ -115,6 +109,8 @@ class ViewController: UIViewController {
         let subStackView: StackView = StackView()
         let content: UIStackView = subStackView.configure(operator: operatorLabel, operand: operandLabel)
         stackView.addArrangedSubview(content)
+        scrollDown()
+        expression += configureCurrentFormula()
     }
     
     private func scrollDown() {
@@ -126,6 +122,11 @@ class ViewController: UIViewController {
     private func clearLabel() {
         operandLabel.text = "0"
         operatorLabel.text = ""
+    }
+    
+    private func configureCondition(isResult: Bool, isInputZero: Bool) {
+        self.isResult = isResult
+        self.isInputZero = isInputZero
     }
 }
 
