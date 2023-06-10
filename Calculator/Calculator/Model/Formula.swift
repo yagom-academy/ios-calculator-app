@@ -11,9 +11,9 @@ struct Formula {
     var operators = CalculatorItemQueue<Operator>()
     var operands = CalculatorItemQueue<Double>()
     
-    mutating func result() -> String {
+    mutating func result() -> Double {
         guard var firstOperand = operands.dequeue() else {
-            return "0"
+            return 0
         }
         
         while let newOperator = operators.dequeue(),
