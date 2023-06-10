@@ -26,14 +26,15 @@ class ViewController: UIViewController {
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
-        guard let labelText = sender.titleLabel?.text else {
+        guard let labelText = sender.titleLabel?.text,
+              let inputNumberLabelText = inputNumberLabel.text else {
             return
         }
         
         if operationReady {
-            if inputNumberLabel.text == "0" {
+            if inputNumberLabelText == "0" {
                 inputNumberLabel.text? = labelText
-            } else {
+            } else if inputNumberLabelText.count < 20 {
                 inputNumberLabel.text? += labelText
             }
         }
