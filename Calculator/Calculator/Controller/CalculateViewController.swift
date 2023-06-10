@@ -11,9 +11,11 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentFormulaStackView: UIStackView!
     @IBOutlet weak var currentFormulaScrollView: UIScrollView!
+    
     private var formulasUntilNow = ""
     private var isZeroButtonUsed = true
     private var isCurrentOperandLabelMadeFromResult = false
+    
     private var currentFormula: String {
         guard let numberText = currentOperandLabel.text,
               let operatorText = currentOperatorLabel.text else {
@@ -182,16 +184,6 @@ final class CalculateViewController: UIViewController {
         return formatter.string(from: number) ?? "NaN"
     }
 
-    private func addCurrentFormula() {
-        guard let operatorString = currentOperatorLabel.text,
-              let operandString = currentOperandLabel.text else {
-            return
-        }
-
-        formulasUntilNow.append(currentFormula)
-        setCurrentFormulaViewOnScroll(operatorString, checkOperandForm(operandString))
-    }
-    
     private func checkOperandForm(_ input: String) -> String {
         let number = input.replacingOccurrences(of: ",", with: "")
         guard formattingNumber(number) != "NaN",
@@ -200,6 +192,16 @@ final class CalculateViewController: UIViewController {
         }
         
         return number
+    }
+    
+    private func addCurrentFormula() {
+        guard let operatorString = currentOperatorLabel.text,
+              let operandString = currentOperandLabel.text else {
+            return
+        }
+        
+        formulasUntilNow.append(currentFormula)
+        setCurrentFormulaViewOnScroll(operatorString, checkOperandForm(operandString))
     }
 }
 
