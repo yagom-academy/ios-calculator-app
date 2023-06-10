@@ -9,14 +9,14 @@ import UIKit
 class CalculatorViewController: UIViewController {
     // MARK: - IBOutlet
     
-    @IBOutlet private weak var scrollView: UIScrollView!
-    @IBOutlet private weak var calculateItemsStack: UIStackView!
+    @IBOutlet private weak var calculateItemsStackViewScrollView: UIScrollView!
+    @IBOutlet private weak var calculateItemsStackView: UIStackView!
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandLabel: UILabel!
     
     // MARK: - Property
     
-    private var components: String = ""
+    private var operatorsAndOperandsInput: String = ""
     
     // MARK: - View State Method
 
@@ -36,11 +36,11 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func tapNEGButton(_ sender: Any) {
-        toggleNegativeNumber()
+        toggleSingOfOperand()
     }
 
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
-        guard !components.isEmpty || (operandLabel.text != "0") else {
+        guard !operatorsAndOperandsInput.isEmpty || (operandLabel.text != "0") else {
             return
         }
         
@@ -92,23 +92,23 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func tapEqualsButton(_ sender: Any) {
-        guard !components.isEmpty else {
+        guard !operatorsAndOperandsInput.isEmpty else {
             return
         }
         
         do {
             appendCalculateItem()
-            var formula = ExpressionParser.parse(from: components)
+            var formula = ExpressionParser.parse(from: operatorsAndOperandsInput)
             let result = try formula.result()
             operandLabel.text = formatNumber(of: result)
             clearOperator()
-            components = ""
+            operatorsAndOperandsInput = ""
         } catch let error as CalculatorError {
             switch error {
             case .divisionError:
                 print(error.message)
                 clearOperator()
-                components = ""
+                operatorsAndOperandsInput = ""
                 operandLabel.text = "NaN"
             }
         } catch {
@@ -127,13 +127,13 @@ class CalculatorViewController: UIViewController {
     }
     
     private func clearAll() {
-        calculateItemsStack.arrangedSubviews.forEach { view in
+        calculateItemsStackView.arrangedSubviews.forEach { view in
             view.removeFromSuperview()
         }
         
         clearOperator()
         clearEntry()
-        components = ""
+        operatorsAndOperandsInput = ""
     }
     
     private func clearOperator() {
@@ -144,7 +144,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
     }
     
-    private func toggleNegativeNumber() {
+    private func toggleSingOfOperand() {
         guard var operandLabelText = operandLabel.text, operandLabelText != "0" else {
             return
         }
@@ -182,10 +182,10 @@ class CalculatorViewController: UIViewController {
         calculateItemStack.addArrangedSubview(operatorLabel)
         calculateItemStack.addArrangedSubview(operandLabel)
         
-        calculateItemsStack.addArrangedSubview(calculateItemStack)
+        calculateItemsStackView.addArrangedSubview(calculateItemStack)
         
-        components.append(operatorLabel.text ?? "")
-        components.append(operandLabel.text ?? "")
+        operatorsAndOperandsInput.append(operatorLabel.text ?? "")
+        operatorsAndOperandsInput.append(operandLabel.text ?? "")
         
         scrollToBottom()
     }
@@ -195,16 +195,16 @@ class CalculatorViewController: UIViewController {
     }
     
     private func scrollToBottom() {
-        scrollView.layoutIfNeeded()
+        calculateItemsStackViewScrollView.layoutIfNeeded()
         
         let bottomOffset = CGPoint(
             x: 0,
-            y: scrollView.contentSize.height
-            - scrollView.bounds.height
-            + scrollView.contentInset.bottom
+            y: calculateItemsStackViewScrollView.contentSize.height
+            - calculateItemsStackViewScrollView.bounds.height
+            + calculateItemsStackViewScrollView.contentInset.bottom
         )
         
-        scrollView.setContentOffset(bottomOffset, animated: true)
+        calculateItemsStackViewScrollView.setContentOffset(bottomOffset, animated: true)
     }
 }
 
