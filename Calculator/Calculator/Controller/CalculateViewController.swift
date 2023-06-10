@@ -36,7 +36,7 @@ final class CalculateViewController: UIViewController {
             return "NaN"
         }
         
-        return "\(operatorText) \(checkOperandForm(numberText).filter { $0 != "," }) "
+        return "\(operatorText) \(checkOperandForm(numberText).replacingOccurrences(of: ",", with: "")) "
     }
     
     override func viewDidLoad() {
@@ -152,7 +152,7 @@ final class CalculateViewController: UIViewController {
         }
         
         if operandLabelText.contains("-") {
-            operandLabelText = operandLabelText.filter{ $0 != "-" }
+            operandLabelText = operandLabelText.replacingOccurrences(of: "-", with: "")
         } else {
             operandLabelText = "-" + operandLabelText
         }
@@ -191,7 +191,7 @@ final class CalculateViewController: UIViewController {
     }
     
     private func checkOperandForm(_ input: String) -> String {
-        guard let number = Double(input.filter { $0 != "," })?.formatNumber(),
+        guard let number = Double(input.replacingOccurrences(of: ",", with: ""))?.formatNumber(),
               input.count <= 20 else {
             return "error"
         }
@@ -215,7 +215,7 @@ extension CalculateViewController {
         let operandLabel: UILabel = {
             let label = UILabel()
             
-            label.text = operand.filter { $0 != "," }
+            label.text = operand.replacingOccurrences(of: ",", with: "")
             label.font = .preferredFont(forTextStyle: .title2)
             label.textColor = .white
             

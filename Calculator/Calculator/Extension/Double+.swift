@@ -12,9 +12,9 @@ extension Double: CalculateItem {
         let formatter = NumberFormatter()
         let number = NSDecimalNumber.init(floatLiteral: self)
 
-        formatter.maximumSignificantDigits = 20
+        formatter.maximumSignificantDigits = 15
         formatter.numberStyle = .decimal
-        formatter.roundingMode = .halfUp
+        //formatter.roundingMode = .halfUp
         formatter.usesSignificantDigits = true
         
         return formatter.string(from: number) ?? "NaN"
