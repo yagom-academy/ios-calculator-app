@@ -62,24 +62,36 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
-        guard let inputOperatorLabelText = inputOperatorLabel.text,
+        guard var inputOperatorLabelText = inputOperatorLabel.text,
               let inputNumberLabelText = inputNumberLabel.text,
               let labelText = sender.titleLabel?.text else {
             return
         }
         
-        let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
-        let operandLabel: UILabel = makeUILabel(makeNumberFormat(for: inputNumberLabelText))
-        let inputLabelStackView = makeUIStackView()
-        
-        inputLabelStackView.addArrangedSubview(operatorLabel)
-        inputLabelStackView.addArrangedSubview(operandLabel)
-        allInputStackView.addArrangedSubview(inputLabelStackView)
-        
-        formulaString += inputOperatorLabelText + inputNumberLabelText
-        resetInputNumberLabel()
-        inputOperatorLabel.text? = labelText
-        allInputScrollView.scrollToBottom()
+        if inputNumberLabelText == "0",
+           labelText == "=" {
+            formulaString += inputOperatorLabelText + inputNumberLabelText
+            allInputScrollView.scrollToBottom()
+        } else if inputNumberLabelText == "0" {
+            inputOperatorLabel.text? = labelText
+        } else {
+            if allInputStackView.subviews.isEmpty {
+                inputOperatorLabelText = ""
+            }
+            
+            let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
+            let operandLabel: UILabel = makeUILabel(makeNumberFormat(for: inputNumberLabelText))
+            let inputLabelStackView = makeUIStackView()
+            
+            inputLabelStackView.addArrangedSubview(operatorLabel)
+            inputLabelStackView.addArrangedSubview(operandLabel)
+            allInputStackView.addArrangedSubview(inputLabelStackView)
+            
+            formulaString += inputOperatorLabelText + inputNumberLabelText
+            resetInputNumberLabel()
+            inputOperatorLabel.text? = labelText
+            allInputScrollView.scrollToBottom()
+        }
     }
     
     @IBAction func tapEqual(_ sender: UIButton) {
@@ -107,6 +119,7 @@ class ViewController: UIViewController {
                 print("operation failure")
             case .divideByZero:
                 inputNumberLabel.text = "NaN"
+                operationReady = false
                 print("divide by zero")
             }
         } catch {
