@@ -29,11 +29,12 @@ class ViewController: UIViewController {
         guard let labelText = sender.titleLabel?.text else {
             return
         }
-        
-        if inputNumberLabel.text == "0" {
-            inputNumberLabel.text? = labelText
-        } else {
-            inputNumberLabel.text? += labelText
+        if operationReady {
+            if inputNumberLabel.text == "0" {
+                inputNumberLabel.text? = labelText
+            } else {
+                inputNumberLabel.text? += labelText
+            }
         }
     }
     
