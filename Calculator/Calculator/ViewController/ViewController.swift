@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
     
     @IBAction func touchDigit(_ sender: UIButton) {
@@ -32,7 +32,9 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchOperator(_ sender: UIButton) {
-
+        guard let inputOperator = sender.currentTitle else { return }
+        
+        displayOperatorLabel.text = "\(inputOperator)"
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
@@ -46,7 +48,6 @@ class ViewController: UIViewController {
         case "AC":
             clearOperandLabel()
             clearOperatorLabel()
-            clearStackView()
         case "CE":
             print("clearEntry")
         case "":
@@ -55,13 +56,13 @@ class ViewController: UIViewController {
             break
         }
     }
-    
-    private func clearOperandLabel() {
 
+    private func clearOperandLabel() {
+        displayOperandLabel.text = "0"
     }
     
     private func clearOperatorLabel() {
-
+        displayOperatorLabel.text?.removeAll()
     }
     
     private func clearStackView() {
