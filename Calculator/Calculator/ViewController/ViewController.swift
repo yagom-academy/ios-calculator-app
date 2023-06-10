@@ -64,7 +64,11 @@ class ViewController: UIViewController {
         }
     }
     
-    private func addFormula() {
+    private func addToFormula() {
+        
+    }
+    
+    private func addToOperandLabel() {
         
     }
     
