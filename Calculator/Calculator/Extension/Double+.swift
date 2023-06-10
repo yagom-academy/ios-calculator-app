@@ -10,7 +10,8 @@ import Foundation
 extension Double: CalculateItem {
     func formatNumber() -> String {
         let formatter = NumberFormatter()
-        let number = Decimal(self)
+        //let number = Decimal(self)
+        let number = NSDecimalNumber(floatLiteral: self)
         formatter.maximumSignificantDigits = 20
         formatter.numberStyle = .decimal
         formatter.roundingMode = .halfUp

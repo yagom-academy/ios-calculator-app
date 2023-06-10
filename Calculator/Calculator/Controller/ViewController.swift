@@ -12,21 +12,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var partOfFormulaStackView: UIStackView!
     @IBOutlet weak var formulaScrollView: UIScrollView!
     private var currentFormula = [String]()
-    private let numberFormatter = NumberFormatter()
-    private var canTappedButton = true
     private var isZeroButtonTappedBefore = true
     private var isResultValue = false
     private var isDotUsed = false
+    private var isOperatorButtonPushed = false
     private var isInitializeCurrentOperandLabel = false {
         didSet {
-            if oldValue == false {
+            if isInitializeCurrentOperandLabel {
                 currentOperandLabel.text = "0"
             }
         }
     }
     private var isInitializeCurrentOperatorLabel = false {
         didSet {
-            if oldValue == false {
+            if isInitializeCurrentOperatorLabel {
                 currentOperatorLabel.text = ""
             }
         }
@@ -67,14 +66,14 @@ class ViewController: UIViewController {
     
     @IBAction func tappedZeroButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0",
-              isResultValue == false else {
+              operandLabelText != "0" else {
             currentOperandLabel.text = "0"
             isZeroButtonTappedBefore = true
             return
         }
         
-        guard checkFutureOperand(operandLabelText + "0") != "error" else {
+        guard checkFutureOperand(operandLabelText + "0") != "error",
+              isResultValue == false else {
             return
         }
         
@@ -83,14 +82,14 @@ class ViewController: UIViewController {
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0",
-              isResultValue == false else {
+              operandLabelText != "0" else {
             currentOperandLabel.text = "0"
             isZeroButtonTappedBefore = true
             return
         }
         
-        guard checkFutureOperand(operandLabelText + "00") != "error" else {
+        guard checkFutureOperand(operandLabelText + "00") != "error",
+              isResultValue == false else {
             return
         }
         
@@ -107,13 +106,16 @@ class ViewController: UIViewController {
 
         currentOperatorLabel.text = sender.currentTitle
 
+        isOperatorButtonPushed = true
         isResultValue = false
         isZeroButtonTappedBefore = false
+        isDotUsed = false
         isInitializeCurrentOperandLabel = true
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
-        guard isResultValue == false else {
+        guard isResultValue == false,
+              isOperatorButtonPushed == true else {
             return
         }
         settingFormula()
@@ -127,22 +129,29 @@ class ViewController: UIViewController {
         currentOperandLabel.text = result.formatNumber()
         currentFormula.removeAll()
         isInitializeCurrentOperatorLabel = true
+        isDotUsed = false
     }
     
     @IBAction func tappedChangeSignButton(_ sender: Any) {
-        guard let operand = currentOperandLabel.text,
-                operand != "0",
-                let operandsNumber = (Double(operand)) else {
+        guard var operand = currentOperandLabel.text,
+                operand != "0" else {
             return
         }
         
-        currentOperandLabel.text = (operandsNumber * -1).formatNumber()
+        if operand.contains("-") {
+            operand = operand.filter{ $0 != "-" }
+        } else {
+            operand = "-" + operand
+        }
+
+        currentOperandLabel.text = operand
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {
         isInitializeCurrentOperandLabel = true
         isResultValue = false
         isZeroButtonTappedBefore = false
+        isDotUsed = false
     }
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
@@ -151,6 +160,8 @@ class ViewController: UIViewController {
         isInitializeCurrentOperatorLabel = true
         isResultValue = false
         isZeroButtonTappedBefore = true
+        isDotUsed = false
+        isOperatorButtonPushed = false
     }
 }
 
@@ -162,16 +173,7 @@ extension ViewController {
         }
         print(presentFormula)
         currentFormula.append(presentFormula)
-        addView(operatorString, operandString)
-    }
-    
-    private func formattingNumbers(_ input: Double) -> String {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.usesSignificantDigits = true
-        
-        return numberFormatter.string(from: Decimal(input) as NSNumber) ?? "NaN"
+        addView(operatorString, checkFutureOperand(operandString))
     }
 }
 
@@ -189,7 +191,7 @@ extension ViewController {
         let operandLabel: UILabel = {
             let label = UILabel()
             
-            label.text = operand
+            label.text = operand.filter { $0 != "," }
             label.font = .preferredFont(forTextStyle: .title2)
             label.textColor = .white
             
@@ -219,19 +221,12 @@ extension ViewController {
 
 extension ViewController {
     private func checkFutureOperand(_ input: String) -> String {
-        let formatter = NumberFormatter()
-        formatter.maximumFractionDigits = 10
-        formatter.numberStyle = .decimal
-        formatter.decimalSeparator = ","
-        formatter.groupingSeparator = ""
-        
-        let number = Decimal(string: input.filter { $0 != "," })
-        
-        if input.count > 20 {
+        guard let number = Double(input.filter { $0 != "," })?.formatNumber(),
+              input.count <= 20 else {
             return "error"
         }
         
-        return formatter.string(from: number! as NSNumber) ?? "error"
+        return number
     }
     
     private var presentFormula: String {
@@ -240,6 +235,6 @@ extension ViewController {
             return "NaN"
         }
         
-        return "\(operatorText) \(checkFutureOperand(numberText.filter { $0 != "," })) "
+        return "\(operatorText) \(checkFutureOperand(numberText).filter { $0 != "," }) "
     }
 }
