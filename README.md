@@ -35,18 +35,6 @@
 <a id="2."></a>
 
 ## 2. ⏰ 타임 라인
-
-#### <`Commit` 메세지>
-- ✍️[`docs`]:`README`나 문서작업
-- 🆕[`feat`]:새로운 기능 구현
-- 🪡[`style`]:스타일 관련 기능(코드의 구조/형태 개선)
-- 🖨️[`chore`]:네이밍, 컨벤션 수정
-- 🛠️[`refactor`]:전면 수정이 있을 때 사용
-- 🔬[`fix`]:버그, 오류 해결
-- ⌨️[`test`]:테스트 코드 수정하거나 추가
-- 🔀[`merge`]:다른 브랜치를 `merge` 할 때 사용
-
-
 <details><summary span style="color:black; background-color:#23ff2921; font-size:120%"><b>1주차</b></summary></span> 
 
 |**날 짜**|**내 용**|
@@ -91,7 +79,8 @@
 
 ### 1️⃣ 자료구조가 왜 필요할까?
 >자료구조라는 것이 생소하기에 자료구조가 무엇인지부터 찾아봐야 했고 해당 프로젝트에서 왜 자료구조가 필요한지부터 고민해보았습니다.
-- 자료구조는 데이터를 구성하고 조직화하여 효율적인 계산 및 데이터처리를 가능하게 해주기에 필요하다고 생각되어졌습니다. 특히나 이번에 구현해야되는 계산기의 특성상 연산을 저장하고 관리를 해줘야하고 계산 결과를 표시하기 위해 지금까지 입력해줬던 값을 저장하고 계산 결과를 출력해야되기 때문이라고 생각되어졌습니다. 그러면서 든 생각이 '`Array`로 구현하면 되는것 아닌가?'라는 생각이 들었는데 찾아보니 자주 사용하던 `Array`도 자료구조의 한 종류라는 것을 알게 되었습니다.
+- 자료구조는 데이터를 구성하고 조직화하여 효율적인 계산 및 데이터처리를 가능하게 해주기에 필요하다고 생각되어졌습니다. 특히나 이번에 구현해야되는 계산기의 특성상 연산을 저장하고 관리를 해줘야하고 계산 결과를 표시하기 위해 지금까지 입력해줬던 값을 저장하고 계산 결과를 출력해야되기 때문이라고 생각되어졌습니다. 그러면서 '`Array`로 구현하면 되는것 아닌가?'라고 생각했는데 찾아보니 자주 사용하던 `Array`도 자료구조의 한 종류라는 것을 알게 되었습니다.
+- 계산기는 숫자, 연산자 등 다양한 데이터를 저장하고 관리해야되는데 자료구조를 사용하면 데이터를 효율적으로 저장하고 접근할 수 있으며, 연산에 필요한 데이터를 쉽게 추출하고 처리가 가능합니다. 또한 자료구조를 활용하면 기능을 확장하기 쉽기 때문에 이번 프로젝트에서 자료구조가 필요했다고 생각되어집니다.
 
 ### 2️⃣ 왜 `Queue`타입 구현을 위해 `LinkedList`를 사용하게 되었는가?
 #### 1) 처음의 선택 : `Stack`
@@ -119,12 +108,13 @@
 
 ### 1️⃣ 프로토콜의 확장
 #### ⛔️ 문제점
-- `Step01`에서 요구하는데로 프로토콜을 비워두었더니 `unitTest`에서 제네릭 타입을 인식을 못해 테스트를 진행할 수가 없는 문제점이 발생했습니다.
+- 이번 프로젝트의 첫 미션에서 요구사항대로 프로토콜을 비워두었더니 `unitTest`에서 제네릭 타입을 인식을 못해 테스트를 진행할 수가 없는 문제점이 발생했습니다.
+![스크린샷 2023-06-10 오후 8 00 58](https://github.com/karenyang835/pr-exercise/assets/124643896/7082941b-00d6-4769-b0a3-c465352385fc)
+
 
 
 #### ✅ 해결 방법
 - 기본 데이터 타입 중 계산기에서 요구하는 타입들을 추가로 확장시켜주었습니다.
-
 #### 수정 전
 
 ```swift
@@ -202,7 +192,7 @@ mutating func append(data: Element) {
 
 🍎 [Swift API Design Guidelines](https://www.swift.org/documentation/api-design-guidelines/)<br>
 <img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - 시간 복잡도](https://velog.io/@reasonz/2022.06.24-자료구조-알고리즘-개념-시간복잡도-Big-O) <br>
-<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 />[BLOG - Queue, 시간 복잡도, 시간복잡도 test](https://jeong9216.tistory.com/350)<br>
+<img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - Queue, 시간 복잡도, 시간복잡도 test](https://jeong9216.tistory.com/350)<br>
 <img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - Queue, Stack, LinkedList](https://woongsios.tistory.com/222)<br>
 <img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - 제네릭](https://seons-dev.tistory.com/entry/Swift-기초문법-제네릭-Generic)<br>
 <img src="https://github.com/karenyang835/ios-calculator-app/assets/124643896/ffe12065-60d0-4913-b258-53383f11d586" width = 20 /> [BLOG - LinkedList](https://jeong9216.tistory.com/401)<br>
@@ -227,5 +217,11 @@ mutating func append(data: Element) {
 
 
 </br>
+
+    
+
+
+    
+
 
     
