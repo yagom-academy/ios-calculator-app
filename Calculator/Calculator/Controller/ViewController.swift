@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     
     @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
@@ -111,6 +110,7 @@ class ViewController: UIViewController {
         inputOperatorLabel.text = ""
         inputNumberLabel.text = "0"
         allStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        calculateSetting = true
     }
     
     @IBAction func clearEntryButton(_ sender: UIButton) {
@@ -129,7 +129,8 @@ class ViewController: UIViewController {
         
         return result
     }
-    
+}
+
 extension ViewController {
     func makeStackView() -> UIStackView {
         let view: UIStackView = UIStackView()
@@ -152,12 +153,10 @@ extension ViewController {
     }
     
     func setScrollView() {
+        scrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
         if bottomOffset.y > 0 {
             scrollView.setContentOffset(bottomOffset, animated: true)
         }
     }
-
-
 }
-
