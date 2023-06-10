@@ -16,10 +16,27 @@ class ViewController: UIViewController {
     private var isZeroButtonTappedBefore = true
     private var isResultValue = false
     private var isDotUsed = false
+    private var isInitializeCurrentOperandLabel = false {
+        didSet {
+            if oldValue == false {
+                currentOperandLabel.text = "0"
+                isInitializeCurrentOperandLabel = false
+            }
+        }
+    }
+    private var isInitializeCurrentOperatorLabel = false {
+        didSet {
+            if oldValue == false {
+                currentOperatorLabel.text = ""
+                isInitializeCurrentOperatorLabel = false
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeLabels()
+        isInitializeCurrentOperandLabel = true
+        isInitializeCurrentOperatorLabel = true
     }
     
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
@@ -82,7 +99,7 @@ class ViewController: UIViewController {
 
         isResultValue = false
         isZeroButtonTappedBefore = false
-        initializeLabels(isOperatorClear: false)
+        isInitializeCurrentOperandLabel = true
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
@@ -98,7 +115,7 @@ class ViewController: UIViewController {
         
         currentOperandLabel.text = formattingNumbers(result)
         currentFormula.removeAll()
-        initializeLabels(isOperandClear: false)
+        isInitializeCurrentOperatorLabel = true
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
@@ -112,7 +129,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {
-        initializeLabels(isOperatorClear: false)
+        isInitializeCurrentOperandLabel = true
         isResultValue = false
         isZeroButtonTappedBefore = false
     }
@@ -141,15 +158,6 @@ extension ViewController {
         currentFormula.append("\(operatorString) ")
         currentFormula.append("\(operandString) ")
         addView(operatorString, operandString)
-    }
-    
-    private func initializeLabels(isOperandClear: Bool = true, isOperatorClear: Bool = true) {
-        if isOperandClear {
-            currentOperandLabel.text = "0"
-        }
-        if isOperatorClear {
-            currentOperatorLabel.text = ""
-        }
     }
     
     private func formattingNumbers(_ input: Double) -> String {
