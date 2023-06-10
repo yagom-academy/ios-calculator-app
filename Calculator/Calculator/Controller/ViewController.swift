@@ -122,9 +122,9 @@ class ViewController: UIViewController {
         let doubleNumber = Double(inputNumber)
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-//        numberFormatter.roundingMode = .roundUp
-//        numberFormatter.maximumSignificantDigits = 2
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+
         let result = numberFormatter.string(for: doubleNumber) ?? "0.0"
         
         return result
