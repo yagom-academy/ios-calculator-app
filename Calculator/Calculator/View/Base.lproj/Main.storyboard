@@ -329,10 +329,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="currentFormulaScrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
+                        <outlet property="currentFormulaStackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="pps-PP-efd"/>
-                        <outlet property="saveFormulaScrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
-                        <outlet property="saveFormulaStackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
