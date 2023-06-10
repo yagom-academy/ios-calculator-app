@@ -56,9 +56,10 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction private func tapNumberButton(_ sender: UIButton) {
-        let operandLabelText = removeComma(of: operandLabel.text)
-        
-        guard var operandLabelText, operandLabelText.count < 20 else {
+        guard
+            var operandLabelText = removeComma(of: operandLabel.text),
+            operandLabelText.count < 20
+        else {
             return
         }
         
@@ -145,7 +146,10 @@ class CalculatorViewController: UIViewController {
     }
     
     private func toggleSingOfOperand() {
-        guard var operandLabelText = operandLabel.text, operandLabelText != "0" else {
+        guard
+            var operandLabelText = operandLabel.text,
+            operandLabelText != "0"
+        else {
             return
         }
         
