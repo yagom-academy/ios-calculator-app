@@ -25,7 +25,8 @@ final class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         clearAll()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 15
+        numberFormatter.roundingMode = .halfDown
     }
     
     // MARK: - IBAction
