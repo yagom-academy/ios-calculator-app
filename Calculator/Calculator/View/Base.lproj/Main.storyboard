@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Calculate View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="CalculateViewController" customModule="Calculator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -331,8 +331,8 @@
                     <connections>
                         <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
                         <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="pps-PP-efd"/>
-                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
-                        <outlet property="partOfFormulaStackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
+                        <outlet property="saveFormulaScrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
+                        <outlet property="saveFormulaStackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
