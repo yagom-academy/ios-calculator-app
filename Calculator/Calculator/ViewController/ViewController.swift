@@ -49,9 +49,14 @@ class ViewController: UIViewController {
             clearOperandLabel()
             clearOperatorLabel()
         case "CE":
+            clearOperandLabel()
             print("clearEntry")
-        case "":
+        case "⁺⁄₋":
             print("chageSign")
+        case ".":
+            print(".")
+        case "00":
+            print("00")
         default:
             break
         }
@@ -66,7 +71,7 @@ class ViewController: UIViewController {
     }
     
     private func clearStackView() {
-
+        stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
     private func clearEntry() {
