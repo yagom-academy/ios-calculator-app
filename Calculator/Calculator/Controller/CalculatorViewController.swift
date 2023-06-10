@@ -181,7 +181,6 @@ final class CalculatorViewController: UIViewController {
         }
         
         let calculateItemStack = UIStackView()
-        calculateItemStack.axis = .horizontal
         calculateItemStack.spacing = 8.0
         calculateItemStack.addArrangedSubview(operatorLabel)
         calculateItemStack.addArrangedSubview(operandLabel)
