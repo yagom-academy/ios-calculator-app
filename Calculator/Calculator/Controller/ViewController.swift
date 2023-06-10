@@ -100,9 +100,7 @@ class ViewController: UIViewController {
         operandLabel.text = "0"
         isResult = false
         isInputZero = false
-        scrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
-        scrollView.setContentOffset(bottomOffset, animated: true)
+        scrollDown()
     }
     
     private func configureCurrentFormula() -> String {
@@ -139,6 +137,12 @@ class ViewController: UIViewController {
         recordedLabel.textColor = .white
         
         return recordedLabel
+    }
+    
+    private func scrollDown() {
+        scrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
+        scrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func clearLabel() {
