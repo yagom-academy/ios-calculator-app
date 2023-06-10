@@ -63,7 +63,8 @@ class ViewController: UIViewController {
     
     @IBAction func tapOperator(_ sender: UIButton) {
         guard let inputOperatorLabelText = inputOperatorLabel.text,
-              let inputNumberLabelText = inputNumberLabel.text else {
+              let inputNumberLabelText = inputNumberLabel.text,
+              let labelText = sender.titleLabel?.text else {
             return
         }
         
@@ -76,15 +77,8 @@ class ViewController: UIViewController {
         allInputStackView.addArrangedSubview(inputLabelStackView)
         
         formulaString += inputOperatorLabelText + inputNumberLabelText
-        
-        resetInputNumberLabel()
-        
-        guard let labelText = sender.titleLabel?.text else {
-            return
-        }
-        
         inputOperatorLabel.text? = labelText
-        
+        resetInputNumberLabel()
         allInputScrollView.scrollToBottom()
     }
     
@@ -92,7 +86,6 @@ class ViewController: UIViewController {
         do {
             if operationReady {
                 tapOperator(sender)
-                resetInputOperatorLabel()
                 
                 var formula = try ExpressionParser.parse(from: formulaString)
                 let result = try formula.result()
@@ -100,6 +93,7 @@ class ViewController: UIViewController {
                 inputNumberLabel.text = makeNumberFormat(for: String(result))
                 operationReady = false
                 
+                resetInputOperatorLabel()
                 resetFormulaString()
             }
         } catch let error as ExpressionParserError {
