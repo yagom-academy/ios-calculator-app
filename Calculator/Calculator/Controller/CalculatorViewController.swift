@@ -99,17 +99,11 @@ final class CalculatorViewController: UIViewController {
         
         do {
             appendCalculateItem()
-            var formula = ExpressionParser.parse(from: operatorsAndOperandsInput)
-            let result = try formula.result()
-            operandLabel.text = formatNumber(of: result)
-            clearOperator()
-            operatorsAndOperandsInput = ""
+            operandLabel.text = formatNumber(of: try calculate())
         } catch let error as CalculatorError {
             switch error {
             case .divisionError:
                 print(error.message)
-                clearOperator()
-                operatorsAndOperandsInput = ""
                 operandLabel.text = "NaN"
             }
         } catch {
@@ -195,6 +189,15 @@ final class CalculatorViewController: UIViewController {
     
     private func removeComma(of text: String?) -> String? {
         return text?.components(separatedBy: ",").joined()
+    }
+    
+    private func calculate() throws -> Double {
+        var formula = ExpressionParser.parse(from: operatorsAndOperandsInput)
+        
+        clearOperator()
+        operatorsAndOperandsInput = ""
+        
+        return try formula.result()
     }
     
     private func scrollToBottom() {
