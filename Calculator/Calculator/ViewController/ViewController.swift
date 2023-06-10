@@ -88,6 +88,14 @@ class ViewController: UIViewController {
     }
     
     private func changeSign() {
-        ㅇ
+        guard var operands = displayOperandLabel.text, operands != "0" else { return }
+        
+        if operands.contains("-") {
+            operands.removeFirst()
+        } else {
+            operands.insert(Character("-"), at: operands.startIndex)
+        }
+        
+        displayOperandLabel.text = operands
     }
 }
