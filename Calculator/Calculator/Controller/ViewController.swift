@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var formulaScrollView: UIScrollView!
     private var currentFormula = [String]()
     private let numberFormatter = NumberFormatter()
+    private var canTappedButton = true
     private var isZeroButtonTappedBefore = true
     private var isResultValue = false
     private var isDotUsed = false
@@ -20,7 +21,6 @@ class ViewController: UIViewController {
         didSet {
             if oldValue == false {
                 currentOperandLabel.text = "0"
-                isInitializeCurrentOperandLabel = false
             }
         }
     }
@@ -28,7 +28,6 @@ class ViewController: UIViewController {
         didSet {
             if oldValue == false {
                 currentOperatorLabel.text = ""
-                isInitializeCurrentOperatorLabel = false
             }
         }
     }
@@ -42,7 +41,8 @@ class ViewController: UIViewController {
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
-              isResultValue == false else {
+              isResultValue == false,
+              checkFutureOperand(operandLabelText + number) != "error" else {
             return
         }
         
@@ -54,17 +54,27 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedDotButton(_ sender: UIButton) {
-        guard isDotUsed, let operandLabelText = currentOperandLabel.text else {
+        guard isDotUsed == false,
+              let operandLabelText = currentOperandLabel.text,
+              isResultValue == false,
+              checkFutureOperand(operandLabelText) != "error" else {
             return
         }
         
+        isDotUsed = true
         currentOperandLabel.text = operandLabelText + "."
     }
     
     @IBAction func tappedZeroButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text, operandLabelText != "0" else {
+        guard let operandLabelText = currentOperandLabel.text,
+              operandLabelText != "0",
+              isResultValue == false else {
             currentOperandLabel.text = "0"
             isZeroButtonTappedBefore = true
+            return
+        }
+        
+        guard checkFutureOperand(operandLabelText + "0") != "error" else {
             return
         }
         
@@ -72,9 +82,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text, operandLabelText != "0" else {
+        guard let operandLabelText = currentOperandLabel.text,
+              operandLabelText != "0",
+              isResultValue == false else {
             currentOperandLabel.text = "0"
             isZeroButtonTappedBefore = true
+            return
+        }
+        
+        guard checkFutureOperand(operandLabelText + "00") != "error" else {
             return
         }
         
@@ -87,13 +103,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if operand.hasSuffix(".") {
-            settingFormula(isEndByPoint: true)
-        } else if isResultValue {
-            settingFormula(isResultComma: true)
-        } else {
-            settingFormula()
-        }
+        settingFormula()
 
         currentOperatorLabel.text = sender.currentTitle
 
@@ -109,23 +119,24 @@ class ViewController: UIViewController {
         settingFormula()
         
         var formula = ExpressionParser.parse(from: currentFormula.joined())
+        
         let result = formula.result()
         isResultValue = true
         isZeroButtonTappedBefore = true
         
-        currentOperandLabel.text = formattingNumbers(result)
+        currentOperandLabel.text = result.formatNumber()
         currentFormula.removeAll()
         isInitializeCurrentOperatorLabel = true
     }
     
-    @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
+    @IBAction func tappedChangeSignButton(_ sender: Any) {
         guard let operand = currentOperandLabel.text,
                 operand != "0",
                 let operandsNumber = (Double(operand)) else {
             return
         }
         
-        currentOperandLabel.text = formattingNumbers(operandsNumber * -1)
+        currentOperandLabel.text = (operandsNumber * -1).formatNumber()
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {
@@ -136,7 +147,8 @@ class ViewController: UIViewController {
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
         partOfFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        initializeLabels()
+        isInitializeCurrentOperandLabel = true
+        isInitializeCurrentOperatorLabel = true
         isResultValue = false
         isZeroButtonTappedBefore = true
     }
@@ -145,18 +157,11 @@ class ViewController: UIViewController {
 extension ViewController {
     private func settingFormula(isEndByPoint: Bool = false, isResultComma: Bool = false) {
         guard let operatorString = currentOperatorLabel.text,
-              var operandString = currentOperandLabel.text else {
+              let operandString = currentOperandLabel.text else {
             return
         }
-
-        if isEndByPoint {
-            operandString = operandString.filter { $0 != "." }
-        } else if isResultComma {
-            operandString = operandString.filter { $0 != "," }
-        }
-        
-        currentFormula.append("\(operatorString) ")
-        currentFormula.append("\(operandString) ")
+        print(presentFormula)
+        currentFormula.append(presentFormula)
         addView(operatorString, operandString)
     }
     
@@ -194,7 +199,6 @@ extension ViewController {
         let subStackView: UIStackView = {
             let stackView = UIStackView(arrangedSubviews: [operatorLabel,operandLabel])
             
-            stackView.axis = .horizontal
             stackView.spacing = 8
             stackView.alignment = .bottom
             
@@ -211,4 +215,31 @@ extension ViewController {
         formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: true)
     }
 
+}
+
+extension ViewController {
+    private func checkFutureOperand(_ input: String) -> String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 10
+        formatter.numberStyle = .decimal
+        formatter.decimalSeparator = ","
+        formatter.groupingSeparator = ""
+        
+        let number = Decimal(string: input.filter { $0 != "," })
+        
+        if input.count > 20 {
+            return "error"
+        }
+        
+        return formatter.string(from: number! as NSNumber) ?? "error"
+    }
+    
+    private var presentFormula: String {
+        guard let numberText = currentOperandLabel.text,
+              let operatorText = currentOperatorLabel.text else {
+            return "NaN"
+        }
+        
+        return "\(operatorText) \(checkFutureOperand(numberText.filter { $0 != "," })) "
+    }
 }
