@@ -247,7 +247,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedOperandsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rUf-JP-hxu"/>
+                                                    <action selector="tappedZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VX6-Ww-Rcb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sH6-8l-kje">
@@ -258,7 +258,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedOperandsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nva-VX-F4U"/>
+                                                    <action selector="tappedDoubleZeroButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k5B-CK-vvx"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8q-5h-bnb">
@@ -269,7 +269,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tappedOperandsButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5MB-KI-5tz"/>
+                                                    <action selector="tappedDotButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VZL-mc-k4T"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
@@ -329,10 +329,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="operands" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
-                        <outlet property="operators" destination="HPC-iy-qdm" id="pps-PP-efd"/>
-                        <outlet property="scrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
-                        <outlet property="stackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
+                        <outlet property="currentOperandLabel" destination="Lwz-OF-XHD" id="6SO-QB-Unf"/>
+                        <outlet property="currentOperatorLabel" destination="HPC-iy-qdm" id="pps-PP-efd"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="X1j-gz-wKi"/>
+                        <outlet property="partOfFormulaStackView" destination="XRe-QE-UJf" id="7oj-gX-8EY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -7,42 +7,66 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var operators: UILabel!
-    @IBOutlet weak var operands: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
-    private var saveFormula = [String]()
+    @IBOutlet weak var currentOperatorLabel: UILabel!
+    @IBOutlet weak var currentOperandLabel: UILabel!
+    @IBOutlet weak var partOfFormulaStackView: UIStackView!
+    @IBOutlet weak var formulaScrollView: UIScrollView!
+    private var currentFormula = [String]()
     private let numberFormatter = NumberFormatter()
-    private var isInputZero = true
+    private var isZeroButtonTappedBefore = true
     private var isResultValue = false
+    private var isDotUsed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearLabels()
+        initializeLabels()
     }
     
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
-        guard let operand = sender.currentTitle,
-              let operandString = operands.text,
+        guard let number = sender.currentTitle,
+              let operandLabelText = currentOperandLabel.text,
               isResultValue == false else {
             return
         }
         
-        guard operand != "0" else {
-            isInputZero = true
-            return
-        }
-        
-        if operandString == "0", operand != "." {
-            operands.text = operand
+        if operandLabelText == "0" {
+            currentOperandLabel.text = number
         } else {
-            operands.text = operandString + operand
+            currentOperandLabel.text = operandLabelText + number
         }
     }
     
+    @IBAction func tappedDotButton(_ sender: UIButton) {
+        guard isDotUsed, let operandLabelText = currentOperandLabel.text else {
+            return
+        }
+        
+        currentOperandLabel.text = operandLabelText + "."
+    }
+    
+    @IBAction func tappedZeroButton(_ sender: UIButton) {
+        guard let operandLabelText = currentOperandLabel.text, operandLabelText != "0" else {
+            currentOperandLabel.text = "0"
+            isZeroButtonTappedBefore = true
+            return
+        }
+        
+        currentOperandLabel.text = operandLabelText + "0"
+    }
+    
+    @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
+        guard let operandLabelText = currentOperandLabel.text, operandLabelText != "0" else {
+            currentOperandLabel.text = "0"
+            isZeroButtonTappedBefore = true
+            return
+        }
+        
+        currentOperandLabel.text = operandLabelText + "00"
+    }
+    
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
-        guard let operand = operands.text,
-              operand != "0" || isInputZero else {
+        guard let operand = currentOperandLabel.text,
+              operand != "0" || isZeroButtonTappedBefore else {
             return
         }
         
@@ -54,11 +78,11 @@ class ViewController: UIViewController {
             settingFormula()
         }
 
-        operators.text = sender.currentTitle
+        currentOperatorLabel.text = sender.currentTitle
 
         isResultValue = false
-        isInputZero = false
-        clearLabels(isOperatorClear: false)
+        isZeroButtonTappedBefore = false
+        initializeLabels(isOperatorClear: false)
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
@@ -67,44 +91,44 @@ class ViewController: UIViewController {
         }
         settingFormula()
         
-        var formula = ExpressionParser.parse(from: saveFormula.joined())
+        var formula = ExpressionParser.parse(from: currentFormula.joined())
         let result = formula.result()
         isResultValue = true
-        isInputZero = true
+        isZeroButtonTappedBefore = true
         
-        operands.text = formattingNumbers(result)
-        saveFormula.removeAll()
-        clearLabels(isOperandClear: false)
+        currentOperandLabel.text = formattingNumbers(result)
+        currentFormula.removeAll()
+        initializeLabels(isOperandClear: false)
     }
     
     @IBAction func tappedChangeMinusSignButton(_ sender: Any) {
-        guard let operand = operands.text,
+        guard let operand = currentOperandLabel.text,
                 operand != "0",
                 let operandsNumber = (Double(operand)) else {
             return
         }
         
-        operands.text = formattingNumbers(operandsNumber * -1)
+        currentOperandLabel.text = formattingNumbers(operandsNumber * -1)
     }
     
     @IBAction func tappedClearButton(_ sender: Any) {
-        clearLabels(isOperatorClear: false)
+        initializeLabels(isOperatorClear: false)
         isResultValue = false
-        isInputZero = false
+        isZeroButtonTappedBefore = false
     }
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        clearLabels()
+        partOfFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        initializeLabels()
         isResultValue = false
-        isInputZero = true
+        isZeroButtonTappedBefore = true
     }
 }
 
 extension ViewController {
     private func settingFormula(isEndByPoint: Bool = false, isResultComma: Bool = false) {
-        guard let operatorString = operators.text,
-              var operandString = operands.text else {
+        guard let operatorString = currentOperatorLabel.text,
+              var operandString = currentOperandLabel.text else {
             return
         }
 
@@ -114,17 +138,17 @@ extension ViewController {
             operandString = operandString.filter { $0 != "," }
         }
         
-        saveFormula.append("\(operatorString) ")
-        saveFormula.append("\(operandString) ")
+        currentFormula.append("\(operatorString) ")
+        currentFormula.append("\(operandString) ")
         addView(operatorString, operandString)
     }
     
-    private func clearLabels(isOperandClear: Bool = true, isOperatorClear: Bool = true) {
+    private func initializeLabels(isOperandClear: Bool = true, isOperatorClear: Bool = true) {
         if isOperandClear {
-            operands.text = "0"
+            currentOperandLabel.text = "0"
         }
         if isOperatorClear {
-            operators.text = ""
+            currentOperatorLabel.text = ""
         }
     }
     
@@ -173,10 +197,10 @@ extension ViewController {
     }
     
     func addView(_ `operator`: String, _ operand: String) {
-        stackView.addArrangedSubview(addSubView(`operator`, operand))
+        partOfFormulaStackView.addArrangedSubview(addSubView(`operator`, operand))
         
-        scrollView.layoutIfNeeded()
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+        formulaScrollView.layoutIfNeeded()
+        formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: true)
     }
 
 }
