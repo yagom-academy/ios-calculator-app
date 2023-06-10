@@ -206,6 +206,7 @@ extension CalculateViewController {
             let label = UILabel()
             
             label.text = `operator`
+            label.font = .preferredFont(forTextStyle: .title2)
             label.textColor = .white
             
             return label
