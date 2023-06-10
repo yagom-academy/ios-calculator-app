@@ -11,25 +11,9 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var currentFormulaStackView: UIStackView!
     @IBOutlet weak var currentFormulaScrollView: UIScrollView!
-    private var formulasUntilNow = [String]()
-    private var didZeroButtonTapped = true
+    private var formulasUntilNow = ""
+    private var isZeroButtonUsed = true
     private var isCurrentOperandLabelMadeFromResult = false
-    private var canTapDotButton = true
-    private var isInitializeCurrentOperandLabel = false {
-        didSet {
-            if isInitializeCurrentOperandLabel {
-                currentOperandLabel.text = "0"
-            }
-        }
-    }
-    private var isInitializeCurrentOperatorLabel = false {
-        didSet {
-            if isInitializeCurrentOperatorLabel {
-                currentOperatorLabel.text = ""
-            }
-        }
-    }
-
     private var currentFormula: String {
         guard let numberText = currentOperandLabel.text,
               let operatorText = currentOperatorLabel.text else {
@@ -41,11 +25,12 @@ final class CalculateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isInitializeCurrentOperandLabel = true
-        isInitializeCurrentOperatorLabel = true
+        initializeOperandLabel()
+        initializeOperatorLabel()
     }
     
-    //MARK: - 버튼 눌릴 때
+    //MARK: - IBAction
+    
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
@@ -57,26 +42,25 @@ final class CalculateViewController: UIViewController {
         if operandLabelText == "0" {
             currentOperandLabel.text = number
         } else {
-            currentOperandLabel.text = operandLabelText + number
+            currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + number)
         }
     }
     
     @IBAction func tappedDotButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              canTapDotButton == true,
+              operandLabelText.contains(".") == false,
               isCurrentOperandLabelMadeFromResult == false else {
             return
         }
         
         currentOperandLabel.text = operandLabelText + "."
-        canTapDotButton = false
     }
     
     @IBAction func tappedZeroButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
               operandLabelText != "0" else {
             currentOperandLabel.text = "0"
-            didZeroButtonTapped = true
+            isZeroButtonUsed = true
             return
         }
         
@@ -92,7 +76,7 @@ final class CalculateViewController: UIViewController {
         guard let operandLabelText = currentOperandLabel.text,
               operandLabelText != "0" else {
             currentOperandLabel.text = "0"
-            didZeroButtonTapped = true
+            isZeroButtonUsed = true
             return
         }
         
@@ -106,7 +90,7 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0" ||  didZeroButtonTapped else {
+              operandLabelText != "0" ||  isZeroButtonUsed else {
             currentOperatorLabel.text = sender.currentTitle
             return
         }
@@ -119,9 +103,8 @@ final class CalculateViewController: UIViewController {
         currentOperatorLabel.text = sender.currentTitle
         
         isCurrentOperandLabelMadeFromResult = false
-        didZeroButtonTapped = false
-        canTapDotButton = true
-        isInitializeCurrentOperandLabel = true
+        isZeroButtonUsed = false
+        initializeOperandLabel()
     }
     
     @IBAction func tappedResultButton(_ sender: Any) {
@@ -132,16 +115,15 @@ final class CalculateViewController: UIViewController {
         
         addCurrentFormula()
         
-        var formula = ExpressionParser.parse(from: formulasUntilNow.joined())
-        let result = formula.result()
+        var formula = ExpressionParser.parse(from: formulasUntilNow)
+        let result = String(formula.result())
         
-        currentOperandLabel.text = result.formatNumber()
+        currentOperandLabel.text = formattingNumber(result)
         formulasUntilNow.removeAll()
         
         isCurrentOperandLabelMadeFromResult = true
-        didZeroButtonTapped = true
-        canTapDotButton = true
-        isInitializeCurrentOperatorLabel = true
+        isZeroButtonUsed = true
+        initializeOperatorLabel()
     }
     
     @IBAction func tappedChangeSignButton(_ sender: Any) {
@@ -162,22 +144,42 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func tappedClearButton(_ sender: Any) {
         if formulasUntilNow.isEmpty {
-            didZeroButtonTapped = true
+            isZeroButtonUsed = true
         } else {
-            didZeroButtonTapped = false
+            isZeroButtonUsed = false
         }
         isCurrentOperandLabelMadeFromResult = false
-        canTapDotButton = true
-        isInitializeCurrentOperandLabel = true
+        initializeOperandLabel()
     }
     
     @IBAction func tappedAllClearButton(_ sender: Any) {
         currentFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         isCurrentOperandLabelMadeFromResult = false
-        didZeroButtonTapped = true
-        canTapDotButton = true
-        isInitializeCurrentOperandLabel = true
-        isInitializeCurrentOperatorLabel = true
+        isZeroButtonUsed = true
+        initializeOperandLabel()
+        initializeOperatorLabel()
+    }
+    
+    // MARK: - Methods
+    
+    private func initializeOperandLabel() {
+        currentOperandLabel.text = "0"
+    }
+    
+    private func initializeOperatorLabel() {
+        currentOperatorLabel.text = ""
+    }
+    
+    private func formattingNumber(_ input: String) -> String {
+        let formatter = NumberFormatter()
+        let number = NSDecimalNumber.init(string: input)
+
+        formatter.maximumSignificantDigits = 15
+        formatter.numberStyle = .decimal
+        formatter.roundingMode = .halfUp
+        formatter.usesSignificantDigits = true
+        
+        return formatter.string(from: number) ?? "NaN"
     }
 
     private func addCurrentFormula() {
@@ -191,7 +193,8 @@ final class CalculateViewController: UIViewController {
     }
     
     private func checkOperandForm(_ input: String) -> String {
-        guard let number = Double(input.replacingOccurrences(of: ",", with: ""))?.formatNumber(),
+        let number = input.replacingOccurrences(of: ",", with: "")
+        guard formattingNumber(number) != "NaN",
               input.count <= 20 else {
             return "error"
         }
