@@ -170,10 +170,7 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text?.removeLast()
         }
         
-        let calculateItemStack = UIStackView()
-        calculateItemStack.spacing = 8.0
-        calculateItemStack.addArrangedSubview(operatorLabel)
-        calculateItemStack.addArrangedSubview(operandLabel)
+        let calculateItemStack = createCalculateItemStackView(operatorLabel, operandLabel)
         
         calculateItemsStackView.addArrangedSubview(calculateItemStack)
         
@@ -193,6 +190,15 @@ final class CalculatorViewController: UIViewController {
         label.text = text
         
         return label
+    }
+    
+    private func createCalculateItemStackView(_ labels: UILabel...) -> UIStackView {
+        let stackView = UIStackView()
+        stackView.spacing = 8.0
+        
+        labels.forEach { stackView.addArrangedSubview($0) }
+        
+        return stackView
     }
     
     private func calculate() throws -> Double {
