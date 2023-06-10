@@ -18,6 +18,6 @@ struct Formula {
             result = try `operator`.calculate(lhs: result, rhs: nextOperand)
         }
         
-        return result
+        return result.isZero ? 0 : result
     }
 }
