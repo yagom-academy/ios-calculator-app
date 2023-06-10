@@ -183,16 +183,16 @@ final class CalculatorViewController: UIViewController {
         scrollToBottom()
     }
     
+    private func removeComma(of text: String?) -> String? {
+        return text?.components(separatedBy: ",").joined()
+    }
+    
     private func createUILabel(text: String?) -> UILabel {
         let label = UILabel()
         label.textColor = .white
         label.text = text
         
         return label
-    }
-    
-    private func removeComma(of text: String?) -> String? {
-        return text?.components(separatedBy: ",").joined()
     }
     
     private func calculate() throws -> Double {
