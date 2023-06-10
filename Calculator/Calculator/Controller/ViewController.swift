@@ -29,6 +29,7 @@ class ViewController: UIViewController {
         guard let labelText = sender.titleLabel?.text else {
             return
         }
+        
         if operationReady {
             if inputNumberLabel.text == "0" {
                 inputNumberLabel.text? = labelText
@@ -60,11 +61,12 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
-        guard let inputNumberLabelText = inputNumberLabel.text else {
+        guard let inputOperatorLabelText = inputOperatorLabel.text,
+              let inputNumberLabelText = inputNumberLabel.text else {
             return
         }
         
-        let operatorLabel: UILabel = makeUILabel(inputOperatorLabel.text)
+        let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
         let operandLabel: UILabel = makeUILabel(makeNumberFormat(for: inputNumberLabelText))
         let inputLabelStackView = makeUIStackView()
         
@@ -72,7 +74,7 @@ class ViewController: UIViewController {
         inputLabelStackView.addArrangedSubview(operandLabel)
         allInputStackView.addArrangedSubview(inputLabelStackView)
         
-        formulaString += (inputOperatorLabel.text ?? "") + (inputNumberLabel.text ?? "")
+        formulaString += inputOperatorLabelText + inputNumberLabelText
         
         resetInputNumberLabel()
         
