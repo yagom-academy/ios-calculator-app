@@ -26,10 +26,14 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tapNumbersButton(_ sender: UIButton) {
-        guard let inputNumber = sender.titleLabel?.text,
-              let numberLabel = inputNumberLabel.text else { return }
-        
-        inputNumberLabel.text = (numberLabel == "0") ? (inputNumber) : (numberLabel + inputNumber)
+        if calculateSetting == true {
+            guard let inputNumber = sender.titleLabel?.text,
+                  let numberLabel = inputNumberLabel.text,
+                  let inputOperatorLabelText = inputOperatorLabel.text else { return }
+            
+            inputOperatorLabel.text = (allStackView.subviews.isEmpty) ? ("") : inputOperatorLabelText
+            inputNumberLabel.text = (numberLabel == "0") ? (inputNumber) : (numberLabel + inputNumber)
+        }
     }
     
     @IBAction func tapSerialZeroButton(_ sender: UIButton) {
