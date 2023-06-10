@@ -201,7 +201,7 @@ final class CalculateViewController: UIViewController {
 }
 
 extension CalculateViewController {
-    func makeCurrentFormulaLabelStackView(_ `operator`: String, _ operand: String) -> UIStackView {
+    private func makeCurrentFormulaLabelStackView(_ `operator`: String, _ operand: String) -> UIStackView {
         let operatorLabel: UILabel = {
             let label = UILabel()
             
@@ -234,7 +234,7 @@ extension CalculateViewController {
         return subStackView
     }
     
-    func setCurrentFormulaViewOnScroll(_ `operator`: String, _ operand: String) {
+    private func setCurrentFormulaViewOnScroll(_ `operator`: String, _ operand: String) {
         currentFormulaStackView.addArrangedSubview(makeCurrentFormulaLabelStackView(`operator`, operand))
         
         currentFormulaScrollView.layoutIfNeeded()
