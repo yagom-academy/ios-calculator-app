@@ -8,6 +8,8 @@ import UIKit
 
 class ViewController: UIViewController {
     private var userTyping = false
+    private var formula = ""
+    private let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var displayOperandLabel: UILabel!
     @IBOutlet weak var displayOperatorLabel: UILabel!
@@ -61,6 +63,17 @@ class ViewController: UIViewController {
             break
         }
     }
+    
+    private func addFormula() {
+        
+    }
+    
+    private func addToStackView(_ operationSign: String, _ operands: String) {
+        let label = UILabel()
+        label.text = "\(operationSign) \(operands)"
+        
+        stackView.addArrangedSubview(label)
+    }
 
     private func clearOperandLabel() {
         displayOperandLabel.text = "0"
@@ -74,11 +87,7 @@ class ViewController: UIViewController {
         stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
-    private func clearEntry() {
-        
-    }
-    
     private func changeSign() {
-        
+        ㅇ
     }
 }
