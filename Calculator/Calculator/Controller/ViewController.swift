@@ -49,16 +49,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorsButton(_ sender: UIButton) {
-        guard let inputOperator = sender.titleLabel?.text,
+        guard let inputButtonOperator = sender.titleLabel?.text,
               let inputNumber = inputNumberLabel.text,
-              let inputOperatorText = inputOperatorLabel.text else { return }
+              let inputOperatorLabelText = inputOperatorLabel.text else { return }
         
-        //현재 숫자입력이 없는 상태인 0에서는 연산자를 반복해서 누르더라도 연산이 이뤄지지 않습니다
         if inputNumberLabel.text == "0" {
-            inputOperatorLabel.text = inputOperator
+            inputOperatorLabel.text = inputButtonOperator
         } else {
             let makeStackView = makeStackView()
-            let operatorLabel = makeLabelInStackView(inputOperatorText)
+            let operatorLabel = makeLabelInStackView(inputOperatorLabelText)
             let numberLabel = makeLabelInStackView(inputNumber)
             
             makeStackView.addArrangedSubview(operatorLabel)
