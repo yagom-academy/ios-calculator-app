@@ -37,12 +37,12 @@
 		3B9B6B4C2A32CE5500AB7ECA /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = SOURCE_ROOT; };
 		3B9B6B4E2A32CE9400AB7ECA /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = SOURCE_ROOT; };
 		3B9B6B502A32CECF00AB7ECA /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = SOURCE_ROOT; };
-		3B9B6B522A32CFC600AB7ECA /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = SOURCE_ROOT; };
+		3B9B6B522A32CFC600AB7ECA /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extension.swift; path = Calculator/Extension/Extension.swift; sourceTree = SOURCE_ROOT; };
 		3B9B6B562A32F5D000AB7ECA /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		3BC261392A25FB0400EB4FD6 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorItemQueue.swift; path = Calculator/Model/CalculatorItemQueue.swift; sourceTree = SOURCE_ROOT; };
 		3BC2613F2A25FB2300EB4FD6 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BC261412A25FB2300EB4FD6 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
-		3BC6A2B32A2843C10047280B /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Protocol.swift; path = Calculator/Model/Protocol.swift; sourceTree = SOURCE_ROOT; };
+		3BC6A2B32A2843C10047280B /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Protocol.swift; path = Calculator/Protocol/Protocol.swift; sourceTree = SOURCE_ROOT; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +79,22 @@
 			path = Error;
 			sourceTree = "<group>";
 		};
+		3B9B6B5A2A35D26A00AB7ECA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3B9B6B522A32CFC600AB7ECA /* Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3B9B6B5B2A35D27600AB7ECA /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				3BC6A2B32A2843C10047280B /* Protocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
 		3BBC64922A29AAAB00177E9C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,8 +116,6 @@
 		3BBC64942A29AABE00177E9C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3B9B6B522A32CFC600AB7ECA /* Extension.swift */,
-				3BC6A2B32A2843C10047280B /* Protocol.swift */,
 				3BC261392A25FB0400EB4FD6 /* CalculatorItemQueue.swift */,
 				3B9B6B502A32CECF00AB7ECA /* Operator.swift */,
 				3B9B6B4E2A32CE9400AB7ECA /* ExpressionParser.swift */,
@@ -141,6 +155,8 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				3B9B6B5B2A35D27600AB7ECA /* Protocol */,
+				3B9B6B5A2A35D26A00AB7ECA /* Extension */,
 				3B9B6B552A32F5BC00AB7ECA /* Error */,
 				3BBC64942A29AABE00177E9C /* Model */,
 				3BBC64932A29AAB200177E9C /* View */,
