@@ -51,7 +51,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = String(operand.suffix(operand.count - 1))
+        operandLabel.text?.removeFirst()
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
