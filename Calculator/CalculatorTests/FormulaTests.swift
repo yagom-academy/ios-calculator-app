@@ -86,16 +86,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_lhs_rhs_operator가_하나이면서_0으로_나누면_DivisionByZero_에러가_발생한다() {
-        // given
-        let random: Double = Double.random(in: -100...100)
-        sut = Formula(operands: [random, 0], operators: [.divide])
-        
-        // then
-        XCTAssertThrowsError(try sut.result())
-    }
-    
-    func test_lhs_rhs_operator가_여러_개이면서_중간에_0으로_나누면_DivisionByZero_에러가_발생한다() {
+    func test_수식_중간에_0으로_나누면_nan이_반환된다() {
         // given
         sut = Formula(
             operands: [1, 2, 5, 0, 2, 20, 5],
@@ -103,13 +94,7 @@ final class FormulaTests: XCTestCase {
         )
         
         // then
-        XCTAssertThrowsError(try sut.result()) { error in
-            if let error = error as? CalculationError {
-                XCTAssertEqual(error, .divisionByZero)
-            } else {
-                XCTFail("예상하지 않은 에러 출력 \(error)")
-            }
-        }
+        XCTAssertTrue(try sut.result().isNaN)
     }
     
     func test_lhs의_옵셔널_바인딩을_실패했을_때_NotFoundOperand_에러가_발생한다() {

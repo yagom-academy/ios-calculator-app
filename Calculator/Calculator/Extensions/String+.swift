@@ -9,4 +9,12 @@ extension String {
     func split(with target: Character) -> [String] {
         self.components(separatedBy: String(target))
     }
+    
+    var isNotEmpty: Bool {
+        !self.isEmpty
+    }
+    
+    var isOperator: Bool {
+        Operator.all.contains(self)
+    }
 }

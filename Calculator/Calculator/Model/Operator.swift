@@ -7,18 +7,22 @@
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "-"
+    case subtract = "−"
     case divide = "÷"
     case multiply = "×"
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    static var all: [Character] {
+        return Self.allCases.map { $0.rawValue }
+    }
+    
+    func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
             return add(lhs: lhs, rhs: rhs)
         case .subtract:
             return subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return try divide(lhs: lhs, rhs: rhs)
+            return divide(lhs: lhs, rhs: rhs)
         case .multiply:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -32,8 +36,8 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
-        if rhs == 0 { throw CalculationError.divisionByZero }
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        if rhs == 0.0 { return .nan }
         return lhs / rhs
     }
     
