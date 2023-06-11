@@ -5,15 +5,12 @@
 //  Created by Min Hyun on 2023/05/31.
 //
 
-import Foundation
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var operatorsQueue = CalculatorItemQueue<Operator>()
         var operandsQueue = CalculatorItemQueue<Double>()
 
-        let operandComponents = self.componentsByOperators(from: input).compactMap { NSDecimalNumber(string:$0).doubleValue
-        }
+        let operandComponents = self.componentsByOperators(from: input).compactMap { Double($0) }
         let operatorComponents = input.compactMap { Operator(rawValue: $0) }
         
         operandComponents.forEach { operandsQueue.enqueue($0) }

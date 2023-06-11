@@ -5,6 +5,8 @@
 //  Created by Min Hyun on 2023/05/31.
 //
 
+import Foundation
+
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
@@ -25,21 +27,25 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) + Decimal(rhs))
+        return result.doubleValue
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) - Decimal(rhs))
+        return  result.doubleValue
     }
     
     private func divide(lhs: Double, rhs: Double) throws -> Double {
         guard rhs != Double.zero else {
             throw CalculatorError.divideByZero
         }
-        return lhs / rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) / Decimal(rhs))
+        return result.doubleValue
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) * Decimal(rhs))
+        return result.doubleValue
     }
 }
