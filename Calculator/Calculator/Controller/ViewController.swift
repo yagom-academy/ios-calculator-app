@@ -70,22 +70,43 @@ final class ViewController: UIViewController {
         }
         
         operatorQueue.enqueue(item: selectedOperator)
-    
+        
+        
+        
         let newOperatorLabel = UILabel()
         newOperatorLabel.text = operatorsLabel.text
-        newOperatorLabel.textColor = .green
+        newOperatorLabel.textColor = .white
+        newOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
         let newNumberLabel = UILabel()
         newNumberLabel.text = numberInputLabel.text
         newNumberLabel.textColor = .white
+        newNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         
-        if firstNumberLabel.text?.isEmpty == true {
+        if numberInputLabel.text?.isEmpty == true {
             firstOperatorLabel?.text = newOperatorLabel.text
             firstNumberLabel?.text = newNumberLabel.text
         }
         
-        operatorStackView.addArrangedSubview(newOperatorLabel)
-        operatorStackView.addArrangedSubview(newNumberLabel)
+        let containerView = UIView()
+        containerView.addSubview(newOperatorLabel)
+        containerView.addSubview(newNumberLabel)
+
+        operatorStackView.addArrangedSubview(containerView)
+
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        newOperatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        newNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            newOperatorLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            newOperatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            newOperatorLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            newNumberLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            newNumberLabel.leadingAnchor.constraint(equalTo: newOperatorLabel.trailingAnchor),
+            newNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            newNumberLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
         
         operatorStackView.spacing = 0
         operatorStackView.layoutIfNeeded()
