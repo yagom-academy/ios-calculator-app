@@ -35,7 +35,8 @@ class CalculatorViewController: UIViewController {
             if inputNumberLabelText == "0" {
                 inputNumberLabel.text? = labelText
             } else if inputNumberLabelText.count < 20 {
-                inputNumberLabel.text? += labelText
+                let newLabelText = inputNumberLabelText + labelText
+                inputNumberLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
             }
         }
     }
