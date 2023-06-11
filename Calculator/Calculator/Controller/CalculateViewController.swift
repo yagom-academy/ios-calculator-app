@@ -71,7 +71,7 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = operandLabelText + "0"
+        currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + "0")
     }
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
@@ -87,7 +87,7 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = operandLabelText + "00"
+        currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + "00")
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
@@ -150,6 +150,7 @@ final class CalculateViewController: UIViewController {
         } else {
             isZeroButtonUsed = false
         }
+        
         isCurrentOperandLabelMadeFromResult = false
         initializeOperandLabel()
     }
