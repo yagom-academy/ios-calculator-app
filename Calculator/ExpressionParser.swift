@@ -13,14 +13,14 @@ enum ExpressionParser {
         let operators = Array(input.filter { $0.isNumber == false })
         
         for operand in operands {
-            if let number = Double(operand) {
-                formula.operands.enqueue(number)
+            if let operand = Double(operand) {
+                formula.operands.enqueue(operand)
             }
         }
         
         for `operator` in operators {
-            if let oper = Operator(rawValue: `operator`) {
-                formula.operators.enqueue(oper)
+            if let `operator` = Operator(rawValue: `operator`) {
+                formula.operators.enqueue(`operator`)
             }
         }
 
