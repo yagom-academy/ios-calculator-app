@@ -1,12 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  CalculatorViewController - ViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var contentView: UIView!
@@ -44,14 +44,7 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapClearButton(_ sender: UIButton) {
-        defaultNumber = ""
-        operatorsLabel.text = ""
-        numberInputLabel.text = "0"
-        firstNumberLabel?.text = ""
-        firstOperatorLabel?.text = ""
-        operandQueue.removeAll()
-        operatorQueue.removeAll()
-        operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        clearCalculator()
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
@@ -116,20 +109,7 @@ final class ViewController: UIViewController {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         newOperatorLabel.translatesAutoresizingMaskIntoConstraints = false
         newNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            newOperatorLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            newOperatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            newOperatorLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            newNumberLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
-            newNumberLabel.leadingAnchor.constraint(equalTo: newOperatorLabel.trailingAnchor),
-            newNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            newNumberLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-        ])
-        
-        operatorStackView.spacing = 0
-        operatorStackView.layoutIfNeeded()
-        scrollView.contentSize = operatorStackView.bounds.size
+        setupConstraints(for: containerView, operatorLabel: newOperatorLabel, numberLabel: newNumberLabel)
         
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
@@ -152,11 +132,19 @@ final class ViewController: UIViewController {
         operandQueue.removeAll()
         operatorQueue.removeAll()
     }
+    
+    @IBAction func tapCEButton(_ sender: UIButton) {
+        if isReset {
+            handleResetState()
+        } else {
+            handleNonResetState()
+        }
+    }
 }
 
 
-extension ViewController {
-    func toggleSign() {
+extension CalculatorViewController {
+    private func toggleSign() {
         guard let currentNumberString = numberInputLabel.text,
               var currentNumber = Double(currentNumberString) else {
             return
@@ -166,7 +154,19 @@ extension ViewController {
         numberInputLabel.text = "\(currentNumber)"
     }
     
-    func updateNumberLabel(_ number: Double) {
+    private func setupConstraints(for containerView: UIView, operatorLabel: UILabel, numberLabel: UILabel) {
+        NSLayoutConstraint.activate([
+            operatorLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            operatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            operatorLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            numberLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            numberLabel.leadingAnchor.constraint(equalTo: operatorLabel.trailingAnchor),
+            numberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            numberLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+    }
+    
+    private func updateNumberLabel(_ number: Double) {
         let numberFormatter = NumberFormatter()
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.numberStyle = .decimal
@@ -175,5 +175,47 @@ extension ViewController {
         if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
             numberInputLabel.text = formattedNumber
         }
+    }
+    
+    private func clearCalculator() {
+        defaultNumber = ""
+        operatorsLabel.text = ""
+        numberInputLabel.text = "0"
+        firstNumberLabel?.text = ""
+        firstOperatorLabel?.text = ""
+        operandQueue.removeAll()
+        operatorQueue.removeAll()
+        operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    private func handleResetState() {
+        if operatorQueue.isEmpty() {
+            defaultNumber = ""
+            numberInputLabel.text = "0"
+        } else {
+            if let lastOperator = operatorQueue.lastItem {
+                _ = operatorQueue.dequeueItem()
+                removeLastOperatorView()
+                operatorsLabel.text = operatorQueue.isEmpty() ? "" : String(lastOperator.rawValue)
+            }
+        }
+    }
+    
+    private func handleNonResetState() {
+        if !defaultNumber.isEmpty {
+            defaultNumber.removeLast()
+            numberInputLabel.text = defaultNumber.isEmpty ? "0" : defaultNumber
+        } else if !operatorQueue.isEmpty() {
+            if let lastOperator = operatorQueue.lastItem {
+                _ = operatorQueue.dequeueItem()
+                removeLastOperatorView()
+                operatorsLabel.text = operatorQueue.isEmpty() ? "" : String(lastOperator.rawValue)
+            }
+        }
+    }
+    
+    private func removeLastOperatorView() {
+        guard let lastContainerView = operatorStackView.arrangedSubviews.last else { return }
+        lastContainerView.removeFromSuperview()
     }
 }
