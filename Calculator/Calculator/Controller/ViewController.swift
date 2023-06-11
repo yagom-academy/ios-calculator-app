@@ -40,11 +40,14 @@ final class ViewController: UIViewController {
         defaultNumber = ""
         operatorsLabel.text = ""
         numberInputLabel.text = "0"
-        firstNumberLabel.text = ""
+        firstNumberLabel?.text = ""
         secondNumberLabel.text = ""
         secondOperatorLabel.text = ""
         operandQueue.removeAll()
         operatorQueue.removeAll()
+        operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
@@ -63,7 +66,6 @@ final class ViewController: UIViewController {
         
         operatorsLabel.text = operatorString
         
-        
         if let number = Double(defaultNumber) {
             operandQueue.enqueue(item: number)
             defaultNumber = ""
@@ -72,18 +74,16 @@ final class ViewController: UIViewController {
         updateDisplayLabels()
         operatorQueue.enqueue(item: selectedOperator)
         
+        firstOperatorLabel?.text = operatorsLabel.text
+        firstNumberLabel?.text = numberInputLabel.text
         
-        guard let op = operatorsLabel.text?.count else { return }
-        
-        if  op >= 1 {
+        if let firstNumber = firstNumberLabel?.text,
+           firstNumber.isEmpty {
             firstOperatorLabel.text = operatorsLabel.text
+            firstNumberLabel.text = numberInputLabel.text
+            
+            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
         }
-        firstNumberLabel.text = numberInputLabel.text
-        
-        let operatorLabel = UILabel()
-        operatorLabel.text = operatorString
-        operatorStackView.addArrangedSubview(operatorLabel)
-        operatorStackView.addSubview(operatorLabel)
     }
     
     @IBAction func tapEqualButton(_ sender: UIButton) {
@@ -102,13 +102,18 @@ final class ViewController: UIViewController {
         
         operandQueue.removeAll()
         operatorQueue.removeAll()
-        firstNumberLabel.text = ""
-        firstOperatorLabel.text = ""
         
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
     func updateDisplayLabels() {
-        secondNumberLabel.text = firstNumberLabel.text
-        secondOperatorLabel.text = firstOperatorLabel.text
+        secondNumberLabel?.text = firstNumberLabel.text
+        secondOperatorLabel?.text = firstOperatorLabel.text
+    }
+    
+    func scrollview() {
+//        scrollView.layoutIfNeeded()
+//        let contentHeight = operatorStackView.frame.maxY
+//        let contetSize = CGSize
     }
 }
