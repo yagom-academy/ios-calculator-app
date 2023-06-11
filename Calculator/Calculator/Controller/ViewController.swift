@@ -57,8 +57,6 @@ final class ViewController: UIViewController {
         operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    
-    
     @IBAction func tapDotButton(_ sender: UIButton) {
         guard defaultNumber.count < 20,
               !defaultNumber.contains(".") else { return }
@@ -148,8 +146,9 @@ final class ViewController: UIViewController {
         let formula = Formula(operands: operandQueue, operators: operatorQueue)
         do {
             let result = try formula.result()
-            numberInputLabel.text = String(result)
+            updateNumberLabel(result)
         } catch {
+            numberInputLabel.text = "Error"
             print(error)
         }
         
@@ -168,5 +167,16 @@ extension ViewController {
         
         currentNumber *= -1
         numberInputLabel.text = "\(currentNumber)"
+    }
+    
+    func updateNumberLabel(_ number: Double) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        
+        if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
+            numberInputLabel.text = formattedNumber
+        }
     }
 }
