@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
         let result: Double = formula.result()
-        operandLabel.text = result.formatNumbers()
+        operandLabel.text = result.formatNumbers().replacingOccurrences(of: "-", with: "−")
         operatorLabel.text = ""
         expression = ""
         isResult = true

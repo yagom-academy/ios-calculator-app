@@ -30,7 +30,7 @@ enum ExpressionParser {
         
         for index in 0..<operands.count - 1 {
             if operands[index].isEmpty {
-                operands[index + 1] = "−\(operands[index + 1])"
+                operands[index + 1] = "-\(operands[index + 1])"
             }
         }
         
