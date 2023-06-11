@@ -8,8 +8,8 @@
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "−"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         let result: Double
@@ -37,7 +37,9 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func divide(_ lhs: Double, _ rhs: Double) -> Double {
-        return lhs / rhs
+        let result = lhs / rhs
+        
+        return result.isInfinite ? .nan : result
     }
     
     private func multiply(_ lhs: Double, _ rhs: Double) -> Double {

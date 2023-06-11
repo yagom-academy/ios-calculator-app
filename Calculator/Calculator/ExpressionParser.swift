@@ -28,6 +28,6 @@ enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where O
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-      return input.components(separatedBy: ["+", "−", "*", "/"])
+      return input.components(separatedBy: ["+", "−", "×", "÷"])
     }
 }
