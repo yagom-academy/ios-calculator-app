@@ -29,6 +29,11 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
+        if !isReset {
+            isReset = true
+            numberInputLabel.text = ""
+        }
+        
         guard let numberValue = sender.title(for: .normal) else { return }
         guard defaultNumber.count < 20 else { return }
         
@@ -63,12 +68,27 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
+        if isReset {
+            if let number = Double(defaultNumber) {
+                operandQueue.enqueue(item: number)
+                defaultNumber = ""
+            }
+            isReset = false
+        }
+        
         guard let operatorString = sender.titleLabel?.text,
               let selectedOperator = Operator(rawValue: Character(operatorString)) else {
             return
         }
         
         operatorsLabel.text = operatorString
+        
+        if operatorString == "÷" {
+            if let lastOperand = operandQueue.lastItem, lastOperand == 0.0 {
+                numberInputLabel.text = "NaN"
+                return
+            }
+        }
         
         if let number = Double(defaultNumber) {
             operandQueue.enqueue(item: number)
@@ -95,13 +115,13 @@ final class ViewController: UIViewController {
         let containerView = UIView()
         containerView.addSubview(newOperatorLabel)
         containerView.addSubview(newNumberLabel)
-
+        
         operatorStackView.addArrangedSubview(containerView)
-
+        
         containerView.translatesAutoresizingMaskIntoConstraints = false
         newOperatorLabel.translatesAutoresizingMaskIntoConstraints = false
         newNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-
+        
         NSLayoutConstraint.activate([
             newOperatorLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
             newOperatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
