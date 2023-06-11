@@ -35,7 +35,7 @@
 ## 2. 시각화된 프로젝트 구조
 
 ### UML
-**추후 추가 예정**
+<img src="https://github.com/h-suo/ios-calculator-app/assets/109963294/0b590bd2-f904-45b6-b017-21e26654cb49" height="1000"/>
 
 ### 폴더 구조
 
