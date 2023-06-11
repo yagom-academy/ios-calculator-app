@@ -17,6 +17,7 @@ final class CalculatorViewController: UIViewController {
     private var inputFormula = ""
     private let initialNumber = 0
     private let maximumPointDigits = 5
+    private let maximumOperandDigits = 20
     private var isFirstArithmeticFormula: Bool {
         return calculationFormulaStackView.subviews.count == 0
     }
@@ -125,7 +126,7 @@ extension CalculatorViewController {
         let operand = currentOperand.replacingOccurrences(of: ".", with: "")
         let appendedOperandCount = (operand + insertedNumber).count
         
-        return appendedOperandCount > 20
+        return appendedOperandCount > maximumOperandDigits
     }
     
     private func isOverMaximumPointDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
@@ -134,7 +135,7 @@ extension CalculatorViewController {
         
         let appendedPointNumber = (pointNumber + insertedNumber).count
         
-        return appendedPointNumber > 5
+        return appendedPointNumber > maximumPointDigits
     }
     
     private func setUpOperandLabelText(_ currentOperand: String, _ insertedNumber: String) -> String? {
