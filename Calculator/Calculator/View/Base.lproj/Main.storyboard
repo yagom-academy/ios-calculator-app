@@ -368,8 +368,6 @@
                         <outlet property="operatorStackView" destination="XRe-QE-UJf" id="6qq-fF-jVE"/>
                         <outlet property="operatorsLabel" destination="HPC-iy-qdm" id="5A0-uW-T9J"/>
                         <outlet property="scrollView" destination="BOT-7g-vxv" id="XF1-XP-3cy"/>
-                        <outlet property="secondNumberLabel" destination="oGo-LN-bKL" id="YAO-I5-LET"/>
-                        <outlet property="secondOperatorLabel" destination="c7v-6K-W40" id="7CO-OM-Hqj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

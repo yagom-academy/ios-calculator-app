@@ -13,9 +13,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var numberInputLabel: UILabel!
     @IBOutlet weak var operatorsLabel: UILabel!
     @IBOutlet weak var firstNumberLabel: UILabel!
-    @IBOutlet weak var secondNumberLabel: UILabel!
     @IBOutlet weak var firstOperatorLabel: UILabel!
-    @IBOutlet weak var secondOperatorLabel: UILabel!
     @IBOutlet weak var operatorStackView: UIStackView!
     
     private var isReset: Bool = false
@@ -44,7 +42,6 @@ final class ViewController: UIViewController {
     @IBAction func tapToggleSingButton(_ sender: UIButton) {
         toggleSign()
     }
-    
     
     @IBAction func tapClearButton(_ sender: UIButton) {
         defaultNumber = ""
