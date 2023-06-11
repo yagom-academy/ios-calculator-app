@@ -43,7 +43,12 @@ class CalculatorViewController: UIViewController {
             
             if numberLabelText.count < 20 {
                 inputOperatorLabel.text = (formulaListStackView.subviews.isEmpty) ? ("") : operatorLabelText
-                inputNumberLabel.text = (numberLabelText == "0") ? (inputNumberText) : calculatorNumberFormatter.string(for: Double(numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText))
+                if numberLabelText == "0" {
+                    inputNumberLabel.text = inputNumberText
+                } else {
+                    let formattedNumberText = numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText
+                    inputNumberLabel.text = calculatorNumberFormatter.string(for: Double(formattedNumberText))
+                }
             }
         }
     }
