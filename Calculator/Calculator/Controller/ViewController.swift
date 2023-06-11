@@ -59,6 +59,10 @@ class ViewController: UIViewController {
             return
         }
         
+        if let operand = operandLabel.text, operand.hasSuffix(".") {
+            operandLabel.text?.removeLast()
+        }
+        
         addStackView()
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
@@ -96,7 +100,7 @@ class ViewController: UIViewController {
         }
         
         if operand.hasSuffix(".") {
-            operandLabel.text = String(operand.prefix(operand.count - 1))
+            operandLabel.text?.removeLast()
         }
 
         addStackView()
