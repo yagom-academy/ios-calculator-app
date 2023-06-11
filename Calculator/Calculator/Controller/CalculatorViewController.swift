@@ -75,17 +75,14 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let currentOperand = sender.currentTitle, !isResult else {
+        guard let currentOperand = sender.currentTitle, let operand = operandLabel.text, !isResult else {
             return
         }
         guard currentOperand != "0" else {
             isInputZero = true
             return
         }
-        guard let operand = operandLabel.text, !(operand.hasSuffix(".") && currentOperand == ".") else {
-            return
-        }
-        guard operand != "0" || currentOperand == "." else {
+        guard operand != "0" else {
             operandLabel.text = currentOperand
             return
         }
@@ -93,14 +90,33 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operand + currentOperand
     }
     
+    @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
+        guard let decimalPointOperand = sender.currentTitle, !isResult else {
+            return
+        }
+        guard let operand = operandLabel.text, !operand.hasSuffix(decimalPointOperand) else {
+            return
+        }
+        guard !operand.contains(decimalPointOperand) else {
+            return
+        }
+        
+        operandLabel.text = operand + decimalPointOperand
+    }
+    
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, operand != "0" || isInputZero else {
+        guard let operand = operandLabel.text?.replacingOccurrences(of: "−", with: "-"),
+              operand != "0" || isInputZero
+        else {
             operatorLabel.text = sender.currentTitle
             return
         }
         
         if operand.hasSuffix(".") {
             operandLabel.text?.removeLast()
+        }
+        if let realNumber = Double(operand), Double(operand) == Double(Int(realNumber)) {
+            operandLabel.text = String(Int(realNumber))
         }
 
         addPreviousContentStackView()
