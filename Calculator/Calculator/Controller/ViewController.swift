@@ -113,11 +113,10 @@ class ViewController: UIViewController {
     }
     
     private func configureCurrentFormula() -> String {
-        guard let operand = operandLabel.text else {
-            return ""
-        }
+        let operatorCase = operatorLabel.text ?? ""
+        let operand = operandLabel.text ?? ""
         
-        return "\(operatorLabel.text ?? "")\(operand)"
+        return operatorCase + operand
     }
     
     private func addStackView() {
