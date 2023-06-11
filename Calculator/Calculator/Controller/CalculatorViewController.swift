@@ -72,7 +72,7 @@ class CalculatorViewController: UIViewController {
             
         if inputNumberLabelText == "0",
            labelText == "=" {
-            formulaString += inputOperatorLabelText + inputNumberLabelText
+            formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
             allInputScrollView.scrollToBottom()
         } else if inputNumberLabelText == "0" {
             inputOperatorLabel.text? = labelText
@@ -82,14 +82,14 @@ class CalculatorViewController: UIViewController {
             }
             
             let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
-            let operandLabel: UILabel = makeUILabel(makeNumberFormat(for: inputNumberLabelText))
+            let operandLabel: UILabel = makeUILabel(inputNumberLabelText)
             let inputLabelStackView = makeUIStackView()
             
             inputLabelStackView.addArrangedSubview(operatorLabel)
             inputLabelStackView.addArrangedSubview(operandLabel)
             allInputStackView.addArrangedSubview(inputLabelStackView)
             
-            formulaString += inputOperatorLabelText + inputNumberLabelText
+            formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
             resetInputNumberLabel()
             inputOperatorLabel.text? = labelText
             allInputScrollView.scrollToBottom()
