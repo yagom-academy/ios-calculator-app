@@ -18,8 +18,8 @@ final class ExpressionParserTests: XCTestCase {
         let result = ExpressionParser.parse(from: input)
         
         // then
-        XCTAssertEqual(result.operands.elements, expectation.operands.elements)
-        XCTAssertEqual(result.operators.elements, expectation.operators.elements)
+        XCTAssertEqual(result.operands.inStack, expectation.operands.inStack)
+        XCTAssertEqual(result.operators.inStack, expectation.operators.inStack)
     }
     
     func test_복잡하고_정상적인_문자열_수식을_parse_하면_Formula_객체안에_연산자와_피연산자가_분리되어_순서대로_queue에_쌓인다() throws {
@@ -34,7 +34,7 @@ final class ExpressionParserTests: XCTestCase {
         let result = ExpressionParser.parse(from: input)
         
         // then
-        XCTAssertEqual(result.operands.elements, expectation.operands.elements)
-        XCTAssertEqual(result.operators.elements, expectation.operators.elements)
+        XCTAssertEqual(result.operands.inStack, expectation.operands.inStack)
+        XCTAssertEqual(result.operators.inStack, expectation.operators.inStack)
     }
 }
