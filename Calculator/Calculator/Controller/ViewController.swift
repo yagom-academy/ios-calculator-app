@@ -148,6 +148,7 @@ class ViewController: UIViewController {
         resetInputNumberLabel()
         resetInputOperatorLabel()
         resetAllInputStackView()
+        resetFormulaString()
         operationReady = true
     }
     
