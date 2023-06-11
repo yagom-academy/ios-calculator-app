@@ -36,6 +36,11 @@ final class ViewController: UIViewController {
         numberInputLabel.text = defaultNumber
     }
     
+    @IBAction func tapToggleSingButton(_ sender: UIButton) {
+        toggleSign()
+    }
+    
+    
     @IBAction func tapClearButton(_ sender: UIButton) {
         defaultNumber = ""
         operatorsLabel.text = ""
@@ -45,8 +50,9 @@ final class ViewController: UIViewController {
         operandQueue.removeAll()
         operatorQueue.removeAll()
         operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
     }
+    
+    
     
     @IBAction func tapDotButton(_ sender: UIButton) {
         guard defaultNumber.count < 20,
@@ -70,8 +76,6 @@ final class ViewController: UIViewController {
         }
         
         operatorQueue.enqueue(item: selectedOperator)
-        
-        
         
         let newOperatorLabel = UILabel()
         newOperatorLabel.text = operatorsLabel.text
@@ -131,5 +135,18 @@ final class ViewController: UIViewController {
         
         operandQueue.removeAll()
         operatorQueue.removeAll()
+    }
+}
+
+
+extension ViewController {
+    func toggleSign() {
+        guard let currentNumberString = numberInputLabel.text,
+              var currentNumber = Double(currentNumberString) else {
+            return
+        }
+        
+        currentNumber *= -1
+        numberInputLabel.text = "\(currentNumber)"
     }
 }
