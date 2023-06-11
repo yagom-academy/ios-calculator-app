@@ -7,7 +7,7 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    let operationManager = OperationManager()
+    var operationManager = OperationManager()
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandsLabel: UILabel!
@@ -23,8 +23,8 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
-        guard let inputOperator = sender.currentTitle else { return }
-        guard let currentOperator = operatorLabel.text,
+        guard let inputOperator = sender.currentTitle,
+              let currentOperator = operatorLabel.text,
               let currentOperands = operandsLabel.text else { return }
         
         let result = operationManager.addFormula(currentOperator, currentOperands)
@@ -46,7 +46,7 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func tapNumberButton(_ sender: UIButton) {
         guard let currentOperands = operandsLabel.text,
               let inputNumber = sender.currentTitle else { return }
-                
+        
         let reuslt = operationManager.addOperandsLabel(currentOperands, inputNumber)
         setOperandsLabel(reuslt)
     }

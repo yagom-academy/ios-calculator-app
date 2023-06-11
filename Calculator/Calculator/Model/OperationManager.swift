@@ -7,7 +7,7 @@
 
 import Foundation
 
-class OperationManager {
+struct OperationManager {
     private var formula: String = ""
     private var isCalculate: Bool = false
     private let numberFormatter: NumberFormatter = {
@@ -19,7 +19,7 @@ class OperationManager {
         return numberFormatter
     }()
     
-    func calculateFormula() -> String {
+    mutating func calculateFormula() -> String {
         var parsedFormula = ExpressionParser.parse(from: formula)
         guard let result = numberFormatter.string(for: parsedFormula.result()) else { return "Error" }
         isCalculate = true
@@ -29,7 +29,7 @@ class OperationManager {
     }
     
     @discardableResult
-    func addFormula(_ operatror: String, _ operands: String) -> (String, String) {
+    mutating func addFormula(_ operatror: String, _ operands: String) -> (String, String) {
         let currentOperands = operands.replacingOccurrences(of: ",", with: "")
         let `operator` = operatror
         
@@ -51,7 +51,7 @@ class OperationManager {
         return ("", "")
     }
     
-    func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
+    mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
         let numberOperands = isCalculate ? CalculatorTerms.zero.rawValue : currentOperands.replacingOccurrences(of: ",", with: "")
         
         guard let number = Double(numberOperands + inputOperands),
@@ -86,7 +86,7 @@ class OperationManager {
         return operands
     }
     
-    func clearFormula() {
+    mutating func clearFormula() {
         formula = ""
     }
 }
