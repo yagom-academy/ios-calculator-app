@@ -148,17 +148,20 @@ extension CalculatorViewController {
         }
         
         if insertedNumber == "." {
-            return currentOperand.contains(".") ? currentOperand : currentOperand + "."
+            let operandAsFormatter = convertToFormatterString(string: currentOperand)
+            
+            return currentOperand.contains(".") ? operandAsFormatter : operandAsFormatter + "."
         }
         
         if currentOperand.contains(".") && Double(insertedNumber) == 0.0 {
-            return currentOperand + insertedNumber
+            let operand = currentOperand.components(separatedBy: ".")
+            let operandAsFormatter = convertToFormatterString(string: operand.first ?? "")
+            let operandPointNumber = operand.last ?? ""
+            
+            return operandAsFormatter + "." + operandPointNumber + insertedNumber
         }
-
-        let appendedOperand = currentOperand + insertedNumber
-        let appenedOperandAsNumber = numberFormatter.number(from: appendedOperand) ?? initialNumber as NSNumber
         
-        return numberFormatter.string(from: appenedOperandAsNumber)
+        return convertToFormatterString(string: currentOperand + insertedNumber)
     }
     
     private func clearFormula() {
@@ -167,14 +170,22 @@ extension CalculatorViewController {
         currentOperatorLabel.text = ""
         calculateButton.isEnabled = false
     }
+    
+    private func convertToFormatterString(string: String) -> String {
+        let formatterNumber = numberFormatter.number(from: string) ?? initialNumber as NSNumber
+        let formatterString = numberFormatter.string(from: formatterNumber) ?? ""
+        
+        return formatterString
+    }
 }
 
 // MARK: - UI Method
 extension CalculatorViewController {
     private func addArithmetic() {
         let operand = makeRefinementOperand()
+        let operndAsFormatterString = convertToFormatterString(string: operand ?? "")
         
-        addFormulaStackView(currentOperandLabel.text)
+        addFormulaStackView(operndAsFormatterString)
         addInputFormula(operand)
         scrollView.scrollToBottom(animated: true)
     }
