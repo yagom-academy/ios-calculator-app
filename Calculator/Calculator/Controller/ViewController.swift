@@ -43,7 +43,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, operand != "0", operand != "0." else {
+        guard let operand = operandLabel.text, Double(operand) != Double.zero else {
             return
         }
         guard operand.hasPrefix("−") else {
