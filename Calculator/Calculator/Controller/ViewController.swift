@@ -41,8 +41,8 @@ class ViewController: UIViewController {
         guard let operand = operandLabel.text, operand != "0", operand != "0." else {
             return
         }
-        guard operand.hasPrefix("-") else {
-            operandLabel.text = "-\(operand)"
+        guard operand.hasPrefix("−") else {
+            operandLabel.text = "−\(operand)"
             return
         }
         
