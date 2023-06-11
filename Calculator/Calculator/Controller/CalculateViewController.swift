@@ -178,7 +178,7 @@ final class CalculateViewController: UIViewController {
 
         formatter.maximumSignificantDigits = 15
         formatter.numberStyle = .decimal
-        formatter.roundingMode = .halfUp
+        formatter.roundingMode = .down
         formatter.usesSignificantDigits = true
         
         return formatter.string(from: number) ?? "NaN"
