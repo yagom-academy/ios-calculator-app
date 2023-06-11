@@ -56,10 +56,10 @@ extension CalculatorViewController {
     }
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {
-        guard let currentOperand = currentOperandLabel.text?.replacingOccurrences(of: ",", with: ""), let insertedNumber = sender.currentTitle else { return }
+        guard var currentOperand = currentOperandLabel.text?.replacingOccurrences(of: ",", with: ""), let insertedNumber = sender.currentTitle else { return }
         
         if isPrevResult {
-            currentOperandLabel.text = "\(initialNumber)"
+            currentOperand = "\(initialNumber)"
             isPrevResult = false
         }
         
@@ -114,7 +114,7 @@ extension CalculatorViewController {
     }
     
     private func makeRefinementOperand() -> String? {
-        guard let currentOperandString = currentOperandLabel.text, let operand = Double(currentOperandString) else { return nil }
+        guard let currentOperandString = currentOperandLabel.text?.replacingOccurrences(of: ",", with: ""), let operand = Double(currentOperandString) else { return nil }
         
         let isDecimalPointNumber = operand != floor(operand)
         
@@ -164,7 +164,7 @@ extension CalculatorViewController {
     private func addArithmetic() {
         let operand = makeRefinementOperand()
         
-        addFormulaStackView(operand)
+        addFormulaStackView(currentOperandLabel.text)
         addInputFormula(operand)
         scrollView.scrollToBottom(animated: true)
     }
