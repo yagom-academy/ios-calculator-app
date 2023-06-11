@@ -41,13 +41,11 @@ final class ViewController: UIViewController {
         operatorsLabel.text = ""
         numberInputLabel.text = "0"
         firstNumberLabel?.text = ""
-        secondNumberLabel.text = ""
-        secondOperatorLabel.text = ""
+        firstOperatorLabel?.text = ""
         operandQueue.removeAll()
         operatorQueue.removeAll()
         operatorStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
     @IBAction func tapDotButton(_ sender: UIButton) {
@@ -71,19 +69,29 @@ final class ViewController: UIViewController {
             defaultNumber = ""
         }
         
-        updateDisplayLabels()
         operatorQueue.enqueue(item: selectedOperator)
+    
+        let newOperatorLabel = UILabel()
+        newOperatorLabel.text = operatorsLabel.text
+        newOperatorLabel.textColor = .green
         
-        firstOperatorLabel?.text = operatorsLabel.text
-        firstNumberLabel?.text = numberInputLabel.text
+        let newNumberLabel = UILabel()
+        newNumberLabel.text = numberInputLabel.text
+        newNumberLabel.textColor = .white
         
-        if let firstNumber = firstNumberLabel?.text,
-           firstNumber.isEmpty {
-            firstOperatorLabel.text = operatorsLabel.text
-            firstNumberLabel.text = numberInputLabel.text
-            
-            scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+        if firstNumberLabel.text?.isEmpty == true {
+            firstOperatorLabel?.text = newOperatorLabel.text
+            firstNumberLabel?.text = newNumberLabel.text
         }
+        
+        operatorStackView.addArrangedSubview(newOperatorLabel)
+        operatorStackView.addArrangedSubview(newNumberLabel)
+        
+        operatorStackView.spacing = 0
+        operatorStackView.layoutIfNeeded()
+        scrollView.contentSize = operatorStackView.bounds.size
+        
+        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
     }
     
     @IBAction func tapEqualButton(_ sender: UIButton) {
@@ -102,18 +110,5 @@ final class ViewController: UIViewController {
         
         operandQueue.removeAll()
         operatorQueue.removeAll()
-        
-        scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
-    }
-    
-    func updateDisplayLabels() {
-        secondNumberLabel?.text = firstNumberLabel.text
-        secondOperatorLabel?.text = firstOperatorLabel.text
-    }
-    
-    func scrollview() {
-//        scrollView.layoutIfNeeded()
-//        let contentHeight = operatorStackView.frame.maxY
-//        let contetSize = CGSize
     }
 }
