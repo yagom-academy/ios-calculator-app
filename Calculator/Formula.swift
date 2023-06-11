@@ -10,19 +10,13 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
     
     mutating func result() throws -> Double {
-        var result: Double = 0.0
-        guard var lhs: Double = operands.dequeue() else { throw CalculatorError.inValidCalculate }
+        guard var result: Double = operands.dequeue() else { throw CalculatorError.inValidCalculate }
         
-        while operands.isEmpty == false {
-            let dequeueOperator = operators.dequeue()
-            
-            guard let rhs = operands.dequeue(),
-                  let calculatedValue = dequeueOperator?.calculate(lhs: lhs, rhs: rhs) else { throw CalculatorError.inValidCalculate }
-            
-            lhs = calculatedValue
+        while let rhs = operands.dequeue(), let `operator` = operators.dequeue() {
+            let calculatedValue = `operator`.calculate(lhs: result, rhs: rhs)
+        
             result = calculatedValue
         }
         return result
     }
 }
-
