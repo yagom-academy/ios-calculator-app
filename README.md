@@ -1,4 +1,4 @@
-# Calcalutor
+# Calculator
 
 ## 📖 목차
 
