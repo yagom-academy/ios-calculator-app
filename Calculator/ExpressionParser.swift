@@ -8,9 +8,9 @@ import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var formula = Formula()
         let operands = componentsByOperators(from: input)
         let operators = Array(input.filter { $0.isNumber == false })
+        var formula = Formula()
         
         for operand in operands {
             if let operand = Double(operand) {
@@ -28,6 +28,13 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.components(separatedBy: ["+", "-", "/", "*"])
+        var operands = input.components(separatedBy: ["+", "-", "/", "*"])
+        
+        while let emptyStringValue = operands.firstIndex(of: "") {
+            operands.remove(at: emptyStringValue)
+            operands[emptyStringValue] = "-" + operands[emptyStringValue]
+            
+        }
+        return operands
     }
 }
