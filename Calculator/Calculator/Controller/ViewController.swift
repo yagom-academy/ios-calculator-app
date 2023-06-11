@@ -37,11 +37,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
-        guard !isResult else {
-            return
-        }
-        
         operandLabel.text = "0"
+        isResult = false
         isInputZero = false
     }
     
