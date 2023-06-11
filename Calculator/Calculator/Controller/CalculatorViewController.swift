@@ -64,10 +64,11 @@ class CalculatorViewController: UIViewController {
     @IBAction func tapOperator(_ sender: UIButton) {
         guard var inputOperatorLabelText = inputOperatorLabel.text,
               let inputNumberLabelText = inputNumberLabel.text,
-              let labelText = sender.titleLabel?.text else {
+              let labelText = sender.titleLabel?.text,
+              operationReady else {
             return
         }
-        
+            
         if inputNumberLabelText == "0",
            labelText == "=" {
             formulaString += inputOperatorLabelText + inputNumberLabelText
