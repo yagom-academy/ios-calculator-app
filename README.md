@@ -1,6 +1,6 @@
 # README
 
-# ✖️➕🧮➖➗ 🟰계산기
+# 🧮 🟰 계산기
 
 ## 📖 목차
 1. [소개](#-소개)
@@ -31,23 +31,36 @@
 
 
 ## 👀 시각화된 프로젝트 구조
-
- <Img src="https://github.com/hemg2/ios-calculator-app/assets/101572902/93acdfb4-5f47-4f98-8541-ea01a462deb5" height="300">
+UML Diagram.jpg
 
 ## 💻 실행 화면
-- 추후 추가 진행하도록하겠습니다.
+| 정상적인 작동 | 소수자리 확인 | 
+|:--:|:--:|
+|<img src="https://hackmd.io/_uploads/Hk13RLQP2.gif" height="400" width="300">|<img src="https://hackmd.io/_uploads/SyWTRLQwn.gif" height="400" width="300">
+
+| 잘못된 입력 | 0나누기 처리 |
+|:--:|:--:|
+|<img src="https://hackmd.io/_uploads/S1Tgywmw3.gif" height="400" width="300">|<img src="https://hackmd.io/_uploads/BJdWJv7D3.gif" height="400" width="300">
+
 
 ---
 
-## ⏰ 타임라인 
+## 🕰️ 타임라인 
 
 | 날짜 | 내용 |
-| :---: | --- |
+| :---: | :--- |
 | 2023.05.29. | 계산기 구현관련된 자료 검색 및 공부 |
 | 2023.05.30. | `CalculatorItemQueue` 객체, `CalculatorTests` 테스트객체 생성, 테스트 진행|
 | 2023.05.31. | `Queue` -> `LinkedList` 변경 진행, `CalculatorItemQueue`, `strcut` -> `class`  타입 변경 |
 | 2023.06.01. | `PR` 피드백 수정 진행 -> `lastItem()`생성 `enqueue`테스트 진행, `countItem` 생성, `enqueue` 테스트 진행 |
 | 2023.06.02. | 피드백 코멘트 작성 및 README 작성 |
+| 2023.06.05. | UML 수정, extension Type진행 |
+| 2023.06.06. | Operator, Formula, ExpressionParse 객체 생성 |
+| 2023.06.07. | FormulaTests생성후 테스트 진행, 0 나누기시 실패 처리 |
+| 2023.06.08. | split-> components 메소드 변경, CalculatorError생성  |
+| 2023.06.09. | ExpressionParser 로직변경, ParserTests 메소드 변경 (result->dequeue) |
+| 2023.06.11. | 계산기UI구현, 연산과정 추가, 스택뷰로 인해스크롤뷰 증가 진행, 나누기값이 없을경우 NAN 처리, NumberFormatter추가 |
+
 
 ---
 
@@ -63,6 +76,72 @@
 |:------:|:---:|:---:|
 |Array|O(1)|O(n)|
 |LinkedList|O(1)|O(1)|
+
+
+### 스택뷰를 스크롤뷰에 추가 함에 있어 하나씩 추가되는 문제를 한꺼번에 추가하게끔 진행
+#### 문제 상황
+- 스크롤뷰에 스택뷰안에있는 레이블을 쌓는 과정에서 많은 고민을 하게 되었습니다 
+```swift
+ let newOperatorLabel = UILabel()
+        newOperatorLabel.text = operatorsLabel.text
+        newOperatorLabel.textColor = .green
+        
+        let newNumberLabel = UILabel()
+        newNumberLabel.text = numberInputLabel.text
+        newNumberLabel.textColor = .white
+        
+        if firstNumberLabel.text?.isEmpty == true {
+            firstOperatorLabel?.text = newOperatorLabel.text
+            firstNumberLabel?.text = newNumberLabel.text
+        }
+        
+        operatorStackView.addArrangedSubview(newOperatorLabel)
+        operatorStackView.addArrangedSubview(newNumberLabel)
+```
+
+- 새로운 레이블을 만들어 추가를 해서 스택뷰에 새로이 쌓아 늘릴려고했지만 newOperatorLabel 따로 newOperatorLabel따로 1개씩 쌓여 이부분을 해결하는데에 있어 엄청 큰 고민을 하게 되었습니다.
+
+
+#### 해결 방안
+- 그래서 방법으로 View를 생성하서 View 안에 넣어 한꺼번에 보이게 진행하였습니다. 
+
+```swift
+let newOperatorLabel = UILabel()
+        newOperatorLabel.text = operatorsLabel.text
+        newOperatorLabel.textColor = .white
+        newOperatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        let newNumberLabel = UILabel()
+        newNumberLabel.text = numberInputLabel.text
+        newNumberLabel.textColor = .white
+        newNumberLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        
+        if numberInputLabel.text?.isEmpty == true {
+            firstOperatorLabel?.text = newOperatorLabel.text
+            firstNumberLabel?.text = newNumberLabel.text
+        }
+        
+        let containerView = UIView()
+        containerView.addSubview(newOperatorLabel)
+        containerView.addSubview(newNumberLabel)
+
+        operatorStackView.addArrangedSubview(containerView)
+
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        newOperatorLabel.translatesAutoresizingMaskIntoConstraints = false
+        newNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            newOperatorLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            newOperatorLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            newOperatorLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            newNumberLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            newNumberLabel.leadingAnchor.constraint(equalTo: newOperatorLabel.trailingAnchor),
+            newNumberLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            newNumberLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+        ])
+```
+
 
 ---
 
