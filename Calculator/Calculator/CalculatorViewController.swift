@@ -11,6 +11,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentOperatorLabel: UILabel!
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
+    @IBOutlet weak var calculateButton: UIButton!
     
     private let numberFormatter = NumberFormatter()
     private var isPrevResult = false
@@ -28,6 +29,7 @@ final class CalculatorViewController: UIViewController {
         
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = maximumPointDigits
+        calculateButton.isEnabled = false
     }
 }
 
@@ -42,6 +44,7 @@ extension CalculatorViewController {
         addArithmetic()
         currentOperatorLabel.text = sender.currentTitle
         currentOperandLabel.text = "\(initialNumber)"
+        calculateButton.isEnabled = true
     }
     
     @IBAction func didTappedCalculate(_ sender: UIButton) {
@@ -62,6 +65,7 @@ extension CalculatorViewController {
         if isPrevResult {
             currentOperand = "\(initialNumber)"
             isPrevResult = false
+            clearFormula()
         }
         
         guard isOverMaximumDigits(currentOperand, insertedNumber) == false,
@@ -76,9 +80,7 @@ extension CalculatorViewController {
         
         switch menu {
         case .allClear:
-            clearCalculationFormulaStackView()
-            inputFormula = ""
-            currentOperatorLabel.text = ""
+            clearFormula()
             fallthrough
             
         case .clearElement:
@@ -157,6 +159,13 @@ extension CalculatorViewController {
         let appenedOperandAsNumber = numberFormatter.number(from: appendedOperand) ?? initialNumber as NSNumber
         
         return numberFormatter.string(from: appenedOperandAsNumber)
+    }
+    
+    private func clearFormula() {
+        clearCalculationFormulaStackView()
+        inputFormula = ""
+        currentOperatorLabel.text = ""
+        calculateButton.isEnabled = false
     }
 }
 
