@@ -63,7 +63,7 @@ class CalculatorViewController: UIViewController {
             operandLabel.text?.removeLast()
         }
         
-        addStackView()
+        addPreviousContentStackView()
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
         let result: Double = formula.result()
@@ -103,7 +103,7 @@ class CalculatorViewController: UIViewController {
             operandLabel.text?.removeLast()
         }
 
-        addStackView()
+        addPreviousContentStackView()
         expression += configureCurrentFormula()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
@@ -119,8 +119,8 @@ class CalculatorViewController: UIViewController {
         return operatorCase + operand
     }
     
-    private func addStackView() {
-        let content: UIStackView = configure(operator: operatorLabel, operand: operandLabel)
+    private func addPreviousContentStackView() {
+        let content: UIStackView = configureContentStackView(operator: operatorLabel, operand: operandLabel)
         previousContentStackView.addArrangedSubview(content)
     }
     
@@ -135,7 +135,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
     }
     
-    private func configure(operator currentOperator: UILabel, operand currentOperand: UILabel) -> UIStackView {
+    private func configureContentStackView(operator currentOperator: UILabel, operand currentOperand: UILabel) -> UIStackView {
         let recordedOperatorLabel: UILabel = configureItem(with: currentOperator)
         let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
         let content: UIStackView = configureContent(item: recordedOperatorLabel, recordedOperandLabel)
