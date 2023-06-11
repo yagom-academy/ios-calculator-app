@@ -31,16 +31,18 @@
 
 
 ## 👀 시각화된 프로젝트 구조
-UML Diagram.jpg
+![UML Diagram](https://github.com/hemg2/ios-calculator-app/assets/101572902/5fc399bb-f58f-4dec-886d-243f00ca74d1)
 
 ## 💻 실행 화면
 | 정상적인 작동 | 소수자리 확인 | 
 |:--:|:--:|
-|<img src="https://hackmd.io/_uploads/Hk13RLQP2.gif" height="400" width="300">|<img src="https://hackmd.io/_uploads/SyWTRLQwn.gif" height="400" width="300">
+|![정상연산](https://github.com/hemg2/ios-calculator-app/assets/101572902/e46170a3-45d2-4a22-bb68-a4af3e36cd04)|![소수자리 확인](https://github.com/hemg2/ios-calculator-app/assets/101572902/6f0073a2-0c6c-49d1-a711-eeb8b11c6a6a)>
+
+
 
 | 잘못된 입력 | 0나누기 처리 |
 |:--:|:--:|
-|<img src="https://hackmd.io/_uploads/S1Tgywmw3.gif" height="400" width="300">|<img src="https://hackmd.io/_uploads/BJdWJv7D3.gif" height="400" width="300">
+|![잘못입력시에러](https://github.com/hemg2/ios-calculator-app/assets/101572902/4dc05fb7-9f40-4606-b86d-70a39bce436d)>|![0나누기 NAN](https://github.com/hemg2/ios-calculator-app/assets/101572902/3f4b4369-752a-4679-8b6b-1d5ef101b8e4)>
 
 
 ---
