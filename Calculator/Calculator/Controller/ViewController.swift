@@ -14,6 +14,14 @@ class ViewController: UIViewController {
     private var expression: String = ""
     private var isResult: Bool = false
     private var isInputZero: Bool = true
+    private let numberFormatter: NumberFormatter = {
+        let numberFormatter: NumberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
+        
+        return numberFormatter
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +66,7 @@ class ViewController: UIViewController {
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
         let result: Double = formula.result()
-        operandLabel.text = result.formatNumbers().replacingOccurrences(of: "-", with: "−")
+        operandLabel.text = numberFormatter.string(for: result)?.replacingOccurrences(of: "-", with: "−")
         operatorLabel.text = ""
         expression = ""
         isResult = true
