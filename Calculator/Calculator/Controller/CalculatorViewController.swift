@@ -22,6 +22,13 @@ class CalculatorViewController: UIViewController {
         
         return numberFormatter
     }()
+    private var currentOperand: String {
+        guard let operand = operandLabel.text else {
+            return "NaN"
+        }
+        
+        return operand.replacingOccurrences(of: ",", with: "")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +50,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, Double(operand) != Double.zero else {
+        guard let operand = operandLabel.text, Double(currentOperand) != Double.zero else {
             return
         }
         guard operand.hasPrefix("−") else {
@@ -75,33 +82,33 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let currentOperand = sender.currentTitle, let operand = operandLabel.text, !isResult else {
+        guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
-        guard currentOperand != "0" else {
+        guard operandElement != "0" else {
             isInputZero = true
             return
         }
-        guard operand != "0" else {
-            operandLabel.text = currentOperand
+        guard currentOperand != "0" else {
+            operandLabel.text = operandElement
             return
         }
 
-        operandLabel.text = operand + currentOperand
+        operandLabel.text = numberFormatter.string(for: Double(currentOperand + operandElement))
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
         guard let decimalPointOperand = sender.currentTitle, !isResult else {
             return
         }
-        guard let operand = operandLabel.text, !operand.hasSuffix(decimalPointOperand) else {
+        guard !currentOperand.hasSuffix(decimalPointOperand) else {
             return
         }
-        guard !operand.contains(decimalPointOperand) else {
+        guard !currentOperand.contains(decimalPointOperand) else {
             return
         }
         
-        operandLabel.text = operand + decimalPointOperand
+        operandLabel.text = currentOperand + decimalPointOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -115,7 +122,7 @@ class CalculatorViewController: UIViewController {
         if operand.hasSuffix(".") {
             operandLabel.text?.removeLast()
         }
-        if let realNumber = Double(operand), Double(operand) == Double(Int(realNumber)) {
+        if let realNumber = Double(currentOperand), Double(currentOperand) == Double(Int(realNumber)) {
             operandLabel.text = String(Int(realNumber))
         }
 
@@ -130,13 +137,12 @@ class CalculatorViewController: UIViewController {
     
     private func configureCurrentFormula() -> String {
         let operatorCase = operatorLabel.text ?? ""
-        let operand = operandLabel.text ?? ""
         
-        return operatorCase + operand
+        return operatorCase + currentOperand
     }
     
     private func addPreviousContentStackView() {
-        let content: UIStackView = configureContentStackView(operator: operatorLabel, operand: operandLabel)
+        let content: UIStackView = configureContentStackView()
         previousContentStackView.addArrangedSubview(content)
     }
     
@@ -150,9 +156,9 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-    
-    private func configureContentStackView(operator currentOperator: UILabel, operand currentOperand: UILabel) -> UIStackView {
-        let recordedOperatorLabel: UILabel = configureItem(with: currentOperator)
+        
+    private func configureContentStackView() -> UIStackView {
+        let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel.text)
         let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
         let content: UIStackView = addItemToContentStackView(item: recordedOperatorLabel, recordedOperandLabel)
         
@@ -171,10 +177,10 @@ class CalculatorViewController: UIViewController {
         return content
     }
 
-    private func configureItem(with label: UILabel) -> UILabel {
+    private func configureItem(with labelText: String?) -> UILabel {
         let recordedLabel: UILabel = UILabel()
         recordedLabel.font = .preferredFont(forTextStyle: .title3)
-        recordedLabel.text = label.text
+        recordedLabel.text = labelText
         recordedLabel.textColor = .white
         
         return recordedLabel
