@@ -17,7 +17,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var equalButton: UIButton!
     
     override func viewDidLoad() {
-        self.displayLabel.text = "0"
+        self.displayLabel.text = Number.zero
         self.equalButton.isEnabled = false
     }
     
@@ -26,13 +26,13 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapDecimalPointButton(_ sender: UIButton) {
-        self.displayLabel.text = self.calculatorManager.inputOperand(".")
+        self.displayLabel.text = self.calculatorManager.inputOperand(Symbol.dot)
     }
     
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         self.operatorLabel.text = self.calculatorManager.inputOperator(sender.unwrappedTitle) { `operator`, operand in
-            self.displayLabel.text = "0"
+            self.displayLabel.text = Number.zero
             return self.recordOnStack(operator: `operator`, operand: operand)
         }
         self.equalButton.isEnabled = true
@@ -43,20 +43,20 @@ final class CalculatorViewController: UIViewController {
         self.displayLabel.text = self.calculatorManager.deliverResult {`operator`, operand in
             return self.recordOnStack(operator: `operator`, operand: operand)
         }
-        self.operatorLabel.text = ""
+        self.operatorLabel.text = Symbol.empty
         self.equalButton.isEnabled = false
     }
     
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
         self.calculatorManager.allClear()
-        self.displayLabel.text = "0"
-        self.operatorLabel.text = ""
+        self.displayLabel.text = Number.zero
+        self.operatorLabel.text = Symbol.empty
         self.clearRecords()
     }
     
     @IBAction private func tapClearEntryButton(_ sender: UIButton) {
         self.calculatorManager.clearRecentOperand()
-        self.displayLabel.text = "0"
+        self.displayLabel.text = Number.zero
     }
     
     @IBAction private func tapSignChangeButton(_ sender: UIButton) {
@@ -71,7 +71,7 @@ final class CalculatorViewController: UIViewController {
             let stackView = UIStackView()
             stackView.axis = .horizontal
             stackView.alignment = .center
-            stackView.spacing = 10
+            stackView.spacing = Spacing.recordStackView
             
             return stackView
         }()
@@ -87,7 +87,7 @@ final class CalculatorViewController: UIViewController {
         self.recordScrollView.layoutIfNeeded()        
         let scrollSize = self.recordScrollView.frame.height
         let contentSize = self.recordScrollView.contentSize.height
-        let bottomOffset = CGPoint(x: 0, y: contentSize - scrollSize)
+        let bottomOffset = CGPoint(x: Offset.scrollToBottom, y: contentSize - scrollSize)
         self.recordScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
@@ -96,5 +96,15 @@ final class CalculatorViewController: UIViewController {
             self.recordStackView.removeArrangedSubview($0)
             $0.removeFromSuperview()
         }
+    }
+}
+
+extension CalculatorViewController {
+    enum Spacing {
+        static let recordStackView = 10.0
+    }
+    
+    enum Offset {
+        static let scrollToBottom = 0.0
     }
 }
