@@ -138,12 +138,12 @@ class CalculatorViewController: UIViewController {
     private func configureContentStackView(operator currentOperator: UILabel, operand currentOperand: UILabel) -> UIStackView {
         let recordedOperatorLabel: UILabel = configureItem(with: currentOperator)
         let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
-        let content: UIStackView = configureContent(item: recordedOperatorLabel, recordedOperandLabel)
+        let content: UIStackView = addItemToContentStackView(item: recordedOperatorLabel, recordedOperandLabel)
         
         return content
     }
         
-    private func configureContent(item formula: UILabel...) -> UIStackView {
+    private func addItemToContentStackView(item formula: UILabel...) -> UIStackView {
         let content: UIStackView = UIStackView()
         content.translatesAutoresizingMaskIntoConstraints = false
         content.axis = .horizontal
