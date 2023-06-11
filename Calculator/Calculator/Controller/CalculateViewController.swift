@@ -179,7 +179,7 @@ final class CalculateViewController: UIViewController {
 
         formatter.maximumSignificantDigits = 15
         formatter.numberStyle = .decimal
-        formatter.roundingMode = .down
+        formatter.roundingMode = .halfUp
         formatter.usesSignificantDigits = true
         
         return formatter.string(from: number) ?? "NaN"
@@ -190,6 +190,10 @@ final class CalculateViewController: UIViewController {
         guard formattingNumber(number) != "NaN",
               input.count <= 20 else {
             return "error"
+        }
+        
+        guard number.hasSuffix(".") == false else {
+            return number.replacingOccurrences(of: ".", with: "")
         }
         
         return number
