@@ -9,8 +9,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var stackView: UIStackView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var previousContentStackView: UIStackView!
+    @IBOutlet weak var previousExpressionScrollView: UIScrollView!
     private var expression: String = ""
     private var isResult: Bool = false
     private var isInputZero: Bool = true
@@ -29,7 +29,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        stackView.subviews.forEach { $0.removeFromSuperview() }
+        previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
         clearLabel()
         expression = ""
         isResult = false
@@ -122,13 +122,13 @@ class ViewController: UIViewController {
     private func addStackView() {
         let subStackView: StackView = StackView()
         let content: UIStackView = subStackView.configure(operator: operatorLabel, operand: operandLabel)
-        stackView.addArrangedSubview(content)
+        previousContentStackView.addArrangedSubview(content)
     }
     
     private func scrollDown() {
-        scrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.size.height)
-        scrollView.setContentOffset(bottomOffset, animated: true)
+        previousExpressionScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: previousExpressionScrollView.contentSize.height - previousExpressionScrollView.bounds.size.height)
+        previousExpressionScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
     private func clearLabel() {
