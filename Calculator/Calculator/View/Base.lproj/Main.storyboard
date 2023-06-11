@@ -346,7 +346,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DC3-Ia-6L7" secondAttribute="trailing" constant="16" id="4U4-wj-pOs"/>
-                            <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="9Pe-KB-bQo"/>
+                            <constraint firstItem="BOT-7g-vxv" firstAttribute="top" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="top" priority="500" constant="50" id="9Pe-KB-bQo"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YKH-82-hZC" secondAttribute="trailing" constant="16" id="YWo-lu-Avi"/>
                             <constraint firstItem="YKH-82-hZC" firstAttribute="top" secondItem="DC3-Ia-6L7" secondAttribute="bottom" constant="20" id="f7E-le-Da8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BOT-7g-vxv" secondAttribute="trailing" constant="16" id="jGA-4U-1bz"/>
@@ -358,8 +358,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentView" destination="8bC-Xf-vdC" id="Sn2-Pe-9hO"/>
+                        <outlet property="firstNumberLabel" destination="Hcb-r0-27f" id="wZh-mA-ov8"/>
+                        <outlet property="firstOperatorLabel" destination="alw-Zd-2pT" id="Q1o-Ky-lWx"/>
                         <outlet property="numberInputLabel" destination="Lwz-OF-XHD" id="aPO-43-LzH"/>
+                        <outlet property="operatorStackView" destination="XRe-QE-UJf" id="6qq-fF-jVE"/>
                         <outlet property="operatorsLabel" destination="HPC-iy-qdm" id="5A0-uW-T9J"/>
+                        <outlet property="scrollView" destination="BOT-7g-vxv" id="XF1-XP-3cy"/>
+                        <outlet property="secondNumberLabel" destination="oGo-LN-bKL" id="YAO-I5-LET"/>
+                        <outlet property="secondOperatorLabel" destination="c7v-6K-W40" id="7CO-OM-Hqj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
