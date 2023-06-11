@@ -13,12 +13,12 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousExpressionScrollView: UIScrollView!
     private var expression: String = ""
     private var isResult: Bool = false
-    private var isInputZero: Bool = true
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
     }()
@@ -40,13 +40,11 @@ class CalculatorViewController: UIViewController {
         clearLabel()
         expression = ""
         isResult = false
-        isInputZero = true
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
         operandLabel.text = "0"
         isResult = false
-        isInputZero = false
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
@@ -78,18 +76,13 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
         expression = ""
         isResult = true
-        isInputZero = true
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
-        guard operandElement != "0" else {
-            isInputZero = true
-            return
-        }
-        guard currentOperand != "0" else {
+        guard currentOperand != "0" || currentOperand != "00" else {
             operandLabel.text = operandElement
             return
         }
@@ -112,14 +105,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text?.replacingOccurrences(of: "−", with: "-"),
-              operand != "0" || isInputZero
-        else {
+        guard currentOperand != "0" else {
             operatorLabel.text = sender.currentTitle
+            expression = "0"
             return
         }
         
-        if operand.hasSuffix(".") {
+        if currentOperand.hasSuffix(".") {
             operandLabel.text?.removeLast()
         }
         if let realNumber = Double(currentOperand), Double(currentOperand) == Double(Int(realNumber)) {
@@ -131,7 +123,6 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isResult = false
-        isInputZero = false
         scrollDown()
     }
     
