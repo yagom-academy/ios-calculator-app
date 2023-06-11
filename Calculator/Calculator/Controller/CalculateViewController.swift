@@ -131,7 +131,8 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedChangeSignButton(_ sender: Any) {
         guard var operandLabelText = currentOperandLabel.text,
               operandLabelText != "0",
-              checkOperandForm(operandLabelText) != "error" else {
+              checkOperandForm(operandLabelText) != "error",
+              isCurrentOperandLabelMadeFromResult == false else {
             return
         }
         
