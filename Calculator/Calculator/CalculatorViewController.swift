@@ -1,8 +1,8 @@
 //
 //  Calculator - ViewController.swift
-//  Created by yagom. 
+//  Created by yagom.
 //  Copyright © yagom. All rights reserved.
-// 
+//
 
 import UIKit
 
@@ -12,9 +12,11 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var currentOperandLabel: UILabel!
     @IBOutlet weak var calculationFormulaStackView: UIStackView!
     
+    private let numberFormatter = NumberFormatter()
     private var isPrevResult = false
     private var inputFormula = ""
     private let initialNumber = 0
+    private let maximumPointDigits = 5
     private var isFirstArithmeticFormula: Bool {
         return calculationFormulaStackView.subviews.count == 0
     }
@@ -22,6 +24,9 @@ final class CalculatorViewController: UIViewController {
     // MARK: - View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = maximumPointDigits
     }
 }
 
@@ -51,17 +56,17 @@ extension CalculatorViewController {
     }
     
     @IBAction func didTappedNumbers(_ sender: UIButton) {
-        guard let insertedNumber = sender.currentTitle else { return }
+        guard let currentOperand = currentOperandLabel.text?.replacingOccurrences(of: ",", with: ""), let insertedNumber = sender.currentTitle else { return }
         
         if isPrevResult {
             currentOperandLabel.text = "\(initialNumber)"
             isPrevResult = false
         }
         
-        let currentOperand = currentOperandLabel.text ?? "\(initialNumber)"
-        let isSubstitutionOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
+        guard isOverMaximumDigits(currentOperand, insertedNumber) == false,
+              isOverMaximumPointDigits(currentOperand, insertedNumber) == false else { return }
         
-        currentOperandLabel.text = isSubstitutionOperand ? "\(Int(insertedNumber) ?? initialNumber)" : currentOperand + insertedNumber
+        currentOperandLabel.text = setUpOperandLabelText(currentOperand, insertedNumber)
     }
     
     @IBAction func didTappedMenus(_ sender: UIButton) {
@@ -98,10 +103,6 @@ extension CalculatorViewController {
     private func calculateResult() -> String? {
         var formula = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parse(from: inputFormula)
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
         guard let result = numberFormatter.string(from: formula.result() as NSNumber) else { return nil }
         
         return result
@@ -118,6 +119,43 @@ extension CalculatorViewController {
         let isDecimalPointNumber = operand != floor(operand)
         
         return isDecimalPointNumber ? "\(operand)" : "\(Int(operand))"
+    }
+    
+    private func isOverMaximumDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
+        let operand = currentOperand.replacingOccurrences(of: ".", with: "")
+        let appendedOperandCount = (operand + insertedNumber).count
+        
+        return appendedOperandCount > 20
+    }
+    
+    private func isOverMaximumPointDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
+        guard currentOperand.contains(".") else { return false }
+        guard let pointNumber = currentOperand.components(separatedBy: ".").last else { return false }
+        
+        let appendedPointNumber = (pointNumber + insertedNumber).count
+        
+        return appendedPointNumber > 5
+    }
+    
+    private func setUpOperandLabelText(_ currentOperand: String, _ insertedNumber: String) -> String? {
+        let isSubstitutionOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
+        
+        if isSubstitutionOperand {
+            return "\(Int(insertedNumber) ?? initialNumber)"
+        }
+        
+        if insertedNumber == "." {
+            return currentOperand.contains(".") ? currentOperand : currentOperand + "."
+        }
+        
+        if currentOperand.contains(".") && Double(insertedNumber) == 0.0 {
+            return currentOperand + insertedNumber
+        }
+
+        let appendedOperand = currentOperand + insertedNumber
+        let appenedOperandAsNumber = numberFormatter.number(from: appendedOperand) ?? initialNumber as NSNumber
+        
+        return numberFormatter.string(from: appenedOperandAsNumber)
     }
 }
 
