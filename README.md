@@ -24,19 +24,28 @@
 |:-:|-|
 |2023-05-30|- `CalculateItemQueueTests` 테스트 생성<br>- `CalculateItemQueueTests`에 테스트 케이스 추가<br>　- `isEmpty`, `dequeue`, `count`<br>- `CalculatorItemQueue` 클래스 생성<br>- `CalculatorItemQueue`에 프로퍼티 추가<br>　- `enqueue`, `dequeue`, `isEmpty`<br>- `CalculatorItemQueue`에 메서드 추가<br>　- `count`<br>- `CalculateItem` 프로토콜 생성<br>|
 |2023-05-31|- `CalculateItemQueueTests`에 테스트 케이스 추가<br>　- `peek`, `dequeue`, `removeAll`<br>- `CalculatorItemQueue`에 메서드 추가<br>　- `peek`, `removeAll`|
+|2023-06-05|- `String`에 `Extension`으로 메서드 추가<br>　- `split`<br>- `Formula` 구조체 생성<br>- `Operator` 열거형 생성|
+|2023-06-06|- `ExpressionParser` 열거형 생성<br>- `ExpressionParser` 에 타입 메서드 생성<br>　- `parse`<br>　- `componentsByOperators`<br>- `Operator`에 메서드 생성<br>　- `calculate`<br>　- `add`<br>　- `subtract`<br>　- `divide`<br>　- `multiply`<br>- `Formula`에 프로퍼티 추가<br>　- `operands`<br>　- `operators`<br>- `Formula`에 메서드 추가<br>　- `result`<br>- `FormulaTests` 테스트 생성<br>- `FormulaTests`에 테스트 케이스 추가<br>　- `result`<br>- `ExpressionParserTests` 테스트 추가<br>- `ExpressionParserTests`에 테스트 케이스 추가<br>　- `parse`|
+|2023-06-07|- `OperatorTests` 테스트 추가<br>- `OperatorTests`에 테스트 케이스 추가<br>　- `divide`|
 
 </br>
 
 # 💎 다이어그램
-![step1_class_diagram](/step1_class_diagram.png)
+![step2_class_diagram](/step2_class_diagram.png)
 
 </br>
 
 # 🚀 트러블 슈팅
-## 1️⃣ Queue를 어떻게 구현할까?
+## 1️⃣ 시간 복잡도가 낮은 Queue의 구현
 
 ### 🔍 문제점
-일반 `Array`를 `Queue`처럼 이용하기 위해서 사용해야 하는 메서드는 [append(_:)](https://developer.apple.com/documentation/swift/array/append(_:)-1ytnt)와 [removeFrist()](https://developer.apple.com/documentation/swift/array/removefirst())이다. `append`는 배열의 맨 뒤에 항목을 추가하는 것으로 시간 복잡도가 `O(1)`이다.`removeFirst`는 배열의 맨 앞의 항목을 제거하고 그 뒤의 항목을 하나씩 앞으로 당겨오는 작업을 수행한다. 이런 작업으로 인해 시간 복잡도가 `O(n)`이 된다. 나는 `dequeue`를 할 때마다 호출하는 `removeFirst`로 인해 `O(n)`의 작업이 일어나는 것을 줄여보고 싶었다.
+`Swift`에서 `Array`를 이용해 `Queue`작업을 하는 경우 사용하는 메서드와 시간 복잡도는 다음 표와 같다.
+|Array|enqeue|dequeue|
+|:-:|:-:|:-:|
+|사용 메서드|[append(_:)](https://developer.apple.com/documentation/swift/array/append(_:)-1ytnt)|[removeFrist()](https://developer.apple.com/documentation/swift/array/removefirst())|
+|시간 복잡도|O(1)|O(n)|
+
+`dequeue`를 할 때마다 호출하는 `removeFirst`로 인해 `O(n)`의 작업이 일어나는 것을 줄여보고 싶었다.
 
 ### ⚒️ 해결방안
 `Double Stack`이라는 방법을 이용해 `dequeue`의 시간 복잡도를 줄여보았다.
@@ -65,9 +74,40 @@ struct CalculatorItemQueue<Element: CalculateItem> {
     ...
 }
 ```
-이 코드에서 집중해서 볼 것은 `dequeue` 메서드다. 메서드 안의 `if`문의 조건은 `dequeueStack` 배열이 비어있는지 확인한다. 배열이 비어있는 경우 [reversed()](https://developer.apple.com/documentation/swift/array/reversed()), [removeAll()](https://developer.apple.com/documentation/swift/array/removeall(keepingcapacity:)-1er5)을 호출한다. 두 메서드 모두 시간 복잡도가 `O(n)`이기 때문에 `O(2n)`으로 볼 수 있지만 이 경우 `2`가 의미있는 값이 아니기 때문에 `O(n)`으로 볼 수 있다. 시간 복잡도는 최악의 상황을 산정하기 때문에 이미 이 상태가 `O(n)`으로 기본 `Array`를 사용했을 때와 달라보이지 않을 수 있다. 하지만 `dequeue`의 조건문이 `false`인 경우(`dequeueStack`에 값이 있을 때)에는 시간 복잡도가 `O(1)`인 [popLast()](https://developer.apple.com/documentation/swift/array/poplast())만 호출하기 때문에 경우에 따라서는 시간 복잡도가 더 단순할 수 있다. 그렇기 때문에 시간 복잡도가 항상 `O(n)`인 기본 `Array`를 이용한 `Queue`보다 `Double Stack`을 이용한 `Queue`를 사용하기로 결정했다.
+위 구현된 코드를 기반으로 `Queue`작업을 하는 경우 시간 복잡도는 다음과 같다.
+|Double Stack|enqeue|dequeue<br>비어있지 않은 경우|dequeue<br>비어있는 경우|
+|:-:|:-:|:-:|:-:|
+|사용 메서드|[append(_:)](https://developer.apple.com/documentation/swift/array/append(_:)-1ytnt)|[popLast()](https://developer.apple.com/documentation/swift/array/poplast())|[reversed()](https://developer.apple.com/documentation/swift/array/reversed())<br>[removeAll()](https://developer.apple.com/documentation/swift/array/removeall(keepingcapacity:)-1er5)<br>[popLast()](https://developer.apple.com/documentation/swift/array/poplast())|
+|시간 복잡도|O(1)|O(1)|O(n)|
 
+`dequeue`의 시간 복잡도가 항상 `O(n)`인 `Array`와 다르게 `Double Stack`은 `dequeueStack`이 비어있지 않은 경우의 시간복잡도가 `O(1)`이기 때문에 `Double Stack`을 이용하는 것으로 결정했다.
+
+## 2️⃣ 다양한 방법의 옵셔널 바인딩
+### 🔍 문제점
+```swift
+while operands.peek() != nil {
+    guard let rhs = operands.dequeue() else {
+        return result
+    }
+
+    guard let `operator` = operators.dequeue() else {
+        return result
+    }
+
+    result = `operator`.calculate(lhs: result, rhs: rhs)
+}
+```
+`calculate` 메서드를 실행하기 위해 `nil`을 3번 확인해야 했다. 이 과정에서 발생한 `guard`문은 꼭 필요하지만, 코드가 복잡해보였다.
+
+### ⚒️ 해결방안
+```swift
+while let `operator` = operators.dequeue(), let rhs = operands.dequeue() {
+    result = try `operator`.calculate(lhs: result, rhs: rhs)
+}
+```
+`while`문 안에서 `Optional Binding`을 사용했다. 기존에는 `if-let`과 `guard-let`으로만 옵셔널 바인딩이 되는줄 알았지만, 공식문서 확인 결과 `while`문 또한 옵셔널 바인딩이 가능했다. 추가로 `let`뿐만 아니라 `var`로도 옵셔널 바인딩이 가능하다는 것을 알게 되었다.
 </br>
 
 # 📚 참고 링크
 * [🍎 Developer Apple - Array](https://developer.apple.com/documentation/swift/array)
+* [🍎 Developer Apple - Optional Binding](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/thebasics/#Optional-Binding)
