@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA072D0F2A36D4CB006C7F9B /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA072D0E2A36D4CB006C7F9B /* Queueable.swift */; };
 		BA24C9C02A32ABDB0030E7BB /* LinkedListProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */; };
 		BA24C9C22A32AC7F0030E7BB /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA24C9C12A32AC7F0030E7BB /* CalculateItem.swift */; };
 		BA24C9C42A32AD0F0030E7BB /* FormulaProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA24C9C32A32AD0F0030E7BB /* FormulaProtocol.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA072D0E2A36D4CB006C7F9B /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
 		BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListProtocol.swift; sourceTree = "<group>"; };
 		BA24C9C12A32AC7F0030E7BB /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		BA24C9C32A32AD0F0030E7BB /* FormulaProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaProtocol.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				BA24C9BF2A32ABDB0030E7BB /* LinkedListProtocol.swift */,
 				BA24C9C12A32AC7F0030E7BB /* CalculateItem.swift */,
 				BA24C9C32A32AD0F0030E7BB /* FormulaProtocol.swift */,
+				BA072D0E2A36D4CB006C7F9B /* Queueable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				BA24C9C02A32ABDB0030E7BB /* LinkedListProtocol.swift in Sources */,
 				BAED15022A29E44D00FBE18E /* LinkedList.swift in Sources */,
 				BA24C9C92A32AE620030E7BB /* Operator+Extension.swift in Sources */,
+				BA072D0F2A36D4CB006C7F9B /* Queueable.swift in Sources */,
 				BA282E2C2A2EA7330041F75F /* MockFormula.swift in Sources */,
 				BA896C342A2FF28800AD8807 /* MockExpressionParser.swift in Sources */,
 				BA24C9C42A32AD0F0030E7BB /* FormulaProtocol.swift in Sources */,
