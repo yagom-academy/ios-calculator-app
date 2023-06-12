@@ -3,7 +3,7 @@
 //  Calculator
 //
 //  Created by Erick on 2023/06/01.
-///
+//  Last modify : idinaloq, Erick, Maxhyunm
 
 struct Formula {
     private var operands: CalculatorItemQueue<Double>
@@ -15,7 +15,7 @@ struct Formula {
     }
     
     mutating func result() -> Double {
-        guard var result: Double = operands.dequeue() else { return Double(0) }
+        guard var result: Double = operands.dequeue() else { return Double.zero }
         
         while !operators.isEmpty {
             let lhs = result

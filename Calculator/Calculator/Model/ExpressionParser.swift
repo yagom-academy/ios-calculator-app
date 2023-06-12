@@ -5,7 +5,7 @@
 //  Created by Erick on 2023/06/01.
 //  Last modify : idinaloq, Erick, Maxhyunm
 
-enum Expressionparser {
+enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
         var operators: CalculatorItemQueue = CalculatorItemQueue<Operator>()
