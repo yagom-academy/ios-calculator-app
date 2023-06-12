@@ -24,6 +24,8 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        numberInputLabel.text = "0"
+        operatorsLabel.text = ""
     }
     
     @IBAction func tapNumberButton(_ sender: UIButton) {
@@ -110,8 +112,10 @@ final class CalculatorViewController: UIViewController {
         newOperatorLabel.translatesAutoresizingMaskIntoConstraints = false
         newNumberLabel.translatesAutoresizingMaskIntoConstraints = false
         setupConstraints(for: containerView, operatorLabel: newOperatorLabel, numberLabel: newNumberLabel)
-        
+        scrollView.layoutIfNeeded()
         scrollView.setContentOffset(CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height), animated: true)
+        let scrollviewWidth = scrollView.frame.width
+        scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: .zero, left: .zero, bottom: .zero, right: scrollviewWidth - 9)
     }
     
     @IBAction func tapEqualButton(_ sender: UIButton) {
