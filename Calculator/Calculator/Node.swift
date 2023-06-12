@@ -5,11 +5,11 @@
 //  Created by redmango1446 on 2023/06/01.
 //
 
-final class Node<T> {
-    var data: T?
+final class Node<Element> {
+    var data: Element?
     var next: Node?
     
-    init(data: T?, next: Node? = nil) {
+    init(data: Element?, next: Node? = nil) {
         self.data = data
         self.next = next
     }

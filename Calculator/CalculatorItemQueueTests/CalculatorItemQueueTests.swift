@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -91,7 +91,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.first
-        let expectedValue = 1
+        let expectedValue: Double = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -104,7 +104,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.first
-        let expectedValue = 1
+        let expectedValue: Double = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -125,7 +125,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.last
-        let expectedValue = 1
+        let expectedValue: Double = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -138,7 +138,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.last
-        let expectedValue = 2
+        let expectedValue: Double = 2
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -150,7 +150,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.dequeue()
-        let expectedValue = 1
+        let expectedValue: Double = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -163,7 +163,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // when
         let result = sut.dequeue()
-        let expectedValue = 1
+        let expectedValue: Double = 1
         
         // then
         XCTAssertEqual(result, expectedValue)
@@ -177,7 +177,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         // when
         var result = sut.dequeue()
         result = sut.dequeue()
-        let expectedValue = 2
+        let expectedValue: Double = 2
         
         // then
         XCTAssertEqual(result, expectedValue)

@@ -5,7 +5,7 @@
 //  Created by redmango1446 on 2023/06/05.
 //
 
-enum Operator: Character, CaseIterable {
+enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
     case subtract = "-"
     case divide = "÷"
@@ -33,7 +33,10 @@ enum Operator: Character, CaseIterable {
     }
     
     private func divide(lhs: Double, rhs:Double) throws -> Double {
-        guard rhs != 0.0 else { throw CalculatorError.divideError }
+        guard !rhs.isZero else {
+            throw CalculatorError.divideError
+        }
+        
         return lhs / rhs
     }
     
