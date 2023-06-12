@@ -16,7 +16,15 @@ final class CalculatorViewController: UIViewController {
     
     // MARK: - Property
     
-    private let numberFormatter = NumberFormatter()
+    private let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 15
+        formatter.roundingMode = .halfDown
+
+        return formatter
+    }()
+    
     private var operatorsAndOperandsInput: String = ""
     
     // MARK: - View State Method
@@ -24,9 +32,6 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearAll()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 15
-        numberFormatter.roundingMode = .halfDown
     }
     
     // MARK: - IBAction
