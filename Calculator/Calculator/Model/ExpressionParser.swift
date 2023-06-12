@@ -3,27 +3,35 @@
 //  Calculator
 //
 //  Created by Erick on 2023/06/01.
-//
+//  Last modify : idinaloq, Erick, Maxhyunm
 
-enum ExpressionParser {
+enum Expressionparser {
     static func parse(from input: String) -> Formula {
-        var operands = CalculatorItemQueue<Double>()
-        var operators = CalculatorItemQueue<Operator>()
-        let components = componentsByOperators(from: input)
+        var operands: CalculatorItemQueue = CalculatorItemQueue<Double>()
+        var operators: CalculatorItemQueue = CalculatorItemQueue<Operator>()
         
-        components
-            .compactMap { Double($0) }
-            .forEach { operands.enqueue($0) }
-        
-        components
-            .filter { $0.count == 1 }
-            .compactMap { Operator(rawValue: Character($0)) }
-            .forEach { operators.enqueue($0) }
+        componentsByOperators(from: input).forEach { operand in
+            if let operandElement = Double(operand) {
+                operands.enqueue(operandElement)
+            }
+        }
+    
+        input.forEach { inputElement in
+            if let operatorValue = Operator(rawValue: inputElement) {
+                operators.enqueue(operatorValue)
+            }
+        }
         
         return Formula(operands: operands, operators: operators)
     }
     
-    static private func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+    private static func componentsByOperators(from input: String) -> [String] {
+        var result: [String] = [input]
+        
+        Operator.allCases.forEach { operatorCase in
+            result = result.flatMap { $0.split(with: operatorCase.rawValue) }
+        }
+        
+        return result
     }
 }
