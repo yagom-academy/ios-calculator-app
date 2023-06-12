@@ -24,7 +24,14 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        var operands = input.components(separatedBy: ["+", "-", "/", "*"])
+        
+        while let emptyStringValue = operands.firstIndex(of: "") {
+            operands.remove(at: emptyStringValue)
+            operands[emptyStringValue] = "-" + operands[emptyStringValue]
+        }
+        
+        return operands
     }
 }
 

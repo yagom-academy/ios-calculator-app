@@ -65,7 +65,21 @@ class ViewController: UIViewController {
     }
     
     private func addToFormula() {
+        guard let currentOperands = displayOperandLabel.text,
+              let operands = numberFormatter.string(for: Double(currentOperands)),
+              let operationSign = displayOperatorLabel.text else { return }
         
+        if formula.isEmpty && operands != "0" {
+            formula += operands
+            addToStackView("", operands)
+        } else if operands != "0" {
+            formula += "\(operationSign) \(operands)"
+            addToStackView(operationSign, operands)
+        }
+        
+        if operationSign == String(Operator.divide.rawValue) && operands == "0" {
+            formula += "\(operationSign) \(operands)"
+        }
     }
     
     private func addToOperandLabel() {

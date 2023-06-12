@@ -6,36 +6,36 @@
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private var outputStack: [Element] = []
-    private var inputStack: [Element] = []
+    private var enqueueStack: [Element] = []
+    private var dequeueStack: [Element] = []
     
     internal var count: Int {
-        let stackCount = outputStack + inputStack
+        let stackCount = dequeueStack + enqueueStack
         return stackCount.count
     }
     
     internal var isEmpty: Bool {
-        return outputStack.isEmpty && inputStack.isEmpty
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     
     internal var peek: Element? {
-        return outputStack.isEmpty ? inputStack.first : outputStack.last
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
     internal mutating func enqueue(_ element: Element) {
-        inputStack.append(element)
+        enqueueStack.append(element)
     }
     
     internal mutating func dequeue() -> Element? {
-        if outputStack.isEmpty {
-            outputStack = inputStack.reversed()
-            inputStack.removeAll()
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return outputStack.popLast()
+        return dequeueStack.popLast()
     }
     
     internal mutating func clear() {
-        inputStack.removeAll()
-        outputStack.removeAll()
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
