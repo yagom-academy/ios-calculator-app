@@ -28,7 +28,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 3)
@@ -43,7 +43,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 6)
@@ -56,7 +56,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -1)
@@ -71,7 +71,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -4)
@@ -84,7 +84,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(-5)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 15)
@@ -97,7 +97,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 2)
@@ -112,7 +112,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 6)
@@ -125,7 +125,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(2)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 0.5)
@@ -140,41 +140,23 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(4)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 0.125)
     }
     
-    func test_10나누기0일때_divideByZero_error에_걸리는지() {
+    func test_10나누기0일때_결과값이_nan인지() {
         //given
         sut.operators.enqueue(Operator.divide)
         sut.operands.enqueue(10)
         sut.operands.enqueue(0)
-        let errorMessage = CalculatorError.divideByZero
-        var error: CalculatorError?
         
         //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
+        let result = sut.result()
         
         //then
-        XCTAssertEqual(error, errorMessage)
-    }
-
-    func test_아무것도입력되지않았을때_unfinishedFormula_error에_걸리는지() {
-        //given
-        let errorMessage = CalculatorError.invalidFormula
-        var error: CalculatorError?
-        
-        //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
-        
-        //then
-        XCTAssertEqual(error, errorMessage)
+        XCTAssertTrue(result.isNaN)
     }
     
     func test_1더하기2더하기3빼기3일때_결과값이_3인지() {
@@ -188,7 +170,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 3)

@@ -26,7 +26,7 @@ final class ExpressionParserTests: XCTestCase {
         sut = ExpressionParser.parse(from: "1 + 2 ")
 
         //when
-        let result = try! sut.result()
+        let result = sut.result()
 
         //then
         XCTAssertEqual(result, 3)
@@ -37,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         sut = ExpressionParser.parse(from: "1 + 2 + 3 ")
 
         //when
-        let result = try! sut.result()
+        let result = sut.result()
 
         //then
         XCTAssertEqual(result, 6)
@@ -45,10 +45,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1빼기2문자열_입력했을때_formula에_결과값이_마이너스1인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 - 2 ")
+        sut = ExpressionParser.parse(from: " 1 − 2 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -1)
@@ -56,10 +56,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1빼기2빼기3문자열_입력했을때_formula에_결과값이_마이너스4인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 - 2 - 3 ")
+        sut = ExpressionParser.parse(from: " 1 − 2 − 3 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -4)
@@ -67,10 +67,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1빼기마이너스5문자열_입력했을때_formula에_결과값이_6인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 - -5 ")
+        sut = ExpressionParser.parse(from: " 1 − -5 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 6)
@@ -78,10 +78,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1곱하기2문자열_입력했을때_formula에_결과값이_2인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 x 2 ")
+        sut = ExpressionParser.parse(from: " 1 × 2 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 2)
@@ -89,10 +89,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1곱하기2곱하기마이너스3문자열_입력했을때_formula에_결과값이_마이너스6인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 x 2 x -3 ")
+        sut = ExpressionParser.parse(from: " 1 × 2 × -3 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, -6)
@@ -100,10 +100,10 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1나누기2문자열_입력했을때_formula에_결과값이_0점5인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 % 2 ")
+        sut = ExpressionParser.parse(from: " 1 ÷ 2 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 0.5)
@@ -111,42 +111,35 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_1나누기2나누기5문자열_입력했을때_formula에_결과값이_0점1인지() {
         //given
-        sut = ExpressionParser.parse(from: "1 % 2 % 5 ")
+        sut = ExpressionParser.parse(from: " 1 ÷ 2 ÷ 5 ")
         
         //when
-        let result = try! sut.result()
+        let result = sut.result()
         
         //then
         XCTAssertEqual(result, 0.1)
     }
     
-    func test_operators_문자열만_입력되었을때_unfinishedFormula_error에_걸리는지() {
+    func test_8나누기2빼기4문자열_입력했을때_formula에_결과값이_0인지() {
         //given
-        sut = ExpressionParser.parse(from: "% ")
-        let errorMessage = CalculatorError.invalidFormula
-        var error: CalculatorError?
+        sut = ExpressionParser.parse(from: " 8 ÷ 2 − 4 ")
         
         //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
+        let result = sut.result()
         
         //then
-        XCTAssertEqual(error, errorMessage)
+        XCTAssertEqual(result, 0)
     }
     
-    func test_빈문자열이_입력되었을때_unfinishedFormula_error에_걸리는지() {
+    func test_0으로나누는문자열_입력했을때_formula에_결과값이_nan인지() {
         //given
-        sut = ExpressionParser.parse(from: " ")
-        let errorMessage = CalculatorError.invalidFormula
-        var error: CalculatorError?
+        sut = ExpressionParser.parse(from: " 8 ÷ 0 ")
         
         //when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
+        let result = sut.result()
         
         //then
-        XCTAssertEqual(error, errorMessage)
+        XCTAssertTrue(result.isNaN)
     }
+    
 }
