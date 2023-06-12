@@ -20,7 +20,7 @@ final class ExpressionParserTeste: XCTestCase {
 
     func test1_parse_1_더하기_10을_넣고_operands를_dequeue를_하면_1을_반환한다() {
         // given
-        let input = "1 + 1"
+        let input = "1+10"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -33,7 +33,7 @@ final class ExpressionParserTeste: XCTestCase {
     
     func test2_parse_1_더하기_10을_넣고_operands를_dequeue를_2번_하면_10을_반환한다() {
         // given
-        let input = "1 + 10"
+        let input = "1+10"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -47,7 +47,7 @@ final class ExpressionParserTeste: XCTestCase {
     
     func test3_parse_1_더하기_10을_넣고_operatos를_dequeue하면_더하기를_반환한다() {
         // given
-        let input = "1 + 10"
+        let input = "1+10"
         
         // when
         var formula = ExpressionParser.parse(from: input)
@@ -60,7 +60,7 @@ final class ExpressionParserTeste: XCTestCase {
     
     func test4_parse_1_더하기_10_빼기_1을_넣고_operatos를_2번_dequeue하면_빼기를_반환한다() {
         // given
-        let input = "1 + 10 - 1"
+        let input = "1+10−1"
         
         // when
         var formula = ExpressionParser.parse(from: input)

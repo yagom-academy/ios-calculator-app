@@ -11,7 +11,7 @@ struct LinkedList<Element> {
     private(set) var count: Int = 0
     
     var isEmpty: Bool {
-        if let head {
+        if head != nil {
             return false
         }
         

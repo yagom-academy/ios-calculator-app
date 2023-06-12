@@ -22,7 +22,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_1과_10을_더하면_예상값은_11이다() {
         // given
-        let input = "1 + 10"
+        let input = "1+10"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -35,7 +35,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_1에서_10을_빼면_예상값은_마이너스9이다() {
         // given
-        let input = "1 - 10"
+        let input = "1−10"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -48,7 +48,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_1과_마이너스10을_더하면_예상값은_마이너스9다() {
         // given
-        let input = "1 + -10"
+        let input = "1+-10"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -61,7 +61,7 @@ final class FormulaTests: XCTestCase {
 
     func test_result_1을_2로_나누면_예상값은_0점5다() {
         // given
-        let input = "1 ÷ 2"
+        let input = "1÷2"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -74,7 +74,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_10_곱하기_2를_하며_예상값은_20다() {
         // given
-        let input = "10 × 2"
+        let input = "10×2"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -87,7 +87,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_2와_10을_더하고_2로_나누면_예상값은_6이다() {
         // given
-        let input = "2 + 10 ÷ 2"
+        let input = "2+10÷2"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -100,7 +100,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_2을_0으로_나누면_divideError에러에_걸린다() {
         // given
-        let input = "2 ÷ 0"
+        let input = "2÷0"
         sut = ExpressionParser.parse(from: input)
         
         let errorMassage: CalculatorError = CalculatorError.divideError
@@ -117,7 +117,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_0을_2로_나누면_예상값은_0이다() {
         // given
-        let input = "0 ÷ 2"
+        let input = "0÷2"
         sut = ExpressionParser.parse(from: input)
         
         // when
@@ -130,7 +130,7 @@ final class FormulaTests: XCTestCase {
     
     func test_result_2_나누기만_입력하면_divideError에러에_걸린다() {
         // given
-        let input = "2 ÷"
+        let input = "2÷"
         sut = ExpressionParser.parse(from: input)
         
         let errorMassage: CalculatorError = CalculatorError.incompleteFormula
