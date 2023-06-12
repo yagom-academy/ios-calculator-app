@@ -7,19 +7,16 @@
 
 extension Operator: CalculateItem {
 	func calculate(lhs: Double, rhs: Double) -> Double {
-		var operatorsCalculateResult: Double {
-			switch self {
-			case .add:
-				return add(lhs: lhs, rhs: rhs)
-			case .subtract:
-				return subtract(lhs: lhs, rhs: rhs)
-			case .divide:
-				return divide(lhs: lhs, rhs: rhs)
-			case .multiply:
-				return multiply(lhs: lhs, rhs: rhs)
-			}
+		switch self {
+		case .add:
+			return add(lhs: lhs, rhs: rhs)
+		case .subtract:
+			return subtract(lhs: lhs, rhs: rhs)
+		case .divide:
+			return divide(lhs: lhs, rhs: rhs)
+		case .multiply:
+			return multiply(lhs: lhs, rhs: rhs)
 		}
-		return operatorsCalculateResult
 	}
 	
 	private func add(lhs: Double, rhs: Double) -> Double {
