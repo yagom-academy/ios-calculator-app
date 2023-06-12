@@ -2,7 +2,7 @@
 //  Queueable.swift
 //  Calculator
 //
-//  Created by Whales on 2023/06/12.
+//  Created by mint, Whales on 2023/06/12.
 //
 
 protocol Queueable {

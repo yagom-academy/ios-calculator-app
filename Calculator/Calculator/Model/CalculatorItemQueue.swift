@@ -2,50 +2,38 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by mint on 2023/05/30.
+//  Created by mint, Whales on 2023/05/30.
 //
 
-import Foundation
-
-struct CalculatorItemQueue<T: CalculateItem> {
-    private var enqueueStack: [T] = []
-    private var dequeueStack: [T] = []
+struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
+    private(set) var queue: LinkedList = LinkedList<Element>()
+    
     var count: Int {
-        return enqueueStack.count + dequeueStack.count
+        return queue.count
     }
+    
     var isEmpty: Bool {
-        return enqueueStack.isEmpty && dequeueStack.isEmpty
-    }
-    var first: T? {
-        if dequeueStack.isEmpty {
-            return enqueueStack.first
-        } else {
-            return dequeueStack.last
-        }
-    }
-    var last: T? {
-        if enqueueStack.isEmpty {
-            return dequeueStack.first
-        } else {
-            return enqueueStack.last
-        }
+        return queue.isEmpty
     }
     
-    mutating func enqueue(_ input: T) {
-        enqueueStack.append(input)
+    var firstData: Element? {
+        return queue.headData
     }
     
-    mutating func dequeue() -> T? {
-        if dequeueStack.isEmpty {
-            dequeueStack = enqueueStack.reversed()
-            enqueueStack.removeAll()
-        }
-        
-        return dequeueStack.popLast()
+    var lastData: Element? {
+        return queue.tailData
     }
     
-    mutating func clear() {
-        enqueueStack.removeAll()
-        dequeueStack.removeAll()
+    mutating func enqueue(_ element: Element) {
+        queue.append(data: element)
+    }
+    
+    @discardableResult
+    mutating func dequeue() -> Element? {
+        return queue.removeFirst()
+    }
+    
+    mutating func clearQueue() {
+        queue.removeAll()
     }
 }
