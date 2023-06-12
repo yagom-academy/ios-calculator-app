@@ -23,13 +23,13 @@ struct Formula<T: CalculateItem, U: CalculateItem>: FormulaProtocol {
 		
 		switch operators {
 		case .add:
-			return lhsOperand + rhsOperand
+			return operators.calculate(lhs: lhsOperand, rhs: rhsOperand)
 		case .subtract:
-			return lhsOperand - rhsOperand
+			return operators.calculate(lhs: lhsOperand, rhs: rhsOperand)
 		case .divide:
-			return lhsOperand / rhsOperand
+			return operators.calculate(lhs: lhsOperand, rhs: rhsOperand)
 		case .multiply:
-			return lhsOperand * rhsOperand
+			return operators.calculate(lhs: lhsOperand, rhs: rhsOperand)
 		}
 	}
 	
