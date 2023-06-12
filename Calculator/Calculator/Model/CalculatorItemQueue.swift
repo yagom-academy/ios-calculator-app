@@ -4,8 +4,6 @@
 //
 //  Created by Yetti on 2023/05/30.
 
-import Foundation
-
 struct CalculatorItemQueue<T: CalculateItem>: DoubleStackQueue {
     private var enqueueStack: [T] = []
     private var dequeueStack: [T] = []
