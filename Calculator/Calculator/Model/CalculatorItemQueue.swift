@@ -5,7 +5,7 @@
 //  Created by Minseong Kang on 2023/05/30.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem>: Queueable {
 	private var list: LinkedList<T>?
 	
 	var isEmpty: Bool? {
