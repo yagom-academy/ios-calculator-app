@@ -7,12 +7,14 @@
 
 import Foundation
 
-enum FormulaErrors: LocalizedError {
-    case divisionByZero
+enum FormulaErrors {
+    case notDivisibleByZero
+}
 
+extension FormulaErrors: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .divisionByZero:
+        case .notDivisibleByZero:
             return "0으로 나눌 수 없습니다."
         }
     }
