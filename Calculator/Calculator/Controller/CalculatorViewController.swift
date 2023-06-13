@@ -30,7 +30,22 @@ class CalculatorViewController: UIViewController {
         return numberFormatter
     }()
     
-    @IBAction func tapNubersButton(_ sender: UIButton) {
+    @IBAction func tapNumbersButton(_ sender: UIButton) {
+        if isComputable {
+            guard let inputNumberText = sender.titleLabel?.text,
+                  let numberLabelText = inputNumberLabel.text,
+                  let operatorLabelText = inputOperatorLabel.text else { return }
+            
+            if numberLabelText.count < 20 {
+                inputOperatorLabel.text = (formulaListStackView.subviews.isEmpty) ? ("") : operatorLabelText
+                if numberLabelText == "0" {
+                    inputNumberLabel.text = inputNumberText
+                } else {
+                    let formattedNumberText = numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText
+                    inputNumberLabel.text = calculatorNumberFormatter.string(for: Double(formattedNumberText))
+                }
+            }
+        }
     }
     
     @IBAction func tapSerialZeroButton(_ sender: UIButton) {
