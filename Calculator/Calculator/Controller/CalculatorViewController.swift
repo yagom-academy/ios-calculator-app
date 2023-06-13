@@ -22,10 +22,10 @@ final class CalculatorViewController: UIViewController {
     
     private var operandValue: String {
         get {
-            return OperandFormatter.removeComma(operandLabel.text ?? CalculatorNamespace.Zero)
+            return OperandFormatter.removeComma(operandsLabel.text ?? CalculatorNamespace.Zero)
         }
         set(newOperand) {
-            operandLabel.text = OperandFormatter.formatInput(newOperand)
+            operandsLabel.text = OperandFormatter.formatInput(newOperand)
         }
     }
     
@@ -43,80 +43,57 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        clearOperatorLabel()
-        clearOperandsLabel()
+        operatorValue = CalculatorNamespace.Empty
+        operandValue = CalculatorNamespace.Zero
         clearCalculationDetailsStackView()
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
-        guard let inputOperator = sender.currentTitle,
-              let currentOperator = operatorLabel.text,
-              let currentOperands = operandsLabel.text else { return }
+        guard let inputOperator = sender.currentTitle else { return }
         
-        let result = operationManager.addFormula(currentOperator, currentOperands)
+        let result = operationManager.addFormula(operatorValue, operandValue)
         addCalculationDetailsStackView(result.0, result.1)
-        setOperatorLabel(inputOperator)
-        clearOperandsLabel()
+        operatorValue = inputOperator
+        operandValue = CalculatorNamespace.Zero
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        guard let currentOperator = operatorLabel.text,
-              let currentOperands = operandsLabel.text else { return }
-        
-        operationManager.addFormula(currentOperator, currentOperands)
-        setOperandsLabel(operationManager.calculateFormula())
-        clearOperatorLabel()
+        operationManager.addFormula(operatorValue, operandValue)
+        operatorValue = operationManager.calculateFormula()
+        operatorValue = CalculatorNamespace.Empty
         clearCalculationDetailsStackView()
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
-        guard let currentOperands = operandsLabel.text,
-              let inputNumber = sender.currentTitle else { return }
+        guard let inputNumber = sender.currentTitle else { return }
         
-        let reuslt = operationManager.addOperandsLabel(currentOperands, inputNumber)
-        setOperandsLabel(reuslt)
+        let result = operationManager.addOperandsLabel(operandValue, inputNumber)
+        operatorValue = result
     }
     
     @IBAction private func tapFunctionButton(_ sender: UIButton) {
-        guard let currentOperands = operandsLabel.text,
-              let buttonTitle = sender.currentTitle else { return }
+        guard let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
         case CalculatorNamespace.AllClear:
-            clearOperatorLabel()
-            clearOperandsLabel()
+            operatorValue = CalculatorNamespace.Empty
+            operandValue = CalculatorNamespace.Zero
             clearCalculationDetailsStackView()
             operationManager.clearFormula()
         case CalculatorNamespace.ClearEntry:
-            clearOperandsLabel()
+            operandValue = CalculatorNamespace.Zero
         case CalculatorNamespace.SignToggle:
-            let result = operationManager.changeSign(currentOperands)
-            setOperandsLabel(result)
+            let result = operationManager.changeSign(operandValue)
+            operandValue = result
         default:
             break
         }
-    }
-    
-    private func setOperatorLabel(_ data: String) {
-        operatorLabel.text = data
-    }
-    
-    private func setOperandsLabel(_ data: String) {
-        operandsLabel.text = data
-    }
-    
-    private func clearOperatorLabel() {
-        operatorLabel.text?.removeAll()
-    }
-    
-    private func clearOperandsLabel() {
-        operandsLabel.text = CalculatorNamespace.Zero
     }
 }
 
 extension CalculatorViewController {
     private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
-        if `operator` == "0" && operands == "0" {
+        if `operator` == CalculatorNamespace.Zero && operands == CalculatorNamespace.Zero {
             return
         }
         
