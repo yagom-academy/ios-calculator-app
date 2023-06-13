@@ -13,25 +13,25 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var formulaListStackView: UIStackView!
     @IBOutlet weak var formulaListScrollView: UIScrollView!
     
+    private var formulaString: String = ""
+    private var isComputable: Bool = true
+    
+    private var calculatorNumberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.maximumSignificantDigits = 15
+        
+        return numberFormatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         inputNumberLabel.text = "0"
         inputOperatorLabel.text = ""
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
-    
-    private var formulaString: String = ""
-    private var isComputable: Bool = true
-
-    private var calculatorNumberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 5
-        numberFormatter.maximumSignificantDigits = 20
-        
-        return numberFormatter
-    }()
     
     @IBAction func tapNumbersButton(_ sender: UIButton) {
         if isComputable {
