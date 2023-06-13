@@ -31,6 +31,12 @@ final class CalculatorItemQueue<T: CalculateItem> {
         return headItem == nil
     }
     
+    func removeAll() {
+        headItem = nil
+        tailItem = nil
+        countItem = 0
+    }
+    
     func enqueue(item: T) {
         let newNode = CalculatorItemNode(value: item)
         
