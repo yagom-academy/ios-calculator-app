@@ -79,6 +79,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
+        let minusSign = "-"
+        guard let numberLabelText = inputNumberLabel.text,
+              numberLabelText != "0" else { return }
+        
+        if numberLabelText.hasPrefix(minusSign) {
+            inputNumberLabel.text = String(numberLabelText.dropFirst(1))
+        } else {
+            inputNumberLabel.text = minusSign + numberLabelText
+        }
     }
     
     @IBAction func tapEqualMarkButton(_ sender: UIButton) {
