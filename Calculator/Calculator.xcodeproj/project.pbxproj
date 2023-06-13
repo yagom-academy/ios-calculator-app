@@ -157,13 +157,13 @@
 			path = LinkedListTests;
 			sourceTree = "<group>";
 		};
-		5D9A077E2A2F650D00F6E112 /* extension */ = {
+		5D9A077E2A2F650D00F6E112 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				5D9A077F2A2F652800F6E112 /* Double+.swift */,
 				5D9A07812A2F653600F6E112 /* String+.swift */,
 			);
-			name = extension;
+			name = Extension;
 			path = Protocol;
 			sourceTree = "<group>";
 		};
@@ -200,7 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				5DA805922A308EC60081E2E0 /* Error */,
-				5D9A077E2A2F650D00F6E112 /* extension */,
+				5D9A077E2A2F650D00F6E112 /* Extension */,
 				5D7AC4932A25E88700AFE620 /* Protocol */,
 				5D7AC4922A25E88500AFE620 /* Model */,
 				5D7AC4912A25E88200AFE620 /* Controller */,
