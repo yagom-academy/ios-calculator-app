@@ -90,6 +90,10 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = numberFormatter.string(for: Double(currentOperand + operandElement))
     }
     
+    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+    }
+    
+    
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
         guard let decimalPointOperand = sender.currentTitle, !isResult else {
             return
