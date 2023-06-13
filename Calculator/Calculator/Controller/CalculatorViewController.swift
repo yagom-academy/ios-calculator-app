@@ -2,12 +2,38 @@
 //  Calculator - CalculatorViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
-// 
+//  Last modify : idinaloq, Erick, Maxhyunm
 
 import UIKit
 
 final class CalculatorViewController: UIViewController {
+    typealias LabelValues = (operandValue: String, operatorValue: String)
+    
     var operationManager = OperationManager()
+    
+    private var operatorValue: String {
+        get {
+            return operatorLabel.text ?? CalculatorNamespace.Empty
+        }
+        set(newOperator) {
+            operatorLabel.text = newOperator
+        }
+    }
+    
+    private var operandValue: String {
+        get {
+            return OperandFormatter.removeComma(operandLabel.text ?? CalculatorNamespace.Zero)
+        }
+        set(newOperand) {
+            operandLabel.text = OperandFormatter.formatInput(newOperand)
+        }
+    }
+    
+    private var currentLabelValues: LabelValues {
+        get {
+            return (operandValue: operandValue, operatorValue: operatorValue)
+        }
+    }
     
     @IBOutlet private weak var operatorLabel: UILabel!
     @IBOutlet private weak var operandsLabel: UILabel!
