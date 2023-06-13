@@ -7,9 +7,7 @@
 import UIKit
 
 final class CalculatorViewController: UIViewController {
-    typealias LabelValues = (operandValue: String, operatorValue: String)
-    
-    var operationManager = OperationManager()
+    private var operationManager = OperationManager()
     
     private var operatorValue: String {
         get {
@@ -26,12 +24,6 @@ final class CalculatorViewController: UIViewController {
         }
         set(newOperand) {
             operandsLabel.text = OperandFormatter.formatInput(newOperand)
-        }
-    }
-    
-    private var currentLabelValues: LabelValues {
-        get {
-            return (operandValue: operandValue, operatorValue: operatorValue)
         }
     }
     
@@ -52,14 +44,14 @@ final class CalculatorViewController: UIViewController {
         guard let inputOperator = sender.currentTitle else { return }
         
         let result = operationManager.addFormula(operatorValue, operandValue)
-        addCalculationDetailsStackView(result.0, result.1)
+        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
         operatorValue = inputOperator
         operandValue = CalculatorNamespace.Zero
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
         let result = operationManager.addFormula(operatorValue, operandValue)
-        addCalculationDetailsStackView(result.0, result.1)
+        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
         operandValue = operationManager.calculateFormula()
         operatorValue = CalculatorNamespace.Empty
     }
