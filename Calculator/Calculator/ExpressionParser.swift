@@ -13,6 +13,7 @@ enum ExpressionParser {
         let inputStrings = componentsByOperators(from: input)
         
         inputStrings
+            .map { $0.components(separatedBy: ",").joined() }
             .compactMap { Double($0) }
             .forEach { formula.operands.enqueue($0) }
         
