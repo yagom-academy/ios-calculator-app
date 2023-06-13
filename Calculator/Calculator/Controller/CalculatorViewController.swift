@@ -56,14 +56,14 @@ final class CalculatorViewController: UIViewController {
               let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
-        case CalculatorTerms.allClear.rawValue:
+        case CalculatorNamespace.AllClear:
             clearOperatorLabel()
             clearOperandsLabel()
             clearCalculationDetailsStackView()
             operationManager.clearFormula()
-        case CalculatorTerms.clearEntry.rawValue:
+        case CalculatorNamespace.ClearEntry:
             clearOperandsLabel()
-        case CalculatorTerms.changeSign.rawValue:
+        case CalculatorNamespace.SignToggle:
             let result = operationManager.changeSign(currentOperands)
             setOperandsLabel(result)
         default:
@@ -84,7 +84,7 @@ final class CalculatorViewController: UIViewController {
     }
     
     private func clearOperandsLabel() {
-        operandsLabel.text = CalculatorTerms.zero.rawValue
+        operandsLabel.text = CalculatorNamespace.Zero
     }
 }
 
