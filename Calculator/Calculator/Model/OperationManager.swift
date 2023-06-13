@@ -8,20 +8,12 @@
 import Foundation
 
 struct OperationManager {
-    private var formula: String = ""
+    private var formula: String = CalculatorNamespace.Empty
     private var isCalculate: Bool = false
-    private let numberFormatter: NumberFormatter = {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 11
-        numberFormatter.maximumIntegerDigits = 12
-        
-        return numberFormatter
-    }()
     
     mutating func calculateFormula() -> String {
         var parsedFormula = ExpressionParser.parse(from: formula)
-        guard let result = numberFormatter.string(for: parsedFormula.result()) else { return "Error" }
+        let result = OperandFormatter.formatStringOperand(String(parsedFormula.result()))
         isCalculate = true
         clearFormula()
         
@@ -30,32 +22,27 @@ struct OperationManager {
     
     @discardableResult
     mutating func addFormula(_ operatror: String, _ operands: String) -> (String, String) {
-        let currentOperands = operands.replacingOccurrences(of: ",", with: "")
         let `operator` = operatror
-        
-        guard let number = Double(currentOperands),
-              let operands = numberFormatter.string(for: number) else { return ("", "") }
+        let operands = OperandFormatter.formatStringOperand(operands)
         
         if formula.isEmpty && operands != CalculatorNamespace.Zero  {
-            formula += "\(number) "
-            return ("", operands)
+            formula += "\(operands)"
+            return (CalculatorNamespace.Empty, operands)
         } else if operands != CalculatorNamespace.Zero {
-            formula += "\(`operator`) \(number) "
+            formula += "\(`operator`)\(operands)"
             return (`operator`, operands)
         }
         
         if `operator` == String(Operator.divide.rawValue) && operands == CalculatorNamespace.Zero {
-            formula += "\(`operator`) \(operands) "
+            formula += "\(`operator`)\(operands) "
         }
         
-        return ("", "")
+        return (CalculatorNamespace.Empty, CalculatorNamespace.Empty)
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
-        let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands.replacingOccurrences(of: ",", with: "")
-        
-        guard let number = Double(numberOperands + inputOperands),
-              let operands = numberFormatter.string(for: number) else { return currentOperands }
+        let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands
+        let operands = OperandFormatter.formatStringOperand(numberOperands + inputOperands)
         
         if operands.filter({ $0 == "," }).count == 4 || numberOperands.count >= 13 {
             return currentOperands
@@ -87,6 +74,6 @@ struct OperationManager {
     }
     
     mutating func clearFormula() {
-        formula = ""
+        formula = CalculatorNamespace.Empty
     }
 }
