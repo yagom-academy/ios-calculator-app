@@ -342,4 +342,4 @@ private func add(lhs: Double, rhs: Double) -> Double {
 </br>
 
 ## 👥 회고
-- [회고 링크](https://github.com/mint3382/ios-calculator-app/wiki)
+- [회고 링크]([https://github.com/mint3382/ios-calculator-app/wiki](https://github.com/mint3382/ios-calculator-app/wiki/%F0%9F%8F%A6%EA%B3%84%EC%82%B0%EA%B8%B0%F0%9F%92%B0))
