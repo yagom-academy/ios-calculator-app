@@ -19,6 +19,12 @@ struct LinkedList<DataType>: Listable {
         return numberOfNode
     }
     
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+        numberOfNode = 0
+    }
+
     mutating func append(_ data: DataType) {
         guard head != nil else {
             head = Node(data: data)
