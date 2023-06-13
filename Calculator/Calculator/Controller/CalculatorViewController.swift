@@ -48,15 +48,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, Double(currentOperand) != Double.zero else {
-            return
-        }
-        guard operand.hasPrefix("−") else {
-            operandLabel.text = "−\(operand)"
-            return
-        }
-        
-        operandLabel.text?.removeFirst()
+        toggleSign()
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
@@ -196,5 +188,16 @@ extension CalculatorViewController {
         if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
             operandLabel.text = formattedNumber
         }
+    }
+    
+    private func toggleSign() {
+        guard let currentNumberString = operandLabel.text,
+              var currentNumber = Double(currentNumberString),
+              Double(currentOperand) != Double.zero else {
+            return
+        }
+        
+        currentNumber *= -1
+        operandLabel.text = "\(currentNumber)"
     }
 }
