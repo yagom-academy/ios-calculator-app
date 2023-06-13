@@ -120,7 +120,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(2)
         
         //when
-        let result = sut.first
+        let result = sut.firstData
         
         //then
         XCTAssertEqual(result, 1)
@@ -134,7 +134,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         let _ = sut.dequeue()
         
         //when
-        let result = sut.first
+        let result = sut.firstData
         
         //then
         XCTAssertEqual(result, 2)
@@ -146,7 +146,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(2)
         
         //when
-        let result = sut.last
+        let result = sut.lastData
         
         //then
         XCTAssertEqual(result, 2)
@@ -159,8 +159,8 @@ final class CalculatorItemQueueTests: XCTestCase {
         let _ = sut.dequeue()
         
         //when
-        let first = sut.first
-        let last = sut.last
+        let first = sut.firstData
+        let last = sut.lastData
         
         //then
         XCTAssertEqual(first, last)
@@ -170,7 +170,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enqueue(10)
         sut.enqueue(20)
-        sut.clear()
+        sut.clearQueue()
         
         //when
         let result = sut.isEmpty
@@ -181,7 +181,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_clear_비어있는queue에_clear시_isEmpty가_true인지() {
         //given
-        sut.clear()
+        sut.clearQueue()
         
         //when
         let result = sut.isEmpty
@@ -194,7 +194,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         //given
         sut.enqueue(10)
         let _ = sut.dequeue()
-        sut.clear()
+        sut.clearQueue()
         
         //when
         let result = sut.isEmpty
@@ -208,7 +208,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(10)
         let _ = sut.dequeue()
         sut.enqueue(20)
-        sut.clear()
+        sut.clearQueue()
         
         //when
         let result = sut.isEmpty
