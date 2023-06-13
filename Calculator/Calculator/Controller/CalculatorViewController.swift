@@ -56,7 +56,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if let operand = operandLabel.text, operand.hasSuffix(".") {
+        if currentOperand.hasSuffix(".") {
             operandLabel.text?.removeLast()
         }
         
@@ -82,12 +82,12 @@ class CalculatorViewController: UIViewController {
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
-        guard currentOperand != "0" || currentOperand != "00" else {
+        guard let a = Double(currentOperand), a != Double.zero || currentOperand.contains(".") else {
             operandLabel.text = operandElement
             return
         }
         
-        operandLabel.text = numberFormatter.string(for: Double(currentOperand + operandElement))
+        operandLabel.text = currentOperand + operandElement
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
@@ -191,9 +191,8 @@ extension CalculatorViewController {
     }
     
     private func toggleSign() {
-        guard let currentNumberString = operandLabel.text,
-              var currentNumber = Double(currentNumberString),
-              Double(currentOperand) != Double.zero else {
+        guard var currentNumber = Double(currentOperand),
+              currentNumber != Double.zero else {
             return
         }
         
