@@ -1,9 +1,7 @@
-# 계산기 [STEP 1]
-> 프로젝트에 단위 테스트(Unit Test)를 위한 타깃이 있습니다.
-> 계산기가 입력받은 숫자와 연산자는 연산큐에 쌓이게 됩니다.
-> 사칙연산 계산을 위한 큐(Queue) 타입(CalculatorItemQueue)가 있습니다.
-> CalculatorItemQueue에서 다루는 요소는 CalculateItem 프로토콜을 준수합니다.
-> CalculateItem 프로토콜은 빈 프로토콜입니다.
+# 계산기 [STEP 2]
+> UML대로 연산과 관련한 타입을 구현합니다.
+> 변수보다는 상수를, 반복문 조건문 보다는 고차함수를 사용하여 코드를 작성합니다.
+> TDD를 적극 수행하여 코드를 작성합니다.
 
 ## 📚 목차
 - [자기소개](#-자기-소개)
@@ -18,83 +16,57 @@
 | [**Kobe**](https://github.com/devKobe24) |
 
 ## ⏰ 타임라인
-프로젝트 진행 기간 | 23.05.30.(화) ~ 23.06.02.(금)
+프로젝트 진행 기간 | 23.06.03.(토) ~ 23.06.09.(금)
 
 | 날짜 | 진행 사항 |
 | -------- | -------- |
-| 23.05.30.(화)     | MVC 형태로 폴더 구성 정리 및 파일 이동.<br/>CalculatorItemQueue 파일 생성, Node 파일 생성 및 클래스 생성, CalculatorTestsPlan 생성, CalculatorItemQueueTests 파일 생성, CalculatorNodeTests 파일 생성.<br/>Node 클래스 생성 테스트 구현.<br/>Node 클래스 value 프로퍼티에 제네릭 타입이 들어가는 테스트 추가.<br/>Node 파일 삭제, CalculatorNodeTests 파일 삭제, CalculatorTestsPlan 수정.<br/> |
-| 23.05.31.(수)     | 배열에 숫자를 담는 함수 생성.<br/>배열에 값이 들어가는것을 확인하기 위한 테스트 생성 및 확인.<br/>enqueue로 함수명 수정.<br/>배열에서 값이 빠지는 기능 테스트 [RED]<br/>enqueue에 반환값 생성<br/>배열에서 값이 빠지는 기능 테스트 [GREEN]<br/>배열에 요소가 없을때 peek 함수를 호출하면 nil을 반환한다 테스트[RED]<br/>배열에 요소가 없을 때 peek 함수를 호출하면 nil을 반환한다 [GREEN]<br/>clear 함수를 호출시 배열의 요소가 모두 비워졌을때 true를 반환한다 테스트[RED]<br/>clear 함수를 호출시 배열의 요소가 모두 비워졌을때 true를 반환한다[GREEN]<br/>clear 함수 수정 [BLUE]|
-| 23.06.02.(금)     | CalculatorItemQueue 코드 수정, CalculatorItemQueueTests 테스트 삭제.<br/>elements 요소를 가져오기 위한 함수 생성.<br/>enqueue 함수 호출시 배열에 요소가 담긴다 [GREEN]<br/>enqueue 여러번 호출시 테스트 성공[GREEN]<br/>빈 배열에 dequeue시 nil 반환 테스트 [RED]<br/>where 구문 추가, Equatable 채택, dequeue 로직 변경.<br/>dequeue 호출시 배열에서 요소가 하나씩 빠짐[GREEN]<br/>peek 함수 호출시 nil 반환.<br/>peek 함수 호출시 첫 번째 요소를 가져온다.<br/>clear 함수 호출 테스트 [GREEN]<br/>불필요한 extension 삭제.<br/>README 작성|
-
+| 23.06.03.(토)| removeFirst 함수 로직 변경.<br/>Test Double를 위한 CalculateItemProtocol 구현<br/>DummyLinkedList, MockCalculatorItemQueue 구현. <br/>private 제어 접근자 삭제.<br/>CalculatorItemQueue 단방향 리스트로 수정.<br/>코드 전면 수정.<br/>Mock Object와 Dummy Data 활용한 테스트 성공[GREEN]<br/>접근 제어자 설정.<br/>enqueue 확인 테스트 [RED]<br/>enqueue 호출시 데이터가 쌓이는 테스트[GREEN]<br/>MockNode 클래스 생성.<br/>Node타입을 MockNode<T> 타입으로 변경.<br/>CalculateItemProtocol에 Equatable을 채택.<br/>MockNode의 Value값 비교 테스트[GREEN]<br/>테스트 코드 성공, MockNode 생성, Equatable 채택, MockNode 타입으로 변경.<br/>CalculateItem 프로토콜 Equatable 채택.<br/>LinkedList의 T가 CalculateItem 채택.<br/>Node 클래스와 T 타입 Equatable 채택.<br/>불필요한 코드 삭제.<br/>접근 제어자 변경, MockLinkedListProtocol 생성.<br/>접근 제어자 삭제.<br/>Mock enqueue Test code 수정.<br/>dequeue시 데이터 삭제 테스트[GREEN]<br/>isEmpty 호출시 true 반환 테스트[GREEN]<br/>isEmpty 호출시 false 반환 테스트[GREEN]<br/>front 호출시 head 값 가져오는 테스트[GREEN]<br/>front 호출시 nil값 반환 테스트[GREEN]|
+| 23.06.05.(월)| DummyLinkedList에서 MockLinkedList로 변경.<br/>MockNode에서 DummyNode로 변경.<br/>|
+| 23.06.06.(화)| 열거형 ExpressionParser 구현 및 파일 생성.<br/>Formula 파일 생성및 구조체 생성.<br/>FormulaProtocol 구현.<br/>Formula 구조체 임시 구현.<br/>ExpressionParser 열거형 임시구현.<br/>MockFormula 객체 생성.<br/>Double를 확장, CalculateItem 채택. <br/>Operator 열거형 임시 구현, Operator 확장.<br/>String Extension 파일 생성 및 임시 구현.<br/>calculate 메서드 수정.<br/>제네릭 CalculateItem 채택, 불필요 코드 삭제.<br/>LinkedListProtocol 채택.<br/>Operator 테스트를 위한 Mock 객체 생성.<br/>Operator의 add 테스트[GREEN]<br/>코드 정리, add 테스트, Mock객체 생성.<br/>Operator subtract 호출시 테스트[GREEN]<br/>Operator의 divide 호출시 테스트[GREEN]<br/>Operator의 multiply 테스트[GREEN]<br/>프로토콜, 구조체 내부 로직 수정.<br/>result 호출시 operator에 따른 결과값 반환 테스트[RED]<br/>프로토콜, 구조체 내부 코드 수정, 테스트 실패|
+| 23.06.07.(수)| String Extension 로직 변경.<br/>불명확한 테스트 함수 이름들 수정. <br/>테스트를 위하여 프로토콜과 구조체 코드 수정.<br/>ExpressionParser의 Mock 객체 생성. <br/>operator 초기값 할당 테스트[GREEN]<br/>Mock객체 생성, add 테스트, 프로토콜과 구조체 수정.<br/>MockFormula operator subtract 테스트[GREEN]<br/>MockFormula operator divide 테스트[GREEN]<br/>MockFormula operator multiply 테스트[GREEN] <br/> split 내부 코드 수정.<br/>MockFormula operands 테스트[GREEN]<br/>MockFormula result 내부 코드 수정.<br/>MockFormula result operands 반환 테스트[GREEN]<br/>MockFormula result 메서드 내부 코드 수정.<br/>MockFormula result operands 반환 테스트[RED]<br/>MockFormula result 메서드 로직 변경.<br/>MockFormula results 연산자 add 테스트[GREEN]<br/>test 케이스 코드 수정.<br/>MockFormula results subtract 호출 테스트[GREEN]<br/> MockFormula results divide 테스트[GREEN]<br/>MockFormula results multiply 테스트[GREEN]<br/>잘못된 띄어쓰기 수정.<br/>componentsByOperators 함수 로직 변경.<br/>componentsByOperator 호출 테스트[RED]<br/>componentsByOperators 내부 로직 변경.<br/>componentsByOperators 호출 테스트[GREEN]<br/>componentsByOperators 메서드 로직 수정.<br/>componentsByOperators 메서드 호출 테스트[GREEN]|
+| 23.06.08.(목)|componentsByOperators 메서드 내부 로직 수정.<br/>|
+| 23.06.09.(금)| parse 메서드 내부 로직 수정.<br/>parse 메서드 호출시 MockFormula 객체 반환 테스트[GREEN]<br/>테스트를 위하여 프로토콜과 구조체 코드 수정.<br/>ExpressionParser의 Mock 객체 생성.<br/>Protocols 파일생성, LinkedListProtocol 파일 생성 및 구현.<br/>CalculateItem 파일생성 및 구현.<br/>Protocols 하위에 FormulaProtocol 파일 생성. <br/>Extensions 폴더 생성 및 String+Extension 파일 이동.<br/>Doule+Extension 파일 생성 및 코드 이동.<br/>Operator+Extension 파일 생성 및 코드 이동.<br/>Operator+Extension 코드 수정.<br/>componentsByOperators 내부 코드 수정[BLUE].<br/>불필요한 주석 삭제.<br/>FormulaProtocol 코드 수정.<br/> Formula 구조체 코드 수정.<br/> Formula의 operators 제네릭 타입 수정[BLUE]<br/>ExpressionParser의 parse 내부 로직 수정[BLUE] <br/> Formula의 result 함수 내부 로직 수정[BLUE].<br/>README 작성|
 
 ## 📺 실행화면
 - 계산기 Unit Test 실행 화면 <br>
-<img src = "https://github.com/devKobe24/images/blob/main/TDD.gif?raw=true" width = 500>
+<img src = "https://github.com/devKobe24/images/blob/main/230609TEST_GIF.gif?raw=true" width = 700>
 
 ## 🔨 트러블 슈팅 
-1️⃣ **배열 VS 연결 리스트** <br>
+1️⃣ **제네릭을 2개 받기** <br>
 🔒 **문제점** <br>
-큐(Queue)를 구현하는데 방법이 여러가지가 있었습니다. 
-그 여러가지 방법 중 배열과 단방향 연결 리스트를 이용한 방법이 있었습니다.
-처음에는 단방향 연결 리스트를 이용하여 큐를 구현하였습니다.
-큐를 구현하던 중 제네릭과 TDD 그리고 단방향 리스트에 대한 정확한 이해도가 부족했습니다.
-그로 인하여 큐를 구현하는데 문제가 생겼습니다.
+Operands와 Operators 각각의 제네릭 타입을 받아야 했습니다.
+문제는 T 한 가지 타입으로만 두 Operands와 Operators를 제네릭으로 받아 관리하고 있었습니다.
+각기 다른 타입을 받아야하는 관계에 문제가 발생했었습니다.
 
 🔑 **해결방법** <br>
-배열을 이용하여 큐를 구현하는 방법으로 방향을 선회하였습니다.
-일단 배열을 이용하여 큐를 구현하는 방법으로 큐를 구현하면서 큐에 대한 이해도를 높이려 했습니다.
-이후 단방향 리스트에 대해 공부했습니다.
-또한 TDD와 제네릭 타입에 대한 공부도 함께 하였습니다.
-현재는 배열을 이용한 방법으로 큐를 구현하여 해결하였으며 추후에는 단방향 연결 리스트로 리팩토링 할 계획입니다.
+학습을 통해 여러개의 제네릭을 받을 수 있다는 점을 인지하고 각기 다른 T,U 제네릭 타입을 구현하고 채택했습니다.
+따라서 Operands와 Operator 각각 다른 제네릭 타입을 갖을 수 있게 되었습니다.
 
 
-2️⃣ **TDD와 Unit Test** <br>
+2️⃣ **고차함수의 사용** <br>
 🔒 **문제점 2** <br>
-TDD를 시도할 때 의존성 주입에 대한 개념과 Test Double에 대한 학습이 미흡했습니다.
-그래서 테스트용 로직을 큐 구조체 내부에 구현했습니다.
-때문에 주객전도와 같은 현상이 일어났습니다.
+반복문과 조건문 대신 고차함수를 사용하려 노력했습니다.
+그러다보니 가독성이 떨어질때도 있고 한 편으로는 코드가 짧아지는 장점도 있었습니다.
+그리고 고차함수에 대한 제대로된 이해가 없어서 잘 사용하지 못하는 문제가 있었습니다.
 
 🔑 **해결방법** <br>
-Test Double을 이용해 Mock Object를 만들어서 해당 객체에만 의존성을 주입해 객체의 생성과 의존성 설정을 자신이 아닌 외부에서 처리하도록 하려합니다.
-외부에서 의존성을 주입받게된다면 특정 구현에 강하게 결합받지 않고, 코드의 유연성과 재사용성이 증가하므로 단위 테스트시 Mock Object를 쉽게 주입하여 테스트할 수 있을것으로 생각됩니다.
-
-
-3️⃣ **코드의 단순화** <br>
-🔒 **문제점 3** <br>
-로직을 만들 때 코드를 조금 더 단순화해서 만들어야 하는데 일단 생각나는대로 적는 습관이 있는것 같습니다.
-그로 인해 한 줄로 쓰여질 코드도 2~3줄이 되는 현상이 발생합니다.
-
-```swift!
-if elements != [] {
-    return elements.removeFirst()
-    } else {
-    return nil
-}
-```
-
-🔑 **해결방법** <br>
-삼항 연산자 혹은 고차함수를 사용해야겠다는 생각을 했습니다.
-그리고 나쁜 습관인 일단 생각나는대로 구현하는 습관보다 코드를 어떻게 하면 단순화할 수 있을지에 대해 고민하고 코드를 써가는 습관을 길러야 겠다는 생각도 했습니다.
-
-이번 해결 방법은 원비께서 제안해주신 삼항 연산자를 적극 활용해봤습니다.
-```swift!
-elements.isEmpty ? nil : elements.removeFirst()
-```
+활동학습과 직접 고차함수 구현을 통해 고차함수가 어떻게 구현되고 동작하는지에 대해 알아보고 이해한 다음 고차함수를 사용했습니다.
+가독성이 너무 떨어지지 않는 선에서 고차함수를 사용하려 노력했습니다.
 
 
 🤔 **고민했던 점** <br>
-- 큐를 구현하는데 있어서 배열, 단방향 리스트, 더블 스택 구조등 다양한 방법이 있어서 무엇을 선택하고 어떻게 구현해야 할지 가장 고민했습니다.
-- TDD의 경우 처음 RED를 어떻게 발생시켜야 하는지 몰라서 고민을 많이 했습니다.
-- 의존성 주입에 대한 개념에 대해 고민했습니다.
-- 코드의 단순화에 대해 고민했습니다.
-- 제네릭 타입이 무엇이고 어떤 상황에 쓰이며 장.단점에 대해서 고민했습니다.
+- UML만을 보고 함수와 전체 적인 구조를 생각하고 구현하는 것을 많이 고민했습니다.
+- 고차함수의 사용의 장점과 단점에 대해서 고민했습니다.
+- 제네릭과 프로토콜 그리고 익스텐션의 조합이 어떤 형식으로 프로그램이 짜여지는지 고민했습니다.
+- SOLID를 어떻게 적용할지 많이 고민했습니다.
 
 
 ## 📑 참고자료
 - [제네릭](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/generics/)
 - [TDD & Unit Test](https://yagom.net/courses/unit-test-%ec%9e%91%ec%84%b1%ed%95%98%ea%b8%b0/)
-- [클래스와 구조체](https://bbiguduk.gitbook.io/swift/language-guide-1/structures-and-classes)
-- [단방향 리스트로 큐를 구현했을 때의 장점, 큐의 구현이 동적인 이유, 동작 방식, 테일 포인터](https://github.com/devKobe24/TIL/blob/main/TIL/230601(3)_TIL.md)
 - [프로토콜](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/protocols/)
 - [Extensions](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/extensions/)
+- [고차함수 TIL](https://github.com/devKobe24/TIL/blob/main/TIL/230609_TIL.md)
+- [UML-넥스트리소프트](https://www.nextree.co.kr/p6753/)
+- [SOLID TIL](https://morgan-kang.notion.site/230520-TIL-SOLID-d77c52091c874ef4848376d248ee1eae)
 

@@ -5,11 +5,7 @@
 //  Created by Minseong Kang on 2023/05/30.
 //
 
-extension Int: CalculateItem { }
-
-protocol CalculateItem: Equatable { }
-
-struct CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem>: Queueable {
 	private var list: LinkedList<T>?
 	
 	var isEmpty: Bool? {
