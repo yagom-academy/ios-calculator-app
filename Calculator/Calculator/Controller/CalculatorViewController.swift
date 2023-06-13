@@ -55,7 +55,14 @@ class CalculatorViewController: UIViewController {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
-        inputNumberLabel.text = (numberLabelText == "0") ? ("0") : (numberLabelText + inputNumberText)
+        if numberLabelText.count < 20 {
+            if numberLabelText == "0" {
+                inputNumberLabel.text = "0"
+            } else {
+                let formattedNumberText = numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText
+                inputNumberLabel.text = calculatorNumberFormatter.string(for: Double(formattedNumberText))
+            }
+        }
     }
     
     @IBAction func tapPeriodButton(_ sender: UIButton) {
