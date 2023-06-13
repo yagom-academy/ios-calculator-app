@@ -17,6 +17,19 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
     }
     
+    private var formulaString: String = ""
+    private var isComputable: Bool = true
+
+    private var calculatorNumberFormatter: NumberFormatter = {
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.maximumSignificantDigits = 20
+        
+        return numberFormatter
+    }()
+    
     @IBAction func tapNubersButton(_ sender: UIButton) {
     }
     
