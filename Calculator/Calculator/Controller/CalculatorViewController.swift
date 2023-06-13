@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         clearLabel()
     }
-
+    
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
         clearLabel()
@@ -71,8 +71,16 @@ class CalculatorViewController: UIViewController {
         addPreviousContentStackView()
         expression += configureCurrentFormula()
         var formula: Formula = ExpressionParser.parse(from: expression)
-        let result: Double = formula.result()
-        operandLabel.text = numberFormatter.string(for: result)?.replacingOccurrences(of: "-", with: "−")
+        
+        do {
+            let result: Double = try formula.result()
+            operandLabel.text = numberFormatter.string(for: result)?.replacingOccurrences(of: "-", with: "−")
+        } catch CalculatorError.missingOperand {
+            print(CalculatorError.missingOperand.localized)
+        } catch {
+            print(error)
+        }
+        
         operatorLabel.text = ""
         expression = ""
         isResult = true
@@ -86,7 +94,7 @@ class CalculatorViewController: UIViewController {
             operandLabel.text = operandElement
             return
         }
-
+        
         operandLabel.text = numberFormatter.string(for: Double(currentOperand + operandElement))
     }
     
@@ -117,7 +125,7 @@ class CalculatorViewController: UIViewController {
         if let realNumber = Double(currentOperand), Double(currentOperand) == Double(Int(realNumber)) {
             operandLabel.text = String(Int(realNumber))
         }
-
+        
         addPreviousContentStackView()
         expression += configureCurrentFormula()
         operatorLabel.text = sender.currentTitle
@@ -147,7 +155,7 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
         operatorLabel.text = ""
     }
-        
+    
     private func configureContentStackView() -> UIStackView {
         let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel.text)
         let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
@@ -155,7 +163,7 @@ class CalculatorViewController: UIViewController {
         
         return content
     }
-        
+    
     private func addItemToContentStackView(item formula: UILabel...) -> UIStackView {
         let content: UIStackView = UIStackView()
         content.translatesAutoresizingMaskIntoConstraints = false
@@ -167,7 +175,7 @@ class CalculatorViewController: UIViewController {
         
         return content
     }
-
+    
     private func configureItem(with labelText: String?) -> UILabel {
         let recordedLabel: UILabel = UILabel()
         recordedLabel.font = .preferredFont(forTextStyle: .title3)
