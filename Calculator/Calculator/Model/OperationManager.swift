@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias LabelValues = (operandValue: String, operatorValue: String)
+
 struct OperationManager {
     private var formula: String = CalculatorNamespace.Empty
     private var isCalculate: Bool = false
@@ -19,9 +21,8 @@ struct OperationManager {
         
         return result
     }
-    
-    @discardableResult
-    mutating func addFormula(_ operatror: String, _ operands: String) -> (String, String) {
+
+    mutating func addFormula(_ operatror: String, _ operands: String) -> LabelValues {
         let `operator` = operatror
         let operands = OperandFormatter.formatStringOperand(operands)
         
@@ -30,14 +31,14 @@ struct OperationManager {
             return (CalculatorNamespace.Empty, operands)
         } else if operands != CalculatorNamespace.Zero {
             formula += "\(`operator`)\(operands)"
-            return (`operator`, operands)
+            return (operandValue: operands, operatorValue: `operator`)
         }
         
         if `operator` == String(Operator.divide.rawValue) && operands == CalculatorNamespace.Zero {
             formula += "\(`operator`)\(operands) "
         }
         
-        return (CalculatorNamespace.Empty, CalculatorNamespace.Empty)
+        return (operandValue: CalculatorNamespace.Empty, operatorValue: CalculatorNamespace.Empty)
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
