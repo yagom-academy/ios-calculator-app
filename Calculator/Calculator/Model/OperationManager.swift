@@ -22,8 +22,8 @@ struct OperationManager {
         return result
     }
 
-    mutating func addFormula(_ operatror: String, _ operands: String) -> LabelValues {
-        let `operator` = operatror
+    mutating func addFormula(_ operators: String, _ operands: String) -> LabelValues {
+        let `operator` = operators
         let operands = OperandFormatter.formatStringOperand(operands)
         
         if formula.isEmpty && operands != CalculatorNamespace.Zero  {
@@ -34,8 +34,9 @@ struct OperationManager {
             return (operandValue: operands, operatorValue: `operator`)
         }
         
-        if `operator` == String(Operator.divide.rawValue) && operands == CalculatorNamespace.Zero {
-            formula += "\(`operator`)\(operands) "
+        if operands == CalculatorNamespace.Zero {
+            formula += "\(`operator`)\(operands)"
+            return (operandValue: operands, operatorValue: `operator`)
         }
         
         return (operandValue: CalculatorNamespace.Empty, operatorValue: CalculatorNamespace.Empty)
@@ -44,20 +45,22 @@ struct OperationManager {
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
         let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands
         let operands = OperandFormatter.formatStringOperand(numberOperands + inputOperands)
+        isCalculate = false
         
         if operands.filter({ $0 == "," }).count == 4 || numberOperands.count >= 13 {
             return currentOperands
         }
         
-        if numberOperands.contains(CalculatorNamespace.Dot) && (inputOperands == CalculatorNamespace.Zero || inputOperands == CalculatorNamespace.DoubleZero) {
+        if numberOperands.contains(CalculatorNamespace.Dot) &&
+            (inputOperands == CalculatorNamespace.Zero || inputOperands == CalculatorNamespace.DoubleZero) {
             let result = numberOperands + inputOperands
             return result
-        } else if !numberOperands.contains(CalculatorNamespace.Dot) && inputOperands == CalculatorNamespace.Dot {
+        } else if !numberOperands.contains(CalculatorNamespace.Dot) &&
+                    inputOperands == CalculatorNamespace.Dot {
             let result = operands + inputOperands
             return result
         }
-        
-        isCalculate = false
+
         return operands
     }
     
