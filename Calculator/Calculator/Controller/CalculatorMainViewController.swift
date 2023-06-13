@@ -7,13 +7,13 @@
 import UIKit
 
 class CalculatorMainViewController: UIViewController {
-
-    @IBOutlet var operandLabel: UILabel!
-    @IBOutlet var operatorLabel: UILabel!
+    @IBOutlet weak var calculatorScrollView: UIScrollView!
+    @IBOutlet weak var calculatorStackView: UIStackView!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func touchUpPointButton(_ sender: UIButton) {
@@ -64,6 +64,14 @@ class CalculatorMainViewController: UIViewController {
         } else {
             operandLabel.text = "-" + currentNumberText
         }
+    }
+    
+    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func touchUpEqualsButton(_ sender: UIButton) {
+        
     }
 }
 
