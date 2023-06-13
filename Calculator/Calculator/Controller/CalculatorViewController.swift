@@ -131,3 +131,32 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension CalculatorViewController {
+    func makeStackview() -> UIStackView {
+        let formulaStackView: UIStackView = UIStackView()
+        
+        formulaStackView.axis = .horizontal
+        formulaStackView.spacing = 8
+        
+        return formulaStackView
+    }
+    
+    func makeLabelInStackView(_ input: String) -> UILabel {
+        let inputLabel: UILabel = UILabel()
+        
+        inputLabel.text = input
+        inputLabel.textColor = UIColor.white
+        
+        return inputLabel
+    }
+    
+    func setAutoScrollToBottom() {
+        formulaListScrollView.layoutIfNeeded()
+        let bottomOffset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height -
+                                   formulaListScrollView.bounds.height +
+                                   formulaListScrollView.contentInset.bottom)
+        if bottomOffset.y > 0 {
+            formulaListScrollView.setContentOffset(bottomOffset, animated: true)
+        }
+    }
+}
