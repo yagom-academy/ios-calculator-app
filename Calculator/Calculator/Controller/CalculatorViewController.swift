@@ -106,8 +106,11 @@ class CalculatorViewController: UIViewController {
                 inputNumberLabel.text = "NaN"
                 isComputable = false
             } catch {
-                let alert = UIAlertController(title: "계산 오류입니다.", message: "확인 버튼을 눌러주시기 바랍니다.", preferredStyle: .alert)
-                let cancle = UIAlertAction(title: "확인", style: .default)
+                let alert = UIAlertController(title: "계산 오류입니다.",
+                                              message: "확인 버튼을 눌러주시기 바랍니다.",
+                                              preferredStyle: .alert)
+                let cancle = UIAlertAction(title: "확인",
+                                           style: .default)
                 alert.addAction(cancle)
                 present(alert, animated: true)
             }
@@ -115,9 +118,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
+        inputOperatorLabel.text = ""
+        inputNumberLabel.text = "0"
+        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        isComputable = true
+        formulaString = ""
     }
     
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
+        isComputable = true
+        inputNumberLabel.text = "0"
     }
 }
 
