@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
     private var userTyping = false
     private var formula = ""
     private var initalNumber = 0
