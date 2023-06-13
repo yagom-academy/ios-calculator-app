@@ -198,6 +198,11 @@ extension CalculatorViewController {
         }
         
         currentNumber *= -1
-        operandLabel.text = "\(currentNumber)"
+        
+        if Double(currentNumber) == Double(Int(currentNumber)) {
+            operandLabel.text = String(Int(currentNumber))
+        } else {
+            operandLabel.text = String(currentNumber)
+        }
     }
 }
