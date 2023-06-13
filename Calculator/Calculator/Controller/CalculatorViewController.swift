@@ -91,6 +91,27 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapEqualMarkButton(_ sender: UIButton) {
+        if isComputable {
+            tapOperatorButton(sender)
+            var calculateResult = ExpressionParser.parse(from: formulaString)
+            
+            do {
+                let formula = try calculateResult.result()
+                let formulaResult = calculatorNumberFormatter.string(for: formula)
+                inputNumberLabel.text = formulaResult
+                
+                isComputable = false
+                formulaString = ""
+            } catch CalculatorError.dividedByZero {
+                inputNumberLabel.text = "NaN"
+                isComputable = false
+            } catch {
+                let alert = UIAlertController(title: "계산 오류입니다.", message: "확인 버튼을 눌러주시기 바랍니다.", preferredStyle: .alert)
+                let cancle = UIAlertAction(title: "확인", style: .default)
+                alert.addAction(cancle)
+                present(alert, animated: true)
+            }
+        }
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
