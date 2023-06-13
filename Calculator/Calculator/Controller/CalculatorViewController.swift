@@ -56,9 +56,26 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapPeriodButton(_ sender: UIButton) {
+        let period = "."
+        guard let numberLabelText = inputNumberLabel.text else { return }
+        
+        inputNumberLabel.text? = (numberLabelText.contains(period)) ? (numberLabelText) : (numberLabelText + period)
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
+        guard let inputOperatorText = sender.titleLabel?.text,
+              let numberLabelText = inputNumberLabel.text,
+              let operatorLabelText = inputOperatorLabel.text else { return }
+        
+        if inputOperatorText == "=" && inputNumberLabel.text == "0" {
+            formulaString += operatorLabelText + numberLabelText
+        } else if inputNumberLabel.text == inputOperatorText {
+            inputOperatorLabel.text = inputOperatorText
+        } else {
+            formulaString += operatorLabelText + numberLabelText
+            inputOperatorLabel.text = inputOperatorText
+            inputNumberLabel.text = "0"
+        }
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
