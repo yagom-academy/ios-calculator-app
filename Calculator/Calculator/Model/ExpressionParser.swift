@@ -5,7 +5,7 @@
 //  Created by yyss99, Serena on 2023/06/12.
 //
 
-// String을 나누기
+import Foundation
 
 enum ExpressionParser {
     
@@ -35,6 +35,10 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        let allOperatorRawValues = Operator.allCases.map { $0.rawValue }
+        let componentStandard = CharacterSet(charactersIn: String(allOperatorRawValues))
+        let componentParts: [String] = input.components(separatedBy: componentStandard)
+        
+        return componentParts
     }
 }
