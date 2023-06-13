@@ -2,7 +2,7 @@
 //  FormulaErrors.swift
 //  Calculator
 //
-//  Created by karen on 2023/06/13.
+//  Created by karen, Mary.
 //
 
 import Foundation
