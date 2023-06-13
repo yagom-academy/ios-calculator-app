@@ -2,7 +2,7 @@
 //  Queueable.swift
 //  Calculator
 //
-//  Created by Whales on 2023/06/04.
+//  Created by mint, Whales on 2023/06/12.
 //
 
 protocol Queueable {
@@ -14,7 +14,7 @@ protocol Queueable {
     
     mutating func enqueue(_ element: CalculateItem)
     
-    mutating func dequeue() throws -> CalculateItem
+    mutating func dequeue() -> CalculateItem?
     
     mutating func clearQueue()
 }

@@ -1,29 +1,26 @@
 //
-//  Formula.swift
+//  Fornula.swift
 //  Calculator
 //
-//  Created by Whales on 2023/06/07.
+//  Created by mint, Whales on 2023/06/02.
 //
 
+import Foundation
+
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
+    var operators = CalculatorItemQueue<Operator>()
+    var operands = CalculatorItemQueue<Double>()
     
-    mutating func result() throws -> Double {
-        if operands.isEmpty {
+    mutating func result() -> Double {
+        guard var firstOperand = operands.dequeue() else {
             return 0
-        } else if operators.isEmpty, let result = operands.readFirstData() {
-            return result
         }
         
-        var result: Double = try operands.dequeue()
-        
-        result = try operators.dequeue().calculate(lhs: result, rhs: try operands.dequeue())
-        
-        while !operands.isEmpty {
-            result = try operators.dequeue().calculate(lhs: result, rhs: try operands.dequeue())
+        while let newOperator = operators.dequeue(),
+              let secondOperand = operands.dequeue() {
+            firstOperand = newOperator.calculate(lhs: firstOperand, rhs: secondOperand)
         }
         
-        return result
+        return firstOperand
     }
 }

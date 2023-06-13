@@ -2,13 +2,11 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Whales on 2023/05/31.
+//  Created by mint, Whales on 2023/05/30.
 //
 
-import UIKit
-
 struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
-    var queue: LinkedList = LinkedList<Element>()
+    private(set) var queue: LinkedList = LinkedList<Element>()
     
     var count: Int {
         return queue.count
@@ -18,27 +16,24 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         return queue.isEmpty
     }
     
+    var firstData: Element? {
+        return queue.headData
+    }
+    
+    var lastData: Element? {
+        return queue.tailData
+    }
+    
     mutating func enqueue(_ element: Element) {
         queue.append(data: element)
     }
     
-    mutating func dequeue() throws -> Element {
-        guard let data = queue.readHeadData() else {
-            throw CalculatorError.invalidData
-        }
-        queue.removeFirst()
-        return data
+    @discardableResult
+    mutating func dequeue() -> Element? {
+        return queue.removeFirst()
     }
     
     mutating func clearQueue() {
         queue.removeAll()
-    }
-    
-    func readFirstData() -> Element? {
-        return queue.readHeadData()
-    }
-    
-    func readLastData() -> Element? {
-        return queue.readTailData()
     }
 }

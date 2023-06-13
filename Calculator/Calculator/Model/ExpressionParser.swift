@@ -2,38 +2,28 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by Whales on 2023/06/07.
+//  Created by mint, Whales on 2023/06/02.
 //
-
-import Foundation
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
-        var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
-        
+        var formula = Formula()
         let components = componentsByOperators(from: input)
-        let operatorsArray = components.filter { ["+", "-", "/", "*"].contains($0) }
-        let operandsArray = components.filter { !["+", "-", "/", "*"].contains($0) }
         
-        for element in operatorsArray {
-            let changeToCharacter = Character(element)
-            
-            if let changeToOperator = Operator(rawValue: changeToCharacter) {
-                operators.enqueue(changeToOperator)
-            }
-        }
+        components
+            .compactMap { Double($0) }
+            .forEach { formula.operands.enqueue($0) }
         
-        for element in operandsArray {
-            if let element = Double(element) {
-                operands.enqueue(element)
-            }
-        }
+        components
+            .filter { Double($0) == nil }
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { formula.operators.enqueue($0) }
         
-        return Formula(operands: operands, operators: operators)
+        return formula
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
         return input.split(with: " ")
+            .filter { $0 != "" }
     }
 }

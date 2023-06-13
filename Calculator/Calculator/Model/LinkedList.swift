@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  Calculator
 //
-//  Created by Whales on 2023/06/03.
+//  Created by mint, Whales on 2023/06/12.
 //
 
 final class Node<T> {
@@ -24,12 +24,12 @@ struct LinkedList<T> {
         head == nil
     }
     
-    func readHeadData() -> T? {
-        return head?.data
+    var headData: T? {
+        head?.data
     }
     
-    func readTailData() -> T? {
-        return tail?.data
+    var tailData: T? {
+        tail?.data
     }
     
     mutating func append(data: T) {
@@ -74,20 +74,24 @@ struct LinkedList<T> {
         count += 1
     }
     
-    mutating func removeFirst() {
+    @discardableResult
+    mutating func removeFirst() -> T? {
         guard !isEmpty else {
-            return
+            return nil
         }
         
+        let data = head?.data
+       
         if count == 1 {
             head = nil
             tail = nil
             count = 0
-            return
+        } else {
+            head = head?.next
+            count -= 1
         }
         
-        head = head?.next
-        count -= 1
+        return data
     }
     
     mutating func removeLast() {

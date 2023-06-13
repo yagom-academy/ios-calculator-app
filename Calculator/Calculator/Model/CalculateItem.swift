@@ -1,10 +1,8 @@
 //
-//  CalculateItem.swift
+//  CalculatorItem.swift
 //  Calculator
 //
-//  Created by Whales on 2023/05/31.
+//  Created by mint, Whales on 2023/05/30.
 //
 
 protocol CalculateItem { }
-
-extension Double: CalculateItem { }
