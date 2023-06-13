@@ -36,15 +36,15 @@ struct OperationManager {
         guard let number = Double(currentOperands),
               let operands = numberFormatter.string(for: number) else { return ("", "") }
         
-        if formula.isEmpty && operands != CalculatorTerms.zero.rawValue  {
+        if formula.isEmpty && operands != CalculatorNamespace.Zero  {
             formula += "\(number) "
             return ("", operands)
-        } else if operands != CalculatorTerms.zero.rawValue {
+        } else if operands != CalculatorNamespace.Zero {
             formula += "\(`operator`) \(number) "
             return (`operator`, operands)
         }
         
-        if `operator` == String(Operator.divide.rawValue) && operands == CalculatorTerms.zero.rawValue {
+        if `operator` == String(Operator.divide.rawValue) && operands == CalculatorNamespace.Zero {
             formula += "\(`operator`) \(operands) "
         }
         
@@ -52,7 +52,7 @@ struct OperationManager {
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
-        let numberOperands = isCalculate ? CalculatorTerms.zero.rawValue : currentOperands.replacingOccurrences(of: ",", with: "")
+        let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands.replacingOccurrences(of: ",", with: "")
         
         guard let number = Double(numberOperands + inputOperands),
               let operands = numberFormatter.string(for: number) else { return currentOperands }
@@ -61,10 +61,10 @@ struct OperationManager {
             return currentOperands
         }
         
-        if numberOperands.contains(CalculatorTerms.decimalPoint.rawValue) && (inputOperands == CalculatorTerms.zero.rawValue || inputOperands == CalculatorTerms.doubleZero.rawValue) {
+        if numberOperands.contains(CalculatorNamespace.Dot) && (inputOperands == CalculatorNamespace.Zero || inputOperands == CalculatorNamespace.DoubleZero) {
             let result = numberOperands + inputOperands
             return result
-        } else if !numberOperands.contains(CalculatorTerms.decimalPoint.rawValue) && inputOperands == CalculatorTerms.decimalPoint.rawValue {
+        } else if !numberOperands.contains(CalculatorNamespace.Dot) && inputOperands == CalculatorNamespace.Dot {
             let result = operands + inputOperands
             return result
         }
@@ -75,12 +75,12 @@ struct OperationManager {
     
     func changeSign(_ operands: String) -> String {
         var operands = operands
-        guard operands != CalculatorTerms.zero.rawValue else { return CalculatorTerms.zero.rawValue }
+        guard operands != CalculatorNamespace.Zero else { return CalculatorNamespace.Zero }
         
-        if operands.contains(CalculatorTerms.minusSign.rawValue) {
+        if operands.contains(CalculatorNamespace.Negative) {
             operands.removeFirst()
         } else {
-            operands.insert(Character(CalculatorTerms.minusSign.rawValue), at: operands.startIndex)
+            operands.insert(Character(CalculatorNamespace.Negative), at: operands.startIndex)
         }
         
         return operands
