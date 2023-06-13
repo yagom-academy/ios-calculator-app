@@ -49,6 +49,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapSerialZeroButton(_ sender: UIButton) {
+        guard let inputNumberText = sender.titleLabel?.text,
+              let numberLabelText = inputNumberLabel.text else { return }
+        
+        inputNumberLabel.text = (numberLabelText == "0") ? ("0") : (numberLabelText + inputNumberText)
     }
     
     @IBAction func tapPeriodButton(_ sender: UIButton) {
