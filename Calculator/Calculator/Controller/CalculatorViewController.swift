@@ -58,17 +58,17 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        operationManager.addFormula(operatorValue, operandValue)
-        operatorValue = operationManager.calculateFormula()
+        let result = operationManager.addFormula(operatorValue, operandValue)
+        addCalculationDetailsStackView(result.0, result.1)
+        operandValue = operationManager.calculateFormula()
         operatorValue = CalculatorNamespace.Empty
-        clearCalculationDetailsStackView()
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
         let result = operationManager.addOperandsLabel(operandValue, inputNumber)
-        operatorValue = result
+        operandValue = result
     }
     
     @IBAction private func tapFunctionButton(_ sender: UIButton) {
@@ -93,7 +93,7 @@ final class CalculatorViewController: UIViewController {
 
 extension CalculatorViewController {
     private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
-        if `operator` == CalculatorNamespace.Zero && operands == CalculatorNamespace.Zero {
+        if `operator` == CalculatorNamespace.Empty && operands == CalculatorNamespace.Empty {
             return
         }
         
