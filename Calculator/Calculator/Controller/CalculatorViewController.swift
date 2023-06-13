@@ -74,7 +74,7 @@ class CalculatorViewController: UIViewController {
         
         do {
             let result: Double = try formula.result()
-            operandLabel.text = numberFormatter.string(for: result)?.replacingOccurrences(of: "-", with: "−")
+            updateNumberLabel(result)
         } catch CalculatorError.missingOperand {
             print(CalculatorError.missingOperand.localized)
         } catch {
@@ -186,3 +186,15 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension CalculatorViewController {
+    private func updateNumberLabel(_ number: Double) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        
+        if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
+            operandLabel.text = formattedNumber
+        }
+    }
+}

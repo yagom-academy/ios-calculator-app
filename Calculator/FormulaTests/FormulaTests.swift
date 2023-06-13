@@ -51,10 +51,10 @@ final class FormulaTests: XCTestCase {
         
         // when
         sut.operands = expectedOperandsQueue
-        let result: Double = try sut.result()
+//        let result: Double = try sut.result()
         
         // then
-        XCTAssertTrue(result.isNaN)
+        XCTAssertThrowsError(try sut.result())
     }
     
     func test_result_Operands가NaN하나만있다면_연산결과는_NaN을반환한다() throws {
