@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "DB5C5B98-9439-4150-9172-680BA329BEA7",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "9CB44E2A2A30828000172F9E",
+        "name" : "CalculatorItemQueueTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "44991FE82A38A225002E4B3C",
+        "name" : "ExpressionParserTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "44991FDB2A38A216002E4B3C",
+        "name" : "FormulaTests"
+      }
+    }
+  ],
+  "version" : 1
+}
