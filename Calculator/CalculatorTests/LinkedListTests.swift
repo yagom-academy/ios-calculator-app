@@ -2,7 +2,7 @@
 //  LinkedListTests.swift
 //  CalculatorTests
 //
-//  Created by Whales on 2023/06/03.
+//  Created by mint, Whales on 2023/06/13.
 //
 
 import XCTest
@@ -36,8 +36,8 @@ final class LinkedListTests: XCTestCase {
         // when
         sut.append(data: 1)
         // then
-        XCTAssertEqual(sut.readHeadData(), expectation)
-        XCTAssertEqual(sut.readTailData(), expectation)
+        XCTAssertEqual(sut.headData, expectation)
+        XCTAssertEqual(sut.tailData, expectation)
     }
     
     func test_append함수호출시_전달인자가_tail의data로_들어가는지() {
@@ -48,7 +48,7 @@ final class LinkedListTests: XCTestCase {
         sut.append(data: 2)
         sut.append(data: 3)
         // then
-        XCTAssertEqual(sut.readTailData(), expectation)
+        XCTAssertEqual(sut.tailData, expectation)
     }
     
     func test_insert함수호출시_list의node개수가_늘어나는지() {
@@ -70,7 +70,7 @@ final class LinkedListTests: XCTestCase {
         // when
         sut.insert(data: 3, at: 0)
         // then
-        XCTAssertEqual(sut.readHeadData(), expectation)
+        XCTAssertEqual(sut.headData, expectation)
     }
     
     func test_insert함수호출시_at전달인자값이_count이상이면_개수변동없는지() {
@@ -92,7 +92,7 @@ final class LinkedListTests: XCTestCase {
         // when
         sut.insert(data: 3, at: 1)
         // then
-        XCTAssertEqual(sut.readTailData(), expectation)
+        XCTAssertEqual(sut.tailData, expectation)
     }
     
     func test_removeFirst함수호출시_head가_두번째node로_옮겨가는지() {
@@ -104,7 +104,7 @@ final class LinkedListTests: XCTestCase {
         // when
         sut.removeFirst()
         // then
-        XCTAssertEqual(sut.readHeadData(), expectation)
+        XCTAssertEqual(sut.headData, expectation)
     }
     
     func test_removeLast함수호출시_tail이_직전node로_옮겨가는지() {
@@ -116,7 +116,7 @@ final class LinkedListTests: XCTestCase {
         // when
         sut.removeLast()
         // then
-        XCTAssertEqual(sut.readTailData(), expectation)
+        XCTAssertEqual(sut.tailData, expectation)
     }
     
     func test_delete함수호출시_list의node개수가_줄어드는지() {

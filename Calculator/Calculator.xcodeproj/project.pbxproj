@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3C714CC22A37411B00D6D419 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C714CC12A37411B00D6D419 /* LinkedList.swift */; };
 		3C714CC42A3745CF00D6D419 /* Queueable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C714CC32A3745CF00D6D419 /* Queueable.swift */; };
+		3C714CCA2A387C3E00D6D419 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C714CC92A387C3E00D6D419 /* LinkedListTests.swift */; };
 		926358962A28EBDD00D8A9F9 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926358952A28EBDD00D8A9F9 /* Double+.swift */; };
 		926358982A28EE5800D8A9F9 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926358972A28EE5800D8A9F9 /* Formula.swift */; };
 		9263589A2A28EF5200D8A9F9 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926358992A28EF5200D8A9F9 /* Operator.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		3C714CC12A37411B00D6D419 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		3C714CC32A3745CF00D6D419 /* Queueable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queueable.swift; sourceTree = "<group>"; };
+		3C714CC92A387C3E00D6D419 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		926358952A28EBDD00D8A9F9 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		926358972A28EE5800D8A9F9 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		926358992A28EF5200D8A9F9 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
@@ -87,8 +89,8 @@
 				3C714CC32A3745CF00D6D419 /* Queueable.swift */,
 				92E9C2282A255A9D00625B6A /* CalculatorItemQueue.swift */,
 				92E9C22A2A255AB100625B6A /* CalculateItem.swift */,
-				926358972A28EE5800D8A9F9 /* Formula.swift */,
 				926358992A28EF5200D8A9F9 /* Operator.swift */,
+				926358972A28EE5800D8A9F9 /* Formula.swift */,
 				9263589B2A2A2F2100D8A9F9 /* ExpressionParser.swift */,
 			);
 			path = Model;
@@ -135,9 +137,10 @@
 			isa = PBXGroup;
 			children = (
 				927B98EE2A2F5F1B0051DE9C /* TestPlan.xctestplan */,
-				927B98EC2A2F5D780051DE9C /* ExpressionParserTests.swift */,
-				926358AC2A2ED1AD00D8A9F9 /* FormulaTests.swift */,
+				3C714CC92A387C3E00D6D419 /* LinkedListTests.swift */,
 				92E9C2212A24DC2100625B6A /* CalculatorItemQueueTests.swift */,
+				926358AC2A2ED1AD00D8A9F9 /* FormulaTests.swift */,
+				927B98EC2A2F5D780051DE9C /* ExpressionParserTests.swift */,
 			);
 			path = CalculatorTests;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			files = (
 				926358AD2A2ED1AD00D8A9F9 /* FormulaTests.swift in Sources */,
 				92E9C2222A24DC2100625B6A /* CalculatorItemQueueTests.swift in Sources */,
+				3C714CCA2A387C3E00D6D419 /* LinkedListTests.swift in Sources */,
 				927B98ED2A2F5D780051DE9C /* ExpressionParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
