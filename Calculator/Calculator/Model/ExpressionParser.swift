@@ -13,31 +13,29 @@ enum ExpressionParser {
         var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
         var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
-        let components = componentsByOperators(from: input)
-        let operandsValues = components.filter { !["+", "-", "/", "*"].contains($0) }
-        let operatorsValues = components.filter{ ["+", "-", "/", "*"].contains($0) }
+        let operandString = componentsByOperators(from: input)
+        let operandParts = operandString.compactMap { Double($0) }
+        let operatorChar = CharacterSet(charactersIn: operandString.joined())
+        let operatorParts = input
+            .components(separatedBy: operatorChar)
+            .filter { $0 != "" }
+            .compactMap{ Operator(rawValue: Character($0)) }
         
-        for value in operandsValues {
-            guard let number = Double(value) else {
-                continue // 안되면 걍 넘김
-            }
-            operands.enqueue(number)
+        for value in operandParts {
+            operands.enqueue(value)
         }
-
-        for value in operatorsValues {
-            guard let operatorChar = value.first,
-                  let `operator` = Operator(rawValue: operatorChar) else {
-                continue
-            }
-            operators.enqueue(`operator`)
+        
+        for value in operatorParts {
+            operators.enqueue(value)
         }
+        
         return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
         let allOperatorRawValues = Operator.allCases.map { $0.rawValue }
         let componentStandard = CharacterSet(charactersIn: String(allOperatorRawValues))
-        let componentParts: [String] = input.components(separatedBy: componentStandard)
+        let componentParts = input.components(separatedBy: componentStandard)
         
         return componentParts
     }
