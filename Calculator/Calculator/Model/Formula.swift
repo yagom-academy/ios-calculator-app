@@ -9,16 +9,14 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         guard var partialResult = operands.dequeue() else {
-            return Double.nan
+            throw CalculatorError.missingOperand
         }
         
-        while let operatorCase = operators.dequeue() {
-            guard let nextOperand = operands.dequeue() else {
-                return partialResult
-            }
-            
+        while let operatorCase = operators.dequeue(),
+              let nextOperand = operands.dequeue() {
+           
             partialResult = operatorCase.calculate(lhs: partialResult, rhs: nextOperand)
         }
         
