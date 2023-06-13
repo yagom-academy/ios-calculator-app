@@ -72,10 +72,28 @@ class CalculatorViewController: UIViewController {
         } else if inputNumberLabel.text == inputOperatorText {
             inputOperatorLabel.text = inputOperatorText
         } else {
+            let formulaStackView = makeStackView()
+            let operatorLabel = makeLabelInStackView(operatorLabelText)
+            let formattedNumberText = numberLabelText.hasSuffix(".") ? String(numberLabelText.dropLast(1)) : numberLabelText
+            let numberLabel = makeLabelInStackView(formattedNumberText)
+            
+            formulaStackView.addArrangedSubview(operatorLabel)
+            formulaStackView.addArrangedSubview(numberLabel)
+            formulaListStackView.addArrangedSubview(formulaStackView)
+            
             formulaString += operatorLabelText + numberLabelText
+            
             inputOperatorLabel.text = inputOperatorText
             inputNumberLabel.text = "0"
+            
+            setAutoScrollToBottom()
         }
+        
+        if inputOperatorText == "=" {
+            inputOperatorLabel.text = ""
+        }
+        
+        isComputable = true
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
