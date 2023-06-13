@@ -48,15 +48,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
-        guard let operand = operandLabel.text, Double(currentOperand) != Double.zero else {
-            return
-        }
-        guard operand.hasPrefix("−") else {
-            operandLabel.text = "−\(operand)"
-            return
-        }
-        
-        operandLabel.text?.removeFirst()
+        toggleSign()
     }
     
     @IBAction func touchUpResultButton(_ sender: UIButton) {
@@ -74,7 +66,7 @@ class CalculatorViewController: UIViewController {
         
         do {
             let result: Double = try formula.result()
-            operandLabel.text = numberFormatter.string(for: result)?.replacingOccurrences(of: "-", with: "−")
+            updateNumberLabel(result)
         } catch CalculatorError.missingOperand {
             print(CalculatorError.missingOperand.localized)
         } catch {
@@ -186,3 +178,26 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension CalculatorViewController {
+    private func updateNumberLabel(_ number: Double) {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        
+        if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
+            operandLabel.text = formattedNumber
+        }
+    }
+    
+    private func toggleSign() {
+        guard let currentNumberString = operandLabel.text,
+              var currentNumber = Double(currentNumberString),
+              Double(currentOperand) != Double.zero else {
+            return
+        }
+        
+        currentNumber *= -1
+        operandLabel.text = "\(currentNumber)"
+    }
+}
