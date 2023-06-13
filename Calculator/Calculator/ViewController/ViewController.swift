@@ -9,6 +9,7 @@ import UIKit
 class ViewController: UIViewController {
     private var userTyping = false
     private var formula = ""
+    private var initalNumber = 0
     private let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var displayOperandLabel: UILabel!
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setNUmberForatter()
     }
     
     @IBAction func touchDigit(_ sender: UIButton) {
@@ -34,13 +36,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func touchOperator(_ sender: UIButton) {
-        guard let inputOperator = sender.currentTitle else { return }
+        guard displayOperatorLabel.text != "0", userTyping == false else {
+            displayOperatorLabel.text = sender.currentTitle
+            return
+        }
         
-        displayOperatorLabel.text = "\(inputOperator)"
+        addFormula()
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
-        
+        guard userTyping == false else { return }
     }
     
     @IBAction func touchMenu(_ sender: UIButton) {
@@ -64,31 +69,31 @@ class ViewController: UIViewController {
         }
     }
     
-    private func addToFormula() {
+    private func addFormula() {
         guard let currentOperands = displayOperandLabel.text,
               let operands = numberFormatter.string(for: Double(currentOperands)),
-              let operationSign = displayOperatorLabel.text else { return }
+              let `operator` = displayOperatorLabel.text else { return }
         
         if formula.isEmpty && operands != "0" {
             formula += operands
-            addToStackView("", operands)
+            addStackView("", operands)
         } else if operands != "0" {
-            formula += "\(operationSign) \(operands)"
-            addToStackView(operationSign, operands)
+            formula += "\(`operator`) \(operands)"
+            addStackView(`operator`, operands)
         }
         
-        if operationSign == String(Operator.divide.rawValue) && operands == "0" {
-            formula += "\(operationSign) \(operands)"
+        if `operator` == String(Operator.divide.rawValue) && operands == "0" {
+            formula += "\(`operator`) \(operands)"
         }
     }
     
-    private func addToOperandLabel() {
+    private func addOperandLabel() {
         
     }
     
-    private func addToStackView(_ operationSign: String, _ operands: String) {
+    private func addStackView(_ `operator`: String, _ operands: String) {
         let label = UILabel()
-        label.text = "\(operationSign) \(operands)"
+        label.text = "\(`operator`) \(operands)"
         
         stackView.addArrangedSubview(label)
     }
@@ -115,5 +120,18 @@ class ViewController: UIViewController {
         }
         
         displayOperandLabel.text = operands
+    }
+    
+    private func calculateResult() -> String? {
+        
+        return nil
+    }
+    
+    private func setNUmberForatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = -2
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.usesSignificantDigits = true
     }
 }
