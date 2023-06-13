@@ -81,7 +81,7 @@ struct LinkedList<T> {
         }
         
         let data = head?.data
-        
+       
         if count == 1 {
             head = nil
             tail = nil

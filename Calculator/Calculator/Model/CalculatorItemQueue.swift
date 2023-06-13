@@ -24,10 +24,6 @@ struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
         return queue.tailData
     }
     
-    mutating func enqueue(_ element: Element) {
-        queue.append(data: element)
-    }
-    
     @discardableResult
     mutating func dequeue() -> Element? {
         return queue.removeFirst()
