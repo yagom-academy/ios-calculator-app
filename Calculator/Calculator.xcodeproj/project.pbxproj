@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		0A3A27462A33B20D00F62CF3 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A27442A33B20D00F62CF3 /* Formula.swift */; };
 		0A3A27872A3730F500F62CF3 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A27862A3730F500F62CF3 /* ExpressionParser.swift */; };
 		0A3A27882A3730F500F62CF3 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A27862A3730F500F62CF3 /* ExpressionParser.swift */; };
+		0A3A278E2A38316D00F62CF3 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3A278D2A38316D00F62CF3 /* CalculatorError.swift */; };
 		0A62B8902A2E3381001956AB /* CalculatorItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */; };
 		0A62B8912A2E3381001956AB /* CalculatorItemNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */; };
 		0A62B8932A2E35D3001956AB /* String +.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A62B8922A2E35D3001956AB /* String +.swift */; };
@@ -47,6 +48,7 @@
 		0A3A27412A33B15300F62CF3 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		0A3A27442A33B20D00F62CF3 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		0A3A27862A3730F500F62CF3 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
+		0A3A278D2A38316D00F62CF3 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CalculatorError.swift; path = "../../../../../../../.Trash/ios-calculator-app/Calculator/Calculator/Model/CalculatorError.swift"; sourceTree = "<group>"; };
 		0A62B88E2A2C93B0001956AB /* CalculatorTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CalculatorTestPlan.xctestplan; sourceTree = "<group>"; };
 		0A62B88F2A2E3381001956AB /* CalculatorItemNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemNode.swift; sourceTree = "<group>"; };
 		0A62B8922A2E35D3001956AB /* String +.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String +.swift"; sourceTree = "<group>"; };
@@ -82,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A3A278C2A38314900F62CF3 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				0A3A278D2A38316D00F62CF3 /* CalculatorError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
 		0A62B8952A2E35E8001956AB /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +113,7 @@
 		0AED33192A2C6AE8002E8C99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0A3A278C2A38314900F62CF3 /* Error */,
 				0A62B8952A2E35E8001956AB /* Extension */,
 				0AABAAE82A2A541B006B7EE4 /* CalculateItem.swift */,
 				0AABAAE52A2A537F006B7EE4 /* CalculatorItemQueue.swift */,
@@ -207,8 +218,9 @@
 		C713D9362570E5EB001C3AFC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					0AABAADB2A2A535E006B7EE4 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -287,6 +299,7 @@
 				0AABAAE62A2A537F006B7EE4 /* CalculatorItemQueue.swift in Sources */,
 				0A3A27452A33B20D00F62CF3 /* Formula.swift in Sources */,
 				0A3A27422A33B15300F62CF3 /* Operator.swift in Sources */,
+				0A3A278E2A38316D00F62CF3 /* CalculatorError.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				0A3A27872A3730F500F62CF3 /* ExpressionParser.swift in Sources */,
 				0A3A273C2A33B09A00F62CF3 /* Double +.swift in Sources */,
@@ -330,6 +343,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = Q7HGK38S83;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -354,6 +368,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = Q7HGK38S83;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
@@ -424,7 +439,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;

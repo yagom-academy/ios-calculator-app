@@ -9,7 +9,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         var result: Double = 0.0
         var lhs: Double?
         
@@ -24,13 +24,13 @@ struct Formula {
             guard let lhs,
                   let rhs = operands.dequeue(),
                   let calculationOperator = operators.dequeue() else {
-                return 0.0
+                throw CalculatorError.invalidDequeue
             }
 
             result = calculationOperator.calculate(lhs: lhs, rhs: rhs)
 
             guard result != Double.nan && result != Double.infinity else {
-                return 0.0
+                throw CalculatorError.dividedByZero
             }
         }
 
