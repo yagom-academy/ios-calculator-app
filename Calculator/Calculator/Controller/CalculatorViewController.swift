@@ -15,6 +15,9 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputNumberLabel.text = "0"
+        inputOperatorLabel.text = ""
+        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
     private var formulaString: String = ""
@@ -150,7 +153,7 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
-    func makeStackview() -> UIStackView {
+    func makeStackView() -> UIStackView {
         let formulaStackView: UIStackView = UIStackView()
         
         formulaStackView.axis = .horizontal
@@ -170,9 +173,7 @@ extension CalculatorViewController {
     
     func setAutoScrollToBottom() {
         formulaListScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height -
-                                   formulaListScrollView.bounds.height +
-                                   formulaListScrollView.contentInset.bottom)
+        let bottomOffset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height - formulaListScrollView.bounds.height + formulaListScrollView.contentInset.bottom)
         if bottomOffset.y > 0 {
             formulaListScrollView.setContentOffset(bottomOffset, animated: true)
         }
