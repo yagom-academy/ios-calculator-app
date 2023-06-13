@@ -82,7 +82,7 @@ class CalculatorViewController: UIViewController {
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
-        guard let a = Double(currentOperand), a != Double.zero || currentOperand.contains(".") else {
+        guard let currentOperandToDouble = Double(currentOperand), currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
             operandLabel.text = operandElement
             return
         }
@@ -91,6 +91,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+        guard let DoubleZero = sender.currentTitle, currentOperand != "0" else {
+            return
+        }
+        
+        operandLabel.text = currentOperand + DoubleZero
     }
     
     
