@@ -17,9 +17,7 @@ class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.minimumSignificantDigits = 0
+        numberFormatter.maximumFractionDigits = 16
         numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
@@ -97,6 +95,9 @@ class CalculatorViewController: UIViewController {
         guard !isResult else {
             return
         }
+        guard currentOperand.count < 15 else {
+            return
+        }
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
@@ -115,6 +116,9 @@ class CalculatorViewController: UIViewController {
         guard !isResult else {
             return
         }
+        guard currentOperand.count < 15 else {
+            return
+        }
         guard let zero = sender.currentTitle, currentOperand != "0" else {
             isPlaceholder = false
             return
@@ -123,11 +127,20 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        let realNumber = (currentOperand + zero).split(with: ".")
+        
+        if realNumber.count == 2 {
+            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
+        } else {
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        }
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
         guard !isResult else {
+            return
+        }
+        guard currentOperand.count < 14 else {
             return
         }
         guard let doubleZero = sender.currentTitle, currentOperand != "0" else {
@@ -138,7 +151,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        let realNumber = (currentOperand + doubleZero).split(with: ".")
+        
+        if realNumber.count == 2 {
+            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
+        } else {
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        }
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
@@ -182,7 +201,9 @@ class CalculatorViewController: UIViewController {
         isResult = false
         isPlaceholder = true
     }
-    
+}
+
+extension CalculatorViewController {
     private func configureCurrentFormula() -> String {
         let operatorCase = operatorLabel.text ?? ""
         
@@ -234,9 +255,6 @@ class CalculatorViewController: UIViewController {
         
         return recordedLabel
     }
-}
-
-extension CalculatorViewController {
     private func toggleSign() {
         guard currentOperandToDouble != Double.zero else {
             return
