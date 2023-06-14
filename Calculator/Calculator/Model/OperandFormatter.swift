@@ -14,21 +14,12 @@ enum OperandFormatter {
     }
     
     static func formatInput(_ operand: String) -> String {
-        guard let firstDigit = operand.first,
-              !operand.contains(CalculatorNamespace.comma)
+        guard !operand.contains(CalculatorNamespace.comma)
         else {
             return operand
         }
         
         var newOperand: String = operand
-        var sign: String = CalculatorNamespace.empty
-        
-        if String(firstDigit) == CalculatorNamespace.negative {
-            newOperand = String(newOperand.dropFirst(1))
-            sign = CalculatorNamespace.negative
-        }
-        
-        newOperand = sign + newOperand
         let operandSplit = newOperand.components(separatedBy: CalculatorNamespace.dot)
         
         guard let operandInteger = operandSplit.first,
