@@ -74,11 +74,11 @@ final class FormulaTests: XCTestCase {
     
     func test_Formula의_result메서드가_operators의_요소는1개이고_operands의_요소는2개일때_결과를_제대로반환하는지_확인() {
         //given
-        sut.operands.enqueue(0.1)
-        sut.operands.enqueue(0.2)
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
         sut.operators.enqueue(Operator.add)
         //when
-        let result = 0.3
+        let result = 3.0
         let input = try? sut.result()
         //then
         XCTAssertEqual(result, input)
@@ -104,12 +104,12 @@ final class FormulaTests: XCTestCase {
     
     func test_Formula의_result메서드가_operators의_요소는2개이고_operands의_요소는2개일때_결과를_제대로반환하는지_확인() {
         //given
-        sut.operands.enqueue(0.1)
-        sut.operands.enqueue(0.2)
+        sut.operands.enqueue(1)
+        sut.operands.enqueue(2)
         sut.operators.enqueue(Operator.add)
         sut.operators.enqueue(Operator.subtract)
         //when
-        let result = 0.3
+        let result = 3.0
         let input = try? sut.result()
         //then
         XCTAssertEqual(result, input)
