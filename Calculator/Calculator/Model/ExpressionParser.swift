@@ -2,7 +2,7 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by mint on 2023/06/02.
+//  Created by mint, Whales on 2023/06/02.
 //
 
 enum ExpressionParser {
@@ -10,10 +10,12 @@ enum ExpressionParser {
         var formula = Formula()
         let components = componentsByOperators(from: input)
         
-        components.compactMap { Double($0) }
+        components
+            .compactMap { Double($0) }
             .forEach { formula.operands.enqueue($0) }
         
-        components.filter { Double($0) == nil }
+        components
+            .filter { Double($0) == nil }
             .compactMap { Operator(rawValue: Character($0)) }
             .forEach { formula.operators.enqueue($0) }
         

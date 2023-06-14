@@ -1,14 +1,14 @@
 //
-//  String+.swift
+//  String_extension.swift
 //  Calculator
 //
-//  Created by mint, Whales on 2023/06/06.
+//  Created by Whales on 2023/06/08.
 //
 
 import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.components(separatedBy: String(target))
+        self.components(separatedBy: String(target))
     }
 }

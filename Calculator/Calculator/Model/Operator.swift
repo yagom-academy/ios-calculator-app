@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by mint on 2023/06/02.
+//  Created by mint, Whales on 2023/06/02.
 //
 
 import Foundation
