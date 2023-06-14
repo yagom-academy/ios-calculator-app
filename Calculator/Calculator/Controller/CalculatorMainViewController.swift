@@ -54,9 +54,9 @@ final class CalculatorMainViewController: UIViewController {
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
         if isFormulaEnd {
             appendCalculateItem()
-            clearEntry()
             operatorsAndOperandsInput = ""
             isFormulaEnd = false
+            clearEntry()
         }
         
         guard
@@ -75,9 +75,9 @@ final class CalculatorMainViewController: UIViewController {
     @IBAction private func touchUpZeroButton(_ sender: UIButton) {
         if isFormulaEnd {
             appendCalculateItem()
-            clearEntry()
             operatorsAndOperandsInput = ""
             isFormulaEnd = false
+            clearEntry()
         }
         
         guard
@@ -116,6 +116,12 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     @IBAction private func touchUpClearEntryButton(_ sender: UIButton) {
+        if isFormulaEnd {
+            appendCalculateItem()
+            operatorsAndOperandsInput = ""
+            isFormulaEnd = false
+        }
+        
         clearEntry()
     }
     
@@ -177,12 +183,6 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     private func clearEntry() {
-        if isFormulaEnd {
-            appendCalculateItem()
-            operatorsAndOperandsInput = ""
-            isFormulaEnd = false
-        }
-        
         operandLabel.text = "0"
     }
     
