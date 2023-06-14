@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     private var numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 20
+        formatter.maximumFractionDigits = 5 //
         
         return formatter
     }()
@@ -47,17 +47,23 @@ class ViewController: UIViewController {
             expression = ""
             inputedOperand = ""
             isResult = false
+            
+            removeStackView()
         }
         
         switch partialOperand {
         case ".":
             inputedOperand += checkDot()
+            operandLabel.text = inputedOperand
+            
+            // TODO: "." Components + 00 Append
         default:
             inputedOperand += partialOperand
+            operandLabel.text = numberFormatter.string(for: Double(inputedOperand))
         }
         
         //operandLabel.text = inputedOperand
-        operandLabel.text = numberFormatter.string(for: Double(inputedOperand))
+//        operandLabel.text = numberFormatter.string(for: Double(inputedOperand))
     }
     
     // 연산자 버튼 눌렀을 때
@@ -67,9 +73,7 @@ class ViewController: UIViewController {
             return
         }
         
-        if isResult {
-            isResult = false
-        }
+        if isResult { return }
         
         addStackView()
 
