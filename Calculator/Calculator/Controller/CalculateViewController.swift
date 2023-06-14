@@ -73,7 +73,11 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "0"))
+        if operandLabelText.contains(".") {
+            currentOperandLabel.text = operandLabelText + "0"
+        } else {
+            currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "0"))
+        }
     }
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
@@ -89,7 +93,11 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "00"))
+        if operandLabelText.contains(".") {
+            currentOperandLabel.text = operandLabelText + "00"
+        } else {
+            currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "00"))
+        }
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {

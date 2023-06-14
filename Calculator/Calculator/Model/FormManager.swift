@@ -17,6 +17,10 @@ struct FormManager {
             return "NaN"
         }
         
+        guard output != "-0" else {
+            return "0"
+        }
+        
         return output
     }
     
