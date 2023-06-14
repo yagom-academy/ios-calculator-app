@@ -9,24 +9,24 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     private var enqueueStack: [Element] = []
     private var dequeueStack: [Element] = []
     
-    internal var count: Int {
+    var count: Int {
         let stackCount = dequeueStack + enqueueStack
         return stackCount.count
     }
     
-    internal var isEmpty: Bool {
+    var isEmpty: Bool {
         return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     
-    internal var peek: Element? {
+    var peek: Element? {
         return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
-    internal mutating func enqueue(_ element: Element) {
+    mutating func enqueue(_ element: Element) {
         enqueueStack.append(element)
     }
     
-    internal mutating func dequeue() -> Element? {
+    mutating func dequeue() -> Element? {
         if dequeueStack.isEmpty {
             dequeueStack = enqueueStack.reversed()
             enqueueStack.removeAll()
@@ -34,7 +34,7 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return dequeueStack.popLast()
     }
     
-    internal mutating func clear() {
+    mutating func clear() {
         enqueueStack.removeAll()
         dequeueStack.removeAll()
     }
