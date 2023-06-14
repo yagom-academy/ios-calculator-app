@@ -9,52 +9,53 @@ import XCTest
 @testable import Calculator
 
 final class ExpressionParserTests: XCTestCase {
-
+    var sut: Formula!
+    
     override func setUpWithError() throws {
-
+        sut = Formula()
     }
 
     override func tearDownWithError() throws {
-
+        sut = nil
     }
 
-    func test_parser에_값을_넣으면_Formlua가_반환되어_result함수를_호출하면_결과가_나오는지() {
+    func test_parse에_1더하기2를넣으면_Formlua가반환되어result함수를_호출하면3이나오는지() {
         // given
         let input = "1 + 2"
-        var formula = ExpressionParser.parse(from: input)
+        var sut = ExpressionParser.parse(from: input)
         let expectation: Double = 3
         
         // when
-        let result = formula.result()
+        let result = sut.result()
         
         // then
         XCTAssertEqual(result, expectation)
     }
     
-    func test_0을_나누는_연산을_parse에_넣으면_nan을_빈환하는지() {
+    func test_parse에_0을나누는연산을넣으면_nan을빈환하는지() {
         //given
         let input = "3 + 5 / 0"
-        var formula = ExpressionParser.parse(from: input)
+        var sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = formula.result().isNaN
+        let result = sut.result().isNaN
         
         // then
         XCTAssertTrue(result)
     }
     
-    func test_피연산자가_부호에_맞게_operands_스택에_들어가는지() {
+    func test_parse에_연산되는값을넣으면_operands스택에피연산자가_올바르게들어가는지() {
         // given
         let input = "-1 * -5 - -3"
-        var formula = ExpressionParser.parse(from: input)
+        var sut = ExpressionParser.parse(from: input)
         let expectation: Double = -1
         let expectation2: Double = -5
         let expectation3: Double = -3
         
         // when
-        let result = formula.operands.dequeue()
-        let result2 = formula.operands.dequeue()
-        let result3 = formula.operands.dequeue()
+        let result = sut.operands.dequeue()
+        let result2 = sut.operands.dequeue()
+        let result3 = sut.operands.dequeue()
         
         // then
         XCTAssertEqual(result, expectation)
@@ -62,32 +63,49 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result3, expectation3)
     }
     
-    func test_연산자가_operators_스택에_올바르게_들어가는지() {
+    func test_parse에_연산되는값을넣으면_operators스택에연산자가_올바르게들어가는지() {
         // given
         let input = "-1 * -5 - -3"
-        var formula = ExpressionParser.parse(from: input)
+        var sut = ExpressionParser.parse(from: input)
         let expectation = Calculator.Operator.multiply
         let expectation2 = Calculator.Operator.subtract
         
         // when
-        let result = formula.operators.dequeue()
-        let result2 = formula.operators.dequeue()
+        let result = sut.operators.dequeue()
+        let result2 = sut.operators.dequeue()
         
         // then
         XCTAssertEqual(result, expectation)
         XCTAssertEqual(result2, expectation2)
     }
     
-    func test_부호가_서로다른_피연산자끼리의_연산을_parse에_넣으면_올바른_결과가_나오는지() {
+    func test_parse에_음수피연산자를넣으면_result의결과값이_올바르게나오는지() {
         // given
         let input = "-2 * 3 - -3"
-        var formula = ExpressionParser.parse(from: input)
+        var sut = ExpressionParser.parse(from: input)
         let expectation: Double = -3
 
         // when
-        let result = formula.result()
+        let result = sut.result()
        
         // then
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_parse에_연산될값을넣었을때_operators스택에_올바르게들어가는지() {
+        // given
+        let input = "-2 * 3 - -3"
+        var sut = ExpressionParser.parse(from: input)
+        let expectation = Operator.multiply
+        let expectation2 = Operator.subtract
+        
+        // when
+        let result = sut.operators.dequeue()
+        let result2 = sut.operators.dequeue()
+        
+        // then
+        XCTAssertEqual(expectation, result)
+        XCTAssertEqual(expectation2, result2)
+
     }
 }

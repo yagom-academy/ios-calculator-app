@@ -13,13 +13,13 @@ enum ExpressionParser {
         let operatorComponents = componentsByOperators(from: input)
                 
         operandComponents
-            .compactMap{ Double($0) }
-            .forEach{ operands.enqueue($0) }
+            .compactMap { Double($0) }
+            .forEach { operands.enqueue($0) }
         
         operatorComponents
-            .filter{ $0.count == 1 }
-            .compactMap{ Operator(rawValue: Character($0)) }
-            .forEach{ operators.enqueue($0) }
+            .filter { $0.count == 1 }
+            .compactMap { Operator(rawValue: Character($0)) }
+            .forEach { operators.enqueue($0) }
         
         return Formula(operands: operands, operators: operators)
     }
@@ -28,5 +28,3 @@ enum ExpressionParser {
         return input.split(with: " ")
     }
 }
-
-
