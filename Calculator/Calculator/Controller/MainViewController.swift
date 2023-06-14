@@ -128,6 +128,16 @@ class MainViewController: UIViewController {
     @IBAction private func hitClearEntryButton(_ sender: UIButton) {
         initializeOperands()
     }
+    
+    @IBAction private func hitChangeSignButton(_ sender: UIButton) {
+        guard operandsValue.isEmpty == false else { return }
+        
+        if operandsValue.hasPrefix(Strings.minus) {
+            updateOperands(to: String(operandsValue.dropFirst()))
+        } else {
+            updateOperands(to: Strings.minus + operandsValue)
+        }
+    }
 }
 
 extension MainViewController {
