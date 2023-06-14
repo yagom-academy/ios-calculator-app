@@ -117,6 +117,17 @@ class MainViewController: UIViewController {
         initializeExpression()
         initializeStackView()
     }
+    
+    @IBAction private func hitAllClearButton(_ sender: UIButton) {
+        initializeOperands()
+        initializeOperator()
+        initializeExpression()
+        initializeStackView()
+    }
+    
+    @IBAction private func hitClearEntryButton(_ sender: UIButton) {
+        initializeOperands()
+    }
 }
 
 extension MainViewController {
