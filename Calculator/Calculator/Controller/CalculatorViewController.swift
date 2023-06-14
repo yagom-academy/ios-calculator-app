@@ -44,22 +44,21 @@ final class CalculatorViewController: UIViewController {
         guard let inputOperator = sender.currentTitle,
               operandValue != CalculatorNamespace.nan else { return }
         
-        let oldOperatorValue = operatorValue
-        
-        operationManager.addFormula(operatorValue, operandValue)
+        let result = operationManager.addFormula(operatorValue, operandValue)
         operatorValue = inputOperator
         
         guard operandValue != CalculatorNamespace.zero else { return }
         
-        addCalculationDetailsStackView(oldOperatorValue, operandValue)
+        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
         operandValue = CalculatorNamespace.zero
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
         guard operatorValue != CalculatorNamespace.empty else { return }
         
-        operationManager.addFormula(operatorValue, operandValue)
-        addCalculationDetailsStackView(operatorValue, operandValue)
+        let result = operationManager.addFormula(operatorValue, operandValue)
+        
+        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
         operandValue = operationManager.calculateFormula()
         operatorValue = CalculatorNamespace.empty
     }

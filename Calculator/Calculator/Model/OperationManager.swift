@@ -22,16 +22,19 @@ struct OperationManager {
         return result
     }
 
-    mutating func addFormula(_ operators: String, _ operands: String)  {
-        if formula.isEmpty && operands != CalculatorNamespace.zero  {
-            formula += "\(operands)"
-        } else if operands != CalculatorNamespace.zero {
-            formula += "\(operators)\(operands)"
+    mutating func addFormula(_ operators: String, _ operands: String) -> LabelValues {
+        if formula.isEmpty {
+            if operands == CalculatorNamespace.zero {
+                return (operandValue: CalculatorNamespace.empty,
+                        operatorValue: CalculatorNamespace.empty)
+            } else {
+                formula += "\(operands)"
+                return (operandValue: operands,
+                        operatorValue: CalculatorNamespace.empty)
+            }
         }
-        
-        if operands == CalculatorNamespace.zero {
-            formula += "\(operators)\(operands)"
-        }
+        formula += "\(operators)\(operands)"
+        return (operandValue: operands, operatorValue: operators)
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
