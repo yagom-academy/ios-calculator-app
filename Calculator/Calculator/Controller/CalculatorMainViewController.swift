@@ -6,13 +6,13 @@
 
 import UIKit
 
-class CalculatorMainViewController: UIViewController {
+final class CalculatorMainViewController: UIViewController {
     // MARK: - IBOutlet
     
-    @IBOutlet weak var calculatorScrollView: UIScrollView!
-    @IBOutlet weak var calculatorStackView: UIStackView!
-    @IBOutlet weak var operandLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet private weak var calculatorScrollView: UIScrollView!
+    @IBOutlet private weak var calculatorStackView: UIStackView!
+    @IBOutlet private weak var operandLabel: UILabel!
+    @IBOutlet private weak var operatorLabel: UILabel!
     
     // MARK: - Property
     
@@ -26,6 +26,7 @@ class CalculatorMainViewController: UIViewController {
     }()
     
     private var operatorsAndOperandsInput: String = ""
+    private var isFormulaEnd: Bool = false
     
     // MARK: - View State Method
     
@@ -36,43 +37,52 @@ class CalculatorMainViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction func touchUpPointButton(_ sender: UIButton) {
-        let currentNumberText = operandLabel.text ?? "0"
+    @IBAction private func touchUpPointButton(_ sender: UIButton) {
+        guard !isFormulaEnd else {
+            return
+        }
+        
+        let currentNumberText = operandLabel.text ?? ""
         let newPointText = sender.titleLabel?.text ?? "."
         let isPoint = currentNumberText.contains(".")
         
-        if isPoint == false {
+        if isPoint == false && currentNumberText != "NaN" {
             operandLabel.text = currentNumberText + newPointText
         }
     }
     
-    @IBAction func touchUpNumberButton(_ sender: UIButton) {
-        let newNumberText = sender.titleLabel?.text ?? "0"
-        var number: Decimal? = Decimal()
+    @IBAction private func touchUpNumberButton(_ sender: UIButton) {
+        if isFormulaEnd {
+            appendCalculateItem()
+            clearEntry()
+            operatorsAndOperandsInput = ""
+            isFormulaEnd = false
+        }
         
         guard
-            let operandLabelText = removeComma(of: operandLabel.text),
+            var operandLabelText = removeComma(of: operandLabel.text),
             operandLabelText.count < 20
         else {
             return
         }
+
+        operandLabelText.append(sender.titleLabel?.text ?? "")
+        let number = Decimal(string: operandLabelText)
         
-        guard operandLabelText == "0" else {
-            number = Decimal(string: operandLabelText + newNumberText)
-            operandLabel.text = formatNumber(of: number)
-            return
-        }
-        
-        guard newNumberText == "00" else {
-            number = Decimal(string: newNumberText)
-            operandLabel.text = formatNumber(of: number)
-            return
-        }
+        operandLabel.text = formatNumber(of: number)
     }
     
-    @IBAction func touchUpZeroButton(_ sender: UIButton) {
+    @IBAction private func touchUpZeroButton(_ sender: UIButton) {
+        if isFormulaEnd {
+            appendCalculateItem()
+            clearEntry()
+            operatorsAndOperandsInput = ""
+            isFormulaEnd = false
+        }
+        
         guard
             let operandLabelText = operandLabel.text,
+            operandLabelText != "NaN",
             operandLabelText != "0" || operandLabelText.contains("."),
             operandLabelText.count < 20
         else {
@@ -82,11 +92,17 @@ class CalculatorMainViewController: UIViewController {
         operandLabel.text?.append(sender.titleLabel?.text ?? "")
     }
     
-    @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        
-        guard !operatorsAndOperandsInput.isEmpty || (operandLabel.text != "0") else {
+    @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
+        guard
+            let operandLabelText = removeComma(of: operandLabel.text),
+            operandLabelText != "NaN",
+            let number = Decimal(string: operandLabelText),
+            !operatorsAndOperandsInput.isEmpty || !number.isZero
+        else {
             return
         }
+        
+        isFormulaEnd = false
         
         guard formatNumber(of: Decimal(string: operandLabel.text ?? "")) != "0" else {
             operatorLabel.text = sender.titleLabel?.text
@@ -97,19 +113,17 @@ class CalculatorMainViewController: UIViewController {
         
         operatorLabel.text = sender.titleLabel?.text
         clearEntry()
-        
     }
     
-    @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
+    @IBAction private func touchUpClearEntryButton(_ sender: UIButton) {
         clearEntry()
     }
     
-    
-    @IBAction func touchUpAllClearButton(_ sender: UIButton) {
+    @IBAction private func touchUpAllClearButton(_ sender: UIButton) {
         clearAll()
     }
     
-    @IBAction func touchUpEqualsButton(_ sender: UIButton) {
+    @IBAction private func touchUpEqualsButton(_ sender: UIButton) {
         guard !operatorsAndOperandsInput.isEmpty else {
             return
         }
@@ -125,11 +139,9 @@ class CalculatorMainViewController: UIViewController {
         } catch {
             print("알 수 없는 에러 발생")
         }
-        
-        
     }
     
-    @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
+    @IBAction private func touchUpChangeSignButton(_ sender: UIButton) {
         guard
             var operandLabelText = removeComma(of: operandLabel.text),
             let number = Decimal(string: operandLabelText),
@@ -161,9 +173,16 @@ class CalculatorMainViewController: UIViewController {
         clearOperator()
         clearEntry()
         operatorsAndOperandsInput = ""
+        isFormulaEnd = false
     }
     
     private func clearEntry() {
+        if isFormulaEnd {
+            appendCalculateItem()
+            operatorsAndOperandsInput = ""
+            isFormulaEnd = false
+        }
+        
         operandLabel.text = "0"
     }
     
@@ -175,14 +194,6 @@ class CalculatorMainViewController: UIViewController {
         return text?.components(separatedBy: ",").joined()
     }
     
-    func updateCalculatorRecordView(by newOperator: String, and newOperand: String) {
-        let newOperandLabel: UILabel = createUILabel(text: newOperand)
-        let newOperatorLabel: UILabel = createUILabel(text: newOperator)
-        let newStackVIew = createUIStackView(laber: newOperatorLabel, newOperandLabel)
-        
-        calculatorStackView.addArrangedSubview(newStackVIew)
-    }
-    
     private func createUILabel(text: String?) -> UILabel {
         let label = UILabel()
         label.textColor = .white
@@ -191,35 +202,17 @@ class CalculatorMainViewController: UIViewController {
         return label
     }
     
-    private func createUIStackView(laber: UILabel...) -> UIStackView {
-        let newStackView = UIStackView()
-        newStackView.spacing = 8
-        newStackView.axis = .horizontal
-        newStackView.alignment = .fill
-        newStackView.distribution = .fill
-        
-        
-        laber.forEach{ newStackView.addArrangedSubview($0) }
-        
-        return newStackView
-    }
-    
-    func updateScrollFocus() {
-        calculatorScrollView.layoutIfNeeded()
-        
-        let scrollViewHeigth =
-        calculatorScrollView.contentSize.height - calculatorScrollView.bounds.height
-        
-        calculatorScrollView
-            .setContentOffset(CGPoint(x: 0, y: scrollViewHeigth), animated: true)
-    }
-    
     private func appendCalculateItem() {
-        guard
-            let operandLabelText = removeComma(of: operandLabel.text),
-            let formattedNumber = formatNumber(of: Decimal(string: operandLabelText))
-        else {
+        guard let operandLabelText = removeComma(of: operandLabel.text) else {
             return
+        }
+        
+        var formattedNumber: String?
+        
+        if operandLabelText == "NaN" {
+            formattedNumber = operandLabelText
+        } else {
+            formattedNumber = formatNumber(of: Decimal(string: operandLabelText))
         }
         
         let operatorLabel = createUILabel(text: self.operatorLabel.text)
@@ -253,6 +246,7 @@ class CalculatorMainViewController: UIViewController {
         
         clearOperator()
         operatorsAndOperandsInput = ""
+        isFormulaEnd = true
         
         return try formula.result()
     }
