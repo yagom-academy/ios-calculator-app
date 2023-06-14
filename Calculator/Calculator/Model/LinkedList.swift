@@ -2,53 +2,40 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by karen on 2023/06/07.
+//  Created by karen, Mary.
 //
 
-final class Node<Element> {
-    var data: Element
-    var next: Node?
-    
-    init(data: Element) {
-        self.data = data
-    }
-}
-
 struct LinkedList<Element> {
-    private var head: Node<Element>?
-    private var tail: Node<Element>?
+    private var front: Node<Element>?
+    private var rear: Node<Element>?
+    private(set) var size: Int = 0
+    var isEmpty: Bool { return size == 0 }
+    var peek: Element? { return front?.element }
     
-    var isEmpty: Bool {
-        return head == nil
-    }
-    
-    var first: Element? {
-        return head?.data
-    }
-    
-    var last: Element? {
-        return tail?.data
-    }
-    
-    mutating func append(data: Element) {
-        let newNode = Node(data: data)
+    mutating func append(_ element: Element) {
+        let newNode = Node(element: element)
         
-        if head == nil {
-            head = newNode
-            tail = newNode
+        if isEmpty {
+            front = newNode
+            rear = newNode
         } else {
-            tail?.next = newNode
-            tail = newNode
+            rear?.next = newNode
+            rear = newNode
         }
+        size += 1
     }
     
     mutating func removeFirst() -> Element? {
-        guard let firstNode = head else { return nil }
+        guard let firstElement = front?.element else { return nil }
         
-        head = firstNode.next
-        if head == nil {
-            tail = nil
+        front = front?.next
+        size -= 1
+        
+        if isEmpty {
+            front = nil
+            rear = nil
         }
-        return firstNode.data
+        
+        return firstElement
     }
 }
