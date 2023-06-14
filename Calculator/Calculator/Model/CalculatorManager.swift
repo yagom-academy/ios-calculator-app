@@ -12,11 +12,45 @@ struct CalculatorManager {
     private var isCalculated = false
     private var formulasUntilNow = ""
     
-    //123456789
-    //현재까지의 피연산자 라벨 + 눌러진 숫자 데이터 받음
-    //입력 가능한지 아닌지. 옵셔널로 반환
-    //가능하면 String 아니면 nil
-    func verifyOperandLabel(currentLabel: String, buttonNumber: String) -> String? {
+    mutating func verifyButton(for number: String, currentLabel: String) -> String? {
+        switch number {
+        case "0", "00":
+            return verifyZeroButton(currentLabel: currentLabel, buttonNumber: number)
+        case ".":
+            return verifyDotButton(currentLabel: currentLabel, buttonText: number)
+        default:
+            return verifyOperandLabel(currentLabel: currentLabel, buttonNumber: number)
+        }
+    }
+    
+    mutating func verifyActionButton(for action: String, currentLabel: String) -> String? {
+        switch action {
+        case "sign":
+            return verifySignButton(currentLabel: currentLabel)
+        case "result":
+            return verifyResultButton(currentLabel: currentLabel)
+        default :
+            return verifyOperatorButton(currentLabel: currentLabel, button: action)
+        }
+    }
+    
+    mutating func clearEntryButton() {
+        if formulasUntilNow.isEmpty {
+            isZeroButtonUsed = true
+        } else {
+            isZeroButtonUsed = false
+        }
+        
+        isCalculated = false
+    }
+    
+    mutating func allClearButton() {
+        formulasUntilNow = ""
+        isCalculated = false
+        isZeroButtonUsed = true
+    }
+    
+    private func verifyOperandLabel(currentLabel: String, buttonNumber: String) -> String? {
         guard isCalculated == false,
               (currentLabel + buttonNumber).count <= 20 else {
             return nil
@@ -25,12 +59,11 @@ struct CalculatorManager {
         guard currentLabel != "0" else {
             return buttonNumber
         }
+        
         return FormManager.transformResult(from: currentLabel + buttonNumber)
     }
-    //0 혹은 00
-    //입력 가능한지 아닌지 옵셔널로 반환
-    //가능하면 String, 아니면 nil
-    mutating func verifyZeroButton(currentLabel: String, buttonNumber: String) -> String? {
+    
+    private mutating func verifyZeroButton(currentLabel: String, buttonNumber: String) -> String? {
         guard currentLabel != "0" else {
             isZeroButtonUsed = true
             return "0"
@@ -47,9 +80,8 @@ struct CalculatorManager {
             return FormManager.transformResult(from: (currentLabel + buttonNumber))
         }
     }
-    //dot
-    //옵셔널로 반환?
-    func verifyDotButton(currentLabel: String, buttonText: String) -> String? {
+    
+    private func verifyDotButton(currentLabel: String, buttonText: String) -> String? {
         guard currentLabel.contains(".") == false,
               isCalculated == false else {
             return nil
@@ -58,8 +90,8 @@ struct CalculatorManager {
         return currentLabel + buttonText
     }
     
-    mutating func verifyOperatorButton(currentLabel: String, button: String) -> String? {
-        guard currentLabel != "0" ||  isZeroButtonUsed else {
+    private mutating func verifyOperatorButton(currentLabel: String, button: String) -> String? {
+        guard currentLabel != "0" || isZeroButtonUsed else {
             return nil
         }
         
@@ -71,7 +103,7 @@ struct CalculatorManager {
         return button
     }
     
-    mutating func verifyResultButton(currentLabel: String) -> String? {
+    private mutating func verifyResultButton(currentLabel: String) -> String? {
         guard isCalculated == false,
               formulasUntilNow.isEmpty == false else {
             return nil
@@ -88,7 +120,7 @@ struct CalculatorManager {
         return FormManager.transformResult(from: String(formula.result()))
     }
     
-    func verifySignButton(currentLabel: String) -> String? {
+    private func verifySignButton(currentLabel: String) -> String? {
         guard currentLabel != "0",
               isCalculated == false else {
             return nil
@@ -99,22 +131,6 @@ struct CalculatorManager {
         }
         
         return currentLabel.replacingOccurrences(of: "-", with: "")
-    }
-    
-    mutating func clearButton() {
-        if formulasUntilNow.isEmpty {
-            isZeroButtonUsed = true
-        } else {
-            isZeroButtonUsed = false
-        }
-        
-        isCalculated = false
-    }
-    
-    mutating func allClearButton() {
-        formulasUntilNow = ""
-        isCalculated = false
-        isZeroButtonUsed = true
     }
     
     private mutating func addFormula(currentLabel: String, button: String = "") {

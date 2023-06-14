@@ -25,7 +25,7 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
-              let labelText = calculatorManager.verifyOperandLabel(currentLabel: operandLabelText, buttonNumber: number) else {
+              let labelText = calculatorManager.verifyButton(for: number, currentLabel: operandLabelText) else {
             return
         }
         
@@ -33,9 +33,8 @@ final class CalculateViewController: UIViewController {
     }
     
     @IBAction func tappedDotButton(_ sender: UIButton) {
-        guard let button = sender.currentTitle,
-              let operandLabelText = currentOperandLabel.text,
-              let labelText = calculatorManager.verifyDotButton(currentLabel: operandLabelText, buttonText: button) else {
+        guard let operandLabelText = currentOperandLabel.text,
+              let labelText = calculatorManager.verifyButton(for: ".", currentLabel: operandLabelText) else {
             return
         }
         
@@ -45,16 +44,17 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedZeroButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
               let number = sender.currentTitle,
-              let labelText = calculatorManager.verifyZeroButton(currentLabel: operandLabelText, buttonNumber: number) else {
+              let labelText = calculatorManager.verifyButton(for: number, currentLabel: operandLabelText) else {
             return
         }
+        
         currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
               let operatorText = sender.currentTitle,
-              let labelText = calculatorManager.verifyOperatorButton(currentLabel: operandLabelText, button: operatorText) else {
+              let labelText = calculatorManager.verifyActionButton(for: operatorText, currentLabel: operandLabelText) else {
             currentOperatorLabel.text = sender.currentTitle
             return
         }
@@ -63,10 +63,10 @@ final class CalculateViewController: UIViewController {
         initializeOperandLabel()
         currentOperatorLabel.text = labelText
     }
-    // = 버튼 함수
+    
     @IBAction func tappedResultButton(_ sender: UIButton) { // calculatorManager 메서드 호출
         guard let operandLabelText = currentOperandLabel.text,
-                let labelText = calculatorManager.verifyResultButton(currentLabel: operandLabelText) else {
+                let labelText = calculatorManager.verifyActionButton(for: "result", currentLabel: operandLabelText) else {
             return
         }
         
@@ -77,7 +77,7 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func tappedChangeSignButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              let labelText = calculatorManager.verifySignButton(currentLabel: operandLabelText) else {
+              let labelText = calculatorManager.verifyActionButton(for: "sign", currentLabel: operandLabelText) else {
             return
         }
 
@@ -85,7 +85,7 @@ final class CalculateViewController: UIViewController {
     }
     
     @IBAction func tappedClearButton(_ sender: UIButton) {
-        calculatorManager.clearButton()
+        calculatorManager.clearEntryButton()
         initializeOperandLabel()
     }
     
