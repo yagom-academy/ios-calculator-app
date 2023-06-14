@@ -15,22 +15,22 @@ struct CalculatorManager {
     mutating func verifyButton(for number: String, currentLabel: String) -> String? {
         switch number {
         case "0", "00":
-            return verifyZeroButton(currentLabel: currentLabel, buttonNumber: number)
+            return verifyZeroButton(currentLabel, number)
         case ".":
-            return verifyDotButton(currentLabel: currentLabel, buttonText: number)
+            return verifyDotButton(currentLabel, number)
         default:
-            return verifyOperandLabel(currentLabel: currentLabel, buttonNumber: number)
+            return verifyOperandLabel(currentLabel, number)
         }
     }
     
     mutating func verifyActionButton(for action: String, currentLabel: String) -> String? {
         switch action {
         case "sign":
-            return verifySignButton(currentLabel: currentLabel)
+            return verifySignButton(currentLabel)
         case "result":
-            return verifyResultButton(currentLabel: currentLabel)
+            return verifyResultButton(currentLabel)
         default :
-            return verifyOperatorButton(currentLabel: currentLabel, button: action)
+            return verifyOperatorButton(currentLabel, action)
         }
     }
     
@@ -50,66 +50,66 @@ struct CalculatorManager {
         isZeroButtonUsed = true
     }
     
-    private func verifyOperandLabel(currentLabel: String, buttonNumber: String) -> String? {
+    private func verifyOperandLabel(_ currentLabelText: String, _ buttonText: String) -> String? {
         guard isCalculated == false,
-              (currentLabel + buttonNumber).count <= 20 else {
+              (currentLabelText + buttonText).count <= 20 else {
             return nil
         }
         
-        guard currentLabel != "0" else {
-            return buttonNumber
+        guard currentLabelText != "0" else {
+            return buttonText
         }
         
-        return FormManager.transformResult(from: currentLabel + buttonNumber)
+        return FormManager.transformResult(from: currentLabelText + buttonText)
     }
     
-    private mutating func verifyZeroButton(currentLabel: String, buttonNumber: String) -> String? {
-        guard currentLabel != "0" else {
+    private mutating func verifyZeroButton(_ currentLabelText: String, _ buttonText: String) -> String? {
+        guard currentLabelText != "0" else {
             isZeroButtonUsed = true
             return "0"
         }
         
         guard isCalculated == false,
-              (currentLabel + buttonNumber).count <= 20 else {
+              (currentLabelText + buttonText).count <= 20 else {
             return nil
         }
         
-        if currentLabel.contains(".") {
-            return currentLabel + buttonNumber
+        if currentLabelText.contains(".") {
+            return currentLabelText + buttonText
         } else {
-            return FormManager.transformResult(from: (currentLabel + buttonNumber))
+            return FormManager.transformResult(from: (currentLabelText + buttonText))
         }
     }
     
-    private func verifyDotButton(currentLabel: String, buttonText: String) -> String? {
-        guard currentLabel.contains(".") == false,
+    private func verifyDotButton(_ currentLabelText: String, _ buttonText: String) -> String? {
+        guard currentLabelText.contains(".") == false,
               isCalculated == false else {
             return nil
         }
     
-        return currentLabel + buttonText
+        return currentLabelText + buttonText
     }
     
-    private mutating func verifyOperatorButton(currentLabel: String, button: String) -> String? {
-        guard currentLabel != "0" || isZeroButtonUsed else {
+    private mutating func verifyOperatorButton(_ currentLabelText: String, _ buttonText: String) -> String? {
+        guard currentLabelText != "0" || isZeroButtonUsed else {
             return nil
         }
         
-        addFormula(currentLabel: currentLabel, button: button)
+        addFormula(currentLabelText, buttonText)
         
         isCalculated = false
         isZeroButtonUsed = false
         
-        return button
+        return buttonText
     }
     
-    private mutating func verifyResultButton(currentLabel: String) -> String? {
+    private mutating func verifyResultButton(_ currentLabelText: String) -> String? {
         guard isCalculated == false,
               formulasUntilNow.isEmpty == false else {
             return nil
         }
         
-        addFormula(currentLabel: currentLabel)
+        addFormula(currentLabelText)
         
         var formula = ExpressionParser.parse(from: formulasUntilNow)
         
@@ -120,22 +120,22 @@ struct CalculatorManager {
         return FormManager.transformResult(from: String(formula.result()))
     }
     
-    private func verifySignButton(currentLabel: String) -> String? {
-        guard currentLabel != "0",
+    private func verifySignButton(_ currentLabelText: String) -> String? {
+        guard currentLabelText != "0",
               isCalculated == false else {
             return nil
         }
         
-        guard currentLabel.contains("-") else {
-            return "-" + currentLabel
+        guard currentLabelText.contains("-") else {
+            return "-" + currentLabelText
         }
         
-        return currentLabel.replacingOccurrences(of: "-", with: "")
+        return currentLabelText.replacingOccurrences(of: "-", with: "")
     }
     
-    private mutating func addFormula(currentLabel: String, button: String = "") {
-        let operandText = FormManager.transformResult(from: (currentLabel)).replacingOccurrences(of: ",", with: "")
+    private mutating func addFormula(_ currentLabelText: String, _ buttonText: String = "") {
+        let operandText = FormManager.transformResult(from: (currentLabelText)).replacingOccurrences(of: ",", with: "")
         
-        formulasUntilNow += " \(button) \(operandText) "
+        formulasUntilNow += " \(buttonText) \(operandText) "
     }
 }

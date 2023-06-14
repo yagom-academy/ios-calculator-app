@@ -2,7 +2,7 @@
 //  UIStackView+.swift
 //  Calculator
 //
-//  Created by minsong kim on 2023/06/14.
+//  Created by mint, Whales on 2023/06/14.
 //
 
 import UIKit

@@ -59,18 +59,18 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        addCurrentFormula()
+        addCurrentFormulaOnView()
         initializeOperandLabel()
         currentOperatorLabel.text = labelText
     }
     
-    @IBAction func tappedResultButton(_ sender: UIButton) { // calculatorManager 메서드 호출
+    @IBAction func tappedResultButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
                 let labelText = calculatorManager.verifyActionButton(for: "result", currentLabel: operandLabelText) else {
             return
         }
         
-        addCurrentFormula()
+        addCurrentFormulaOnView()
         initializeOperatorLabel()
         currentOperandLabel.text = labelText
     }
@@ -106,20 +106,20 @@ final class CalculateViewController: UIViewController {
         currentOperatorLabel.text = ""
     }
     
-    private func addCurrentFormula() {
-        guard let operatorString = currentOperatorLabel.text,
-              let operandString = currentOperandLabel.text else {
+    private func addCurrentFormulaOnView() {
+        guard let operatorLabelText = currentOperatorLabel.text,
+              let operandLabelText = currentOperandLabel.text else {
             return
         }
         
-        setCurrentFormulaViewOnScroll(operatorString, FormManager.transformResult(from: operandString))
+        setCurrentFormulaViewOnScroll(operatorLabelText, FormManager.transformResult(from: operandLabelText))
     }
 }
 
 extension CalculateViewController {
     private func makeCurrentFormulaLabelStackView(_ `operator`: String, _ operand: String) -> UIStackView {
-        let operatorLabel: UILabel = UILabel(text: `operator`)
-        let operandLabel: UILabel = UILabel(text: operand)
+        let operatorLabel = UILabel(text: `operator`)
+        let operandLabel = UILabel(text: operand)
         return UIStackView(firstLabel: operatorLabel, secondLabel: operandLabel)
     }
     
