@@ -6,22 +6,12 @@
 
 import UIKit
 
-extension String {
-    var isZero: Bool {
-        return self == "0" ? true : false
-    }
-}
+let maximumDecimalDigits = 5
+let maximumOperandDigits = 20
 
 class ViewController: UIViewController {
     private var expression: String = String()
-    private var inputedOperand: String = String()
-    private var numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 5 //
-        
-        return formatter
-    }()
+    private var operandFormatter = OperandFormatter()
     private var isResult: Bool = false
     
     @IBOutlet weak var calculateHistoryScrollView: UIScrollView!
@@ -33,87 +23,75 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         initializeCalculator()
     }
-    
-    // 연산자 눌렀을 때 스택뷰 안들어가도록
-    // 15자리부터 0 나오는 문제
-    // numberFormatter를 쓰면 -> . 바로 안나옴
+
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let partialOperand = sender.titleLabel?.text,
-              inputedOperand.count < 20 else {
+        guard let inputedOperand = sender.titleLabel?.text,
+              var currentOperand = operandLabel.text,
+              let currentOperator = operatorLabel.text else {
             return
         }
         
         if isResult {
-            expression = ""
-            inputedOperand = ""
-            isResult = false
-            
-            removeStackView()
+            initializeCalculator()
+            currentOperand = "0"
         }
         
-        switch partialOperand {
-        case ".":
-            inputedOperand += checkDot()
-            operandLabel.text = inputedOperand
-            
-            // TODO: "." Components + 00 Append
-        default:
-            inputedOperand += partialOperand
-            operandLabel.text = numberFormatter.string(for: Double(inputedOperand))
+        if currentOperator.isEmpty == false {
+            expression += currentOperator
         }
         
-        //operandLabel.text = inputedOperand
-//        operandLabel.text = numberFormatter.string(for: Double(inputedOperand))
+        operandLabel.text = operandFormatter.formattingOperand(inputedOperand, currentOperand)
     }
-    
-    // 연산자 버튼 눌렀을 때
+
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let currentOperator = sender.titleLabel?.text,
-              operandLabel.text?.isZero == false else {
+        guard let inputedOperator = sender.titleLabel?.text,
+              let currentOperator = operatorLabel.text,
+              let currentOperand = operandLabel.text else {
             return
         }
         
         if isResult { return }
         
-        addStackView()
-
-        if inputedOperand.isEmpty == false {
-            expression += inputedOperand
-            initOperand()
+        if currentOperand.isZero {
+            operatorLabel.text = inputedOperator
+        } else {
+            addStackView(currentOperator, currentOperand)
+            expression += currentOperand
             initOperandLabel()
+            operatorLabel.text = inputedOperator
         }
-    
-        operatorLabel.text = currentOperator
-        updateOperator(currentOperator)
+        
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        guard expression.isEmpty == false && isResult == false else {
+        guard isResult == false,
+              let currentOperand = operandLabel.text,
+              let currentOperator = operatorLabel.text else {
             return
         }
         
-        if inputedOperand.isEmpty == false {
-            expression += inputedOperand
+        if currentOperand.isZero && currentOperator.isEmpty == false {
+            expression += currentOperator
         }
         
-        addStackView()
+        if currentOperand.isEmpty == false {
+            expression += currentOperand
+        }
+ 
+        addStackView(currentOperator, currentOperand)
         
-        var value = ExpressionParser.parser(from: expression)
+        var parsedExpression = ExpressionParser.parser(from: expression.withoutDecimalPoint)
         
         do {
-            let result = try value.result()
+            let result = try parsedExpression.result()
             
-            let resultValue = numberFormatter.string(for: result)
-            operandLabel.text = resultValue
-            expression = resultValue ?? ""
-            initOperand()
+            let formattingResult = operandFormatter.string(for: result)
+            operandLabel.text = formattingResult
             initOperatorLabel()
             isResult = true
-            //addStackView()
         } catch CalculatorError.notANumber {
             operandLabel.text = CalculatorError.notANumber.errorDescription
             initExpression()
-            initOperand()
             initOperatorLabel()
         } catch {
             print("알 수 없는 오류")
@@ -127,23 +105,18 @@ class ViewController: UIViewController {
     
     //CE: Clear Entry
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
-        guard inputedOperand.isEmpty == false else {
-            return
-        }
-        inputedOperand.removeLast()
         initOperandLabel()
     }
     
     @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
         guard let currentOperand = operandLabel.text,
-              currentOperand.isZero == false else {
+              currentOperand.isZero == false && isResult == false else {
             return
         }
 
-        if let number = Double(currentOperand) {
+        if let number = Double(currentOperand.withoutDecimalPoint) {
             let changedSignNumber = number.sign == .plus ? -number : abs(number)
-            operandLabel.text = numberFormatter.string(for: Double(changedSignNumber))
-            inputedOperand = String(changedSignNumber)
+            operandLabel.text = operandFormatter.string(for: Double(changedSignNumber))
         }
     }
     
@@ -152,10 +125,10 @@ class ViewController: UIViewController {
 extension ViewController {
     func initializeCalculator() {
         initExpression()
-        initOperand()
         initOperandLabel()
         initOperatorLabel()
         removeStackView()
+        isResult = false
     }
     
     func initOperandLabel() {
@@ -166,49 +139,18 @@ extension ViewController {
         operatorLabel.text = ""
     }
     
-    func initOperand() {
-        inputedOperand = ""
-    }
-    
     func initExpression() {
         expression = ""
     }
-    
-    func updateOperator(_ currentOperator: String) {
-        // experssion 바로 전값이 연산자면, 넣지않음
-        if let formerValue = expression.last,
-           formerValue.isNumber || formerValue == "." {
-            expression += currentOperator
-        }
-    }
-    
-    func checkDot() -> String {
-        if inputedOperand.contains(".") == false && inputedOperand.isEmpty {
-            return "0."
-        } else
-        if inputedOperand.contains(".") == false {
-            return "."
-        } else {
-            return ""
-        }
-    }
+
 }
 
-
 extension ViewController {
-    func addStackView() {
-        var currentOperand: UILabel
-        var currentOperator: UILabel
-        
-        if isResult {
-            currentOperand = createUILabel(text: operandLabel.text)
-            currentOperator = createUILabel(text: "")
-        } else {
-            currentOperand = createUILabel(text: operandLabel.text)
-            currentOperator = createUILabel(text: operatorLabel.text)
-        }
+    func addStackView(_ currentOperator: String, _ currentOperand: String)  {
+        let operandUILabel = createUILabel(text: currentOperand)
+        let operatorUILabel = createUILabel(text: currentOperator)
             
-        let stackView = createUIStackView(currentOperator, currentOperand)
+        let stackView = createUIStackView(operatorUILabel, operandUILabel)
         calculateStackView.addArrangedSubview(stackView)
         
         scrollToBottom()
