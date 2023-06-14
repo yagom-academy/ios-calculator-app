@@ -23,8 +23,6 @@ struct OperationManager {
     }
 
     mutating func addFormula(_ operators: String, _ operands: String)  {
-        let operands = OperandFormatter.formatStringOperand(operands)
-        
         if formula.isEmpty && operands != CalculatorNamespace.zero  {
             formula += "\(operands)"
         } else if operands != CalculatorNamespace.zero {
@@ -38,12 +36,8 @@ struct OperationManager {
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
         let numberOperands = isCalculate ? CalculatorNamespace.zero : currentOperands
-        let operands = OperandFormatter.formatStringOperand(numberOperands + inputOperands)
+        let operands = numberOperands + inputOperands
         isCalculate = false
-        
-        if operands.filter({ $0 == "," }).count == 4 || numberOperands.count >= 13 {
-            return currentOperands
-        }
         
         if numberOperands.contains(CalculatorNamespace.dot) &&
             (inputOperands == CalculatorNamespace.zero || inputOperands == CalculatorNamespace.doubleZero) {
@@ -60,7 +54,7 @@ struct OperationManager {
     
     func changeSign(_ operands: String) -> String {
         var operands = operands
-        guard operands != CalculatorNamespace.zero else { return CalculatorNamespace.zero }
+        guard operands != CalculatorNamespace.zero else { return operands }
         
         if operands.contains(CalculatorNamespace.negative) {
             operands.removeFirst()
