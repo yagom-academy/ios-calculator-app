@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by yyss99 on 2023/06/03.
+//  Created by yyss99, Serena on 2023/06/03.
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
@@ -28,6 +28,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         count += 1
     }
     
+    @discardableResult
     mutating func dequeue() -> T? {
         guard let firstNode = head else { return nil }
         head = firstNode.next
