@@ -19,6 +19,7 @@ class CalculatorViewController: UIViewController {
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.minimumSignificantDigits = 0
         numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
@@ -29,6 +30,13 @@ class CalculatorViewController: UIViewController {
         }
         
         return operand.replacingOccurrences(of: ",", with: "")
+    }
+    private var currentOperandToDouble: Double {
+        guard let operand = Double(currentOperand) else {
+            return Double.nan
+        }
+        
+        return operand
     }
     
     override func viewDidLoad() {
@@ -69,7 +77,7 @@ class CalculatorViewController: UIViewController {
         
         do {
             let result: Double = try formula.result()
-            updateNumberLabel(result)
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: result))
         } catch CalculatorError.missingOperand {
             print(CalculatorError.missingOperand.localized)
         } catch {
@@ -85,13 +93,15 @@ class CalculatorViewController: UIViewController {
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
-        
-        guard let currentOperandToDouble = Double(currentOperand), currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
+        guard currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
             operandLabel.text = operandElement
             return
         }
+        guard let newOperand = Double(currentOperand + operandElement) else {
+            return
+        }
         
-        operandLabel.text = currentOperand + operandElement
+        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
@@ -99,17 +109,23 @@ class CalculatorViewController: UIViewController {
             isPlaceholder = false
             return
         }
-        
-        operandLabel.text = currentOperand + zero
-    }
-    
-    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        guard let DoubleZero = sender.currentTitle, currentOperand != "0" else {
-            isPlaceholder = false
+        guard let newOperand = Double(currentOperand + zero) else {
             return
         }
         
-        operandLabel.text = currentOperand + DoubleZero
+        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+    }
+    
+    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+        guard let doubleZero = sender.currentTitle, currentOperand != "0" else {
+            isPlaceholder = false
+            return
+        }
+        guard let newOperand = Double(currentOperand + doubleZero) else {
+            return
+        }
+        
+        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
@@ -123,7 +139,7 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = currentOperand + decimalPointOperand
+        operandLabel.text = operandLabel.text! + decimalPointOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -136,8 +152,8 @@ class CalculatorViewController: UIViewController {
         if currentOperand.hasSuffix(".") {
             operandLabel.text?.removeLast()
         }
-        if let realNumber = Double(currentOperand), Double(currentOperand) == Double(Int(realNumber)) {
-            operandLabel.text = String(Int(realNumber))
+        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
+            operandLabel.text = String(Int(currentOperandToDouble))
         }
         
         addPreviousContentStackView()
@@ -146,7 +162,6 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = "0"
         isResult = false
         isPlaceholder = true
-        scrollDown()
     }
     
     private func configureCurrentFormula() -> String {
@@ -158,6 +173,7 @@ class CalculatorViewController: UIViewController {
     private func addPreviousContentStackView() {
         let content: UIStackView = configureContentStackView()
         previousContentStackView.addArrangedSubview(content)
+        scrollDown()
     }
     
     private func scrollDown() {
@@ -173,7 +189,7 @@ class CalculatorViewController: UIViewController {
     
     private func configureContentStackView() -> UIStackView {
         let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel.text)
-        let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
+        let recordedOperandLabel: UILabel = configureItem(with: numberFormatter.string(from: NSNumber(value: currentOperandToDouble)))
         let content: UIStackView = addItemToContentStackView(item: recordedOperatorLabel, recordedOperandLabel)
         
         return content
@@ -202,29 +218,15 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
-    private func updateNumberLabel(_ number: Double) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        
-        if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
-            operandLabel.text = formattedNumber
-        }
-    }
-    
     private func toggleSign() {
-        guard var currentNumber = Double(currentOperand),
-              currentNumber != Double.zero else {
+        guard currentOperandToDouble != Double.zero else {
             return
         }
         
-        currentNumber *= -1
-        
-        if Double(currentNumber) == Double(Int(currentNumber)) {
-            operandLabel.text = String(Int(currentNumber))
+        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
+            operandLabel.text = String(Int(currentOperandToDouble) * -1)
         } else {
-            operandLabel.text = String(currentNumber)
+            operandLabel.text = String(currentOperandToDouble * -1)
         }
     }
 }
