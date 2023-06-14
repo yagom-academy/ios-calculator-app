@@ -22,6 +22,7 @@ struct OperationManager {
         return result
     }
 
+    @discardableResult
     mutating func addFormula(_ operators: String, _ operands: String) -> LabelValues {
         if formula.isEmpty {
             if operands == CalculatorNamespace.zero {
@@ -42,8 +43,9 @@ struct OperationManager {
         let operands = numberOperands + inputOperands
         isCalculate = false
         
-        if operands.filter({ String($0) == CalculatorNamespace.comma }).count == 4 ||
-            numberOperands.count >= 13 {
+        if numberOperands
+            .replacingOccurrences(of: CalculatorNamespace.negative, with: CalculatorNamespace.empty)
+            .count >= 12 {
             return numberOperands
         }
         
