@@ -2,24 +2,21 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by 박종화 on 2023/06/02.
+//  Created by Jusbug, Yetti on 2023/06/02.
 //
 
 struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
-
-    mutating func result() throws -> Double {
-        guard var result: Double = operands.dequeue() else {
-            throw CalculationErrors.emptyStack }
+    mutating func result() -> Double {
+        guard var result: Double = operands.dequeue() else { return 0 }
         
         while operators.isEmpty == false {
             let lhs = result
             guard let rhs: Double = operands.dequeue(),
-                  let operatorSign: Operator = operators.dequeue() else {
-                throw CalculationErrors.emptyStack }
+                  let `operator`: Operator = operators.dequeue() else { return result }
             
-            result = operatorSign.calculate(lhs: lhs, rhs: rhs)
+            result = `operator`.calculate(lhs: lhs, rhs: rhs)
         }
         
         return result

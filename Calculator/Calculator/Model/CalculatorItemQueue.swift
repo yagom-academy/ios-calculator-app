@@ -2,40 +2,40 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by 박종화 on 2023/05/30.
+//  Created by Jusbug, Yetti on 2023/05/30.
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private var outputStack: [Element] = []
-    private var inputStack: [Element] = []
+    private var enqueueStack: [Element] = []
+    private var dequeueStack: [Element] = []
     
-    internal var count: Int {
-        let stackCount = outputStack + inputStack
+    var count: Int {
+        let stackCount = dequeueStack + enqueueStack
         return stackCount.count
     }
     
-    internal var isEmpty: Bool {
-        return outputStack.isEmpty && inputStack.isEmpty
+    var isEmpty: Bool {
+        return dequeueStack.isEmpty && enqueueStack.isEmpty
     }
     
-    internal var peek: Element? {
-        return outputStack.isEmpty == false ? outputStack.last : inputStack.first
+    var peek: Element? {
+        return dequeueStack.isEmpty ? enqueueStack.first : dequeueStack.last
     }
     
-    internal mutating func enqueue(_ element: Element) {
-        inputStack.append(element)
+    mutating func enqueue(_ element: Element) {
+        enqueueStack.append(element)
     }
     
-    internal mutating func dequeue() -> Element? {
-        if outputStack.isEmpty {
-            outputStack = inputStack.reversed()
-            inputStack.removeAll()
+    mutating func dequeue() -> Element? {
+        if dequeueStack.isEmpty {
+            dequeueStack = enqueueStack.reversed()
+            enqueueStack.removeAll()
         }
-        return outputStack.popLast()
+        return dequeueStack.popLast()
     }
     
-    internal mutating func clear() {
-        inputStack.removeAll()
-        outputStack.removeAll()
+    mutating func clear() {
+        enqueueStack.removeAll()
+        dequeueStack.removeAll()
     }
 }
