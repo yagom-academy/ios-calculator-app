@@ -116,13 +116,13 @@ class CalculatorViewController: UIViewController {
         } catch let error as OperationError {
             switch error {
             case .operandNotEnoughError:
-                print("Operand Not Enough Error")
+                print(OperationError.operandNotEnoughError)
             case .operatorNotEnoughError:
-                print("Operator Not Enough Error")
+                print(OperationError.operatorNotEnoughError)
             case .divideByZeroError:
+                print(OperationError.divideByZeroError)
                 inputNumberLabel.text = "NaN"
                 operationReady = false
-                print("divide by zero")
             }
         } catch {
             print("unexpected error")
