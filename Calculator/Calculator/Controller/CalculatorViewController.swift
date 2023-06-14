@@ -7,7 +7,7 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-
+    
     @IBOutlet weak var inputNumberLabel: UILabel!
     @IBOutlet weak var inputOperatorLabel: UILabel!
     @IBOutlet weak var formulaListStackView: UIStackView!
@@ -56,107 +56,103 @@ class CalculatorViewController: UIViewController {
               let numberLabelText = inputNumberLabel.text else { return }
         
         if numberLabelText.count < 20 {
-            if numberLabelText == "0" {
-                inputNumberLabel.text = "0"
-            } else {
-                let formattedNumberText = numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText
-                inputNumberLabel.text = calculatorNumberFormatter.string(for: Double(formattedNumberText))
-            }
+            let formattedNumberText = Double(numberLabelText.replacingOccurrences(of: ",", with: "") + inputNumberText)
+            inputNumberLabel.text = (numberLabelText == "0") ? ("0") : (calculatorNumberFormatter.string(for: formattedNumberText))
         }
     }
+
+@IBAction func tapPeriodButton(_ sender: UIButton) {
+    let period = "."
+    guard let numberLabelText = inputNumberLabel.text else { return }
     
-    @IBAction func tapPeriodButton(_ sender: UIButton) {
-        let period = "."
-        guard let numberLabelText = inputNumberLabel.text else { return }
+    inputNumberLabel.text? = (numberLabelText.contains(period)) ? (numberLabelText) : (numberLabelText + period)
+}
+
+@IBAction func tapOperatorButton(_ sender: UIButton) {
+    guard let inputOperatorText = sender.titleLabel?.text,
+          let numberLabelText = inputNumberLabel.text,
+          let operatorLabelText = inputOperatorLabel.text else { return }
+    
+    if inputOperatorText == "=" && inputNumberLabel.text == "0" {
+        formulaString += operatorLabelText + numberLabelText
+    } else if inputNumberLabel.text == inputOperatorText {
+        inputOperatorLabel.text = inputOperatorText
+    } else {
+        let formulaStackView = makeStackView()
+        let operatorLabel = makeLabelInStackView(operatorLabelText)
+        let formattedNumberText = numberLabelText.hasSuffix(".") ? String(numberLabelText.dropLast(1)) : numberLabelText
+        let numberLabel = makeLabelInStackView(formattedNumberText)
         
-        inputNumberLabel.text? = (numberLabelText.contains(period)) ? (numberLabelText) : (numberLabelText + period)
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(numberLabel)
+        formulaListStackView.addArrangedSubview(formulaStackView)
+        
+        formulaString += operatorLabelText + numberLabelText
+        
+        inputOperatorLabel.text = inputOperatorText
+        inputNumberLabel.text = "0"
+        
+        setAutoScrollToBottom()
     }
     
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let inputOperatorText = sender.titleLabel?.text,
-              let numberLabelText = inputNumberLabel.text,
-              let operatorLabelText = inputOperatorLabel.text else { return }
-        
-        if inputOperatorText == "=" && inputNumberLabel.text == "0" {
-            formulaString += operatorLabelText + numberLabelText
-        } else if inputNumberLabel.text == inputOperatorText {
-            inputOperatorLabel.text = inputOperatorText
-        } else {
-            let formulaStackView = makeStackView()
-            let operatorLabel = makeLabelInStackView(operatorLabelText)
-            let formattedNumberText = numberLabelText.hasSuffix(".") ? String(numberLabelText.dropLast(1)) : numberLabelText
-            let numberLabel = makeLabelInStackView(formattedNumberText)
-            
-            formulaStackView.addArrangedSubview(operatorLabel)
-            formulaStackView.addArrangedSubview(numberLabel)
-            formulaListStackView.addArrangedSubview(formulaStackView)
-            
-            formulaString += operatorLabelText + numberLabelText
-            
-            inputOperatorLabel.text = inputOperatorText
-            inputNumberLabel.text = "0"
-            
-            setAutoScrollToBottom()
-        }
-        
-        if inputOperatorText == "=" {
-            inputOperatorLabel.text = ""
-        }
-        
-        isComputable = true
-    }
-    
-    @IBAction func tapChangeSignButton(_ sender: UIButton) {
-        let minusSign = "-"
-        guard let numberLabelText = inputNumberLabel.text,
-              numberLabelText != "0" else { return }
-        
-        if numberLabelText.hasPrefix(minusSign) {
-            inputNumberLabel.text = String(numberLabelText.dropFirst(1))
-        } else {
-            inputNumberLabel.text = minusSign + numberLabelText
-        }
-    }
-    
-    @IBAction func tapEqualMarkButton(_ sender: UIButton) {
-        if isComputable {
-            tapOperatorButton(sender)
-            var calculateResult = ExpressionParser.parse(from: formulaString)
-            
-            do {
-                let formula = try calculateResult.result()
-                let formulaResult = calculatorNumberFormatter.string(for: formula)
-                inputNumberLabel.text = formulaResult
-                
-                isComputable = false
-                formulaString = ""
-            } catch CalculatorError.dividedByZero {
-                inputNumberLabel.text = "NaN"
-                isComputable = false
-            } catch {
-                let alert = UIAlertController(title: "계산 오류입니다.",
-                                              message: "확인 버튼을 눌러주시기 바랍니다.",
-                                              preferredStyle: .alert)
-                let cancle = UIAlertAction(title: "확인",
-                                           style: .default)
-                alert.addAction(cancle)
-                present(alert, animated: true)
-            }
-        }
-    }
-    
-    @IBAction func tapAllClearButton(_ sender: UIButton) {
+    if inputOperatorText == "=" {
         inputOperatorLabel.text = ""
-        inputNumberLabel.text = "0"
-        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
-        isComputable = true
-        formulaString = ""
     }
     
-    @IBAction func tapClearEntryButton(_ sender: UIButton) {
-        isComputable = true
-        inputNumberLabel.text = "0"
+    isComputable = true
+}
+
+@IBAction func tapChangeSignButton(_ sender: UIButton) {
+    let minusSign = "-"
+    guard let numberLabelText = inputNumberLabel.text,
+          numberLabelText != "0" else { return }
+    
+    if numberLabelText.hasPrefix(minusSign) {
+        inputNumberLabel.text = String(numberLabelText.dropFirst(1))
+    } else {
+        inputNumberLabel.text = minusSign + numberLabelText
     }
+}
+
+@IBAction func tapEqualMarkButton(_ sender: UIButton) {
+    if isComputable {
+        tapOperatorButton(sender)
+        var calculateResult = ExpressionParser.parse(from: formulaString)
+        
+        do {
+            let formula = try calculateResult.result()
+            let formulaResult = calculatorNumberFormatter.string(for: formula)
+            inputNumberLabel.text = formulaResult
+            
+            isComputable = false
+            formulaString = ""
+        } catch CalculatorError.dividedByZero {
+            inputNumberLabel.text = "NaN"
+            isComputable = false
+        } catch {
+            let alert = UIAlertController(title: "계산 오류입니다.",
+                                          message: "확인 버튼을 눌러주시기 바랍니다.",
+                                          preferredStyle: .alert)
+            let cancle = UIAlertAction(title: "확인",
+                                       style: .default)
+            alert.addAction(cancle)
+            present(alert, animated: true)
+        }
+    }
+}
+
+@IBAction func tapAllClearButton(_ sender: UIButton) {
+    inputOperatorLabel.text = ""
+    inputNumberLabel.text = "0"
+    formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    isComputable = true
+    formulaString = ""
+}
+
+@IBAction func tapClearEntryButton(_ sender: UIButton) {
+    isComputable = true
+    inputNumberLabel.text = "0"
+}
 }
 
 extension CalculatorViewController {
