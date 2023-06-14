@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct FormManager {
-    let numberFormatter = NumberFormatter()
+enum FormManager {
+    static let numberFormatter = NumberFormatter()
     
-    var configuredNumberFormatter : NumberFormatter {
+    static var configuredNumberFormatter : NumberFormatter {
         self.numberFormatter.numberStyle = .decimal
         self.numberFormatter.maximumFractionDigits = 19
         self.numberFormatter.maximumIntegerDigits = 20
@@ -18,7 +18,7 @@ struct FormManager {
         return self.numberFormatter
     }
     
-    func transformResult(from input: String) -> String {
+    static func transformResult(from input: String) -> String {
         var numberString = deleteComma(input)
         numberString = deleteLastDot(numberString)
         
@@ -34,11 +34,11 @@ struct FormManager {
         return output
     }
     
-    private func deleteComma(_ input: String) -> String {
+    private static func deleteComma(_ input: String) -> String {
         return input.replacingOccurrences(of: ",", with: "")
     }
     
-    private func deleteLastDot(_ input: String) -> String {
+    private static func deleteLastDot(_ input: String) -> String {
         guard input.hasSuffix(".") == false else {
             return input.replacingOccurrences(of: ".", with: "")
         }

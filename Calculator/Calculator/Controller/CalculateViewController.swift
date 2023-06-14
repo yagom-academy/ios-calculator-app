@@ -12,20 +12,7 @@ final class CalculateViewController: UIViewController {
     @IBOutlet weak var currentFormulaStackView: UIStackView!
     @IBOutlet weak var currentFormulaScrollView: UIScrollView!
     
-    private var formulasUntilNow = ""
-    private var isZeroButtonUsed = true
-    private var isCalculated = false
-    private let formManager = FormManager()
-    
-    private var currentFormula: String {
-        guard let numberText = currentOperandLabel.text,
-              let operatorText = currentOperatorLabel.text else {
-            return "NaN"
-        }
-        let operandText = formManager.transformResult(from: (numberText)).replacingOccurrences(of: ",", with: "")
-        
-        return "\(operatorText) \(operandText) "
-    }
+    private var calculatorManager = CalculatorManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,133 +25,73 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
-              isCalculated == false,
-              (operandLabelText + number).count <= 20 else {
+              let labelText = calculatorManager.verifyOperandLabel(currentLabel: operandLabelText, buttonNumber: number) else {
             return
         }
         
-        if operandLabelText == "0" {
-            currentOperandLabel.text = number
-        } else {
-            currentOperandLabel.text = formManager.transformResult(from: operandLabelText + number)
-        }
+        currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedDotButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText.contains(".") == false,
-              isCalculated == false else {
+        guard let button = sender.currentTitle,
+              let operandLabelText = currentOperandLabel.text,
+              let labelText = calculatorManager.verifyDotButton(currentLabel: operandLabelText, buttonText: button) else {
             return
         }
         
-        currentOperandLabel.text = operandLabelText + "."
+        currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedZeroButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0" else {
-            currentOperandLabel.text = "0"
-            isZeroButtonUsed = true
+              let number = sender.currentTitle,
+              let labelText = calculatorManager.verifyZeroButton(currentLabel: operandLabelText, buttonNumber: number) else {
             return
         }
-        
-        guard (operandLabelText + "0").count <= 20,
-              isCalculated == false else {
-            return
-        }
-        
-        if operandLabelText.contains(".") {
-            currentOperandLabel.text = operandLabelText + "0"
-        } else {
-            currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "0"))
-        }
-    }
-    
-    @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0" else {
-            currentOperandLabel.text = "0"
-            isZeroButtonUsed = true
-            return
-        }
-        
-        guard (operandLabelText + "00").count <= 20,
-              isCalculated == false else {
-            return
-        }
-        
-        if operandLabelText.contains(".") {
-            currentOperandLabel.text = operandLabelText + "00"
-        } else {
-            currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "00"))
-        }
+        currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0" ||  isZeroButtonUsed else {
+              let operatorText = sender.currentTitle,
+              let labelText = calculatorManager.verifyOperatorButton(currentLabel: operandLabelText, button: operatorText) else {
             currentOperatorLabel.text = sender.currentTitle
             return
         }
         
         addCurrentFormula()
-        currentOperatorLabel.text = sender.currentTitle
-        
-        isCalculated = false
-        isZeroButtonUsed = false
         initializeOperandLabel()
+        currentOperatorLabel.text = labelText
     }
     // = 버튼 함수
     @IBAction func tappedResultButton(_ sender: UIButton) { // calculatorManager 메서드 호출
-        guard isCalculated == false,
-              formulasUntilNow.isEmpty == false else {
+        guard let operandLabelText = currentOperandLabel.text,
+                let labelText = calculatorManager.verifyResultButton(currentLabel: operandLabelText) else {
             return
         }
         
         addCurrentFormula()
-        
-        var formula = ExpressionParser.parse(from: formulasUntilNow)
-        
-        currentOperandLabel.text = formManager.transformResult(from: String(formula.result()))
-        formulasUntilNow.removeAll()
-        
-        isCalculated = true
-        isZeroButtonUsed = true
         initializeOperatorLabel()
+        currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedChangeSignButton(_ sender: UIButton) {
-        guard var operandLabelText = currentOperandLabel.text,
-              operandLabelText != "0",
-              isCalculated == false else {
+        guard let operandLabelText = currentOperandLabel.text,
+              let labelText = calculatorManager.verifySignButton(currentLabel: operandLabelText) else {
             return
         }
-        
-        if operandLabelText.contains("-") {
-            operandLabelText = operandLabelText.replacingOccurrences(of: "-", with: "")
-        } else {
-            operandLabelText = "-" + operandLabelText
-        }
 
-        currentOperandLabel.text = operandLabelText
+        currentOperandLabel.text = labelText
     }
     
     @IBAction func tappedClearButton(_ sender: UIButton) {
-        if formulasUntilNow.isEmpty {
-            isZeroButtonUsed = true
-        } else {
-            isZeroButtonUsed = false
-        }
-        
-        isCalculated = false
+        calculatorManager.clearButton()
         initializeOperandLabel()
     }
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {
         currentFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        formulasUntilNow = ""
-        isCalculated = false
-        isZeroButtonUsed = true
+        calculatorManager.allClearButton()
         initializeOperandLabel()
         initializeOperatorLabel()
     }
@@ -185,8 +112,7 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        formulasUntilNow.append(currentFormula)
-        setCurrentFormulaViewOnScroll(operatorString, formManager.transformResult(from: operandString))
+        setCurrentFormulaViewOnScroll(operatorString, FormManager.transformResult(from: operandString))
     }
 }
 
