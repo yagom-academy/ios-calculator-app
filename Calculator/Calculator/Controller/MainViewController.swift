@@ -98,6 +98,25 @@ class MainViewController: UIViewController {
             updateOperands(to: operandsValue + number)
         }
     }
+    
+    @IBAction private func hitEqualsButton(_ sender: UIButton) {
+        do {
+            expression.append(operatorValue + operandsValue)
+            insertStackView(with: operatorValue, operandsValue)
+            print(expression)
+            var formula = ExpressionParser.parse(from: expression)
+            let result = try formula.result()
+            
+            operandsLabel.text = result.numberFormat()!
+        } catch {
+            operandsLabel.text = Strings.nan
+            print(error)
+        }
+        initializeOperands(labelUpdate: false)
+        initializeOperator()
+        initializeExpression()
+        initializeStackView()
+    }
 }
 
 extension MainViewController {
