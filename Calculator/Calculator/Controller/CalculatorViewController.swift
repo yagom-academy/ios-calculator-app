@@ -173,7 +173,8 @@ extension CalculatorViewController {
     
     func setAutoScrollToBottom() {
         formulaListScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: formulaListScrollView.contentSize.height - formulaListScrollView.bounds.height + formulaListScrollView.contentInset.bottom)
+        let bottomOffset = CGPoint(x: 0,
+                                   y: formulaListScrollView.contentSize.height - formulaListScrollView.bounds.height)
         if bottomOffset.y > 0 {
             formulaListScrollView.setContentOffset(bottomOffset, animated: true)
         }
