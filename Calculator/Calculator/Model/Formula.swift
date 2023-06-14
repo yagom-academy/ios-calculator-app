@@ -19,7 +19,11 @@ struct Formula {
                 throw OperationError.operatorNotEnoughError
             }
             
-            accumulateValue = try operatorsElement.calculate(lhs: accumulateValue, rhs: nextOperand)
+            accumulateValue = operatorsElement.calculate(lhs: accumulateValue, rhs: nextOperand)
+            
+            if accumulateValue.isInfinite || accumulateValue.isNaN {
+                throw OperationError.divideByZeroError
+            }
         }
         
         return accumulateValue
