@@ -10,7 +10,7 @@ import Foundation
 typealias LabelValues = (operandValue: String, operatorValue: String)
 
 struct OperationManager {
-    private var formula: String = CalculatorNamespace.Empty
+    private var formula: String = CalculatorNamespace.empty
     private var isCalculate: Bool = false
     
     mutating func calculateFormula() -> String {
@@ -22,28 +22,22 @@ struct OperationManager {
         return result
     }
 
-    mutating func addFormula(_ operators: String, _ operands: String) -> LabelValues {
-        let `operator` = operators
+    mutating func addFormula(_ operators: String, _ operands: String)  {
         let operands = OperandFormatter.formatStringOperand(operands)
         
-        if formula.isEmpty && operands != CalculatorNamespace.Zero  {
+        if formula.isEmpty && operands != CalculatorNamespace.zero  {
             formula += "\(operands)"
-            return (CalculatorNamespace.Empty, operands)
-        } else if operands != CalculatorNamespace.Zero {
-            formula += "\(`operator`)\(operands)"
-            return (operandValue: operands, operatorValue: `operator`)
+        } else if operands != CalculatorNamespace.zero {
+            formula += "\(operators)\(operands)"
         }
         
-        if operands == CalculatorNamespace.Zero {
-            formula += "\(`operator`)\(operands)"
-            return (operandValue: operands, operatorValue: `operator`)
+        if operands == CalculatorNamespace.zero {
+            formula += "\(operators)\(operands)"
         }
-        
-        return (operandValue: CalculatorNamespace.Empty, operatorValue: CalculatorNamespace.Empty)
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
-        let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands
+        let numberOperands = isCalculate ? CalculatorNamespace.zero : currentOperands
         let operands = OperandFormatter.formatStringOperand(numberOperands + inputOperands)
         isCalculate = false
         
@@ -51,12 +45,12 @@ struct OperationManager {
             return currentOperands
         }
         
-        if numberOperands.contains(CalculatorNamespace.Dot) &&
-            (inputOperands == CalculatorNamespace.Zero || inputOperands == CalculatorNamespace.DoubleZero) {
+        if numberOperands.contains(CalculatorNamespace.dot) &&
+            (inputOperands == CalculatorNamespace.zero || inputOperands == CalculatorNamespace.doubleZero) {
             let result = numberOperands + inputOperands
             return result
-        } else if !numberOperands.contains(CalculatorNamespace.Dot) &&
-                    inputOperands == CalculatorNamespace.Dot {
+        } else if !numberOperands.contains(CalculatorNamespace.dot) &&
+                    inputOperands == CalculatorNamespace.dot {
             let result = operands + inputOperands
             return result
         }
@@ -66,18 +60,18 @@ struct OperationManager {
     
     func changeSign(_ operands: String) -> String {
         var operands = operands
-        guard operands != CalculatorNamespace.Zero else { return CalculatorNamespace.Zero }
+        guard operands != CalculatorNamespace.zero else { return CalculatorNamespace.zero }
         
-        if operands.contains(CalculatorNamespace.Negative) {
+        if operands.contains(CalculatorNamespace.negative) {
             operands.removeFirst()
         } else {
-            operands.insert(Character(CalculatorNamespace.Negative), at: operands.startIndex)
+            operands.insert(Character(CalculatorNamespace.negative), at: operands.startIndex)
         }
         
         return operands
     }
     
     mutating func clearFormula() {
-        formula = CalculatorNamespace.Empty
+        formula = CalculatorNamespace.empty
     }
 }

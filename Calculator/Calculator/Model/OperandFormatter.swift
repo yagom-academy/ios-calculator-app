@@ -20,11 +20,11 @@ enum OperandFormatter {
             return operand
         }
         var newOperand: String = operand
-        var sign: String = CalculatorNamespace.Empty
+        var sign: String = CalculatorNamespace.empty
         
-        if String(firstDigit) == CalculatorNamespace.Negative {
+        if String(firstDigit) == CalculatorNamespace.negative {
             newOperand = String(newOperand.dropFirst(1))
-            sign = CalculatorNamespace.Negative
+            sign = CalculatorNamespace.negative
         }
 
         if newOperand.count > 20 {
@@ -32,7 +32,7 @@ enum OperandFormatter {
         }
         
         newOperand = sign + newOperand
-        let operandSplit = newOperand.components(separatedBy: CalculatorNamespace.Dot)
+        let operandSplit = newOperand.components(separatedBy: CalculatorNamespace.dot)
         
         guard let operandInteger = operandSplit.first,
               let operandFraction = operandSplit.last
@@ -43,7 +43,7 @@ enum OperandFormatter {
         newOperand = formatNumberToString(operandDouble)
         
         if operandSplit.count == 2 {
-            newOperand += CalculatorNamespace.Dot + operandFraction
+            newOperand += CalculatorNamespace.dot + operandFraction
         }
         return newOperand
     }
@@ -59,7 +59,7 @@ enum OperandFormatter {
         
         guard let numberFormatted = numberFormatter.string(for: operand)
         else {
-            return CalculatorNamespace.Empty
+            return CalculatorNamespace.empty
         }
         return numberFormatted
     }
