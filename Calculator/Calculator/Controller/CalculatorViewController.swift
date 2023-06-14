@@ -1,15 +1,12 @@
 //
-//  Calculator - ViewController.swift
+//  Calculator - CalculatorViewController.swift
 //  Created by yagom. 
 //  Copyright © yagom. All rights reserved.
 // 
 
 import UIKit
 
-let maximumDecimalDigits = 5
-let maximumOperandDigits = 20
-
-class ViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     private var expression: String = String()
     private var operandFormatter = OperandFormatter()
     private var isResult: Bool = false
@@ -50,8 +47,17 @@ class ViewController: UIViewController {
             return
         }
         
-        if isResult { return }
+        if isResult && currentOperand.isZero == false {
+            addStackView(currentOperator, currentOperand)
+            expression += currentOperand
+            initOperandLabel()
+            operatorLabel.text = inputedOperator
+            isResult = false
+            return
+        }
         
+        if isResult { return }
+
         if currentOperand.isZero {
             operatorLabel.text = inputedOperator
         } else {
@@ -60,7 +66,6 @@ class ViewController: UIViewController {
             initOperandLabel()
             operatorLabel.text = inputedOperator
         }
-        
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -85,8 +90,9 @@ class ViewController: UIViewController {
         do {
             let result = try parsedExpression.result()
             
-            let formattingResult = operandFormatter.string(for: result)
+            let formattingResult = operandFormatter.numberToString(for: result)
             operandLabel.text = formattingResult
+            initExpression()
             initOperatorLabel()
             isResult = true
         } catch CalculatorError.notANumber {
@@ -116,14 +122,14 @@ class ViewController: UIViewController {
 
         if let number = Double(currentOperand.withoutDecimalPoint) {
             let changedSignNumber = number.sign == .plus ? -number : abs(number)
-            operandLabel.text = operandFormatter.string(for: Double(changedSignNumber))
+            operandLabel.text = operandFormatter.numberToString(for: Double(changedSignNumber))
         }
     }
     
 }
 
-extension ViewController {
-    func initializeCalculator() {
+extension CalculatorViewController {
+    private func initializeCalculator() {
         initExpression()
         initOperandLabel()
         initOperatorLabel()
@@ -131,46 +137,45 @@ extension ViewController {
         isResult = false
     }
     
-    func initOperandLabel() {
+    private func initOperandLabel() {
         operandLabel.text = "0"
     }
     
-    func initOperatorLabel() {
+    private func initOperatorLabel() {
         operatorLabel.text = ""
     }
     
-    func initExpression() {
+    private func initExpression() {
         expression = ""
     }
-
 }
 
-extension ViewController {
-    func addStackView(_ currentOperator: String, _ currentOperand: String)  {
-        let operandUILabel = createUILabel(text: currentOperand)
-        let operatorUILabel = createUILabel(text: currentOperator)
-            
-        let stackView = createUIStackView(operatorUILabel, operandUILabel)
+extension CalculatorViewController {
+    private func addStackView(_ currentOperator: String, _ currentOperand: String)  {
+        let stackView = createUIStackView(currentOperator, currentOperand)
         calculateStackView.addArrangedSubview(stackView)
-        
+        calculateHistoryScrollView.layoutIfNeeded()
         scrollToBottom()
     }
     
-    func removeStackView() {
+    private func removeStackView() {
         calculateStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
     }
     
-    func createUILabel(text: String?) -> UILabel {
+    private func createUILabel(text: String?) -> UILabel {
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         label.text = text
         
         return label
     }
     
-    func createUIStackView(_ labels: UILabel...) -> UIStackView {
+    private func createUIStackView(_ currentOperator: String, _ currentOperand: String) -> UIStackView {
+        let labels = [createUILabel(text: currentOperator), createUILabel(text: currentOperand)]
+        
         let stackView = UIStackView()
         stackView.spacing = 10
         
@@ -181,9 +186,7 @@ extension ViewController {
         return stackView
     }
     
-    func scrollToBottom() {
-        calculateHistoryScrollView.layoutIfNeeded()
-        
+    private func scrollToBottom() {
         let bottomOffset = CGPoint(x: 0, y: (calculateHistoryScrollView.contentSize.height - calculateHistoryScrollView.bounds.size.height))
 
         calculateHistoryScrollView.setContentOffset(bottomOffset, animated: true)

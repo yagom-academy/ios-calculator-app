@@ -9,7 +9,9 @@ import Foundation
 
 struct OperandFormatter {
     private let operandFormatter: NumberFormatter
-    
+    private let maximumDecimalDigits = 5
+    private let maximumOperandDigits = 20 // 연산프로퍼티
+
     init(operandFormatter: NumberFormatter = NumberFormatter()) {
         self.operandFormatter = operandFormatter
         self.operandFormatter.numberStyle = .decimal
@@ -43,10 +45,13 @@ struct OperandFormatter {
         }
     }
     
-    func string(for input: Any) -> String? {
+    func numberToString(for input: Any) -> String? {
         return operandFormatter.string(for: input)
     }
-    
+}
+
+// MARK: - Private
+extension OperandFormatter {
     private func checkOperandLength(_ inputedOperand: String, _ currentOperand: String) -> Bool {
         let number = currentOperand.withoutDecimalPoint + inputedOperand
         return number.count <= maximumOperandDigits
@@ -56,7 +61,6 @@ struct OperandFormatter {
         guard currentOperand.contains(".") else {
             return true
         }
-        
         let decimalPart = currentOperand.components(separatedBy: ".").last ?? ""
         
         return (decimalPart + inputedOperand).count <= maximumDecimalDigits
