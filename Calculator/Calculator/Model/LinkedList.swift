@@ -5,19 +5,9 @@
 //  Created by mint, Whales on 2023/06/12.
 //
 
-final class Node<T> {
-    var data: T
-    var next: Node?
-    
-    init(data: T, next: Node? = nil) {
-        self.data = data
-        self.next = next
-    }
-}
-
 struct LinkedList<T> {
     private var head: Node<T>?
-    private var tail: Node<T>?
+    private weak var tail: Node<T>?
     
     var isEmpty: Bool {
         head == nil
@@ -45,15 +35,8 @@ struct LinkedList<T> {
     
     @discardableResult
     mutating func removeFirst() -> T? {
-        guard !isEmpty else {
-            return nil
-        }
-        
         let data = head?.data
        
-        if head?.next == nil {
-            tail = nil
-        }
         head = head?.next
         
         return data

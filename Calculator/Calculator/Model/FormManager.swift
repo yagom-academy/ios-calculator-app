@@ -28,8 +28,8 @@ struct FormManager {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumFractionDigits = 19
+        numberFormatter.maximumIntegerDigits = 20
         
         return numberFormatter
     }

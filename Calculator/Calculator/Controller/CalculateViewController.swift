@@ -162,6 +162,7 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {
         currentFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        formulasUntilNow = ""
         isCalculated = false
         isZeroButtonUsed = true
         initializeOperandLabel()
@@ -191,36 +192,9 @@ final class CalculateViewController: UIViewController {
 
 extension CalculateViewController {
     private func makeCurrentFormulaLabelStackView(_ `operator`: String, _ operand: String) -> UIStackView {
-        let operatorLabel: UILabel = {
-            let label = UILabel()
-            
-            label.text = `operator`
-            label.font = .preferredFont(forTextStyle: .title2)
-            label.textColor = .white
-            
-            return label
-        }()
-        
-        let operandLabel: UILabel = {
-            let label = UILabel()
-            
-            label.text = operand
-            label.font = .preferredFont(forTextStyle: .title2)
-            label.textColor = .white
-            
-            return label
-        }()
-        
-        let subStackView: UIStackView = {
-            let stackView = UIStackView(arrangedSubviews: [operatorLabel,operandLabel])
-            
-            stackView.spacing = 8
-            stackView.alignment = .bottom
-            
-            return stackView
-        }()
-        
-        return subStackView
+        let operatorLabel: UILabel = UILabel(text: `operator`)
+        let operandLabel: UILabel = UILabel(text: operand)
+        return UIStackView(firstLabel: operatorLabel, secondLabel: operandLabel)
     }
     
     private func setCurrentFormulaViewOnScroll(_ `operator`: String, _ operand: String) {
