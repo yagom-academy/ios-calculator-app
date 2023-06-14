@@ -63,6 +63,17 @@ class MainViewController: UIViewController {
             subview.removeFromSuperview()
         }
     }
+    
+    @IBAction private func hitOperatorButton(_ sender: UIButton) {
+        guard let `operator` = sender.currentTitle else { return }
+        
+        if operandsValue.isEmpty == false {
+            expression.append(operatorValue + operandsValue)
+            insertStackView(with: operatorValue, operandsValue)
+        }
+        updateOperator(to: `operator`)
+        initializeOperands()
+    }
 }
 
 extension MainViewController {
