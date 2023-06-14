@@ -22,19 +22,19 @@ class MainViewController: UIViewController {
     }
 
     private func initializeExpression() {
-        expression = ""
+        expression = Strings.empty
     }
     
     private func initializeOperands(labelUpdate: Bool = true) {
-        operandsValue = ""
+        operandsValue = Strings.empty
         if labelUpdate {
-            operandsLabel.text = "0"
+            operandsLabel.text = Strings.zero
         }
     }
     
     private func initializeOperator() {
-        operatorValue = ""
-        operatorLabel.text = ""
+        operatorValue = Strings.empty
+        operatorLabel.text = Strings.empty
     }
     
     private func updateOperands(to value: String) {
@@ -74,6 +74,30 @@ class MainViewController: UIViewController {
         updateOperator(to: `operator`)
         initializeOperands()
     }
+    
+    @IBAction private func hitNumberButton(_ sender: UIButton) {
+        guard let number = sender.currentTitle else { return }
+        if operandsValue.contains(Strings.point) && number == Strings.point { return }
+
+        switch (operandsValue, number) {
+        case (Strings.zero, Strings.zero):
+            return
+        case (Strings.zero, Strings.doubleZero):
+            return
+        case (Strings.empty, Strings.zero) where expression.isEmpty:
+            return
+        case (Strings.empty, Strings.doubleZero):
+            return
+        case (Strings.empty, Strings.point):
+            updateOperands(to: Strings.zero + number)
+        case (Strings.zero, _):
+            updateOperands(to: number)
+        case (Strings.empty, _):
+            updateOperands(to: number)
+        default:
+            updateOperands(to: operandsValue + number)
+        }
+    }
 }
 
 extension MainViewController {
@@ -96,5 +120,16 @@ extension MainViewController {
         }
         
         return stackView
+    }
+}
+
+extension MainViewController {
+    private enum Strings {
+        static let empty = ""
+        static let zero = "0"
+        static let point = "."
+        static let doubleZero = "00"
+        static let minus = "-"
+        static let nan = "NaN"
     }
 }
