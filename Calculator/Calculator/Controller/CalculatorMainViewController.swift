@@ -125,18 +125,26 @@ class CalculatorMainViewController: UIViewController {
         } catch {
             print("알 수 없는 에러 발생")
         }
+        
+        
     }
     
     @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
-        var currentOperandText = operandLabel.text ?? "0"
-        let isCurrentSign = currentOperandText.contains("-")
-        
-        if isCurrentSign == true {
-            currentOperandText.removeFirst()
-            operandLabel.text = currentOperandText
-        } else {
-            operandLabel.text = "-" + currentOperandText
+        guard
+            var operandLabelText = removeComma(of: operandLabel.text),
+            let number = Decimal(string: operandLabelText),
+            !number.isZero
+        else {
+            return
         }
+        
+        if operandLabelText.contains("-") {
+            operandLabelText.removeFirst()
+        } else {
+            operandLabelText = "-\(operandLabelText)"
+        }
+        
+        operandLabel.text = operandLabelText
     }
     
     // MARK: - Method
