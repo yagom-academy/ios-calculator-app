@@ -39,14 +39,14 @@ struct OperationManager {
         let operands = numberOperands + inputOperands
         isCalculate = false
         
+        if operands.filter({ String($0) == CalculatorNamespace.comma }).count == 4 ||
+            numberOperands.count >= 13 {
+            return numberOperands
+        }
+        
         if numberOperands.contains(CalculatorNamespace.dot) &&
-            (inputOperands == CalculatorNamespace.zero || inputOperands == CalculatorNamespace.doubleZero) {
-            let result = numberOperands + inputOperands
-            return result
-        } else if !numberOperands.contains(CalculatorNamespace.dot) &&
-                    inputOperands == CalculatorNamespace.dot {
-            let result = operands + inputOperands
-            return result
+            inputOperands == CalculatorNamespace.dot {
+            return numberOperands
         }
 
         return operands

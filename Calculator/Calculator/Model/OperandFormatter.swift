@@ -15,20 +15,17 @@ enum OperandFormatter {
     
     static func formatInput(_ operand: String) -> String {
         guard let firstDigit = operand.first,
-              !operand.contains(",")
+              !operand.contains(CalculatorNamespace.comma)
         else {
             return operand
         }
+        
         var newOperand: String = operand
         var sign: String = CalculatorNamespace.empty
         
         if String(firstDigit) == CalculatorNamespace.negative {
             newOperand = String(newOperand.dropFirst(1))
             sign = CalculatorNamespace.negative
-        }
-
-        if newOperand.count > 20 {
-            newOperand = String(newOperand.prefix(20))
         }
         
         newOperand = sign + newOperand
@@ -65,6 +62,6 @@ enum OperandFormatter {
     }
     
     static func removeComma(_ operand: String) -> String {
-        return operand.replacingOccurrences(of: ",", with: "")
+        return operand.replacingOccurrences(of: CalculatorNamespace.comma, with: CalculatorNamespace.empty)
     }
 }
