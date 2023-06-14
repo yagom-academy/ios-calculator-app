@@ -6,15 +6,14 @@
 //  Last modify : idinaloq, Erick, Maxhyunm
 
 enum CalculatorNamespace {
-    static let Empty: String = ""
-    static let Zero: String = "0"
-    static let NaN: String = "NaN"
-    static let Negative: String = "-"
-    static let DoubleZero: String = "00"
-    static let Dot: String = "."
-    static let Equal: String = "="
-    static let AllClear: String = "AC"
-    static let ClearEntry: String = "CE"
-    static let SignToggle: String = "⁺⁄₋"
-    static let Comma: String = ","
+    static let empty: String = ""
+    static let zero: String = "0"
+    static let nan: String = "NaN"
+    static let negative: String = "-"
+    static let doubleZero: String = "00"
+    static let dot: String = "."
+    static let allClear: String = "AC"
+    static let clearEntry: String = "CE"
+    static let signToggle: String = "⁺⁄₋"
+    static let comma: String = ","
 }

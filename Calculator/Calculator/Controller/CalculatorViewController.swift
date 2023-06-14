@@ -11,7 +11,7 @@ final class CalculatorViewController: UIViewController {
     
     private var operatorValue: String {
         get {
-            return operatorLabel.text ?? CalculatorNamespace.Empty
+            return operatorLabel.text ?? CalculatorNamespace.empty
         }
         set(newOperator) {
             operatorLabel.text = newOperator
@@ -20,7 +20,7 @@ final class CalculatorViewController: UIViewController {
     
     private var operandValue: String {
         get {
-            return OperandFormatter.removeComma(operandsLabel.text ?? CalculatorNamespace.Zero)
+            return OperandFormatter.removeComma(operandsLabel.text ?? CalculatorNamespace.zero)
         }
         set(newOperand) {
             operandsLabel.text = OperandFormatter.formatInput(newOperand)
@@ -35,32 +35,33 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operatorValue = CalculatorNamespace.Empty
-        operandValue = CalculatorNamespace.Zero
+        operatorValue = CalculatorNamespace.empty
+        operandValue = CalculatorNamespace.zero
         clearCalculationDetailsStackView()
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle,
-              operandValue != CalculatorNamespace.NaN else { return }
+              operandValue != CalculatorNamespace.nan else { return }
         
-        let result = operationManager.addFormula(operatorValue, operandValue)
+        let oldOperatorValue = operatorValue
         
+        operationManager.addFormula(operatorValue, operandValue)
         operatorValue = inputOperator
-        guard result.operandValue != CalculatorNamespace.Zero else { return }
         
-        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
-        operandValue = CalculatorNamespace.Zero
+        guard operandValue != CalculatorNamespace.zero else { return }
+        
+        addCalculationDetailsStackView(oldOperatorValue, operandValue)
+        operandValue = CalculatorNamespace.zero
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        guard operatorValue != CalculatorNamespace.Empty else { return }
+        guard operatorValue != CalculatorNamespace.empty else { return }
         
-        let result = operationManager.addFormula(operatorValue, operandValue)
-        
-        addCalculationDetailsStackView(result.operatorValue, result.operandValue)
+        operationManager.addFormula(operatorValue, operandValue)
+        addCalculationDetailsStackView(operatorValue, operandValue)
         operandValue = operationManager.calculateFormula()
-        operatorValue = CalculatorNamespace.Empty
+        operatorValue = CalculatorNamespace.empty
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
@@ -74,14 +75,14 @@ final class CalculatorViewController: UIViewController {
         guard let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
-        case CalculatorNamespace.AllClear:
-            operatorValue = CalculatorNamespace.Empty
-            operandValue = CalculatorNamespace.Zero
+        case CalculatorNamespace.allClear:
+            operatorValue = CalculatorNamespace.empty
+            operandValue = CalculatorNamespace.zero
             clearCalculationDetailsStackView()
             operationManager.clearFormula()
-        case CalculatorNamespace.ClearEntry:
-            operandValue = CalculatorNamespace.Zero
-        case CalculatorNamespace.SignToggle:
+        case CalculatorNamespace.clearEntry:
+            operandValue = CalculatorNamespace.zero
+        case CalculatorNamespace.signToggle:
             let result = operationManager.changeSign(operandValue)
             operandValue = result
         default:
@@ -92,7 +93,7 @@ final class CalculatorViewController: UIViewController {
 
 extension CalculatorViewController {
     private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
-        if `operator` == CalculatorNamespace.Empty && operands == CalculatorNamespace.Empty {
+        if `operator` == CalculatorNamespace.empty && operands == CalculatorNamespace.empty {
             return
         }
         
