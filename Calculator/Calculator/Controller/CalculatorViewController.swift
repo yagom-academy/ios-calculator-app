@@ -13,6 +13,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousExpressionScrollView: UIScrollView!
     private var expression: String = ""
     private var isResult: Bool = false
+    private var isPlaceholder: Bool = true
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
@@ -40,11 +41,13 @@ class CalculatorViewController: UIViewController {
         clearLabel()
         expression = ""
         isResult = false
+        isPlaceholder = true
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
         operandLabel.text = "0"
         isResult = false
+        isPlaceholder = true
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
@@ -82,6 +85,7 @@ class CalculatorViewController: UIViewController {
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
+        
         guard let currentOperandToDouble = Double(currentOperand), currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
             operandLabel.text = operandElement
             return
@@ -90,14 +94,23 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = currentOperand + operandElement
     }
     
+    @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        guard let zero = sender.currentTitle, currentOperand != "0" else {
+            isPlaceholder = false
+            return
+        }
+        
+        operandLabel.text = currentOperand + zero
+    }
+    
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
         guard let DoubleZero = sender.currentTitle, currentOperand != "0" else {
+            isPlaceholder = false
             return
         }
         
         operandLabel.text = currentOperand + DoubleZero
     }
-    
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
         guard let decimalPointOperand = sender.currentTitle, !isResult else {
@@ -114,7 +127,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard currentOperand != "0" else {
+        guard !(currentOperand == "0" && isPlaceholder) else {
             operatorLabel.text = sender.currentTitle
             expression = "0"
             return
@@ -132,6 +145,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isResult = false
+        isPlaceholder = true
         scrollDown()
     }
     
