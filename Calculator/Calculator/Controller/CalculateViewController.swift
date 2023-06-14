@@ -15,14 +15,16 @@ final class CalculateViewController: UIViewController {
     private var formulasUntilNow = ""
     private var isZeroButtonUsed = true
     private var isCalculated = false
+    private let formManager = FormManager()
     
     private var currentFormula: String {
         guard let numberText = currentOperandLabel.text,
               let operatorText = currentOperatorLabel.text else {
             return "NaN"
         }
+        let operandText = formManager.transformResult(from: (numberText)).replacingOccurrences(of: ",", with: "")
         
-        return "\(operatorText) \(checkOperandForm(numberText).replacingOccurrences(of: ",", with: "")) "
+        return "\(operatorText) \(operandText) "
     }
     
     override func viewDidLoad() {
@@ -37,18 +39,14 @@ final class CalculateViewController: UIViewController {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
               isCalculated == false,
-              checkOperandForm(operandLabelText + number) != "error" else {
+              (operandLabelText + number).count <= 20 else {
             return
         }
         
         if operandLabelText == "0" {
             currentOperandLabel.text = number
         } else {
-            guard let numberAsDouble = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + number) else {
-                return
-            }
-            
-            currentOperandLabel.text = formatter().string(from: numberAsDouble as NSNumber)
+            currentOperandLabel.text = formManager.transformResult(from: operandLabelText + number)
         }
     }
     
@@ -70,16 +68,12 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        guard checkOperandForm(operandLabelText + "0") != "error",
+        guard (operandLabelText + "0").count <= 20,
               isCalculated == false else {
             return
         }
         
-        guard let number = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + "0") else {
-            return
-        }
-        
-        currentOperandLabel.text = formatter().string(from: number as NSNumber)
+        currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "0"))
     }
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
@@ -90,26 +84,18 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        guard checkOperandForm(operandLabelText + "00") != "error",
+        guard (operandLabelText + "00").count <= 20,
               isCalculated == false else {
             return
         }
         
-        guard let number = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + "00") else {
-            return
-        }
-        
-        currentOperandLabel.text = formatter().string(from: number as NSNumber)
+        currentOperandLabel.text = formManager.transformResult(from: (operandLabelText + "00"))
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
               operandLabelText != "0" ||  isZeroButtonUsed else {
             currentOperatorLabel.text = sender.currentTitle
-            return
-        }
-        
-        guard checkOperandForm(operandLabelText) != "error" else {
             return
         }
         
@@ -131,7 +117,7 @@ final class CalculateViewController: UIViewController {
         
         var formula = ExpressionParser.parse(from: formulasUntilNow)
         
-        currentOperandLabel.text = formatter().string(from: formula.result() as NSNumber)
+        currentOperandLabel.text = formManager.transformResult(from: String(formula.result()))
         formulasUntilNow.removeAll()
         
         isCalculated = true
@@ -142,7 +128,6 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedChangeSignButton(_ sender: UIButton) {
         guard var operandLabelText = currentOperandLabel.text,
               operandLabelText != "0",
-              checkOperandForm(operandLabelText) != "error",
               isCalculated == false else {
             return
         }
@@ -185,32 +170,6 @@ final class CalculateViewController: UIViewController {
         currentOperatorLabel.text = ""
     }
     
-    private func formatter() -> NumberFormatter {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        numberFormatter.maximumFractionDigits = 20
-        
-        return numberFormatter
-    }
-
-    private func checkOperandForm(_ input: String) -> String {
-        let numberString = input.replacingOccurrences(of: ",", with: "")
-        
-        guard let number = Double(numberString),
-              formatter().string(from: number as NSNumber) != "NaN",
-              input.count <= 20 else {
-            return "error"
-        }
-        
-        guard numberString.hasSuffix(".") == false else {
-            return numberString.replacingOccurrences(of: ".", with: "")
-        }
-        
-        return numberString
-    }
-    
     private func addCurrentFormula() {
         guard let operatorString = currentOperatorLabel.text,
               let operandString = currentOperandLabel.text else {
@@ -218,7 +177,7 @@ final class CalculateViewController: UIViewController {
         }
         
         formulasUntilNow.append(currentFormula)
-        setCurrentFormulaViewOnScroll(operatorString, checkOperandForm(operandString))
+        setCurrentFormulaViewOnScroll(operatorString, formManager.transformResult(from: operandString))
     }
 }
 
@@ -237,7 +196,7 @@ extension CalculateViewController {
         let operandLabel: UILabel = {
             let label = UILabel()
             
-            label.text = operand.replacingOccurrences(of: ",", with: "")
+            label.text = operand
             label.font = .preferredFont(forTextStyle: .title2)
             label.textColor = .white
             
