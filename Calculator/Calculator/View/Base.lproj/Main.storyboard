@@ -366,7 +366,6 @@
                     <connections>
                         <outlet property="allInputScrollView" destination="BOT-7g-vxv" id="UL0-aR-1sg"/>
                         <outlet property="allInputStackView" destination="XRe-QE-UJf" id="0Cq-or-i77"/>
-                        <outlet property="inputLabelStackView" destination="2pK-nQ-lxl" id="Mos-yV-P4z"/>
                         <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="Cd0-N9-0bo"/>
                         <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="Hcx-Oe-dic"/>
                     </connections>
