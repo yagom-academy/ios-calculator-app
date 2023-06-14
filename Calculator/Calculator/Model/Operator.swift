@@ -3,7 +3,9 @@
 //  Calculator
 //
 //  Created by Erick on 2023/05/29.
-//
+//  Last modify : idinaloq, Erick, Maxhyunm
+
+import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
@@ -14,31 +16,36 @@ enum Operator: Character, CaseIterable, CalculateItem {
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
         case .add:
-            return add(lhs: lhs, rhs: rhs)
+            return self.add(lhs: lhs, rhs: rhs)
         case .subtract:
-            return subtract(lhs: lhs, rhs: rhs)
+            return self.subtract(lhs: lhs, rhs: rhs)
         case .divide:
-            return divide(lhs: lhs, rhs: rhs)
+            return self.divide(lhs: lhs, rhs: rhs)
         case .multiply:
-            return multiply(lhs: lhs, rhs: rhs)
+            return self.multiply(lhs: lhs, rhs: rhs)
         }
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) + Decimal(rhs))
+        return result.doubleValue
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) - Decimal(rhs))
+        return  result.doubleValue
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        let result = lhs / rhs
-        
-        return result.isInfinite ? Double.nan : result
+        guard rhs != Double.zero else {
+            return Double.nan
+        }
+        let result = NSDecimalNumber(decimal: Decimal(lhs) / Decimal(rhs))
+        return result.doubleValue
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let result = NSDecimalNumber(decimal: Decimal(lhs) * Decimal(rhs))
+        return result.doubleValue
     }
 }
