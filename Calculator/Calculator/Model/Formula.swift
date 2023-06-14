@@ -19,7 +19,9 @@ struct Formula {
         }
         
         while !operators.isEmpty {
-            (lhs == nil) ? (lhs = operands.dequeue()) : (lhs = result)
+            (lhs == nil) ?
+            (lhs = operands.dequeue()) :
+            (lhs = result)
 
             guard let lhs,
                   let rhs = operands.dequeue(),
