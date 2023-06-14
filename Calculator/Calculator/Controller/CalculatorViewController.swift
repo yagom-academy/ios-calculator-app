@@ -25,16 +25,18 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
+        guard operationReady else {
+            return
+        }
+        
         let labelText = unwrap(sender.titleLabel?.text)
         let inputNumberLabelText = unwrap(inputNumberLabel.text)
         
-        if operationReady {
-            if inputNumberLabelText.isZero {
-                inputNumberLabel.text? = labelText
-            } else if inputNumberLabelText.count < 20 {
-                let newLabelText = inputNumberLabelText + labelText
-                inputNumberLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
-            }
+        if inputNumberLabelText.isZero {
+            inputNumberLabel.text? = labelText
+        } else if inputNumberLabelText.count < 20 {
+            let newLabelText = inputNumberLabelText + labelText
+            inputNumberLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
         }
     }
     
@@ -68,10 +70,6 @@ class CalculatorViewController: UIViewController {
         } else if inputNumberLabelText.isZero {
             inputOperatorLabel.text? = labelText
         } else {
-            if allInputStackView.subviews.isEmpty {
-                inputOperatorLabelText = ""
-            }
-            
             let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
             let operandLabel: UILabel = makeUILabel(
                 inputNumberLabelText.hasSuffix(".") ?
@@ -125,12 +123,14 @@ class CalculatorViewController: UIViewController {
         let hyphenMinus = "-"
         let numberLabelText = unwrap(inputNumberLabel.text)
         
-        if !numberLabelText.isZero {
-            if numberLabelText.hasPrefix(hyphenMinus) {
-                inputNumberLabel.text = String(numberLabelText.dropFirst())
-            } else {
-                inputNumberLabel.text = hyphenMinus + numberLabelText
-            }
+        if numberLabelText.isZero {
+            return
+        }
+        
+        if numberLabelText.hasPrefix(hyphenMinus) {
+            inputNumberLabel.text = String(numberLabelText.dropFirst())
+        } else {
+            inputNumberLabel.text = hyphenMinus + numberLabelText
         }
     }
     
