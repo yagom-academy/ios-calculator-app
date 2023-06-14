@@ -8,12 +8,22 @@
 import Foundation
 
 struct FormManager {
+    let numberFormatter = NumberFormatter()
+    
+    var configuredNumberFormatter : NumberFormatter {
+        self.numberFormatter.numberStyle = .decimal
+        self.numberFormatter.maximumFractionDigits = 19
+        self.numberFormatter.maximumIntegerDigits = 20
+        
+        return self.numberFormatter
+    }
+    
     func transformResult(from input: String) -> String {
         var numberString = deleteComma(input)
         numberString = deleteLastDot(numberString)
         
         guard let number = Double(numberString),
-              let output = formatter().string(from: number as NSNumber) else {
+              let output = self.configuredNumberFormatter.string(from: number as NSNumber) else {
             return "NaN"
         }
         
@@ -22,16 +32,6 @@ struct FormManager {
         }
         
         return output
-    }
-    
-    private func formatter() -> NumberFormatter {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 19
-        numberFormatter.maximumIntegerDigits = 20
-        
-        return numberFormatter
     }
     
     private func deleteComma(_ input: String) -> String {

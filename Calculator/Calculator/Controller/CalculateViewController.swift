@@ -114,8 +114,8 @@ final class CalculateViewController: UIViewController {
         isZeroButtonUsed = false
         initializeOperandLabel()
     }
-    
-    @IBAction func tappedResultButton(_ sender: UIButton) {
+    // = 버튼 함수
+    @IBAction func tappedResultButton(_ sender: UIButton) { // calculatorManager 메서드 호출
         guard isCalculated == false,
               formulasUntilNow.isEmpty == false else {
             return
