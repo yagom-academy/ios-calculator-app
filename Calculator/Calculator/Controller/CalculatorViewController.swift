@@ -17,9 +17,7 @@ class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.minimumSignificantDigits = 0
+        numberFormatter.maximumFractionDigits = 20
         numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
@@ -123,7 +121,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        let realNumber = (currentOperand + zero).split(with: ".")
+        
+        if realNumber.count == 2 {
+            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
+        } else {
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        }
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
@@ -138,7 +142,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        let realNumber = (currentOperand + doubleZero).split(with: ".")
+        
+        if realNumber.count == 2 {
+            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
+        } else {
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+        }
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
