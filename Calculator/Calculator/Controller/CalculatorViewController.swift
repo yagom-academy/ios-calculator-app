@@ -29,7 +29,7 @@ class CalculatorViewController: UIViewController {
         let inputNumberLabelText = unwrap(inputNumberLabel.text)
         
         if operationReady {
-            if inputNumberLabelText == "0" {
+            if inputNumberLabelText.isZero {
                 inputNumberLabel.text? = labelText
             } else if inputNumberLabelText.count < 20 {
                 let newLabelText = inputNumberLabelText + labelText
@@ -41,7 +41,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func tapZero(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if inputNumberLabel.text != "0" {
+        if !unwrap(inputNumberLabel.text).isZero {
             inputNumberLabel.text? += labelText
         }
     }
@@ -61,11 +61,11 @@ class CalculatorViewController: UIViewController {
         let inputNumberLabelText = unwrap(inputNumberLabel.text)
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if inputNumberLabelText == "0",
+        if inputNumberLabelText.isZero,
            labelText == "=" {
             formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
             allInputScrollView.scrollToBottom()
-        } else if inputNumberLabelText == "0" {
+        } else if inputNumberLabelText.isZero {
             inputOperatorLabel.text? = labelText
         } else {
             if allInputStackView.subviews.isEmpty {
@@ -125,7 +125,7 @@ class CalculatorViewController: UIViewController {
         let hyphenMinus = "-"
         let numberLabelText = unwrap(inputNumberLabel.text)
         
-        if numberLabelText != "0" {
+        if !numberLabelText.isZero {
             if numberLabelText.hasPrefix(hyphenMinus) {
                 inputNumberLabel.text = String(numberLabelText.dropFirst())
             } else {
