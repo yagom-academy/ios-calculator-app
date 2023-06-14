@@ -6,7 +6,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     private var expression = String()
     private var operandsValue = String()
     private var operatorValue = String()
@@ -103,14 +103,12 @@ class MainViewController: UIViewController {
         do {
             expression.append(operatorValue + operandsValue)
             insertStackView(with: operatorValue, operandsValue)
-            print(expression)
             var formula = ExpressionParser.parse(from: expression)
             let result = try formula.result()
             
             operandsLabel.text = result.numberFormat()!
         } catch {
             operandsLabel.text = Strings.nan
-            print(error)
         }
         initializeOperands(labelUpdate: false)
         initializeOperator()
