@@ -44,7 +44,11 @@ final class CalculateViewController: UIViewController {
         if operandLabelText == "0" {
             currentOperandLabel.text = number
         } else {
-            currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + number)
+            guard let numberAsDouble = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + number) else {
+                return
+            }
+            
+            currentOperandLabel.text = formatter().string(from: numberAsDouble as NSNumber)
         }
     }
     
@@ -71,7 +75,11 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + "0")
+        guard let number = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + "0") else {
+            return
+        }
+        
+        currentOperandLabel.text = formatter().string(from: number as NSNumber)
     }
     
     @IBAction func tappedDoubleZeroButton(_ sender: UIButton) {
@@ -87,7 +95,11 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        currentOperandLabel.text = formattingNumber(operandLabelText.replacingOccurrences(of: ",", with: "") + "00")
+        guard let number = Double(operandLabelText.replacingOccurrences(of: ",", with: "") + "00") else {
+            return
+        }
+        
+        currentOperandLabel.text = formatter().string(from: number as NSNumber)
     }
     
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
@@ -118,9 +130,8 @@ final class CalculateViewController: UIViewController {
         addCurrentFormula()
         
         var formula = ExpressionParser.parse(from: formulasUntilNow)
-        let result = String(formula.result())
         
-        currentOperandLabel.text = formattingNumber(result)
+        currentOperandLabel.text = formatter().string(from: formula.result() as NSNumber)
         formulasUntilNow.removeAll()
         
         isCalculated = true
@@ -174,30 +185,30 @@ final class CalculateViewController: UIViewController {
         currentOperatorLabel.text = ""
     }
     
-    private func formattingNumber(_ input: String) -> String {
-        let formatter = NumberFormatter()
-        let number = NSDecimalNumber.init(string: input)
-
-        formatter.maximumSignificantDigits = 15
-        formatter.numberStyle = .decimal
-        formatter.roundingMode = .halfUp
-        formatter.usesSignificantDigits = true
+    private func formatter() -> NumberFormatter {
+        let numberFormatter = NumberFormatter()
         
-        return formatter.string(from: number) ?? "NaN"
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.roundingMode = .halfUp
+        numberFormatter.maximumFractionDigits = 20
+        
+        return numberFormatter
     }
 
     private func checkOperandForm(_ input: String) -> String {
-        let number = input.replacingOccurrences(of: ",", with: "")
-        guard formattingNumber(number) != "NaN",
+        let numberString = input.replacingOccurrences(of: ",", with: "")
+        
+        guard let number = Double(numberString),
+              formatter().string(from: number as NSNumber) != "NaN",
               input.count <= 20 else {
             return "error"
         }
         
-        guard number.hasSuffix(".") == false else {
-            return number.replacingOccurrences(of: ".", with: "")
+        guard numberString.hasSuffix(".") == false else {
+            return numberString.replacingOccurrences(of: ".", with: "")
         }
         
-        return number
+        return numberString
     }
     
     private func addCurrentFormula() {
