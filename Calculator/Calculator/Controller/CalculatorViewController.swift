@@ -25,10 +25,8 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
-        guard let labelText = sender.titleLabel?.text,
-              let inputNumberLabelText = inputNumberLabel.text else {
-            return
-        }
+        let labelText = unwrap(sender.titleLabel?.text)
+        let inputNumberLabelText = unwrap(inputNumberLabel.text)
         
         if operationReady {
             if inputNumberLabelText == "0" {
@@ -41,9 +39,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapZero(_ sender: UIButton) {
-        guard let labelText = sender.titleLabel?.text else {
-            return
-        }
+        let labelText = unwrap(sender.titleLabel?.text)
         
         if inputNumberLabel.text != "0" {
             inputNumberLabel.text? += labelText
@@ -51,24 +47,20 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapPoint(_ sender: UIButton) {
-        guard let labelText = sender.titleLabel?.text,
-              let inputNumberLabelText = inputNumberLabel.text else {
-            return
-        }
-        
-        if !inputNumberLabelText.contains(labelText) {
-            inputNumberLabel.text? += labelText
+        if !unwrap(inputNumberLabel.text).contains(unwrap(sender.titleLabel?.text)) {
+            inputNumberLabel.text? += unwrap(sender.titleLabel?.text)
         }
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
-        guard var inputOperatorLabelText = inputOperatorLabel.text,
-              let inputNumberLabelText = inputNumberLabel.text,
-              let labelText = sender.titleLabel?.text,
-              operationReady else {
+        guard operationReady else {
             return
         }
-            
+        
+        var inputOperatorLabelText = unwrap(inputOperatorLabel.text)
+        let inputNumberLabelText = unwrap(inputNumberLabel.text)
+        let labelText = unwrap(sender.titleLabel?.text)
+        
         if inputNumberLabelText == "0",
            labelText == "=" {
             formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
@@ -131,9 +123,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tapChangeSign(_ sender: UIButton) {
         let hyphenMinus = "-"
+        let numberLabelText = unwrap(inputNumberLabel.text)
         
-        if let numberLabelText = inputNumberLabel.text,
-           numberLabelText != "0" {
+        if numberLabelText != "0" {
             if numberLabelText.hasPrefix(hyphenMinus) {
                 inputNumberLabel.text = String(numberLabelText.dropFirst())
             } else {
@@ -170,6 +162,14 @@ class CalculatorViewController: UIViewController {
     
     private func resetFormulaString() {
         formulaString = ""
+    }
+    
+    private func unwrap(_ text: String?) -> String {
+        guard let text else {
+            return ""
+        }
+        
+        return text
     }
     
     private func makeUILabel(_ text: String?) -> UILabel {
