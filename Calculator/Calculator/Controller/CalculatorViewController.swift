@@ -59,6 +59,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
+        guard currentOperand != "NaN" else {
+            return
+        }
+        
         toggleSign()
     }
     
@@ -90,6 +94,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
@@ -105,6 +112,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
         guard let zero = sender.currentTitle, currentOperand != "0" else {
             isPlaceholder = false
             return
@@ -117,6 +127,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
         guard let doubleZero = sender.currentTitle, currentOperand != "0" else {
             isPlaceholder = false
             return
@@ -129,6 +142,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
+        guard !isResult else {
+            return
+        }
         guard let decimalPointOperand = sender.currentTitle, !isResult else {
             return
         }
@@ -143,6 +159,9 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
+        guard currentOperand != "NaN" else {
+            return
+        }
         guard !(currentOperand == "0" && isPlaceholder) else {
             operatorLabel.text = sender.currentTitle
             expression = "0"
