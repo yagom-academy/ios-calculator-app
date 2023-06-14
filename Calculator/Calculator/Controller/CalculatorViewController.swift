@@ -63,9 +63,9 @@ class CalculatorViewController: UIViewController {
         let inputNumberLabelText = unwrap(inputNumberLabel.text)
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if inputNumberLabelText.isZero,
-           labelText == "=" {
+        if inputNumberLabelText.isZero, labelText == "=" {
             formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
+            
             allInputScrollView.scrollToBottom()
         } else if inputNumberLabelText.isZero {
             inputOperatorLabel.text? = labelText
@@ -75,7 +75,6 @@ class CalculatorViewController: UIViewController {
                 inputNumberLabelText.hasSuffix(".") ?
                 String(inputNumberLabelText.dropLast()) : inputNumberLabelText
             )
-            
             let inputLabelStackView = makeUIStackView()
             
             inputLabelStackView.addArrangedSubview(operatorLabel)
@@ -83,8 +82,9 @@ class CalculatorViewController: UIViewController {
             allInputStackView.addArrangedSubview(inputLabelStackView)
             
             formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
-            resetInputNumberLabel()
             inputOperatorLabel.text? = labelText
+            
+            resetInputNumberLabel()
             allInputScrollView.scrollToBottom()
         }
     }
@@ -110,9 +110,10 @@ class CalculatorViewController: UIViewController {
             case .operatorNotEnoughError:
                 print(OperationError.operatorNotEnoughError)
             case .divideByZeroError:
-                print(OperationError.divideByZeroError)
                 inputNumberLabel.text = "NaN"
                 operationReady = false
+                
+                print(OperationError.divideByZeroError)
             }
         } catch {
             print("unexpected error")
@@ -143,6 +144,7 @@ class CalculatorViewController: UIViewController {
         resetInputOperatorLabel()
         resetAllInputStackView()
         resetFormulaString()
+        
         operationReady = true
     }
     
