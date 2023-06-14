@@ -17,7 +17,7 @@ class CalculatorViewController: UIViewController {
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
+        numberFormatter.maximumFractionDigits = 16
         numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
@@ -95,6 +95,9 @@ class CalculatorViewController: UIViewController {
         guard !isResult else {
             return
         }
+        guard currentOperand.count < 15 else {
+            return
+        }
         guard let operandElement = sender.currentTitle, !isResult else {
             return
         }
@@ -111,6 +114,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
         guard !isResult else {
+            return
+        }
+        guard currentOperand.count < 15 else {
             return
         }
         guard let zero = sender.currentTitle, currentOperand != "0" else {
@@ -132,6 +138,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
         guard !isResult else {
+            return
+        }
+        guard currentOperand.count < 14 else {
             return
         }
         guard let doubleZero = sender.currentTitle, currentOperand != "0" else {
@@ -192,7 +201,9 @@ class CalculatorViewController: UIViewController {
         isResult = false
         isPlaceholder = true
     }
-    
+}
+
+extension CalculatorViewController {
     private func configureCurrentFormula() -> String {
         let operatorCase = operatorLabel.text ?? ""
         
@@ -244,9 +255,6 @@ class CalculatorViewController: UIViewController {
         
         return recordedLabel
     }
-}
-
-extension CalculatorViewController {
     private func toggleSign() {
         guard currentOperandToDouble != Double.zero else {
             return
