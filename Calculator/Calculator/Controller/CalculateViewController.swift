@@ -32,25 +32,6 @@ final class CalculateViewController: UIViewController {
         currentOperandLabel.text = labelText
     }
     
-    @IBAction func tappedDotButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text,
-              let labelText = calculatorManager.verifyButton(for: ".", currentLabel: operandLabelText) else {
-            return
-        }
-        
-        currentOperandLabel.text = labelText
-    }
-    
-    @IBAction func tappedZeroButton(_ sender: UIButton) {
-        guard let operandLabelText = currentOperandLabel.text,
-              let number = sender.currentTitle,
-              let labelText = calculatorManager.verifyButton(for: number, currentLabel: operandLabelText) else {
-            return
-        }
-        
-        currentOperandLabel.text = labelText
-    }
-    
     @IBAction func tappedOperatorButton(_ sender: UIButton) {
         guard let operandLabelText = currentOperandLabel.text,
               let operatorText = sender.currentTitle,
