@@ -56,7 +56,7 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard operandLabel.text?.isZero != false else {
+        guard operandLabel.text?.isZero == false else {
             operatorLabel.text = isFirstArithmeticFormula ? "" : sender.currentTitle
             return
         }
@@ -76,19 +76,17 @@ final class CalculatorViewController: UIViewController {
         calculate()
     }
     
-    //AC: All Clear
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
         initializeCalculator()
     }
     
-    //CE: Clear Entry
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
         initOperandLabel()
     }
     
     @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
         guard let currentOperand = operandLabel.text,
-              currentOperand.isZero == false && isResult == false else {
+              currentOperand.isZero == false else {
             return
         }
 
@@ -97,7 +95,6 @@ final class CalculatorViewController: UIViewController {
             operandLabel.text = numberFormatter.string(for: changedSignNumber)
         }
     }
-    
 }
 
 // MARK: - Private Method
