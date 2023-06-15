@@ -59,4 +59,28 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertTrue(sut.isEmpty)
     }
+    
+    func test_enqueueStack에_1을넣고_dequeue를호출할때_dequeueStack이빈배열이면_peek을enqueueStack에서가져오는지() {
+        // given
+        sut.enqueue("1")
+        let expectation = sut.peek
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_큐에어떤값도존재하지않을때nil이반환되는지() {
+        // given
+        sut.enqueue("1")
+        _ = sut.dequeue()
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
