@@ -47,9 +47,9 @@ class CalculatorViewController: UIViewController {
                 if numberLabelText == CalculatorNamespace.Zero {
                     inputNumberLabel.text = inputNumberText
                 } else {
-                    let formattedNumberText = numberLabelTextWithoutComma + inputNumberText
-                    let doubleNumberText = Double(formattedNumberText)
-                    inputNumberLabel.text = calculatorNumberFormatter.string(from: Decimal(doubleNumberText!) as NSNumber)
+                    let resultNumberText = numberLabelTextWithoutComma + inputNumberText
+                    let doubleNumberText = Double(resultNumberText)
+                    inputNumberLabel.text = calculatorNumberFormatter.string(for: doubleNumberText)
                 }
             }
         }
@@ -150,9 +150,9 @@ class CalculatorViewController: UIViewController {
                 let alert = UIAlertController(title: "계산 오류입니다.",
                                               message: "확인 버튼을 눌러주시기 바랍니다.",
                                               preferredStyle: .alert)
-                let cancle = UIAlertAction(title: "확인",
+                let cancel = UIAlertAction(title: "확인",
                                            style: .default)
-                alert.addAction(cancle)
+                alert.addAction(cancel)
                 present(alert, animated: true)
             }
         }
