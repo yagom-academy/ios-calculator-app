@@ -39,12 +39,15 @@ class CalculatorViewController: UIViewController {
                   let numberLabelText = inputNumberLabel.text,
                   let operatorLabelText = inputOperatorLabel.text else { return }
             
+            let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
+                                                                                   with: CalculatorNamespace.Empty)
+            
             if numberLabelText.count < 20 {
                 inputOperatorLabel.text = (formulaListStackView.subviews.isEmpty) ? (CalculatorNamespace.Empty) : operatorLabelText
                 if numberLabelText == CalculatorNamespace.Zero {
                     inputNumberLabel.text = inputNumberText
                 } else {
-                    let formattedNumberText = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma, with: CalculatorNamespace.Empty) + inputNumberText
+                    let formattedNumberText = numberLabelTextWithoutComma + inputNumberText
                     let doubleNumberText = Double(formattedNumberText)
                     inputNumberLabel.text = calculatorNumberFormatter.string(from: Decimal(doubleNumberText!) as NSNumber)
                 }
@@ -56,8 +59,11 @@ class CalculatorViewController: UIViewController {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
+        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
+                                                                               with: CalculatorNamespace.Empty)
+        
         if numberLabelText.count < 20 {
-            let formattedNumberText = Double(numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma, with: CalculatorNamespace.Empty) + inputNumberText)
+            let formattedNumberText = Double(numberLabelTextWithoutComma + inputNumberText)
             if numberLabelText == CalculatorNamespace.Zero {
                 inputNumberLabel.text = CalculatorNamespace.Zero
             } else {
