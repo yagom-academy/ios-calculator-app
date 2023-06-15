@@ -14,6 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var formulaStackView: UIStackView!
     
     private var formulaString = ""
+    private var operationReady = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        var operatorText = unwrap(operatorLabel.text)
+        let operatorText = unwrap(operatorLabel.text)
         let operandText = unwrap(operandLabel.text).removeTrailingDot
         let labelText = unwrap(sender.titleLabel?.text)
+        operationReady = true
         
         if operandText.isZero, formulaStackView.subviews.isEmpty {
             return
@@ -63,7 +65,7 @@ class CalculatorViewController: UIViewController {
         } else if operandText.isZero {
             operatorLabel.text? = labelText
         } else {
-            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, operandText))
+            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeNumberFormat(for: operandText)))
             
             formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
             operatorLabel.text = labelText
@@ -74,6 +76,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapEqualButton(_ sender: UIButton) {
+        guard operationReady else {
+            return
+        }
+        
         do {
             tapOperatorButton(sender)
             
@@ -81,6 +87,7 @@ class CalculatorViewController: UIViewController {
             let result = try formula.result()
             
             operandLabel.text = makeNumberFormat(for: String(result))
+            operationReady = false
             
             resetOperatorLabel()
             resetFormulaString()
@@ -92,6 +99,7 @@ class CalculatorViewController: UIViewController {
                 print(OperationError.operatorNotEnoughError)
             case .divideByZeroError:
                 operandLabel.text = "NaN"
+                operationReady = false
                 
                 print(OperationError.divideByZeroError)
             }
@@ -119,6 +127,8 @@ class CalculatorViewController: UIViewController {
         resetOperatorLabel()
         resetFormulaStackView()
         resetFormulaString()
+        
+        operationReady = true
     }
     
     private func resetOperandLabel() {
