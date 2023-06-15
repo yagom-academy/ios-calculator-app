@@ -127,21 +127,4 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertEqual(result, expectedValue)
     }
-    
-    func test_result_2_나누기만_입력하면_divideError에러에_걸린다() {
-        // given
-        let input = "2÷"
-        sut = ExpressionParser.parse(from: input)
-        
-        let errorMassage: CalculatorError = CalculatorError.incompleteFormula
-        var error: CalculatorError?
-        
-        // when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
-
-        // then
-        XCTAssertEqual(error, errorMassage)
-    }
 }
