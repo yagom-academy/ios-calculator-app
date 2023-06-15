@@ -10,7 +10,6 @@ let initialNumber = 0
 let maximumPointDigits = 5
 let maximumOperandDigits = 20
 
-
 final class CalculatorViewController: UIViewController {
     private var expression: String = String()
     private var numberFormatter = NumberFormatter()
@@ -40,7 +39,7 @@ final class CalculatorViewController: UIViewController {
         
         if isResult {
             initializeCalculator()
-            currentOperand = "0"
+            currentOperand = "\(initialNumber)"
         }
         
         guard let operandLabelText = operandFormatter.setUpInputOperandText(currentOperand, inputedOperand) else { return }
@@ -57,7 +56,6 @@ final class CalculatorViewController: UIViewController {
         addStackView()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "\(initialNumber)"
-//        calculateButton.isEnabled = true
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -102,7 +100,7 @@ extension CalculatorViewController {
     }
     
     private func initOperandLabel() {
-        operandLabel.text = "0"
+        operandLabel.text = "\(initialNumber)"
     }
     
     private func initOperatorLabel() {
@@ -135,9 +133,9 @@ extension CalculatorViewController {
 extension CalculatorViewController {
     private func addStackView()  {
         let operand = operandFormatter.makeRefinementArithmeticOperand(operandLabel.text)
-        let operndAsFormatterString = numberFormatter.convertToFormatterString(string: operand ?? "")
+        let operandAsFormatterString = numberFormatter.convertToFormatterString(string: operand ?? "")
         
-        addFormulaStackView(operndAsFormatterString)
+        addFormulaStackView(operandAsFormatterString)
         addInputFormula(operand)
         scrollToBottom()
     }

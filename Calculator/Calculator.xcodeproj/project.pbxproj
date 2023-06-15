@@ -223,13 +223,6 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		ACDB12DD2A3074B3007CBD37 /* Error */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Error;
-			sourceTree = "<group>";
-		};
 		ACDB12DE2A3074EA007CBD37 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +280,6 @@
 				AC2DCC982A2592A500F35632 /* View */,
 				AC2DCC992A2592AD00F35632 /* Controller */,
 				ACDB12DE2A3074EA007CBD37 /* Extension */,
-				ACDB12DD2A3074B3007CBD37 /* Error */,
 				ACDB12E22A30C5A7007CBD37 /* Resource */,
 			);
 			path = Calculator;

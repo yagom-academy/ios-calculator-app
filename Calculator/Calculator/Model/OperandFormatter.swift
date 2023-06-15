@@ -2,7 +2,7 @@
 //  OperandFormatter.swift
 //  Calculator
 //
-//  Created by Hyungmin Lee on 2023/06/14.
+//  Created by Zion & Dasan on 2023/06/14.
 //
 
 import Foundation
@@ -30,7 +30,7 @@ struct OperandFormatter {
     }
 }
 
-// MARK: - setUpInpuOperandText
+// MARK: - setUpInputOperandText
 extension OperandFormatter {
     private func setUpChangedOperandFormat(_ currentOperand: String, _ insertedNumber: String) -> String? {
         let isSubstitutionOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")

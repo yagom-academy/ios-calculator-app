@@ -2,7 +2,7 @@
 //  Formula.swift
 //  Calculator
 //
-//  Created by Dasan on 2023/06/02.
+//  Created by Zion & Dasan on 2023/06/02.
 //
 
 struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.T == Double, OperatorQueue.T == Operator {

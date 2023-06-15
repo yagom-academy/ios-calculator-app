@@ -2,7 +2,7 @@
 //  NumberFormatter+.swift
 //  Calculator
 //
-//  Created by Yena on 2023/06/15.
+//  Created by Zion & Dasan on 2023/06/15.
 //
 
 import Foundation

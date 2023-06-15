@@ -2,7 +2,7 @@
 //  ArithmeticStackView.swift
 //  Calculator
 //
-//  Created by Hyungmin Lee on 2023/06/15.
+//  Created by Zion & Dasan on 2023/06/15.
 //
 
 import UIKit
@@ -39,4 +39,3 @@ class ArithmeticStackView: UIStackView {
         label.textColor = .white
     }
 }
-
