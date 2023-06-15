@@ -26,7 +26,7 @@ final class CalculatorMainViewController: UIViewController {
     }()
     
     private var operatorsAndOperandsInput: String = ""
-    private var isFormulaEnd: Bool = false
+    private var isFormulainProcess: Bool = true
     
     // MARK: - View State Method
     
@@ -37,74 +37,75 @@ final class CalculatorMainViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction private func touchUpPointButton(_ sender: UIButton) {
-        guard !isFormulaEnd else {
-            return
-        }
-        
-        let currentNumberText = operandLabel.text ?? ""
-        let newPointText = sender.titleLabel?.text ?? "."
-        let isPoint = currentNumberText.contains(".")
-        
-        if isPoint == false && currentNumberText != "NaN" {
-            operandLabel.text = currentNumberText + newPointText
-        }
-    }
-    
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
-        if isFormulaEnd {
+        if !isFormulainProcess {
             appendCalculateItem()
-            operatorsAndOperandsInput = ""
-            isFormulaEnd = false
+            clearInput()
+            continueFormulaProcess()
             clearEntry()
         }
         
         guard
             var operandLabelText = removeComma(of: operandLabel.text),
-            operandLabelText.count < 20
+            operandLabelText.count < 20,
+            let numberText = sender.titleLabel?.text
         else {
             return
         }
 
-        operandLabelText.append(sender.titleLabel?.text ?? "")
+        operandLabelText.append(numberText)
         let number = Decimal(string: operandLabelText)
         
         operandLabel.text = formatNumber(of: number)
     }
     
     @IBAction private func touchUpZeroButton(_ sender: UIButton) {
-        if isFormulaEnd {
+        if !isFormulainProcess {
             appendCalculateItem()
-            operatorsAndOperandsInput = ""
-            isFormulaEnd = false
+            clearInput()
+            continueFormulaProcess()
             clearEntry()
         }
         
         guard
             let operandLabelText = operandLabel.text,
-            operandLabelText != "NaN",
+            operandLabelText.isNotNaN,
             operandLabelText != "0" || operandLabelText.contains("."),
-            operandLabelText.count < 20
+            operandLabelText.count < 20,
+            let zeroText = sender.titleLabel?.text
         else {
             return
         }
         
-        operandLabel.text?.append(sender.titleLabel?.text ?? "")
+        operandLabel.text?.append(zeroText)
+    }
+    
+    @IBAction private func touchUpPointButton(_ sender: UIButton) {
+        guard
+            isFormulainProcess,
+            let operandLabelText = operandLabel.text,
+            let pointText = sender.titleLabel?.text,
+            !operandLabelText.contains(pointText)
+        else {
+            return
+        }
+        
+        operandLabel.text?.append(pointText)
     }
     
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard
             let operandLabelText = removeComma(of: operandLabel.text),
-            operandLabelText != "NaN",
-            let number = Decimal(string: operandLabelText),
-            !operatorsAndOperandsInput.isEmpty || !number.isZero
+            operandLabelText.isNotNaN,
+            let currentNumber = Decimal(string: operandLabelText),
+            !operatorsAndOperandsInput.isEmpty || !currentNumber.isZero
         else {
             return
         }
         
-        isFormulaEnd = false
+        continueFormulaProcess()
         
-        guard formatNumber(of: Decimal(string: operandLabel.text ?? "")) != "0" else {
+        guard formatNumber(of: currentNumber) != "0" else {
             operatorLabel.text = sender.titleLabel?.text
             return
         }
@@ -116,10 +117,10 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     @IBAction private func touchUpClearEntryButton(_ sender: UIButton) {
-        if isFormulaEnd {
+        if !isFormulainProcess {
             appendCalculateItem()
-            operatorsAndOperandsInput = ""
-            isFormulaEnd = false
+            clearInput()
+            continueFormulaProcess()
         }
         
         clearEntry()
@@ -178,8 +179,8 @@ final class CalculatorMainViewController: UIViewController {
         
         clearOperator()
         clearEntry()
-        operatorsAndOperandsInput = ""
-        isFormulaEnd = false
+        clearInput()
+        continueFormulaProcess()
     }
     
     private func clearEntry() {
@@ -188,6 +189,18 @@ final class CalculatorMainViewController: UIViewController {
     
     private func clearOperator() {
         operatorLabel.text = nil
+    }
+    
+    private func clearInput() {
+        operatorsAndOperandsInput = ""
+    }
+    
+    func continueFormulaProcess() {
+        isFormulainProcess = true
+    }
+    
+    func finishFormulaProcess() {
+        isFormulainProcess = false
     }
     
     private func removeComma(of text: String?) -> String? {
@@ -209,7 +222,7 @@ final class CalculatorMainViewController: UIViewController {
         
         var formattedNumber: String?
         
-        if operandLabelText == "NaN" {
+        if operandLabelText.isNaN {
             formattedNumber = operandLabelText
         } else {
             formattedNumber = formatNumber(of: Decimal(string: operandLabelText))
@@ -245,8 +258,8 @@ final class CalculatorMainViewController: UIViewController {
         var formula = ExpressionParser.parse(from: operatorsAndOperandsInput)
         
         clearOperator()
-        operatorsAndOperandsInput = ""
-        isFormulaEnd = true
+        clearInput()
+        finishFormulaProcess()
         
         return try formula.result()
     }

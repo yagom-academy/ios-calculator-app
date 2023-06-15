@@ -6,6 +6,14 @@
 //
 
 extension String {
+    var isNaN: Bool {
+        return self == "NaN"
+    }
+    
+    var isNotNaN: Bool {
+        return self != "NaN"
+    }
+    
     func split(with target: Character) -> [String] {
         return self.components(separatedBy: String(target))
     }
