@@ -32,12 +32,8 @@ final class CalculatorMainViewController: UIViewController {
         return removeComma(of: operandLabel.text)
     }
     
-    private var operandLabelNumber: Decimal {
-        guard let number = Decimal(string: operandLabelText) else {
-            return 0
-        }
-        
-        return number
+    private var operandLabelNumber: Decimal? {
+        return Decimal(string: operandLabelText)
     }
     
     // MARK: - View State Method
@@ -107,6 +103,7 @@ final class CalculatorMainViewController: UIViewController {
     @IBAction private func touchUpOperatorButton(_ sender: UIButton) {
         guard
             operandLabelText.isNotNaN,
+            let operandLabelNumber,
             !operatorsAndOperandsInput.isEmpty || !operandLabelNumber.isZero,
             let operatorText = sender.titleLabel?.text
         else {
@@ -159,7 +156,10 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     @IBAction private func touchUpChangeSignButton(_ sender: UIButton) {
-        guard !operandLabelNumber.isZero else {
+        guard
+            let operandLabelNumber,
+            !operandLabelNumber.isZero
+        else {
             return
         }
         
