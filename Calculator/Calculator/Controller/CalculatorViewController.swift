@@ -173,7 +173,7 @@ extension CalculatorViewController {
     private func createUILabel(text: String?) -> UILabel {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .darkGray
+        label.textColor = .white
         label.text = text
         
         return label
