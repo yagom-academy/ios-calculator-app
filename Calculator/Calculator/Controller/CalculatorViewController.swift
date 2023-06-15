@@ -43,14 +43,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
-        clearLabel()
-        expression = ""
-        isResult = false
-        isPlaceholder = true
+        clearAll()
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
+        guard !isResult else {
+            clearAll()
+            return
+        }
+        
         operandLabel.text = "0"
         isResult = false
         isPlaceholder = true
@@ -136,7 +137,7 @@ class CalculatorViewController: UIViewController {
             expression = "0"
             return
         }
-                
+        
         addPreviousContentStackView()
         updateExpression()
         operatorLabel.text = sender.currentTitle
@@ -147,12 +148,37 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
+    private func clearLabel() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+    }
+    
+    private func clearAll() {
+        previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
+        clearLabel()
+        expression = ""
+        isResult = false
+        isPlaceholder = true
+    }
+    
+    private func toggleSign() {
+        guard currentOperandToDouble != Double.zero else {
+            return
+        }
+        
+        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
+            operandLabel.text = String(Int(currentOperandToDouble) * -1)
+        } else {
+            operandLabel.text = String(currentOperandToDouble * -1)
+        }
+    }
+    
     private func inputZero(_ count: Int) {
         guard validateOperandInput(with: count), currentOperand != "0" else {
             isPlaceholder = false
             return
         }
-
+        
         let newOperand = currentOperand + String(repeating: "0", count: count)
         let realNumber = newOperand.split(with: ".")
         
@@ -167,7 +193,7 @@ extension CalculatorViewController {
             operandLabel.text = integerNumber + "." + String(realNumber[1])
         }
     }
-
+    
     private func validateOperandInput(with textCount: Int) -> Bool {
         guard !isResult else {
             return false
@@ -191,11 +217,6 @@ extension CalculatorViewController {
         previousExpressionScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: previousExpressionScrollView.contentSize.height - previousExpressionScrollView.bounds.size.height)
         previousExpressionScrollView.setContentOffset(bottomOffset, animated: true)
-    }
-    
-    private func clearLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
     }
     
     private func configureContentStackView() -> UIStackView {
@@ -225,17 +246,5 @@ extension CalculatorViewController {
         recordedLabel.textColor = .white
         
         return recordedLabel
-    }
-    
-    private func toggleSign() {
-        guard currentOperandToDouble != Double.zero else {
-            return
-        }
-        
-        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
-            operandLabel.text = String(Int(currentOperandToDouble) * -1)
-        } else {
-            operandLabel.text = String(currentOperandToDouble * -1)
-        }
     }
 }
