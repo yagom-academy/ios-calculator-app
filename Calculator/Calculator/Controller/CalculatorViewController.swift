@@ -50,11 +50,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        let operatorText = unwrap(operatorLabel.text)
+        var operatorText = unwrap(operatorLabel.text)
         let operandText = unwrap(operandLabel.text).removeTrailingDot
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if operandText.isZero, labelText == "=" {
+        if operandText.isZero, formulaStackView.subviews.isEmpty {
+            return
+        } else if operandText.isZero, labelText == "=" {
             formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
             
             formulaScrollView.scrollToBottom()
