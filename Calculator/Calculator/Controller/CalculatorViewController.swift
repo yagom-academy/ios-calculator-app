@@ -6,10 +6,20 @@
 
 import UIKit
 
+let initialNumber = 0
+let maximumPointDigits = 5
+let maximumOperandDigits = 20
+
+
 final class CalculatorViewController: UIViewController {
     private var expression: String = String()
-    private var operandFormatter = OperandFormatter()
+    private var numberFormatter = NumberFormatter()
+    private lazy var operandFormatter = OperandFormatter(numberFormatter)
     private var isResult: Bool = false
+    
+    private var isFirstArithmeticFormula: Bool {
+        return calculateStackView.subviews.count == 0
+    }
     
     @IBOutlet weak var calculateHistoryScrollView: UIScrollView!
     @IBOutlet weak var calculateStackView: UIStackView!
@@ -18,15 +28,16 @@ final class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initializeCalculator()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 5
     }
 
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let inputedOperand = sender.titleLabel?.text,
-              var currentOperand = operandLabel.text,
-              let currentOperator = operatorLabel.text else {
-            return
-        }
+        guard let inputedOperand = sender.currentTitle,
+              var currentOperand = operandLabel.text?.withoutDecimalPoint,
+              let currentOperator = operatorLabel.text else { return }
         
         if isResult {
             initializeCalculator()
@@ -35,55 +46,29 @@ final class CalculatorViewController: UIViewController {
         
         if currentOperator.isEmpty == false {
             expression += currentOperator
-        }
+        } // TODO: Not have Operator
         
-        operandLabel.text = operandFormatter.formattingOperand(inputedOperand, currentOperand)
+        guard let operandLabelText = operandFormatter.setUpInputOperandText(currentOperand, inputedOperand) else { return }
+        
+        operandLabel.text = operandLabelText
     }
 
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard let inputedOperator = sender.titleLabel?.text,
-              let currentOperator = operatorLabel.text,
-              let currentOperand = operandLabel.text else {
+        guard operandLabel.text != "\(initialNumber)", isResult == false else {
+            operatorLabel.text = isFirstArithmeticFormula ? "" : sender.currentTitle
             return
         }
         
-        if isResult && currentOperand.isZero == false, currentOperand.isNaN == false {
-            addStackView(currentOperator, currentOperand)
-            expression += currentOperand
-            initOperandLabel()
-            operatorLabel.text = inputedOperator
-            isResult = false
-            return
-        }
-        
-        if isResult { return }
-
-        if currentOperand.isZero {
-            operatorLabel.text = inputedOperator
-        } else {
-            addStackView(currentOperator, currentOperand)
-            expression += currentOperand
-            initOperandLabel()
-            operatorLabel.text = inputedOperator
-        }
+        addStackView()
+        operatorLabel.text = sender.currentTitle
+        operandLabel.text = "\(initialNumber)"
+//        calculateButton.isEnabled = true
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
-        guard isResult == false,
-              let currentOperand = operandLabel.text,
-              let currentOperator = operatorLabel.text else {
-            return
-        }
-        
-        if currentOperand.isZero && currentOperator.isEmpty == false {
-            expression += currentOperator
-        }
-        
-        if currentOperand.isEmpty == false {
-            expression += currentOperand
-        }
+        guard isResult == false else { return }
  
-        addStackView(currentOperator, currentOperand)
+        addStackView()
         calculate()
     }
     
@@ -105,7 +90,7 @@ final class CalculatorViewController: UIViewController {
 
         if let number = Double(currentOperand.withoutDecimalPoint) {
             let changedSignNumber = number.sign == .plus ? -number : abs(number)
-            operandLabel.text = operandFormatter.numberToString(for: Double(changedSignNumber))
+            operandLabel.text = numberFormatter.string(for: changedSignNumber)
         }
     }
     
@@ -135,61 +120,44 @@ extension CalculatorViewController {
     
     private func calculate() {
         var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: expression.withoutDecimalPoint)
+
+        let result = parsedExpression.result()
         
-        do {
-            let result = try parsedExpression.result()
-            
-            let formattingResult = operandFormatter.numberToString(for: result)
-            operandLabel.text = formattingResult
-            initExpression()
-            initOperatorLabel()
-            isResult = true
-        } catch CalculatorError.notANumber {
-            operandLabel.text = CalculatorError.notANumber.errorDescription
-            initExpression()
-            initOperatorLabel()
-            isResult = true
-        } catch {
-            print("알 수 없는 오류")
-        }
+        let formattingResult = numberFormatter.string(for: result)
+        operandLabel.text = formattingResult
+        initExpression()
+        initOperatorLabel()
+        isResult = true
+    }
+    
+    private func addInputFormula(_ operandString: String?) {
+        expression += operatorLabel.text ?? ""
+        expression += operandString ?? ""
     }
 }
 
 // MARK: - StackView Method
 extension CalculatorViewController {
-    private func addStackView(_ currentOperator: String, _ currentOperand: String)  {
-        let stackView = createUIStackView(currentOperator, currentOperand)
-        calculateStackView.addArrangedSubview(stackView)
-        calculateHistoryScrollView.layoutIfNeeded()
+    private func addStackView()  {
+        let operand = operandFormatter.makeRefinementArithmeticOperand(operandLabel.text)
+        let operndAsFormatterString = numberFormatter.convertToFormatterString(string: operand ?? "")
+        
+        addFormulaStackView(operndAsFormatterString)
+        addInputFormula(operand)
         scrollToBottom()
+    }
+    
+    private func addFormulaStackView(_ operandString: String?){
+        let arithmeticStackView = ArithmeticStackView(operatorLabel.text, operandString)
+        
+        calculateStackView.addArrangedSubview(arithmeticStackView)
+        calculateHistoryScrollView.layoutIfNeeded()
     }
     
     private func removeStackView() {
         calculateStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }
-    }
-    
-    private func createUILabel(text: String?) -> UILabel {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.text = text
-        
-        return label
-    }
-    
-    private func createUIStackView(_ currentOperator: String, _ currentOperand: String) -> UIStackView {
-        let labels = [createUILabel(text: currentOperator), createUILabel(text: currentOperand)]
-        
-        let stackView = UIStackView()
-        stackView.spacing = 10
-        
-        labels.forEach {
-            stackView.addArrangedSubview($0)
-        }
-        
-        return stackView
     }
     
     private func scrollToBottom() {

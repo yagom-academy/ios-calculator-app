@@ -22,7 +22,7 @@ struct OperandFormatter {
     }
     
     func makeRefinementArithmeticOperand(_ currentOperandLabelText: String?) -> String? {
-        guard let currentOperandString = currentOperandLabelText?.replacingOccurrences(of: ",", with: ""), let operand = Double(currentOperandString) else { return nil }
+        guard let currentOperandString = currentOperandLabelText?.withoutDecimalPoint, let operand = Double(currentOperandString) else { return nil }
         
         let isDecimalPointNumber = operand != floor(operand)
         
@@ -60,7 +60,7 @@ extension OperandFormatter {
 // MARK: - Check Numbers
 extension OperandFormatter {
     private func checkOverMaximumDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
-        let operand = currentOperand.replacingOccurrences(of: ".", with: "")
+        let operand = currentOperand.withoutDecimalPoint
         let appendedOperandCount = (operand + insertedNumber).count
         
         return appendedOperandCount > maximumOperandDigits
