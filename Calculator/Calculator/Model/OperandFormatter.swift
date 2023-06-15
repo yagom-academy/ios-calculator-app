@@ -12,10 +12,8 @@ enum OperandFormatter {
         let operandNumber = NSDecimalNumber(string: operand)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = -2
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumFractionDigits = 11
+        numberFormatter.maximumIntegerDigits = 12
         numberFormatter.roundingMode = .halfUp
         
         guard let numberFormatted = numberFormatter.string(for: operandNumber)
