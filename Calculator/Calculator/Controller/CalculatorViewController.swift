@@ -11,7 +11,7 @@ let maximumPointDigits = 5
 let maximumOperandDigits = 20
 
 final class CalculatorViewController: UIViewController {
-    private var expression: String = String()
+    private var inputFormula: String = String()
     private var numberFormatter = NumberFormatter()
     private lazy var operandFormatter = OperandFormatter(numberFormatter)
     private var isResult: Bool = false
@@ -33,19 +33,13 @@ final class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 5
         calculateButton.isEnabled = false
     }
-
+    
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let inputedOperand = sender.currentTitle,
               var currentOperand = operandLabel.text?.withoutDecimalPoint else { return }
         
         if isResult {
-            if operatorLabel.text != "" {
-                isResult = false
-                calculateButton.isEnabled = true
-            } else {
-                initializeCalculator()
-            }
-            
+            appendFormulaOrInitialize()
             currentOperand = "\(initialNumber)"
         }
         
@@ -116,11 +110,11 @@ extension CalculatorViewController {
     }
     
     private func initExpression() {
-        expression = ""
+        inputFormula = ""
     }
     
     private func calculate() {
-        var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: expression.withoutDecimalPoint)
+        var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: inputFormula.withoutDecimalPoint)
         let result = parsedExpression.result()
         let formattingResult = numberFormatter.string(for: result)
         
@@ -131,8 +125,17 @@ extension CalculatorViewController {
     }
     
     private func addInputFormula(_ operandString: String?) {
-        expression += operatorLabel.text ?? ""
-        expression += operandString ?? ""
+        inputFormula += operatorLabel.text ?? ""
+        inputFormula += operandString ?? ""
+    }
+    
+    private func appendFormulaOrInitialize() {
+        if operatorLabel.text != "" {
+            isResult = false
+            calculateButton.isEnabled = true
+        } else {
+            initializeCalculator()
+        }
     }
 }
 
