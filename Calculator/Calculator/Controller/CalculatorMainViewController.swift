@@ -29,13 +29,7 @@ final class CalculatorMainViewController: UIViewController {
     }()
     
     private var operandLabelText: String {
-        get {
-            return removeComma(of: operandLabel.text)
-        }
-        
-        set(text) {
-            operandLabel.text = text
-        }
+        return removeComma(of: operandLabel.text)
     }
     
     private var operandLabelNumber: Decimal {
@@ -70,7 +64,7 @@ final class CalculatorMainViewController: UIViewController {
             return
         }
 
-        operandLabelText.append(numberText)
+        operandLabel.text?.append(numberText)
         operandLabel.text = formatNumber(of: operandLabelNumber)
     }
     
@@ -157,7 +151,7 @@ final class CalculatorMainViewController: UIViewController {
         } catch let error as CalculatorError {
             switch error {
             case .divideError:
-                operandLabelText = "NaN"
+                operandLabel.text = "NaN"
             }
         } catch {
             print("알 수 없는 에러 발생")
@@ -170,9 +164,9 @@ final class CalculatorMainViewController: UIViewController {
         }
         
         if operandLabelText.contains("-") {
-            operandLabelText.removeFirst()
+            operandLabel.text?.removeFirst()
         } else {
-            operandLabelText = "-\(operandLabelText)"
+            operandLabel.text = "-\(operandLabelText)"
         }
     }
     
@@ -194,7 +188,7 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     private func clearEntry() {
-        operandLabelText = "0"
+        operandLabel.text? = "0"
     }
     
     private func clearOperator() {
@@ -243,7 +237,7 @@ final class CalculatorMainViewController: UIViewController {
         let operandLabel = createUILabel(text: formattedNumber)
         
         if operandLabelText.last == "." {
-            operandLabelText.removeLast()
+            operandLabel.text?.removeLast()
         }
         
         let calculateItemStackView = createCalculateItemStackView(operatorLabel, operandLabel)
