@@ -13,4 +13,24 @@ extension String {
     var isZero: Bool {
         return self == "0"
     }
+    
+    var isPrime: Bool {
+        return self.contains(".")
+    }
+    
+    var convertSign: String {
+        if self.hasPrefix("-") {
+            return String(self.dropFirst())
+        } else {
+            return "-\(self)"
+        }
+    }
+    
+    var removeTrailingDot: String {
+        if self.hasSuffix(".") {
+            return String(self.dropLast())
+        } else {
+            return self
+        }
+    }
 }

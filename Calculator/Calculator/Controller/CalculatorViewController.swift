@@ -44,7 +44,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapPoint(_ sender: UIButton) {
-        if !unwrap(operandLabel.text).contains(unwrap(sender.titleLabel?.text)) {
+        if !unwrap(operandLabel.text).isPrime {
             operandLabel.text? += unwrap(sender.titleLabel?.text)
         }
     }
@@ -61,19 +61,16 @@ class CalculatorViewController: UIViewController {
         } else if operandText.isZero {
             operatorLabel.text? = labelText
         } else {
-            let operatorLabel: UILabel = makeUILabel(operatorText)
-            let operandLabel: UILabel = makeUILabel(
-                operandText.hasSuffix(".") ?
-                String(operandText.dropLast()) : operandText
-            )
+            let partialOperatorLabel: UILabel = makeUILabel(operatorText)
+            let partialOperandLabel: UILabel = makeUILabel(operandText.removeTrailingDot)
             let partialStackView = makeUIStackView()
             
-            partialStackView.addArrangedSubview(operatorLabel)
-            partialStackView.addArrangedSubview(operandLabel)
+            partialStackView.addArrangedSubview(partialOperatorLabel)
+            partialStackView.addArrangedSubview(partialOperandLabel)
             formulaStackView.addArrangedSubview(partialStackView)
             
             formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
-            operatorLabel.text? = labelText
+            operatorLabel.text = labelText
             
             resetOperandLabel()
             formulaScrollView.scrollToBottom()
@@ -108,18 +105,13 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapChangeSign(_ sender: UIButton) {
-        let hyphenMinus = "-"
         let operandText = unwrap(operandLabel.text)
         
         if operandText.isZero {
             return
         }
         
-        if operandText.hasPrefix(hyphenMinus) {
-            operandLabel.text = String(operandText.dropFirst())
-        } else {
-            operandLabel.text = hyphenMinus + operandText
-        }
+        operandLabel.text = operandText.convertSign
     }
     
     @IBAction func tapClearEntry(_ sender: UIButton) {
