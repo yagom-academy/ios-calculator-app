@@ -36,6 +36,10 @@ final class CalculatorMainViewController: UIViewController {
         return Decimal(string: operandLabelText)
     }
     
+    private var isOperandInputPossible: Bool {
+        return operandLabelText.count < 20
+    }
+    
     // MARK: - View State Method
     
     override func viewDidLoad() {
@@ -54,7 +58,7 @@ final class CalculatorMainViewController: UIViewController {
         }
         
         guard
-            operandLabelText.count < 20,
+            isOperandInputPossible,
             let numberText = sender.titleLabel?.text
         else {
             return
@@ -75,7 +79,7 @@ final class CalculatorMainViewController: UIViewController {
         guard
             operandLabelText.isNotNaN,
             operandLabelText != "0" || operandLabelText.contains("."),
-            operandLabelText.count < 20,
+            isOperandInputPossible,
             let zeroText = sender.titleLabel?.text
         else {
             return
