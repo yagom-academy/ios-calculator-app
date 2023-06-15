@@ -15,7 +15,6 @@ final class CalculatorViewController: UIViewController {
     private var numberFormatter = NumberFormatter()
     private lazy var operandFormatter = OperandFormatter(numberFormatter)
     private var isResult: Bool = false
-    
     private var isFirstArithmeticFormula: Bool {
         return calculateStackView.subviews.count == 0
     }
@@ -122,9 +121,7 @@ extension CalculatorViewController {
     
     private func calculate() {
         var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: expression.withoutDecimalPoint)
-
         let result = parsedExpression.result()
-        
         let formattingResult = numberFormatter.string(for: result)
         
         operandLabel.text = formattingResult
