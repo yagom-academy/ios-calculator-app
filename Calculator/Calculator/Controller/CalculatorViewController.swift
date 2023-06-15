@@ -36,17 +36,12 @@ final class CalculatorViewController: UIViewController {
 
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
         guard let inputedOperand = sender.currentTitle,
-              var currentOperand = operandLabel.text?.withoutDecimalPoint,
-              let currentOperator = operatorLabel.text else { return }
+              var currentOperand = operandLabel.text?.withoutDecimalPoint else { return }
         
         if isResult {
             initializeCalculator()
             currentOperand = "0"
         }
-        
-        if currentOperator.isEmpty == false {
-            expression += currentOperator
-        } // TODO: Not have Operator
         
         guard let operandLabelText = operandFormatter.setUpInputOperandText(currentOperand, inputedOperand) else { return }
         
