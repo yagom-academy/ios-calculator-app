@@ -10,6 +10,10 @@ extension String {
         return self == "0" ? true : false
     }
     
+    var isNaN: Bool {
+        return self == "NaN" ? true : false
+    }
+    
     var withoutDecimalPoint: Self {
         return self.replacingOccurrences(of: ",", with: "")
     }

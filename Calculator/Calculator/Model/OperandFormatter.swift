@@ -2,7 +2,7 @@
 //  OperandFormatter.swift
 //  Calculator
 //
-//  Created by Yena on 2023/06/14.
+//  Created by Dasan on 2023/06/14.
 //
 
 import Foundation
@@ -50,7 +50,7 @@ struct OperandFormatter {
     }
 }
 
-// MARK: - Private
+// MARK: - Private Method
 extension OperandFormatter {
     private func checkOperandLength(_ inputedOperand: String, _ currentOperand: String) -> Bool {
         let number = currentOperand.withoutDecimalPoint + inputedOperand

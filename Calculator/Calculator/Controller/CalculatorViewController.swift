@@ -47,7 +47,7 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if isResult && currentOperand.isZero == false {
+        if isResult && currentOperand.isZero == false, currentOperand.isNaN == false {
             addStackView(currentOperator, currentOperand)
             expression += currentOperand
             initOperandLabel()
@@ -84,24 +84,7 @@ final class CalculatorViewController: UIViewController {
         }
  
         addStackView(currentOperator, currentOperand)
-        
-        var parsedExpression = ExpressionParser.parser(from: expression.withoutDecimalPoint)
-        
-        do {
-            let result = try parsedExpression.result()
-            
-            let formattingResult = operandFormatter.numberToString(for: result)
-            operandLabel.text = formattingResult
-            initExpression()
-            initOperatorLabel()
-            isResult = true
-        } catch CalculatorError.notANumber {
-            operandLabel.text = CalculatorError.notANumber.errorDescription
-            initExpression()
-            initOperatorLabel()
-        } catch {
-            print("알 수 없는 오류")
-        }
+        calculate()
     }
     
     //AC: All Clear
@@ -128,6 +111,7 @@ final class CalculatorViewController: UIViewController {
     
 }
 
+// MARK: - Private Method
 extension CalculatorViewController {
     private func initializeCalculator() {
         initExpression()
@@ -148,8 +132,30 @@ extension CalculatorViewController {
     private func initExpression() {
         expression = ""
     }
+    
+    private func calculate() {
+        var parsedExpression = ExpressionParser.parser(from: expression.withoutDecimalPoint)
+        
+        do {
+            let result = try parsedExpression.result()
+            
+            let formattingResult = operandFormatter.numberToString(for: result)
+            operandLabel.text = formattingResult
+            initExpression()
+            initOperatorLabel()
+            isResult = true
+        } catch CalculatorError.notANumber {
+            operandLabel.text = CalculatorError.notANumber.errorDescription
+            initExpression()
+            initOperatorLabel()
+            isResult = true
+        } catch {
+            print("알 수 없는 오류")
+        }
+    }
 }
 
+// MARK: - StackView Method
 extension CalculatorViewController {
     private func addStackView(_ currentOperator: String, _ currentOperand: String)  {
         let stackView = createUIStackView(currentOperator, currentOperand)
@@ -167,7 +173,7 @@ extension CalculatorViewController {
     private func createUILabel(text: String?) -> UILabel {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
+        label.textColor = .darkGray
         label.text = text
         
         return label
