@@ -5,18 +5,16 @@
 //  Created by Dasan on 2023/06/02.
 //
 
-struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
-
-    mutating func result() throws -> Double {
-        guard var accumulatedValue = operands.dequeue() else {
-            return 0.0
-        }
+struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.T == Double, OperatorQueue.T == Operator {
+    var operands: OperandQueue
+    var operators: OperatorQueue
+    
+    mutating func result() -> Double {
+        guard var accumulatedValue = operands.dequeue() else { return 0.0 }
         
-        while let rightValue = operands.dequeue(),
-              let currentOperator = operators.dequeue() {
-            accumulatedValue = try currentOperator.calculate(lhs: accumulatedValue, rhs: rightValue)
+        while let operand = operands.dequeue(),
+              let `operator` = operators.dequeue() {
+            accumulatedValue = `operator`.calculate(lhs: accumulatedValue, rhs: operand)
         }
     
         return accumulatedValue

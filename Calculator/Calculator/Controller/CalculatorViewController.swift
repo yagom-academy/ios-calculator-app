@@ -134,7 +134,7 @@ extension CalculatorViewController {
     }
     
     private func calculate() {
-        var parsedExpression = ExpressionParser.parser(from: expression.withoutDecimalPoint)
+        var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: expression.withoutDecimalPoint)
         
         do {
             let result = try parsedExpression.result()

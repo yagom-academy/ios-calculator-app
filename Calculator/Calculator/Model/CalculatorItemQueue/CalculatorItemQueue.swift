@@ -8,6 +8,7 @@
 protocol Queueable {
     associatedtype T
     
+    init()
     mutating func enqueue(_ data: T)
     mutating func dequeue() -> T?
 }
