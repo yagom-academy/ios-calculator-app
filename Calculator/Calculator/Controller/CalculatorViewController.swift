@@ -69,12 +69,8 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if currentOperand.hasSuffix(".") {
-            operandLabel.text?.removeLast()
-        }
-        
         addPreviousContentStackView()
-        expression += configureCurrentFormula()
+        updateExpression()
         var formula: Formula = ExpressionParser.parse(from: expression)
         
         do {
@@ -124,14 +120,11 @@ class CalculatorViewController: UIViewController {
         guard let decimalPointOperand = sender.currentTitle else {
             return
         }
-        guard !currentOperand.hasSuffix(decimalPointOperand) else {
-            return
-        }
         guard !currentOperand.contains(decimalPointOperand) else {
             return
         }
         
-        operandLabel.text = operandLabel.text! + decimalPointOperand
+        operandLabel.text = (operandLabel.text ?? "0") + decimalPointOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
@@ -143,16 +136,9 @@ class CalculatorViewController: UIViewController {
             expression = "0"
             return
         }
-        
-        if currentOperand.hasSuffix(".") {
-            operandLabel.text?.removeLast()
-        }
-        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
-            operandLabel.text = String(Int(currentOperandToDouble))
-        }
-        
+                
         addPreviousContentStackView()
-        expression += configureCurrentFormula()
+        updateExpression()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isResult = false
@@ -168,11 +154,16 @@ extension CalculatorViewController {
         }
 
         let newOperand = currentOperand + String(repeating: "0", count: count)
-        let realNumber = newOperand.split(with: ".").compactMap(Double.init)
+        let realNumber = newOperand.split(with: ".")
+        
+        guard let numberValue = Double(realNumber[0]),
+              let integerNumber = numberFormatter.string(from: NSNumber(value: numberValue)) else {
+            return
+        }
         
         if realNumber.count == 1 {
-            operandLabel.text = numberFormatter.string(from: NSNumber(value: realNumber[0]))
-        } else if let integerNumber = numberFormatter.string(for: realNumber[0]) {
+            operandLabel.text = integerNumber
+        } else {
             operandLabel.text = integerNumber + "." + String(realNumber[1])
         }
     }
@@ -185,10 +176,9 @@ extension CalculatorViewController {
         return currentOperand.count + textCount < 16
     }
     
-    private func configureCurrentFormula() -> String {
+    private func updateExpression() {
         let operatorCase = operatorLabel.text ?? ""
-        
-        return operatorCase + currentOperand
+        expression += operatorCase + currentOperand
     }
     
     private func addPreviousContentStackView() {
