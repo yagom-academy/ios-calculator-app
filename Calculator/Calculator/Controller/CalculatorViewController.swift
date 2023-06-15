@@ -107,7 +107,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapEqualMarkButton(_ sender: UIButton) {
-        guard !isComputable else { return }
+        guard isComputable else { return }
         
         tapOperatorButton(sender)
         var calculateResult = ExpressionParser.parse(from: formulaString)
@@ -131,7 +131,6 @@ class CalculatorViewController: UIViewController {
             alert.addAction(cancel)
             present(alert, animated: true)
         }
-        
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
