@@ -25,7 +25,7 @@ final class CalculateViewController: UIViewController {
     @IBAction func tappedOperandsButton(_ sender: UIButton) {
         guard let number = sender.currentTitle,
               let operandLabelText = currentOperandLabel.text,
-              let labelText = calculatorManager.verifyButton(for: number, currentLabel: operandLabelText) else {
+              let labelText = calculatorManager.verifyNumber(number, for: operandLabelText) else {
             return
         }
         
@@ -72,7 +72,7 @@ final class CalculateViewController: UIViewController {
     
     @IBAction func tappedAllClearButton(_ sender: UIButton) {
         currentFormulaStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        calculatorManager.allClearButton()
+        calculatorManager.clearAll()
         initializeOperandLabel()
         initializeOperatorLabel()
     }

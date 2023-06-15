@@ -8,15 +8,15 @@
 import Foundation
 
 enum FormManager {
-    static let numberFormatter = NumberFormatter()
-    
-    static var configuredNumberFormatter : NumberFormatter {
-        self.numberFormatter.numberStyle = .decimal
-        self.numberFormatter.maximumFractionDigits = 19
-        self.numberFormatter.maximumIntegerDigits = 20
+    static let configuredNumberFormatter : NumberFormatter = {
+        let numberFormatter = NumberFormatter()
         
-        return self.numberFormatter
-    }
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 19
+        numberFormatter.maximumIntegerDigits = 20
+        
+        return numberFormatter
+    }()
     
     static func transformResult(from input: String) -> String {
         var numberString = deleteComma(input)
@@ -27,11 +27,7 @@ enum FormManager {
             return "NaN"
         }
         
-        guard output != "-0" else {
-            return "0"
-        }
-        
-        return output
+        return output == "-0" ? "0" : output
     }
     
     private static func deleteComma(_ input: String) -> String {
@@ -39,10 +35,10 @@ enum FormManager {
     }
     
     private static func deleteLastDot(_ input: String) -> String {
-        guard input.hasSuffix(".") == false else {
-            return input.replacingOccurrences(of: ".", with: "")
+        guard input.hasSuffix(".") else {
+            return input
         }
         
-        return input
+        return input.replacingOccurrences(of: ".", with: "")
     }
 }

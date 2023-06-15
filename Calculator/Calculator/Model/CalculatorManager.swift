@@ -12,14 +12,14 @@ struct CalculatorManager {
     private var isCalculated = false
     private var formulasUntilNow = ""
     
-    mutating func verifyButton(for number: String, currentLabel: String) -> String? {
-        switch number {
+    mutating func verifyNumber(_ currentInput: String, for accumulatedOperand: String) -> String? {
+        switch currentInput {
         case "0", "00":
-            return verifyZeroButton(currentLabel, number)
+            return verifyZeroButton(accumulatedOperand, currentInput)
         case ".":
-            return verifyDotButton(currentLabel, number)
+            return verifyDotButton(accumulatedOperand, currentInput)
         default:
-            return verifyOperandLabel(currentLabel, number)
+            return verifyOperandLabel(accumulatedOperand, currentInput)
         }
     }
     
@@ -44,7 +44,7 @@ struct CalculatorManager {
         isCalculated = false
     }
     
-    mutating func allClearButton() {
+    mutating func clearAll() {
         formulasUntilNow = ""
         isCalculated = false
         isZeroButtonUsed = true
