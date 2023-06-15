@@ -92,13 +92,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard !isResult else {
+        guard validateOperandInput(with: 1) else {
             return
         }
-        guard currentOperand.count < 15 else {
-            return
-        }
-        guard let operandElement = sender.currentTitle, !isResult else {
+        guard let operandElement = sender.currentTitle else {
             return
         }
         guard currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
@@ -113,58 +110,18 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpZeroButton(_ sender: UIButton) {
-        guard !isResult else {
-            return
-        }
-        guard currentOperand.count < 15 else {
-            return
-        }
-        guard let zero = sender.currentTitle, currentOperand != "0" else {
-            isPlaceholder = false
-            return
-        }
-        guard let newOperand = Double(currentOperand + zero) else {
-            return
-        }
-        
-        let realNumber = (currentOperand + zero).split(with: ".")
-        
-        if realNumber.count == 2 {
-            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
-        } else {
-            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
-        }
+        inputZero(1)
     }
     
     @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
-        guard !isResult else {
-            return
-        }
-        guard currentOperand.count < 14 else {
-            return
-        }
-        guard let doubleZero = sender.currentTitle, currentOperand != "0" else {
-            isPlaceholder = false
-            return
-        }
-        guard let newOperand = Double(currentOperand + doubleZero) else {
-            return
-        }
-        
-        let realNumber = (currentOperand + doubleZero).split(with: ".")
-        
-        if realNumber.count == 2 {
-            operandLabel.text = (numberFormatter.string(for: Double(realNumber[0])) ?? "0") + "." + realNumber[1]
-        } else {
-            operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
-        }
+        inputZero(2)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
         guard !isResult else {
             return
         }
-        guard let decimalPointOperand = sender.currentTitle, !isResult else {
+        guard let decimalPointOperand = sender.currentTitle else {
             return
         }
         guard !currentOperand.hasSuffix(decimalPointOperand) else {
@@ -204,6 +161,30 @@ class CalculatorViewController: UIViewController {
 }
 
 extension CalculatorViewController {
+    private func inputZero(_ count: Int) {
+        guard validateOperandInput(with: count), currentOperand != "0" else {
+            isPlaceholder = false
+            return
+        }
+
+        let newOperand = currentOperand + String(repeating: "0", count: count)
+        let realNumber = newOperand.split(with: ".").compactMap(Double.init)
+        
+        if realNumber.count == 1 {
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: realNumber[0]))
+        } else if let integerNumber = numberFormatter.string(for: realNumber[0]) {
+            operandLabel.text = integerNumber + "." + String(realNumber[1])
+        }
+    }
+
+    private func validateOperandInput(with textCount: Int) -> Bool {
+        guard !isResult else {
+            return false
+        }
+        
+        return currentOperand.count + textCount < 16
+    }
+    
     private func configureCurrentFormula() -> String {
         let operatorCase = operatorLabel.text ?? ""
         
@@ -255,6 +236,7 @@ extension CalculatorViewController {
         
         return recordedLabel
     }
+    
     private func toggleSign() {
         guard currentOperandToDouble != Double.zero else {
             return
