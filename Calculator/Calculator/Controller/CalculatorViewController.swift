@@ -79,33 +79,12 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
-        guard let inputOperatorText = sender.titleLabel?.text,
-              let numberLabelText = inputNumberLabel.text,
-              let operatorLabelText = inputOperatorLabel.text else { return }
+        guard let inputOperatorText = sender.titleLabel?.text else { return }
         
-        if inputOperatorText == CalculatorNamespace.Equal && inputNumberLabel.text == CalculatorNamespace.Zero {
-            formulaString += operatorLabelText + numberLabelText
-        } else if inputNumberLabel.text == CalculatorNamespace.Zero {
+        if inputNumberLabel.text == CalculatorNamespace.Zero {
             inputOperatorLabel.text = inputOperatorText
         } else {
-            let formulaStackView = makeStackView()
-            let operatorLabel = makeLabelInStackView(operatorLabelText)
-            let formattedNumberText =
-            numberLabelText.hasSuffix(CalculatorNamespace.Period) ?
-            String(numberLabelText.dropLast(1)) :
-            numberLabelText
-            let numberLabel = makeLabelInStackView(formattedNumberText)
-            
-            formulaStackView.addArrangedSubview(operatorLabel)
-            formulaStackView.addArrangedSubview(numberLabel)
-            formulaListStackView.addArrangedSubview(formulaStackView)
-            
-            formulaString += operatorLabelText + numberLabelText
-            
-            inputOperatorLabel.text = inputOperatorText
-            inputNumberLabel.text = CalculatorNamespace.Zero
-            
-            setAutoScrollToBottom()
+            addFormulaStackView(inputOperatorText)
         }
         
         if inputOperatorText == CalculatorNamespace.Equal {
@@ -194,5 +173,29 @@ extension CalculatorViewController {
         if bottomOffset.y > 0 {
             formulaListScrollView.setContentOffset(bottomOffset, animated: true)
         }
+    }
+    
+    func addFormulaStackView(_ inputOperatorText: String) {
+        guard let numberLabelText = inputNumberLabel.text,
+              let operatorLabelText = inputOperatorLabel.text else { return }
+        
+        let formulaStackView = makeStackView()
+        let operatorLabel = makeLabelInStackView(operatorLabelText)
+        let formattedNumberText =
+        numberLabelText.hasSuffix(CalculatorNamespace.Period) ?
+        String(numberLabelText.dropLast(1)) :
+        numberLabelText
+        let numberLabel = makeLabelInStackView(formattedNumberText)
+        
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(numberLabel)
+        formulaListStackView.addArrangedSubview(formulaStackView)
+        
+        formulaString += operatorLabelText + numberLabelText
+        
+        inputOperatorLabel.text = inputOperatorText
+        inputNumberLabel.text = CalculatorNamespace.Zero
+        
+        setAutoScrollToBottom()
     }
 }
