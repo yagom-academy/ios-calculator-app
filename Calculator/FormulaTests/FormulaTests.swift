@@ -62,7 +62,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, expeactation)
     }
     
-    func test_operands스택에_30을넣고_operators스택에는_곱하기를넣었을때_result값이30이되는지() {
+    func test_peek값이_enqueueStack에1을넣었을ㄸ() {
         // given
         let input: Double = 30
         let input2: Operator = .add

@@ -83,4 +83,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         // then
         XCTAssertNil(result)
     }
+    
+    func test_큐에값이있을때_dequeue를호출하면_첫번째로넣은값을_반환하는지() {
+        // given
+        sut.enqueue("1")
+        sut.enqueue("2")
+        sut.enqueue("3")
+        let expectation = "1"
+        
+        // when
+        let result = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
 }
