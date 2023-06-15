@@ -6,11 +6,7 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var queue: LinkedList<T>
-    
-    var count: Int {
-        return queue.count
-    }
+    private var queue: LinkedList<T> = LinkedList()
     
     var isEmpty: Bool {
         return queue.isEmpty
@@ -22,10 +18,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
     
     var last: T? {
         return queue.last
-    }
-    
-    init(queue: LinkedList<T> = LinkedList()) {
-        self.queue = queue
     }
     
     mutating func enqueue(_ data: T) {
