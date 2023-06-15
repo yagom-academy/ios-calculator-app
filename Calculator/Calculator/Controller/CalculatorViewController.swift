@@ -107,30 +107,31 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapEqualMarkButton(_ sender: UIButton) {
-        if isComputable {
-            tapOperatorButton(sender)
-            var calculateResult = ExpressionParser.parse(from: formulaString)
+        guard !isComputable else { return }
+        
+        tapOperatorButton(sender)
+        var calculateResult = ExpressionParser.parse(from: formulaString)
+        
+        do {
+            let formula = try calculateResult.result()
+            let formulaResult = calculatorNumberFormatter.string(for: formula)
+            inputNumberLabel.text = formulaResult
             
-            do {
-                let formula = try calculateResult.result()
-                let formulaResult = calculatorNumberFormatter.string(from: Decimal(formula) as NSNumber)
-                inputNumberLabel.text = formulaResult
-                
-                isComputable = false
-                formulaString = CalculatorNamespace.Empty
-            } catch CalculatorError.dividedByZero {
-                inputNumberLabel.text = CalculatorNamespace.NaN
-                isComputable = false
-            } catch {
-                let alert = UIAlertController(title: "계산 오류입니다.",
-                                              message: "확인 버튼을 눌러주시기 바랍니다.",
-                                              preferredStyle: .alert)
-                let cancel = UIAlertAction(title: "확인",
-                                           style: .default)
-                alert.addAction(cancel)
-                present(alert, animated: true)
-            }
+            isComputable = false
+            formulaString = CalculatorNamespace.Empty
+        } catch CalculatorError.dividedByZero {
+            inputNumberLabel.text = CalculatorNamespace.NaN
+            isComputable = false
+        } catch {
+            let alert = UIAlertController(title: "계산 오류입니다.",
+                                          message: "확인 버튼을 눌러주시기 바랍니다.",
+                                          preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "확인",
+                                       style: .default)
+            alert.addAction(cancel)
+            present(alert, animated: true)
         }
+        
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
