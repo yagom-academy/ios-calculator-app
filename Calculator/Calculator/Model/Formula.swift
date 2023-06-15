@@ -8,7 +8,7 @@
 struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.T == Double, OperatorQueue.T == Operator {
     var operands: OperandQueue
     var operators: OperatorQueue
-
+    
     mutating func result() -> Double {
         guard var accumulatedValue = operands.dequeue() else { return 0.0 }
         
