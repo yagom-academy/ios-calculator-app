@@ -8,15 +8,15 @@
 import Foundation
 
 struct OperandFormatter {
-    private let operandFormatter: NumberFormatter
+    private let numberFormatter: NumberFormatter
     private let maximumDecimalDigits = 5
     private let maximumOperandDigits = 20 // 연산프로퍼티
 
     init(operandFormatter: NumberFormatter = NumberFormatter()) {
-        self.operandFormatter = operandFormatter
-        self.operandFormatter.numberStyle = .decimal
-        self.operandFormatter.maximumFractionDigits = maximumDecimalDigits
-        self.operandFormatter.maximumIntegerDigits = maximumOperandDigits
+        self.numberFormatter = operandFormatter
+        self.numberFormatter.numberStyle = .decimal
+        self.numberFormatter.maximumFractionDigits = maximumDecimalDigits
+        self.numberFormatter.maximumIntegerDigits = maximumOperandDigits
     }
     
     func formattingOperand(_ inputedOperand: String, _ currentOperand: String) -> String {
@@ -37,16 +37,16 @@ struct OperandFormatter {
             let separatedOperand = currentOperand.components(separatedBy: ".")
             let integerPart = separatedOperand.first ?? "0"
             let decimalPart = separatedOperand.last ?? ""
-            let formattingIntegerPart = operandFormatter.string(for: Int(integerPart.withoutDecimalPoint)) ?? "0"
+            let formattingIntegerPart = numberFormatter.string(for: Int(integerPart.withoutDecimalPoint)) ?? "0"
             
             return formattingIntegerPart + "." + decimalPart + inputedOperand
         } else {
-            return operandFormatter.string(for: Double(currentOperand.withoutDecimalPoint + inputedOperand)) ?? "0"
+            return numberFormatter.string(for: Double(currentOperand.withoutDecimalPoint + inputedOperand)) ?? "0"
         }
     }
     
     func numberToString(for input: Any) -> String? {
-        return operandFormatter.string(for: input)
+        return numberFormatter.string(for: input)
     }
 }
 
