@@ -66,11 +66,10 @@ final class CalculatorViewController: UIViewController {
     @IBAction private func tapNumberButton(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
-        let result = operationManager.addOperandsLabel(operandValue, inputNumber)
-        operandValue = result
+        operandValue = operationManager.addOperandsLabel(operandValue, inputNumber)
     }
     
-    @IBAction private func tapFunctionButton(_ sender: UIButton) {
+    @IBAction private func tapClearButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
@@ -81,12 +80,13 @@ final class CalculatorViewController: UIViewController {
             operationManager.clearFormula()
         case CalculatorNamespace.clearEntry:
             operandValue = CalculatorNamespace.zero
-        case CalculatorNamespace.signToggle:
-            let result = operationManager.changeSign(operandValue)
-            operandValue = result
         default:
             break
         }
+    }
+    
+    @IBAction private func tapSignToggleButton(_ sender: UIButton) {
+        operandValue = operationManager.changeSign(operandValue)
     }
 }
 
