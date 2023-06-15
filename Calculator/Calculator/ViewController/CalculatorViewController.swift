@@ -90,13 +90,22 @@ class CalculatorViewController: UIViewController {
         if `operator` == String(Operator.divide.rawValue) && operands == "0" {
             formula += "\(`operator`) \(operands)"
         }
+        
+        clearOperandLabel()
+        clearOperatorLabel()
     }
+
     
     private func addStackView(_ `operator`: String, _ operands: String) {
         let label = UILabel()
         label.text = "\(`operator`) \(operands)"
         
         stackView.addArrangedSubview(label)
+    }
+    
+    private func calculateFormula() -> String? {
+        var parsedValue = ExpressionParser.parse(from: formula)
+        return numberFormatter.string(for: parsedValue.result())
     }
     
     private func changeSign() {
