@@ -23,7 +23,7 @@ class CalculatorViewController: UIViewController {
         resetFormulaStackView()
     }
 
-    @IBAction func tapNumpad(_ sender: UIButton) {
+    @IBAction func tapNumpadButton(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
         let operandText = unwrap(operandLabel.text)
         
@@ -35,7 +35,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapZero(_ sender: UIButton) {
+    @IBAction func tapZeroButton(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
         
         if !unwrap(operandLabel.text).isZero {
@@ -43,13 +43,13 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapPoint(_ sender: UIButton) {
+    @IBAction func tapPointButton(_ sender: UIButton) {
         if !unwrap(operandLabel.text).isPrime {
             operandLabel.text? += unwrap(sender.titleLabel?.text)
         }
     }
     
-    @IBAction func tapOperator(_ sender: UIButton) {
+    @IBAction func tapOperatorButton(_ sender: UIButton) {
         let operatorText = unwrap(operatorLabel.text)
         let operandText = unwrap(operandLabel.text).removeTrailingDot
         let labelText = unwrap(sender.titleLabel?.text)
@@ -71,9 +71,9 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapEqual(_ sender: UIButton) {
+    @IBAction func tapEqualButton(_ sender: UIButton) {
         do {
-            tapOperator(sender)
+            tapOperatorButton(sender)
             
             var formula = ExpressionParser.parse(from: formulaString)
             let result = try formula.result()
@@ -98,7 +98,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapChangeSign(_ sender: UIButton) {
+    @IBAction func tapChangeSignButton(_ sender: UIButton) {
         let operandText = unwrap(operandLabel.text)
         
         if operandText.isZero {
@@ -108,11 +108,11 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = operandText.convertSign
     }
     
-    @IBAction func tapClearEntry(_ sender: UIButton) {
+    @IBAction func tapClearEntryButton(_ sender: UIButton) {
         resetOperandLabel()
     }
     
-    @IBAction func tapAllClear(_ sender: UIButton) {
+    @IBAction func tapAllClearButton(_ sender: UIButton) {
         resetOperandLabel()
         resetOperatorLabel()
         resetFormulaStackView()
