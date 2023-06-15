@@ -17,7 +17,7 @@ final class CalculatorMainViewController: UIViewController {
     // MARK: - Property
     
     private var operatorsAndOperandsInput: String = ""
-    private var isFormulainProcess: Bool = true
+    private var isFormulaInProcess: Bool = true
     
     private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -50,7 +50,7 @@ final class CalculatorMainViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction private func touchUpNumberButton(_ sender: UIButton) {
-        if !isFormulainProcess {
+        if !isFormulaInProcess {
             appendCalculateItem()
             clearInput()
             continueFormulaProcess()
@@ -69,7 +69,7 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     @IBAction private func touchUpZeroButton(_ sender: UIButton) {
-        if !isFormulainProcess {
+        if !isFormulaInProcess {
             appendCalculateItem()
             clearInput()
             continueFormulaProcess()
@@ -94,7 +94,7 @@ final class CalculatorMainViewController: UIViewController {
     
     @IBAction private func touchUpPointButton(_ sender: UIButton) {
         guard
-            isFormulainProcess,
+            isFormulaInProcess,
             let pointText = sender.titleLabel?.text,
             !operandLabelText.contains(pointText)
         else {
@@ -128,7 +128,7 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     @IBAction private func touchUpClearEntryButton(_ sender: UIButton) {
-        if !isFormulainProcess {
+        if !isFormulaInProcess {
             appendCalculateItem()
             clearInput()
             continueFormulaProcess()
@@ -204,11 +204,11 @@ final class CalculatorMainViewController: UIViewController {
     }
     
     func continueFormulaProcess() {
-        isFormulainProcess = true
+        isFormulaInProcess = true
     }
     
     func finishFormulaProcess() {
-        isFormulainProcess = false
+        isFormulaInProcess = false
     }
     
     private func removeComma(of text: String?) -> String {
