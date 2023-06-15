@@ -40,7 +40,6 @@ struct OperationManager {
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
         let numberOperands = isCalculate ? CalculatorNamespace.zero : currentOperands
-        let operands = numberOperands + inputOperands
         isCalculate = false
         
         if numberOperands
@@ -54,7 +53,7 @@ struct OperationManager {
             return numberOperands
         }
 
-        return operands
+        return numberOperands + inputOperands
     }
     
     func changeSign(_ operands: String) -> String {
