@@ -6,4 +6,3 @@
 //
 
 protocol CalculateItem {}
-

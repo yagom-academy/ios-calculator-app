@@ -337,9 +337,9 @@
                     </view>
                     <connections>
                         <outlet property="expressionScrollView" destination="BOT-7g-vxv" id="RcX-wS-Nx8"/>
+                        <outlet property="expressionStackView" destination="XRe-QE-UJf" id="BMz-yr-vI0"/>
                         <outlet property="operandsLabel" destination="Lwz-OF-XHD" id="B7b-ZP-jdA"/>
                         <outlet property="operatorLabel" destination="HPC-iy-qdm" id="ETX-Jt-91m"/>
-                        <outlet property="parentStackView" destination="XRe-QE-UJf" id="BMz-yr-vI0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

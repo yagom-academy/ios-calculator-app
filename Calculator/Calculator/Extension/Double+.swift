@@ -4,12 +4,13 @@
 //
 //  Created by karen, Mary.
 //
+
 import Foundation
 
 extension Double: CalculateItem {}
 
 extension Double {
-    func numberFormat() -> String? {
+    func changeNumberFormat() -> String? {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal

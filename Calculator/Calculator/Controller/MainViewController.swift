@@ -13,15 +13,21 @@ final class MainViewController: UIViewController {
     private var isResult = false
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var parentStackView: UIStackView!
+    @IBOutlet weak var expressionStackView: UIStackView!
     @IBOutlet weak var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeOperands()
-        initializeOperator()
+        initializeAll()
     }
 
+    private func initializeAll() {
+        initializeOperands()
+        initializeOperator()
+        initializeExpression()
+        initializeStackView()
+    }
+    
     private func initializeExpression() {
         expression = Strings.empty
     }
@@ -38,31 +44,10 @@ final class MainViewController: UIViewController {
         operatorLabel.text = Strings.empty
     }
     
-    private func updateOperands(to value: String, labelUpdate: Bool = true) {
-        operandsValue = value
-        if labelUpdate {
-            operandsLabel.text = value
-        }
-    }
-    
-    private func updateOperator(to `operator`: String) {
-        operatorValue = `operator`
-        operatorLabel.text = `operator`
-    }
-
-    private func insertStackView(with strings: String...) {
-        let labels = strings.map { createUILabel(text: $0) }
-        let subStackView = createSubStackView(with: labels)
-        
-        parentStackView.addArrangedSubview(subStackView)
-        expressionScrollView.layoutIfNeeded()
-        expressionScrollView.scrollToBottom()
-    }
-    
     private func initializeStackView() {
-        guard parentStackView.subviews.count > 0 else { return }
+        guard expressionStackView.subviews.count > 0 else { return }
         
-        parentStackView.subviews.forEach { subview in
+        expressionStackView.subviews.forEach { subview in
             subview.removeFromSuperview()
         }
     }
@@ -70,23 +55,37 @@ final class MainViewController: UIViewController {
     @IBAction private func hitOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         if isResult { isResult = false }
-        
         if operandsValue.isEmpty == false {
             expression.append(operatorValue + operandsValue)
             insertStackView(with: operatorValue, operandsValue)
         }
+        
         updateOperator(to: `operator`)
         initializeOperands()
     }
     
+    private func insertStackView(with strings: String...) {
+        let labels = strings.map { createUILabel(text: $0) }
+        let subStackView = createSubStackView(with: labels)
+        
+        expressionStackView.addArrangedSubview(subStackView)
+        expressionScrollView.layoutIfNeeded()
+        expressionScrollView.scrollToBottom()
+    }
+    
+    private func updateOperator(to `operator`: String) {
+        operatorValue = `operator`
+        operatorLabel.text = `operator`
+    }
+    
     @IBAction private func hitNumberButton(_ sender: UIButton) {
-        guard let number = sender.currentTitle else { return }
         if isResult {
             isResult = false
-            hitAllClearButton(sender)
+            initializeAll()
         }
+        guard let number = sender.currentTitle else { return }
         if operandsValue.contains(Strings.point) && number == Strings.point { return }
-
+        
         switch (operandsValue, number) {
         case (Strings.zero, Strings.zero),
              (Strings.zero, Strings.doubleZero),
@@ -101,9 +100,16 @@ final class MainViewController: UIViewController {
         default:
              updateOperands(to: operandsValue + number)
         }
-        
-        if let formattedNumber = Double(operandsValue)?.numberFormat() {
+
+        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
             operandsLabel.text = formattedNumber
+        }
+    }
+    
+    private func updateOperands(to value: String, labelUpdate: Bool = true) {
+        operandsValue = value
+        if labelUpdate {
+            operandsLabel.text = value
         }
     }
     
@@ -113,13 +119,15 @@ final class MainViewController: UIViewController {
                 expression.append(operatorValue + operandsValue)
                 insertStackView(with: operatorValue, operandsValue)
             }
+            
             var formula = ExpressionParser.parse(from: expression)
             let result = try formula.result()
-            
+            let formattedResult = result.changeNumberFormat() ?? Strings.nan
+
             initializeOperator()
             initializeExpression()
-            operandsLabel.text = result.numberFormat() ?? Strings.nan
-            updateOperands(to: "\(Int(result))", labelUpdate: false)
+            operandsLabel.text = formattedResult
+            updateOperands(to: "\(result)", labelUpdate: false)
             isResult = true
         } catch {
             operandsLabel.text = Strings.nan
@@ -128,10 +136,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func hitAllClearButton(_ sender: UIButton) {
-        initializeOperands()
-        initializeOperator()
-        initializeExpression()
-        initializeStackView()
+        initializeAll()
     }
     
     @IBAction private func hitClearEntryButton(_ sender: UIButton) {
@@ -140,7 +145,6 @@ final class MainViewController: UIViewController {
     
     @IBAction private func hitChangeSignButton(_ sender: UIButton) {
         guard operandsValue.isEmpty == false else { return }
-        
         if operandsValue.hasPrefix(Strings.minus) {
             updateOperands(to: String(operandsValue.dropFirst()))
         } else {
