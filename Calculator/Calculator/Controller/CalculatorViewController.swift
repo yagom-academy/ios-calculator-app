@@ -58,10 +58,11 @@ class CalculatorViewController: UIViewController {
         
         if numberLabelText.count < 20 {
             let formattedNumberText = Double(numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma, with: CalculatorNamespace.Empty) + inputNumberText)
-            inputNumberLabel.text =
-            (numberLabelText == CalculatorNamespace.Zero) ?
-            (CalculatorNamespace.Zero) :
-            (calculatorNumberFormatter.string(from: Decimal(formattedNumberText!) as NSNumber))
+            if numberLabelText == CalculatorNamespace.Zero {
+                inputNumberLabel.text = CalculatorNamespace.Zero
+            } else {
+                inputNumberLabel.text = calculatorNumberFormatter.string(for: formattedNumberText)
+            }
         }
     }
     
