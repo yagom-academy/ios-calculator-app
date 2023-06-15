@@ -88,22 +88,22 @@ final class MainViewController: UIViewController {
         if operandsValue.contains(Strings.point) && number == Strings.point { return }
 
         switch (operandsValue, number) {
-        case (Strings.zero, Strings.zero):
-            return
-        case (Strings.zero, Strings.doubleZero):
-            return
-        case (Strings.empty, Strings.zero) where expression.isEmpty:
-            return
-        case (Strings.empty, Strings.doubleZero):
+        case (Strings.zero, Strings.zero),
+             (Strings.zero, Strings.doubleZero),
+             (Strings.empty, Strings.zero) where expression.isEmpty,
+             (Strings.empty, Strings.doubleZero):
             return
         case (Strings.empty, Strings.point):
-            updateOperands(to: Strings.zero + number)
-        case (Strings.zero, _):
-            updateOperands(to: number)
-        case (Strings.empty, _):
-            updateOperands(to: number)
+             updateOperands(to: Strings.zero + number)
+        case (Strings.zero, _),
+             (Strings.empty, _):
+             updateOperands(to: number)
         default:
-            updateOperands(to: operandsValue + number)
+             updateOperands(to: operandsValue + number)
+        }
+        
+        if let formattedNumber = Double(operandsValue)?.numberFormat() {
+            operandsLabel.text = formattedNumber
         }
     }
     
