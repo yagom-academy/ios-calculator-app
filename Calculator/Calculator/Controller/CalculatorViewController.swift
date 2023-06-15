@@ -20,6 +20,7 @@ final class CalculatorViewController: UIViewController {
         return calculateStackView.subviews.count == 0
     }
     
+    @IBOutlet weak var calculateButton: UIButton!
     @IBOutlet weak var calculateHistoryScrollView: UIScrollView!
     @IBOutlet weak var calculateStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
@@ -31,6 +32,7 @@ final class CalculatorViewController: UIViewController {
         initializeCalculator()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 5
+        calculateButton.isEnabled = false
     }
 
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -38,7 +40,13 @@ final class CalculatorViewController: UIViewController {
               var currentOperand = operandLabel.text?.withoutDecimalPoint else { return }
         
         if isResult {
-            initializeCalculator()
+            if operatorLabel.text != "" {
+                isResult = false
+                calculateButton.isEnabled = true
+            } else {
+                initializeCalculator()
+            }
+            
             currentOperand = "\(initialNumber)"
         }
         
@@ -48,14 +56,17 @@ final class CalculatorViewController: UIViewController {
     }
 
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard operandLabel.text != "\(initialNumber)", isResult == false else {
+        guard operandLabel.text?.isZero != false else {
             operatorLabel.text = isFirstArithmeticFormula ? "" : sender.currentTitle
             return
         }
         
+        if isResult == true { initExpression() }
+        
         addStackView()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "\(initialNumber)"
+        calculateButton.isEnabled = true
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -97,6 +108,7 @@ extension CalculatorViewController {
         initOperatorLabel()
         removeStackView()
         isResult = false
+        calculateButton.isEnabled = false
     }
     
     private func initOperandLabel() {
@@ -117,10 +129,11 @@ extension CalculatorViewController {
         let result = parsedExpression.result()
         
         let formattingResult = numberFormatter.string(for: result)
+        
         operandLabel.text = formattingResult
-        initExpression()
         initOperatorLabel()
         isResult = true
+        calculateButton.isEnabled = false
     }
     
     private func addInputFormula(_ operandString: String?) {
@@ -140,7 +153,7 @@ extension CalculatorViewController {
         scrollToBottom()
     }
     
-    private func addFormulaStackView(_ operandString: String?){
+    private func addFormulaStackView(_ operandString: String?) {
         let arithmeticStackView = ArithmeticStackView(operatorLabel.text, operandString)
         
         calculateStackView.addArrangedSubview(arithmeticStackView)
