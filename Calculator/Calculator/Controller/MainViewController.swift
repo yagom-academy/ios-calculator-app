@@ -10,6 +10,7 @@ final class MainViewController: UIViewController {
     private var expression = String()
     private var operandsValue = String()
     private var operatorValue = String()
+    private var isResult = false
     @IBOutlet weak var operandsLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var parentStackView: UIStackView!
@@ -37,9 +38,11 @@ final class MainViewController: UIViewController {
         operatorLabel.text = Strings.empty
     }
     
-    private func updateOperands(to value: String) {
+    private func updateOperands(to value: String, labelUpdate: Bool = true) {
         operandsValue = value
-        operandsLabel.text = value
+        if labelUpdate {
+            operandsLabel.text = value
+        }
     }
     
     private func updateOperator(to `operator`: String) {
@@ -66,6 +69,7 @@ final class MainViewController: UIViewController {
     
     @IBAction private func hitOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
+        if isResult { isResult = false }
         
         if operandsValue.isEmpty == false {
             expression.append(operatorValue + operandsValue)
@@ -77,6 +81,10 @@ final class MainViewController: UIViewController {
     
     @IBAction private func hitNumberButton(_ sender: UIButton) {
         guard let number = sender.currentTitle else { return }
+        if isResult {
+            isResult = false
+            hitAllClearButton(sender)
+        }
         if operandsValue.contains(Strings.point) && number == Strings.point { return }
 
         switch (operandsValue, number) {
@@ -101,19 +109,22 @@ final class MainViewController: UIViewController {
     
     @IBAction private func hitEqualsButton(_ sender: UIButton) {
         do {
-            expression.append(operatorValue + operandsValue)
-            insertStackView(with: operatorValue, operandsValue)
+            if operandsValue.isEmpty == false {
+                expression.append(operatorValue + operandsValue)
+                insertStackView(with: operatorValue, operandsValue)
+            }
             var formula = ExpressionParser.parse(from: expression)
             let result = try formula.result()
             
-            operandsLabel.text = result.numberFormat()!
+            initializeOperator()
+            initializeExpression()
+            operandsLabel.text = result.numberFormat() ?? Strings.nan
+            updateOperands(to: "\(Int(result))", labelUpdate: false)
+            isResult = true
         } catch {
             operandsLabel.text = Strings.nan
+            initializeOperands(labelUpdate: false)
         }
-        initializeOperands(labelUpdate: false)
-        initializeOperator()
-        initializeExpression()
-        initializeStackView()
     }
     
     @IBAction private func hitAllClearButton(_ sender: UIButton) {
