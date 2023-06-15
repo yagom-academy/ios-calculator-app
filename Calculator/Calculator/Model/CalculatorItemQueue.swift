@@ -8,10 +8,6 @@
 struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
     private(set) var queue: LinkedList = LinkedList<Element>()
     
-    var count: Int {
-        return queue.count
-    }
-    
     var isEmpty: Bool {
         return queue.isEmpty
     }

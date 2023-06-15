@@ -27,21 +27,20 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return NSDecimalNumber(decimal: Decimal(lhs) + Decimal(rhs)).doubleValue
+        return lhs + rhs
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return NSDecimalNumber(decimal: Decimal(lhs) - Decimal(rhs)).doubleValue
+        return lhs - rhs
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        guard rhs != 0 else {
-            return .nan
-        }
-        return NSDecimalNumber(decimal: Decimal(lhs) / Decimal(rhs)).doubleValue
+        let result = lhs / rhs
+        
+        return result.isInfinite ? .nan : result
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return NSDecimalNumber(decimal: Decimal(lhs) * Decimal(rhs)).doubleValue
+        return lhs * rhs
     }
 }

@@ -6,15 +6,13 @@
 //
 
 protocol Queueable {
-    associatedtype CalculateItem
+    associatedtype T
     
-    var queue: LinkedList<CalculateItem> { get }
-    var count: Int { get }
     var isEmpty: Bool { get }
     
-    mutating func enqueue(_ element: CalculateItem)
+    mutating func enqueue(_ element: T)
     
-    mutating func dequeue() -> CalculateItem?
+    mutating func dequeue() -> T?
     
     mutating func clearQueue()
 }
