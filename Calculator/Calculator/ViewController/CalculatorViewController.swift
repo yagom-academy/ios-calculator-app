@@ -20,6 +20,9 @@ class CalculatorViewController: UIViewController {
         super.viewDidLoad()
         
         setNUmberForatter()
+        clearStackView()
+        clearOperandLabel()
+        clearOperatorLabel()
     }
     
     @IBAction func touchDigit(_ sender: UIButton) {
@@ -36,12 +39,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchOperator(_ sender: UIButton) {
-        guard displayOperatorLabel.text != "0", userTyping == false else {
-            displayOperatorLabel.text = sender.currentTitle
-            return
-        }
+        guard let inputOperator = sender.currentTitle else { return }
         
         addFormula()
+        displayOperatorLabel.text = inputOperator
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
@@ -56,10 +57,9 @@ class CalculatorViewController: UIViewController {
             clearOperandLabel()
             clearOperatorLabel()
         case "CE":
-            clearOperandLabel()
             print("clearEntry")
         case "⁺⁄₋":
-            print("chageSign")
+            changeSign()
         case ".":
             print(".")
         case "00":
@@ -87,27 +87,11 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    private func addOperandLabel() {
-        
-    }
-    
     private func addStackView(_ `operator`: String, _ operands: String) {
         let label = UILabel()
         label.text = "\(`operator`) \(operands)"
         
         stackView.addArrangedSubview(label)
-    }
-
-    private func clearOperandLabel() {
-        displayOperandLabel.text = "0"
-    }
-    
-    private func clearOperatorLabel() {
-        displayOperatorLabel.text?.removeAll()
-    }
-    
-    private func clearStackView() {
-        stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
     private func changeSign() {
@@ -122,9 +106,8 @@ class CalculatorViewController: UIViewController {
         displayOperandLabel.text = operands
     }
     
-    private func calculateResult() -> String? {
+    private func clearEntry() {
         
-        return nil
     }
     
     private func setNUmberForatter() {
@@ -133,5 +116,17 @@ class CalculatorViewController: UIViewController {
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumSignificantDigits = 20
         numberFormatter.usesSignificantDigits = true
+    }
+    
+    private func clearOperandLabel() {
+        displayOperandLabel.text = "0"
+    }
+    
+    private func clearOperatorLabel() {
+        displayOperatorLabel.text?.removeAll()
+    }
+    
+    private func clearStackView() {
+        stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
 }
