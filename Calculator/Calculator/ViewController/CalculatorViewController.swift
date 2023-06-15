@@ -28,14 +28,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func touchDigit(_ sender: UIButton) {
         guard let digit = sender.currentTitle else { return }
         
-        if userTyping {
-            let currentText = displayOperandLabel.text!
-            displayOperandLabel.text = currentText + digit
-        } else {
-            displayOperandLabel.text = digit
-        }
-        
-        userTyping = true
+        addDisplayOperandsLabel(digit)
     }
     
     @IBAction func touchOperator(_ sender: UIButton) {
@@ -68,10 +61,22 @@ class CalculatorViewController: UIViewController {
             break
         }
     }
+    private func addDisplayOperandsLabel(_ input: String) {
+        guard let operands = displayOperandLabel.text,
+              let number = Double(operands + input),
+              let result = numberFormatter.string(for: number) else { return }
+        
+        if operands.contains(".") {
+            let result = operands + input
+            displayOperandLabel.text = result
+            return
+        }
+        
+        displayOperandLabel.text = result
+    }
     
     private func addFormula() {
-        guard let currentOperands = displayOperandLabel.text,
-              let operands = numberFormatter.string(for: Double(currentOperands)),
+        guard let operands = displayOperandLabel.text,
               let `operator` = displayOperatorLabel.text else { return }
         
         if formula.isEmpty && operands != "0" {
@@ -107,15 +112,11 @@ class CalculatorViewController: UIViewController {
     }
     
     private func clearEntry() {
-        
+    
     }
     
-    private func setNUmberForatter() {
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = -2
-        numberFormatter.maximumIntegerDigits = 20
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.usesSignificantDigits = true
+    private func dotButton() {
+        guard let opreand = displayOperandLabel.text else { return }
     }
     
     private func clearOperandLabel() {
@@ -128,5 +129,12 @@ class CalculatorViewController: UIViewController {
     
     private func clearStackView() {
         stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func setNUmberForatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = -2
+        numberFormatter.maximumIntegerDigits = 20
+        numberFormatter.maximumSignificantDigits = 20
     }
 }
