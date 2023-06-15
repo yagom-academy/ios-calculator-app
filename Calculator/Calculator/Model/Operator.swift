@@ -2,7 +2,7 @@
 //  Operator.swift
 //  Calculator
 //
-//  Created by Dasan on 2023/06/02.
+//  Created by Hyungmin Lee on 2023/06/02.
 //
 
 enum Operator: Character, CaseIterable, CalculateItem {
@@ -11,36 +11,38 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "÷"
     case multiply = "×"
     
-    func calculate(lhs: Double, rhs: Double) throws -> Double {
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        let result: Double
+        
         switch self {
         case .add:
-            return self.add(lhs: lhs, rhs: rhs)
+            result = add(lhs, rhs)
         case .subtract:
-            return self.subtract(lhs: lhs, rhs: rhs)
+            result = subtract(lhs, rhs)
         case .divide:
-            return try self.divide(lhs: lhs, rhs: rhs)
+            result = divide(lhs, rhs)
         case .multiply:
-            return self.multiply(lhs: lhs, rhs: rhs)
+            result = multiply(lhs, rhs)
         }
+        
+        return result
     }
     
-    private func add(lhs: Double, rhs: Double) -> Double {
+    private func add(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs + rhs
     }
     
-    private func subtract(lhs: Double, rhs: Double) -> Double {
+    private func subtract(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs - rhs
     }
     
-    private func divide(lhs: Double, rhs: Double) throws -> Double {
-        guard rhs != 0.0 else {
-            throw CalculatorError.notANumber
-        }
+    private func divide(_ lhs: Double, _ rhs: Double) -> Double {
+        let result = lhs / rhs
         
-        return lhs / rhs
+        return result.isInfinite ? .nan : result
     }
     
-    private func multiply(lhs: Double, rhs: Double) -> Double {
+    private func multiply(_ lhs: Double, _ rhs: Double) -> Double {
         return lhs * rhs
     }
 }
