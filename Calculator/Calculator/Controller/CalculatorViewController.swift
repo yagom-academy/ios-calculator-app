@@ -51,7 +51,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tapOperator(_ sender: UIButton) {
         let operatorText = unwrap(operatorLabel.text)
-        let operandText = unwrap(operandLabel.text)
+        let operandText = unwrap(operandLabel.text).removeTrailingDot
         let labelText = unwrap(sender.titleLabel?.text)
         
         if operandText.isZero, labelText == "=" {
@@ -61,13 +61,7 @@ class CalculatorViewController: UIViewController {
         } else if operandText.isZero {
             operatorLabel.text? = labelText
         } else {
-            let partialOperatorLabel: UILabel = makeUILabel(operatorText)
-            let partialOperandLabel: UILabel = makeUILabel(operandText.removeTrailingDot)
-            let partialStackView = makeUIStackView()
-            
-            partialStackView.addArrangedSubview(partialOperatorLabel)
-            partialStackView.addArrangedSubview(partialOperandLabel)
-            formulaStackView.addArrangedSubview(partialStackView)
+            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, operandText))
             
             formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
             operatorLabel.text = labelText
@@ -168,6 +162,17 @@ class CalculatorViewController: UIViewController {
         stackView.spacing = 8
         
         return stackView
+    }
+    
+    private func makePartialFormulaStackView(_ operatorText: String, _ operandText: String) -> UIStackView {
+        let operatorLabel = makeUILabel(operatorText)
+        let operandLabel = makeUILabel(operandText)
+        let partialStackView = makeUIStackView()
+        
+        partialStackView.addArrangedSubview(operatorLabel)
+        partialStackView.addArrangedSubview(operandLabel)
+        
+        return partialStackView
     }
     
     private func makeNumberFormat(for input: String) -> String {
