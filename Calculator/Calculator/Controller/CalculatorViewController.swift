@@ -34,23 +34,19 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapNumbersButton(_ sender: UIButton) {
-        if isComputable {
-            guard let inputNumberText = sender.titleLabel?.text,
-                  let numberLabelText = inputNumberLabel.text,
-                  let operatorLabelText = inputOperatorLabel.text else { return }
-            
-            let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
-                                                                                   with: CalculatorNamespace.Empty)
-            
-            if numberLabelText.count < 20 {
-                inputOperatorLabel.text = (formulaListStackView.subviews.isEmpty) ? (CalculatorNamespace.Empty) : operatorLabelText
-                if numberLabelText == CalculatorNamespace.Zero {
-                    inputNumberLabel.text = inputNumberText
-                } else {
-                    let resultNumberText = numberLabelTextWithoutComma + inputNumberText
-                    let doubleNumberText = Double(resultNumberText)
-                    inputNumberLabel.text = calculatorNumberFormatter.string(for: doubleNumberText)
-                }
+        guard let inputNumberText = sender.titleLabel?.text,
+              let numberLabelText = inputNumberLabel.text else { return }
+        
+        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
+                                                                               with: CalculatorNamespace.Empty)
+        
+        if isComputable, numberLabelText.count < 19 {
+            if numberLabelText == CalculatorNamespace.Zero {
+                inputNumberLabel.text = inputNumberText
+            } else {
+                let resultNumberText = numberLabelTextWithoutComma + inputNumberText
+                let doubleNumberText = Double(resultNumberText)
+                inputNumberLabel.text = calculatorNumberFormatter.string(for: doubleNumberText)
             }
         }
     }
@@ -62,7 +58,7 @@ class CalculatorViewController: UIViewController {
         let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
                                                                                with: CalculatorNamespace.Empty)
         
-        if numberLabelText.count < 20 {
+        if numberLabelText.count < 19 {
             let formattedNumberText = Double(numberLabelTextWithoutComma + inputNumberText)
             if numberLabelText == CalculatorNamespace.Zero {
                 inputNumberLabel.text = CalculatorNamespace.Zero
@@ -89,7 +85,7 @@ class CalculatorViewController: UIViewController {
         
         if inputOperatorText == CalculatorNamespace.Equal && inputNumberLabel.text == CalculatorNamespace.Zero {
             formulaString += operatorLabelText + numberLabelText
-        } else if inputNumberLabel.text == inputOperatorText {
+        } else if inputNumberLabel.text == CalculatorNamespace.Zero {
             inputOperatorLabel.text = inputOperatorText
         } else {
             let formulaStackView = makeStackView()
