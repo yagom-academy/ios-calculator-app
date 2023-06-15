@@ -8,75 +8,75 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
-    @IBOutlet weak var inputNumberLabel: UILabel!
-    @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet weak var allInputScrollView: UIScrollView!
-    @IBOutlet weak var allInputStackView: UIStackView!
+    @IBOutlet weak var operandLabel: UILabel!
+    @IBOutlet weak var operatorLabel: UILabel!
+    @IBOutlet weak var formulaScrollView: UIScrollView!
+    @IBOutlet weak var formulaStackView: UIStackView!
     
     private var formulaString = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetInputNumberLabel()
-        resetInputOperatorLabel()
-        resetAllInputStackView()
+        resetOperandLabel()
+        resetOperatorLabel()
+        resetFormulaStackView()
     }
 
     @IBAction func tapNumpad(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
-        let inputNumberLabelText = unwrap(inputNumberLabel.text)
+        let operandText = unwrap(operandLabel.text)
         
-        if inputNumberLabelText.isZero {
-            inputNumberLabel.text? = labelText
-        } else if inputNumberLabelText.count < 20 {
-            let newLabelText = inputNumberLabelText + labelText
-            inputNumberLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
+        if operandText.isZero {
+            operandLabel.text? = labelText
+        } else if operandText.count < 20 {
+            let newLabelText = operandText + labelText
+            operandLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
         }
     }
     
     @IBAction func tapZero(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if !unwrap(inputNumberLabel.text).isZero {
-            inputNumberLabel.text? += labelText
+        if !unwrap(operandLabel.text).isZero {
+            operandLabel.text? += labelText
         }
     }
     
     @IBAction func tapPoint(_ sender: UIButton) {
-        if !unwrap(inputNumberLabel.text).contains(unwrap(sender.titleLabel?.text)) {
-            inputNumberLabel.text? += unwrap(sender.titleLabel?.text)
+        if !unwrap(operandLabel.text).contains(unwrap(sender.titleLabel?.text)) {
+            operandLabel.text? += unwrap(sender.titleLabel?.text)
         }
     }
     
     @IBAction func tapOperator(_ sender: UIButton) {
-        let inputOperatorLabelText = unwrap(inputOperatorLabel.text)
-        let inputNumberLabelText = unwrap(inputNumberLabel.text)
+        let operatorText = unwrap(operatorLabel.text)
+        let operandText = unwrap(operandLabel.text)
         let labelText = unwrap(sender.titleLabel?.text)
         
-        if inputNumberLabelText.isZero, labelText == "=" {
-            formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
+        if operandText.isZero, labelText == "=" {
+            formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
             
-            allInputScrollView.scrollToBottom()
-        } else if inputNumberLabelText.isZero {
-            inputOperatorLabel.text? = labelText
+            formulaScrollView.scrollToBottom()
+        } else if operandText.isZero {
+            operatorLabel.text? = labelText
         } else {
-            let operatorLabel: UILabel = makeUILabel(inputOperatorLabelText)
+            let operatorLabel: UILabel = makeUILabel(operatorText)
             let operandLabel: UILabel = makeUILabel(
-                inputNumberLabelText.hasSuffix(".") ?
-                String(inputNumberLabelText.dropLast()) : inputNumberLabelText
+                operandText.hasSuffix(".") ?
+                String(operandText.dropLast()) : operandText
             )
-            let inputLabelStackView = makeUIStackView()
+            let partialStackView = makeUIStackView()
             
-            inputLabelStackView.addArrangedSubview(operatorLabel)
-            inputLabelStackView.addArrangedSubview(operandLabel)
-            allInputStackView.addArrangedSubview(inputLabelStackView)
+            partialStackView.addArrangedSubview(operatorLabel)
+            partialStackView.addArrangedSubview(operandLabel)
+            formulaStackView.addArrangedSubview(partialStackView)
             
-            formulaString += inputOperatorLabelText + inputNumberLabelText.replacingOccurrences(of: ",", with: "")
-            inputOperatorLabel.text? = labelText
+            formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
+            operatorLabel.text? = labelText
             
-            resetInputNumberLabel()
-            allInputScrollView.scrollToBottom()
+            resetOperandLabel()
+            formulaScrollView.scrollToBottom()
         }
     }
     
@@ -87,9 +87,9 @@ class CalculatorViewController: UIViewController {
             var formula = ExpressionParser.parse(from: formulaString)
             let result = try formula.result()
             
-            inputNumberLabel.text = makeNumberFormat(for: String(result))
+            operandLabel.text = makeNumberFormat(for: String(result))
             
-            resetInputOperatorLabel()
+            resetOperatorLabel()
             resetFormulaString()
         } catch let error as OperationError {
             switch error {
@@ -98,7 +98,7 @@ class CalculatorViewController: UIViewController {
             case .operatorNotEnoughError:
                 print(OperationError.operatorNotEnoughError)
             case .divideByZeroError:
-                inputNumberLabel.text = "NaN"
+                operandLabel.text = "NaN"
                 
                 print(OperationError.divideByZeroError)
             }
@@ -109,40 +109,40 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tapChangeSign(_ sender: UIButton) {
         let hyphenMinus = "-"
-        let numberLabelText = unwrap(inputNumberLabel.text)
+        let operandText = unwrap(operandLabel.text)
         
-        if numberLabelText.isZero {
+        if operandText.isZero {
             return
         }
         
-        if numberLabelText.hasPrefix(hyphenMinus) {
-            inputNumberLabel.text = String(numberLabelText.dropFirst())
+        if operandText.hasPrefix(hyphenMinus) {
+            operandLabel.text = String(operandText.dropFirst())
         } else {
-            inputNumberLabel.text = hyphenMinus + numberLabelText
+            operandLabel.text = hyphenMinus + operandText
         }
     }
     
     @IBAction func tapClearEntry(_ sender: UIButton) {
-        resetInputNumberLabel()
+        resetOperandLabel()
     }
     
     @IBAction func tapAllClear(_ sender: UIButton) {
-        resetInputNumberLabel()
-        resetInputOperatorLabel()
-        resetAllInputStackView()
+        resetOperandLabel()
+        resetOperatorLabel()
+        resetFormulaStackView()
         resetFormulaString()
     }
     
-    private func resetInputNumberLabel() {
-        inputNumberLabel.text = "0"
+    private func resetOperandLabel() {
+        operandLabel.text = "0"
     }
     
-    private func resetInputOperatorLabel() {
-        inputOperatorLabel.text = ""
+    private func resetOperatorLabel() {
+        operatorLabel.text = ""
     }
     
-    private func resetAllInputStackView() {
-        allInputStackView.subviews.forEach {
+    private func resetFormulaStackView() {
+        formulaStackView.subviews.forEach {
             $0.removeFromSuperview()
         }
     }

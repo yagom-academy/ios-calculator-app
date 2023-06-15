@@ -364,10 +364,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="allInputScrollView" destination="BOT-7g-vxv" id="UL0-aR-1sg"/>
-                        <outlet property="allInputStackView" destination="XRe-QE-UJf" id="0Cq-or-i77"/>
-                        <outlet property="inputNumberLabel" destination="Lwz-OF-XHD" id="Cd0-N9-0bo"/>
-                        <outlet property="inputOperatorLabel" destination="HPC-iy-qdm" id="Hcx-Oe-dic"/>
+                        <outlet property="formulaScrollView" destination="BOT-7g-vxv" id="UL0-aR-1sg"/>
+                        <outlet property="formulaStackView" destination="XRe-QE-UJf" id="0Cq-or-i77"/>
+                        <outlet property="operandLabel" destination="Lwz-OF-XHD" id="Cd0-N9-0bo"/>
+                        <outlet property="operatorLabel" destination="HPC-iy-qdm" id="Hcx-Oe-dic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
