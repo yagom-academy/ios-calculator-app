@@ -92,6 +92,10 @@ final class CalculatorMainViewController: UIViewController {
         }
         
         operandLabel.text?.append(zeroText)
+        
+        if !operandLabelText.contains(".") {
+            operandLabel.text = formatNumber(of: operandLabelNumber)
+        }
     }
     
     @IBAction private func touchUpPointButton(_ sender: UIButton) {
