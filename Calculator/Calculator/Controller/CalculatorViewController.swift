@@ -174,7 +174,10 @@ extension CalculatorViewController {
     }
     
     private func inputZero(_ count: Int) {
-        guard validateOperandInput(with: count), currentOperand != "0" else {
+        guard validateOperandInput(with: count) else {
+            return
+        }
+        guard currentOperand != "0" else {
             isPlaceholder = false
             return
         }
