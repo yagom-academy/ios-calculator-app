@@ -94,7 +94,7 @@ class CalculatorViewController: UIViewController {
                 print(OperationError.divideByZeroError)
             }
         } catch {
-            print("unexpected error")
+            print(CalculatorError.unexpectedError)
         }
     }
     
