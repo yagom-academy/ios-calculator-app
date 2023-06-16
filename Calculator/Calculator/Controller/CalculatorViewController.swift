@@ -67,45 +67,35 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapDotButton(_ sender: UIButton) {
-        let dot = CalculatorNamespace.dot
         guard let currentNumberLabelText = inputNumberLabel.text else { return }
-        guard !currentNumberLabelText.contains(dot) else { return }
+        guard !currentNumberLabelText.contains(CalculatorNamespace.dot) else { return }
         
-        inputNumberLabel.text = currentNumberLabelText + dot
+        inputNumberLabel.text = currentNumberLabelText + CalculatorNamespace.dot
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperatorText = sender.titleLabel?.text else { return }
         
-        if inputNumberLabel.text == CalculatorNamespace.zero {
-            inputOperatorLabel.text = inputOperatorText
-        } else {
-            addFormulaStackView(inputOperatorText)
-        }
-        
-        if inputOperatorText == CalculatorNamespace.equal {
-            inputOperatorLabel.text = CalculatorNamespace.empty
-        }
-        
-        isComputable = true
+        addFomulaStackViewWithoutZero(inputOperatorText)
     }
     
     @IBAction private func tapSignChangeButton(_ sender: UIButton) {
-        let minusSign = CalculatorNamespace.minus
         guard let currentNumberLabelText = inputNumberLabel.text,
               currentNumberLabelText != CalculatorNamespace.zero else { return }
         
-        if currentNumberLabelText.hasPrefix(minusSign) {
+        if currentNumberLabelText.hasPrefix(CalculatorNamespace.minus) {
             inputNumberLabel.text = String(currentNumberLabelText.dropFirst(1))
         } else {
-            inputNumberLabel.text = minusSign + currentNumberLabelText
+            inputNumberLabel.text = CalculatorNamespace.minus + currentNumberLabelText
         }
     }
     
     @IBAction private func tapEqualMarkButton(_ sender: UIButton) {
         guard isComputable else { return }
+        guard let inputOperatorText = sender.titleLabel?.text else { return }
         
-        tapOperatorButton(sender)
+        addFomulaStackViewWithoutZero(inputOperatorText)
+        
         var calculateResult = ExpressionParser.parse(from: formulaString)
         
         do {
@@ -196,6 +186,20 @@ extension CalculatorViewController {
         inputNumberLabel.text = CalculatorNamespace.zero
         inputOperatorLabel.text = CalculatorNamespace.empty
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+    }
+    
+    private func addFomulaStackViewWithoutZero(_ inputOperatorText: String) {
+        if inputNumberLabel.text == CalculatorNamespace.zero {
+            inputOperatorLabel.text = inputOperatorText
+        } else {
+            addFormulaStackView(inputOperatorText)
+        }
+        
+        if inputOperatorText == CalculatorNamespace.equal {
+            inputOperatorLabel.text = CalculatorNamespace.empty
+        }
+        
+        isComputable = true
     }
 }
 
