@@ -132,7 +132,7 @@ class CalculatorViewController: UIViewController {
         guard currentOperand != "NaN" else {
             return
         }
-        guard !(currentOperand == "0" && isPlaceholder) else {
+        guard currentOperand != "0" || isPlaceholder == false else {
             operatorLabel.text = sender.currentTitle
             expression = "0"
             return
