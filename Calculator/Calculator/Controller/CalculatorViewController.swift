@@ -97,15 +97,21 @@ extension CalculatorViewController {
         }
         
         let operandsText = OperandFormatter.formatStringOperand(operands)
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title3)
-        label.textColor = .white
-        label.textAlignment = .right
-        label.text = "\(`operator`) \(operandsText)"
+        let label = setUpCalculationDetailsLabel(`operator`, operandsText)
         
         calculationDetailsStackView.addArrangedSubview(label)
         calculationDetailsScrollView.layoutIfNeeded()
         calculationDetailsScrollView.scrollToBottom(animated: false)
+    }
+    
+    private func setUpCalculationDetailsLabel(_ `operator`: String, _ operands: String) -> UILabel {
+        let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
+        label.textColor = .white
+        label.textAlignment = .right
+        label.text = "\(`operator`) \(operands)"
+        
+        return label
     }
     
     private func clearCalculationDetailsStackView() {
