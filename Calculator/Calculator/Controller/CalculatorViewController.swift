@@ -67,7 +67,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapPeriodButton(_ sender: UIButton) {
-        let period = CalculatorNamespace.period
+        let period = CalculatorNamespace.dot
         guard let currentNumberLabelText = inputNumberLabel.text else { return }
         
         inputNumberLabel.text = currentNumberLabelText.contains(period) ? currentNumberLabelText : currentNumberLabelText + period
@@ -176,7 +176,7 @@ extension CalculatorViewController {
         
         let formulaStackView = makeStackView()
         let operatorLabel = makeLabelInStackView(operatorLabelText)
-        let formattedNumberText = currentNumberLabelText.hasSuffix(CalculatorNamespace.period) ? String(currentNumberLabelText.dropLast(1)) : currentNumberLabelText
+        let formattedNumberText = currentNumberLabelText.hasSuffix(CalculatorNamespace.dot) ? String(currentNumberLabelText.dropLast(1)) : currentNumberLabelText
         let numberLabel = makeLabelInStackView(formattedNumberText)
         
         formulaStackView.addArrangedSubview(operatorLabel)
@@ -205,7 +205,7 @@ extension CalculatorViewController {
         static let naN: String = "NaN"
         static let minus: String = "-"
         static let doubleZero: String = "00"
-        static let period: String = "."
+        static let dot: String = "."
         static let equal: String = "="
         static let comma: String = ","
     }
