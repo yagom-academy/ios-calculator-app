@@ -8,7 +8,7 @@
 struct CalculatorItemQueue<Element: CalculateItem> {
 	private var head: Node<Element>? = nil
 	private var tail: Node<Element>? = nil
-	private(set) var count: Int = 0
+	private var count: Int = 0
     
     init(_ elements: [Element] = []) {
         for element in elements {
