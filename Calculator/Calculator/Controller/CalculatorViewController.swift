@@ -163,8 +163,6 @@ extension CalculatorViewController {
         guard let currentNumberLabelText = inputNumberLabel.text,
               let operatorLabelText = inputOperatorLabel.text else { return }
         
-        let formulaStackView = makeStackView()
-        let operatorLabel = makeLabelInStackView(operatorLabelText)
         var formattedNumberText: String
         
         if currentNumberLabelText.hasSuffix(CalculatorNamespace.dot) {
@@ -172,12 +170,8 @@ extension CalculatorViewController {
         } else {
             formattedNumberText = currentNumberLabelText
         }
-
-        let numberLabel = makeLabelInStackView(formattedNumberText)
         
-        formulaStackView.addArrangedSubview(operatorLabel)
-        formulaStackView.addArrangedSubview(numberLabel)
-        formulaListStackView.addArrangedSubview(formulaStackView)
+        configureFormulaStackView(operatorLabelText, formattedNumberText)
         
         formulaString += operatorLabelText + currentNumberLabelText
         
@@ -205,6 +199,16 @@ extension CalculatorViewController {
         }
         
         isComputable = true
+    }
+    
+    private func configureFormulaStackView(_ operator: String,_ operand: String) {
+        let formulaStackView = makeStackView()
+        let operatorLabel = makeLabelInStackView(`operator`)
+        let numberLabel = makeLabelInStackView(operand)
+        
+        formulaStackView.addArrangedSubview(operatorLabel)
+        formulaStackView.addArrangedSubview(numberLabel)
+        formulaListStackView.addArrangedSubview(formulaStackView)
     }
 }
 
