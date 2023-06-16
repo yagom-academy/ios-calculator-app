@@ -78,11 +78,24 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addDisplayOperandsLabel(_ input: String) {
-        guard let operands = displayOperandLabel.text,
-              let number = Double(operands + input),
+        if displayOperandLabel.text?.contains(",") != false {
+            displayOperandLabel.text = displayOperandLabel.text?.components(separatedBy:
+                                                                                ",").joined()
+        }
+        
+        guard let operand = displayOperandLabel.text?.replacingOccurrences(of: ",", with: ""),
+              let number = Double(operand + input),
               let result = numberFormatter.string(for: number) else { return }
         
-        displayOperandLabel.text = result
+        if input == "." && operand.contains(".") == false {
+            let result = operand + input
+            displayOperandLabel.text = result
+        } else if (input == "00" || input == "0") && operand.contains(".") {
+            let result = operand + input
+            displayOperandLabel.text = result
+        } else {
+            displayOperandLabel.text = result
+        }
     }
     
     private func addFormula() {
