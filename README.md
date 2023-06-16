@@ -76,7 +76,7 @@
 ### 1️⃣ 기능함수 분기처리
 
 **문제점**
-- 기존 UML에서는 componentsByOperator() 라는 네이밍 뜻대로 연산자를 기준으로 해서 피연산자를 반환해주는 것이 맞지만 구현한 코드에서는 formula에 연산자와 피연산자 간에 빈칸을 두어 그 공백을 기준으로 split()하여 각 요소들을 제네릭으로 변환한 타입에 맞춰 각각 큐에 넣어줬기 때문에 타입에 따른 enqueue연산을 수행하는 메서드를 각각 생성해줄 필요성을 느꼈다.
+- 기존 UML에서는 `componentsByOperator()` 라는 네이밍 뜻대로 연산자를 기준으로 해서 피연산자를 반환해주는 것이 맞지만 구현한 코드에서는 `formula`에 연산자와 피연산자 간에 빈칸을 두어 그 공백을 기준으로 `split()`하여 각 요소들을 제네릭으로 변환한 타입에 맞춰 각각 큐에 넣어줬기 때문에 타입에 따른 `enqueue`연산을 수행하는 메서드를 각각 생성해줄 필요성을 느꼈다.
 
 <details>
 <summary>본문 코드 내용</summary>
@@ -93,7 +93,7 @@ static private func componentsByOperators(from input: String) -> [String] {
 
 **해결방안**
 
-- operandComponents와 operatroComponents를 각각 다른 메서드로 기능을 분리하여 가독성과 유지보수성을 높였습니다.
+- `operandComponents`와 `operatroComponents`를 각각 다른 메서드로 기능을 분리하여 가독성과 유지보수성을 높였습니다.
 <details>
 <summary>본문 코드 내용</summary>
     
@@ -129,7 +129,7 @@ static private func collectOperators(from input: String) -> CalculatorItemQueue<
 
 ### 2️⃣ 매직 넘버, 매직 리터럴 처리
 
-**문제점**
+**문제점**  
 - 계산기 내부에서는 숫자 이외에도 `.`, `,`, `-`와 같은 기호들이 많이 사용되었고 그러다보니 매직 넘버와 매직 리터럴로 값을 할당해야하거나 처리하는 부분이 너무 많아졌습니다. 
 
 
@@ -138,7 +138,7 @@ static private func collectOperators(from input: String) -> CalculatorItemQueue<
 </br>
 
 **해결방안**
-- CalculatorViewController 내부에서 사용할 수 있는 `네임스페이스`를 하나 만들어 매직 리터럴들을 처리해 주었습니다.
+- `CalculatorViewController` 내부에서 사용할 수 있는 `네임스페이스`를 하나 만들어 매직 리터럴들을 처리해 주었습니다.
 
 <details>
 <summary>본문 코드 내용</summary>
@@ -165,7 +165,7 @@ extension CalculatorViewController {
 ### 3️⃣ DecimalSign 값 처리
 
 **문제점**
-- 4자리수 이상의 숫자가 입력되어 NumberFormatter를 거친 후 저장된 displayOperandLabel.text에는 decimal 값을 내포하고 있기 때문에 parse()로 연산와 피연산자를 구분하여 result()로 연산 결과를 리턴해올 수 없었습니다.
+- 4자리수 이상의 숫자가 입력되어 `NumberFormatter` 거친 후 저장된 `displayOperandLabel.text`에는 `decimal`값을 내포하고 있기 때문에 `parse()`로 연산와 피연산자를 구분하여 `result()`로 연산 결과를 리턴해올 수 없었습니다.
 
 <details>
 <summary>본문 코드 내용</summary>
@@ -183,7 +183,7 @@ private func addFormula() {
 
 **해결방안**
 
-- 따라서 문자열의 특정 값을 다른 값으로 대체해주는 메서드인 replacingOccurrences(of: with:)를 이용하여 "," 값을 빈값으로 대체해주며 문자열 formula에 다시 반환하여 연산이 이루어지도록 해결하였습니다.
+- 따라서 문자열의 특정 값을 다른 값으로 대체해주는 메서드인 `replacingOccurrences(of: with:)`를 이용하여 "," 값을 빈값으로 대체해주며 문자열 `formula` 다시 반환하여 연산이 이루어지도록 해결하였습니다.
 
 <details>
 <summary>본문 코드 내용</summary>
