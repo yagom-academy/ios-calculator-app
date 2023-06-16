@@ -13,7 +13,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var formulaListStackView: UIStackView!
     @IBOutlet weak var formulaListScrollView: UIScrollView!
     
-    private var formulaString: String = CalculatorNamespace.Empty
+    private var formulaString: String = CalculatorNamespace.empty
     private var isComputable: Bool = true
     
     private var calculatorNumberFormatter: NumberFormatter = {
@@ -28,8 +28,8 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputNumberLabel.text = CalculatorNamespace.Zero
-        inputOperatorLabel.text = CalculatorNamespace.Empty
+        inputNumberLabel.text = CalculatorNamespace.zero
+        inputOperatorLabel.text = CalculatorNamespace.empty
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
@@ -37,11 +37,11 @@ class CalculatorViewController: UIViewController {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
-        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
-                                                                               with: CalculatorNamespace.Empty)
+        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
+                                                                               with: CalculatorNamespace.empty)
         
         if isComputable, numberLabelText.count < 19 {
-            if numberLabelText == CalculatorNamespace.Zero {
+            if numberLabelText == CalculatorNamespace.zero {
                 inputNumberLabel.text = inputNumberText
             } else {
                 let resultNumberText = numberLabelTextWithoutComma + inputNumberText
@@ -55,13 +55,13 @@ class CalculatorViewController: UIViewController {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
-        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.Comma,
-                                                                               with: CalculatorNamespace.Empty)
+        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
+                                                                               with: CalculatorNamespace.empty)
         
         if numberLabelText.count < 19 {
             let formattedNumberText = Double(numberLabelTextWithoutComma + inputNumberText)
-            if numberLabelText == CalculatorNamespace.Zero {
-                inputNumberLabel.text = CalculatorNamespace.Zero
+            if numberLabelText == CalculatorNamespace.zero {
+                inputNumberLabel.text = CalculatorNamespace.zero
             } else {
                 inputNumberLabel.text = calculatorNumberFormatter.string(for: formattedNumberText)
             }
@@ -69,35 +69,32 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapPeriodButton(_ sender: UIButton) {
-        let period = CalculatorNamespace.Period
+        let period = CalculatorNamespace.period
         guard let numberLabelText = inputNumberLabel.text else { return }
         
-        inputNumberLabel.text =
-        (numberLabelText.contains(period)) ?
-        (numberLabelText) :
-        (numberLabelText + period)
+        inputNumberLabel.text = numberLabelText.contains(period) ? numberLabelText : numberLabelText + period
     }
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperatorText = sender.titleLabel?.text else { return }
         
-        if inputNumberLabel.text == CalculatorNamespace.Zero {
+        if inputNumberLabel.text == CalculatorNamespace.zero {
             inputOperatorLabel.text = inputOperatorText
         } else {
             addFormulaStackView(inputOperatorText)
         }
         
-        if inputOperatorText == CalculatorNamespace.Equal {
-            inputOperatorLabel.text = CalculatorNamespace.Empty
+        if inputOperatorText == CalculatorNamespace.equal {
+            inputOperatorLabel.text = CalculatorNamespace.empty
         }
         
         isComputable = true
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
-        let minusSign = CalculatorNamespace.Minus
+        let minusSign = CalculatorNamespace.minus
         guard let numberLabelText = inputNumberLabel.text,
-              numberLabelText != CalculatorNamespace.Zero else { return }
+              numberLabelText != CalculatorNamespace.zero else { return }
         
         if numberLabelText.hasPrefix(minusSign) {
             inputNumberLabel.text = String(numberLabelText.dropFirst(1))
@@ -118,15 +115,15 @@ class CalculatorViewController: UIViewController {
             inputNumberLabel.text = formulaResult
             
             isComputable = false
-            formulaString = CalculatorNamespace.Empty
+            formulaString = CalculatorNamespace.empty
         } catch CalculatorError.dividedByZero {
-            inputNumberLabel.text = CalculatorNamespace.NaN
+            inputNumberLabel.text = CalculatorNamespace.naN
             isComputable = false
         } catch {
-            let alert = UIAlertController(title: "계산 오류입니다.",
-                                          message: "확인 버튼을 눌러주시기 바랍니다.",
+            let alert = UIAlertController(title: AlertText.errorTitle,
+                                          message: AlertText.errorMessage,
                                           preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "확인",
+            let cancel = UIAlertAction(title: AlertText.errorConfirm,
                                        style: .default)
             alert.addAction(cancel)
             present(alert, animated: true)
@@ -134,16 +131,16 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapAllClearButton(_ sender: UIButton) {
-        inputOperatorLabel.text = CalculatorNamespace.Empty
-        inputNumberLabel.text = CalculatorNamespace.Zero
+        inputOperatorLabel.text = CalculatorNamespace.empty
+        inputNumberLabel.text = CalculatorNamespace.zero
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
         isComputable = true
-        formulaString = CalculatorNamespace.Empty
+        formulaString = CalculatorNamespace.empty
     }
     
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
         isComputable = true
-        inputNumberLabel.text = CalculatorNamespace.Zero
+        inputNumberLabel.text = CalculatorNamespace.zero
     }
 }
 
@@ -181,10 +178,7 @@ extension CalculatorViewController {
         
         let formulaStackView = makeStackView()
         let operatorLabel = makeLabelInStackView(operatorLabelText)
-        let formattedNumberText =
-        numberLabelText.hasSuffix(CalculatorNamespace.Period) ?
-        String(numberLabelText.dropLast(1)) :
-        numberLabelText
+        let formattedNumberText = numberLabelText.hasSuffix(CalculatorNamespace.period) ? String(numberLabelText.dropLast(1)) : numberLabelText
         let numberLabel = makeLabelInStackView(formattedNumberText)
         
         formulaStackView.addArrangedSubview(operatorLabel)
@@ -194,8 +188,27 @@ extension CalculatorViewController {
         formulaString += operatorLabelText + numberLabelText
         
         inputOperatorLabel.text = inputOperatorText
-        inputNumberLabel.text = CalculatorNamespace.Zero
+        inputNumberLabel.text = CalculatorNamespace.zero
         
         setAutoScrollToBottom()
+    }
+}
+
+extension CalculatorViewController {
+    private enum CalculatorNamespace {
+        static let empty: String = ""
+        static let zero: String = "0"
+        static let naN: String = "NaN"
+        static let minus: String = "-"
+        static let doubleZero: String = "00"
+        static let period: String = "."
+        static let equal: String = "="
+        static let comma: String = ","
+    }
+    
+    private enum AlertText {
+        static let errorTitle: String =  "계산 오류입니다."
+        static let errorMessage: String = "확인 버튼을 눌러주시기 바랍니다."
+        static let errorConfirm: String = "확인"
     }
 }
