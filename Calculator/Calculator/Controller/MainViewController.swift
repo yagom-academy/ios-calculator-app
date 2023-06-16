@@ -65,7 +65,9 @@ final class MainViewController: UIViewController {
     }
     
     private func insertStackView(with strings: String...) {
-        let labels = strings.map { createFormulaLabel(text: $0) }
+        let labels = strings.map {
+            createFormulaLabel(text: Double($0)?.changeNumberFormat() ?? $0)
+        }
         let subStackView = createSubStackView(with: labels)
         
         expressionStackView.addArrangedSubview(subStackView)
@@ -141,7 +143,7 @@ final class MainViewController: UIViewController {
             isResult = false
             clearAll()
         }
-        if operandsValue.contains(CalculatorNameSpace.dot) { return }
+        guard operandsValue.contains(CalculatorNameSpace.dot) == false else { return }
         
         switch operandsValue {
         case CalculatorNameSpace.empty:
@@ -165,6 +167,7 @@ final class MainViewController: UIViewController {
     }
     
     @IBAction private func tapEqualsButton(_ sender: UIButton) {
+        if isResult { return }
         do {
             if operandsValue.isEmpty == false {
                 expression.append(operatorValue + operandsValue)
