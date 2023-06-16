@@ -9,7 +9,6 @@ import UIKit
 class CalculatorViewController: UIViewController {
     private var userTyping = false
     private var formula = ""
-    private var initalNumber = 0
     private let numberFormatter = NumberFormatter()
     
     @IBOutlet weak var displayOperandLabel: UILabel!
@@ -39,7 +38,20 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
-        guard userTyping == false else { return }
+        guard let operand = displayOperandLabel.text,
+              let `operator` = displayOperatorLabel.text else { return }
+        
+        addFormula()
+        guard let result = calculateFormula() else { return }
+        
+        if `operator` == String(Operator.divide.rawValue) && operand == "0" {
+            displayOperandLabel.text = "NaN"
+        } else {
+            displayOperandLabel.text = result
+            clearStackView()
+        }
+        clearOperandLabel()
+        clearFormula()
     }
     
     @IBAction func touchMenu(_ sender: UIButton) {
@@ -61,6 +73,7 @@ class CalculatorViewController: UIViewController {
             break
         }
     }
+    
     private func addDisplayOperandsLabel(_ input: String) {
         guard let operands = displayOperandLabel.text,
               let number = Double(operands + input),
@@ -120,8 +133,8 @@ class CalculatorViewController: UIViewController {
         displayOperandLabel.text = operands
     }
     
-    private func clearEntry() {
-    
+    private func clearFormula() {
+        formula.removeAll()
     }
     
     private func dotButton() {
