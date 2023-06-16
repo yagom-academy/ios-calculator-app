@@ -16,12 +16,7 @@ enum OperandFormatter {
         numberFormatter.maximumIntegerDigits = 12
         numberFormatter.roundingMode = .halfUp
         
-        guard let numberFormatted = numberFormatter.string(for: operandNumber)
-        else {
-            return CalculatorNamespace.empty
-        }
-        
-        return numberFormatted
+        return numberFormatter.string(for: operandNumber) ?? CalculatorNamespace.empty
     }
     
     static func formatInput(_ operand: String) -> String {

@@ -15,11 +15,10 @@ struct OperationManager {
     
     mutating func calculateFormula() -> String {
         var parsedFormula = ExpressionParser.parse(from: formula)
-        let result = OperandFormatter.formatStringOperand(String(parsedFormula.result()))
         isCalculate = true
         clearFormula()
         
-        return result
+        return OperandFormatter.formatStringOperand(String(parsedFormula.result()))
     }
 
     @discardableResult
