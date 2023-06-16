@@ -8,10 +8,10 @@ import UIKit
 
 class CalculatorViewController: UIViewController {
     
-    @IBOutlet weak var inputNumberLabel: UILabel!
-    @IBOutlet weak var inputOperatorLabel: UILabel!
-    @IBOutlet weak var formulaListStackView: UIStackView!
-    @IBOutlet weak var formulaListScrollView: UIScrollView!
+    @IBOutlet weak private var inputNumberLabel: UILabel!
+    @IBOutlet weak private var inputOperatorLabel: UILabel!
+    @IBOutlet weak private var formulaListStackView: UIStackView!
+    @IBOutlet weak private var formulaListScrollView: UIScrollView!
     
     private var formulaString: String = CalculatorNamespace.empty
     private var isComputable: Bool = true
@@ -28,12 +28,10 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        inputNumberLabel.text = CalculatorNamespace.zero
-        inputOperatorLabel.text = CalculatorNamespace.empty
-        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        setCalculator()
     }
     
-    @IBAction func tapNumbersButton(_ sender: UIButton) {
+    @IBAction private func tapNumbersButton(_ sender: UIButton) {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
@@ -51,7 +49,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapSerialZeroButton(_ sender: UIButton) {
+    @IBAction private func tapSerialZeroButton(_ sender: UIButton) {
         guard let inputNumberText = sender.titleLabel?.text,
               let numberLabelText = inputNumberLabel.text else { return }
         
@@ -68,14 +66,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapPeriodButton(_ sender: UIButton) {
+    @IBAction private func tapPeriodButton(_ sender: UIButton) {
         let period = CalculatorNamespace.period
         guard let numberLabelText = inputNumberLabel.text else { return }
         
         inputNumberLabel.text = numberLabelText.contains(period) ? numberLabelText : numberLabelText + period
     }
     
-    @IBAction func tapOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperatorText = sender.titleLabel?.text else { return }
         
         if inputNumberLabel.text == CalculatorNamespace.zero {
@@ -91,7 +89,7 @@ class CalculatorViewController: UIViewController {
         isComputable = true
     }
     
-    @IBAction func tapChangeSignButton(_ sender: UIButton) {
+    @IBAction private func tapChangeSignButton(_ sender: UIButton) {
         let minusSign = CalculatorNamespace.minus
         guard let numberLabelText = inputNumberLabel.text,
               numberLabelText != CalculatorNamespace.zero else { return }
@@ -103,7 +101,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapEqualMarkButton(_ sender: UIButton) {
+    @IBAction private func tapEqualMarkButton(_ sender: UIButton) {
         guard isComputable else { return }
         
         tapOperatorButton(sender)
@@ -130,7 +128,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapAllClearButton(_ sender: UIButton) {
+    @IBAction private func tapAllClearButton(_ sender: UIButton) {
         inputOperatorLabel.text = CalculatorNamespace.empty
         inputNumberLabel.text = CalculatorNamespace.zero
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
@@ -138,14 +136,14 @@ class CalculatorViewController: UIViewController {
         formulaString = CalculatorNamespace.empty
     }
     
-    @IBAction func tapClearEntryButton(_ sender: UIButton) {
+    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
         isComputable = true
         inputNumberLabel.text = CalculatorNamespace.zero
     }
 }
 
 extension CalculatorViewController {
-    func makeStackView() -> UIStackView {
+    private func makeStackView() -> UIStackView {
         let formulaStackView: UIStackView = UIStackView()
         
         formulaStackView.axis = .horizontal
@@ -154,7 +152,7 @@ extension CalculatorViewController {
         return formulaStackView
     }
     
-    func makeLabelInStackView(_ input: String) -> UILabel {
+    private func makeLabelInStackView(_ input: String) -> UILabel {
         let inputLabel: UILabel = UILabel()
         
         inputLabel.text = input
@@ -163,7 +161,7 @@ extension CalculatorViewController {
         return inputLabel
     }
     
-    func setAutoScrollToBottom() {
+    private func setAutoScrollToBottom() {
         formulaListScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0,
                                    y: formulaListScrollView.contentSize.height - formulaListScrollView.bounds.height)
@@ -172,7 +170,7 @@ extension CalculatorViewController {
         }
     }
     
-    func addFormulaStackView(_ inputOperatorText: String) {
+    private func addFormulaStackView(_ inputOperatorText: String) {
         guard let numberLabelText = inputNumberLabel.text,
               let operatorLabelText = inputOperatorLabel.text else { return }
         
@@ -191,6 +189,12 @@ extension CalculatorViewController {
         inputNumberLabel.text = CalculatorNamespace.zero
         
         setAutoScrollToBottom()
+    }
+    
+    private func setCalculator() {
+        inputNumberLabel.text = CalculatorNamespace.zero
+        inputOperatorLabel.text = CalculatorNamespace.empty
+        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
 }
 
