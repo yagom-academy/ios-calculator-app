@@ -165,7 +165,14 @@ extension CalculatorViewController {
         
         let formulaStackView = makeStackView()
         let operatorLabel = makeLabelInStackView(operatorLabelText)
-        let formattedNumberText = currentNumberLabelText.hasSuffix(CalculatorNamespace.dot) ? String(currentNumberLabelText.dropLast(1)) : currentNumberLabelText
+        var formattedNumberText: String
+        
+        if currentNumberLabelText.hasSuffix(CalculatorNamespace.dot) {
+            formattedNumberText = String(currentNumberLabelText.dropLast(1))
+        } else {
+            formattedNumberText = currentNumberLabelText
+        }
+
         let numberLabel = makeLabelInStackView(formattedNumberText)
         
         formulaStackView.addArrangedSubview(operatorLabel)
