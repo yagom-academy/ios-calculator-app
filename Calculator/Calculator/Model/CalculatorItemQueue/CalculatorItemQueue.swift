@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Dasan on 2023/05/30.
+//  Created by Zion & Dasan on 2023/05/30.
 //
 
 protocol Queueable {
