@@ -18,33 +18,33 @@ final class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeAll()
+        clearAll()
     }
 
-    private func initializeAll() {
-        initializeOperands()
-        initializeOperator()
-        initializeExpression()
-        initializeStackView()
+    private func clearAll() {
+        clearOperands()
+        clearOperator()
+        clearExpression()
+        clearStackView()
     }
     
-    private func initializeExpression() {
+    private func clearExpression() {
         expression = Strings.empty
     }
     
-    private func initializeOperands(labelUpdate: Bool = true) {
+    private func clearOperands(labelUpdate: Bool = true) {
         operandsValue = Strings.empty
         if labelUpdate {
             operandsLabel.text = Strings.zero
         }
     }
     
-    private func initializeOperator() {
+    private func clearOperator() {
         operatorValue = Strings.empty
         operatorLabel.text = Strings.empty
     }
     
-    private func initializeStackView() {
+    private func clearStackView() {
         guard expressionStackView.subviews.count > 0 else { return }
         
         expressionStackView.subviews.forEach { subview in
@@ -52,7 +52,7 @@ final class MainViewController: UIViewController {
         }
     }
     
-    @IBAction private func hitOperatorButton(_ sender: UIButton) {
+    @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let `operator` = sender.currentTitle else { return }
         if isResult { isResult = false }
         if operandsValue.isEmpty == false {
@@ -61,7 +61,7 @@ final class MainViewController: UIViewController {
         }
         
         updateOperator(to: `operator`)
-        initializeOperands()
+        clearOperands()
     }
     
     private func insertStackView(with strings: String...) {
@@ -78,27 +78,27 @@ final class MainViewController: UIViewController {
         operatorLabel.text = `operator`
     }
     
-    @IBAction private func hitNumberButton(_ sender: UIButton) {
+    @IBAction private func tapNumberButton(_ sender: UIButton) {
         if isResult {
             isResult = false
-            initializeAll()
+            clearAll()
         }
-        guard let number = sender.currentTitle else { return }
-        if operandsValue.contains(Strings.point) && number == Strings.point { return }
+        guard let selectedNumber = sender.currentTitle else { return }
+        if operandsValue.contains(Strings.dot) && selectedNumber == Strings.dot { return }
         
-        switch (operandsValue, number) {
+        switch (operandsValue, selectedNumber) {
         case (Strings.zero, Strings.zero),
              (Strings.zero, Strings.doubleZero),
              (Strings.empty, Strings.zero) where expression.isEmpty,
              (Strings.empty, Strings.doubleZero):
             return
-        case (Strings.empty, Strings.point):
-             updateOperands(to: Strings.zero + number)
+        case (Strings.empty, Strings.dot):
+             updateOperands(to: Strings.zero + selectedNumber)
         case (Strings.zero, _),
              (Strings.empty, _):
-             updateOperands(to: number)
+             updateOperands(to: selectedNumber)
         default:
-             updateOperands(to: operandsValue + number)
+             updateOperands(to: operandsValue + selectedNumber)
         }
 
         if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
@@ -106,14 +106,14 @@ final class MainViewController: UIViewController {
         }
     }
     
-    private func updateOperands(to value: String, labelUpdate: Bool = true) {
+    private func updateOperands(to value: String, willUpdateLabel: Bool = true) {
         operandsValue = value
-        if labelUpdate {
+        if willUpdateLabel {
             operandsLabel.text = value
         }
     }
     
-    @IBAction private func hitEqualsButton(_ sender: UIButton) {
+    @IBAction private func tapEqualsButton(_ sender: UIButton) {
         do {
             if operandsValue.isEmpty == false {
                 expression.append(operatorValue + operandsValue)
@@ -124,26 +124,26 @@ final class MainViewController: UIViewController {
             let result = try formula.result()
             let formattedResult = result.changeNumberFormat() ?? Strings.nan
 
-            initializeOperator()
-            initializeExpression()
+            clearOperator()
+            clearExpression()
             operandsLabel.text = formattedResult
-            updateOperands(to: "\(result)", labelUpdate: false)
+            updateOperands(to: "\(result)", willUpdateLabel: false)
             isResult = true
         } catch {
             operandsLabel.text = Strings.nan
-            initializeOperands(labelUpdate: false)
+            clearOperands(labelUpdate: false)
         }
     }
     
-    @IBAction private func hitAllClearButton(_ sender: UIButton) {
-        initializeAll()
+    @IBAction private func tapAllClearButton(_ sender: UIButton) {
+        clearAll()
     }
     
-    @IBAction private func hitClearEntryButton(_ sender: UIButton) {
-        initializeOperands()
+    @IBAction private func tapClearEntryButton(_ sender: UIButton) {
+        clearOperands()
     }
     
-    @IBAction private func hitChangeSignButton(_ sender: UIButton) {
+    @IBAction private func tapChangeSignButton(_ sender: UIButton) {
         guard operandsValue.isEmpty == false else { return }
         if operandsValue.hasPrefix(Strings.minus) {
             updateOperands(to: String(operandsValue.dropFirst()))
@@ -180,7 +180,7 @@ extension MainViewController {
     private enum Strings {
         static let empty = ""
         static let zero = "0"
-        static let point = "."
+        static let dot = "."
         static let doubleZero = "00"
         static let minus = "-"
         static let nan = "NaN"
