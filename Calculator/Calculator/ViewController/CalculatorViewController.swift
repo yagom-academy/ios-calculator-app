@@ -6,7 +6,7 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
     private var userTyping = false
     private var formula = ""
     private let numberFormatter = NumberFormatter()
@@ -18,26 +18,26 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setNumberForatter()
+        setNumberFormatter()
         clearStackView()
         clearOperandLabel()
         clearOperatorLabel()
     }
     
-    @IBAction func touchDigit(_ sender: UIButton) {
+    @IBAction private func touchDigitButton(_ sender: UIButton) {
         guard let digit = sender.currentTitle else { return }
         
         addDisplayOperandsLabel(digit)
     }
     
-    @IBAction func touchOperator(_ sender: UIButton) {
+    @IBAction private func touchOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle else { return }
         
         addFormula()
         displayOperatorLabel.text = inputOperator
     }
     
-    @IBAction func touchCalculate(_ sender: UIButton) {
+    @IBAction private func touchCalculateButton(_ sender: UIButton) {
         guard let operands = displayOperandLabel.text,
               let `operator` = displayOperatorLabel.text else { return }
         
@@ -55,7 +55,7 @@ class CalculatorViewController: UIViewController {
         clearOperatorLabel()
     }
 
-    @IBAction func touchMenu(_ sender: UIButton) {
+    @IBAction private func touchMenuButton(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
         
         switch title {
@@ -150,7 +150,7 @@ class CalculatorViewController: UIViewController {
         stackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
     }
     
-    private func setNumberForatter() {
+    private func setNumberFormatter() {
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.maximumIntegerDigits = 20
