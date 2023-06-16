@@ -5,22 +5,14 @@
 //  Created by Zion & Dasan on 2023/05/30.
 //
 
-protocol Queueable {
-    associatedtype T
+struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
+    private var queue: LinkedList<Element> = LinkedList()
     
-    init()
-    mutating func enqueue(_ data: T)
-    mutating func dequeue() -> T?
-}
-
-struct CalculatorItemQueue<T: CalculateItem>: Queueable {
-    private var queue: LinkedList<T> = LinkedList()
-    
-    mutating func enqueue(_ data: T) {
+    mutating func enqueue(_ data: Element) {
         queue.append(data)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return queue.removeFirst()
     }
 }

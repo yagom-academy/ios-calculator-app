@@ -11,15 +11,15 @@ let maximumPointDigits = 5
 let maximumOperandDigits = 20
 
 final class CalculatorViewController: UIViewController {
-    private var inputFormula: String = String()
+    private var inputFormula = String()
     private var numberFormatter = NumberFormatter()
     private lazy var operandFormatter = OperandFormatter(numberFormatter)
-    private var isResult: Bool = false
+    private var isResult = false
     private var isFirstArithmeticFormula: Bool {
-        return calculateStackView.subviews.count == 0
+        return calculateStackView.subviews.isEmpty
     }
     
-    @IBOutlet weak var calculateButton: UIButton!
+    @IBOutlet weak var equalButton: UIButton!
     @IBOutlet weak var calculateHistoryScrollView: UIScrollView!
     @IBOutlet weak var calculateStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
@@ -28,10 +28,10 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initializeCalculator()
+        resetCalculator()
         numberFormatter.numberStyle = .decimal
         numberFormatter.maximumFractionDigits = 5
-        calculateButton.isEnabled = false
+        equalButton.isEnabled = false
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
@@ -54,12 +54,13 @@ final class CalculatorViewController: UIViewController {
             return
         }
         
-        if isResult == true { initExpression() }
+        if isResult == true { resetExpression() }
         
         addStackView()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "\(initialNumber)"
-        calculateButton.isEnabled = true
+        equalButton.isEnabled = true
+        isResult = false
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -70,11 +71,11 @@ final class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        initializeCalculator()
+        resetCalculator()
     }
     
     @IBAction func touchUpClearEntryButton(_ sender: UIButton) {
-        initOperandLabel()
+        resetOperandLabel()
     }
     
     @IBAction func touchUpChangeSignButton(_ sender: UIButton) {
@@ -92,24 +93,24 @@ final class CalculatorViewController: UIViewController {
 
 // MARK: - Private Method
 extension CalculatorViewController {
-    private func initializeCalculator() {
-        initExpression()
-        initOperandLabel()
-        initOperatorLabel()
-        removeStackView()
+    private func resetCalculator() {
+        resetExpression()
+        resetOperandLabel()
+        resetOperatorLabel()
+        removeArithmeticStackViews()
         isResult = false
-        calculateButton.isEnabled = false
+        equalButton.isEnabled = false
     }
     
-    private func initOperandLabel() {
+    private func resetOperandLabel() {
         operandLabel.text = "\(initialNumber)"
     }
     
-    private func initOperatorLabel() {
+    private func resetOperatorLabel() {
         operatorLabel.text = ""
     }
     
-    private func initExpression() {
+    private func resetExpression() {
         inputFormula = ""
     }
     
@@ -119,9 +120,9 @@ extension CalculatorViewController {
         let formattingResult = numberFormatter.string(for: result)
         
         operandLabel.text = formattingResult
-        initOperatorLabel()
+        resetOperatorLabel()
         isResult = true
-        calculateButton.isEnabled = false
+        equalButton.isEnabled = false
     }
     
     private func addInputFormula(_ operandString: String?) {
@@ -132,9 +133,9 @@ extension CalculatorViewController {
     private func appendFormulaOrInitialize() {
         if operatorLabel.text != "" {
             isResult = false
-            calculateButton.isEnabled = true
+            equalButton.isEnabled = true
         } else {
-            initializeCalculator()
+            resetCalculator()
         }
     }
 }
@@ -157,7 +158,7 @@ extension CalculatorViewController {
         calculateHistoryScrollView.layoutIfNeeded()
     }
     
-    private func removeStackView() {
+    private func removeArithmeticStackViews() {
         calculateStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
         }

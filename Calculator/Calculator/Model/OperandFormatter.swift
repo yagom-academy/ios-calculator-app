@@ -16,7 +16,7 @@ struct OperandFormatter {
     
     func setUpInputOperandText(_ currentOperand: String, _ insertedNumber: String) -> String? {
         guard checkOverMaximumDigits(currentOperand, insertedNumber) == false,
-              checkOverMaximumPointDigits(currentOperand, insertedNumber) == false else { return nil }
+              checkOverMaximumFractionDigits(currentOperand, insertedNumber) == false else { return nil }
         
         return setUpChangedOperandFormat(currentOperand, insertedNumber)
     }
@@ -47,10 +47,10 @@ extension OperandFormatter {
         
         if currentOperand.contains(".") && Double(insertedNumber) == 0.0 {
             let operand = currentOperand.components(separatedBy: ".")
-            let operandAsFormatter = numberFormatter.convertToFormatterString(string: operand.first ?? "")
-            let operandPointNumber = operand.last ?? ""
+            let operandAsInteger = numberFormatter.convertToFormatterString(string: operand.first ?? "")
+            let operandFractionNumber = operand.last ?? ""
             
-            return operandAsFormatter + "." + operandPointNumber + insertedNumber
+            return operandAsInteger + "." + operandFractionNumber + insertedNumber
         }
         
         return numberFormatter.convertToFormatterString(string: currentOperand + insertedNumber)
@@ -66,12 +66,12 @@ extension OperandFormatter {
         return appendedOperandCount > maximumOperandDigits
     }
     
-    private func checkOverMaximumPointDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
+    private func checkOverMaximumFractionDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
         guard currentOperand.contains(".") else { return false }
-        guard let pointNumber = currentOperand.components(separatedBy: ".").last else { return false }
+        guard let fractionNumber = currentOperand.components(separatedBy: ".").last else { return false }
         
-        let appendedPointNumber = (pointNumber + insertedNumber).count
+        let appendedFractionNumber = (fractionNumber + insertedNumber).count
         
-        return appendedPointNumber > maximumPointDigits
+        return appendedFractionNumber > maximumPointDigits
     }
 }

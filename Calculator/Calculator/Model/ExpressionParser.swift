@@ -5,9 +5,7 @@
 //  Created by Zion & Dasan on 2023/06/02.
 //
 
-import Foundation
-
-enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.T == Double, OperatorQueue.T == Operator {
+enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
     static func parser(from input: String) -> Formula<OperandQueue, OperatorQueue> {
         var operandQueue = OperandQueue()
         var operatorQueue = OperatorQueue()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArithmeticStackView: UIStackView {
+final class ArithmeticStackView: UIStackView {
     private let operatorLabel = UILabel()
     private let operandLabel = UILabel()
     

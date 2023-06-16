@@ -5,7 +5,7 @@
 //  Created by Zion & Dasan on 2023/06/02.
 //
 
-struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.T == Double, OperatorQueue.T == Operator {
+struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQueue.Element == Double, OperatorQueue.Element == Operator {
     var operands: OperandQueue
     var operators: OperatorQueue
     
@@ -13,8 +13,8 @@ struct Formula<OperandQueue: Queueable, OperatorQueue: Queueable> where OperandQ
         guard var accumulatedValue = operands.dequeue() else { return 0.0 }
         
         while let operand = operands.dequeue(),
-              let `operator` = operators.dequeue() {
-            accumulatedValue = `operator`.calculate(lhs: accumulatedValue, rhs: operand)
+              let operatorSymbol = operators.dequeue() {
+            accumulatedValue = operatorSymbol.calculate(lhs: accumulatedValue, rhs: operand)
         }
     
         return accumulatedValue

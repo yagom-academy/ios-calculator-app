@@ -7,18 +7,18 @@
 
 extension String {
     var isZero: Bool {
-        return self == "0" ? true : false
+        return self == "0"
     }
     
     var isNaN: Bool {
-        return self == "NaN" ? true : false
+        return self == "NaN"
     }
     
     var withoutDecimalPoint: Self {
-        return self.replacingOccurrences(of: ",", with: "")
+        return replacingOccurrences(of: ",", with: "")
     }
     
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map{ String($0) }
+        return split(separator: target).map{ String($0) }
     }
 }

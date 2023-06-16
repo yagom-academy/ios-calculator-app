@@ -5,15 +5,6 @@
 //  Created by Zion & Dasan on 2023/05/30.
 //
 
-final class Node<T> {
-    var data: T
-    var next: Node?
-    
-    init(data: T) {
-        self.data = data
-    }
-}
-
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
