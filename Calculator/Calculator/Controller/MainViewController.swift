@@ -32,9 +32,9 @@ final class MainViewController: UIViewController {
         expression = CalculatorNameSpace.empty
     }
     
-    private func clearOperands(labelUpdate: Bool = true) {
+    private func clearOperands(willUpdateLabel: Bool = true) {
         operandsValue = CalculatorNameSpace.empty
-        if labelUpdate {
+        if willUpdateLabel {
             operandsLabel.text = CalculatorNameSpace.zero
         }
     }
@@ -172,7 +172,7 @@ final class MainViewController: UIViewController {
             isResult = true
         } catch {
             operandsLabel.text = CalculatorNameSpace.nan
-            clearOperands(labelUpdate: false)
+            clearOperands(willUpdateLabel: false)
         }
     }
     
