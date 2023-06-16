@@ -66,11 +66,12 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction private func tapPeriodButton(_ sender: UIButton) {
-        let period = CalculatorNamespace.dot
+    @IBAction private func tapDotButton(_ sender: UIButton) {
+        let dot = CalculatorNamespace.dot
         guard let currentNumberLabelText = inputNumberLabel.text else { return }
+        guard !currentNumberLabelText.contains(dot) else { return }
         
-        inputNumberLabel.text = currentNumberLabelText.contains(period) ? currentNumberLabelText : currentNumberLabelText + period
+        inputNumberLabel.text = currentNumberLabelText + dot
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
