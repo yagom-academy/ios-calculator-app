@@ -5,13 +5,23 @@
 //  Created by Minsup on 2023/05/30.
 //
 
-struct CalculatorItemQueue<T: CalculateItem>: Queueable {
-	private var head: Node<T>? = nil
-	private var tail: Node<T>? = nil
+struct CalculatorItemQueue<Element: CalculateItem> {
+	private var head: Node<Element>? = nil
+	private var tail: Node<Element>? = nil
 	private(set) var count: Int = 0
+    
+    init(_ elements: [Element] = []) {
+        for element in elements {
+            self.enqueue(element)
+        }
+    }
+    
+    var isEmpty: Bool {
+        count == 0
+    }
 	
-	mutating func enqueue(_ value: T) {
-		let newNode = Node<T>(value)
+	mutating func enqueue(_ value: Element) {
+		let newNode = Node<Element>(value)
 		count += 1
 		guard let lastNode = tail else {
 			head = newNode
@@ -22,9 +32,9 @@ struct CalculatorItemQueue<T: CalculateItem>: Queueable {
 		tail = newNode
 	}
 	
-	mutating func dequeue() throws -> T {
+	mutating func dequeue()  -> Element? {
 		guard let firstNode = head else {
-			throw CalculationError.indexOutOfRange
+			return nil
 		}
 		count -= 1
 		head = firstNode.next
@@ -32,7 +42,7 @@ struct CalculatorItemQueue<T: CalculateItem>: Queueable {
 		return firstNode.value
 	}
 	
-	mutating func removeAll() {
+	mutating func clear() {
 		for _ in (0...count) {
 			guard let firstNode = head else {
 				tail = nil
@@ -43,4 +53,20 @@ struct CalculatorItemQueue<T: CalculateItem>: Queueable {
 			count -= 1
 		}
 	}
+    
+    mutating func getAllElement() -> [Element] {
+        var allElement: [Element] = []
+        
+        for _ in (0...count) {
+            guard let firstNode = head else {
+                tail = nil
+                return allElement
+            }
+            allElement.append(firstNode.value)
+            head = firstNode.next
+            firstNode.changeNext(nil)
+            count -= 1
+        }
+        return allElement
+    }
 }

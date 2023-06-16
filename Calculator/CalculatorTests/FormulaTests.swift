@@ -104,7 +104,7 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertThrowsError(try sut.result()) { error in
             if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperand)
+                XCTAssertEqual(error, .emptyOperand)
             } else {
                 XCTFail("예상하지 않은 에러 출력 \(error)")
             }
@@ -118,7 +118,7 @@ final class FormulaTests: XCTestCase {
         // then
         XCTAssertThrowsError(try sut.result()) { error in
             if let error = error as? CalculationError {
-                XCTAssertEqual(error, .notFoundOperator)
+                XCTAssertEqual(error, .emptyOperator)
             } else {
                 XCTFail("예상하지 않은 에러 출력 \(error)")
             }

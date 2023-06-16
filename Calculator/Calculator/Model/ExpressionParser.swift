@@ -7,16 +7,10 @@
 
 enum ExpressionParser {
 	static func parse(from input: String) -> Formula {
-		var operatorsQueue = CalculatorItemQueue<Operator>()
-		var operandsQueue = CalculatorItemQueue<Double>()
-
 		let operandComponents = self.componentsByOperators(from: input).compactMap { Double($0) }
 		let operatorComponents = input.compactMap { Operator(rawValue: $0) }
 		
-		operandComponents.forEach { operandsQueue.enqueue($0) }
-		operatorComponents.forEach { operatorsQueue.enqueue($0) }
-
-		return Formula(operands:operandsQueue, operators: operatorsQueue)
+		return Formula(operands: operandComponents, operators: operatorComponents)
 	}
 		
 	static private func componentsByOperators(from input: String) -> [String] {

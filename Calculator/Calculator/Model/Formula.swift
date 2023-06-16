@@ -9,12 +9,17 @@ struct Formula {
 	var operands: CalculatorItemQueue<Double>
 	var operators: CalculatorItemQueue<Operator>
 	
+    init(operands: [Double] = [], operators: [Operator] = []) {
+        self.operands = CalculatorItemQueue(operands)
+        self.operators = CalculatorItemQueue(operators)
+    }
+    
 	mutating func result() throws -> Double {
-		var result = try operands.dequeue()
+        guard var result =  operands.dequeue() else { throw CalculationError.emptyOperand }
 		
 		while operands.count > 0 {
-			let operatorItem = try operators.dequeue()
-			let rhs = try operands.dequeue()
+            guard let operatorItem = operators.dequeue() else { throw CalculationError.emptyOperator}
+            guard let rhs = operands.dequeue() else { throw CalculationError.emptyOperand}
 			result = operatorItem.calculate(lhs: result, rhs: rhs)
 		}
 		return result

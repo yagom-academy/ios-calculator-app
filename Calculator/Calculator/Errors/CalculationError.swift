@@ -6,7 +6,6 @@
 //
 
 enum CalculationError: Error {
-    case notFoundOperand
-    case notFoundOperator
-	case indexOutOfRange
+    case emptyOperand
+    case emptyOperator
 }
