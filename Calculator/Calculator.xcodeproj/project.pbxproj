@@ -161,9 +161,9 @@
 		ACDB12DB2A30746C007CBD37 /* CalculatorItemQueue */ = {
 			isa = PBXGroup;
 			children = (
+				AC320D702A3BF1BA0096E758 /* Node.swift */,
 				AC2DCCA02A25BDBC00F35632 /* LinkedList.swift */,
 				AC2DCC9C2A259DA500F35632 /* CalculatorItemQueue.swift */,
-				AC320D702A3BF1BA0096E758 /* Node.swift */,
 			);
 			path = CalculatorItemQueue;
 			sourceTree = "<group>";

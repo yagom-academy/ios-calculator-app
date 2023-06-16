@@ -26,7 +26,7 @@ struct LinkedList<T> {
         
         if isEmpty {
             head = node
-            tail = head
+            tail = node
         } else {
             tail?.next = node
             tail = node
