@@ -17,28 +17,10 @@
   },
   "testTargets" : [
     {
-      "enabled" : false,
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "AC2DCCA52A25D63D00F35632",
-        "name" : "LinkedListTests"
-      }
-    },
-    {
-      "enabled" : false,
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "AC7636452A282524009C18C1",
+        "identifier" : "AC320D662A3BE02E0096E758",
         "name" : "CalculatorItemQueueTests"
-      }
-    },
-    {
-      "enabled" : false,
-      "target" : {
-        "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "AC7EF3DD2A2B86ED00A883D2",
-        "name" : "FormulaTests"
       }
     },
     {
