@@ -33,32 +33,32 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapNumbersButton(_ sender: UIButton) {
         guard let inputNumberText = sender.titleLabel?.text,
-              let numberLabelText = inputNumberLabel.text else { return }
+              let currentNumberLabelText = inputNumberLabel.text,
+              isComputable,
+              currentNumberLabelText.count < 19 else { return }
         
-        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
+        let numberLabelTextWithoutComma = currentNumberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
                                                                                with: CalculatorNamespace.empty)
         
-        if isComputable, numberLabelText.count < 19 {
-            if numberLabelText == CalculatorNamespace.zero {
-                inputNumberLabel.text = inputNumberText
-            } else {
-                let resultNumberText = numberLabelTextWithoutComma + inputNumberText
-                let doubleNumberText = Double(resultNumberText)
-                inputNumberLabel.text = calculatorNumberFormatter.string(for: doubleNumberText)
-            }
+        if currentNumberLabelText == CalculatorNamespace.zero {
+            inputNumberLabel.text = inputNumberText
+        } else {
+            let resultNumberText = numberLabelTextWithoutComma + inputNumberText
+            let doubleNumberText = Double(resultNumberText)
+            inputNumberLabel.text = calculatorNumberFormatter.string(for: doubleNumberText)
         }
     }
     
     @IBAction private func tapSerialZeroButton(_ sender: UIButton) {
         guard let inputNumberText = sender.titleLabel?.text,
-              let numberLabelText = inputNumberLabel.text else { return }
+              let currentNumberLabelText = inputNumberLabel.text else { return }
         
-        let numberLabelTextWithoutComma = numberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
+        let numberLabelTextWithoutComma = currentNumberLabelText.replacingOccurrences(of: CalculatorNamespace.comma,
                                                                                with: CalculatorNamespace.empty)
         
-        if numberLabelText.count < 19 {
+        if currentNumberLabelText.count < 19 {
             let formattedNumberText = Double(numberLabelTextWithoutComma + inputNumberText)
-            if numberLabelText == CalculatorNamespace.zero {
+            if currentNumberLabelText == CalculatorNamespace.zero {
                 inputNumberLabel.text = CalculatorNamespace.zero
             } else {
                 inputNumberLabel.text = calculatorNumberFormatter.string(for: formattedNumberText)
@@ -68,9 +68,9 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapPeriodButton(_ sender: UIButton) {
         let period = CalculatorNamespace.period
-        guard let numberLabelText = inputNumberLabel.text else { return }
+        guard let currentNumberLabelText = inputNumberLabel.text else { return }
         
-        inputNumberLabel.text = numberLabelText.contains(period) ? numberLabelText : numberLabelText + period
+        inputNumberLabel.text = currentNumberLabelText.contains(period) ? currentNumberLabelText : currentNumberLabelText + period
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
@@ -91,13 +91,13 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func tapChangeSignButton(_ sender: UIButton) {
         let minusSign = CalculatorNamespace.minus
-        guard let numberLabelText = inputNumberLabel.text,
-              numberLabelText != CalculatorNamespace.zero else { return }
+        guard let currentNumberLabelText = inputNumberLabel.text,
+              currentNumberLabelText != CalculatorNamespace.zero else { return }
         
-        if numberLabelText.hasPrefix(minusSign) {
-            inputNumberLabel.text = String(numberLabelText.dropFirst(1))
+        if currentNumberLabelText.hasPrefix(minusSign) {
+            inputNumberLabel.text = String(currentNumberLabelText.dropFirst(1))
         } else {
-            inputNumberLabel.text = minusSign + numberLabelText
+            inputNumberLabel.text = minusSign + currentNumberLabelText
         }
     }
     
@@ -171,19 +171,19 @@ extension CalculatorViewController {
     }
     
     private func addFormulaStackView(_ inputOperatorText: String) {
-        guard let numberLabelText = inputNumberLabel.text,
+        guard let currentNumberLabelText = inputNumberLabel.text,
               let operatorLabelText = inputOperatorLabel.text else { return }
         
         let formulaStackView = makeStackView()
         let operatorLabel = makeLabelInStackView(operatorLabelText)
-        let formattedNumberText = numberLabelText.hasSuffix(CalculatorNamespace.period) ? String(numberLabelText.dropLast(1)) : numberLabelText
+        let formattedNumberText = currentNumberLabelText.hasSuffix(CalculatorNamespace.period) ? String(currentNumberLabelText.dropLast(1)) : currentNumberLabelText
         let numberLabel = makeLabelInStackView(formattedNumberText)
         
         formulaStackView.addArrangedSubview(operatorLabel)
         formulaStackView.addArrangedSubview(numberLabel)
         formulaListStackView.addArrangedSubview(formulaStackView)
         
-        formulaString += operatorLabelText + numberLabelText
+        formulaString += operatorLabelText + currentNumberLabelText
         
         inputOperatorLabel.text = inputOperatorText
         inputNumberLabel.text = CalculatorNamespace.zero
