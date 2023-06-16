@@ -11,10 +11,10 @@ final class MainViewController: UIViewController {
     private var operandsValue = String()
     private var operatorValue = String()
     private var isResult = false
-    @IBOutlet weak var operandsLabel: UILabel!
-    @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var expressionStackView: UIStackView!
-    @IBOutlet weak var expressionScrollView: UIScrollView!
+    @IBOutlet weak private var operandsLabel: UILabel!
+    @IBOutlet weak private var operatorLabel: UILabel!
+    @IBOutlet weak private var expressionStackView: UIStackView!
+    @IBOutlet weak private var expressionScrollView: UIScrollView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,19 +29,19 @@ final class MainViewController: UIViewController {
     }
     
     private func clearExpression() {
-        expression = Strings.empty
+        expression = CalculatorNameSpace.empty
     }
     
     private func clearOperands(labelUpdate: Bool = true) {
-        operandsValue = Strings.empty
+        operandsValue = CalculatorNameSpace.empty
         if labelUpdate {
-            operandsLabel.text = Strings.zero
+            operandsLabel.text = CalculatorNameSpace.zero
         }
     }
     
     private func clearOperator() {
-        operatorValue = Strings.empty
-        operatorLabel.text = Strings.empty
+        operatorValue = CalculatorNameSpace.empty
+        operatorLabel.text = CalculatorNameSpace.empty
     }
     
     private func clearStackView() {
@@ -65,7 +65,7 @@ final class MainViewController: UIViewController {
     }
     
     private func insertStackView(with strings: String...) {
-        let labels = strings.map { createUILabel(text: $0) }
+        let labels = strings.map { createFormulaLabel(text: $0) }
         let subStackView = createSubStackView(with: labels)
         
         expressionStackView.addArrangedSubview(subStackView)
@@ -84,21 +84,72 @@ final class MainViewController: UIViewController {
             clearAll()
         }
         guard let selectedNumber = sender.currentTitle else { return }
-        if operandsValue.contains(Strings.dot) && selectedNumber == Strings.dot { return }
         
         switch (operandsValue, selectedNumber) {
-        case (Strings.zero, Strings.zero),
-             (Strings.zero, Strings.doubleZero),
-             (Strings.empty, Strings.zero) where expression.isEmpty,
-             (Strings.empty, Strings.doubleZero):
-            return
-        case (Strings.empty, Strings.dot):
-             updateOperands(to: Strings.zero + selectedNumber)
-        case (Strings.zero, _),
-             (Strings.empty, _):
+        case (CalculatorNameSpace.zero, _),
+             (CalculatorNameSpace.empty, _):
              updateOperands(to: selectedNumber)
         default:
              updateOperands(to: operandsValue + selectedNumber)
+        }
+
+        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
+            operandsLabel.text = formattedNumber
+        }
+    }
+    
+    @IBAction private func tapZeroButton(_ sender: UIButton) {
+        if isResult {
+            isResult = false
+            clearAll()
+        }
+
+        switch operandsValue {
+        case CalculatorNameSpace.zero,
+            CalculatorNameSpace.empty where expression.isEmpty:
+            return
+        default:
+            updateOperands(to: operandsValue + CalculatorNameSpace.zero)
+        }
+        
+        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
+            operandsLabel.text = formattedNumber
+        }
+    }
+    
+    @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
+        if isResult {
+            isResult = false
+            clearAll()
+        }
+        
+        switch operandsValue {
+        case CalculatorNameSpace.zero,
+             CalculatorNameSpace.empty:
+            return
+        default:
+             updateOperands(to: operandsValue + CalculatorNameSpace.doubleZero)
+        }
+
+        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
+            operandsLabel.text = formattedNumber
+        }
+    }
+    
+    @IBAction private func tapDotButton(_ sender: UIButton) {
+        if isResult {
+            isResult = false
+            clearAll()
+        }
+        if operandsValue.contains(CalculatorNameSpace.dot) { return }
+        
+        switch operandsValue {
+        case CalculatorNameSpace.empty:
+             updateOperands(to: CalculatorNameSpace.zero + CalculatorNameSpace.dot)
+        case CalculatorNameSpace.zero:
+             updateOperands(to: CalculatorNameSpace.dot)
+        default:
+             updateOperands(to: operandsValue + CalculatorNameSpace.dot)
         }
 
         if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
@@ -122,7 +173,7 @@ final class MainViewController: UIViewController {
             
             var formula = ExpressionParser.parse(from: expression)
             let result = try formula.result()
-            let formattedResult = result.changeNumberFormat() ?? Strings.nan
+            let formattedResult = result.changeNumberFormat() ?? CalculatorNameSpace.nan
 
             clearOperator()
             clearExpression()
@@ -130,7 +181,7 @@ final class MainViewController: UIViewController {
             updateOperands(to: "\(result)", willUpdateLabel: false)
             isResult = true
         } catch {
-            operandsLabel.text = Strings.nan
+            operandsLabel.text = CalculatorNameSpace.nan
             clearOperands(labelUpdate: false)
         }
     }
@@ -145,16 +196,16 @@ final class MainViewController: UIViewController {
     
     @IBAction private func tapChangeSignButton(_ sender: UIButton) {
         guard operandsValue.isEmpty == false else { return }
-        if operandsValue.hasPrefix(Strings.minus) {
+        if operandsValue.hasPrefix(CalculatorNameSpace.minus) {
             updateOperands(to: String(operandsValue.dropFirst()))
         } else {
-            updateOperands(to: Strings.minus + operandsValue)
+            updateOperands(to: CalculatorNameSpace.minus + operandsValue)
         }
     }
 }
 
 extension MainViewController {
-    private func createUILabel(text: String) -> UILabel {
+    private func createFormulaLabel(text: String) -> UILabel {
         let label = UILabel()
         
         label.font = UIFont.preferredFont(forTextStyle: .title3)
@@ -177,7 +228,7 @@ extension MainViewController {
 }
 
 extension MainViewController {
-    private enum Strings {
+    private enum CalculatorNameSpace {
         static let empty = ""
         static let zero = "0"
         static let dot = "."
