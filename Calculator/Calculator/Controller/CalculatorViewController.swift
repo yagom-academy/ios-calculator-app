@@ -28,7 +28,7 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCalculator()
+        clearFormula()
     }
     
     @IBAction private func tapNumbersButton(_ sender: UIButton) {
@@ -120,9 +120,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func tapAllClearButton(_ sender: UIButton) {
-        inputOperatorLabel.text = CalculatorNamespace.empty
-        inputNumberLabel.text = CalculatorNamespace.zero
-        formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
+        clearFormula()
         isComputable = true
         formulaString = CalculatorNamespace.empty
     }
@@ -182,7 +180,7 @@ extension CalculatorViewController {
         setAutoScrollToBottom()
     }
     
-    private func setCalculator() {
+    private func clearFormula() {
         inputNumberLabel.text = CalculatorNamespace.zero
         inputOperatorLabel.text = CalculatorNamespace.empty
         formulaListStackView.arrangedSubviews.forEach{ $0.removeFromSuperview() }
