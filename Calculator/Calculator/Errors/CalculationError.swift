@@ -8,4 +8,5 @@
 enum CalculationError: Error {
     case notFoundOperand
     case notFoundOperator
+	case indexOutOfRange
 }
