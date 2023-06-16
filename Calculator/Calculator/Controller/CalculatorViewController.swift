@@ -13,11 +13,11 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var previousExpressionScrollView: UIScrollView!
     private var expression: String = ""
     private var isResult: Bool = false
+    private var isPlaceholder: Bool = true
     private let numberFormatter: NumberFormatter = {
         let numberFormatter: NumberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumFractionDigits = 16
         numberFormatter.roundingMode = .halfUp
         
         return numberFormatter
@@ -29,6 +29,13 @@ class CalculatorViewController: UIViewController {
         
         return operand.replacingOccurrences(of: ",", with: "")
     }
+    private var currentOperandToDouble: Double {
+        guard let operand = Double(currentOperand) else {
+            return Double.nan
+        }
+        
+        return operand
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,18 +43,25 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpAllClearButton(_ sender: UIButton) {
-        previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
-        clearLabel()
-        expression = ""
-        isResult = false
+        clearAll()
     }
     
     @IBAction func touchUpCleanEntryButton(_ sender: UIButton) {
+        guard !isResult else {
+            clearAll()
+            return
+        }
+        
         operandLabel.text = "0"
         isResult = false
+        isPlaceholder = true
     }
     
     @IBAction func touchUpSignButton(_ sender: UIButton) {
+        guard currentOperand != "NaN" else {
+            return
+        }
+        
         toggleSign()
     }
     
@@ -56,17 +70,13 @@ class CalculatorViewController: UIViewController {
             return
         }
         
-        if let operand = operandLabel.text, operand.hasSuffix(".") {
-            operandLabel.text?.removeLast()
-        }
-        
         addPreviousContentStackView()
-        expression += configureCurrentFormula()
+        updateExpression()
         var formula: Formula = ExpressionParser.parse(from: expression)
         
         do {
             let result: Double = try formula.result()
-            updateNumberLabel(result)
+            operandLabel.text = numberFormatter.string(from: NSNumber(value: result))
         } catch CalculatorError.missingOperand {
             print(CalculatorError.missingOperand.localized)
         } catch {
@@ -79,62 +89,131 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchUpOperandButton(_ sender: UIButton) {
-        guard let operandElement = sender.currentTitle, !isResult else {
+        guard validateOperandInput(with: 1) else {
             return
         }
-        guard currentOperand != "0" || currentOperand != "00" else {
+        guard let operandElement = sender.currentTitle else {
+            return
+        }
+        guard currentOperandToDouble != Double.zero || currentOperand.contains(".") else {
             operandLabel.text = operandElement
             return
         }
+        guard let newOperand = Double(currentOperand + operandElement) else {
+            return
+        }
         
-        operandLabel.text = numberFormatter.string(for: Double(currentOperand + operandElement))
+        operandLabel.text = numberFormatter.string(from: NSNumber(value: newOperand))
+    }
+    
+    @IBAction func touchUpZeroButton(_ sender: UIButton) {
+        inputZero(1)
+    }
+    
+    @IBAction func touchUpDoubleZeroButton(_ sender: UIButton) {
+        inputZero(2)
     }
     
     @IBAction func touchUpDecimalPointButton(_ sender: UIButton) {
-        guard let decimalPointOperand = sender.currentTitle, !isResult else {
+        guard !isResult else {
             return
         }
-        guard !currentOperand.hasSuffix(decimalPointOperand) else {
+        guard let decimalPointOperand = sender.currentTitle else {
             return
         }
         guard !currentOperand.contains(decimalPointOperand) else {
             return
         }
         
-        operandLabel.text = currentOperand + decimalPointOperand
+        operandLabel.text = (operandLabel.text ?? "0") + decimalPointOperand
     }
     
     @IBAction func touchUpOperatorButton(_ sender: UIButton) {
-        guard currentOperand != "0" else {
+        guard currentOperand != "NaN" else {
+            return
+        }
+        guard currentOperand != "0" || isPlaceholder == false else {
             operatorLabel.text = sender.currentTitle
             expression = "0"
             return
         }
         
-        if currentOperand.hasSuffix(".") {
-            operandLabel.text?.removeLast()
-        }
-        if let realNumber = Double(currentOperand), Double(currentOperand) == Double(Int(realNumber)) {
-            operandLabel.text = String(Int(realNumber))
-        }
-        
         addPreviousContentStackView()
-        expression += configureCurrentFormula()
+        updateExpression()
         operatorLabel.text = sender.currentTitle
         operandLabel.text = "0"
         isResult = false
-        scrollDown()
+        isPlaceholder = true
+    }
+}
+
+extension CalculatorViewController {
+    private func clearLabel() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
     }
     
-    private func configureCurrentFormula() -> String {
-        let operatorCase = operatorLabel.text ?? ""
+    private func clearAll() {
+        previousContentStackView.subviews.forEach { $0.removeFromSuperview() }
+        clearLabel()
+        expression = ""
+        isResult = false
+        isPlaceholder = true
+    }
+    
+    private func toggleSign() {
+        guard currentOperandToDouble != Double.zero else {
+            return
+        }
         
-        return operatorCase + currentOperand
+        if currentOperandToDouble == Double(Int(currentOperandToDouble)) {
+            operandLabel.text = String(Int(currentOperandToDouble) * -1)
+        } else {
+            operandLabel.text = String(currentOperandToDouble * -1)
+        }
+    }
+    
+    private func inputZero(_ count: Int) {
+        guard validateOperandInput(with: count) else {
+            return
+        }
+        guard currentOperand != "0" else {
+            isPlaceholder = false
+            return
+        }
+        
+        let newOperand = currentOperand + String(repeating: "0", count: count)
+        let realNumber = newOperand.split(with: ".")
+        
+        guard let numberValue = Double(realNumber[0]),
+              let integerNumber = numberFormatter.string(from: NSNumber(value: numberValue)) else {
+            return
+        }
+        
+        if realNumber.count == 1 {
+            operandLabel.text = integerNumber
+        } else {
+            operandLabel.text = integerNumber + "." + String(realNumber[1])
+        }
+    }
+    
+    private func validateOperandInput(with textCount: Int) -> Bool {
+        guard !isResult else {
+            return false
+        }
+        
+        return currentOperand.count + textCount < 16
+    }
+    
+    private func updateExpression() {
+        let operatorCase = operatorLabel.text ?? ""
+        expression += operatorCase + currentOperand
     }
     
     private func addPreviousContentStackView() {
         let content: UIStackView = configureContentStackView()
         previousContentStackView.addArrangedSubview(content)
+        scrollDown()
     }
     
     private func scrollDown() {
@@ -143,14 +222,9 @@ class CalculatorViewController: UIViewController {
         previousExpressionScrollView.setContentOffset(bottomOffset, animated: true)
     }
     
-    private func clearLabel() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
-    }
-    
     private func configureContentStackView() -> UIStackView {
         let recordedOperatorLabel: UILabel = configureItem(with: operatorLabel.text)
-        let recordedOperandLabel: UILabel = configureItem(with: currentOperand)
+        let recordedOperandLabel: UILabel = configureItem(with: numberFormatter.string(from: NSNumber(value: currentOperandToDouble)))
         let content: UIStackView = addItemToContentStackView(item: recordedOperatorLabel, recordedOperandLabel)
         
         return content
@@ -175,29 +249,5 @@ class CalculatorViewController: UIViewController {
         recordedLabel.textColor = .white
         
         return recordedLabel
-    }
-}
-
-extension CalculatorViewController {
-    private func updateNumberLabel(_ number: Double) {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.maximumFractionDigits = 20
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfUp
-        
-        if let formattedNumber = numberFormatter.string(from: NSNumber(value: number)) {
-            operandLabel.text = formattedNumber
-        }
-    }
-    
-    private func toggleSign() {
-        guard let currentNumberString = operandLabel.text,
-              var currentNumber = Double(currentNumberString),
-              Double(currentOperand) != Double.zero else {
-            return
-        }
-        
-        currentNumber *= -1
-        operandLabel.text = "\(currentNumber)"
     }
 }
