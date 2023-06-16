@@ -86,7 +86,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addFormula() {
-        guard let operands = displayOperandLabel.text,
+        guard let operands = displayOperandLabel.text?.replacingOccurrences(of: ",", with: ""),
               let `operator` = displayOperatorLabel.text else { return }
         
         if operands != "0" && `operator`.isEmpty {
