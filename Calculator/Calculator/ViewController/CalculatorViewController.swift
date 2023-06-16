@@ -38,22 +38,23 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func touchCalculate(_ sender: UIButton) {
-        guard let operand = displayOperandLabel.text,
+        guard let operands = displayOperandLabel.text,
               let `operator` = displayOperatorLabel.text else { return }
         
         addFormula()
+        
         guard let result = calculateFormula() else { return }
         
-        if `operator` == String(Operator.divide.rawValue) && operand == "0" {
+        if `operator` == String(Operator.divide.rawValue) && operands == "0" {
             displayOperandLabel.text = "NaN"
         } else {
             displayOperandLabel.text = result
             clearStackView()
         }
-        clearOperandLabel()
         clearFormula()
+        clearOperatorLabel()
     }
-    
+
     @IBAction func touchMenu(_ sender: UIButton) {
         guard let title = sender.currentTitle else { return }
         
@@ -61,8 +62,10 @@ class CalculatorViewController: UIViewController {
         case "AC":
             clearOperandLabel()
             clearOperatorLabel()
+            clearStackView()
+            clearFormula()
         case "CE":
-            print("clearEntry")
+            clearOperandLabel()
         case "⁺⁄₋":
             changeSign()
         case ".":
@@ -79,12 +82,6 @@ class CalculatorViewController: UIViewController {
               let number = Double(operands + input),
               let result = numberFormatter.string(for: number) else { return }
         
-        if operands.contains(".") {
-            let result = operands + input
-            displayOperandLabel.text = result
-            return
-        }
-        
         displayOperandLabel.text = result
     }
     
@@ -92,33 +89,34 @@ class CalculatorViewController: UIViewController {
         guard let operands = displayOperandLabel.text,
               let `operator` = displayOperatorLabel.text else { return }
         
-        if formula.isEmpty && operands != "0" {
+        if operands != "0" && `operator`.isEmpty {
             formula += operands
             addStackView("", operands)
-        } else if operands != "0" {
-            formula += "\(`operator`) \(operands)"
+        } else if operands != "0" || (`operator` == String(Operator.divide.rawValue) && operands == "0") {
+            formula += " \(`operator`) \(operands)"
             addStackView(`operator`, operands)
         }
-        
-        if `operator` == String(Operator.divide.rawValue) && operands == "0" {
-            formula += "\(`operator`) \(operands)"
-        }
-        
+                
         clearOperandLabel()
         clearOperatorLabel()
     }
 
     
     private func addStackView(_ `operator`: String, _ operands: String) {
-        let label = UILabel()
-        label.text = "\(`operator`) \(operands)"
+        let stackViewLabel = UILabel()
+        stackViewLabel.textColor = .white
+        stackViewLabel.text = "\(`operator`) \(operands)"
         
-        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(stackViewLabel)
     }
     
     private func calculateFormula() -> String? {
         var parsedValue = ExpressionParser.parse(from: formula)
-        return numberFormatter.string(for: parsedValue.result())
+        let result = parsedValue.result()
+        
+        userTyping = true
+        
+        return numberFormatter.string(for: result)
     }
     
     private func changeSign() {
@@ -133,12 +131,12 @@ class CalculatorViewController: UIViewController {
         displayOperandLabel.text = operands
     }
     
-    private func clearFormula() {
-        formula.removeAll()
+    private func dotButton() {
+
     }
     
-    private func dotButton() {
-        guard let opreand = displayOperandLabel.text else { return }
+    private func clearFormula() {
+        formula.removeAll()
     }
     
     private func clearOperandLabel() {
