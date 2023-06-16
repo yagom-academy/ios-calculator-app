@@ -33,10 +33,10 @@ struct OperandFormatter {
 // MARK: - setUpInputOperandText
 extension OperandFormatter {
     private func setUpChangedOperandFormat(_ currentOperand: String, _ insertedNumber: String) -> String? {
-        let isSubstitutionOperand = (Int(currentOperand) == initialNumber) && (insertedNumber != ".")
+        let isSubstitutionOperand = (Int(currentOperand) == NumberConstraints.initialNumber) && (insertedNumber != ".")
         
         if isSubstitutionOperand {
-            return "\(Int(insertedNumber) ?? initialNumber)"
+            return "\(Int(insertedNumber) ?? NumberConstraints.initialNumber)"
         }
         
         if insertedNumber == "." {
@@ -60,10 +60,10 @@ extension OperandFormatter {
 // MARK: - Check Numbers
 extension OperandFormatter {
     private func checkOverMaximumDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
-        let operand = currentOperand.withoutDecimalPoint
+        let operand = currentOperand.replacingOccurrences(of: ".", with: "")
         let appendedOperandCount = (operand + insertedNumber).count
         
-        return appendedOperandCount > maximumOperandDigits
+        return appendedOperandCount > NumberConstraints.maximumOperandDigits
     }
     
     private func checkOverMaximumFractionDigits(_ currentOperand: String, _ insertedNumber: String) -> Bool {
@@ -72,6 +72,6 @@ extension OperandFormatter {
         
         let appendedFractionNumber = (fractionNumber + insertedNumber).count
         
-        return appendedFractionNumber > maximumPointDigits
+        return appendedFractionNumber > NumberConstraints.maximumFractionDigits
     }
 }

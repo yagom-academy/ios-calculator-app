@@ -6,9 +6,11 @@
 
 import UIKit
 
-let initialNumber = 0
-let maximumPointDigits = 5
-let maximumOperandDigits = 20
+enum NumberConstraints {
+    static var initialNumber: Int { return 0 }
+    static var maximumFractionDigits: Int { return 5 }
+    static var maximumOperandDigits: Int { return 20 }
+}
 
 final class CalculatorViewController: UIViewController {
     private var inputFormula = String()
@@ -28,9 +30,8 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        resetCalculator()
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 5
+        numberFormatter.maximumFractionDigits = NumberConstraints.maximumFractionDigits
         equalButton.isEnabled = false
     }
     
@@ -39,8 +40,8 @@ final class CalculatorViewController: UIViewController {
               var currentOperand = operandLabel.text?.withoutDecimalPoint else { return }
         
         if isResult {
-            appendFormulaOrInitialize()
-            currentOperand = "\(initialNumber)"
+            setFormulaAppendOrReset()
+            currentOperand = "\(NumberConstraints.initialNumber)"
         }
         
         guard let operandLabelText = operandFormatter.setUpInputOperandText(currentOperand, inputedOperand) else { return }
@@ -58,9 +59,8 @@ final class CalculatorViewController: UIViewController {
         
         addStackView()
         operatorLabel.text = sender.currentTitle
-        operandLabel.text = "\(initialNumber)"
-        equalButton.isEnabled = true
-        isResult = false
+        operandLabel.text = "\(NumberConstraints.initialNumber)"
+        setUpHaveResultOption(false)
     }
         
     @IBAction func touchUpEqualButton(_ sender: UIButton) {
@@ -103,7 +103,7 @@ extension CalculatorViewController {
     }
     
     private func resetOperandLabel() {
-        operandLabel.text = "\(initialNumber)"
+        operandLabel.text = "\(NumberConstraints.initialNumber)"
     }
     
     private func resetOperatorLabel() {
@@ -114,6 +114,8 @@ extension CalculatorViewController {
         inputFormula = ""
     }
     
+    
+    
     private func calculate() {
         var parsedExpression = ExpressionParser<CalculatorItemQueue, CalculatorItemQueue>.parser(from: inputFormula.withoutDecimalPoint)
         let result = parsedExpression.result()
@@ -121,8 +123,7 @@ extension CalculatorViewController {
         
         operandLabel.text = formattingResult
         resetOperatorLabel()
-        isResult = true
-        equalButton.isEnabled = false
+        setUpHaveResultOption(true)
     }
     
     private func addInputFormula(_ operandString: String?) {
@@ -130,13 +131,17 @@ extension CalculatorViewController {
         inputFormula += operandString ?? ""
     }
     
-    private func appendFormulaOrInitialize() {
+    private func setFormulaAppendOrReset() {
         if operatorLabel.text != "" {
-            isResult = false
-            equalButton.isEnabled = true
+            setUpHaveResultOption(false)
         } else {
             resetCalculator()
         }
+    }
+    
+    private func setUpHaveResultOption(_ haveResult: Bool) {
+        isResult = haveResult
+        equalButton.isEnabled = !haveResult
     }
 }
 

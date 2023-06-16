@@ -15,7 +15,6 @@ enum ExpressionParser<OperandQueue: Queueable, OperatorQueue: Queueable> where O
             .forEach { operandQueue.enqueue($0) }
     
         input
-            .filter { $0.isNumber == false }
             .compactMap { Operator(rawValue: $0) }
             .forEach { operatorQueue.enqueue($0) }
         
