@@ -90,7 +90,7 @@ class CalculatorViewController: UIViewController {
         isComputable = true
     }
     
-    @IBAction private func tapChangeSignButton(_ sender: UIButton) {
+    @IBAction private func tapSignChangeButton(_ sender: UIButton) {
         let minusSign = CalculatorNamespace.minus
         guard let currentNumberLabelText = inputNumberLabel.text,
               currentNumberLabelText != CalculatorNamespace.zero else { return }
