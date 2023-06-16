@@ -68,33 +68,25 @@ class CalculatorViewController: UIViewController {
             clearOperandLabel()
         case "⁺⁄₋":
             changeSign()
-        case ".":
-            print(".")
-        case "00":
-            print("00")
         default:
             break
         }
     }
     
     private func addDisplayOperandsLabel(_ input: String) {
-        if displayOperandLabel.text?.contains(",") != false {
-            displayOperandLabel.text = displayOperandLabel.text?.components(separatedBy:
-                                                                                ",").joined()
-        }
         
         guard let operand = displayOperandLabel.text?.replacingOccurrences(of: ",", with: ""),
               let number = Double(operand + input),
-              let result = numberFormatter.string(for: number) else { return }
+              let formattedOperand = numberFormatter.string(for: number) else { return }
         
         if input == "." && operand.contains(".") == false {
-            let result = operand + input
+            let result = formattedOperand + input
             displayOperandLabel.text = result
         } else if (input == "00" || input == "0") && operand.contains(".") {
             let result = operand + input
             displayOperandLabel.text = result
         } else {
-            displayOperandLabel.text = result
+            displayOperandLabel.text = formattedOperand
         }
     }
     
@@ -166,7 +158,7 @@ class CalculatorViewController: UIViewController {
     
     private func setNUmberForatter() {
         numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = -2
+        numberFormatter.maximumFractionDigits = 20
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumSignificantDigits = 20
     }
