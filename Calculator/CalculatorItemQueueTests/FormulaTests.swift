@@ -26,7 +26,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = 11
         
         // then
@@ -39,7 +39,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = -9
         
         // then
@@ -52,7 +52,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = -9
         
         // then
@@ -65,7 +65,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = 0.5
         
         // then
@@ -78,7 +78,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = 20
         
         // then
@@ -91,28 +91,11 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = 6
         
         // then
         XCTAssertEqual(result, expectedValue)
-    }
-    
-    func test_result_2을_0으로_나누면_divideError에러에_걸린다() {
-        // given
-        let input = "2÷0"
-        sut = ExpressionParser.parse(from: input)
-        
-        let errorMassage: CalculatorError = CalculatorError.divideError
-        var error: CalculatorError?
-        
-        // when
-        XCTAssertThrowsError(try sut.result()){ result in
-            error = result as? CalculatorError
-        }
-
-        // then
-        XCTAssertEqual(error, errorMassage)
     }
     
     func test_result_0을_2로_나누면_예상값은_0이다() {
@@ -121,7 +104,7 @@ final class FormulaTests: XCTestCase {
         sut = ExpressionParser.parse(from: input)
         
         // when
-        let result = try! sut.result()
+        let result = sut.result()
         let expectedValue: Double = 0
         
         // then

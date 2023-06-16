@@ -145,18 +145,16 @@ final class CalculatorMainViewController: UIViewController {
         guard !operatorsAndOperandsInput.isEmpty else {
             return
         }
+     
+        appendCalculateItem()
+        let result = calculate()
         
-        do {
-            appendCalculateItem()
-            operandLabel.text = formatNumber(of: try calculate())
-        } catch let error as CalculatorError {
-            switch error {
-            case .divideError:
-                operandLabel.text = "NaN"
-            }
-        } catch {
-            print("알 수 없는 에러 발생")
+        if result.isNaN || result.isInfinite {
+            operandLabel.text = "NaN"
+        } else {
+            operandLabel.text = formatNumber(of: result)
         }
+        
     }
     
     @IBAction private func touchUpChangeSignButton(_ sender: UIButton) {
@@ -263,14 +261,14 @@ final class CalculatorMainViewController: UIViewController {
         return stackView
     }
     
-    private func calculate() throws -> Double {
+    private func calculate() -> Double {
         var formula = ExpressionParser.parse(from: operatorsAndOperandsInput)
         
         clearOperator()
         clearInput()
         finishFormulaProcess()
         
-        return try formula.result()
+        return formula.result()
     }
     
     private func scrollToBottom() {
