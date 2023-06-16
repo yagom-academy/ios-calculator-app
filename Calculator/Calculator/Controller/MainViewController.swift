@@ -66,7 +66,7 @@ final class MainViewController: UIViewController {
     
     private func insertStackView(with strings: String...) {
         let labels = strings.map {
-            createFormulaLabel(text: Double($0)?.changeNumberFormat() ?? $0)
+            createFormulaLabel(text: $0.changeNumberFormat() ?? $0)
         }
         let subStackView = createSubStackView(with: labels)
         
@@ -80,32 +80,30 @@ final class MainViewController: UIViewController {
         operatorLabel.text = `operator`
     }
     
-    @IBAction private func tapNumberButton(_ sender: UIButton) {
+    @IBAction private func tapOperandsButton(_ sender: UIButton) {
         if isResult {
             isResult = false
             clearAll()
         }
-        guard let selectedNumber = sender.currentTitle else { return }
+        guard let selectedOperands = sender.currentTitle else { return }
         
-        switch (operandsValue, selectedNumber) {
-        case (CalculatorNameSpace.zero, _),
-             (CalculatorNameSpace.empty, _):
-             updateOperands(to: selectedNumber)
+        switch selectedOperands {
+        case CalculatorNameSpace.zero:
+            updateOperandsZero()
+        case CalculatorNameSpace.doubleZero:
+            updateOperandsDoubleZero()
+        case CalculatorNameSpace.dot:
+            updateOperandsDot()
         default:
-             updateOperands(to: operandsValue + selectedNumber)
+            updateOperandsNumber(number: selectedOperands)
         }
 
-        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
+        if let formattedNumber = operandsValue.changeNumberFormat() {
             operandsLabel.text = formattedNumber
         }
     }
     
-    @IBAction private func tapZeroButton(_ sender: UIButton) {
-        if isResult {
-            isResult = false
-            clearAll()
-        }
-
+    private func updateOperandsZero() {
         switch operandsValue {
         case CalculatorNameSpace.zero,
             CalculatorNameSpace.empty where expression.isEmpty:
@@ -113,18 +111,9 @@ final class MainViewController: UIViewController {
         default:
             updateOperands(to: operandsValue + CalculatorNameSpace.zero)
         }
-        
-        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
-            operandsLabel.text = formattedNumber
-        }
     }
     
-    @IBAction private func tapDoubleZeroButton(_ sender: UIButton) {
-        if isResult {
-            isResult = false
-            clearAll()
-        }
-        
+    private func updateOperandsDoubleZero() {
         switch operandsValue {
         case CalculatorNameSpace.zero,
              CalculatorNameSpace.empty:
@@ -132,17 +121,9 @@ final class MainViewController: UIViewController {
         default:
              updateOperands(to: operandsValue + CalculatorNameSpace.doubleZero)
         }
-
-        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
-            operandsLabel.text = formattedNumber
-        }
     }
     
-    @IBAction private func tapDotButton(_ sender: UIButton) {
-        if isResult {
-            isResult = false
-            clearAll()
-        }
+    private func updateOperandsDot() {
         guard operandsValue.contains(CalculatorNameSpace.dot) == false else { return }
         
         switch operandsValue {
@@ -153,12 +134,18 @@ final class MainViewController: UIViewController {
         default:
              updateOperands(to: operandsValue + CalculatorNameSpace.dot)
         }
-
-        if let formattedNumber = Double(operandsValue)?.changeNumberFormat() {
-            operandsLabel.text = formattedNumber
-        }
     }
     
+    private func updateOperandsNumber(number: String) {
+        switch (operandsValue, number) {
+        case (CalculatorNameSpace.zero, _),
+             (CalculatorNameSpace.empty, _):
+             updateOperands(to: number)
+        default:
+             updateOperands(to: operandsValue + number)
+        }
+    }
+ 
     private func updateOperands(to value: String, willUpdateLabel: Bool = true) {
         operandsValue = value
         if willUpdateLabel {

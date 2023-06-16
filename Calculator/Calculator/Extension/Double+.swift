@@ -14,7 +14,7 @@ extension Double {
         let numberFormatter = NumberFormatter()
         
         numberFormatter.numberStyle = .decimal
-        numberFormatter.roundingMode = .halfDown
+        numberFormatter.roundingMode = .halfUp
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 21
         
