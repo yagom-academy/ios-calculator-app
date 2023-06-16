@@ -2,37 +2,17 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Dasan on 2023/05/30.
+//  Created by Zion & Dasan on 2023/05/30.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private var queue: LinkedList<T>
+struct CalculatorItemQueue<Element: CalculateItem>: Queueable {
+    private var queue: LinkedList<Element> = LinkedList()
     
-    var count: Int {
-        return queue.count
-    }
-    
-    var isEmpty: Bool {
-        return queue.isEmpty
-    }
-    
-    var first: T? {
-        return queue.first
-    }
-    
-    var last: T? {
-        return queue.last
-    }
-    
-    init(queue: LinkedList<T> = LinkedList()) {
-        self.queue = queue
-    }
-    
-    mutating func enqueue(_ data: T) {
+    mutating func enqueue(_ data: Element) {
         queue.append(data)
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return queue.removeFirst()
     }
 }
