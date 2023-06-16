@@ -65,7 +65,7 @@
 
 | 기본 사칙연산 | AC, CE, ChangeSign 기능 | dotSign, DoubleZero 연산 |
 | :--------: | :--------: | :--------: |
-|<img src="https://i.ibb.co/zmvpSCj/Calculator-Simulator-1.gif" width="250">| <img src="https://i.ibb.co/Jn2Tk3d/Calculator-Simulator-2.gif" width="250">| <img src="https://i.ibb.co/jzzkrqh/Calculator-Simulator-3.gif" width="250">|
+|<img src="https://i.ibb.co/C7jbN5M/Calculator-Simulator-1.gif" width="250">| <img src="https://i.ibb.co/Jn2Tk3d/Calculator-Simulator-2.gif" width="250">| <img src="https://i.ibb.co/jzzkrqh/Calculator-Simulator-3.gif" width="250">|
 
 ---
 
