@@ -6,24 +6,22 @@
 //
 
 struct Formula {
-    var operands: CalculatorItemQueue<Double>
-    var operators: CalculatorItemQueue<Operator>
-    
+	var operands: CalculatorItemQueue<Double>
+	var operators: CalculatorItemQueue<Operator>
+	
     init(operands: [Double] = [], operators: [Operator] = []) {
-        self.operands = CalculatorItemQueue<Double>(operands)
-        self.operators = CalculatorItemQueue<Operator>(operators)
+        self.operands = CalculatorItemQueue(operands)
+        self.operators = CalculatorItemQueue(operators)
     }
     
-    mutating func result() throws -> Double {
-        
-        guard var result = operands.dequeue() else { throw CalculationError.notFoundOperand }
-        
-        while !operands.isEmpty {
-            guard let `operator` = operators.dequeue() else { throw CalculationError.notFoundOperator }
-            guard let next = operands.dequeue() else { throw CalculationError.notFoundOperand }            
-            result = `operator`.calculate(lhs: result, rhs: next)
-        }
-        
-        return result
-    }
+	mutating func result() throws -> Double {
+        guard var result =  operands.dequeue() else { throw CalculationError.emptyOperand }
+		
+		while !operands.isEmpty {
+            guard let operatorItem = operators.dequeue() else { throw CalculationError.emptyOperator}
+            guard let rhs = operands.dequeue() else { throw CalculationError.emptyOperand}
+			result = operatorItem.calculate(lhs: result, rhs: rhs)
+		}
+		return result
+	}
 }

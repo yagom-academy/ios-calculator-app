@@ -76,7 +76,7 @@ extension CalculatorViewController {
             
             do {
                 record(self.incomingRecentOperator, ResultFormatter.format(from: self.incomingRecentOperand))
-                var formula = ExpressionParser.parse(from: self.expression)
+				var formula = ExpressionParser.parse(from: self.expression)
                 let result = try formula.result()
                 self.expression = ExpressionFormatter.format(from: result)
                 return ResultFormatter.format(from: self.incomingRecentOperand)

@@ -5,37 +5,68 @@
 //  Created by Minsup on 2023/05/30.
 //
 
-struct CalculatorItemQueue<Element: CalculateItem> {    
-    var elements: [Element]
-    var outStack: [Element]
+struct CalculatorItemQueue<Element: CalculateItem> {
+	private var head: Node<Element>? = nil
+	private var tail: Node<Element>? = nil
+	private var count: Int = 0
     
-    init(_ elements:[Element] = []) {
-        self.elements = elements
-        self.outStack = []
-    }
-    
-    mutating func enqueue(_ element: Element) {
-        self.elements.append(element)
-    }
-    
-    mutating func dequeue() -> Element? {
-        if outStack.isEmpty {
-            outStack = elements.reversed()
-            elements.removeAll()
+    init(_ elements: [Element] = []) {
+        for element in elements {
+            self.enqueue(element)
         }
-        return outStack.popLast()
-    }
-    
-    mutating func clear() {
-        self.elements.removeAll()
-        self.outStack.removeAll()
     }
     
     var isEmpty: Bool {
-        return self.elements.isEmpty && self.outStack.isEmpty
+        count == 0
     }
+	
+	mutating func enqueue(_ value: Element) {
+		let newNode = Node<Element>(value)
+		count += 1
+		guard let lastNode = tail else {
+			head = newNode
+			tail = newNode
+			return
+		}
+		lastNode.changeNext(newNode)
+		tail = newNode
+	}
+	
+	mutating func dequeue()  -> Element? {
+		guard let firstNode = head else {
+			return nil
+		}
+		count -= 1
+		head = firstNode.next
+		firstNode.changeNext(nil)
+		return firstNode.value
+	}
+	
+	mutating func clear() {
+		for _ in (0...count) {
+			guard let firstNode = head else {
+				tail = nil
+				return
+			}
+			head = firstNode.next
+			firstNode.changeNext(nil)
+			count -= 1
+		}
+	}
     
-    var count: Int {
-        return self.elements.count + self.outStack.count
+    mutating func getAllElement() -> [Element] {
+        var allElement: [Element] = []
+        
+        for _ in (0...count) {
+            guard let firstNode = head else {
+                tail = nil
+                return allElement
+            }
+            allElement.append(firstNode.value)
+            head = firstNode.next
+            firstNode.changeNext(nil)
+            count -= 1
+        }
+        return allElement
     }
 }

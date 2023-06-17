@@ -161,10 +161,10 @@ final class IntegrationTests: XCTestCase {
         }
     }
     
-    func test_1자리수_10000개의_피연산자_계산_속도_측정() {
+    func test_1자리수_100000개의_피연산자_계산_속도_측정() {
         // given
         var input: String = ""
-        for _ in 0...9999 {
+        for _ in 0...99999 {
             input += "1+"
         }
         _ = input.removeLast()
