@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2832E3C42A3D448A009CA1F0 /* CalculatorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2832E3C32A3D448A009CA1F0 /* CalculatorData.swift */; };
+		2832E3C62A3D4549009CA1F0 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2832E3C52A3D4549009CA1F0 /* Calculator.swift */; };
 		2868ACEA2A376B770070B41B /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868ACE92A376B770070B41B /* CalculatorViewController.swift */; };
 		28745C032A39E2A1009BDD3F /* ExtensionUIScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28745C022A39E2A1009BDD3F /* ExtensionUIScrollView.swift */; };
 		2876C72C2A3B2830000E191C /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2876C72B2A3B2830000E191C /* CalculatorError.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2832E3C32A3D448A009CA1F0 /* CalculatorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorData.swift; sourceTree = "<group>"; };
+		2832E3C52A3D4549009CA1F0 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		2868ACE92A376B770070B41B /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		28745C022A39E2A1009BDD3F /* ExtensionUIScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionUIScrollView.swift; sourceTree = "<group>"; };
 		2876C72B2A3B2830000E191C /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
@@ -157,6 +161,8 @@
 				3DE0FC3E2A2FCE95007854E6 /* ExpressionParser.swift */,
 				3DE0FC3C2A2FCE7C007854E6 /* Operator.swift */,
 				3DE0FC3A2A2FCE56007854E6 /* Formula.swift */,
+				2832E3C32A3D448A009CA1F0 /* CalculatorData.swift */,
+				2832E3C52A3D4549009CA1F0 /* Calculator.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -466,6 +472,7 @@
 				3D1E092F2A28927D004EDD0F /* Node.swift in Sources */,
 				3D1E09352A28D02C004EDD0F /* CalculatorItemQueueProtocol.swift in Sources */,
 				3DE0FC3D2A2FCE7C007854E6 /* Operator.swift in Sources */,
+				2832E3C42A3D448A009CA1F0 /* CalculatorData.swift in Sources */,
 				3D1E09312A2892E9004EDD0F /* CalculateItem.swift in Sources */,
 				3D1E09442A298B41004EDD0F /* MockCalculatorItemQueue.swift in Sources */,
 				3DE0C8302A25D1020017ECB5 /* CalculatorItemQueue.swift in Sources */,
@@ -474,6 +481,7 @@
 				28745C032A39E2A1009BDD3F /* ExtensionUIScrollView.swift in Sources */,
 				3DE0FC3F2A2FCE95007854E6 /* ExpressionParser.swift in Sources */,
 				3DE0FC452A2FCEF6007854E6 /* Double.swift in Sources */,
+				2832E3C62A3D4549009CA1F0 /* Calculator.swift in Sources */,
 				3DE0FC472A2FCF0C007854E6 /* String.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
