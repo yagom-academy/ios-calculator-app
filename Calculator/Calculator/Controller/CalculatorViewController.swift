@@ -52,8 +52,11 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func tapOperatorButton(_ sender: UIButton) {
         let operatorText = unwrap(operatorLabel.text)
-        let operandText = unwrap(operandLabel.text).removeTrailingDot
+        var operandText = unwrap(operandLabel.text)
         let labelText = unwrap(sender.titleLabel?.text)
+        
+        operandText.removeTrailingDot()
+        
         isOperationReady = true
         
         if operandText.isZero, formulaStackView.subviews.isEmpty {
@@ -109,13 +112,15 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
-        let operandText = unwrap(operandLabel.text)
+        var operandText = unwrap(operandLabel.text)
         
         if operandText.isZero {
             return
         }
         
-        operandLabel.text = operandText.convertSign
+        operandText.convertSign()
+        
+        operandLabel.text = operandText
     }
     
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
