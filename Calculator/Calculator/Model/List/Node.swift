@@ -2,7 +2,7 @@
 //  Node.swift
 //  Calculator
 //
-//  Created by kangkyungmin on 2023/06/01.
+//  Created by kyungmin, EtialMoon on 2023/06/01.
 //
 
 final class Node<T> {

@@ -2,7 +2,7 @@
 //  CalculatorViewController.swift
 //  Calculator
 //
-//  Created by EtialMoon on 2023/06/13.
+//  Created by kyungmin, EtialMoon on 2023/06/13.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var formulaStackView: UIStackView!
     
     private var formulaString = ""
-    private var operationReady = true
+    private var isOperationReady = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,7 @@ class CalculatorViewController: UIViewController {
         resetFormulaStackView()
     }
 
-    @IBAction func tapNumpadButton(_ sender: UIButton) {
+    @IBAction func tapNumberButton(_ sender: UIButton) {
         let labelText = unwrap(sender.titleLabel?.text)
         let operandText = unwrap(operandLabel.text)
         
@@ -44,8 +44,8 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func tapPointButton(_ sender: UIButton) {
-        if !unwrap(operandLabel.text).isPrime {
+    @IBAction func tapDotButton(_ sender: UIButton) {
+        if !unwrap(operandLabel.text).isFraction {
             operandLabel.text? += unwrap(sender.titleLabel?.text)
         }
     }
@@ -54,7 +54,7 @@ class CalculatorViewController: UIViewController {
         let operatorText = unwrap(operatorLabel.text)
         let operandText = unwrap(operandLabel.text).removeTrailingDot
         let labelText = unwrap(sender.titleLabel?.text)
-        operationReady = true
+        isOperationReady = true
         
         if operandText.isZero, formulaStackView.subviews.isEmpty {
             return
@@ -76,7 +76,7 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapEqualButton(_ sender: UIButton) {
-        guard operationReady else {
+        guard isOperationReady else {
             return
         }
         
@@ -87,7 +87,7 @@ class CalculatorViewController: UIViewController {
             let result = try formula.result()
             
             operandLabel.text = makeNumberFormat(for: String(result))
-            operationReady = false
+            isOperationReady = false
             
             resetOperatorLabel()
             resetFormulaString()
@@ -99,7 +99,7 @@ class CalculatorViewController: UIViewController {
                 print(OperationError.operatorNotEnoughError)
             case .divideByZeroError:
                 operandLabel.text = "NaN"
-                operationReady = false
+                isOperationReady = false
                 
                 print(OperationError.divideByZeroError)
             }
@@ -128,7 +128,7 @@ class CalculatorViewController: UIViewController {
         resetFormulaStackView()
         resetFormulaString()
         
-        operationReady = true
+        isOperationReady = true
     }
     
     private func resetOperandLabel() {
@@ -157,7 +157,7 @@ class CalculatorViewController: UIViewController {
         return text
     }
     
-    private func makeUILabel(_ text: String?) -> UILabel {
+    private func makePartialExpressionLabel(_ text: String?) -> UILabel {
         let label = UILabel()
         
         label.text = text
@@ -167,7 +167,7 @@ class CalculatorViewController: UIViewController {
         return label
     }
     
-    private func makeUIStackView() -> UIStackView {
+    private func makePartialExpressionStackView() -> UIStackView {
         let stackView = UIStackView()
         
         stackView.axis = .horizontal
@@ -177,9 +177,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func makePartialFormulaStackView(_ operatorText: String, _ operandText: String) -> UIStackView {
-        let operatorLabel = makeUILabel(operatorText)
-        let operandLabel = makeUILabel(operandText)
-        let partialStackView = makeUIStackView()
+        let operatorLabel = makePartialExpressionLabel(operatorText)
+        let operandLabel = makePartialExpressionLabel(operandText)
+        let partialStackView = makePartialExpressionStackView()
         
         partialStackView.addArrangedSubview(operatorLabel)
         partialStackView.addArrangedSubview(operandLabel)

@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  Calculator
 //
-//  Created by kangkyungmin on 2023/05/31.
+//  Created by kyungmin, EtialMoon on 2023/05/31.
 //
 
 struct LinkedList<T> {

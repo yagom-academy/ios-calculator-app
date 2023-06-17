@@ -2,7 +2,7 @@
 //  MockCalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by kangkyungmin on 2023/06/02.
+//  Created by kyungmin, EtialMoon on 2023/06/02.
 //
 
 import Foundation

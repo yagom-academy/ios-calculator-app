@@ -2,7 +2,7 @@
 //  String.swift
 //  Calculator
 //
-//  Created by kangkyungmin on 2023/06/07.
+//  Created by kyungmin, EtialMoon on 2023/06/07.
 //
 
 extension String {
@@ -14,7 +14,7 @@ extension String {
         return self == "0"
     }
     
-    var isPrime: Bool {
+    var isFraction: Bool {
         return self.contains(".")
     }
     

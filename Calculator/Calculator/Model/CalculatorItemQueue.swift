@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by kangkyungmin on 2023/05/30.
+//  Created by kyungmin, EtialMoon on 2023/05/30.
 //
 
 struct CalculatorItemQueue<T: CalculateItem>: CalculatorItemQueueProtocol {

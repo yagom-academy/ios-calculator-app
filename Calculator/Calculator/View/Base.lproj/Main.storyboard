@@ -135,7 +135,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="564-no-FdS"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="564-no-FdS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgT-2D-A49">
@@ -146,7 +146,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iQB-Xc-tqk"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iQB-Xc-tqk"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcj-xJ-ruw">
@@ -157,7 +157,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j4V-Fv-CX6"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="j4V-Fv-CX6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="811-Pz-An6">
@@ -184,7 +184,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Jx-Qz-cW3"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1Jx-Qz-cW3"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vpW-df-OLm">
@@ -195,7 +195,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0gW-I1-MIL"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0gW-I1-MIL"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-Mw-CPv">
@@ -206,7 +206,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PhP-xf-VUO"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PhP-xf-VUO"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nTe-Sn-Pvd">
@@ -233,7 +233,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cml-NJ-zLe"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cml-NJ-zLe"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rif-2S-UU2">
@@ -244,7 +244,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yMl-pg-k85"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yMl-pg-k85"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8H-iH-tSd">
@@ -255,7 +255,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapNumpadButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tj9-NZ-N7e"/>
+                                                    <action selector="tapNumberButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Tj9-NZ-N7e"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sbh-wC-koF">
@@ -304,7 +304,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="tapPointButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jr3-Um-7m5"/>
+                                                    <action selector="tapDotButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jr3-Um-7m5"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Daw-iX-Owl">
