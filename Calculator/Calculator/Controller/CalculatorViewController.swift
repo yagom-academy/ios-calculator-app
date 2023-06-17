@@ -61,16 +61,12 @@ class CalculatorViewController: UIViewController {
         
         if operandText.isZero, formulaStackView.subviews.isEmpty {
             return
-        } else if operandText.isZero, labelText == "=" {
-            formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
-            
-            formulaScrollView.scrollToBottom()
         } else if operandText.isZero {
             operatorLabel.text? = labelText
         } else {
             formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeNumberFormat(for: operandText)))
             
-            formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
+            addFormulaString(operatorText, operandText)
             operatorLabel.text = labelText
             
             resetOperandLabel()
@@ -83,8 +79,20 @@ class CalculatorViewController: UIViewController {
             return
         }
         
+        let operatorText = unwrap(operatorLabel.text)
+        var operandText = unwrap(operandLabel.text)
+        
+        operandText.removeTrailingDot()
+        
+        if operandText.isZero {
+            addFormulaString(operatorText, operandText)
+            
+            return
+        }
+        
         do {
-            tapOperatorButton(sender)
+            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeNumberFormat(for: operandText)))
+            addFormulaString(operatorText, operandText)
             
             var formula = ExpressionParser.parse(from: formulaString)
             let result = try formula.result()
@@ -94,6 +102,7 @@ class CalculatorViewController: UIViewController {
             
             resetOperatorLabel()
             resetFormulaString()
+            formulaScrollView.scrollToBottom()
         } catch let error as OperationError {
             switch error {
             case .operandNotEnoughError:
@@ -160,6 +169,10 @@ class CalculatorViewController: UIViewController {
         }
         
         return text
+    }
+    
+    private func addFormulaString(_ operatorText: String, _ operandText: String) {
+        formulaString += operatorText + operandText.replacingOccurrences(of: ",", with: "")
     }
     
     private func makePartialExpressionLabel(_ text: String?) -> UILabel {
