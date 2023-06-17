@@ -10,74 +10,65 @@ import Foundation
 typealias LabelValues = (operandValue: String, operatorValue: String)
 
 struct OperationManager {
-    private var formula: String = CalculatorNamespace.Empty
+    private var formula: String = CalculatorNamespace.empty
     private var isCalculate: Bool = false
     
     mutating func calculateFormula() -> String {
         var parsedFormula = ExpressionParser.parse(from: formula)
-        let result = OperandFormatter.formatStringOperand(String(parsedFormula.result()))
         isCalculate = true
         clearFormula()
         
-        return result
+        return OperandFormatter.formatStringOperand(String(parsedFormula.result()))
     }
 
+    @discardableResult
     mutating func addFormula(_ operators: String, _ operands: String) -> LabelValues {
-        let `operator` = operators
-        let operands = OperandFormatter.formatStringOperand(operands)
-        
-        if formula.isEmpty && operands != CalculatorNamespace.Zero  {
-            formula += "\(operands)"
-            return (CalculatorNamespace.Empty, operands)
-        } else if operands != CalculatorNamespace.Zero {
-            formula += "\(`operator`)\(operands)"
-            return (operandValue: operands, operatorValue: `operator`)
+        if formula.isEmpty {
+            if operands == CalculatorNamespace.zero {
+                return (operandValue: CalculatorNamespace.empty,
+                        operatorValue: CalculatorNamespace.empty)
+            } else {
+                formula += "\(operands)"
+                return (operandValue: operands,
+                        operatorValue: CalculatorNamespace.empty)
+            }
         }
-        
-        if operands == CalculatorNamespace.Zero {
-            formula += "\(`operator`)\(operands)"
-            return (operandValue: operands, operatorValue: `operator`)
-        }
-        
-        return (operandValue: CalculatorNamespace.Empty, operatorValue: CalculatorNamespace.Empty)
+        formula += "\(operators)\(operands)"
+        return (operandValue: operands, operatorValue: operators)
     }
     
     mutating func addOperandsLabel(_ currentOperands: String, _ inputOperands: String) -> String {
-        let numberOperands = isCalculate ? CalculatorNamespace.Zero : currentOperands
-        let operands = OperandFormatter.formatStringOperand(numberOperands + inputOperands)
+        let numberOperands = isCalculate ? CalculatorNamespace.zero : currentOperands
         isCalculate = false
         
-        if operands.filter({ $0 == "," }).count == 4 || numberOperands.count >= 13 {
-            return currentOperands
+        if numberOperands
+            .replacingOccurrences(of: CalculatorNamespace.negative, with: CalculatorNamespace.empty)
+            .count >= 12 {
+            return numberOperands
         }
         
-        if numberOperands.contains(CalculatorNamespace.Dot) &&
-            (inputOperands == CalculatorNamespace.Zero || inputOperands == CalculatorNamespace.DoubleZero) {
-            let result = numberOperands + inputOperands
-            return result
-        } else if !numberOperands.contains(CalculatorNamespace.Dot) &&
-                    inputOperands == CalculatorNamespace.Dot {
-            let result = operands + inputOperands
-            return result
+        if numberOperands.contains(CalculatorNamespace.dot) &&
+            inputOperands == CalculatorNamespace.dot {
+            return numberOperands
         }
 
-        return operands
+        return numberOperands + inputOperands
     }
     
     func changeSign(_ operands: String) -> String {
         var operands = operands
-        guard operands != CalculatorNamespace.Zero else { return CalculatorNamespace.Zero }
+        guard operands != CalculatorNamespace.zero else { return operands }
         
-        if operands.contains(CalculatorNamespace.Negative) {
+        if operands.contains(CalculatorNamespace.negative) {
             operands.removeFirst()
         } else {
-            operands.insert(Character(CalculatorNamespace.Negative), at: operands.startIndex)
+            operands.insert(Character(CalculatorNamespace.negative), at: operands.startIndex)
         }
         
         return operands
     }
     
     mutating func clearFormula() {
-        formula = CalculatorNamespace.Empty
+        formula = CalculatorNamespace.empty
     }
 }

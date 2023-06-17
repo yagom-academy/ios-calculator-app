@@ -11,7 +11,7 @@ final class CalculatorViewController: UIViewController {
     
     private var operatorValue: String {
         get {
-            return operatorLabel.text ?? CalculatorNamespace.Empty
+            return operatorLabel.text ?? CalculatorNamespace.empty
         }
         set(newOperator) {
             operatorLabel.text = newOperator
@@ -20,7 +20,7 @@ final class CalculatorViewController: UIViewController {
     
     private var operandValue: String {
         get {
-            return OperandFormatter.removeComma(operandsLabel.text ?? CalculatorNamespace.Zero)
+            return OperandFormatter.removeComma(operandsLabel.text ?? CalculatorNamespace.zero)
         }
         set(newOperand) {
             operandsLabel.text = OperandFormatter.formatInput(newOperand)
@@ -35,76 +35,83 @@ final class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        operatorValue = CalculatorNamespace.Empty
-        operandValue = CalculatorNamespace.Zero
+        operatorValue = CalculatorNamespace.empty
+        operandValue = CalculatorNamespace.zero
         clearCalculationDetailsStackView()
     }
     
     @IBAction private func tapOperatorButton(_ sender: UIButton) {
         guard let inputOperator = sender.currentTitle,
-              operandValue != CalculatorNamespace.NaN else { return }
+              operandValue != CalculatorNamespace.nan else { return }
         
         let result = operationManager.addFormula(operatorValue, operandValue)
-        
         operatorValue = inputOperator
-        guard result.operandValue != CalculatorNamespace.Zero else { return }
+        
+        guard operandValue != CalculatorNamespace.zero else { return }
         
         addCalculationDetailsStackView(result.operatorValue, result.operandValue)
-        operandValue = CalculatorNamespace.Zero
+        operandValue = CalculatorNamespace.zero
     }
     
     @IBAction private func tapEqualButton(_ sender: UIButton) {
-        guard operatorValue != CalculatorNamespace.Empty else { return }
+        guard operatorValue != CalculatorNamespace.empty else { return }
         
         let result = operationManager.addFormula(operatorValue, operandValue)
         
         addCalculationDetailsStackView(result.operatorValue, result.operandValue)
         operandValue = operationManager.calculateFormula()
-        operatorValue = CalculatorNamespace.Empty
+        operatorValue = CalculatorNamespace.empty
     }
     
     @IBAction private func tapNumberButton(_ sender: UIButton) {
         guard let inputNumber = sender.currentTitle else { return }
         
-        let result = operationManager.addOperandsLabel(operandValue, inputNumber)
-        operandValue = result
+        operandValue = operationManager.addOperandsLabel(operandValue, inputNumber)
     }
     
-    @IBAction private func tapFunctionButton(_ sender: UIButton) {
+    @IBAction private func tapClearButton(_ sender: UIButton) {
         guard let buttonTitle = sender.currentTitle else { return }
         
         switch buttonTitle {
-        case CalculatorNamespace.AllClear:
-            operatorValue = CalculatorNamespace.Empty
-            operandValue = CalculatorNamespace.Zero
+        case CalculatorNamespace.allClear:
+            operatorValue = CalculatorNamespace.empty
+            operandValue = CalculatorNamespace.zero
             clearCalculationDetailsStackView()
             operationManager.clearFormula()
-        case CalculatorNamespace.ClearEntry:
-            operandValue = CalculatorNamespace.Zero
-        case CalculatorNamespace.SignToggle:
-            let result = operationManager.changeSign(operandValue)
-            operandValue = result
+        case CalculatorNamespace.clearEntry:
+            operandValue = CalculatorNamespace.zero
         default:
             break
         }
+    }
+    
+    @IBAction private func tapSignToggleButton(_ sender: UIButton) {
+        operandValue = operationManager.changeSign(operandValue)
     }
 }
 
 extension CalculatorViewController {
     private func addCalculationDetailsStackView(_ `operator`: String, _ operands: String) {
-        if `operator` == CalculatorNamespace.Empty && operands == CalculatorNamespace.Empty {
+        if `operator` == CalculatorNamespace.empty && operands == CalculatorNamespace.empty {
             return
         }
         
+        let operandsText = OperandFormatter.formatStringOperand(operands)
+        let label = setUpCalculationDetailsLabel(`operator`, operandsText)
+        
+        calculationDetailsStackView.addArrangedSubview(label)
+        calculationDetailsScrollView.layoutIfNeeded()
+        calculationDetailsScrollView.scrollToBottom(animated: false)
+    }
+    
+    private func setUpCalculationDetailsLabel(_ `operator`: String, _ operands: String) -> UILabel {
         let label = UILabel()
         label.font = UIFont.preferredFont(forTextStyle: .title3)
         label.textColor = .white
         label.textAlignment = .right
         label.text = "\(`operator`) \(operands)"
         
-        calculationDetailsStackView.addArrangedSubview(label)
-        calculationDetailsScrollView.layoutIfNeeded()
-        calculationDetailsScrollView.scrollToBottom(animated: false)
+        return label
     }
     
     private func clearCalculationDetailsStackView() {
