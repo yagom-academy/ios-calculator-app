@@ -18,19 +18,17 @@ extension String {
         return self.contains(".")
     }
     
-    var convertSign: String {
+    mutating func convertSign() {
         if self.hasPrefix("-") {
-            return String(self.dropFirst())
+            self = String(self.dropFirst())
         } else {
-            return "-\(self)"
+            self = "-\(self)"
         }
     }
     
-    var removeTrailingDot: String {
+    mutating func removeTrailingDot() {
         if self.hasSuffix(".") {
-            return String(self.dropLast())
-        } else {
-            return self
+            self = String(self.dropLast())
         }
     }
 }
