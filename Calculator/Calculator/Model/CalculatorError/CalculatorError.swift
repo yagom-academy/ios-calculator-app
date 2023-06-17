@@ -9,11 +9,14 @@ import Foundation
 
 enum CalculatorError: Error, LocalizedError {
     case unexpectedError
+    case unReadyError
     
     var errorDescription: String {
         switch self {
         case .unexpectedError:
             return "Unexpected Error"
+        case .unReadyError:
+            return "UnReady Error"
         }
     }
 }
