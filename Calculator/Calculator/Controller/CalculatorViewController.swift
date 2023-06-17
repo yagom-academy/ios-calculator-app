@@ -15,6 +15,7 @@ class CalculatorViewController: UIViewController {
     
     private var formulaString = ""
     private var isOperationReady = true
+    private let numberFormatter = NumberFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class CalculatorViewController: UIViewController {
         resetOperandLabel()
         resetOperatorLabel()
         resetFormulaStackView()
+        resetNumberFormatter()
     }
 
     @IBAction func tapNumberButton(_ sender: UIButton) {
@@ -32,7 +34,7 @@ class CalculatorViewController: UIViewController {
             operandLabel.text? = labelText
         } else if operandText.count < 20 {
             let newLabelText = operandText + labelText
-            operandLabel.text? = makeNumberFormat(for: newLabelText.replacingOccurrences(of: ",", with: ""))
+            operandLabel.text? = makeFormattedNumber(for: newLabelText.replacingOccurrences(of: ",", with: ""))
         }
     }
     
@@ -64,7 +66,7 @@ class CalculatorViewController: UIViewController {
         } else if operandText.isZero {
             operatorLabel.text? = labelText
         } else {
-            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeNumberFormat(for: operandText)))
+            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeFormattedNumber(for: operandText)))
             
             addFormulaString(operatorText, operandText)
             operatorLabel.text = labelText
@@ -91,30 +93,24 @@ class CalculatorViewController: UIViewController {
         }
         
         do {
-            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeNumberFormat(for: operandText)))
+            formulaStackView.addArrangedSubview(makePartialFormulaStackView(operatorText, makeFormattedNumber(for: operandText)))
             addFormulaString(operatorText, operandText)
             
             var formula = ExpressionParser.parse(from: formulaString)
             let result = try formula.result()
             
-            operandLabel.text = makeNumberFormat(for: String(result))
+            operandLabel.text = makeFormattedNumber(for: String(result))
             isOperationReady = false
             
             resetOperatorLabel()
             resetFormulaString()
             formulaScrollView.scrollToBottom()
         } catch let error as OperationError {
-            switch error {
-            case .operandNotEnoughError:
-                print(OperationError.operandNotEnoughError)
-            case .operatorNotEnoughError:
-                print(OperationError.operatorNotEnoughError)
-            case .divideByZeroError:
+            if error == .divideByZeroError {
                 operandLabel.text = "NaN"
                 isOperationReady = false
-                
-                print(OperationError.divideByZeroError)
             }
+            print(error)
         } catch {
             print(CalculatorError.unexpectedError)
         }
@@ -123,7 +119,7 @@ class CalculatorViewController: UIViewController {
     @IBAction func tapChangeSignButton(_ sender: UIButton) {
         var operandText = unwrap(operandLabel.text)
         
-        if operandText.isZero {
+        guard operandText.isZero == false else {
             return
         }
         
@@ -133,6 +129,10 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func tapClearEntryButton(_ sender: UIButton) {
+        if isOperationReady == false {
+            resetFormulaStackView()
+        }
+    
         resetOperandLabel()
     }
     
@@ -163,12 +163,13 @@ class CalculatorViewController: UIViewController {
         formulaString = ""
     }
     
+    private func resetNumberFormatter() {
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumFractionDigits = 20
+    }
+    
     private func unwrap(_ text: String?) -> String {
-        guard let text else {
-            return ""
-        }
-        
-        return text
+        return text ?? ""
     }
     
     private func addFormulaString(_ operatorText: String, _ operandText: String) {
@@ -205,12 +206,7 @@ class CalculatorViewController: UIViewController {
         return partialStackView
     }
     
-    private func makeNumberFormat(for input: String) -> String {
-        let numberFormatter = NumberFormatter()
-        
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-
+    private func makeFormattedNumber(for input: String) -> String {
         return numberFormatter.string(for: Double(input)) ?? "0"
     }
 }
