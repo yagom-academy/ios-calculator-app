@@ -15,6 +15,7 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var displayOperatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,6 +76,7 @@ final class CalculatorViewController: UIViewController {
     
     private func addDisplayOperandsLabel(_ input: String) {
         guard let operand = displayOperandLabel.text?.replacingOccurrences(of: CalculatorSigns.decimalSign, with: ""),
+              let operand2 = displayOperandLabel.text,
               let number = Double(operand + input),
               let formattedOperand = numberFormatter.string(for: number) else { return }
         
@@ -82,7 +84,7 @@ final class CalculatorViewController: UIViewController {
             let result = formattedOperand + input
             displayOperandLabel.text = result
         } else if (input == CalculatorSigns.doubleZero || input == CalculatorSigns.zero) && operand.contains(CalculatorSigns.dot) {
-            let result = operand + input
+            let result = operand2 + input
             displayOperandLabel.text = result
         } else {
             displayOperandLabel.text = formattedOperand
@@ -108,6 +110,8 @@ final class CalculatorViewController: UIViewController {
     private func addStackView(_ `operator`: String, _ operands: String) {
         let stackViewLabel = UILabel()
         stackViewLabel.textColor = .white
+        stackViewLabel.textAlignment = .center
+        stackViewLabel.font = .boldSystemFont(ofSize: 20)
         stackViewLabel.text = "\(`operator`) \(operands)"
         
         stackView.addArrangedSubview(stackViewLabel)
