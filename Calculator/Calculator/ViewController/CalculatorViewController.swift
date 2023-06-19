@@ -15,7 +15,6 @@ final class CalculatorViewController: UIViewController {
     @IBOutlet weak var displayOperatorLabel: UILabel!
     @IBOutlet weak var stackView: UIStackView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,6 +104,7 @@ final class CalculatorViewController: UIViewController {
                 
         clearOperandLabel()
         clearOperatorLabel()
+        
     }
     
     private func addStackView(_ `operator`: String, _ operands: String) {
@@ -159,6 +159,7 @@ final class CalculatorViewController: UIViewController {
         numberFormatter.maximumFractionDigits = 20
         numberFormatter.maximumIntegerDigits = 20
         numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.usesSignificantDigits = true
     }
 }
 
