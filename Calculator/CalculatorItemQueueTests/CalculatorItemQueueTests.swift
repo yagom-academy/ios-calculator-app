@@ -81,5 +81,19 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertNil(result)
     }
+    
+    func test_clear호출시모두초기화되는지() {
+        sut.enqueue(1)
+        sut.enqueue(77)
+        sut.enqueue(28)
+        sut.enqueue(9)
+        sut.enqueue(17)
+        sut.dequeue()
+        sut.clear()
+        
+        let result = sut.enqueueBox.isEmpty && sut.dequeueBox.isEmpty
+        
+        XCTAssertTrue(result)
+    }
 
 }
