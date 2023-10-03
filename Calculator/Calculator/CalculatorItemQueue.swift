@@ -5,6 +5,16 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-class CalculatorItemQueue {
+struct CalculatorItemQueue<T: CalculatorItem> {
+    private let list = CalculatorItemQueueLinkedList()
     
+    var isEmpty: Bool
+    
+    func enQueue(_ item: T) {
+        
+    }
+    
+    func deQueue() {
+        
+    }
 }
