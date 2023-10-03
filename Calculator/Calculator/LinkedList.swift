@@ -5,9 +5,9 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-class LinkedList<DataType> {
+final class LinkedList<DataType> {
     final class Node<DataType> {
-        var data: DataType
+        private(set) var data: DataType
         var next: Node?
         
         init(data: DataType) {
@@ -15,8 +15,8 @@ class LinkedList<DataType> {
         }
     }
     
-    var head: Node<DataType>?
-    var tail: Node<DataType>?
+    private(set) var head: Node<DataType>?
+    private(set) var tail: Node<DataType>?
     var count: Int = 0
     
     var isEmpty: Bool {
