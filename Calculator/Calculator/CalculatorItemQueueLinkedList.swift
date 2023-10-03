@@ -5,25 +5,25 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-class CalculatorItemQueueLinkedList<T> {
-    final class Node<T> {
-        var value: T
+class CalculatorItemQueueLinkedList<DataType> {
+    final class Node<DataType> {
+        var data: DataType
         var next: Node?
         
-        init(value: T) {
-            self.value = value
+        init(data: DataType) {
+            self.data = data
         }
     }
     
-    var head: Node<T>?
-    var tail: Node<T>?
+    var head: Node<DataType>?
+    var tail: Node<DataType>?
     var count: Int = 0
     
     var isEmpty: Bool {
         return count == 0 ? true : false
     }
     
-    func append(_ item: T) {
+    func append(_ item: DataType) {
         
     }
     
