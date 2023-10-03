@@ -14,4 +14,20 @@ class CalculatorItemQueueLinkedList<T> {
             self.value = value
         }
     }
+    
+    var head: Node<T>?
+    var tail: Node<T>?
+    var count: Int = 0
+    
+    var isEmpty: Bool {
+        return count == 0 ? true : false
+    }
+    
+    func append(_ item: T) {
+        
+    }
+    
+    func removeFirst() {
+        
+    }
 }
