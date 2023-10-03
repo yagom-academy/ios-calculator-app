@@ -54,5 +54,14 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
     }
+    
+    func test_enqueue호출시값이잘들어가있는지() {
+        sut.enqueue(1)
+        sut.enqueue(28)
+        sut.enqueue(9)
+        sut.enqueue(17)
+        
+        XCTAssertEqual(sut.enqueueBox, [1, 28, 9, 17])
+    }
 
 }
