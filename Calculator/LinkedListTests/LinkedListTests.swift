@@ -132,4 +132,37 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, 3)
     }
     
+    func test_removeFirst호출시_head의Next가head가되는지() {
+        // given
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
+        
+        let head = sut.head
+        let headNext = sut.head?.next
+        
+        // when
+        sut.removeFirst()
+        
+        // then
+        XCTAssertTrue(sut.head === headNext)
+        XCTAssertFalse(sut.head === head)
+        XCTAssertEqual(sut.head?.data, 20)
+    }
+    
+    func test_removeFirst호출시_head의Next가head가된후_count가1감소하는지() {
+        // given
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
+        
+        let count = sut.count
+        
+        // when
+        sut.removeFirst()
+        
+        // then
+        XCTAssertEqual(sut.count, (count - 1))
+    }
+    
 }

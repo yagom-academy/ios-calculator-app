@@ -45,6 +45,7 @@ class LinkedList<DataType> {
     }
     
     func removeFirst() {
-        
+        head = head?.next
+        count -= 1
     }
 }
