@@ -20,11 +20,11 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return list.isEmpty
     }
     
-    func enQueue(_ item: Element) {
-        
+    func enQueue(_ element: Element) {
+        list.append(element)
     }
     
     func deQueue() {
-        
+        list.removeFirst()
     }
 }

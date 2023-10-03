@@ -21,7 +21,39 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-
+    func test_enQueue호출시_queue에값이추가되는지() {
+        // given
+        let firstData: Int = 10
+        let secondData: Int = 20
+        let thirdData: Int = 30
+        
+        // when
+        sut.enQueue(firstData)
+        sut.enQueue(secondData)
+        sut.enQueue(thirdData)
+        
+        // then
+        XCTAssertFalse(sut.isEmpty)
+        XCTAssertEqual(sut.front, firstData)
+        XCTAssertEqual(sut.rear, thirdData)
+    }
+    
+    func test_deQueue호출시_front값이삭제되는지() {
+        // given
+        let firstData: Int = 10
+        let secondData: Int = 20
+        let thirdData: Int = 30
+        sut.enQueue(firstData)
+        sut.enQueue(secondData)
+        sut.enQueue(thirdData)
+        
+        // when
+        sut.deQueue()
+        
+        // then
+        XCTAssertEqual(sut.front, secondData)
+        XCTAssertEqual(sut.rear, thirdData)
+    }
 }
 
 extension Int: CalculatorItem {
