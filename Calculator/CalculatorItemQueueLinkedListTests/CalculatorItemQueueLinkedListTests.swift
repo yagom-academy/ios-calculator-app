@@ -1,6 +1,6 @@
 //
-//  CalculatorItemQueueTests.swift
-//  CalculatorItemQueueTests
+//  CalculatorItemQueueLinkedListTests.swift
+//  CalculatorItemQueueLinkedListTests
 //
 //  Created by 김진주 on 2023/10/03.
 //
@@ -8,12 +8,12 @@
 import XCTest
 @testable import Calculator
 
-final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue!
+final class CalculatorItemQueueLinkedListTests: XCTestCase {
+    var sut: CalculatorItemQueueLinkedList!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue()
+        sut = CalculatorItemQueueLinkedList()
     }
 
     override func tearDownWithError() throws {
