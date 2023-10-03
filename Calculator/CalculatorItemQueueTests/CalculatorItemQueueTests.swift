@@ -21,8 +21,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-    
+    func test_스택이모두비었을때_isEmpty_true() {
+        let result = sut.isEmpty
+        
+        XCTAssertTrue(result)
+    }
 
-    
+    func test_스택이안비었을때_isEmpty_false() {
+        sut.enqueue(1)
+        
+        let result = sut.isEmpty
+        
+        XCTAssertFalse(result)
+    }
 
 }
