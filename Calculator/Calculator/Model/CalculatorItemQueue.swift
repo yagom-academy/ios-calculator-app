@@ -21,7 +21,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return dequeueBox.last ?? enqueueBox.first
     }
     
-    mutating func enqueue(element: Element) {
+    mutating func enqueue(_ element: Element) {
         enqueueBox.append(element)
     }
     
