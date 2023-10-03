@@ -63,5 +63,23 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         XCTAssertEqual(sut.enqueueBox, [1, 28, 9, 17])
     }
+    
+    func test_dequeue호출시값이잘빠지는지() {
+        sut.enqueue(1)
+        sut.enqueue(77)
+        sut.enqueue(28)
+        sut.enqueue(9)
+        sut.enqueue(17)
+        
+        let result = sut.dequeue()
+        
+        XCTAssertEqual(result, 1)
+    }
+    
+    func test_빈배열에서dequeue호출시nil을반환하는지() {
+        let result = sut.dequeue()
+        
+        XCTAssertNil(result)
+    }
 
 }
