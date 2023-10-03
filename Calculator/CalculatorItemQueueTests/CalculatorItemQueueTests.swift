@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<MockItem>!
+    var sut: CalculatorItemQueue<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<MockItem>()
+        sut = CalculatorItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
@@ -21,8 +21,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
+
 }
 
-class MockItem: CalculatorItem {
+extension Int: CalculatorItem {
     
 }

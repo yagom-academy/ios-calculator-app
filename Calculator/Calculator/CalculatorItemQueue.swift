@@ -8,6 +8,14 @@
 struct CalculatorItemQueue<Element: CalculatorItem> {
     private let list: LinkedList<Element> = LinkedList()
     
+    var front: Element? {
+        return list.head?.data
+    }
+    
+    var rear: Element? {
+        return list.tail?.data
+    }
+    
     var isEmpty: Bool {
         return list.isEmpty
     }
