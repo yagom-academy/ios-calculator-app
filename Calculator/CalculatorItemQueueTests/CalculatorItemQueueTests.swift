@@ -35,7 +35,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_count가옳게출력되는지test() {
+    func test_count가옳게출력되는지테스트() {
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
@@ -43,6 +43,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         let result = sut.count
         
         XCTAssertEqual(result, 3)
+    }
+    
+    func test_front호출테스트() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        let result = sut.front
+        
+        XCTAssertEqual(result, 1)
     }
 
 }
