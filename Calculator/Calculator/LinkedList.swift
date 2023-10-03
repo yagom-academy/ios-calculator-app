@@ -1,11 +1,11 @@
 //
-//  CalculatorItemQueueLinkedList.swift
+//  LinkedList.swift
 //  Calculator
 //
 //  Created by jyubong on 2023/10/03.
 //
 
-class CalculatorItemQueueLinkedList<DataType> {
+class LinkedList<DataType> {
     final class Node<DataType> {
         var data: DataType
         var next: Node?
@@ -23,8 +23,8 @@ class CalculatorItemQueueLinkedList<DataType> {
         return count == 0 ? true : false
     }
     
-    func append(_ item: DataType) {
-        
+    func append(_ data: DataType) {
+        let newNode: Node = Node(data: data)
     }
     
     func removeFirst() {

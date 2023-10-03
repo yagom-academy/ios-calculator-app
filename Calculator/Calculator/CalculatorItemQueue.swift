@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private let list: CalculatorItemQueueLinkedList<Element> = CalculatorItemQueueLinkedList()
+    private let list: LinkedList<Element> = LinkedList()
     
     var isEmpty: Bool {
         return list.isEmpty
