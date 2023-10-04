@@ -54,6 +54,16 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.front, secondData)
         XCTAssertEqual(sut.rear, thirdData)
     }
+    
+    func test_deQueue호출시_isEmpty일때_nil반환하는지() {
+        // given
+        
+        // when
+        let result = sut.deQueue()
+        
+        // then
+        XCTAssertNil(result)
+    }
 }
 
 extension Int: CalculatorItem {

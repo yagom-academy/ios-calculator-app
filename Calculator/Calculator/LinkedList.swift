@@ -45,13 +45,13 @@ final class LinkedList<DataType> {
     }
     
     @discardableResult
-    func removeFirst() -> Node<DataType>? {
+    func removeFirst() -> DataType? {
         guard !isEmpty else { return nil }
         
         let node = head
         head = head?.next
         count -= 1
         
-        return node
+        return node?.data
     }
 }
