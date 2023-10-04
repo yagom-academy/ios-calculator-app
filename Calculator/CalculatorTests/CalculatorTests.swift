@@ -58,4 +58,14 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(input: 1)
         XCTAssertFalse(sut.isEmpty())
     }
+    
+    func test_enqueue로_3_2_1넣고_peek_실행시_3이_출력되는지() {
+        sut.enqueue(input: 3)
+        sut.enqueue(input: 2)
+        sut.enqueue(input: 1)
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, 3)
+    }
 }
