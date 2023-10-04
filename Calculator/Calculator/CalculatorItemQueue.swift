@@ -24,12 +24,12 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return list.isEmpty
     }
     
-    mutating func enQueue(_ element: Element) {
+    func enQueue(_ element: Element) {
         list.append(element)
     }
     
     @discardableResult
-    mutating func deQueue() -> Element? {
+    func deQueue() -> Element? {
         return isEmpty ? nil : list.removeFirst()
     }
 }
