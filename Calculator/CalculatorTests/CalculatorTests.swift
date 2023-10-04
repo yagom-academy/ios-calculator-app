@@ -30,6 +30,14 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.elements, [3,2,1])
     }
     
+    func test_enqueue실행시_3_Plus_1를_전달했을때_elements에_잘들어가는지() {
+        sut.enqueue(input: 3)
+        sut.enqueue(input: "+")
+        sut.enqueue(input: 1)
+        
+        XCTAssertEqual(sut.elements, [3,"+",1])
+    }
+    
     func test_enqueue로_3_2_1넣고_dequeue_한_번_실행시_elements가_앞에서_하나줄어드는지() {
         sut.enqueue(input: 3)
         sut.enqueue(input: 2)
@@ -68,4 +76,6 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 3)
     }
+    
+    
 }
