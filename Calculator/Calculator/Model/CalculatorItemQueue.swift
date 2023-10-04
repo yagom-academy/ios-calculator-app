@@ -28,4 +28,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
     mutating func clear() {
         elements.removeAll()
     }
+    
+    mutating func peek() -> T? {
+        return elements.first
+    }
 }
