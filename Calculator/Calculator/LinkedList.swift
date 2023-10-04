@@ -44,8 +44,14 @@ final class LinkedList<DataType> {
         count += 1
     }
     
-    func removeFirst() {
+    @discardableResult
+    func removeFirst() -> Node<DataType>? {
+        guard !isEmpty else { return nil }
+        
+        let node = head
         head = head?.next
         count -= 1
+        
+        return node
     }
 }

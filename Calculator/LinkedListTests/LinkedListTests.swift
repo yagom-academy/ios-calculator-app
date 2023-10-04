@@ -99,44 +99,60 @@ final class LinkedListTests: XCTestCase {
     func test_append호출시_count가2이상일때_tail에newNode가할당되는지() {
         // given
         let firstData: Int = 10
-        sut.append(firstData)
         let secondData: Int = 20
-        sut.append(secondData)
         let thirdData: Int = 30
-        sut.append(thirdData)
         let forthData: Int = 40
+        sut.append(firstData)
+        sut.append(secondData)
+        sut.append(thirdData)
         
         // when
         sut.append(forthData)
         
         // then
-        XCTAssertEqual(sut.head?.data, 10)
-        XCTAssertEqual(sut.head?.next?.data, 20)
-        XCTAssertEqual(sut.head?.next?.next?.data, 30)
-        XCTAssertEqual(sut.tail?.data, 40)
+        XCTAssertEqual(sut.head?.data, firstData)
+        XCTAssertEqual(sut.head?.next?.data, secondData)
+        XCTAssertEqual(sut.head?.next?.next?.data, thirdData)
+        XCTAssertEqual(sut.tail?.data, forthData)
         XCTAssertTrue(sut.head?.next?.next?.next === sut.tail)
     }
     
     func test_append호출시_count가2이상일때_tail에newNode가할당된후_count가1올라가는지() {
         // given
         let firstData: Int = 10
-        sut.append(firstData)
         let secondData: Int = 20
-        sut.append(secondData)
         let thirdData: Int = 30
+        sut.append(firstData)
+        sut.append(secondData)
+        
+        let expectationCount = 3
         
         // when
         sut.append(thirdData)
         
         // then
-        XCTAssertEqual(sut.count, 3)
+        XCTAssertEqual(sut.count, expectationCount)
+    }
+    
+    func test_removeFirst호출시_isEmpty일때_nil을반환한다() {
+        // given
+        sut.count = 0
+        
+        // when
+        let result = sut.removeFirst()
+        
+        // then
+        XCTAssertNil(result)
     }
     
     func test_removeFirst호출시_head의Next가head가되는지() {
         // given
-        sut.append(10)
-        sut.append(20)
-        sut.append(30)
+        let firstData: Int = 10
+        let secondData: Int = 20
+        let thirdData: Int = 30
+        sut.append(firstData)
+        sut.append(secondData)
+        sut.append(thirdData)
         
         let head = sut.head
         let headNext = sut.head?.next
@@ -147,22 +163,22 @@ final class LinkedListTests: XCTestCase {
         // then
         XCTAssertTrue(sut.head === headNext)
         XCTAssertFalse(sut.head === head)
-        XCTAssertEqual(sut.head?.data, 20)
+        XCTAssertEqual(sut.head?.data, secondData)
     }
     
-    func test_removeFirst호출시_head의Next가head가된후_count가1감소하는지() {
+    func test_removeFirst호출시_count가1감소하는지() {
         // given
         sut.append(10)
         sut.append(20)
         sut.append(30)
         
-        let count = sut.count
+        let expectationCount = sut.count - 1
         
         // when
         sut.removeFirst()
         
         // then
-        XCTAssertEqual(sut.count, (count - 1))
+        XCTAssertEqual(sut.count, expectationCount)
     }
     
 }
