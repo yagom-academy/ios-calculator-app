@@ -16,6 +16,10 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return list.tail?.data
     }
     
+    var count: Int {
+        return list.count
+    }
+    
     var isEmpty: Bool {
         return list.isEmpty
     }
