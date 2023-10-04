@@ -55,3 +55,18 @@ final class LinkedList<DataType> {
         return node?.data
     }
 }
+
+extension LinkedList {
+    subscript(at index: Int) -> Node<DataType>? {
+        guard 0..<count ~= index else { return nil }
+        
+        var node = head
+        
+        for _ in 0..<index {
+            let next = node?.next
+            node = next
+        }
+        
+        return node
+    }
+}

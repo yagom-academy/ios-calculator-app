@@ -111,10 +111,10 @@ final class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut.head?.data, firstData)
-        XCTAssertEqual(sut.head?.next?.data, secondData)
-        XCTAssertEqual(sut.head?.next?.next?.data, thirdData)
+        XCTAssertEqual(sut[at: 1]?.data, secondData)
+        XCTAssertEqual(sut[at: 2]?.data, thirdData)
         XCTAssertEqual(sut.tail?.data, forthData)
-        XCTAssertTrue(sut.head?.next?.next?.next === sut.tail)
+        XCTAssertTrue(sut[at: 3] === sut.tail)
     }
     
     func test_append호출시_count가2이상일때_tail에newNode가할당된후_count가1올라가는지() {
