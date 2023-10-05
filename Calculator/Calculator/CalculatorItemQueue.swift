@@ -5,7 +5,7 @@
 //  Created by Lee minyeol on 2023/10/04.
 //
 
-struct CalculatorItemQueue<T>: CalculateItem {
+struct CalculatorItemQueue<T: CalculateItem> {
     var queue: [T] = []
     
     var count: Int {
