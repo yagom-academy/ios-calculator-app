@@ -62,6 +62,7 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(input: 3)
         sut.enqueue(input: 2)
         sut.enqueue(input: 1)
+        
         XCTAssertFalse(sut.isEmpty())
     }
     
