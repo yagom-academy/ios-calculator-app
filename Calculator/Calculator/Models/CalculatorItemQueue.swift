@@ -14,6 +14,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     var peek: T? {
-        !leftContainer.isEmpty ? leftContainer.last : nil
+        !leftContainer.isEmpty ? leftContainer.last : rightContainer.first
+    }
+    
+    func dequeue() {
+        
     }
 }

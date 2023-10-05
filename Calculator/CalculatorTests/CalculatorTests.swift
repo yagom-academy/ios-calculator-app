@@ -30,4 +30,28 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(result!, sut.leftContainer.last)
     }
+    
+    func test_왼쪽컨테이너에_요소가없을때_오른쪽컨테이너에서요소를_빼내는지() {
+        // given
+        sut.leftContainer = []
+        sut.rightContainer = [3, 1, 17]
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result!, sut.rightContainer.first)
+    }
+    
+    func test_왼쪽컨테이너가_비었을때_오른쪽컨테이너가뒤집혀_왼쪽컨테이너에_할당되는지() {
+        // given
+        sut.leftContainer = []
+        sut.rightContainer = [4, 2, 7]
+        
+        // when
+        sut.dequeue()
+        
+        // then
+        XCTAssertEqual(sut.rightContainer, [7, 2, 4])
+    }
 }
