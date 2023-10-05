@@ -75,6 +75,4 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 3)
     }
-    
-    
 }
