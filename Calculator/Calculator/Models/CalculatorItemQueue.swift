@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     private var elements: [T] = []
     
     mutating func enqueue(_ element: T) {
