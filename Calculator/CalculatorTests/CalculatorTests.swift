@@ -61,9 +61,9 @@ final class CalculatorTests: XCTestCase {
         sut.rightContainer = [4, 2, 7]
         
         // when
-        sut.dequeue() -> T?
+        let result = sut.dequeue()
         
         // then
-        XCTAssertEqual(sut.leftContainer.popLast(), 4)
+        XCTAssertEqual(result, 4)
     }
 }
