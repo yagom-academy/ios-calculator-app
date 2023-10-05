@@ -80,14 +80,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4EE2D51F2ACEED50003736B5 /* Vieww */ = {
+		4EE2D51F2ACEED50003736B5 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
 				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 			);
-			path = Vieww;
+			path = View;
 			sourceTree = "<group>";
 		};
 		4EF722022ACCE2FD00940E68 /* CalculatorItemQueueTests */ = {
@@ -121,7 +121,7 @@
 			children = (
 				4EE2D51C2ACEECBF003736B5 /* Controller */,
 				4EE2D51D2ACEECFC003736B5 /* Model */,
-				4EE2D51F2ACEED50003736B5 /* Vieww */,
+				4EE2D51F2ACEED50003736B5 /* View */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
