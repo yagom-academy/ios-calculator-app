@@ -54,4 +54,16 @@ final class CalculatorTests: XCTestCase {
         // then
         XCTAssertEqual(sut.leftContainer, [7, 2, 4])
     }
+    
+    func test_뒤집힌요소들이들어간_왼쪽컨테이너에서_마지막요소가_제대로빠져나오는지() {
+        // given
+        sut.leftContainer = []
+        sut.rightContainer = [4, 2, 7]
+        
+        // when
+        sut.dequeue() -> T?
+        
+        // then
+        XCTAssertEqual(sut.leftContainer.popLast(), 4)
+    }
 }
