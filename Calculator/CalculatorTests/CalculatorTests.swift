@@ -61,4 +61,12 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 50)
     }
+    
+    func test_clear호출시_요소가_전부_제거되는지() {
+        let _ = sut.clear()
+        
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
+    }
 }
