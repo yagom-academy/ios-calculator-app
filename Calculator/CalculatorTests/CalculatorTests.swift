@@ -19,7 +19,7 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_Enqueue호출시_요소가_제대로_추가되는지() throws {
+    func test_Enqueue호출시_요소가_제대로_추가되는지() {
         let _ = sut.enqueue(3)
         
         let result = sut.peek()
