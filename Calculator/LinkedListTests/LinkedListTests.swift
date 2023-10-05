@@ -24,21 +24,21 @@ final class LinkedListTests: XCTestCase {
     func test_count가0일때_isEmpty가True인지() {
         // given
         sut.count = 0
-        
+
         // when
         let result = sut.isEmpty
-        
+
         // then
         XCTAssertTrue(result)
     }
-    
+
     func test_count가0보다클때_isEmpty가False인지() {
         // given
         sut.count = 5
-        
+
         // when
         let result = sut.isEmpty
-        
+
         // then
         XCTAssertFalse(result)
     }
