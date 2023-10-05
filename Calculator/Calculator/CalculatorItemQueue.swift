@@ -36,7 +36,16 @@ struct CalculateItemQueue {
     }
     
     mutating func dequeue() -> Double? {
-        return 0
+        guard let headNode = head else {
+            return nil
+        }
+        
+        head = headNode.next
+        if head == nil {
+            tail = nil
+        }
+        
+        return headNode.value
     }
     
     mutating func clear() {

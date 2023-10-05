@@ -30,4 +30,13 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.tail?.operatorType, .minus)
     }
 
+    func test_dequeue() {
+        sut.enqueue(value: 1, operatorType: .plus)
+        sut.enqueue(value: 2, operatorType: .minus)
+        
+        sut.dequeue()
+        
+        XCTAssertEqual(sut.head?.value, 2)
+        XCTAssertEqual(sut.head?.operatorType, .minus)
+    }
 }
