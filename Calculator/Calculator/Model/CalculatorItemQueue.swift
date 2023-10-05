@@ -17,7 +17,7 @@ struct CalculatorItemQueue<Element: CalculateItem> {
         return enqueueBox.count + dequeueBox.count
     }
     
-    var front: Element? {
+    var peek: Element? {
         return dequeueBox.last ?? enqueueBox.first
     }
     
