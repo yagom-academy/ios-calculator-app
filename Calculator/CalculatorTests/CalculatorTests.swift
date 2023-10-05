@@ -52,6 +52,6 @@ final class CalculatorTests: XCTestCase {
         sut.dequeue()
         
         // then
-        XCTAssertEqual(sut.rightContainer, [7, 2, 4])
+        XCTAssertEqual(sut.leftContainer, [7, 2, 4])
     }
 }

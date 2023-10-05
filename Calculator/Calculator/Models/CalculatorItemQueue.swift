@@ -17,7 +17,9 @@ struct CalculatorItemQueue<T: CalculateItem> {
         !leftContainer.isEmpty ? leftContainer.last : rightContainer.first
     }
     
-    func dequeue() {
-        
+    mutating func dequeue() {
+        if leftContainer.isEmpty {
+            leftContainer = rightContainer.reversed()
+        }
     }
 }
