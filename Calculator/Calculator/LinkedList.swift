@@ -26,13 +26,16 @@ final class LinkedList<DataType> {
     func append(_ data: DataType) {
         let newNode: Node = Node(data: data)
         
-        guard !isEmpty else {
-            head = newNode
-            tail = newNode
-            count += 1
-            return
-        }
-        
+        isEmpty ? appendWhenEmpty(newNode) : appendWhenNotEmpty(newNode)
+    }
+    
+    func appendWhenEmpty(_ newNode: Node<DataType>) {
+        head = newNode
+        tail = newNode
+        count += 1
+    }
+    
+    func appendWhenNotEmpty(_ newNode: Node<DataType>) {
         if count == 1 {
             tail = newNode
             head?.next = tail
