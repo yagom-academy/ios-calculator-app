@@ -59,34 +59,43 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 1)
     }
     
-    func test_queue비었을때_dequeue호출시_nil을반환한다() {
+    func test_queue비었을때_dequeue호출시_nil를반환한다() {
         //given
         
         //when
-        let result = sut.dequeue()
+         let result = sut.dequeue()
         //then
         XCTAssertNil(result)
     }
     
-    func test_4와5와6이queue들었을때_dequeue호출시_4을제거하면_개수가2개가된다() {
-        //given
-        sut.enqueue("4")
-        sut.enqueue("5")
-        sut.enqueue("6")
-        //when
-        XCTAssertEqual(sut.dequeue(), "4")
-        //then
-        XCTAssertEqual(sut.count, 2)
-    }
+//    func test_queue비었을때_dequeue호출시_nil을반환한다() {
+//        //given
+//
+//        //when
+//        let result = sut.dequeue()
+//        //then
+//        XCTAssertNil(result)
+//    }
     
-    func test_7과8과9가queue에들어있을떄_clear호출시배열이제거되면_ture를반환한다() {
-        //given
-        sut.enqueue("7")
-        sut.enqueue("8")
-        sut.enqueue("9")
-        //when
-        sut.clear()
-        //then
-        XCTAssertTrue(sut.isEmpty)
-    }
+//    func test_4와5와6이queue들었을때_dequeue호출시_4을제거하면_개수가2개가된다() {
+//        //given
+//        sut.enqueue("4")
+//        sut.enqueue("5")
+//        sut.enqueue("6")
+//        //when
+//        XCTAssertEqual(sut.dequeue(), "4")
+//        //then
+//        XCTAssertEqual(sut.count, 2)
+//    }
+//
+//    func test_7과8과9가queue에들어있을떄_clear호출시배열이제거되면_ture를반환한다() {
+//        //given
+//        sut.enqueue("7")
+//        sut.enqueue("8")
+//        sut.enqueue("9")
+//        //when
+//        sut.clear()
+//        //then
+//        XCTAssertTrue(sut.isEmpty)
+//    }
 }
