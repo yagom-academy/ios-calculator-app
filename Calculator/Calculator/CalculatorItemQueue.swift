@@ -32,4 +32,8 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
     mutating func deQueue() -> Element? {
         return isEmpty ? nil : list.removeFirst()
     }
+    
+    mutating func clear() {
+        list.removeAll()
+    }
 }

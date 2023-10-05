@@ -46,6 +46,12 @@ struct LinkedList<DataType> {
         
         return node?.data
     }
+    
+    mutating func removeAll() {
+        head = nil
+        tail = nil
+        count = 0
+    }
 }
 
 extension LinkedList {

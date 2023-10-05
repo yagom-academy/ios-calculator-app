@@ -21,7 +21,7 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_count가0일때_isEmpty가True인지() {
+    func test_count가0일때_isEmpty가True이다() {
         // given
         sut.count = 0
 
@@ -32,7 +32,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_count가0보다클때_isEmpty가False인지() {
+    func test_count가0보다클때_isEmpty가False이다() {
         // given
         sut.count = 5
 
@@ -43,7 +43,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_append호출시_isEmpty일때_head와tail에newNode가할당되는지() {
+    func test_append호출시_isEmpty일때_head와tail에newNode가할당된다() {
         // given
         sut.count = 0
         let data: Int = 10
@@ -57,7 +57,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut.head === sut.tail)
     }
     
-    func test_append호출시_isEmpty일때_count가1증가하는지() {
+    func test_append호출시_isEmpty일때_count가1증가한다() {
         // given
         sut.count = 0
         let data: Int = 10
@@ -69,7 +69,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, 1)
     }
     
-    func test_append호출시_count가1일때_tail에newNode가할당되는지() {
+    func test_append호출시_count가1일때_tail에newNode가할당된다() {
         // given
         let data: Int = 10
         sut.append(data)
@@ -84,7 +84,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.tail?.data, newData)
     }
     
-    func test_append호출시_count가1일때_tail에newNode가할당된후_count가1늘어나는지() {
+    func test_append호출시_count가1일때_tail에newNode가할당된후_count가1늘어난다() {
         // given
         let data: Int = 10
         sut.append(data)
@@ -96,7 +96,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, 2)
     }
     
-    func test_append호출시_count가2이상일때_tail에newNode가할당되는지() {
+    func test_append호출시_count가2이상일때_tail에newNode가할당된다() {
         // given
         let firstData: Int = 10
         let secondData: Int = 20
@@ -117,7 +117,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(sut[at: 3] === sut.tail)
     }
     
-    func test_append호출시_count가2이상일때_tail에newNode가할당된후_count가1올라가는지() {
+    func test_append호출시_count가2이상일때_tail에newNode가할당된후_count가1올라간다() {
         // given
         let firstData: Int = 10
         let secondData: Int = 20
@@ -145,7 +145,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_removeFirst호출시_head의Next가head가되는지() {
+    func test_removeFirst호출시_head의Next가head가된다() {
         // given
         let firstData: Int = 10
         let secondData: Int = 20
@@ -166,7 +166,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.head?.data, secondData)
     }
     
-    func test_removeFirst호출시_count가1감소하는지() {
+    func test_removeFirst호출시_count가1감소한다() {
         // given
         sut.append(10)
         sut.append(20)
@@ -179,6 +179,21 @@ final class LinkedListTests: XCTestCase {
         
         // then
         XCTAssertEqual(sut.count, expectationCount)
+    }
+    
+    func test_removeAll호출시_전부nil이된다() {
+        // given
+        sut.append(10)
+        sut.append(20)
+        sut.append(30)
+        
+        // when
+        sut.removeAll()
+        
+        // then
+        XCTAssertNil(sut[at: 0])
+        XCTAssertNil(sut[at: 1])
+        XCTAssertNil(sut[at: 2])
     }
     
 }

@@ -21,7 +21,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-    func test_enQueue호출시_queue에값이추가되는지() {
+    func test_enQueue호출시_queue에값이추가된다() {
         // given
         let firstData: Int = 10
         let secondData: Int = 20
@@ -38,7 +38,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.rear, thirdData)
     }
     
-    func test_deQueue호출시_front값이삭제되는지() {
+    func test_deQueue호출시_front값이삭제된다() {
         // given
         let firstData: Int = 10
         let secondData: Int = 20
@@ -55,7 +55,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.rear, thirdData)
     }
     
-    func test_deQueue호출시_isEmpty일때_nil반환하는지() {
+    func test_deQueue호출시_isEmpty일때_nil반환한다() {
         // given
         
         // when
