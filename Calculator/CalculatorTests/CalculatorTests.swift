@@ -64,4 +64,15 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_count() {
+        var expectation = 3
+        
+        sut.enqueue(value: 1, operatorType: .plus)
+        sut.enqueue(value: 2, operatorType: .minus)
+        sut.enqueue(value: 3, operatorType: .multiplication)
+        
+        var result = sut.count()
+        XCTAssertEqual(result, expectation)
+    }
 }

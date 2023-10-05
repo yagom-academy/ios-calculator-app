@@ -59,6 +59,12 @@ struct CalculateItemQueue {
     
     func count() -> Int {
         var count = 0
+        var currentNode = head
+        
+        while currentNode != nil {
+            currentNode = currentNode?.next
+            count += 1
+        }
         
         return count
     }
