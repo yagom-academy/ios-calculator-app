@@ -19,3 +19,30 @@ class CalculateItemNode: CalculateItem {
        self.operatorType = operatorType
    }
 }
+
+struct CalculateItemQueue {
+    var head: CalculateItemNode?
+    var tail: CalculateItemNode?
+    
+    mutating func enqueue(value: Double, operatorType: OperatorType) {
+        
+    }
+    
+    mutating func dequeue() -> Double? {
+        return 0
+    }
+    
+    mutating func clear() {
+
+    }
+    
+    func isEmpty() -> Bool {
+        return false
+    }
+    
+    func count() -> Int {
+        var count = 0
+        
+        return count
+    }
+}
