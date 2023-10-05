@@ -18,11 +18,13 @@ struct CalculatorItemQueue<T>: CalculateItem {
     }
     
     mutating func dequeue() {
-        elements.removeFirst()
+        if !elements.isEmpty {
+            elements.removeFirst()
+        }
     }
     
     mutating func isEmpty() -> Bool {
-        return elements.isEmpty ? true : false
+        return elements.isEmpty
     }
     
     mutating func clear() {
