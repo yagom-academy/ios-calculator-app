@@ -5,26 +5,26 @@
 //  Created by Lee minyeol on 2023/10/04.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    var queue: [T] = []
+struct CalculatorItemQueue<List: CalculateItem> {
+    private var list: [List] = []
     
     var count: Int {
-        return queue.count
+        return list.count
     }
     
     var isEmpty: Bool {
-        return queue.isEmpty
+        return list.isEmpty
     }
     
-    mutating func enqueue(_ element: T) {
-        queue.append(element)
+    mutating func enqueue(_ element: List) {
+        list.append(element)
     }
     
-    mutating func dequeue() -> T? {
-        return isEmpty ? nil : queue.removeFirst()
+    mutating func dequeue() -> List? {
+        return isEmpty ? nil : list.removeFirst()
     }
     
     mutating func clear() {
-        queue.removeAll()
+        list.removeAll()
     }
 }
