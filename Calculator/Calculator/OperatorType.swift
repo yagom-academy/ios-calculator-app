@@ -8,6 +8,6 @@
 enum OperatorType: Int {
     case plus
     case minus
-    case Multiplication
+    case multiplication
     case division
 }

@@ -50,4 +50,18 @@ final class CalculatorTests: XCTestCase {
         expectation = false
         XCTAssertEqual(result, expectation)
     }
+    
+    func test_clear() {
+        var expectation = true
+        
+        sut.enqueue(value: 1, operatorType: .plus)
+        sut.enqueue(value: 2, operatorType: .minus)
+        sut.enqueue(value: 3, operatorType: .multiplication)
+        sut.enqueue(value: 4, operatorType: .division)
+        
+        sut.clear()
+        var result = sut.isEmpty()
+        
+        XCTAssertEqual(result, expectation)
+    }
 }

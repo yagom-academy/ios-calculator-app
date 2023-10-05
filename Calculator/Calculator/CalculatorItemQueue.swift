@@ -49,7 +49,8 @@ struct CalculateItemQueue {
     }
     
     mutating func clear() {
-
+        head = nil
+        tail = nil
     }
     
     func isEmpty() -> Bool {
