@@ -25,7 +25,14 @@ struct CalculateItemQueue {
     var tail: CalculateItemNode?
     
     mutating func enqueue(value: Double, operatorType: OperatorType) {
-        
+        let newNode = CalculateItemNode(value: value, operatorType: operatorType)
+        if head == nil {
+            head = newNode
+            tail = newNode
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
     }
     
     mutating func dequeue() -> Double? {
