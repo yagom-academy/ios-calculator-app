@@ -21,7 +21,7 @@ class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_queue가비어있을때_isEmpty호출시_true를반환하는지() {
+    func test_queue가비어있을때_isEmpty호출시_true를반환한다() {
         //given
         
         //when
@@ -30,7 +30,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_1이queue에들어있을때_isEmpty호출시_false를반환하는지() {
+    func test_1이queue에들어있을때_isEmpty호출시_false를반환한다() {
         //given
         sut.enqueue("1")
         //when
@@ -39,7 +39,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_숫자가1과2와3이queue에들어있을떄_count호출시_개수3개가반환되는지() {
+    func test_숫자가1과2와3이queue에들어있을떄_count호출시_개수3개가반환한다() {
         //given
         sut.enqueue("1")
         sut.enqueue("2")
@@ -50,7 +50,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_빈배열인queue에_enqueue호출시숫자가3이들어오면_개수가1개가되는지() {
+    func test_빈배열인queue에_enqueue호출시숫자가3이들어오면_개수가1개가된다() {
         //given
         
         //when
@@ -59,7 +59,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 1)
     }
     
-    func test_queue비었을때_dequeue호출시_nil을반환하는지() {
+    func test_queue비었을때_dequeue호출시_nil을반환한다() {
         //given
         
         //when
@@ -68,7 +68,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_4와5와6이queue들었을때_dequeue호출시_4을제거하면_개수가2개가되는지() {
+    func test_4와5와6이queue들었을때_dequeue호출시_4을제거하면_개수가2개가된다() {
         //given
         sut.enqueue("4")
         sut.enqueue("5")
@@ -79,7 +79,7 @@ class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, 2)
     }
     
-    func test_7과8과9가queue에들어있을떄_clear호출시배열이제거되면_ture를반환하는지() {
+    func test_7과8과9가queue에들어있을떄_clear호출시배열이제거되면_ture를반환한다() {
         //given
         sut.enqueue("7")
         sut.enqueue("8")
