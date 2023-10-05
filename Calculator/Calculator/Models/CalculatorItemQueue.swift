@@ -5,6 +5,6 @@
 //  Created by Charles on 2023/10/05.
 //
 
-struct CalculatorItemQueue<T> {
+struct CalculatorItemQueue<T: CalculateItem> {
     
 }
