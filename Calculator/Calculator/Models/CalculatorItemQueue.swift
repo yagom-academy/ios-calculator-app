@@ -22,6 +22,10 @@ struct CalculatorItemQueue<T> {
         }
     }
     
+    mutating func clear() {
+        elements.removeAll()
+    }
+    
     func isEmpty() -> Bool {
         return elements.isEmpty
     }
