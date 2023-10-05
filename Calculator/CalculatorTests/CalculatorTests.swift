@@ -39,4 +39,15 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(sut.head?.value, 2)
         XCTAssertEqual(sut.head?.operatorType, .minus)
     }
+    
+    func test_isEmpty() {
+        var result = sut.isEmpty()
+        var expectation = true
+        XCTAssertEqual(result, expectation)
+        
+        sut.enqueue(value: 1, operatorType: .plus)
+        result = sut.isEmpty()
+        expectation = false
+        XCTAssertEqual(result, expectation)
+    }
 }

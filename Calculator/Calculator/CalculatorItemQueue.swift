@@ -53,7 +53,7 @@ struct CalculateItemQueue {
     }
     
     func isEmpty() -> Bool {
-        return false
+        return head == nil
     }
     
     func count() -> Int {
