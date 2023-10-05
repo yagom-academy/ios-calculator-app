@@ -35,4 +35,30 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, 1)
     }
+    
+    func test_isEmpty호출시_제대로_Bool타입을_반환하는지() {
+        let result = sut.isEmpty()
+        
+        XCTAssertTrue(result)
+    }
+    
+    func test_count호출시_요소의_갯수를_정확히_반환하는지() {
+        let _ = sut.enqueue(1)
+        let _ = sut.enqueue(2)
+        let _ = sut.enqueue(3)
+        
+        let result = sut.count()
+        
+        XCTAssertEqual(result, 3)
+    }
+    
+    func test_peek호출시_첫번째요소를_반환하는지() {
+        let _ = sut.enqueue(50)
+        let _ = sut.enqueue(1)
+        let _ = sut.enqueue(2)
+        
+        let result = sut.peek()
+        
+        XCTAssertEqual(result, 50)
+    }
 }
