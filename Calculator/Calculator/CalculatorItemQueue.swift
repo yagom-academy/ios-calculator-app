@@ -6,7 +6,7 @@
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private let list: LinkedList<Element> = LinkedList()
+    private var list: LinkedList<Element> = LinkedList()
     
     var front: Element? {
         return list.head?.data
@@ -24,12 +24,12 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return list.isEmpty
     }
     
-    func enQueue(_ element: Element) {
+    mutating func enQueue(_ element: Element) {
         list.append(element)
     }
     
     @discardableResult
-    func deQueue() -> Element? {
+    mutating func deQueue() -> Element? {
         return isEmpty ? nil : list.removeFirst()
     }
 }

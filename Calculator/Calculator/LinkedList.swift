@@ -5,7 +5,7 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-final class LinkedList<DataType> {
+struct LinkedList<DataType> {
     final class Node<DataType> {
         private(set) var data: DataType
         var next: Node?
@@ -23,22 +23,21 @@ final class LinkedList<DataType> {
         return count == 0 ? true : false
     }
     
-    func append(_ data: DataType) {
+    mutating func append(_ data: DataType) {
         let newNode: Node = Node(data: data)
         
         if isEmpty {
             head = newNode
-            tail = head
         } else {
             tail?.next = newNode
-            tail = newNode
         }
         
+        tail = newNode
         count += 1
     }
     
     @discardableResult
-    func removeFirst() -> DataType? {
+    mutating func removeFirst() -> DataType? {
         guard !isEmpty else { return nil }
         
         let node = head
