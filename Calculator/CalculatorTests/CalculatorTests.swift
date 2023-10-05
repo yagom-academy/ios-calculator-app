@@ -18,4 +18,16 @@ final class CalculatorTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_왼쪽컨테이너에_요소가있을때_마지막요소를_빼내는지() {
+        // given
+        sut.leftContainer = [1, 2, 3]
+        sut.rightContainer = []
+        
+        // when
+        let result = sut.peek
+        
+        // then
+        XCTAssertEqual(result!, sut.leftContainer.last)
+    }
 }

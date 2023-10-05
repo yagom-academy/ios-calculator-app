@@ -6,5 +6,14 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
+    var leftContainer: [T] = []
+    var rightContainer: [T] = []
     
+    var isEmpty: Bool {
+        leftContainer.isEmpty && rightContainer.isEmpty
+    }
+    
+    var peek: T? {
+        !leftContainer.isEmpty ? leftContainer.last : nil
+    }
 }
