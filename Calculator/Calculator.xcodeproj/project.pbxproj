@@ -29,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4ECD05532ACF8ADA000B5FAB /* Calculator.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Calculator.xctestplan; sourceTree = "<group>"; };
 		4EF722012ACCE2FD00940E68 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EF722032ACCE2FD00940E68 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		4EF7220A2ACCE42100940E68 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
+				4ECD05532ACF8ADA000B5FAB /* Calculator.xctestplan */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				4EF722022ACCE2FD00940E68 /* CalculatorItemQueueTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,

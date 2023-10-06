@@ -63,17 +63,19 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         
         //when
-         let result = sut.dequeue()
+        let result = sut.dequeue()
         //then
         XCTAssertNil(result)
     }
     
-    func test_4가list에들어있을때_dequeue호출시_4를제거하면_개수가0개가된다() {
+    func test_3과4가list에들어있을때_dequeue호출시_3을뺀다면_숫자가1이된다() {
+        //given
+        sut.enqueue("3")
         sut.enqueue("4")
-        
-        XCTAssertEqual(sut.dequeue(), "4")
-        
-        XCTAssertEqual(sut.count, 0)
+        //when
+        XCTAssertEqual(sut.dequeue(), "3")
+        //then
+        XCTAssertEqual(sut.count, 1)
     }
     
     func test_4와5와6이list들었을때_dequeue호출시_4을제거하면_개수가2개가된다() {
