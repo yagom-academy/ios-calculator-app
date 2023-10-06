@@ -2,7 +2,7 @@
 //  LinkedListTests.swift
 //  LinkedListTests
 //
-//  Created by 김진주 on 2023/10/03.
+//  Created by jybong on 2023/10/03.
 //
 
 import XCTest
@@ -87,157 +87,68 @@ final class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-//    func test_append호출시_isEmpty일때_head와tail에newNode가할당된다() {
-//        // given
-//        sut.count = 0
-//        let data: Int = 10
-//
-//        // when
-//        sut.append(data)
-//
-//        // then
-//        XCTAssertNotNil(sut.head)
-//        XCTAssertNotNil(sut.tail)
-//        XCTAssertTrue(sut.head === sut.tail)
-//    }
-//
-//    func test_append호출시_isEmpty일때_count가1증가한다() {
-//        // given
-//        sut.count = 0
-//        let data: Int = 10
-//
-//        // when
-//        sut.append(data)
-//
-//        // then
-//        XCTAssertEqual(sut.count, 1)
-//    }
-    
-    func test_append호출시_count가1일때_tail에newNode가할당된다() {
+    func test_append호출시_isEmpty일때_head에newNode가할당된다() {
         // given
-        let data: Int = 10
-        sut.append(data)
-        let newData: Int = 20
-        
+        sut = List()
+        let data = 1
+
         // when
-        sut.append(newData)
-        
+        sut.append(data)
+
         // then
-        XCTAssertFalse(sut.head === sut.tail)
         XCTAssertEqual(sut.head?.data, data)
-        XCTAssertEqual(sut.tail?.data, newData)
     }
     
-    func test_append호출시_count가1일때_tail에newNode가할당된후_count가1늘어난다() {
+    func test_append호출시_tail에newNode가할당된다() {
         // given
-        let data: Int = 10
-        sut.append(data)
-        
+        let firstNode = List.Node(data: 1)
+        sut = List(head: firstNode, tail: firstNode)
+        let previousTail = sut.tail
+        let secondNodeData = 2
+
         // when
-        sut.append(data)
-        
+        sut.append(secondNodeData)
+
         // then
-        XCTAssertEqual(sut.count, 2)
+        XCTAssertEqual(previousTail?.next?.data, secondNodeData)
+        XCTAssertEqual(sut.tail?.data, secondNodeData)
     }
     
-    func test_append호출시_count가2이상일때_tail에newNode가할당된다() {
+    func test_removeFirst호출시_isEmpty일때_nil을반환한다() {
         // given
-        let firstData: Int = 10
-        let secondData: Int = 20
-        let thirdData: Int = 30
-        let forthData: Int = 40
-        sut.append(firstData)
-        sut.append(secondData)
-        sut.append(thirdData)
-        
+        sut = List()
+
         // when
-        sut.append(forthData)
-        
+        let result = sut.removeFirst()
+
         // then
-        XCTAssertEqual(sut.head?.data, firstData)
-        XCTAssertEqual(sut[at: 1]?.data, secondData)
-        XCTAssertEqual(sut[at: 2]?.data, thirdData)
-        XCTAssertEqual(sut.tail?.data, forthData)
-        XCTAssertTrue(sut[at: 3] === sut.tail)
+        XCTAssertNil(result)
     }
     
-    func test_append호출시_count가2이상일때_tail에newNode가할당된후_count가1올라간다() {
+    func test_removeFirst호출시_첫번째node가제거된다() {
         // given
-        let firstData: Int = 10
-        let secondData: Int = 20
-        let thirdData: Int = 30
-        sut.append(firstData)
-        sut.append(secondData)
-        
-        let expectationCount = 3
-        
+        let firstNode = List.Node(data: 1)
+        let secondNode = List.Node(data: 2)
+        sut = List(head: firstNode, tail: secondNode)
+        firstNode.next = secondNode
+
         // when
-        sut.append(thirdData)
-        
+        let result = sut.removeFirst()
+
         // then
-        XCTAssertEqual(sut.count, expectationCount)
+        XCTAssertFalse(sut.head === firstNode)
     }
     
-//    func test_removeFirst호출시_isEmpty일때_nil을반환한다() {
-//        // given
-//        sut.count = 0
-//
-//        // when
-//        let result = sut.removeFirst()
-//
-//        // then
-//        XCTAssertNil(result)
-//    }
-    
-    func test_removeFirst호출시_head의Next가head가된다() {
+    func test_removeAll호출시_초기화된다() {
         // given
-        let firstData: Int = 10
-        let secondData: Int = 20
-        let thirdData: Int = 30
-        sut.append(firstData)
-        sut.append(secondData)
-        sut.append(thirdData)
-        
-        let head = sut.head
-        let headNext = sut.head?.next
-        
-        // when
-        sut.removeFirst()
-        
-        // then
-        XCTAssertTrue(sut.head === headNext)
-        XCTAssertFalse(sut.head === head)
-        XCTAssertEqual(sut.head?.data, secondData)
-    }
-    
-    func test_removeFirst호출시_count가1감소한다() {
-        // given
-        sut.append(10)
-        sut.append(20)
-        sut.append(30)
-        
-        let expectationCount = sut.count - 1
-        
-        // when
-        sut.removeFirst()
-        
-        // then
-        XCTAssertEqual(sut.count, expectationCount)
-    }
-    
-    func test_removeAll호출시_전부nil이된다() {
-        // given
-        sut.append(10)
-        sut.append(20)
-        sut.append(30)
+        let node = List.Node(data: 1)
+        sut = List(head: node, tail: node)
         
         // when
         sut.removeAll()
         
         // then
-        XCTAssertNil(sut[at: 0])
-        XCTAssertNil(sut[at: 1])
-        XCTAssertNil(sut[at: 2])
+        XCTAssertNil(sut.head)
+        XCTAssertNil(sut.tail)
     }
-    
 }
