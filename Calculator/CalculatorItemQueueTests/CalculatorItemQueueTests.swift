@@ -9,60 +9,93 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
+    typealias List = LinkedList<Int>
+    
     var sut: CalculatorItemQueue<Int>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Int>(list: List())
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
     }
+    
+    func test_count_초기에count가0이다() {
+        // given
+        let expectation = 0
+        
+        // when
+        sut = CalculatorItemQueue(list: List())
+        
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
+    
+    func test_count_enQude되면_count가1이다() {
+        // given
+        let firstNode = List.Node(data: 1)
+        let list = List(head: firstNode, tail: firstNode)
+        
+        let expectation = 1
+        
+        // when
+        sut = CalculatorItemQueue(list: list)
+        
+        // then
+        XCTAssertEqual(sut.count, expectation)
+    }
 
     func test_enQueue호출시_queue에값이추가된다() {
         // given
-        let firstData: Int = 10
-        let secondData: Int = 20
-        let thirdData: Int = 30
+        let data: Int = 1
         
         // when
-        sut.enQueue(firstData)
-        sut.enQueue(secondData)
-        sut.enQueue(thirdData)
+        sut.enQueue(data)
         
         // then
-        XCTAssertFalse(sut.isEmpty)
-        XCTAssertEqual(sut.front, firstData)
-        XCTAssertEqual(sut.rear, thirdData)
+        XCTAssertEqual(sut.front, sut.rear)
     }
     
     func test_deQueue호출시_front값이삭제된다() {
         // given
-        let firstData: Int = 10
-        let secondData: Int = 20
-        let thirdData: Int = 30
-        sut.enQueue(firstData)
-        sut.enQueue(secondData)
-        sut.enQueue(thirdData)
+        let firstNode = List.Node(data: 1)
+        let secondNode = List.Node(data: 2)
+        firstNode.next = secondNode
+        let list = List(head: firstNode, tail: secondNode)
+        sut = CalculatorItemQueue(list: list)
         
         // when
         sut.deQueue()
         
         // then
-        XCTAssertEqual(sut.front, secondData)
-        XCTAssertEqual(sut.rear, thirdData)
+        XCTAssertEqual(sut.front, secondNode.data)
     }
     
     func test_deQueue호출시_isEmpty일때_nil반환한다() {
         // given
+        sut = CalculatorItemQueue(list: List())
         
         // when
         let result = sut.deQueue()
         
         // then
         XCTAssertNil(result)
+    }
+    
+    func test_clear호출시_isEmpty이다() {
+        // given
+        let firstNode = List.Node(data: 1)
+        let list = List(head: firstNode, tail: firstNode)
+        sut = CalculatorItemQueue(list: list)
+        
+        // when
+        sut.clear()
+        
+        // then
+        XCTAssertTrue(sut.isEmpty)
     }
 }
 

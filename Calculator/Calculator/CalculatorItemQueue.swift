@@ -24,6 +24,10 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         return list.isEmpty
     }
     
+    init(list: LinkedList<Element>) {
+        self.list = list
+    }
+    
     mutating func enQueue(_ element: Element) {
         list.append(element)
     }
