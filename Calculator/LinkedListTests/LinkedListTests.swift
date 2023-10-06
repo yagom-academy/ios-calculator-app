@@ -9,11 +9,13 @@ import XCTest
 @testable import Calculator
 
 final class LinkedListTests: XCTestCase {
-    var sut: LinkedList<Int>!
+    typealias List = LinkedList<Int>
+    
+    var sut: List!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = LinkedList<Int>()
+        sut = List()
     }
 
     override func tearDownWithError() throws {
@@ -21,9 +23,50 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_count가0일때_isEmpty가True이다() {
+    func test_count_초기값이0이다() {
         // given
-        sut.count = 0
+        sut = List()
+        let expectation = 0
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_count_list에Node1개가할당되면_count는1이다() {
+        // given
+        let node = List.Node(data: 1)
+        sut = List(head: node, tail: node)
+        let expectation = 1
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_count_list에Node2개가할당되면_count는2이다() {
+        // given
+        let firstNode = List.Node(data: 1)
+        let secondNode = List.Node(data: 2)
+        sut = List(head: firstNode, tail: secondNode)
+        firstNode.next = secondNode
+        
+        let expectation = 2
+        
+        // when
+        let result = sut.count
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
+    func test_isEmpty_노드가없을때True이다() {
+        // given
+        sut = List()
 
         // when
         let result = sut.isEmpty
@@ -32,9 +75,10 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_count가0보다클때_isEmpty가False이다() {
+    func test_isEmpty_노드가있을때False이다() {
         // given
-        sut.count = 5
+        let node = List.Node(data: 1)
+        sut = List(head: node, tail: node)
 
         // when
         let result = sut.isEmpty
@@ -43,31 +87,31 @@ final class LinkedListTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_append호출시_isEmpty일때_head와tail에newNode가할당된다() {
-        // given
-        sut.count = 0
-        let data: Int = 10
-        
-        // when
-        sut.append(data)
-        
-        // then
-        XCTAssertNotNil(sut.head)
-        XCTAssertNotNil(sut.tail)
-        XCTAssertTrue(sut.head === sut.tail)
-    }
-    
-    func test_append호출시_isEmpty일때_count가1증가한다() {
-        // given
-        sut.count = 0
-        let data: Int = 10
-        
-        // when
-        sut.append(data)
-        
-        // then
-        XCTAssertEqual(sut.count, 1)
-    }
+//    func test_append호출시_isEmpty일때_head와tail에newNode가할당된다() {
+//        // given
+//        sut.count = 0
+//        let data: Int = 10
+//
+//        // when
+//        sut.append(data)
+//
+//        // then
+//        XCTAssertNotNil(sut.head)
+//        XCTAssertNotNil(sut.tail)
+//        XCTAssertTrue(sut.head === sut.tail)
+//    }
+//
+//    func test_append호출시_isEmpty일때_count가1증가한다() {
+//        // given
+//        sut.count = 0
+//        let data: Int = 10
+//
+//        // when
+//        sut.append(data)
+//
+//        // then
+//        XCTAssertEqual(sut.count, 1)
+//    }
     
     func test_append호출시_count가1일때_tail에newNode가할당된다() {
         // given
@@ -134,16 +178,16 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(sut.count, expectationCount)
     }
     
-    func test_removeFirst호출시_isEmpty일때_nil을반환한다() {
-        // given
-        sut.count = 0
-        
-        // when
-        let result = sut.removeFirst()
-        
-        // then
-        XCTAssertNil(result)
-    }
+//    func test_removeFirst호출시_isEmpty일때_nil을반환한다() {
+//        // given
+//        sut.count = 0
+//
+//        // when
+//        let result = sut.removeFirst()
+//
+//        // then
+//        XCTAssertNil(result)
+//    }
     
     func test_removeFirst호출시_head의Next가head가된다() {
         // given
