@@ -42,9 +42,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_count프로퍼티를확인할때_1과2와3이들어있을시_count가3이출력된다() {
         //given
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
+        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [])
         
         //when
         let result = sut.count
@@ -55,9 +53,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_peek프로퍼티를확인할때_1과2와3이들어있을시_1이나온다() {
         //given
-        sut.enqueue(1)
-        sut.enqueue(2)
-        sut.enqueue(3)
+        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [])
         
         //when
         let result = sut.peek
@@ -105,12 +101,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_enqueue로여러요소를넣고_clear호출시모두초기화되는지() {
         // given
-        sut.enqueue(1)
-        sut.enqueue(77)
-        sut.enqueue(28)
-        sut.enqueue(9)
-        sut.enqueue(17)
-        sut.dequeue()
+        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [77, 28, 9])
         sut.clear()
         
         //when
