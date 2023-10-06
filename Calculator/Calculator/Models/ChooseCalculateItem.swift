@@ -6,4 +6,4 @@
 //
 
 
-extension Int: CalculateItem { }
+extension Double: CalculateItem { }
