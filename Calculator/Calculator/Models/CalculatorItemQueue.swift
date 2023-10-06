@@ -6,27 +6,27 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private(set) var leftContainer: [T] = []
-    private(set) var rightContainer: [T] = []
+    private(set) var dequeueContainer: [T] = []
+    private(set) var enqueueContainer: [T] = []
     
     var isEmpty: Bool {
-        leftContainer.isEmpty && rightContainer.isEmpty
+        dequeueContainer.isEmpty && enqueueContainer.isEmpty
     }
     
     var peek: T? {
-        !leftContainer.isEmpty ? leftContainer.last : rightContainer.first
+        !dequeueContainer.isEmpty ? dequeueContainer.last : enqueueContainer.first
     }
     
     mutating func dequeue() -> T? {
-        if leftContainer.isEmpty {
-            leftContainer = rightContainer.reversed()
-            rightContainer.removeAll()
+        if dequeueContainer.isEmpty {
+            dequeueContainer = enqueueContainer.reversed()
+            enqueueContainer.removeAll()
         }
         
-        return leftContainer.popLast()
+        return dequeueContainer.popLast()
     }
     
     mutating func enqueue(_ element: T) {
-        rightContainer.append(element)
+        enqueueContainer.append(element)
     }
 }
