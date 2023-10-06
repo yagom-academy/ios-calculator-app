@@ -7,8 +7,8 @@
 
 
 final class LinkedList<Data> {
-    private(set) var head: Node<Data>?
-    private(set) var tail: Node<Data>?
+    private var head: Node<Data>?
+    private var tail: Node<Data>?
     private(set) var count: Int = 0
     
     var isEmpty: Bool { head == nil }
