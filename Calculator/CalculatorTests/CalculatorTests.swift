@@ -9,68 +9,63 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: CalculateItemQueue!
+    var sut: CalculateItemQueue<Int>!
     
     override func setUpWithError() throws {
-        sut = CalculateItemQueue()
+        sut = CalculateItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
 
-    func test_enqueue() {
-        sut.enqueue(value: 1, operatorType: .plus)
-        sut.enqueue(value: 2, operatorType: .minus)
-        
-        XCTAssertEqual(sut.head?.value, 1)
-        XCTAssertEqual(sut.head?.operatorType, .plus)
+    func test_enqueue로_1_2_3을_넣었을때_head가1인지() {
+        let expectation = 1
 
-        XCTAssertEqual(sut.tail?.value, 2)
-        XCTAssertEqual(sut.tail?.operatorType, .minus)
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+
+        let result = sut.peek()
+
+        XCTAssertEqual(result, expectation)
     }
 
-    func test_dequeue() {
-        sut.enqueue(value: 1, operatorType: .plus)
-        sut.enqueue(value: 2, operatorType: .minus)
+    func test_enqueue로_1_2_3을_넣고_dequeue실행시_head가2인지() {
+        let expectation = 2
         
-        sut.dequeue()
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
+        let _ = sut.dequeue()
+        let result = sut.peek()
         
-        XCTAssertEqual(sut.head?.value, 2)
-        XCTAssertEqual(sut.head?.operatorType, .minus)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_isEmpty() {
+    func test_isEmpty실행시_리스트가_비어있을경우_True가_반환되는지() {
         var result = sut.isEmpty()
-        var expectation = true
-        XCTAssertEqual(result, expectation)
-        
-        sut.enqueue(value: 1, operatorType: .plus)
-        result = sut.isEmpty()
-        expectation = false
-        XCTAssertEqual(result, expectation)
+
+        XCTAssertTrue(result)
     }
     
-    func test_clear() {
-        var expectation = true
-        
-        sut.enqueue(value: 1, operatorType: .plus)
-        sut.enqueue(value: 2, operatorType: .minus)
-        sut.enqueue(value: 3, operatorType: .multiplication)
-        sut.enqueue(value: 4, operatorType: .division)
-        
+    func test_enqueue로_1_2_3을_넣고_clear실행시_Queue가_비어있는지() {
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
         sut.clear()
+        
         var result = sut.isEmpty()
         
-        XCTAssertEqual(result, expectation)
+        XCTAssertTrue(result)
     }
     
-    func test_count() {
+    func test_enqueue로_1_2_3을_넣고_count실행시_3이_반환되는지() {
         var expectation = 3
         
-        sut.enqueue(value: 1, operatorType: .plus)
-        sut.enqueue(value: 2, operatorType: .minus)
-        sut.enqueue(value: 3, operatorType: .multiplication)
+        sut.enqueue(value: 1)
+        sut.enqueue(value: 2)
+        sut.enqueue(value: 3)
         
         var result = sut.count()
         XCTAssertEqual(result, expectation)

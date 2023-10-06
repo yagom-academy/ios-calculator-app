@@ -9,23 +9,22 @@ protocol CalculateItem {
    
 }
 
-class CalculateItemNode: CalculateItem {
-   var value: Double
-   var operatorType: OperatorType
-   var next: CalculateItemNode?
-   
-   init (value: Double, operatorType: OperatorType) {
-       self.value = value
-       self.operatorType = operatorType
-   }
-}
-
-struct CalculateItemQueue {
+struct CalculateItemQueue<T> {
     var head: CalculateItemNode?
     var tail: CalculateItemNode?
+    var itemCount = 0
     
-    mutating func enqueue(value: Double, operatorType: OperatorType) {
-        let newNode = CalculateItemNode(value: value, operatorType: operatorType)
+    final class CalculateItemNode: CalculateItem {
+       var value: T
+       var next: CalculateItemNode?
+       
+       init (value: T) {
+           self.value = value
+       }
+    }
+    
+    mutating func enqueue(value: T) {
+        let newNode = CalculateItemNode(value: value)
         if head == nil {
             head = newNode
             tail = newNode
@@ -33,9 +32,10 @@ struct CalculateItemQueue {
             tail?.next = newNode
             tail = newNode
         }
+        itemCount += 1
     }
     
-    mutating func dequeue() -> Double? {
+    mutating func dequeue() -> T? {
         guard let headNode = head else {
             return nil
         }
@@ -44,7 +44,7 @@ struct CalculateItemQueue {
         if head == nil {
             tail = nil
         }
-        
+        itemCount -= 1
         return headNode.value
     }
     
@@ -53,19 +53,15 @@ struct CalculateItemQueue {
         tail = nil
     }
     
+    func peek() -> T? {
+        return head?.value
+    }
+    
     func isEmpty() -> Bool {
         return head == nil
     }
     
     func count() -> Int {
-        var count = 0
-        var currentNode = head
-        
-        while currentNode != nil {
-            currentNode = currentNode?.next
-            count += 1
-        }
-        
-        return count
+        return itemCount
     }
 }
