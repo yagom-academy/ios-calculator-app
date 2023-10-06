@@ -22,13 +22,11 @@ final class LinkedList<Data> {
         if isEmpty {
             head = newNode
             tail = head
-            count += 1
-            return
         } else {
             tail?.next = newNode
             tail = newNode
-            count += 1
         }
+        count += 1
     }
     
     func removeFirst() -> Data? {
