@@ -23,7 +23,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_count_초기에count가0이다() {
+    func test_count_값이없을때count가0이다() {
         // given
         let expectation = 0
         
@@ -48,7 +48,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
 
-    func test_enQueue호출시_queue에값이추가된다() {
+    func test_enQueue호출시_rear에값이변경된다() {
         // given
         let data: Int = 1
         
@@ -59,19 +59,20 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.rear, data)
     }
     
-    func test_deQueue호출시_front값이삭제된다() {
+    func test_deQueue호출시_front를반환한다() {
         // given
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
         firstNode.next = secondNode
         let list = List(head: firstNode, tail: secondNode)
         sut = CalculatorItemQueue(list: list)
+        let expectation = sut.front
         
         // when
-        sut.deQueue()
+        let result = sut.deQueue()
         
         // then
-        XCTAssertEqual(sut.front, secondNode.data)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_deQueue호출시_isEmpty일때_nil반환한다() {

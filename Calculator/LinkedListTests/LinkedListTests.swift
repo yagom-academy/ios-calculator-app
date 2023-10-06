@@ -23,7 +23,7 @@ final class LinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_count_초기값이0이다() {
+    func test_count_노드가없을때0이다() {
         // given
         sut = List()
         let expectation = 0
@@ -35,7 +35,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_count_list에Node1개가할당되면_count는1이다() {
+    func test_count_list에노드1개가할당되면_count는1이다() {
         // given
         let node = List.Node(data: 1)
         sut = List(head: node, tail: node)
@@ -48,7 +48,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_count_list에Node2개가할당되면_count는2이다() {
+    func test_count_list에노드2개가할당되면_count는2이다() {
         // given
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
@@ -125,7 +125,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_removeFirst호출시_첫번째node가제거된다() {
+    func test_removeFirst호출시_첫번째노드가제거된다() {
         // given
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
