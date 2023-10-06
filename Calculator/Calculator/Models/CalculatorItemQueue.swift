@@ -6,8 +6,8 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var leftContainer: [T] = []
-    var rightContainer: [T] = []
+    private(set) var leftContainer: [T] = []
+    private(set) var rightContainer: [T] = []
     
     var isEmpty: Bool {
         leftContainer.isEmpty && rightContainer.isEmpty

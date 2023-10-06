@@ -21,8 +21,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_왼쪽컨테이너에_요소가있을때_마지막요소를_빼내는지() {
         // given
-        sut.leftContainer = [1, 2, 3]
-        sut.rightContainer = []
+        sut = CalculatorItemQueue(leftContainer: [1, 2, 3], rightContainer: [])
         
         // when
         let result = sut.peek
@@ -33,8 +32,7 @@ final class CalculatorTests: XCTestCase {
     
     func test_왼쪽컨테이너에_요소가없을때_오른쪽컨테이너에서요소를_빼내는지() {
         // given
-        sut.leftContainer = []
-        sut.rightContainer = [3, 1, 17]
+        sut = CalculatorItemQueue(leftContainer: [], rightContainer: [3, 1, 17])
         
         // when
         let result = sut.peek
@@ -45,8 +43,7 @@ final class CalculatorTests: XCTestCase {
 
     func test_뒤집힌요소들이들어간_왼쪽컨테이너에서_마지막요소가_제대로빠져나오는지() {
         // given
-        sut.leftContainer = []
-        sut.rightContainer = [4, 2, 7]
+        sut = CalculatorItemQueue(leftContainer: [], rightContainer: [4, 2, 7])
         
         // when
         let result = sut.dequeue()
