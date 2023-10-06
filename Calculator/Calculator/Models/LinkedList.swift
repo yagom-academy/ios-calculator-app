@@ -6,18 +6,18 @@
 //
 
 
-final class LinkedList<T> {
-    private(set) var head: Node<T>?
-    private(set) var tail: Node<T>?
+final class LinkedList<Data> {
+    private(set) var head: Node<Data>?
+    private(set) var tail: Node<Data>?
     private(set) var count: Int = 0
     
     var isEmpty: Bool { head == nil }
     
-    var first: T? { head?.data }
+    var first: Data? { head?.data }
     
-    var last: T? { tail?.data }
+    var last: Data? { tail?.data }
     
-    func append(value: T) {
+    func append(value: Data) {
         let newNode: Node = Node(data: value)
         if isEmpty {
             head = newNode
@@ -31,7 +31,7 @@ final class LinkedList<T> {
         }
     }
     
-    func removeFirst() -> T? {
+    func removeFirst() -> Data? {
         guard !isEmpty else { return nil }
         
         let node = head?.data
