@@ -13,7 +13,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>()
+        sut = CalculatorItemQueue<Int>(enqueueBox: [], dequeueBox: [])
     }
 
     override func tearDownWithError() throws {
@@ -21,68 +21,90 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
 
-    func test_스택이모두비었을때_isEmpty_true() {
+    func test_isEmpty프로퍼티를확인할시_비어있을때_True반환() {
+        //when
         let result = sut.isEmpty
         
+        //then
         XCTAssertTrue(result)
     }
 
     func test_스택이안비었을때_isEmpty_false() {
+        //given
         sut.enqueue(1)
         
+        //when
         let result = sut.isEmpty
         
+        //then
         XCTAssertFalse(result)
     }
     
-    func test_count가옳게출력되는지테스트() {
+    func test_count프로퍼티를확인할때_1과2와3이들어있을시_count가3이출력된다() {
+        //given
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         
+        //when
         let result = sut.count
         
+        //then
         XCTAssertEqual(result, 3)
     }
     
-    func test_front호출테스트() {
+    func test_peek프로퍼티를확인할때_1과2와3이들어있을시_1이나온다() {
+        //given
         sut.enqueue(1)
         sut.enqueue(2)
         sut.enqueue(3)
         
+        //when
         let result = sut.peek
         
+        //then
         XCTAssertEqual(result, 1)
     }
     
-    func test_enqueue호출시값이잘들어가있는지() {
+    func test_1과28과9와17을enqueue했을때_enqueueBox에1과28과9와17이들어있다() {
+        //given
         sut.enqueue(1)
         sut.enqueue(28)
         sut.enqueue(9)
         sut.enqueue(17)
         
-        XCTAssertEqual(sut.enqueueBox, [1, 28, 9, 17])
+        //when
+        let result = sut.enqueueBox
+        
+        //then
+        XCTAssertEqual(result, [1, 28, 9, 17])
     }
     
-    func test_dequeue호출시값이잘빠지는지() {
+    func test_1과77과28과9와17을enqueue하고_dequeue호출했을때_1이나온다() {
+        //given
         sut.enqueue(1)
         sut.enqueue(77)
         sut.enqueue(28)
         sut.enqueue(9)
         sut.enqueue(17)
         
+        //when
         let result = sut.dequeue()
         
+        //then
         XCTAssertEqual(result, 1)
     }
     
     func test_빈배열에서dequeue호출시nil을반환하는지() {
+        //when
         let result = sut.dequeue()
         
+        //then
         XCTAssertNil(result)
     }
     
-    func test_clear호출시모두초기화되는지() {
+    func test_enqueue로여러요소를넣고_clear호출시모두초기화되는지() {
+        // given
         sut.enqueue(1)
         sut.enqueue(77)
         sut.enqueue(28)
@@ -91,8 +113,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.dequeue()
         sut.clear()
         
+        //when
         let result = sut.enqueueBox.isEmpty && sut.dequeueBox.isEmpty
         
+        //then
         XCTAssertTrue(result)
     }
 
