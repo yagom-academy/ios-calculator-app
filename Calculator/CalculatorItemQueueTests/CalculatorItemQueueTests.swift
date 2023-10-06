@@ -34,7 +34,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.count, expectation)
     }
     
-    func test_count_enQude되면_count가1이다() {
+    func test_count_enQueue되면_count가1이다() {
         // given
         let firstNode = List.Node(data: 1)
         let list = List(head: firstNode, tail: firstNode)
@@ -56,7 +56,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enQueue(data)
         
         // then
-        XCTAssertEqual(sut.front, sut.rear)
+        XCTAssertEqual(sut.rear, data)
     }
     
     func test_deQueue호출시_front값이삭제된다() {
