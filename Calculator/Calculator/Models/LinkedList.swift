@@ -18,14 +18,15 @@ final class LinkedList<T> {
     var last: T? { tail?.data }
     
     func append(value: T) {
+        let newNode: Node = Node(data: value)
         if isEmpty {
-            head = Node(data: value)
+            head = newNode
             tail = head
             count += 1
             return
         } else {
-            tail?.next = Node(data: value)
-            tail = tail?.next
+            tail?.next = newNode
+            tail = newNode
             count += 1
         }
     }
