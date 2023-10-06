@@ -50,7 +50,7 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut.enqueue(2)
         sut.enqueue(3)
         
-        let result = sut.front
+        let result = sut.peek
         
         XCTAssertEqual(result, 1)
     }

@@ -6,8 +6,13 @@
 //
 
 struct CalculatorItemQueue<Element: CalculateItem> {
-    private(set) var enqueueBox: [Element] = []
-    private(set) var dequeueBox: [Element] = []
+    private(set) var enqueueBox: [Element] 
+    private(set) var dequeueBox: [Element]
+    
+    init(enqueueBox: [Element], dequeueBox: [Element]) {
+        self.enqueueBox = enqueueBox
+        self.dequeueBox = dequeueBox
+    }
     
     var isEmpty: Bool {
         return enqueueBox.isEmpty && dequeueBox.isEmpty
