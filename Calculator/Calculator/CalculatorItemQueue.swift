@@ -28,16 +28,16 @@ struct CalculatorItemQueue<Element: CalculatorItem> {
         self.list = list
     }
     
-    mutating func enQueue(_ element: Element) {
+    func enQueue(_ element: Element) {
         list.append(element)
     }
     
     @discardableResult
-    mutating func deQueue() -> Element? {
+    func deQueue() -> Element? {
         return isEmpty ? nil : list.removeFirst()
     }
     
-    mutating func clear() {
+    func clear() {
         list.removeAll()
     }
 }

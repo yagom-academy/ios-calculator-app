@@ -5,7 +5,7 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-struct LinkedList<DataType> {
+final class LinkedList<DataType> {
     final class Node<DataType> {
         private(set) var data: DataType
         var next: Node?
@@ -42,7 +42,7 @@ struct LinkedList<DataType> {
         self.tail = tail
     }
     
-    mutating func append(_ data: DataType) {
+    func append(_ data: DataType) {
         let newNode: Node = Node(data: data)
         
         if isEmpty {
@@ -55,7 +55,7 @@ struct LinkedList<DataType> {
     }
     
     @discardableResult
-    mutating func removeFirst() -> DataType? {
+    func removeFirst() -> DataType? {
         guard !isEmpty else { return nil }
         
         let node = head
@@ -64,7 +64,7 @@ struct LinkedList<DataType> {
         return node?.data
     }
     
-    mutating func removeAll() {
+    func removeAll() {
         head = nil
         tail = nil
     }
