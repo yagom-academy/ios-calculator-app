@@ -32,11 +32,11 @@ final class LinkedList<Data> {
     func removeFirst() -> Data? {
         guard !isEmpty else { return nil }
         
-        let node = head?.data
+        let value = head?.data
         head = head?.next
         count -= 1
         
-        return node
+        return value
     }
     
     func removeAll() {
