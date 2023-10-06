@@ -20,15 +20,13 @@ final class LinkedList<T> {
     func append(value: T) {
         if head == nil {
             head = Node(data: value)
+            tail = head
             count += 1
             return
         }
         
-        var node = head
-        while node?.next != nil {
-            node = node?.next
-        }
-        node?.next = Node(data: value)
+        tail?.next = Node(data: value)
+        tail = tail?.next
         count += 1
     }
     

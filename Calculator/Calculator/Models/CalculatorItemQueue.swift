@@ -7,33 +7,29 @@
 
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    private var elements: [T] = []
+    private var list = LinkedList<T>()
     
     mutating func enqueue(_ element: T) {
-        elements.append(element)
+        list.append(value: element)
     }
     
     mutating func dequeue() -> T? {
-        if elements.isEmpty {
-            return nil
-        } else {
-            return elements.removeFirst()
-        }
+        list.removeFirst()
     }
     
     mutating func clear() {
-        elements.removeAll()
+        list.removeAll()
     }
     
     func isEmpty() -> Bool {
-        return elements.isEmpty
+        return list.isEmpty
     }
     
     func count() -> Int {
-        return elements.count
+        return list.count
     }
     
     func peek() -> T? {
-        return elements.first
+        return list.head?.data
     }
 }
