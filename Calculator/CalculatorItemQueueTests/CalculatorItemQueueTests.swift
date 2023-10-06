@@ -29,9 +29,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_스택이안비었을때_isEmpty_false() {
+    func test_isEmpty프로퍼티를확인할시_요소가하나라도있을때_False를반환한다() {
         //given
-        sut.enqueue(1)
+        sut = .init(enqueueBox: [1], dequeueBox: [])
         
         //when
         let result = sut.isEmpty
