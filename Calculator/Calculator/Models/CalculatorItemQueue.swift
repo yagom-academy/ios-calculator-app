@@ -25,4 +25,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         
         return leftContainer.popLast()
     }
+    
+    mutating func enqueue(_ element: T) {
+        rightContainer.append(element)
+    }
 }
