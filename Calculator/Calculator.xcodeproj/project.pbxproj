@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C0A61242ACFC9A2001FF9A6 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A61232ACFC9A2001FF9A6 /* LinkedList.swift */; };
+		3C0A61262ACFDEDB001FF9A6 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C0A61252ACFDEDB001FF9A6 /* Node.swift */; };
 		3C643B0A2ACDCCA300088B74 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643B092ACDCCA300088B74 /* CalculatorTests.swift */; };
 		3C643B142ACDCDEA00088B74 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C643B132ACDCDEA00088B74 /* CalculatorItemQueue.swift */; };
 		3CA454D52ACEAC0300CA8B96 /* ChooseCalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CA454D42ACEAC0300CA8B96 /* ChooseCalculateItem.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		3C0A61232ACFC9A2001FF9A6 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		3C0A61252ACFDEDB001FF9A6 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		3C643B072ACDCCA300088B74 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C643B092ACDCCA300088B74 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		3C643B132ACDCDEA00088B74 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -89,6 +91,7 @@
 				3CE8664C2ACDD25C0097813E /* CalculateItem.swift */,
 				3CA454D42ACEAC0300CA8B96 /* ChooseCalculateItem.swift */,
 				3C0A61232ACFC9A2001FF9A6 /* LinkedList.swift */,
+				3C0A61252ACFDEDB001FF9A6 /* Node.swift */,
 				3C643B132ACDCDEA00088B74 /* CalculatorItemQueue.swift */,
 			);
 			path = Models;
@@ -244,6 +247,7 @@
 				3CE8664D2ACDD25C0097813E /* CalculateItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
+				3C0A61262ACFDEDB001FF9A6 /* Node.swift in Sources */,
 				3CA454D52ACEAC0300CA8B96 /* ChooseCalculateItem.swift in Sources */,
 				3C643B142ACDCDEA00088B74 /* CalculatorItemQueue.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
