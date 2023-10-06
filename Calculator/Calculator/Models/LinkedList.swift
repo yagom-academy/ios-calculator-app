@@ -18,16 +18,16 @@ final class LinkedList<T> {
     var last: T? { tail?.data }
     
     func append(value: T) {
-        if head == nil {
+        if isEmpty {
             head = Node(data: value)
             tail = head
             count += 1
             return
+        } else {
+            tail?.next = Node(data: value)
+            tail = tail?.next
+            count += 1
         }
-        
-        tail?.next = Node(data: value)
-        tail = tail?.next
-        count += 1
     }
     
     func removeFirst() -> T? {

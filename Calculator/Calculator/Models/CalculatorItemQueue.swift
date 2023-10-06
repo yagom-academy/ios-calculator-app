@@ -30,6 +30,6 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     func peek() -> T? {
-        return list.head?.data
+        return list.first
     }
 }
