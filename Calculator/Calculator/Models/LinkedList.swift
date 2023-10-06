@@ -17,9 +17,29 @@ final class LinkedList<T> {
     
     var last: T? { tail?.data }
     
-    init(data: T) {
-        self.head = Node(data: data)
-        self.tail = head
+    func append(value: T) {
+        if head == nil {
+            head = Node(data: value)
+            count += 1
+            return
+        }
+        
+        var node = head
+        while node?.next != nil {
+            node = node?.next
+        }
+        node?.next = Node(data: value)
+        count += 1
+    }
+    
+    func removeFirst() -> T? {
+        guard !isEmpty else { return nil }
+        
+        let node = head?.data
+        head = head?.next
+        count -= 1
+        
+        return node
     }
     
     func removeAll() {
