@@ -9,10 +9,10 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: CalculateItemQueue<Int>!
+    var sut: CalculateItemQueue!
     
     override func setUpWithError() throws {
-        sut = CalculateItemQueue<Int>()
+        sut = CalculateItemQueue()
     }
 
     override func tearDownWithError() throws {
@@ -28,7 +28,7 @@ final class CalculatorTests: XCTestCase {
 
         let result = sut.peek()
 
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result as? Int, expectation)
     }
 
     func test_enqueue로_1_2_3을_넣고_dequeue실행시_head가2인지() {
@@ -40,11 +40,11 @@ final class CalculatorTests: XCTestCase {
         let _ = sut.dequeue()
         let result = sut.peek()
         
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result as? Int, expectation)
     }
     
     func test_isEmpty실행시_리스트가_비어있을경우_True가_반환되는지() {
-        var result = sut.isEmpty()
+        let result = sut.isEmpty()
 
         XCTAssertTrue(result)
     }
@@ -55,19 +55,19 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue(value: 3)
         sut.clear()
         
-        var result = sut.isEmpty()
+        let result = sut.isEmpty()
         
         XCTAssertTrue(result)
     }
     
     func test_enqueue로_1_2_3을_넣고_count실행시_3이_반환되는지() {
-        var expectation = 3
+        let expectation = 3
         
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         sut.enqueue(value: 3)
         
-        var result = sut.count()
+        let result = sut.count()
         XCTAssertEqual(result, expectation)
     }
 }

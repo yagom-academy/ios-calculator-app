@@ -9,12 +9,12 @@ protocol CalculateItem {
    
 }
 
-struct CalculateItemQueue<T> {
-    var head: CalculateItemNode?
-    var tail: CalculateItemNode?
+struct CalculateItemQueue {
+    var head: CalculateItemNode<Any>?
+    var tail: CalculateItemNode<Any>?
     var itemCount = 0
     
-    final class CalculateItemNode: CalculateItem {
+    final class CalculateItemNode<T>: CalculateItem {
        var value: T
        var next: CalculateItemNode?
        
@@ -23,7 +23,7 @@ struct CalculateItemQueue<T> {
        }
     }
     
-    mutating func enqueue(value: T) {
+    mutating func enqueue(value: Any) {
         let newNode = CalculateItemNode(value: value)
         if head == nil {
             head = newNode
@@ -35,7 +35,7 @@ struct CalculateItemQueue<T> {
         itemCount += 1
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Any? {
         guard let headNode = head else {
             return nil
         }
@@ -53,7 +53,7 @@ struct CalculateItemQueue<T> {
         tail = nil
     }
     
-    func peek() -> T? {
+    func peek() -> Any? {
         return head?.value
     }
     
