@@ -33,3 +33,4 @@
 |------|---|
 |23.10.04|STEP1 CalculatorItemQueue타입 구현 <br>`사칙연산 계산을 위한 CalculatorItemQueue타입 구현 `
 |23.10.05|STEP1 CalculatorItemQueue타입에 대한 UnitTest 구현 <br> `CalculatorItemQueue의 메서드에 대한 UnitTest를 구현`
+|23.10.06|STEP1 CalculatorItemQueue타입에 사용할 LinkedList 구현 <br> `LinkedList 자료구조를 통해 Queue를 구현`
