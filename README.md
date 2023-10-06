@@ -1,7 +1,19 @@
-## iOS 커리어 스타터 캠프
+## 계산기
 
-### 계산기 프로젝트 저장소
+## 목차
 
-- 이 저장소를 자신의 저장소로 fork하여 프로젝트를 진행합니다
+1. [팀원](#1-팀원)
+2. [클래스다이어그램](#2-클래스-다이어그램)
 
-![클래스다이얼그램](https://github.com/mireu79/ios-calculator-app/assets/125941932/9aed4abf-fa3a-45d3-abc5-681f36eb42f7)
+<br>
+
+## 1. 팀원
+
+| [mireu](https://github.com/mireu79)  |
+| :--------: |
+|<img src=https://github.com/mireu79/ios-rock-paper-scissors/assets/125941932/b4a69222-b338-4a7f-984c-be5bd78dc1d8 height="150"/> |
+
+<br>
+
+## 2. 클래스 다이어그램
+![632a7061324ce85b6f34ebd5](https://github.com/mireu79/ios-calculator-app/assets/125941932/2356b0ff-5f3b-42a7-af13-d901cedc2079)
