@@ -10,6 +10,7 @@ protocol CalculateItem {
     
 }
 
+
 struct CalculatorItemQueue<T>: CalculateItem {
     var elements: [T] = []
     
@@ -33,5 +34,15 @@ struct CalculatorItemQueue<T>: CalculateItem {
     
     mutating func peek() -> T? {
         return elements.first
+    }
+}
+
+class Node<T> {
+    var next: Node<T>?
+    var element: T
+    
+    init(element: T) {
+        next = nil
+        self.element = element
     }
 }
