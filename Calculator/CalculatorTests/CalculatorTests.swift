@@ -22,7 +22,7 @@ final class CalculatorTests: XCTestCase {
         sut = nil
     }
     
-    func test_enqueue실행시_3_2_1를_넣어주고_dequeue실행시_원하는요소가_나오는지() {
+    func test_enqueue실행시_3_2_1를_넣어주고_dequeue_3번_실행시_넣은_순서대로_방출되는지() {
         //given
         sut.enqueue(3)
         sut.enqueue(2)
@@ -60,6 +60,16 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, 3)
+    }
+    
+    func test_노드가_존재하지_않을때_peek실행시_nil값이_출력되는지() {
+        // given
+        
+        // when
+        let result = sut.peek()
+        
+        // then
+        XCTAssertEqual(result, nil)
     }
     
     func test_노드가_존재하지_않을때_isEmpty실행시_true를_반환하는지() {
@@ -119,5 +129,15 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(count, 3)
+    }
+    
+    func test_노드가_존재하지_않을때_count실행시_0을_반환하는지() {
+        // given
+        
+        // when
+        let count = sut.count()
+        
+        //then
+        XCTAssertEqual(count, 0)
     }
 }
