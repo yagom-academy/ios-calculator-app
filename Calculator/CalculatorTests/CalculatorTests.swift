@@ -57,8 +57,15 @@ final class CalculatorTests: XCTestCase {
     func test_enqueue로_3을_넣어주고_dequeue로_제거후_isEmpty실행시_true를_반환하는지(){
         sut.enqueue(3)
         let dequeueElement = sut.dequeue()
-        XCTAssertFalse(sut.isEmpty())
+        XCTAssertTrue(sut.isEmpty())
     }
     
+    func test_enqueue실행시_3_2_1를_넣어주고_clear실행후_isEmpty실행시_true를_반환하는지(){
+        sut.enqueue(3)
+        sut.enqueue(2)
+        sut.enqueue(1)
+        sut.clear()
+        XCTAssertTrue(sut.isEmpty())
+    }
     
 }
