@@ -55,6 +55,21 @@ struct CalculatorItemQueue<T> {
         tail = nil
     }    
     
+    func count() -> Int {
+        var count = 0
+        guard !isEmpty() else {
+            return count
+        }
+        count += 1
+        var currentNode = head
+        
+        while currentNode?.next != nil {
+            count += 1
+            currentNode = currentNode?.next
+        }
+        return count
+    }
+    
 }
 
 class Node<T> {
