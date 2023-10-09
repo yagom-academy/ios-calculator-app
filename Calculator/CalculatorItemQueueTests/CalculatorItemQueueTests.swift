@@ -40,15 +40,26 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_count프로퍼티를확인할때_1과2와3이들어있을시_count가3이출력된다() {
+    func test_아무것도없을때_count프로퍼티를확인할시_count가0이출력된다() {
         //given
-        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [])
+        sut = .init(enqueueBox: [], dequeueBox: [])
         
         //when
         let result = sut.count
         
         //then
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_count프로퍼티를확인할때_요소가한개들어있을시_count가1이출력된다() {
+        //given
+        sut = .init(enqueueBox: [1], dequeueBox: [])
+        
+        //when
+        let result = sut.count
+        
+        //then
+        XCTAssertEqual(result, 1)
     }
     
     func test_peek프로퍼티를확인할때_1과2와3이들어있을시_1이나온다() {
@@ -62,27 +73,21 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
     
-    func test_1과28과9와17을enqueue했을때_enqueueBox에1과28과9와17이들어있다() {
+    func test_1과28과9가있을때_17을enqueue할시_enqueueBox에1과28과9와17이들어있다() {
         //given
-        sut.enqueue(1)
-        sut.enqueue(28)
-        sut.enqueue(9)
-        sut.enqueue(17)
+        sut = .init(enqueueBox: [1, 28, 9], dequeueBox: [])
+        let expectedEnqueueBox = [1, 28, 9, 17]
         
         //when
-        let result = sut.enqueueBox
+        sut.enqueue(17)
         
         //then
-        XCTAssertEqual(result, [1, 28, 9, 17])
+        XCTAssertEqual(sut.enqueueBox, expectedEnqueueBox)
     }
     
-    func test_1과77과28과9와17을enqueue하고_dequeue호출했을때_1이나온다() {
+    func test_1과77과28과9와17로초기화를하고_dequeue호출했을때_1이나온다() {
         //given
-        sut.enqueue(1)
-        sut.enqueue(77)
-        sut.enqueue(28)
-        sut.enqueue(9)
-        sut.enqueue(17)
+        sut = .init(enqueueBox: [1,77,28,9,17], dequeueBox: [])
         
         //when
         let result = sut.dequeue()
@@ -99,16 +104,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_enqueue로여러요소를넣고_clear호출시모두초기화되는지() {
+    func test_여러요소를넣고_clear호출시_모두초기화되는지() {
         // given
         sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [77, 28, 9])
-        sut.clear()
+        let expectedEnqueueBox = [Int]()
+        let expectedDequeueBox = [Int]()
         
         //when
-        let result = sut.enqueueBox.isEmpty && sut.dequeueBox.isEmpty
+        sut.clear()
         
         //then
-        XCTAssertTrue(result)
+        XCTAssertEqual(expectedDequeueBox, sut.dequeueBox)
+        XCTAssertEqual(expectedEnqueueBox, sut.enqueueBox)
     }
 
 }
