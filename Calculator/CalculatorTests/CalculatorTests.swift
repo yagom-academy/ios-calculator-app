@@ -45,7 +45,20 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
     
-    func test_노드가_존재할때_isEmpty실행시_true를_반환하는지() {
+    func test_노드가_존재하지_않을때_isEmpty실행시_true를_반환하는지() {
         XCTAssertTrue(sut.isEmpty())
     }
+    
+    func test_enqueue로_3을_넣어주고_isEmpty실행시_false를_반환하는지() {
+        sut.enqueue(3)
+        XCTAssertFalse(sut.isEmpty())
+    }
+    
+    func test_enqueue로_3을_넣어주고_dequeue로_제거후_isEmpty실행시_true를_반환하는지(){
+        sut.enqueue(3)
+        let dequeueElement = sut.dequeue()
+        XCTAssertFalse(sut.isEmpty())
+    }
+    
+    
 }

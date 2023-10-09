@@ -42,6 +42,13 @@ struct CalculatorItemQueue<T> {
         return peekElement
     }
     
+    func isEmpty() -> Bool {
+        if head == nil {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 class Node<T> {
