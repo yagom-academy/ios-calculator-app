@@ -8,24 +8,13 @@
 struct CalculatorItemQueue<T: CalculateItem> {
     var head: Node<T>?
     var tail: Node<T>?
+    var elementCount = 0
     
     var isEmpty: Bool {
-        if head == nil {
-            return true
-        } else {
-            return false
-        }
+        return head == nil
     }
     
     var count: Int {
-        var current = head
-        var elementCount = 0
-        
-        while current != nil {
-            elementCount += 1
-            current = current?.next
-        }
-        
         return elementCount
     }
     
@@ -39,11 +28,13 @@ struct CalculatorItemQueue<T: CalculateItem> {
         guard isEmpty == false else {
             head = node
             tail = node
+            elementCount += 1
             return
         }
         
         tail?.next = node
         tail = tail?.next
+        elementCount += 1
     }
     
     mutating func dequeue() -> T? {
@@ -63,6 +54,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
         newValue = head?.value
         head = head?.next
         return newValue
+        elementCount -= 1
     }
     
     mutating func clear() {
