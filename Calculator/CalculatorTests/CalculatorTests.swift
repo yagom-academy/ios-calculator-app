@@ -23,55 +23,101 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_enqueue실행시_3_2_1를_넣어주고_dequeue실행시_원하는요소가_나오는지() {
+        //given
         sut.enqueue(3)
         sut.enqueue(2)
         sut.enqueue(1)
         
-        XCTAssertEqual(sut.dequeue(), 3)
-        XCTAssertEqual(sut.dequeue(), 2)
-        XCTAssertEqual(sut.dequeue(), 1)
+        //when
+        let dequeued1 = sut.dequeue()
+        let dequeued2 = sut.dequeue()
+        let dequeued3 = sut.dequeue()
+        
+        // then
+        XCTAssertEqual(dequeued1, 3)
+        XCTAssertEqual(dequeued2, 2)
+        XCTAssertEqual(dequeued3, 1)
     }
     
     func test_노드가_없을때_dequeue실행시_nil을_반환하는지() {
-        XCTAssertEqual(sut.dequeue(), nil)
+        //given
+        
+        // when
+        let dequeuedItem = sut.dequeue()
+        
+        // then
+        XCTAssertNil(dequeuedItem)
     }
     
     func test_enqueue로_3_2_1을_넣어주고_peek실행시_3이_출력되는지(){
+        // given
         sut.enqueue(3)
         sut.enqueue(2)
         sut.enqueue(1)
         
+        // when
         let result = sut.peek()
+        
+        // then
         XCTAssertEqual(result, 3)
     }
     
     func test_노드가_존재하지_않을때_isEmpty실행시_true를_반환하는지() {
-        XCTAssertTrue(sut.isEmpty())
+        //given
+        
+        // when
+        let isEmpty = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(isEmpty)
     }
     
     func test_enqueue로_3을_넣어주고_isEmpty실행시_false를_반환하는지() {
+        // given
         sut.enqueue(3)
-        XCTAssertFalse(sut.isEmpty())
+        
+        // when
+        let isEmpty = sut.isEmpty()
+        
+        // then
+        XCTAssertFalse(isEmpty)
     }
     
     func test_enqueue로_3을_넣어주고_dequeue로_제거후_isEmpty실행시_true를_반환하는지(){
+        // given
         sut.enqueue(3)
-        let dequeueElement = sut.dequeue()
-        XCTAssertTrue(sut.isEmpty())
+        _ = sut.dequeue()
+        
+        // when
+        let isEmpty = sut.isEmpty()
+        
+        // then
+        XCTAssertTrue(isEmpty)
     }
     
     func test_enqueue실행시_3_2_1를_넣어주고_clear실행후_isEmpty실행시_true를_반환하는지(){
+        // given
         sut.enqueue(3)
         sut.enqueue(2)
         sut.enqueue(1)
+            
+        // when
         sut.clear()
+            
+        // then
         XCTAssertTrue(sut.isEmpty())
     }
     
     func test_enqueue실행시_3_2_1를_넣어주고_count실행시_3을_반환하는지() {
+        // given
         sut.enqueue(3)
         sut.enqueue(2)
         sut.enqueue(1)
-        XCTAssertEqual(sut.count(), 3)
+        
+        // when
+        let count = sut.count()
+        
+        // then
+        XCTAssertEqual(count, 3)
     }
 }
