@@ -6,9 +6,9 @@
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var head: Node<T>?
-    var tail: Node<T>?
-    var elementCount = 0
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    private var elementCount = 0
     
     var isEmpty: Bool {
         return head == nil
