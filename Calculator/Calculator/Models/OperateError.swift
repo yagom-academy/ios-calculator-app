@@ -5,6 +5,6 @@
 //  Created by Charles on 2023/10/09.
 //
 
-enum OperateError {
+enum OperateError: Error {
     case dividingZero
 }
