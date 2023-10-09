@@ -44,4 +44,8 @@ final class CalculatorTests: XCTestCase {
         let result = sut.peek()
         XCTAssertEqual(result, 3)
     }
+    
+    func test_노드가_존재할때_isEmpty실행시_true를_반환하는지() {
+        XCTAssertTrue(sut.isEmpty())
+    }
 }
