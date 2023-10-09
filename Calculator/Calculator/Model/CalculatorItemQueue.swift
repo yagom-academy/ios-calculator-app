@@ -49,6 +49,11 @@ struct CalculatorItemQueue<T> {
             return false
         }
     }
+    
+    mutating func clear() {
+        head = nil
+        tail = nil
+    }
 }
 
 class Node<T> {
