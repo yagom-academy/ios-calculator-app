@@ -53,7 +53,8 @@ struct CalculatorItemQueue<T> {
     mutating func clear() {
         head = nil
         tail = nil
-    }
+    }    
+    
 }
 
 class Node<T> {

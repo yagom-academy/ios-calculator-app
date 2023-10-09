@@ -68,4 +68,10 @@ final class CalculatorTests: XCTestCase {
         XCTAssertTrue(sut.isEmpty())
     }
     
+    func test_enqueue실행시_3_2_1를_넣어주고_count실행시_3을_반환하는지() {
+        sut.enqueue(3)
+        sut.enqueue(2)
+        sut.enqueue(1)
+        XCTAssertEqual(sut.count(), 3)
+    }
 }
