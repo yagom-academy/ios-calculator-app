@@ -34,3 +34,6 @@
 |23.10.04|STEP1 CalculatorItemQueue타입 구현 <br>`사칙연산 계산을 위한 CalculatorItemQueue타입 구현 `
 |23.10.05|STEP1 CalculatorItemQueue타입에 대한 UnitTest 구현 <br> `CalculatorItemQueue의 메서드에 대한 UnitTest를 구현`
 |23.10.06|STEP1 CalculatorItemQueue타입에 사용할 LinkedList 구현 및 Pr 피드백 수정 <br> `LinkedList 자료구조를 통해 Queue를 구현`
+|23.10.10|STEP2 UML기반 타입구현 <br> `UML을 기반으로 필요한 타입과 프로퍼티 메서드 구현`
+|23.10.11|STEP2 타입에 필요한 기능 구현 및 UnitTest구현 <br> `타입별 상세한 기능을 구현하고 해당 타입의 메서드들에 대한 UnitTest 구현`
+
