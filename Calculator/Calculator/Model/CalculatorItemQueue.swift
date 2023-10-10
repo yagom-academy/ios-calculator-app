@@ -5,9 +5,9 @@
 //  Created by uemu on 2023/10/09.
 //
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+struct CalculatorItemQueue<Item: CalculateItem> {
+    private var head: Node<Item>?
+    private var tail: Node<Item>?
     private var elementCount = 0
     
     var isEmpty: Bool {
@@ -18,11 +18,11 @@ struct CalculatorItemQueue<T: CalculateItem> {
         return elementCount
     }
     
-    var peek: T? {
+    var peek: Item? {
         return head?.value
     }
     
-    mutating func enqueue(value: T) {
+    mutating func enqueue(value: Item) {
         let node = Node(value: value)
         
         guard isEmpty == false else {
@@ -37,8 +37,8 @@ struct CalculatorItemQueue<T: CalculateItem> {
         elementCount += 1
     }
     
-    mutating func dequeue() -> T? {
-        var newValue: T? = nil
+    mutating func dequeue() -> Item? {
+        var newValue: Item? = nil
         
         guard isEmpty == false else {
             return nil
