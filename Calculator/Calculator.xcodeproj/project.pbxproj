@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		BF6F4DD12ACC409C00829028 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DD02ACC409C00829028 /* LinkedList.swift */; };
 		BF6F4DD32ACC40B800829028 /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DD22ACC40B800829028 /* CalculatorItem.swift */; };
 		BF6F4DDB2ACC41F900829028 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DDA2ACC41F900829028 /* LinkedListTests.swift */; };
+		BF7A130E2AD50F5E005A4500 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A130D2AD50F5E005A4500 /* Formula.swift */; };
 		BFC9914B2AD4CF57009134C0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9914A2AD4CF57009134C0 /* Operator.swift */; };
 		BFC991532AD4D076009134C0 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC991522AD4D076009134C0 /* OperatorTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		BF6F4DD82ACC41F900829028 /* CalculatorItemQueueLinkedListTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueLinkedListTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6F4DDA2ACC41F900829028 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		BF6F4DE12ACC420C00829028 /* CalculatorItemQueueTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CalculatorItemQueueTests.xctestplan; sourceTree = "<group>"; };
+		BF7A130D2AD50F5E005A4500 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
 		BFC9914A2AD4CF57009134C0 /* Operator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operator.swift; sourceTree = "<group>"; };
 		BFC991502AD4D076009134C0 /* OperatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OperatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFC991522AD4D076009134C0 /* OperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatorTests.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				BF6F4DC12ACC404F00829028 /* CalculatorItemQueue.swift */,
 				BF6F4DD02ACC409C00829028 /* LinkedList.swift */,
 				BFC9914A2AD4CF57009134C0 /* Operator.swift */,
+				BF7A130D2AD50F5E005A4500 /* Formula.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -253,8 +256,9 @@
 		C713D9362570E5EB001C3AFC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					BF6F4DC62ACC407700829028 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -363,6 +367,7 @@
 				BF6F4DD12ACC409C00829028 /* LinkedList.swift in Sources */,
 				BFC9914B2AD4CF57009134C0 /* Operator.swift in Sources */,
 				BF6F4DC22ACC404F00829028 /* CalculatorItemQueue.swift in Sources */,
+				BF7A130E2AD50F5E005A4500 /* Formula.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +419,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -437,6 +443,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -459,6 +466,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -482,6 +490,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
@@ -505,6 +514,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -533,6 +543,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -605,7 +616,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
