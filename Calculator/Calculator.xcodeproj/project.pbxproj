@@ -94,10 +94,10 @@
 		3C643B112ACDCDA200088B74 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3CE8664C2ACDD25C0097813E /* CalculateItem.swift */,
-				3CA454D42ACEAC0300CA8B96 /* ExtensionType.swift */,
 				3C0A61232ACFC9A2001FF9A6 /* LinkedList.swift */,
 				3C0A61252ACFDEDB001FF9A6 /* Node.swift */,
+				3CA454D42ACEAC0300CA8B96 /* ExtensionType.swift */,
+				3CE8664C2ACDD25C0097813E /* CalculateItem.swift */,
 				3C643B132ACDCDEA00088B74 /* CalculatorItemQueue.swift */,
 				3CFF54F12AD3E21E0094BC36 /* Formula.swift */,
 				3CFF54F32AD3E3BD0094BC36 /* ExpressionParser.swift */,

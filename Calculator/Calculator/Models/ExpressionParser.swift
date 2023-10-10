@@ -7,12 +7,12 @@
 
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula {
+   static func parse(from input: String) -> Formula {
         let cal = CalculatorItemQueue<Double>()
         return Formula(operands: cal, operators: cal)
     }
     
-    private func componentsByOperators(from input: String) -> [String] {
+    static private func componentsByOperators(from input: String) -> [String] {
         return [""]
     }
 }
