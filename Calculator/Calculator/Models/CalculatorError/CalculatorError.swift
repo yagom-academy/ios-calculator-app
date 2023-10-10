@@ -8,4 +8,5 @@
 
 enum CalculatorError: Error {
     case noValue
+    case notANumber
 }

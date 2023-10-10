@@ -14,7 +14,7 @@ struct Formula {
         guard var firstOperands = operands.dequeue() else { throw CalculatorError.noValue }
         
         while let nextOperand = operands.dequeue(), let `operator` = operators.dequeue() {
-            firstOperands = `operator`.calculate(lhs: firstOperands, rhs: nextOperand)
+            firstOperands = try `operator`.calculate(lhs: firstOperands, rhs: nextOperand)
         }
         
         return firstOperands
