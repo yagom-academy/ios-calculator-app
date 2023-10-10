@@ -38,23 +38,24 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     }
     
     mutating func dequeue() -> Item? {
-        var newValue: Item? = nil
+        let newValue: Item?
         
         guard isEmpty == false else {
             return nil
         }
         
-        if head === tail {
+        guard head !== tail else {
             newValue = head?.value
             head = nil
             tail = nil
+            elementCount -= 1
             return newValue
         }
         
         newValue = head?.value
         head = head?.next
-        return newValue
         elementCount -= 1
+        return newValue
     }
     
     mutating func clear() {
