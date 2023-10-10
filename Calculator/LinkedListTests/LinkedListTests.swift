@@ -103,7 +103,6 @@ final class LinkedListTests: XCTestCase {
         // given
         let firstNode = List.Node(data: 1)
         sut = List(head: firstNode, tail: firstNode)
-        let previousTail = sut.tail
         let secondNodeData = 2
 
         // when

@@ -26,6 +26,13 @@
         "identifier" : "BF6F4DD72ACC41F900829028",
         "name" : "CalculatorItemQueueLinkedListTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BFC9914F2AD4D076009134C0",
+        "name" : "OperatorTests"
+      }
     }
   ],
   "version" : 1
