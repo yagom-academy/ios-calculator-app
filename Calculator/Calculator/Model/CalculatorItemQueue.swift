@@ -24,17 +24,16 @@ struct CalculatorItemQueue<Item: CalculateItem> {
     
     mutating func enqueue(value: Item) {
         let node = Node(value: value)
+        elementCount += 1
         
         guard isEmpty == false else {
             head = node
             tail = node
-            elementCount += 1
             return
         }
         
         tail?.next = node
         tail = tail?.next
-        elementCount += 1
     }
     
     mutating func dequeue() -> Item? {
@@ -44,17 +43,17 @@ struct CalculatorItemQueue<Item: CalculateItem> {
             return nil
         }
         
+        elementCount -= 1
+        
         guard head !== tail else {
             newValue = head?.value
             head = nil
             tail = nil
-            elementCount -= 1
             return newValue
         }
         
         newValue = head?.value
         head = head?.next
-        elementCount -= 1
         return newValue
     }
     
