@@ -54,7 +54,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 2)
     }
     
-    func test_operator가subtract케이스이고lhs와rhs가각각1과0일때_calculate호출시divideByZeroError가나오는지() throws {
+    func test_operator가divide케이스이고lhs와rhs가각각1과0일때_calculate호출시divideByZeroError가나오는지() throws {
         //given
         sut = Operator.divide
         let lhs: Double = 1
@@ -65,7 +65,19 @@ final class OperatorTests: XCTestCase {
             XCTAssertEqual(error as! CalculatorError, CalculatorError.divideByZeroError)
         }
     }
-
+    
+    func test_operator가multiply케이스이고lhs와rhs가각각4와2일때_calculate호출시8이나오는지() throws {
+        //given
+        sut = Operator.multiply
+        let lhs: Double = 4
+        let rhs: Double = 2
+        
+        //when
+        let result = try sut.calculate(lhs: lhs, rhs: rhs)
+        
+        //then
+        XCTAssertEqual(result, 8)
+    }
     
 
 }
