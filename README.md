@@ -23,8 +23,8 @@
 <br>
 
 ## 2. 다이어그램
-#### STEP1
-<img width="641" alt="스크린샷 2023-10-05 오후 6 15 33" src="https://github.com/woohyeon3382/ios-calculator-app/assets/123448121/162348bf-4418-44f9-89e3-5794aac15619">
+#### STEP2
+<img width="589" alt="스크린샷 2023-10-11 오전 6 34 40" src="https://github.com/woohyeon3382/ios-calculator-app/assets/123448121/62d32518-7e60-479e-94f6-64c3ba17854c">
 
 <br>
 
