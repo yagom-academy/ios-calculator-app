@@ -9,52 +9,85 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-    var sut: CalculateItemQueue!
+    var sut: CalculateItemQueue<Int>!
     
     override func setUpWithError() throws {
-        sut = CalculateItemQueue()
+        sut = CalculateItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
         sut = nil
     }
-
-    func test_enqueue로_1_2_3을_넣었을때_head가1인지() {
+    
+    //peek
+    func test_enqueue로_1을_넣고_peek을_호출시_반환값이_1인지() {
+        //given
         let expectation = 1
 
         sut.enqueue(value: 1)
-        sut.enqueue(value: 2)
-        sut.enqueue(value: 3)
 
+        //when
         let result = sut.peek()
 
-        XCTAssertEqual(result as? Int, expectation)
+        //then
+        XCTAssertEqual(result, expectation)
     }
 
-    func test_enqueue로_1_2_3을_넣고_dequeue실행시_head가2인지() {
-        let expectation = 2
+    //dequeue
+    func test_enqueue로_1을_넣고_dequeue를_호출시_반환값이_1인지() {
+        //given
+        let expectation = 1
         
         sut.enqueue(value: 1)
-        sut.enqueue(value: 2)
-        sut.enqueue(value: 3)
-        let _ = sut.dequeue()
-        let result = sut.peek()
         
-        XCTAssertEqual(result as? Int, expectation)
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_isEmpty실행시_리스트가_비어있을경우_True가_반환되는지() {
+    //dequeue - 제거
+    func test_enqueue로_1을_넣고_dequeue를_호출시_리스트가_비어있는지() {
+        //given
+        sut.enqueue(value: 1)
+        
+        //when
+        sut.dequeue()
+        let result = sut.isEmpty()
+        
+        //then
+        XCTAssertTrue(result)
+    }
+    
+    //dequeue - 실패케이스
+    func test_빈_큐에_dequeue를_호출시_nil을_반환하는지() {
+        //when
+        let result = sut.dequeue()
+        
+        //then
+        XCTAssertNil(result)
+    }
+    
+    
+    func test_큐가_비어있을경우_isEmpty실행시_반환값이_True인지() {
+        //when
         let result = sut.isEmpty()
 
+        //then
         XCTAssertTrue(result)
     }
     
     func test_enqueue로_1_2_3을_넣고_clear실행시_Queue가_비어있는지() {
+        //given
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         sut.enqueue(value: 3)
+        
+        //when
         sut.clear()
         
+        //then
         let result = sut.isEmpty()
         
         XCTAssertTrue(result)
@@ -63,11 +96,15 @@ final class CalculatorTests: XCTestCase {
     func test_enqueue로_1_2_3을_넣고_count실행시_3이_반환되는지() {
         let expectation = 3
         
+        //given
         sut.enqueue(value: 1)
         sut.enqueue(value: 2)
         sut.enqueue(value: 3)
         
+        //when
         let result = sut.count()
+        
+        //then
         XCTAssertEqual(result, expectation)
     }
 }
