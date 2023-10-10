@@ -5,7 +5,7 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-final class LinkedList<DataType> {
+final class LinkedList<NodeDataType> {
     final class Node<DataType> {
         private(set) var data: DataType
         var next: Node?
@@ -15,8 +15,8 @@ final class LinkedList<DataType> {
         }
     }
     
-    private(set) var head: Node<DataType>?
-    private(set) var tail: Node<DataType>?
+    private(set) var head: Node<NodeDataType>?
+    private(set) var tail: Node<NodeDataType>?
     
     var count: Int {
         guard var node = head else {
@@ -37,12 +37,12 @@ final class LinkedList<DataType> {
         return head == nil ? true : false
     }
     
-    init(head: Node<DataType>? = nil, tail: Node<DataType>? = nil) {
+    init(head: Node<NodeDataType>? = nil, tail: Node<NodeDataType>? = nil) {
         self.head = head
         self.tail = tail
     }
     
-    func append(_ data: DataType) {
+    func append(_ data: NodeDataType) {
         let newNode: Node = Node(data: data)
         
         if isEmpty {
@@ -55,7 +55,7 @@ final class LinkedList<DataType> {
     }
     
     @discardableResult
-    func removeFirst() -> DataType? {
+    func removeFirst() -> NodeDataType? {
         guard !isEmpty else { return nil }
         
         let node = head
