@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "BCD60EB5-BED6-4306-8918-1CE3C65EF1C7",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "DC3253072AD51B8A00200EF6",
+        "name" : "FormulaTests"
+      }
+    }
+  ],
+  "version" : 1
+}
