@@ -2,14 +2,15 @@
 //  ExtensionType.swift
 //  Calculator
 //
-//  Created by 김우현 on 10/5/23.
+//  Created by Toy on 10/5/23.
 //
 
+import Foundation
 
 extension Double: CalculateItem { }
 
 extension String {
     func split(with target: Character) -> [String] {
-        return [""]
+        return self.components(separatedBy: String(target))
     }
 }
