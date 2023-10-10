@@ -17,10 +17,10 @@ struct Formula {
         }
         
         while !operators.isEmpty {
-            guard let op = operators.dequeue() else { break }
+            guard let operatingSymbol = operators.dequeue() else { break }
             
             guard let rhs = operands.dequeue() else { break }
-            accumulatingValue = op.calculate(lhs: accumulatingValue, rhs: rhs)
+            accumulatingValue = operatingSymbol.calculate(lhs: accumulatingValue, rhs: rhs)
 
         }
         
