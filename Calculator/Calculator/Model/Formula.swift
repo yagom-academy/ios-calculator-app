@@ -12,8 +12,8 @@ struct Formula {
     func result() throws -> Double {
         guard var previousOperand = operands.deQueue() else { return 0.0 }
         
-        while let operand = operands.deQueue(), let operation = operators.deQueue() {
-            previousOperand = try operation.calculate(lhs: previousOperand, rhs: operand)
+        while let operand = operands.deQueue(), let `operator` = operators.deQueue() {
+            previousOperand = try `operator`.calculate(lhs: previousOperand, rhs: operand)
         }
         
         return previousOperand
