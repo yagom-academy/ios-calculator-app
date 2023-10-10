@@ -40,6 +40,13 @@
         "identifier" : "BF7A13142AD51C08005A4500",
         "name" : "FormulaTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BF7A13232AD55E54005A4500",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1

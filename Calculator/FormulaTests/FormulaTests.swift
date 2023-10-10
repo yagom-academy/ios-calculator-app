@@ -40,7 +40,7 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_operators에값이없을때_result호출시_1을반환한다() throws {
+    func test_operators에값이없고_operands에값1이있을때_result호출시_1을반환한다() throws {
         // given
         let node = DoubleNode(data: 1.0)
         let doubleList = DoubleList(head: node, tail: node)

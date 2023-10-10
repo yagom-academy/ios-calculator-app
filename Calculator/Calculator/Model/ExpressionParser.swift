@@ -7,15 +7,15 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        var operands = CalculatorItemQueue<Double>(list: LinkedList())
-        var operators = CalculatorItemQueue<Operator>(list: LinkedList())
+        let operands = CalculatorItemQueue<Double>(list: LinkedList())
+        let operators = CalculatorItemQueue<Operator>(list: LinkedList())
         let components = componentsByOperator(from: input)
         
         components.forEach { component in
-            if let `operator` = Operator(rawValue: Character(component)) {
-                operators.enQueue(`operator`)
-            } else if let operand = Double(component) {
+            if let operand = Double(component) {
                 operands.enQueue(operand)
+            } else if let `operator` = Operator(rawValue: Character(component)) {
+                operators.enQueue(`operator`)
             }
         }
         
@@ -29,6 +29,6 @@ enum ExpressionParser {
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map{ String($0) }
+        return split(separator: target).map{ String($0) }
     }
 }
