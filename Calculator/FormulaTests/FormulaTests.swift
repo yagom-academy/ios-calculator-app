@@ -25,11 +25,11 @@ final class FormulaTests: XCTestCase {
         XCTAssertNil(try? sut.result())
     }
     
-    func test_result메서드호출시_3더하기2가_5를리턴하는지() {
+    func test_result메서드호출시_3더하기2가_5를리턴하는지() throws {
         let input = "2 + 3"
         var parse = ExpressionParser.parse(from: input)
         
-        var result = try! parse.result()
+        var result = try parse.result()
         
         XCTAssertEqual(result, 5.0)
     }
