@@ -10,6 +10,20 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() -> Double {
-        return 0
+        var accumulatingValue: Double = 0
+        
+        if let initialValue = operands.dequeue() {
+            accumulatingValue = initialValue
+        }
+        
+        while !operators.isEmpty {
+            guard let op = operators.dequeue() else { break }
+            
+            guard let rhs = operands.dequeue() else { break }
+            accumulatingValue = op.calculate(lhs: accumulatingValue, rhs: rhs)
+
+        }
+        
+        return accumulatingValue
     }
 }
