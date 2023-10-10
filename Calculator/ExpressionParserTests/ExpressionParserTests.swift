@@ -25,5 +25,16 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(expectedFormulaOperands, formula.operands.enqueueBox)
         XCTAssertEqual(expectedFormulaOperators, formula.operators.enqueueBox)
     }
+    
+    func test_parse호출시_빈문자열을전달했을때_queue가비어있는지() throws {
+        //given
+        let formula = try ExpressionParser.parse(from: "")
+        let expectedFormulaOperators: [Operator] = []
+        let expectedFormulaOperands: [Double] = []
+        
+        //then
+        XCTAssertEqual(expectedFormulaOperands, formula.operands.enqueueBox)
+        XCTAssertEqual(expectedFormulaOperators, formula.operators.enqueueBox)
+    }
 
 }
