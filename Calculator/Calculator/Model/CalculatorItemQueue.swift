@@ -12,7 +12,11 @@ protocol CalculateItem {
     
 }
 
-struct CalculatorItemQueue<T> {
+extension Int: CalculateItem {
+    
+}
+
+struct CalculatorItemQueue<T: CalculateItem> {
     var head: Node<T>?
     var tail: Node<T>?
     
