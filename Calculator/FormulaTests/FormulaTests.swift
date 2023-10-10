@@ -26,6 +26,17 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, 32)
     }
     
+    func test_Formula의queue요소에2와7과마이너스1이있을때_result호출시_마이너스9가나오는지() throws {
+        //given
+        sut = Formula(operands: CalculatorItemQueue<Double>(enqueueBox: [2, 7, -1], dequeueBox: []), operators: CalculatorItemQueue<Operator>(enqueueBox: [.add, .multiply], dequeueBox: []))
+        
+        //when
+        let result = try sut.result()
+        
+        //then
+        XCTAssertEqual(result, -9)
+    }
+    
     func test_Formula의operands의queue가비어있을때_result호출시_invalidOperandError가나오는지() throws {
         //given
         sut = Formula(operands: CalculatorItemQueue<Double>(enqueueBox: [], dequeueBox: []), operators: CalculatorItemQueue<Operator>(enqueueBox: [], dequeueBox: []))
