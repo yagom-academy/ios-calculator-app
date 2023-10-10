@@ -70,7 +70,7 @@ final class OperatorTests: XCTestCase {
         
         //when then
         XCTAssertThrowsError(try sut.calculate(lhs: lhs, rhs: rhs)) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.canNotDivideZero)
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
         }
     }
     
