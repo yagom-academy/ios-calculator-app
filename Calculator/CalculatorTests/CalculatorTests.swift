@@ -45,7 +45,6 @@ final class CalculatorTests: XCTestCase {
         
         // then
         XCTAssertEqual(result, 2)
-        
     }
     
     func test_enqueue로_5와6을_넣고_peek을_호출하여_첫번째_인자가_5가맞는지() {
