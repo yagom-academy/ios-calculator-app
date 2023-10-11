@@ -18,20 +18,22 @@ final class ExpressionParserTest: XCTestCase {
     
     func test_Stirng값이주어질떄_parse를_실행하면_Formula인스턴스에_operand큐가추가된다() {
         //given
-        let number = "1 + 1"
+        let expectation = 2
         //when
-        let result = ExpressionParser.parse(from: number)
+        let formula = ExpressionParser.parse(from: "1 + 1")
+        let result = formula.operands.count
         //then
-        XCTAssertTrue(result.operands.isEmpty)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_Stirng값이주어질떄_parse를_실행하면_Formula인스턴스에_operators큐가추가된다() {
         //given
-        let number = "2 + 3"
+        let expectation = 1
         //when
-        let result = ExpressionParser.parse(from: number)
+        let formula = ExpressionParser.parse(from: "1 + 1")
+        let result = formula.operators.count
         //then
-        XCTAssertTrue(result.operators.isEmpty)
+        XCTAssertEqual(result, expectation)
     }
 
 }

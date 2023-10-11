@@ -10,12 +10,12 @@ enum ExpressionParser {
         let operandcomponent = componentsByOperators(from: input)
         let operatorscomponent = componentsByOperators(from: input)
         
-        var operand = CalculatorItemQueue<Double>()
+        var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
         for component in operandcomponent {
             if let oprand2 = Double(component) {
-                operand.enqueue(oprand2)
+                operands.enqueue(oprand2)
             }
         }
         
@@ -25,7 +25,7 @@ enum ExpressionParser {
                 }
             }
         
-        return Formula()
+        return Formula(operands: operands, operators: operators)
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
