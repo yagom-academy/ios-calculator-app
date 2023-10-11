@@ -4,6 +4,7 @@
 //
 //  Created by mireu on 2023/10/06.
 //
+
 extension Double: CalculateItem { }
 
 extension String {
