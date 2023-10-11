@@ -11,9 +11,11 @@ import XCTest
 final class ExpressionParserTest: XCTestCase {
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
     }
     
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
     }
     
     func test_Stirng값이주어질떄_parse를_실행하면_Formula인스턴스에_operand큐가추가된다() {

@@ -11,11 +11,11 @@ import XCTest
 final class FormulaTest: XCTestCase {
     
     override func setUpWithError() throws {
-        
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        
+        try super.tearDownWithError()
     }
 
     func test_2더하기3이_들어있을때_result실행시_결과는5가된다() {
@@ -29,7 +29,7 @@ final class FormulaTest: XCTestCase {
         let expectation = 5.0
         //when
         var formula = Formula(operands: operands, operators: operators)
-        let result = formula.result()
+        let result = try? formula.result()
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -47,7 +47,7 @@ final class FormulaTest: XCTestCase {
         let expectation = 6.0
         //when
         var formula = Formula(operands: operands, operators: operators)
-        let result = formula.result()
+        let result = try? formula.result()
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -66,7 +66,7 @@ final class FormulaTest: XCTestCase {
         let expectation = -4.0
         //when
         var formula = Formula(operands: operands, operators: operators)
-        let result = formula.result()
+        let result = try? formula.result()
         //then
         XCTAssertEqual(result, expectation)
     }

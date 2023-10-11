@@ -12,10 +12,12 @@ final class ExtensionTest: XCTestCase {
     var sut: String?
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = String()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     
