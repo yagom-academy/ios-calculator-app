@@ -14,6 +14,7 @@
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
 		DC32530B2AD51B8A00200EF6 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC32530A2AD51B8A00200EF6 /* FormulaTests.swift */; };
+		DC3253192AD68B0F00200EF6 /* ExpressionPaserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3253182AD68B0F00200EF6 /* ExpressionPaserTests.swift */; };
 		DCF286082ACE8E1C0065C4FA /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF286072ACE8E1C0065C4FA /* CalculatorItemQueue.swift */; };
 		DCF2860A2ACE8F240065C4FA /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF286092ACE8F240065C4FA /* CalculateItem.swift */; };
 		DCF286122ACE8F890065C4FA /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF286112ACE8F890065C4FA /* CalculatorTests.swift */; };
@@ -26,6 +27,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		DC32530C2AD51B8A00200EF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C713D93D2570E5EB001C3AFC;
+			remoteInfo = Calculator;
+		};
+		DC32531A2AD68B0F00200EF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C713D9362570E5EB001C3AFC /* Project object */;
 			proxyType = 1;
@@ -54,6 +62,9 @@
 		DC3253082AD51B8A00200EF6 /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC32530A2AD51B8A00200EF6 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		DC3253112AD51E8500200EF6 /* FormulaTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FormulaTests.xctestplan; sourceTree = "<group>"; };
+		DC3253162AD68B0F00200EF6 /* ExpressionPaserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionPaserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC3253182AD68B0F00200EF6 /* ExpressionPaserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionPaserTests.swift; sourceTree = "<group>"; };
+		DC32531F2AD68DAD00200EF6 /* ExpressionParser.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ExpressionParser.xctestplan; sourceTree = "<group>"; };
 		DCF286072ACE8E1C0065C4FA /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		DCF286092ACE8F240065C4FA /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		DCF2860F2ACE8F890065C4FA /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +91,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC3253132AD68B0F00200EF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCF2860C2ACE8F890065C4FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -93,11 +111,13 @@
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
+				DC32531F2AD68DAD00200EF6 /* ExpressionParser.xctestplan */,
 				DC3253112AD51E8500200EF6 /* FormulaTests.xctestplan */,
 				DC1BFFDC2AD00740001AB01D /* Calculator.xctestplan */,
 				C713D9402570E5EB001C3AFC /* Calculator */,
 				DCF286102ACE8F890065C4FA /* CalculatorTests */,
 				DC3253092AD51B8A00200EF6 /* FormulaTests */,
+				DC3253172AD68B0F00200EF6 /* ExpressionPaserTests */,
 				C713D93F2570E5EB001C3AFC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +128,7 @@
 				C713D93E2570E5EB001C3AFC /* Calculator.app */,
 				DCF2860F2ACE8F890065C4FA /* CalculatorTests.xctest */,
 				DC3253082AD51B8A00200EF6 /* FormulaTests.xctest */,
+				DC3253162AD68B0F00200EF6 /* ExpressionPaserTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,6 +150,14 @@
 				DC32530A2AD51B8A00200EF6 /* FormulaTests.swift */,
 			);
 			path = FormulaTests;
+			sourceTree = "<group>";
+		};
+		DC3253172AD68B0F00200EF6 /* ExpressionPaserTests */ = {
+			isa = PBXGroup;
+			children = (
+				DC3253182AD68B0F00200EF6 /* ExpressionPaserTests.swift */,
+			);
+			path = ExpressionPaserTests;
 			sourceTree = "<group>";
 		};
 		DCF286032ACE8CE00065C4FA /* Models */ = {
@@ -211,6 +240,24 @@
 			productReference = DC3253082AD51B8A00200EF6 /* FormulaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DC3253152AD68B0F00200EF6 /* ExpressionPaserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC32531C2AD68B0F00200EF6 /* Build configuration list for PBXNativeTarget "ExpressionPaserTests" */;
+			buildPhases = (
+				DC3253122AD68B0F00200EF6 /* Sources */,
+				DC3253132AD68B0F00200EF6 /* Frameworks */,
+				DC3253142AD68B0F00200EF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC32531B2AD68B0F00200EF6 /* PBXTargetDependency */,
+			);
+			name = ExpressionPaserTests;
+			productName = ExpressionPaserTests;
+			productReference = DC3253162AD68B0F00200EF6 /* ExpressionPaserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DCF2860E2ACE8F890065C4FA /* CalculatorTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DCF286152ACE8F890065C4FA /* Build configuration list for PBXNativeTarget "CalculatorTests" */;
@@ -246,6 +293,10 @@
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = C713D93D2570E5EB001C3AFC;
 					};
+					DC3253152AD68B0F00200EF6 = {
+						CreatedOnToolsVersion = 14.3.1;
+						TestTargetID = C713D93D2570E5EB001C3AFC;
+					};
 					DCF2860E2ACE8F890065C4FA = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = C713D93D2570E5EB001C3AFC;
@@ -268,6 +319,7 @@
 				C713D93D2570E5EB001C3AFC /* Calculator */,
 				DCF2860E2ACE8F890065C4FA /* CalculatorTests */,
 				DC3253072AD51B8A00200EF6 /* FormulaTests */,
+				DC3253152AD68B0F00200EF6 /* ExpressionPaserTests */,
 			);
 		};
 /* End PBXProject section */
@@ -284,6 +336,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DC3253062AD51B8A00200EF6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC3253142AD68B0F00200EF6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -325,6 +384,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC3253122AD68B0F00200EF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC3253192AD68B0F00200EF6 /* ExpressionPaserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DCF2860B2ACE8F890065C4FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +407,11 @@
 			isa = PBXTargetDependency;
 			target = C713D93D2570E5EB001C3AFC /* Calculator */;
 			targetProxy = DC32530C2AD51B8A00200EF6 /* PBXContainerItemProxy */;
+		};
+		DC32531B2AD68B0F00200EF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C713D93D2570E5EB001C3AFC /* Calculator */;
+			targetProxy = DC32531A2AD68B0F00200EF6 /* PBXContainerItemProxy */;
 		};
 		DCF286142ACE8F890065C4FA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -571,6 +643,50 @@
 			};
 			name = Release;
 		};
+		DC32531D2AD68B0F00200EF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyungchul.ExpressionPaserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Calculator";
+			};
+			name = Debug;
+		};
+		DC32531E2AD68B0F00200EF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hyungchul.ExpressionPaserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Calculator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Calculator";
+			};
+			name = Release;
+		};
 		DCF286162ACE8F890065C4FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -644,6 +760,15 @@
 			buildConfigurations = (
 				DC32530F2AD51B8A00200EF6 /* Debug */,
 				DC3253102AD51B8A00200EF6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC32531C2AD68B0F00200EF6 /* Build configuration list for PBXNativeTarget "ExpressionPaserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC32531D2AD68B0F00200EF6 /* Debug */,
+				DC32531E2AD68B0F00200EF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
