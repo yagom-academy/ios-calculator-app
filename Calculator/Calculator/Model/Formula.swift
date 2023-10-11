@@ -9,7 +9,7 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         guard var firstResult = operands.dequeue() else { return 0 }
         
         while !operators.isEmpty {
@@ -17,10 +17,10 @@ struct Formula {
             
             guard let operatorSign = operators.dequeue() else { return 0 }
             
-            firstResult = operatorSign.calculate(lhs: firstResult, rhs: secondResult)
-            }
-            return firstResult
+            firstResult = try operatorSign.calculate(lhs: firstResult, rhs: secondResult)
         }
+        return firstResult
     }
+}
 
 

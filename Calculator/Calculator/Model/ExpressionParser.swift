@@ -13,23 +13,23 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
-        for component in operandcomponent {
-            if let oprand2 = Double(component) {
-                operands.enqueue(oprand2)
+        operandcomponent.forEach{ component in
+            if let oprand = Double(component) {
+                operands.enqueue(oprand)
             }
         }
         
-        for component in operatorscomponent {
-                if let oprators2 = Operator(rawValue: Character(component)) {
-                    operators.enqueue(oprators2)
-                }
+        operatorscomponent.forEach{ component in
+            if let oprators = Operator(rawValue: Character(component)) {
+                operators.enqueue(oprators)
             }
+        }
         
         return Formula(operands: operands, operators: operators)
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-       
+        
         return input.split(with: " ")
     }
 }
