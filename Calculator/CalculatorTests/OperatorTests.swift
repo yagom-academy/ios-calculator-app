@@ -23,43 +23,43 @@ final class OperatorTests: XCTestCase {
         sut = .add
         let lhs: Double = 1
         let rhs: Double = 2
-        let expactation: Double = 3
+        let expectation: Double = 3
         
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
-        XCTAssertEqual(result, expactation)
+        XCTAssertEqual(result, expectation)
     }
 
     func test_operator가_subtract일때_10_5전달하며_calculate호출시_반환값이_5인지() throws {
         sut = .subtract
         let lhs: Double = 10
         let rhs: Double = 5
-        let expactation: Double = 5
+        let expectation: Double = 5
         
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
-        XCTAssertEqual(result, expactation)
+        XCTAssertEqual(result, expectation)
     }
     
     func test_operator가_divide일때_10_5전달하며_calculate호출시_반환값이_2인지() throws {
         sut = .divide
         let lhs: Double = 10
         let rhs: Double = 5
-        let expactation: Double = 2
+        let expectation: Double = 2
         
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
-        XCTAssertEqual(result, expactation)
+        XCTAssertEqual(result, expectation)
     }
 
     func test_operator가_multiply일때_10_5전달하며_calculate호출시_반환값이_50인지() throws {
         sut = .multiply
         let lhs: Double = 10
         let rhs: Double = 5
-        let expactation: Double = 50
+        let expectation: Double = 50
         
         let result = sut.calculate(lhs: lhs, rhs: rhs)
         
-        XCTAssertEqual(result, expactation)
+        XCTAssertEqual(result, expectation)
     }
 }

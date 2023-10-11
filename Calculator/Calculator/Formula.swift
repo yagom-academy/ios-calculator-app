@@ -9,8 +9,22 @@ struct Formula {
     var operands: CalculateItemQueue<Double>
     var operators: CalculateItemQueue<Operator>
     
-    func result() -> Double {
+    mutating func result() -> Double {
+        guard var result = operands.dequeue() else {
+            return 0
+        }
         
-        return 1
+        while !operands.isEmpty(), !operators.isEmpty() {
+            guard let operatorType = operators.dequeue() else {
+                break
+            }
+            guard let operand = operands.dequeue() else {
+                break
+            }
+            
+            result = operatorType.calculate(lhs: result, rhs: operand)
+        }
+        
+        return result
     }
 }
