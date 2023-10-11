@@ -11,7 +11,15 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return []
+        var result = ""
+        
+        for char in input {
+            if char != " " {
+                result += String(char) + " "
+            }
+        }
+        
+        return result.split(with: " ").filter{ $0 != "" }
     }
 }
 
