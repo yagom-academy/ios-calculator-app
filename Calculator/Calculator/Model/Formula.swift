@@ -9,11 +9,11 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    func result() throws -> Double {
+    func result() -> Double {
         guard var previousOperand = operands.deQueue() else { return 0.0 }
         
         while let operand = operands.deQueue(), let `operator` = operators.deQueue() {
-            previousOperand = try `operator`.calculate(lhs: previousOperand, rhs: operand)
+            previousOperand = `operator`.calculate(lhs: previousOperand, rhs: operand)
         }
         
         return previousOperand

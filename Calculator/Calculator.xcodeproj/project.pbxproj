@@ -13,7 +13,6 @@
 		BF6F4DD32ACC40B800829028 /* CalculatorItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DD22ACC40B800829028 /* CalculatorItem.swift */; };
 		BF6F4DDB2ACC41F900829028 /* LinkedListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DDA2ACC41F900829028 /* LinkedListTests.swift */; };
 		BF7A130E2AD50F5E005A4500 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A130D2AD50F5E005A4500 /* Formula.swift */; };
-		BF7A13102AD51990005A4500 /* CalculatorError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A130F2AD51990005A4500 /* CalculatorError.swift */; };
 		BF7A13182AD51C08005A4500 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A13172AD51C08005A4500 /* FormulaTests.swift */; };
 		BF7A131F2AD52252005A4500 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A131E2AD52252005A4500 /* ExpressionParser.swift */; };
 		BF7A13272AD55E54005A4500 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A13262AD55E54005A4500 /* ExpressionParserTests.swift */; };
@@ -75,7 +74,6 @@
 		BF6F4DDA2ACC41F900829028 /* LinkedListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedListTests.swift; sourceTree = "<group>"; };
 		BF6F4DE12ACC420C00829028 /* CalculatorItemQueueTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = CalculatorItemQueueTests.xctestplan; sourceTree = "<group>"; };
 		BF7A130D2AD50F5E005A4500 /* Formula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula.swift; sourceTree = "<group>"; };
-		BF7A130F2AD51990005A4500 /* CalculatorError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorError.swift; sourceTree = "<group>"; };
 		BF7A13152AD51C08005A4500 /* FormulaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FormulaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7A13172AD51C08005A4500 /* FormulaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaTests.swift; sourceTree = "<group>"; };
 		BF7A131E2AD52252005A4500 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
@@ -164,7 +162,6 @@
 				BF6F4DD02ACC409C00829028 /* LinkedList.swift */,
 				BFC9914A2AD4CF57009134C0 /* Operator.swift */,
 				BF7A130D2AD50F5E005A4500 /* Formula.swift */,
-				BF7A130F2AD51990005A4500 /* CalculatorError.swift */,
 				BF7A131E2AD52252005A4500 /* ExpressionParser.swift */,
 			);
 			path = Model;
@@ -500,7 +497,6 @@
 				BF7A131F2AD52252005A4500 /* ExpressionParser.swift in Sources */,
 				BF6F4DD32ACC40B800829028 /* CalculatorItem.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
-				BF7A13102AD51990005A4500 /* CalculatorError.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				BF6F4DD12ACC409C00829028 /* LinkedList.swift in Sources */,
 				BFC9914B2AD4CF57009134C0 /* Operator.swift in Sources */,
