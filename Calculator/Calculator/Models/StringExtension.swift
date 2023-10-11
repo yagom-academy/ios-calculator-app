@@ -4,9 +4,10 @@
 //
 //  Created by Charles on 2023/10/08.
 //
+import Foundation
 
 extension String {
     func split(with target: Character) -> [String] {
-        return []
+        return components(separatedBy: String(target))
     }
 }
