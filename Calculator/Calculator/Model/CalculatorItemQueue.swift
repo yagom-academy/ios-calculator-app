@@ -4,21 +4,12 @@
 //
 //  Created by hyunMac on 10/4/23.
 //
-
-// CalculatorItemQueue
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-extension Int: CalculateItem {
-    
-}
-
-struct CalculatorItemQueue<T: CalculateItem> {
-    var head: Node<T>?
-    var tail: Node<T>?
+struct CalculatorItemQueue<T: CalculatorItem> {
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    private var nodeCount = 0
     
     mutating func enqueue(_ elemnet: T) {
         let newNode = Node(elemnet)
@@ -26,9 +17,10 @@ struct CalculatorItemQueue<T: CalculateItem> {
             head = newNode
             tail = newNode
         } else {
-            tail?.next = newNode
+            tail?.setNext(newNode)
             tail = newNode
         }
+        nodeCount += 1
     }
     
     mutating func dequeue() -> T? {
@@ -36,6 +28,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
             return nil
         }
         head = head?.next
+        nodeCount -= 1
         return dequeuedElement
     }
     
@@ -60,28 +53,21 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }    
     
     func count() -> Int {
-        var count = 0
-        guard !isEmpty() else {
-            return count
-        }
-        count += 1
-        var currentNode = head
-        
-        while currentNode?.next != nil {
-            count += 1
-            currentNode = currentNode?.next
-        }
-        return count
+        return nodeCount
     }
     
 }
 
-class Node<T> {
-    var next: Node<T>?
-    var element: T
+final class Node<T> {
+    private(set) var next: Node<T>?
+    private(set) var element: T
     
     init(_ element: T) {
-        next = nil
+        self.next = nil
         self.element = element
+    }
+    
+    func setNext(_ node: Node<T>) {
+        self.next = node
     }
 }
