@@ -7,6 +7,8 @@
 
 protocol CalculateItem { }
 
+extension Double: CalculateItem { }
+
 struct CalculateItemQueue<T> where T: CalculateItem {
     var list = LinkedList<T>()
     
