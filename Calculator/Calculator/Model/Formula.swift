@@ -10,14 +10,12 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     func result() -> Double {
-        guard var previousOperand = operands.deQueue() else { return 0.0 }
+        guard var lhs = operands.deQueue() else { return .zero }
         
-        while let operand = operands.deQueue(), let `operator` = operators.deQueue() {
-            previousOperand = `operator`.calculate(lhs: previousOperand, rhs: operand)
+        while let rhs = operands.deQueue(), let `operator` = operators.deQueue() {
+            lhs = `operator`.calculate(lhs: lhs, rhs: rhs)
         }
         
-        return previousOperand
+        return lhs
     }
 }
-
-extension Double: CalculatorItem { }
