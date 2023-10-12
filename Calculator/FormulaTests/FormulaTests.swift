@@ -54,6 +54,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(3)
         sut.operators.enqueue(.divide)
         sut.operators.enqueue(.multiply)
+        
         let result = try sut.result()
         
         XCTAssertEqual(result, 7.5)
@@ -73,6 +74,7 @@ final class FormulaTests: XCTestCase {
         sut.operands.enqueue(1)
         sut.operands.enqueue(3)
         sut.operators.enqueue(.subtract)
+        
         let result = try sut.result()
         
         XCTAssertEqual(result, -2)
