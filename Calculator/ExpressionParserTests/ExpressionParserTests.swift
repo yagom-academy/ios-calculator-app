@@ -30,41 +30,45 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(result.operators.isEmpty)
     }
     
-    func test_parse호출시_double1개인String을넣었을때_operansCount가1인Fomula를반환한다() {
+    func test_parse호출시_double1개인String을넣었을때_operandsfornt에해당값이있다() {
         // given
         let input = "10.2"
-        let expectation = 1
+        let formula = ExpressionParser.parse(from: input)
+        let expectation = Double(input)
         
         // when
-        let result = ExpressionParser.parse(from: input)
+        let result = formula.operands.front
         
         // then
-        XCTAssertEqual(result.operands.count, expectation)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_parse호출시_operator가1개인String을넣었을때_operatorsCount가1인Fomula를반환한다() {
+    func test_parse호출시_operator가1개인String을넣었을때_operatorsfornt에해당값이있다() {
         // given
-        let input = "-"
-        let expectation = 1
+        let input = "−"
+        let formula = ExpressionParser.parse(from: input)
+        let expectation = Operator(rawValue: Character(input))
         
         // when
-        let result = ExpressionParser.parse(from: input)
+        let result = formula.operators.front
         
         // then
-        XCTAssertEqual(result.operators.count, expectation)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_parse호출시_double과operator1개씩있는String을넣었을때_값이1개씩있는Fomula를반환한다() {
+    func test_parse호출시_double과operator1개씩있는String을넣었을때_operand에만해당값이있다() {
         // given
-        let input = "1.1 +"
-        let expectation = 1
+        let input = "1.1+"
+        let formula = ExpressionParser.parse(from: input)
+        let expectatedOperands = 1.1
         
         // when
-        let result = ExpressionParser.parse(from: input)
+        let operandsResult = formula.operands.front
+        let operatorsResult = formula.operators.front
         
         // then
-        XCTAssertEqual(result.operands.count, expectation)
-        XCTAssertEqual(result.operators.count, expectation)
+        XCTAssertNil(operatorsResult)
+        XCTAssertEqual(operandsResult, expectatedOperands)
     }
     
     func test_parse호출시_double이3개_operator가2개있는String을넣었을때_값이3개2개씩있는Fomula를반환한다() {
