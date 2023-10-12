@@ -9,14 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class ExpressionParserTests: XCTestCase {
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-    }
 
     func test_parse메서드호출시_연산자와_피연산자가_분리되어enqueue되는지() {
         let input = "3 + 7 - -10"

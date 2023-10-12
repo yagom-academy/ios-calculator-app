@@ -29,7 +29,7 @@ final class FormulaTests: XCTestCase {
         let input = "2 + 3"
         var parse = ExpressionParser.parse(from: input)
         
-        var result = try parse.result()
+        let result = try parse.result()
         
         XCTAssertEqual(result, 5.0)
     }
