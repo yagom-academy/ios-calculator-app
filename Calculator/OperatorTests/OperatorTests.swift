@@ -20,7 +20,7 @@ final class OperatorTests: XCTestCase {
         sut = nil
     }
 
-    func test_operator가add일때_calculator호출시_1과2를더해서결과는3이다() {
+    func test_calculator호출시_operator가add일때_1과2를더해서결과는3이다() {
         // given
         sut = Operator.add
         let lhs = 1.0
@@ -34,7 +34,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operator가subract일때_calculator호출시_1과2를빼서결과는마이너스1이다() {
+    func test_calculator호출시_operator가subract일때_1과2를빼서결과는마이너스1이다() {
         // given
         sut = Operator.subtract
         let lhs = 1.0
@@ -48,7 +48,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operator가divide일때_calculator호출시_1과2를나누어서결과는0점5이다() {
+    func test_calculator호출시_operator가divide일때_1과2를나누어서결과는0점5이다() {
         // given
         sut = Operator.divide
         let lhs = 1.0
@@ -62,7 +62,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_operator가divide일때_calculator호출시_1과0을나누면nan이다() {
+    func test_calculator호출시_operator가divide일때_1과0을나누면nan이다() {
         // given
         sut = Operator.divide
         let lhs = 1.0
@@ -75,7 +75,7 @@ final class OperatorTests: XCTestCase {
         XCTAssertTrue(result.isNaN)
     }
     
-    func test_operator가multiply일때_calculator호출시_1과2를곱해서결과는2이다() {
+    func test_calculator호출시_operator가multiply일때_1과2를곱해서결과는2이다() {
         // given
         sut = Operator.multiply
         let lhs = 1.0

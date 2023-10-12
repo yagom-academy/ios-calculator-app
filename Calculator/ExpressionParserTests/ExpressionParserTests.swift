@@ -30,7 +30,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertTrue(result.operators.isEmpty)
     }
     
-    func test_parse호출시_double1개인String을넣었을때_operandsfornt에해당값이있다() {
+    func test_parse호출시_양수인doubleString1개를넣었을때_operandsfornt에해당값이있다() {
         // given
         let input = "10.2"
         let formula = ExpressionParser.parse(from: input)
@@ -43,7 +43,7 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_parse호출시_음수인double1개인String을넣었을때_operandsfornt에해당값이있다() {
+    func test_parse호출시_음수인doubleString1개를넣었을때_operandsfornt에해당값이있다() {
         // given
         let input = "-10.2"
         let formula = ExpressionParser.parse(from: input)
@@ -123,9 +123,9 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
     }
     
-    func test_parse호출시_공백이있는_double포함2개_operator가1개인String을넣었을때_공백을제외한각각의값이있는Fomula를반환한다() {
+    func test_parse호출시_공백이있는_double2개_operator가1개인String을넣었을때_공백을제외한각각의값이있는Fomula를반환한다() {
         // given
-        let input = "1.1/ 2.2"
+        let input = " 1.1/ 2.2"
         let formula = ExpressionParser.parse(from: input)
         let expectatedOperandsfront = 1.1
         let expectatedOperandsRear = 2.2
