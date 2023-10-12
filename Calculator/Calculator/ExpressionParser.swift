@@ -6,17 +6,31 @@
 //
 
 enum ExpressionParser {
-    func parse(from input: String) -> Formula? {
+    static func parse(from input: String) -> Formula {
+        let components = componentsByOperator(from: input).compactMap{ Double($0) }
+        var operands = CalculateItemQueue<Double>()
+        var operators = CalculateItemQueue<Operator>()
         
-        //컴포넌트 호출해서 쪼개야지모
-        
-        //포뮬러에 잘 담아서 리턴하기?
-        
-        return nil
+        components.forEach {
+            operands.enqueue(value: $0)
+        }
+        input.forEach {
+            guard let `operator` = Operator(rawValue: $0) else {
+                return
+            }
+            operators.enqueue(value: `operator`)
+        }
+
+        return Formula(operands: operands, operators: operators)
     }
     
-    func componentsByOperator(from input: String) -> [String] {
+    static private func componentsByOperator(from input: String) -> [String] {
+        var components = input.split(with: " ").joined()
         
-        return []
+        Operator.allCases.forEach {
+            components = components.split(with: $0.rawValue).joined(separator: " ")
+        }
+
+        return components.split(with: " ")
     }
 }

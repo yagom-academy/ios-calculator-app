@@ -11,14 +11,11 @@ struct Formula {
     
     mutating func result() -> Double {
         guard var result = operands.dequeue() else {
-            return 0
+            return .nan
         }
         
-        while !operands.isEmpty(), !operators.isEmpty() {
+        while let operand = operands.dequeue() {
             guard let operatorType = operators.dequeue() else {
-                break
-            }
-            guard let operand = operands.dequeue() else {
                 break
             }
             

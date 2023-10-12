@@ -10,7 +10,7 @@ import XCTest
 
 extension Int: CalculateItem { }
 
-final class CalculatorTests: XCTestCase {
+final class QueueTests: XCTestCase {
     var sut: CalculateItemQueue<Int>!
     
     override func setUpWithError() throws {

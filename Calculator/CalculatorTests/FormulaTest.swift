@@ -19,7 +19,7 @@ final class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func test_operator가_add일때_1_2전달하며_calculate호출시_반환값이3인지() throws {
+    func test_operands에10_20_5_5_2_operators에add_subtract_divide_multiply_추가한뒤_result의_반환값이10인지() throws {
         let expectation: Double = 10
         
         sut.operands.enqueue(value: 10)
