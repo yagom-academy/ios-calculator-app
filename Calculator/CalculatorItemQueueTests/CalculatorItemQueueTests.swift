@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>(enqueueBox: [], dequeueBox: [])
+        sut = CalculatorItemQueue<Double>(enqueueBox: [], dequeueBox: [])
     }
 
     override func tearDownWithError() throws {
@@ -76,7 +76,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_1과28과9가있을때_17을enqueue할시_enqueueBox에1과28과9와17이들어있다() {
         //given
         sut = .init(enqueueBox: [1, 28, 9], dequeueBox: [])
-        let expectedEnqueueBox = [1, 28, 9, 17]
+        let expectedEnqueueBox: [Double] = [1, 28, 9, 17]
         
         //when
         sut.enqueue(17)
@@ -107,8 +107,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     func test_여러요소를넣고_clear호출시_모두초기화되는지() {
         // given
         sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [77, 28, 9])
-        let expectedEnqueueBox = [Int]()
-        let expectedDequeueBox = [Int]()
+        let expectedEnqueueBox = [Double]()
+        let expectedDequeueBox = [Double]()
         
         //when
         sut.clear()

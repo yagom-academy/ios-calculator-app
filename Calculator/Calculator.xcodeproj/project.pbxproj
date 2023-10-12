@@ -14,10 +14,11 @@
 		4F1658842AD5B92000915A6E /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1658832AD5B92000915A6E /* FormulaTests.swift */; };
 		4F16588B2AD5BE3A00915A6E /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F16588A2AD5BE3A00915A6E /* ExpressionParser.swift */; };
 		4F1658932AD5BF4500915A6E /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1658922AD5BF4500915A6E /* ExpressionParserTests.swift */; };
+		4F8E01732AD7E8BB0069D603 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E01722AD7E8BB0069D603 /* Double+.swift */; };
+		4F8E01752AD7E8C30069D603 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E01742AD7E8C30069D603 /* String+.swift */; };
 		4FC4C43A2ACC0143005085E9 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4C4392ACC0143005085E9 /* CalculatorItemQueueTests.swift */; };
 		4FC4C4442ACC03FC005085E9 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4C4432ACC03FC005085E9 /* CalculateItem.swift */; };
 		4FC4C4462ACC041B005085E9 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4C4452ACC041B005085E9 /* CalculatorItemQueue.swift */; };
-		4FC4C4482ACC2B3A005085E9 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC4C4472ACC2B3A005085E9 /* Extension.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
 		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
@@ -68,11 +69,12 @@
 		4F16588A2AD5BE3A00915A6E /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		4F1658902AD5BF4500915A6E /* ExpressionParserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpressionParserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F1658922AD5BF4500915A6E /* ExpressionParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParserTests.swift; sourceTree = "<group>"; };
+		4F8E01722AD7E8BB0069D603 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		4F8E01742AD7E8C30069D603 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		4FC4C4372ACC0143005085E9 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FC4C4392ACC0143005085E9 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
 		4FC4C4432ACC03FC005085E9 /* CalculateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateItem.swift; sourceTree = "<group>"; };
 		4FC4C4452ACC041B005085E9 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
-		4FC4C4472ACC2B3A005085E9 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -146,6 +148,15 @@
 			path = ExpressionParserTests;
 			sourceTree = "<group>";
 		};
+		4F8E01712AD7E8840069D603 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4F8E01722AD7E8BB0069D603 /* Double+.swift */,
+				4F8E01742AD7E8C30069D603 /* String+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		4FC4C4382ACC0143005085E9 /* CalculatorItemQueueTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,7 +173,6 @@
 				4FC4C4452ACC041B005085E9 /* CalculatorItemQueue.swift */,
 				4F16587B2AD5B66100915A6E /* Formula.swift */,
 				4F16588A2AD5BE3A00915A6E /* ExpressionParser.swift */,
-				4FC4C4472ACC2B3A005085E9 /* Extension.swift */,
 				4F16586C2AD5AD5E00915A6E /* CalculatorError.swift */,
 			);
 			path = Model;
@@ -215,6 +225,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				4F8E01712AD7E8840069D603 /* Extension */,
 				4FC4C4422ACC03AB005085E9 /* Controller */,
 				4FC4C4402ACC0375005085E9 /* Model */,
 				4FC4C4412ACC03A3005085E9 /* View */,
@@ -449,11 +460,12 @@
 				4FC4C4462ACC041B005085E9 /* CalculatorItemQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
-				4FC4C4482ACC2B3A005085E9 /* Extension.swift in Sources */,
+				4F8E01732AD7E8BB0069D603 /* Double+.swift in Sources */,
 				4F16586D2AD5AD5E00915A6E /* CalculatorError.swift in Sources */,
 				4F16586B2AD5AC1B00915A6E /* Operator.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
 				4FC4C4442ACC03FC005085E9 /* CalculateItem.swift in Sources */,
+				4F8E01752AD7E8C30069D603 /* String+.swift in Sources */,
 				4F16587C2AD5B66100915A6E /* Formula.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
