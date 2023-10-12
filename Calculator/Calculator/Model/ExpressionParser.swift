@@ -12,11 +12,9 @@ enum ExpressionParser {
         let components = componentsByOperator(from: input)
         
         components.forEach { component in
-            if component.isEmpty {
-                return
-            } else if let operand = Double(component) {
+            if let operand = Double(component) {
                 operands.enQueue(operand)
-            } else if let `operator` = Operator(rawValue: Character(component)) {
+            } else if component.count == 1, let `operator` = Operator(rawValue: Character(component)) {
                 operators.enQueue(`operator`)
             }
         }
