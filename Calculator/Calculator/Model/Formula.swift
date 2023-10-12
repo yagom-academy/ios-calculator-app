@@ -16,7 +16,7 @@ struct Formula {
         var result: Double = 0
         
         while !operators.isEmpty {
-            guard let operators = operators.dequeue() else {
+            guard let operatorSymbol = operators.dequeue() else {
                 return lhs
             }
             
@@ -24,7 +24,7 @@ struct Formula {
                 throw CalculatorError.invalidOperandError
             }
             
-            lhs = try operators.calculate(lhs: lhs, rhs: rhs)
+            lhs = try operatorSymbol.calculate(lhs: lhs, rhs: rhs)
             result = lhs
         }
         
