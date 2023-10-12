@@ -6,7 +6,7 @@
 //
 
 
-final class LinkedList<Data> {
+struct LinkedList<Data> {
     private var head: Node<Data>?
     private var tail: Node<Data>?
     private(set) var count: Int = 0
@@ -17,7 +17,7 @@ final class LinkedList<Data> {
     
     var last: Data? { tail?.data }
     
-    func append(value: Data) {
+    mutating func append(value: Data) {
         let newNode: Node = Node(data: value)
         if isEmpty {
             head = newNode
@@ -29,7 +29,7 @@ final class LinkedList<Data> {
         count += 1
     }
     
-    func removeFirst() -> Data? {
+    mutating func removeFirst() -> Data? {
         guard !isEmpty else { return nil }
         
         let value = head?.data
@@ -39,7 +39,7 @@ final class LinkedList<Data> {
         return value
     }
     
-    func removeAll() {
+    mutating func removeAll() {
         head = nil
         tail = nil
         count = 0
