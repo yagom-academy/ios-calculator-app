@@ -36,6 +36,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         if rhs == .zero {
             throw CalculatorError.divideByZero
         }
+        
         return lhs / rhs
     }
     
