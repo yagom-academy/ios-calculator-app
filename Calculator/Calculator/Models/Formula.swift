@@ -10,6 +10,7 @@ struct Formula {
     var operands = CalculatorItemQueue<Double>()
     var operators = CalculatorItemQueue<Operator>()
     
+    @discardableResult
     mutating func result() throws -> Double {
         guard var firstOperands = operands.dequeue() else { throw CalculatorError.noValue }
         

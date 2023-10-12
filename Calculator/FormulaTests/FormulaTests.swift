@@ -21,8 +21,12 @@ final class FormulaTests: XCTestCase {
         sut = nil
     }
     
-    func test_result메서드호출시_값이없을때_nil을리턴하는지() {
-        XCTAssertNil(try? sut.result())
+    func test_result메서드호출시_값이없을때_error를리턴하는지() {
+        do {
+            try sut.result()
+        } catch let error {
+            XCTAssertEqual(error as! CalculatorError, CalculatorError.noValue)
+        }
     }
     
     func test_result메서드호출시_3더하기2가_5를리턴하는지() throws {
