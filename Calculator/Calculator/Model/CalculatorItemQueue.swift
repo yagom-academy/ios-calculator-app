@@ -7,67 +7,32 @@
 import Foundation
 
 struct CalculatorItemQueue<T: CalculatorItem> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
-    private var nodeCount = 0
+    private var list = LinkedList<T>()
     
     mutating func enqueue(_ elemnet: T) {
-        let newNode = Node(elemnet)
-        if head == nil {
-            head = newNode
-            tail = newNode
-        } else {
-            tail?.setNext(newNode)
-            tail = newNode
-        }
-        nodeCount += 1
+        list.enqueue(elemnet)
     }
     
     mutating func dequeue() -> T? {
-        guard let dequeuedElement = head?.element else {
-            return nil
-        }
-        head = head?.next
-        nodeCount -= 1
-        return dequeuedElement
+        list.dequeue()
     }
     
     func peek() -> T? {
-        guard let peekElement = head?.element else {
-            return nil
-        }
-        return peekElement
+        list.peek()
     }
     
-    func isEmpty() -> Bool {
-        if head == nil {
-            return true
-        } else {
-            return false
-        }
+    mutating func isEmpty() -> Bool {
+        list.isEmpty()
     }
     
     mutating func clear() {
-        head = nil
-        tail = nil
-    }    
+        list.clear()
+    }
     
     func count() -> Int {
-        return nodeCount
+        list.count()
     }
     
 }
 
-final class Node<T> {
-    private(set) var next: Node<T>?
-    private(set) var element: T
-    
-    init(_ element: T) {
-        self.next = nil
-        self.element = element
-    }
-    
-    func setNext(_ node: Node<T>) {
-        self.next = node
-    }
-}
+
