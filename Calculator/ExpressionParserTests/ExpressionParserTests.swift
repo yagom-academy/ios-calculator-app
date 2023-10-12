@@ -43,6 +43,19 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
+    func test_parse호출시_음수인double1개인String을넣었을때_operandsfornt에해당값이있다() {
+        // given
+        let input = "-10.2"
+        let formula = ExpressionParser.parse(from: input)
+        let expectation = Double(input)
+        
+        // when
+        let result = formula.operands.front
+        
+        // then
+        XCTAssertEqual(result, expectation)
+    }
+    
     func test_parse호출시_operator가1개인String을넣었을때_operatorsfornt에해당값이있다() {
         // given
         let input = "−"
@@ -71,31 +84,59 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operandsResult, expectatedOperands)
     }
     
-    func test_parse호출시_double이3개_operator가2개있는String을넣었을때_값이3개2개씩있는Fomula를반환한다() {
+    func test_parse호출시_double이3개_operator가2개있는String을넣었을때_각각의값이있는Fomula를반환한다() {
         // given
-        let input = "1.0 + 2.5 / 3.2"
-        let expectatedOperandsCount = 3
-        let expectatedOperatorsCount = 2
+        let input = "1.0+2.5−3.2"
+        let formula = ExpressionParser.parse(from: input)
+        let expectatedOperandsfront = 1.0
+        let expectatedOperandsRear = 3.2
+        let expectatedOperatorsfront = Operator.add
+        let expectatedOperatorsRear = Operator.subtract
         
         // when
-        let result = ExpressionParser.parse(from: input)
+        let operandsResult = formula.operands
+        let operatorsResult = formula.operators
         
         // then
-        XCTAssertEqual(result.operands.count, expectatedOperandsCount)
-        XCTAssertEqual(result.operators.count, expectatedOperatorsCount)
+        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
+        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
+        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
+        XCTAssertEqual(operatorsResult.rear, expectatedOperatorsRear)
     }
     
-    func test_parse호출시_음수인double포함2개_operator가1개인String을넣었을때_값이2개1개씩있는Fomula를반환한다() {
+    func test_parse호출시_음수인double포함2개_operator가1개인String을넣었을때_각각의값이있는Fomula를반환한다() {
         // given
-        let input = "1.1 * -2.2"
-        let expectatedOperandsCount = 2
-        let expectatedOperatorsCount = 1
+        let input = "1.1*-2.2"
+        let formula = ExpressionParser.parse(from: input)
+        let expectatedOperandsfront = 1.1
+        let expectatedOperandsRear = -2.2
+        let expectatedOperatorsfront = Operator.multiply
         
         // when
-        let result = ExpressionParser.parse(from: input)
+        let operandsResult = formula.operands
+        let operatorsResult = formula.operators
         
         // then
-        XCTAssertEqual(result.operands.count, expectatedOperandsCount)
-        XCTAssertEqual(result.operators.count, expectatedOperatorsCount)
+        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
+        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
+        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
+    }
+    
+    func test_parse호출시_공백이있는_double포함2개_operator가1개인String을넣었을때_공백을제외한각각의값이있는Fomula를반환한다() {
+        // given
+        let input = "1.1/ 2.2"
+        let formula = ExpressionParser.parse(from: input)
+        let expectatedOperandsfront = 1.1
+        let expectatedOperandsRear = 2.2
+        let expectatedOperatorsfront = Operator.divide
+        
+        // when
+        let operandsResult = formula.operands
+        let operatorsResult = formula.operators
+        
+        // then
+        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
+        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
+        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
     }
 }
