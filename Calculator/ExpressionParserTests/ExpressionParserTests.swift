@@ -26,12 +26,7 @@ final class ExpressionParserTests: XCTestCase {
             operators.append(`operator`)
         }
         
-        for (index, value) in numbers.enumerated() {
-            XCTAssertEqual(value, resultNumbers[index])
-        }
-        
-        for (index, value) in operators.enumerated() {
-            XCTAssertEqual(value, resultOperators[index])
-        }
+        XCTAssertEqual(numbers, resultNumbers)
+        XCTAssertEqual(operators, resultOperators)
     }
 }
