@@ -12,10 +12,8 @@ struct Formula {
     mutating func result() throws -> Double {
         guard var firstResult = operands.dequeue() else { return 0 }
         
-        while !operators.isEmpty {
-            guard let secondResult = operands.dequeue() else { return 0 }
-            
-            guard let operatorSign = operators.dequeue() else { return 0 }
+        while let secondResult = operands.dequeue() {
+            guard let operatorSign = operators.dequeue() else { return firstResult }
             
             firstResult = try operatorSign.calculate(lhs: firstResult, rhs: secondResult)
         }
