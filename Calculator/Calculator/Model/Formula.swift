@@ -11,7 +11,7 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard var lhs = operands.dequeue() else {
-            throw CalculatorError.invalidOperandError
+            return 0
         }
         var result: Double = 0
         
