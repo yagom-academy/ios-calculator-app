@@ -74,13 +74,14 @@ final class ExpressionParserTests: XCTestCase {
         let input = "1.1+"
         let formula = ExpressionParser.parse(from: input)
         let expectatedOperands = 1.1
+        let expectatedOperators = Operator.add
         
         // when
         let operandsResult = formula.operands.front
         let operatorsResult = formula.operators.front
         
         // then
-        XCTAssertNil(operatorsResult)
+        XCTAssertEqual(operatorsResult, expectatedOperators)
         XCTAssertEqual(operandsResult, expectatedOperands)
     }
     
