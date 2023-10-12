@@ -11,7 +11,7 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard var lhs = operands.dequeue() else {
-            return 0
+            return .zero
         }
         var result: Double = 0
         
