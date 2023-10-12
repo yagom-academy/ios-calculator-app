@@ -17,7 +17,7 @@ struct Formula {
         
         while !operators.isEmpty {
             guard let operators = operators.dequeue() else {
-                throw CalculatorError.invalidOperatorError
+                return lhs
             }
             
             guard let rhs = operands.dequeue() else {
