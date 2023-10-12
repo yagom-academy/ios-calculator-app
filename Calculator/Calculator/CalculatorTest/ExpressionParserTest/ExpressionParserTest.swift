@@ -22,7 +22,7 @@ final class ExpressionParserTest: XCTestCase {
         //given
         let expectation = 2
         //when
-        let formula = ExpressionParser.parse(from: "1 + 1")
+        let formula = ExpressionParser.parse(from: "10 + 1")
         let result = formula.operands.count
         //then
         XCTAssertEqual(result, expectation)
