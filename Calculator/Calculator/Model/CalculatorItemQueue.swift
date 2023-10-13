@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by Lee minyeol on 2023/10/04.
+//  Created by mireu on 2023/10/04.
 //
 
 struct CalculatorItemQueue<T: CalculateItem> {
@@ -21,11 +21,7 @@ struct CalculatorItemQueue<T: CalculateItem> {
     }
     
     mutating func dequeue() -> T? {
-        if isEmpty {
-            return nil
-        } else {
-            return list.removeFirst()
-        }
+        return isEmpty ? nil : list.removeFirst()
     }
     
     mutating func clear() {

@@ -9,7 +9,7 @@ import XCTest
 @testable import Calculator
 
 class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<String>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
@@ -32,7 +32,7 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_1이list에들어있을때_isEmpty호출시_false를반환한다() {
         //given
-        sut.enqueue("1")
+        sut.enqueue(1)
         //when
         let result = sut.isEmpty
         //then
@@ -41,9 +41,9 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_숫자가1과2와3이list에들어있을떄_count호출시_개수3개가반환한다() {
         //given
-        sut.enqueue("1")
-        sut.enqueue("2")
-        sut.enqueue("3")
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         //when
         let result = sut.count
         //then
@@ -54,7 +54,7 @@ class CalculatorItemQueueTests: XCTestCase {
         //given
         
         //when
-        sut.enqueue("3")
+        sut.enqueue(3)
         //then
         XCTAssertEqual(sut.count, 1)
     }
@@ -70,30 +70,30 @@ class CalculatorItemQueueTests: XCTestCase {
     
     func test_3과4가list에들어있을때_dequeue호출시_3을뺀다면_숫자가1이된다() {
         //given
-        sut.enqueue("3")
-        sut.enqueue("4")
+        sut.enqueue(3)
+        sut.enqueue(4)
         //when
-        XCTAssertEqual(sut.dequeue(), "3")
+        XCTAssertEqual(sut.dequeue(), 3)
         //then
         XCTAssertEqual(sut.count, 1)
     }
     
     func test_4와5와6이list들었을때_dequeue호출시_4을제거하면_개수가2개가된다() {
         //given
-        sut.enqueue("4")
-        sut.enqueue("5")
-        sut.enqueue("6")
+        sut.enqueue(4)
+        sut.enqueue(5)
+        sut.enqueue(6)
         //when
-        XCTAssertEqual(sut.dequeue(), "4")
+        XCTAssertEqual(sut.dequeue(), 4)
         //then
         XCTAssertEqual(sut.count, 2)
     }
 
-    func test_7과8과9가list에들어있을떄_clear호출시배열이제거되면_ture를반환한다() {
+    func test_7과8과9가list에들어있을떄_clear호출시배열이제거되면_true를반환한다() {
         //given
-        sut.enqueue("7")
-        sut.enqueue("8")
-        sut.enqueue("9")
+        sut.enqueue(7)
+        sut.enqueue(8)
+        sut.enqueue(9)
         //when
         sut.clear()
         //then
