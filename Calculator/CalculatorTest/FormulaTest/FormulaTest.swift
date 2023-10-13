@@ -69,6 +69,8 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(0)
         sut.operators.enqueue(.divide)
         // when, then
-        XCTAssertThrowsError(try sut.result()) { error in XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)}
+        XCTAssertThrowsError(try sut.result()) { error in
+            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
+        }
     }
 }
