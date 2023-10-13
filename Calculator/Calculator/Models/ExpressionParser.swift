@@ -10,7 +10,7 @@ enum ExpressionParser {
         var formula = Formula()
         let componentsArray = componentsByOperators(from: input)
         
-        componentsArray.forEach{ component in
+        componentsArray.forEach { component in
             if let operand = Double(component) {
                 formula.operands.enqueue(operand)
             } else if let operatorSymbol = Operator(rawValue: Character(component)) {
@@ -30,7 +30,7 @@ enum ExpressionParser {
             }
         }
         
-        return result.split(with: " ").filter{ $0 != "" }
+        return result.split(with: " ").filter { $0 != "" }
     }
 }
 
