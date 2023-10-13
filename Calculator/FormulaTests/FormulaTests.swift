@@ -37,5 +37,19 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(result, -9)
     }
     
+    func test_rhs가dequeue에실패했을때_lhs가rhs에전달되어계산이되는지() {
+        //given
+        sut = Formula(operands: CalculatorItemQueue<Double>(enqueueBox: [2]), operators: CalculatorItemQueue<Operator>(enqueueBox: [.multiply]))
+        let expectedResult: Double = 4
+        
+        //when
+        let result = sut.result()
+        
+        //then
+        XCTAssertEqual(result, expectedResult)
+    }
+    
+    
+    
 }
 
