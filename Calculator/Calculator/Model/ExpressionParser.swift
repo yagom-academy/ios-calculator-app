@@ -11,11 +11,11 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>(list: LinkedList())
         let components = componentsByOperator(from: input)
         
-        components.compactMap{ Double($0) }.forEach {
+        components.compactMap { Double($0) }.forEach {
             operands.enQueue($0)
         }
         
-        input.compactMap{ Operator(rawValue: $0) }.forEach {
+        input.compactMap { Operator(rawValue: $0) }.forEach {
             operators.enQueue($0)
         }
         
@@ -23,13 +23,12 @@ enum ExpressionParser {
     }
     
     static private func componentsByOperator(from input: String) -> [String] {
-        let operatorList = Operator.allCases
-        var splitedString = [input.filter { $0 != " " }]
+        var splitedInput = [input]
         
-        operatorList.forEach { `operator` in
-            splitedString = splitedString.flatMap{ $0.split(with:`operator`.rawValue) }
+        Operator.allCases.forEach { `operator` in
+            splitedInput = splitedInput.flatMap { $0.split(with:`operator`.rawValue) }
         }
         
-        return splitedString
+        return splitedInput
     }
 }

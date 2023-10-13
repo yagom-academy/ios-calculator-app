@@ -122,22 +122,4 @@ final class ExpressionParserTests: XCTestCase {
         XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
         XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
     }
-    
-    func test_parse호출시_공백이있는_double2개_operator가1개인String을넣었을때_공백을제외한각각의값이있는Fomula를반환한다() {
-        // given
-        let input = " 1.1/ 2.2"
-        let formula = ExpressionParser.parse(from: input)
-        let expectatedOperandsfront = 1.1
-        let expectatedOperandsRear = 2.2
-        let expectatedOperatorsfront = Operator.divide
-        
-        // when
-        let operandsResult = formula.operands
-        let operatorsResult = formula.operators
-        
-        // then
-        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
-        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
-        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
-    }
 }
