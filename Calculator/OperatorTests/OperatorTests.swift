@@ -69,5 +69,18 @@ final class OperatorTests: XCTestCase {
         XCTAssertEqual(result, 8)
     }
     
+    func test_operator가divide케이스이고lhs가4rhs가0일때_calculate호출시nan이나오는지() {
+        //given
+        sut = Operator.divide
+        let lhs: Double = 4
+        let rhs: Double = 0
+        
+        //when
+        let result = sut.calculate(lhs: lhs, rhs: rhs)
+        
+        //then
+        XCTAssertTrue(result.isNaN)
+    }
+    
 
 }
