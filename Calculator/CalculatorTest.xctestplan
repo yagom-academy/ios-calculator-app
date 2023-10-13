@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BA215A81-5898-464E-A4A8-469E0B016922",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "4E07F7CF2AD90BDF00416542",
+        "name" : "CalculatorTest"
+      }
+    }
+  ],
+  "version" : 1
+}
