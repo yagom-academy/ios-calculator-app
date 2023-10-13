@@ -11,16 +11,12 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>(list: LinkedList())
         let components = componentsByOperator(from: input)
         
-        components.forEach {
-            if let operand = Double($0) {
-                operands.enQueue(operand)
-            }
+        components.compactMap{ Double($0) }.forEach {
+            operands.enQueue($0)
         }
         
-        input.forEach {
-            if let `operator` = Operator(rawValue: $0) {
-                operators.enQueue(`operator`)
-            }
+        input.compactMap{ Operator(rawValue: $0) }.forEach {
+            operators.enQueue($0)
         }
         
         return Formula(operands: operands, operators: operators)
