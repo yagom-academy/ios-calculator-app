@@ -16,12 +16,8 @@ struct Formula {
             accumulatingValue = initialValue
         }
         
-        while !operators.isEmpty {
-            guard let `operator` = operators.dequeue() else { break }
-            
-            guard let rhs = operands.dequeue() else { break }
+        while !operators.isEmpty, let `operator` = operators.dequeue(), let rhs = operands.dequeue() {
             accumulatingValue = `operator`.calculate(lhs: accumulatingValue, rhs: rhs)
-
         }
         
         return accumulatingValue
