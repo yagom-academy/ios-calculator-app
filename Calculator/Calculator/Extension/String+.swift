@@ -7,6 +7,7 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        return self.split(separator: target).map { String($0) }
+        let input = self.components(separatedBy: .whitespaces).joined()
+        return input.split(separator: target).map { String($0) }
     }
 }
