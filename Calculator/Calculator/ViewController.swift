@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     private let numberFormatter = NumberFormatter()
-    private var digitIsSelecting = false
-    private var dotIsClicked = false
+    private var digitIsSelecting: Bool = false
+    private var dotIsClicked: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,10 @@ class ViewController: UIViewController {
     }
     
     private func configuareUI() {
-        operandLabel.text = "0"
+        operandLabel.text = NameSpace.zero
         
         numberFormatter.numberStyle = .decimal
     }
-
 
     @IBAction func digitButtonTapped(_ sender: UIButton) {
         guard let lhs = operandLabel.text, let rhs = sender.currentTitle else { return }
@@ -45,12 +44,12 @@ class ViewController: UIViewController {
     private func formatInDigitSelecting(lhs: String, rhs: String) {
         guard let lhsInt = numberFormatter.number(from: lhs) as? Int, let rhsInt = Int(rhs) else { return }
         
-        var digit = 0
+        var digit: Int = .zero
         
         switch rhs {
-        case "0":
+        case NameSpace.zero:
             digit = lhsInt * 10
-        case "00":
+        case NameSpace.doubleZero:
             digit = lhsInt * 100
         default:
             digit = lhsInt * 10 + rhsInt
@@ -69,13 +68,13 @@ class ViewController: UIViewController {
     }
     
     @IBAction func signChangedButton(_ sender: UIButton) {
-        guard var digit = operandLabel.text, digit != "0" else { return }
+        guard var digit = operandLabel.text, digit != NameSpace.zero else { return }
         
-        if digit.first == "-" {
+        if digit.first == Character(NameSpace.minus) {
             digit.removeFirst()
             operandLabel.text = digit
         } else {
-            operandLabel.text = "-" + digit
+            operandLabel.text = NameSpace.minus + digit
         }
     }
 }
