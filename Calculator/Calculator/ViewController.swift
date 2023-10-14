@@ -77,4 +77,8 @@ class ViewController: UIViewController {
             operandLabel.text = NameSpace.minus + digit
         }
     }
+    
+    @IBAction func operatorsButtonTapped(_ sender: UIButton) {
+        operatorLabel.text = sender.currentTitle
+    }
 }

@@ -8,8 +8,8 @@
 enum Operator: Character, CaseIterable, CalculatorItem {
     case add = "+"
     case subtract = "−"
-    case divide = "/"
-    case multiply = "*"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {

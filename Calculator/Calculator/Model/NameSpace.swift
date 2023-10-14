@@ -6,7 +6,7 @@
 //
 
 enum NameSpace {
-    static let zero = "0"
-    static let doubleZero = "00"
-    static let minus = "-"
+    static let zero: String = "0"
+    static let doubleZero: String = "00"
+    static let minus: String = "-"
 }

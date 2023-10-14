@@ -107,7 +107,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_parse호출시_음수인double포함2개_operator가1개인String을넣었을때_각각의값이있는Fomula를반환한다() {
         // given
-        let input = "1.1*-2.2"
+        let input = "1.1×-2.2"
         let formula = ExpressionParser.parse(from: input)
         let expectatedOperandsfront = 1.1
         let expectatedOperandsRear = -2.2
