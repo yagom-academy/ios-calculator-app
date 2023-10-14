@@ -19,9 +19,9 @@ final class FormulaTests: XCTestCase {
         sut = nil
     }
 
-    func test_피연산자2331_연산자AddMultiplySubtract가_큐에존재할때_모두를연산한결과는_14와같다() {
+    func test_피연산자들과_연산자들이_주어지고_result호출시_결과값은_14와같다() {
         // given
-        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
+        sut = Formula()
         sut.operands.enqueue(2)
         sut.operands.enqueue(3)
         sut.operands.enqueue(3)
@@ -31,10 +31,31 @@ final class FormulaTests: XCTestCase {
         sut.operators.enqueue(.subtract)
         
         // when
-        let result = sut.result()
+        let result = try! sut.result()
         
         // then
         XCTAssertEqual(result, 14)
+    }
+    
+    func test_피연산자에_0과_연산자에_나누기가_주어지고_result를호출했을때의_에러는_dividingZero와같다() {
+        // given
+        sut = Formula()
+        sut.operands.enqueue(3)
+        sut.operands.enqueue(0)
+        sut.operators.enqueue(.divide)
+        
+        // when
+        let result = Result {
+            try sut.result()
+        }
+        
+        // then
+        switch result {
+        case .success(_):
+            break
+        case .failure(let error):
+            XCTAssertEqual(error as? OperateError, OperateError.dividingZero)
+        }
     }
 
 }
