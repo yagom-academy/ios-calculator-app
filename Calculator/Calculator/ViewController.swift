@@ -67,5 +67,15 @@ class ViewController: UIViewController {
         operandLabel.text = lhs + rhs
         dotIsClicked = true
     }
+    
+    @IBAction func signChangedButton(_ sender: UIButton) {
+        guard var digit = operandLabel.text, digit != "0" else { return }
+        
+        if digit.first == "-" {
+            digit.removeFirst()
+            operandLabel.text = digit
+        } else {
+            operandLabel.text = "-" + digit
+        }
+    }
 }
-
