@@ -81,4 +81,10 @@ class ViewController: UIViewController {
     @IBAction func operatorsButtonTapped(_ sender: UIButton) {
         operatorLabel.text = sender.currentTitle
     }
+    
+    @IBAction func clearButtonTapped(_ sender: UIButton) {
+        operandLabel.text = NameSpace.zero
+        digitIsSelecting = false
+        dotIsClicked = false
+    }
 }
