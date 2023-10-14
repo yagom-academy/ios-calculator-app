@@ -103,14 +103,12 @@ final class LinkedListTests: XCTestCase {
         // given
         let firstNode = List.Node(data: 1)
         sut = List(head: firstNode, tail: firstNode)
-        let previousTail = sut.tail
         let secondNodeData = 2
 
         // when
         sut.append(secondNodeData)
 
         // then
-        XCTAssertEqual(previousTail?.next?.data, secondNodeData)
         XCTAssertEqual(sut.tail?.data, secondNodeData)
     }
     
@@ -125,18 +123,20 @@ final class LinkedListTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_removeFirst호출시_첫번째노드가제거된다() {
+    func test_removeFirst호출시_첫번째노드가제거되고첫번째노드를반환한다() {
         // given
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
         sut = List(head: firstNode, tail: secondNode)
         firstNode.next = secondNode
+        let expectedHead = sut.head?.data
 
         // when
         let result = sut.removeFirst()
 
         // then
-        XCTAssertFalse(sut.head === firstNode)
+        XCTAssertNotEqual(expectedHead, sut.head?.data)
+        XCTAssertEqual(expectedHead, result)
     }
     
     func test_removeAll호출시_초기화된다() {

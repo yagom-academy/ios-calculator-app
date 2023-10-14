@@ -2,7 +2,7 @@
 //  CalculatorItemQueueTests.swift
 //  CalculatorItemQueueTests
 //
-//  Created by 김진주 on 2023/10/03.
+//  Created by jyubong on 2023/10/03.
 //
 
 import XCTest
@@ -23,29 +23,31 @@ final class CalculatorItemQueueTests: XCTestCase {
         sut = nil
     }
     
-    func test_count_값이없을때count가0이다() {
+    func test_큐값이없을때_count결과가_0이다() {
         // given
+        sut = .init(list: List())
         let expectation = 0
         
         // when
-        sut = CalculatorItemQueue(list: List())
+        let result = sut.count
         
         // then
-        XCTAssertEqual(sut.count, expectation)
+        XCTAssertEqual(result, expectation)
     }
     
-    func test_count_enQueue되면_count가1이다() {
+    func test_큐값이1개이면_count결과가_1이다() {
         // given
         let firstNode = List.Node(data: 1)
         let list = List(head: firstNode, tail: firstNode)
+        sut = .init(list: list)
         
         let expectation = 1
         
         // when
-        sut = CalculatorItemQueue(list: list)
+        let result = sut.count
         
         // then
-        XCTAssertEqual(sut.count, expectation)
+        XCTAssertEqual(result, expectation)
     }
 
     func test_enQueue호출시_rear에값이변경된다() {
@@ -59,25 +61,24 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertEqual(sut.rear, data)
     }
     
-    func test_deQueue호출시_front를반환한다() {
+    func test_deQueue호출시_front가삭제되고front를반환한다() {
         // given
-        let firstNode = List.Node(data: 1)
-        let secondNode = List.Node(data: 2)
-        firstNode.next = secondNode
-        let list = List(head: firstNode, tail: secondNode)
-        sut = CalculatorItemQueue(list: list)
+        let node = List.Node(data: 1)
+        let list = List(head: node, tail: node)
+        sut = .init(list: list)
         let expectation = sut.front
         
         // when
         let result = sut.deQueue()
         
         // then
+        XCTAssertNotEqual(sut.front, expectation)
         XCTAssertEqual(result, expectation)
     }
     
-    func test_deQueue호출시_isEmpty일때_nil반환한다() {
+    func test_deQueue호출시_값이없을때_nil반환한다() {
         // given
-        sut = CalculatorItemQueue(list: List())
+        sut = .init(list: List())
         
         // when
         let result = sut.deQueue()
@@ -86,17 +87,18 @@ final class CalculatorItemQueueTests: XCTestCase {
         XCTAssertNil(result)
     }
     
-    func test_clear호출시_isEmpty이다() {
+    func test_clear호출시_값이nil이된다() {
         // given
-        let firstNode = List.Node(data: 1)
-        let list = List(head: firstNode, tail: firstNode)
-        sut = CalculatorItemQueue(list: list)
+        let node = List.Node(data: 1)
+        let list = List(head: node, tail: node)
+        sut = .init(list: list)
         
         // when
         sut.clear()
         
         // then
-        XCTAssertTrue(sut.isEmpty)
+        XCTAssertNil(sut.front)
+        XCTAssertNil(sut.rear)
     }
 }
 

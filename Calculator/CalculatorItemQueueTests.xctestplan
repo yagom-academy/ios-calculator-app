@@ -26,6 +26,27 @@
         "identifier" : "BF6F4DD72ACC41F900829028",
         "name" : "CalculatorItemQueueLinkedListTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BFC9914F2AD4D076009134C0",
+        "name" : "OperatorTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BF7A13142AD51C08005A4500",
+        "name" : "FormulaTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Calculator.xcodeproj",
+        "identifier" : "BF7A13232AD55E54005A4500",
+        "name" : "ExpressionParserTests"
+      }
     }
   ],
   "version" : 1
