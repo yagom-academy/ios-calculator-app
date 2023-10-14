@@ -58,5 +58,14 @@ class ViewController: UIViewController {
         
         operandLabel.text = numberFormatter.string(for: digit)
     }
+    
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        guard let lhs = operandLabel.text, let rhs = sender.currentTitle else { return }
+        
+        guard !dotIsClicked else { return }
+        
+        operandLabel.text = lhs + rhs
+        dotIsClicked = true
+    }
 }
 
