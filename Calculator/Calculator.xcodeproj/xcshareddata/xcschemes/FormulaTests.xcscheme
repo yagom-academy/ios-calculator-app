@@ -13,7 +13,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:ExpressionParser.xctestplan"
+            reference = "container:FormulaTests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -23,7 +23,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DC3253072AD51B8A00200EF6"
+               BlueprintIdentifier = "DC8C11B42ADA6089007AF3EF"
                BuildableName = "FormulaTests.xctest"
                BlueprintName = "FormulaTests"
                ReferencedContainer = "container:Calculator.xcodeproj">

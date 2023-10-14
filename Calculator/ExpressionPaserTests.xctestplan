@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "BCD60EB5-BED6-4306-8918-1CE3C65EF1C7",
+      "id" : "E3790E58-2DF5-4CE4-938C-597959A4B1B9",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -16,8 +16,8 @@
       "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
-        "identifier" : "DC3253072AD51B8A00200EF6",
-        "name" : "FormulaTests"
+        "identifier" : "DC3253152AD68B0F00200EF6",
+        "name" : "ExpressionPaserTests"
       }
     }
   ],

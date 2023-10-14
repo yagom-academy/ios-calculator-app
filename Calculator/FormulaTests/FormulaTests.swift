@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  FormulaTests
 //
-//  Created by Charles on 2023/10/10.
+//  Created by Charles on 2023/10/14.
 //
 
 import XCTest
@@ -57,5 +57,4 @@ final class FormulaTests: XCTestCase {
             XCTAssertEqual(error as? OperateError, OperateError.dividingZero)
         }
     }
-
 }
