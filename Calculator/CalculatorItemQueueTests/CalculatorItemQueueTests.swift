@@ -9,11 +9,11 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = CalculatorItemQueue<Int>(enqueueBox: [], dequeueBox: [])
+        sut = CalculatorItemQueue<Double>(enqueueBox: [])
     }
 
     override func tearDownWithError() throws {
@@ -31,7 +31,7 @@ final class CalculatorItemQueueTests: XCTestCase {
 
     func test_isEmpty프로퍼티를확인할시_요소가하나라도있을때_False를반환한다() {
         //given
-        sut = .init(enqueueBox: [1], dequeueBox: [])
+        sut = .init(enqueueBox: [1])
         
         //when
         let result = sut.isEmpty
@@ -42,7 +42,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_아무것도없을때_count프로퍼티를확인할시_count가0이출력된다() {
         //given
-        sut = .init(enqueueBox: [], dequeueBox: [])
+        sut = .init(enqueueBox: [])
         
         //when
         let result = sut.count
@@ -53,7 +53,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_count프로퍼티를확인할때_요소가한개들어있을시_count가1이출력된다() {
         //given
-        sut = .init(enqueueBox: [1], dequeueBox: [])
+        sut = .init(enqueueBox: [1])
         
         //when
         let result = sut.count
@@ -64,7 +64,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_peek프로퍼티를확인할때_1과2와3이들어있을시_1이나온다() {
         //given
-        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [])
+        sut = .init(enqueueBox: [1, 2, 3])
         
         //when
         let result = sut.peek
@@ -75,8 +75,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_1과28과9가있을때_17을enqueue할시_enqueueBox에1과28과9와17이들어있다() {
         //given
-        sut = .init(enqueueBox: [1, 28, 9], dequeueBox: [])
-        let expectedEnqueueBox = [1, 28, 9, 17]
+        sut = .init(enqueueBox: [1, 28, 9])
+        let expectedEnqueueBox: [Double] = [1, 28, 9, 17]
         
         //when
         sut.enqueue(17)
@@ -87,7 +87,7 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_1과77과28과9와17로초기화를하고_dequeue호출했을때_1이나온다() {
         //given
-        sut = .init(enqueueBox: [1,77,28,9,17], dequeueBox: [])
+        sut = .init(enqueueBox: [1,77,28,9,17])
         
         //when
         let result = sut.dequeue()
@@ -106,9 +106,9 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_여러요소를넣고_clear호출시_모두초기화되는지() {
         // given
-        sut = .init(enqueueBox: [1, 2, 3], dequeueBox: [77, 28, 9])
-        let expectedEnqueueBox = [Int]()
-        let expectedDequeueBox = [Int]()
+        sut = .init(enqueueBox: [1, 2, 3])
+        let expectedEnqueueBox = [Double]()
+        let expectedDequeueBox = [Double]()
         
         //when
         sut.clear()
