@@ -115,13 +115,13 @@ class CalculatorViewController: UIViewController {
     private func calculate() {
         let formula = ExpressionParser.parse(from: formulas)
         
-        operandLabel.text = numberFormatter.string(for: formula.result())
+        operandLabel.text = formatToString(formula.result())
         operatorLabel.text = StringName.empty
         formulas = StringName.empty
     }
     
     private func formatInDigitSelecting(lhs: String, rhs: String) {
-        guard let lhsDouble = numberFormatter.number(from: lhs) as? Double, let rhsDouble = Double(rhs) else { return }
+        guard let lhsDouble = formatToDouble(lhs), let rhsDouble = Double(rhs) else { return }
         
         var digit: Double = .zero
         
@@ -134,7 +134,7 @@ class CalculatorViewController: UIViewController {
             digit = lhsDouble * 10 + rhsDouble
         }
         
-        operandLabel.text = numberFormatter.string(for: digit)
+        operandLabel.text = formatToString(digit)
     }
     
     private func addFomulaStackView() {
@@ -146,7 +146,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func createFomulaStackView() -> UIView {
-        let operand = numberFormatter.number(from: operandLabel.text ?? StringName.zero)
+        let operand = formatToDouble(operandLabel.text)
         let `operator` = operatorLabel.text
         
         let stackView = createStackView()
@@ -181,7 +181,7 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addToCalculatorContainer() {
-        guard let operand = numberFormatter.number(from: operandLabel.text ?? StringName.empty) as? Double, let `operator` = operatorLabel.text else { return }
+        guard let operand = formatToDouble(operandLabel.text), let `operator` = operatorLabel.text else { return }
         
         if `operator` != StringName.empty, formulas == StringName.empty {
             formulas.append(StringName.zero)
@@ -194,5 +194,15 @@ class CalculatorViewController: UIViewController {
     private func resetState() {
         digitIsSelecting = false
         dotIsClicked = false
+    }
+    
+    private func formatToDouble(_ text: String?) -> Double? {
+        guard let text = text else { return nil }
+        
+        return numberFormatter.number(from: text) as? Double
+    }
+    
+    private func formatToString(_ number: Double?) -> String? {
+        numberFormatter.string(for: number)
     }
 }

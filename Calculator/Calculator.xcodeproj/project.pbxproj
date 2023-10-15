@@ -192,7 +192,6 @@
 		BF7A130C2AD50C12005A4500 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BF06F02C2AD7594000F95FD5 /* Extension */,
 				BF6F4DD22ACC40B800829028 /* CalculatorItem.swift */,
 				BF6F4DC12ACC404F00829028 /* CalculatorItemQueue.swift */,
 				BF6F4DD02ACC409C00829028 /* LinkedList.swift */,
@@ -258,6 +257,7 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				BF06F02C2AD7594000F95FD5 /* Extension */,
 				BF6BE2802ADBDED800349464 /* View */,
 				BF6BE27F2ADBDEC300349464 /* Controller */,
 				BF7A130C2AD50C12005A4500 /* Model */,
