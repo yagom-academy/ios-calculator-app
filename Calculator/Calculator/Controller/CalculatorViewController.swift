@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var scrollStackView: UIStackView!
