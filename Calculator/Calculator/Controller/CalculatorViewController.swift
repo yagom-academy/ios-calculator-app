@@ -13,14 +13,14 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
-    private var numberFormatter: NumberFormatter {
+    private var numberFormatter: NumberFormatter  = {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
         numberFormatter.maximumSignificantDigits = 20
         
         return numberFormatter
-    }
+    }()
     
     private var digitIsSelecting: Bool = false
     private var dotIsClicked: Bool = false
