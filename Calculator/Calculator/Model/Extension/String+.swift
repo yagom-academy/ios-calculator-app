@@ -11,4 +11,8 @@ extension String {
         
         return splitedString
     }
+    
+    mutating func appendFirst(_ text: String) {
+        self = text + self
+    }
 }

@@ -24,7 +24,7 @@ class CalculatorViewController: UIViewController {
     
     private var digitIsSelecting: Bool = false
     private var dotIsClicked: Bool = false
-    private var calculatorContainer: String = StringName.whiteSpace
+    private var calculatorContainer: String = StringName.empty
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class CalculatorViewController: UIViewController {
     
     private func configuareUI() {
         operandLabel.text = StringName.zero
-        operatorLabel.text = StringName.whiteSpace
+        operatorLabel.text = StringName.empty
     }
 
     @IBAction func digitButtonTapped(_ sender: UIButton) {
@@ -67,33 +67,34 @@ class CalculatorViewController: UIViewController {
             digit.removeFirst()
             operandLabel.text = digit
         } else {
-            operandLabel.text = StringName.minus + digit
+            digit.appendFirst(StringName.minus)
+            operandLabel.text = digit
         }
     }
     
     @IBAction func operatorsButtonTapped(_ sender: UIButton) {
-        guard digitIsSelecting || operandLabel.text != StringName.zero else {
+        if !digitIsSelecting, operandLabel.text == StringName.zero {
             operatorLabel.text = sender.currentTitle
             return
         }
         
         addToCalculatorContainer()
-        addEntry()
+        addFomulaStackView()
         
         operandLabel.text = StringName.zero
         operatorLabel.text = sender.currentTitle
-        dotIsClicked = false
-        digitIsSelecting = false
+        
+        resetState()
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        formulaStackView.arrangedSubviews.filter { !$0.isHidden } .forEach { $0.removeFromSuperview()
-        }
+        formulaStackView.arrangedSubviews.filter { !$0.isHidden }
+                                        .forEach { $0.removeFromSuperview() }
         
         configuareUI()
         resetState()
         
-        calculatorContainer = StringName.whiteSpace
+        calculatorContainer = StringName.empty
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
@@ -106,7 +107,7 @@ class CalculatorViewController: UIViewController {
         guard digitIsSelecting else { return }
         
         addToCalculatorContainer()
-        addEntry()
+        addFomulaStackView()
         calculate()
         resetState()
     }
@@ -114,8 +115,8 @@ class CalculatorViewController: UIViewController {
     private func calculate() {
         let formula = ExpressionParser.parse(from: calculatorContainer)
         operandLabel.text = numberFormatter.string(for: formula.result())
-        operatorLabel.text = StringName.whiteSpace
-        calculatorContainer = StringName.whiteSpace
+        operatorLabel.text = StringName.empty
+        calculatorContainer = StringName.empty
     }
     
     private func formatInDigitSelecting(lhs: String, rhs: String) {
@@ -135,16 +136,15 @@ class CalculatorViewController: UIViewController {
         operandLabel.text = numberFormatter.string(for: digit)
     }
     
-    private func addEntry() {
+    private func addFomulaStackView() {
         let index = formulaStackView.arrangedSubviews.count - 1
+        let newView = createFomulaStackView()
         
-        let newView = createEntry()
         formulaStackView.insertArrangedSubview(newView, at: index)
-        
         formulaScrollView.scrollDown()
     }
     
-    private func createEntry() -> UIView {
+    private func createFomulaStackView() -> UIView {
         let operand = numberFormatter.number(from: operandLabel.text ?? StringName.zero)
         let `operator` = operatorLabel.text
         
@@ -178,9 +178,9 @@ class CalculatorViewController: UIViewController {
     }
     
     private func addToCalculatorContainer() {
-        guard let operand = numberFormatter.number(from: operandLabel.text ?? StringName.whiteSpace) as? Double, let `operator` = operatorLabel.text else { return }
+        guard let operand = numberFormatter.number(from: operandLabel.text ?? StringName.empty) as? Double, let `operator` = operatorLabel.text else { return }
         
-        if `operator` != StringName.whiteSpace, calculatorContainer == StringName.whiteSpace {
+        if `operator` != StringName.empty, calculatorContainer == StringName.empty {
             calculatorContainer += StringName.zero
         }
         
