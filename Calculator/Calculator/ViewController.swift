@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     private let numberFormatter = NumberFormatter()
-    
     private var digitIsSelecting: Bool = false
     private var dotIsClicked: Bool = false
     private var calculatorContainer: String = NameSpace.whiteSpace
@@ -30,6 +29,8 @@ class ViewController: UIViewController {
         operatorLabel.text = NameSpace.whiteSpace
         
         numberFormatter.numberStyle = .decimal
+        numberFormatter.usesSignificantDigits = true
+        numberFormatter.maximumSignificantDigits = 20
     }
 
     @IBAction func digitButtonTapped(_ sender: UIButton) {
@@ -89,6 +90,7 @@ class ViewController: UIViewController {
         
         operandLabel.text = NameSpace.zero
         operatorLabel.text = sender.currentTitle
+        dotIsClicked = false
     }
     
     private func addEntry() {
@@ -105,7 +107,7 @@ class ViewController: UIViewController {
     }
     
     private func createEntry() -> UIView {
-        let operand = operandLabel.text
+        let operand = numberFormatter.number(from: operandLabel.text ?? NameSpace.zero)
         let `operator` = operatorLabel.text
         
         let stack = UIStackView()
@@ -122,7 +124,7 @@ class ViewController: UIViewController {
         operatorLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         let operandLabel = UILabel()
-        operandLabel.text = operand
+        operandLabel.text = numberFormatter.string(for: operand)
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operandLabel.textColor = .white
         
