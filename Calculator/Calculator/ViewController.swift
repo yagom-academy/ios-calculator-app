@@ -7,7 +7,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var stackView: UIStackView!
     
@@ -15,8 +14,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     
     private let numberFormatter = NumberFormatter()
+    
     private var digitIsSelecting: Bool = false
     private var dotIsClicked: Bool = false
+    private var calculatorContainer: String = NameSpace.whiteSpace
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class ViewController: UIViewController {
     
     private func configuareUI() {
         operandLabel.text = NameSpace.zero
-        operatorLabel.text = nil
+        operatorLabel.text = NameSpace.whiteSpace
         
         numberFormatter.numberStyle = .decimal
     }
@@ -83,6 +84,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorsButtonTapped(_ sender: UIButton) {
+        addToCalculatorContainer()
         addEntry()
         
         operandLabel.text = NameSpace.zero
@@ -130,8 +132,24 @@ class ViewController: UIViewController {
         return stack
     }
     
+    private func addToCalculatorContainer() {
+        calculatorContainer += (operatorLabel.text ?? NameSpace.whiteSpace) + (operandLabel.text ?? NameSpace.whiteSpace)
+    }
+    
     @IBAction func clearButtonTapped(_ sender: UIButton) {
         operandLabel.text = NameSpace.zero
+        digitIsSelecting = false
+        dotIsClicked = false
+    }
+    
+    @IBAction func calculateButtonTapped(_ sender: UIButton) {
+        addToCalculatorContainer()
+        addEntry()
+        
+        let formula = ExpressionParser.parse(from: calculatorContainer)
+        operandLabel.text = numberFormatter.string(for: formula.result())
+        operatorLabel.text = NameSpace.whiteSpace
+        calculatorContainer = NameSpace.whiteSpace
         digitIsSelecting = false
         dotIsClicked = false
     }
