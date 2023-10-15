@@ -38,7 +38,7 @@ class CalculatorViewController: UIViewController {
     }
 
     @IBAction func digitButtonTapped(_ sender: UIButton) {
-        guard let lhs = operandLabel.text, let rhs = sender.currentTitle else { return }
+        guard let lhs = operandLabel.text, let rhs = sender.currentTitle, lhs.filter({ $0 != "," && $0 != "." }).count < 20 else { return }
         
         if dotIsClicked {
             operandLabel.text = lhs + rhs
@@ -121,17 +121,17 @@ class CalculatorViewController: UIViewController {
     }
     
     private func formatInDigitSelecting(lhs: String, rhs: String) {
-        guard let lhsInt = numberFormatter.number(from: lhs) as? Int, let rhsInt = Int(rhs) else { return }
+        guard let lhsDouble = numberFormatter.number(from: lhs) as? Double, let rhsDouble = Double(rhs) else { return }
         
-        var digit: Int = .zero
+        var digit: Double = .zero
         
         switch rhs {
         case StringName.zero:
-            digit = lhsInt * 10
+            digit = lhsDouble * 10
         case StringName.doubleZero:
-            digit = lhsInt * 100
+            digit = lhsDouble * 100
         default:
-            digit = lhsInt * 10 + rhsInt
+            digit = lhsDouble * 10 + rhsDouble
         }
         
         operandLabel.text = numberFormatter.string(for: digit)
