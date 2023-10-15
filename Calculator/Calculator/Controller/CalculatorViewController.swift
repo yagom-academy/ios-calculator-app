@@ -48,5 +48,13 @@ class CalculatorViewController: UIViewController {
             operandLabel.text = operandNumber
         }
     }
+    
+    
+    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
+        guard let operatorSymbol = sender.title(for: .normal) else { return }
+        
+        operandLabel.text = "0"
+        operatorLabel.text = operatorSymbol
+    }
 }
 
