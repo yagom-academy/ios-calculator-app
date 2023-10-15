@@ -8,6 +8,9 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var stackView: UIStackView!
+    
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -23,6 +26,7 @@ class ViewController: UIViewController {
     
     private func configuareUI() {
         operandLabel.text = NameSpace.zero
+        operatorLabel.text = nil
         
         numberFormatter.numberStyle = .decimal
     }
@@ -79,7 +83,51 @@ class ViewController: UIViewController {
     }
     
     @IBAction func operatorsButtonTapped(_ sender: UIButton) {
+        addEntry()
+        
+        operandLabel.text = NameSpace.zero
         operatorLabel.text = sender.currentTitle
+    }
+    
+    private func addEntry() {
+        let index = stackView.arrangedSubviews.count - 1
+        let addView = stackView.arrangedSubviews[index]
+        let offset = CGPoint(x: scrollView.contentOffset.x,
+                             y: scrollView.contentOffset.y + addView.frame.size.height)
+        
+        let newView = createEntry()
+        stackView.insertArrangedSubview(newView, at: index)
+        
+        scrollView.contentOffset = offset
+        scrollView.scrollRectToVisible(CGRect(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height , width: scrollView.bounds.size.width, height: scrollView.bounds.size.height), animated: false)
+    }
+    
+    private func createEntry() -> UIView {
+        let operand = operandLabel.text
+        let `operator` = operatorLabel.text
+        
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 8
+        
+        let operatorLabel = UILabel()
+        operatorLabel.text = `operator`
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.textColor = .white
+        operatorLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        operatorLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        
+        let operandLabel = UILabel()
+        operandLabel.text = operand
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operandLabel.textColor = .white
+        
+        stack.addArrangedSubview(operatorLabel)
+        stack.addArrangedSubview(operandLabel)
+        
+        return stack
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
