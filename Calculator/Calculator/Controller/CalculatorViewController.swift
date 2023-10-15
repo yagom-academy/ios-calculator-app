@@ -14,6 +14,8 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var listStackView: UIStackView!
     
+    var operandNumber = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +27,14 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = ""
         scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
-
-
+    
+    @IBAction func numberButtonDidTap(_ sender: UIButton) {
+        guard let number = sender.title(for: .normal) else { return }
+        
+        if operandNumber.count < 20 {
+            operandNumber += number
+            operandLabel.text = operandNumber
+        }
+    }
 }
 
