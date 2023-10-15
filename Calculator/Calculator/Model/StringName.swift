@@ -5,7 +5,7 @@
 //  Created by jyubong on 10/14/23.
 //
 
-enum NameSpace {
+enum StringName {
     static let whiteSpace: String = ""
     static let zero: String = "0"
     static let doubleZero: String = "00"
