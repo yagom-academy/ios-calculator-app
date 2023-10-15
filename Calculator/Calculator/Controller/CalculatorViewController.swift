@@ -36,5 +36,17 @@ class CalculatorViewController: UIViewController {
             operandLabel.text = operandNumber
         }
     }
+    
+    @IBAction func dotButtonDidTap(_ sender: UIButton) {
+        if operandNumber.isEmpty {
+            operandNumber = "0."
+            operandLabel.text = operandNumber
+        } else if operandNumber.last == "." || operandNumber.count == 20 {
+            operandLabel.text = operandNumber
+        } else {
+            operandNumber += "."
+            operandLabel.text = operandNumber
+        }
+    }
 }
 
