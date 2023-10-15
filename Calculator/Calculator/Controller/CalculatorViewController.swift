@@ -53,8 +53,33 @@ class CalculatorViewController: UIViewController {
     @IBAction func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
         
+        addScrollStackView()
+        operandNumber = ""
         operandLabel.text = "0"
         operatorLabel.text = operatorSymbol
+    }
+    
+    func addListStackView() -> UIStackView {
+        let operatorLabel = UILabel()
+        let operandLabel = UILabel()
+        let stackView = UIStackView()
+        
+        stackView.spacing = 8
+        operandLabel.textColor = .white
+        operatorLabel.textColor = .white
+        operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
+        operatorLabel.text = self.operatorLabel.text
+        operandLabel.text = self.operandLabel.text
+        
+        stackView.addArrangedSubview(operatorLabel)
+        stackView.addArrangedSubview(operandLabel)
+        
+        return stackView
+    }
+    
+    func addScrollStackView() {
+        scrollStackView.addArrangedSubview(addListStackView())
     }
 }
 
