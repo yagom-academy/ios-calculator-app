@@ -16,7 +16,14 @@ class CalculatorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        configureUI()
+    }
+    
+    private func configureUI() {
+        operandLabel.text = "0"
+        operatorLabel.text = ""
+        scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 
 
