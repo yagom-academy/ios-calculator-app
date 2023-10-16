@@ -23,17 +23,14 @@ final class FormulaTests: XCTestCase {
         let expectation: Double = 10
         
         sut.operands.enqueue(value: 10)
-    
-        sut.operators.enqueue(value: .add)
         sut.operands.enqueue(value: 20)
-        
         sut.operands.enqueue(value: 5)
-        sut.operators.enqueue(value: .subtract)
-        
         sut.operands.enqueue(value: 5)
-        sut.operators.enqueue(value: .divide)
-
         sut.operands.enqueue(value: 2)
+        
+        sut.operators.enqueue(value: .add)
+        sut.operators.enqueue(value: .subtract)
+        sut.operators.enqueue(value: .divide)
         sut.operators.enqueue(value: .multiply)
 
         let result = sut.result()
