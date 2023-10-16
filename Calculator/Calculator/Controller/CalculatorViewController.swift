@@ -80,6 +80,13 @@ class CalculatorViewController: UIViewController {
     
     func addScrollStackView() {
         scrollStackView.addArrangedSubview(addListStackView())
+        scrollToBottom()
     }
+    
+    private func scrollToBottom() {
+        formulaScrollView.layoutIfNeeded()
+        formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
+        
+        }
 }
 
