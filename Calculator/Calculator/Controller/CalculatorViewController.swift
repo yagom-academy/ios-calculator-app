@@ -7,6 +7,13 @@
 import UIKit
 
 class CalculatorViewController: UIViewController {
+    
+    enum CalculatorValue {
+        static let emptyArray: String = ""
+        static let zero: String = "0"
+        static let zeroDecimal: String = "0.1"
+        static let decimalPoint: String = "."
+    }
 
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var scrollStackView: UIStackView!
@@ -14,7 +21,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet weak var listStackView: UIStackView!
     
-    var operandNumber = ""
+    var operandNumber = CalculatorValue.emptyArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +30,8 @@ class CalculatorViewController: UIViewController {
     }
     
     private func configureUI() {
-        operandLabel.text = "0"
-        operatorLabel.text = ""
+        operandLabel.text = CalculatorValue.zero
+        operatorLabel.text = CalculatorValue.emptyArray
         scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
@@ -39,12 +46,12 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func dotButtonDidTap(_ sender: UIButton) {
         if operandNumber.isEmpty {
-            operandNumber = "0."
+            operandNumber = CalculatorValue.zeroDecimal
             operandLabel.text = operandNumber
-        } else if operandNumber.last == "." || operandNumber.count == 20 {
+        } else if operandNumber.last == Character(CalculatorValue.decimalPoint) || operandNumber.count == 20 {
             operandLabel.text = operandNumber
         } else {
-            operandNumber += "."
+            operandNumber += CalculatorValue.decimalPoint
             operandLabel.text = operandNumber
         }
     }
@@ -54,8 +61,8 @@ class CalculatorViewController: UIViewController {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
         
         addScrollStackView()
-        operandNumber = ""
-        operandLabel.text = "0"
+        operandNumber = CalculatorValue.emptyArray
+        operandLabel.text = CalculatorValue.zero
         operatorLabel.text = operatorSymbol
     }
     
@@ -86,7 +93,6 @@ class CalculatorViewController: UIViewController {
     private func scrollToBottom() {
         formulaScrollView.layoutIfNeeded()
         formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
-        
         }
 }
 
