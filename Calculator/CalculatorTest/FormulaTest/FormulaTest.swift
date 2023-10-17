@@ -29,7 +29,7 @@ final class FormulaTest: XCTestCase {
         
         let expectation = 5.0
         //when
-        let result = try? sut.result()
+        let result = sut.result()
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -43,7 +43,7 @@ final class FormulaTest: XCTestCase {
         
         let expectation = 6.0
         //when
-        let result = try? sut.result()
+        let result = sut.result()
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -58,7 +58,7 @@ final class FormulaTest: XCTestCase {
         
         let expectation = -4.0
         //when
-        let result = try? sut.result()
+        let result = sut.result()
         //then
         XCTAssertEqual(result, expectation)
     }
@@ -69,7 +69,7 @@ final class FormulaTest: XCTestCase {
         sut.operands.enqueue(0)
         sut.operators.enqueue(.divide)
         // when, then
-        XCTAssertThrowsError(try sut.result()) { error in
+        XCTAssertThrowsError(sut.result()) { error in
             XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
         }
     }
