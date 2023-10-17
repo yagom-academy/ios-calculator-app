@@ -80,12 +80,12 @@ class CalculatorViewController: UIViewController {
         operandNumber = CalculatorValue.emptyArray
     }
     
-    @IBAction func ceButtonDidTap(_ sender: Any) {
+    @IBAction private func ceButtonDidTap(_ sender: Any) {
         operandLabel.text = CalculatorValue.zero
         operandNumber = CalculatorValue.emptyArray
     }
     
-    @IBAction func plusMinusButtonDidTap(_ sender: Any) {
+    @IBAction private func plusMinusButtonDidTap(_ sender: Any) {
         if operandNumber.first == "-" {
             operandNumber.remove(at: operandNumber.startIndex)
             operandLabel.text = operandNumber
@@ -95,7 +95,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func equalButtonDidTap(_ sender: Any) {
+    @IBAction private func equalButtonDidTap(_ sender: Any) {
         formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
         if operandNumber == CalculatorValue.emptyArray {
             formulaNumber += CalculatorValue.emptyArray
