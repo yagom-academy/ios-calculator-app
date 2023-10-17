@@ -78,6 +78,16 @@ class CalculatorViewController: UIViewController {
         operandNumber = CalculatorValue.emptyArray
     }
     
+    @IBAction func plusMinusButtonDidTap(_ sender: Any) {
+        if operandNumber.first == "-" {
+            operandNumber.remove(at: operandNumber.startIndex)
+            operandLabel.text = operandNumber
+        } else {
+            operandNumber = "-" + operandNumber
+            operandLabel.text = operandNumber
+        }
+    }
+    
     private func addListStackView() -> UIStackView {
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
