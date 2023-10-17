@@ -59,7 +59,6 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    
     @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
         
@@ -71,6 +70,12 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func allClearButtonDidTap(_ sender: Any) {
         initializeUI()
+        operandNumber = CalculatorValue.emptyArray
+    }
+    
+    @IBAction func ceButtonDidTap(_ sender: Any) {
+        operandLabel.text = CalculatorValue.zero
+        operandNumber = CalculatorValue.emptyArray
     }
     
     private func addListStackView() -> UIStackView {
