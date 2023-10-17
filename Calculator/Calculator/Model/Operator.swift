@@ -4,12 +4,13 @@
 //
 //  Created by Kiseok on 2023/10/11.
 //
+import Foundation
 
 enum Operator: Character, CaseIterable, CalculateItem {
     case add = "+"
-    case subtract = "－"
-    case divide = "/"
-    case multiply = "*"
+    case subtract = "−"
+    case divide = "÷"
+    case multiply = "×"
     
     func calculate(lhs: Double, rhs: Double) -> Double {
         switch self {
@@ -25,11 +26,19 @@ enum Operator: Character, CaseIterable, CalculateItem {
     }
     
     private func add(lhs: Double, rhs: Double) -> Double {
-        return lhs + rhs
+        let decimalLhs = Decimal(lhs)
+        let decimalRhs = Decimal(rhs)
+        let result = decimalLhs + decimalRhs
+        
+        return Double(truncating: result as NSDecimalNumber)
     }
     
     private func subtract(lhs: Double, rhs: Double) -> Double {
-        return lhs - rhs
+        let decimalLhs = Decimal(lhs)
+        let decimalRhs = Decimal(rhs)
+        let result = decimalLhs - decimalRhs
+        
+        return Double(truncating: result as NSDecimalNumber)
     }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
@@ -37,10 +46,18 @@ enum Operator: Character, CaseIterable, CalculateItem {
             return .nan
         }
         
-        return lhs / rhs
+        let decimalLhs = Decimal(lhs)
+        let decimalRhs = Decimal(rhs)
+        let result = decimalLhs / decimalRhs
+        
+        return Double(truncating: result as NSDecimalNumber)
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double {
-        return lhs * rhs
+        let decimalLhs = Decimal(lhs)
+        let decimalRhs = Decimal(rhs)
+        let result = decimalLhs * decimalRhs
+        
+        return Double(truncating: result as NSDecimalNumber)
     }
 }
