@@ -6,14 +6,10 @@
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private var list: LinkedList<Element> = LinkedList()
+    private var list = LinkedList<Element>()
     
-    var front: Element? {
+    var peek: Element? {
         return list.head?.data
-    }
-    
-    var rear: Element? {
-        return list.tail?.data
     }
     
     var count: Int {
