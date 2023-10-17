@@ -26,10 +26,10 @@ class CalculatorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+        initializeUI()
     }
     
-    private func configureUI() {
+    private func initializeUI() {
         operandLabel.text = CalculatorValue.zero
         operatorLabel.text = CalculatorValue.emptyArray
         scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
@@ -67,6 +67,10 @@ class CalculatorViewController: UIViewController {
         operandNumber = CalculatorValue.emptyArray
         operandLabel.text = CalculatorValue.zero
         operatorLabel.text = operatorSymbol
+    }
+    
+    @IBAction private func allClearButtonDidTap(_ sender: Any) {
+        initializeUI()
     }
     
     private func addListStackView() -> UIStackView {
