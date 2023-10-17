@@ -62,6 +62,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
+        
         if operandLabel.text == CalculatorValue.zero {
             operatorLabel.text = operatorSymbol
         } else {
@@ -97,18 +98,15 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func equalButtonDidTap(_ sender: Any) {
         formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
+        
         if operandNumber == CalculatorValue.emptyArray {
             formulaNumber += CalculatorValue.emptyArray
         } else {
             formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
         }
         
-        
         var formula = ExpressionParser.parse(from: formulaNumber)
-        print(formula.operands)
-        print(formula.operators)
         let result = formula.result()
-        print(result)
         let intResult = Int(result)
         
         initializeUI()
@@ -117,7 +115,6 @@ class CalculatorViewController: UIViewController {
             operandLabel.text = String(intResult)
         } else {
             operandLabel.text = String(result)
-            print(result)
         }
         
         operandNumber = CalculatorValue.emptyArray
@@ -136,7 +133,6 @@ class CalculatorViewController: UIViewController {
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operatorLabel.text = self.operatorLabel.text
         operandLabel.text = self.operandLabel.text
-        
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         
