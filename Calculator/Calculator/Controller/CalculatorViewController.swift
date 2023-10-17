@@ -13,6 +13,7 @@ class CalculatorViewController: UIViewController {
         static let zero: String = "0"
         static let zeroDecimal: String = "0."
         static let decimalPoint: String = "."
+        static let minus: String = "-"
     }
     
     @IBOutlet weak var formulaScrollView: UIScrollView!
@@ -87,11 +88,11 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction private func plusMinusButtonDidTap(_ sender: Any) {
-        if operandNumber.first == "-" {
+        if operandNumber.first == Character(CalculatorValue.minus) {
             operandNumber.remove(at: operandNumber.startIndex)
             operandLabel.text = operandNumber
         } else {
-            operandNumber = "-" + operandNumber
+            operandNumber = CalculatorValue.minus + operandNumber
             operandLabel.text = operandNumber
         }
     }
