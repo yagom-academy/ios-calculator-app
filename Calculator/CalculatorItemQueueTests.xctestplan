@@ -13,7 +13,6 @@
   },
   "testTargets" : [
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Calculator.xcodeproj",
         "identifier" : "BF6F4DC62ACC407700829028",
