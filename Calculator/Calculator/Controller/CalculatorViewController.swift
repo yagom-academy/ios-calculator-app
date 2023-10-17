@@ -14,7 +14,7 @@ class CalculatorViewController: UIViewController {
         static let zeroDecimal: String = "0.1"
         static let decimalPoint: String = "."
     }
-
+    
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var scrollStackView: UIStackView!
     @IBOutlet weak var operandLabel: UILabel!
@@ -22,6 +22,7 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var listStackView: UIStackView!
     
     var operandNumber = CalculatorValue.emptyArray
+    var formulaNumber = CalculatorValue.emptyArray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,8 @@ class CalculatorViewController: UIViewController {
     @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
         
+        formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
+        formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
         addScrollStackView()
         operandNumber = CalculatorValue.emptyArray
         operandLabel.text = CalculatorValue.zero
@@ -70,6 +73,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction private func allClearButtonDidTap(_ sender: Any) {
         initializeUI()
+        formulaNumber = CalculatorValue.emptyArray
         operandNumber = CalculatorValue.emptyArray
     }
     
@@ -86,6 +90,18 @@ class CalculatorViewController: UIViewController {
             operandNumber = "-" + operandNumber
             operandLabel.text = operandNumber
         }
+    }
+    
+    @IBAction func equalButtonDidTap(_ sender: Any) {
+        formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
+        formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
+        
+        var formula = ExpressionParser.parse(from: formulaNumber)
+        let result = formula.result()
+        
+        initializeUI()
+        operandLabel.text = String(result)
+        formulaNumber = CalculatorValue.emptyArray
     }
     
     private func addListStackView() -> UIStackView {
@@ -115,7 +131,7 @@ class CalculatorViewController: UIViewController {
     private func scrollToBottom() {
         formulaScrollView.layoutIfNeeded()
         formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
-        }
+    }
     
     private func numberFormatter(operand: String) -> String {
         guard let doubleOperand = Double(operand) else { return CalculatorValue.emptyArray }
