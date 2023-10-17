@@ -5,18 +5,22 @@
 //  Created by jyubong on 2023/10/03.
 //
 
-final class LinkedList<NodeDataType> {
-    final class Node<DataType> {
+final class LinkedList<DataType> {
+    final class Node {
         private(set) var data: DataType
-        var next: Node?
+        private(set) var next: Node?
         
         init(data: DataType) {
             self.data = data
         }
+        
+        func setNext(_ node: Node) {
+            self.next = node
+        }
     }
     
-    private(set) var head: Node<NodeDataType>?
-    private(set) var tail: Node<NodeDataType>?
+    private(set) var head: Node?
+    private(set) var tail: Node?
     
     var count: Int {
         guard var node = head else {
@@ -37,31 +41,32 @@ final class LinkedList<NodeDataType> {
         return head == nil ? true : false
     }
     
-    init(head: Node<NodeDataType>? = nil, tail: Node<NodeDataType>? = nil) {
+    init(head: Node? = nil, tail: Node? = nil) {
         self.head = head
         self.tail = tail
     }
     
-    func append(_ data: NodeDataType) {
+    func append(_ data: DataType) {
         let newNode: Node = Node(data: data)
         
         if isEmpty {
             head = newNode
         } else {
-            tail?.next = newNode
+            tail?.setNext(newNode)
         }
         
         tail = newNode
     }
     
     @discardableResult
-    func removeFirst() -> NodeDataType? {
-        guard !isEmpty else { return nil }
+    func removeFirst() -> DataType? {
+        guard let headData = head?.data else {
+            return nil
+        }
         
-        let node = head
         head = head?.next
         
-        return node?.data
+        return headData
     }
     
     func removeAll() {
