@@ -35,7 +35,7 @@ class CalculatorViewController: UIViewController {
         scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
     
-    @IBAction func numberButtonDidTap(_ sender: UIButton) {
+    @IBAction private func numberButtonDidTap(_ sender: UIButton) {
         guard let number = sender.title(for: .normal) else { return }
         
         if operandNumber.count < 20 {
@@ -44,7 +44,7 @@ class CalculatorViewController: UIViewController {
         }
     }
     
-    @IBAction func dotButtonDidTap(_ sender: UIButton) {
+    @IBAction private func dotButtonDidTap(_ sender: UIButton) {
         if operandNumber.isEmpty {
             operandNumber = CalculatorValue.zeroDecimal
             operandLabel.text = operandNumber
@@ -57,7 +57,7 @@ class CalculatorViewController: UIViewController {
     }
     
     
-    @IBAction func operatorButtonDidTap(_ sender: UIButton) {
+    @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
         
         addScrollStackView()
@@ -66,7 +66,7 @@ class CalculatorViewController: UIViewController {
         operatorLabel.text = operatorSymbol
     }
     
-    func addListStackView() -> UIStackView {
+    private func addListStackView() -> UIStackView {
         let operatorLabel = UILabel()
         let operandLabel = UILabel()
         let stackView = UIStackView()
@@ -85,7 +85,7 @@ class CalculatorViewController: UIViewController {
         return stackView
     }
     
-    func addScrollStackView() {
+    private func addScrollStackView() {
         scrollStackView.addArrangedSubview(addListStackView())
         scrollToBottom()
     }
