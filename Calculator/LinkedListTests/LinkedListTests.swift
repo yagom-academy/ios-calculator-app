@@ -2,7 +2,7 @@
 //  LinkedListTests.swift
 //  LinkedListTests
 //
-//  Created by jybong on 2023/10/03.
+//  Created by jyubong,Morgan.
 //
 
 import XCTest
@@ -75,7 +75,6 @@ final class LinkedListTests: XCTestCase {
 
     func test_isEmpty_호출시_노드가있을때False이다() {
         // given
-        let list = List()
         let node = List.Node(data: 1)
         sut = List(head: node, tail: node)
 

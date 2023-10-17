@@ -2,7 +2,7 @@
 //  OperatorTests.swift
 //  OperatorTests
 //
-//  Created by jybong on 10/10/23.
+//  Created by jyubong,Morgan.
 //
 
 import XCTest
