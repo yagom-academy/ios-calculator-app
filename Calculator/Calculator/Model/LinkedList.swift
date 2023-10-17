@@ -2,7 +2,7 @@
 //  LinkedList.swift
 //  Calculator
 //
-//  Created by jyubong on 2023/10/03.
+//  Created by jyubong,Morgan.
 //
 
 final class LinkedList<DataType> {

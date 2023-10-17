@@ -7,9 +7,7 @@
 
 extension String {
     func split(with target: Character) -> [String] {
-        let splitedString = split(separator: target).compactMap { String($0) }
-        
-        return splitedString
+        split(separator: target).compactMap { String($0) }
     }
     
     mutating func appendFirst(_ text: String) {

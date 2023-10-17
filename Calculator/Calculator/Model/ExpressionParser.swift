@@ -2,7 +2,7 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by jyubong on 10/10/23.
+//  Created by jyubong,Morgan.
 //
 
 enum ExpressionParser {
@@ -11,12 +11,16 @@ enum ExpressionParser {
         let operators = CalculatorItemQueue<Operator>(list: LinkedList())
         let components = componentsByOperator(from: input)
         
-        components.compactMap { Double($0) }.forEach {
-            operands.enQueue($0)
+        components.forEach {
+            if let operand = Double($0) {
+                operands.enQueue(operand)
+            }
         }
         
-        input.compactMap { Operator(rawValue: $0) }.forEach {
-            operators.enQueue($0)
+        input.forEach {
+            if let `operator` = Operator(rawValue: $0) {
+                operators.enQueue(`operator`)
+            }
         }
         
         return Formula(operands: operands, operators: operators)

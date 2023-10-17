@@ -2,7 +2,7 @@
 //  NameSpace.swift
 //  Calculator
 //
-//  Created by jyubong on 10/14/23.
+//  Created by jyubong,Morgan.
 //
 
 enum StringName {
