@@ -11,7 +11,7 @@ class CalculatorViewController: UIViewController {
     enum CalculatorValue {
         static let emptyArray: String = ""
         static let zero: String = "0"
-        static let zeroDecimal: String = "0.1"
+        static let zeroDecimal: String = "0."
         static let decimalPoint: String = "."
     }
     
@@ -56,19 +56,22 @@ class CalculatorViewController: UIViewController {
             operandLabel.text = numberFormatter(operand: operandNumber)
         } else {
             operandNumber += CalculatorValue.decimalPoint
-            operandLabel.text = numberFormatter(operand: operandNumber)
+            operandLabel.text = operandNumber
         }
     }
     
     @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
         guard let operatorSymbol = sender.title(for: .normal) else { return }
-        
-        formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
-        formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
-        addScrollStackView()
-        operandNumber = CalculatorValue.emptyArray
-        operandLabel.text = CalculatorValue.zero
-        operatorLabel.text = operatorSymbol
+        if operandLabel.text == CalculatorValue.zero {
+            operatorLabel.text = operatorSymbol
+        } else {
+            formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
+            formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
+            addScrollStackView()
+            operandNumber = CalculatorValue.emptyArray
+            operandLabel.text = CalculatorValue.zero
+            operatorLabel.text = operatorSymbol
+        }
     }
     
     @IBAction private func allClearButtonDidTap(_ sender: Any) {
@@ -94,13 +97,30 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func equalButtonDidTap(_ sender: Any) {
         formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
-        formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
+        if operandNumber == CalculatorValue.emptyArray {
+            formulaNumber += CalculatorValue.emptyArray
+        } else {
+            formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
+        }
+        
         
         var formula = ExpressionParser.parse(from: formulaNumber)
+        print(formula.operands)
+        print(formula.operators)
         let result = formula.result()
+        print(result)
+        let intResult = Int(result)
         
         initializeUI()
-        operandLabel.text = String(result)
+        
+        if result == Double(Int(result)) {
+            operandLabel.text = String(intResult)
+        } else {
+            operandLabel.text = String(result)
+            print(result)
+        }
+        
+        operandNumber = CalculatorValue.emptyArray
         formulaNumber = CalculatorValue.emptyArray
     }
     
