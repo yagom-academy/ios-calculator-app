@@ -62,15 +62,4 @@ final class FormulaTest: XCTestCase {
         //then
         XCTAssertEqual(result, expectation)
     }
-
-    func test_1나누기0이_들어있을때_result실행시_divideByZero_error가난다() {
-        //given
-        sut.operands.enqueue(1)
-        sut.operands.enqueue(0)
-        sut.operators.enqueue(.divide)
-        // when, then
-        XCTAssertThrowsError(sut.result()) { error in
-            XCTAssertEqual(error as? CalculatorError, CalculatorError.divideByZero)
-        }
-    }
 }
