@@ -11,7 +11,7 @@ struct Formula {
     
     mutating func result() throws -> Double {
         guard var accumulatingValue = operands.dequeue() else {
-            throw OperateError.emptyQueueError
+            throw OperateError.emptyQueue
         }
         
         while let `operator` = operators.dequeue(), let rhs = operands.dequeue() {
