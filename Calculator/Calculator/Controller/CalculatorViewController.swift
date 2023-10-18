@@ -42,7 +42,7 @@ class CalculatorViewController: UIViewController {
         
         if operandNumber.count < 20 {
             operandNumber += number
-            operandLabel.text = numberFormatter(operand: operandNumber)
+            operandLabel.text = operandNumber.numberFormatter()
         } else if operandNumber.contains(Character(CalculatorValue.decimalPoint)) && operandNumber.count < 20 {
             operandNumber += number
             operandLabel.text = operandNumber
@@ -52,9 +52,9 @@ class CalculatorViewController: UIViewController {
     @IBAction private func dotButtonDidTap(_ sender: UIButton) {
         if operandNumber.isEmpty {
             operandNumber = CalculatorValue.zeroDecimal
-            operandLabel.text = numberFormatter(operand: operandNumber)
+            operandLabel.text = operandNumber.numberFormatter()
         } else if operandNumber.last == Character(CalculatorValue.decimalPoint) || operandNumber.count == 20 || operandNumber.contains(Character(CalculatorValue.decimalPoint)) {
-            operandLabel.text = numberFormatter(operand: operandNumber)
+            operandLabel.text = operandNumber.numberFormatter()
         } else {
             operandNumber += CalculatorValue.decimalPoint
             operandLabel.text = operandNumber
@@ -115,7 +115,7 @@ class CalculatorViewController: UIViewController {
         if result.isNaN {
             operandLabel.text = "NaN"
         } else if result.haveDecimalPlace() {
-            operandLabel.text = String(result)
+            operandLabel.text = String(result).numberFormatter()
         } else {
             operandLabel.text = String(Int(result))
         }
@@ -150,15 +150,6 @@ class CalculatorViewController: UIViewController {
     private func scrollToBottom() {
         formulaScrollView.layoutIfNeeded()
         formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
-    }
-    
-    private func numberFormatter(operand: String) -> String {
-        guard let doubleOperand = Double(operand) else { return CalculatorValue.emptyArray }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumFractionDigits = 20
-        
-        return numberFormatter.string(from: NSNumber(value: doubleOperand)) ?? CalculatorValue.emptyArray
     }
 }
 
