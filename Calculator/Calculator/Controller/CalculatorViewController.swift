@@ -111,12 +111,13 @@ class CalculatorViewController: UIViewController {
         
         initializeUI()
         
+        
         if result.isNaN {
             operandLabel.text = "NaN"
-        } else if result == Double(Int(result)) {
-            operandLabel.text = String(Int(result))
-        } else {
+        } else if result.haveDecimalPlace() {
             operandLabel.text = String(result)
+        } else {
+            operandLabel.text = String(Int(result))
         }
         
         operandNumber = CalculatorValue.emptyArray
