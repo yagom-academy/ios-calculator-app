@@ -7,23 +7,33 @@
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        let components = componentsByOperators(from: input)
-        
-        var operands = CalculatorItemQueue<Double>()
-        var operators = CalculatorItemQueue<Operator>()
-        
-        components.forEach { component in
-            if let oprand = Double(component) {
-                operands.enqueue(oprand)
-            } else if let `oprator` = Operator(rawValue: Character(component)) {
-                operators.enqueue(`oprator`)
-            }
+        var formula = Formula()
+        let numbers = componentsByOperators(from: input)
+        let operators = input.compactMap { char in
+            Operator(rawValue: char)
         }
         
-        return Formula(operands: operands, operators: operators)
+        numbers.forEach {
+            guard let number = Double($0) else { return }
+            formula.operands.enqueue(number)
+        }
+        
+        operators.forEach {
+            formula.operators.enqueue($0)
+        }
+        
+        return formula
     }
     
     static private func componentsByOperators(from input: String) -> [String] {
-        return input.split(with: " ")
+        var components = [input]
+        
+        Operator.allCases.forEach { operatorSymbol in
+            components = components.flatMap { str in
+                str.split(with: operatorSymbol.rawValue)
+            }
+        }
+        
+        return components.filter { $0 != "" }
     }
 }
