@@ -108,12 +108,13 @@ class CalculatorViewController: UIViewController {
         
         var formula = ExpressionParser.parse(from: formulaNumber)
         let result = formula.result()
-        let intResult = Int(result)
         
         initializeUI()
         
-        if result == Double(Int(result)) {
-            operandLabel.text = String(intResult)
+        if result.isNaN {
+            operandLabel.text = "NaN"
+        } else if result == Double(Int(result)) {
+            operandLabel.text = String(Int(result))
         } else {
             operandLabel.text = String(result)
         }
