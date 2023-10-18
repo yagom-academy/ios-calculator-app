@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		928E30882ADE767F005A8C37 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A13262AD55E54005A4500 /* ExpressionParserTests.swift */; };
 		BF06F02E2AD7595B00F95FD5 /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06F02D2AD7595B00F95FD5 /* Double+.swift */; };
 		BF06F0302AD7597500F95FD5 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF06F02F2AD7597500F95FD5 /* String+.swift */; };
+		BF6BE27C2ADADC1900349464 /* StringName.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE27B2ADADC1900349464 /* StringName.swift */; };
+		BF6BE27E2ADBDD6D00349464 /* ScrollView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6BE27D2ADBDD6D00349464 /* ScrollView+.swift */; };
 		BF6F4DC22ACC404F00829028 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DC12ACC404F00829028 /* CalculatorItemQueue.swift */; };
 		BF6F4DCA2ACC407700829028 /* CalculatorItemQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DC92ACC407700829028 /* CalculatorItemQueueTests.swift */; };
 		BF6F4DD12ACC409C00829028 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6F4DD02ACC409C00829028 /* LinkedList.swift */; };
@@ -17,12 +20,11 @@
 		BF7A130E2AD50F5E005A4500 /* Formula.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A130D2AD50F5E005A4500 /* Formula.swift */; };
 		BF7A13182AD51C08005A4500 /* FormulaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A13172AD51C08005A4500 /* FormulaTests.swift */; };
 		BF7A131F2AD52252005A4500 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A131E2AD52252005A4500 /* ExpressionParser.swift */; };
-		BF7A13272AD55E54005A4500 /* ExpressionParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7A13262AD55E54005A4500 /* ExpressionParserTests.swift */; };
 		BFC9914B2AD4CF57009134C0 /* Operator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC9914A2AD4CF57009134C0 /* Operator.swift */; };
 		BFC991532AD4D076009134C0 /* OperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFC991522AD4D076009134C0 /* OperatorTests.swift */; };
 		C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9412570E5EB001C3AFC /* AppDelegate.swift */; };
 		C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9432570E5EB001C3AFC /* SceneDelegate.swift */; };
-		C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* ViewController.swift */; };
+		C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */; };
 		C713D9492570E5EB001C3AFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D9472570E5EB001C3AFC /* Main.storyboard */; };
 		C713D94B2570E5ED001C3AFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C713D94A2570E5ED001C3AFC /* Assets.xcassets */; };
 		C713D94E2570E5ED001C3AFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */; };
@@ -69,6 +71,8 @@
 /* Begin PBXFileReference section */
 		BF06F02D2AD7595B00F95FD5 /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
 		BF06F02F2AD7597500F95FD5 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		BF6BE27B2ADADC1900349464 /* StringName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringName.swift; sourceTree = "<group>"; };
+		BF6BE27D2ADBDD6D00349464 /* ScrollView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrollView+.swift"; sourceTree = "<group>"; };
 		BF6F4DC12ACC404F00829028 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
 		BF6F4DC72ACC407700829028 /* CalculatorItemQueueTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorItemQueueTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6F4DC92ACC407700829028 /* CalculatorItemQueueTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueueTests.swift; sourceTree = "<group>"; };
@@ -89,7 +93,7 @@
 		C713D93E2570E5EB001C3AFC /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C713D9412570E5EB001C3AFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C713D9432570E5EB001C3AFC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C713D9452570E5EB001C3AFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		C713D9482570E5EB001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C713D94A2570E5ED001C3AFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C713D94D2570E5ED001C3AFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,8 +151,26 @@
 			children = (
 				BF06F02D2AD7595B00F95FD5 /* Double+.swift */,
 				BF06F02F2AD7597500F95FD5 /* String+.swift */,
+				BF6BE27D2ADBDD6D00349464 /* ScrollView+.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		BF6BE27F2ADBDEC300349464 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9452570E5EB001C3AFC /* CalculatorViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		BF6BE2802ADBDED800349464 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		BF6F4DC82ACC407700829028 /* CalculatorItemQueueTests */ = {
@@ -170,13 +192,13 @@
 		BF7A130C2AD50C12005A4500 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BF06F02C2AD7594000F95FD5 /* Extension */,
 				BF6F4DD22ACC40B800829028 /* CalculatorItem.swift */,
 				BF6F4DC12ACC404F00829028 /* CalculatorItemQueue.swift */,
 				BF6F4DD02ACC409C00829028 /* LinkedList.swift */,
 				BFC9914A2AD4CF57009134C0 /* Operator.swift */,
 				BF7A130D2AD50F5E005A4500 /* Formula.swift */,
 				BF7A131E2AD52252005A4500 /* ExpressionParser.swift */,
+				BF6BE27B2ADADC1900349464 /* StringName.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -235,13 +257,13 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				BF06F02C2AD7594000F95FD5 /* Extension */,
+				BF6BE2802ADBDED800349464 /* View */,
+				BF6BE27F2ADBDEC300349464 /* Controller */,
 				BF7A130C2AD50C12005A4500 /* Model */,
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
@@ -492,7 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF7A13272AD55E54005A4500 /* ExpressionParserTests.swift in Sources */,
+				928E30882ADE767F005A8C37 /* ExpressionParserTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,9 +530,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF6BE27E2ADBDD6D00349464 /* ScrollView+.swift in Sources */,
 				BF7A131F2AD52252005A4500 /* ExpressionParser.swift in Sources */,
 				BF6F4DD32ACC40B800829028 /* CalculatorItem.swift in Sources */,
-				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
+				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
+				BF6BE27C2ADADC1900349464 /* StringName.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				BF06F02E2AD7595B00F95FD5 /* Double+.swift in Sources */,
 				BF6F4DD12ACC409C00829028 /* LinkedList.swift in Sources */,
@@ -582,7 +606,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyubong.CalculatorItemQueueTests;
@@ -606,7 +630,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyubong.CalculatorItemQueueTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -629,7 +653,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyubong.CalculatorItemQueueLinkedListTests;
@@ -653,7 +677,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jyubong.CalculatorItemQueueLinkedListTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -2,7 +2,7 @@
 //  ExpressionParserTests.swift
 //  ExpressionParserTests
 //
-//  Created by jybong on 10/10/23.
+//  Created by jyubong,Morgan.
 //
 
 import XCTest
@@ -37,7 +37,7 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = Double(input)
         
         // when
-        let result = formula.operands.front
+        let result = formula.operands.peek
         
         // then
         XCTAssertEqual(result, expectation)
@@ -50,7 +50,7 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = Double(input)
         
         // when
-        let result = formula.operands.front
+        let result = formula.operands.peek
         
         // then
         XCTAssertEqual(result, expectation)
@@ -63,7 +63,7 @@ final class ExpressionParserTests: XCTestCase {
         let expectation = Operator(rawValue: Character(input))
         
         // when
-        let result = formula.operators.front
+        let result = formula.operators.peek
         
         // then
         XCTAssertEqual(result, expectation)
@@ -77,8 +77,8 @@ final class ExpressionParserTests: XCTestCase {
         let expectatedOperators = Operator.add
         
         // when
-        let operandsResult = formula.operands.front
-        let operatorsResult = formula.operators.front
+        let operandsResult = formula.operands.peek
+        let operatorsResult = formula.operators.peek
         
         // then
         XCTAssertEqual(operatorsResult, expectatedOperators)
@@ -99,15 +99,13 @@ final class ExpressionParserTests: XCTestCase {
         let operatorsResult = formula.operators
         
         // then
-        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
-        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
-        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
-        XCTAssertEqual(operatorsResult.rear, expectatedOperatorsRear)
+        XCTAssertEqual(operandsResult.peek, expectatedOperandsfront)
+        XCTAssertEqual(operatorsResult.peek, expectatedOperatorsfront)
     }
     
     func test_parse호출시_음수인double포함2개_operator가1개인String을넣었을때_각각의값이있는Fomula를반환한다() {
         // given
-        let input = "1.1*-2.2"
+        let input = "1.1×-2.2"
         let formula = ExpressionParser.parse(from: input)
         let expectatedOperandsfront = 1.1
         let expectatedOperandsRear = -2.2
@@ -118,8 +116,7 @@ final class ExpressionParserTests: XCTestCase {
         let operatorsResult = formula.operators
         
         // then
-        XCTAssertEqual(operandsResult.front, expectatedOperandsfront)
-        XCTAssertEqual(operandsResult.rear, expectatedOperandsRear)
-        XCTAssertEqual(operatorsResult.front, expectatedOperatorsfront)
+        XCTAssertEqual(operandsResult.peek, expectatedOperandsfront)
+        XCTAssertEqual(operatorsResult.peek, expectatedOperatorsfront)
     }
 }

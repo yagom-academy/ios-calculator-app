@@ -2,18 +2,14 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by jyubong on 2023/10/03.
+//  Created by jyubong,Morgan.
 //
 
 struct CalculatorItemQueue<Element: CalculatorItem> {
-    private var list: LinkedList<Element> = LinkedList()
+    private var list = LinkedList<Element>()
     
-    var front: Element? {
+    var peek: Element? {
         return list.head?.data
-    }
-    
-    var rear: Element? {
-        return list.tail?.data
     }
     
     var count: Int {

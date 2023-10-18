@@ -2,7 +2,7 @@
 //  FormulaTests.swift
 //  FormulaTests
 //
-//  Created by jybong on 10/10/23.
+//  Created by jyubong,Morgan.
 //
 
 import XCTest
@@ -10,9 +10,9 @@ import XCTest
 
 final class FormulaTests: XCTestCase {
     typealias DoubleList = LinkedList<Double>
-    typealias DoubleNode = LinkedList<Double>.Node<Double>
+    typealias DoubleNode = LinkedList<Double>.Node
     typealias OperatorList = LinkedList<Operator>
-    typealias OperatorNode = LinkedList<Operator>.Node<Operator>
+    typealias OperatorNode = LinkedList<Operator>.Node
     
     var sut: Formula!
 
@@ -60,12 +60,12 @@ final class FormulaTests: XCTestCase {
         let firstNode = DoubleNode(data: 2.0)
         let secondNode = DoubleNode(data: 3.0)
         let doubleList = DoubleList(head: firstNode, tail: secondNode)
-        firstNode.next = secondNode
+        firstNode.setNext(secondNode)
         
         let addNode = OperatorNode(data: .add)
         let subtractNode = OperatorNode(data: .subtract)
         let operatorList = OperatorList(head: addNode, tail: subtractNode)
-        addNode.next = subtractNode
+        addNode.setNext(subtractNode)
         
         sut = Formula(operands: .init(list: doubleList), operators: .init(list: operatorList))
         let expectation = 5.0
@@ -83,13 +83,13 @@ final class FormulaTests: XCTestCase {
         let secondNode = DoubleNode(data: 3.0)
         let thirdNode = DoubleNode(data: 4.0)
         let doubleList = DoubleList(head: firstNode, tail: thirdNode)
-        firstNode.next = secondNode
-        secondNode.next = thirdNode
+        firstNode.setNext(secondNode)
+        secondNode.setNext(thirdNode)
         
         let addNode = OperatorNode(data: .add)
         let subtractNode = OperatorNode(data: .subtract)
         let operatorList = OperatorList(head: addNode, tail: subtractNode)
-        addNode.next = subtractNode
+        addNode.setNext(subtractNode)
         
         sut = Formula(operands: .init(list: doubleList), operators: .init(list: operatorList))
         let expectation = 1.0
@@ -107,13 +107,13 @@ final class FormulaTests: XCTestCase {
         let secondNode = DoubleNode(data: 2.0)
         let thirdNode = DoubleNode(data: 4.0)
         let doubleList = DoubleList(head: firstNode, tail: thirdNode)
-        firstNode.next = secondNode
-        secondNode.next = thirdNode
+        firstNode.setNext(secondNode)
+        secondNode.setNext(thirdNode)
         
         let addNode = OperatorNode(data: .divide)
         let subtractNode = OperatorNode(data: .multiply)
         let operatorList = OperatorList(head: addNode, tail: subtractNode)
-        addNode.next = subtractNode
+        addNode.setNext(subtractNode)
         
         sut = Formula(operands: .init(list: doubleList), operators: .init(list: operatorList))
         let expectation = 4.0

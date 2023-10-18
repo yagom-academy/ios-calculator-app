@@ -2,7 +2,7 @@
 //  LinkedListTests.swift
 //  LinkedListTests
 //
-//  Created by jybong on 2023/10/03.
+//  Created by jyubong,Morgan.
 //
 
 import XCTest
@@ -15,12 +15,10 @@ final class LinkedListTests: XCTestCase {
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        sut = List()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
-        sut = nil
     }
     
     func test_count_노드가없을때0이다() {
@@ -53,7 +51,7 @@ final class LinkedListTests: XCTestCase {
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
         sut = List(head: firstNode, tail: secondNode)
-        firstNode.next = secondNode
+        firstNode.setNext(secondNode)
         
         let expectation = 2
         
@@ -75,7 +73,7 @@ final class LinkedListTests: XCTestCase {
         XCTAssertTrue(result)
     }
 
-    func test_isEmpty_노드가있을때False이다() {
+    func test_isEmpty_호출시_노드가있을때False이다() {
         // given
         let node = List.Node(data: 1)
         sut = List(head: node, tail: node)
@@ -128,7 +126,7 @@ final class LinkedListTests: XCTestCase {
         let firstNode = List.Node(data: 1)
         let secondNode = List.Node(data: 2)
         sut = List(head: firstNode, tail: secondNode)
-        firstNode.next = secondNode
+        firstNode.setNext(secondNode)
         let expectedHead = sut.head?.data
 
         // when
