@@ -14,7 +14,7 @@ final class LinkedList<DataType> {
             self.data = data
         }
         
-        func setNext(_ node: Node) {
+        func setNext(_ node: Node?) {
             self.next = node
         }
     }
