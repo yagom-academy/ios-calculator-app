@@ -7,4 +7,5 @@
 
 enum OperateError: Error {
     case dividingZero
+    case emptyQueue
 }
