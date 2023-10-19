@@ -14,114 +14,57 @@ class CalculatorViewController: UIViewController {
         static let zeroDecimal: String = "0."
         static let decimalPoint: String = "."
         static let minus: String = "-"
+        static let nan: String = "NaN"
     }
     
     @IBOutlet weak var formulaScrollView: UIScrollView!
     @IBOutlet weak var scrollStackView: UIStackView!
+    
     @IBOutlet weak var operandLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
-    @IBOutlet weak var listStackView: UIStackView!
     
-    var operandNumber = CalculatorValue.emptyArray
-    var formulaNumber = CalculatorValue.emptyArray
-    
+    var currentOperand = CalculatorValue.emptyArray
+    var currentOperator = CalculatorValue.emptyArray
+    var inputString = CalculatorValue.emptyArray
+    var resultString = CalculatorValue.emptyArray
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        initializeUI()
+        resetUI()
     }
-    
-    private func initializeUI() {
-        operandLabel.text = CalculatorValue.zero
-        operatorLabel.text = CalculatorValue.emptyArray
-        scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+  
+    private func resetUI() {
+        if currentOperand.isEmpty {
+            operandLabel.text = CalculatorValue.zero
+        } else {
+            operandLabel.text = currentOperand
+        }
+        
+        operatorLabel.text = currentOperator
     }
     
     @IBAction private func numberButtonDidTap(_ sender: UIButton) {
         guard let number = sender.title(for: .normal) else { return }
         
-        if operandNumber.count < 20 {
-            operandNumber += number
-            operandLabel.text = operandNumber.numberFormatter()
-        } else if operandNumber.contains(Character(CalculatorValue.decimalPoint)) && operandNumber.count < 20 {
-            operandNumber += number
-            operandLabel.text = operandNumber
+        if currentOperand.count < 20 {
+            currentOperand += number
+        
+            operandLabel.text = currentOperand.numberFormatter()
         }
     }
     
     @IBAction private func dotButtonDidTap(_ sender: UIButton) {
-        if operandNumber.isEmpty {
-            operandNumber = CalculatorValue.zeroDecimal
-            operandLabel.text = operandNumber.numberFormatter()
-        } else if operandNumber.last == Character(CalculatorValue.decimalPoint) || operandNumber.count == 20 || operandNumber.contains(Character(CalculatorValue.decimalPoint)) {
-            operandLabel.text = operandNumber.numberFormatter()
+        guard currentOperand.count < 20 &&
+                !currentOperand.contains(Character(CalculatorValue.decimalPoint)) else { return }
+   
+        if currentOperand.isEmpty || currentOperand == CalculatorValue.minus {
+            currentOperand += CalculatorValue.zeroDecimal
         } else {
-            operandNumber += CalculatorValue.decimalPoint
-            operandLabel.text = operandNumber
-        }
-    }
-    
-    @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
-        guard let operatorSymbol = sender.title(for: .normal) else { return }
-        
-        if operandLabel.text == CalculatorValue.zero {
-            operatorLabel.text = operatorSymbol
-        } else {
-            formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
-            formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
-            addScrollStackView()
-            operandNumber = CalculatorValue.emptyArray
-            operandLabel.text = CalculatorValue.zero
-            operatorLabel.text = operatorSymbol
-        }
-    }
-    
-    @IBAction private func allClearButtonDidTap(_ sender: Any) {
-        initializeUI()
-        formulaNumber = CalculatorValue.emptyArray
-        operandNumber = CalculatorValue.emptyArray
-    }
-    
-    @IBAction private func ceButtonDidTap(_ sender: Any) {
-        operandLabel.text = CalculatorValue.zero
-        operandNumber = CalculatorValue.emptyArray
-    }
-    
-    @IBAction private func plusMinusButtonDidTap(_ sender: Any) {
-        if operandNumber.first == Character(CalculatorValue.minus) {
-            operandNumber.remove(at: operandNumber.startIndex)
-            operandLabel.text = operandNumber
-        } else {
-            operandNumber = CalculatorValue.minus + operandNumber
-            operandLabel.text = operandNumber
-        }
-    }
-    
-    @IBAction private func equalButtonDidTap(_ sender: Any) {
-        formulaNumber += operatorLabel.text ?? CalculatorValue.emptyArray
-        
-        if operandNumber == CalculatorValue.emptyArray {
-            formulaNumber += CalculatorValue.emptyArray
-        } else {
-            formulaNumber += operandLabel.text ?? CalculatorValue.emptyArray
+            currentOperand += CalculatorValue.decimalPoint
         }
         
-        var formula = ExpressionParser.parse(from: formulaNumber)
-        let result = formula.result()
-        
-        initializeUI()
-        
-        
-        if result.isNaN {
-            operandLabel.text = "NaN"
-        } else if result.haveDecimalPlace() {
-            operandLabel.text = String(result).numberFormatter()
-        } else {
-            operandLabel.text = String(Int(result))
-        }
-        
-        operandNumber = CalculatorValue.emptyArray
-        formulaNumber = CalculatorValue.emptyArray
+        operandLabel.text = currentOperand
     }
     
     private func addListStackView() -> UIStackView {
@@ -134,12 +77,23 @@ class CalculatorViewController: UIViewController {
         operatorLabel.textColor = .white
         operandLabel.font = UIFont.preferredFont(forTextStyle: .title3)
         operatorLabel.font = UIFont.preferredFont(forTextStyle: .title3)
-        operatorLabel.text = self.operatorLabel.text
-        operandLabel.text = self.operandLabel.text
+        
+        if currentOperand == CalculatorValue.minus {
+            operandLabel.text = currentOperand + CalculatorValue.zero
+        } else {
+            operandLabel.text = currentOperand
+        }
+        operatorLabel.text = currentOperator
+        
         stackView.addArrangedSubview(operatorLabel)
         stackView.addArrangedSubview(operandLabel)
         
         return stackView
+    }
+    
+    private func scrollToBottom() {
+        formulaScrollView.layoutIfNeeded()
+        formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
     }
     
     private func addScrollStackView() {
@@ -147,9 +101,88 @@ class CalculatorViewController: UIViewController {
         scrollToBottom()
     }
     
-    private func scrollToBottom() {
-        formulaScrollView.layoutIfNeeded()
-        formulaScrollView.setContentOffset(CGPoint(x: 0, y: formulaScrollView.contentSize.height - formulaScrollView.bounds.height), animated: false)
+    @IBAction private func operatorButtonDidTap(_ sender: UIButton) {
+        guard let operatorSymbol = sender.title(for: .normal) else { return }
+        
+        if !resultString.isEmpty {
+            currentOperand = resultString
+            resultString = CalculatorValue.emptyArray
+        }
+        
+        guard !currentOperand.isEmpty else {
+            currentOperator = operatorSymbol
+            operatorLabel.text = currentOperator
+            return
+        }
+        
+        inputString += currentOperator
+        inputString += currentOperand
+        
+        addScrollStackView()
+        
+        currentOperator = operatorSymbol
+        currentOperand = CalculatorValue.emptyArray
+        
+        resetUI()
+    }
+    
+    @IBAction private func allClearButtonDidTap(_ sender: Any) {
+        inputString = CalculatorValue.emptyArray
+        currentOperator = CalculatorValue.emptyArray
+        currentOperand = CalculatorValue.emptyArray
+        resultString = CalculatorValue.emptyArray
+        
+        resetUI()
+        
+        scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+    }
+    
+    @IBAction private func ClearEntryButtonDidTap(_ sender: Any) {
+        currentOperand = CalculatorValue.emptyArray
+        resetUI()
+    }
+    
+    @IBAction private func plusMinusButtonDidTap(_ sender: Any) {
+        if currentOperand.first == Character(CalculatorValue.minus) {
+            currentOperand.remove(at: currentOperand.startIndex)
+        } else {
+            currentOperand = CalculatorValue.minus + currentOperand
+        }
+        
+        if currentOperand == CalculatorValue.minus {
+            operandLabel.text = currentOperand + CalculatorValue.zero
+        } else {
+            operandLabel.text = currentOperand
+        }
+    }
+    
+    @IBAction private func equalButtonDidTap(_ sender: Any) {
+        inputString += currentOperator + currentOperand
+        
+        guard !inputString.contains(CalculatorValue.nan) else {
+            operandLabel.text = CalculatorValue.nan
+            resultString = CalculatorValue.nan
+            return
+        }
+        
+        var formula = ExpressionParser.parse(from: inputString)
+        let result = formula.result()
+        
+        if result.isNaN {
+            resultString = CalculatorValue.nan
+        } else if result.haveDecimalPlace() {
+            resultString = String(result).numberFormatter()
+        } else {
+            resultString = String(Int(result))
+        }
+        operandLabel.text = resultString
+        operatorLabel.text = CalculatorValue.emptyArray
+        
+        currentOperand = CalculatorValue.emptyArray
+        currentOperator = CalculatorValue.emptyArray
+        inputString = CalculatorValue.emptyArray
+        
+        scrollStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     }
 }
 
