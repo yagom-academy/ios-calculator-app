@@ -17,12 +17,12 @@ class CalculatorViewController: UIViewController {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
         numberFormatter.usesSignificantDigits = true
-        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.maximumSignificantDigits = NameSpace.twenty
         
         return numberFormatter
     }()
     
-    private var formulas: String = StringName.empty
+    private var formulas: String = NameSpace.empty
     private var digitIsSelecting: Bool = false
     private var dotIsClicked: Bool = false
     
@@ -33,12 +33,12 @@ class CalculatorViewController: UIViewController {
     }
     
     private func configuareUI() {
-        operandLabel.text = StringName.zero
-        operatorLabel.text = StringName.empty
+        operandLabel.text = NameSpace.zero
+        operatorLabel.text = NameSpace.empty
     }
 
     @IBAction func digitButtonTapped(_ sender: UIButton) {
-        guard let lhs = operandLabel.text, let rhs = sender.currentTitle, lhs.filter({ $0 != "," && $0 != "." }).count < 20 else { return }
+        guard let lhs = operandLabel.text, let rhs = sender.currentTitle, lhs.filter({ $0 != "," && $0 != "." }).count < NameSpace.twenty else { return }
         
         if dotIsClicked {
             operandLabel.text = lhs + rhs
@@ -61,19 +61,19 @@ class CalculatorViewController: UIViewController {
     }
     
     @IBAction func signChangedButton(_ sender: UIButton) {
-        guard var digit = operandLabel.text, digit != StringName.zero else { return }
+        guard var digit = operandLabel.text, digit != NameSpace.zero else { return }
         
-        if digit.hasPrefix(StringName.minus) {
+        if digit.hasPrefix(NameSpace.minus) {
             digit.removeFirst()
             operandLabel.text = digit
         } else {
-            digit.appendFirst(StringName.minus)
+            digit.appendFirst(NameSpace.minus)
             operandLabel.text = digit
         }
     }
     
     @IBAction func operatorsButtonTapped(_ sender: UIButton) {
-        if !digitIsSelecting, operandLabel.text == StringName.zero {
+        if !digitIsSelecting, operandLabel.text == NameSpace.zero {
             operatorLabel.text = sender.currentTitle
             return
         }
@@ -81,7 +81,7 @@ class CalculatorViewController: UIViewController {
         addToCalculatorContainer()
         addFomulaStackView()
         
-        operandLabel.text = StringName.zero
+        operandLabel.text = NameSpace.zero
         operatorLabel.text = sender.currentTitle
         
         resetState()
@@ -94,11 +94,11 @@ class CalculatorViewController: UIViewController {
         configuareUI()
         resetState()
         
-        formulas = StringName.empty
+        formulas = NameSpace.empty
     }
     
     @IBAction func clearButtonTapped(_ sender: UIButton) {
-        operandLabel.text = StringName.zero
+        operandLabel.text = NameSpace.zero
         
         resetState()
     }
@@ -116,8 +116,8 @@ class CalculatorViewController: UIViewController {
         let formula = ExpressionParser.parse(from: formulas)
         
         operandLabel.text = formatToString(formula.result())
-        operatorLabel.text = StringName.empty
-        formulas = StringName.empty
+        operatorLabel.text = NameSpace.empty
+        formulas = NameSpace.empty
     }
     
     private func formatInDigitSelecting(lhs: String, rhs: String) {
@@ -126,19 +126,19 @@ class CalculatorViewController: UIViewController {
         var digit: Double = .zero
         
         switch rhs {
-        case StringName.zero:
-            digit = lhsDouble * 10
-        case StringName.doubleZero:
-            digit = lhsDouble * 100
+        case NameSpace.zero:
+            digit = lhsDouble * NameSpace.ten
+        case NameSpace.doubleZero:
+            digit = lhsDouble * NameSpace.hundred
         default:
-            digit = lhsDouble * 10 + rhsDouble
+            digit = lhsDouble * NameSpace.ten + rhsDouble
         }
         
         operandLabel.text = formatToString(digit)
     }
     
     private func addFomulaStackView() {
-        let index = formulaStackView.arrangedSubviews.count - 1
+        let index = formulaStackView.arrangedSubviews.count - NameSpace.one
         let newView = createFomulaStackView()
         
         formulaStackView.insertArrangedSubview(newView, at: index)
@@ -165,7 +165,7 @@ class CalculatorViewController: UIViewController {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .fill
-        stackView.spacing = 8
+        stackView.spacing = NameSpace.eight
         
         return stackView
     }
@@ -183,8 +183,8 @@ class CalculatorViewController: UIViewController {
     private func addToCalculatorContainer() {
         guard let operand = formatToDouble(operandLabel.text), let `operator` = operatorLabel.text else { return }
         
-        if `operator` != StringName.empty, formulas == StringName.empty {
-            formulas.append(StringName.zero)
+        if `operator` != NameSpace.empty, formulas == NameSpace.empty {
+            formulas.append(NameSpace.zero)
         }
         
         formulas.append(`operator`)
