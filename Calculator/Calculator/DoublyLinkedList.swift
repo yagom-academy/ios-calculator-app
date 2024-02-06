@@ -9,6 +9,8 @@ protocol DoublyLinkedListProtocol {
     associatedtype Element
     var count: Int { get set }
     var isEmpty: Bool { get }
+    var first: Element? { get }
+    var last: Element? { get }
     mutating func addFirst(element: Element)
     mutating func addLast(element: Element)
     mutating func removeFirst() -> Element?
@@ -31,6 +33,14 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
     
     var isEmpty: Bool {
         return true
+    }
+    
+    var first: Element? {
+        return nil
+    }
+    
+    var last: Element? {
+        return nil
     }
     
     init() {
