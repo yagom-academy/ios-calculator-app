@@ -76,18 +76,34 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
     }
     
     mutating func addFirst(element: Element) {
+        guard let nextNodeOfHeader = header.next else {
+            return
+        }
         
+        addBetween(element: element, predecessor: header, successor: nextNodeOfHeader)
     }
     
     mutating func addLast(element: Element) {
+        guard let prevNodeOfTrailer = trailer.prev else {
+            return
+        }
         
+        addBetween(element: element, predecessor: prevNodeOfTrailer, successor: trailer)
     }
     
     mutating func removeFirst() -> Element? {
-        return nil
+        guard !isEmpty, let firstNode = header.next else {
+            return nil
+        }
+        
+        return remove(node: firstNode)
     }
     
     mutating func removeLast() -> Element? {
-        return nil
+        guard !isEmpty, let lastNode = trailer.prev else {
+            return nil
+        }
+        
+        return remove(node: lastNode)
     }
 }
