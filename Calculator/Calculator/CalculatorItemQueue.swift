@@ -19,7 +19,7 @@ protocol QueueProtocol {
 }
 
 struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
-    var list = DoublyLinkedList<Element>()
+    private var list = DoublyLinkedList<Element>()
     
     var count: Int {
         return list.count
