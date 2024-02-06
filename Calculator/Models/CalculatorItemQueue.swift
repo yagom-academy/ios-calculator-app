@@ -74,9 +74,17 @@ struct LinkedList<T> {
         newNode.next = currentNode?.next
         currentNode?.next = newNode
     }
+    
+    mutating func clear() {
+        if head == nil {
+            return
+        }
+        
+        head = nil
+    }
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+class CalculatorItemQueue<T> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -91,7 +99,11 @@ class CalculatorItemQueue<T: CalculateItem> {
         list.append(value)
     }
     
+    func insert(_ value: T, at index: Int) {
+        list.insert(value, at: index)
+    }
+    
     func clear() {
-        
+        list.clear()
     }
 }
