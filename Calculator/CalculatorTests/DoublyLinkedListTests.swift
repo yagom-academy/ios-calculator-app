@@ -27,7 +27,7 @@ final class DoublyLinkedListTests: XCTestCase {
         sut = nil
     }
     
-    func test_AddFirst() {
+    func test_AddElementAsFirstOfTheList() {
         // Given
         let element = 30
         let expectedFirstValue = 30
@@ -40,7 +40,7 @@ final class DoublyLinkedListTests: XCTestCase {
         XCTAssertEqual(expectedFirstValue, resultFirstValue)
     }
     
-    func test_AddLast() {
+    func test_AddElementAsLastOfTheList() {
         // Given
         let element = 30
         let expectedLastValue = 30
