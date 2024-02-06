@@ -25,4 +25,8 @@ iOS 계산기 앱 업데이트를 통해 Swift로 구현된 **큐 타입**을 �
 - `toArray()`: 큐의 요소를 포함하는 **배열을 반환**합니다.
 - `get(index:)`: 큐에서 **특정 위치의 요소에 접근**합니다.
 
+## UML
+
+<img src="https://github.com/kkomgi/ios-calculator-app/blob/step1/Calculator/Calculator/Resources/Images/queue_uml.jpg">
+
 ---
