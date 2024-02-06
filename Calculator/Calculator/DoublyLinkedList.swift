@@ -7,7 +7,7 @@
 
 protocol DoublyLinkedListProtocol {
     associatedtype Element
-    var count: Int { get set }
+    var count: Int { get }
     var isEmpty: Bool { get }
     var first: Element? { get }
     var last: Element? { get }
@@ -23,24 +23,27 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
     private var _count: Int = 0
     
     var count: Int {
-        get {
-            return 0
-        }
-        set {
-            
-        }
+        return _count
     }
     
     var isEmpty: Bool {
-        return true
+        return _count == 0
     }
     
     var first: Element? {
-        return nil
+        guard !isEmpty else {
+            return nil
+        }
+        
+        return header.next?.element
     }
     
     var last: Element? {
-        return nil
+        guard !isEmpty else {
+            return nil
+        }
+        
+        return trailer.prev?.element
     }
     
     init() {
