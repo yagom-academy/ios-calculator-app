@@ -20,14 +20,10 @@ protocol DoublyLinkedListProtocol {
 struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
     private var header: Node<Element>
     private var trailer: Node<Element>
-    private var _count: Int = 0
-    
-    var count: Int {
-        return _count
-    }
+    private(set) var count: Int = 0
     
     var isEmpty: Bool {
-        return _count == 0
+        return count == 0
     }
     
     var first: Element? {
@@ -62,7 +58,7 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
         predecessor.setNext(node: newNode)
         successor.setPrev(node: newNode)
         
-        _count += 1
+        count += 1
     }
     
     private mutating func remove(node: Node<Element>) -> Element? {
@@ -74,7 +70,7 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
         predecessor.setNext(node: successor)
         successor.setPrev(node: predecessor)
         
-        _count -= 1
+        count -= 1
         
         return node.element
     }
