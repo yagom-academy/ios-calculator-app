@@ -76,19 +76,19 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
         return node.element
     }
     
-    func addFirst(element: Element) {
+    mutating func addFirst(element: Element) {
         
     }
     
-    func addLast(element: Element) {
+    mutating func addLast(element: Element) {
         
     }
     
-    func removeFirst() -> Element? {
+    mutating func removeFirst() -> Element? {
         return nil
     }
     
-    func removeLast() -> Element? {
+    mutating func removeLast() -> Element? {
         return nil
     }
 }
