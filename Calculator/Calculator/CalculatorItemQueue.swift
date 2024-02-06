@@ -50,8 +50,18 @@ struct CalculatorItemQueue: CalculateItem {
                 if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
                     valueOfOperations += firstValueInt
                 }
+            case "-":
+                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
+                    valueOfOperations -= firstValueInt
+                }
+            case "*":
+                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
+                    valueOfOperations *= firstValueInt
+                }
             default:
-                valueOfOperations += 1
+                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
+                    valueOfOperations /= firstValueInt
+                }
             }
         }
         

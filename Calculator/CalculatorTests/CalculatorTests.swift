@@ -86,7 +86,13 @@ final class CalculatorTests: XCTestCase {
         sut.enqueue("2")
         sut.enqueue("+")
         sut.enqueue("5")
-        let expectation = "7"
+        sut.enqueue("-")
+        sut.enqueue("6")
+        sut.enqueue("*")
+        sut.enqueue("2")
+        sut.enqueue("/")
+        sut.enqueue("2")
+        let expectation = "1"
         
         //when
         sut.calculateOperations()
