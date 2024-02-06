@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CalculatorItemQueue: CalculatorItem {
+struct CalculatorItemQueue: CalculateItem {
     
 }

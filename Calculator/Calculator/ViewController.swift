@@ -1,6 +1,6 @@
 //
 //  Calculator - ViewController.swift
-//  Created by Danny9. 
+//  Created by Danny.
 //  Copyright © yagom. All rights reserved.
 // 
 
