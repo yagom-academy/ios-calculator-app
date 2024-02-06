@@ -34,10 +34,10 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
     }
     
     mutating func enqueue(element: Element) {
-        
+        list.addLast(element: element)
     }
     
     mutating func dequeue() -> Element? {
-        return nil
+        return list.removeFirst()
     }
 }
