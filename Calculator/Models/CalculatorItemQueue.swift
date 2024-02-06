@@ -50,29 +50,16 @@ struct LinkedList<T> {
         return head.value
     }
     
-    mutating func insert(_ value: T, at index: Int) {
-        let newNode = Node(value: value)
-        
-        if index == 0 {
-            newNode.next = head
-            head = newNode
-            return
+    mutating func peek() -> T? {
+        guard let head = self.head else {
+            return nil
         }
         
-        var currentNode = head
-        var currentIndex = 0
-        
-        while currentNode != nil && currentIndex < index - 1 {
-            currentNode = currentNode?.next
-            currentIndex += 1
+        if head.next == nil {
+            return head.value
         }
         
-        if currentNode == nil {
-            return
-        }
-        
-        newNode.next = currentNode?.next
-        currentNode?.next = newNode
+        return head.value
     }
     
     mutating func clear() {
@@ -84,7 +71,7 @@ struct LinkedList<T> {
     }
 }
 
-class CalculatorItemQueue<T> {
+class CalculatorItemQueue<T: CalculateItem> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -99,8 +86,8 @@ class CalculatorItemQueue<T> {
         list.append(value)
     }
     
-    func insert(_ value: T, at index: Int) {
-        list.insert(value, at: index)
+    func peek() -> T? {
+        return list.peek()
     }
     
     func clear() {
