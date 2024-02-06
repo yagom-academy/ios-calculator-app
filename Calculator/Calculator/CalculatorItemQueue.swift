@@ -22,15 +22,15 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
     var list = DoublyLinkedList<Element>()
     
     var count: Int {
-        return 0
+        return list.count
     }
     
     var isEmpty: Bool {
-        return true
+        return list.isEmpty
     }
     
     var first: Element? {
-        return nil
+        return list.first
     }
     
     mutating func enqueue(element: Element) {
