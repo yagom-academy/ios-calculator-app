@@ -17,91 +17,91 @@ extension DoublyLinkedList {
 }
 
 final class DoublyLinkedListTests: XCTestCase {
-    var dll: DoublyLinkedList<Any>!
+    var sut: DoublyLinkedList<Int>!
     
     override func setUpWithError() throws {
-        dll = DoublyLinkedList()
+        sut = DoublyLinkedList()
     }
 
     override func tearDownWithError() throws {
-        dll = nil
+        sut = nil
     }
     
     func test_AddFirst() {
-        // Arrange
+        // Given
         let element = 30
         let expectedFirstValue = 30
         
-        // Act
-        dll.addFirst(element: element)
-        let resultFirstValue = dll.first as? Int
+        // When
+        sut.addFirst(element: element)
+        let resultFirstValue = sut.first
         
-        // Assert
+        // Then
         XCTAssertEqual(expectedFirstValue, resultFirstValue)
     }
     
     func test_AddLast() {
-        // Arrange
+        // Given
         let element = 30
         let expectedLastValue = 30
         
-        // Act
-        dll.addLast(element: element)
-        let resultLastValue = dll.last as? Int
+        // When
+        sut.addLast(element: element)
+        let resultLastValue = sut.last
         
-        // Assert
+        // Then
         XCTAssertEqual(expectedLastValue, resultLastValue)
     }
     
     func test_RemoveFirstWhenListIsNotEmpty() {
-        // Arrange
-        dll.fromElements(20, 30)
-        let expectedFirstValue = 20
+        // Given
+        sut.fromElements(20, 30)
+        let expectedRemovedValue = 20
         let expectedFirstValueAfterRemove = 30
         let expectedCount = 1
         
-        // Act
-        let resultFirstValue = dll.removeFirst() as? Int
-        let resultFirstValueAfterRemove = dll.first as? Int
-        let resultCount = dll.count
+        // When
+        let resultRemovedValue = sut.removeFirst()
+        let resultFirstValueAfterRemove = sut.first
+        let resultCount = sut.count
         
-        // Assert
-        XCTAssertEqual(expectedFirstValue, resultFirstValue)
+        // Then
+        XCTAssertEqual(expectedRemovedValue, resultRemovedValue)
         XCTAssertEqual(expectedFirstValueAfterRemove, resultFirstValueAfterRemove)
         XCTAssertEqual(expectedCount, resultCount)
     }
     
     func test_RemoveFirstWhenListIsEmpty() {
-        // Act
-        let result = dll.removeFirst()
+        // When
+        let result = sut.removeFirst()
         
-        // Assert
+        // Then
         XCTAssertNil(result)
     }
     
     func test_RemoveLastWhenListIsNotEmpty() {
-        // Arrange
-        dll.fromElements(20, 30)
-        let expectedLastValue = 30
+        // Given
+        sut.fromElements(20, 30)
+        let expectedRemovedValue = 30
         let expectedLastValueAfterRemove = 20
         let expectedCount = 1
         
-        // Act
-        let resultLastValue = dll.removeLast() as? Int
-        let resultLastValueAfterRemove = dll.last as? Int
-        let resultCount = dll.count
+        // When
+        let resultRemovedValue = sut.removeLast()
+        let resultLastValueAfterRemove = sut.last
+        let resultCount = sut.count
         
-        // Assert
-        XCTAssertEqual(expectedLastValue, resultLastValue)
+        // Then
+        XCTAssertEqual(expectedRemovedValue, resultRemovedValue)
         XCTAssertEqual(expectedLastValueAfterRemove, resultLastValueAfterRemove)
         XCTAssertEqual(expectedCount, resultCount)
     }
     
     func test_RemoveLastWhenListIsEmpty() {
-        // Act
-        let result = dll.removeLast()
+        // When
+        let result = sut.removeLast()
         
-        // Assert
+        // Then
         XCTAssertNil(result)
     }
 }
