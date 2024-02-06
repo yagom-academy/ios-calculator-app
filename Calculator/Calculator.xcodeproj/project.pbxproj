@@ -141,11 +141,11 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				3A522C5F2B722D08004F39A3 /* Resources */,
 				3A522C502B70F21D004F39A3 /* Controller */,
 				3A522C4F2B70EB1C004F39A3 /* Model */,
 				3A522C572B70F4D7004F39A3 /* View */,
 				3A522C512B70F233004F39A3 /* CalculatorItemQueueTest */,
+				3A522C5F2B722D08004F39A3 /* Resources */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
