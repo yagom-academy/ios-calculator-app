@@ -83,7 +83,7 @@ struct LinkedList<T> {
     }
 }
 
-class CalculatorItemQueue<T> {
+class CalculatorItemQueue<T: CalculateItem> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
