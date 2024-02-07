@@ -30,39 +30,4 @@ struct CalculatorItemQueue: CalculateItem {
         return list
     }
     
-    public func showValueOfOperations() -> String {
-        return String(valueOfOperations)
-    }
-    
-    public mutating func calculateOperations() {
-        
-        if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
-            valueOfOperations += firstValueInt
-        }
-        
-        while list.count > 0 {
-            
-            let multiflex = dequeue()
-            
-            switch multiflex {
-            case "+":
-                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
-                    valueOfOperations += firstValueInt
-                }
-            case "-":
-                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
-                    valueOfOperations -= firstValueInt
-                }
-            case "*":
-                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
-                    valueOfOperations *= firstValueInt
-                }
-            default:
-                if let firstValueString = dequeue(), let firstValueInt = Int(firstValueString){
-                    valueOfOperations /= firstValueInt
-                }
-            }
-        }
-        
-    }
 }
