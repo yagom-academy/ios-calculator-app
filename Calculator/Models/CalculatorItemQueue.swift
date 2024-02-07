@@ -18,14 +18,18 @@ class Node<T> {
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    
-    init() {}
+    private var count: Int = 0
     
     var isEmpty: Bool {
         head == nil
     }
     
+    init() {}
+    
+    
     mutating func append(_ value: T) {
+        count += 1
+        
         guard !isEmpty else {
             head = Node(value: value)
             tail = head
@@ -40,6 +44,8 @@ struct LinkedList<T> {
         guard let head = self.head else {
             return nil
         }
+        
+        count -= 1
         
         if head.next == nil {
             self.head = nil
@@ -63,27 +69,19 @@ struct LinkedList<T> {
     }
     
     mutating func size() -> Int {
-        var currentNode = head
-        var size = 0
-        
-        while currentNode != nil {
-            currentNode = currentNode?.next
-            size = size + 1
-        }
-        
-        return size
+        return count
     }
     
     mutating func clear() {
         if head == nil {
             return
         }
-        
+        count = 0
         head = nil
     }
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+class CalculatorItemQueue<T> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
