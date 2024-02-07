@@ -16,8 +16,8 @@ class Node<T> {
 }
 
 struct LinkedList<T> {
-    var head: Node<T>?
-    var tail: Node<T>?
+    private var head: Node<T>?
+    private var tail: Node<T>?
     
     init() {}
     
@@ -62,6 +62,18 @@ struct LinkedList<T> {
         return head.value
     }
     
+    mutating func size() -> Int {
+        var currentNode = head
+        var size = 0
+        
+        while currentNode != nil {
+            currentNode = currentNode?.next
+            size = size + 1
+        }
+        
+        return size
+    }
+    
     mutating func clear() {
         if head == nil {
             return
@@ -71,11 +83,15 @@ struct LinkedList<T> {
     }
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+class CalculatorItemQueue<T> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
         list.isEmpty
+    }
+    
+    var size: Int {
+        list.size()
     }
     
     func dequeue() -> T? {
