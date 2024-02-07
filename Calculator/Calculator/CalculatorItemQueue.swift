@@ -8,27 +8,27 @@
 import Foundation
 
 struct CalculatorItemQueue: CalculateItem {
-    private var queue: [String] = []
+    private var list: [String] = []
     private var valueOfOperations: Int = 0
     
     public var count: Int {
-        return queue.count
+        return list.count
     }
     
     public var isEmpty: Bool {
-        return queue.isEmpty
+        return list.isEmpty
     }
     
     public mutating func enqueue(_ element: String) {
-        queue.append(element)
+        list.append(element)
     }
     
     public mutating func dequeue() -> String? {
-        return queue.removeFirst()
+        return list.removeFirst()
     }
     
     public func showQueue() -> [String] {
-        return queue
+        return list
     }
     
     public func showValueOfOperations() -> String {
@@ -41,7 +41,7 @@ struct CalculatorItemQueue: CalculateItem {
             valueOfOperations += firstValueInt
         }
         
-        while queue.count > 0 {
+        while list.count > 0 {
             
             let multiflex = dequeue()
             
