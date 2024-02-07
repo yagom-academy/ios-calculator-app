@@ -9,7 +9,6 @@ import Foundation
 
 struct CalculatorItemQueue: CalculateItem {
     private var list: [String] = []
-    private var valueOfOperations: Int = 0
     
     public var count: Int {
         return list.count
