@@ -37,10 +37,9 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // When
         sut.enqueue(element: element)
-        let resultCount = sut.count
         
         // Then
-        XCTAssertEqual(expectedCount, resultCount)
+        XCTAssertEqual(expectedCount, sut.count)
     }
     
     func test_EnqueueWhenQueueIsEmpty() {
@@ -51,12 +50,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // When
         sut.enqueue(element: element)
-        let resultFirstValue = sut.first
-        let resultCount = sut.count
         
         // Then
-        XCTAssertEqual(expectedFirstValue, resultFirstValue)
-        XCTAssertEqual(expectedCount, resultCount)
+        XCTAssertEqual(expectedFirstValue, sut.first)
+        XCTAssertEqual(expectedCount, sut.count)
     }
     
     func test_DequeueWhenListIsNotEmpty() {
@@ -67,11 +64,10 @@ final class CalculatorItemQueueTests: XCTestCase {
         
         // When
         let resultValue = sut.dequeue()
-        let resultCount = sut.count
         
         // Then
         XCTAssertEqual(expectedValue, resultValue)
-        XCTAssertEqual(expectedCount, resultCount)
+        XCTAssertEqual(expectedCount, sut.count)
     }
     
     func test_DequeueWhenListIsEmpty() {
