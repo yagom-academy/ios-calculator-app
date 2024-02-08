@@ -5,6 +5,10 @@
 //  Created by Jaehun Lee on 2/6/24.
 //
 
+extension Double: CalculateItem {
+    
+}
+
 protocol CalculateItem {
     
 }

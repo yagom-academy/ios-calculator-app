@@ -8,10 +8,6 @@
 import XCTest
 @testable import Calculator
 
-extension Int: CalculateItem {
-    
-}
-
 extension CalculatorItemQueue {
     mutating func fromElements(_ elements: Element...) {
         for element in elements {
@@ -21,7 +17,7 @@ extension CalculatorItemQueue {
 }
 
 final class CalculatorItemQueueTests: XCTestCase {
-    var sut: CalculatorItemQueue<Int>!
+    var sut: CalculatorItemQueue<Double>!
     
     override func setUpWithError() throws {
         sut = CalculatorItemQueue()
@@ -33,8 +29,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_EnqueueWhenQueueIsNotEmpty() {
         // Given
-        sut.fromElements(10, 20)
-        let element = 30
+        sut.fromElements(10.0, 20.0)
+        let element = 30.0
         let expectedCount = 3
         
         // When
@@ -47,8 +43,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_EnqueueWhenQueueIsEmpty() {
         // Given
-        let element = 30
-        let expectedFirstValue = 30
+        let element = 30.0
+        let expectedFirstValue = 30.0
         let expectedCount = 1
         
         // When
@@ -63,8 +59,8 @@ final class CalculatorItemQueueTests: XCTestCase {
     
     func test_DequeueWhenListIsNotEmpty() {
         // Given
-        sut.fromElements(10, 20)
-        let expectedValue = 10
+        sut.fromElements(10.0, 20.0)
+        let expectedValue = 10.0
         let expectedCount = 1
         
         // When
