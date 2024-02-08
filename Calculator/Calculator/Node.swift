@@ -14,11 +14,11 @@ class Node<Element> {
         self.element = element
     }
     
-    func setPrev(node: Node<Element>) {
+    func setPreviousNode(as node: Node<Element>) {
         prev = node
     }
     
-    func setNext(node: Node<Element>) {
+    func setNextNode(as node: Node<Element>) {
         next = node
     }
 }

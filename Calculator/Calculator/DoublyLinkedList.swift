@@ -46,17 +46,17 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
         self.header = Node(element: nil)
         self.trailer = Node(element: nil)
         
-        header.setNext(node: trailer)
-        trailer.setPrev(node: header)
+        header.setNextNode(as: trailer)
+        trailer.setPreviousNode(as: header)
     }
     
     private mutating func addBetween(element: Element, predecessor: Node<Element>, successor: Node<Element>) {
         let newNode = Node(element: element)
         
-        newNode.setPrev(node: predecessor)
-        newNode.setNext(node: successor)
-        predecessor.setNext(node: newNode)
-        successor.setPrev(node: newNode)
+        newNode.setPreviousNode(as: predecessor)
+        newNode.setNextNode(as: successor)
+        predecessor.setNextNode(as: newNode)
+        successor.setPreviousNode(as: newNode)
         
         count += 1
     }
@@ -67,8 +67,8 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
             return nil
         }
         
-        predecessor.setNext(node: successor)
-        successor.setPrev(node: predecessor)
+        predecessor.setNextNode(as: successor)
+        successor.setPreviousNode(as: predecessor)
         
         count -= 1
         
