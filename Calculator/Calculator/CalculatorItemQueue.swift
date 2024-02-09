@@ -45,3 +45,55 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
         return list.removeFirst()
     }
 }
+
+extension String {
+    func split(with target: Character) -> [String] {
+        return []
+    }
+}
+
+enum Operator: Character, CaseIterable, CalculateItem {
+    case add = "+"
+    case subtract = "-"
+    case divide = "/"
+    case multiply = "*"
+    
+    func calculate(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
+    
+    private func add(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
+    
+    private func subtract(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
+    
+    private func divide(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
+    
+    private func multiply(lhs: Double, rhs: Double) -> Double {
+        return 0.0
+    }
+}
+
+struct Formula {
+    var operands: CalculatorItemQueue<Double>
+    var operators: CalculatorItemQueue<Operator>
+    
+    func result() -> Double {
+        return 0.0
+    }
+}
+
+enum ExpressionParser {
+    static func parse(from input: String) -> Formula {
+        return Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+    }
+    
+    private static func componentsByOperators(from input: String) -> [String] {
+        return []
+    }
+}
