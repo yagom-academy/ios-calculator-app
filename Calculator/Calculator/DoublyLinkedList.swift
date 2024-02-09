@@ -5,12 +5,15 @@
 //  Created by Jaehun Lee on 2/6/24.
 //
 
-protocol DoublyLinkedListProtocol {
+protocol DataAccessable {
     associatedtype Element
     var count: Int { get }
     var isEmpty: Bool { get }
     var first: Element? { get }
     var last: Element? { get }
+}
+
+protocol DoublyLinkedListProtocol: DataAccessable {
     mutating func addFirst(element: Element)
     mutating func addLast(element: Element)
     mutating func removeFirst() -> Element?
