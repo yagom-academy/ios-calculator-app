@@ -128,4 +128,12 @@ final class CalculatorItemQueueTest: XCTestCase {
         current = current?.next
         XCTAssertEqual(current?.value, thirdElement, "세 번째는 3이어야 합니다")
     }
+    
+    func testPrintNode() {
+        var queue = CalculatorItemQueue<Int>()
+        queue.enqueue(1)
+        queue.enqueue(2)
+        queue.enqueue(3)
+        queue.printNode()
+    }
 }
