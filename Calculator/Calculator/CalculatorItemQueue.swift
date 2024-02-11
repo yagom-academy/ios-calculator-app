@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct CalculatorItemQueue {
+protocol CalculateItem {
+    
+}
+
+struct CalculatorItemQueue: CalculateItem {
     var inbox: [Int] = []
     var outbox: [Int] = []
     
