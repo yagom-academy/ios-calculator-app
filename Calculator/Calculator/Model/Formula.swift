@@ -12,6 +12,6 @@ struct Formula {
     let operators: CalculatorItemQueue
     
     func result() -> Double {
-        
+        return 0.0
     }
 }
