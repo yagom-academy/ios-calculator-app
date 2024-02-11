@@ -69,6 +69,49 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		2EA512D12B7909D500E6F470 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2E5EDC9E2B71015500DC9359 /* CalculatorItemQueue.swift */,
+				2E5EDCA02B71019800DC9359 /* CalculateItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EA512D22B790A3D00E6F470 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
+				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2EA512D32B790A6700E6F470 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2EA512D42B790A7300E6F470 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EA512D52B790A8400E6F470 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -90,15 +133,12 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
-				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
-				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
-				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+				2EA512D22B790A3D00E6F470 /* App */,
+				2EA512D12B7909D500E6F470 /* Model */,
+				2EA512D42B790A7300E6F470 /* View */,
+				2EA512D32B790A6700E6F470 /* Controller */,
+				2EA512D52B790A8400E6F470 /* Resource */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
-				2E5EDC9E2B71015500DC9359 /* CalculatorItemQueue.swift */,
-				2E5EDCA02B71019800DC9359 /* CalculateItem.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
