@@ -54,7 +54,18 @@ extension String {
 
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
-        return Formula(operands: CalculatorItemQueue(), operators: CalculatorItemQueue())
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
+        
+        let operandsArr = componentsByOperators(from: input)
+            .compactMap { Double($0) }
+        let operatorsArr = input
+            .compactMap { Operator(rawValue: $0) }
+        
+        operandsArr.forEach { operands.enqueue(element: $0) }
+        operatorsArr.forEach { operators.enqueue(element: $0) }
+        
+        return Formula(operands: operands, operators: operators)
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
