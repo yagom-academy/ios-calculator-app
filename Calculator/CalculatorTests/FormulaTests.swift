@@ -18,4 +18,25 @@ final class FormulaTests: XCTestCase {
     override func tearDownWithError() throws {
         sut = nil
     }
+    
+    func test_ResultOfFormula() {
+        // Given
+        let operandsArr = [120.0, 3.0, 20.0, 10.0, 4.0, 2.0]
+        let operatorsArr: [Operator] = [.divide, .add, .subtract, .multiply, .divide]
+        operandsArr.forEach { sut.operands.enqueue(element: $0) }
+        operatorsArr.forEach { sut.operators.enqueue(element: $0) }
+        let expectedValue = 100.0
+        
+        // Then
+        XCTAssertEqual(expectedValue, sut.result())
+    }
+    
+    func test_DivisionByZeroOfFormula() {
+        // Given
+        let operandsArr = [1.0, 0.0]
+        let operatorsArr: [Operator] = [.divide]
+        
+        // Then
+        XCTAssertThrowsError(sut.result())
+    }
 }
