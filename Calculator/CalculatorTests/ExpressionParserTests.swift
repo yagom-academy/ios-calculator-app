@@ -16,4 +16,36 @@ final class ExpressionParserTests: XCTestCase {
     override func tearDownWithError() throws {
         try super.tearDownWithError()
     }
+    
+    func test_Parse() {
+        // Given
+        let expression = "120.0/3.+20-10.0*4.0/2.0"
+        let expectedOperandsArr = [120.0, 3.0, 20.0, 10.0, 4.0, 2.0]
+        let expectedOperatorsArr: [Operator] = [.divide, .add, .subtract, .multiply, .divide]
+        
+        // When
+        var resultFormula = ExpressionParser.parse(from: expression)
+        var resultOperandsArr: [Double] = []
+        var resultOperatorsArr: [Operator] = []
+        
+        while !resultFormula.operands.isEmpty {
+            guard let operand = resultFormula.operands.dequeue() else {
+                return
+            }
+            
+            resultOperandsArr.append(operand)
+        }
+        
+        while !resultFormula.operators.isEmpty {
+            guard let `operator` = resultFormula.operators.dequeue() else {
+                return
+            }
+            
+            resultOperatorsArr.append(`operator`)
+        }
+        
+        // Then
+        XCTAssertEqual(expectedOperandsArr, resultOperandsArr)
+        XCTAssertEqual(expectedOperatorsArr, resultOperatorsArr)
+    }
 }
