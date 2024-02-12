@@ -48,7 +48,7 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
 
 extension String {
     func split(with target: Character) -> [String] {
-        return []
+        return self.split(separator: target).map { String($0) }
     }
 }
 
