@@ -58,6 +58,10 @@ enum ExpressionParser {
     }
     
     private static func componentsByOperators(from input: String) -> [String] {
-        return []
+        let inputThatOperatorTransposedWithBlank = input
+            .map { Operator(rawValue: $0) != nil ? " " : String($0) }
+            .joined()
+        
+        return inputThatOperatorTransposedWithBlank.split(with: " ")
     }
 }
