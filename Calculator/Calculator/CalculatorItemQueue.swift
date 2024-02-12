@@ -58,7 +58,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         return 0.0
     }
     
@@ -70,7 +70,7 @@ enum Operator: Character, CaseIterable, CalculateItem {
         return 0.0
     }
     
-    private func divide(lhs: Double, rhs: Double) -> Double {
+    private func divide(lhs: Double, rhs: Double) throws -> Double {
         return 0.0
     }
     
