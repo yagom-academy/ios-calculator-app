@@ -31,10 +31,12 @@ final class FormulaTests: XCTestCase {
         XCTAssertEqual(expectedValue, try sut.result())
     }
     
-    func test_DivisionByZeroOfFormula() {
+    func test_ResultOfFormulaWhenDividerIsZero() {
         // Given
         let operandsArr = [1.0, 0.0]
         let operatorsArr: [Operator] = [.divide]
+        operandsArr.forEach { sut.operands.enqueue(element: $0) }
+        operatorsArr.forEach { sut.operators.enqueue(element: $0) }
         
         // Then
         XCTAssertThrowsError(try sut.result())
