@@ -28,7 +28,7 @@ final class FormulaTests: XCTestCase {
         let expectedValue = 100.0
         
         // Then
-        XCTAssertEqual(expectedValue, sut.result())
+        XCTAssertEqual(expectedValue, try sut.result())
     }
     
     func test_DivisionByZeroOfFormula() {
@@ -37,6 +37,6 @@ final class FormulaTests: XCTestCase {
         let operatorsArr: [Operator] = [.divide]
         
         // Then
-        XCTAssertThrowsError(sut.result())
+        XCTAssertThrowsError(try sut.result())
     }
 }
