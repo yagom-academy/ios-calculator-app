@@ -1,5 +1,5 @@
 //
-//  String+split.swift
+//  String+Split.swift
 //  Calculator
 //
 //  Created by Jaehun Lee on 2/13/24.
