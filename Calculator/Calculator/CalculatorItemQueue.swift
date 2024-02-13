@@ -51,7 +51,7 @@ struct CalculatorItemQueue: CalculateItem {
     
     mutating func rear() -> Int? {
         if inbox.isEmpty {
-            return outbox.first!
+            return outbox.first
         }
         
         return inbox.last
