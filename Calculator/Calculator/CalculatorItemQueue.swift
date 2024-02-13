@@ -12,8 +12,8 @@ protocol CalculateItem {
 }
 
 struct CalculatorItemQueue: CalculateItem {
-    var inbox: [Int] = []
-    var outbox: [Int] = []
+    private var inbox: [Int] = []
+    private var outbox: [Int] = []
     
     var size: Int {
         return inbox.count + outbox.count
