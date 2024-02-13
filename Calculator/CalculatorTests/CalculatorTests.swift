@@ -13,10 +13,12 @@ final class CalculatorTests: XCTestCase {
     var calculatorSlut: CalculatorItemQueue?
 
     override func setUpWithError() throws {
+        try super.setUpWithError()
         calculatorSlut = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         calculatorSlut = nil
     }
     
