@@ -5,7 +5,11 @@
 //  Created by Jaehun Lee on 2/13/24.
 //
 
-enum ExpressionParser {
+protocol Parsable {
+    static func parse(from input: String) -> Formula
+}
+
+enum ExpressionParser: Parsable {
     static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
