@@ -61,14 +61,10 @@ struct LinkedList<T> {
             return nil
         }
         
-        if head.next == nil {
-            return head.value
-        }
-        
         return head.value
     }
     
-    mutating func size() -> Int {
+    func size() -> Int {
         return count
     }
     
@@ -81,7 +77,7 @@ struct LinkedList<T> {
     }
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -92,19 +88,19 @@ class CalculatorItemQueue<T: CalculateItem> {
         list.size()
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return list.pop()
     }
     
-    func enqueue(_ value: T) {
+    mutating func enqueue(_ value: T) {
         list.append(value)
     }
     
-    func peek() -> T? {
+    mutating func peek() -> T? {
         return list.peek()
     }
     
-    func clear() {
+    mutating func clear() {
         list.clear()
     }
 }
