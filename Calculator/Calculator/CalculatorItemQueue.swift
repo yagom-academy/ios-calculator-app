@@ -40,36 +40,20 @@ struct CalculatorItemQueue: CalculateItem {
         return outbox.popLast()
     }
     
-    mutating func front() -> Int {
-        if self.isEmpty {
-            return -1
-        }
-        
+    mutating func front() -> Int? {
         if outbox.isEmpty {
             outbox = inbox.reversed()
             inbox.removeAll()
         }
         
-        if let lastData = outbox.last {
-            return lastData
-        } else {
-            return -1
-        }
+        return outbox.last
     }
     
-    mutating func rear() -> Int {
-        if self.isEmpty {
-            return -1
-        }
-        
+    mutating func rear() -> Int? {
         if inbox.isEmpty {
             return outbox.first!
         }
         
-        if let lastData = inbox.last {
-            return lastData
-        } else {
-            return -1
-        }
+        return inbox.last
     }
 }
