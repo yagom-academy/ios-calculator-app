@@ -31,17 +31,13 @@ struct CalculatorItemQueue: CalculateItem {
         inbox.append(data)
     }
     
-    mutating func pop() -> Int {
-        if self.isEmpty {
-            return -1
-        }
-        
+    mutating func pop() -> Int? {
         if outbox.isEmpty {
             outbox = inbox.reversed()
             inbox.removeAll()
         }
         
-        return outbox.removeLast()
+        return outbox.popLast()
     }
     
     mutating func front() -> Int {
