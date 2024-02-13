@@ -10,9 +10,10 @@
 | 날짜 | 내용 |
 | --- | --- |
 | 230212 | [Step1] 단위 테스트 타깃 추가, CalculatorItemQueue UML 작성 및 구현 |
+| 230213 | [Step1] PR, 피드백 반영 |
 
-## 🧾 다이어그램 
-### UML
+## 🧾 UML
+### 클래스 다이어그램
 <img src="UMLDiagram.png" width="500">
 
 ## 🔨 트러블 슈팅 
