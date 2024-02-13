@@ -19,7 +19,7 @@ struct CalculatorItemQueue: CalculateItem {
         return inbox.count + outbox.count
     }
     
-    var empty: Int {
+    var isEmpty: Int {
         if inbox.isEmpty && outbox.isEmpty {
             return 1
         } else {
@@ -32,7 +32,7 @@ struct CalculatorItemQueue: CalculateItem {
     }
     
     mutating func pop() -> Int {
-        if self.empty == 1 {
+        if self.isEmpty == 1 {
             return -1
         }
         
@@ -45,7 +45,7 @@ struct CalculatorItemQueue: CalculateItem {
     }
     
     mutating func front() -> Int {
-        if self.empty == 1 {
+        if self.isEmpty == 1 {
             return -1
         }
         
@@ -61,8 +61,8 @@ struct CalculatorItemQueue: CalculateItem {
         }
     }
     
-    mutating func back() -> Int {
-        if self.empty == 1 {
+    mutating func rear() -> Int {
+        if self.isEmpty == 1 {
             return -1
         }
         
