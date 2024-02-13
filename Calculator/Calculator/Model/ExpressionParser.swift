@@ -11,13 +11,13 @@ protocol Parsable {
 
 enum ExpressionParser: Parsable {
     static func parse(from input: String) -> Formula {
-        var operands = CalculatorItemQueue<Double>()
-        var operators = CalculatorItemQueue<Operator>()
+        var operands: CalculatorItemQueue<Double> = .init()
+        var operators: CalculatorItemQueue<Operator> = .init()
         
         let operandsArr = componentsByOperators(from: input)
-            .compactMap { Double($0) }
+            .compactMap(Double.init)
         let operatorsArr = input
-            .compactMap { Operator(rawValue: $0) }
+            .compactMap(Operator.init)
         
         operandsArr.forEach { operands.enqueue(element: $0) }
         operatorsArr.forEach { operators.enqueue(element: $0) }
