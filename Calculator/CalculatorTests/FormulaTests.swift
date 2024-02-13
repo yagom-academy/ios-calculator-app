@@ -39,8 +39,18 @@ final class FormulaTests: XCTestCase {
         let operatorsArr: [Operator] = [.divide]
         operandsArr.forEach { sut.operands.enqueue(element: $0) }
         operatorsArr.forEach { sut.operators.enqueue(element: $0) }
+        let expectedError: CalculateError = .divisionByZero
         
-        // Then
-        XCTAssertThrowsError(try sut.result())
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
     }
 }
