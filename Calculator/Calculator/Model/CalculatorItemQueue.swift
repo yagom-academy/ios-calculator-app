@@ -55,14 +55,14 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
     }
     
     mutating func dequeue() -> Element? {
-        guard let headNode = head else { return nil }
-        head = headNode.next
+        let headNode = head
+        head = headNode?.next
         
         if head == nil {
             tail = nil
         }
         
-        return headNode.value
+        return headNode?.value
     }
     
     mutating func prepend(_ element: Element) {
@@ -124,6 +124,7 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         head = nil
     }
     
+    #if DEBUG
     func printNode() {
         var currentNode = head
         
@@ -133,4 +134,5 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         }
         print()
     }
+    #endif
 }

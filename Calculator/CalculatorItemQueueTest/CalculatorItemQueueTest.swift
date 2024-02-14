@@ -9,13 +9,16 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorItemQueueTest: XCTestCase {
-
+    private var sut: CalculatorItemQueue<Int>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = CalculatorItemQueue<Int>()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
+        try super.tearDownWithError()
     }
 
     func testExample() throws {
@@ -33,107 +36,94 @@ final class CalculatorItemQueueTest: XCTestCase {
         }
     }
     
-    func testEnqueueAndDequeue() {
-        var queue = CalculatorItemQueue<Int>()
-        XCTAssertTrue(queue.isEmpty, "시작 시, 큐는 비어 있어야 합니다")
-
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.enqueue(3)
-        
-        XCTAssertFalse(queue.isEmpty, "큐가 비어 있지 않아야 합니다")
-        XCTAssertEqual(queue.count, 3, "큐에는 3개의 element 가 존재해야 합니다")
-
-        let dequeuedItem1 = queue.dequeue()
-        XCTAssertEqual(dequeuedItem1, 1, "dequeue된 element는 1이어야 합니다")
-        
-        let dequeuedItem2 = queue.dequeue()
-        XCTAssertEqual(dequeuedItem2, 2, "dequeue된 element는 2이어야 합니다")
-
-        queue.enqueue(4)
-        XCTAssertEqual(queue.count, 2, "dequeue->dequeue->enqueue 한 후에는 큐에 2개의 element가 있어야 합니다")
-
-        let dequeuedItem3 = queue.dequeue()
-        XCTAssertEqual(dequeuedItem3, 3, "dequeue된 element은 3이어야 합니다")
-
-        let dequeuedItem4 = queue.dequeue()
-        XCTAssertEqual(dequeuedItem4, 4, "dequeue된 element은 4이어야 합니다")
-        
-        XCTAssertTrue(queue.isEmpty, "모든 아이템을 dequeue한 후에는 큐는 empty 상태이어야 합니다")
-    }
-
-    func testPeek() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.enqueue(1)
-        queue.enqueue(2)
-        
-        let headValue = queue.head?.value
-        XCTAssertEqual(headValue, 1, "헤드 값은 1이어야 합니다")
-    }
-
-    func testRemoveAll() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.removeAll()
-        XCTAssertTrue(queue.isEmpty, "모든 element를 제거한 후에는 큐는 empty 상태이어야 합니다")
+    func test_큐가_비어있는지_확인할_수_있다() {
+        XCTAssertTrue(sut.isEmpty, "시작 시 큐는 비어 있어야 합니다.")
     }
     
-    func testPrepend() {
-        var queue = CalculatorItemQueue<Int>()
+    func test_큐에_값을_삽입할_수_있다() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         
-        XCTAssertTrue(queue.isEmpty, "시작 시, 큐는 비어 있어야 합니다")
-        
-        queue.prepend(1)
-        XCTAssertFalse(queue.isEmpty, "element를 앞에 추가한 후에는 큐가 비어 있지 않아야 합니다")
-        XCTAssertEqual(queue.head?.value, 1, "1을 앞에 추가한 후에는 헤드 값이 1이어야 합니다")
-        
-        queue.prepend(2)
-        XCTAssertEqual(queue.head?.value, 2, "2를 앞에 추가한 후에는 헤드 값이 2가 되어야 합니다. 또한 2는 새로운 헤드가 되야 합니다")
-        
-        XCTAssertEqual(queue.count, 2, "두 번의 추가 후에는 큐에 2개의 아이템이 있어야 합니다")
+        XCTAssertFalse(sut.isEmpty, "큐가 비어 있지 않아야 합니다.")
+        XCTAssertEqual(sut.count, 3, "큐에는 3개의 element가 존재해야 합니다.")
     }
     
-    func testFirstMatching() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.enqueue(3)
+    func test_큐에서_값을_삭제할_수_있다() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
         
-        let existingNode = queue.first(matching: 2)
-        XCTAssertNotNil(existingNode, "값이 있어야 합니다")
-        XCTAssertEqual(existingNode?.value, 2, "찾은 노드의 값은 2가 되어야 합니다")
+        let dequeuedItem1 = sut.dequeue()
+        XCTAssertEqual(dequeuedItem1, 1, "dequeue된 element는 1이어야 합니다.")
         
-        let nonExistingNode = queue.first(matching: 4)
-        XCTAssertNil(nonExistingNode, "4는 존재하면 안 됩니다")
+        let dequeuedItem2 = sut.dequeue()
+        XCTAssertEqual(dequeuedItem2, 2, "dequeue된 element는 2이어야 합니다.")
+    }
+
+    func test_큐의_맨_앞_값을_확인할_수_있다() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        
+        let headValue = sut.head?.value
+        XCTAssertEqual(headValue, 1, "헤드 값은 1이어야 합니다.")
+    }
+
+    func test_큐의_모든_값을_제거할_수_있다() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.removeAll()
+        
+        XCTAssertTrue(sut.isEmpty, "모든 element를 제거한 후에는 큐는 empty 상태이어야 합니다.")
     }
     
-    func testInsertBefore() {
-        var queue = CalculatorItemQueue<Int>()
+    func test_특정_값을_가진_노드를_찾을_수_있다() {
+        sut.enqueue(1)
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        let existingNode = sut.first(matching: 2)
+        XCTAssertNotNil(existingNode, "값이 있어야 합니다.")
+        XCTAssertEqual(existingNode?.value, 2, "찾은 노드의 값은 2가 되어야 합니다.")
+        
+        let nonExistingNode = sut.first(matching: 4)
+        XCTAssertNil(nonExistingNode, "4는 존재하면 안 됩니다.")
+    }
+    
+    func test_특정_노드_앞에_값을_추가할_수_있다() {
         let firstElement = 1
         let secondElement = 2
         let thirdElement = 3
         
-        queue.enqueue(firstElement)
-        queue.enqueue(thirdElement)
+        sut.enqueue(firstElement)
+        sut.enqueue(thirdElement)
         
-        if let nodeToInsertBefore = queue.first(matching: thirdElement) {
-            queue.insert(secondElement, before: nodeToInsertBefore)
+        if let nodeToInsertBefore = sut.first(matching: thirdElement) {
+            sut.insert(secondElement, before: nodeToInsertBefore)
         }
         
-        var current = queue.head
-        XCTAssertEqual(current?.value, firstElement, "첫 번째는 1이어야 합니다")
+        var current = sut.head
+        XCTAssertEqual(current?.value, firstElement, "첫 번째는 1이어야 합니다.")
         current = current?.next
-        XCTAssertEqual(current?.value, secondElement, "두 번째는 2이어야 합니다")
+        XCTAssertEqual(current?.value, secondElement, "두 번째는 2이어야 합니다.")
         current = current?.next
-        XCTAssertEqual(current?.value, thirdElement, "세 번째는 3이어야 합니다")
+        XCTAssertEqual(current?.value, thirdElement, "세 번째는 3이어야 합니다.")
     }
-    
-    func testPrintNode() {
-        var queue = CalculatorItemQueue<Int>()
-        queue.enqueue(1)
-        queue.enqueue(2)
-        queue.enqueue(3)
-        queue.printNode()
+
+    func test_큐의_앞에_값을_추가하고_삭제할_수_있다() {
+        // Given
+        sut.enqueue(2)
+        sut.enqueue(3)
+        
+        // When
+        sut.insert(1, before: sut.head!)
+        let dequeuedItem1 = sut.dequeue()
+        let dequeuedItem2 = sut.dequeue()
+        let dequeuedItem3 = sut.dequeue()
+        
+        // Then
+        XCTAssertEqual(dequeuedItem1, 1, "dequeue된 element는 1이어야 합니다.")
+        XCTAssertEqual(dequeuedItem2, 2, "dequeue된 element는 2이어야 합니다.")
+        XCTAssertEqual(dequeuedItem3, 3, "dequeue된 element는 3이어야 합니다.")
     }
 }
