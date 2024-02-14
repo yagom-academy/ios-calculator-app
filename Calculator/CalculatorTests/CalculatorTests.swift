@@ -6,30 +6,69 @@
 //
 
 import XCTest
+@testable import Calculator
+
+enum MyError: Error {
+    case someExpectedError
+    case someUnExpectedError
+}
+
+func functionThatThrows() throws {
+    throw MyError.someExpectedError
+}
 
 final class CalculatorTests: XCTestCase {
-
+    var sut: CalculatorItemQueue<Double>!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        //각각의 테스트 메서드가 실행되기 전 말그대로 setup 해주는 코드
+        sut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        // 각각의 유닛 테스트가 끝난 후 테스트 값을 처리
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    func test_Queue의사이즈가Enqueue한만큼늘어났다면_True를_반환한다() {
+        let expectation = 5
+        let input = [1.0, 2.0, 3.0, 4.0, 5.0]
+        
+        for number in input {
+            sut.enqueue(number)
         }
+        
+        XCTAssertEqual(sut.size, expectation)
     }
+    
+    func test_Queue을모두Dequeue하였을때isEmpty를만족시키면_True를_반환한다() throws {
+        let size = sut.size
 
+        if size == 0 {
+            print("list의 사이즈가 0")
+            return
+        }
+        
+        XCTAssertThrowsError(try functionThatThrows()) { error in
+            for _ in 0...size-1 {
+                let dequeuedNumber = sut.dequeue()
+            }
+            
+            XCTAssertEqual(error as! MyError, MyError.someExpectedError)
+        }
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_Queue를clear한경우isEmpty를만족시키면_True를_반환한다() {
+        let input = [1.0, 2.0, 3.0, 4.0, 5.0]
+        
+        for number in input {
+            sut.enqueue(number)
+        }
+        
+        sut.clear()
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
 }
