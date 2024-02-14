@@ -8,10 +8,25 @@
 import Foundation
 
 struct Formula {
-    let operands: CalculatorItemQueue
-    let operators: CalculatorItemQueue
+    var operands: CalculatorItemQueue
+    var operators: CalculatorItemQueue
     
     func result() -> Double {
-        return 0.0
+        var result: Double = operands.dequeue()
+        
+        while !operands.isEmpty {
+            switch operators.dequeue() {
+            case "+":
+                result = Operator.add.calculate(lhs: result, rhs: operands.dequeue())
+            case "-":
+                result = Operator.subtract.calculate(lhs: result, rhs: operands.dequeue())
+            case "/":
+                result = Operator.divide.calculate(lhs: result, rhs: operands.dequeue())
+            default:
+                result = Operator.multiply.calculate(lhs: result, rhs: operands.dequeue())
+            }
+        }
+        
+        return result
     }
 }
