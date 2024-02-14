@@ -19,9 +19,7 @@ final class ExpressionParserTests: XCTestCase {
     
     func test_Parse() {
         // Given
-        let expression = "120.0/3.+20-10.0*4.0/2.0"
-        let expectedOperandsArr = [120.0, 3.0, 20.0, 10.0, 4.0, 2.0]
-        let expectedOperatorsArr: [Operator] = [.divide, .add, .subtract, .multiply, .divide]
+        let expression = "120.0/3.+-20−10.0*4.0/2.0"
         
         // When
         var resultFormula = ExpressionParser.parse(from: expression)
