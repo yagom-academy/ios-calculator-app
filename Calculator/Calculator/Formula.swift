@@ -20,13 +20,13 @@ struct Formula {
                 
                 switch operatorCharacter {
                 case "+":
-                    formulaResult = Operator.calculate(.add)(lhs: result, rhs: operand)
+                    formulaResult = Operator.add.calculate(lhs: result, rhs: operand)
                 case "-":
-                    formulaResult = Operator.calculate(.substract)(lhs: result, rhs: operand)
+                    formulaResult = Operator.substract.calculate(lhs: result, rhs: operand)
                 case "%":
-                    formulaResult = Operator.calculate(.divide)(lhs: result, rhs: operand)
+                    formulaResult = Operator.divide.calculate(lhs: result, rhs: operand)
                 case "*":
-                    formulaResult = Operator.calculate(.multiply)(lhs: result, rhs: operand)
+                    formulaResult = Operator.multiply.calculate(lhs: result, rhs: operand)
                 default:
                     break
                 }
