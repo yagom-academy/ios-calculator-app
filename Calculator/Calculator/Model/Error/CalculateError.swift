@@ -7,4 +7,5 @@
 
 enum CalculateError: Error {
     case divisionByZero
+    case invalidFormula
 }
