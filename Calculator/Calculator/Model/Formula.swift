@@ -10,7 +10,8 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard var result = operands.dequeue() else {
+        guard operands.count == operators.count + 1, 
+              var result = operands.dequeue() else {
             throw CalculateError.invalidFormula
         }
         
