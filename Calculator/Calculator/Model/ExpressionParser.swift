@@ -5,8 +5,10 @@
 //  Created by Jaehun Lee on 2/13/24.
 //
 
-protocol Parsable {
-    static func parse(from input: String) -> Formula
+protocol Parsable<Input, Output> {
+    associatedtype Input
+    associatedtype Output
+    static func parse(from input: Input) -> Output
 }
 
 enum ExpressionParser: Parsable {
