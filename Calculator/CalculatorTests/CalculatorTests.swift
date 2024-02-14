@@ -10,11 +10,11 @@ import XCTest
 
 final class CalculatorTests: XCTestCase {
     
-    var calculatorSlut: CalculatorItemQueue?
+    var calculatorSlut: CalculatorItemQueue<Double>?
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        calculatorSlut = CalculatorItemQueue()
+        calculatorSlut = CalculatorItemQueue<Double>()
     }
 
     override func tearDownWithError() throws {
@@ -116,7 +116,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = calculatorSlut?.front()
-        let expectation = 0
+        let expectation = 0.0
         
         // then
         XCTAssertEqual(result, expectation)
@@ -132,7 +132,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = calculatorSlut?.rear()
-        let expectation = 4
+        let expectation = 4.0
         
         // then
         XCTAssertEqual(result, expectation)
@@ -166,7 +166,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = calculatorSlut?.pop()
-        let expectation = 0
+        let expectation = 0.0
         
         // then
         XCTAssertEqual(result, expectation)
@@ -184,7 +184,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = calculatorSlut?.front()
-        let expectation = 2
+        let expectation = 2.0
         
         // then
         XCTAssertEqual(result, expectation)
@@ -202,7 +202,7 @@ final class CalculatorTests: XCTestCase {
         
         // when
         let result = calculatorSlut?.rear()
-        let expectation = 4
+        let expectation = 4.0
         
         // then
         XCTAssertEqual(result, expectation)
