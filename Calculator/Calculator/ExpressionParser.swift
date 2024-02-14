@@ -12,12 +12,12 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<String>()
         
-        let parsedExpression = componentsByOperators(from: input)
-        for component in parsedExpression {
-            if let number = Double(component) {
+        let parsedExpressions = componentsByOperators(from: input)
+        for expression in parsedExpressions {
+            if let number = Double(expression) {
                 operands.push(number)
             } else {
-                operators.push(component)
+                operators.push(expression)
             }
         }
         
