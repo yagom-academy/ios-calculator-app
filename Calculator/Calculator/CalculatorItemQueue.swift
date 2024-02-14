@@ -7,14 +7,6 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-extension Double: CalculateItem {
-    
-}
-
 struct CalculatorItemQueue<T>: CalculateItem {
     private var inbox: [T] = []
     private var outbox: [T] = []
