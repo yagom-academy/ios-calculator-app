@@ -53,4 +53,63 @@ final class FormulaTests: XCTestCase {
             XCTAssertEqual(expectedError, thrownError)
         }
     }
+    
+    func test_OperandsIsEmpty() {
+        // Given
+        let operatorsArr: [Operator] = [.subtract]
+        operatorsArr.forEach { sut.operators.enqueue(element: $0) }
+        let expectedError: CalculateError = .invalidFormula
+        
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
+    }
+    
+    func test_OperatorsIsEmpty() {
+        // Given
+        let operandsArr = [1.0, 2.0]
+        operandsArr.forEach { sut.operands.enqueue(element: $0) }
+        let expectedError: CalculateError = .invalidFormula
+        
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
+    }
+    
+    func test_WierdFormula() {
+        // Given
+        let operandsArr = [1.0, 2.0]
+        let operatorsArr: [Operator] = [.divide, .add, .subtract]
+        operandsArr.forEach { sut.operands.enqueue(element: $0) }
+        operatorsArr.forEach { sut.operators.enqueue(element: $0) }
+        let expectedError: CalculateError = .invalidFormula
+        
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
+    }
 }
