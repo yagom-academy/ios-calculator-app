@@ -8,7 +8,5 @@
 import Foundation
 
 extension Double: CalculateItem {
-    func calculate(lhs: Double, rhs: Double) -> Double {
-        
-    }
+    
 }

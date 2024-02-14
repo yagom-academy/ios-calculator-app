@@ -10,13 +10,18 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         
-        var operands = CalculatorItemQueue()
-        var operators = CalculatorItemQueue()
+        var operands = CalculatorItemQueue<Double>()
+        var operators = CalculatorItemQueue<Operator>()
         
-        var componentByOperatorsArray = componentByOperators(from: input)
+        let componentByOperatorsArray = componentByOperators(from: input)
         
-        operands.enqueue(componentByOperatorsArray[1])
-        operators.enqueue(componentByOperatorsArray[0])
+        if let DoubleValueOfOperands = Double(componentByOperatorsArray[1]) {
+            operands.enqueue(DoubleValueOfOperands)
+        }
+        
+        if let OperatorValueOfOperator = Operator(rawValue: Character(componentByOperatorsArray[0])) {
+            operators.enqueue(OperatorValueOfOperator)
+        }
     
         let resultOfParse = Formula(operands: operands, operators: operators)
         

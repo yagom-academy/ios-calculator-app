@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CalculateItem {
-    func calculate(lhs: Double, rhs: Double) -> Double
+    
 }
