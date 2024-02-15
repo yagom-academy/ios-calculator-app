@@ -20,10 +20,12 @@ final class DoublyLinkedListTests: XCTestCase {
     var sut: DoublyLinkedList<Int>!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sut = DoublyLinkedList()
     }
 
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sut = nil
     }
     

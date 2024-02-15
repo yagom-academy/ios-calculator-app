@@ -20,7 +20,7 @@ protocol DoublyLinkedListProtocol: DataAccessable {
     mutating func removeLast() -> Element?
 }
 
-struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
+struct DoublyLinkedList<Element: Equatable>: DoublyLinkedListProtocol {
     private var header: Node<Element>
     private var trailer: Node<Element>
     private(set) var count: Int = 0
@@ -108,5 +108,11 @@ struct DoublyLinkedList<Element>: DoublyLinkedListProtocol {
         }
         
         return remove(node: lastNode)
+    }
+}
+
+extension DoublyLinkedList: Equatable {
+    static func ==(lhs: DoublyLinkedList<Element>, rhs: DoublyLinkedList<Element>) -> Bool {
+        return lhs.header == rhs.header
     }
 }

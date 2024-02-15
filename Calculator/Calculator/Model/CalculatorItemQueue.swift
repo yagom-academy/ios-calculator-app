@@ -5,10 +5,6 @@
 //  Created by Jaehun Lee on 2/6/24.
 //
 
-extension Double: CalculateItem {
-    
-}
-
 protocol CalculateItem {
     
 }
@@ -18,7 +14,7 @@ protocol QueueProtocol: DataAccessable {
     mutating func dequeue() -> Element?
 }
 
-struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
+struct CalculatorItemQueue<Element: CalculateItem & Equatable>: QueueProtocol {
     private var list = DoublyLinkedList<Element>()
     
     var count: Int {
@@ -43,5 +39,11 @@ struct CalculatorItemQueue<Element: CalculateItem>: QueueProtocol {
     
     mutating func dequeue() -> Element? {
         return list.removeFirst()
+    }
+}
+
+extension CalculatorItemQueue: Equatable {
+    static func ==(lhs: CalculatorItemQueue<Element>, rhs: CalculatorItemQueue<Element>) -> Bool {
+        return lhs.list == rhs.list
     }
 }
