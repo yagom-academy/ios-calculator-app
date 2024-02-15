@@ -11,16 +11,22 @@ import XCTest
 final class CalculatorTests: XCTestCase {
 
     var sut: CalculatorItemQueue<String>!
+    var formulaSut: Formula!
+    
+    var operands: CalculatorItemQueue<Double>!
+    var operators: CalculatorItemQueue<Operator>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
-        
+        operands = CalculatorItemQueue()
+        operators = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
+        formulaSut = nil
     }
 
     func test_큐_요소개수파악이되는지테스트() throws {
@@ -61,6 +67,20 @@ final class CalculatorTests: XCTestCase {
         let result = sut.dequeue()
         
         XCTAssertEqual(result, expectation)
+    }
+    
+    func test_Formula_연산결과확인하기() {
+        operands.enqueue(1.0)
+        operands.enqueue(1.0)
+        operands.enqueue(2.0)
+        operators.enqueue(Operator.add)
+        operators.enqueue(Operator.multiply)
+        let expression = 4.0
+        
+        formulaSut = Formula(operands: operands, operators: operators)
+        let result = formulaSut.result()
+        
+        XCTAssertEqual(result, expression)
     }
     
 }
