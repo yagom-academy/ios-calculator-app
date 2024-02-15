@@ -16,7 +16,8 @@ struct Formula {
         
         while operands.isEmpty == false {
             if operators.isEmpty == false {
-                valueOfResult = operators.dequeue()?.calculate(lhs: valueOfResult, rhs: operands.dequeue() ?? Constant.zero) ?? Constant.zero
+                var elementOfOperators = operators.dequeue()
+                valueOfResult = elementOfOperators?.calculate(lhs: valueOfResult, rhs: operands.dequeue() ?? Constant.zero) ?? Constant.zero
             } else {
                 throw CalculatorError.overTheOperands
             }

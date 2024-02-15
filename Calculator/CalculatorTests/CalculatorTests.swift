@@ -27,10 +27,13 @@ final class CalculatorTests: XCTestCase {
         try super.tearDownWithError()
         sut = nil
         formulaSut = nil
+        operands = nil
+        operators = nil
     }
 
     func test_큐_요소개수파악이되는지테스트() throws {
-        sut.enqueue("3")
+        let dummy = ["3"]
+        dummy.forEach { sut.enqueue($0) }
         let expection = 1
         
         let result = sut.count
@@ -39,8 +42,8 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_큐_비어있는상태인지테스트() {
-        sut.enqueue("2")
-        sut.enqueue("4")
+        let dummy = ["3"]
+        dummy.forEach { sut.enqueue($0) }
         let expection = false
         
         let result: Bool = sut.isEmpty
@@ -49,8 +52,10 @@ final class CalculatorTests: XCTestCase {
     }
 
     func test_큐_요소추가하기() {
-        sut.enqueue("2")
-        let expectation: [String] = ["2"]
+        let dummy = ["3"]
+        dummy.forEach { sut.enqueue($0) }
+        
+        let expectation: [String] = dummy
         
         let result = sut.showQueue()
         
@@ -58,11 +63,12 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_큐_요소제거하기_FirstOut() {
-        sut.enqueue("2")
-        sut.enqueue("+")
-        sut.enqueue("3")
-        let expectation = "+"
+        let dummy = ["2", "+", "3"]
+        dummy.forEach { sut.enqueue($0) }
         sut.dequeue()
+
+        let expectation = "+"
+        
         
         let result = sut.dequeue()
         
@@ -70,11 +76,11 @@ final class CalculatorTests: XCTestCase {
     }
     
     func test_Formula_연산결과확인하기() {
-        operands.enqueue(1.0)
-        operands.enqueue(1.0)
-        operands.enqueue(2.0)
-        operators.enqueue(Operator.add)
-        operators.enqueue(Operator.multiply)
+        let operandsDummy: [Double] = [1.0, 1.0, 2.0]
+        let operatorsDummy: [Operator] = [Operator.add, Operator.multiply]
+        operandsDummy.forEach { operands.enqueue($0) }
+        operatorsDummy.forEach { operators.enqueue($0) }
+        
         let expression = 4.0
         
         formulaSut = Formula(operands: operands, operators: operators)
