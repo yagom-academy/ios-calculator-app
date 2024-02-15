@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B70FB552B7D070900D8229F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B70FB542B7D070900D8229F /* Extensions.swift */; };
 		8B88654B2B71003000CE0652 /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B88654A2B71003000CE0652 /* CalculatorTests.swift */; };
 		8B8865522B7100FC00CE0652 /* CalculatorItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8865512B7100FC00CE0652 /* CalculatorItemQueue.swift */; };
 		8B8865592B724A4700CE0652 /* CalculateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8865582B724A4700CE0652 /* CalculateItem.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8B70FB542B7D070900D8229F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8B8865482B71003000CE0652 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B88654A2B71003000CE0652 /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
 		8B8865512B7100FC00CE0652 /* CalculatorItemQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorItemQueue.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				8B8865512B7100FC00CE0652 /* CalculatorItemQueue.swift */,
 				8B88655A2B7B92F300CE0652 /* Operator.swift */,
 				8B88655C2B7B931A00CE0652 /* ExpressionParser.swift */,
+				8B70FB542B7D070900D8229F /* Extensions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				8B8865592B724A4700CE0652 /* CalculateItem.swift in Sources */,
 				8B88655B2B7B92F300CE0652 /* Operator.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* CalculatorViewController.swift in Sources */,
+				8B70FB552B7D070900D8229F /* Extensions.swift in Sources */,
 				C713D9422570E5EB001C3AFC /* AppDelegate.swift in Sources */,
 				8B8865522B7100FC00CE0652 /* CalculatorItemQueue.swift in Sources */,
 				8B88655D2B7B931A00CE0652 /* ExpressionParser.swift in Sources */,

@@ -5,7 +5,7 @@
 //  Created by Yejin Hong on 2024/02/05.
 //
 
-class Node<T> {
+private class Node<T> {
     var value: T
     var next: Node?
     
