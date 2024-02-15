@@ -15,8 +15,8 @@ struct Formula {
     mutating func result() -> Double {
         var valueOfResult: Double = operands.dequeue() ?? defaultValue
         
-        while !operands.isEmpty {
-            if !operators.isEmpty{
+        while operands.isEmpty == false {
+            if operators.isEmpty == false {
                 valueOfResult = operators.dequeue()?.calculate(lhs: valueOfResult, rhs: operands.dequeue() ?? defaultValue) ?? defaultValue
             }
         }
