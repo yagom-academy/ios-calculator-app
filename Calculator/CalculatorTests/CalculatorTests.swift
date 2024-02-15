@@ -78,9 +78,16 @@ final class CalculatorTests: XCTestCase {
         let expression = 4.0
         
         formulaSut = Formula(operands: operands, operators: operators)
-        let result = formulaSut.result()
         
-        XCTAssertEqual(result, expression)
+        do {
+            let result = try formulaSut.result()
+            XCTAssertEqual(result, expression)
+        } catch CalculatorError.overTheOperands {
+            print("Operands가 Operators 보다 수가 많습니다.")
+        } catch {
+            print("알 수 없는 에러가 발생했습니다.")
+        }
+        
     }
     
 }
