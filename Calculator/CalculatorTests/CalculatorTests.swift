@@ -12,7 +12,6 @@ final class CalculatorTests: XCTestCase {
 
     var sut: CalculatorItemQueue<String>!
     var formulaSut: Formula!
-    
     var operands: CalculatorItemQueue<Double>!
     var operators: CalculatorItemQueue<Operator>!
     
@@ -94,6 +93,21 @@ final class CalculatorTests: XCTestCase {
             print("알 수 없는 에러가 발생했습니다.")
         }
         
+    }
+    
+    func test_ExpressionParser_parse메소드_결과() {
+        formulaSut = ExpressionParser.parse(from: "123 + 234")
+        
+        let operandsDummy: [Double] = [123, 234]
+        let operatorsDummy: [Operator] = [Operator.add]
+        operandsDummy.forEach { operands.enqueue($0) }
+        operatorsDummy.forEach { operators.enqueue($0) }
+        
+        let resultOfOperands: CalculatorItemQueue<Double> = formulaSut.operands
+        let resultOfOperators: CalculatorItemQueue<Operator> = formulaSut.operators
+        
+        XCTAssertEqual(operands.showQueue(), resultOfOperands.showQueue())
+        XCTAssertEqual(operators.showQueue(), resultOfOperators.showQueue())
     }
     
 }

@@ -10,18 +10,19 @@ import Foundation
 extension String {
     func split(with target: Character) -> [String] {
         var splitString: [String] = []
-        var splitOperands: String = ""
+        var splitOperandsAndOperators: String = ""
         
         for i in self {
             if i == target {
-                splitString.append(String(i))
+                splitString.append(splitOperandsAndOperators)
+                splitOperandsAndOperators = ""
             } else {
-                splitOperands.append(String(i))
+                splitOperandsAndOperators.append(String(i))
             }
         }
         
-        splitString.append(splitOperands)
-        
+        splitString.append(splitOperandsAndOperators)
+            
         return splitString
     }
 }
