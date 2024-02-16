@@ -6,6 +6,10 @@
 //
 import Foundation
 
+enum MyError: Error {
+    case noElements
+}
+
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandElements = componentsByOperators(from: input)
@@ -13,15 +17,13 @@ enum ExpressionParser {
         var operands: CalculatorItemQueue<Double> = CalculatorItemQueue()
         var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue()
         
-        operandElements.forEach {
-            operands.enqueue(Double($0)!)
-        }
+        operandElements
+            .compactMap{ Double($0) }
+            .forEach{ operands.enqueue($0) }
         
-        input.forEach {
-            if !operandElements.contains(String($0)) {
-                operators.enqueue(Operator(rawValue: $0)!)
-            }
-        }
+        input
+            .compactMap { Operator(rawValue: $0) }
+            .forEach { operators.enqueue($0) }
         
         return Formula(operands: operands, operators: operators)
     }
@@ -42,8 +44,17 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
     
-    func result() -> Double {
+    mutating func result() -> Double {
+        var calculateResult = 0.0
         
-        return 0.0
+        while let operand = operands.dequeue() {
+            guard let `operator` = operators.dequeue() else {
+                return 0.0
+            }
+            
+            calculateResult = `operator`.calculate(lhs: calculateResult, rhs: operand)
+        }
+        
+        return calculateResult
     }
 }
