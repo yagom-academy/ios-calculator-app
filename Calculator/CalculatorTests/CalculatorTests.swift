@@ -9,25 +9,16 @@ import XCTest
 @testable import Calculator
 
 final class CalculatorTests: XCTestCase {
-
     var sut: CalculatorItemQueue<String>!
-    var formulaSut: Formula!
-    var operands: CalculatorItemQueue<Double>!
-    var operators: CalculatorItemQueue<Operator>!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CalculatorItemQueue()
-        operands = CalculatorItemQueue()
-        operators = CalculatorItemQueue()
     }
 
     override func tearDownWithError() throws {
         try super.tearDownWithError()
         sut = nil
-        formulaSut = nil
-        operands = nil
-        operators = nil
     }
 
     func test_큐_요소개수파악이되는지테스트() throws {
@@ -73,58 +64,4 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertEqual(result, expectation)
     }
-    
-    func test_Formula_0으로_나눴을때_연산결과확인하기() {
-        // Given
-        let operandsDummy: [Double] = [1.0, 1.0, 0]
-        let operatorsDummy: [Operator] = [Operator.add, Operator.divide]
-        operandsDummy.forEach { operands.enqueue($0) }
-        operatorsDummy.forEach { operators.enqueue($0) }
-        let expectation: CalculatorError = CalculatorError.divideOfZero
-        formulaSut = Formula(operands: operands, operators: operators)
-        
-        do {
-            // When
-            _ = try formulaSut.result()
-            XCTFail()
-        } catch {
-            guard let thrownError = error as? CalculatorError else {
-                XCTFail()
-                return
-            }
-            // Then
-            XCTAssertEqual(expectation, thrownError)
-        }
-        
-    }
-    
-    func test_Formula_정상적인값들어있을때_연산결과확인하기() {
-        // Given
-        let operandsDummy: [Double] = [1.0, 1.0]
-        let operatorsDummy: [Operator] = [Operator.add]
-        operandsDummy.forEach { operands.enqueue($0) }
-        operatorsDummy.forEach { operators.enqueue($0) }
-        let expectation = 2.0
-        
-        formulaSut = Formula(operands: operands, operators: operators)
-        
-        try XCTAssertEqual(formulaSut.result(), expectation)
-        
-    }
-    
-    func test_ExpressionParser_parse메소드_결과() {
-        formulaSut = ExpressionParser.parse(from: "123 + 234 +")
-        
-        let operandsDummy: [Double] = [123, 234]
-        let operatorsDummy: [Operator] = [Operator.add, Operator.add]
-        operandsDummy.forEach { operands.enqueue($0) }
-        operatorsDummy.forEach { operators.enqueue($0) }
-        
-        let resultOfOperands: CalculatorItemQueue<Double> = formulaSut.operands
-        let resultOfOperators: CalculatorItemQueue<Operator> = formulaSut.operators
-        
-        XCTAssertEqual(operands.showQueue(), resultOfOperands.showQueue())
-        XCTAssertEqual(operators.showQueue(), resultOfOperators.showQueue())
-    }
-    
 }

@@ -16,6 +16,7 @@ final class OperatorTests: XCTestCase {
     var sutMultiply: Operator!
     
     override func setUpWithError() throws {
+        try super.setUpWithError()
         sutAdd = Operator.add
         sutSubtract = Operator.subtract
         sutDivide = Operator.divide
@@ -23,6 +24,7 @@ final class OperatorTests: XCTestCase {
     }
     
     override func tearDownWithError() throws {
+        try super.tearDownWithError()
         sutAdd = nil
         sutSubtract = nil
         sutDivide = nil
