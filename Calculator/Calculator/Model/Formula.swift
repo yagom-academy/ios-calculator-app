@@ -12,14 +12,20 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        var valueOfResult: Double = operands.dequeue() ?? Constant.zero
+        guard operands.count == operators.count + 1 else {
+            throw CalculatorError.unExpectedError
+        }
+        
+        guard var valueOfResult = operands.dequeue() else {
+            throw CalculatorError.unExpectedError
+        }
         
         while operands.isEmpty == false {
             if operators.isEmpty == false {
-                var elementOfOperators = operators.dequeue()
-                valueOfResult = elementOfOperators?.calculate(lhs: valueOfResult, rhs: operands.dequeue() ?? Constant.zero) ?? Constant.zero
-            } else {
-                throw CalculatorError.overTheOperands
+                guard let elementOfOperators = operators.dequeue() else {
+                    throw CalculatorError.unExpectedError
+                }
+                try valueOfResult = elementOfOperators.calculate(lhs: valueOfResult, rhs: operands.dequeue() ?? Constant.zero)
             }
         }
         

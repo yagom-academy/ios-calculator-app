@@ -74,32 +74,49 @@ final class CalculatorTests: XCTestCase {
         XCTAssertEqual(result, expectation)
     }
     
-    func test_Formula_연산결과확인하기() {
-        let operandsDummy: [Double] = [1.0, 1.0, 2.0]
-        let operatorsDummy: [Operator] = [Operator.add, Operator.multiply]
+    func test_Formula_0으로_나눴을때_연산결과확인하기() {
+        // Given
+        let operandsDummy: [Double] = [1.0, 1.0, 0]
+        let operatorsDummy: [Operator] = [Operator.add, Operator.divide]
         operandsDummy.forEach { operands.enqueue($0) }
         operatorsDummy.forEach { operators.enqueue($0) }
-        
-        let expression = 4.0
-        
+        let expectation: CalculatorError = CalculatorError.divideOfZero
         formulaSut = Formula(operands: operands, operators: operators)
         
         do {
-            let result = try formulaSut.result()
-            XCTAssertEqual(result, expression)
-        } catch CalculatorError.overTheOperands {
-            print("Operands가 Operators 보다 수가 많습니다.")
+            // When
+            _ = try formulaSut.result()
+            XCTFail()
         } catch {
-            print("알 수 없는 에러가 발생했습니다.")
+            guard let thrownError = error as? CalculatorError else {
+                XCTFail()
+                return
+            }
+            // Then
+            XCTAssertEqual(expectation, thrownError)
         }
         
     }
     
+    func test_Formula_정상적인값들어있을때_연산결과확인하기() {
+        // Given
+        let operandsDummy: [Double] = [1.0, 1.0]
+        let operatorsDummy: [Operator] = [Operator.add]
+        operandsDummy.forEach { operands.enqueue($0) }
+        operatorsDummy.forEach { operators.enqueue($0) }
+        let expectation = 2.0
+        
+        formulaSut = Formula(operands: operands, operators: operators)
+        
+        try XCTAssertEqual(formulaSut.result(), expectation)
+        
+    }
+    
     func test_ExpressionParser_parse메소드_결과() {
-        formulaSut = ExpressionParser.parse(from: "123 + 234")
+        formulaSut = ExpressionParser.parse(from: "123 + 234 +")
         
         let operandsDummy: [Double] = [123, 234]
-        let operatorsDummy: [Operator] = [Operator.add]
+        let operatorsDummy: [Operator] = [Operator.add, Operator.add]
         operandsDummy.forEach { operands.enqueue($0) }
         operatorsDummy.forEach { operators.enqueue($0) }
         

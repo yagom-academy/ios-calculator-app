@@ -13,23 +13,14 @@ enum Operator: Character, CaseIterable, CalculateItem {
     case divide = "/"
     case multiply = "*"
     
-    func calculate(lhs: Double, rhs: Double) -> Double {
+    func calculate(lhs: Double, rhs: Double) throws -> Double {
         switch self.rawValue {
         case "+":
             return add(lhs: lhs, rhs: rhs)
         case "-":
             return subtract(lhs: lhs, rhs: rhs)
         case "/":
-            do {
-                let result = try divide(lhs: lhs, rhs: rhs)
-                return result
-            } catch CalculatorError.divideOfZero {
-                print("0으로 나누면 에러가 발생합니다.")
-                return 0
-            } catch {
-                print("그외 다른 Error가 발생했습니다.")
-                return 0
-            }
+            return try divide(lhs: lhs, rhs: rhs)
         default:
             return multiply(lhs: lhs, rhs: rhs)
         }
@@ -47,7 +38,6 @@ enum Operator: Character, CaseIterable, CalculateItem {
         if rhs == 0 {
             throw CalculatorError.divideOfZero
         }
-        
         return lhs / rhs
     }
     
