@@ -29,7 +29,11 @@ enum Operator: Character, CaseIterable, CalculateItem {
     private func substract(lhs: Double, rhs: Double) -> Double { lhs - rhs }
     
     private func divide(lhs: Double, rhs: Double) -> Double {
-        lhs / rhs
+        if rhs == 0 {
+            return .infinity
+        }
+        
+        return lhs / rhs
     }
     
     private func multiply(lhs: Double, rhs: Double) -> Double { lhs * rhs }

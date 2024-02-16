@@ -24,9 +24,6 @@ struct LinkedList<T> {
         head == nil
     }
     
-    init() {}
-    
-    
     mutating func append(_ value: T) {
         count += 1
         

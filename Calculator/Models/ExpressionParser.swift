@@ -6,10 +6,6 @@
 //
 import Foundation
 
-enum MyError: Error {
-    case noElements
-}
-
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         let operandElements = componentsByOperators(from: input)
@@ -49,7 +45,7 @@ struct Formula {
         
         while let operand = operands.dequeue() {
             guard let `operator` = operators.dequeue() else {
-                return 0.0
+                return .nan
             }
             
             calculateResult = `operator`.calculate(lhs: calculateResult, rhs: operand)
