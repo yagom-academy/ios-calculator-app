@@ -1,6 +1,6 @@
 //
-//  FormulaTests.swift
-//  FormulaTests
+//  ExpressionParserTests.swift
+//  ExpressionParserTests
 //
 //  Created by EUNJI CHOI on 2/20/24.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Calculator
 
-final class FormulaTests: XCTestCase {
+final class ExpressionParserTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -33,23 +33,25 @@ final class FormulaTests: XCTestCase {
         }
     }
     
-    func test_단순_덧셈_결과를_올바르게_반환한다() {
-        // 1 + 2 = 3
-        var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
-        formula.operands.enqueue(1)
-        formula.operands.enqueue(2)
-        formula.operators.enqueue(.add)
-        
-        XCTAssertEqual(formula.result(), 3, "1과 2를 더한 결과는 3이어야 한다.")
-    }
-    
-    func test_문자열_파싱으로_단순_덧셈_수식을_생성한다() {
-        // "1+2"를 파싱하여 Formula 생성
+    func test_단순_덧셈_파싱을_성공적으로_수행한다() {
+        // "1+2" 수식을 파싱
         var formula = ExpressionParser.parse(from: "1+2")
+        // 반환된 Formula 인스턴스에서 피연산자와 연산자를 검증
+        guard let firstOperand = formula.operands.dequeue(),
+              let secondOperand = formula.operands.dequeue(),
+              let operation = formula.operators.dequeue() else {
+            XCTFail("피연산자 또는 연산자가 없습니다.")
+            return
+        }
         
-        // 결과 검증
-        XCTAssertFalse(formula.operands.isEmpty, "피연산자 큐가 비어 있지 않아야 한다.")
-        XCTAssertFalse(formula.operators.isEmpty, "연산자 큐가 비어 있지 않아야 한다.")
-        XCTAssertEqual(formula.result(), 3, "\"1+2\"의 계산 결과는 3이어야 한다.")
+        // 예상되는 값과 비교
+        XCTAssertEqual(firstOperand, 1.0, "첫 번째 피연산자가 1.0이어야 합니다.")
+        XCTAssertEqual(secondOperand, 2.0, "두 번째 피연산자가 2.0이어야 합니다.")
+        XCTAssertEqual(operation, .add, "연산자가 덧셈이어야 합니다.")
+        
+        // 더 이상의 피연산자나 연산자가 없는지 확인
+        XCTAssertTrue(formula.operands.isEmpty, "피연산자 큐가 비어 있어야 합니다.")
+        XCTAssertTrue(formula.operators.isEmpty, "연산자 큐가 비어 있어야 합니다.")
     }
+
 }

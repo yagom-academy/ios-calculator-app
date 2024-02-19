@@ -10,6 +10,6 @@ import Foundation
 protocol CalculateItem {
 }
 
-extension Double {
+extension Double: CalculateItem {
     
 }
