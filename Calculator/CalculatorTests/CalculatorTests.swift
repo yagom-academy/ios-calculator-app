@@ -59,19 +59,24 @@ final class CalculatorTests: XCTestCase {
 //        XCTAssertEqual(expectation, result)
 //    }
 //
-//    func test_Queue가_첫번째요소를_반환하는가() throws {
-//        // given
-//        let expectation = 3.0
-//
-//        // when
-//        sut.enqueue(element: 3.0)
-//        sut.enqueue(element: 4.0)
-//        sut.enqueue(element: 24.2)
-//        let result = sut.first()
-//
-//        // then
-//        XCTAssertEqual(expectation, result)
-//    }
+    func test_Queue가_첫번째요소를_반환하는가() throws {
+        // given
+        let expectation = 3.0
+
+        // when
+        sut.enqueue(element: 3.0)
+        sut.enqueue(element: 4.0)
+        sut.enqueue(element: 24.2)
+        let result = sut.first()
+
+        XCTAssertEqual(expectation, result)
+    }
+    
+    func test_Queue가_없을때_nil을_반환하는가() throws {
+        let result = sut.first()
+        
+        XCTAssertNil(result)
+    }
 //
 //    func test_Queue가_비워지는가() throws {
 //        // given
