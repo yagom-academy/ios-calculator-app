@@ -21,4 +21,8 @@ struct CalculatorItemQueue<E> {
     func first() -> E? {
         return list.peek()
     }
+    
+    mutating func clear() {
+        list.clear()
+    }
 }

@@ -47,11 +47,28 @@ struct LinkedList<E> {
         }
     }
     
+    mutating func deleteFirstWithoutReturn() {
+        if isEmpty {
+            return
+        } else if head?.next == nil {
+            head = nil
+            tail = nil
+        } else {
+            head = head?.next
+        }
+    }
+    
     func peek() -> E? {
         if isEmpty {
             return nil
         } else {
             return head?.data
+        }
+    }
+    
+    mutating func clear() {
+        for _ in 0...count {
+            deleteFirstWithoutReturn()
         }
     }
 
