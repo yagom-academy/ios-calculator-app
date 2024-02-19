@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
+struct CalculatorItemQueue<T>: CalculateItem where T: Equatable {
     class Node {
-        var value: Element
+        var value: T
         var next: Node?
         
-        init(value: Element) {
+        init(value: T) {
             self.value = value
         }
         
@@ -42,7 +42,7 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         return head == nil
     }
     
-    mutating func enqueue(_ element: Element) {
+    mutating func enqueue(_ element: T) {
         let newNode = Node(value: element)
         
         if tail != nil {
@@ -54,7 +54,7 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         tail = newNode
     }
     
-    mutating func dequeue() -> Element? {
+    mutating func dequeue() -> T? {
         let headNode = head
         head = headNode?.next
         
@@ -65,13 +65,13 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         return headNode?.value
     }
     
-    mutating func prepend(_ element: Element) {
+    mutating func prepend(_ element: T) {
         let newNode = Node(value: element)
         newNode.next = head
         head = newNode
     }
     
-    mutating func insert(_ element: Element, before node: Node) {
+    mutating func insert(_ element: T, before node: Node) {
         let newNode = Node(value: element)
         
         if node === head {
@@ -90,7 +90,7 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         }
     }
     
-    func first(matching value: Element) -> Node? {
+    func first(matching value: T) -> Node? {
         var current = head
         
         while let node = current {
