@@ -5,8 +5,8 @@
 //  Created by JIWOONG on 2024/02/19.
 //
 
-struct CalculatorItemQueue<E> {
-    var list = LinkedList<E>()
+struct CalculatorItemQueue<E>: CalculateItem {
+    private var list = LinkedList<E>()
     var isEmpty: Bool { list.isEmpty }
     var count: Int { list.count }
     

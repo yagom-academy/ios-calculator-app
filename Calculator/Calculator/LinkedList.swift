@@ -6,8 +6,8 @@
 //
 
 struct LinkedList<E> {
-    var head: Node<E>?
-    var tail: Node<E>?
+    private var head: Node<E>?
+    private var tail: Node<E>?
     var isEmpty: Bool { head == nil }
     var count: Int {
         var result = 0
@@ -47,7 +47,7 @@ struct LinkedList<E> {
         }
     }
     
-    mutating func deleteFirstWithoutReturn() {
+    private mutating func deleteFirstWithoutReturn() {
         if isEmpty {
             return
         } else if head?.next == nil {
