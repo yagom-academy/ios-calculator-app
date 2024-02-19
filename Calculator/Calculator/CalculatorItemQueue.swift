@@ -8,6 +8,7 @@
 struct CalculatorItemQueue<E> {
     var list = LinkedList<E>()
     var isEmpty: Bool { list.isEmpty }
+    var count: Int { list.count }
     
     mutating func enqueue(element: E) {
         list.addLast(element: element)

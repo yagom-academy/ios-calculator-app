@@ -10,7 +10,13 @@ struct LinkedList<E> {
     var tail: Node<E>?
     var isEmpty: Bool { head == nil }
     var count: Int {
-        return 0
+        var result = 0
+        var temp = head
+        while temp != nil {
+            temp = temp?.next
+            result += 1
+        }
+        return result
     }
     
     mutating func addLast(element: E) {
