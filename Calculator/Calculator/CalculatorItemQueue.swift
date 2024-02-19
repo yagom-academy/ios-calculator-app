@@ -16,4 +16,8 @@ struct CalculatorItemQueue<E> {
     mutating func dequeue() -> E? {
         return list.deleteFirst()
     }
+    
+    func first() -> E? {
+        return list.peek()
+    }
 }

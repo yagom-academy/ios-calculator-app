@@ -40,5 +40,13 @@ struct LinkedList<E> {
             return result
         }
     }
+    
+    func peek() -> E? {
+        if isEmpty {
+            return nil
+        } else {
+            return head?.data
+        }
+    }
 
 }
