@@ -11,7 +11,7 @@ struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<String>
     
-    mutating func result() -> Double {
+    mutating func result() throws -> Double {
         var formulaResult: Double? = nil
         
         while let operand = operands.pop() {
@@ -24,6 +24,10 @@ struct Formula {
                 case "-":
                     formulaResult = Operator.substract.calculate(lhs: result, rhs: operand)
                 case "%":
+                    if operand == 0 {
+                        throw CalculatorError.divideByZero
+                    }
+                    
                     formulaResult = Operator.divide.calculate(lhs: result, rhs: operand)
                 case "*":
                     formulaResult = Operator.multiply.calculate(lhs: result, rhs: operand)
