@@ -7,7 +7,7 @@
 
 class Node<E> {
     let data: E
-    let next: Node?
+    var next: Node?
     
     init(data: E, next: Node?) {
         self.data = data
