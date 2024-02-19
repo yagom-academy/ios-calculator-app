@@ -23,5 +23,22 @@ struct LinkedList<E> {
             tail = newNode
         }
     }
+    
+    mutating func deleteFirst() -> E? {
+        if isEmpty {
+            return nil
+        } else if head?.next == nil {
+            let result = head?.data
+            head = nil
+            tail = nil
+            
+            return result
+        } else {
+            let result = head?.data
+            head = head?.next
+            
+            return result
+        }
+    }
 
 }

@@ -12,4 +12,8 @@ struct CalculatorItemQueue<E> {
     mutating func enqueue(element: E) {
         list.addLast(element: element)
     }
+    
+    mutating func dequeue() -> E? {
+        return list.deleteFirst()
+    }
 }
