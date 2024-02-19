@@ -77,20 +77,20 @@ final class CalculatorTests: XCTestCase {
         
         XCTAssertNil(result)
     }
-//
-//    func test_Queue가_비워지는가() throws {
-//        // given
-//        let expectation = true
-//
-//        // when
-//        sut.enqueue(element: 3.0)
-//        sut.enqueue(element: 4.0)
-//        sut.enqueue(element: 24.2)
-//        sut.clear()
-//        let result = sut.isEmpty
-//
-//        // then
-//        XCTAssertEqual(expectation, result)
-//    }
+
+    func test_Queue가_비워지는가() throws {
+        // given
+        let expectation = true
+
+        // when
+        sut.enqueue(element: 3.0)
+        sut.enqueue(element: 4.0)
+        sut.enqueue(element: 24.2)
+        sut.clear()
+        let result = sut.isEmpty
+
+        // then
+        XCTAssertEqual(expectation, result)
+    }
 
 }
