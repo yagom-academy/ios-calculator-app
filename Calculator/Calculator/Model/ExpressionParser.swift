@@ -17,6 +17,7 @@ enum ExpressionParser {
         for component in componentByOperatorsArray {
             if let DoubleValueOfOperands = Double(component) {
                 operands.push(DoubleValueOfOperands)
+                continue
             }
             
             if let OperatorValueOfOperator = Operator(rawValue: Character(component)) {
