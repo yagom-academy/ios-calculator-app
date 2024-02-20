@@ -9,7 +9,6 @@ import XCTest
 @testable import Calculator
 
 final class OperatorTests: XCTestCase {
-    
     var sutAdd: Operator!
     var sutSubtract: Operator!
     var sutDivide: Operator!
@@ -70,5 +69,4 @@ final class OperatorTests: XCTestCase {
         
         XCTAssertEqual(expectation, result)
     }
-    
 }

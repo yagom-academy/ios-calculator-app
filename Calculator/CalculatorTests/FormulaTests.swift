@@ -48,7 +48,6 @@ final class FormulaTests: XCTestCase {
             // Then
             XCTAssertEqual(expectation, thrownError)
         }
-        
     }
     
     func test_Formula_정상적인값들어있을때_연산결과확인하기() {
@@ -62,6 +61,5 @@ final class FormulaTests: XCTestCase {
         formulaSut = Formula(operands: operands, operators: operators)
         
         try XCTAssertEqual(formulaSut.result(), expectation)
-        
     }
 }
