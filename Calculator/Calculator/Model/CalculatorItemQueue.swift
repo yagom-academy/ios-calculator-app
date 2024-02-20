@@ -52,4 +52,8 @@ struct CalculatorItemQueue<T>: CalculateItem {
         
         return inbox.last
     }
+    
+    func showQueue() -> [T] {
+        return inbox + outbox
+    }
 }
