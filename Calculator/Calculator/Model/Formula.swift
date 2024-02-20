@@ -20,22 +20,12 @@ struct Formula {
             throw CalculatorError.unexpected
         }
         
-        while operands.isEmpty == false {
-            if operators.isEmpty == false {
-                guard let elementOfOperators = operators.pop() else {
-                    throw CalculatorError.unexpected
-                }
-                
-                guard let elementOfOperands = operands.pop() else {
-                    throw CalculatorError.unexpected
-                }
-                
-                if elementOfOperators == Operator.divide && elementOfOperands == 0 {
-                    throw CalculatorError.divideByZero
-                }
-                
-                valueOfResult = elementOfOperators.calculate(lhs: valueOfResult, rhs: elementOfOperands)
+        while let elementOfOperators = operators.pop(), let elementOfOperands = operands.pop() {
+            if elementOfOperators == Operator.divide && elementOfOperands == 0 {
+                throw CalculatorError.divideByZero
             }
+            
+            valueOfResult = elementOfOperators.calculate(lhs: valueOfResult, rhs: elementOfOperands)
         }
         
         return valueOfResult
