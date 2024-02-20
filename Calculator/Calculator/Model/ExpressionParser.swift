@@ -8,9 +8,7 @@
 import Foundation
 
 enum ExpressionParser {
-//    static func parse(from input: String) -> Formula {
-    static func parse(from input: String) {
-        
+    static func parse(from input: String) -> Formula {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
@@ -26,8 +24,8 @@ enum ExpressionParser {
             }
         }
         
-//        let resultOfParse = Formula(operands: operands, operators: operators)
-//        return resultOfParse
+        let resultOfParse = Formula(operands: operands, operators: operators)
+        return resultOfParse
     }
 
     private static func componentByOperators(from input: String) -> [String] {

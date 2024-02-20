@@ -12,12 +12,12 @@ struct Formula {
     var operators: CalculatorItemQueue<Operator>
     
     mutating func result() throws -> Double {
-        guard operands.size == operators.size + 1 else {
-            throw CalculatorError.unexpected
+        guard var valueOfResult = operands.pop() else {
+            throw CalculatorError.emptyOperands
         }
         
-        guard var valueOfResult = operands.pop() else {
-            throw CalculatorError.unexpected
+        guard operands.size == operators.size + 1 else {
+            throw CalculatorError.incorrectFormula
         }
         
         while let elementOfOperators = operators.pop(), let elementOfOperands = operands.pop() {

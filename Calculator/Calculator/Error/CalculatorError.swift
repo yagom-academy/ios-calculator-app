@@ -9,5 +9,6 @@ import Foundation
 
 enum CalculatorError: Error {
     case divideByZero
-    case unexpected
+    case incorrectFormula
+    case emptyOperands
 }
