@@ -16,7 +16,7 @@ struct Formula {
             throw CalculatorError.emptyOperands
         }
         
-        guard operands.size == operators.size + 1 else {
+        guard operands.size == operators.size else {
             throw CalculatorError.incorrectFormula
         }
         
