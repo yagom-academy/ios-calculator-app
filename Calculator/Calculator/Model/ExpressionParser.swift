@@ -29,8 +29,8 @@ enum ExpressionParser {
     }
     
     static func componentsByOperators(from input: String) -> [String] {
-        let operatorsSet = CharacterSet(charactersIn: "+-*/")
-        return input.components(separatedBy: operatorsSet).filter { !$0.isEmpty }
+        let arrayComponents = input.map { Operator(rawValue: $0) != nil ? " " : String($0) }.joined()
+        return arrayComponents.split(with: " ")
     }
 }
 
