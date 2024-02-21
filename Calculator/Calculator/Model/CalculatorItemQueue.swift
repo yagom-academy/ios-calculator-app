@@ -23,6 +23,10 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
     }
     
+    var Queue: [T] {
+        return inbox + outbox
+    }
+    
     mutating func push(_ data: T) {
         inbox.append(data)
     }
@@ -51,9 +55,5 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
         
         return inbox.last
-    }
-    
-    func showQueue() -> [T] {
-        return inbox + outbox
     }
 }

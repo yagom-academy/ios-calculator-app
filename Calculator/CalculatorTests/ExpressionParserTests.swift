@@ -36,7 +36,7 @@ final class ExpressionParserTests: XCTestCase {
         let resultOfOperands: CalculatorItemQueue<Double> = formulaSut.operands
         let resultOfOperators: CalculatorItemQueue<Operator> = formulaSut.operators
         
-        XCTAssertEqual(operands.showQueue(), resultOfOperands.showQueue())
-        XCTAssertEqual(operators.showQueue(), resultOfOperators.showQueue())
+        XCTAssertEqual(operands.Queue, resultOfOperands.Queue)
+        XCTAssertEqual(operators.Queue, resultOfOperators.Queue)
     }
 }
