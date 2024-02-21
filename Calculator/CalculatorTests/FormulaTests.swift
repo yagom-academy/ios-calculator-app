@@ -50,6 +50,52 @@ final class FormulaTests: XCTestCase {
         }
     }
     
+    func test_Formula_Operands큐_값이없을경우_연산결과확인하기() {
+        // Given
+        let operandsDummy: [Double] = []
+        let operatorsDummy: [Operator] = [Operator.add, Operator.divide]
+        operandsDummy.forEach { operands.push($0) }
+        operatorsDummy.forEach { operators.push($0) }
+        let expectation: CalculatorError = CalculatorError.emptyOperands
+        formulaSut = Formula(operands: operands, operators: operators)
+        
+        do {
+            // When
+            _ = try formulaSut.result()
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculatorError else {
+                XCTFail()
+                return
+            }
+            // Then
+            XCTAssertEqual(expectation, thrownError)
+        }
+    }
+    
+    func test_Formula_Operands큐와Operators큐_올바른개수가아닐경우_연산결과확인하기() {
+        // Given
+        let operandsDummy: [Double] = [123, 123]
+        let operatorsDummy: [Operator] = [Operator.add, Operator.divide]
+        operandsDummy.forEach { operands.push($0) }
+        operatorsDummy.forEach { operators.push($0) }
+        let expectation: CalculatorError = CalculatorError.incorrectFormula
+        formulaSut = Formula(operands: operands, operators: operators)
+        
+        do {
+            // When
+            _ = try formulaSut.result()
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculatorError else {
+                XCTFail()
+                return
+            }
+            // Then
+            XCTAssertEqual(expectation, thrownError)
+        }
+    }
+    
     func test_Formula_정상적인값들어있을때_연산결과확인하기() {
         // Given
         let operandsDummy: [Double] = [1.0, 1.0]
