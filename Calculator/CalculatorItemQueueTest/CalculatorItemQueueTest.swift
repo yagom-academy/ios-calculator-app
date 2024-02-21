@@ -2,7 +2,7 @@
 //  CalculatorItemQueueTest.swift
 //  CalculatorItemQueueTest
 //
-//  Created by EUNJI CHOI on 2/10/24.
+//  Created by Prism, Hamzzi on 2/10/24.
 //
 
 import XCTest
