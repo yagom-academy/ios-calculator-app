@@ -54,11 +54,11 @@ class ViewController: UIViewController {
         
         let operandLog = UILabel()
         operandLog.textColor = .white
-        operatorLog.font = .preferredFont(forTextStyle: .title3)
-        operatorLog.textAlignment = .right
-        operatorLog.adjustsFontForContentSizeCategory = true
-        operatorLog.adjustsFontSizeToFitWidth = true
-        operatorLog.minimumScaleFactor = 0.5
+        operandLog.font = .preferredFont(forTextStyle: .title3)
+        operandLog.textAlignment = .right
+        operandLog.adjustsFontForContentSizeCategory = true
+        operandLog.adjustsFontSizeToFitWidth = true
+        operandLog.minimumScaleFactor = 0.5
         
         if let `operator` = `operator` {
             operatorLog.text = String(`operator`.rawValue)
