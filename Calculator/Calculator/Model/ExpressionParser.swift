@@ -2,23 +2,33 @@
 //  ExpressionParser.swift
 //  Calculator
 //
-//  Created by EUNJI CHOI on 2/16/24.
+//  Created by Prism, Hamzzi on 2/13/24.
 //
 
 import Foundation
 
-enum ExpressionParser {
+protocol Parsable {
+    associatedtype Input
+    associatedtype Output
+    static func parse(from input: Input) -> Output
+}
+
+enum ExpressionParser: Parsable {
+    typealias Input = String
+    typealias Output = Formula
+
     static func parse(from input: String) -> Formula {
-        let components = componentsByOperators(from: input)
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
+
+        let components = componentsByOperators(from: input)
 
         components.forEach { component in
             if let value = Double(component) {
                 operands.enqueue(value)
             }
         }
-        
+
         input.forEach { char in
             if let operatorValue = Operator(rawValue: char) {
                 operators.enqueue(operatorValue)
@@ -27,10 +37,19 @@ enum ExpressionParser {
 
         return Formula(operands: operands, operators: operators)
     }
-    
+
     static func componentsByOperators(from input: String) -> [String] {
-        let arrayComponents = input.map { Operator(rawValue: $0) != nil ? " " : String($0) }.joined()
-        return arrayComponents.split(with: " ")
+        let inputThatOperatorTransposedWithBlank = input
+            .map { Operator(rawValue: $0) != nil ? " " : String($0) }
+            .joined()
+
+        return inputThatOperatorTransposedWithBlank.split(with: " ")
+    }
+}
+
+fileprivate extension String {
+    func split(with target: Character) -> [String] {
+        return self.split(separator: target).map { String($0) }
     }
 }
 
