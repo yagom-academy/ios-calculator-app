@@ -6,6 +6,7 @@
 //
 
 private class Node<T> {
+    //Linked List 중첩타입
     var value: T
     var next: Node?
     
@@ -66,11 +67,9 @@ struct LinkedList<T> {
     }
     
     mutating func clear() {
-        if head == nil {
-            return
-        }
         count = 0
         head = nil
+        tail = nil
     }
 }
 

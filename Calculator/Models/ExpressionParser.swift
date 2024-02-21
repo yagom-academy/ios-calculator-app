@@ -39,9 +39,9 @@ enum ExpressionParser {
 struct Formula {
     var operands: CalculatorItemQueue<Double>
     var operators: CalculatorItemQueue<Operator>
-    
+//    1 + 2 * 3
     mutating func result() -> Double {
-        var calculateResult = 0.0
+        var calculateResult = operands.dequeue() ?? 0.0
         
         while let operand = operands.dequeue() {
             guard let `operator` = operators.dequeue() else {
