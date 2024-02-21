@@ -63,4 +63,32 @@ final class FormulaTests: XCTestCase {
         // Then
         try XCTAssertEqual(formulaSut.result(), expectation)
     }
+    
+    func test_Formula_정상적인값2들어있을때_연산결과확인하기() {
+            // Given
+            let operandsDummy: [Double] = [1.0, 1.0, 2.0, 3.0, 4.0]
+            let operatorsDummy: [Operator] = [Operator.add, Operator.divide, Operator.multiply, Operator.subtract]
+            operandsDummy.forEach { operands.push($0) }
+            operatorsDummy.forEach { operators.push($0) }
+            let expectation = -1.0
+            
+            formulaSut = Formula(operands: operands, operators: operators)
+            
+            // Then
+            try XCTAssertEqual(formulaSut.result(), expectation)
+        }
+        
+        func test_Formula_완전복잡한수식_연산결과확인하기() {
+            // Given
+            let operandsDummy: [Double] = [1.0, 1.0, 2.0, 3.0, 4.0, 100, 234, 11, 769]
+            let operatorsDummy: [Operator] = [Operator.add, Operator.divide, Operator.multiply, Operator.subtract, Operator.multiply, Operator.add, Operator.divide, Operator.subtract]
+            operandsDummy.forEach { operands.push($0) }
+            operatorsDummy.forEach { operators.push($0) }
+            let expectation = -756.8181818181819
+            
+            formulaSut = Formula(operands: operands, operators: operators)
+            
+            // Then
+            try XCTAssertEqual(formulaSut.result(), expectation)
+        }
 }
