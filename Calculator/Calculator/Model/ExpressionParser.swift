@@ -12,21 +12,21 @@ enum ExpressionParser {
         var operands = CalculatorItemQueue<Double>()
         var operators = CalculatorItemQueue<Operator>()
         
-        let componentByOperatorsArray = componentByOperators(from: input)
+        let components = componentByOperators(from: input)
         
-        for component in componentByOperatorsArray {
-            if let DoubleValueOfOperands = Double(component) {
-                operands.push(DoubleValueOfOperands)
+        for component in components {
+            if let operandComponent = Double(component) {
+                operands.push(operandComponent)
                 continue
             }
             
-            if let OperatorValueOfOperator = Operator(rawValue: Character(component)) {
-                operators.push(OperatorValueOfOperator)
+            if let operatorComponent = Operator(rawValue: Character(component)) {
+                operators.push(operatorComponent)
             }
         }
         
-        let resultOfParse = Formula(operands: operands, operators: operators)
-        return resultOfParse
+        let result = Formula(operands: operands, operators: operators)
+        return result
     }
 
     private static func componentByOperators(from input: String) -> [String] {
