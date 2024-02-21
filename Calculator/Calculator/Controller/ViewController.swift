@@ -90,4 +90,24 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func signButtonTapped(_ sender: UIButton) {
+        guard let number = Double(formulaUserInput) else {
+            return
+        }
+        var changeSignNumber: Double = 0
+        
+        if number > 0 || number < 0 {
+            changeSignNumber = number - (number * 2)
+        } else {
+            changeSignNumber = 0
+        }
+        
+        if Double(Int(number)) == number {
+            formulaUserInput = String(Int(changeSignNumber))
+        } else {
+            formulaUserInput = String(changeSignNumber)
+        }
+        
+        formulaLabel.text = "\(formulaUserInput)"
+    }
 }
