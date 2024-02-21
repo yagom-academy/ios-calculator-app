@@ -9,47 +9,107 @@ import XCTest
 @testable import Calculator
 
 final class FormulaTests: XCTestCase {
-
+    var sut: Formula!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        sut = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
+        sut = nil
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_ResultOfFormula() {
+        // Given
+        let operandsArr = [120.0, 3.0, 20.0, 10.0, 4.0, 2.0]
+        let operatorsArr: [Operator] = [.divide, .add, .subtract, .multiply, .divide]
+        operandsArr.forEach { sut.operands.enqueue($0) }
+        operatorsArr.forEach { sut.operators.enqueue($0) }
+        let expectedValue = 100.0
+        
+        // Then
+        XCTAssertEqual(expectedValue, try sut.result())
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
+    
+    func test_ResultOfFormulaWhenDividerIsZero() {
+        // Given
+        let operandsArr = [1.0, 0.0]
+        let operatorsArr: [Operator] = [.divide]
+        operandsArr.forEach { sut.operands.enqueue($0) }
+        operatorsArr.forEach { sut.operators.enqueue($0) }
+        let expectedError: CalculateError = .divisionByZero
+        
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
         }
     }
     
-    func test_단순_덧셈_결과를_올바르게_반환한다() {
-        // 1 + 2 = 3
-        var formula = Formula(operands: CalculatorItemQueue<Double>(), operators: CalculatorItemQueue<Operator>())
-        formula.operands.enqueue(1)
-        formula.operands.enqueue(2)
-        formula.operators.enqueue(.add)
+    func test_OperandsIsEmpty() {
+        // Given
+        let operatorsArr: [Operator] = [.subtract]
+        operatorsArr.forEach { sut.operators.enqueue($0) }
+        let expectedError: CalculateError = .invalidFormula
         
-        XCTAssertEqual(formula.result(), 3, "1과 2를 더한 결과는 3이어야 한다.")
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
     }
     
-    func test_문자열_파싱으로_단순_덧셈_수식을_생성한다() {
-        // "1+2"를 파싱하여 Formula 생성
-        var formula = ExpressionParser.parse(from: "1+2")
+    func test_OperatorsIsEmpty() {
+        // Given
+        let operandsArr = [1.0, 2.0]
+        operandsArr.forEach { sut.operands.enqueue($0) }
+        let expectedError: CalculateError = .invalidFormula
         
-        // 결과 검증
-        XCTAssertFalse(formula.operands.isEmpty, "피연산자 큐가 비어 있지 않아야 한다.")
-        XCTAssertFalse(formula.operators.isEmpty, "연산자 큐가 비어 있지 않아야 한다.")
-        XCTAssertEqual(formula.result(), 3, "\"1+2\"의 계산 결과는 3이어야 한다.")
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
+    }
+    
+    func test_WierdFormula() {
+        // Given
+        let operandsArr = [1.0, 2.0]
+        let operatorsArr: [Operator] = [.divide, .add, .subtract]
+        operandsArr.forEach { sut.operands.enqueue($0) }
+        operatorsArr.forEach { sut.operators.enqueue($0) }
+        let expectedError: CalculateError = .invalidFormula
+        
+        do {
+            // When
+            let _ = try sut.result()
+            
+            XCTFail()
+        } catch {
+            guard let thrownError = error as? CalculateError else { XCTFail(); return }
+            
+            // Then
+            XCTAssertEqual(expectedError, thrownError)
+        }
     }
 }

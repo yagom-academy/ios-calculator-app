@@ -2,34 +2,79 @@
 //  OperatorTests.swift
 //  OperatorTests
 //
-//  Created by EUNJI CHOI on 2/21/24.
+//  Created by Prism, Hamzzi on 2/21/24.
 //
 
 import XCTest
+@testable import Calculator
 
 final class OperatorTests: XCTestCase {
-
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        try super.tearDownWithError()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_Add() {
+        // Given
+        let num1 = 1.234
+        let num2 = 5.678
+        let expectedValue = 6.912
+        
+        // When
+        let resultValue = try? Operator.add.calculate(lhs: num1, rhs: num2)
+        
+        // Then
+        XCTAssertEqual(expectedValue, resultValue)
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_Subtract() {
+        // Given
+        let num1 = 5.678
+        let num2 = 1.234
+        let expectedValue = 4.444
+        
+        // When
+        let resultValue = try? Operator.subtract.calculate(lhs: num1, rhs: num2)
+        
+        // Then
+        XCTAssertEqual(expectedValue, resultValue)
     }
-
+    
+    func test_Divide() {
+        // Given
+        let num1 = 1.234
+        let num2 = 2.0
+        let expectedValue = 0.617
+        
+        // When
+        let resultValue = try? Operator.divide.calculate(lhs: num1, rhs: num2)
+        
+        // Then
+        XCTAssertEqual(expectedValue, resultValue)
+    }
+    
+    func test_DivisionByZero() {
+        // Given
+        let num1 = 100.0
+        let num2 = 0.0
+        
+        // Then
+        XCTAssertThrowsError(try Operator.divide.calculate(lhs: num1, rhs: num2))
+    }
+    
+    func test_Multiply() {
+        // Given
+        let num1 = 3.333
+        let num2 = 3.0
+        let expectedValue = 9.999
+        
+        // When
+        let resultValue = try? Operator.multiply.calculate(lhs: num1, rhs: num2)
+        
+        // Then
+        XCTAssertEqual(expectedValue, resultValue)
+    }
 }
