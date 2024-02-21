@@ -23,7 +23,7 @@ struct CalculatorItemQueue<T>: CalculateItem {
         }
     }
     
-    var Queue: [T] {
+    var queue: [T] {
         return inbox + outbox
     }
     

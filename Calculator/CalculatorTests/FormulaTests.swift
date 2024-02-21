@@ -60,6 +60,7 @@ final class FormulaTests: XCTestCase {
         
         formulaSut = Formula(operands: operands, operators: operators)
         
+        // Then
         try XCTAssertEqual(formulaSut.result(), expectation)
     }
 }

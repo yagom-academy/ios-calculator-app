@@ -31,42 +31,54 @@ final class OperatorTests: XCTestCase {
     }
     
     func test_addOperator_calculate_결과확인() throws {
+        // Given
         let lhs: Double = 1
         let rhs: Double = 1
-        let expectation: Double = 2
         
+        // When
+        let expectation: Double = 2
         let result = sutAdd.calculate(lhs: lhs, rhs: rhs)
         
+        // Then
         XCTAssertEqual(expectation, result)
     }
     
     func test_subtractOperator_calculate_결과확인() throws {
+        // Given
         let lhs: Double = 1
         let rhs: Double = 3
-        let expectation: Double = -2
         
+        // When
+        let expectation: Double = -2
         let result = sutSubtract.calculate(lhs: lhs, rhs: rhs)
         
+        // Then
         XCTAssertEqual(expectation, result)
     }
     
     func test_divideOperator_calculate_결과확인() throws {
+        // Given
         let lhs: Double = 3
         let rhs: Double = 3
-        let expectation: Double = 1
         
+        // When
+        let expectation: Double = 1
         let result = sutDivide.calculate(lhs: lhs, rhs: rhs)
         
+        // Then
         XCTAssertEqual(expectation, result)
     }
     
     func test_multiplyOperator_calculate_결과확인() throws {
+        // Given
         let lhs: Double = 3
         let rhs: Double = 3
-        let expectation: Double = 9
         
+        // When
+        let expectation: Double = 9
         let result = sutMultiply.calculate(lhs: lhs, rhs: rhs)
         
+        // Then
         XCTAssertEqual(expectation, result)
     }
 }

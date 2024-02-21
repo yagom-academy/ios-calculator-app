@@ -26,17 +26,20 @@ final class ExpressionParserTests: XCTestCase {
     }
     
     func test_ExpressionParser_parse_실행결과_테스트() {
+        // given
         formulaSut = ExpressionParser.parse(from: "123 + 234 +")
         
-        let operandsDummy: [Double] = [123, 234]
-        let operatorsDummy: [Operator] = [Operator.add, Operator.add]
-        operandsDummy.forEach { operands.push($0) }
-        operatorsDummy.forEach { operators.push($0) }
+        // when
+        let expectationOfOperands: [Double] = [123, 234]
+        let expectationOfOperators: [Operator] = [Operator.add, Operator.add]
+        expectationOfOperands.forEach { operands.push($0) }
+        expectationOfOperators.forEach { operators.push($0) }
         
-        let resultOfOperands: CalculatorItemQueue<Double> = formulaSut.operands
-        let resultOfOperators: CalculatorItemQueue<Operator> = formulaSut.operators
+        let resultOfOperands = formulaSut.operands.queue
+        let resultOfOperators = formulaSut.operators.queue
         
-        XCTAssertEqual(operands.Queue, resultOfOperands.Queue)
-        XCTAssertEqual(operators.Queue, resultOfOperators.Queue)
+        // then
+        XCTAssertEqual(expectationOfOperands, resultOfOperands)
+        XCTAssertEqual(expectationOfOperators, resultOfOperators)
     }
 }
