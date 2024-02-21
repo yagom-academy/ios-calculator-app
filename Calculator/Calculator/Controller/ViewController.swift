@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     var formulaUserInput: String = "0"
     var calculationOperator: Operator = Operator.add
     
+    var isDotted: Bool = false
+    
     @IBOutlet weak var formulaLabel: UILabel!
     @IBOutlet weak var operatorLabel: UILabel!
     
@@ -48,6 +50,8 @@ class ViewController: UIViewController {
                 break
             }
             
+            isDotted = false
+            
             operatorLabel.text = "\(calculationOperator.rawValue)"
             
             formulaResult += formulaUserInput + " " + currentOperator + " "
@@ -60,6 +64,7 @@ class ViewController: UIViewController {
     @IBAction func equalSignButtonTapped(_ sender: UIButton) {
         formulaResult += formulaUserInput
         formulaUserInput = ""
+        isDotted = false
         
         formulaLabel.text = "\(formulaResult)"
         
@@ -71,6 +76,7 @@ class ViewController: UIViewController {
         formulaResult = ""
         formulaUserInput = "0"
         calculationOperator = .add
+        isDotted = false
         
         formulaLabel.text = "\(formulaUserInput)"
         operatorLabel.text = "\(calculationOperator.rawValue)"
@@ -88,12 +94,15 @@ class ViewController: UIViewController {
             formulaLabel.text = "\(formulaResult)"
             formulaUserInput = "0"
         }
+        
+        isDotted = false
     }
     
     @IBAction func signButtonTapped(_ sender: UIButton) {
         guard let number = Double(formulaUserInput) else {
             return
         }
+        
         var changeSignNumber: Double = 0
         
         if number > 0 || number < 0 {
@@ -109,5 +118,15 @@ class ViewController: UIViewController {
         }
         
         formulaLabel.text = "\(formulaUserInput)"
+    }
+    
+    @IBAction func dotButtonTapped(_ sender: UIButton) {
+        if isDotted {
+            return
+        } else {
+            isDotted = true
+            formulaUserInput += "."
+            formulaLabel.text = "\(formulaUserInput)"
+        }
     }
 }
