@@ -75,4 +75,19 @@ class ViewController: UIViewController {
         formulaLabel.text = "\(formulaUserInput)"
         operatorLabel.text = "\(calculationOperator.rawValue)"
     }
+    
+    @IBAction func ceButtonTapped(_ sender: UIButton) {
+        if formulaUserInput == "" {
+            formulaResult = ""
+            formulaUserInput = "0"
+            calculationOperator = .add
+            
+            formulaLabel.text = "\(formulaUserInput)"
+            operatorLabel.text = "\(calculationOperator.rawValue)"
+        } else {
+            formulaLabel.text = "\(formulaResult)"
+            formulaUserInput = "0"
+        }
+    }
+    
 }
