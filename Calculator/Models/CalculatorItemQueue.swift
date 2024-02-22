@@ -77,7 +77,7 @@ struct LinkedList<T> {
 }
 
 struct CalculatorItemQueue<T: CalculateItem> {
-    var list = LinkedList<T>()
+    private var list = LinkedList<T>()
     
     var isEmpty: Bool {
         list.isEmpty
