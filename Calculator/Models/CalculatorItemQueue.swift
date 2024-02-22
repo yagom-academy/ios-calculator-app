@@ -5,7 +5,8 @@
 //  Created by Yejin Hong on 2024/02/05.
 //
 
-class Node<T> {
+private class Node<T> {
+    //Linked List 중첩타입
     var value: T
     var next: Node?
     
@@ -23,9 +24,6 @@ struct LinkedList<T> {
     var isEmpty: Bool {
         head == nil
     }
-    
-    init() {}
-    
     
     mutating func append(_ value: T) {
         count += 1
@@ -61,27 +59,21 @@ struct LinkedList<T> {
             return nil
         }
         
-        if head.next == nil {
-            return head.value
-        }
-        
         return head.value
     }
     
-    mutating func size() -> Int {
+    func size() -> Int {
         return count
     }
     
     mutating func clear() {
-        if head == nil {
-            return
-        }
         count = 0
         head = nil
+        tail = nil
     }
 }
 
-class CalculatorItemQueue<T: CalculateItem> {
+struct CalculatorItemQueue<T: CalculateItem> {
     var list = LinkedList<T>()
     
     var isEmpty: Bool {
@@ -92,19 +84,19 @@ class CalculatorItemQueue<T: CalculateItem> {
         list.size()
     }
     
-    func dequeue() -> T? {
+    mutating func dequeue() -> T? {
         return list.pop()
     }
     
-    func enqueue(_ value: T) {
+    mutating func enqueue(_ value: T) {
         list.append(value)
     }
     
-    func peek() -> T? {
+    mutating func peek() -> T? {
         return list.peek()
     }
     
-    func clear() {
+    mutating func clear() {
         list.clear()
     }
 }
