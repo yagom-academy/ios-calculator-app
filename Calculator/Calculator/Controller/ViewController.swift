@@ -6,12 +6,12 @@
 
 import UIKit
 
-enum StringForm {
-    case input
-    case output
-}
-
 class ViewController: UIViewController {
+    enum StringForm {
+        case input
+        case output
+    }
+    
     var expression = ""
     var `operator`: Operator?
     var operand = "0"
