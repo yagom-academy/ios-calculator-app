@@ -1,11 +1,9 @@
 //
-//  Extensions.swift
+//  String+.swift
 //  Calculator
 //
-//  Created by Yejin Hong on 2024/02/14.
+//  Created by JIWOONG on 2024/02/22.
 //
-
-extension Double: CalculateItem { }
 
 extension String {
     func split(with target: Character) -> [String] {
