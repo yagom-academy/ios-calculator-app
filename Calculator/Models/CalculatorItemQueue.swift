@@ -6,11 +6,10 @@
 //
 
 private class Node<T> {
-    //Linked List 중첩타입
     var value: T
     var next: Node?
     
-    init(value: T, next: Node? = nil) {
+    init(value: T, next: Node?) {
         self.value = value
         self.next = next
     }
