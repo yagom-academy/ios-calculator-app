@@ -18,12 +18,12 @@ struct Formula {
         }
         
         while !operators.isEmpty {
-            guard let `operator` = operators.dequeue(),
-                  let operand = operands.dequeue() else {
+            guard let calculatorOperator = operators.dequeue(),
+                  let calculatorOperand = operands.dequeue() else {
                 throw CalculateError.invalidFormula
             }
             
-            result = try `operator`.calculate(lhs: result, rhs: operand)
+            result = try calculatorOperator.calculate(lhs: result, rhs: calculatorOperand)
         }
         
         return result

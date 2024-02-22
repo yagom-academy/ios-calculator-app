@@ -13,8 +13,8 @@ final class CalculateViewController: UIViewController {
     }
     
     private var expression = ""
-    private var `operator`: Operator?
-    private var operand = "0"
+    private var calculatorOperator: Operator?
+    private var calculatorOperand = "0"
     private var isOperatorActivated = false
     private var errorHasOccured = false
     
@@ -60,13 +60,13 @@ final class CalculateViewController: UIViewController {
         operandLog.adjustsFontSizeToFitWidth = true
         operandLog.minimumScaleFactor = 0.5
         
-        if let `operator` = `operator` {
-            operatorLog.text = String(`operator`.rawValue)
+        if let calculatorOperator = calculatorOperator {
+            operatorLog.text = String(calculatorOperator.rawValue)
         } else {
             operatorLog.text = ""
         }
         
-        operandLog.text = convertToInputForm(operand: operand)
+        operandLog.text = convertToInputForm(operand: calculatorOperand)
         
         logStackView.addArrangedSubview(operatorLog)
         logStackView.addArrangedSubview(operandLog)
@@ -75,16 +75,16 @@ final class CalculateViewController: UIViewController {
     }
     
     func updateExpression() {
-        if let `operator` {
-            expression += String(`operator`.rawValue)
+        if let calculatorOperator {
+            expression += String(calculatorOperator.rawValue)
         }
         
-        expression += operand
+        expression += calculatorOperand
     }
     
     func updateOperatorLabel() {
-        if let `operator` {
-            operatorLabel.text = String(`operator`.rawValue)
+        if let calculatorOperator {
+            operatorLabel.text = String(calculatorOperator.rawValue)
         } else {
             operatorLabel.text = ""
         }
@@ -93,9 +93,9 @@ final class CalculateViewController: UIViewController {
     func updateOperandLabel(form: StringForm) {
         switch form {
         case .input:
-            operandLabel.text = convertToInputForm(operand: operand)
+            operandLabel.text = convertToInputForm(operand: calculatorOperand)
         case .output:
-            operandLabel.text = convertToOutputForm(operand: operand)
+            operandLabel.text = convertToOutputForm(operand: calculatorOperand)
         }
     }
     
@@ -126,8 +126,8 @@ final class CalculateViewController: UIViewController {
 
     @IBAction func acButtonTouchedUp(_ sender: UIButton) {
         expression = ""
-        `operator` = nil
-        operand = "0"
+        calculatorOperator = nil
+        calculatorOperand = "0"
         isOperatorActivated = false
         errorHasOccured = false
         
@@ -142,7 +142,7 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        operand = "0"
+        calculatorOperand = "0"
         isOperatorActivated = false
         
         updateOperatorLabel()
@@ -150,15 +150,15 @@ final class CalculateViewController: UIViewController {
     }
     
     @IBAction func signToggleButtonTouchedUp(_ sender: UIButton) {
-        guard !errorHasOccured, Double(operand) != 0.0,
-              let firstCharacterOfOperand = operand.first else {
+        guard !errorHasOccured, Double(calculatorOperand) != 0.0,
+              let firstCharacterOfOperand = calculatorOperand.first else {
             return
         }
         
         if firstCharacterOfOperand == "-" {
-            operand = String(operand[operand.index(operand.startIndex, offsetBy: 1)...])
+            calculatorOperand = String(calculatorOperand[calculatorOperand.index(calculatorOperand.startIndex, offsetBy: 1)...])
         } else {
-            operand = "-" + operand
+            calculatorOperand = "-" + calculatorOperand
         }
         
         updateOperatorLabel()
@@ -173,7 +173,7 @@ final class CalculateViewController: UIViewController {
         if !isOperatorActivated {
             updateExpression()
             addLogToStackView(stackView: logsStackView)
-            operand = "0"
+            calculatorOperand = "0"
             isOperatorActivated = true
         }
         
@@ -181,7 +181,7 @@ final class CalculateViewController: UIViewController {
             return
         }
         
-        `operator` = Operator(rawValue: Character(operatorStringFromButton))
+        calculatorOperator = Operator(rawValue: Character(operatorStringFromButton))
         
         updateOperatorLabel()
         updateOperandLabel(form: .output)
@@ -199,17 +199,17 @@ final class CalculateViewController: UIViewController {
             var formula = ExpressionParser.parse(from: expression)
             let result = try formula.result()
             
-            operand = String(result)
+            calculatorOperand = String(result)
         } catch CalculateError.divisionByZero {
-            operand = "NaN"
+            calculatorOperand = "NaN"
             errorHasOccured = true
         } catch {
-            operand = "ERROR"
+            calculatorOperand = "ERROR"
             errorHasOccured = true
         }
         
         expression = ""
-        `operator` = nil
+        calculatorOperator = nil
         isOperatorActivated = false
         
         updateOperatorLabel()
@@ -217,13 +217,13 @@ final class CalculateViewController: UIViewController {
     }
     
     @IBAction func dotButtonTouchedUp(_ sender: UIButton) {
-        guard !errorHasOccured, !operand.contains(".") else {
+        guard !errorHasOccured, !calculatorOperand.contains(".") else {
             return
         }
         
         isOperatorActivated = false
         
-        operand += "."
+        calculatorOperand += "."
         
         updateOperatorLabel()
         updateOperandLabel(form: .input)
@@ -232,18 +232,18 @@ final class CalculateViewController: UIViewController {
     @IBAction func numberButtonTouchedUp(_ sender: UIButton) {
         guard !errorHasOccured,
               let numberStringFromButton = sender.currentTitle,
-              operand.countDigit() + numberStringFromButton.count <= 20 else {
+              calculatorOperand.countDigit() + numberStringFromButton.count <= 20 else {
             return
         }
         
-        if operand == "0" {
+        if calculatorOperand == "0" {
             guard !numberStringFromButton.contains("0") else {
                 return
             }
             
-            operand = numberStringFromButton
+            calculatorOperand = numberStringFromButton
         } else {
-            operand += numberStringFromButton
+            calculatorOperand += numberStringFromButton
         }
         
         isOperatorActivated = false
