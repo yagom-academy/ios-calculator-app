@@ -15,9 +15,9 @@ private class Node<T> {
     }
 }
 
-struct LinkedList<T> {
-    private var head: Node<T>?
-    private var tail: Node<T>?
+struct LinkedList<Element> {
+    private var head: Node<Element>?
+    private var tail: Node<Element>?
     
     var isEmpty: Bool {
         head == nil
@@ -33,18 +33,18 @@ struct LinkedList<T> {
         return result
     }
     
-    mutating func append(_ value: T) {
+    mutating func append(_ value: Element) {
         guard !isEmpty else {
             head = Node(value: value)
             tail = head
             return
         }
         
-        tail!.next = Node(value: value)
-        tail = tail!.next
+        tail?.next = Node(value: value)
+        tail = tail?.next
     }
     
-    mutating func pop() -> T? {
+    mutating func pop() -> Element? {
         guard let head = self.head else {
             return nil
         }
@@ -58,7 +58,7 @@ struct LinkedList<T> {
         return head.value
     }
     
-    mutating func peek() -> T? {
+    func peek() -> Element? {
         guard let head = self.head else {
             return nil
         }
@@ -76,8 +76,8 @@ struct LinkedList<T> {
     }
 }
 
-struct CalculatorItemQueue<T: CalculateItem> {
-    private var list = LinkedList<T>()
+struct CalculatorItemQueue<Element: CalculateItem> {
+    private var list = LinkedList<Element>()
     
     var isEmpty: Bool {
         list.isEmpty
@@ -87,15 +87,15 @@ struct CalculatorItemQueue<T: CalculateItem> {
         list.size()
     }
     
-    mutating func dequeue() -> T? {
+    mutating func dequeue() -> Element? {
         return list.pop()
     }
     
-    mutating func enqueue(_ value: T) {
+    mutating func enqueue(_ value: Element) {
         list.append(value)
     }
     
-    mutating func peek() -> T? {
+    mutating func peek() -> Element? {
         return list.peek()
     }
     
