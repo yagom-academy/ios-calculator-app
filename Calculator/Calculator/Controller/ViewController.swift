@@ -6,7 +6,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class CalculateViewController: UIViewController {
     enum StringForm {
         case input
         case output
