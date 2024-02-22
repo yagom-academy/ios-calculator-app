@@ -18,15 +18,22 @@ private class Node<T> {
 struct LinkedList<T> {
     private var head: Node<T>?
     private var tail: Node<T>?
-    private var count: Int = 0
     
     var isEmpty: Bool {
         head == nil
     }
     
+    private var count: Int {
+        var result = 0
+        var temp = head
+        while temp != nil {
+            temp = temp?.next
+            result += 1
+        }
+        return result
+    }
+    
     mutating func append(_ value: T) {
-        count += 1
-        
         guard !isEmpty else {
             head = Node(value: value)
             tail = head
@@ -41,8 +48,6 @@ struct LinkedList<T> {
         guard let head = self.head else {
             return nil
         }
-        
-        count -= 1
         
         if head.next == nil {
             self.head = nil
@@ -66,7 +71,6 @@ struct LinkedList<T> {
     }
     
     mutating func clear() {
-        count = 0
         head = nil
         tail = nil
     }
