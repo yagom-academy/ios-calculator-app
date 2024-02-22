@@ -12,15 +12,15 @@ final class CalculateViewController: UIViewController {
         case output
     }
     
-    var expression = ""
-    var `operator`: Operator?
-    var operand = "0"
-    var isOperatorActivated = false
-    var errorHasOccured = false
+    private var expression = ""
+    private var `operator`: Operator?
+    private var operand = "0"
+    private var isOperatorActivated = false
+    private var errorHasOccured = false
     
-    @IBOutlet var operatorLabel: UILabel!
-    @IBOutlet var operandLabel: UILabel!
-    @IBOutlet var logsStackView: UIStackView!
+    @IBOutlet private var operatorLabel: UILabel!
+    @IBOutlet private var operandLabel: UILabel!
+    @IBOutlet private var logsStackView: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
