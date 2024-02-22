@@ -9,9 +9,8 @@ private class Node<T> {
     var value: T
     var next: Node?
     
-    init(value: T, next: Node?) {
+    init(value: T) {
         self.value = value
-        self.next = next
     }
 }
 
