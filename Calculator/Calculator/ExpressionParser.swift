@@ -31,6 +31,7 @@ enum ExpressionParser {
         for char in input {
             let str = String(char)
             if str == "+" || str == "-" || str == "%" || str == "*" {
+            if str == "+" || str == "−" || str == "÷" || str == "×" {
                 components.append(tempOperand)
                 components.append(str)
                 tempOperand = ""
