@@ -75,7 +75,7 @@ final class CalculateViewController: UIViewController {
     }
     
     func updateExpression() {
-        if let `operator` = `operator` {
+        if let `operator` {
             expression += String(`operator`.rawValue)
         }
         
@@ -83,7 +83,7 @@ final class CalculateViewController: UIViewController {
     }
     
     func updateOperatorLabel() {
-        if let `operator` = `operator` {
+        if let `operator` {
             operatorLabel.text = String(`operator`.rawValue)
         } else {
             operatorLabel.text = ""
@@ -124,7 +124,7 @@ final class CalculateViewController: UIViewController {
         return formattedOperand
     }
 
-    @IBAction func acButtonTouchedUP(_ sender: UIButton) {
+    @IBAction func acButtonTouchedUp(_ sender: UIButton) {
         expression = ""
         `operator` = nil
         operand = "0"
