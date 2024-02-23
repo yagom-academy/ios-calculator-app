@@ -116,8 +116,8 @@ extension String {
 📍[Apple, Swift documentation, Double](<https://developer.apple.com/documentation/swift/double>)  
 📍[그린, Tistory, Swift split vs component 차이](<https://green1229.tistory.com/318>)  
 📍[jeonyeohun, Tistory, 스위프트로 구현하는 자료구조 2: 링크드 리스트(Linked List)](<https://jeonyeohun.tistory.com/320>)  
-📍[HeeJeong Kwon, Github, [자료구조] 큐(Queue)란](<https://gmlwjd9405.github.io/2018/08/02/data-structure-queue.html>)
-📍[Apple, Swift documentation, replacingOccurrences(of:with:)](<https://developer.apple.com/documentation/foundation/nsstring/1412937-replacingoccurrences>)
+📍[HeeJeong Kwon, Github, [자료구조] 큐(Queue)란](<https://gmlwjd9405.github.io/2018/08/02/data-structure-queue.html>)  
+📍[Apple, Swift documentation, replacingOccurrences(of:with:)](<https://developer.apple.com/documentation/foundation/nsstring/1412937-replacingoccurrences>)  
 📍[ZeddiOS, Tistory, String쪼개기](<https://zeddios.tistory.com/74>)
 
 
