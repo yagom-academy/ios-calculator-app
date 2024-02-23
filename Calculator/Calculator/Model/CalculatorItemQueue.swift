@@ -2,7 +2,7 @@
 //  CalculatorItemQueue.swift
 //  Calculator
 //
-//  Created by EUNJI CHOI on 2/5/24.
+//  Created by Prism, Hamzzi on 2/5/24.
 //
 
 import Foundation
@@ -23,20 +23,7 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
     
     var head: Node?
     var tail: Node?
-    
-    var count: Int {
-        guard head != nil else { return 0 }
-        
-        var cnt = 0
-        var current = head
-        
-        repeat {
-            cnt += 1
-            current = current?.next
-        } while current != nil
-        
-        return cnt
-    }
+    var count: Int = 0
     
     var isEmpty: Bool {
         return head == nil
@@ -51,6 +38,8 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
             head = newNode
         }
         
+        count += 1
+        
         tail = newNode
     }
     
@@ -61,6 +50,8 @@ struct CalculatorItemQueue<Element>: CalculateItem where Element: Equatable {
         if head == nil {
             tail = nil
         }
+        
+        count -= 1
         
         return headNode?.value
     }
