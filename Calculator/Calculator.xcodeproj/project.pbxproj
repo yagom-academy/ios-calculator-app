@@ -84,6 +84,45 @@
 			path = CalculatorTests;
 			sourceTree = "<group>";
 		};
+		06D0E84E2B883BE400F3113E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06145E5E2B792C1000F39DD3 /* CalculatorItemQueue.swift */,
+				06EA151F2B7CFFB2001821CA /* Formula.swift */,
+				06EA15212B7D0084001821CA /* ExpressionParser.swift */,
+				06EA152B2B7D4D11001821CA /* CalculateItem.swift */,
+				06EA151B2B7CDA22001821CA /* Operator.swift */,
+				060891542B8348B100002F9B /* CalculatorError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		06D0E84F2B883BFD00F3113E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		06D0E8502B883C0600F3113E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C713D9472570E5EB001C3AFC /* Main.storyboard */,
+				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		06D0E8512B883CE400F3113E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				06EA15292B7D4CF4001821CA /* DoubleExtension.swift */,
+				06EA15272B7D4B76001821CA /* StringExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		C713D9352570E5EB001C3AFC = {
 			isa = PBXGroup;
 			children = (
@@ -105,20 +144,13 @@
 		C713D9402570E5EB001C3AFC /* Calculator */ = {
 			isa = PBXGroup;
 			children = (
+				06D0E8512B883CE400F3113E /* Extension */,
+				06D0E84E2B883BE400F3113E /* Model */,
+				06D0E8502B883C0600F3113E /* View */,
+				06D0E84F2B883BFD00F3113E /* Controller */,
 				C713D9412570E5EB001C3AFC /* AppDelegate.swift */,
 				C713D9432570E5EB001C3AFC /* SceneDelegate.swift */,
-				C713D9452570E5EB001C3AFC /* ViewController.swift */,
-				06145E5E2B792C1000F39DD3 /* CalculatorItemQueue.swift */,
-				06EA151F2B7CFFB2001821CA /* Formula.swift */,
-				06EA15212B7D0084001821CA /* ExpressionParser.swift */,
-				06EA152B2B7D4D11001821CA /* CalculateItem.swift */,
-				06EA151B2B7CDA22001821CA /* Operator.swift */,
-				06EA15292B7D4CF4001821CA /* DoubleExtension.swift */,
-				06EA15272B7D4B76001821CA /* StringExtension.swift */,
-				060891542B8348B100002F9B /* CalculatorError.swift */,
-				C713D9472570E5EB001C3AFC /* Main.storyboard */,
 				C713D94A2570E5ED001C3AFC /* Assets.xcassets */,
-				C713D94C2570E5ED001C3AFC /* LaunchScreen.storyboard */,
 				C713D94F2570E5ED001C3AFC /* Info.plist */,
 			);
 			path = Calculator;
