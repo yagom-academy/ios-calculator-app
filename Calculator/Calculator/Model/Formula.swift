@@ -21,15 +21,15 @@ struct Formula {
                 switch operatorCharacter {
                 case "+":
                     formulaResult = Operator.add.calculate(lhs: result, rhs: operand)
-                case "-":
+                case "−":
                     formulaResult = Operator.substract.calculate(lhs: result, rhs: operand)
-                case "%":
+                case "÷":
                     if operand == 0 {
                         throw CalculatorError.divideByZero
                     }
                     
                     formulaResult = Operator.divide.calculate(lhs: result, rhs: operand)
-                case "*":
+                case "×":
                     formulaResult = Operator.multiply.calculate(lhs: result, rhs: operand)
                 default:
                     break
