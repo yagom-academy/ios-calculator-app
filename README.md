@@ -18,7 +18,7 @@
 ### 2. 팀원
 | <img src="https://avatars.githubusercontent.com/u/57698939?v=4" width="200"> | <img src="https://avatars.githubusercontent.com/u/139211436?v=4" width="200"> |
 | :---: | :---: |
-| Prism ([Github](https://github.com/Diana-yjh/)) | Gray ([Github](https://github.com/yawoong2)) |
+| Diana ([Github](https://github.com/Diana-yjh/)) | Gray ([Github](https://github.com/yawoong2)) |
 
 ### 3. 타임라인
 | 날짜 | 제목 |
