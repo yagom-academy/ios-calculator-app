@@ -10,14 +10,18 @@ import Foundation
 enum ExpressionParser {
     static func parse(from input: String) -> Formula {
         var operands: CalculatorItemQueue<Double> = CalculatorItemQueue<Double>()
-        var operators: CalculatorItemQueue<String> = CalculatorItemQueue<String>()
+        var operators: CalculatorItemQueue<Operator> = CalculatorItemQueue<Operator>()
         
         let parsedExpressions = componentsByOperators(from: input)
         for expression in parsedExpressions {
-            if let number = Double(expression) {
-                operands.push(number)
-            } else {
-                operators.push(expression)
+            if let operand = Double(expression) {
+                operands.push(operand)
+                break
+            }
+            
+            if let `operator` = Operator(rawValue: Character(expression)) {
+                operators.push(`operator`)
+                break
             }
         }
         
@@ -30,7 +34,9 @@ enum ExpressionParser {
         
         for char in input {
             let str = String(char)
-            if str == "+" || str == "−" || str == "÷" || str == "×" {
+            if Operator.allCases.contains(where: { `operator` in
+                return `operator`.rawValue == char
+            }) {
                 components.append(tempOperand)
                 components.append(str)
                 tempOperand = ""
