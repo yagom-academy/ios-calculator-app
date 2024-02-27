@@ -7,13 +7,9 @@
 
 import Foundation
 
-protocol CalculateItem {
-    
-}
-
-struct CalculatorItemQueue: CalculateItem {
-    private var inbox: [Int] = []
-    private var outbox: [Int] = []
+struct CalculatorItemQueue<T>: CalculateItem {
+    private var inbox: [T] = []
+    private var outbox: [T] = []
     
     var size: Int {
         return inbox.count + outbox.count
@@ -27,11 +23,11 @@ struct CalculatorItemQueue: CalculateItem {
         }
     }
     
-    mutating func push(_ data: Int) {
+    mutating func push(_ data: T) {
         inbox.append(data)
     }
     
-    mutating func pop() -> Int? {
+    mutating func pop() -> T? {
         if outbox.isEmpty {
             outbox = inbox.reversed()
             inbox.removeAll()
@@ -40,7 +36,7 @@ struct CalculatorItemQueue: CalculateItem {
         return outbox.popLast()
     }
     
-    mutating func front() -> Int? {
+    mutating func front() -> T? {
         if outbox.isEmpty {
             outbox = inbox.reversed()
             inbox.removeAll()
@@ -49,7 +45,7 @@ struct CalculatorItemQueue: CalculateItem {
         return outbox.last
     }
     
-    mutating func rear() -> Int? {
+    mutating func rear() -> T? {
         if inbox.isEmpty {
             return outbox.first
         }
